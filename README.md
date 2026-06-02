@@ -7465,6 +7465,8 @@ The pair-readiness direct-completion surface training layer trains that corpus u
 
 The pair-readiness direct-completion route comparison layer compares objective-structure, direct-prompt bridge, and direct-completion surface training runs, selecting the direct-completion surface as the current candidate only because it improves default direct hits from 0 to 2 without direct pollution.
 
+The pair-readiness direct-completion pair-probe replay layer then checks that candidate against heldout pair prompt surfaces and prevents over-promotion: v738 remains direct-probe-only evidence because `fixed=|loss=` and related pair prompts do not replay pair-full.
+
 The run registry layer indexes multiple run directories so experiments can be scanned by commit, data fingerprint, quality status, eval suite coverage, metrics, artifact count, notes, tags, best-val rank, loss delta, a leaderboard, an interactive local HTML table, shareable URL state, and visible-row CSV export.
 
 The experiment card layer turns one run into a compact JSON/Markdown/HTML summary for review, handoff, or portfolio use.

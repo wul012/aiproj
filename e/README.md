@@ -1181,3 +1181,8 @@ e/663/解释/说明.md
 - `e/739/图片`
 - `e/739/解释/说明.md`
 - v739 direct-completion route comparison 的运行截图和解释。
+## v740 补充索引
+
+- `e/740/图片`
+- `e/740/解释/说明.md`
+- v740 direct-completion pair-probe replay 的运行截图和解释。

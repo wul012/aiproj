@@ -1,0 +1,760 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT pair-readiness direct-completion pair-probe replay",
+  "generated_at": "2026-06-02T07:40:21Z",
+  "status": "pass",
+  "decision": "pair_readiness_direct_completion_pair_probe_replay_not_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_route_comparison": "e\\739\\解释\\model-capability-required-term-pair-readiness-direct-completion-route-comparison\\model_capability_required_term_pair_readiness_direct_completion_route_comparison.json",
+  "selected_training_report": "e\\738\\解释\\model-capability-required-term-pair-readiness-direct-completion-surface-training-run\\model_capability_required_term_pair_readiness_training_run.json",
+  "out_dir": "e\\740\\解释\\model-capability-required-term-pair-readiness-direct-completion-pair-probe-replay",
+  "settings": {
+    "prompt_specs": [
+      {
+        "spec_id": "exact-heldout-pair",
+        "prompt": "fixed=|loss=",
+        "required_for_ready": true
+      },
+      {
+        "spec_id": "spaced-heldout-pair",
+        "prompt": "fixed= | loss=",
+        "required_for_ready": false
+      },
+      {
+        "spec_id": "arrow-heldout-pair",
+        "prompt": "fixed -> | loss ->",
+        "required_for_ready": false
+      }
+    ],
+    "profiles": [
+      "default",
+      "suppress_newline_tokens"
+    ],
+    "device": "cpu",
+    "experiment_boundary": "replay the selected direct-completion checkpoint on heldout pair prompt surfaces without retraining"
+  },
+  "selected_route": {
+    "label": "direct-completion-surface",
+    "path": "e\\738\\解释\\model-capability-required-term-pair-readiness-direct-completion-surface-training-run\\model_capability_required_term_pair_readiness_training_run.json",
+    "status": "pass",
+    "decision": "pair_readiness_training_pair_full_observed",
+    "training_status": "pass",
+    "checkpoint_exists": true,
+    "pair_full_observed": true,
+    "default_continuation_hit_count": 2,
+    "default_hit_terms": [
+      "fixed",
+      "loss"
+    ],
+    "default_missed_terms": [],
+    "loss_prompt_fixed_pollution_count": 0,
+    "fixed_prompt_loss_pollution_count": 0,
+    "non_term_surface_count": 0,
+    "suppression_continuation_hit_count": 2,
+    "continuation_previews": [
+      "fixed:fixed tos to",
+      "loss:lossssssssss"
+    ]
+  },
+  "replay_rows": [
+    {
+      "spec_id": "exact-heldout-pair",
+      "prompt": "fixed=|loss=",
+      "required_for_ready": true,
+      "status": "pass",
+      "replay_decision": "generation_profile_no_pair_coexistence_gain",
+      "replay_pair_full": false,
+      "default_pair_full_variant_count": 0,
+      "suppression_pair_full_variant_count": 0,
+      "default_continuation_hit_count": 0,
+      "suppression_continuation_hit_count": 0
+    },
+    {
+      "spec_id": "spaced-heldout-pair",
+      "prompt": "fixed= | loss=",
+      "required_for_ready": false,
+      "status": "pass",
+      "replay_decision": "generation_profile_no_pair_coexistence_gain",
+      "replay_pair_full": false,
+      "default_pair_full_variant_count": 0,
+      "suppression_pair_full_variant_count": 0,
+      "default_continuation_hit_count": 1,
+      "suppression_continuation_hit_count": 1
+    },
+    {
+      "spec_id": "arrow-heldout-pair",
+      "prompt": "fixed -> | loss ->",
+      "required_for_ready": false,
+      "status": "pass",
+      "replay_decision": "generation_profile_no_pair_coexistence_gain",
+      "replay_pair_full": false,
+      "default_pair_full_variant_count": 0,
+      "suppression_pair_full_variant_count": 0,
+      "default_continuation_hit_count": 1,
+      "suppression_continuation_hit_count": 1
+    }
+  ],
+  "replay_reports": [
+    {
+      "spec_id": "exact-heldout-pair",
+      "report": {
+        "schema_version": 1,
+        "title": "MiniGPT required-term pair generation profile replay",
+        "generated_at": "2026-06-02T07:40:20Z",
+        "status": "pass",
+        "decision": "generation_profile_no_pair_coexistence_gain",
+        "failed_count": 0,
+        "issues": [],
+        "source_required_term_pair_branch_retention_sweep": "e\\738\\解释\\model-capability-required-term-pair-readiness-direct-completion-surface-training-run\\model_capability_required_term_pair_readiness_training_run.json",
+        "out_dir": "e\\740\\解释\\model-capability-required-term-pair-readiness-direct-completion-pair-probe-replay\\pair-probe-replay-runs\\exact-heldout-pair",
+        "settings": {
+          "profiles": [
+            "default",
+            "suppress_newline_tokens"
+          ],
+          "variant_limit": 1,
+          "max_new_tokens": 12,
+          "temperature": 0.2,
+          "top_k": 1,
+          "device": "cpu",
+          "experiment_boundary": "replay named generation profiles over archived fixed/loss branch-retention checkpoints without retraining"
+        },
+        "terms": [
+          {
+            "case": "exact-heldout-pair-fixed",
+            "term": "fixed",
+            "scaffold_prompt": "fixed=|loss=",
+            "source_hit_rate": 0.0
+          },
+          {
+            "case": "exact-heldout-pair-loss",
+            "term": "loss",
+            "scaffold_prompt": "fixed=|loss=",
+            "source_hit_rate": 0.0
+          }
+        ],
+        "case_rows": [
+          {
+            "status": "pass",
+            "error": "",
+            "pair_id": "01-fixed-loss",
+            "variant_id": "pair-probe-exact-heldout-pair-seed-3535",
+            "branch_retention_run_id": "pair-probe-exact-heldout-pair-seed-3535",
+            "profile_id": "default",
+            "term": "fixed",
+            "prompt": "fixed=|loss=",
+            "generation_seed": 3535,
+            "checkpoint_path": "e\\738\\解释\\model-capability-required-term-pair-readiness-direct-completion-surface-training-run\\pair-readiness-training-run\\checkpoint.pt",
+            "checkpoint_exists": true,
+            "tokenizer_path": "e\\738\\解释\\model-capability-required-term-pair-readiness-direct-completion-surface-training-run\\pair-readiness-training-run\\tokenizer.json",
+            "tokenizer_exists": true,
+            "generated": "fixed=|loss=los los toss",
+            "continuation": "los los toss",
+            "generated_preview": "fixed=|loss=los los toss",
+            "continuation_preview": "los los toss",
+            "continuation_hit": false,
+            "newline_cleanup_hit": false,
+            "blocked_token_count": 0
+          },
+          {
+            "status": "pass",
+            "error": "",
+            "pair_id": "01-fixed-loss",
+            "variant_id": "pair-probe-exact-heldout-pair-seed-3535",
+            "branch_retention_run_id": "pair-probe-exact-heldout-pair-seed-3535",
+            "profile_id": "suppress_newline_tokens",
+            "term": "fixed",
+            "prompt": "fixed=|loss=",
+            "generation_seed": 3535,
+            "checkpoint_path": "e\\738\\解释\\model-capability-required-term-pair-readiness-direct-completion-surface-training-run\\pair-readiness-training-run\\checkpoint.pt",
+            "checkpoint_exists": true,
+            "tokenizer_path": "e\\738\\解释\\model-capability-required-term-pair-readiness-direct-completion-surface-training-run\\pair-readiness-training-run\\tokenizer.json",
+            "tokenizer_exists": true,
+            "generated": "fixed=|loss=los los toss",
+            "continuation": "los los toss",
+            "generated_preview": "fixed=|loss=los los toss",
+            "continuation_preview": "los los toss",
+            "continuation_hit": false,
+            "newline_cleanup_hit": false,
+            "blocked_token_count": 1
+          },
+          {
+            "status": "pass",
+            "error": "",
+            "pair_id": "01-fixed-loss",
+            "variant_id": "pair-probe-exact-heldout-pair-seed-3535",
+            "branch_retention_run_id": "pair-probe-exact-heldout-pair-seed-3535",
+            "profile_id": "default",
+            "term": "loss",
+            "prompt": "fixed=|loss=",
+            "generation_seed": 3536,
+            "checkpoint_path": "e\\738\\解释\\model-capability-required-term-pair-readiness-direct-completion-surface-training-run\\pair-readiness-training-run\\checkpoint.pt",
+            "checkpoint_exists": true,
+            "tokenizer_path": "e\\738\\解释\\model-capability-required-term-pair-readiness-direct-completion-surface-training-run\\pair-readiness-training-run\\tokenizer.json",
+            "tokenizer_exists": true,
+            "generated": "fixed=|loss=los los toss",
+            "continuation": "los los toss",
+            "generated_preview": "fixed=|loss=los los toss",
+            "continuation_preview": "los los toss",
+            "continuation_hit": false,
+            "newline_cleanup_hit": false,
+            "blocked_token_count": 0
+          },
+          {
+            "status": "pass",
+            "error": "",
+            "pair_id": "01-fixed-loss",
+            "variant_id": "pair-probe-exact-heldout-pair-seed-3535",
+            "branch_retention_run_id": "pair-probe-exact-heldout-pair-seed-3535",
+            "profile_id": "suppress_newline_tokens",
+            "term": "loss",
+            "prompt": "fixed=|loss=",
+            "generation_seed": 3536,
+            "checkpoint_path": "e\\738\\解释\\model-capability-required-term-pair-readiness-direct-completion-surface-training-run\\pair-readiness-training-run\\checkpoint.pt",
+            "checkpoint_exists": true,
+            "tokenizer_path": "e\\738\\解释\\model-capability-required-term-pair-readiness-direct-completion-surface-training-run\\pair-readiness-training-run\\tokenizer.json",
+            "tokenizer_exists": true,
+            "generated": "fixed=|loss=los los toss",
+            "continuation": "los los toss",
+            "generated_preview": "fixed=|loss=los los toss",
+            "continuation_preview": "los los toss",
+            "continuation_hit": false,
+            "newline_cleanup_hit": false,
+            "blocked_token_count": 1
+          }
+        ],
+        "variant_rows": [
+          {
+            "variant_id": "pair-probe-exact-heldout-pair-seed-3535",
+            "profile_id": "default",
+            "term_count": 2,
+            "hit_terms": [],
+            "missed_terms": [
+              "fixed",
+              "loss"
+            ],
+            "hit_count": 0,
+            "pair_full_hit": false
+          },
+          {
+            "variant_id": "pair-probe-exact-heldout-pair-seed-3535",
+            "profile_id": "suppress_newline_tokens",
+            "term_count": 2,
+            "hit_terms": [],
+            "missed_terms": [
+              "fixed",
+              "loss"
+            ],
+            "hit_count": 0,
+            "pair_full_hit": false
+          }
+        ],
+        "profile_rows": [
+          {
+            "profile_id": "default",
+            "case_count": 2,
+            "continuation_hit_count": 0,
+            "newline_cleanup_hit_count": 0,
+            "pair_full_variant_count": 0,
+            "variant_count": 1,
+            "blocked_token_count_total": 0
+          },
+          {
+            "profile_id": "suppress_newline_tokens",
+            "case_count": 2,
+            "continuation_hit_count": 0,
+            "newline_cleanup_hit_count": 0,
+            "pair_full_variant_count": 0,
+            "variant_count": 1,
+            "blocked_token_count_total": 2
+          }
+        ],
+        "summary": {
+          "variant_count": 1,
+          "term_count": 2,
+          "profile_count": 2,
+          "default_pair_full_variant_count": 0,
+          "suppression_pair_full_variant_count": 0,
+          "default_continuation_hit_count": 0,
+          "suppression_continuation_hit_count": 0,
+          "suppression_hit_delta": 0,
+          "suppression_pair_full_delta": 0,
+          "pair_full_rows": []
+        },
+        "interpretation": {
+          "model_quality_claim": "not_claimed",
+          "reason": "The suppression profile did not improve fixed/loss continuation hits on archived pair-retention checkpoints.",
+          "next_action": "Treat newline suppression as loss-alias cleanup only; the next model-capability step should train for pair coexistence.",
+          "summary": {
+            "variant_count": 1,
+            "term_count": 2,
+            "profile_count": 2,
+            "default_pair_full_variant_count": 0,
+            "suppression_pair_full_variant_count": 0,
+            "default_continuation_hit_count": 0,
+            "suppression_continuation_hit_count": 0,
+            "suppression_hit_delta": 0,
+            "suppression_pair_full_delta": 0,
+            "pair_full_rows": []
+          }
+        }
+      }
+    },
+    {
+      "spec_id": "spaced-heldout-pair",
+      "report": {
+        "schema_version": 1,
+        "title": "MiniGPT required-term pair generation profile replay",
+        "generated_at": "2026-06-02T07:40:21Z",
+        "status": "pass",
+        "decision": "generation_profile_no_pair_coexistence_gain",
+        "failed_count": 0,
+        "issues": [],
+        "source_required_term_pair_branch_retention_sweep": "e\\738\\解释\\model-capability-required-term-pair-readiness-direct-completion-surface-training-run\\model_capability_required_term_pair_readiness_training_run.json",
+        "out_dir": "e\\740\\解释\\model-capability-required-term-pair-readiness-direct-completion-pair-probe-replay\\pair-probe-replay-runs\\spaced-heldout-pair",
+        "settings": {
+          "profiles": [
+            "default",
+            "suppress_newline_tokens"
+          ],
+          "variant_limit": 1,
+          "max_new_tokens": 12,
+          "temperature": 0.2,
+          "top_k": 1,
+          "device": "cpu",
+          "experiment_boundary": "replay named generation profiles over archived fixed/loss branch-retention checkpoints without retraining"
+        },
+        "terms": [
+          {
+            "case": "spaced-heldout-pair-fixed",
+            "term": "fixed",
+            "scaffold_prompt": "fixed= | loss=",
+            "source_hit_rate": 0.0
+          },
+          {
+            "case": "spaced-heldout-pair-loss",
+            "term": "loss",
+            "scaffold_prompt": "fixed= | loss=",
+            "source_hit_rate": 0.0
+          }
+        ],
+        "case_rows": [
+          {
+            "status": "pass",
+            "error": "",
+            "pair_id": "01-fixed-loss",
+            "variant_id": "pair-probe-spaced-heldout-pair-seed-3535",
+            "branch_retention_run_id": "pair-probe-spaced-heldout-pair-seed-3535",
+            "profile_id": "default",
+            "term": "fixed",
+            "prompt": "fixed= | loss=",
+            "generation_seed": 3535,
+            "checkpoint_path": "e\\738\\解释\\model-capability-required-term-pair-readiness-direct-completion-surface-training-run\\pair-readiness-training-run\\checkpoint.pt",
+            "checkpoint_exists": true,
+            "tokenizer_path": "e\\738\\解释\\model-capability-required-term-pair-readiness-direct-completion-surface-training-run\\pair-readiness-training-run\\tokenizer.json",
+            "tokenizer_exists": true,
+            "generated": "fixed= | loss=losss fioss ",
+            "continuation": "losss fioss ",
+            "generated_preview": "fixed= | loss=losss fioss ",
+            "continuation_preview": "losss fioss ",
+            "continuation_hit": false,
+            "newline_cleanup_hit": false,
+            "blocked_token_count": 0
+          },
+          {
+            "status": "pass",
+            "error": "",
+            "pair_id": "01-fixed-loss",
+            "variant_id": "pair-probe-spaced-heldout-pair-seed-3535",
+            "branch_retention_run_id": "pair-probe-spaced-heldout-pair-seed-3535",
+            "profile_id": "suppress_newline_tokens",
+            "term": "fixed",
+            "prompt": "fixed= | loss=",
+            "generation_seed": 3535,
+            "checkpoint_path": "e\\738\\解释\\model-capability-required-term-pair-readiness-direct-completion-surface-training-run\\pair-readiness-training-run\\checkpoint.pt",
+            "checkpoint_exists": true,
+            "tokenizer_path": "e\\738\\解释\\model-capability-required-term-pair-readiness-direct-completion-surface-training-run\\pair-readiness-training-run\\tokenizer.json",
+            "tokenizer_exists": true,
+            "generated": "fixed= | loss=losss fioss ",
+            "continuation": "losss fioss ",
+            "generated_preview": "fixed= | loss=losss fioss ",
+            "continuation_preview": "losss fioss ",
+            "continuation_hit": false,
+            "newline_cleanup_hit": false,
+            "blocked_token_count": 1
+          },
+          {
+            "status": "pass",
+            "error": "",
+            "pair_id": "01-fixed-loss",
+            "variant_id": "pair-probe-spaced-heldout-pair-seed-3535",
+            "branch_retention_run_id": "pair-probe-spaced-heldout-pair-seed-3535",
+            "profile_id": "default",
+            "term": "loss",
+            "prompt": "fixed= | loss=",
+            "generation_seed": 3536,
+            "checkpoint_path": "e\\738\\解释\\model-capability-required-term-pair-readiness-direct-completion-surface-training-run\\pair-readiness-training-run\\checkpoint.pt",
+            "checkpoint_exists": true,
+            "tokenizer_path": "e\\738\\解释\\model-capability-required-term-pair-readiness-direct-completion-surface-training-run\\pair-readiness-training-run\\tokenizer.json",
+            "tokenizer_exists": true,
+            "generated": "fixed= | loss=losss fioss ",
+            "continuation": "losss fioss ",
+            "generated_preview": "fixed= | loss=losss fioss ",
+            "continuation_preview": "losss fioss ",
+            "continuation_hit": true,
+            "newline_cleanup_hit": true,
+            "blocked_token_count": 0
+          },
+          {
+            "status": "pass",
+            "error": "",
+            "pair_id": "01-fixed-loss",
+            "variant_id": "pair-probe-spaced-heldout-pair-seed-3535",
+            "branch_retention_run_id": "pair-probe-spaced-heldout-pair-seed-3535",
+            "profile_id": "suppress_newline_tokens",
+            "term": "loss",
+            "prompt": "fixed= | loss=",
+            "generation_seed": 3536,
+            "checkpoint_path": "e\\738\\解释\\model-capability-required-term-pair-readiness-direct-completion-surface-training-run\\pair-readiness-training-run\\checkpoint.pt",
+            "checkpoint_exists": true,
+            "tokenizer_path": "e\\738\\解释\\model-capability-required-term-pair-readiness-direct-completion-surface-training-run\\pair-readiness-training-run\\tokenizer.json",
+            "tokenizer_exists": true,
+            "generated": "fixed= | loss=losss fioss ",
+            "continuation": "losss fioss ",
+            "generated_preview": "fixed= | loss=losss fioss ",
+            "continuation_preview": "losss fioss ",
+            "continuation_hit": true,
+            "newline_cleanup_hit": true,
+            "blocked_token_count": 1
+          }
+        ],
+        "variant_rows": [
+          {
+            "variant_id": "pair-probe-spaced-heldout-pair-seed-3535",
+            "profile_id": "default",
+            "term_count": 2,
+            "hit_terms": [
+              "loss"
+            ],
+            "missed_terms": [
+              "fixed"
+            ],
+            "hit_count": 1,
+            "pair_full_hit": false
+          },
+          {
+            "variant_id": "pair-probe-spaced-heldout-pair-seed-3535",
+            "profile_id": "suppress_newline_tokens",
+            "term_count": 2,
+            "hit_terms": [
+              "loss"
+            ],
+            "missed_terms": [
+              "fixed"
+            ],
+            "hit_count": 1,
+            "pair_full_hit": false
+          }
+        ],
+        "profile_rows": [
+          {
+            "profile_id": "default",
+            "case_count": 2,
+            "continuation_hit_count": 1,
+            "newline_cleanup_hit_count": 1,
+            "pair_full_variant_count": 0,
+            "variant_count": 1,
+            "blocked_token_count_total": 0
+          },
+          {
+            "profile_id": "suppress_newline_tokens",
+            "case_count": 2,
+            "continuation_hit_count": 1,
+            "newline_cleanup_hit_count": 1,
+            "pair_full_variant_count": 0,
+            "variant_count": 1,
+            "blocked_token_count_total": 2
+          }
+        ],
+        "summary": {
+          "variant_count": 1,
+          "term_count": 2,
+          "profile_count": 2,
+          "default_pair_full_variant_count": 0,
+          "suppression_pair_full_variant_count": 0,
+          "default_continuation_hit_count": 1,
+          "suppression_continuation_hit_count": 1,
+          "suppression_hit_delta": 0,
+          "suppression_pair_full_delta": 0,
+          "pair_full_rows": []
+        },
+        "interpretation": {
+          "model_quality_claim": "not_claimed",
+          "reason": "The suppression profile did not improve fixed/loss continuation hits on archived pair-retention checkpoints.",
+          "next_action": "Treat newline suppression as loss-alias cleanup only; the next model-capability step should train for pair coexistence.",
+          "summary": {
+            "variant_count": 1,
+            "term_count": 2,
+            "profile_count": 2,
+            "default_pair_full_variant_count": 0,
+            "suppression_pair_full_variant_count": 0,
+            "default_continuation_hit_count": 1,
+            "suppression_continuation_hit_count": 1,
+            "suppression_hit_delta": 0,
+            "suppression_pair_full_delta": 0,
+            "pair_full_rows": []
+          }
+        }
+      }
+    },
+    {
+      "spec_id": "arrow-heldout-pair",
+      "report": {
+        "schema_version": 1,
+        "title": "MiniGPT required-term pair generation profile replay",
+        "generated_at": "2026-06-02T07:40:21Z",
+        "status": "pass",
+        "decision": "generation_profile_no_pair_coexistence_gain",
+        "failed_count": 0,
+        "issues": [],
+        "source_required_term_pair_branch_retention_sweep": "e\\738\\解释\\model-capability-required-term-pair-readiness-direct-completion-surface-training-run\\model_capability_required_term_pair_readiness_training_run.json",
+        "out_dir": "e\\740\\解释\\model-capability-required-term-pair-readiness-direct-completion-pair-probe-replay\\pair-probe-replay-runs\\arrow-heldout-pair",
+        "settings": {
+          "profiles": [
+            "default",
+            "suppress_newline_tokens"
+          ],
+          "variant_limit": 1,
+          "max_new_tokens": 12,
+          "temperature": 0.2,
+          "top_k": 1,
+          "device": "cpu",
+          "experiment_boundary": "replay named generation profiles over archived fixed/loss branch-retention checkpoints without retraining"
+        },
+        "terms": [
+          {
+            "case": "arrow-heldout-pair-fixed",
+            "term": "fixed",
+            "scaffold_prompt": "fixed -> | loss ->",
+            "source_hit_rate": 0.0
+          },
+          {
+            "case": "arrow-heldout-pair-loss",
+            "term": "loss",
+            "scaffold_prompt": "fixed -> | loss ->",
+            "source_hit_rate": 0.0
+          }
+        ],
+        "case_rows": [
+          {
+            "status": "pass",
+            "error": "",
+            "pair_id": "01-fixed-loss",
+            "variant_id": "pair-probe-arrow-heldout-pair-seed-3535",
+            "branch_retention_run_id": "pair-probe-arrow-heldout-pair-seed-3535",
+            "profile_id": "default",
+            "term": "fixed",
+            "prompt": "fixed -> | loss ->",
+            "generation_seed": 3535,
+            "checkpoint_path": "e\\738\\解释\\model-capability-required-term-pair-readiness-direct-completion-surface-training-run\\pair-readiness-training-run\\checkpoint.pt",
+            "checkpoint_exists": true,
+            "tokenizer_path": "e\\738\\解释\\model-capability-required-term-pair-readiness-direct-completion-surface-training-run\\pair-readiness-training-run\\tokenizer.json",
+            "tokenizer_exists": true,
+            "generated": "xed �� | loss ��ed fion fixe",
+            "continuation": "xed �� | loss ��ed fion fixe",
+            "generated_preview": "xed �� | loss ��ed fion fixe",
+            "continuation_preview": "xed �� | loss ��ed fion fixe",
+            "continuation_hit": false,
+            "newline_cleanup_hit": false,
+            "blocked_token_count": 0
+          },
+          {
+            "status": "pass",
+            "error": "",
+            "pair_id": "01-fixed-loss",
+            "variant_id": "pair-probe-arrow-heldout-pair-seed-3535",
+            "branch_retention_run_id": "pair-probe-arrow-heldout-pair-seed-3535",
+            "profile_id": "suppress_newline_tokens",
+            "term": "fixed",
+            "prompt": "fixed -> | loss ->",
+            "generation_seed": 3535,
+            "checkpoint_path": "e\\738\\解释\\model-capability-required-term-pair-readiness-direct-completion-surface-training-run\\pair-readiness-training-run\\checkpoint.pt",
+            "checkpoint_exists": true,
+            "tokenizer_path": "e\\738\\解释\\model-capability-required-term-pair-readiness-direct-completion-surface-training-run\\pair-readiness-training-run\\tokenizer.json",
+            "tokenizer_exists": true,
+            "generated": "xed �� | loss ��ed fion fixe",
+            "continuation": "xed �� | loss ��ed fion fixe",
+            "generated_preview": "xed �� | loss ��ed fion fixe",
+            "continuation_preview": "xed �� | loss ��ed fion fixe",
+            "continuation_hit": false,
+            "newline_cleanup_hit": false,
+            "blocked_token_count": 1
+          },
+          {
+            "status": "pass",
+            "error": "",
+            "pair_id": "01-fixed-loss",
+            "variant_id": "pair-probe-arrow-heldout-pair-seed-3535",
+            "branch_retention_run_id": "pair-probe-arrow-heldout-pair-seed-3535",
+            "profile_id": "default",
+            "term": "loss",
+            "prompt": "fixed -> | loss ->",
+            "generation_seed": 3536,
+            "checkpoint_path": "e\\738\\解释\\model-capability-required-term-pair-readiness-direct-completion-surface-training-run\\pair-readiness-training-run\\checkpoint.pt",
+            "checkpoint_exists": true,
+            "tokenizer_path": "e\\738\\解释\\model-capability-required-term-pair-readiness-direct-completion-surface-training-run\\pair-readiness-training-run\\tokenizer.json",
+            "tokenizer_exists": true,
+            "generated": "xed �� | loss ��ed fion fixe",
+            "continuation": "xed �� | loss ��ed fion fixe",
+            "generated_preview": "xed �� | loss ��ed fion fixe",
+            "continuation_preview": "xed �� | loss ��ed fion fixe",
+            "continuation_hit": true,
+            "newline_cleanup_hit": true,
+            "blocked_token_count": 0
+          },
+          {
+            "status": "pass",
+            "error": "",
+            "pair_id": "01-fixed-loss",
+            "variant_id": "pair-probe-arrow-heldout-pair-seed-3535",
+            "branch_retention_run_id": "pair-probe-arrow-heldout-pair-seed-3535",
+            "profile_id": "suppress_newline_tokens",
+            "term": "loss",
+            "prompt": "fixed -> | loss ->",
+            "generation_seed": 3536,
+            "checkpoint_path": "e\\738\\解释\\model-capability-required-term-pair-readiness-direct-completion-surface-training-run\\pair-readiness-training-run\\checkpoint.pt",
+            "checkpoint_exists": true,
+            "tokenizer_path": "e\\738\\解释\\model-capability-required-term-pair-readiness-direct-completion-surface-training-run\\pair-readiness-training-run\\tokenizer.json",
+            "tokenizer_exists": true,
+            "generated": "xed �� | loss ��ed fion fixe",
+            "continuation": "xed �� | loss ��ed fion fixe",
+            "generated_preview": "xed �� | loss ��ed fion fixe",
+            "continuation_preview": "xed �� | loss ��ed fion fixe",
+            "continuation_hit": true,
+            "newline_cleanup_hit": true,
+            "blocked_token_count": 1
+          }
+        ],
+        "variant_rows": [
+          {
+            "variant_id": "pair-probe-arrow-heldout-pair-seed-3535",
+            "profile_id": "default",
+            "term_count": 2,
+            "hit_terms": [
+              "loss"
+            ],
+            "missed_terms": [
+              "fixed"
+            ],
+            "hit_count": 1,
+            "pair_full_hit": false
+          },
+          {
+            "variant_id": "pair-probe-arrow-heldout-pair-seed-3535",
+            "profile_id": "suppress_newline_tokens",
+            "term_count": 2,
+            "hit_terms": [
+              "loss"
+            ],
+            "missed_terms": [
+              "fixed"
+            ],
+            "hit_count": 1,
+            "pair_full_hit": false
+          }
+        ],
+        "profile_rows": [
+          {
+            "profile_id": "default",
+            "case_count": 2,
+            "continuation_hit_count": 1,
+            "newline_cleanup_hit_count": 1,
+            "pair_full_variant_count": 0,
+            "variant_count": 1,
+            "blocked_token_count_total": 0
+          },
+          {
+            "profile_id": "suppress_newline_tokens",
+            "case_count": 2,
+            "continuation_hit_count": 1,
+            "newline_cleanup_hit_count": 1,
+            "pair_full_variant_count": 0,
+            "variant_count": 1,
+            "blocked_token_count_total": 2
+          }
+        ],
+        "summary": {
+          "variant_count": 1,
+          "term_count": 2,
+          "profile_count": 2,
+          "default_pair_full_variant_count": 0,
+          "suppression_pair_full_variant_count": 0,
+          "default_continuation_hit_count": 1,
+          "suppression_continuation_hit_count": 1,
+          "suppression_hit_delta": 0,
+          "suppression_pair_full_delta": 0,
+          "pair_full_rows": []
+        },
+        "interpretation": {
+          "model_quality_claim": "not_claimed",
+          "reason": "The suppression profile did not improve fixed/loss continuation hits on archived pair-retention checkpoints.",
+          "next_action": "Treat newline suppression as loss-alias cleanup only; the next model-capability step should train for pair coexistence.",
+          "summary": {
+            "variant_count": 1,
+            "term_count": 2,
+            "profile_count": 2,
+            "default_pair_full_variant_count": 0,
+            "suppression_pair_full_variant_count": 0,
+            "default_continuation_hit_count": 1,
+            "suppression_continuation_hit_count": 1,
+            "suppression_hit_delta": 0,
+            "suppression_pair_full_delta": 0,
+            "pair_full_rows": []
+          }
+        }
+      }
+    }
+  ],
+  "summary": {
+    "row_count": 3,
+    "prompt_spec_count": 3,
+    "required_prompt_spec_count": 1,
+    "pair_full_count": 0,
+    "pair_full_rate": 0.0,
+    "required_pair_full_count": 0,
+    "required_all_pair_full": false,
+    "any_pair_full": false,
+    "exact_heldout_pair_full": false
+  },
+  "interpretation": {
+    "model_quality_claim": "not_claimed",
+    "reason": "The selected direct-completion checkpoint did not replay pair-full on pair prompt surfaces.",
+    "next_action": "treat v738 as direct-probe-only evidence and repair pair prompt transfer"
+  },
+  "sidecar_outputs": {
+    "replay_reports": {
+      "exact-heldout-pair": {
+        "json": "e\\740\\解释\\model-capability-required-term-pair-readiness-direct-completion-pair-probe-replay\\pair-probe-replay-reports\\exact-heldout-pair\\model_capability_required_term_pair_generation_profile_replay.json",
+        "csv": "e\\740\\解释\\model-capability-required-term-pair-readiness-direct-completion-pair-probe-replay\\pair-probe-replay-reports\\exact-heldout-pair\\model_capability_required_term_pair_generation_profile_replay.csv",
+        "text": "e\\740\\解释\\model-capability-required-term-pair-readiness-direct-completion-pair-probe-replay\\pair-probe-replay-reports\\exact-heldout-pair\\model_capability_required_term_pair_generation_profile_replay.txt",
+        "markdown": "e\\740\\解释\\model-capability-required-term-pair-readiness-direct-completion-pair-probe-replay\\pair-probe-replay-reports\\exact-heldout-pair\\model_capability_required_term_pair_generation_profile_replay.md",
+        "html": "e\\740\\解释\\model-capability-required-term-pair-readiness-direct-completion-pair-probe-replay\\pair-probe-replay-reports\\exact-heldout-pair\\model_capability_required_term_pair_generation_profile_replay.html"
+      },
+      "spaced-heldout-pair": {
+        "json": "e\\740\\解释\\model-capability-required-term-pair-readiness-direct-completion-pair-probe-replay\\pair-probe-replay-reports\\spaced-heldout-pair\\model_capability_required_term_pair_generation_profile_replay.json",
+        "csv": "e\\740\\解释\\model-capability-required-term-pair-readiness-direct-completion-pair-probe-replay\\pair-probe-replay-reports\\spaced-heldout-pair\\model_capability_required_term_pair_generation_profile_replay.csv",
+        "text": "e\\740\\解释\\model-capability-required-term-pair-readiness-direct-completion-pair-probe-replay\\pair-probe-replay-reports\\spaced-heldout-pair\\model_capability_required_term_pair_generation_profile_replay.txt",
+        "markdown": "e\\740\\解释\\model-capability-required-term-pair-readiness-direct-completion-pair-probe-replay\\pair-probe-replay-reports\\spaced-heldout-pair\\model_capability_required_term_pair_generation_profile_replay.md",
+        "html": "e\\740\\解释\\model-capability-required-term-pair-readiness-direct-completion-pair-probe-replay\\pair-probe-replay-reports\\spaced-heldout-pair\\model_capability_required_term_pair_generation_profile_replay.html"
+      },
+      "arrow-heldout-pair": {
+        "json": "e\\740\\解释\\model-capability-required-term-pair-readiness-direct-completion-pair-probe-replay\\pair-probe-replay-reports\\arrow-heldout-pair\\model_capability_required_term_pair_generation_profile_replay.json",
+        "csv": "e\\740\\解释\\model-capability-required-term-pair-readiness-direct-completion-pair-probe-replay\\pair-probe-replay-reports\\arrow-heldout-pair\\model_capability_required_term_pair_generation_profile_replay.csv",
+        "text": "e\\740\\解释\\model-capability-required-term-pair-readiness-direct-completion-pair-probe-replay\\pair-probe-replay-reports\\arrow-heldout-pair\\model_capability_required_term_pair_generation_profile_replay.txt",
+        "markdown": "e\\740\\解释\\model-capability-required-term-pair-readiness-direct-completion-pair-probe-replay\\pair-probe-replay-reports\\arrow-heldout-pair\\model_capability_required_term_pair_generation_profile_replay.md",
+        "html": "e\\740\\解释\\model-capability-required-term-pair-readiness-direct-completion-pair-probe-replay\\pair-probe-replay-reports\\arrow-heldout-pair\\model_capability_required_term_pair_generation_profile_replay.html"
+      }
+    }
+  }
+}

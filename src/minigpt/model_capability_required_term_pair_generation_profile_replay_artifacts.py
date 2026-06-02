@@ -50,7 +50,14 @@ def write_model_capability_required_term_pair_generation_profile_replay_csv(repo
         writer = csv.DictWriter(handle, fieldnames=fieldnames)
         writer.writeheader()
         for row in list_of_dicts(report.get("case_rows")):
-            writer.writerow({field: csv_cell(row.get(field)) for field in fieldnames})
+            writer.writerow({field: csv_cell(_csv_value(row, field)) for field in fieldnames})
+
+
+def _csv_value(row: dict[str, Any], field: str) -> Any:
+    value = row.get(field)
+    if field == "continuation_preview":
+        return str(value or "").rstrip()
+    return value
 
 
 def render_model_capability_required_term_pair_generation_profile_replay_markdown(report: dict[str, Any]) -> str:

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT direct-completion pair-probe replay</title>
+<style>
+:root{color-scheme:light;--ink:#172026;--muted:#5d6975;--line:#d8dee4;--panel:#f7f9fb;--accent:#166534}
+*{box-sizing:border-box}
+body{margin:0;background:#eef2f5;color:var(--ink);font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1180px;margin:0 auto;padding:28px}
+h1{font-size:30px;margin:0 0 8px;letter-spacing:0}
+h2{font-size:18px;margin:0 0 12px;letter-spacing:0}
+p{color:var(--muted);line-height:1.55;overflow-wrap:anywhere}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:18px 0}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:8px}
+.card{padding:14px}
+.card span{display:block;color:var(--muted);font-size:12px;text-transform:uppercase}
+.card strong{display:block;margin-top:6px;font-size:18px;line-height:1.2;color:var(--accent);overflow-wrap:anywhere}
+.panel{padding:16px;margin:14px 0}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:#334155}
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT direct-completion pair-probe replay</h1><p>The selected direct-completion checkpoint did not replay pair-full on pair prompt surfaces.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Decision</span><strong>pair_readiness_direct_completion_pair_probe_replay_not_ready</strong></div><div class="card"><span>Specs</span><strong>3</strong></div><div class="card"><span>Pair-full</span><strong>0/3</strong></div><div class="card"><span>Required all</span><strong>False</strong></div><div class="card"><span>Exact pair</span><strong>False</strong></div></section>
+<section class="panel"><h2>Selected Training Report</h2><p>e\738\解释\model-capability-required-term-pair-readiness-direct-completion-surface-training-run\model_capability_required_term_pair_readiness_training_run.json</p></section>
+<section class="panel"><h2>Replay Rows</h2><div class="table-wrap"><table>
+<thead><tr><th>Spec</th><th>Prompt</th><th>Required</th><th>Pair-full</th><th>Default full</th><th>Suppression full</th></tr></thead>
+<tbody><tr><td>exact-heldout-pair</td><td>fixed=|loss=</td><td>True</td><td>False</td><td>0</td><td>0</td></tr><tr><td>spaced-heldout-pair</td><td>fixed= | loss=</td><td>False</td><td>False</td><td>0</td><td>0</td></tr><tr><td>arrow-heldout-pair</td><td>fixed -&gt; | loss -&gt;</td><td>False</td><td>False</td><td>0</td><td>0</td></tr></tbody>
+</table></div></section>
+<section class="panel"><h2>Next Action</h2><p>treat v738 as direct-probe-only evidence and repair pair prompt transfer</p></section>
+</main>
+</body>
+</html>

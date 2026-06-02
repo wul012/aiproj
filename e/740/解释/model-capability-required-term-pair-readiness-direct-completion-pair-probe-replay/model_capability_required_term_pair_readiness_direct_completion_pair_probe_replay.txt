@@ -1,0 +1,9 @@
+status=pass
+decision=pair_readiness_direct_completion_pair_probe_replay_not_ready
+failed_count=0
+prompt_spec_count=3
+pair_full_count=0
+required_all_pair_full=False
+exact_heldout_pair_full=False
+model_quality_claim=not_claimed
+next_action=treat v738 as direct-probe-only evidence and repair pair prompt transfer
