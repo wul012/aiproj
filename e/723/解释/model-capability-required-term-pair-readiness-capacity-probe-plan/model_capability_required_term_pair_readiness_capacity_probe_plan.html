@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT capacity-probe plan</title>
+<style>
+:root{color-scheme:light;--ink:#172026;--muted:#5d6975;--line:#d8dee4;--panel:#f7f9fb;--accent:#1d4ed8}
+*{box-sizing:border-box}
+body{margin:0;background:#eef2f5;color:var(--ink);font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1120px;margin:0 auto;padding:28px}
+h1{font-size:30px;margin:0 0 8px;letter-spacing:0}
+h2{font-size:18px;margin:0 0 12px;letter-spacing:0}
+p{color:var(--muted);line-height:1.55;overflow-wrap:anywhere}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:18px 0}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:8px}
+.card{padding:14px}
+.card span{display:block;color:var(--muted);font-size:12px;text-transform:uppercase}
+.card strong{display:block;margin-top:6px;font-size:18px;line-height:1.2;color:var(--accent);overflow-wrap:anywhere}
+.panel{padding:16px;margin:14px 0}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:#334155}
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT capacity-probe plan</h1><p>Single-sided fixed/loss row patching returned to baseline, so the next controlled probe should test a slightly larger tiny model on the same corpus.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Decision</span><strong>pair_readiness_capacity_probe_plan_ready</strong></div><div class="card"><span>Ready</span><strong>True</strong></div><div class="card"><span>Layers</span><strong>2</strong></div><div class="card"><span>Heads</span><strong>2</strong></div><div class="card"><span>Embedding</span><strong>96</strong></div><div class="card"><span>Iters</span><strong>1800</strong></div></section>
+<section class="panel"><h2>Training Config</h2><div class="table-wrap"><table>
+<thead><tr><th>Key</th><th>Value</th></tr></thead><tbody><tr><td>seed</td><td>3535</td></tr><tr><td>max_iters</td><td>1800</td></tr><tr><td>eval_iters</td><td>2</td></tr><tr><td>batch_size</td><td>16</td></tr><tr><td>block_size</td><td>16</td></tr><tr><td>n_layer</td><td>2</td></tr><tr><td>n_head</td><td>2</td></tr><tr><td>n_embd</td><td>96</td></tr><tr><td>learning_rate</td><td>0.01</td></tr><tr><td>max_new_tokens</td><td>12</td></tr><tr><td>temperature</td><td>0.2</td></tr><tr><td>top_k</td><td>1</td></tr><tr><td>device</td><td>cpu</td></tr></tbody>
+</table></div></section>
+<section class="panel"><h2>Checks</h2><div class="table-wrap"><table>
+<thead><tr><th>Check</th><th>Status</th><th>Actual</th><th>Detail</th></tr></thead>
+<tbody><tr><td>route_comparison_passed</td><td>pass</td><td>pass</td><td>source route comparison must pass</td></tr><tr><td>route_comparison_decision</td><td>pass</td><td>pair_readiness_fixed_recovery_returns_to_baseline_without_pair_full</td><td>capacity probe follows only the closed fixed/loss row-patching branch</td></tr><tr><td>no_pair_full_route</td><td>pass</td><td>False</td><td>no route should already be pair-full</td></tr><tr><td>fixed_recovery_returned_to_baseline</td><td>pass</td><td>True</td><td>fixed-recovery must be confirmed as a baseline return</td></tr><tr><td>route_count_four</td><td>pass</td><td>4</td><td>comparison should include baseline, loss-retention, structured, and fixed-recovery routes</td></tr></tbody>
+</table></div></section>
+<section class="panel"><h2>Next Action</h2><p>run pair_readiness_capacity_probe_training_run</p></section>
+</main>
+</body>
+</html>

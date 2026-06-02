@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT pair-readiness capacity-probe plan",
+  "generated_at": "2026-06-02T04:02:36Z",
+  "status": "pass",
+  "decision": "pair_readiness_capacity_probe_plan_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_route_comparison_path": "e\\722\\解释\\model-capability-required-term-pair-readiness-four-route-comparison\\model_capability_required_term_pair_readiness_route_comparison.json",
+  "source_route_comparison": {
+    "status": "pass",
+    "decision": "pair_readiness_fixed_recovery_returns_to_baseline_without_pair_full",
+    "summary": {
+      "route_count": 4,
+      "best_default_hit_count": 1,
+      "best_routes": [
+        "baseline-split",
+        "structured-template",
+        "fixed-recovery"
+      ],
+      "pair_full_routes": [],
+      "any_pair_full_observed": false,
+      "structured_vs_baseline_default_hit_delta": 0,
+      "structured_vs_loss_retention_default_hit_delta": 1,
+      "baseline_default_hit_terms": [
+        "fixed"
+      ],
+      "loss_retention_default_hit_terms": [],
+      "structured_default_hit_terms": [
+        "loss"
+      ],
+      "structured_default_missed_terms": [
+        "fixed"
+      ],
+      "failure_shape_changed": true,
+      "fixed_recovery_vs_baseline_default_hit_delta": 0,
+      "fixed_recovery_vs_structured_default_hit_delta": 0,
+      "fixed_recovery_default_hit_terms": [
+        "fixed"
+      ],
+      "fixed_recovery_default_missed_terms": [
+        "loss"
+      ],
+      "fixed_recovery_returns_to_baseline": true
+    }
+  },
+  "check_rows": [
+    {
+      "id": "route_comparison_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "source route comparison must pass"
+    },
+    {
+      "id": "route_comparison_decision",
+      "status": "pass",
+      "actual": "pair_readiness_fixed_recovery_returns_to_baseline_without_pair_full",
+      "detail": "capacity probe follows only the closed fixed/loss row-patching branch"
+    },
+    {
+      "id": "no_pair_full_route",
+      "status": "pass",
+      "actual": false,
+      "detail": "no route should already be pair-full"
+    },
+    {
+      "id": "fixed_recovery_returned_to_baseline",
+      "status": "pass",
+      "actual": true,
+      "detail": "fixed-recovery must be confirmed as a baseline return"
+    },
+    {
+      "id": "route_count_four",
+      "status": "pass",
+      "actual": 4,
+      "detail": "comparison should include baseline, loss-retention, structured, and fixed-recovery routes"
+    }
+  ],
+  "plan": {
+    "ready": true,
+    "proposed_next_artifact": "pair_readiness_capacity_probe_training_run",
+    "corpus_source": "fixed_recovery_corpus_materialization",
+    "training_config": {
+      "seed": 3535,
+      "max_iters": 1800,
+      "eval_iters": 2,
+      "batch_size": 16,
+      "block_size": 16,
+      "n_layer": 2,
+      "n_head": 2,
+      "n_embd": 96,
+      "learning_rate": 0.01,
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 1,
+      "device": "cpu"
+    },
+    "probe_focus": "test whether a slightly larger tiny model can hold fixed and loss direct branches together",
+    "success_guard": "fixed= and loss= must both hit in heldout direct replay before pair-probe checks",
+    "non_goal": "do not add more single-sided fixed/loss rows in this probe"
+  },
+  "summary": {
+    "check_count": 5,
+    "passed_check_count": 5,
+    "failed_check_count": 0,
+    "plan_ready": true,
+    "proposed_next_artifact": "pair_readiness_capacity_probe_training_run",
+    "corpus_source": "fixed_recovery_corpus_materialization",
+    "n_layer": 2,
+    "n_head": 2,
+    "n_embd": 96,
+    "max_iters": 1800,
+    "learning_rate": 0.01
+  },
+  "interpretation": {
+    "model_quality_claim": "plan_only",
+    "reason": "Single-sided fixed/loss row patching returned to baseline, so the next controlled probe should test a slightly larger tiny model on the same corpus.",
+    "next_action": "run pair_readiness_capacity_probe_training_run"
+  }
+}

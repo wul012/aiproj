@@ -7354,6 +7354,8 @@ The pair-readiness fixed-recovery training layer trains that corpus with the sam
 
 The pair-readiness four-route comparison layer extends the route comparison to include fixed recovery, confirming it returns to the baseline fixed-only shape and closing single-sided fixed/loss row patching in favor of capacity or objective-structure tests.
 
+The pair-readiness capacity-probe plan layer turns that closeout into a controlled larger-tiny-model experiment, preserving the same fixed-recovery corpus while raising model capacity to 2 layers, 2 heads, and 96 embedding dimensions.
+
 The run registry layer indexes multiple run directories so experiments can be scanned by commit, data fingerprint, quality status, eval suite coverage, metrics, artifact count, notes, tags, best-val rank, loss delta, a leaderboard, an interactive local HTML table, shareable URL state, and visible-row CSV export.
 
 The experiment card layer turns one run into a compact JSON/Markdown/HTML summary for review, handoff, or portfolio use.

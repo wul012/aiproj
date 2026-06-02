@@ -1,0 +1,13 @@
+status=pass
+decision=pair_readiness_capacity_probe_plan_ready
+failed_count=0
+plan_ready=True
+proposed_next_artifact=pair_readiness_capacity_probe_training_run
+corpus_source=fixed_recovery_corpus_materialization
+n_layer=2
+n_head=2
+n_embd=96
+max_iters=1800
+learning_rate=0.01
+model_quality_claim=plan_only
+next_action=run pair_readiness_capacity_probe_training_run

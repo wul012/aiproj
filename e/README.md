@@ -1096,3 +1096,8 @@ e/663/解释/说明.md
 - `e/722/图片`
 - `e/722/解释/说明.md`
 - v722 four-route pair-readiness comparison 的运行截图和解释。
+## v723 补充索引
+
+- `e/723/图片`
+- `e/723/解释/说明.md`
+- v723 capacity-probe plan 的运行截图和解释。
