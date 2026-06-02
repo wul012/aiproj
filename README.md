@@ -4,7 +4,19 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v700.0.0` compares v696 and v699 and confirms a minimal-prompt first-token tradeoff.
+Version `v701.0.0` turns the minimal-prompt tradeoff into a balanced first-token repair plan.
+
+## Latest v701 checkpoint
+
+- Added `minimal_prompt_balanced_first_token_repair_objective`.
+- Added `model_capability_required_term_pair_minimal_prompt_balanced_repair_plan`.
+- Consumed v700 tradeoff comparison evidence.
+- Confirmed `decision=minimal_prompt_balanced_repair_plan_ready`.
+- Confirmed `proposed_corpus_mode=minimal_prompt_balanced_first_token_repair_objective`.
+- Confirmed `seed_to_rerun=3535`.
+- Archived v701 evidence in `e/701` and added the code explanation in `代码讲解记录_模型能力阶段/715-v701-minimal-prompt-balanced-repair-plan.md`.
+
+## Latest v700 checkpoint
 
 ## Latest v700 checkpoint
 
@@ -14,8 +26,6 @@ Version `v700.0.0` compares v696 and v699 and confirms a minimal-prompt first-to
 - Confirmed `mixed_branch_tradeoff_confirmed=True` and `other_term_start_count=4`.
 - Kept `model_quality_claim=diagnostic_only`.
 - Archived v700 evidence in `e/700` and added the code explanation in `代码讲解记录_模型能力阶段/714-v700-minimal-prompt-tradeoff-comparison.md`.
-
-## Latest v699 checkpoint
 
 ## Latest v699 checkpoint
 

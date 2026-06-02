@@ -1,0 +1,5 @@
+id,status,actual,detail
+tradeoff_passed,pass,pass,tradeoff diagnostic must pass
+tradeoff_confirmed,pass,first_token_preference_tradeoff_confirmed,balanced repair requires confirmed first-token tradeoff
+mixed_branch_tradeoff,pass,True,source reports must include fixed-only and loss-only outcomes
+no_pair_full_candidate,pass,0,plan should only run when no pair-full candidate exists

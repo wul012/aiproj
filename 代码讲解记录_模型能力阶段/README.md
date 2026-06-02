@@ -695,6 +695,9 @@
 714-v700-minimal-prompt-tradeoff-comparison.md
  -> v700 code explanation: compare v696 and v699 with the existing first-token diagnostic and confirm tradeoff.
 
+715-v701-minimal-prompt-balanced-repair-plan.md
+ -> v701 code explanation: convert the minimal-prompt tradeoff into a balanced first-token repair plan.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

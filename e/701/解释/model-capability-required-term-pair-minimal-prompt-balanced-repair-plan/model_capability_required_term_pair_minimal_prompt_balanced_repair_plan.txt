@@ -1,0 +1,10 @@
+status=pass
+decision=minimal_prompt_balanced_repair_plan_ready
+failed_count=0
+plan_ready=True
+proposed_corpus_mode=minimal_prompt_balanced_first_token_repair_objective
+seed_to_rerun=3535
+repair_focus=balanced_first_token_and_direct_target_retention
+expected_change=balance fixed/loss first-token pressure after v696 fixed-only and v699 loss-only tradeoff
+model_quality_claim=repair_plan_only
+next_action=rerun seed 3535 with corpus_mode=minimal_prompt_balanced_first_token_repair_objective

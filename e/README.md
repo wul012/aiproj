@@ -986,3 +986,8 @@ e/663/解释/说明.md
 - `e/700/图片`
 - `e/700/解释/说明.md`
 - v700 minimal prompt tradeoff comparison 的运行截图和解释。
+## v701 补充索引
+
+- `e/701/图片`
+- `e/701/解释/说明.md`
+- v701 minimal prompt balanced repair plan 的运行截图和解释。

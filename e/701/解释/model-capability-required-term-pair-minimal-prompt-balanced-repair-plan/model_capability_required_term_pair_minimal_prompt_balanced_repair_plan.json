@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair minimal prompt balanced repair plan",
+  "generated_at": "2026-06-02T01:20:44Z",
+  "status": "pass",
+  "decision": "minimal_prompt_balanced_repair_plan_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_tradeoff_path": "e\\700\\解释\\model-capability-required-term-pair-minimal-prompt-tradeoff-comparison\\model_capability_required_term_pair_first_token_preference_diagnostic.json",
+  "source_tradeoff": {
+    "status": "pass",
+    "decision": "first_token_preference_tradeoff_confirmed",
+    "summary": {
+      "source_report_count": 2,
+      "prompt_row_count": 8,
+      "first_char_match_count": 4,
+      "expected_term_start_count": 2,
+      "other_term_start_count": 4,
+      "fixed_prompt_count": 4,
+      "loss_prompt_count": 4,
+      "fixed_prompt_loss_start_count": 2,
+      "loss_prompt_fixed_start_count": 2,
+      "pair_full_report_count": 0,
+      "fixed_only_report_count": 1,
+      "loss_only_report_count": 1,
+      "all_miss_report_count": 0,
+      "source_branch_classes": [
+        {
+          "source_label": "v696-fixed-dominant",
+          "hit_terms": [
+            "fixed"
+          ],
+          "branch_class": "fixed-only"
+        },
+        {
+          "source_label": "v699-loss-dominant",
+          "hit_terms": [
+            "loss"
+          ],
+          "branch_class": "loss-only"
+        }
+      ],
+      "first_token_conflict_confirmed": true,
+      "mixed_branch_tradeoff_confirmed": true
+    }
+  },
+  "check_rows": [
+    {
+      "id": "tradeoff_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "tradeoff diagnostic must pass"
+    },
+    {
+      "id": "tradeoff_confirmed",
+      "status": "pass",
+      "actual": "first_token_preference_tradeoff_confirmed",
+      "detail": "balanced repair requires confirmed first-token tradeoff"
+    },
+    {
+      "id": "mixed_branch_tradeoff",
+      "status": "pass",
+      "actual": true,
+      "detail": "source reports must include fixed-only and loss-only outcomes"
+    },
+    {
+      "id": "no_pair_full_candidate",
+      "status": "pass",
+      "actual": 0,
+      "detail": "plan should only run when no pair-full candidate exists"
+    }
+  ],
+  "plan": {
+    "ready": true,
+    "proposed_corpus_mode": "minimal_prompt_balanced_first_token_repair_objective",
+    "seed_to_rerun": 3535,
+    "repair_focus": "balanced_first_token_and_direct_target_retention",
+    "kept_boundary": "minimal prompt only; no contextual answer-bearing anchor",
+    "expected_prompt_surface": [
+      "fixed=",
+      "loss="
+    ],
+    "expected_change": "balance fixed/loss first-token pressure after v696 fixed-only and v699 loss-only tradeoff",
+    "recommended_next_action": "rerun seed 3535 with corpus_mode=minimal_prompt_balanced_first_token_repair_objective"
+  },
+  "summary": {
+    "check_count": 4,
+    "passed_check_count": 4,
+    "failed_check_count": 0,
+    "plan_ready": true,
+    "proposed_corpus_mode": "minimal_prompt_balanced_first_token_repair_objective",
+    "seed_to_rerun": 3535,
+    "repair_focus": "balanced_first_token_and_direct_target_retention"
+  },
+  "interpretation": {
+    "model_quality_claim": "repair_plan_only",
+    "reason": "The two real runs form fixed-only and loss-only outcomes, so the next corpus should balance first-token pressure.",
+    "next_action": "rerun seed 3535 with corpus_mode=minimal_prompt_balanced_first_token_repair_objective"
+  }
+}

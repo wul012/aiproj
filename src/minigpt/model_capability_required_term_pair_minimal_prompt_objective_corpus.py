@@ -4,6 +4,7 @@ from __future__ import annotations
 PAIR_MINIMAL_PROMPT_OBJECTIVE_CORPUS_MODES = (
     "minimal_prompt_equals_surface_objective",
     "minimal_prompt_loss_first_token_repair_objective",
+    "minimal_prompt_balanced_first_token_repair_objective",
 )
 
 
@@ -19,6 +20,9 @@ def extend_pair_minimal_prompt_objective_corpus(
         return True
     if corpus_mode == "minimal_prompt_loss_first_token_repair_objective":
         _extend_minimal_prompt_loss_first_token_repair_objective(lines, repeat=repeat, bridge_repeat=bridge_repeat)
+        return True
+    if corpus_mode == "minimal_prompt_balanced_first_token_repair_objective":
+        _extend_minimal_prompt_balanced_first_token_repair_objective(lines, repeat=repeat, bridge_repeat=bridge_repeat)
         return True
     return False
 
@@ -96,6 +100,49 @@ def _extend_minimal_prompt_loss_first_token_repair_objective(lines: list[str], *
                 "loss= must start with l before any other branch text.",
                 "fixed= remains fixed but is not allowed to absorb loss=.",
                 "contextual answer-bearing anchors are still not allowed.",
+            ]
+        )
+
+
+def _extend_minimal_prompt_balanced_first_token_repair_objective(lines: list[str], *, repeat: int, bridge_repeat: int) -> None:
+    fixed_rows = [
+        "fixed=f",
+        "fixed=fi",
+        "fixed=fix",
+        "fixed=fixed",
+        "fixed=f",
+        "fixed=fi",
+        "fixed=fix",
+        "fixed=fixed",
+        "prompt fixed= completion fixed",
+        "minimal prompt fixed= target fixed",
+        "fixed branch starts with f",
+        "fixed branch does not start loss",
+    ]
+    loss_rows = [
+        "loss=l",
+        "loss=lo",
+        "loss=los",
+        "loss=loss",
+        "loss=l",
+        "loss=lo",
+        "loss=los",
+        "loss=loss",
+        "prompt loss= completion loss",
+        "minimal prompt loss= target loss",
+        "loss branch starts with l",
+        "loss branch does not start fixed",
+    ]
+    for _ in range(max(1, repeat)):
+        lines.extend(fixed_rows)
+        lines.extend(loss_rows)
+    for _ in range(max(0, bridge_repeat)):
+        lines.extend(
+            [
+                "balanced first-token repair keeps both prompt surfaces minimal.",
+                "fixed= must start with f and finish fixed.",
+                "loss= must start with l and finish loss.",
+                "neither branch may absorb the other branch at the first token.",
             ]
         )
 
