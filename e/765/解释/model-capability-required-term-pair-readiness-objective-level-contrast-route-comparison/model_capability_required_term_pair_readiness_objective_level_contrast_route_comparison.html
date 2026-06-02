@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT objective-level contrast route comparison</title>
+<style>
+:root{color-scheme:light;--ink:#172026;--muted:#5d6975;--line:#d8dee4;--panel:#f7f9fb;--accent:#0f766e}
+*{box-sizing:border-box}
+body{margin:0;background:#eef2f5;color:var(--ink);font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1120px;margin:0 auto;padding:28px}
+h1{font-size:30px;margin:0 0 8px;letter-spacing:0}
+h2{font-size:18px;margin:0 0 12px;letter-spacing:0}
+p{color:var(--muted);line-height:1.55;overflow-wrap:anywhere}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:18px 0}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:8px}
+.card{padding:14px}
+.card span{display:block;color:var(--muted);font-size:12px;text-transform:uppercase}
+.card strong{display:block;margin-top:6px;font-size:18px;line-height:1.2;color:var(--accent);overflow-wrap:anywhere}
+.panel{padding:16px;margin:14px 0}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:#334155}
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT objective-level contrast route comparison</h1><p>Objective-level contrast reaches all pair replay surfaces while prior fixed-preserving and near-exact routes remain partial.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Decision</span><strong>pair_readiness_objective_level_contrast_replay_wins_needs_promotion_guard</strong></div><div class="card"><span>Selected</span><strong>objective_level_contrast</strong></div><div class="card"><span>Objective best</span><strong>True</strong></div><div class="card"><span>Objective pair-full</span><strong>3</strong></div><div class="card"><span>Claim</span><strong>route_comparison_winner</strong></div></section>
+<section class="panel"><h2>Route Rows</h2><div class="table-wrap"><table>
+<thead><tr><th>Route</th><th>Decision</th><th>Exact full</th><th>Required all</th><th>Pair-full count</th><th>Exact hits</th></tr></thead>
+<tbody><tr><td>fixed_preserving_baseline</td><td>pair_readiness_fixed_preserving_transfer_pair_probe_replay_partial</td><td>False</td><td>False</td><td>1</td><td>1</td></tr><tr><td>near_exact_surface_repair</td><td>pair_readiness_fixed_preserving_transfer_pair_probe_replay_partial</td><td>False</td><td>False</td><td>1</td><td>1</td></tr><tr><td>objective_level_contrast</td><td>pair_readiness_fixed_preserving_transfer_pair_probe_replay_ready</td><td>True</td><td>True</td><td>3</td><td>2</td></tr></tbody>
+</table></div></section>
+<section class="panel"><h2>Checks</h2><div class="table-wrap"><table>
+<thead><tr><th>Check</th><th>Status</th><th>Actual</th><th>Detail</th></tr></thead>
+<tbody><tr><td>baseline_passed</td><td>pass</td><td>pass</td><td>baseline replay must pass</td></tr><tr><td>exact_repair_passed</td><td>pass</td><td>pass</td><td>exact repair replay must pass</td></tr><tr><td>objective_passed</td><td>pass</td><td>pass</td><td>objective replay must pass</td></tr><tr><td>three_routes_present</td><td>pass</td><td>3</td><td>comparison should include baseline, near-exact repair, and objective routes</td></tr><tr><td>objective_required_all_pair_full</td><td>pass</td><td>True</td><td>objective route must pass all required pair probes</td></tr><tr><td>objective_pair_full_count_wins</td><td>pass</td><td>objective=3, prior_max=1</td><td>objective route should improve pair-full count over prior routes</td></tr><tr><td>objective_exact_hits_complete</td><td>pass</td><td>2</td><td>objective route should hit both terms on exact default replay</td></tr></tbody>
+</table></div></section>
+<section class="panel"><h2>Next Action</h2><p>run promotion guard and seed stability before accepting the checkpoint</p></section>
+</main>
+</body>
+</html>

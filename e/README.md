@@ -1306,3 +1306,8 @@ e/663/解释/说明.md
 - `e/764/图片`
 - `e/764/解释/说明.md`
 - v764 objective-level contrast pair-probe replay 的运行截图和解释。
+## v765 补充索引
+
+- `e/765/图片`
+- `e/765/解释/说明.md`
+- v765 objective-level contrast route comparison 的运行截图和解释。

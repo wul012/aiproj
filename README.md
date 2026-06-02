@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v764.0.0` independently replays the objective-level contrast checkpoint and records pair-full results on exact, spaced, and arrow pair prompts.
+Version `v765.0.0` compares prior pair replay routes and selects objective-level contrast as the current winner pending promotion guards.
+
+## Latest v765 checkpoint
+
+- Added `model_capability_required_term_pair_readiness_objective_level_contrast_route_comparison`.
+- Compared v750 baseline, v756 near-exact repair, and v764 objective-level contrast replays.
+- Confirmed `decision=pair_readiness_objective_level_contrast_replay_wins_needs_promotion_guard`.
+- Confirmed `objective_route_best=True` and `objective_pair_full_count=3`.
+- Kept `promotion_guard_required=True`.
+- Archived v765 evidence in `e/765` and added the code explanation in `代码讲解记录_模型能力阶段/779-v765-objective-level-contrast-route-comparison.md`.
 
 ## Latest v764 checkpoint
 

@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT pair-readiness objective-level contrast route comparison",
+  "generated_at": "2026-06-02T11:07:31Z",
+  "status": "pass",
+  "decision": "pair_readiness_objective_level_contrast_replay_wins_needs_promotion_guard",
+  "failed_count": 0,
+  "issues": [],
+  "source_paths": {
+    "fixed_preserving_baseline": "e\\750\\解释\\model-capability-required-term-pair-readiness-fixed-preserving-transfer-pair-probe-replay\\model_capability_required_term_pair_readiness_fixed_preserving_transfer_pair_probe_replay.json",
+    "near_exact_surface_repair": "e\\756\\解释\\model-capability-required-term-pair-readiness-exact-surface-repair-pair-probe-replay\\model_capability_required_term_pair_readiness_fixed_preserving_transfer_pair_probe_replay.json",
+    "objective_level_contrast": "e\\764\\解释\\model-capability-required-term-pair-readiness-objective-level-contrast-pair-probe-replay\\model_capability_required_term_pair_readiness_fixed_preserving_transfer_pair_probe_replay.json"
+  },
+  "route_rows": [
+    {
+      "route": "fixed_preserving_baseline",
+      "status": "pass",
+      "decision": "pair_readiness_fixed_preserving_transfer_pair_probe_replay_partial",
+      "exact_heldout_pair_full": false,
+      "required_all_pair_full": false,
+      "pair_full_count": 1,
+      "exact_default_hit_count": 1,
+      "exact_suppression_hit_count": 1,
+      "replay_row_count": 3,
+      "model_quality_claim": "pair_probe_replay_partial"
+    },
+    {
+      "route": "near_exact_surface_repair",
+      "status": "pass",
+      "decision": "pair_readiness_fixed_preserving_transfer_pair_probe_replay_partial",
+      "exact_heldout_pair_full": false,
+      "required_all_pair_full": false,
+      "pair_full_count": 1,
+      "exact_default_hit_count": 1,
+      "exact_suppression_hit_count": 1,
+      "replay_row_count": 3,
+      "model_quality_claim": "pair_probe_replay_partial"
+    },
+    {
+      "route": "objective_level_contrast",
+      "status": "pass",
+      "decision": "pair_readiness_fixed_preserving_transfer_pair_probe_replay_ready",
+      "exact_heldout_pair_full": true,
+      "required_all_pair_full": true,
+      "pair_full_count": 3,
+      "exact_default_hit_count": 2,
+      "exact_suppression_hit_count": 2,
+      "replay_row_count": 3,
+      "model_quality_claim": "pair_probe_replay_ready"
+    }
+  ],
+  "check_rows": [
+    {
+      "id": "baseline_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "baseline replay must pass"
+    },
+    {
+      "id": "exact_repair_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "exact repair replay must pass"
+    },
+    {
+      "id": "objective_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "objective replay must pass"
+    },
+    {
+      "id": "three_routes_present",
+      "status": "pass",
+      "actual": 3,
+      "detail": "comparison should include baseline, near-exact repair, and objective routes"
+    },
+    {
+      "id": "objective_required_all_pair_full",
+      "status": "pass",
+      "actual": true,
+      "detail": "objective route must pass all required pair probes"
+    },
+    {
+      "id": "objective_pair_full_count_wins",
+      "status": "pass",
+      "actual": "objective=3, prior_max=1",
+      "detail": "objective route should improve pair-full count over prior routes"
+    },
+    {
+      "id": "objective_exact_hits_complete",
+      "status": "pass",
+      "actual": 2,
+      "detail": "objective route should hit both terms on exact default replay"
+    }
+  ],
+  "summary": {
+    "selected_route": "objective_level_contrast",
+    "objective_route_best": true,
+    "baseline_pair_full_count": 1,
+    "exact_repair_pair_full_count": 1,
+    "objective_pair_full_count": 3,
+    "objective_vs_baseline_pair_full_delta": 2,
+    "objective_vs_exact_repair_pair_full_delta": 2,
+    "objective_exact_heldout_pair_full": true,
+    "promotion_guard_required": true
+  },
+  "interpretation": {
+    "model_quality_claim": "route_comparison_winner",
+    "reason": "Objective-level contrast reaches all pair replay surfaces while prior fixed-preserving and near-exact routes remain partial.",
+    "next_action": "run promotion guard and seed stability before accepting the checkpoint"
+  }
+}

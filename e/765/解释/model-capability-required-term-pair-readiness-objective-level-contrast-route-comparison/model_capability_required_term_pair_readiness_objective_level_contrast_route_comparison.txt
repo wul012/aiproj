@@ -1,0 +1,9 @@
+status=pass
+decision=pair_readiness_objective_level_contrast_replay_wins_needs_promotion_guard
+failed_count=0
+selected_route=objective_level_contrast
+objective_route_best=True
+objective_pair_full_count=3
+promotion_guard_required=True
+model_quality_claim=route_comparison_winner
+next_action=run promotion guard and seed stability before accepting the checkpoint
