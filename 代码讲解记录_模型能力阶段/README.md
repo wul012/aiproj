@@ -746,6 +746,9 @@
 731-v717-pair-readiness-route-comparison.md
  -> v717 code explanation: compare baseline, loss-retention, and structured-template routes and classify the structured route as failure-shape change, not promotion.
 
+732-v718-fixed-recovery-repair-plan.md
+ -> v718 code explanation: convert the structured-template loss-only route comparison into a fixed-recovery repair plan.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

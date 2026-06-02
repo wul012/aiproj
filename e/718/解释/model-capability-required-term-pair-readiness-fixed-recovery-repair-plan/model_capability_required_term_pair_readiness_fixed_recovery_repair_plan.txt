@@ -1,0 +1,10 @@
+status=pass
+decision=pair_readiness_fixed_recovery_repair_plan_ready
+failed_count=0
+plan_ready=True
+proposed_next_artifact=pair_readiness_fixed_recovery_contract_patch
+repair_focus=restore fixed direct retention while preserving the structured route's recovered loss hit
+source_structured_hit_terms=['loss']
+source_structured_missed_terms=['fixed']
+model_quality_claim=plan_only
+next_action=build pair_readiness_fixed_recovery_contract_patch

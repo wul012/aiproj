@@ -1,0 +1,9 @@
+id,status,actual,detail
+route_comparison_passed,pass,pass,source route comparison must pass
+route_comparison_decision,pass,pair_readiness_structured_template_changes_failure_shape_without_pair_full,fixed recovery follows only a structured-template failure-shape change
+failure_shape_changed,pass,True,structured route must change failure shape
+structured_hits_loss,pass,"[""loss""]",structured route should retain loss before fixed recovery
+structured_misses_fixed,pass,"[""fixed""]",structured route should miss fixed before fixed recovery
+no_pair_full_route,pass,False,no route should already be pair-full
+structured_not_above_baseline,pass,0,"structured route should be a shape change, not an improvement"
+structured_and_baseline_best,pass,"[""baseline-split"", ""structured-template""]",baseline and structured routes should be tied best evidence

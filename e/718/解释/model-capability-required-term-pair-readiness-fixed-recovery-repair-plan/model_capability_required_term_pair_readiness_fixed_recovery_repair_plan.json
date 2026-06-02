@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT pair-readiness fixed-recovery repair plan",
+  "generated_at": "2026-06-02T03:25:56Z",
+  "status": "pass",
+  "decision": "pair_readiness_fixed_recovery_repair_plan_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_route_comparison_path": "e\\717\\解释\\model-capability-required-term-pair-readiness-route-comparison\\model_capability_required_term_pair_readiness_route_comparison.json",
+  "source_route_comparison": {
+    "status": "pass",
+    "decision": "pair_readiness_structured_template_changes_failure_shape_without_pair_full",
+    "summary": {
+      "route_count": 3,
+      "best_default_hit_count": 1,
+      "best_routes": [
+        "baseline-split",
+        "structured-template"
+      ],
+      "pair_full_routes": [],
+      "any_pair_full_observed": false,
+      "structured_vs_baseline_default_hit_delta": 0,
+      "structured_vs_loss_retention_default_hit_delta": 1,
+      "baseline_default_hit_terms": [
+        "fixed"
+      ],
+      "loss_retention_default_hit_terms": [],
+      "structured_default_hit_terms": [
+        "loss"
+      ],
+      "structured_default_missed_terms": [
+        "fixed"
+      ],
+      "failure_shape_changed": true
+    }
+  },
+  "check_rows": [
+    {
+      "id": "route_comparison_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "source route comparison must pass"
+    },
+    {
+      "id": "route_comparison_decision",
+      "status": "pass",
+      "actual": "pair_readiness_structured_template_changes_failure_shape_without_pair_full",
+      "detail": "fixed recovery follows only a structured-template failure-shape change"
+    },
+    {
+      "id": "failure_shape_changed",
+      "status": "pass",
+      "actual": true,
+      "detail": "structured route must change failure shape"
+    },
+    {
+      "id": "structured_hits_loss",
+      "status": "pass",
+      "actual": [
+        "loss"
+      ],
+      "detail": "structured route should retain loss before fixed recovery"
+    },
+    {
+      "id": "structured_misses_fixed",
+      "status": "pass",
+      "actual": [
+        "fixed"
+      ],
+      "detail": "structured route should miss fixed before fixed recovery"
+    },
+    {
+      "id": "no_pair_full_route",
+      "status": "pass",
+      "actual": false,
+      "detail": "no route should already be pair-full"
+    },
+    {
+      "id": "structured_not_above_baseline",
+      "status": "pass",
+      "actual": 0,
+      "detail": "structured route should be a shape change, not an improvement"
+    },
+    {
+      "id": "structured_and_baseline_best",
+      "status": "pass",
+      "actual": [
+        "baseline-split",
+        "structured-template"
+      ],
+      "detail": "baseline and structured routes should be tied best evidence"
+    }
+  ],
+  "plan": {
+    "ready": true,
+    "proposed_next_artifact": "pair_readiness_fixed_recovery_contract_patch",
+    "repair_focus": "restore fixed direct retention while preserving the structured route's recovered loss hit",
+    "contract_patch": [
+      "add fixed answer confirmation rows after structured prompt-answer rows",
+      "add fixed anti-loss contamination rows",
+      "preserve loss structured rows from v714 because loss recovered in v716",
+      "keep heldout pair probe excluded from training rows",
+      "compare fixed-recovery run against v707 baseline and v716 structured-template before any promotion"
+    ],
+    "training_policy": "materialize the patched contract and rerun the same tiny training configuration",
+    "success_guard": "fixed= and loss= must both hit in heldout direct replay before pair-probe checks"
+  },
+  "summary": {
+    "check_count": 8,
+    "passed_check_count": 8,
+    "failed_check_count": 0,
+    "plan_ready": true,
+    "proposed_next_artifact": "pair_readiness_fixed_recovery_contract_patch",
+    "repair_focus": "restore fixed direct retention while preserving the structured route's recovered loss hit",
+    "source_structured_hit_terms": [
+      "loss"
+    ],
+    "source_structured_missed_terms": [
+      "fixed"
+    ]
+  },
+  "interpretation": {
+    "model_quality_claim": "plan_only",
+    "reason": "The structured-template route recovered loss but missed fixed, so the next patch should restore fixed without discarding the recovered loss behavior.",
+    "next_action": "build pair_readiness_fixed_recovery_contract_patch"
+  }
+}

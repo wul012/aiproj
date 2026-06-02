@@ -1071,3 +1071,8 @@ e/663/解释/说明.md
 - `e/717/图片`
 - `e/717/解释/说明.md`
 - v717 pair-readiness route comparison 的运行截图和解释。
+## v718 补充索引
+
+- `e/718/图片`
+- `e/718/解释/说明.md`
+- v718 fixed-recovery repair plan 的运行截图和解释。
