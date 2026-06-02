@@ -1,0 +1,29 @@
+# MiniGPT Fixed-Preserving Transfer Contract Patch
+
+- Status: `pass`
+- Decision: `pair_readiness_fixed_preserving_transfer_contract_patch_ready`
+- Added rows: `4`
+
+## Added Rows
+
+- `fixed_preserving_transfer guard fixed before loss => fixed loss`
+- `fixed_preserving_transfer compact fixed/loss keeps fixed => fixed loss`
+- `fixed_preserving_transfer reverse loss then fixed keeps fixed => loss fixed`
+- `fixed_preserving_transfer boundary fixed retained with loss`
+
+## Checks
+
+| Check | Status | Actual | Detail |
+| --- | --- | --- | --- |
+| transfer_plan_passed | pass | pass | fixed-preserving transfer plan must pass |
+| transfer_plan_decision | pass | pair_readiness_fixed_preserving_transfer_plan_ready | patch follows only a ready fixed-preserving transfer plan |
+| next_artifact_matches | pass | pair_readiness_fixed_preserving_transfer_contract_patch | plan must request this patch artifact |
+| base_contract_passed | pass | pass | base direct-completion contract must pass |
+| base_contract_decision | pass | pair_readiness_direct_completion_surface_contract_ready | base must be the direct-completion surface contract |
+| fixed_preserving_rows_added | pass | all fixed-preserving rows | all fixed-preserving transfer rows must be present |
+| transfer_row_budget_respected | pass | 4 | patch must respect plan transfer row budget |
+| broad_pair_transfer_rows_not_reused | pass | ['fixed_preserving_transfer guard fixed before loss => fixed loss', 'fixed_preserving_transfer compact fixed/loss keeps fixed => fixed loss', 'fixed_preserving_transfer reverse loss then fixed keeps fixed => loss fixed', 'fixed_preserving_transfer boundary fixed retained with loss'] | patch must not reuse broad pair_transfer rows from the closed route |
+| exact_direct_rows_preserved | pass | ['fixed=fixed', 'loss=loss'] | direct completion rows must be preserved |
+| heldout_pair_absent | pass | False | heldout pair prompt must stay out of training rows |
+| heldout_pair_absent_from_patch | pass | False | patch rows must not train on exact heldout pair prompt |
+| no_exact_eval_row_overlap | pass | [] | exact eval prompts must not be training rows |

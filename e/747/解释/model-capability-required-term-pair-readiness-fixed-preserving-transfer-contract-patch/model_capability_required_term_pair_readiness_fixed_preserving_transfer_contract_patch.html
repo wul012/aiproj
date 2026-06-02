@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT fixed-preserving transfer contract patch</title>
+<style>
+:root{color-scheme:light;--ink:#172026;--muted:#5d6975;--line:#d8dee4;--panel:#f7f9fb;--accent:#1d4ed8}
+*{box-sizing:border-box}
+body{margin:0;background:#eef2f5;color:var(--ink);font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1120px;margin:0 auto;padding:28px}
+h1{font-size:30px;margin:0 0 8px;letter-spacing:0}
+h2{font-size:18px;margin:0 0 12px;letter-spacing:0}
+p,li{color:var(--muted);line-height:1.55;overflow-wrap:anywhere}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:18px 0}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:8px}
+.card{padding:14px}
+.card span{display:block;color:var(--muted);font-size:12px;text-transform:uppercase}
+.card strong{display:block;margin-top:6px;font-size:18px;line-height:1.2;color:var(--accent);overflow-wrap:anywhere}
+.panel{padding:16px;margin:14px 0}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:#334155}
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT fixed-preserving transfer contract patch</h1><p>The patched contract keeps direct-completion rows and adds only four non-heldout fixed-preserving transfer rows.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Decision</span><strong>pair_readiness_fixed_preserving_transfer_contract_patch_ready</strong></div><div class="card"><span>Ready</span><strong>True</strong></div><div class="card"><span>Base rows</span><strong>16</strong></div><div class="card"><span>Patched rows</span><strong>20</strong></div><div class="card"><span>Transfer rows</span><strong>4</strong></div></section>
+<section class="panel"><h2>Added Rows</h2><ul><li>fixed_preserving_transfer guard fixed before loss =&gt; fixed loss</li><li>fixed_preserving_transfer compact fixed/loss keeps fixed =&gt; fixed loss</li><li>fixed_preserving_transfer reverse loss then fixed keeps fixed =&gt; loss fixed</li><li>fixed_preserving_transfer boundary fixed retained with loss</li></ul></section>
+<section class="panel"><h2>Checks</h2><div class="table-wrap"><table>
+<thead><tr><th>Check</th><th>Status</th><th>Actual</th><th>Detail</th></tr></thead>
+<tbody><tr><td>transfer_plan_passed</td><td>pass</td><td>pass</td><td>fixed-preserving transfer plan must pass</td></tr><tr><td>transfer_plan_decision</td><td>pass</td><td>pair_readiness_fixed_preserving_transfer_plan_ready</td><td>patch follows only a ready fixed-preserving transfer plan</td></tr><tr><td>next_artifact_matches</td><td>pass</td><td>pair_readiness_fixed_preserving_transfer_contract_patch</td><td>plan must request this patch artifact</td></tr><tr><td>base_contract_passed</td><td>pass</td><td>pass</td><td>base direct-completion contract must pass</td></tr><tr><td>base_contract_decision</td><td>pass</td><td>pair_readiness_direct_completion_surface_contract_ready</td><td>base must be the direct-completion surface contract</td></tr><tr><td>fixed_preserving_rows_added</td><td>pass</td><td>all fixed-preserving rows</td><td>all fixed-preserving transfer rows must be present</td></tr><tr><td>transfer_row_budget_respected</td><td>pass</td><td>4</td><td>patch must respect plan transfer row budget</td></tr><tr><td>broad_pair_transfer_rows_not_reused</td><td>pass</td><td>[&#x27;fixed_preserving_transfer guard fixed before loss =&gt; fixed loss&#x27;, &#x27;fixed_preserving_transfer compact fixed/loss keeps fixed =&gt; fixed loss&#x27;, &#x27;fixed_preserving_transfer reverse loss then fixed keeps fixed =&gt; loss fixed&#x27;, &#x27;fixed_preserving_transfer boundary fixed retained with loss&#x27;]</td><td>patch must not reuse broad pair_transfer rows from the closed route</td></tr><tr><td>exact_direct_rows_preserved</td><td>pass</td><td>[&#x27;fixed=fixed&#x27;, &#x27;loss=loss&#x27;]</td><td>direct completion rows must be preserved</td></tr><tr><td>heldout_pair_absent</td><td>pass</td><td>False</td><td>heldout pair prompt must stay out of training rows</td></tr><tr><td>heldout_pair_absent_from_patch</td><td>pass</td><td>False</td><td>patch rows must not train on exact heldout pair prompt</td></tr><tr><td>no_exact_eval_row_overlap</td><td>pass</td><td>[]</td><td>exact eval prompts must not be training rows</td></tr></tbody>
+</table></div></section>
+<section class="panel"><h2>Next Action</h2><p>materialize the fixed-preserving patched contract and rerun pair-readiness training</p></section>
+</main>
+</body>
+</html>

@@ -1216,3 +1216,8 @@ e/663/解释/说明.md
 - `e/746/图片`
 - `e/746/解释/说明.md`
 - v746 fixed-preserving transfer plan 的运行截图和解释。
+## v747 补充索引
+
+- `e/747/图片`
+- `e/747/解释/说明.md`
+- v747 fixed-preserving transfer contract patch 的运行截图和解释。

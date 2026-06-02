@@ -833,6 +833,9 @@
 760-v746-fixed-preserving-transfer-plan.md
  -> v746 code explanation: turn the transfer regression closeout into a four-row-budget fixed-preserving contract patch plan.
 
+761-v747-fixed-preserving-transfer-contract-patch.md
+ -> v747 code explanation: apply the fixed-preserving plan as a checked four-row contract patch and register it for materialization.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

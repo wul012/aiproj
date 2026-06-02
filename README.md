@@ -7479,6 +7479,8 @@ The pair-readiness pair prompt transfer regression diagnostic layer compares v73
 
 The pair-readiness fixed-preserving transfer plan layer turns that regression closeout into a smaller next contract target: preserve exact direct-completion rows, cap transfer rows at four, and keep the exact pair prompt held out.
 
+The pair-readiness fixed-preserving transfer contract patch layer applies that plan to the direct-completion surface contract, adding four checked bridge rows and registering the new decision for corpus materialization.
+
 The run registry layer indexes multiple run directories so experiments can be scanned by commit, data fingerprint, quality status, eval suite coverage, metrics, artifact count, notes, tags, best-val rank, loss delta, a leaderboard, an interactive local HTML table, shareable URL state, and visible-row CSV export.
 
 The experiment card layer turns one run into a compact JSON/Markdown/HTML summary for review, handoff, or portfolio use.
