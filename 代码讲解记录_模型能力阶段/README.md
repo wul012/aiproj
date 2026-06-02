@@ -788,6 +788,9 @@
 745-v731-direct-prompt-bridge-contract-patch.md
  -> v731 code explanation: add checked raw fixed=/loss= bridge rows while preserving heldout pair isolation and materializer compatibility.
 
+746-v732-direct-prompt-bridge-corpus-materialization.md
+ -> v732 code explanation: materialize the direct-prompt bridge contract patch into an 8320-line corpus and heldout fixture.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

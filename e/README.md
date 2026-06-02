@@ -1141,3 +1141,8 @@ e/663/解释/说明.md
 - `e/731/图片`
 - `e/731/解释/说明.md`
 - v731 direct-prompt bridge contract patch 的运行截图和解释。
+## v732 补充索引
+
+- `e/732/图片`
+- `e/732/解释/说明.md`
+- v732 direct-prompt bridge corpus materialization 的运行截图和解释。

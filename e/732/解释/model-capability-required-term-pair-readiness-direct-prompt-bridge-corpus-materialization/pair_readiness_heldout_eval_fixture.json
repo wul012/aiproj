@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "kind": "pair_readiness_heldout_eval_fixture",
+  "probes": [
+    {
+      "id": "fixed-direct",
+      "prompt": "fixed=",
+      "expected_term": "fixed",
+      "split": "heldout-direct"
+    },
+    {
+      "id": "loss-direct",
+      "prompt": "loss=",
+      "expected_term": "loss",
+      "split": "heldout-direct"
+    },
+    {
+      "id": "fixed-loss-pair",
+      "prompt": "fixed=|loss=",
+      "expected_term": "fixed+loss",
+      "split": "heldout-pair"
+    }
+  ],
+  "heldout_pair_probe": "fixed=|loss=",
+  "promotion_requirement": "fixed-direct and loss-direct heldout continuations must both hit before pair-probe promotion",
+  "training_rows": [
+    "objective=direct_term | term=fixed | prompt_surface=fixed_equals | answer=fixed",
+    "objective=direct_term | case=fixed_branch | target=fixed | response=fixed",
+    "task_id=fixed_direct | input=fixed equals prompt | output=fixed token",
+    "task_id=fixed_direct | branch=fixed | forbidden=loss | answer=fixed",
+    "objective=direct_term | term=loss | prompt_surface=loss_equals | answer=loss",
+    "objective=direct_term | case=loss_branch | target=loss | response=loss",
+    "task_id=loss_direct | input=loss equals prompt | output=loss token",
+    "task_id=loss_direct | branch=loss | forbidden=fixed | answer=loss",
+    "objective=paired_terms | first=fixed | second=loss | answer=fixed then loss",
+    "paired_block order=fixed_loss | fixed branch answer fixed | loss branch answer loss",
+    "task_id=pair_forward | fixed_result=fixed | loss_result=loss",
+    "objective=paired_terms | first=loss | second=fixed | answer=loss then fixed",
+    "paired_block order=loss_fixed | loss branch answer loss | fixed branch answer fixed",
+    "task_id=pair_reverse | loss_result=loss | fixed_result=fixed",
+    "contrast fixed_branch keeps fixed and does not answer loss",
+    "contrast loss_branch keeps loss and does not answer fixed",
+    "boundary fixed answer remains fixed even when loss is nearby",
+    "boundary loss answer remains loss even when fixed is nearby",
+    "bridge=direct_prompt | prompt=fixed= | answer=fixed",
+    "bridge fixed raw surface fixed= produces fixed",
+    "direct prompt fixed= should continue with fixed",
+    "fixed= -> fixed token",
+    "bridge=direct_prompt | prompt=loss= | answer=loss",
+    "bridge loss raw surface loss= produces loss",
+    "direct prompt loss= should continue with loss",
+    "loss= -> loss token"
+  ]
+}

@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v731.0.0` patches the objective-structure contract with checked direct-prompt bridge rows.
+Version `v732.0.0` materializes the direct-prompt bridge contract patch into an 8320-line training corpus.
+
+## Latest v732 checkpoint
+
+- Reused `model_capability_required_term_pair_readiness_corpus_materialization`.
+- Consumed v731 `pair_readiness_direct_prompt_bridge_contract_patch_ready`.
+- Generated `training_line_count=8320` with `repeat=320`.
+- Preserved 3 heldout eval probes.
+- Confirmed `heldout_not_in_training_rows` and `heldout_not_in_corpus`.
+- Archived v732 evidence in `e/732` and added the code explanation in `代码讲解记录_模型能力阶段/746-v732-direct-prompt-bridge-corpus-materialization.md`.
 
 ## Latest v731 checkpoint
 
