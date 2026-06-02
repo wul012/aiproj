@@ -740,6 +740,9 @@
 729-v715-structured-template-corpus-materialization.md
  -> v715 code explanation: materialize the structured-template contract into a real pair-readiness training corpus and heldout fixture.
 
+730-v716-structured-template-training-run.md
+ -> v716 code explanation: run the structured-template corpus as a real tiny checkpoint and record its loss-only heldout direct result.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

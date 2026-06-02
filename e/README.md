@@ -1061,3 +1061,8 @@ e/663/解释/说明.md
 - `e/715/图片`
 - `e/715/解释/说明.md`
 - v715 structured-template corpus materialization 的运行截图和解释。
+## v716 补充索引
+
+- `e/716/图片`
+- `e/716/解释/说明.md`
+- v716 structured-template training run 的运行截图和解释。

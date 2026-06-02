@@ -7340,6 +7340,8 @@ The pair-readiness structured-template contract layer reads the v713 repair comp
 
 The pair-readiness structured-template corpus materialization layer writes that contract into a real repeated training corpus and heldout fixture, while the materializer locator now accepts split, loss-retention, and structured-template contract output directories without importing their builders.
 
+The pair-readiness structured-template training layer trains the materialized structured corpus with the same tiny configuration as prior runs, producing a checkpoint that still lacks pair-full behavior but flips the heldout direct miss from loss to fixed.
+
 The run registry layer indexes multiple run directories so experiments can be scanned by commit, data fingerprint, quality status, eval suite coverage, metrics, artifact count, notes, tags, best-val rank, loss delta, a leaderboard, an interactive local HTML table, shareable URL state, and visible-row CSV export.
 
 The experiment card layer turns one run into a compact JSON/Markdown/HTML summary for review, handoff, or portfolio use.
