@@ -1,0 +1,9 @@
+status=pass
+decision=pair_readiness_fixed_preserving_transfer_plan_ready
+failed_count=0
+plan_ready=True
+proposed_next_artifact=pair_readiness_fixed_preserving_transfer_contract_patch
+closed_route=pair_prompt_transfer_full_surrogate_patch
+transfer_row_budget=4
+model_quality_claim=plan_only
+next_action=build a checked fixed-preserving transfer contract patch from the direct-completion base contract

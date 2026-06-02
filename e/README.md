@@ -1211,3 +1211,8 @@ e/663/解释/说明.md
 - `e/745/图片`
 - `e/745/解释/说明.md`
 - v745 pair prompt transfer regression diagnostic 的运行截图和解释。
+## v746 补充索引
+
+- `e/746/图片`
+- `e/746/解释/说明.md`
+- v746 fixed-preserving transfer plan 的运行截图和解释。

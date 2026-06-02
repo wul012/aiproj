@@ -1,0 +1,7 @@
+id,status,actual,detail
+diagnostic_passed,pass,pass,regression diagnostic must pass
+diagnostic_decision,pass,pair_readiness_pair_prompt_transfer_regressed_stop_route,plan follows only the regressed transfer route closeout
+transfer_route_closed,pass,True,full surrogate transfer route must already be closed
+fixed_regressed,pass,True,plan is specific to fixed-side regression
+direct_hit_regressed,pass,-1,transfer hits must be lower than direct-completion hits
+pair_probe_still_not_ready,pass,False,direct-completion pair probe must still be not ready

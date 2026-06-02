@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT fixed-preserving transfer plan</title>
+<style>
+:root{color-scheme:light;--ink:#172026;--muted:#5d6975;--line:#d8dee4;--panel:#f7f9fb;--accent:#1d4ed8}
+*{box-sizing:border-box}
+body{margin:0;background:#eef2f5;color:var(--ink);font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1120px;margin:0 auto;padding:28px}
+h1{font-size:30px;margin:0 0 8px;letter-spacing:0}
+h2{font-size:18px;margin:0 0 12px;letter-spacing:0}
+p,li{color:var(--muted);line-height:1.55;overflow-wrap:anywhere}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:18px 0}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:8px}
+.card{padding:14px}
+.card span{display:block;color:var(--muted);font-size:12px;text-transform:uppercase}
+.card strong{display:block;margin-top:6px;font-size:18px;line-height:1.2;color:var(--accent);overflow-wrap:anywhere}
+.panel{padding:16px;margin:14px 0}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:#334155}
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT fixed-preserving transfer plan</h1><p>The full surrogate transfer patch regressed fixed retention, so the next route should be smaller and fixed-preserving.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Decision</span><strong>pair_readiness_fixed_preserving_transfer_plan_ready</strong></div><div class="card"><span>Ready</span><strong>True</strong></div><div class="card"><span>Next artifact</span><strong>pair_readiness_fixed_preserving_transfer_contract_patch</strong></div><div class="card"><span>Row budget</span><strong>4</strong></div><div class="card"><span>Claim</span><strong>plan_only</strong></div></section>
+<section class="panel"><h2>Checks</h2><div class="table-wrap"><table>
+<thead><tr><th>Check</th><th>Status</th><th>Actual</th><th>Detail</th></tr></thead>
+<tbody><tr><td>diagnostic_passed</td><td>pass</td><td>pass</td><td>regression diagnostic must pass</td></tr><tr><td>diagnostic_decision</td><td>pass</td><td>pair_readiness_pair_prompt_transfer_regressed_stop_route</td><td>plan follows only the regressed transfer route closeout</td></tr><tr><td>transfer_route_closed</td><td>pass</td><td>True</td><td>full surrogate transfer route must already be closed</td></tr><tr><td>fixed_regressed</td><td>pass</td><td>True</td><td>plan is specific to fixed-side regression</td></tr><tr><td>direct_hit_regressed</td><td>pass</td><td>-1</td><td>transfer hits must be lower than direct-completion hits</td></tr><tr><td>pair_probe_still_not_ready</td><td>pass</td><td>False</td><td>direct-completion pair probe must still be not ready</td></tr></tbody>
+</table></div></section>
+<section class="panel"><h2>Patch Strategy</h2><ul><li>preserve exact direct-completion rows before adding transfer rows</li><li>replace the broad eight-row surrogate transfer patch with at most four fixed-preserving bridge rows</li><li>include explicit fixed-before-loss guard text so fixed= does not drift to loss</li><li>do not add the exact heldout pair prompt or direct echo of fixed=|loss=</li></ul></section>
+<section class="panel"><h2>Next Action</h2><p>build a checked fixed-preserving transfer contract patch from the direct-completion base contract</p></section>
+</main>
+</body>
+</html>

@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT pair-readiness fixed-preserving transfer plan",
+  "generated_at": "2026-06-02T08:34:03Z",
+  "status": "pass",
+  "decision": "pair_readiness_fixed_preserving_transfer_plan_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_regression_diagnostic_path": "e\\745\\解释\\model-capability-required-term-pair-readiness-pair-prompt-transfer-regression-diagnostic\\model_capability_required_term_pair_readiness_pair_prompt_transfer_regression_diagnostic.json",
+  "source_regression_diagnostic": {
+    "status": "pass",
+    "decision": "pair_readiness_pair_prompt_transfer_regressed_stop_route",
+    "summary": {
+      "direct_completion_default_hit_count": 2,
+      "transfer_default_hit_count": 1,
+      "transfer_hit_delta_from_direct": -1,
+      "direct_completion_pair_full_observed": true,
+      "transfer_pair_full_observed": false,
+      "pair_probe_exact_heldout_pair_full": false,
+      "fixed_regressed": true,
+      "loss_regressed": false,
+      "direct_completion_regressed": true,
+      "transfer_route_closed": true,
+      "closed_route": "pair_prompt_transfer_full_surrogate_patch"
+    }
+  },
+  "check_rows": [
+    {
+      "id": "diagnostic_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "regression diagnostic must pass"
+    },
+    {
+      "id": "diagnostic_decision",
+      "status": "pass",
+      "actual": "pair_readiness_pair_prompt_transfer_regressed_stop_route",
+      "detail": "plan follows only the regressed transfer route closeout"
+    },
+    {
+      "id": "transfer_route_closed",
+      "status": "pass",
+      "actual": true,
+      "detail": "full surrogate transfer route must already be closed"
+    },
+    {
+      "id": "fixed_regressed",
+      "status": "pass",
+      "actual": true,
+      "detail": "plan is specific to fixed-side regression"
+    },
+    {
+      "id": "direct_hit_regressed",
+      "status": "pass",
+      "actual": -1,
+      "detail": "transfer hits must be lower than direct-completion hits"
+    },
+    {
+      "id": "pair_probe_still_not_ready",
+      "status": "pass",
+      "actual": false,
+      "detail": "direct-completion pair probe must still be not ready"
+    }
+  ],
+  "plan": {
+    "ready": true,
+    "closed_route": "pair_prompt_transfer_full_surrogate_patch",
+    "proposed_next_artifact": "pair_readiness_fixed_preserving_transfer_contract_patch",
+    "base_contract_artifact": "pair_readiness_direct_completion_surface_contract",
+    "transfer_row_budget": 4,
+    "direct_completion_rows_to_preserve": [
+      "fixed=fixed",
+      "loss=loss"
+    ],
+    "heldout_pair_prompt_must_remain_absent": "fixed=|loss=",
+    "objective": "restore fixed direct retention while keeping loss direct retention and adding only a small non-heldout transfer bridge",
+    "patch_strategy": [
+      "preserve exact direct-completion rows before adding transfer rows",
+      "replace the broad eight-row surrogate transfer patch with at most four fixed-preserving bridge rows",
+      "include explicit fixed-before-loss guard text so fixed= does not drift to loss",
+      "do not add the exact heldout pair prompt or direct echo of fixed=|loss="
+    ],
+    "success_guard": "next training must recover fixed and loss direct hits before any pair prompt replay promotion"
+  },
+  "summary": {
+    "plan_ready": true,
+    "proposed_next_artifact": "pair_readiness_fixed_preserving_transfer_contract_patch",
+    "closed_route": "pair_prompt_transfer_full_surrogate_patch",
+    "transfer_row_budget": 4,
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "plan_only",
+    "reason": "The full surrogate transfer patch regressed fixed retention, so the next route should be smaller and fixed-preserving.",
+    "next_action": "build a checked fixed-preserving transfer contract patch from the direct-completion base contract"
+  }
+}
