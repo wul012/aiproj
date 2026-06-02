@@ -1,0 +1,5 @@
+profile_id,term,continuation_hit,pollution_class,generated
+default,fixed,True,expected-fixed,fixed=fixed=fixed=
+suppress_newline_tokens,fixed,True,expected-fixed,fixed=fixed=fixed=
+default,loss,False,loss-prompt-fixed-pollution,loss=fixed=fixed=
+suppress_newline_tokens,loss,False,loss-prompt-fixed-pollution,loss=fixed=fixed=

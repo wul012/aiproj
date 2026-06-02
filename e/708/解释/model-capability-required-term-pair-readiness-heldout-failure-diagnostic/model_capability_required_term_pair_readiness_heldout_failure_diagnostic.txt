@@ -1,0 +1,9 @@
+status=pass
+decision=pair_readiness_loss_prompt_absorbed_by_fixed
+failed_count=0
+dominant_failure=loss_prompt_absorbed_by_fixed
+fixed_hit_count=1
+loss_hit_count=0
+loss_prompt_fixed_pollution_count=1
+model_quality_claim=diagnostic_only
+next_action=plan a loss-retention repair only if loss prompt fixed-pollution is dominant

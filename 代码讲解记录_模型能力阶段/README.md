@@ -716,6 +716,9 @@
 721-v707-pair-readiness-training-run.md
  -> v707 code explanation: train on the materialized pair-readiness corpus and replay held-out direct probes.
 
+722-v708-pair-readiness-heldout-failure-diagnostic.md
+ -> v708 code explanation: diagnose the v707 held-out direct failure as loss prompt absorption by the fixed branch.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

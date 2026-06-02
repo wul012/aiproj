@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v707.0.0` trains on the materialized pair-readiness corpus and replays held-out direct probes.
+Version `v708.0.0` diagnoses the v707 held-out direct failure as loss prompt absorption by the fixed branch.
+
+## Latest v708 checkpoint
+
+- Added `model_capability_required_term_pair_readiness_heldout_failure_diagnostic`.
+- Consumed v707 pair-readiness training run.
+- Confirmed `decision=pair_readiness_loss_prompt_absorbed_by_fixed`.
+- Confirmed `fixed_hit_count=1`, `loss_hit_count=0`, and `loss_prompt_fixed_pollution_count=1`.
+- Kept `model_quality_claim=diagnostic_only`.
+- Archived v708 evidence in `e/708` and added the code explanation in `代码讲解记录_模型能力阶段/722-v708-pair-readiness-heldout-failure-diagnostic.md`.
 
 ## Latest v707 checkpoint
 

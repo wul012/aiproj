@@ -1021,3 +1021,8 @@ e/663/解释/说明.md
 - `e/707/图片`
 - `e/707/解释/说明.md`
 - v707 pair-readiness training run 的运行截图和解释。
+## v708 补充索引
+
+- `e/708/图片`
+- `e/708/解释/说明.md`
+- v708 pair-readiness heldout failure diagnostic 的运行截图和解释。

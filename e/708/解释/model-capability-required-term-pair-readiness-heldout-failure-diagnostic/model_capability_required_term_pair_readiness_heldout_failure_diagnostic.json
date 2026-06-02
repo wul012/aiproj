@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT pair-readiness heldout failure diagnostic",
+  "generated_at": "2026-06-02T02:04:16Z",
+  "status": "pass",
+  "decision": "pair_readiness_loss_prompt_absorbed_by_fixed",
+  "failed_count": 0,
+  "issues": [],
+  "source_training_path": "e\\707\\解释\\model-capability-required-term-pair-readiness-training-run\\model_capability_required_term_pair_readiness_training_run.json",
+  "source_training": {
+    "status": "pass",
+    "decision": "pair_readiness_training_no_pair_full",
+    "summary": {
+      "materialization_status": "pass",
+      "training_status": "pass",
+      "checkpoint_exists": true,
+      "tokenizer_exists": true,
+      "default_pair_full_variant_count": 0,
+      "suppression_pair_full_variant_count": 0,
+      "default_continuation_hit_count": 1,
+      "suppression_continuation_hit_count": 1,
+      "pair_full_observed": false
+    }
+  },
+  "analysis_rows": [
+    {
+      "profile_id": "default",
+      "term": "fixed",
+      "prompt": "fixed=",
+      "generated": "fixed=fixed=fixed=",
+      "continuation": "fixed=fixed=",
+      "continuation_hit": true,
+      "fixed_present": true,
+      "loss_present": false,
+      "pollution_class": "expected-fixed"
+    },
+    {
+      "profile_id": "suppress_newline_tokens",
+      "term": "fixed",
+      "prompt": "fixed=",
+      "generated": "fixed=fixed=fixed=",
+      "continuation": "fixed=fixed=",
+      "continuation_hit": true,
+      "fixed_present": true,
+      "loss_present": false,
+      "pollution_class": "expected-fixed"
+    },
+    {
+      "profile_id": "default",
+      "term": "loss",
+      "prompt": "loss=",
+      "generated": "loss=fixed=fixed=",
+      "continuation": "fixed=fixed=",
+      "continuation_hit": false,
+      "fixed_present": true,
+      "loss_present": false,
+      "pollution_class": "loss-prompt-fixed-pollution"
+    },
+    {
+      "profile_id": "suppress_newline_tokens",
+      "term": "loss",
+      "prompt": "loss=",
+      "generated": "loss=fixed=fixed=",
+      "continuation": "fixed=fixed=",
+      "continuation_hit": false,
+      "fixed_present": true,
+      "loss_present": false,
+      "pollution_class": "loss-prompt-fixed-pollution"
+    }
+  ],
+  "summary": {
+    "training_status": "pass",
+    "pair_full_observed": false,
+    "default_row_count": 2,
+    "fixed_hit_count": 1,
+    "loss_hit_count": 0,
+    "loss_prompt_fixed_pollution_count": 1,
+    "fixed_prompt_loss_pollution_count": 0,
+    "miss_count": 0,
+    "dominant_failure": "loss_prompt_absorbed_by_fixed"
+  },
+  "interpretation": {
+    "model_quality_claim": "diagnostic_only",
+    "reason": "Dominant heldout failure is loss_prompt_absorbed_by_fixed.",
+    "next_action": "plan a loss-retention repair only if loss prompt fixed-pollution is dominant"
+  }
+}
