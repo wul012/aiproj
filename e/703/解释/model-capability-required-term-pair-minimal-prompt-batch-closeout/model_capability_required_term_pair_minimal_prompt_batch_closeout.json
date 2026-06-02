@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair minimal prompt batch closeout",
+  "generated_at": "2026-06-02T01:38:23Z",
+  "status": "pass",
+  "decision": "minimal_prompt_batch_closed_without_pair_full",
+  "failed_count": 0,
+  "issues": [],
+  "source_report_count": 3,
+  "summary": {
+    "report_count": 3,
+    "pass_count": 3,
+    "checkpoint_count": 3,
+    "pair_full_report_count": 0,
+    "fixed_only_report_count": 1,
+    "loss_only_report_count": 2,
+    "all_miss_report_count": 0,
+    "partial_other_report_count": 0,
+    "corpus_modes": [
+      "minimal_prompt_balanced_first_token_repair_objective",
+      "minimal_prompt_equals_surface_objective",
+      "minimal_prompt_loss_first_token_repair_objective"
+    ],
+    "branch_classes": [
+      "fixed-only",
+      "loss-only",
+      "loss-only"
+    ],
+    "closeout_ready": true
+  },
+  "evidence_rows": [
+    {
+      "label": "v696-fixed-dominant",
+      "path": "e\\696\\解释\\model-capability-required-term-pair-minimal-prompt-training\\model_capability_required_term_pair_coexistence_refresh.json",
+      "status": "pass",
+      "decision": "required_term_pair_coexistence_refresh_no_pair_full",
+      "corpus_mode": "minimal_prompt_equals_surface_objective",
+      "training_status": "pass",
+      "checkpoint_exists": true,
+      "pair_full_observed": false,
+      "hit_terms": [
+        "fixed"
+      ],
+      "branch_class": "fixed-only",
+      "fixed_generated": "fixed=fixed=fixed=",
+      "loss_generated": "loss=fixed=fixed=",
+      "model_quality_claim": "not_claimed"
+    },
+    {
+      "label": "v699-loss-dominant",
+      "path": "e\\699\\解释\\model-capability-required-term-pair-minimal-prompt-loss-first-token-training\\model_capability_required_term_pair_coexistence_refresh.json",
+      "status": "pass",
+      "decision": "required_term_pair_coexistence_refresh_no_pair_full",
+      "corpus_mode": "minimal_prompt_loss_first_token_repair_objective",
+      "training_status": "pass",
+      "checkpoint_exists": true,
+      "pair_full_observed": false,
+      "hit_terms": [
+        "loss"
+      ],
+      "branch_class": "loss-only",
+      "fixed_generated": "fixed=losssssss= l",
+      "loss_generated": "loss= losssssss=",
+      "model_quality_claim": "not_claimed"
+    },
+    {
+      "label": "v702-balanced",
+      "path": "e\\702\\解释\\model-capability-required-term-pair-minimal-prompt-balanced-training\\model_capability_required_term_pair_coexistence_refresh.json",
+      "status": "pass",
+      "decision": "required_term_pair_coexistence_refresh_no_pair_full",
+      "corpus_mode": "minimal_prompt_balanced_first_token_repair_objective",
+      "training_status": "pass",
+      "checkpoint_exists": true,
+      "pair_full_observed": false,
+      "hit_terms": [
+        "loss"
+      ],
+      "branch_class": "loss-only",
+      "fixed_generated": "fixed=lix=los=loss",
+      "loss_generated": "loss=lossssss=los",
+      "model_quality_claim": "not_claimed"
+    }
+  ],
+  "interpretation": {
+    "model_quality_claim": "not_claimed",
+    "reason": "Three real minimal-prompt training attempts completed, but none produced full fixed/loss continuation coverage.",
+    "next_action": "stop same-family minimal-prompt corpus churn and design a pair-readiness split before more training",
+    "summary": {
+      "report_count": 3,
+      "pass_count": 3,
+      "checkpoint_count": 3,
+      "pair_full_report_count": 0,
+      "fixed_only_report_count": 1,
+      "loss_only_report_count": 2,
+      "all_miss_report_count": 0,
+      "partial_other_report_count": 0,
+      "corpus_modes": [
+        "minimal_prompt_balanced_first_token_repair_objective",
+        "minimal_prompt_equals_surface_objective",
+        "minimal_prompt_loss_first_token_repair_objective"
+      ],
+      "branch_classes": [
+        "fixed-only",
+        "loss-only",
+        "loss-only"
+      ],
+      "closeout_ready": true
+    }
+  }
+}

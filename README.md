@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v702.0.0` runs the balanced minimal-prompt corpus as a real tiny training negative-result check.
+Version `v703.0.0` closes out the repeated minimal-prompt training batch after three real negative-result runs.
+
+## Latest v703 checkpoint
+
+- Added `model_capability_required_term_pair_minimal_prompt_batch_closeout`.
+- Compared v696 fixed-dominant, v699 loss-dominant, and v702 balanced training reports.
+- Confirmed `decision=minimal_prompt_batch_closed_without_pair_full`.
+- Confirmed `report_count=3`, `pair_full_report_count=0`, `fixed_only_report_count=1`, and `loss_only_report_count=2`.
+- Kept `model_quality_claim=not_claimed`.
+- Archived v703 evidence in `e/703` and added the code explanation in `代码讲解记录_模型能力阶段/717-v703-minimal-prompt-batch-closeout.md`.
 
 ## Latest v702 checkpoint
 

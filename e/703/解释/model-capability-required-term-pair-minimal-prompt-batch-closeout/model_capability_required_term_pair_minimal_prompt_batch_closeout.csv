@@ -1,0 +1,4 @@
+label,corpus_mode,branch_class,pair_full_observed,fixed_generated,loss_generated
+v696-fixed-dominant,minimal_prompt_equals_surface_objective,fixed-only,False,fixed=fixed=fixed=,loss=fixed=fixed=
+v699-loss-dominant,minimal_prompt_loss_first_token_repair_objective,loss-only,False,fixed=losssssss= l,loss= losssssss=
+v702-balanced,minimal_prompt_balanced_first_token_repair_objective,loss-only,False,fixed=lix=los=loss,loss=lossssss=los

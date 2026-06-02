@@ -701,6 +701,9 @@
 716-v702-minimal-prompt-balanced-training.md
  -> v702 code explanation: run the balanced minimal-prompt corpus as a real tiny training negative-result check.
 
+717-v703-minimal-prompt-batch-closeout.md
+ -> v703 code explanation: close the repeated minimal-prompt training batch after three real negative-result runs.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

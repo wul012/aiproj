@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT minimal prompt batch closeout</title>
+<style>
+:root{color-scheme:light;--ink:#18212b;--muted:#5a6572;--line:#d8dee4;--panel:#f6f8fa;--accent:#7c2d12}
+*{box-sizing:border-box}
+body{margin:0;background:#eef1f4;color:var(--ink);font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1180px;margin:0 auto;padding:28px}
+h1{font-size:30px;margin:0 0 8px;letter-spacing:0}
+h2{font-size:18px;margin:0 0 12px;letter-spacing:0}
+p{color:var(--muted);line-height:1.55;overflow-wrap:anywhere}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:18px 0}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:8px}
+.card{padding:14px}
+.card span{display:block;color:var(--muted);font-size:12px;text-transform:uppercase}
+.card strong{display:block;margin-top:6px;font-size:18px;line-height:1.2;color:var(--accent);overflow-wrap:anywhere}
+.panel{padding:16px;margin:14px 0}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:#334155}
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT minimal prompt batch closeout</h1><p>Three real minimal-prompt training attempts completed, but none produced full fixed/loss continuation coverage.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Decision</span><strong>minimal_prompt_batch_closed_without_pair_full</strong></div><div class="card"><span>Reports</span><strong>3</strong></div><div class="card"><span>Pair-full</span><strong>0</strong></div><div class="card"><span>Fixed-only</span><strong>1</strong></div><div class="card"><span>Loss-only</span><strong>2</strong></div></section>
+<section class="panel"><h2>Evidence Rows</h2><div class="table-wrap"><table>
+<thead><tr><th>Label</th><th>Corpus</th><th>Branch</th><th>Fixed sample</th><th>Loss sample</th></tr></thead>
+<tbody><tr><td>v696-fixed-dominant</td><td>minimal_prompt_equals_surface_objective</td><td>fixed-only</td><td>fixed=fixed=fixed=</td><td>loss=fixed=fixed=</td></tr><tr><td>v699-loss-dominant</td><td>minimal_prompt_loss_first_token_repair_objective</td><td>loss-only</td><td>fixed=losssssss= l</td><td>loss= losssssss=</td></tr><tr><td>v702-balanced</td><td>minimal_prompt_balanced_first_token_repair_objective</td><td>loss-only</td><td>fixed=lix=los=loss</td><td>loss=lossssss=los</td></tr></tbody>
+</table></div></section>
+<section class="panel"><h2>Next Action</h2><p>stop same-family minimal-prompt corpus churn and design a pair-readiness split before more training</p></section>
+</main>
+</body>
+</html>

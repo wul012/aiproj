@@ -1,0 +1,9 @@
+status=pass
+decision=minimal_prompt_batch_closed_without_pair_full
+failed_count=0
+report_count=3
+pair_full_report_count=0
+fixed_only_report_count=1
+loss_only_report_count=2
+model_quality_claim=not_claimed
+next_action=stop same-family minimal-prompt corpus churn and design a pair-readiness split before more training

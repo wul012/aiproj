@@ -996,3 +996,8 @@ e/663/解释/说明.md
 - `e/702/图片`
 - `e/702/解释/说明.md`
 - v702 minimal prompt balanced training 的运行截图和解释。
+## v703 补充索引
+
+- `e/703/图片`
+- `e/703/解释/说明.md`
+- v703 minimal prompt batch closeout 的运行截图和解释。
