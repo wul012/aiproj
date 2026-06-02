@@ -7481,6 +7481,8 @@ The pair-readiness fixed-preserving transfer plan layer turns that regression cl
 
 The pair-readiness fixed-preserving transfer contract patch layer applies that plan to the direct-completion surface contract, adding four checked bridge rows and registering the new decision for corpus materialization.
 
+The pair-readiness fixed-preserving transfer materialization layer turns that checked contract patch into a 6400-line training corpus and a heldout eval fixture without leaking the exact pair probe.
+
 The run registry layer indexes multiple run directories so experiments can be scanned by commit, data fingerprint, quality status, eval suite coverage, metrics, artifact count, notes, tags, best-val rank, loss delta, a leaderboard, an interactive local HTML table, shareable URL state, and visible-row CSV export.
 
 The experiment card layer turns one run into a compact JSON/Markdown/HTML summary for review, handoff, or portfolio use.

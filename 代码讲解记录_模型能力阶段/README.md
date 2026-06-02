@@ -836,6 +836,9 @@
 761-v747-fixed-preserving-transfer-contract-patch.md
  -> v747 code explanation: apply the fixed-preserving plan as a checked four-row contract patch and register it for materialization.
 
+762-v748-fixed-preserving-transfer-corpus-materialization.md
+ -> v748 code explanation: materialize the fixed-preserving transfer contract patch into a 6400-line corpus and heldout fixture.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

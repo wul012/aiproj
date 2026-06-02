@@ -1221,3 +1221,8 @@ e/663/解释/说明.md
 - `e/747/图片`
 - `e/747/解释/说明.md`
 - v747 fixed-preserving transfer contract patch 的运行截图和解释。
+## v748 补充索引
+
+- `e/748/图片`
+- `e/748/解释/说明.md`
+- v748 fixed-preserving transfer corpus materialization 的运行截图和解释。
