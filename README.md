@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v763.0.0` trains the objective-level contrast corpus and records direct pair-probe hit evidence before independent replay.
+Version `v764.0.0` independently replays the objective-level contrast checkpoint and records pair-full results on exact, spaced, and arrow pair prompts.
+
+## Latest v764 checkpoint
+
+- Reused `model_capability_required_term_pair_readiness_fixed_preserving_transfer_pair_probe_replay`.
+- Consumed v763 objective-level contrast training run.
+- Confirmed `decision=pair_readiness_fixed_preserving_transfer_pair_probe_replay_ready`.
+- Confirmed `exact_heldout_pair_full=True` and `required_all_pair_full=True`.
+- Recorded `pair_full_count=3`.
+- Archived v764 evidence in `e/764` and added the code explanation in `代码讲解记录_模型能力阶段/778-v764-objective-level-contrast-pair-probe-replay.md`.
 
 ## Latest v763 checkpoint
 

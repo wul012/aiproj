@@ -884,6 +884,9 @@
 777-v763-objective-level-contrast-training-run.md
  -> v763 code explanation: train the objective-level contrast corpus and record direct pair-probe hit evidence before independent replay.
 
+778-v764-objective-level-contrast-pair-probe-replay.md
+ -> v764 code explanation: independently replay the v763 checkpoint across exact, spaced, and arrow pair prompts and record all pair-full evidence.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

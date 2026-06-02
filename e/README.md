@@ -1301,3 +1301,8 @@ e/663/解释/说明.md
 - `e/763/图片`
 - `e/763/解释/说明.md`
 - v763 objective-level contrast training run 的运行截图和解释。
+## v764 补充索引
+
+- `e/764/图片`
+- `e/764/解释/说明.md`
+- v764 objective-level contrast pair-probe replay 的运行截图和解释。
