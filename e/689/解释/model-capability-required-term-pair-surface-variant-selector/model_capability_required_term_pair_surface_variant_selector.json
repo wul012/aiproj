@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair surface variant selector",
+  "generated_at": "2026-06-01T23:58:42Z",
+  "status": "pass",
+  "decision": "required_term_pair_surface_variant_selected_for_contextual_demo",
+  "failed_count": 0,
+  "issues": [],
+  "source_variant_plan_path": "e\\687\\解释\\model-capability-required-term-pair-surface-variant-plan\\model_capability_required_term_pair_surface_variant_plan.json",
+  "source_variant_replay_path": "e\\688\\解释\\model-capability-required-term-pair-surface-variant-replay\\model_capability_required_term_pair_surface_variant_replay.json",
+  "candidate_rows": [
+    {
+      "variant_id": "compact_context",
+      "prompt_template": "{other_term}={other_term}{term}=",
+      "separator_style": "compact",
+      "stable_pair_full": true,
+      "pair_full_seed_count": 3,
+      "hit_case_count": 6,
+      "style_rank": 4,
+      "selection_score": 28,
+      "selection_reason": "stable but less readable because labels are fused"
+    },
+    {
+      "variant_id": "newline_context",
+      "prompt_template": "{other_term}={other_term}\n{term}=",
+      "separator_style": "newline",
+      "stable_pair_full": true,
+      "pair_full_seed_count": 3,
+      "hit_case_count": 6,
+      "style_rank": 2,
+      "selection_score": 47,
+      "selection_reason": "stable contextual separator variant"
+    },
+    {
+      "variant_id": "semicolon_context",
+      "prompt_template": "{other_term}={other_term}; {term}=",
+      "separator_style": "semicolon",
+      "stable_pair_full": true,
+      "pair_full_seed_count": 3,
+      "hit_case_count": 6,
+      "style_rank": 1,
+      "selection_score": 56,
+      "selection_reason": "stable contextual separator variant"
+    },
+    {
+      "variant_id": "space_context_control",
+      "prompt_template": "{other_term}={other_term} {term}=",
+      "separator_style": "space",
+      "stable_pair_full": true,
+      "pair_full_seed_count": 3,
+      "hit_case_count": 6,
+      "style_rank": 0,
+      "selection_score": 67,
+      "selection_reason": "stable and matches the original execution profile"
+    },
+    {
+      "variant_id": "worded_context",
+      "prompt_template": "known {other_term}={other_term}; answer {term}=",
+      "separator_style": "worded",
+      "stable_pair_full": true,
+      "pair_full_seed_count": 3,
+      "hit_case_count": 6,
+      "style_rank": 3,
+      "selection_score": 23,
+      "selection_reason": "stable but adds extra instruction wording"
+    }
+  ],
+  "selected_variant": {
+    "variant_id": "space_context_control",
+    "prompt_template": "{other_term}={other_term} {term}=",
+    "separator_style": "space",
+    "stable_pair_full": true,
+    "pair_full_seed_count": 3,
+    "hit_case_count": 6,
+    "style_rank": 0,
+    "selection_score": 67,
+    "selection_reason": "stable and matches the original execution profile"
+  },
+  "summary": {
+    "candidate_count": 5,
+    "stable_variant_count": 5,
+    "stable_variant_ids": [
+      "compact_context",
+      "newline_context",
+      "semicolon_context",
+      "space_context_control",
+      "worded_context"
+    ],
+    "selected_variant_id": "space_context_control",
+    "max_new_tokens": 8,
+    "promotion_allowed": false
+  },
+  "interpretation": {
+    "model_quality_claim": "contextual_surface_variant_selected",
+    "reason": "A stable, readable, profile-aligned contextual variant is selected without changing the promotion boundary.",
+    "next_action": "contrast contextual variant success against non-leaking baselines"
+  }
+}

@@ -926,3 +926,8 @@ e/663/解释/说明.md
 - `e/688/图片`
 - `e/688/解释/说明.md`
 - v688 required-term pair surface variant replay 的运行截图和解释。
+## v689 补充索引
+
+- `e/689/图片`
+- `e/689/解释/说明.md`
+- v689 required-term pair surface variant selector 的运行截图和解释。

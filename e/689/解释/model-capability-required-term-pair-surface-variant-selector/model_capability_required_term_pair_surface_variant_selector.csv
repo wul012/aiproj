@@ -1,0 +1,6 @@
+variant_id,separator_style,stable_pair_full,pair_full_seed_count,hit_case_count,style_rank,selection_score,selection_reason
+compact_context,compact,True,3,6,4,28,stable but less readable because labels are fused
+newline_context,newline,True,3,6,2,47,stable contextual separator variant
+semicolon_context,semicolon,True,3,6,1,56,stable contextual separator variant
+space_context_control,space,True,3,6,0,67,stable and matches the original execution profile
+worded_context,worded,True,3,6,3,23,stable but adds extra instruction wording

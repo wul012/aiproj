@@ -4,7 +4,18 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v688.0.0` replays contextual surface variants for the selected required-term pair execution profile.
+Version `v689.0.0` selects the default contextual surface variant after all planned variants replay stably.
+
+## Latest v689 checkpoint
+
+- Added `model_capability_required_term_pair_surface_variant_selector`.
+- Consumed v687 variant plan and v688 variant replay evidence.
+- Confirmed `status=pass`.
+- Confirmed `decision=required_term_pair_surface_variant_selected_for_contextual_demo`.
+- Confirmed `selected_variant_id=space_context_control`.
+- Confirmed `stable_variant_count=5`.
+- Preserved `promotion_allowed=False`.
+- Archived v689 evidence in `e/689` and added the code explanation in `代码讲解记录_模型能力阶段/703-v689-required-term-pair-surface-variant-selector.md`.
 
 ## Latest v688 checkpoint
 

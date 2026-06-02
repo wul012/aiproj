@@ -1,0 +1,7 @@
+status=pass
+decision=required_term_pair_surface_variant_selected_for_contextual_demo
+selected_variant_id=space_context_control
+stable_variant_count=5
+promotion_allowed=False
+model_quality_claim=contextual_surface_variant_selected
+next_action=contrast contextual variant success against non-leaking baselines
