@@ -1,0 +1,11 @@
+id,status,actual,detail
+plan_passed,pass,pass,objective-structure plan must pass
+plan_decision,pass,pair_readiness_objective_structure_plan_ready,contract follows only a ready objective-structure plan
+next_artifact_matches,pass,pair_readiness_objective_structure_contract,plan must request this contract artifact
+training_rows_present,pass,18,objective-structure rows must be substantial enough to materialize
+direct_family_balance,pass,"fixed=4, loss=4",fixed/loss direct row families must be balanced
+paired_forward_present,pass,3,forward paired block rows must be present
+paired_reverse_present,pass,3,reverse paired block rows must be present
+evaluation_probes_present,pass,3,"fixed, loss, and pair probes must be preserved"
+no_exact_eval_row_overlap,pass,[],exact eval prompts must not be training rows
+heldout_pair_absent,pass,False,heldout pair probe must stay out of training rows

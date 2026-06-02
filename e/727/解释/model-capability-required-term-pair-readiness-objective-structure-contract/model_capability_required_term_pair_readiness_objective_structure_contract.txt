@@ -1,0 +1,10 @@
+status=pass
+decision=pair_readiness_objective_structure_contract_ready
+failed_count=0
+contract_ready=True
+training_row_count=18
+row_family_count=5
+evaluation_probe_count=3
+paired_block_row_count=6
+model_quality_claim=contract_only
+next_action=materialize the objective-structure contract into a training corpus and heldout fixture

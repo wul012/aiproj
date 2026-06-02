@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v726.0.0` converts the five-route capacity-probe closeout into a checked objective-structure contract plan.
+Version `v727.0.0` builds a materializable objective-structure contract with balanced task-id rows and heldout checks.
+
+## Latest v727 checkpoint
+
+- Added `model_capability_required_term_pair_readiness_objective_structure_contract`.
+- Built 18 objective-structure training rows across 5 row families.
+- Preserved 3 heldout probes: `fixed=`, `loss=`, and `fixed=|loss=`.
+- Confirmed `decision=pair_readiness_objective_structure_contract_ready`.
+- Connected the new contract decision and JSON filename to corpus materialization.
+- Archived v727 evidence in `e/727` and added the code explanation in `代码讲解记录_模型能力阶段/741-v727-objective-structure-contract.md`.
 
 ## Latest v726 checkpoint
 

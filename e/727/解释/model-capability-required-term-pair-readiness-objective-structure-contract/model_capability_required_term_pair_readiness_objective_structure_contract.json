@@ -1,0 +1,205 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT pair-readiness objective-structure contract",
+  "generated_at": "2026-06-02T04:42:19Z",
+  "status": "pass",
+  "decision": "pair_readiness_objective_structure_contract_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_plan_path": "e\\726\\解释\\model-capability-required-term-pair-readiness-objective-structure-plan\\model_capability_required_term_pair_readiness_objective_structure_plan.json",
+  "source_plan": {
+    "status": "pass",
+    "decision": "pair_readiness_objective_structure_plan_ready",
+    "summary": {
+      "check_count": 8,
+      "passed_check_count": 8,
+      "failed_check_count": 0,
+      "plan_ready": true,
+      "proposed_next_artifact": "pair_readiness_objective_structure_contract",
+      "objective_strategy_count": 4,
+      "contract_requirement_count": 4
+    }
+  },
+  "contract": {
+    "contract_version": 5,
+    "training_rows": [
+      "objective=direct_term | term=fixed | prompt_surface=fixed_equals | answer=fixed",
+      "objective=direct_term | case=fixed_branch | target=fixed | response=fixed",
+      "task_id=fixed_direct | input=fixed equals prompt | output=fixed token",
+      "task_id=fixed_direct | branch=fixed | forbidden=loss | answer=fixed",
+      "objective=direct_term | term=loss | prompt_surface=loss_equals | answer=loss",
+      "objective=direct_term | case=loss_branch | target=loss | response=loss",
+      "task_id=loss_direct | input=loss equals prompt | output=loss token",
+      "task_id=loss_direct | branch=loss | forbidden=fixed | answer=loss",
+      "objective=paired_terms | first=fixed | second=loss | answer=fixed then loss",
+      "paired_block order=fixed_loss | fixed branch answer fixed | loss branch answer loss",
+      "task_id=pair_forward | fixed_result=fixed | loss_result=loss",
+      "objective=paired_terms | first=loss | second=fixed | answer=loss then fixed",
+      "paired_block order=loss_fixed | loss branch answer loss | fixed branch answer fixed",
+      "task_id=pair_reverse | loss_result=loss | fixed_result=fixed",
+      "contrast fixed_branch keeps fixed and does not answer loss",
+      "contrast loss_branch keeps loss and does not answer fixed",
+      "boundary fixed answer remains fixed even when loss is nearby",
+      "boundary loss answer remains loss even when fixed is nearby"
+    ],
+    "row_families": [
+      {
+        "family": "task_id_direct_fixed",
+        "role": "direct_term_completion",
+        "target_term": "fixed",
+        "rows": [
+          "objective=direct_term | term=fixed | prompt_surface=fixed_equals | answer=fixed",
+          "objective=direct_term | case=fixed_branch | target=fixed | response=fixed",
+          "task_id=fixed_direct | input=fixed equals prompt | output=fixed token",
+          "task_id=fixed_direct | branch=fixed | forbidden=loss | answer=fixed"
+        ]
+      },
+      {
+        "family": "task_id_direct_loss",
+        "role": "direct_term_completion",
+        "target_term": "loss",
+        "rows": [
+          "objective=direct_term | term=loss | prompt_surface=loss_equals | answer=loss",
+          "objective=direct_term | case=loss_branch | target=loss | response=loss",
+          "task_id=loss_direct | input=loss equals prompt | output=loss token",
+          "task_id=loss_direct | branch=loss | forbidden=fixed | answer=loss"
+        ]
+      },
+      {
+        "family": "paired_block_forward",
+        "role": "paired_branch_completion",
+        "target_term": "fixed+loss",
+        "rows": [
+          "objective=paired_terms | first=fixed | second=loss | answer=fixed then loss",
+          "paired_block order=fixed_loss | fixed branch answer fixed | loss branch answer loss",
+          "task_id=pair_forward | fixed_result=fixed | loss_result=loss"
+        ]
+      },
+      {
+        "family": "paired_block_reverse",
+        "role": "paired_branch_completion",
+        "target_term": "loss+fixed",
+        "rows": [
+          "objective=paired_terms | first=loss | second=fixed | answer=loss then fixed",
+          "paired_block order=loss_fixed | loss branch answer loss | fixed branch answer fixed",
+          "task_id=pair_reverse | loss_result=loss | fixed_result=fixed"
+        ]
+      },
+      {
+        "family": "boundary_contrast",
+        "role": "anti_contamination",
+        "target_term": "fixed/loss",
+        "rows": [
+          "contrast fixed_branch keeps fixed and does not answer loss",
+          "contrast loss_branch keeps loss and does not answer fixed",
+          "boundary fixed answer remains fixed even when loss is nearby",
+          "boundary loss answer remains loss even when fixed is nearby"
+        ]
+      }
+    ],
+    "evaluation_probes": [
+      {
+        "id": "fixed-direct",
+        "prompt": "fixed=",
+        "expected_term": "fixed",
+        "split": "heldout-direct"
+      },
+      {
+        "id": "loss-direct",
+        "prompt": "loss=",
+        "expected_term": "loss",
+        "split": "heldout-direct"
+      },
+      {
+        "id": "fixed-loss-pair",
+        "prompt": "fixed=|loss=",
+        "expected_term": "fixed+loss",
+        "split": "heldout-pair"
+      }
+    ],
+    "heldout_pair_probe": "fixed=|loss=",
+    "promotion_requirement": "fixed-direct and loss-direct heldout continuations must both hit before pair-probe promotion",
+    "leakage_policy": "use task-id and paired-block descriptions, but never train on exact heldout direct or pair probes",
+    "template_family": "objective_structure_task_id_and_paired_blocks",
+    "source_route_boundary": "created after light capacity probe matched fixed-recovery without recovering loss"
+  },
+  "check_rows": [
+    {
+      "id": "plan_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "objective-structure plan must pass"
+    },
+    {
+      "id": "plan_decision",
+      "status": "pass",
+      "actual": "pair_readiness_objective_structure_plan_ready",
+      "detail": "contract follows only a ready objective-structure plan"
+    },
+    {
+      "id": "next_artifact_matches",
+      "status": "pass",
+      "actual": "pair_readiness_objective_structure_contract",
+      "detail": "plan must request this contract artifact"
+    },
+    {
+      "id": "training_rows_present",
+      "status": "pass",
+      "actual": 18,
+      "detail": "objective-structure rows must be substantial enough to materialize"
+    },
+    {
+      "id": "direct_family_balance",
+      "status": "pass",
+      "actual": "fixed=4, loss=4",
+      "detail": "fixed/loss direct row families must be balanced"
+    },
+    {
+      "id": "paired_forward_present",
+      "status": "pass",
+      "actual": 3,
+      "detail": "forward paired block rows must be present"
+    },
+    {
+      "id": "paired_reverse_present",
+      "status": "pass",
+      "actual": 3,
+      "detail": "reverse paired block rows must be present"
+    },
+    {
+      "id": "evaluation_probes_present",
+      "status": "pass",
+      "actual": 3,
+      "detail": "fixed, loss, and pair probes must be preserved"
+    },
+    {
+      "id": "no_exact_eval_row_overlap",
+      "status": "pass",
+      "actual": [],
+      "detail": "exact eval prompts must not be training rows"
+    },
+    {
+      "id": "heldout_pair_absent",
+      "status": "pass",
+      "actual": false,
+      "detail": "heldout pair probe must stay out of training rows"
+    }
+  ],
+  "summary": {
+    "contract_ready": true,
+    "training_row_count": 18,
+    "row_family_count": 5,
+    "evaluation_probe_count": 3,
+    "failed_check_count": 0,
+    "heldout_pair_probe": "fixed=|loss=",
+    "template_family": "objective_structure_task_id_and_paired_blocks",
+    "fixed_direct_row_count": 4,
+    "loss_direct_row_count": 4,
+    "paired_block_row_count": 6
+  },
+  "interpretation": {
+    "model_quality_claim": "contract_only",
+    "reason": "The contract replaces single-sided row patching with task-id and paired-block objectives while preserving heldout probes.",
+    "next_action": "materialize the objective-structure contract into a training corpus and heldout fixture"
+  }
+}

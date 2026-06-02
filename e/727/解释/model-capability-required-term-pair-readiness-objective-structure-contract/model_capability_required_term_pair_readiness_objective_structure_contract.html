@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT objective-structure contract</title>
+<style>
+:root{color-scheme:light;--ink:#172026;--muted:#5d6975;--line:#d8dee4;--panel:#f7f9fb;--accent:#7c2d12}
+*{box-sizing:border-box}
+body{margin:0;background:#eef2f5;color:var(--ink);font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1120px;margin:0 auto;padding:28px}
+h1{font-size:30px;margin:0 0 8px;letter-spacing:0}
+h2{font-size:18px;margin:0 0 12px;letter-spacing:0}
+p,li{color:var(--muted);line-height:1.55;overflow-wrap:anywhere}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:18px 0}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:8px}
+.card{padding:14px}
+.card span{display:block;color:var(--muted);font-size:12px;text-transform:uppercase}
+.card strong{display:block;margin-top:6px;font-size:18px;line-height:1.2;color:var(--accent);overflow-wrap:anywhere}
+.panel{padding:16px;margin:14px 0}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:#334155}
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT objective-structure contract</h1><p>The contract replaces single-sided row patching with task-id and paired-block objectives while preserving heldout probes.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Decision</span><strong>pair_readiness_objective_structure_contract_ready</strong></div><div class="card"><span>Ready</span><strong>True</strong></div><div class="card"><span>Rows</span><strong>18</strong></div><div class="card"><span>Families</span><strong>5</strong></div><div class="card"><span>Paired rows</span><strong>6</strong></div></section>
+<section class="panel"><h2>Row Families</h2><div class="table-wrap"><table>
+<thead><tr><th>Family</th><th>Role</th><th>Target</th><th>Rows</th></tr></thead>
+<tbody><tr><td>task_id_direct_fixed</td><td>direct_term_completion</td><td>fixed</td><td>4</td></tr><tr><td>task_id_direct_loss</td><td>direct_term_completion</td><td>loss</td><td>4</td></tr><tr><td>paired_block_forward</td><td>paired_branch_completion</td><td>fixed+loss</td><td>3</td></tr><tr><td>paired_block_reverse</td><td>paired_branch_completion</td><td>loss+fixed</td><td>3</td></tr><tr><td>boundary_contrast</td><td>anti_contamination</td><td>fixed/loss</td><td>4</td></tr></tbody>
+</table></div></section>
+<section class="panel"><h2>Checks</h2><div class="table-wrap"><table>
+<thead><tr><th>Check</th><th>Status</th><th>Actual</th><th>Detail</th></tr></thead>
+<tbody><tr><td>plan_passed</td><td>pass</td><td>pass</td><td>objective-structure plan must pass</td></tr><tr><td>plan_decision</td><td>pass</td><td>pair_readiness_objective_structure_plan_ready</td><td>contract follows only a ready objective-structure plan</td></tr><tr><td>next_artifact_matches</td><td>pass</td><td>pair_readiness_objective_structure_contract</td><td>plan must request this contract artifact</td></tr><tr><td>training_rows_present</td><td>pass</td><td>18</td><td>objective-structure rows must be substantial enough to materialize</td></tr><tr><td>direct_family_balance</td><td>pass</td><td>fixed=4, loss=4</td><td>fixed/loss direct row families must be balanced</td></tr><tr><td>paired_forward_present</td><td>pass</td><td>3</td><td>forward paired block rows must be present</td></tr><tr><td>paired_reverse_present</td><td>pass</td><td>3</td><td>reverse paired block rows must be present</td></tr><tr><td>evaluation_probes_present</td><td>pass</td><td>3</td><td>fixed, loss, and pair probes must be preserved</td></tr><tr><td>no_exact_eval_row_overlap</td><td>pass</td><td>[]</td><td>exact eval prompts must not be training rows</td></tr><tr><td>heldout_pair_absent</td><td>pass</td><td>False</td><td>heldout pair probe must stay out of training rows</td></tr></tbody>
+</table></div></section>
+<section class="panel"><h2>Evaluation Probes</h2><ul><li>fixed-direct: fixed= -> fixed</li><li>loss-direct: loss= -> loss</li><li>fixed-loss-pair: fixed=|loss= -> fixed+loss</li></ul></section>
+<section class="panel"><h2>Next Action</h2><p>materialize the objective-structure contract into a training corpus and heldout fixture</p></section>
+</main>
+</body>
+</html>
