@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <title>v783 seed handoff markdown split</title>
+  <style>
+    body { font-family: "Segoe UI", Arial, sans-serif; margin: 32px; color: #1f2933; line-height: 1.55; }
+    main { max-width: 980px; margin: 0 auto; }
+    h1 { font-size: 28px; margin-bottom: 8px; }
+    h2 { margin-top: 28px; font-size: 20px; }
+    table { border-collapse: collapse; width: 100%; margin-top: 12px; }
+    th, td { border: 1px solid #c9d1d9; padding: 10px 12px; text-align: left; vertical-align: top; }
+    th { background: #f3f4f6; }
+    code { background: #eef2f7; padding: 2px 5px; border-radius: 4px; }
+    .pass { color: #0f766e; font-weight: 700; }
+  </style>
+</head>
+<body>
+<main>
+  <h1>v783 seed handoff markdown split</h1>
+  <p><strong>status:</strong> <span class="pass">pass</span></p>
+  <p>
+    v783 moves the promoted seed handoff Markdown renderer out of
+    <code>promoted_training_scale_seed_handoff_sections.py</code>.
+  </p>
+
+  <h2>Split Boundary</h2>
+  <table>
+    <tr><th>Module</th><th>Role after v783</th><th>Line count</th></tr>
+    <tr>
+      <td><code>src/minigpt/promoted_training_scale_seed_handoff_sections.py</code></td>
+      <td>HTML renderer, HTML plan/command/execution/artifact/list sections, styling, and compatibility re-export of Markdown functions.</td>
+      <td>408</td>
+    </tr>
+    <tr>
+      <td><code>src/minigpt/promoted_training_scale_seed_handoff_markdown.py</code></td>
+      <td>Markdown renderer and Markdown writer for promoted training-scale seed handoff reports.</td>
+      <td>274</td>
+    </tr>
+  </table>
+
+  <h2>Verification</h2>
+  <ul>
+    <li><code>python -m py_compile src\minigpt\promoted_training_scale_seed_handoff_sections.py src\minigpt\promoted_training_scale_seed_handoff_markdown.py</code></li>
+    <li><code>python -m pytest tests\test_promoted_training_scale_seed_handoff.py tests\test_promoted_training_scale_seed_handoff_suite_design.py -q -o cache_dir=runs\pytest-cache-v783-focused</code>: 29 passed</li>
+  </ul>
+
+  <h2>Maintenance Value</h2>
+  <p>
+    Markdown and HTML rendering can now evolve independently while existing imports from the sections module remain valid.
+  </p>
+</main>
+</body>
+</html>

@@ -1412,3 +1412,9 @@ e/663/解释/说明.md
 - `e/782/图片`
 - `e/782/解释/说明.md`
 - v782 promoted comparison summary split 的运行截图和解释。
+
+## v783 补充索引
+
+- `e/783/图片`
+- `e/783/解释/说明.md`
+- v783 seed handoff markdown split 的运行截图和解释。

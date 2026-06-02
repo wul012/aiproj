@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v782.0.0` extracts promoted training-scale comparison summary aggregation from the comparison workflow.
+Version `v783.0.0` extracts promoted seed handoff Markdown rendering from the sections renderer module.
+
+## Latest v783 checkpoint
+
+- Added `promoted_training_scale_seed_handoff_markdown`.
+- Reduced `promoted_training_scale_seed_handoff_sections.py` from 653 to 408 lines.
+- Moved Markdown rendering and Markdown writing into a focused module.
+- Kept existing imports compatible by re-exporting the Markdown functions from the sections module.
+- Verified with `29 passed` promoted seed handoff focused tests.
+- Archived v783 evidence in `e/783` and added the code explanation in `代码讲解记录_模型能力阶段/797-v783-seed-handoff-markdown-split.md`.
 
 ## Latest v782 checkpoint
 

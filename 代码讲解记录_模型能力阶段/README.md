@@ -941,6 +941,9 @@
 796-v782-promoted-comparison-summary-split.md
  -> v782 code explanation: extract promoted training-scale comparison summary aggregation from the comparison workflow.
 
+797-v783-seed-handoff-markdown-split.md
+ -> v783 code explanation: extract promoted seed handoff Markdown rendering from the sections renderer module.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。
