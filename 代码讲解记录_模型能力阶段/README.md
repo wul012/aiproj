@@ -707,6 +707,9 @@
 718-v704-pair-readiness-split-plan.md
  -> v704 code explanation: convert the minimal-prompt closeout into a pair-readiness train/eval split plan.
 
+719-v705-pair-readiness-split-contract.md
+ -> v705 code explanation: materialize the pair-readiness split plan into a checked train/eval contract.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

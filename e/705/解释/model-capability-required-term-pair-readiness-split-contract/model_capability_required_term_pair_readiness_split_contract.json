@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair-readiness split contract",
+  "generated_at": "2026-06-02T01:46:06Z",
+  "status": "pass",
+  "decision": "pair_readiness_split_contract_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_plan_path": "e\\704\\解释\\model-capability-required-term-pair-readiness-split-plan\\model_capability_required_term_pair_readiness_split_plan.json",
+  "source_plan": {
+    "status": "pass",
+    "decision": "pair_readiness_split_plan_ready",
+    "summary": {
+      "check_count": 5,
+      "passed_check_count": 5,
+      "failed_check_count": 0,
+      "plan_ready": true,
+      "proposed_next_artifact": "pair_readiness_split_contract",
+      "training_split_count": 3,
+      "evaluation_split_count": 3
+    }
+  },
+  "contract": {
+    "contract_version": 1,
+    "training_rows": [
+      "fixed=f",
+      "fixed=fi",
+      "fixed=fix",
+      "fixed=fixed",
+      "loss=l",
+      "loss=lo",
+      "loss=los",
+      "loss=loss",
+      "fixed branch starts with f",
+      "loss branch starts with l",
+      "fixed branch does not start loss",
+      "loss branch does not start fixed"
+    ],
+    "evaluation_probes": [
+      {
+        "id": "fixed-direct",
+        "prompt": "fixed=",
+        "expected_term": "fixed",
+        "split": "heldout-direct"
+      },
+      {
+        "id": "loss-direct",
+        "prompt": "loss=",
+        "expected_term": "loss",
+        "split": "heldout-direct"
+      },
+      {
+        "id": "fixed-loss-pair",
+        "prompt": "fixed=|loss=",
+        "expected_term": "fixed+loss",
+        "split": "heldout-pair"
+      }
+    ],
+    "heldout_pair_probe": "fixed=|loss=",
+    "promotion_requirement": "fixed-direct and loss-direct heldout continuations must both hit before pair capability is claimed",
+    "leakage_policy": "evaluation prompts may be prefixes but exact heldout pair probes must not appear in training rows"
+  },
+  "check_rows": [
+    {
+      "id": "plan_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "split plan must pass"
+    },
+    {
+      "id": "plan_decision",
+      "status": "pass",
+      "actual": "pair_readiness_split_plan_ready",
+      "detail": "contract follows only a ready pair-readiness split plan"
+    },
+    {
+      "id": "next_artifact_matches",
+      "status": "pass",
+      "actual": "pair_readiness_split_contract",
+      "detail": "plan must request this contract artifact"
+    },
+    {
+      "id": "training_rows_present",
+      "status": "pass",
+      "actual": 12,
+      "detail": "contract needs direct and anti-contamination rows"
+    },
+    {
+      "id": "evaluation_probes_present",
+      "status": "pass",
+      "actual": 3,
+      "detail": "contract needs fixed, loss, and pair heldout probes"
+    },
+    {
+      "id": "no_exact_eval_row_overlap",
+      "status": "pass",
+      "actual": [],
+      "detail": "evaluation prompt strings must not be exact training rows"
+    },
+    {
+      "id": "heldout_pair_probe_absent",
+      "status": "pass",
+      "actual": false,
+      "detail": "heldout pair probe must stay out of training rows"
+    }
+  ],
+  "summary": {
+    "training_row_count": 12,
+    "evaluation_probe_count": 3,
+    "check_count": 7,
+    "passed_check_count": 7,
+    "failed_check_count": 0,
+    "heldout_pair_probe": "fixed=|loss=",
+    "contract_ready": true
+  },
+  "interpretation": {
+    "model_quality_claim": "contract_only",
+    "reason": "Training rows and heldout probes are now separated enough to build a corpus without reusing the pair probe as a training row.",
+    "next_action": "materialize the contract into a training corpus and heldout evaluation fixture"
+  }
+}

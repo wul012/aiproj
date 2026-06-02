@@ -1,0 +1,9 @@
+status=pass
+decision=pair_readiness_split_contract_ready
+failed_count=0
+contract_ready=True
+training_row_count=12
+evaluation_probe_count=3
+heldout_pair_probe=fixed=|loss=
+model_quality_claim=contract_only
+next_action=materialize the contract into a training corpus and heldout evaluation fixture

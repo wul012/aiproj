@@ -1006,3 +1006,8 @@ e/663/解释/说明.md
 - `e/704/图片`
 - `e/704/解释/说明.md`
 - v704 pair-readiness split plan 的运行截图和解释。
+## v705 补充索引
+
+- `e/705/图片`
+- `e/705/解释/说明.md`
+- v705 pair-readiness split contract 的运行截图和解释。

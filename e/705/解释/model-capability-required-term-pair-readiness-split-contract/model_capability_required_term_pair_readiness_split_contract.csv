@@ -1,0 +1,8 @@
+id,status,actual,detail
+plan_passed,pass,pass,split plan must pass
+plan_decision,pass,pair_readiness_split_plan_ready,contract follows only a ready pair-readiness split plan
+next_artifact_matches,pass,pair_readiness_split_contract,plan must request this contract artifact
+training_rows_present,pass,12,contract needs direct and anti-contamination rows
+evaluation_probes_present,pass,3,"contract needs fixed, loss, and pair heldout probes"
+no_exact_eval_row_overlap,pass,[],evaluation prompt strings must not be exact training rows
+heldout_pair_probe_absent,pass,False,heldout pair probe must stay out of training rows
