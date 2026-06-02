@@ -7475,6 +7475,8 @@ The pair-readiness pair prompt transfer corpus materialization layer expands the
 
 The pair-readiness pair prompt transfer training layer trains that corpus with the same larger-tiny settings as the direct-completion candidate and records a loss-only regression, so the transfer patch is not a promotion route.
 
+The pair-readiness pair prompt transfer regression diagnostic layer compares v738 direct success, v740 pair-probe failure, and v744 transfer regression, then closes the full surrogate transfer patch route before more rows are added.
+
 The run registry layer indexes multiple run directories so experiments can be scanned by commit, data fingerprint, quality status, eval suite coverage, metrics, artifact count, notes, tags, best-val rank, loss delta, a leaderboard, an interactive local HTML table, shareable URL state, and visible-row CSV export.
 
 The experiment card layer turns one run into a compact JSON/Markdown/HTML summary for review, handoff, or portfolio use.

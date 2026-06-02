@@ -1,0 +1,11 @@
+status=pass
+decision=pair_readiness_pair_prompt_transfer_regressed_stop_route
+failed_count=0
+direct_completion_default_hit_count=2
+transfer_default_hit_count=1
+transfer_hit_delta_from_direct=-1
+fixed_regressed=True
+pair_probe_exact_heldout_pair_full=False
+transfer_route_closed=True
+model_quality_claim=negative_route_diagnostic
+next_action=stop the full surrogate transfer patch route and diagnose a lighter fixed-preserving transfer objective

@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT pair prompt transfer regression diagnostic",
+  "generated_at": "2026-06-02T08:24:32Z",
+  "status": "pass",
+  "decision": "pair_readiness_pair_prompt_transfer_regressed_stop_route",
+  "failed_count": 0,
+  "issues": [],
+  "diagnostic_rows": [
+    {
+      "label": "direct-completion-surface",
+      "kind": "training",
+      "path": "e\\738\\解释\\model-capability-required-term-pair-readiness-direct-completion-surface-training-run\\model_capability_required_term_pair_readiness_training_run.json",
+      "status": "pass",
+      "decision": "pair_readiness_training_pair_full_observed",
+      "checkpoint_exists": true,
+      "training_status": "pass",
+      "default_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "default_missed_terms": [],
+      "default_hit_count": 2,
+      "pair_full_observed": true
+    },
+    {
+      "label": "direct-completion-pair-probe",
+      "kind": "pair_probe_replay",
+      "path": "e\\740\\解释\\model-capability-required-term-pair-readiness-direct-completion-pair-probe-replay\\model_capability_required_term_pair_readiness_direct_completion_pair_probe_replay.json",
+      "status": "pass",
+      "decision": "pair_readiness_direct_completion_pair_probe_replay_not_ready",
+      "checkpoint_exists": true,
+      "training_status": "n/a",
+      "default_hit_terms": [],
+      "default_missed_terms": [],
+      "default_hit_count": 0,
+      "pair_full_observed": false,
+      "required_pair_full_count": 0,
+      "required_all_pair_full": false,
+      "exact_heldout_pair_full": false
+    },
+    {
+      "label": "pair-prompt-transfer",
+      "kind": "training",
+      "path": "e\\744\\解释\\model-capability-required-term-pair-readiness-pair-prompt-transfer-training-run\\model_capability_required_term_pair_readiness_training_run.json",
+      "status": "pass",
+      "decision": "pair_readiness_training_no_pair_full",
+      "checkpoint_exists": true,
+      "training_status": "pass",
+      "default_hit_terms": [
+        "loss"
+      ],
+      "default_missed_terms": [
+        "fixed"
+      ],
+      "default_hit_count": 1,
+      "pair_full_observed": false
+    }
+  ],
+  "summary": {
+    "direct_completion_default_hit_count": 2,
+    "transfer_default_hit_count": 1,
+    "transfer_hit_delta_from_direct": -1,
+    "direct_completion_pair_full_observed": true,
+    "transfer_pair_full_observed": false,
+    "pair_probe_exact_heldout_pair_full": false,
+    "fixed_regressed": true,
+    "loss_regressed": false,
+    "direct_completion_regressed": true,
+    "transfer_route_closed": true,
+    "closed_route": "pair_prompt_transfer_full_surrogate_patch"
+  },
+  "interpretation": {
+    "model_quality_claim": "negative_route_diagnostic",
+    "reason": "The transfer route regressed from direct pair-full to a weaker heldout direct result while pair-probe replay was still not ready.",
+    "next_action": "stop the full surrogate transfer patch route and diagnose a lighter fixed-preserving transfer objective"
+  }
+}

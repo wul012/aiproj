@@ -1,0 +1,4 @@
+label,kind,default_hit_count,pair_full_observed,default_hit_terms,default_missed_terms,decision
+direct-completion-surface,training,2,True,"[""fixed"", ""loss""]",[],pair_readiness_training_pair_full_observed
+direct-completion-pair-probe,pair_probe_replay,0,False,[],[],pair_readiness_direct_completion_pair_probe_replay_not_ready
+pair-prompt-transfer,training,1,False,"[""loss""]","[""fixed""]",pair_readiness_training_no_pair_full

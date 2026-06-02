@@ -827,6 +827,9 @@
 758-v744-pair-prompt-transfer-training-run.md
  -> v744 code explanation: train the pair prompt transfer corpus and record the loss-only negative result under the same larger-tiny settings.
 
+759-v745-pair-prompt-transfer-regression-diagnostic.md
+ -> v745 code explanation: compare v738, v740, and v744 evidence to close the regressed full surrogate transfer patch route.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

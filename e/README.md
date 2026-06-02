@@ -1206,3 +1206,8 @@ e/663/解释/说明.md
 - `e/744/图片`
 - `e/744/解释/说明.md`
 - v744 pair prompt transfer training run 的运行截图和解释。
+## v745 补充索引
+
+- `e/745/图片`
+- `e/745/解释/说明.md`
+- v745 pair prompt transfer regression diagnostic 的运行截图和解释。
