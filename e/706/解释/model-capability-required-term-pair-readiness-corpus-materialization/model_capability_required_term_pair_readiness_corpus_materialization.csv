@@ -1,0 +1,7 @@
+id,status,actual,detail
+contract_passed,pass,pass,source contract must pass
+contract_decision,pass,pair_readiness_split_contract_ready,materialization requires a ready split contract
+repeat_positive,pass,320,repeat must be positive
+training_rows_present,pass,12,training rows must be present
+heldout_not_in_training_rows,pass,False,heldout pair probe must not be a training row
+heldout_not_in_corpus,pass,False,heldout pair probe must not appear as a corpus line

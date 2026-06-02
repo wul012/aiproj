@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v705.0.0` materializes the pair-readiness split plan into a checked train/eval contract.
+Version `v706.0.0` materializes the pair-readiness split contract into a training corpus and held-out eval fixture.
+
+## Latest v706 checkpoint
+
+- Added `model_capability_required_term_pair_readiness_corpus_materialization`.
+- Consumed v705 `pair_readiness_split_contract_ready`.
+- Confirmed `decision=pair_readiness_corpus_materialized`.
+- Generated `pair_readiness_training_corpus.txt` and `pair_readiness_heldout_eval_fixture.json`.
+- Confirmed `training_line_count=3840`, `evaluation_probe_count=3`, and heldout pair probe leakage checks.
+- Archived v706 evidence in `e/706` and added the code explanation in `代码讲解记录_模型能力阶段/720-v706-pair-readiness-corpus-materialization.md`.
 
 ## Latest v705 checkpoint
 

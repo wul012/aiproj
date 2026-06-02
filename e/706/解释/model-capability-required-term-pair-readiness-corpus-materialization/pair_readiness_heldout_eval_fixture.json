@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "kind": "pair_readiness_heldout_eval_fixture",
+  "probes": [
+    {
+      "id": "fixed-direct",
+      "prompt": "fixed=",
+      "expected_term": "fixed",
+      "split": "heldout-direct"
+    },
+    {
+      "id": "loss-direct",
+      "prompt": "loss=",
+      "expected_term": "loss",
+      "split": "heldout-direct"
+    },
+    {
+      "id": "fixed-loss-pair",
+      "prompt": "fixed=|loss=",
+      "expected_term": "fixed+loss",
+      "split": "heldout-pair"
+    }
+  ],
+  "heldout_pair_probe": "fixed=|loss=",
+  "promotion_requirement": "fixed-direct and loss-direct heldout continuations must both hit before pair capability is claimed",
+  "training_rows": [
+    "fixed=f",
+    "fixed=fi",
+    "fixed=fix",
+    "fixed=fixed",
+    "loss=l",
+    "loss=lo",
+    "loss=los",
+    "loss=loss",
+    "fixed branch starts with f",
+    "loss branch starts with l",
+    "fixed branch does not start loss",
+    "loss branch does not start fixed"
+  ]
+}
