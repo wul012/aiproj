@@ -7356,6 +7356,8 @@ The pair-readiness four-route comparison layer extends the route comparison to i
 
 The pair-readiness capacity-probe plan layer turns that closeout into a controlled larger-tiny-model experiment, preserving the same fixed-recovery corpus while raising model capacity to 2 layers, 2 heads, and 96 embedding dimensions.
 
+The pair-readiness capacity-probe training layer runs that larger tiny model and shows the fixed-recovery corpus still produces fixed-only heldout behavior, so the lightweight capacity bump is not a pair-full breakthrough.
+
 The run registry layer indexes multiple run directories so experiments can be scanned by commit, data fingerprint, quality status, eval suite coverage, metrics, artifact count, notes, tags, best-val rank, loss delta, a leaderboard, an interactive local HTML table, shareable URL state, and visible-row CSV export.
 
 The experiment card layer turns one run into a compact JSON/Markdown/HTML summary for review, handoff, or portfolio use.

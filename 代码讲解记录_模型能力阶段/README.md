@@ -764,6 +764,9 @@
 737-v723-capacity-probe-plan.md
  -> v723 code explanation: convert the four-route closeout into a controlled larger-tiny-model capacity probe plan.
 
+738-v724-capacity-probe-training-run.md
+ -> v724 code explanation: run the larger tiny capacity probe and record that it remains fixed-only without pair-full.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

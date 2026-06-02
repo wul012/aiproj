@@ -1101,3 +1101,8 @@ e/663/解释/说明.md
 - `e/723/图片`
 - `e/723/解释/说明.md`
 - v723 capacity-probe plan 的运行截图和解释。
+## v724 补充索引
+
+- `e/724/图片`
+- `e/724/解释/说明.md`
+- v724 capacity-probe training run 的运行截图和解释。
