@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v711.0.0` materializes the loss-retention patched contract into a larger pair-readiness corpus.
+Version `v712.0.0` trains the loss-retention patched corpus and records a no-improvement direct-probe result.
+
+## Latest v712 checkpoint
+
+- Reused `model_capability_required_term_pair_readiness_training_run`.
+- Trained a real tiny checkpoint on v711 loss-retention patched corpus.
+- Confirmed `decision=pair_readiness_training_no_pair_full`.
+- Observed `default_continuation_hit_count=0`.
+- Generated samples drift to `los=los=los=` for both `fixed=` and `loss=`.
+- Archived v712 evidence in `e/712` and added the code explanation in `代码讲解记录_模型能力阶段/726-v712-loss-retention-training-run.md`.
 
 ## Latest v711 checkpoint
 

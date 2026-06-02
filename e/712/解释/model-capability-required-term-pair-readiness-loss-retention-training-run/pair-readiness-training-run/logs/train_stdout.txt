@@ -1,0 +1,14 @@
+device=cpu
+tokenizer=char
+tokens=120320 vocab_size=24
+parameters=52,672
+data_source=data:e\711\解释\model-capability-required-term-pair-readiness-loss-retention-corpus-materialization\pair_readiness_training_corpus.txt
+step=    1 train_loss=2.8862 val_loss=2.8837
+step=  350 train_loss=1.4231 val_loss=1.3210
+step=  700 train_loss=1.4687 val_loss=1.4239
+step= 1050 train_loss=1.2239 val_loss=1.4945
+step= 1400 train_loss=1.5025 val_loss=1.3723
+saved=e\712\解释\model-capability-required-term-pair-readiness-loss-retention-training-run\pair-readiness-training-run
+history=e\712\解释\model-capability-required-term-pair-readiness-loss-retention-training-run\pair-readiness-training-run\metrics.jsonl
+manifest=e\712\解释\model-capability-required-term-pair-readiness-loss-retention-training-run\pair-readiness-training-run\run_manifest.json
+sample=e\712\解释\model-capability-required-term-pair-readiness-loss-retention-training-run\pair-readiness-training-run\sample.txt

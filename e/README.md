@@ -1041,3 +1041,8 @@ e/663/解释/说明.md
 - `e/711/图片`
 - `e/711/解释/说明.md`
 - v711 loss-retention corpus materialization 的运行截图和解释。
+## v712 补充索引
+
+- `e/712/图片`
+- `e/712/解释/说明.md`
+- v712 loss-retention training run 的运行截图和解释。
