@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT pair-readiness objective-level contrast seed stability plan",
+  "generated_at": "2026-06-02T11:21:03Z",
+  "status": "pass",
+  "decision": "pair_readiness_objective_level_contrast_seed_stability_plan_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_promotion_guard_path": "e\\766\\解释\\model-capability-required-term-pair-readiness-objective-level-contrast-promotion-guard\\model_capability_required_term_pair_readiness_objective_level_contrast_promotion_guard.json",
+  "source_promotion_guard": {
+    "status": "pass",
+    "decision": "pair_readiness_objective_level_contrast_promotion_guard_ready_for_seed_stability",
+    "summary": {
+      "promotion_guard_ready": true,
+      "promotion_allowed": false,
+      "guard_result": "ready_for_seed_stability",
+      "required_next_artifact": "pair_readiness_objective_level_contrast_seed_stability_plan",
+      "passed_check_count": 13,
+      "failed_check_count": 0
+    }
+  },
+  "check_rows": [
+    {
+      "id": "guard_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "promotion guard must pass"
+    },
+    {
+      "id": "guard_decision",
+      "status": "pass",
+      "actual": "pair_readiness_objective_level_contrast_promotion_guard_ready_for_seed_stability",
+      "detail": "seed stability follows only the guarded route candidate decision"
+    },
+    {
+      "id": "guard_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "promotion guard must be ready"
+    },
+    {
+      "id": "promotion_not_allowed_yet",
+      "status": "pass",
+      "actual": false,
+      "detail": "single-seed promotion must remain blocked"
+    },
+    {
+      "id": "next_artifact_matches",
+      "status": "pass",
+      "actual": "pair_readiness_objective_level_contrast_seed_stability_plan",
+      "detail": "guard must request this seed stability plan"
+    }
+  ],
+  "plan": {
+    "ready": true,
+    "source_seed": 3636,
+    "additional_seeds": [
+      3737,
+      3838
+    ],
+    "required_seed_count": 3,
+    "minimum_ready_replay_count": 2,
+    "required_next_artifacts": [
+      "pair_readiness_objective_level_contrast_seed_3737_training_run",
+      "pair_readiness_objective_level_contrast_seed_3737_pair_probe_replay",
+      "pair_readiness_objective_level_contrast_seed_3838_training_run",
+      "pair_readiness_objective_level_contrast_seed_3838_pair_probe_replay",
+      "pair_readiness_objective_level_contrast_seed_stability_rollup"
+    ],
+    "acceptance_rule": "accept only if at least two of three seeds replay required pair-full and no seed regresses to zero exact hits",
+    "non_goals": [
+      "do not reuse the v763 checkpoint as a substitute for additional seeds",
+      "do not accept direct training hits without pair replay",
+      "do not change corpus or model size during the stability run"
+    ]
+  },
+  "summary": {
+    "seed_stability_plan_ready": true,
+    "source_seed": 3636,
+    "additional_seed_count": 2,
+    "required_seed_count": 3,
+    "minimum_ready_replay_count": 2,
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "plan_only",
+    "reason": "The guarded route candidate needs additional seeds before acceptance.",
+    "next_action": "run seed 3737 training and replay first, then seed 3838"
+  }
+}

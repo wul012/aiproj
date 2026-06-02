@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v766.0.0` runs a guarded promotion check for objective-level contrast and requires seed stability before acceptance.
+Version `v767.0.0` turns the objective-level contrast promotion guard into a concrete seed stability plan.
+
+## Latest v767 checkpoint
+
+- Added `model_capability_required_term_pair_readiness_objective_level_contrast_seed_stability_plan`.
+- Consumed the v766 promotion guard and confirmed `decision=pair_readiness_objective_level_contrast_seed_stability_plan_ready`.
+- Kept the model-quality claim at `plan_only`.
+- Planned supplemental seeds `3737` and `3838` after the source seed `3636`.
+- Recorded the acceptance rule and required next artifacts before additional training.
+- Archived v767 evidence in `e/767` and added the code explanation in `代码讲解记录_模型能力阶段/781-v767-objective-level-contrast-seed-stability-plan.md`.
 
 ## Latest v766 checkpoint
 

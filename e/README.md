@@ -1316,3 +1316,9 @@ e/663/解释/说明.md
 - `e/766/图片`
 - `e/766/解释/说明.md`
 - v766 objective-level contrast promotion guard 的运行截图和解释。
+
+## v767 补充索引
+
+- `e/767/图片`
+- `e/767/解释/说明.md`
+- v767 objective-level contrast seed stability plan 的运行截图和解释。

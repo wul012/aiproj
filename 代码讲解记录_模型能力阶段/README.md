@@ -893,6 +893,9 @@
 780-v766-objective-level-contrast-promotion-guard.md
  -> v766 code explanation: run a guarded promotion check that allows seed stability but blocks single-seed acceptance.
 
+781-v767-objective-level-contrast-seed-stability-plan.md
+ -> v767 code explanation: turn the guarded route candidate into a concrete supplemental-seed stability plan.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

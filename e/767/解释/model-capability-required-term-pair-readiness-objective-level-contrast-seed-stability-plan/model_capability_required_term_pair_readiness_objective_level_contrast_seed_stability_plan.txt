@@ -1,0 +1,9 @@
+status=pass
+decision=pair_readiness_objective_level_contrast_seed_stability_plan_ready
+failed_count=0
+seed_stability_plan_ready=True
+source_seed=3636
+additional_seed_count=2
+minimum_ready_replay_count=2
+model_quality_claim=plan_only
+next_action=run seed 3737 training and replay first, then seed 3838

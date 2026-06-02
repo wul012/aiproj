@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT objective-level contrast seed stability plan</title>
+<style>
+:root{color-scheme:light;--ink:#172026;--muted:#5d6975;--line:#d8dee4;--panel:#f7f9fb;--accent:#7c3aed}
+*{box-sizing:border-box}
+body{margin:0;background:#eef2f5;color:var(--ink);font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1120px;margin:0 auto;padding:28px}
+h1{font-size:30px;margin:0 0 8px;letter-spacing:0}
+h2{font-size:18px;margin:0 0 12px;letter-spacing:0}
+p,li{color:var(--muted);line-height:1.55;overflow-wrap:anywhere}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:18px 0}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:8px}
+.card{padding:14px}
+.card span{display:block;color:var(--muted);font-size:12px;text-transform:uppercase}
+.card strong{display:block;margin-top:6px;font-size:18px;line-height:1.2;color:var(--accent);overflow-wrap:anywhere}
+.panel{padding:16px;margin:14px 0}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:#334155}
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT objective-level contrast seed stability plan</h1><p>The guarded route candidate needs additional seeds before acceptance.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Decision</span><strong>pair_readiness_objective_level_contrast_seed_stability_plan_ready</strong></div><div class="card"><span>Ready</span><strong>True</strong></div><div class="card"><span>Source seed</span><strong>3636</strong></div><div class="card"><span>Extra seeds</span><strong>2</strong></div><div class="card"><span>Minimum ready</span><strong>2</strong></div></section>
+<section class="panel"><h2>Acceptance Rule</h2><p>accept only if at least two of three seeds replay required pair-full and no seed regresses to zero exact hits</p></section>
+<section class="panel"><h2>Required Next Artifacts</h2><ul><li>pair_readiness_objective_level_contrast_seed_3737_training_run</li><li>pair_readiness_objective_level_contrast_seed_3737_pair_probe_replay</li><li>pair_readiness_objective_level_contrast_seed_3838_training_run</li><li>pair_readiness_objective_level_contrast_seed_3838_pair_probe_replay</li><li>pair_readiness_objective_level_contrast_seed_stability_rollup</li></ul></section>
+<section class="panel"><h2>Checks</h2><div class="table-wrap"><table>
+<thead><tr><th>Check</th><th>Status</th><th>Actual</th><th>Detail</th></tr></thead>
+<tbody><tr><td>guard_passed</td><td>pass</td><td>pass</td><td>promotion guard must pass</td></tr><tr><td>guard_decision</td><td>pass</td><td>pair_readiness_objective_level_contrast_promotion_guard_ready_for_seed_stability</td><td>seed stability follows only the guarded route candidate decision</td></tr><tr><td>guard_ready</td><td>pass</td><td>True</td><td>promotion guard must be ready</td></tr><tr><td>promotion_not_allowed_yet</td><td>pass</td><td>False</td><td>single-seed promotion must remain blocked</td></tr><tr><td>next_artifact_matches</td><td>pass</td><td>pair_readiness_objective_level_contrast_seed_stability_plan</td><td>guard must request this seed stability plan</td></tr></tbody>
+</table></div></section>
+<section class="panel"><h2>Non Goals</h2><ul><li>do not reuse the v763 checkpoint as a substitute for additional seeds</li><li>do not accept direct training hits without pair replay</li><li>do not change corpus or model size during the stability run</li></ul></section>
+<section class="panel"><h2>Next Action</h2><p>run seed 3737 training and replay first, then seed 3838</p></section>
+</main>
+</body>
+</html>
