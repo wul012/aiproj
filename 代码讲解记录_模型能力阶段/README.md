@@ -776,6 +776,9 @@
 741-v727-objective-structure-contract.md
  -> v727 code explanation: build a materializable objective-structure contract with balanced task-id rows, paired blocks, and heldout leakage checks.
 
+742-v728-objective-structure-corpus-materialization.md
+ -> v728 code explanation: materialize the objective-structure contract into a 5760-line training corpus and heldout fixture.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

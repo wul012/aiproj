@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v727.0.0` builds a materializable objective-structure contract with balanced task-id rows and heldout checks.
+Version `v728.0.0` materializes the objective-structure contract into a 5760-line training corpus and heldout fixture.
+
+## Latest v728 checkpoint
+
+- Reused `model_capability_required_term_pair_readiness_corpus_materialization`.
+- Consumed v727 `pair_readiness_objective_structure_contract_ready`.
+- Generated `training_line_count=5760` with `repeat=320`.
+- Preserved 3 heldout eval probes.
+- Confirmed `heldout_not_in_training_rows` and `heldout_not_in_corpus`.
+- Archived v728 evidence in `e/728` and added the code explanation in `代码讲解记录_模型能力阶段/742-v728-objective-structure-corpus-materialization.md`.
 
 ## Latest v727 checkpoint
 

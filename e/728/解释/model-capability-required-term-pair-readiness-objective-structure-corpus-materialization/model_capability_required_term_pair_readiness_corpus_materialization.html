@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT pair-readiness corpus materialization</title>
+<style>
+:root{color-scheme:light;--ink:#172026;--muted:#5d6975;--line:#d8dee4;--panel:#f7f9fb;--accent:#155e75}
+*{box-sizing:border-box}
+body{margin:0;background:#eef2f5;color:var(--ink);font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1120px;margin:0 auto;padding:28px}
+h1{font-size:30px;margin:0 0 8px;letter-spacing:0}
+h2{font-size:18px;margin:0 0 12px;letter-spacing:0}
+p,li{color:var(--muted);line-height:1.55;overflow-wrap:anywhere}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:18px 0}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:8px}
+.card{padding:14px}
+.card span{display:block;color:var(--muted);font-size:12px;text-transform:uppercase}
+.card strong{display:block;margin-top:6px;font-size:18px;line-height:1.2;color:var(--accent);overflow-wrap:anywhere}
+.panel{padding:16px;margin:14px 0}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:#334155}
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT pair-readiness corpus materialization</h1><p>Training corpus and heldout eval fixture are materialized from a checked split contract.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Decision</span><strong>pair_readiness_corpus_materialized</strong></div><div class="card"><span>Ready</span><strong>True</strong></div><div class="card"><span>Train lines</span><strong>5760</strong></div><div class="card"><span>Eval probes</span><strong>3</strong></div></section>
+<section class="panel"><h2>Materialized Paths</h2><p>e\728\解释\model-capability-required-term-pair-readiness-objective-structure-corpus-materialization\pair_readiness_training_corpus.txt</p><p>e\728\解释\model-capability-required-term-pair-readiness-objective-structure-corpus-materialization\pair_readiness_heldout_eval_fixture.json</p></section>
+<section class="panel"><h2>Checks</h2><div class="table-wrap"><table>
+<thead><tr><th>Check</th><th>Status</th><th>Actual</th><th>Detail</th></tr></thead>
+<tbody><tr><td>contract_passed</td><td>pass</td><td>pass</td><td>source contract must pass</td></tr><tr><td>contract_decision</td><td>pass</td><td>pair_readiness_objective_structure_contract_ready</td><td>materialization requires a ready pair-readiness contract</td></tr><tr><td>repeat_positive</td><td>pass</td><td>320</td><td>repeat must be positive</td></tr><tr><td>training_rows_present</td><td>pass</td><td>18</td><td>training rows must be present</td></tr><tr><td>heldout_not_in_training_rows</td><td>pass</td><td>False</td><td>heldout pair probe must not be a training row</td></tr><tr><td>heldout_not_in_corpus</td><td>pass</td><td>False</td><td>heldout pair probe must not appear as a corpus line</td></tr></tbody>
+</table></div></section>
+<section class="panel"><h2>Corpus Preview</h2><ul><li>objective=direct_term | term=fixed | prompt_surface=fixed_equals | answer=fixed</li><li>objective=direct_term | case=fixed_branch | target=fixed | response=fixed</li><li>task_id=fixed_direct | input=fixed equals prompt | output=fixed token</li><li>task_id=fixed_direct | branch=fixed | forbidden=loss | answer=fixed</li><li>objective=direct_term | term=loss | prompt_surface=loss_equals | answer=loss</li><li>objective=direct_term | case=loss_branch | target=loss | response=loss</li><li>task_id=loss_direct | input=loss equals prompt | output=loss token</li><li>task_id=loss_direct | branch=loss | forbidden=fixed | answer=loss</li></ul></section>
+<section class="panel"><h2>Next Action</h2><p>train on the materialized corpus and replay heldout probes</p></section>
+</main>
+</body>
+</html>
