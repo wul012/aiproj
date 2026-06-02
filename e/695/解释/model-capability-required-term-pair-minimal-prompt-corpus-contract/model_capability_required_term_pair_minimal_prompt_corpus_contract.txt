@@ -1,0 +1,12 @@
+status=pass
+decision=minimal_prompt_equals_surface_corpus_contract_ready
+failed_count=0
+contract_ready=True
+corpus_mode=minimal_prompt_equals_surface_objective
+source_prompts=['fixed=', 'loss=']
+line_count=38
+fixed_direct_count=2
+loss_direct_count=2
+anchor_hit_count=0
+model_quality_claim=corpus_contract_only
+next_action=run a real tiny checkpoint with corpus_mode=minimal_prompt_equals_surface_objective

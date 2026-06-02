@@ -1,0 +1,143 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair minimal prompt corpus contract",
+  "generated_at": "2026-06-02T00:53:24Z",
+  "status": "pass",
+  "decision": "minimal_prompt_equals_surface_corpus_contract_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_readiness_path": "e\\694\\解释\\model-capability-required-term-pair-minimal-prompt-objective-readiness\\model_capability_required_term_pair_minimal_prompt_objective_readiness.json",
+  "source_readiness": {
+    "status": "pass",
+    "decision": "minimal_prompt_surface_objective_ready_for_corpus_contract",
+    "summary": {
+      "check_count": 5,
+      "passed_check_count": 5,
+      "failed_check_count": 0,
+      "objective_ready": true,
+      "objective_id": "minimal_prompt_surface_objective",
+      "recommended_corpus_mode": "minimal_prompt_equals_surface_objective",
+      "recommended_next_version": "v695"
+    }
+  },
+  "check_rows": [
+    {
+      "id": "readiness_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "readiness report must pass"
+    },
+    {
+      "id": "objective_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "minimal prompt objective must be ready"
+    },
+    {
+      "id": "corpus_mode_registered",
+      "status": "pass",
+      "actual": "minimal_prompt_equals_surface_objective",
+      "detail": "recommended corpus mode must be registered"
+    },
+    {
+      "id": "source_prompts_are_minimal",
+      "status": "pass",
+      "actual": [
+        "fixed=",
+        "loss="
+      ],
+      "detail": "source prompts must be fixed= and loss="
+    },
+    {
+      "id": "fixed_target_present",
+      "status": "pass",
+      "actual": true,
+      "detail": "corpus must contain fixed=fixed direct row"
+    },
+    {
+      "id": "loss_target_present",
+      "status": "pass",
+      "actual": true,
+      "detail": "corpus must contain loss=loss direct row"
+    },
+    {
+      "id": "fixed_prefix_present",
+      "status": "pass",
+      "actual": true,
+      "detail": "corpus must contain fixed prefix spans"
+    },
+    {
+      "id": "loss_prefix_present",
+      "status": "pass",
+      "actual": true,
+      "detail": "corpus must contain loss prefix spans"
+    },
+    {
+      "id": "no_contextual_anchor_patterns",
+      "status": "pass",
+      "actual": [],
+      "detail": "corpus contract must avoid answer-bearing paired prompt anchors"
+    },
+    {
+      "id": "no_pair_id",
+      "status": "pass",
+      "actual": false,
+      "detail": "minimal prompt corpus must not reintroduce numeric pair ids"
+    }
+  ],
+  "corpus": {
+    "corpus_mode": "minimal_prompt_equals_surface_objective",
+    "repeat": 2,
+    "bridge_repeat": 1,
+    "source_prompts": [
+      "fixed=",
+      "loss="
+    ],
+    "char_count": 946,
+    "line_count": 38,
+    "fixed_direct_count": 2,
+    "loss_direct_count": 2,
+    "anchor_hits": [],
+    "contains_pair_id": false
+  },
+  "sample_lines": [
+    "MiniGPT fixed/loss pair coexistence refresh corpus.",
+    "The prompt before the colon selects the exact continuation term.",
+    "fixed=f",
+    "fixed=fi",
+    "fixed=fix",
+    "fixed=fixed",
+    "prompt fixed= completion fixed",
+    "minimal prompt fixed= target fixed",
+    "after fixed= write fixed",
+    "fixed= stops after fixed",
+    "loss=l",
+    "loss=lo",
+    "loss=los",
+    "loss=loss",
+    "prompt loss= completion loss",
+    "minimal prompt loss= target loss",
+    "after loss= write loss",
+    "loss= stops after loss",
+    "fixed=f",
+    "fixed=fi"
+  ],
+  "summary": {
+    "check_count": 10,
+    "passed_check_count": 10,
+    "failed_check_count": 0,
+    "contract_ready": true,
+    "corpus_mode": "minimal_prompt_equals_surface_objective",
+    "source_prompts": [
+      "fixed=",
+      "loss="
+    ],
+    "line_count": 38,
+    "anchor_hit_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "corpus_contract_only",
+    "reason": "The corpus exposes fixed= and loss= direct targets without the contextual answer-bearing surface used by the previous branch.",
+    "next_action": "run a real tiny checkpoint with corpus_mode=minimal_prompt_equals_surface_objective"
+  }
+}

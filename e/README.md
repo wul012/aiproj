@@ -956,3 +956,8 @@ e/663/解释/说明.md
 - `e/694/图片`
 - `e/694/解释/说明.md`
 - v694 minimal prompt objective readiness 的运行截图和解释。
+## v695 补充索引
+
+- `e/695/图片`
+- `e/695/解释/说明.md`
+- v695 minimal prompt corpus contract 的运行截图和解释。

@@ -1,0 +1,11 @@
+id,status,actual,detail
+readiness_passed,pass,pass,readiness report must pass
+objective_ready,pass,True,minimal prompt objective must be ready
+corpus_mode_registered,pass,minimal_prompt_equals_surface_objective,recommended corpus mode must be registered
+source_prompts_are_minimal,pass,"[""fixed="", ""loss=""]",source prompts must be fixed= and loss=
+fixed_target_present,pass,True,corpus must contain fixed=fixed direct row
+loss_target_present,pass,True,corpus must contain loss=loss direct row
+fixed_prefix_present,pass,True,corpus must contain fixed prefix spans
+loss_prefix_present,pass,True,corpus must contain loss prefix spans
+no_contextual_anchor_patterns,pass,[],corpus contract must avoid answer-bearing paired prompt anchors
+no_pair_id,pass,False,minimal prompt corpus must not reintroduce numeric pair ids

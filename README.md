@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v694.0.0` opens the minimal-prompt objective route with a readiness contract that preserves the no-promotion boundary.
+Version `v695.0.0` registers and validates the minimal-prompt equals-surface corpus contract before real training.
+
+## Latest v695 checkpoint
+
+- Added `minimal_prompt_equals_surface_objective` as a registered required-term pair corpus mode.
+- Added `model_capability_required_term_pair_minimal_prompt_corpus_contract`.
+- Consumed v694 readiness evidence.
+- Confirmed `status=pass`.
+- Confirmed `decision=minimal_prompt_equals_surface_corpus_contract_ready`.
+- Confirmed `source_prompts=['fixed=', 'loss=']`.
+- Confirmed `anchor_hit_count=0`, keeping contextual answer-bearing anchors out of the next training route.
+- Archived v695 evidence in `e/695` and added the code explanation in `代码讲解记录_模型能力阶段/709-v695-minimal-prompt-corpus-contract.md`.
+
+## Latest v694 checkpoint
 
 ## Latest v694 checkpoint
 
