@@ -917,6 +917,9 @@
 788-v774-handoff-review-recommendations-split.md
  -> v774 code explanation: extract handoff review recommendation text and detail generation from the core review builder.
 
+789-v775-promoted-comparison-recommendations-split.md
+ -> v775 code explanation: extract promoted training-scale comparison recommendation text from the comparison builder.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

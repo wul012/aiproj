@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v774.0.0` extracts promoted seed handoff review recommendations from the core review builder.
+Version `v775.0.0` extracts promoted training-scale comparison recommendations from the comparison builder.
+
+## Latest v775 checkpoint
+
+- Added `promoted_training_scale_comparison_recommendations`.
+- Reduced `promoted_training_scale_comparison.py` from 777 to 661 lines.
+- Moved compared/blocked recommendation text out of the comparison builder.
+- Preserved promoted comparison behavior and report outputs.
+- Verified with `13 passed` promoted comparison focused tests.
+- Archived v775 evidence in `e/775` and added the code explanation in `代码讲解记录_模型能力阶段/789-v775-promoted-comparison-recommendations-split.md`.
 
 ## Latest v774 checkpoint
 

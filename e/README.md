@@ -1364,3 +1364,9 @@ e/663/解释/说明.md
 - `e/774/图片`
 - `e/774/解释/说明.md`
 - v774 handoff review recommendations split 的运行截图和解释。
+
+## v775 补充索引
+
+- `e/775/图片`
+- `e/775/解释/说明.md`
+- v775 promoted comparison recommendations split 的运行截图和解释。
