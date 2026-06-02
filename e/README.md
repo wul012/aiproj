@@ -1146,3 +1146,8 @@ e/663/解释/说明.md
 - `e/732/图片`
 - `e/732/解释/说明.md`
 - v732 direct-prompt bridge corpus materialization 的运行截图和解释。
+## v733 补充索引
+
+- `e/733/图片`
+- `e/733/解释/说明.md`
+- v733 direct-prompt bridge training run 的运行截图和解释。

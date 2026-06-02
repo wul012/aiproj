@@ -1,0 +1,14 @@
+device=cpu
+tokenizer=char
+tokens=506240 vocab_size=33
+parameters=228,576
+data_source=data:e\732\解释\model-capability-required-term-pair-readiness-direct-prompt-bridge-corpus-materialization\pair_readiness_training_corpus.txt
+step=    1 train_loss=3.2407 val_loss=3.2567
+step=  450 train_loss=1.7933 val_loss=1.9829
+step=  900 train_loss=1.4680 val_loss=1.7025
+step= 1350 train_loss=1.6263 val_loss=1.7089
+step= 1800 train_loss=1.5415 val_loss=1.6150
+saved=e\733\解释\model-capability-required-term-pair-readiness-direct-prompt-bridge-training-run\pair-readiness-training-run
+history=e\733\解释\model-capability-required-term-pair-readiness-direct-prompt-bridge-training-run\pair-readiness-training-run\metrics.jsonl
+manifest=e\733\解释\model-capability-required-term-pair-readiness-direct-prompt-bridge-training-run\pair-readiness-training-run\run_manifest.json
+sample=e\733\解释\model-capability-required-term-pair-readiness-direct-prompt-bridge-training-run\pair-readiness-training-run\sample.txt

@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v732.0.0` materializes the direct-prompt bridge contract patch into an 8320-line training corpus.
+Version `v733.0.0` trains the direct-prompt bridge corpus and records that it still has zero direct hits.
+
+## Latest v733 checkpoint
+
+- Reused `model_capability_required_term_pair_readiness_training_run`.
+- Trained a real tiny checkpoint on v732 direct-prompt bridge corpus.
+- Confirmed `training_status=pass` and `checkpoint_exists=True`.
+- Confirmed `decision=pair_readiness_training_no_pair_full`.
+- Observed `default_continuation_hit_count=0`; bridge rows did not restore direct hits.
+- Archived v733 evidence in `e/733` and added the code explanation in `代码讲解记录_模型能力阶段/747-v733-direct-prompt-bridge-training-run.md`.
 
 ## Latest v732 checkpoint
 
