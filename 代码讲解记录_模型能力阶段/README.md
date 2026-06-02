@@ -938,6 +938,9 @@
 795-v781-maturity-release-context-split.md
  -> v781 code explanation: extract maturity release-readiness context normalization from the maturity workflow.
 
+796-v782-promoted-comparison-summary-split.md
+ -> v782 code explanation: extract promoted training-scale comparison summary aggregation from the comparison workflow.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v781.0.0` extracts maturity release-readiness context normalization from the maturity workflow.
+Version `v782.0.0` extracts promoted training-scale comparison summary aggregation from the comparison workflow.
+
+## Latest v782 checkpoint
+
+- Added `promoted_training_scale_comparison_summary`.
+- Reduced `promoted_training_scale_comparison.py` from 661 to 420 lines.
+- Moved comparison status, handoff clean-batch counts, CI reason counts, suite mismatch totals, and comparison-ready metrics into a focused summary module.
+- Kept promotion index loading, promoted row normalization, comparison input resolution, comparison execution, blockers, and clean-batch guards in the main comparison module.
+- Verified with `13 passed` promoted comparison focused tests.
+- Archived v782 evidence in `e/782` and added the code explanation in `代码讲解记录_模型能力阶段/796-v782-promoted-comparison-summary-split.md`.
 
 ## Latest v781 checkpoint
 

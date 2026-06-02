@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <title>v782 promoted comparison summary split</title>
+  <style>
+    body { font-family: "Segoe UI", Arial, sans-serif; margin: 32px; color: #1f2933; line-height: 1.55; }
+    main { max-width: 980px; margin: 0 auto; }
+    h1 { font-size: 28px; margin-bottom: 8px; }
+    h2 { margin-top: 28px; font-size: 20px; }
+    table { border-collapse: collapse; width: 100%; margin-top: 12px; }
+    th, td { border: 1px solid #c9d1d9; padding: 10px 12px; text-align: left; vertical-align: top; }
+    th { background: #f3f4f6; }
+    code { background: #eef2f7; padding: 2px 5px; border-radius: 4px; }
+    .pass { color: #0f766e; font-weight: 700; }
+  </style>
+</head>
+<body>
+<main>
+  <h1>v782 promoted comparison summary split</h1>
+  <p><strong>status:</strong> <span class="pass">pass</span></p>
+  <p>
+    v782 moves promoted training-scale comparison summary aggregation out of
+    <code>promoted_training_scale_comparison.py</code>.
+  </p>
+
+  <h2>Split Boundary</h2>
+  <table>
+    <tr><th>Module</th><th>Role after v782</th><th>Line count</th></tr>
+    <tr>
+      <td><code>src/minigpt/promoted_training_scale_comparison.py</code></td>
+      <td>Promotion index loading, promoted row normalization, comparison input resolution, comparison execution, blockers, and clean-batch guards.</td>
+      <td>420</td>
+    </tr>
+    <tr>
+      <td><code>src/minigpt/promoted_training_scale_comparison_summary.py</code></td>
+      <td>Aggregate comparison status, handoff clean-batch counts, CI reason counts, suite mismatch totals, and comparison-ready metrics.</td>
+      <td>261</td>
+    </tr>
+  </table>
+
+  <h2>Verification</h2>
+  <ul>
+    <li><code>python -m py_compile src\minigpt\promoted_training_scale_comparison.py src\minigpt\promoted_training_scale_comparison_summary.py</code></li>
+    <li><code>python -m pytest tests\test_promoted_training_scale_comparison.py -q -o cache_dir=runs\pytest-cache-v782-focused</code>: 13 passed</li>
+  </ul>
+
+  <h2>Maintenance Value</h2>
+  <p>
+    Summary aggregation is now reviewable separately from comparison execution and row eligibility. The main promoted comparison
+    module falls from 661 to 420 lines.
+  </p>
+</main>
+</body>
+</html>

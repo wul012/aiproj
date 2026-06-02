@@ -1406,3 +1406,9 @@ e/663/解释/说明.md
 - `e/781/图片`
 - `e/781/解释/说明.md`
 - v781 maturity release context split 的运行截图和解释。
+
+## v782 补充索引
+
+- `e/782/图片`
+- `e/782/解释/说明.md`
+- v782 promoted comparison summary split 的运行截图和解释。
