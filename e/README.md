@@ -1046,3 +1046,8 @@ e/663/解释/说明.md
 - `e/712/图片`
 - `e/712/解释/说明.md`
 - v712 loss-retention training run 的运行截图和解释。
+## v713 补充索引
+
+- `e/713/图片`
+- `e/713/解释/说明.md`
+- v713 pair-readiness repair comparison 的运行截图和解释。

@@ -1,0 +1,8 @@
+status=pass
+decision=pair_readiness_loss_retention_patch_regressed
+failed_count=0
+default_hit_delta=-1
+candidate_improved=False
+candidate_regressed=True
+model_quality_claim=not_claimed
+next_action=close this repair route and avoid more single-sided prefix weighting

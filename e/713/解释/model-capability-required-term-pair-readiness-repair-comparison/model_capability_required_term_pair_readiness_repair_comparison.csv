@@ -1,0 +1,3 @@
+label,decision,pair_full_observed,default_continuation_hit_count,model_quality_claim
+baseline,pair_readiness_training_no_pair_full,False,1,not_claimed
+loss-retention-candidate,pair_readiness_training_no_pair_full,False,0,not_claimed

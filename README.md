@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v712.0.0` trains the loss-retention patched corpus and records a no-improvement direct-probe result.
+Version `v713.0.0` compares baseline and loss-retention pair-readiness runs and closes the single-sided prefix repair route.
+
+## Latest v713 checkpoint
+
+- Added `model_capability_required_term_pair_readiness_repair_comparison`.
+- Compared v707 baseline split training against v712 loss-retention patched training.
+- Confirmed `decision=pair_readiness_loss_retention_patch_regressed`.
+- Confirmed `default_hit_delta=-1`, `candidate_improved=False`, and `candidate_regressed=True`.
+- Closed this repair route and avoided further single-sided prefix weighting.
+- Archived v713 evidence in `e/713` and added the code explanation in `代码讲解记录_模型能力阶段/727-v713-pair-readiness-repair-comparison.md`.
 
 ## Latest v712 checkpoint
 

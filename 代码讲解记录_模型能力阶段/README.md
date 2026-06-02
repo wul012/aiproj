@@ -731,6 +731,9 @@
 726-v712-loss-retention-training-run.md
  -> v712 code explanation: train the loss-retention patched corpus and record a no-improvement direct-probe result.
 
+727-v713-pair-readiness-repair-comparison.md
+ -> v713 code explanation: compare baseline and loss-retention pair-readiness runs and close the single-sided prefix repair route.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

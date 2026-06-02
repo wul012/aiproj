@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT pair-readiness repair comparison",
+  "generated_at": "2026-06-02T02:23:15Z",
+  "status": "pass",
+  "decision": "pair_readiness_loss_retention_patch_regressed",
+  "failed_count": 0,
+  "issues": [],
+  "comparison_rows": [
+    {
+      "label": "baseline",
+      "path": "e\\707\\解释\\model-capability-required-term-pair-readiness-training-run\\model_capability_required_term_pair_readiness_training_run.json",
+      "status": "pass",
+      "decision": "pair_readiness_training_no_pair_full",
+      "training_status": "pass",
+      "checkpoint_exists": true,
+      "pair_full_observed": false,
+      "default_continuation_hit_count": 1,
+      "suppression_continuation_hit_count": 1,
+      "model_quality_claim": "not_claimed"
+    },
+    {
+      "label": "loss-retention-candidate",
+      "path": "e\\712\\解释\\model-capability-required-term-pair-readiness-loss-retention-training-run\\model_capability_required_term_pair_readiness_training_run.json",
+      "status": "pass",
+      "decision": "pair_readiness_training_no_pair_full",
+      "training_status": "pass",
+      "checkpoint_exists": true,
+      "pair_full_observed": false,
+      "default_continuation_hit_count": 0,
+      "suppression_continuation_hit_count": 0,
+      "model_quality_claim": "not_claimed"
+    }
+  ],
+  "summary": {
+    "baseline_default_hit_count": 1,
+    "candidate_default_hit_count": 0,
+    "default_hit_delta": -1,
+    "suppression_hit_delta": -1,
+    "baseline_pair_full_observed": false,
+    "candidate_pair_full_observed": false,
+    "candidate_improved": false,
+    "candidate_regressed": true
+  },
+  "interpretation": {
+    "model_quality_claim": "not_claimed",
+    "reason": "The loss-retention patch reduced heldout direct hits versus the baseline split run.",
+    "next_action": "close this repair route and avoid more single-sided prefix weighting"
+  }
+}
