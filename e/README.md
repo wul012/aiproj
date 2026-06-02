@@ -1334,3 +1334,9 @@ e/663/解释/说明.md
 - `e/769/图片`
 - `e/769/解释/说明.md`
 - v769 objective-level contrast seed 3737 pair-probe replay 的运行截图和解释。
+
+## v770 补充索引
+
+- `e/770/图片`
+- `e/770/解释/说明.md`
+- v770 objective-level contrast seed 3838 training run 的运行截图和解释。

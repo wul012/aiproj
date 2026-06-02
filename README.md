@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v769.0.0` replays the first supplemental objective-level contrast seed checkpoint.
+Version `v770.0.0` runs the second supplemental objective-level contrast seed training check.
+
+## Latest v770 checkpoint
+
+- Reused `model_capability_required_term_pair_readiness_training_run`.
+- Trained the objective-level contrast corpus with supplemental seed `3838`.
+- Confirmed `decision=pair_readiness_training_pair_full_observed`.
+- Confirmed `checkpoint_exists=True` and `pair_full_observed=True`.
+- Preserved the model-quality claim as `direct_pair_probe_hit` until replay.
+- Archived v770 evidence in `e/770` and added the code explanation in `代码讲解记录_模型能力阶段/784-v770-objective-level-contrast-seed-3838-training-run.md`.
 
 ## Latest v769 checkpoint
 
