@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v706.0.0` materializes the pair-readiness split contract into a training corpus and held-out eval fixture.
+Version `v707.0.0` trains on the materialized pair-readiness corpus and replays held-out direct probes.
+
+## Latest v707 checkpoint
+
+- Added `model_capability_required_term_pair_readiness_training_run`.
+- Trained a real tiny checkpoint on v706 `pair_readiness_training_corpus.txt`.
+- Replayed heldout direct probes `fixed=` and `loss=`.
+- Confirmed `decision=pair_readiness_training_no_pair_full`.
+- Observed fixed-only behavior: `fixed=` hits fixed, while `loss=` generates `fixed=fixed=`.
+- Archived v707 evidence in `e/707` and added the code explanation in `代码讲解记录_模型能力阶段/721-v707-pair-readiness-training-run.md`.
 
 ## Latest v706 checkpoint
 

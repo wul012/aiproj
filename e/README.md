@@ -1016,3 +1016,8 @@ e/663/解释/说明.md
 - `e/706/图片`
 - `e/706/解释/说明.md`
 - v706 pair-readiness corpus materialization 的运行截图和解释。
+## v707 补充索引
+
+- `e/707/图片`
+- `e/707/解释/说明.md`
+- v707 pair-readiness training run 的运行截图和解释。
