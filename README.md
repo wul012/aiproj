@@ -7338,6 +7338,8 @@ The required-term pair surface-policy minimality check confirms that `pair_conte
 
 The pair-readiness structured-template contract layer reads the v713 repair comparison, requires the loss-retention prefix patch to be a confirmed regression, and converts that closed route into prompt-answer structured rows that keep heldout direct and pair probes out of the training rows.
 
+The pair-readiness structured-template corpus materialization layer writes that contract into a real repeated training corpus and heldout fixture, while the materializer locator now accepts split, loss-retention, and structured-template contract output directories without importing their builders.
+
 The run registry layer indexes multiple run directories so experiments can be scanned by commit, data fingerprint, quality status, eval suite coverage, metrics, artifact count, notes, tags, best-val rank, loss delta, a leaderboard, an interactive local HTML table, shareable URL state, and visible-row CSV export.
 
 The experiment card layer turns one run into a compact JSON/Markdown/HTML summary for review, handoff, or portfolio use.

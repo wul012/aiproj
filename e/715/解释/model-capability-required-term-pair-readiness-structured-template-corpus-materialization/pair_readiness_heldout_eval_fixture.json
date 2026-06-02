@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "kind": "pair_readiness_heldout_eval_fixture",
+  "probes": [
+    {
+      "id": "fixed-direct",
+      "prompt": "fixed=",
+      "expected_term": "fixed",
+      "split": "heldout-direct"
+    },
+    {
+      "id": "loss-direct",
+      "prompt": "loss=",
+      "expected_term": "loss",
+      "split": "heldout-direct"
+    },
+    {
+      "id": "fixed-loss-pair",
+      "prompt": "fixed=|loss=",
+      "expected_term": "fixed+loss",
+      "split": "heldout-pair"
+    }
+  ],
+  "heldout_pair_probe": "fixed=|loss=",
+  "promotion_requirement": "fixed-direct and loss-direct must both hit before pair probe or baseline promotion is claimed",
+  "training_rows": [
+    "task: complete required term | prompt: fixed= | answer: fixed",
+    "task: complete required term | prompt: loss= | answer: loss",
+    "case=fixed | prompt=fixed= | expected=fixed | answer=fixed",
+    "case=loss | prompt=loss= | expected=loss | answer=loss",
+    "fixed direct template -> fixed",
+    "loss direct template -> loss",
+    "fixed route target term is fixed",
+    "loss route target term is loss",
+    "when prompt begins fixed= complete fixed",
+    "when prompt begins loss= complete loss",
+    "required term fixed stays on fixed branch",
+    "required term loss stays on loss branch",
+    "fixed branch answer uses fixed and avoids loss",
+    "loss branch answer uses loss and avoids fixed"
+  ]
+}

@@ -22,11 +22,20 @@ PAIR_READINESS_READY_CONTRACT_DECISIONS = {
     "pair_readiness_loss_retention_contract_patch_ready",
     "pair_readiness_structured_template_contract_ready",
 }
+PAIR_READINESS_CONTRACT_JSON_FILENAMES = (
+    PAIR_READINESS_SPLIT_CONTRACT_JSON_FILENAME,
+    "model_capability_required_term_pair_readiness_loss_retention_contract_patch.json",
+    "model_capability_required_term_pair_readiness_structured_template_contract.json",
+)
 
 
 def locate_pair_readiness_corpus_materialization_source(path: str | Path) -> Path:
     source = Path(path)
     if source.is_dir():
+        for filename in PAIR_READINESS_CONTRACT_JSON_FILENAMES:
+            candidate = source / filename
+            if candidate.is_file():
+                return candidate
         source = source / PAIR_READINESS_SPLIT_CONTRACT_JSON_FILENAME
     return source
 
@@ -189,6 +198,7 @@ __all__ = [
     "PAIR_READINESS_CORPUS_MATERIALIZATION_JSON_FILENAME",
     "PAIR_READINESS_CORPUS_MATERIALIZATION_MARKDOWN_FILENAME",
     "PAIR_READINESS_CORPUS_MATERIALIZATION_TEXT_FILENAME",
+    "PAIR_READINESS_CONTRACT_JSON_FILENAMES",
     "PAIR_READINESS_HELDOUT_EVAL_FIXTURE_FILENAME",
     "PAIR_READINESS_READY_CONTRACT_DECISIONS",
     "PAIR_READINESS_TRAINING_CORPUS_FILENAME",

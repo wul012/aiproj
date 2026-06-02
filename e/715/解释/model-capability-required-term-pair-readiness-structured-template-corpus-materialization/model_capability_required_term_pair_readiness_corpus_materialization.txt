@@ -1,0 +1,8 @@
+status=pass
+decision=pair_readiness_corpus_materialized
+failed_count=0
+materialization_ready=True
+training_line_count=4480
+evaluation_probe_count=3
+model_quality_claim=data_artifact_only
+next_action=train on the materialized corpus and replay heldout probes

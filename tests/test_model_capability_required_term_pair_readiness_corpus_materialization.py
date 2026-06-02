@@ -8,9 +8,14 @@ from minigpt.model_capability_required_term_pair_readiness_corpus_materializatio
     PAIR_READINESS_HELDOUT_EVAL_FIXTURE_FILENAME,
     PAIR_READINESS_TRAINING_CORPUS_FILENAME,
     build_pair_readiness_corpus_materialization,
+    locate_pair_readiness_corpus_materialization_source,
     resolve_exit_code,
     write_materialized_pair_readiness_inputs,
 )
+from minigpt.model_capability_required_term_pair_readiness_structured_template_contract import (
+    PAIR_READINESS_STRUCTURED_TEMPLATE_CONTRACT_JSON_FILENAME,
+)
+from minigpt.report_utils import write_json_payload
 from minigpt.model_capability_required_term_pair_readiness_corpus_materialization_artifacts import (
     render_pair_readiness_corpus_materialization_html,
     render_pair_readiness_corpus_materialization_markdown,
@@ -50,6 +55,14 @@ class PairReadinessCorpusMaterializationTests(unittest.TestCase):
             self.assertTrue((root / PAIR_READINESS_TRAINING_CORPUS_FILENAME).is_file())
             self.assertTrue((root / PAIR_READINESS_HELDOUT_EVAL_FIXTURE_FILENAME).is_file())
 
+    def test_locator_accepts_structured_template_output_directory(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            source = root / PAIR_READINESS_STRUCTURED_TEMPLATE_CONTRACT_JSON_FILENAME
+            write_json_payload(contract_fixture("pair_readiness_structured_template_contract_ready"), source)
+
+            self.assertEqual(locate_pair_readiness_corpus_materialization_source(root), source)
+
     def test_outputs_render_all_formats(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             report = build_pair_readiness_corpus_materialization(contract_fixture(), out_dir=tmp, repeat=1)
@@ -61,10 +74,10 @@ class PairReadinessCorpusMaterializationTests(unittest.TestCase):
         self.assertIn("MiniGPT pair-readiness corpus materialization", render_pair_readiness_corpus_materialization_html(report))
 
 
-def contract_fixture() -> dict[str, object]:
+def contract_fixture(decision: str = "pair_readiness_split_contract_ready") -> dict[str, object]:
     return {
         "status": "pass",
-        "decision": "pair_readiness_split_contract_ready",
+        "decision": decision,
         "summary": {"contract_ready": True},
         "contract": {
             "training_rows": ["fixed=f", "fixed=fi", "fixed=fix", "fixed=fixed", "loss=l", "loss=lo", "loss=los", "loss=loss"],

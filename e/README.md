@@ -1056,3 +1056,8 @@ e/663/解释/说明.md
 - `e/714/图片`
 - `e/714/解释/说明.md`
 - v714 pair-readiness structured-template contract 的运行截图和解释。
+## v715 补充索引
+
+- `e/715/图片`
+- `e/715/解释/说明.md`
+- v715 structured-template corpus materialization 的运行截图和解释。

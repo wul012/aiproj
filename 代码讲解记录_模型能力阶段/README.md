@@ -737,6 +737,9 @@
 728-v714-pair-readiness-structured-template-contract.md
  -> v714 code explanation: convert the regressed loss-retention route into a structured prompt-answer contract for the next materialization/training pass.
 
+729-v715-structured-template-corpus-materialization.md
+ -> v715 code explanation: materialize the structured-template contract into a real pair-readiness training corpus and heldout fixture.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。
