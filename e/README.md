@@ -1436,3 +1436,9 @@ e/663/解释/说明.md
 - `e/786/图片`
 - `e/786/解释/说明.md`
 - v786 promoted decision HTML split 的运行截图和解释。
+
+## v787 补充索引
+
+- `e/787/图片`
+- `e/787/解释/说明.md`
+- v787 pair capacity sweep summary split 的运行截图和解释。

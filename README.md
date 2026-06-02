@@ -7768,6 +7768,8 @@ The v785 maintenance split extracts registry release-readiness comparison summar
 
 The v786 maintenance split extracts promoted training-scale decision HTML rendering into `promoted_training_scale_decision_html.py`, reducing the artifact coordinator from 628 to 415 lines while preserving legacy exports.
 
+The v787 maintenance split extracts pair capacity sweep summary and interpretation helpers into `model_capability_required_term_pair_capacity_sweep_summary.py`, reducing the training orchestration module from 616 to 417 lines.
+
 Next useful extensions:
 
 - Train on a larger Chinese corpus.

@@ -953,6 +953,9 @@
 800-v786-promoted-decision-html-split.md
  -> v786 code explanation: extract promoted training-scale decision HTML rendering from the artifact coordinator.
 
+801-v787-pair-capacity-sweep-summary-split.md
+ -> v787 code explanation: extract pair capacity sweep summary and interpretation helpers from the training orchestration module.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。
