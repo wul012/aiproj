@@ -671,6 +671,9 @@
 706-v692-required-term-pair-surface-branch-closeout.md
  -> v692 code explanation: close v679-v691 as a contextual decode-aid branch with minimal-prompt capability still unsolved.
 
+707-v693-surface-branch-final-verification.md
+ -> v693 code explanation: verify the v679-v692 surface-policy batch with full tests, source encoding hygiene, and diff checks.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

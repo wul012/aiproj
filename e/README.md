@@ -946,3 +946,8 @@ e/663/解释/说明.md
 - `e/692/图片`
 - `e/692/解释/说明.md`
 - v692 required-term pair surface branch closeout 的运行截图和解释。
+## v693 补充索引
+
+- `e/693/图片`
+- `e/693/解释/说明.md`
+- v693 surface branch final verification 的运行截图和解释。

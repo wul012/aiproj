@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<link rel="icon" href="data:,">
+<title>MiniGPT v693 final verification</title>
+<style>
+body{margin:0;background:#eef2f5;color:#172026;font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1040px;margin:0 auto;padding:28px}
+h1{font-size:30px;margin:0 0 8px;letter-spacing:0}
+p{color:#5d6975;line-height:1.55}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin:18px 0}
+.stats div,section{background:white;border:1px solid #d8dee4;border-radius:8px;padding:14px;margin:14px 0}
+span{display:block;color:#5d6975;font-size:12px;text-transform:uppercase}
+strong{display:block;color:#0f766e;margin-top:6px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid #d8dee4;padding:9px;text-align:left;vertical-align:top}
+th{background:#f7f9fb;color:#334155}
+</style>
+</head>
+<body>
+<main>
+<h1>MiniGPT v693 final verification</h1>
+<p>v693 closes the v679-v692 surface-policy batch with full local verification and no new model-capability claim.</p>
+<section class="stats">
+<div><span>Pytest</span><strong>1335 passed</strong></div>
+<div><span>Source encoding</span><strong>815 / 815 clean</strong></div>
+<div><span>Diff check</span><strong>pass</strong></div>
+<div><span>Branch result</span><strong>contextual decode aid</strong></div>
+</section>
+<section>
+<h2>Verification Commands</h2>
+<table>
+<thead><tr><th>Command</th><th>Result</th></tr></thead>
+<tbody>
+<tr><td>python -m pytest -q -o cache_dir=runs\pytest-cache-v693-full</td><td>1335 passed in 166.24s</td></tr>
+<tr><td>python -B scripts\check_source_encoding.py --out-dir runs\source-encoding-hygiene-v693</td><td>status=pass, source_count=815, clean_count=815, bom_count=0, syntax_error_count=0</td></tr>
+<tr><td>git diff --check</td><td>pass</td></tr>
+</tbody>
+</table>
+</section>
+<section>
+<h2>Batch Outcome</h2>
+<p>v679-v692 found and closed a contextual decoding route for fixed/loss surface recovery. The result is useful for demos and diagnostics, but promotion remains blocked because non-leaking baselines are still unstable.</p>
+</section>
+</main>
+</body>
+</html>

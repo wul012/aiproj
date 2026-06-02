@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v692.0.0` closes the required-term pair surface branch as a contextual decode aid.
+Version `v693.0.0` verifies the v679-v692 contextual surface-policy branch with full local checks.
+
+## Latest v693 checkpoint
+
+- Added final verification evidence for the v679-v692 surface-policy batch.
+- Confirmed full test suite: `1335 passed in 166.24s`.
+- Confirmed source encoding hygiene: `source_count=815`, `clean_count=815`, `bom_count=0`, `syntax_error_count=0`.
+- Confirmed `git diff --check` passes.
+- Preserved the batch conclusion: contextual decode aid is closed; minimal-prompt capability remains a future objective.
+- Archived v693 evidence in `e/693` and added the code explanation in `代码讲解记录_模型能力阶段/707-v693-surface-branch-final-verification.md`.
 
 ## Latest v692 checkpoint
 
