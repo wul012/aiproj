@@ -1,0 +1,14 @@
+status=pass
+decision=pair_readiness_capacity_probe_no_improvement_fixed_only
+failed_count=0
+best_default_hit_count=1
+best_routes=['baseline-split', 'structured-template', 'fixed-recovery', 'capacity-probe']
+structured_vs_baseline_default_hit_delta=0
+structured_vs_loss_retention_default_hit_delta=1
+fixed_recovery_vs_structured_default_hit_delta=0
+fixed_recovery_returns_to_baseline=True
+capacity_probe_vs_fixed_recovery_default_hit_delta=0
+capacity_probe_no_improvement=True
+failure_shape_changed=True
+model_quality_claim=comparison_only
+next_action=treat this light capacity bump as closed and plan an objective-structure change before larger runs

@@ -37,10 +37,12 @@ def build_pair_readiness_route_comparison(
     loss_retention_report: dict[str, Any],
     structured_template_report: dict[str, Any],
     fixed_recovery_report: dict[str, Any] | None = None,
+    capacity_probe_report: dict[str, Any] | None = None,
     baseline_path: str | Path | None = None,
     loss_retention_path: str | Path | None = None,
     structured_template_path: str | Path | None = None,
     fixed_recovery_path: str | Path | None = None,
+    capacity_probe_path: str | Path | None = None,
     generated_at: str | None = None,
 ) -> dict[str, Any]:
     rows = [
@@ -50,6 +52,8 @@ def build_pair_readiness_route_comparison(
     ]
     if fixed_recovery_report is not None:
         rows.append(_row("fixed-recovery", fixed_recovery_report, fixed_recovery_path))
+    if capacity_probe_report is not None:
+        rows.append(_row("capacity-probe", capacity_probe_report, capacity_probe_path))
     summary = _summary(rows)
     issues = _issues(rows)
     status = "pass" if not issues else "fail"
@@ -108,6 +112,7 @@ def _summary(rows: list[dict[str, Any]]) -> dict[str, Any]:
     loss_retention = by_label["loss-retention-prefix"]
     structured = by_label["structured-template"]
     fixed_recovery = by_label.get("fixed-recovery")
+    capacity_probe = by_label.get("capacity-probe")
     best_hit_count = max(int(row.get("default_continuation_hit_count") or 0) for row in rows)
     best_routes = [str(row.get("label")) for row in rows if int(row.get("default_continuation_hit_count") or 0) == best_hit_count]
     pair_full_routes = [str(row.get("label")) for row in rows if row.get("pair_full_observed") is True]
@@ -120,10 +125,18 @@ def _summary(rows: list[dict[str, Any]]) -> dict[str, Any]:
     failure_shape_changed = structured.get("default_hit_terms") != baseline.get("default_hit_terms")
     fixed_recovery_vs_baseline_delta = _hit_delta(fixed_recovery, baseline)
     fixed_recovery_vs_structured_delta = _hit_delta(fixed_recovery, structured)
+    capacity_vs_fixed_recovery_delta = _hit_delta(capacity_probe, fixed_recovery)
+    capacity_vs_baseline_delta = _hit_delta(capacity_probe, baseline)
     fixed_recovery_returns_to_baseline = bool(
         fixed_recovery
         and fixed_recovery.get("default_hit_terms") == baseline.get("default_hit_terms")
         and int(fixed_recovery.get("default_continuation_hit_count") or 0) == int(baseline.get("default_continuation_hit_count") or 0)
+    )
+    capacity_probe_no_improvement = bool(
+        capacity_probe
+        and fixed_recovery
+        and capacity_probe.get("default_hit_terms") == fixed_recovery.get("default_hit_terms")
+        and int(capacity_probe.get("default_continuation_hit_count") or 0) == int(fixed_recovery.get("default_continuation_hit_count") or 0)
     )
     summary = {
         "route_count": len(rows),
@@ -147,6 +160,16 @@ def _summary(rows: list[dict[str, Any]]) -> dict[str, Any]:
                 "fixed_recovery_default_hit_terms": fixed_recovery.get("default_hit_terms"),
                 "fixed_recovery_default_missed_terms": fixed_recovery.get("default_missed_terms"),
                 "fixed_recovery_returns_to_baseline": fixed_recovery_returns_to_baseline,
+            }
+        )
+    if capacity_probe is not None:
+        summary.update(
+            {
+                "capacity_probe_vs_fixed_recovery_default_hit_delta": capacity_vs_fixed_recovery_delta,
+                "capacity_probe_vs_baseline_default_hit_delta": capacity_vs_baseline_delta,
+                "capacity_probe_default_hit_terms": capacity_probe.get("default_hit_terms"),
+                "capacity_probe_default_missed_terms": capacity_probe.get("default_missed_terms"),
+                "capacity_probe_no_improvement": capacity_probe_no_improvement,
             }
         )
     return summary
@@ -175,6 +198,8 @@ def _decision(status: str, summary: dict[str, Any]) -> str:
         return "fix_pair_readiness_route_comparison_inputs"
     if summary.get("any_pair_full_observed") is True:
         return "pair_readiness_route_pair_full_candidate_found"
+    if summary.get("capacity_probe_no_improvement") is True:
+        return "pair_readiness_capacity_probe_no_improvement_fixed_only"
     if summary.get("fixed_recovery_returns_to_baseline") is True:
         return "pair_readiness_fixed_recovery_returns_to_baseline_without_pair_full"
     if summary.get("structured_vs_baseline_default_hit_delta") > 0:
@@ -198,6 +223,12 @@ def _interpretation(status: str, summary: dict[str, Any]) -> dict[str, Any]:
             "model_quality_claim": "comparison_pair_full_candidate",
             "reason": "At least one compared route observed pair-full behavior.",
             "next_action": "run stricter heldout pair-probe replay before promotion",
+        }
+    if summary.get("capacity_probe_no_improvement") is True:
+        return {
+            "model_quality_claim": "comparison_only",
+            "reason": "The capacity probe matches the fixed-recovery route's fixed-only behavior and does not recover loss.",
+            "next_action": "treat this light capacity bump as closed and plan an objective-structure change before larger runs",
         }
     if summary.get("fixed_recovery_returns_to_baseline") is True:
         return {

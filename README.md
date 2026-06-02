@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v713.0.0` compares baseline and loss-retention pair-readiness runs and closes the single-sided prefix repair route.
+Version `v725.0.0` compares five pair-readiness routes and closes the light capacity-bump path after it remains fixed-only.
+
+## Latest v725 checkpoint
+
+- Extended `model_capability_required_term_pair_readiness_route_comparison` with optional `--capacity-probe`.
+- Compared v707 baseline, v712 loss-retention, v716 structured-template, v721 fixed-recovery, and v724 capacity-probe reports.
+- Confirmed `decision=pair_readiness_capacity_probe_no_improvement_fixed_only`.
+- Confirmed `capacity_probe_vs_fixed_recovery_default_hit_delta=0` and `capacity_probe_no_improvement=True`.
+- Kept `model_quality_claim=comparison_only`; this is route evidence, not a model-quality promotion.
+- Archived v725 evidence in `e/725` and added the code explanation in `代码讲解记录_模型能力阶段/739-v725-five-route-comparison.md`.
 
 ## Latest v713 checkpoint
 

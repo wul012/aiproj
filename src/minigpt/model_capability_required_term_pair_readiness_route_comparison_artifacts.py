@@ -27,6 +27,8 @@ def render_pair_readiness_route_comparison_text(report: dict[str, Any]) -> str:
         ("structured_vs_loss_retention_default_hit_delta", summary.get("structured_vs_loss_retention_default_hit_delta")),
         ("fixed_recovery_vs_structured_default_hit_delta", summary.get("fixed_recovery_vs_structured_default_hit_delta")),
         ("fixed_recovery_returns_to_baseline", summary.get("fixed_recovery_returns_to_baseline")),
+        ("capacity_probe_vs_fixed_recovery_default_hit_delta", summary.get("capacity_probe_vs_fixed_recovery_default_hit_delta")),
+        ("capacity_probe_no_improvement", summary.get("capacity_probe_no_improvement")),
         ("failure_shape_changed", summary.get("failure_shape_changed")),
         ("model_quality_claim", interpretation.get("model_quality_claim")),
         ("next_action", interpretation.get("next_action")),
@@ -75,6 +77,7 @@ def render_pair_readiness_route_comparison_html(report: dict[str, Any]) -> str:
         ("Best routes", summary.get("best_routes")),
         ("Structured vs base", summary.get("structured_vs_baseline_default_hit_delta")),
         ("Fixed vs structured", summary.get("fixed_recovery_vs_structured_default_hit_delta")),
+        ("Capacity vs fixed", summary.get("capacity_probe_vs_fixed_recovery_default_hit_delta")),
         ("Shape changed", summary.get("failure_shape_changed")),
     ]
     rows = "".join(_row_html(row) for row in list_of_dicts(report.get("route_rows")))

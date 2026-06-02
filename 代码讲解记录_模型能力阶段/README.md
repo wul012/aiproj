@@ -767,6 +767,9 @@
 738-v724-capacity-probe-training-run.md
  -> v724 code explanation: run the larger tiny capacity probe and record that it remains fixed-only without pair-full.
 
+739-v725-five-route-comparison.md
+ -> v725 code explanation: compare baseline, repair, structured, fixed-recovery, and capacity-probe routes and close the light capacity-bump path.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

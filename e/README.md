@@ -1106,3 +1106,8 @@ e/663/解释/说明.md
 - `e/724/图片`
 - `e/724/解释/说明.md`
 - v724 capacity-probe training run 的运行截图和解释。
+## v725 补充索引
+
+- `e/725/图片`
+- `e/725/解释/说明.md`
+- v725 five-route pair-readiness comparison 的运行截图和解释。

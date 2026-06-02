@@ -1,0 +1,161 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT pair-readiness route comparison",
+  "generated_at": "2026-06-02T04:15:52Z",
+  "status": "pass",
+  "decision": "pair_readiness_capacity_probe_no_improvement_fixed_only",
+  "failed_count": 0,
+  "issues": [],
+  "route_rows": [
+    {
+      "label": "baseline-split",
+      "path": "e\\707\\解释\\model-capability-required-term-pair-readiness-training-run\\model_capability_required_term_pair_readiness_training_run.json",
+      "status": "pass",
+      "decision": "pair_readiness_training_no_pair_full",
+      "training_status": "pass",
+      "checkpoint_exists": true,
+      "pair_full_observed": false,
+      "default_continuation_hit_count": 1,
+      "suppression_continuation_hit_count": 1,
+      "default_hit_terms": [
+        "fixed"
+      ],
+      "default_missed_terms": [
+        "loss"
+      ],
+      "suppression_hit_terms": [
+        "fixed"
+      ],
+      "model_quality_claim": "not_claimed"
+    },
+    {
+      "label": "loss-retention-prefix",
+      "path": "e\\712\\解释\\model-capability-required-term-pair-readiness-loss-retention-training-run\\model_capability_required_term_pair_readiness_training_run.json",
+      "status": "pass",
+      "decision": "pair_readiness_training_no_pair_full",
+      "training_status": "pass",
+      "checkpoint_exists": true,
+      "pair_full_observed": false,
+      "default_continuation_hit_count": 0,
+      "suppression_continuation_hit_count": 0,
+      "default_hit_terms": [],
+      "default_missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "suppression_hit_terms": [],
+      "model_quality_claim": "not_claimed"
+    },
+    {
+      "label": "structured-template",
+      "path": "e\\716\\解释\\model-capability-required-term-pair-readiness-structured-template-training-run\\model_capability_required_term_pair_readiness_training_run.json",
+      "status": "pass",
+      "decision": "pair_readiness_training_no_pair_full",
+      "training_status": "pass",
+      "checkpoint_exists": true,
+      "pair_full_observed": false,
+      "default_continuation_hit_count": 1,
+      "suppression_continuation_hit_count": 1,
+      "default_hit_terms": [
+        "loss"
+      ],
+      "default_missed_terms": [
+        "fixed"
+      ],
+      "suppression_hit_terms": [
+        "loss"
+      ],
+      "model_quality_claim": "not_claimed"
+    },
+    {
+      "label": "fixed-recovery",
+      "path": "e\\721\\解释\\model-capability-required-term-pair-readiness-fixed-recovery-training-run\\model_capability_required_term_pair_readiness_training_run.json",
+      "status": "pass",
+      "decision": "pair_readiness_training_no_pair_full",
+      "training_status": "pass",
+      "checkpoint_exists": true,
+      "pair_full_observed": false,
+      "default_continuation_hit_count": 1,
+      "suppression_continuation_hit_count": 1,
+      "default_hit_terms": [
+        "fixed"
+      ],
+      "default_missed_terms": [
+        "loss"
+      ],
+      "suppression_hit_terms": [
+        "fixed"
+      ],
+      "model_quality_claim": "not_claimed"
+    },
+    {
+      "label": "capacity-probe",
+      "path": "e\\724\\解释\\model-capability-required-term-pair-readiness-capacity-probe-training-run\\model_capability_required_term_pair_readiness_training_run.json",
+      "status": "pass",
+      "decision": "pair_readiness_training_no_pair_full",
+      "training_status": "pass",
+      "checkpoint_exists": true,
+      "pair_full_observed": false,
+      "default_continuation_hit_count": 1,
+      "suppression_continuation_hit_count": 1,
+      "default_hit_terms": [
+        "fixed"
+      ],
+      "default_missed_terms": [
+        "loss"
+      ],
+      "suppression_hit_terms": [
+        "fixed"
+      ],
+      "model_quality_claim": "not_claimed"
+    }
+  ],
+  "summary": {
+    "route_count": 5,
+    "best_default_hit_count": 1,
+    "best_routes": [
+      "baseline-split",
+      "structured-template",
+      "fixed-recovery",
+      "capacity-probe"
+    ],
+    "pair_full_routes": [],
+    "any_pair_full_observed": false,
+    "structured_vs_baseline_default_hit_delta": 0,
+    "structured_vs_loss_retention_default_hit_delta": 1,
+    "baseline_default_hit_terms": [
+      "fixed"
+    ],
+    "loss_retention_default_hit_terms": [],
+    "structured_default_hit_terms": [
+      "loss"
+    ],
+    "structured_default_missed_terms": [
+      "fixed"
+    ],
+    "failure_shape_changed": true,
+    "fixed_recovery_vs_baseline_default_hit_delta": 0,
+    "fixed_recovery_vs_structured_default_hit_delta": 0,
+    "fixed_recovery_default_hit_terms": [
+      "fixed"
+    ],
+    "fixed_recovery_default_missed_terms": [
+      "loss"
+    ],
+    "fixed_recovery_returns_to_baseline": true,
+    "capacity_probe_vs_fixed_recovery_default_hit_delta": 0,
+    "capacity_probe_vs_baseline_default_hit_delta": 0,
+    "capacity_probe_default_hit_terms": [
+      "fixed"
+    ],
+    "capacity_probe_default_missed_terms": [
+      "loss"
+    ],
+    "capacity_probe_no_improvement": true
+  },
+  "interpretation": {
+    "model_quality_claim": "comparison_only",
+    "reason": "The capacity probe matches the fixed-recovery route's fixed-only behavior and does not recover loss.",
+    "next_action": "treat this light capacity bump as closed and plan an objective-structure change before larger runs"
+  }
+}

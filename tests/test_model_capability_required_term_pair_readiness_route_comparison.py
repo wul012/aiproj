@@ -71,6 +71,22 @@ class PairReadinessRouteComparisonTests(unittest.TestCase):
         self.assertTrue(report["summary"]["fixed_recovery_returns_to_baseline"])
         self.assertEqual(report["interpretation"]["next_action"], "close single-sided fixed/loss row patching and test capacity or objective structure instead")
 
+    def test_comparison_reports_capacity_probe_no_improvement(self) -> None:
+        report = build_pair_readiness_route_comparison(
+            baseline_report=training_fixture(hit_terms=["fixed"], missed_terms=["loss"], hit_count=1),
+            loss_retention_report=training_fixture(hit_terms=[], missed_terms=["fixed", "loss"], hit_count=0),
+            structured_template_report=training_fixture(hit_terms=["loss"], missed_terms=["fixed"], hit_count=1),
+            fixed_recovery_report=training_fixture(hit_terms=["fixed"], missed_terms=["loss"], hit_count=1),
+            capacity_probe_report=training_fixture(hit_terms=["fixed"], missed_terms=["loss"], hit_count=1),
+        )
+
+        self.assertEqual(report["status"], "pass")
+        self.assertEqual(report["decision"], "pair_readiness_capacity_probe_no_improvement_fixed_only")
+        self.assertEqual(report["summary"]["route_count"], 5)
+        self.assertEqual(report["summary"]["capacity_probe_vs_fixed_recovery_default_hit_delta"], 0)
+        self.assertTrue(report["summary"]["capacity_probe_no_improvement"])
+        self.assertEqual(report["interpretation"]["next_action"], "treat this light capacity bump as closed and plan an objective-structure change before larger runs")
+
     def test_outputs_render_all_formats(self) -> None:
         report = build_pair_readiness_route_comparison(
             baseline_report=training_fixture(hit_terms=["fixed"], missed_terms=["loss"], hit_count=1),

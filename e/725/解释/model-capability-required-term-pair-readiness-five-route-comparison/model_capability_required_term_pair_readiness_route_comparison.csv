@@ -1,0 +1,6 @@
+label,pair_full_observed,default_continuation_hit_count,default_hit_terms,default_missed_terms,model_quality_claim
+baseline-split,False,1,"[""fixed""]","[""loss""]",not_claimed
+loss-retention-prefix,False,0,[],"[""fixed"", ""loss""]",not_claimed
+structured-template,False,1,"[""loss""]","[""fixed""]",not_claimed
+fixed-recovery,False,1,"[""fixed""]","[""loss""]",not_claimed
+capacity-probe,False,1,"[""fixed""]","[""loss""]",not_claimed
