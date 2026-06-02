@@ -1171,3 +1171,8 @@ e/663/解释/说明.md
 - `e/737/图片`
 - `e/737/解释/说明.md`
 - v737 direct-completion surface corpus materialization 的运行截图和解释。
+## v738 补充索引
+
+- `e/738/图片`
+- `e/738/解释/说明.md`
+- v738 direct-completion surface training run 的运行截图和解释。

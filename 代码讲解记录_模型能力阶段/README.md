@@ -806,6 +806,9 @@
 751-v737-direct-completion-surface-corpus-materialization.md
  -> v737 code explanation: materialize the direct-completion surface contract into a 5120-line corpus and heldout fixture.
 
+752-v738-direct-completion-surface-training-run.md
+ -> v738 code explanation: train the direct-completion surface corpus and record pair-full heldout direct evidence under the same larger-tiny configuration.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

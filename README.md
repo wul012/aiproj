@@ -7461,6 +7461,8 @@ The pair-readiness bridge closeout and direct-completion surface contract layers
 
 The pair-readiness direct-completion surface materialization layer expands that 16-row contract into a 5120-line corpus and heldout fixture, proving the compact surface route is ready for the next real tiny training run.
 
+The pair-readiness direct-completion surface training layer trains that corpus under the same larger-tiny configuration and records the first pair-full heldout direct result for this route, while still requiring pair-probe replay and historical comparison before promotion.
+
 The run registry layer indexes multiple run directories so experiments can be scanned by commit, data fingerprint, quality status, eval suite coverage, metrics, artifact count, notes, tags, best-val rank, loss delta, a leaderboard, an interactive local HTML table, shareable URL state, and visible-row CSV export.
 
 The experiment card layer turns one run into a compact JSON/Markdown/HTML summary for review, handoff, or portfolio use.

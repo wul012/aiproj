@@ -1,0 +1,14 @@
+device=cpu
+tokenizer=char
+tokens=165760 vocab_size=27
+parameters=228,000
+data_source=data:e\737\解释\model-capability-required-term-pair-readiness-direct-completion-surface-corpus-materialization\pair_readiness_training_corpus.txt
+step=    1 train_loss=3.1407 val_loss=3.1135
+step=  450 train_loss=1.2918 val_loss=1.2207
+step=  900 train_loss=0.9196 val_loss=0.8657
+step= 1350 train_loss=0.8405 val_loss=0.9379
+step= 1800 train_loss=1.0773 val_loss=1.0665
+saved=e\738\解释\model-capability-required-term-pair-readiness-direct-completion-surface-training-run\pair-readiness-training-run
+history=e\738\解释\model-capability-required-term-pair-readiness-direct-completion-surface-training-run\pair-readiness-training-run\metrics.jsonl
+manifest=e\738\解释\model-capability-required-term-pair-readiness-direct-completion-surface-training-run\pair-readiness-training-run\run_manifest.json
+sample=e\738\解释\model-capability-required-term-pair-readiness-direct-completion-surface-training-run\pair-readiness-training-run\sample.txt
