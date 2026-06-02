@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <title>v778 release readiness comparison regression split</title>
+  <style>
+    body { font-family: "Segoe UI", Arial, sans-serif; margin: 32px; color: #1f2933; line-height: 1.55; }
+    main { max-width: 980px; margin: 0 auto; }
+    h1 { font-size: 28px; margin-bottom: 8px; }
+    h2 { margin-top: 28px; font-size: 20px; }
+    table { border-collapse: collapse; width: 100%; margin-top: 12px; }
+    th, td { border: 1px solid #c9d1d9; padding: 10px 12px; text-align: left; vertical-align: top; }
+    th { background: #f3f4f6; }
+    code { background: #eef2f7; padding: 2px 5px; border-radius: 4px; }
+    .pass { color: #0f766e; font-weight: 700; }
+  </style>
+</head>
+<body>
+<main>
+  <h1>v778 release readiness comparison regression split</h1>
+  <p><strong>status:</strong> <span class="pass">pass</span></p>
+  <p>
+    v778 follows v777 by moving regression detection and status scoring helpers out of
+    <code>release_readiness_comparison.py</code>.
+  </p>
+
+  <h2>Split Boundary</h2>
+  <table>
+    <tr><th>Module</th><th>Role after v778</th><th>Line count</th></tr>
+    <tr>
+      <td><code>src/minigpt/release_readiness_comparison.py</code></td>
+      <td>Comparison orchestration, row flattening, delta construction, summary assembly, and artifact exports.</td>
+      <td>457</td>
+    </tr>
+    <tr>
+      <td><code>src/minigpt/release_readiness_comparison_regressions.py</code></td>
+      <td>CI workflow regression reasons, coverage regression, benchmark-history regression, status scoring, and max-delta helpers.</td>
+      <td>178</td>
+    </tr>
+    <tr>
+      <td><code>src/minigpt/release_readiness_comparison_narrative.py</code></td>
+      <td>Delta explanations and recommendations retained from v777.</td>
+      <td>197</td>
+    </tr>
+  </table>
+
+  <h2>Verification</h2>
+  <ul>
+    <li><code>python -m py_compile src\minigpt\release_readiness_comparison.py src\minigpt\release_readiness_comparison_regressions.py</code></li>
+    <li><code>python -m pytest tests\test_release_readiness_comparison.py -q -o cache_dir=runs\pytest-cache-v778-focused</code>: 20 passed</li>
+  </ul>
+
+  <h2>Maintenance Value</h2>
+  <p>
+    Regression semantics now have one focused home. Future CI workflow, coverage, and benchmark-history checks can change
+    without reopening the full comparison builder.
+  </p>
+</main>
+</body>
+</html>

@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v777.0.0` extracts release readiness comparison narrative wording from the comparison workflow.
+Version `v778.0.0` extracts release readiness comparison regression scoring from the comparison workflow.
+
+## Latest v778 checkpoint
+
+- Added `release_readiness_comparison_regressions`.
+- Reduced `release_readiness_comparison.py` from 605 to 457 lines after the v777 narrative split.
+- Moved CI workflow regression reasons, test coverage regression, benchmark-history regression, status scoring, and max-delta helpers out of the comparison builder.
+- Kept comparison row/delta/summary orchestration in the main module.
+- Verified with `20 passed` release readiness comparison focused tests.
+- Archived v778 evidence in `e/778` and added the code explanation in `代码讲解记录_模型能力阶段/792-v778-release-readiness-comparison-regression-split.md`.
 
 ## Latest v777 checkpoint
 

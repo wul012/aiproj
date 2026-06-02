@@ -1382,3 +1382,9 @@ e/663/解释/说明.md
 - `e/777/图片`
 - `e/777/解释/说明.md`
 - v777 release readiness comparison narrative split 的运行截图和解释。
+
+## v778 补充索引
+
+- `e/778/图片`
+- `e/778/解释/说明.md`
+- v778 release readiness comparison regression split 的运行截图和解释。
