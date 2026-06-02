@@ -36,9 +36,11 @@ def build_pair_readiness_route_comparison(
     baseline_report: dict[str, Any],
     loss_retention_report: dict[str, Any],
     structured_template_report: dict[str, Any],
+    fixed_recovery_report: dict[str, Any] | None = None,
     baseline_path: str | Path | None = None,
     loss_retention_path: str | Path | None = None,
     structured_template_path: str | Path | None = None,
+    fixed_recovery_path: str | Path | None = None,
     generated_at: str | None = None,
 ) -> dict[str, Any]:
     rows = [
@@ -46,6 +48,8 @@ def build_pair_readiness_route_comparison(
         _row("loss-retention-prefix", loss_retention_report, loss_retention_path),
         _row("structured-template", structured_template_report, structured_template_path),
     ]
+    if fixed_recovery_report is not None:
+        rows.append(_row("fixed-recovery", fixed_recovery_report, fixed_recovery_path))
     summary = _summary(rows)
     issues = _issues(rows)
     status = "pass" if not issues else "fail"
@@ -103,6 +107,7 @@ def _summary(rows: list[dict[str, Any]]) -> dict[str, Any]:
     baseline = by_label["baseline-split"]
     loss_retention = by_label["loss-retention-prefix"]
     structured = by_label["structured-template"]
+    fixed_recovery = by_label.get("fixed-recovery")
     best_hit_count = max(int(row.get("default_continuation_hit_count") or 0) for row in rows)
     best_routes = [str(row.get("label")) for row in rows if int(row.get("default_continuation_hit_count") or 0) == best_hit_count]
     pair_full_routes = [str(row.get("label")) for row in rows if row.get("pair_full_observed") is True]
@@ -113,7 +118,14 @@ def _summary(rows: list[dict[str, Any]]) -> dict[str, Any]:
         loss_retention.get("default_continuation_hit_count") or 0
     )
     failure_shape_changed = structured.get("default_hit_terms") != baseline.get("default_hit_terms")
-    return {
+    fixed_recovery_vs_baseline_delta = _hit_delta(fixed_recovery, baseline)
+    fixed_recovery_vs_structured_delta = _hit_delta(fixed_recovery, structured)
+    fixed_recovery_returns_to_baseline = bool(
+        fixed_recovery
+        and fixed_recovery.get("default_hit_terms") == baseline.get("default_hit_terms")
+        and int(fixed_recovery.get("default_continuation_hit_count") or 0) == int(baseline.get("default_continuation_hit_count") or 0)
+    )
+    summary = {
         "route_count": len(rows),
         "best_default_hit_count": best_hit_count,
         "best_routes": best_routes,
@@ -127,6 +139,23 @@ def _summary(rows: list[dict[str, Any]]) -> dict[str, Any]:
         "structured_default_missed_terms": structured.get("default_missed_terms"),
         "failure_shape_changed": failure_shape_changed,
     }
+    if fixed_recovery is not None:
+        summary.update(
+            {
+                "fixed_recovery_vs_baseline_default_hit_delta": fixed_recovery_vs_baseline_delta,
+                "fixed_recovery_vs_structured_default_hit_delta": fixed_recovery_vs_structured_delta,
+                "fixed_recovery_default_hit_terms": fixed_recovery.get("default_hit_terms"),
+                "fixed_recovery_default_missed_terms": fixed_recovery.get("default_missed_terms"),
+                "fixed_recovery_returns_to_baseline": fixed_recovery_returns_to_baseline,
+            }
+        )
+    return summary
+
+
+def _hit_delta(left: dict[str, Any] | None, right: dict[str, Any] | None) -> int | None:
+    if left is None or right is None:
+        return None
+    return int(left.get("default_continuation_hit_count") or 0) - int(right.get("default_continuation_hit_count") or 0)
 
 
 def _issues(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -146,6 +175,8 @@ def _decision(status: str, summary: dict[str, Any]) -> str:
         return "fix_pair_readiness_route_comparison_inputs"
     if summary.get("any_pair_full_observed") is True:
         return "pair_readiness_route_pair_full_candidate_found"
+    if summary.get("fixed_recovery_returns_to_baseline") is True:
+        return "pair_readiness_fixed_recovery_returns_to_baseline_without_pair_full"
     if summary.get("structured_vs_baseline_default_hit_delta") > 0:
         return "pair_readiness_structured_template_route_improved_without_pair_full"
     if summary.get("structured_vs_baseline_default_hit_delta") < 0:
@@ -167,6 +198,12 @@ def _interpretation(status: str, summary: dict[str, Any]) -> dict[str, Any]:
             "model_quality_claim": "comparison_pair_full_candidate",
             "reason": "At least one compared route observed pair-full behavior.",
             "next_action": "run stricter heldout pair-probe replay before promotion",
+        }
+    if summary.get("fixed_recovery_returns_to_baseline") is True:
+        return {
+            "model_quality_claim": "comparison_only",
+            "reason": "The fixed-recovery route returns to the baseline fixed-only shape and does not preserve the structured route's loss hit.",
+            "next_action": "close single-sided fixed/loss row patching and test capacity or objective structure instead",
         }
     if summary.get("failure_shape_changed") is True:
         return {

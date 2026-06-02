@@ -758,6 +758,9 @@
 735-v721-fixed-recovery-training-run.md
  -> v721 code explanation: train the fixed-recovery corpus and record that it restores fixed but loses loss again.
 
+736-v722-four-route-comparison.md
+ -> v722 code explanation: extend route comparison to four routes and close single-sided fixed/loss row patching after fixed-recovery returns to baseline.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

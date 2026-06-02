@@ -1,0 +1,12 @@
+status=pass
+decision=pair_readiness_fixed_recovery_returns_to_baseline_without_pair_full
+failed_count=0
+best_default_hit_count=1
+best_routes=['baseline-split', 'structured-template', 'fixed-recovery']
+structured_vs_baseline_default_hit_delta=0
+structured_vs_loss_retention_default_hit_delta=1
+fixed_recovery_vs_structured_default_hit_delta=0
+fixed_recovery_returns_to_baseline=True
+failure_shape_changed=True
+model_quality_claim=comparison_only
+next_action=close single-sided fixed/loss row patching and test capacity or objective structure instead

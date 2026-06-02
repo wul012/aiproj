@@ -27,6 +27,7 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--baseline", type=Path, required=True, help="Baseline training run JSON or output directory.")
     parser.add_argument("--loss-retention", type=Path, required=True, help="Loss-retention training run JSON or output directory.")
     parser.add_argument("--structured-template", type=Path, required=True, help="Structured-template training run JSON or output directory.")
+    parser.add_argument("--fixed-recovery", type=Path, help="Optional fixed-recovery training run JSON or output directory.")
     parser.add_argument("--out-dir", type=Path, default=ROOT / "runs" / "model-capability-required-term-pair-readiness-route-comparison")
     parser.add_argument("--require-pass", action="store_true", help="Return exit code 1 when comparison inputs fail.")
     parser.add_argument("--force", action="store_true", help="Delete an existing non-empty output directory first.")
@@ -39,13 +40,16 @@ def main(argv: Sequence[str] | None = None) -> None:
     baseline = locate_pair_readiness_route_comparison_source(args.baseline)
     loss_retention = locate_pair_readiness_route_comparison_source(args.loss_retention)
     structured = locate_pair_readiness_route_comparison_source(args.structured_template)
+    fixed_recovery = locate_pair_readiness_route_comparison_source(args.fixed_recovery) if args.fixed_recovery else None
     report = build_pair_readiness_route_comparison(
         baseline_report=read_json_report(baseline),
         loss_retention_report=read_json_report(loss_retention),
         structured_template_report=read_json_report(structured),
+        fixed_recovery_report=read_json_report(fixed_recovery) if fixed_recovery else None,
         baseline_path=baseline,
         loss_retention_path=loss_retention,
         structured_template_path=structured,
+        fixed_recovery_path=fixed_recovery,
     )
     outputs = write_pair_readiness_route_comparison_outputs(report, args.out_dir)
     print(render_pair_readiness_route_comparison_text(report), end="")

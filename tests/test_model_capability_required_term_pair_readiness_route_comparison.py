@@ -56,6 +56,21 @@ class PairReadinessRouteComparisonTests(unittest.TestCase):
         self.assertEqual(report["decision"], "pair_readiness_route_pair_full_candidate_found")
         self.assertEqual(report["interpretation"]["model_quality_claim"], "comparison_pair_full_candidate")
 
+    def test_comparison_reports_fixed_recovery_returning_to_baseline(self) -> None:
+        report = build_pair_readiness_route_comparison(
+            baseline_report=training_fixture(hit_terms=["fixed"], missed_terms=["loss"], hit_count=1),
+            loss_retention_report=training_fixture(hit_terms=[], missed_terms=["fixed", "loss"], hit_count=0),
+            structured_template_report=training_fixture(hit_terms=["loss"], missed_terms=["fixed"], hit_count=1),
+            fixed_recovery_report=training_fixture(hit_terms=["fixed"], missed_terms=["loss"], hit_count=1),
+        )
+
+        self.assertEqual(report["status"], "pass")
+        self.assertEqual(report["decision"], "pair_readiness_fixed_recovery_returns_to_baseline_without_pair_full")
+        self.assertEqual(report["summary"]["route_count"], 4)
+        self.assertEqual(report["summary"]["fixed_recovery_vs_structured_default_hit_delta"], 0)
+        self.assertTrue(report["summary"]["fixed_recovery_returns_to_baseline"])
+        self.assertEqual(report["interpretation"]["next_action"], "close single-sided fixed/loss row patching and test capacity or objective structure instead")
+
     def test_outputs_render_all_formats(self) -> None:
         report = build_pair_readiness_route_comparison(
             baseline_report=training_fixture(hit_terms=["fixed"], missed_terms=["loss"], hit_count=1),

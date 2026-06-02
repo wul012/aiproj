@@ -1091,3 +1091,8 @@ e/663/解释/说明.md
 - `e/721/图片`
 - `e/721/解释/说明.md`
 - v721 fixed-recovery training run 的运行截图和解释。
+## v722 补充索引
+
+- `e/722/图片`
+- `e/722/解释/说明.md`
+- v722 four-route pair-readiness comparison 的运行截图和解释。
