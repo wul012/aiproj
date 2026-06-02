@@ -1251,3 +1251,8 @@ e/663/解释/说明.md
 - `e/753/图片`
 - `e/753/解释/说明.md`
 - v753 exact-surface repair contract patch 的运行截图和解释。
+## v754 补充索引
+
+- `e/754/图片`
+- `e/754/解释/说明.md`
+- v754 exact-surface repair corpus materialization 的运行截图和解释。

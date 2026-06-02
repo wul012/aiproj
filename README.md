@@ -7493,6 +7493,8 @@ The pair-readiness exact-surface repair plan layer turns that sensitivity diagno
 
 The pair-readiness exact-surface repair contract patch layer applies that plan as four checked near-exact pipe/equals bridge rows, preserving prior rows and registering the new decision for corpus materialization.
 
+The pair-readiness exact-surface repair materialization layer turns that checked patch into a 7680-line training corpus while keeping the exact heldout pair prompt out of training rows and corpus lines.
+
 The run registry layer indexes multiple run directories so experiments can be scanned by commit, data fingerprint, quality status, eval suite coverage, metrics, artifact count, notes, tags, best-val rank, loss delta, a leaderboard, an interactive local HTML table, shareable URL state, and visible-row CSV export.
 
 The experiment card layer turns one run into a compact JSON/Markdown/HTML summary for review, handoff, or portfolio use.
