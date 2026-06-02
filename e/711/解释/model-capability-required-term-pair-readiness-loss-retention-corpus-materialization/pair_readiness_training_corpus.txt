@@ -1,0 +1,6400 @@
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution
+fixed=f
+fixed=fi
+fixed=fix
+fixed=fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+fixed branch starts with f
+loss branch starts with l
+fixed branch does not start loss
+loss branch does not start fixed
+loss=l
+loss=lo
+loss=los
+loss=loss
+loss branch keeps l before fixed
+loss branch resists fixed completion
+loss prompt should not become fixed
+loss direct retention beats fixed pollution

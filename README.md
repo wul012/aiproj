@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v710.0.0` applies the loss-retention repair plan as a checked contract patch.
+Version `v711.0.0` materializes the loss-retention patched contract into a larger pair-readiness corpus.
+
+## Latest v711 checkpoint
+
+- Reused `model_capability_required_term_pair_readiness_corpus_materialization`.
+- Consumed v710 `pair_readiness_loss_retention_contract_patch_ready`.
+- Confirmed `decision=pair_readiness_corpus_materialized`.
+- Generated a loss-retention patched corpus with `training_line_count=6400`.
+- Preserved the 3 heldout eval probes and data-artifact-only quality boundary.
+- Archived v711 evidence in `e/711` and added the code explanation in `代码讲解记录_模型能力阶段/725-v711-loss-retention-corpus-materialization.md`.
 
 ## Latest v710 checkpoint
 

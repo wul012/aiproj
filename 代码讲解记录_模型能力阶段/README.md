@@ -725,6 +725,9 @@
 724-v710-pair-readiness-loss-retention-contract-patch.md
  -> v710 code explanation: apply the loss-retention repair plan as a checked contract patch.
 
+725-v711-loss-retention-corpus-materialization.md
+ -> v711 code explanation: materialize the loss-retention patched contract into a larger pair-readiness corpus.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

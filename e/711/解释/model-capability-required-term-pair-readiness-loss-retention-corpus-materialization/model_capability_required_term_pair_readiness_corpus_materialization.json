@@ -1,0 +1,142 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair-readiness corpus materialization",
+  "generated_at": "2026-06-02T02:15:45Z",
+  "status": "pass",
+  "decision": "pair_readiness_corpus_materialized",
+  "failed_count": 0,
+  "issues": [],
+  "source_contract_path": "e\\710\\解释\\model-capability-required-term-pair-readiness-loss-retention-contract-patch\\model_capability_required_term_pair_readiness_loss_retention_contract_patch.json",
+  "source_contract": {
+    "status": "pass",
+    "decision": "pair_readiness_loss_retention_contract_patch_ready",
+    "summary": {
+      "base_training_row_count": 12,
+      "patched_training_row_count": 20,
+      "added_training_row_count": 8,
+      "evaluation_probe_count": 3,
+      "failed_check_count": 0,
+      "patch_ready": true
+    }
+  },
+  "settings": {
+    "repeat": 320
+  },
+  "materialized_paths": {
+    "training_corpus": "e\\711\\解释\\model-capability-required-term-pair-readiness-loss-retention-corpus-materialization\\pair_readiness_training_corpus.txt",
+    "heldout_eval_fixture": "e\\711\\解释\\model-capability-required-term-pair-readiness-loss-retention-corpus-materialization\\pair_readiness_heldout_eval_fixture.json"
+  },
+  "check_rows": [
+    {
+      "id": "contract_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "source contract must pass"
+    },
+    {
+      "id": "contract_decision",
+      "status": "pass",
+      "actual": "pair_readiness_loss_retention_contract_patch_ready",
+      "detail": "materialization requires a ready split contract or loss-retention contract patch"
+    },
+    {
+      "id": "repeat_positive",
+      "status": "pass",
+      "actual": 320,
+      "detail": "repeat must be positive"
+    },
+    {
+      "id": "training_rows_present",
+      "status": "pass",
+      "actual": 20,
+      "detail": "training rows must be present"
+    },
+    {
+      "id": "heldout_not_in_training_rows",
+      "status": "pass",
+      "actual": false,
+      "detail": "heldout pair probe must not be a training row"
+    },
+    {
+      "id": "heldout_not_in_corpus",
+      "status": "pass",
+      "actual": false,
+      "detail": "heldout pair probe must not appear as a corpus line"
+    }
+  ],
+  "training_corpus": {
+    "line_count": 6400,
+    "char_count": 120319,
+    "preview": [
+      "fixed=f",
+      "fixed=fi",
+      "fixed=fix",
+      "fixed=fixed",
+      "loss=l",
+      "loss=lo",
+      "loss=los",
+      "loss=loss"
+    ]
+  },
+  "heldout_eval_fixture": {
+    "schema_version": 1,
+    "kind": "pair_readiness_heldout_eval_fixture",
+    "probes": [
+      {
+        "id": "fixed-direct",
+        "prompt": "fixed=",
+        "expected_term": "fixed",
+        "split": "heldout-direct"
+      },
+      {
+        "id": "loss-direct",
+        "prompt": "loss=",
+        "expected_term": "loss",
+        "split": "heldout-direct"
+      },
+      {
+        "id": "fixed-loss-pair",
+        "prompt": "fixed=|loss=",
+        "expected_term": "fixed+loss",
+        "split": "heldout-pair"
+      }
+    ],
+    "heldout_pair_probe": "fixed=|loss=",
+    "promotion_requirement": "fixed-direct and loss-direct heldout continuations must both hit before pair capability is claimed",
+    "training_rows": [
+      "fixed=f",
+      "fixed=fi",
+      "fixed=fix",
+      "fixed=fixed",
+      "loss=l",
+      "loss=lo",
+      "loss=los",
+      "loss=loss",
+      "fixed branch starts with f",
+      "loss branch starts with l",
+      "fixed branch does not start loss",
+      "loss branch does not start fixed",
+      "loss=l",
+      "loss=lo",
+      "loss=los",
+      "loss=loss",
+      "loss branch keeps l before fixed",
+      "loss branch resists fixed completion",
+      "loss prompt should not become fixed",
+      "loss direct retention beats fixed pollution"
+    ]
+  },
+  "summary": {
+    "materialization_ready": true,
+    "training_line_count": 6400,
+    "evaluation_probe_count": 3,
+    "check_count": 6,
+    "passed_check_count": 6,
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "data_artifact_only",
+    "reason": "Training corpus and heldout eval fixture are materialized from a checked split contract.",
+    "next_action": "train on the materialized corpus and replay heldout probes"
+  }
+}
