@@ -956,6 +956,9 @@
 801-v787-pair-capacity-sweep-summary-split.md
  -> v787 code explanation: extract pair capacity sweep summary and interpretation helpers from the training orchestration module.
 
+802-v788-seed-handoff-review-summary-split.md
+ -> v788 code explanation: extract promoted seed handoff review summary builders from the requirement and automation gate module.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

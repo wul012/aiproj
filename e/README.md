@@ -1442,3 +1442,9 @@ e/663/解释/说明.md
 - `e/787/图片`
 - `e/787/解释/说明.md`
 - v787 pair capacity sweep summary split 的运行截图和解释。
+
+## v788 补充索引
+
+- `e/788/图片`
+- `e/788/解释/说明.md`
+- v788 seed handoff review summary split 的运行截图和解释。

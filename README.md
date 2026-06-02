@@ -7770,6 +7770,8 @@ The v786 maintenance split extracts promoted training-scale decision HTML render
 
 The v787 maintenance split extracts pair capacity sweep summary and interpretation helpers into `model_capability_required_term_pair_capacity_sweep_summary.py`, reducing the training orchestration module from 616 to 417 lines.
 
+The v788 maintenance split extracts promoted seed handoff review summary builders into `promoted_training_scale_seed_handoff_review_summary.py`, reducing the review module from 613 to 410 lines and closing the sixteen-version maintenance split run.
+
 Next useful extensions:
 
 - Train on a larger Chinese corpus.
