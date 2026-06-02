@@ -842,6 +842,9 @@
 763-v749-fixed-preserving-transfer-training-run.md
  -> v749 code explanation: train the fixed-preserving corpus under the larger-tiny settings and record the direct pair-probe hit before independent replay.
 
+764-v750-fixed-preserving-transfer-pair-probe-replay.md
+ -> v750 code explanation: independently replay the v749 checkpoint and record partial pair-probe evidence before any promotion.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

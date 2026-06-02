@@ -1231,3 +1231,8 @@ e/663/解释/说明.md
 - `e/749/图片`
 - `e/749/解释/说明.md`
 - v749 fixed-preserving transfer training run 的运行截图和解释。
+## v750 补充索引
+
+- `e/750/图片`
+- `e/750/解释/说明.md`
+- v750 fixed-preserving transfer pair-probe replay 的运行截图和解释。

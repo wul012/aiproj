@@ -7485,6 +7485,8 @@ The pair-readiness fixed-preserving transfer materialization layer turns that ch
 
 The pair-readiness fixed-preserving transfer training layer trains that corpus under the same larger-tiny settings as the regressed broad-transfer route and observes a direct pair-probe hit, while leaving promotion to an independent replay step.
 
+The pair-readiness fixed-preserving transfer pair-probe replay layer reloads that checkpoint without retraining and shows a partial result: one alternate pair surface is pair-full, but the required exact heldout pair prompt is not ready.
+
 The run registry layer indexes multiple run directories so experiments can be scanned by commit, data fingerprint, quality status, eval suite coverage, metrics, artifact count, notes, tags, best-val rank, loss delta, a leaderboard, an interactive local HTML table, shareable URL state, and visible-row CSV export.
 
 The experiment card layer turns one run into a compact JSON/Markdown/HTML summary for review, handoff, or portfolio use.
