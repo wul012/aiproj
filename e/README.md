@@ -1322,3 +1322,9 @@ e/663/解释/说明.md
 - `e/767/图片`
 - `e/767/解释/说明.md`
 - v767 objective-level contrast seed stability plan 的运行截图和解释。
+
+## v768 补充索引
+
+- `e/768/图片`
+- `e/768/解释/说明.md`
+- v768 objective-level contrast seed 3737 training run 的运行截图和解释。

@@ -896,6 +896,9 @@
 781-v767-objective-level-contrast-seed-stability-plan.md
  -> v767 code explanation: turn the guarded route candidate into a concrete supplemental-seed stability plan.
 
+782-v768-objective-level-contrast-seed-3737-training-run.md
+ -> v768 code explanation: train the first supplemental objective-level contrast seed and keep the result pending replay.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

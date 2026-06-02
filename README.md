@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v767.0.0` turns the objective-level contrast promotion guard into a concrete seed stability plan.
+Version `v768.0.0` runs the first supplemental objective-level contrast seed training check.
+
+## Latest v768 checkpoint
+
+- Reused `model_capability_required_term_pair_readiness_training_run`.
+- Trained the objective-level contrast corpus with supplemental seed `3737`.
+- Confirmed `decision=pair_readiness_training_pair_full_observed`.
+- Confirmed `checkpoint_exists=True` and `pair_full_observed=True`.
+- Kept the model-quality claim at `direct_pair_probe_hit`, pending replay.
+- Archived v768 evidence in `e/768` and added the code explanation in `代码讲解记录_模型能力阶段/782-v768-objective-level-contrast-seed-3737-training-run.md`.
 
 ## Latest v767 checkpoint
 
