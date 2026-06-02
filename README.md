@@ -7764,6 +7764,8 @@ The governance stabilization review layer extends that maintenance policy to the
 
 The v784 maintenance split extracts training portfolio artifact-reading summary normalization into `training_portfolio_comparison_portfolio.py`, reducing the comparison coordinator from 641 to 403 lines without changing the comparison report contract.
 
+The v785 maintenance split extracts registry release-readiness comparison summary helpers into `registry_release_readiness_summary.py`, reducing `registry_data.py` from 634 to 507 lines while preserving registry outputs and rankings imports.
+
 Next useful extensions:
 
 - Train on a larger Chinese corpus.

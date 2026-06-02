@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <title>v785 registry release-readiness summary split</title>
+  <style>
+    :root {
+      font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
+      background: #f7f8fa;
+      color: #202833;
+    }
+    body {
+      margin: 0;
+      padding: 32px;
+    }
+    main {
+      max-width: 1040px;
+      margin: 0 auto;
+      background: #fff;
+      border: 1px solid #d7dee8;
+      border-radius: 8px;
+      padding: 28px;
+      box-shadow: 0 8px 24px rgba(32, 40, 51, 0.08);
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      letter-spacing: 0;
+    }
+    h2 {
+      margin-top: 28px;
+      font-size: 18px;
+    }
+    .meta {
+      color: #657386;
+      margin-bottom: 22px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin: 20px 0;
+    }
+    .card {
+      border: 1px solid #d7dee8;
+      border-radius: 6px;
+      padding: 14px;
+      background: #fbfcfe;
+    }
+    .label {
+      color: #657386;
+      font-size: 13px;
+    }
+    .value {
+      display: block;
+      margin-top: 6px;
+      font-size: 22px;
+      font-weight: 700;
+    }
+    code {
+      background: #edf2f7;
+      border-radius: 4px;
+      padding: 2px 5px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+    }
+    th, td {
+      border: 1px solid #d7dee8;
+      padding: 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background: #edf2f7;
+    }
+    .pass {
+      color: #17663a;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>v785 registry release-readiness summary split</h1>
+    <p class="meta">维护拆分版本：把 registry data 中的 release-readiness summary/delta 逻辑拆出，不改变 registry 输出契约。</p>
+
+    <div class="grid">
+      <div class="card">
+        <span class="label">registry_data.py</span>
+        <span class="value">634 -> 507</span>
+      </div>
+      <div class="card">
+        <span class="label">新增 summary 模块</span>
+        <span class="value">207 行</span>
+      </div>
+      <div class="card">
+        <span class="label">focused tests</span>
+        <span class="value pass">24 passed</span>
+      </div>
+    </div>
+
+    <h2>拆分边界</h2>
+    <table>
+      <tr><th>文件</th><th>职责</th></tr>
+      <tr>
+        <td><code>registry_release_readiness_summary.py</code></td>
+        <td>读取 release-readiness comparison artifact，判定 comparison status，并统计 benchmark readiness requirement 的 delta/reason drift。</td>
+      </tr>
+      <tr>
+        <td><code>registry_release_readiness.py</code></td>
+        <td>保留原 rankings 使用的 release-readiness delta row、leaderboard 和 summary 逻辑，避免导入撞名。</td>
+      </tr>
+      <tr>
+        <td><code>registry_data.py</code></td>
+        <td>继续负责 RegisteredRun 汇总、run discovery、registry 聚合和 legacy helper 兼容导出。</td>
+      </tr>
+    </table>
+
+    <h2>验证结果</h2>
+    <table>
+      <tr><th>命令</th><th>结果</th></tr>
+      <tr><td><code>py_compile registry_data/release_readiness modules</code></td><td class="pass">pass</td></tr>
+      <tr><td><code>pytest registry + coverage governance</code></td><td class="pass">24 passed</td></tr>
+      <tr><td><code>check_source_encoding.py</code></td><td class="pass">status=pass, clean_count=1013</td></tr>
+      <tr><td><code>git diff --check</code></td><td class="pass">pass</td></tr>
+    </table>
+  </main>
+</body>
+</html>

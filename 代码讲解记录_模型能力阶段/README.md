@@ -947,6 +947,9 @@
 798-v784-training-portfolio-summary-split.md
  -> v784 code explanation: extract training portfolio artifact-reading summary normalization from the comparison workflow.
 
+799-v785-registry-release-readiness-summary-split.md
+ -> v785 code explanation: extract registry release-readiness comparison summary helpers from the registry data module.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

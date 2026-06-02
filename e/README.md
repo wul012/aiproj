@@ -1424,3 +1424,9 @@ e/663/解释/说明.md
 - `e/784/图片`
 - `e/784/解释/说明.md`
 - v784 training portfolio summary split 的运行截图和解释。
+
+## v785 补充索引
+
+- `e/785/图片`
+- `e/785/解释/说明.md`
+- v785 registry release-readiness summary split 的运行截图和解释。
