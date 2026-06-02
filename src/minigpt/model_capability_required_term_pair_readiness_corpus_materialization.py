@@ -21,11 +21,13 @@ PAIR_READINESS_READY_CONTRACT_DECISIONS = {
     "pair_readiness_split_contract_ready",
     "pair_readiness_loss_retention_contract_patch_ready",
     "pair_readiness_structured_template_contract_ready",
+    "pair_readiness_fixed_recovery_contract_patch_ready",
 }
 PAIR_READINESS_CONTRACT_JSON_FILENAMES = (
     PAIR_READINESS_SPLIT_CONTRACT_JSON_FILENAME,
     "model_capability_required_term_pair_readiness_loss_retention_contract_patch.json",
     "model_capability_required_term_pair_readiness_structured_template_contract.json",
+    "model_capability_required_term_pair_readiness_fixed_recovery_contract_patch.json",
 )
 
 

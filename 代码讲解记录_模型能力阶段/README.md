@@ -749,6 +749,9 @@
 732-v718-fixed-recovery-repair-plan.md
  -> v718 code explanation: convert the structured-template loss-only route comparison into a fixed-recovery repair plan.
 
+733-v719-fixed-recovery-contract-patch.md
+ -> v719 code explanation: apply the fixed-recovery plan to the structured-template contract while preserving loss rows and heldout isolation.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

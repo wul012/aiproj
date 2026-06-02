@@ -7346,6 +7346,8 @@ The pair-readiness route comparison layer compares baseline split, loss-retentio
 
 The pair-readiness fixed-recovery plan layer converts that loss-only structured-template result into a bounded next step: restore fixed direct retention while preserving recovered loss behavior and keeping pair-promotion blocked until both direct probes hit.
 
+The pair-readiness fixed-recovery contract patch layer applies that plan to the structured-template contract, adding fixed-recovery rows while preserving loss rows and registering the patch as a materializer-ready contract decision.
+
 The run registry layer indexes multiple run directories so experiments can be scanned by commit, data fingerprint, quality status, eval suite coverage, metrics, artifact count, notes, tags, best-val rank, loss delta, a leaderboard, an interactive local HTML table, shareable URL state, and visible-row CSV export.
 
 The experiment card layer turns one run into a compact JSON/Markdown/HTML summary for review, handoff, or portfolio use.

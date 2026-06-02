@@ -1076,3 +1076,8 @@ e/663/解释/说明.md
 - `e/718/图片`
 - `e/718/解释/说明.md`
 - v718 fixed-recovery repair plan 的运行截图和解释。
+## v719 补充索引
+
+- `e/719/图片`
+- `e/719/解释/说明.md`
+- v719 fixed-recovery contract patch 的运行截图和解释。

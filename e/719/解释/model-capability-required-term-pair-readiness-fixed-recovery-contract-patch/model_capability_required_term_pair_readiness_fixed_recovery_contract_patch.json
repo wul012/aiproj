@@ -1,0 +1,181 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT pair-readiness fixed-recovery contract patch",
+  "generated_at": "2026-06-02T03:34:39Z",
+  "status": "pass",
+  "decision": "pair_readiness_fixed_recovery_contract_patch_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_plan_path": "e\\718\\解释\\model-capability-required-term-pair-readiness-fixed-recovery-repair-plan\\model_capability_required_term_pair_readiness_fixed_recovery_repair_plan.json",
+  "source_base_contract_path": "e\\714\\解释\\model-capability-required-term-pair-readiness-structured-template-contract\\model_capability_required_term_pair_readiness_structured_template_contract.json",
+  "source_plan": {
+    "status": "pass",
+    "decision": "pair_readiness_fixed_recovery_repair_plan_ready",
+    "summary": {
+      "check_count": 8,
+      "passed_check_count": 8,
+      "failed_check_count": 0,
+      "plan_ready": true,
+      "proposed_next_artifact": "pair_readiness_fixed_recovery_contract_patch",
+      "repair_focus": "restore fixed direct retention while preserving the structured route's recovered loss hit",
+      "source_structured_hit_terms": [
+        "loss"
+      ],
+      "source_structured_missed_terms": [
+        "fixed"
+      ]
+    }
+  },
+  "source_base_contract": {
+    "status": "pass",
+    "decision": "pair_readiness_structured_template_contract_ready",
+    "summary": {
+      "contract_ready": true,
+      "structured_training_row_count": 14,
+      "evaluation_probe_count": 3,
+      "failed_check_count": 0,
+      "source_default_hit_delta": -1,
+      "source_candidate_regressed": true,
+      "heldout_pair_probe": "fixed=|loss=",
+      "template_family": "prompt_answer_structured_direct_terms"
+    }
+  },
+  "contract": {
+    "contract_version": 4,
+    "training_rows": [
+      "task: complete required term | prompt: fixed= | answer: fixed",
+      "task: complete required term | prompt: loss= | answer: loss",
+      "case=fixed | prompt=fixed= | expected=fixed | answer=fixed",
+      "case=loss | prompt=loss= | expected=loss | answer=loss",
+      "fixed direct template -> fixed",
+      "loss direct template -> loss",
+      "fixed route target term is fixed",
+      "loss route target term is loss",
+      "when prompt begins fixed= complete fixed",
+      "when prompt begins loss= complete loss",
+      "required term fixed stays on fixed branch",
+      "required term loss stays on loss branch",
+      "fixed branch answer uses fixed and avoids loss",
+      "loss branch answer uses loss and avoids fixed",
+      "task: complete required term | prompt: fixed= | answer: fixed | recovery: fixed",
+      "case=fixed-recovery | prompt=fixed= | expected=fixed | answer=fixed",
+      "fixed direct answer confirmation -> fixed",
+      "fixed prompt should complete fixed before loss",
+      "fixed branch keeps fixed and rejects loss completion",
+      "fixed recovery row preserves fixed token sequence",
+      "when prompt begins fixed= the answer remains fixed",
+      "required term fixed stays fixed while loss rows stay present"
+    ],
+    "evaluation_probes": [
+      {
+        "id": "fixed-direct",
+        "prompt": "fixed=",
+        "expected_term": "fixed",
+        "split": "heldout-direct"
+      },
+      {
+        "id": "loss-direct",
+        "prompt": "loss=",
+        "expected_term": "loss",
+        "split": "heldout-direct"
+      },
+      {
+        "id": "fixed-loss-pair",
+        "prompt": "fixed=|loss=",
+        "expected_term": "fixed+loss",
+        "split": "heldout-pair"
+      }
+    ],
+    "heldout_pair_probe": "fixed=|loss=",
+    "promotion_requirement": "fixed-direct and loss-direct must both hit before pair probe or baseline promotion is claimed",
+    "leakage_policy": "structured rows may describe direct prompts, but exact heldout probe strings must not be training rows",
+    "template_family": "prompt_answer_structured_direct_terms",
+    "source_route_boundary": "created after the loss-retention prefix repair regressed, so this avoids more single-sided prefix weighting",
+    "patch_kind": "fixed_recovery",
+    "patch_note": "fixed-recovery rows are added after structured-template rows while preserving loss rows and heldout probes"
+  },
+  "patch": {
+    "added_rows": [
+      "task: complete required term | prompt: fixed= | answer: fixed | recovery: fixed",
+      "case=fixed-recovery | prompt=fixed= | expected=fixed | answer=fixed",
+      "fixed direct answer confirmation -> fixed",
+      "fixed prompt should complete fixed before loss",
+      "fixed branch keeps fixed and rejects loss completion",
+      "fixed recovery row preserves fixed token sequence",
+      "when prompt begins fixed= the answer remains fixed",
+      "required term fixed stays fixed while loss rows stay present"
+    ],
+    "added_row_count": 8,
+    "patch_focus": "fixed direct recovery without removing structured loss rows"
+  },
+  "check_rows": [
+    {
+      "id": "repair_plan_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "repair plan must pass"
+    },
+    {
+      "id": "repair_plan_decision",
+      "status": "pass",
+      "actual": "pair_readiness_fixed_recovery_repair_plan_ready",
+      "detail": "patch follows only a ready fixed-recovery repair plan"
+    },
+    {
+      "id": "base_contract_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "base structured-template contract must pass"
+    },
+    {
+      "id": "base_contract_decision",
+      "status": "pass",
+      "actual": "pair_readiness_structured_template_contract_ready",
+      "detail": "base must be the structured-template contract"
+    },
+    {
+      "id": "fixed_rows_added",
+      "status": "pass",
+      "actual": "all fixed rows",
+      "detail": "all fixed-recovery rows must be present"
+    },
+    {
+      "id": "loss_rows_preserved",
+      "status": "pass",
+      "actual": 11,
+      "detail": "loss structured rows must remain present"
+    },
+    {
+      "id": "evaluation_probes_preserved",
+      "status": "pass",
+      "actual": 3,
+      "detail": "fixed, loss, and pair probes must be preserved"
+    },
+    {
+      "id": "no_exact_eval_row_overlap",
+      "status": "pass",
+      "actual": [],
+      "detail": "exact eval prompts must not be training rows"
+    },
+    {
+      "id": "heldout_pair_absent",
+      "status": "pass",
+      "actual": false,
+      "detail": "heldout pair probe must not be a training row"
+    }
+  ],
+  "summary": {
+    "base_training_row_count": 14,
+    "patched_training_row_count": 22,
+    "added_training_row_count": 8,
+    "loss_row_count": 11,
+    "evaluation_probe_count": 3,
+    "failed_check_count": 0,
+    "patch_ready": true
+  },
+  "interpretation": {
+    "model_quality_claim": "contract_patch_only",
+    "reason": "The structured-template contract now includes fixed-recovery rows while preserving loss rows and heldout probes.",
+    "next_action": "materialize the fixed-recovery contract and rerun pair-readiness training"
+  }
+}

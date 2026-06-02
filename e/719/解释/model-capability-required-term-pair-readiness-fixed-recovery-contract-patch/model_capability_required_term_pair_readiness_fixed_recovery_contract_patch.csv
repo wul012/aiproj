@@ -1,0 +1,10 @@
+id,status,actual,detail
+repair_plan_passed,pass,pass,repair plan must pass
+repair_plan_decision,pass,pair_readiness_fixed_recovery_repair_plan_ready,patch follows only a ready fixed-recovery repair plan
+base_contract_passed,pass,pass,base structured-template contract must pass
+base_contract_decision,pass,pair_readiness_structured_template_contract_ready,base must be the structured-template contract
+fixed_rows_added,pass,all fixed rows,all fixed-recovery rows must be present
+loss_rows_preserved,pass,11,loss structured rows must remain present
+evaluation_probes_preserved,pass,3,"fixed, loss, and pair probes must be preserved"
+no_exact_eval_row_overlap,pass,[],exact eval prompts must not be training rows
+heldout_pair_absent,pass,False,heldout pair probe must not be a training row
