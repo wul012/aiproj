@@ -1,0 +1,5 @@
+profile_id,term,prompt,branch_vote,continuation_hit,continuation_preview
+default,fixed,fixed=,fixed-start,True,fixed=fixed=
+suppress_newline_tokens,fixed,fixed=,fixed-start,True,fixed=fixed=
+default,loss,loss=,fixed-start,False,fixed=fixed=
+suppress_newline_tokens,loss,loss=,fixed-start,False,fixed=fixed=

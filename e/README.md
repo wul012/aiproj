@@ -966,3 +966,8 @@ e/663/解释/说明.md
 - `e/696/图片`
 - `e/696/解释/说明.md`
 - v696 minimal prompt training 的运行截图和解释。
+## v697 补充索引
+
+- `e/697/图片`
+- `e/697/解释/说明.md`
+- v697 minimal prompt branch-bias diagnostic 的运行截图和解释。

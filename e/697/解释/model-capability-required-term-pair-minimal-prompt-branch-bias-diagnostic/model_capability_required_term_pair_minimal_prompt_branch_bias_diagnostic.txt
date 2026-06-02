@@ -1,0 +1,11 @@
+status=pass
+decision=minimal_prompt_branch_bias_fixed_absorbs_loss
+failed_count=0
+corpus_mode=minimal_prompt_equals_surface_objective
+seed=3535
+fixed_hit_count=2
+loss_hit_count=0
+loss_prompt_fixed_start_count=2
+dominant_bias=fixed
+model_quality_claim=diagnostic_only
+next_action=strengthen loss first-token and branch separation before rerunning the minimal-prompt training

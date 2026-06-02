@@ -4,7 +4,19 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v696.0.0` runs the first real tiny checkpoint for the minimal-prompt equals-surface objective and preserves the negative result.
+Version `v697.0.0` diagnoses the first minimal-prompt training failure as fixed-dominant branch bias.
+
+## Latest v697 checkpoint
+
+- Added `model_capability_required_term_pair_minimal_prompt_branch_bias_diagnostic`.
+- Consumed v696 real minimal-prompt training evidence.
+- Confirmed `decision=minimal_prompt_branch_bias_fixed_absorbs_loss`.
+- Confirmed `fixed_hit_count=2`, `loss_hit_count=0`, and `loss_prompt_fixed_start_count=2`.
+- Confirmed `dominant_bias=fixed`.
+- Kept `model_quality_claim=diagnostic_only`.
+- Archived v697 evidence in `e/697` and added the code explanation in `代码讲解记录_模型能力阶段/711-v697-minimal-prompt-branch-bias-diagnostic.md`.
+
+## Latest v696 checkpoint
 
 ## Latest v696 checkpoint
 
@@ -14,8 +26,6 @@ Version `v696.0.0` runs the first real tiny checkpoint for the minimal-prompt eq
 - Observed `fixed=` hits fixed, while `loss=` still continues as `fixed=fixed=`.
 - Confirmed `pair_full_observed=False` and `model_quality_claim=not_claimed`.
 - Archived v696 evidence in `e/696` and added the code explanation in `代码讲解记录_模型能力阶段/710-v696-minimal-prompt-training.md`.
-
-## Latest v695 checkpoint
 
 ## Latest v695 checkpoint
 

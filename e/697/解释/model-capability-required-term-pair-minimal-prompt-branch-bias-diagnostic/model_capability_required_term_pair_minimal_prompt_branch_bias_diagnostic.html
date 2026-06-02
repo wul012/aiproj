@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT minimal prompt branch-bias diagnostic</title>
+<style>
+:root{color-scheme:light;--ink:#172026;--muted:#5d6975;--line:#d8dee4;--panel:#f7f9fb;--accent:#0f766e}
+*{box-sizing:border-box}
+body{margin:0;background:#eef2f5;color:var(--ink);font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1120px;margin:0 auto;padding:28px}
+h1{font-size:30px;margin:0 0 8px;letter-spacing:0}
+h2{font-size:18px;margin:0 0 12px;letter-spacing:0}
+p{color:var(--muted);line-height:1.55;overflow-wrap:anywhere}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:18px 0}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:8px}
+.card{padding:14px}
+.card span{display:block;color:var(--muted);font-size:12px;text-transform:uppercase}
+.card strong{display:block;margin-top:6px;font-size:18px;line-height:1.2;color:var(--accent);overflow-wrap:anywhere}
+.panel{padding:16px;margin:14px 0}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:#334155}
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT minimal prompt branch-bias diagnostic</h1><p>The loss prompt begins with the competing fixed term, so the miss is a branch-bias failure rather than a missing checkpoint.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Decision</span><strong>minimal_prompt_branch_bias_fixed_absorbs_loss</strong></div><div class="card"><span>Fixed hits</span><strong>2</strong></div><div class="card"><span>Loss hits</span><strong>0</strong></div><div class="card"><span>Loss-&gt;fixed starts</span><strong>2</strong></div><div class="card"><span>Dominant bias</span><strong>fixed</strong></div></section>
+<section class="panel">
+<h2>Diagnostic Rows</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Profile</th><th>Term</th><th>Prompt</th><th>Branch Vote</th><th>Hit</th><th>Continuation</th></tr></thead>
+<tbody><tr><td>default</td><td>fixed</td><td>fixed=</td><td>fixed-start</td><td>True</td><td>fixed=fixed=</td></tr><tr><td>suppress_newline_tokens</td><td>fixed</td><td>fixed=</td><td>fixed-start</td><td>True</td><td>fixed=fixed=</td></tr><tr><td>default</td><td>loss</td><td>loss=</td><td>fixed-start</td><td>False</td><td>fixed=fixed=</td></tr><tr><td>suppress_newline_tokens</td><td>loss</td><td>loss=</td><td>fixed-start</td><td>False</td><td>fixed=fixed=</td></tr></tbody>
+</table></div>
+</section>
+<section class="panel"><h2>Next Action</h2><p>strengthen loss first-token and branch separation before rerunning the minimal-prompt training</p></section>
+</main>
+</body>
+</html>

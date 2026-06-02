@@ -683,6 +683,9 @@
 710-v696-minimal-prompt-training.md
  -> v696 code explanation: run the first real minimal-prompt tiny checkpoint and preserve the loss-branch failure as negative evidence.
 
+711-v697-minimal-prompt-branch-bias-diagnostic.md
+ -> v697 code explanation: diagnose the first minimal-prompt failure as fixed-dominant branch bias.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。
