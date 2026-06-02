@@ -950,6 +950,9 @@
 799-v785-registry-release-readiness-summary-split.md
  -> v785 code explanation: extract registry release-readiness comparison summary helpers from the registry data module.
 
+800-v786-promoted-decision-html-split.md
+ -> v786 code explanation: extract promoted training-scale decision HTML rendering from the artifact coordinator.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

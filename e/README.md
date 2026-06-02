@@ -1430,3 +1430,9 @@ e/663/解释/说明.md
 - `e/785/图片`
 - `e/785/解释/说明.md`
 - v785 registry release-readiness summary split 的运行截图和解释。
+
+## v786 补充索引
+
+- `e/786/图片`
+- `e/786/解释/说明.md`
+- v786 promoted decision HTML split 的运行截图和解释。

@@ -7766,6 +7766,8 @@ The v784 maintenance split extracts training portfolio artifact-reading summary 
 
 The v785 maintenance split extracts registry release-readiness comparison summary helpers into `registry_release_readiness_summary.py`, reducing `registry_data.py` from 634 to 507 lines while preserving registry outputs and rankings imports.
 
+The v786 maintenance split extracts promoted training-scale decision HTML rendering into `promoted_training_scale_decision_html.py`, reducing the artifact coordinator from 628 to 415 lines while preserving legacy exports.
+
 Next useful extensions:
 
 - Train on a larger Chinese corpus.
