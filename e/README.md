@@ -1418,3 +1418,9 @@ e/663/解释/说明.md
 - `e/783/图片`
 - `e/783/解释/说明.md`
 - v783 seed handoff markdown split 的运行截图和解释。
+
+## v784 补充索引
+
+- `e/784/图片`
+- `e/784/解释/说明.md`
+- v784 training portfolio summary split 的运行截图和解释。

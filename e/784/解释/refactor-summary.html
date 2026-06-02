@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <title>v784 training portfolio summary split</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
+      background: #f6f7f9;
+      color: #1f2933;
+    }
+    body {
+      margin: 0;
+      padding: 32px;
+    }
+    main {
+      max-width: 1040px;
+      margin: 0 auto;
+      background: #ffffff;
+      border: 1px solid #d8dee6;
+      border-radius: 8px;
+      padding: 28px;
+      box-shadow: 0 8px 24px rgba(31, 41, 51, 0.08);
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      letter-spacing: 0;
+    }
+    h2 {
+      margin-top: 28px;
+      font-size: 18px;
+    }
+    .meta {
+      color: #5b6775;
+      margin-bottom: 24px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin: 20px 0;
+    }
+    .card {
+      border: 1px solid #d8dee6;
+      border-radius: 6px;
+      padding: 14px;
+      background: #fbfcfd;
+    }
+    .label {
+      color: #5b6775;
+      font-size: 13px;
+    }
+    .value {
+      display: block;
+      margin-top: 6px;
+      font-size: 22px;
+      font-weight: 700;
+    }
+    code {
+      background: #eef2f6;
+      border-radius: 4px;
+      padding: 2px 5px;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 12px;
+    }
+    th, td {
+      border: 1px solid #d8dee6;
+      padding: 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background: #eef2f6;
+    }
+    .pass {
+      color: #17663a;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>v784 training portfolio summary split</h1>
+    <p class="meta">维护拆分版本：不新增功能，只把 portfolio artifact 读取与摘要归一化从比较主流程中剥离。</p>
+
+    <div class="grid">
+      <div class="card">
+        <span class="label">主文件行数</span>
+        <span class="value">641 -> 403</span>
+      </div>
+      <div class="card">
+        <span class="label">新增模块</span>
+        <span class="value">283 行</span>
+      </div>
+      <div class="card">
+        <span class="label">focused tests</span>
+        <span class="value pass">15 passed</span>
+      </div>
+    </div>
+
+    <h2>职责边界</h2>
+    <table>
+      <tr>
+        <th>模块</th>
+        <th>保留或新增职责</th>
+      </tr>
+      <tr>
+        <td><code>training_portfolio_comparison_portfolio.py</code></td>
+        <td>读取 run manifest、benchmark scorecard、dataset card、maturity narrative、generation quality，并归一化为单个 portfolio summary。</td>
+      </tr>
+      <tr>
+        <td><code>training_portfolio_comparison.py</code></td>
+        <td>保留 portfolio 选择、baseline 选择、delta 计算、summary 聚合和 review/recommendation 接线。</td>
+      </tr>
+    </table>
+
+    <h2>验证结果</h2>
+    <table>
+      <tr><th>命令</th><th>结果</th></tr>
+      <tr><td><code>python -m py_compile ...</code></td><td class="pass">pass</td></tr>
+      <tr><td><code>pytest test_training_portfolio_comparison*</code></td><td class="pass">15 passed</td></tr>
+      <tr><td><code>check_source_encoding.py</code></td><td class="pass">status=pass, clean_count=1012</td></tr>
+      <tr><td><code>git diff --check</code></td><td class="pass">pass</td></tr>
+    </table>
+  </main>
+</body>
+</html>

@@ -944,6 +944,9 @@
 797-v783-seed-handoff-markdown-split.md
  -> v783 code explanation: extract promoted seed handoff Markdown rendering from the sections renderer module.
 
+798-v784-training-portfolio-summary-split.md
+ -> v784 code explanation: extract training portfolio artifact-reading summary normalization from the comparison workflow.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

@@ -7762,6 +7762,8 @@ The maintenance batching policy layer turns the v84-v108 version-fragmentation c
 
 The governance stabilization review layer extends that maintenance policy to the current seven governance chains: dataset provenance, benchmark history, registry/model card, release readiness, CI/coverage hygiene, training promotion, and maturity portfolio review. It pauses new governance-chain creation for a short window, records which chains are kept, watched, merged, or cut based on consumer and evidence presence, and routes proposed new items into those existing chains first. Each chain also carries a review reason and expansion rule so future work can merge into existing chains before creating new reports. v362 shows exact, keyword, and ambiguous-keyword routing, including the matched keywords/chains that force cross-chain proposals into review, and v363 adds an opt-in clean routing gate for CI or preflight checks.
 
+The v784 maintenance split extracts training portfolio artifact-reading summary normalization into `training_portfolio_comparison_portfolio.py`, reducing the comparison coordinator from 641 to 403 lines without changing the comparison report contract.
+
 Next useful extensions:
 
 - Train on a larger Chinese corpus.
