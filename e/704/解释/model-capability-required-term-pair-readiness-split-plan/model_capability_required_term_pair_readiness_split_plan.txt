@@ -1,0 +1,9 @@
+status=pass
+decision=pair_readiness_split_plan_ready
+failed_count=0
+plan_ready=True
+proposed_next_artifact=pair_readiness_split_contract
+training_split_count=3
+evaluation_split_count=3
+model_quality_claim=plan_only
+next_action=build pair_readiness_split_contract

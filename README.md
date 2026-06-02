@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v703.0.0` closes out the repeated minimal-prompt training batch after three real negative-result runs.
+Version `v704.0.0` turns the minimal-prompt closeout into a pair-readiness train/eval split plan.
+
+## Latest v704 checkpoint
+
+- Added `model_capability_required_term_pair_readiness_split_plan`.
+- Consumed v703 `minimal_prompt_batch_closed_without_pair_full` closeout evidence.
+- Confirmed `decision=pair_readiness_split_plan_ready`.
+- Proposed `pair_readiness_split_contract` as the next artifact.
+- Split training rows from held-out evaluation probes and promotion guardrails.
+- Archived v704 evidence in `e/704` and added the code explanation in `代码讲解记录_模型能力阶段/718-v704-pair-readiness-split-plan.md`.
 
 ## Latest v703 checkpoint
 

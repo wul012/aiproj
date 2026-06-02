@@ -704,6 +704,9 @@
 717-v703-minimal-prompt-batch-closeout.md
  -> v703 code explanation: close the repeated minimal-prompt training batch after three real negative-result runs.
 
+718-v704-pair-readiness-split-plan.md
+ -> v704 code explanation: convert the minimal-prompt closeout into a pair-readiness train/eval split plan.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

@@ -1001,3 +1001,8 @@ e/663/解释/说明.md
 - `e/703/图片`
 - `e/703/解释/说明.md`
 - v703 minimal prompt batch closeout 的运行截图和解释。
+## v704 补充索引
+
+- `e/704/图片`
+- `e/704/解释/说明.md`
+- v704 pair-readiness split plan 的运行截图和解释。

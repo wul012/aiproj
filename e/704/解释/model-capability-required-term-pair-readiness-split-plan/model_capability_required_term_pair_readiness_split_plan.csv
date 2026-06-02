@@ -1,0 +1,6 @@
+id,status,actual,detail
+closeout_passed,pass,pass,minimal prompt closeout must pass
+closeout_decision,pass,minimal_prompt_batch_closed_without_pair_full,split plan only follows a closed no-pair-full minimal-prompt batch
+three_real_reports,pass,3,need at least three real attempts
+no_pair_full,pass,0,pair-full candidate should be promoted instead of planning a split
+mixed_failures,pass,"fixed=1, loss=2",split plan needs evidence that both branches can win separately

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT pair-readiness split plan</title>
+<style>
+:root{color-scheme:light;--ink:#172026;--muted:#5d6975;--line:#d8dee4;--panel:#f7f9fb;--accent:#334155}
+*{box-sizing:border-box}
+body{margin:0;background:#eef2f5;color:var(--ink);font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1120px;margin:0 auto;padding:28px}
+h1{font-size:30px;margin:0 0 8px;letter-spacing:0}
+h2{font-size:18px;margin:0 0 12px;letter-spacing:0}
+p{color:var(--muted);line-height:1.55;overflow-wrap:anywhere}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:18px 0}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:8px}
+.card{padding:14px}
+.card span{display:block;color:var(--muted);font-size:12px;text-transform:uppercase}
+.card strong{display:block;margin-top:6px;font-size:18px;line-height:1.2;color:var(--accent);overflow-wrap:anywhere}
+.panel{padding:16px;margin:14px 0}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:#334155}
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT pair-readiness split plan</h1><p>Repeated minimal-prompt training produced separate branch wins but no pair-full candidate, so the next step should separate train/eval readiness.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Decision</span><strong>pair_readiness_split_plan_ready</strong></div><div class="card"><span>Plan ready</span><strong>True</strong></div><div class="card"><span>Next artifact</span><strong>pair_readiness_split_contract</strong></div><div class="card"><span>Train splits</span><strong>3</strong></div><div class="card"><span>Eval splits</span><strong>3</strong></div></section>
+<section class="panel"><h2>Checks</h2><div class="table-wrap"><table>
+<thead><tr><th>Check</th><th>Status</th><th>Actual</th><th>Detail</th></tr></thead>
+<tbody><tr><td>closeout_passed</td><td>pass</td><td>pass</td><td>minimal prompt closeout must pass</td></tr><tr><td>closeout_decision</td><td>pass</td><td>minimal_prompt_batch_closed_without_pair_full</td><td>split plan only follows a closed no-pair-full minimal-prompt batch</td></tr><tr><td>three_real_reports</td><td>pass</td><td>3</td><td>need at least three real attempts</td></tr><tr><td>no_pair_full</td><td>pass</td><td>0</td><td>pair-full candidate should be promoted instead of planning a split</td></tr><tr><td>mixed_failures</td><td>pass</td><td>fixed=1, loss=2</td><td>split plan needs evidence that both branches can win separately</td></tr></tbody>
+</table></div></section>
+<section class="panel"><h2>Split</h2><p>Training: direct_branch_completion_rows, anti_contamination_rows, balanced_prefix_progression_rows</p><p>Evaluation: fixed=, loss=, heldout_fixed_loss_pair_probe</p><p>claim pair capability only when heldout fixed and loss continuations both hit</p></section>
+<section class="panel"><h2>Next Action</h2><p>build pair_readiness_split_contract</p></section>
+</main>
+</body>
+</html>

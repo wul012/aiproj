@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair-readiness split plan",
+  "generated_at": "2026-06-02T01:41:55Z",
+  "status": "pass",
+  "decision": "pair_readiness_split_plan_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_closeout_path": "e\\703\\解释\\model-capability-required-term-pair-minimal-prompt-batch-closeout\\model_capability_required_term_pair_minimal_prompt_batch_closeout.json",
+  "source_closeout": {
+    "status": "pass",
+    "decision": "minimal_prompt_batch_closed_without_pair_full",
+    "summary": {
+      "report_count": 3,
+      "pass_count": 3,
+      "checkpoint_count": 3,
+      "pair_full_report_count": 0,
+      "fixed_only_report_count": 1,
+      "loss_only_report_count": 2,
+      "all_miss_report_count": 0,
+      "partial_other_report_count": 0,
+      "corpus_modes": [
+        "minimal_prompt_balanced_first_token_repair_objective",
+        "minimal_prompt_equals_surface_objective",
+        "minimal_prompt_loss_first_token_repair_objective"
+      ],
+      "branch_classes": [
+        "fixed-only",
+        "loss-only",
+        "loss-only"
+      ],
+      "closeout_ready": true
+    }
+  },
+  "check_rows": [
+    {
+      "id": "closeout_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "minimal prompt closeout must pass"
+    },
+    {
+      "id": "closeout_decision",
+      "status": "pass",
+      "actual": "minimal_prompt_batch_closed_without_pair_full",
+      "detail": "split plan only follows a closed no-pair-full minimal-prompt batch"
+    },
+    {
+      "id": "three_real_reports",
+      "status": "pass",
+      "actual": 3,
+      "detail": "need at least three real attempts"
+    },
+    {
+      "id": "no_pair_full",
+      "status": "pass",
+      "actual": 0,
+      "detail": "pair-full candidate should be promoted instead of planning a split"
+    },
+    {
+      "id": "mixed_failures",
+      "status": "pass",
+      "actual": "fixed=1, loss=2",
+      "detail": "split plan needs evidence that both branches can win separately"
+    }
+  ],
+  "plan": {
+    "ready": true,
+    "proposed_next_artifact": "pair_readiness_split_contract",
+    "training_split": [
+      "direct_branch_completion_rows",
+      "anti_contamination_rows",
+      "balanced_prefix_progression_rows"
+    ],
+    "evaluation_split": [
+      "fixed=",
+      "loss=",
+      "heldout_fixed_loss_pair_probe"
+    ],
+    "holdout_rule": "do not train on the exact heldout pair probe used for promotion",
+    "promotion_guard": "claim pair capability only when heldout fixed and loss continuations both hit",
+    "stop_condition": "if split contract cannot separate train/eval rows, pause training and redesign objective"
+  },
+  "summary": {
+    "check_count": 5,
+    "passed_check_count": 5,
+    "failed_check_count": 0,
+    "plan_ready": true,
+    "proposed_next_artifact": "pair_readiness_split_contract",
+    "training_split_count": 3,
+    "evaluation_split_count": 3
+  },
+  "interpretation": {
+    "model_quality_claim": "plan_only",
+    "reason": "Repeated minimal-prompt training produced separate branch wins but no pair-full candidate, so the next step should separate train/eval readiness.",
+    "next_action": "build pair_readiness_split_contract"
+  }
+}
