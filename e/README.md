@@ -1352,3 +1352,9 @@ e/663/解释/说明.md
 - `e/772/图片`
 - `e/772/解释/说明.md`
 - v772 objective-level contrast seed stability rollup 的运行截图和解释。
+
+## v773 补充索引
+
+- `e/773/图片`
+- `e/773/解释/说明.md`
+- v773 receipt validation split 的运行截图和解释。

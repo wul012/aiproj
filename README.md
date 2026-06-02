@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v772.0.0` rolls up objective-level contrast seed stability across three replay-ready seeds.
+Version `v773.0.0` starts the maintenance split series by extracting promoted seed handoff receipt validation.
+
+## Latest v773 checkpoint
+
+- Added `promoted_training_scale_seed_handoff_receipt_validation`.
+- Reduced `promoted_training_scale_seed_handoff_receipt.py` from 941 to 774 lines.
+- Moved schema constants, v2-v5 field checks, integer normalization, and compare-key normalization out of the receipt workflow module.
+- Preserved existing receipt imports and focused behavior.
+- Verified with `50 passed` receipt-focused tests.
+- Archived v773 evidence in `e/773` and added the code explanation in `代码讲解记录_模型能力阶段/787-v773-receipt-validation-split.md`.
 
 ## Latest v772 checkpoint
 
