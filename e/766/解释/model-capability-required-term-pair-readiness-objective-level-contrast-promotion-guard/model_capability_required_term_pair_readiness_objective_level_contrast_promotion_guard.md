@@ -1,0 +1,24 @@
+# MiniGPT Objective-Level Contrast Promotion Guard
+
+- Status: `pass`
+- Decision: `pair_readiness_objective_level_contrast_promotion_guard_ready_for_seed_stability`
+- Guard result: `ready_for_seed_stability`
+- Promotion allowed: `False`
+
+## Checks
+
+| Check | Status | Actual | Detail |
+| --- | --- | --- | --- |
+| comparison_passed | pass | pass | route comparison must pass |
+| comparison_decision | pass | pair_readiness_objective_level_contrast_replay_wins_needs_promotion_guard | promotion guard follows only the objective-level contrast winner decision |
+| objective_route_best | pass | True | objective route must be best in comparison |
+| promotion_guard_required | pass | True | comparison must require this guard |
+| replay_passed | pass | pass | objective replay must pass |
+| replay_decision_ready | pass | pair_readiness_fixed_preserving_transfer_pair_probe_replay_ready | objective replay must be ready |
+| replay_required_all_pair_full | pass | True | all required pair probes must be full |
+| replay_pair_full_count | pass | 3 | all three pair surfaces should be pair-full |
+| training_passed | pass | pass | training report must pass |
+| checkpoint_exists | pass | True | checkpoint must exist |
+| tokenizer_exists | pass | True | tokenizer must exist |
+| direct_pair_full | pass | True | training run should observe direct pair-full before replay |
+| materialized_corpus_large_enough | pass | 8320 | source corpus should be the objective-level contrast materialization |

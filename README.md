@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v765.0.0` compares prior pair replay routes and selects objective-level contrast as the current winner pending promotion guards.
+Version `v766.0.0` runs a guarded promotion check for objective-level contrast and requires seed stability before acceptance.
+
+## Latest v766 checkpoint
+
+- Added `model_capability_required_term_pair_readiness_objective_level_contrast_promotion_guard`.
+- Consumed v765 route comparison, v764 replay, and v763 training run.
+- Confirmed `decision=pair_readiness_objective_level_contrast_promotion_guard_ready_for_seed_stability`.
+- Confirmed `promotion_guard_ready=True` and `promotion_allowed=False`.
+- Proposed `pair_readiness_objective_level_contrast_seed_stability_plan`.
+- Archived v766 evidence in `e/766` and added the code explanation in `代码讲解记录_模型能力阶段/780-v766-objective-level-contrast-promotion-guard.md`.
 
 ## Latest v765 checkpoint
 

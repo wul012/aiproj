@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT objective-level contrast promotion guard</title>
+<style>
+:root{color-scheme:light;--ink:#172026;--muted:#5d6975;--line:#d8dee4;--panel:#f7f9fb;--accent:#b45309}
+*{box-sizing:border-box}
+body{margin:0;background:#eef2f5;color:var(--ink);font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1120px;margin:0 auto;padding:28px}
+h1{font-size:30px;margin:0 0 8px;letter-spacing:0}
+h2{font-size:18px;margin:0 0 12px;letter-spacing:0}
+p,li{color:var(--muted);line-height:1.55;overflow-wrap:anywhere}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:18px 0}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:8px}
+.card{padding:14px}
+.card span{display:block;color:var(--muted);font-size:12px;text-transform:uppercase}
+.card strong{display:block;margin-top:6px;font-size:18px;line-height:1.2;color:var(--accent);overflow-wrap:anywhere}
+.panel{padding:16px;margin:14px 0}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:#334155}
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT objective-level contrast promotion guard</h1><p>The objective-level contrast checkpoint wins replay comparison, but a single seed is not enough for acceptance.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Decision</span><strong>pair_readiness_objective_level_contrast_promotion_guard_ready_for_seed_stability</strong></div><div class="card"><span>Ready</span><strong>True</strong></div><div class="card"><span>Allowed</span><strong>False</strong></div><div class="card"><span>Guard</span><strong>ready_for_seed_stability</strong></div><div class="card"><span>Claim</span><strong>guarded_route_candidate</strong></div></section>
+<section class="panel"><h2>Checks</h2><div class="table-wrap"><table>
+<thead><tr><th>Check</th><th>Status</th><th>Actual</th><th>Detail</th></tr></thead>
+<tbody><tr><td>comparison_passed</td><td>pass</td><td>pass</td><td>route comparison must pass</td></tr><tr><td>comparison_decision</td><td>pass</td><td>pair_readiness_objective_level_contrast_replay_wins_needs_promotion_guard</td><td>promotion guard follows only the objective-level contrast winner decision</td></tr><tr><td>objective_route_best</td><td>pass</td><td>True</td><td>objective route must be best in comparison</td></tr><tr><td>promotion_guard_required</td><td>pass</td><td>True</td><td>comparison must require this guard</td></tr><tr><td>replay_passed</td><td>pass</td><td>pass</td><td>objective replay must pass</td></tr><tr><td>replay_decision_ready</td><td>pass</td><td>pair_readiness_fixed_preserving_transfer_pair_probe_replay_ready</td><td>objective replay must be ready</td></tr><tr><td>replay_required_all_pair_full</td><td>pass</td><td>True</td><td>all required pair probes must be full</td></tr><tr><td>replay_pair_full_count</td><td>pass</td><td>3</td><td>all three pair surfaces should be pair-full</td></tr><tr><td>training_passed</td><td>pass</td><td>pass</td><td>training report must pass</td></tr><tr><td>checkpoint_exists</td><td>pass</td><td>True</td><td>checkpoint must exist</td></tr><tr><td>tokenizer_exists</td><td>pass</td><td>True</td><td>tokenizer must exist</td></tr><tr><td>direct_pair_full</td><td>pass</td><td>True</td><td>training run should observe direct pair-full before replay</td></tr><tr><td>materialized_corpus_large_enough</td><td>pass</td><td>8320</td><td>source corpus should be the objective-level contrast materialization</td></tr></tbody>
+</table></div></section>
+<section class="panel"><h2>Non Goals</h2><ul><li>do not tag the checkpoint as accepted before seed stability</li><li>do not remove replay artifacts from the evidence chain</li><li>do not replace seed stability with direct training-run hits</li></ul></section>
+<section class="panel"><h2>Next Action</h2><p>build pair_readiness_objective_level_contrast_seed_stability_plan</p></section>
+</main>
+</body>
+</html>

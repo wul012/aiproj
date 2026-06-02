@@ -1,0 +1,154 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT pair-readiness objective-level contrast promotion guard",
+  "generated_at": "2026-06-02T11:13:28Z",
+  "status": "pass",
+  "decision": "pair_readiness_objective_level_contrast_promotion_guard_ready_for_seed_stability",
+  "failed_count": 0,
+  "issues": [],
+  "source_paths": {
+    "route_comparison": "e\\765\\解释\\model-capability-required-term-pair-readiness-objective-level-contrast-route-comparison\\model_capability_required_term_pair_readiness_objective_level_contrast_route_comparison.json",
+    "objective_replay": "e\\764\\解释\\model-capability-required-term-pair-readiness-objective-level-contrast-pair-probe-replay\\model_capability_required_term_pair_readiness_fixed_preserving_transfer_pair_probe_replay.json",
+    "training_run": "e\\763\\解释\\model-capability-required-term-pair-readiness-objective-level-contrast-training-run\\model_capability_required_term_pair_readiness_training_run.json"
+  },
+  "source_summaries": {
+    "route_comparison": {
+      "selected_route": "objective_level_contrast",
+      "objective_route_best": true,
+      "baseline_pair_full_count": 1,
+      "exact_repair_pair_full_count": 1,
+      "objective_pair_full_count": 3,
+      "objective_vs_baseline_pair_full_delta": 2,
+      "objective_vs_exact_repair_pair_full_delta": 2,
+      "objective_exact_heldout_pair_full": true,
+      "promotion_guard_required": true
+    },
+    "objective_replay": {
+      "row_count": 3,
+      "prompt_spec_count": 3,
+      "required_prompt_spec_count": 1,
+      "pair_full_count": 3,
+      "pair_full_rate": 1.0,
+      "required_pair_full_count": 1,
+      "required_all_pair_full": true,
+      "any_pair_full": true,
+      "exact_heldout_pair_full": true
+    },
+    "training_run": {
+      "materialization_status": "pass",
+      "training_status": "pass",
+      "checkpoint_exists": true,
+      "tokenizer_exists": true,
+      "default_pair_full_variant_count": 1,
+      "suppression_pair_full_variant_count": 1,
+      "default_continuation_hit_count": 2,
+      "suppression_continuation_hit_count": 2,
+      "pair_full_observed": true
+    }
+  },
+  "check_rows": [
+    {
+      "id": "comparison_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "route comparison must pass"
+    },
+    {
+      "id": "comparison_decision",
+      "status": "pass",
+      "actual": "pair_readiness_objective_level_contrast_replay_wins_needs_promotion_guard",
+      "detail": "promotion guard follows only the objective-level contrast winner decision"
+    },
+    {
+      "id": "objective_route_best",
+      "status": "pass",
+      "actual": true,
+      "detail": "objective route must be best in comparison"
+    },
+    {
+      "id": "promotion_guard_required",
+      "status": "pass",
+      "actual": true,
+      "detail": "comparison must require this guard"
+    },
+    {
+      "id": "replay_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "objective replay must pass"
+    },
+    {
+      "id": "replay_decision_ready",
+      "status": "pass",
+      "actual": "pair_readiness_fixed_preserving_transfer_pair_probe_replay_ready",
+      "detail": "objective replay must be ready"
+    },
+    {
+      "id": "replay_required_all_pair_full",
+      "status": "pass",
+      "actual": true,
+      "detail": "all required pair probes must be full"
+    },
+    {
+      "id": "replay_pair_full_count",
+      "status": "pass",
+      "actual": 3,
+      "detail": "all three pair surfaces should be pair-full"
+    },
+    {
+      "id": "training_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "training report must pass"
+    },
+    {
+      "id": "checkpoint_exists",
+      "status": "pass",
+      "actual": true,
+      "detail": "checkpoint must exist"
+    },
+    {
+      "id": "tokenizer_exists",
+      "status": "pass",
+      "actual": true,
+      "detail": "tokenizer must exist"
+    },
+    {
+      "id": "direct_pair_full",
+      "status": "pass",
+      "actual": true,
+      "detail": "training run should observe direct pair-full before replay"
+    },
+    {
+      "id": "materialized_corpus_large_enough",
+      "status": "pass",
+      "actual": 8320,
+      "detail": "source corpus should be the objective-level contrast materialization"
+    }
+  ],
+  "guard": {
+    "ready": true,
+    "guard_result": "ready_for_seed_stability",
+    "promotion_allowed": false,
+    "required_next_artifact": "pair_readiness_objective_level_contrast_seed_stability_plan",
+    "acceptance_boundary": "single-seed replay winner is insufficient for accepting a model-capability route",
+    "non_goals": [
+      "do not tag the checkpoint as accepted before seed stability",
+      "do not remove replay artifacts from the evidence chain",
+      "do not replace seed stability with direct training-run hits"
+    ]
+  },
+  "summary": {
+    "promotion_guard_ready": true,
+    "promotion_allowed": false,
+    "guard_result": "ready_for_seed_stability",
+    "required_next_artifact": "pair_readiness_objective_level_contrast_seed_stability_plan",
+    "passed_check_count": 13,
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "guarded_route_candidate",
+    "reason": "The objective-level contrast checkpoint wins replay comparison, but a single seed is not enough for acceptance.",
+    "next_action": "build pair_readiness_objective_level_contrast_seed_stability_plan"
+  }
+}

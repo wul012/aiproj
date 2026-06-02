@@ -1311,3 +1311,8 @@ e/663/解释/说明.md
 - `e/765/图片`
 - `e/765/解释/说明.md`
 - v765 objective-level contrast route comparison 的运行截图和解释。
+## v766 补充索引
+
+- `e/766/图片`
+- `e/766/解释/说明.md`
+- v766 objective-level contrast promotion guard 的运行截图和解释。
