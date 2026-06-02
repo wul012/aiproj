@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v778.0.0` extracts release readiness comparison regression scoring from the comparison workflow.
+Version `v779.0.0` extracts maturity narrative release-context normalization from the portfolio summary workflow.
+
+## Latest v779 checkpoint
+
+- Added `maturity_narrative_release`.
+- Reduced `maturity_narrative_summary.py` from 715 to 534 lines.
+- Moved release readiness context normalization and maturity-summary fallback handling into a focused release module.
+- Kept portfolio summary assembly, row extraction, status calculation, recommendations, and warnings in the main narrative summary module.
+- Verified with `20 passed` maturity narrative focused tests.
+- Archived v779 evidence in `e/779` and added the code explanation in `代码讲解记录_模型能力阶段/793-v779-maturity-narrative-release-summary-split.md`.
 
 ## Latest v778 checkpoint
 

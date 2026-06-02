@@ -929,6 +929,9 @@
 792-v778-release-readiness-comparison-regression-split.md
  -> v778 code explanation: extract release readiness comparison regression scoring from the comparison workflow.
 
+793-v779-maturity-narrative-release-summary-split.md
+ -> v779 code explanation: extract maturity narrative release-context normalization from the portfolio summary workflow.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

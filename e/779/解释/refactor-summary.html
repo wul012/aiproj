@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <title>v779 maturity narrative release summary split</title>
+  <style>
+    body { font-family: "Segoe UI", Arial, sans-serif; margin: 32px; color: #1f2933; line-height: 1.55; }
+    main { max-width: 980px; margin: 0 auto; }
+    h1 { font-size: 28px; margin-bottom: 8px; }
+    h2 { margin-top: 28px; font-size: 20px; }
+    table { border-collapse: collapse; width: 100%; margin-top: 12px; }
+    th, td { border: 1px solid #c9d1d9; padding: 10px 12px; text-align: left; vertical-align: top; }
+    th { background: #f3f4f6; }
+    code { background: #eef2f7; padding: 2px 5px; border-radius: 4px; }
+    .pass { color: #0f766e; font-weight: 700; }
+  </style>
+</head>
+<body>
+<main>
+  <h1>v779 maturity narrative release summary split</h1>
+  <p><strong>status:</strong> <span class="pass">pass</span></p>
+  <p>
+    v779 moves release-readiness context normalization out of <code>maturity_narrative_summary.py</code> and into
+    <code>maturity_narrative_release.py</code>.
+  </p>
+
+  <h2>Split Boundary</h2>
+  <table>
+    <tr><th>Module</th><th>Role after v779</th><th>Line count</th></tr>
+    <tr>
+      <td><code>src/minigpt/maturity_narrative_summary.py</code></td>
+      <td>Portfolio summary assembly, row extraction, status calculation, recommendations, and warnings.</td>
+      <td>534</td>
+    </tr>
+    <tr>
+      <td><code>src/minigpt/maturity_narrative_release.py</code></td>
+      <td>Normalize release-readiness context and maturity-summary fallback fields into one release summary shape.</td>
+      <td>207</td>
+    </tr>
+  </table>
+
+  <h2>Verification</h2>
+  <ul>
+    <li><code>python -m py_compile src\minigpt\maturity_narrative_summary.py src\minigpt\maturity_narrative_release.py</code></li>
+    <li><code>python -m pytest tests\test_maturity_narrative.py -q -o cache_dir=runs\pytest-cache-v779-focused</code>: 20 passed</li>
+  </ul>
+
+  <h2>Maintenance Value</h2>
+  <p>
+    Release readiness fallback fields are now isolated from portfolio narrative assembly, making future release-context changes
+    reviewable without reopening the whole maturity narrative summary module.
+  </p>
+</main>
+</body>
+</html>

@@ -1388,3 +1388,9 @@ e/663/解释/说明.md
 - `e/778/图片`
 - `e/778/解释/说明.md`
 - v778 release readiness comparison regression split 的运行截图和解释。
+
+## v779 补充索引
+
+- `e/779/图片`
+- `e/779/解释/说明.md`
+- v779 maturity narrative release summary split 的运行截图和解释。
