@@ -1,0 +1,4 @@
+spec_id,prompt,required_for_ready,replay_pair_full,default_continuation_hit_count,suppression_continuation_hit_count
+exact-heldout-pair,fixed=|loss=,True,False,1,1
+spaced-heldout-pair,fixed= | loss=,False,False,1,1
+arrow-heldout-pair,fixed -> | loss ->,False,True,2,2

@@ -1,0 +1,8 @@
+status=pass
+decision=pair_readiness_fixed_preserving_transfer_pair_probe_replay_partial
+failed_count=0
+exact_heldout_pair_full=False
+required_all_pair_full=False
+pair_full_count=1
+model_quality_claim=pair_probe_replay_partial
+next_action=diagnose prompt-surface sensitivity before promotion

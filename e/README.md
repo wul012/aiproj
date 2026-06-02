@@ -1261,3 +1261,8 @@ e/663/解释/说明.md
 - `e/755/图片`
 - `e/755/解释/说明.md`
 - v755 exact-surface repair training run 的运行截图和解释。
+## v756 补充索引
+
+- `e/756/图片`
+- `e/756/解释/说明.md`
+- v756 exact-surface repair pair-probe replay 的运行截图和解释。
