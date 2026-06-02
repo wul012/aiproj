@@ -1346,3 +1346,9 @@ e/663/解释/说明.md
 - `e/771/图片`
 - `e/771/解释/说明.md`
 - v771 objective-level contrast seed 3838 pair-probe replay 的运行截图和解释。
+
+## v772 补充索引
+
+- `e/772/图片`
+- `e/772/解释/说明.md`
+- v772 objective-level contrast seed stability rollup 的运行截图和解释。

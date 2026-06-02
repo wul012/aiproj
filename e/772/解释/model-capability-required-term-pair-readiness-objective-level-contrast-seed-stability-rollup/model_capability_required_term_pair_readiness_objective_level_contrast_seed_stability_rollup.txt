@@ -1,0 +1,11 @@
+status=pass
+decision=pair_readiness_objective_level_contrast_seed_stability_ready_for_acceptance_review
+failed_count=0
+acceptance_review_ready=True
+promotion_allowed=False
+observed_seed_count=3
+ready_replay_count=3
+pair_full_counts={'3636': 3, '3737': 2, '3838': 2}
+uniform_pair_full_strength=False
+model_quality_claim=seed_stable_pair_probe_replay_candidate
+next_action=run an acceptance review or promotion guard that consumes this seed stability rollup

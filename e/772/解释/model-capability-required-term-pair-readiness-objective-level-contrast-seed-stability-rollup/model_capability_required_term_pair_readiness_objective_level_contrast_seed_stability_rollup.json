@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT pair-readiness objective-level contrast seed stability rollup",
+  "generated_at": "2026-06-02T11:44:40Z",
+  "status": "pass",
+  "decision": "pair_readiness_objective_level_contrast_seed_stability_ready_for_acceptance_review",
+  "failed_count": 0,
+  "issues": [],
+  "source_seed_stability_plan_path": "e\\767\\解释\\model-capability-required-term-pair-readiness-objective-level-contrast-seed-stability-plan\\model_capability_required_term_pair_readiness_objective_level_contrast_seed_stability_plan.json",
+  "source_seed_stability_plan": {
+    "status": "pass",
+    "decision": "pair_readiness_objective_level_contrast_seed_stability_plan_ready",
+    "summary": {
+      "seed_stability_plan_ready": true,
+      "source_seed": 3636,
+      "additional_seed_count": 2,
+      "required_seed_count": 3,
+      "minimum_ready_replay_count": 2,
+      "failed_check_count": 0
+    },
+    "plan": {
+      "ready": true,
+      "source_seed": 3636,
+      "additional_seeds": [
+        3737,
+        3838
+      ],
+      "required_seed_count": 3,
+      "minimum_ready_replay_count": 2,
+      "required_next_artifacts": [
+        "pair_readiness_objective_level_contrast_seed_3737_training_run",
+        "pair_readiness_objective_level_contrast_seed_3737_pair_probe_replay",
+        "pair_readiness_objective_level_contrast_seed_3838_training_run",
+        "pair_readiness_objective_level_contrast_seed_3838_pair_probe_replay",
+        "pair_readiness_objective_level_contrast_seed_stability_rollup"
+      ],
+      "acceptance_rule": "accept only if at least two of three seeds replay required pair-full and no seed regresses to zero exact hits",
+      "non_goals": [
+        "do not reuse the v763 checkpoint as a substitute for additional seeds",
+        "do not accept direct training hits without pair replay",
+        "do not change corpus or model size during the stability run"
+      ]
+    }
+  },
+  "seed_rows": [
+    {
+      "seed": 3636,
+      "source_path": "e\\764\\解释\\model-capability-required-term-pair-readiness-objective-level-contrast-pair-probe-replay\\model_capability_required_term_pair_readiness_fixed_preserving_transfer_pair_probe_replay.json",
+      "status": "pass",
+      "decision": "pair_readiness_fixed_preserving_transfer_pair_probe_replay_ready",
+      "exact_heldout_pair_full": true,
+      "required_all_pair_full": true,
+      "pair_full_count": 3,
+      "pair_full_rate": 1.0,
+      "ready": true
+    },
+    {
+      "seed": 3737,
+      "source_path": "e\\769\\解释\\model-capability-required-term-pair-readiness-objective-level-contrast-seed-3737-pair-probe-replay\\model_capability_required_term_pair_readiness_fixed_preserving_transfer_pair_probe_replay.json",
+      "status": "pass",
+      "decision": "pair_readiness_fixed_preserving_transfer_pair_probe_replay_ready",
+      "exact_heldout_pair_full": true,
+      "required_all_pair_full": true,
+      "pair_full_count": 2,
+      "pair_full_rate": 0.6667,
+      "ready": true
+    },
+    {
+      "seed": 3838,
+      "source_path": "e\\771\\解释\\model-capability-required-term-pair-readiness-objective-level-contrast-seed-3838-pair-probe-replay\\model_capability_required_term_pair_readiness_fixed_preserving_transfer_pair_probe_replay.json",
+      "status": "pass",
+      "decision": "pair_readiness_fixed_preserving_transfer_pair_probe_replay_ready",
+      "exact_heldout_pair_full": true,
+      "required_all_pair_full": true,
+      "pair_full_count": 2,
+      "pair_full_rate": 0.6667,
+      "ready": true
+    }
+  ],
+  "check_rows": [
+    {
+      "id": "plan_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "seed stability plan must pass"
+    },
+    {
+      "id": "plan_decision",
+      "status": "pass",
+      "actual": "pair_readiness_objective_level_contrast_seed_stability_plan_ready",
+      "detail": "rollup must follow the v767 seed stability plan"
+    },
+    {
+      "id": "all_expected_seeds_observed",
+      "status": "pass",
+      "actual": [],
+      "detail": "all planned seeds must have replay evidence"
+    },
+    {
+      "id": "no_unexpected_seeds",
+      "status": "pass",
+      "actual": [],
+      "detail": "rollup must not mix unplanned seeds"
+    },
+    {
+      "id": "minimum_ready_replays",
+      "status": "pass",
+      "actual": 3,
+      "detail": "ready replay count must satisfy the acceptance rule"
+    },
+    {
+      "id": "no_zero_pair_full_seed",
+      "status": "pass",
+      "actual": [],
+      "detail": "no seed may regress to zero pair-full hits"
+    },
+    {
+      "id": "every_observed_replay_ready",
+      "status": "pass",
+      "actual": 3,
+      "detail": "each observed replay must be replay-ready"
+    }
+  ],
+  "summary": {
+    "seed_stability_rollup_ready": true,
+    "acceptance_review_ready": true,
+    "promotion_allowed": false,
+    "expected_seed_count": 3,
+    "observed_seed_count": 3,
+    "ready_replay_count": 3,
+    "minimum_ready_replay_count": 2,
+    "pair_full_counts": {
+      "3636": 3,
+      "3737": 2,
+      "3838": 2
+    },
+    "min_pair_full_count": 2,
+    "max_pair_full_count": 3,
+    "uniform_pair_full_strength": false,
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "seed_stable_pair_probe_replay_candidate",
+    "reason": "All planned seeds produced replay-ready evidence, with pair-full counts recorded for strength review.",
+    "next_action": "run an acceptance review or promotion guard that consumes this seed stability rollup"
+  }
+}

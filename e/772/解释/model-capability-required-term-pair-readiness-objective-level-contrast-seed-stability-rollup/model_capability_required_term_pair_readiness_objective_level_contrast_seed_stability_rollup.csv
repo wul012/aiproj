@@ -1,0 +1,4 @@
+seed,ready,status,decision,exact_heldout_pair_full,required_all_pair_full,pair_full_count,source_path
+3636,True,pass,pair_readiness_fixed_preserving_transfer_pair_probe_replay_ready,True,True,3,e\764\解释\model-capability-required-term-pair-readiness-objective-level-contrast-pair-probe-replay\model_capability_required_term_pair_readiness_fixed_preserving_transfer_pair_probe_replay.json
+3737,True,pass,pair_readiness_fixed_preserving_transfer_pair_probe_replay_ready,True,True,2,e\769\解释\model-capability-required-term-pair-readiness-objective-level-contrast-seed-3737-pair-probe-replay\model_capability_required_term_pair_readiness_fixed_preserving_transfer_pair_probe_replay.json
+3838,True,pass,pair_readiness_fixed_preserving_transfer_pair_probe_replay_ready,True,True,2,e\771\解释\model-capability-required-term-pair-readiness-objective-level-contrast-seed-3838-pair-probe-replay\model_capability_required_term_pair_readiness_fixed_preserving_transfer_pair_probe_replay.json

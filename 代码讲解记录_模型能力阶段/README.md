@@ -908,6 +908,9 @@
 785-v771-objective-level-contrast-seed-3838-pair-probe-replay.md
  -> v771 code explanation: replay the second supplemental objective-level contrast seed and complete the seed-stability replay inputs.
 
+786-v772-objective-level-contrast-seed-stability-rollup.md
+ -> v772 code explanation: roll up three objective-level contrast seed replays into an acceptance-review-ready candidate while keeping promotion gated.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

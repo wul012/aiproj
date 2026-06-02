@@ -4,7 +4,17 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v771.0.0` replays the second supplemental objective-level contrast seed checkpoint.
+Version `v772.0.0` rolls up objective-level contrast seed stability across three replay-ready seeds.
+
+## Latest v772 checkpoint
+
+- Added `model_capability_required_term_pair_readiness_objective_level_contrast_seed_stability_rollup`.
+- Consumed the v767 plan plus v764/v769/v771 replay reports.
+- Confirmed `decision=pair_readiness_objective_level_contrast_seed_stability_ready_for_acceptance_review`.
+- Confirmed `observed_seed_count=3` and `ready_replay_count=3`.
+- Recorded pair-full counts `{'3636': 3, '3737': 2, '3838': 2}` and `uniform_pair_full_strength=False`.
+- Kept `promotion_allowed=False`; the next step is an acceptance review or promotion guard.
+- Archived v772 evidence in `e/772` and added the code explanation in `代码讲解记录_模型能力阶段/786-v772-objective-level-contrast-seed-stability-rollup.md`.
 
 ## Latest v771 checkpoint
 
