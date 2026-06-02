@@ -1358,3 +1358,9 @@ e/663/解释/说明.md
 - `e/773/图片`
 - `e/773/解释/说明.md`
 - v773 receipt validation split 的运行截图和解释。
+
+## v774 补充索引
+
+- `e/774/图片`
+- `e/774/解释/说明.md`
+- v774 handoff review recommendations split 的运行截图和解释。

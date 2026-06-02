@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v773.0.0` starts the maintenance split series by extracting promoted seed handoff receipt validation.
+Version `v774.0.0` extracts promoted seed handoff review recommendations from the core review builder.
+
+## Latest v774 checkpoint
+
+- Added `promoted_training_scale_seed_handoff_review_recommendations`.
+- Reduced `promoted_training_scale_seed_handoff_review.py` from 779 to 613 lines.
+- Moved recommendation text and clean-batch detail generation out of the review workflow module.
+- Preserved the public `build_seed_handoff_review_recommendations` import path.
+- Verified with `33 passed` handoff review focused tests.
+- Archived v774 evidence in `e/774` and added the code explanation in `代码讲解记录_模型能力阶段/788-v774-handoff-review-recommendations-split.md`.
 
 ## Latest v773 checkpoint
 
