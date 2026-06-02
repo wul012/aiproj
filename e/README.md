@@ -1066,3 +1066,8 @@ e/663/解释/说明.md
 - `e/716/图片`
 - `e/716/解释/说明.md`
 - v716 structured-template training run 的运行截图和解释。
+## v717 补充索引
+
+- `e/717/图片`
+- `e/717/解释/说明.md`
+- v717 pair-readiness route comparison 的运行截图和解释。

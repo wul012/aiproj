@@ -1,0 +1,10 @@
+status=pass
+decision=pair_readiness_structured_template_changes_failure_shape_without_pair_full
+failed_count=0
+best_default_hit_count=1
+best_routes=['baseline-split', 'structured-template']
+structured_vs_baseline_default_hit_delta=0
+structured_vs_loss_retention_default_hit_delta=1
+failure_shape_changed=True
+model_quality_claim=comparison_only
+next_action=diagnose fixed recovery or capacity before expanding the structured corpus

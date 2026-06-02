@@ -743,6 +743,9 @@
 730-v716-structured-template-training-run.md
  -> v716 code explanation: run the structured-template corpus as a real tiny checkpoint and record its loss-only heldout direct result.
 
+731-v717-pair-readiness-route-comparison.md
+ -> v717 code explanation: compare baseline, loss-retention, and structured-template routes and classify the structured route as failure-shape change, not promotion.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

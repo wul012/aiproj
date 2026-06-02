@@ -7342,6 +7342,8 @@ The pair-readiness structured-template corpus materialization layer writes that 
 
 The pair-readiness structured-template training layer trains the materialized structured corpus with the same tiny configuration as prior runs, producing a checkpoint that still lacks pair-full behavior but flips the heldout direct miss from loss to fixed.
 
+The pair-readiness route comparison layer compares baseline split, loss-retention prefix, and structured-template training runs, showing that structured-template ties the baseline hit count while flipping the hit term from fixed to loss rather than producing pair-full behavior.
+
 The run registry layer indexes multiple run directories so experiments can be scanned by commit, data fingerprint, quality status, eval suite coverage, metrics, artifact count, notes, tags, best-val rank, loss delta, a leaderboard, an interactive local HTML table, shareable URL state, and visible-row CSV export.
 
 The experiment card layer turns one run into a compact JSON/Markdown/HTML summary for review, handoff, or portfolio use.
