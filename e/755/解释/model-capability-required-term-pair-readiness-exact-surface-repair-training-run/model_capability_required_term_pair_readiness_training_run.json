@@ -1,0 +1,367 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair-readiness training run",
+  "generated_at": "2026-06-02T09:58:47Z",
+  "status": "pass",
+  "decision": "pair_readiness_training_pair_full_observed",
+  "failed_count": 0,
+  "issues": [],
+  "out_dir": "e\\755\\解释\\model-capability-required-term-pair-readiness-exact-surface-repair-training-run",
+  "settings": {
+    "seed": 3535,
+    "max_iters": 1800,
+    "eval_iters": 2,
+    "batch_size": 16,
+    "block_size": 16,
+    "n_layer": 2,
+    "n_head": 2,
+    "n_embd": 96,
+    "learning_rate": 0.01,
+    "max_new_tokens": 12,
+    "temperature": 0.2,
+    "top_k": 1,
+    "device": "cpu",
+    "experiment_boundary": "train on materialized pair-readiness corpus and replay heldout direct probes"
+  },
+  "source_materialization": {
+    "status": "pass",
+    "decision": "pair_readiness_corpus_materialized",
+    "summary": {
+      "materialization_ready": true,
+      "training_line_count": 7680,
+      "evaluation_probe_count": 3,
+      "check_count": 6,
+      "passed_check_count": 6,
+      "failed_check_count": 0
+    },
+    "training_corpus": "e\\754\\解释\\model-capability-required-term-pair-readiness-exact-surface-repair-corpus-materialization\\pair_readiness_training_corpus.txt"
+  },
+  "training": {
+    "status": "pass",
+    "returncode": 0,
+    "command": [
+      "D:\\python\\python.exe",
+      "-B",
+      "D:\\aiproj\\scripts\\train.py",
+      "--data",
+      "e\\754\\解释\\model-capability-required-term-pair-readiness-exact-surface-repair-corpus-materialization\\pair_readiness_training_corpus.txt",
+      "--out-dir",
+      "e\\755\\解释\\model-capability-required-term-pair-readiness-exact-surface-repair-training-run\\pair-readiness-training-run",
+      "--device",
+      "cpu",
+      "--tokenizer",
+      "char",
+      "--max-iters",
+      "1800",
+      "--eval-interval",
+      "450",
+      "--eval-iters",
+      "2",
+      "--batch-size",
+      "16",
+      "--block-size",
+      "16",
+      "--n-layer",
+      "2",
+      "--n-head",
+      "2",
+      "--n-embd",
+      "96",
+      "--learning-rate",
+      "0.01",
+      "--seed",
+      "3535",
+      "--sample-prompt",
+      "fixed:",
+      "--sample-tokens",
+      "8",
+      "--sample-temperature",
+      "0.2",
+      "--sample-top-k",
+      "1"
+    ],
+    "command_text": "D:\\python\\python.exe -B D:\\aiproj\\scripts\\train.py --data e\\754\\解释\\model-capability-required-term-pair-readiness-exact-surface-repair-corpus-materialization\\pair_readiness_training_corpus.txt --out-dir e\\755\\解释\\model-capability-required-term-pair-readiness-exact-surface-repair-training-run\\pair-readiness-training-run --device cpu --tokenizer char --max-iters 1800 --eval-interval 450 --eval-iters 2 --batch-size 16 --block-size 16 --n-layer 2 --n-head 2 --n-embd 96 --learning-rate 0.01 --seed 3535 --sample-prompt fixed: --sample-tokens 8 --sample-temperature 0.2 --sample-top-k 1",
+    "stdout": "e\\755\\解释\\model-capability-required-term-pair-readiness-exact-surface-repair-training-run\\pair-readiness-training-run\\logs\\train_stdout.txt",
+    "stderr": "e\\755\\解释\\model-capability-required-term-pair-readiness-exact-surface-repair-training-run\\pair-readiness-training-run\\logs\\train_stderr.txt",
+    "run_dir": "e\\755\\解释\\model-capability-required-term-pair-readiness-exact-surface-repair-training-run\\pair-readiness-training-run",
+    "checkpoint_path": "e\\755\\解释\\model-capability-required-term-pair-readiness-exact-surface-repair-training-run\\pair-readiness-training-run\\checkpoint.pt",
+    "tokenizer_path": "e\\755\\解释\\model-capability-required-term-pair-readiness-exact-surface-repair-training-run\\pair-readiness-training-run\\tokenizer.json",
+    "metrics_path": "e\\755\\解释\\model-capability-required-term-pair-readiness-exact-surface-repair-training-run\\pair-readiness-training-run\\metrics.jsonl",
+    "train_config_path": "e\\755\\解释\\model-capability-required-term-pair-readiness-exact-surface-repair-training-run\\pair-readiness-training-run\\train_config.json",
+    "checkpoint_exists": true,
+    "tokenizer_exists": true,
+    "metrics_exists": true,
+    "train_config_exists": true,
+    "training_mode": "from_scratch",
+    "resume_checkpoint": "",
+    "resume_checkpoint_exists": false
+  },
+  "replay_report": {
+    "schema_version": 1,
+    "title": "MiniGPT required-term pair generation profile replay",
+    "generated_at": "2026-06-02T09:58:47Z",
+    "status": "pass",
+    "decision": "generation_profile_no_pair_coexistence_gain",
+    "failed_count": 0,
+    "issues": [],
+    "source_required_term_pair_branch_retention_sweep": "",
+    "out_dir": "e\\755\\解释\\model-capability-required-term-pair-readiness-exact-surface-repair-training-run\\heldout-direct-replay",
+    "settings": {
+      "profiles": [
+        "default",
+        "suppress_newline_tokens"
+      ],
+      "variant_limit": 3,
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 1,
+      "device": "cpu",
+      "experiment_boundary": "replay named generation profiles over archived fixed/loss branch-retention checkpoints without retraining"
+    },
+    "terms": [
+      {
+        "case": "fixed-direct",
+        "term": "fixed",
+        "scaffold_prompt": "fixed=",
+        "source_hit_rate": 1.0
+      },
+      {
+        "case": "loss-direct",
+        "term": "loss",
+        "scaffold_prompt": "loss=",
+        "source_hit_rate": 1.0
+      }
+    ],
+    "case_rows": [
+      {
+        "status": "pass",
+        "error": "",
+        "pair_id": "01-fixed-loss",
+        "variant_id": "pair-readiness-materialized",
+        "branch_retention_run_id": "01-fixed-loss-pair-readiness",
+        "profile_id": "default",
+        "term": "fixed",
+        "prompt": "fixed=",
+        "generation_seed": 3535,
+        "checkpoint_path": "e\\755\\解释\\model-capability-required-term-pair-readiness-exact-surface-repair-training-run\\pair-readiness-training-run\\checkpoint.pt",
+        "checkpoint_exists": true,
+        "tokenizer_path": "e\\755\\解释\\model-capability-required-term-pair-readiness-exact-surface-repair-training-run\\pair-readiness-training-run\\tokenizer.json",
+        "tokenizer_exists": true,
+        "generated": "fixed=fixed\nfixed=",
+        "continuation": "fixed\nfixed=",
+        "generated_preview": "fixed=fixed\\nfixed=",
+        "continuation_preview": "fixed\\nfixed=",
+        "continuation_hit": true,
+        "newline_cleanup_hit": true,
+        "blocked_token_count": 0
+      },
+      {
+        "status": "pass",
+        "error": "",
+        "pair_id": "01-fixed-loss",
+        "variant_id": "pair-readiness-materialized",
+        "branch_retention_run_id": "01-fixed-loss-pair-readiness",
+        "profile_id": "suppress_newline_tokens",
+        "term": "fixed",
+        "prompt": "fixed=",
+        "generation_seed": 3535,
+        "checkpoint_path": "e\\755\\解释\\model-capability-required-term-pair-readiness-exact-surface-repair-training-run\\pair-readiness-training-run\\checkpoint.pt",
+        "checkpoint_exists": true,
+        "tokenizer_path": "e\\755\\解释\\model-capability-required-term-pair-readiness-exact-surface-repair-training-run\\pair-readiness-training-run\\tokenizer.json",
+        "tokenizer_exists": true,
+        "generated": "fixed=fixed=fixed=",
+        "continuation": "fixed=fixed=",
+        "generated_preview": "fixed=fixed=fixed=",
+        "continuation_preview": "fixed=fixed=",
+        "continuation_hit": true,
+        "newline_cleanup_hit": true,
+        "blocked_token_count": 1
+      },
+      {
+        "status": "pass",
+        "error": "",
+        "pair_id": "01-fixed-loss",
+        "variant_id": "pair-readiness-materialized",
+        "branch_retention_run_id": "01-fixed-loss-pair-readiness",
+        "profile_id": "default",
+        "term": "loss",
+        "prompt": "loss=",
+        "generation_seed": 3536,
+        "checkpoint_path": "e\\755\\解释\\model-capability-required-term-pair-readiness-exact-surface-repair-training-run\\pair-readiness-training-run\\checkpoint.pt",
+        "checkpoint_exists": true,
+        "tokenizer_path": "e\\755\\解释\\model-capability-required-term-pair-readiness-exact-surface-repair-training-run\\pair-readiness-training-run\\tokenizer.json",
+        "tokenizer_exists": true,
+        "generated": "loss=lossssssssss",
+        "continuation": "lossssssssss",
+        "generated_preview": "loss=lossssssssss",
+        "continuation_preview": "lossssssssss",
+        "continuation_hit": true,
+        "newline_cleanup_hit": true,
+        "blocked_token_count": 0
+      },
+      {
+        "status": "pass",
+        "error": "",
+        "pair_id": "01-fixed-loss",
+        "variant_id": "pair-readiness-materialized",
+        "branch_retention_run_id": "01-fixed-loss-pair-readiness",
+        "profile_id": "suppress_newline_tokens",
+        "term": "loss",
+        "prompt": "loss=",
+        "generation_seed": 3536,
+        "checkpoint_path": "e\\755\\解释\\model-capability-required-term-pair-readiness-exact-surface-repair-training-run\\pair-readiness-training-run\\checkpoint.pt",
+        "checkpoint_exists": true,
+        "tokenizer_path": "e\\755\\解释\\model-capability-required-term-pair-readiness-exact-surface-repair-training-run\\pair-readiness-training-run\\tokenizer.json",
+        "tokenizer_exists": true,
+        "generated": "loss=lossssssssss",
+        "continuation": "lossssssssss",
+        "generated_preview": "loss=lossssssssss",
+        "continuation_preview": "lossssssssss",
+        "continuation_hit": true,
+        "newline_cleanup_hit": true,
+        "blocked_token_count": 1
+      }
+    ],
+    "variant_rows": [
+      {
+        "variant_id": "pair-readiness-materialized",
+        "profile_id": "default",
+        "term_count": 2,
+        "hit_terms": [
+          "fixed",
+          "loss"
+        ],
+        "missed_terms": [],
+        "hit_count": 2,
+        "pair_full_hit": true
+      },
+      {
+        "variant_id": "pair-readiness-materialized",
+        "profile_id": "suppress_newline_tokens",
+        "term_count": 2,
+        "hit_terms": [
+          "fixed",
+          "loss"
+        ],
+        "missed_terms": [],
+        "hit_count": 2,
+        "pair_full_hit": true
+      }
+    ],
+    "profile_rows": [
+      {
+        "profile_id": "default",
+        "case_count": 2,
+        "continuation_hit_count": 2,
+        "newline_cleanup_hit_count": 2,
+        "pair_full_variant_count": 1,
+        "variant_count": 1,
+        "blocked_token_count_total": 0
+      },
+      {
+        "profile_id": "suppress_newline_tokens",
+        "case_count": 2,
+        "continuation_hit_count": 2,
+        "newline_cleanup_hit_count": 2,
+        "pair_full_variant_count": 1,
+        "variant_count": 1,
+        "blocked_token_count_total": 2
+      }
+    ],
+    "summary": {
+      "variant_count": 1,
+      "term_count": 2,
+      "profile_count": 2,
+      "default_pair_full_variant_count": 1,
+      "suppression_pair_full_variant_count": 1,
+      "default_continuation_hit_count": 2,
+      "suppression_continuation_hit_count": 2,
+      "suppression_hit_delta": 0,
+      "suppression_pair_full_delta": 0,
+      "pair_full_rows": [
+        {
+          "variant_id": "pair-readiness-materialized",
+          "profile_id": "default",
+          "term_count": 2,
+          "hit_terms": [
+            "fixed",
+            "loss"
+          ],
+          "missed_terms": [],
+          "hit_count": 2,
+          "pair_full_hit": true
+        },
+        {
+          "variant_id": "pair-readiness-materialized",
+          "profile_id": "suppress_newline_tokens",
+          "term_count": 2,
+          "hit_terms": [
+            "fixed",
+            "loss"
+          ],
+          "missed_terms": [],
+          "hit_count": 2,
+          "pair_full_hit": true
+        }
+      ]
+    },
+    "interpretation": {
+      "model_quality_claim": "not_claimed",
+      "reason": "The suppression profile did not improve fixed/loss continuation hits on archived pair-retention checkpoints.",
+      "next_action": "Treat newline suppression as loss-alias cleanup only; the next model-capability step should train for pair coexistence.",
+      "summary": {
+        "variant_count": 1,
+        "term_count": 2,
+        "profile_count": 2,
+        "default_pair_full_variant_count": 1,
+        "suppression_pair_full_variant_count": 1,
+        "default_continuation_hit_count": 2,
+        "suppression_continuation_hit_count": 2,
+        "suppression_hit_delta": 0,
+        "suppression_pair_full_delta": 0,
+        "pair_full_rows": [
+          {
+            "variant_id": "pair-readiness-materialized",
+            "profile_id": "default",
+            "term_count": 2,
+            "hit_terms": [
+              "fixed",
+              "loss"
+            ],
+            "missed_terms": [],
+            "hit_count": 2,
+            "pair_full_hit": true
+          },
+          {
+            "variant_id": "pair-readiness-materialized",
+            "profile_id": "suppress_newline_tokens",
+            "term_count": 2,
+            "hit_terms": [
+              "fixed",
+              "loss"
+            ],
+            "missed_terms": [],
+            "hit_count": 2,
+            "pair_full_hit": true
+          }
+        ]
+      }
+    }
+  },
+  "summary": {
+    "materialization_status": "pass",
+    "training_status": "pass",
+    "checkpoint_exists": true,
+    "tokenizer_exists": true,
+    "default_pair_full_variant_count": 1,
+    "suppression_pair_full_variant_count": 1,
+    "default_continuation_hit_count": 2,
+    "suppression_continuation_hit_count": 2,
+    "pair_full_observed": true
+  },
+  "interpretation": {
+    "model_quality_claim": "direct_pair_probe_hit",
+    "reason": "The materialized pair-readiness training run hit both heldout direct probes.",
+    "next_action": "run heldout pair-probe replay before promoting the checkpoint"
+  }
+}

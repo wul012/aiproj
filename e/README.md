@@ -1256,3 +1256,8 @@ e/663/解释/说明.md
 - `e/754/图片`
 - `e/754/解释/说明.md`
 - v754 exact-surface repair corpus materialization 的运行截图和解释。
+## v755 补充索引
+
+- `e/755/图片`
+- `e/755/解释/说明.md`
+- v755 exact-surface repair training run 的运行截图和解释。

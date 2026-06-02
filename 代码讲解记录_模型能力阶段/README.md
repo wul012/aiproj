@@ -857,6 +857,9 @@
 768-v754-exact-surface-repair-corpus-materialization.md
  -> v754 code explanation: materialize the exact-surface repair contract patch into a 7680-line corpus without heldout leakage.
 
+769-v755-exact-surface-repair-training-run.md
+ -> v755 code explanation: train the exact-surface repair corpus and record direct pair-probe hit evidence before independent replay.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

@@ -1,0 +1,14 @@
+device=cpu
+tokenizer=char
+tokens=341760 vocab_size=33
+parameters=228,576
+data_source=data:e\754\解释\model-capability-required-term-pair-readiness-exact-surface-repair-corpus-materialization\pair_readiness_training_corpus.txt
+step=    1 train_loss=3.2248 val_loss=3.2283
+step=  450 train_loss=1.5204 val_loss=1.8003
+step=  900 train_loss=1.3293 val_loss=1.6964
+step= 1350 train_loss=1.2729 val_loss=1.3614
+step= 1800 train_loss=1.0542 val_loss=1.1416
+saved=e\755\解释\model-capability-required-term-pair-readiness-exact-surface-repair-training-run\pair-readiness-training-run
+history=e\755\解释\model-capability-required-term-pair-readiness-exact-surface-repair-training-run\pair-readiness-training-run\metrics.jsonl
+manifest=e\755\解释\model-capability-required-term-pair-readiness-exact-surface-repair-training-run\pair-readiness-training-run\run_manifest.json
+sample=e\755\解释\model-capability-required-term-pair-readiness-exact-surface-repair-training-run\pair-readiness-training-run\sample.txt
