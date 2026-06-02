@@ -866,6 +866,9 @@
 771-v757-exact-surface-repair-effectiveness-comparison.md
  -> v757 code explanation: compare v750 and v756 replay surfaces and close the ineffective near-exact repair route.
 
+772-v758-exact-surface-repair-route-closeout.md
+ -> v758 code explanation: convert the ineffective exact-surface repair comparison into a closed-route boundary and next-route candidates.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

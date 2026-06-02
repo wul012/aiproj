@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v735.0.0` closes the no-improvement bridge route and plans a direct-completion surface contract.
+Version `v758.0.0` closes the ineffective near-exact repair route and points the next model-capability work toward objective or decoding alternatives.
+
+## Latest v758 checkpoint
+
+- Added `model_capability_required_term_pair_readiness_exact_surface_repair_route_closeout`.
+- Consumed v757 exact-surface repair effectiveness comparison.
+- Confirmed `decision=pair_readiness_exact_surface_repair_route_closed`.
+- Closed `near_exact_surface_bridge_rows`.
+- Recommended `objective_or_decoding_alternative_plan` as the next route.
+- Archived v758 evidence in `e/758` and added the code explanation in `代码讲解记录_模型能力阶段/772-v758-exact-surface-repair-route-closeout.md`.
 
 ## Latest v735 checkpoint
 

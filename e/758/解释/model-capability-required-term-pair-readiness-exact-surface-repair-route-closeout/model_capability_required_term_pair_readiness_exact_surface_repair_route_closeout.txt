@@ -1,0 +1,9 @@
+status=pass
+decision=pair_readiness_exact_surface_repair_route_closed
+failed_count=0
+closeout_ready=True
+closed_route=near_exact_surface_bridge_rows
+recommended_next_route=objective_or_decoding_alternative_plan
+candidate_route_count=3
+closed_reason=independent replay deltas stayed at zero for exact, spaced, and arrow surfaces
+next_action=plan objective-level or decoding-side alternatives instead of adding more near-exact rows

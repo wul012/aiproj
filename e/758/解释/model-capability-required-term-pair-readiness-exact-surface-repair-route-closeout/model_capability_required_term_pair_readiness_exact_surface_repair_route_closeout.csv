@@ -1,0 +1,4 @@
+route,why,risk
+objective_level_contrast,the current corpus teaches surface patterns but not a stable required exact response,may still overfit tiny prompt forms
+decode_side_constraint_probe,"arrow surface can produce both terms, so decoding may expose whether exact prompt is first-token or separator sensitive",decode constraints can mask model weakness
+fresh_seed_stability,confirm whether the partial pattern is seed-specific before investing in another corpus patch,costs more training time
