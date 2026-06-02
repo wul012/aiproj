@@ -755,6 +755,9 @@
 734-v720-fixed-recovery-corpus-materialization.md
  -> v720 code explanation: materialize the fixed-recovery patched contract into a 7040-line training corpus and heldout fixture.
 
+735-v721-fixed-recovery-training-run.md
+ -> v721 code explanation: train the fixed-recovery corpus and record that it restores fixed but loses loss again.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

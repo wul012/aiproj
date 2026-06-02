@@ -1,0 +1,3 @@
+profile_id,hit_terms,missed_terms,pair_full_hit
+default,"[""fixed""]","[""loss""]",False
+suppress_newline_tokens,"[""fixed""]","[""loss""]",False

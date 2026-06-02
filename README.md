@@ -7350,6 +7350,8 @@ The pair-readiness fixed-recovery contract patch layer applies that plan to the 
 
 The pair-readiness fixed-recovery corpus materialization layer writes the patched contract into a 7040-line training corpus and heldout fixture, keeping the pair probe out of both training rows and corpus lines.
 
+The pair-readiness fixed-recovery training layer trains that corpus with the same tiny configuration and shows the route restores `fixed` but loses `loss`, returning to a fixed-only failure rather than pair-full behavior.
+
 The run registry layer indexes multiple run directories so experiments can be scanned by commit, data fingerprint, quality status, eval suite coverage, metrics, artifact count, notes, tags, best-val rank, loss delta, a leaderboard, an interactive local HTML table, shareable URL state, and visible-row CSV export.
 
 The experiment card layer turns one run into a compact JSON/Markdown/HTML summary for review, handoff, or portfolio use.
