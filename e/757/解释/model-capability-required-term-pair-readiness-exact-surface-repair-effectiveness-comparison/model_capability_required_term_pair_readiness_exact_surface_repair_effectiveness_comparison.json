@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT pair-readiness exact-surface repair effectiveness comparison",
+  "generated_at": "2026-06-02T10:10:23Z",
+  "status": "pass",
+  "decision": "pair_readiness_exact_surface_repair_ineffective_stop_route",
+  "failed_count": 0,
+  "issues": [],
+  "source_baseline_replay_path": "e\\750\\解释\\model-capability-required-term-pair-readiness-fixed-preserving-transfer-pair-probe-replay\\model_capability_required_term_pair_readiness_fixed_preserving_transfer_pair_probe_replay.json",
+  "source_repaired_replay_path": "e\\756\\解释\\model-capability-required-term-pair-readiness-exact-surface-repair-pair-probe-replay\\model_capability_required_term_pair_readiness_fixed_preserving_transfer_pair_probe_replay.json",
+  "comparison_rows": [
+    {
+      "spec_id": "arrow-heldout-pair",
+      "prompt": "fixed -> | loss ->",
+      "required_for_ready": false,
+      "baseline_pair_full": true,
+      "repaired_pair_full": true,
+      "baseline_default_hit_count": 2,
+      "repaired_default_hit_count": 2,
+      "default_hit_delta": 0,
+      "pair_full_delta": 0
+    },
+    {
+      "spec_id": "exact-heldout-pair",
+      "prompt": "fixed=|loss=",
+      "required_for_ready": true,
+      "baseline_pair_full": false,
+      "repaired_pair_full": false,
+      "baseline_default_hit_count": 1,
+      "repaired_default_hit_count": 1,
+      "default_hit_delta": 0,
+      "pair_full_delta": 0
+    },
+    {
+      "spec_id": "spaced-heldout-pair",
+      "prompt": "fixed= | loss=",
+      "required_for_ready": false,
+      "baseline_pair_full": false,
+      "repaired_pair_full": false,
+      "baseline_default_hit_count": 1,
+      "repaired_default_hit_count": 1,
+      "default_hit_delta": 0,
+      "pair_full_delta": 0
+    }
+  ],
+  "check_rows": [
+    {
+      "id": "baseline_replay_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "baseline replay must execute cleanly"
+    },
+    {
+      "id": "repaired_replay_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "repaired replay must execute cleanly"
+    },
+    {
+      "id": "comparison_rows_present",
+      "status": "pass",
+      "actual": 3,
+      "detail": "comparison requires replay rows"
+    },
+    {
+      "id": "exact_surface_compared",
+      "status": "pass",
+      "actual": [
+        "arrow-heldout-pair",
+        "exact-heldout-pair",
+        "spaced-heldout-pair"
+      ],
+      "detail": "exact heldout pair surface must be compared"
+    }
+  ],
+  "summary": {
+    "baseline_decision": "pair_readiness_fixed_preserving_transfer_pair_probe_replay_partial",
+    "repaired_decision": "pair_readiness_fixed_preserving_transfer_pair_probe_replay_partial",
+    "baseline_exact_heldout_pair_full": false,
+    "repaired_exact_heldout_pair_full": false,
+    "baseline_pair_full_count": 1,
+    "repaired_pair_full_count": 1,
+    "exact_default_hit_delta": 0,
+    "exact_pair_full_delta": 0,
+    "improved_surface_ids": [],
+    "regressed_surface_ids": [],
+    "exact_surface_improved": false,
+    "repair_effective": false,
+    "repair_ineffective": true
+  },
+  "interpretation": {
+    "model_quality_claim": "not_claimed",
+    "reason": "The exact-surface repair did not improve independent replay over the fixed-preserving baseline.",
+    "next_action": "close the near-exact repair route and consider objective/decoding alternatives"
+  }
+}

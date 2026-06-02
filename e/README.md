@@ -1266,3 +1266,8 @@ e/663/解释/说明.md
 - `e/756/图片`
 - `e/756/解释/说明.md`
 - v756 exact-surface repair pair-probe replay 的运行截图和解释。
+## v757 补充索引
+
+- `e/757/图片`
+- `e/757/解释/说明.md`
+- v757 exact-surface repair effectiveness comparison 的运行截图和解释。

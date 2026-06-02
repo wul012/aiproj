@@ -863,6 +863,9 @@
 770-v756-exact-surface-repair-pair-probe-replay.md
  -> v756 code explanation: independently replay the exact-surface repair checkpoint and record the partial, non-promotable result.
 
+771-v757-exact-surface-repair-effectiveness-comparison.md
+ -> v757 code explanation: compare v750 and v756 replay surfaces and close the ineffective near-exact repair route.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

@@ -1,0 +1,9 @@
+status=pass
+decision=pair_readiness_exact_surface_repair_ineffective_stop_route
+failed_count=0
+repair_effective=False
+repair_ineffective=True
+exact_default_hit_delta=0
+exact_pair_full_delta=0
+model_quality_claim=not_claimed
+next_action=close the near-exact repair route and consider objective/decoding alternatives

@@ -1,0 +1,4 @@
+spec_id,prompt,baseline_pair_full,repaired_pair_full,baseline_default_hit_count,repaired_default_hit_count,default_hit_delta,pair_full_delta
+arrow-heldout-pair,fixed -> | loss ->,True,True,2,2,0,0
+exact-heldout-pair,fixed=|loss=,False,False,1,1,0,0
+spaced-heldout-pair,fixed= | loss=,False,False,1,1,0,0

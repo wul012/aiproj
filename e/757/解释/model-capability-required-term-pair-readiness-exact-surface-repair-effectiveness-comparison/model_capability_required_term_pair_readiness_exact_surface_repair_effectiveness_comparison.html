@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT exact-surface repair effectiveness comparison</title>
+<style>
+:root{color-scheme:light;--ink:#172026;--muted:#5d6975;--line:#d8dee4;--panel:#f7f9fb;--accent:#1d4ed8}
+*{box-sizing:border-box}
+body{margin:0;background:#eef2f5;color:var(--ink);font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1120px;margin:0 auto;padding:28px}
+h1{font-size:30px;margin:0 0 8px;letter-spacing:0}
+h2{font-size:18px;margin:0 0 12px;letter-spacing:0}
+p{color:var(--muted);line-height:1.55;overflow-wrap:anywhere}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:18px 0}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:8px}
+.card{padding:14px}
+.card span{display:block;color:var(--muted);font-size:12px;text-transform:uppercase}
+.card strong{display:block;margin-top:6px;font-size:18px;line-height:1.2;color:var(--accent);overflow-wrap:anywhere}
+.panel{padding:16px;margin:14px 0}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:#334155}
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT exact-surface repair effectiveness comparison</h1><p>The exact-surface repair did not improve independent replay over the fixed-preserving baseline.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Decision</span><strong>pair_readiness_exact_surface_repair_ineffective_stop_route</strong></div><div class="card"><span>Effective</span><strong>False</strong></div><div class="card"><span>Ineffective</span><strong>True</strong></div><div class="card"><span>Exact hit delta</span><strong>0</strong></div><div class="card"><span>Claim</span><strong>not_claimed</strong></div></section>
+<section class="panel"><h2>Comparison Rows</h2><div class="table-wrap"><table>
+<thead><tr><th>Spec</th><th>Prompt</th><th>Before full</th><th>After full</th><th>Before hits</th><th>After hits</th><th>Delta</th></tr></thead>
+<tbody><tr><td>arrow-heldout-pair</td><td>fixed -&gt; | loss -&gt;</td><td>True</td><td>True</td><td>2</td><td>2</td><td>0</td></tr><tr><td>exact-heldout-pair</td><td>fixed=|loss=</td><td>False</td><td>False</td><td>1</td><td>1</td><td>0</td></tr><tr><td>spaced-heldout-pair</td><td>fixed= | loss=</td><td>False</td><td>False</td><td>1</td><td>1</td><td>0</td></tr></tbody>
+</table></div></section>
+<section class="panel"><h2>Checks</h2><div class="table-wrap"><table>
+<thead><tr><th>Check</th><th>Status</th><th>Actual</th><th>Detail</th></tr></thead>
+<tbody><tr><td>baseline_replay_passed</td><td>pass</td><td>pass</td><td>baseline replay must execute cleanly</td></tr><tr><td>repaired_replay_passed</td><td>pass</td><td>pass</td><td>repaired replay must execute cleanly</td></tr><tr><td>comparison_rows_present</td><td>pass</td><td>3</td><td>comparison requires replay rows</td></tr><tr><td>exact_surface_compared</td><td>pass</td><td>[&#x27;arrow-heldout-pair&#x27;, &#x27;exact-heldout-pair&#x27;, &#x27;spaced-heldout-pair&#x27;]</td><td>exact heldout pair surface must be compared</td></tr></tbody>
+</table></div></section>
+<section class="panel"><h2>Next Action</h2><p>close the near-exact repair route and consider objective/decoding alternatives</p></section>
+</main>
+</body>
+</html>
