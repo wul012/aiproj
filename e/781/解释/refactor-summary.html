@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <title>v781 maturity release context split</title>
+  <style>
+    body { font-family: "Segoe UI", Arial, sans-serif; margin: 32px; color: #1f2933; line-height: 1.55; }
+    main { max-width: 980px; margin: 0 auto; }
+    h1 { font-size: 28px; margin-bottom: 8px; }
+    h2 { margin-top: 28px; font-size: 20px; }
+    table { border-collapse: collapse; width: 100%; margin-top: 12px; }
+    th, td { border: 1px solid #c9d1d9; padding: 10px 12px; text-align: left; vertical-align: top; }
+    th { background: #f3f4f6; }
+    code { background: #eef2f7; padding: 2px 5px; border-radius: 4px; }
+    .pass { color: #0f766e; font-weight: 700; }
+  </style>
+</head>
+<body>
+<main>
+  <h1>v781 maturity release context split</h1>
+  <p><strong>status:</strong> <span class="pass">pass</span></p>
+  <p>
+    v781 moves release-readiness trend extraction from <code>maturity.py</code> into
+    <code>maturity_release_context.py</code>.
+  </p>
+
+  <h2>Split Boundary</h2>
+  <table>
+    <tr><th>Module</th><th>Role after v781</th><th>Line count</th></tr>
+    <tr>
+      <td><code>src/minigpt/maturity.py</code></td>
+      <td>Version discovery, capability matrix, maturity summary, phase timeline, registry/request contexts, and recommendations.</td>
+      <td>494</td>
+    </tr>
+    <tr>
+      <td><code>src/minigpt/maturity_release_context.py</code></td>
+      <td>Normalize registry release-readiness comparison deltas and derive maturity-facing release trend status.</td>
+      <td>188</td>
+    </tr>
+  </table>
+
+  <h2>Verification</h2>
+  <ul>
+    <li><code>python -m py_compile src\minigpt\maturity.py src\minigpt\maturity_release_context.py</code></li>
+    <li><code>python -m pytest tests\test_coverage_governance_chain.py tests\test_maturity_artifacts.py -q -o cache_dir=runs\pytest-cache-v781-focused</code>: 3 passed</li>
+  </ul>
+
+  <h2>Maintenance Value</h2>
+  <p>
+    Release-readiness comparison field mapping can now evolve independently from the maturity capability matrix and version
+    discovery code. The main maturity module is below 500 lines.
+  </p>
+</main>
+</body>
+</html>

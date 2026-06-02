@@ -935,6 +935,9 @@
 794-v780-release-readiness-panel-split.md
  -> v780 code explanation: extract release readiness dashboard panel builders from the dashboard workflow.
 
+795-v781-maturity-release-context-split.md
+ -> v781 code explanation: extract maturity release-readiness context normalization from the maturity workflow.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

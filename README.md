@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v780.0.0` extracts release readiness dashboard panel builders from the dashboard workflow.
+Version `v781.0.0` extracts maturity release-readiness context normalization from the maturity workflow.
+
+## Latest v781 checkpoint
+
+- Added `maturity_release_context`.
+- Reduced `maturity.py` from 664 to 494 lines.
+- Moved registry release-readiness comparison delta mapping and maturity-facing trend-status derivation into a focused context module.
+- Kept version discovery, capability matrix, maturity summary, phase timeline, registry/request contexts, and recommendations in the main maturity module.
+- Verified with `3 passed` maturity and coverage governance focused tests.
+- Archived v781 evidence in `e/781` and added the code explanation in `代码讲解记录_模型能力阶段/795-v781-maturity-release-context-split.md`.
 
 ## Latest v780 checkpoint
 
