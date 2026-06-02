@@ -1,0 +1,12 @@
+status=pass
+decision=pair_readiness_direct_completion_surface_contract_ready
+failed_count=0
+contract_ready=True
+training_row_count=16
+row_family_count=6
+exact_completion_row_count=2
+fixed_prefix_row_count=3
+loss_prefix_row_count=3
+paired_order_row_count=4
+model_quality_claim=contract_only
+next_action=materialize the direct-completion surface contract and rerun pair-readiness training

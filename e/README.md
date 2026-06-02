@@ -1161,3 +1161,8 @@ e/663/解释/说明.md
 - `e/735/图片`
 - `e/735/解释/说明.md`
 - v735 bridge closeout plan 的运行截图和解释。
+## v736 补充索引
+
+- `e/736/图片`
+- `e/736/解释/说明.md`
+- v736 direct-completion surface contract 的运行截图和解释。

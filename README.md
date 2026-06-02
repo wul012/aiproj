@@ -7457,6 +7457,8 @@ The pair-readiness capacity-probe plan layer turns that closeout into a controll
 
 The pair-readiness capacity-probe training layer runs that larger tiny model and shows the fixed-recovery corpus still produces fixed-only heldout behavior, so the lightweight capacity bump is not a pair-full breakthrough.
 
+The pair-readiness bridge closeout and direct-completion surface contract layers close the no-improvement direct-prompt bridge route, replace descriptive bridge rows with compact `fixed=fixed` / `loss=loss` completion surfaces, preserve balanced prefix ladders, and keep the heldout pair probe isolated for the next materialization and training pass.
+
 The run registry layer indexes multiple run directories so experiments can be scanned by commit, data fingerprint, quality status, eval suite coverage, metrics, artifact count, notes, tags, best-val rank, loss delta, a leaderboard, an interactive local HTML table, shareable URL state, and visible-row CSV export.
 
 The experiment card layer turns one run into a compact JSON/Markdown/HTML summary for review, handoff, or portfolio use.

@@ -1,0 +1,13 @@
+id,status,actual,detail
+closeout_plan_passed,pass,pass,bridge closeout plan must pass
+closeout_plan_decision,pass,pair_readiness_bridge_closeout_plan_ready,contract follows only a ready bridge closeout plan
+next_artifact_matches,pass,pair_readiness_direct_completion_surface_contract,closeout plan must request this contract artifact
+training_rows_present,pass,16,direct-completion surface rows must be materializable
+exact_fixed_completion_present,pass,"[""fixed=fixed"", ""loss=loss""]",exact fixed completion row must be present
+exact_loss_completion_present,pass,"[""fixed=fixed"", ""loss=loss""]",exact loss completion row must be present
+prefix_ladder_balance,pass,"fixed=3, loss=3",fixed and loss prefix ladders must contain the same number of rows
+paired_forward_present,pass,2,forward paired order rows must be present
+paired_reverse_present,pass,2,reverse paired order rows must be present
+evaluation_probes_present,pass,3,"fixed, loss, and pair probes must be preserved"
+no_exact_eval_row_overlap,pass,[],exact eval prompts must not be training rows
+heldout_pair_absent,pass,False,heldout pair probe must stay out of training rows

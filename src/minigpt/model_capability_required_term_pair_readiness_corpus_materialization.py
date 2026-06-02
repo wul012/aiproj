@@ -24,6 +24,7 @@ PAIR_READINESS_READY_CONTRACT_DECISIONS = {
     "pair_readiness_fixed_recovery_contract_patch_ready",
     "pair_readiness_objective_structure_contract_ready",
     "pair_readiness_direct_prompt_bridge_contract_patch_ready",
+    "pair_readiness_direct_completion_surface_contract_ready",
 }
 PAIR_READINESS_CONTRACT_JSON_FILENAMES = (
     PAIR_READINESS_SPLIT_CONTRACT_JSON_FILENAME,
@@ -32,6 +33,7 @@ PAIR_READINESS_CONTRACT_JSON_FILENAMES = (
     "model_capability_required_term_pair_readiness_fixed_recovery_contract_patch.json",
     "model_capability_required_term_pair_readiness_objective_structure_contract.json",
     "model_capability_required_term_pair_readiness_direct_prompt_bridge_contract_patch.json",
+    "model_capability_required_term_pair_readiness_direct_completion_surface_contract.json",
 )
 
 

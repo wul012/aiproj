@@ -1,0 +1,229 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT pair-readiness direct-completion surface contract",
+  "generated_at": "2026-06-02T06:56:24Z",
+  "status": "pass",
+  "decision": "pair_readiness_direct_completion_surface_contract_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_closeout_plan_path": "e\\735\\解释\\model-capability-required-term-pair-readiness-bridge-closeout-plan\\model_capability_required_term_pair_readiness_bridge_closeout_plan.json",
+  "source_closeout_plan": {
+    "status": "pass",
+    "decision": "pair_readiness_bridge_closeout_plan_ready",
+    "summary": {
+      "check_count": 5,
+      "passed_check_count": 5,
+      "failed_check_count": 0,
+      "plan_ready": true,
+      "closed_route": "direct_prompt_bridge_contract_patch",
+      "proposed_next_artifact": "pair_readiness_direct_completion_surface_contract",
+      "next_contract_requirement_count": 4,
+      "non_goal_count": 3
+    }
+  },
+  "contract": {
+    "contract_version": 7,
+    "training_rows": [
+      "fixed=fixed",
+      "loss=loss",
+      "fixed=f",
+      "fixed=fi",
+      "fixed=fix",
+      "loss=l",
+      "loss=lo",
+      "loss=los",
+      "pair_surface order=fixed_then_loss | fixed=fixed | loss=loss",
+      "pair_surface forward fixed token fixed and loss token loss",
+      "pair_surface order=loss_then_fixed | loss=loss | fixed=fixed",
+      "pair_surface reverse loss token loss and fixed token fixed",
+      "direct_completion fixed branch keeps fixed not loss",
+      "direct_completion loss branch keeps loss not fixed",
+      "direct_completion fixed surface cannot answer loss",
+      "direct_completion loss surface cannot answer fixed"
+    ],
+    "row_families": [
+      {
+        "family": "exact_direct_completion",
+        "role": "direct_completion_surface",
+        "target_term": "fixed/loss",
+        "rows": [
+          "fixed=fixed",
+          "loss=loss"
+        ]
+      },
+      {
+        "family": "fixed_prefix_ladder",
+        "role": "direct_completion_prefix",
+        "target_term": "fixed",
+        "rows": [
+          "fixed=f",
+          "fixed=fi",
+          "fixed=fix"
+        ]
+      },
+      {
+        "family": "loss_prefix_ladder",
+        "role": "direct_completion_prefix",
+        "target_term": "loss",
+        "rows": [
+          "loss=l",
+          "loss=lo",
+          "loss=los"
+        ]
+      },
+      {
+        "family": "paired_order_forward",
+        "role": "paired_order_surface",
+        "target_term": "fixed+loss",
+        "rows": [
+          "pair_surface order=fixed_then_loss | fixed=fixed | loss=loss",
+          "pair_surface forward fixed token fixed and loss token loss"
+        ]
+      },
+      {
+        "family": "paired_order_reverse",
+        "role": "paired_order_surface",
+        "target_term": "loss+fixed",
+        "rows": [
+          "pair_surface order=loss_then_fixed | loss=loss | fixed=fixed",
+          "pair_surface reverse loss token loss and fixed token fixed"
+        ]
+      },
+      {
+        "family": "direct_boundary_contrast",
+        "role": "anti_contamination",
+        "target_term": "fixed/loss",
+        "rows": [
+          "direct_completion fixed branch keeps fixed not loss",
+          "direct_completion loss branch keeps loss not fixed",
+          "direct_completion fixed surface cannot answer loss",
+          "direct_completion loss surface cannot answer fixed"
+        ]
+      }
+    ],
+    "evaluation_probes": [
+      {
+        "id": "fixed-direct",
+        "prompt": "fixed=",
+        "expected_term": "fixed",
+        "split": "heldout-direct"
+      },
+      {
+        "id": "loss-direct",
+        "prompt": "loss=",
+        "expected_term": "loss",
+        "split": "heldout-direct"
+      },
+      {
+        "id": "fixed-loss-pair",
+        "prompt": "fixed=|loss=",
+        "expected_term": "fixed+loss",
+        "split": "heldout-pair"
+      }
+    ],
+    "heldout_pair_probe": "fixed=|loss=",
+    "promotion_requirement": "fixed-direct and loss-direct heldout continuations must both hit before pair-probe promotion",
+    "leakage_policy": "train exact direct completions and balanced prefixes, but keep exact heldout prompts and pair probe out of training rows",
+    "template_family": "direct_completion_surface_balanced_prefix_ladder",
+    "source_route_boundary": "created after direct-prompt bridge patch had zero hit improvement and introduced fixed pollution"
+  },
+  "check_rows": [
+    {
+      "id": "closeout_plan_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "bridge closeout plan must pass"
+    },
+    {
+      "id": "closeout_plan_decision",
+      "status": "pass",
+      "actual": "pair_readiness_bridge_closeout_plan_ready",
+      "detail": "contract follows only a ready bridge closeout plan"
+    },
+    {
+      "id": "next_artifact_matches",
+      "status": "pass",
+      "actual": "pair_readiness_direct_completion_surface_contract",
+      "detail": "closeout plan must request this contract artifact"
+    },
+    {
+      "id": "training_rows_present",
+      "status": "pass",
+      "actual": 16,
+      "detail": "direct-completion surface rows must be materializable"
+    },
+    {
+      "id": "exact_fixed_completion_present",
+      "status": "pass",
+      "actual": [
+        "fixed=fixed",
+        "loss=loss"
+      ],
+      "detail": "exact fixed completion row must be present"
+    },
+    {
+      "id": "exact_loss_completion_present",
+      "status": "pass",
+      "actual": [
+        "fixed=fixed",
+        "loss=loss"
+      ],
+      "detail": "exact loss completion row must be present"
+    },
+    {
+      "id": "prefix_ladder_balance",
+      "status": "pass",
+      "actual": "fixed=3, loss=3",
+      "detail": "fixed and loss prefix ladders must contain the same number of rows"
+    },
+    {
+      "id": "paired_forward_present",
+      "status": "pass",
+      "actual": 2,
+      "detail": "forward paired order rows must be present"
+    },
+    {
+      "id": "paired_reverse_present",
+      "status": "pass",
+      "actual": 2,
+      "detail": "reverse paired order rows must be present"
+    },
+    {
+      "id": "evaluation_probes_present",
+      "status": "pass",
+      "actual": 3,
+      "detail": "fixed, loss, and pair probes must be preserved"
+    },
+    {
+      "id": "no_exact_eval_row_overlap",
+      "status": "pass",
+      "actual": [],
+      "detail": "exact eval prompts must not be training rows"
+    },
+    {
+      "id": "heldout_pair_absent",
+      "status": "pass",
+      "actual": false,
+      "detail": "heldout pair probe must stay out of training rows"
+    }
+  ],
+  "summary": {
+    "contract_ready": true,
+    "training_row_count": 16,
+    "row_family_count": 6,
+    "evaluation_probe_count": 3,
+    "failed_check_count": 0,
+    "heldout_pair_probe": "fixed=|loss=",
+    "template_family": "direct_completion_surface_balanced_prefix_ladder",
+    "exact_completion_row_count": 2,
+    "fixed_prefix_row_count": 3,
+    "loss_prefix_row_count": 3,
+    "paired_order_row_count": 4,
+    "boundary_contrast_row_count": 4
+  },
+  "interpretation": {
+    "model_quality_claim": "contract_only",
+    "reason": "The contract replaces descriptive bridge rows with compact exact direct completions and balanced prefix surfaces.",
+    "next_action": "materialize the direct-completion surface contract and rerun pair-readiness training"
+  }
+}
