@@ -1176,3 +1176,8 @@ e/663/解释/说明.md
 - `e/738/图片`
 - `e/738/解释/说明.md`
 - v738 direct-completion surface training run 的运行截图和解释。
+## v739 补充索引
+
+- `e/739/图片`
+- `e/739/解释/说明.md`
+- v739 direct-completion route comparison 的运行截图和解释。

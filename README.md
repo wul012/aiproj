@@ -7463,6 +7463,8 @@ The pair-readiness direct-completion surface materialization layer expands that 
 
 The pair-readiness direct-completion surface training layer trains that corpus under the same larger-tiny configuration and records the first pair-full heldout direct result for this route, while still requiring pair-probe replay and historical comparison before promotion.
 
+The pair-readiness direct-completion route comparison layer compares objective-structure, direct-prompt bridge, and direct-completion surface training runs, selecting the direct-completion surface as the current candidate only because it improves default direct hits from 0 to 2 without direct pollution.
+
 The run registry layer indexes multiple run directories so experiments can be scanned by commit, data fingerprint, quality status, eval suite coverage, metrics, artifact count, notes, tags, best-val rank, loss delta, a leaderboard, an interactive local HTML table, shareable URL state, and visible-row CSV export.
 
 The experiment card layer turns one run into a compact JSON/Markdown/HTML summary for review, handoff, or portfolio use.

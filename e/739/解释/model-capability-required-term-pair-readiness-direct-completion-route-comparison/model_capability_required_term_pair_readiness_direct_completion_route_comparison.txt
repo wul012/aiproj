@@ -1,0 +1,11 @@
+status=pass
+decision=pair_readiness_direct_completion_route_candidate_found
+failed_count=0
+previous_best_hit_count=0
+direct_completion_default_hit_count=2
+direct_completion_hit_delta_from_previous_best=2
+direct_completion_pair_full_observed=True
+direct_completion_pollution_free=True
+selected_route=direct-completion-surface
+model_quality_claim=comparison_candidate
+next_action=run pair-probe replay and stricter promotion checks before accepting this route

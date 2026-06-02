@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT pair-readiness direct-completion route comparison",
+  "generated_at": "2026-06-02T07:18:48Z",
+  "status": "pass",
+  "decision": "pair_readiness_direct_completion_route_candidate_found",
+  "failed_count": 0,
+  "issues": [],
+  "comparison_rows": [
+    {
+      "label": "objective-structure",
+      "path": "e\\729\\解释\\model-capability-required-term-pair-readiness-objective-structure-training-run\\model_capability_required_term_pair_readiness_training_run.json",
+      "status": "pass",
+      "decision": "pair_readiness_training_no_pair_full",
+      "training_status": "pass",
+      "checkpoint_exists": true,
+      "pair_full_observed": false,
+      "default_continuation_hit_count": 0,
+      "default_hit_terms": [],
+      "default_missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "loss_prompt_fixed_pollution_count": 0,
+      "fixed_prompt_loss_pollution_count": 0,
+      "non_term_surface_count": 2,
+      "suppression_continuation_hit_count": 0,
+      "continuation_previews": [
+        "fixed:d | | | | |",
+        "loss:d | | | | |"
+      ]
+    },
+    {
+      "label": "direct-prompt-bridge",
+      "path": "e\\733\\解释\\model-capability-required-term-pair-readiness-direct-prompt-bridge-training-run\\model_capability_required_term_pair_readiness_training_run.json",
+      "status": "pass",
+      "decision": "pair_readiness_training_no_pair_full",
+      "training_status": "pass",
+      "checkpoint_exists": true,
+      "pair_full_observed": false,
+      "default_continuation_hit_count": 0,
+      "default_hit_terms": [],
+      "default_missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "loss_prompt_fixed_pollution_count": 1,
+      "fixed_prompt_loss_pollution_count": 0,
+      "non_term_surface_count": 1,
+      "suppression_continuation_hit_count": 0,
+      "continuation_previews": [
+        "fixed: | | | ted |",
+        "loss:fixed | | |"
+      ]
+    },
+    {
+      "label": "direct-completion-surface",
+      "path": "e\\738\\解释\\model-capability-required-term-pair-readiness-direct-completion-surface-training-run\\model_capability_required_term_pair_readiness_training_run.json",
+      "status": "pass",
+      "decision": "pair_readiness_training_pair_full_observed",
+      "training_status": "pass",
+      "checkpoint_exists": true,
+      "pair_full_observed": true,
+      "default_continuation_hit_count": 2,
+      "default_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "default_missed_terms": [],
+      "loss_prompt_fixed_pollution_count": 0,
+      "fixed_prompt_loss_pollution_count": 0,
+      "non_term_surface_count": 0,
+      "suppression_continuation_hit_count": 2,
+      "continuation_previews": [
+        "fixed:fixed tos to",
+        "loss:lossssssssss"
+      ]
+    }
+  ],
+  "summary": {
+    "objective_default_hit_count": 0,
+    "bridge_default_hit_count": 0,
+    "direct_completion_default_hit_count": 2,
+    "previous_best_hit_count": 0,
+    "direct_completion_hit_delta_from_previous_best": 2,
+    "direct_completion_pair_full_observed": true,
+    "direct_completion_pollution_count": 0,
+    "direct_completion_pollution_free": true,
+    "direct_completion_suppression_hit_count": 2,
+    "direct_completion_candidate": true,
+    "selected_route": "direct-completion-surface",
+    "recommended_next_artifact": "pair_readiness_direct_completion_pair_probe_replay"
+  },
+  "interpretation": {
+    "model_quality_claim": "comparison_candidate",
+    "reason": "The direct-completion surface route beats prior objective/bridge routes on default direct hits without direct pollution.",
+    "next_action": "run pair-probe replay and stricter promotion checks before accepting this route"
+  }
+}
