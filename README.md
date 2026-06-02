@@ -4,7 +4,18 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v698.0.0` turns the fixed-dominant minimal-prompt failure into a loss-first-token repair plan.
+Version `v699.0.0` reruns minimal-prompt training with the loss-first-token repair and records the opposite branch tradeoff.
+
+## Latest v699 checkpoint
+
+- Ran real seed `3535` training with `minimal_prompt_loss_first_token_repair_objective`.
+- Confirmed `training_status=pass` and `checkpoint_exists=True`.
+- Confirmed `decision=required_term_pair_coexistence_refresh_no_pair_full`.
+- Observed `loss=` now hits loss, while `fixed=` drifts into loss.
+- Confirmed `pair_full_observed=False` and `model_quality_claim=not_claimed`.
+- Archived v699 evidence in `e/699` and added the code explanation in `代码讲解记录_模型能力阶段/713-v699-minimal-prompt-loss-first-token-training.md`.
+
+## Latest v698 checkpoint
 
 ## Latest v698 checkpoint
 
@@ -15,8 +26,6 @@ Version `v698.0.0` turns the fixed-dominant minimal-prompt failure into a loss-f
 - Confirmed `proposed_corpus_mode=minimal_prompt_loss_first_token_repair_objective`.
 - Confirmed `seed_to_rerun=3535` and `repair_focus=loss_first_token_and_branch_separation`.
 - Archived v698 evidence in `e/698` and added the code explanation in `代码讲解记录_模型能力阶段/712-v698-minimal-prompt-loss-first-token-repair-plan.md`.
-
-## Latest v697 checkpoint
 
 ## Latest v697 checkpoint
 

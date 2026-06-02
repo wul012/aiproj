@@ -1,0 +1,14 @@
+device=cpu
+tokenizer=char
+tokens=86497 vocab_size=33
+parameters=53,248
+data_source=data:e\699\解释\model-capability-required-term-pair-minimal-prompt-loss-first-token-training\required_term_pair_coexistence_refresh_corpus.txt
+step=    1 train_loss=2.9949 val_loss=3.0864
+step=  350 train_loss=1.3627 val_loss=2.4056
+step=  700 train_loss=1.6745 val_loss=2.6993
+step= 1050 train_loss=1.5498 val_loss=2.4684
+step= 1400 train_loss=1.7180 val_loss=2.6692
+saved=e\699\解释\model-capability-required-term-pair-minimal-prompt-loss-first-token-training\pair-coexistence-refresh-run
+history=e\699\解释\model-capability-required-term-pair-minimal-prompt-loss-first-token-training\pair-coexistence-refresh-run\metrics.jsonl
+manifest=e\699\解释\model-capability-required-term-pair-minimal-prompt-loss-first-token-training\pair-coexistence-refresh-run\run_manifest.json
+sample=e\699\解释\model-capability-required-term-pair-minimal-prompt-loss-first-token-training\pair-coexistence-refresh-run\sample.txt

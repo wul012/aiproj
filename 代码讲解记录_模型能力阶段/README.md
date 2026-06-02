@@ -689,6 +689,9 @@
 712-v698-minimal-prompt-loss-first-token-repair-plan.md
  -> v698 code explanation: convert fixed-dominant branch-bias evidence into a loss-first-token repair corpus plan.
 
+713-v699-minimal-prompt-loss-first-token-training.md
+ -> v699 code explanation: rerun minimal-prompt training with loss-first-token repair and record the opposite branch tradeoff.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。
