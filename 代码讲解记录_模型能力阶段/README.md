@@ -899,6 +899,9 @@
 782-v768-objective-level-contrast-seed-3737-training-run.md
  -> v768 code explanation: train the first supplemental objective-level contrast seed and keep the result pending replay.
 
+783-v769-objective-level-contrast-seed-3737-pair-probe-replay.md
+ -> v769 code explanation: replay the first supplemental objective-level contrast seed and record the passing but weaker pair-full count.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

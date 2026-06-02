@@ -1328,3 +1328,9 @@ e/663/解释/说明.md
 - `e/768/图片`
 - `e/768/解释/说明.md`
 - v768 objective-level contrast seed 3737 training run 的运行截图和解释。
+
+## v769 补充索引
+
+- `e/769/图片`
+- `e/769/解释/说明.md`
+- v769 objective-level contrast seed 3737 pair-probe replay 的运行截图和解释。

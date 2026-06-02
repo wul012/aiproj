@@ -1,0 +1,8 @@
+status=pass
+decision=pair_readiness_fixed_preserving_transfer_pair_probe_replay_ready
+failed_count=0
+exact_heldout_pair_full=True
+required_all_pair_full=True
+pair_full_count=2
+model_quality_claim=pair_probe_replay_ready
+next_action=compare against prior routes and run stricter promotion guards before accepting the checkpoint
