@@ -881,6 +881,9 @@
 776-v762-objective-level-contrast-corpus-materialization.md
  -> v762 code explanation: materialize the objective-level contrast contract into an 8320-line corpus and heldout fixture.
 
+777-v763-objective-level-contrast-training-run.md
+ -> v763 code explanation: train the objective-level contrast corpus and record direct pair-probe hit evidence before independent replay.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

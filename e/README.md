@@ -1296,3 +1296,8 @@ e/663/解释/说明.md
 - `e/762/图片`
 - `e/762/解释/说明.md`
 - v762 objective-level contrast corpus materialization 的运行截图和解释。
+## v763 补充索引
+
+- `e/763/图片`
+- `e/763/解释/说明.md`
+- v763 objective-level contrast training run 的运行截图和解释。

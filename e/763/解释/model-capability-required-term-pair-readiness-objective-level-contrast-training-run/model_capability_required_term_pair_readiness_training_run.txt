@@ -1,0 +1,9 @@
+status=pass
+decision=pair_readiness_training_pair_full_observed
+failed_count=0
+training_status=pass
+checkpoint_exists=True
+pair_full_observed=True
+default_continuation_hit_count=2
+model_quality_claim=direct_pair_probe_hit
+next_action=run heldout pair-probe replay before promoting the checkpoint

@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v762.0.0` materializes the objective-level contrast contract into an 8320-line training corpus and heldout fixture.
+Version `v763.0.0` trains the objective-level contrast corpus and records direct pair-probe hit evidence before independent replay.
+
+## Latest v763 checkpoint
+
+- Reused `model_capability_required_term_pair_readiness_training_run`.
+- Trained on the v762 objective-level contrast corpus.
+- Confirmed `decision=pair_readiness_training_pair_full_observed`.
+- Confirmed `checkpoint_exists=True` and `pair_full_observed=True`.
+- Recorded `default_continuation_hit_count=2`.
+- Archived v763 evidence in `e/763` and added the code explanation in `代码讲解记录_模型能力阶段/777-v763-objective-level-contrast-training-run.md`.
 
 ## Latest v762 checkpoint
 
