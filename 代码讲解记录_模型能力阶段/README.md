@@ -905,6 +905,9 @@
 784-v770-objective-level-contrast-seed-3838-training-run.md
  -> v770 code explanation: train the second supplemental objective-level contrast seed with unchanged corpus and model settings.
 
+785-v771-objective-level-contrast-seed-3838-pair-probe-replay.md
+ -> v771 code explanation: replay the second supplemental objective-level contrast seed and complete the seed-stability replay inputs.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。
