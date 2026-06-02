@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair surface baseline contrast",
+  "generated_at": "2026-06-02T00:03:05Z",
+  "status": "pass",
+  "decision": "required_term_pair_contextual_variant_needed_over_non_leaking_baselines",
+  "failed_count": 0,
+  "issues": [],
+  "source_policy_replay_path": "e\\681\\解释\\model-capability-required-term-pair-surface-policy-replay\\model_capability_required_term_pair_surface_policy_replay.json",
+  "source_variant_selector_path": "e\\689\\解释\\model-capability-required-term-pair-surface-variant-selector\\model_capability_required_term_pair_surface_variant_selector.json",
+  "contrast_rows": [
+    {
+      "source_id": "space_context_control",
+      "source_type": "selected_contextual_variant",
+      "stable_pair_full": true,
+      "pair_full_seed_count": 3,
+      "hit_case_count": 6
+    },
+    {
+      "source_id": "single_label_default",
+      "source_type": "non_leaking_baseline",
+      "stable_pair_full": false,
+      "pair_full_seed_count": 2,
+      "hit_case_count": 5
+    },
+    {
+      "source_id": "single_label_suppress_newline",
+      "source_type": "non_leaking_baseline",
+      "stable_pair_full": false,
+      "pair_full_seed_count": 2,
+      "hit_case_count": 5
+    }
+  ],
+  "summary": {
+    "contextual_stable": true,
+    "non_leaking_baseline_count": 2,
+    "stable_non_leaking_baseline_count": 0,
+    "contextual_anchor_required": true,
+    "promotion_allowed": false
+  },
+  "interpretation": {
+    "model_quality_claim": "contextual_anchor_required_for_surface_stability",
+    "reason": "The selected contextual variant is stable while non-leaking baselines are not.",
+    "next_action": "close this branch as contextual decode aid unless a new objective targets minimal prompts"
+  }
+}

@@ -4,7 +4,18 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v689.0.0` selects the default contextual surface variant after all planned variants replay stably.
+Version `v690.0.0` contrasts the selected contextual surface variant with non-leaking baselines.
+
+## Latest v690 checkpoint
+
+- Added `model_capability_required_term_pair_surface_baseline_contrast`.
+- Consumed v681 surface-policy replay and v689 variant-selector evidence.
+- Confirmed `status=pass`.
+- Confirmed `decision=required_term_pair_contextual_variant_needed_over_non_leaking_baselines`.
+- Confirmed `contextual_stable=True`.
+- Confirmed `stable_non_leaking_baseline_count=0`.
+- Confirmed `contextual_anchor_required=True`.
+- Archived v690 evidence in `e/690` and added the code explanation in `代码讲解记录_模型能力阶段/704-v690-required-term-pair-surface-baseline-contrast.md`.
 
 ## Latest v689 checkpoint
 

@@ -931,3 +931,8 @@ e/663/解释/说明.md
 - `e/689/图片`
 - `e/689/解释/说明.md`
 - v689 required-term pair surface variant selector 的运行截图和解释。
+## v690 补充索引
+
+- `e/690/图片`
+- `e/690/解释/说明.md`
+- v690 required-term pair surface baseline contrast 的运行截图和解释。

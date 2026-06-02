@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><link rel="icon" href="data:,"><title>MiniGPT surface baseline contrast</title><style>
+body{margin:0;background:#eef2f5;color:#172026;font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1100px;margin:0 auto;padding:28px}h1{font-size:30px;margin:0 0 8px;letter-spacing:0}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin:18px 0}
+.stats div,section{background:white;border:1px solid #d8dee4;border-radius:8px;padding:14px;margin:14px 0}
+span{display:block;color:#5d6975;font-size:12px;text-transform:uppercase}strong{display:block;color:#0f766e;margin-top:6px}
+table{width:100%;border-collapse:collapse;font-size:13px}th,td{border-bottom:1px solid #d8dee4;padding:9px;text-align:left;vertical-align:top}
+th{background:#f7f9fb;color:#334155}
+</style></head>
+<body><main>
+<h1>MiniGPT surface baseline contrast</h1>
+<p>The selected contextual variant is stable while non-leaking baselines are not.</p>
+<section class="stats">
+<div><span>Contextual stable</span><strong>True</strong></div>
+<div><span>Non-leaking stable</span><strong>0</strong></div>
+<div><span>Anchor required</span><strong>True</strong></div>
+</section>
+<section><h2>Contrast</h2><table><thead><tr><th>Source</th><th>Type</th><th>Stable</th><th>Pair-full seeds</th><th>Hits</th></tr></thead><tbody><tr><td>space_context_control</td><td>selected_contextual_variant</td><td>True</td><td>3</td><td>6</td></tr><tr><td>single_label_default</td><td>non_leaking_baseline</td><td>False</td><td>2</td><td>5</td></tr><tr><td>single_label_suppress_newline</td><td>non_leaking_baseline</td><td>False</td><td>2</td><td>5</td></tr></tbody></table></section>
+<section><h2>Next Action</h2><p>close this branch as contextual decode aid unless a new objective targets minimal prompts</p></section>
+</main></body></html>

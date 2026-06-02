@@ -662,6 +662,9 @@
 703-v689-required-term-pair-surface-variant-selector.md
  -> v689 code explanation: choose the stable readable default contextual variant while preserving the no-promotion boundary.
 
+704-v690-required-term-pair-surface-baseline-contrast.md
+ -> v690 code explanation: contrast the selected contextual variant with non-leaking baselines and keep the anchor-required boundary explicit.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

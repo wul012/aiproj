@@ -1,0 +1,4 @@
+source_id,source_type,stable_pair_full,pair_full_seed_count,hit_case_count
+space_context_control,selected_contextual_variant,True,3,6
+single_label_default,non_leaking_baseline,False,2,5
+single_label_suppress_newline,non_leaking_baseline,False,2,5
