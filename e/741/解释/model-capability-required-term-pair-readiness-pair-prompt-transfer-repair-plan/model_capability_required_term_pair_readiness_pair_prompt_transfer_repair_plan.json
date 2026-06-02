@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT pair-readiness pair prompt transfer repair plan",
+  "generated_at": "2026-06-02T07:52:09Z",
+  "status": "pass",
+  "decision": "pair_readiness_pair_prompt_transfer_repair_plan_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_pair_probe_replay_path": "e\\740\\解释\\model-capability-required-term-pair-readiness-direct-completion-pair-probe-replay\\model_capability_required_term_pair_readiness_direct_completion_pair_probe_replay.json",
+  "source_pair_probe_replay": {
+    "status": "pass",
+    "decision": "pair_readiness_direct_completion_pair_probe_replay_not_ready",
+    "summary": {
+      "row_count": 3,
+      "prompt_spec_count": 3,
+      "required_prompt_spec_count": 1,
+      "pair_full_count": 0,
+      "pair_full_rate": 0.0,
+      "required_pair_full_count": 0,
+      "required_all_pair_full": false,
+      "any_pair_full": false,
+      "exact_heldout_pair_full": false
+    }
+  },
+  "check_rows": [
+    {
+      "id": "pair_probe_replay_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "pair-probe replay must execute successfully"
+    },
+    {
+      "id": "pair_probe_not_ready",
+      "status": "pass",
+      "actual": "pair_readiness_direct_completion_pair_probe_replay_not_ready",
+      "detail": "repair follows only the not-ready direct-completion pair-probe replay result"
+    },
+    {
+      "id": "exact_pair_failed",
+      "status": "pass",
+      "actual": false,
+      "detail": "exact heldout pair prompt must be the observed failure"
+    },
+    {
+      "id": "no_pair_prompt_full",
+      "status": "pass",
+      "actual": 0,
+      "detail": "plan assumes no pair prompt surface replayed pair-full"
+    },
+    {
+      "id": "heldout_pair_remains_heldout",
+      "status": "pass",
+      "actual": "fixed=|loss=",
+      "detail": "heldout pair prompt identity must stay explicit"
+    }
+  ],
+  "plan": {
+    "ready": true,
+    "closed_claim": "direct_completion_surface_is_promotion_ready",
+    "confirmed_boundary": "v738 is direct-probe-only evidence until pair prompt transfer is repaired",
+    "proposed_next_artifact": "pair_readiness_pair_prompt_transfer_contract_patch",
+    "base_contract_artifact": "pair_readiness_direct_completion_surface_contract",
+    "repair_requirements": [
+      "add surrogate pair-transfer rows that bind fixed and loss in one training line without using the exact heldout pair probe",
+      "cover more than one non-heldout separator style so transfer is not tied to a single string template",
+      "preserve fixed=fixed and loss=loss direct-completion rows from the base contract",
+      "keep heldout pair prompt fixed=|loss= out of training rows and materialized corpus lines",
+      "require pair-probe replay before any promotion claim"
+    ],
+    "non_goals": [
+      "do not train on the exact fixed=|loss= heldout pair prompt",
+      "do not increase model size before testing the transfer patch",
+      "do not reinterpret v738 as promotion-ready without pair-probe evidence"
+    ]
+  },
+  "summary": {
+    "plan_ready": true,
+    "check_count": 5,
+    "passed_check_count": 5,
+    "failed_check_count": 0,
+    "proposed_next_artifact": "pair_readiness_pair_prompt_transfer_contract_patch",
+    "repair_requirement_count": 5,
+    "non_goal_count": 3
+  },
+  "interpretation": {
+    "model_quality_claim": "plan_only",
+    "reason": "Direct-completion training helps direct probes but does not transfer to pair prompts, so the next patch must target non-leaking pair-transfer rows.",
+    "next_action": "build pair_readiness_pair_prompt_transfer_contract_patch"
+  }
+}

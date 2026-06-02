@@ -1,0 +1,6 @@
+id,status,actual,detail
+pair_probe_replay_passed,pass,pass,pair-probe replay must execute successfully
+pair_probe_not_ready,pass,pair_readiness_direct_completion_pair_probe_replay_not_ready,repair follows only the not-ready direct-completion pair-probe replay result
+exact_pair_failed,pass,False,exact heldout pair prompt must be the observed failure
+no_pair_prompt_full,pass,0,plan assumes no pair prompt surface replayed pair-full
+heldout_pair_remains_heldout,pass,fixed=|loss=,heldout pair prompt identity must stay explicit

@@ -1,0 +1,8 @@
+status=pass
+decision=pair_readiness_pair_prompt_transfer_repair_plan_ready
+failed_count=0
+plan_ready=True
+proposed_next_artifact=pair_readiness_pair_prompt_transfer_contract_patch
+repair_requirement_count=5
+model_quality_claim=plan_only
+next_action=build pair_readiness_pair_prompt_transfer_contract_patch

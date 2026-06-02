@@ -815,6 +815,9 @@
 754-v740-direct-completion-pair-probe-replay.md
  -> v740 code explanation: replay the selected direct-completion checkpoint on heldout pair prompt surfaces and mark the route as direct-probe-only after pair prompts do not transfer.
 
+755-v741-pair-prompt-transfer-repair-plan.md
+ -> v741 code explanation: turn the pair-probe replay failure into a non-leaking pair prompt transfer contract patch plan.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

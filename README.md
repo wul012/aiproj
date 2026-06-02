@@ -7467,6 +7467,8 @@ The pair-readiness direct-completion route comparison layer compares objective-s
 
 The pair-readiness direct-completion pair-probe replay layer then checks that candidate against heldout pair prompt surfaces and prevents over-promotion: v738 remains direct-probe-only evidence because `fixed=|loss=` and related pair prompts do not replay pair-full.
 
+The pair-readiness pair prompt transfer repair plan layer converts that negative replay into a non-leaking contract patch plan: preserve the direct-completion rows, add surrogate pair-transfer rows, and keep the exact `fixed=|loss=` prompt held out.
+
 The run registry layer indexes multiple run directories so experiments can be scanned by commit, data fingerprint, quality status, eval suite coverage, metrics, artifact count, notes, tags, best-val rank, loss delta, a leaderboard, an interactive local HTML table, shareable URL state, and visible-row CSV export.
 
 The experiment card layer turns one run into a compact JSON/Markdown/HTML summary for review, handoff, or portfolio use.
