@@ -4,7 +4,18 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v699.0.0` reruns minimal-prompt training with the loss-first-token repair and records the opposite branch tradeoff.
+Version `v700.0.0` compares v696 and v699 and confirms a minimal-prompt first-token tradeoff.
+
+## Latest v700 checkpoint
+
+- Reused `model_capability_required_term_pair_first_token_preference_diagnostic`.
+- Compared v696 fixed-dominant training with v699 loss-dominant training.
+- Confirmed `decision=first_token_preference_tradeoff_confirmed`.
+- Confirmed `mixed_branch_tradeoff_confirmed=True` and `other_term_start_count=4`.
+- Kept `model_quality_claim=diagnostic_only`.
+- Archived v700 evidence in `e/700` and added the code explanation in `代码讲解记录_模型能力阶段/714-v700-minimal-prompt-tradeoff-comparison.md`.
+
+## Latest v699 checkpoint
 
 ## Latest v699 checkpoint
 
@@ -14,8 +25,6 @@ Version `v699.0.0` reruns minimal-prompt training with the loss-first-token repa
 - Observed `loss=` now hits loss, while `fixed=` drifts into loss.
 - Confirmed `pair_full_observed=False` and `model_quality_claim=not_claimed`.
 - Archived v699 evidence in `e/699` and added the code explanation in `代码讲解记录_模型能力阶段/713-v699-minimal-prompt-loss-first-token-training.md`.
-
-## Latest v698 checkpoint
 
 ## Latest v698 checkpoint
 

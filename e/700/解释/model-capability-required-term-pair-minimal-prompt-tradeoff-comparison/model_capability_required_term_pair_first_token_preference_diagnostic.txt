@@ -1,0 +1,9 @@
+status=pass
+decision=first_token_preference_tradeoff_confirmed
+failed_count=0
+source_report_count=2
+first_token_conflict_confirmed=True
+mixed_branch_tradeoff_confirmed=True
+other_term_start_count=4
+model_quality_claim=diagnostic_only
+next_action=design a contrast-free objective that separates first-token choice from repeated term loops

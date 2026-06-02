@@ -692,6 +692,9 @@
 713-v699-minimal-prompt-loss-first-token-training.md
  -> v699 code explanation: rerun minimal-prompt training with loss-first-token repair and record the opposite branch tradeoff.
 
+714-v700-minimal-prompt-tradeoff-comparison.md
+ -> v700 code explanation: compare v696 and v699 with the existing first-token diagnostic and confirm tradeoff.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

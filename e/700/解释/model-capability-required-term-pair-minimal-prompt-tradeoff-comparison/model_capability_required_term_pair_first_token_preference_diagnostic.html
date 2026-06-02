@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT first-token preference diagnostic</title>
+<style>
+:root{color-scheme:light;--ink:#18212b;--muted:#5f6f7d;--line:#d7dee6;--panel:#f7f9fb;--accent:#355c7d}
+*{box-sizing:border-box}
+body{margin:0;background:#eef3f7;color:var(--ink);font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1180px;margin:0 auto;padding:28px}
+h1{font-size:30px;margin:0 0 8px;letter-spacing:0}
+h2{font-size:18px;margin:0 0 12px;letter-spacing:0}
+p{color:var(--muted);line-height:1.55}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin:18px 0}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:8px}
+.card{padding:14px}
+.card span{display:block;color:var(--muted);font-size:12px;text-transform:uppercase}
+.card strong{display:block;margin-top:6px;font-size:18px;line-height:1.2;color:var(--accent);overflow-wrap:anywhere}
+.panel{padding:16px;margin:14px 0}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:#334155}
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT first-token preference diagnostic</h1><p>The same prompt surface flips between fixed-only and loss-only outcomes without a pair-full route.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Decision</span><strong>first_token_preference_tradeoff_confirmed</strong></div><div class="card"><span>Conflict</span><strong>True</strong></div><div class="card"><span>Tradeoff</span><strong>True</strong></div><div class="card"><span>Other starts</span><strong>4</strong></div></section>
+<section class="panel"><h2>Next Action</h2><p>design a contrast-free objective that separates first-token choice from repeated term loops</p></section>
+<section class="panel">
+<h2>Prompt Rows</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Source</th><th>Profile</th><th>Term</th><th>First</th><th>Vote</th><th>Hit</th><th>Continuation</th></tr></thead>
+<tbody><tr><td>v696-fixed-dominant</td><td>default</td><td>fixed</td><td>f/f</td><td>fixed-start</td><td>True</td><td>fixed=fixed=</td></tr>
+<tr><td>v696-fixed-dominant</td><td>suppress_newline_tokens</td><td>fixed</td><td>f/f</td><td>fixed-start</td><td>True</td><td>fixed=fixed=</td></tr>
+<tr><td>v696-fixed-dominant</td><td>default</td><td>loss</td><td>f/l</td><td>fixed-start</td><td>False</td><td>fixed=fixed=</td></tr>
+<tr><td>v696-fixed-dominant</td><td>suppress_newline_tokens</td><td>loss</td><td>f/l</td><td>fixed-start</td><td>False</td><td>fixed=fixed=</td></tr>
+<tr><td>v699-loss-dominant</td><td>default</td><td>fixed</td><td>l/f</td><td>loss-start</td><td>False</td><td>losssssss= l</td></tr>
+<tr><td>v699-loss-dominant</td><td>suppress_newline_tokens</td><td>fixed</td><td>l/f</td><td>loss-start</td><td>False</td><td>losssssss= l</td></tr>
+<tr><td>v699-loss-dominant</td><td>default</td><td>loss</td><td>l/l</td><td>other</td><td>True</td><td> losssssss= </td></tr>
+<tr><td>v699-loss-dominant</td><td>suppress_newline_tokens</td><td>loss</td><td>l/l</td><td>other</td><td>True</td><td> losssssss= </td></tr></tbody>
+</table></div>
+</section>
+</main>
+</body>
+</html>

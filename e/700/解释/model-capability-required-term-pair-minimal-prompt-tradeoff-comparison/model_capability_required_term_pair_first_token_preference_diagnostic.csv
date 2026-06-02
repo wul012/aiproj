@@ -1,0 +1,9 @@
+source_label,profile_id,term,expected_first_char,observed_first_char,first_char_expected,branch_vote,continuation_hit,continuation_preview
+v696-fixed-dominant,default,fixed,f,f,True,fixed-start,True,fixed=fixed=
+v696-fixed-dominant,suppress_newline_tokens,fixed,f,f,True,fixed-start,True,fixed=fixed=
+v696-fixed-dominant,default,loss,l,f,False,fixed-start,False,fixed=fixed=
+v696-fixed-dominant,suppress_newline_tokens,loss,l,f,False,fixed-start,False,fixed=fixed=
+v699-loss-dominant,default,fixed,f,l,False,loss-start,False,losssssss= l
+v699-loss-dominant,suppress_newline_tokens,fixed,f,l,False,loss-start,False,losssssss= l
+v699-loss-dominant,default,loss,l,l,True,other,True, losssssss= 
+v699-loss-dominant,suppress_newline_tokens,loss,l,l,True,other,True, losssssss= 

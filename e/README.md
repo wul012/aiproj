@@ -981,3 +981,8 @@ e/663/解释/说明.md
 - `e/699/图片`
 - `e/699/解释/说明.md`
 - v699 minimal prompt loss first-token training 的运行截图和解释。
+## v700 补充索引
+
+- `e/700/图片`
+- `e/700/解释/说明.md`
+- v700 minimal prompt tradeoff comparison 的运行截图和解释。
