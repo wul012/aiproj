@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v776.0.0` extracts promoted seed handoff receipt text renderers from the receipt workflow.
+Version `v777.0.0` extracts release readiness comparison narrative wording from the comparison workflow.
+
+## Latest v777 checkpoint
+
+- Added `release_readiness_comparison_narrative`.
+- Reduced `release_readiness_comparison.py` from 767 to 605 lines.
+- Moved delta explanation text, status delta labels, CI reason labels, and release handoff recommendations out of the comparison builder.
+- Preserved existing comparison schema and public `status_delta_label` export.
+- Verified with `20 passed` release readiness comparison focused tests.
+- Archived v777 evidence in `e/777` and added the code explanation in `代码讲解记录_模型能力阶段/791-v777-release-readiness-comparison-narrative-split.md`.
 
 ## Latest v776 checkpoint
 

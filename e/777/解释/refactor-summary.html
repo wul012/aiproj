@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <title>v777 release readiness comparison narrative split</title>
+  <style>
+    body { font-family: "Segoe UI", Arial, sans-serif; margin: 32px; color: #1f2933; line-height: 1.55; }
+    main { max-width: 980px; margin: 0 auto; }
+    h1 { font-size: 28px; margin-bottom: 8px; }
+    h2 { margin-top: 28px; font-size: 20px; }
+    table { border-collapse: collapse; width: 100%; margin-top: 12px; }
+    th, td { border: 1px solid #c9d1d9; padding: 10px 12px; text-align: left; vertical-align: top; }
+    th { background: #f3f4f6; }
+    code { background: #eef2f7; padding: 2px 5px; border-radius: 4px; }
+    .pass { color: #0f766e; font-weight: 700; }
+  </style>
+</head>
+<body>
+<main>
+  <h1>v777 release readiness comparison narrative split</h1>
+  <p><strong>status:</strong> <span class="pass">pass</span></p>
+  <p>
+    v777 keeps the release-readiness comparison contract unchanged while moving narrative explanation and recommendation wording
+    out of <code>release_readiness_comparison.py</code>.
+  </p>
+
+  <h2>Split Boundary</h2>
+  <table>
+    <tr><th>Module</th><th>Role after v777</th><th>Line count</th></tr>
+    <tr>
+      <td><code>src/minigpt/release_readiness_comparison.py</code></td>
+      <td>Read inputs, build rows, compute deltas, summarize regression counts, and expose existing public exports.</td>
+      <td>605</td>
+    </tr>
+    <tr>
+      <td><code>src/minigpt/release_readiness_comparison_narrative.py</code></td>
+      <td>Render delta explanations, status delta labels, CI regression reason labels, and release handoff recommendations.</td>
+      <td>197</td>
+    </tr>
+  </table>
+
+  <h2>Verification</h2>
+  <ul>
+    <li><code>python -m py_compile src\minigpt\release_readiness_comparison.py src\minigpt\release_readiness_comparison_narrative.py</code></li>
+    <li><code>python -m pytest tests\test_release_readiness_comparison.py -q -o cache_dir=runs\pytest-cache-v777-focused</code>: 20 passed</li>
+  </ul>
+
+  <h2>Maintenance Value</h2>
+  <p>
+    The old module mixed comparison data mechanics with long English release explanations. The split gives future regression
+    helpers, summary calculators, and narrative wording separate places to change, which lowers review cost before deeper
+    release-readiness cleanup.
+  </p>
+</main>
+</body>
+</html>

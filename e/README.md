@@ -1376,3 +1376,9 @@ e/663/解释/说明.md
 - `e/776/图片`
 - `e/776/解释/说明.md`
 - v776 receipt outputs split 的运行截图和解释。
+
+## v777 补充索引
+
+- `e/777/图片`
+- `e/777/解释/说明.md`
+- v777 release readiness comparison narrative split 的运行截图和解释。
