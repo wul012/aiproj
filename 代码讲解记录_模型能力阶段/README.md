@@ -824,6 +824,9 @@
 757-v743-pair-prompt-transfer-corpus-materialization.md
  -> v743 code explanation: materialize the pair prompt transfer contract patch into a 7680-line training corpus and heldout fixture without leaking the exact pair prompt.
 
+758-v744-pair-prompt-transfer-training-run.md
+ -> v744 code explanation: train the pair prompt transfer corpus and record the loss-only negative result under the same larger-tiny settings.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

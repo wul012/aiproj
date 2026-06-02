@@ -7473,6 +7473,8 @@ The pair-readiness pair prompt transfer contract patch layer adds eight surrogat
 
 The pair-readiness pair prompt transfer corpus materialization layer expands the patched 24-row contract into a 7680-line training corpus and heldout fixture while keeping the exact pair probe isolated from training rows and corpus lines.
 
+The pair-readiness pair prompt transfer training layer trains that corpus with the same larger-tiny settings as the direct-completion candidate and records a loss-only regression, so the transfer patch is not a promotion route.
+
 The run registry layer indexes multiple run directories so experiments can be scanned by commit, data fingerprint, quality status, eval suite coverage, metrics, artifact count, notes, tags, best-val rank, loss delta, a leaderboard, an interactive local HTML table, shareable URL state, and visible-row CSV export.
 
 The experiment card layer turns one run into a compact JSON/Markdown/HTML summary for review, handoff, or portfolio use.

@@ -1,0 +1,14 @@
+device=cpu
+tokenizer=char
+tokens=302080 vocab_size=34
+parameters=228,672
+data_source=data:e\743\解释\model-capability-required-term-pair-readiness-pair-prompt-transfer-corpus-materialization\pair_readiness_training_corpus.txt
+step=    1 train_loss=3.2835 val_loss=3.3484
+step=  450 train_loss=1.3833 val_loss=1.3845
+step=  900 train_loss=1.4366 val_loss=1.4562
+step= 1350 train_loss=1.3646 val_loss=1.2620
+step= 1800 train_loss=1.0547 val_loss=1.2977
+saved=e\744\解释\model-capability-required-term-pair-readiness-pair-prompt-transfer-training-run\pair-readiness-training-run
+history=e\744\解释\model-capability-required-term-pair-readiness-pair-prompt-transfer-training-run\pair-readiness-training-run\metrics.jsonl
+manifest=e\744\解释\model-capability-required-term-pair-readiness-pair-prompt-transfer-training-run\pair-readiness-training-run\run_manifest.json
+sample=e\744\解释\model-capability-required-term-pair-readiness-pair-prompt-transfer-training-run\pair-readiness-training-run\sample.txt

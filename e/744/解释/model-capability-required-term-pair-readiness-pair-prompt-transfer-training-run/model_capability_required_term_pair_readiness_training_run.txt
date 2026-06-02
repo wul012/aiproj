@@ -1,0 +1,9 @@
+status=pass
+decision=pair_readiness_training_no_pair_full
+failed_count=0
+training_status=pass
+checkpoint_exists=True
+pair_full_observed=False
+default_continuation_hit_count=1
+model_quality_claim=not_claimed
+next_action=inspect heldout direct failures before changing corpus

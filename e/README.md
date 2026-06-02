@@ -1201,3 +1201,8 @@ e/663/解释/说明.md
 - `e/743/图片`
 - `e/743/解释/说明.md`
 - v743 pair prompt transfer corpus materialization 的运行截图和解释。
+## v744 补充索引
+
+- `e/744/图片`
+- `e/744/解释/说明.md`
+- v744 pair prompt transfer training run 的运行截图和解释。
