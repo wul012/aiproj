@@ -1246,3 +1246,8 @@ e/663/解释/说明.md
 - `e/752/图片`
 - `e/752/解释/说明.md`
 - v752 exact-surface repair plan 的运行截图和解释。
+## v753 补充索引
+
+- `e/753/图片`
+- `e/753/解释/说明.md`
+- v753 exact-surface repair contract patch 的运行截图和解释。

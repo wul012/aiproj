@@ -1,0 +1,9 @@
+status=pass
+decision=pair_readiness_exact_surface_repair_contract_patch_ready
+failed_count=0
+patch_ready=True
+base_training_row_count=20
+patched_training_row_count=24
+exact_surface_repair_row_count=4
+model_quality_claim=contract_patch_only
+next_action=materialize the exact-surface repair contract and rerun training plus independent replay

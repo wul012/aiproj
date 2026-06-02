@@ -1,0 +1,259 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT pair-readiness exact-surface repair contract patch",
+  "generated_at": "2026-06-02T09:39:07Z",
+  "status": "pass",
+  "decision": "pair_readiness_exact_surface_repair_contract_patch_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_repair_plan_path": "e\\752\\解释\\model-capability-required-term-pair-readiness-exact-surface-repair-plan\\model_capability_required_term_pair_readiness_exact_surface_repair_plan.json",
+  "source_base_contract_path": "e\\747\\解释\\model-capability-required-term-pair-readiness-fixed-preserving-transfer-contract-patch\\model_capability_required_term_pair_readiness_fixed_preserving_transfer_contract_patch.json",
+  "source_repair_plan": {
+    "status": "pass",
+    "decision": "pair_readiness_exact_surface_repair_plan_ready",
+    "summary": {
+      "plan_ready": true,
+      "proposed_next_artifact": "pair_readiness_exact_surface_repair_contract_patch",
+      "base_contract_artifact": "pair_readiness_fixed_preserving_transfer_contract_patch",
+      "repair_row_budget": 4,
+      "missed_required_surfaces": [
+        "exact-heldout-pair"
+      ],
+      "observed_pair_full_surfaces": [
+        "arrow-heldout-pair"
+      ],
+      "failed_check_count": 0
+    }
+  },
+  "source_base_contract": {
+    "status": "pass",
+    "decision": "pair_readiness_fixed_preserving_transfer_contract_patch_ready",
+    "summary": {
+      "patch_ready": true,
+      "base_training_row_count": 16,
+      "patched_training_row_count": 20,
+      "added_training_row_count": 4,
+      "fixed_preserving_transfer_row_count": 4,
+      "evaluation_probe_count": 3,
+      "failed_check_count": 0
+    }
+  },
+  "contract": {
+    "contract_version": 10,
+    "training_rows": [
+      "fixed=fixed",
+      "loss=loss",
+      "fixed=f",
+      "fixed=fi",
+      "fixed=fix",
+      "loss=l",
+      "loss=lo",
+      "loss=los",
+      "pair_surface order=fixed_then_loss | fixed=fixed | loss=loss",
+      "pair_surface forward fixed token fixed and loss token loss",
+      "pair_surface order=loss_then_fixed | loss=loss | fixed=fixed",
+      "pair_surface reverse loss token loss and fixed token fixed",
+      "direct_completion fixed branch keeps fixed not loss",
+      "direct_completion loss branch keeps loss not fixed",
+      "direct_completion fixed surface cannot answer loss",
+      "direct_completion loss surface cannot answer fixed",
+      "fixed_preserving_transfer guard fixed before loss => fixed loss",
+      "fixed_preserving_transfer compact fixed/loss keeps fixed => fixed loss",
+      "fixed_preserving_transfer reverse loss then fixed keeps fixed => loss fixed",
+      "fixed_preserving_transfer boundary fixed retained with loss",
+      "exact_surface_bridge pipe equals tokens map fixed and loss => fixed loss",
+      "exact_surface_bridge fixed equals pipe loss equals expects fixed loss",
+      "exact_surface_bridge compact pipe structure keeps fixed before loss",
+      "exact_surface_bridge no space pipe joins fixed token and loss token"
+    ],
+    "row_families": [
+      {
+        "family": "exact_direct_completion",
+        "role": "direct_completion_surface",
+        "target_term": "fixed/loss",
+        "rows": [
+          "fixed=fixed",
+          "loss=loss"
+        ]
+      },
+      {
+        "family": "fixed_prefix_ladder",
+        "role": "direct_completion_prefix",
+        "target_term": "fixed",
+        "rows": [
+          "fixed=f",
+          "fixed=fi",
+          "fixed=fix"
+        ]
+      },
+      {
+        "family": "loss_prefix_ladder",
+        "role": "direct_completion_prefix",
+        "target_term": "loss",
+        "rows": [
+          "loss=l",
+          "loss=lo",
+          "loss=los"
+        ]
+      },
+      {
+        "family": "paired_order_forward",
+        "role": "paired_order_surface",
+        "target_term": "fixed+loss",
+        "rows": [
+          "pair_surface order=fixed_then_loss | fixed=fixed | loss=loss",
+          "pair_surface forward fixed token fixed and loss token loss"
+        ]
+      },
+      {
+        "family": "paired_order_reverse",
+        "role": "paired_order_surface",
+        "target_term": "loss+fixed",
+        "rows": [
+          "pair_surface order=loss_then_fixed | loss=loss | fixed=fixed",
+          "pair_surface reverse loss token loss and fixed token fixed"
+        ]
+      },
+      {
+        "family": "direct_boundary_contrast",
+        "role": "anti_contamination",
+        "target_term": "fixed/loss",
+        "rows": [
+          "direct_completion fixed branch keeps fixed not loss",
+          "direct_completion loss branch keeps loss not fixed",
+          "direct_completion fixed surface cannot answer loss",
+          "direct_completion loss surface cannot answer fixed"
+        ]
+      }
+    ],
+    "evaluation_probes": [
+      {
+        "id": "fixed-direct",
+        "prompt": "fixed=",
+        "expected_term": "fixed",
+        "split": "heldout-direct"
+      },
+      {
+        "id": "loss-direct",
+        "prompt": "loss=",
+        "expected_term": "loss",
+        "split": "heldout-direct"
+      },
+      {
+        "id": "fixed-loss-pair",
+        "prompt": "fixed=|loss=",
+        "expected_term": "fixed+loss",
+        "split": "heldout-pair"
+      }
+    ],
+    "heldout_pair_probe": "fixed=|loss=",
+    "promotion_requirement": "fixed-direct and loss-direct heldout continuations must both hit before pair-probe promotion",
+    "leakage_policy": "train exact direct completions and balanced prefixes, but keep exact heldout prompts and pair probe out of training rows",
+    "template_family": "direct_completion_surface_balanced_prefix_ladder",
+    "source_route_boundary": "created after direct-prompt bridge patch had zero hit improvement and introduced fixed pollution",
+    "patch_kind": "exact_surface_repair",
+    "patch_note": "adds four near-exact pipe/equals surface bridge rows while keeping the exact heldout prompt absent"
+  },
+  "patch": {
+    "added_rows": [
+      "exact_surface_bridge pipe equals tokens map fixed and loss => fixed loss",
+      "exact_surface_bridge fixed equals pipe loss equals expects fixed loss",
+      "exact_surface_bridge compact pipe structure keeps fixed before loss",
+      "exact_surface_bridge no space pipe joins fixed token and loss token"
+    ],
+    "added_row_count": 4,
+    "patch_focus": "near-exact pipe/equals surface bridge without training on the heldout exact prompt"
+  },
+  "check_rows": [
+    {
+      "id": "repair_plan_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "exact-surface repair plan must pass"
+    },
+    {
+      "id": "repair_plan_decision",
+      "status": "pass",
+      "actual": "pair_readiness_exact_surface_repair_plan_ready",
+      "detail": "patch follows only a ready exact-surface repair plan"
+    },
+    {
+      "id": "next_artifact_matches",
+      "status": "pass",
+      "actual": "pair_readiness_exact_surface_repair_contract_patch",
+      "detail": "plan must request this patch artifact"
+    },
+    {
+      "id": "base_contract_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "base fixed-preserving contract must pass"
+    },
+    {
+      "id": "base_contract_decision",
+      "status": "pass",
+      "actual": "pair_readiness_fixed_preserving_transfer_contract_patch_ready",
+      "detail": "base must be the fixed-preserving transfer contract patch"
+    },
+    {
+      "id": "exact_surface_rows_added",
+      "status": "pass",
+      "actual": "all exact-surface rows",
+      "detail": "all exact-surface repair rows must be present"
+    },
+    {
+      "id": "repair_row_budget_respected",
+      "status": "pass",
+      "actual": 4,
+      "detail": "patch must respect plan row budget"
+    },
+    {
+      "id": "fixed_preserving_rows_preserved",
+      "status": "pass",
+      "actual": "all fixed-preserving rows",
+      "detail": "patch must preserve fixed-preserving transfer rows"
+    },
+    {
+      "id": "exact_direct_rows_preserved",
+      "status": "pass",
+      "actual": [
+        "fixed=fixed",
+        "loss=loss"
+      ],
+      "detail": "direct completion rows must be preserved"
+    },
+    {
+      "id": "heldout_pair_absent",
+      "status": "pass",
+      "actual": false,
+      "detail": "heldout pair prompt must stay out of all training rows"
+    },
+    {
+      "id": "heldout_pair_absent_from_patch",
+      "status": "pass",
+      "actual": false,
+      "detail": "patch rows must not train on exact heldout pair prompt"
+    },
+    {
+      "id": "no_exact_eval_row_overlap",
+      "status": "pass",
+      "actual": [],
+      "detail": "exact eval prompts must not be training rows"
+    }
+  ],
+  "summary": {
+    "patch_ready": true,
+    "base_training_row_count": 20,
+    "patched_training_row_count": 24,
+    "added_training_row_count": 4,
+    "exact_surface_repair_row_count": 4,
+    "fixed_preserving_transfer_row_count": 4,
+    "evaluation_probe_count": 3,
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "contract_patch_only",
+    "reason": "The patched contract adds near-exact pipe/equals bridge rows while keeping the exact heldout prompt absent.",
+    "next_action": "materialize the exact-surface repair contract and rerun training plus independent replay"
+  }
+}

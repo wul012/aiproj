@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT exact-surface repair contract patch</title>
+<style>
+:root{color-scheme:light;--ink:#172026;--muted:#5d6975;--line:#d8dee4;--panel:#f7f9fb;--accent:#1d4ed8}
+*{box-sizing:border-box}
+body{margin:0;background:#eef2f5;color:var(--ink);font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1120px;margin:0 auto;padding:28px}
+h1{font-size:30px;margin:0 0 8px;letter-spacing:0}
+h2{font-size:18px;margin:0 0 12px;letter-spacing:0}
+p,li{color:var(--muted);line-height:1.55;overflow-wrap:anywhere}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:18px 0}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:8px}
+.card{padding:14px}
+.card span{display:block;color:var(--muted);font-size:12px;text-transform:uppercase}
+.card strong{display:block;margin-top:6px;font-size:18px;line-height:1.2;color:var(--accent);overflow-wrap:anywhere}
+.panel{padding:16px;margin:14px 0}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:#334155}
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT exact-surface repair contract patch</h1><p>The patched contract adds near-exact pipe/equals bridge rows while keeping the exact heldout prompt absent.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Decision</span><strong>pair_readiness_exact_surface_repair_contract_patch_ready</strong></div><div class="card"><span>Ready</span><strong>True</strong></div><div class="card"><span>Base rows</span><strong>20</strong></div><div class="card"><span>Patched rows</span><strong>24</strong></div><div class="card"><span>Repair rows</span><strong>4</strong></div></section>
+<section class="panel"><h2>Added Rows</h2><ul><li>exact_surface_bridge pipe equals tokens map fixed and loss =&gt; fixed loss</li><li>exact_surface_bridge fixed equals pipe loss equals expects fixed loss</li><li>exact_surface_bridge compact pipe structure keeps fixed before loss</li><li>exact_surface_bridge no space pipe joins fixed token and loss token</li></ul></section>
+<section class="panel"><h2>Checks</h2><div class="table-wrap"><table>
+<thead><tr><th>Check</th><th>Status</th><th>Actual</th><th>Detail</th></tr></thead>
+<tbody><tr><td>repair_plan_passed</td><td>pass</td><td>pass</td><td>exact-surface repair plan must pass</td></tr><tr><td>repair_plan_decision</td><td>pass</td><td>pair_readiness_exact_surface_repair_plan_ready</td><td>patch follows only a ready exact-surface repair plan</td></tr><tr><td>next_artifact_matches</td><td>pass</td><td>pair_readiness_exact_surface_repair_contract_patch</td><td>plan must request this patch artifact</td></tr><tr><td>base_contract_passed</td><td>pass</td><td>pass</td><td>base fixed-preserving contract must pass</td></tr><tr><td>base_contract_decision</td><td>pass</td><td>pair_readiness_fixed_preserving_transfer_contract_patch_ready</td><td>base must be the fixed-preserving transfer contract patch</td></tr><tr><td>exact_surface_rows_added</td><td>pass</td><td>all exact-surface rows</td><td>all exact-surface repair rows must be present</td></tr><tr><td>repair_row_budget_respected</td><td>pass</td><td>4</td><td>patch must respect plan row budget</td></tr><tr><td>fixed_preserving_rows_preserved</td><td>pass</td><td>all fixed-preserving rows</td><td>patch must preserve fixed-preserving transfer rows</td></tr><tr><td>exact_direct_rows_preserved</td><td>pass</td><td>[&#x27;fixed=fixed&#x27;, &#x27;loss=loss&#x27;]</td><td>direct completion rows must be preserved</td></tr><tr><td>heldout_pair_absent</td><td>pass</td><td>False</td><td>heldout pair prompt must stay out of all training rows</td></tr><tr><td>heldout_pair_absent_from_patch</td><td>pass</td><td>False</td><td>patch rows must not train on exact heldout pair prompt</td></tr><tr><td>no_exact_eval_row_overlap</td><td>pass</td><td>[]</td><td>exact eval prompts must not be training rows</td></tr></tbody>
+</table></div></section>
+<section class="panel"><h2>Next Action</h2><p>materialize the exact-surface repair contract and rerun training plus independent replay</p></section>
+</main>
+</body>
+</html>

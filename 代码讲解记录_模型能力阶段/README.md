@@ -851,6 +851,9 @@
 766-v752-exact-surface-repair-plan.md
  -> v752 code explanation: turn prompt-surface sensitivity into a bounded exact-surface repair plan without leaking the heldout prompt.
 
+767-v753-exact-surface-repair-contract-patch.md
+ -> v753 code explanation: apply the exact-surface plan as a checked four-row contract patch and register it for materialization.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。
