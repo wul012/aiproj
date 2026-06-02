@@ -4,7 +4,18 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v690.0.0` contrasts the selected contextual surface variant with non-leaking baselines.
+Version `v691.0.0` decides to close the contextual surface branch and route future model work to minimal prompts.
+
+## Latest v691 checkpoint
+
+- Added `model_capability_required_term_pair_surface_route_decision`.
+- Consumed v690 baseline-contrast and v689 variant-selector evidence.
+- Confirmed `status=pass`.
+- Confirmed `decision=close_contextual_decode_branch_and_design_minimal_prompt_objective`.
+- Confirmed `current_route=contextual_decode_aid_closeout`.
+- Confirmed `recommended_next_route=minimal_prompt_surface_objective`.
+- Preserved `promotion_allowed=False`.
+- Archived v691 evidence in `e/691` and added the code explanation in `代码讲解记录_模型能力阶段/705-v691-required-term-pair-surface-route-decision.md`.
 
 ## Latest v690 checkpoint
 

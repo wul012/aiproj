@@ -936,3 +936,8 @@ e/663/解释/说明.md
 - `e/690/图片`
 - `e/690/解释/说明.md`
 - v690 required-term pair surface baseline contrast 的运行截图和解释。
+## v691 补充索引
+
+- `e/691/图片`
+- `e/691/解释/说明.md`
+- v691 required-term pair surface route decision 的运行截图和解释。

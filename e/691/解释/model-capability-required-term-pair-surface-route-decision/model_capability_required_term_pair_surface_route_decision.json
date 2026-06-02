@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required-term pair surface route decision",
+  "generated_at": "2026-06-02T00:07:17Z",
+  "status": "pass",
+  "decision": "close_contextual_decode_branch_and_design_minimal_prompt_objective",
+  "failed_count": 0,
+  "issues": [],
+  "source_baseline_contrast_path": "e\\690\\解释\\model-capability-required-term-pair-surface-baseline-contrast\\model_capability_required_term_pair_surface_baseline_contrast.json",
+  "source_variant_selector_path": "e\\689\\解释\\model-capability-required-term-pair-surface-variant-selector\\model_capability_required_term_pair_surface_variant_selector.json",
+  "route": {
+    "selected_variant_id": "space_context_control",
+    "current_route": "contextual_decode_aid_closeout",
+    "recommended_next_route": "minimal_prompt_surface_objective",
+    "allowed_use": "demo_and_diagnostic_contextual_decode",
+    "blocked_use": "baseline_promotion_or_minimal_prompt_claim",
+    "contextual_anchor_required": true,
+    "stable_non_leaking_baseline_count": 0,
+    "promotion_allowed": false
+  },
+  "summary": {
+    "selected_variant_id": "space_context_control",
+    "current_route": "contextual_decode_aid_closeout",
+    "recommended_next_route": "minimal_prompt_surface_objective",
+    "promotion_ready": false
+  },
+  "interpretation": {
+    "model_quality_claim": "contextual_decode_aid_not_baseline",
+    "reason": "The selected contextual variant is useful, but the baseline contrast proves non-leaking prompts are still unstable.",
+    "next_action": "close this branch and only start a new objective if minimal-prompt capability is required"
+  }
+}

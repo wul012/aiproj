@@ -1,0 +1,8 @@
+status=pass
+decision=close_contextual_decode_branch_and_design_minimal_prompt_objective
+selected_variant_id=space_context_control
+current_route=contextual_decode_aid_closeout
+recommended_next_route=minimal_prompt_surface_objective
+promotion_allowed=False
+model_quality_claim=contextual_decode_aid_not_baseline
+next_action=close this branch and only start a new objective if minimal-prompt capability is required
