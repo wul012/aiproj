@@ -1166,3 +1166,8 @@ e/663/解释/说明.md
 - `e/736/图片`
 - `e/736/解释/说明.md`
 - v736 direct-completion surface contract 的运行截图和解释。
+## v737 补充索引
+
+- `e/737/图片`
+- `e/737/解释/说明.md`
+- v737 direct-completion surface corpus materialization 的运行截图和解释。

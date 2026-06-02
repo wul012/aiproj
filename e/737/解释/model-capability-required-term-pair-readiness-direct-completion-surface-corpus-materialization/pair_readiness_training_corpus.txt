@@ -1,0 +1,5120 @@
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed
+fixed=fixed
+loss=loss
+fixed=f
+fixed=fi
+fixed=fix
+loss=l
+loss=lo
+loss=los
+pair_surface order=fixed_then_loss | fixed=fixed | loss=loss
+pair_surface forward fixed token fixed and loss token loss
+pair_surface order=loss_then_fixed | loss=loss | fixed=fixed
+pair_surface reverse loss token loss and fixed token fixed
+direct_completion fixed branch keeps fixed not loss
+direct_completion loss branch keeps loss not fixed
+direct_completion fixed surface cannot answer loss
+direct_completion loss surface cannot answer fixed

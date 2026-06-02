@@ -7459,6 +7459,8 @@ The pair-readiness capacity-probe training layer runs that larger tiny model and
 
 The pair-readiness bridge closeout and direct-completion surface contract layers close the no-improvement direct-prompt bridge route, replace descriptive bridge rows with compact `fixed=fixed` / `loss=loss` completion surfaces, preserve balanced prefix ladders, and keep the heldout pair probe isolated for the next materialization and training pass.
 
+The pair-readiness direct-completion surface materialization layer expands that 16-row contract into a 5120-line corpus and heldout fixture, proving the compact surface route is ready for the next real tiny training run.
+
 The run registry layer indexes multiple run directories so experiments can be scanned by commit, data fingerprint, quality status, eval suite coverage, metrics, artifact count, notes, tags, best-val rank, loss delta, a leaderboard, an interactive local HTML table, shareable URL state, and visible-row CSV export.
 
 The experiment card layer turns one run into a compact JSON/Markdown/HTML summary for review, handoff, or portfolio use.
