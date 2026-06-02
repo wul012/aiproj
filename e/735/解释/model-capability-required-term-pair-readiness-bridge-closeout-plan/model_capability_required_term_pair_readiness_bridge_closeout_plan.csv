@@ -1,0 +1,6 @@
+id,status,actual,detail
+comparison_passed,pass,pass,bridge comparison must pass
+comparison_decision,pass,pair_readiness_bridge_no_improvement_introduced_fixed_pollution,closeout follows only a bridge route with no improvement and introduced fixed pollution
+no_hit_delta,pass,0,bridge route must show no hit-count improvement
+pollution_introduced,pass,True,bridge route must introduce loss-prompt fixed pollution
+bridge_not_improved,pass,False,bridge route must not be an improved candidate

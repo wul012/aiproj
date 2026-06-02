@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT pair-readiness bridge closeout plan",
+  "generated_at": "2026-06-02T06:40:40Z",
+  "status": "pass",
+  "decision": "pair_readiness_bridge_closeout_plan_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_bridge_comparison_path": "e\\734\\解释\\model-capability-required-term-pair-readiness-bridge-comparison\\model_capability_required_term_pair_readiness_bridge_comparison.json",
+  "source_bridge_comparison": {
+    "status": "pass",
+    "decision": "pair_readiness_bridge_no_improvement_introduced_fixed_pollution",
+    "summary": {
+      "objective_default_hit_count": 0,
+      "bridge_default_hit_count": 0,
+      "default_hit_delta": 0,
+      "bridge_improved": false,
+      "bridge_pair_full_observed": false,
+      "objective_non_term_surface_count": 2,
+      "bridge_non_term_surface_count": 1,
+      "bridge_loss_prompt_fixed_pollution_count": 1,
+      "bridge_pollution_introduced": true,
+      "failure_shape_changed": true,
+      "recommended_next_artifact": "pair_readiness_bridge_closeout"
+    }
+  },
+  "check_rows": [
+    {
+      "id": "comparison_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "bridge comparison must pass"
+    },
+    {
+      "id": "comparison_decision",
+      "status": "pass",
+      "actual": "pair_readiness_bridge_no_improvement_introduced_fixed_pollution",
+      "detail": "closeout follows only a bridge route with no improvement and introduced fixed pollution"
+    },
+    {
+      "id": "no_hit_delta",
+      "status": "pass",
+      "actual": 0,
+      "detail": "bridge route must show no hit-count improvement"
+    },
+    {
+      "id": "pollution_introduced",
+      "status": "pass",
+      "actual": true,
+      "detail": "bridge route must introduce loss-prompt fixed pollution"
+    },
+    {
+      "id": "bridge_not_improved",
+      "status": "pass",
+      "actual": false,
+      "detail": "bridge route must not be an improved candidate"
+    }
+  ],
+  "plan": {
+    "ready": true,
+    "closed_route": "direct_prompt_bridge_contract_patch",
+    "proposed_next_artifact": "pair_readiness_direct_completion_surface_contract",
+    "route_change": "replace descriptive bridge rows with compact direct-completion surfaces",
+    "next_contract_requirements": [
+      "include balanced completion rows such as fixed=fixed and loss=loss without adding the heldout pair probe",
+      "include short prefix ladder rows only when both fixed and loss ladders are symmetric",
+      "keep paired order rows separate from direct completion rows",
+      "surface checks must count exact direct completions and pair-probe leakage separately"
+    ],
+    "non_goals": [
+      "do not add more direct-prompt bridge prose rows",
+      "do not increase model size before the new surface contract is trained",
+      "do not train on the exact heldout pair probe"
+    ]
+  },
+  "summary": {
+    "check_count": 5,
+    "passed_check_count": 5,
+    "failed_check_count": 0,
+    "plan_ready": true,
+    "closed_route": "direct_prompt_bridge_contract_patch",
+    "proposed_next_artifact": "pair_readiness_direct_completion_surface_contract",
+    "next_contract_requirement_count": 4,
+    "non_goal_count": 3
+  },
+  "interpretation": {
+    "model_quality_claim": "plan_only",
+    "reason": "The direct-prompt bridge route did not improve hits and introduced fixed pollution, so it should be closed.",
+    "next_action": "build pair_readiness_direct_completion_surface_contract"
+  }
+}

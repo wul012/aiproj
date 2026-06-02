@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v734.0.0` compares the bridge route against objective-structure training and closes the bridge patch after no improvement.
+Version `v735.0.0` closes the no-improvement bridge route and plans a direct-completion surface contract.
+
+## Latest v735 checkpoint
+
+- Added `model_capability_required_term_pair_readiness_bridge_closeout_plan`.
+- Consumed v734 bridge comparison.
+- Confirmed `decision=pair_readiness_bridge_closeout_plan_ready`.
+- Closed `direct_prompt_bridge_contract_patch`.
+- Proposed `pair_readiness_direct_completion_surface_contract`.
+- Archived v735 evidence in `e/735` and added the code explanation in `代码讲解记录_模型能力阶段/749-v735-bridge-closeout-plan.md`.
 
 ## Latest v734 checkpoint
 

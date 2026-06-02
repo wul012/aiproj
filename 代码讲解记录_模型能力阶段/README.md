@@ -797,6 +797,9 @@
 748-v734-bridge-comparison.md
  -> v734 code explanation: compare v729 and v733, close the bridge route after no hit improvement and introduced fixed pollution.
 
+749-v735-bridge-closeout-plan.md
+ -> v735 code explanation: close the no-improvement bridge route and plan a direct-completion surface contract.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。
