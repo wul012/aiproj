@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v729.0.0` trains the objective-structure corpus and records a direct-surface mismatch negative result.
+Version `v730.0.0` diagnoses the objective-structure training miss as direct prompt surface mismatch.
+
+## Latest v730 checkpoint
+
+- Added `model_capability_required_term_pair_readiness_surface_mismatch_diagnostic`.
+- Consumed v727 objective-structure contract and v729 training run.
+- Confirmed `decision=pair_readiness_direct_surface_mismatch_detected`.
+- Observed `default_hit_terms=[]`, `default_missed_terms=['fixed', 'loss']`, and `raw_surface_reference_count=0`.
+- Proposed `pair_readiness_direct_prompt_bridge_contract_patch` as the next artifact.
+- Archived v730 evidence in `e/730` and added the code explanation in `代码讲解记录_模型能力阶段/744-v730-surface-mismatch-diagnostic.md`.
 
 ## Latest v729 checkpoint
 

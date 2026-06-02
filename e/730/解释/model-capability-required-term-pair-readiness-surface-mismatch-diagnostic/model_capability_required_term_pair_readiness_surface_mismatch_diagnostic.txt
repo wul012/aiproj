@@ -1,0 +1,10 @@
+status=pass
+decision=pair_readiness_direct_surface_mismatch_detected
+failed_count=0
+surface_mismatch_detected=True
+default_hit_terms=[]
+default_missed_terms=['fixed', 'loss']
+raw_surface_reference_count=0
+recommended_next_artifact=pair_readiness_direct_prompt_bridge_contract_patch
+model_quality_claim=diagnostic_only
+next_action=build pair_readiness_direct_prompt_bridge_contract_patch without adding the heldout pair probe

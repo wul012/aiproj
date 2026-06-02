@@ -1131,3 +1131,8 @@ e/663/解释/说明.md
 - `e/729/图片`
 - `e/729/解释/说明.md`
 - v729 objective-structure training run 的运行截图和解释。
+## v730 补充索引
+
+- `e/730/图片`
+- `e/730/解释/说明.md`
+- v730 surface mismatch diagnostic 的运行截图和解释。

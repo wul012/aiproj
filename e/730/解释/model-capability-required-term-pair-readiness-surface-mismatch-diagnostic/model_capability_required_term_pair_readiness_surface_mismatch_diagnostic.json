@@ -1,0 +1,124 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT pair-readiness surface mismatch diagnostic",
+  "generated_at": "2026-06-02T05:07:01Z",
+  "status": "pass",
+  "decision": "pair_readiness_direct_surface_mismatch_detected",
+  "failed_count": 0,
+  "issues": [],
+  "source_contract_path": "e\\727\\解释\\model-capability-required-term-pair-readiness-objective-structure-contract\\model_capability_required_term_pair_readiness_objective_structure_contract.json",
+  "source_training_path": "e\\729\\解释\\model-capability-required-term-pair-readiness-objective-structure-training-run\\model_capability_required_term_pair_readiness_training_run.json",
+  "source_contract": {
+    "status": "pass",
+    "decision": "pair_readiness_objective_structure_contract_ready",
+    "summary": {
+      "contract_ready": true,
+      "training_row_count": 18,
+      "row_family_count": 5,
+      "evaluation_probe_count": 3,
+      "failed_check_count": 0,
+      "heldout_pair_probe": "fixed=|loss=",
+      "template_family": "objective_structure_task_id_and_paired_blocks",
+      "fixed_direct_row_count": 4,
+      "loss_direct_row_count": 4,
+      "paired_block_row_count": 6
+    }
+  },
+  "source_training": {
+    "status": "pass",
+    "decision": "pair_readiness_training_no_pair_full",
+    "summary": {
+      "materialization_status": "pass",
+      "training_status": "pass",
+      "checkpoint_exists": true,
+      "tokenizer_exists": true,
+      "default_pair_full_variant_count": 0,
+      "suppression_pair_full_variant_count": 0,
+      "default_continuation_hit_count": 0,
+      "suppression_continuation_hit_count": 0,
+      "pair_full_observed": false
+    }
+  },
+  "analysis_rows": [
+    {
+      "term": "fixed",
+      "prompt": "fixed=",
+      "continuation": "d | | | | |",
+      "continuation_hit": false,
+      "exact_prompt_training_row": false,
+      "raw_surface_reference_count": 0,
+      "surface_class": "non_term_surface"
+    },
+    {
+      "term": "loss",
+      "prompt": "loss=",
+      "continuation": "d | | | | |",
+      "continuation_hit": false,
+      "exact_prompt_training_row": false,
+      "raw_surface_reference_count": 0,
+      "surface_class": "non_term_surface"
+    }
+  ],
+  "check_rows": [
+    {
+      "id": "contract_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "source objective contract must pass"
+    },
+    {
+      "id": "contract_decision",
+      "status": "pass",
+      "actual": "pair_readiness_objective_structure_contract_ready",
+      "detail": "diagnostic follows only the objective-structure contract"
+    },
+    {
+      "id": "training_report_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "source training report must pass"
+    },
+    {
+      "id": "training_no_pair_full",
+      "status": "pass",
+      "actual": "pair_readiness_training_no_pair_full",
+      "detail": "surface mismatch diagnostic is only for no-pair-full training runs"
+    },
+    {
+      "id": "default_replay_terms_present",
+      "status": "pass",
+      "actual": 2,
+      "detail": "need default fixed/loss replay rows"
+    },
+    {
+      "id": "both_direct_terms_missed",
+      "status": "pass",
+      "actual": true,
+      "detail": "both direct terms must miss before planning a bridge"
+    }
+  ],
+  "summary": {
+    "training_row_count": 18,
+    "template_family": "objective_structure_task_id_and_paired_blocks",
+    "default_replay_term_count": 2,
+    "default_hit_terms": [],
+    "default_missed_terms": [
+      "fixed",
+      "loss"
+    ],
+    "both_direct_terms_missed": true,
+    "exact_prompt_overlap_count": 0,
+    "raw_surface_reference_count": 0,
+    "surface_mismatch_detected": true,
+    "recommended_next_artifact": "pair_readiness_direct_prompt_bridge_contract_patch",
+    "bridge_needed_terms": [
+      "fixed",
+      "loss"
+    ]
+  },
+  "interpretation": {
+    "model_quality_claim": "diagnostic_only",
+    "reason": "The objective-structure rows avoid exact direct prompts, and both heldout direct prompts miss with non-term continuations.",
+    "next_action": "build pair_readiness_direct_prompt_bridge_contract_patch without adding the heldout pair probe"
+  }
+}
