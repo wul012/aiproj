@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT pair-readiness fixed-preserving transfer prompt-surface sensitivity diagnostic",
+  "generated_at": "2026-06-02T09:19:01Z",
+  "status": "pass",
+  "decision": "pair_readiness_fixed_preserving_transfer_prompt_surface_sensitivity_found",
+  "failed_count": 0,
+  "issues": [],
+  "source_training_run": "e\\749\\解释\\model-capability-required-term-pair-readiness-fixed-preserving-transfer-training-run\\model_capability_required_term_pair_readiness_training_run.json",
+  "source_pair_probe_replay": "e\\750\\解释\\model-capability-required-term-pair-readiness-fixed-preserving-transfer-pair-probe-replay\\model_capability_required_term_pair_readiness_fixed_preserving_transfer_pair_probe_replay.json",
+  "surface_rows": [
+    {
+      "spec_id": "exact-heldout-pair",
+      "prompt": "fixed=|loss=",
+      "required_for_ready": true,
+      "replay_pair_full": false,
+      "default_continuation_hit_count": 1,
+      "suppression_continuation_hit_count": 1,
+      "diagnosis": "required_surface_missed"
+    },
+    {
+      "spec_id": "spaced-heldout-pair",
+      "prompt": "fixed= | loss=",
+      "required_for_ready": false,
+      "replay_pair_full": false,
+      "default_continuation_hit_count": 1,
+      "suppression_continuation_hit_count": 1,
+      "diagnosis": "optional_surface_missed"
+    },
+    {
+      "spec_id": "arrow-heldout-pair",
+      "prompt": "fixed -> | loss ->",
+      "required_for_ready": false,
+      "replay_pair_full": true,
+      "default_continuation_hit_count": 2,
+      "suppression_continuation_hit_count": 2,
+      "diagnosis": "pair_full_surface"
+    }
+  ],
+  "check_rows": [
+    {
+      "id": "training_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "training run must pass"
+    },
+    {
+      "id": "training_pair_full_observed",
+      "status": "pass",
+      "actual": "pair_readiness_training_pair_full_observed",
+      "detail": "diagnostic expects the v749 pair-full training observation"
+    },
+    {
+      "id": "replay_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "pair-probe replay must execute cleanly"
+    },
+    {
+      "id": "surface_rows_present",
+      "status": "pass",
+      "actual": 3,
+      "detail": "replay report must contain surface rows"
+    },
+    {
+      "id": "required_surface_present",
+      "status": "pass",
+      "actual": [
+        "exact-heldout-pair"
+      ],
+      "detail": "at least one required surface must be checked"
+    }
+  ],
+  "summary": {
+    "training_pair_full_observed": true,
+    "training_default_hit_count": 2,
+    "replay_decision": "pair_readiness_fixed_preserving_transfer_pair_probe_replay_partial",
+    "exact_heldout_pair_full": false,
+    "required_all_pair_full": false,
+    "pair_full_count": 1,
+    "surface_count": 3,
+    "required_missed_surface_ids": [
+      "exact-heldout-pair"
+    ],
+    "optional_pair_full_surface_ids": [
+      "arrow-heldout-pair"
+    ],
+    "surface_sensitivity_observed": true,
+    "promotion_blocked": true,
+    "recommended_next_artifact": "exact_surface_repair_plan"
+  },
+  "interpretation": {
+    "model_quality_claim": "prompt_surface_sensitive_pair_probe",
+    "reason": "An optional pair surface is pair-full while the required exact heldout pair surface is missed.",
+    "next_action": "plan a minimal exact-surface repair before any checkpoint promotion"
+  }
+}

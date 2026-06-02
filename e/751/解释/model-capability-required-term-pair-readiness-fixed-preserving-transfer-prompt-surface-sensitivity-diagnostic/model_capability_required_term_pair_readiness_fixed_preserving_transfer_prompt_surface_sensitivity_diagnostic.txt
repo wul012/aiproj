@@ -1,0 +1,9 @@
+status=pass
+decision=pair_readiness_fixed_preserving_transfer_prompt_surface_sensitivity_found
+failed_count=0
+surface_sensitivity_observed=True
+promotion_blocked=True
+required_missed_surface_ids=['exact-heldout-pair']
+optional_pair_full_surface_ids=['arrow-heldout-pair']
+model_quality_claim=prompt_surface_sensitive_pair_probe
+next_action=plan a minimal exact-surface repair before any checkpoint promotion

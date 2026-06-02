@@ -845,6 +845,9 @@
 764-v750-fixed-preserving-transfer-pair-probe-replay.md
  -> v750 code explanation: independently replay the v749 checkpoint and record partial pair-probe evidence before any promotion.
 
+765-v751-prompt-surface-sensitivity-diagnostic.md
+ -> v751 code explanation: combine v749 training and v750 replay evidence to diagnose prompt-surface sensitivity and block promotion.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

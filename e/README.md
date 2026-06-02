@@ -1236,3 +1236,8 @@ e/663/解释/说明.md
 - `e/750/图片`
 - `e/750/解释/说明.md`
 - v750 fixed-preserving transfer pair-probe replay 的运行截图和解释。
+## v751 补充索引
+
+- `e/751/图片`
+- `e/751/解释/说明.md`
+- v751 prompt-surface sensitivity diagnostic 的运行截图和解释。
