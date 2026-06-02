@@ -1126,3 +1126,8 @@ e/663/解释/说明.md
 - `e/728/图片`
 - `e/728/解释/说明.md`
 - v728 objective-structure corpus materialization 的运行截图和解释。
+## v729 补充索引
+
+- `e/729/图片`
+- `e/729/解释/说明.md`
+- v729 objective-structure training run 的运行截图和解释。

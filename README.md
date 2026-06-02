@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v728.0.0` materializes the objective-structure contract into a 5760-line training corpus and heldout fixture.
+Version `v729.0.0` trains the objective-structure corpus and records a direct-surface mismatch negative result.
+
+## Latest v729 checkpoint
+
+- Reused `model_capability_required_term_pair_readiness_training_run`.
+- Trained a real tiny checkpoint on v728 objective-structure corpus.
+- Confirmed `training_status=pass` and `checkpoint_exists=True`.
+- Confirmed `decision=pair_readiness_training_no_pair_full`.
+- Observed `default_continuation_hit_count=0`; both `fixed` and `loss` were missed.
+- Archived v729 evidence in `e/729` and added the code explanation in `代码讲解记录_模型能力阶段/743-v729-objective-structure-training-run.md`.
 
 ## Latest v728 checkpoint
 
