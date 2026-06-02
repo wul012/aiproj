@@ -17,6 +17,11 @@ PAIR_READINESS_CORPUS_MATERIALIZATION_MARKDOWN_FILENAME = "model_capability_requ
 PAIR_READINESS_CORPUS_MATERIALIZATION_HTML_FILENAME = "model_capability_required_term_pair_readiness_corpus_materialization.html"
 PAIR_READINESS_TRAINING_CORPUS_FILENAME = "pair_readiness_training_corpus.txt"
 PAIR_READINESS_HELDOUT_EVAL_FIXTURE_FILENAME = "pair_readiness_heldout_eval_fixture.json"
+PAIR_READINESS_READY_CONTRACT_DECISIONS = {
+    "pair_readiness_split_contract_ready",
+    "pair_readiness_loss_retention_contract_patch_ready",
+    "pair_readiness_structured_template_contract_ready",
+}
 
 
 def locate_pair_readiness_corpus_materialization_source(path: str | Path) -> Path:
@@ -132,9 +137,9 @@ def _checks(contract_report: dict[str, Any], contract: dict[str, Any], corpus_li
         _check("contract_passed", contract_report.get("status") == "pass", contract_report.get("status"), "source contract must pass"),
         _check(
             "contract_decision",
-            contract_report.get("decision") in {"pair_readiness_split_contract_ready", "pair_readiness_loss_retention_contract_patch_ready"},
+            contract_report.get("decision") in PAIR_READINESS_READY_CONTRACT_DECISIONS,
             contract_report.get("decision"),
-            "materialization requires a ready split contract or loss-retention contract patch",
+            "materialization requires a ready pair-readiness contract",
         ),
         _check("repeat_positive", repeat > 0, repeat, "repeat must be positive"),
         _check("training_rows_present", len(training_rows) >= 8, len(training_rows), "training rows must be present"),
@@ -185,6 +190,7 @@ __all__ = [
     "PAIR_READINESS_CORPUS_MATERIALIZATION_MARKDOWN_FILENAME",
     "PAIR_READINESS_CORPUS_MATERIALIZATION_TEXT_FILENAME",
     "PAIR_READINESS_HELDOUT_EVAL_FIXTURE_FILENAME",
+    "PAIR_READINESS_READY_CONTRACT_DECISIONS",
     "PAIR_READINESS_TRAINING_CORPUS_FILENAME",
     "build_pair_readiness_corpus_materialization",
     "locate_pair_readiness_corpus_materialization_source",

@@ -1,0 +1,9 @@
+status=pass
+decision=pair_readiness_structured_template_contract_ready
+failed_count=0
+contract_ready=True
+structured_training_row_count=14
+source_default_hit_delta=-1
+template_family=prompt_answer_structured_direct_terms
+model_quality_claim=contract_only
+next_action=materialize the structured-template contract and run a real tiny training comparison

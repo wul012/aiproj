@@ -1,0 +1,11 @@
+id,status,actual,detail
+source_comparison_passed,pass,pass,source comparison must pass
+source_comparison_decision,pass,pair_readiness_loss_retention_patch_regressed,structured template route follows only the closed loss-retention regression branch
+prior_route_regressed,pass,True,source must confirm the prior repair regressed
+prior_default_delta_negative,pass,-1,source default-hit delta must be negative
+training_rows_present,pass,14,structured template rows must be substantial enough to materialize
+fixed_rows_present,pass,8,fixed route must have repeated structured anchors
+loss_rows_present,pass,8,loss route must have repeated structured anchors
+evaluation_probes_present,pass,3,"fixed, loss, and pair probes must be preserved"
+no_exact_eval_row_overlap,pass,[],exact eval prompts must not be training rows
+heldout_pair_absent,pass,False,heldout pair probe must stay out of training rows

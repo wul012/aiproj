@@ -734,6 +734,9 @@
 727-v713-pair-readiness-repair-comparison.md
  -> v713 code explanation: compare baseline and loss-retention pair-readiness runs and close the single-sided prefix repair route.
 
+728-v714-pair-readiness-structured-template-contract.md
+ -> v714 code explanation: convert the regressed loss-retention route into a structured prompt-answer contract for the next materialization/training pass.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

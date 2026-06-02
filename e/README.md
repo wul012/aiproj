@@ -1051,3 +1051,8 @@ e/663/解释/说明.md
 - `e/713/图片`
 - `e/713/解释/说明.md`
 - v713 pair-readiness repair comparison 的运行截图和解释。
+## v714 补充索引
+
+- `e/714/图片`
+- `e/714/解释/说明.md`
+- v714 pair-readiness structured-template contract 的运行截图和解释。

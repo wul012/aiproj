@@ -1,0 +1,145 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT pair-readiness structured-template contract",
+  "generated_at": "2026-06-02T02:48:41Z",
+  "status": "pass",
+  "decision": "pair_readiness_structured_template_contract_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_comparison_path": "e\\713\\解释\\model-capability-required-term-pair-readiness-repair-comparison\\model_capability_required_term_pair_readiness_repair_comparison.json",
+  "source_comparison": {
+    "status": "pass",
+    "decision": "pair_readiness_loss_retention_patch_regressed",
+    "summary": {
+      "baseline_default_hit_count": 1,
+      "candidate_default_hit_count": 0,
+      "default_hit_delta": -1,
+      "suppression_hit_delta": -1,
+      "baseline_pair_full_observed": false,
+      "candidate_pair_full_observed": false,
+      "candidate_improved": false,
+      "candidate_regressed": true
+    }
+  },
+  "contract": {
+    "contract_version": 3,
+    "training_rows": [
+      "task: complete required term | prompt: fixed= | answer: fixed",
+      "task: complete required term | prompt: loss= | answer: loss",
+      "case=fixed | prompt=fixed= | expected=fixed | answer=fixed",
+      "case=loss | prompt=loss= | expected=loss | answer=loss",
+      "fixed direct template -> fixed",
+      "loss direct template -> loss",
+      "fixed route target term is fixed",
+      "loss route target term is loss",
+      "when prompt begins fixed= complete fixed",
+      "when prompt begins loss= complete loss",
+      "required term fixed stays on fixed branch",
+      "required term loss stays on loss branch",
+      "fixed branch answer uses fixed and avoids loss",
+      "loss branch answer uses loss and avoids fixed"
+    ],
+    "evaluation_probes": [
+      {
+        "id": "fixed-direct",
+        "prompt": "fixed=",
+        "expected_term": "fixed",
+        "split": "heldout-direct"
+      },
+      {
+        "id": "loss-direct",
+        "prompt": "loss=",
+        "expected_term": "loss",
+        "split": "heldout-direct"
+      },
+      {
+        "id": "fixed-loss-pair",
+        "prompt": "fixed=|loss=",
+        "expected_term": "fixed+loss",
+        "split": "heldout-pair"
+      }
+    ],
+    "heldout_pair_probe": "fixed=|loss=",
+    "promotion_requirement": "fixed-direct and loss-direct must both hit before pair probe or baseline promotion is claimed",
+    "leakage_policy": "structured rows may describe direct prompts, but exact heldout probe strings must not be training rows",
+    "template_family": "prompt_answer_structured_direct_terms",
+    "source_route_boundary": "created after the loss-retention prefix repair regressed, so this avoids more single-sided prefix weighting"
+  },
+  "check_rows": [
+    {
+      "id": "source_comparison_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "source comparison must pass"
+    },
+    {
+      "id": "source_comparison_decision",
+      "status": "pass",
+      "actual": "pair_readiness_loss_retention_patch_regressed",
+      "detail": "structured template route follows only the closed loss-retention regression branch"
+    },
+    {
+      "id": "prior_route_regressed",
+      "status": "pass",
+      "actual": true,
+      "detail": "source must confirm the prior repair regressed"
+    },
+    {
+      "id": "prior_default_delta_negative",
+      "status": "pass",
+      "actual": -1,
+      "detail": "source default-hit delta must be negative"
+    },
+    {
+      "id": "training_rows_present",
+      "status": "pass",
+      "actual": 14,
+      "detail": "structured template rows must be substantial enough to materialize"
+    },
+    {
+      "id": "fixed_rows_present",
+      "status": "pass",
+      "actual": 8,
+      "detail": "fixed route must have repeated structured anchors"
+    },
+    {
+      "id": "loss_rows_present",
+      "status": "pass",
+      "actual": 8,
+      "detail": "loss route must have repeated structured anchors"
+    },
+    {
+      "id": "evaluation_probes_present",
+      "status": "pass",
+      "actual": 3,
+      "detail": "fixed, loss, and pair probes must be preserved"
+    },
+    {
+      "id": "no_exact_eval_row_overlap",
+      "status": "pass",
+      "actual": [],
+      "detail": "exact eval prompts must not be training rows"
+    },
+    {
+      "id": "heldout_pair_absent",
+      "status": "pass",
+      "actual": false,
+      "detail": "heldout pair probe must stay out of training rows"
+    }
+  ],
+  "summary": {
+    "contract_ready": true,
+    "structured_training_row_count": 14,
+    "evaluation_probe_count": 3,
+    "failed_check_count": 0,
+    "source_default_hit_delta": -1,
+    "source_candidate_regressed": true,
+    "heldout_pair_probe": "fixed=|loss=",
+    "template_family": "prompt_answer_structured_direct_terms"
+  },
+  "interpretation": {
+    "model_quality_claim": "contract_only",
+    "reason": "The previous prefix-weighting repair regressed, so this contract switches to structured prompt-answer rows while preserving heldout direct and pair probes.",
+    "next_action": "materialize the structured-template contract and run a real tiny training comparison"
+  }
+}
