@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v759.0.0` selects objective-level contrast as the next model-capability route after closing the ineffective near-exact repair path.
+Version `v760.0.0` turns the selected objective-level contrast route into a contract design plan with explicit heldout boundaries.
+
+## Latest v760 checkpoint
+
+- Added `model_capability_required_term_pair_readiness_objective_level_contrast_plan`.
+- Consumed v759 objective-or-decoding alternative selector.
+- Confirmed `decision=pair_readiness_objective_level_contrast_plan_ready`.
+- Planned 4 contract row families and 26 training rows.
+- Preserved exact/spaced/arrow heldout pair prompt surfaces as eval-only.
+- Archived v760 evidence in `e/760` and added the code explanation in `代码讲解记录_模型能力阶段/774-v760-objective-level-contrast-plan.md`.
 
 ## Latest v759 checkpoint
 

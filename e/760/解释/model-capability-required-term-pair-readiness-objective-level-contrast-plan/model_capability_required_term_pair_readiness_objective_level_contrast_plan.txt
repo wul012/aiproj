@@ -1,0 +1,10 @@
+status=pass
+decision=pair_readiness_objective_level_contrast_plan_ready
+failed_count=0
+plan_ready=True
+selected_route=objective_level_contrast
+proposed_next_artifact=pair_readiness_objective_level_contrast_contract
+contract_design_row_count=4
+planned_training_row_count=26
+model_quality_claim=plan_only
+next_action=build pair_readiness_objective_level_contrast_contract

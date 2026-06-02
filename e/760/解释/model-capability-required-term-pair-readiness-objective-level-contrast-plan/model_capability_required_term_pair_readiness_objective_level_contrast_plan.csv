@@ -1,0 +1,5 @@
+row_id,planned_count,purpose,guardrail
+objective-header,6,state the response objective before answer text,no heldout prompt surface
+branch-role-contrast,8,contrast fixed/loss branch roles under explicit task ids,balanced by branch
+pair-answer-contrast,8,ask for both answer terms through varied objective labels,avoid exact heldout pair prompt
+separator-neutral-answer,4,separate answer terms through non-heldout separators,do not reuse fixed=|loss= as prompt

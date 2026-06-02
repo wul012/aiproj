@@ -1,0 +1,157 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT pair-readiness objective-level contrast plan",
+  "generated_at": "2026-06-02T10:41:57Z",
+  "status": "pass",
+  "decision": "pair_readiness_objective_level_contrast_plan_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_selector_path": "e\\759\\解释\\model-capability-required-term-pair-readiness-objective-or-decoding-alternative-selector\\model_capability_required_term_pair_readiness_objective_or_decoding_alternative_selector.json",
+  "source_selector": {
+    "status": "pass",
+    "decision": "pair_readiness_objective_or_decoding_alternative_selected",
+    "summary": {
+      "selector_ready": true,
+      "selected_route": "objective_level_contrast",
+      "selected_score": 92,
+      "proposed_next_artifact": "pair_readiness_objective_level_contrast_plan",
+      "route_count": 3,
+      "passed_check_count": 10,
+      "failed_check_count": 0
+    },
+    "selector": {
+      "ready": true,
+      "selected_route": "objective_level_contrast",
+      "selected_score": 92,
+      "proposed_next_artifact": "pair_readiness_objective_level_contrast_plan",
+      "route_order": [
+        "objective_level_contrast",
+        "decode_side_constraint_probe",
+        "fresh_seed_stability"
+      ],
+      "non_goals": [
+        "do not add more near-exact surface rows",
+        "do not promote constrained decoding as model-quality proof",
+        "do not start fresh-seed training without a sharper route hypothesis"
+      ]
+    }
+  },
+  "check_rows": [
+    {
+      "id": "selector_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "source selector must pass"
+    },
+    {
+      "id": "selector_decision",
+      "status": "pass",
+      "actual": "pair_readiness_objective_or_decoding_alternative_selected",
+      "detail": "plan follows only the objective-or-decoding selector"
+    },
+    {
+      "id": "selector_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "selector must be ready"
+    },
+    {
+      "id": "selected_objective_route",
+      "status": "pass",
+      "actual": "objective_level_contrast",
+      "detail": "objective-level contrast must be selected"
+    },
+    {
+      "id": "selected_score_high",
+      "status": "pass",
+      "actual": 92,
+      "detail": "selected route score must be high enough for contract planning"
+    },
+    {
+      "id": "selected_next_artifact",
+      "status": "pass",
+      "actual": "pair_readiness_objective_level_contrast_plan",
+      "detail": "selector must point at this plan artifact"
+    },
+    {
+      "id": "single_selected_route",
+      "status": "pass",
+      "actual": 1,
+      "detail": "selector should mark exactly one route as selected"
+    }
+  ],
+  "plan": {
+    "ready": true,
+    "selected_route": "objective_level_contrast",
+    "proposed_next_artifact": "pair_readiness_objective_level_contrast_contract",
+    "objective": {
+      "id": "paired_required_terms_exact_response",
+      "intent": "teach the tiny model to answer the required-term task, not to copy near-exact prompt surfaces",
+      "answer_terms": [
+        "fixed",
+        "loss"
+      ],
+      "required_pair_order": [
+        "fixed",
+        "loss"
+      ]
+    },
+    "contract_design_rows": [
+      {
+        "row_id": "objective-header",
+        "planned_count": 6,
+        "purpose": "state the response objective before answer text",
+        "guardrail": "no heldout prompt surface"
+      },
+      {
+        "row_id": "branch-role-contrast",
+        "planned_count": 8,
+        "purpose": "contrast fixed/loss branch roles under explicit task ids",
+        "guardrail": "balanced by branch"
+      },
+      {
+        "row_id": "pair-answer-contrast",
+        "planned_count": 8,
+        "purpose": "ask for both answer terms through varied objective labels",
+        "guardrail": "avoid exact heldout pair prompt"
+      },
+      {
+        "row_id": "separator-neutral-answer",
+        "planned_count": 4,
+        "purpose": "separate answer terms through non-heldout separators",
+        "guardrail": "do not reuse fixed=|loss= as prompt"
+      }
+    ],
+    "heldout_boundaries": [
+      "exact-heldout-pair prompt surface remains eval-only",
+      "spaced-heldout-pair prompt surface remains eval-only",
+      "arrow-heldout-pair prompt surface remains eval-only"
+    ],
+    "acceptance_checks": [
+      "contract row count is balanced across fixed/loss roles",
+      "no training prompt equals a heldout pair prompt",
+      "row families expose objective labels before answer text",
+      "materializer can consume the contract without special-case code"
+    ],
+    "non_goals": [
+      "do not add another near-exact bridge row patch",
+      "do not change model size before the objective contract is replayed",
+      "do not promote constrained decoding as model-quality proof"
+    ]
+  },
+  "summary": {
+    "plan_ready": true,
+    "selected_route": "objective_level_contrast",
+    "proposed_next_artifact": "pair_readiness_objective_level_contrast_contract",
+    "contract_design_row_count": 4,
+    "planned_training_row_count": 26,
+    "heldout_boundary_count": 3,
+    "acceptance_check_count": 4,
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "plan_only",
+    "reason": "The selected route changes the training objective while preserving heldout pair-prompt boundaries.",
+    "next_action": "build pair_readiness_objective_level_contrast_contract"
+  }
+}

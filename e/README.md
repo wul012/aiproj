@@ -1281,3 +1281,8 @@ e/663/解释/说明.md
 - `e/759/图片`
 - `e/759/解释/说明.md`
 - v759 objective-or-decoding alternative selector 的运行截图和解释。
+## v760 补充索引
+
+- `e/760/图片`
+- `e/760/解释/说明.md`
+- v760 objective-level contrast plan 的运行截图和解释。

@@ -872,6 +872,9 @@
 773-v759-objective-or-decoding-alternative-selector.md
  -> v759 code explanation: score objective, decoding, and fresh-seed alternatives after v758 closeout and select objective-level contrast.
 
+774-v760-objective-level-contrast-plan.md
+ -> v760 code explanation: turn the selected objective-level contrast route into a contract design plan with heldout boundaries.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

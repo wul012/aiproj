@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT objective-level contrast plan</title>
+<style>
+:root{color-scheme:light;--ink:#172026;--muted:#5d6975;--line:#d8dee4;--panel:#f7f9fb;--accent:#0f766e}
+*{box-sizing:border-box}
+body{margin:0;background:#eef2f5;color:var(--ink);font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1120px;margin:0 auto;padding:28px}
+h1{font-size:30px;margin:0 0 8px;letter-spacing:0}
+h2{font-size:18px;margin:0 0 12px;letter-spacing:0}
+p,li{color:var(--muted);line-height:1.55;overflow-wrap:anywhere}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:18px 0}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:8px}
+.card{padding:14px}
+.card span{display:block;color:var(--muted);font-size:12px;text-transform:uppercase}
+.card strong{display:block;margin-top:6px;font-size:18px;line-height:1.2;color:var(--accent);overflow-wrap:anywhere}
+.panel{padding:16px;margin:14px 0}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:#334155}
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT objective-level contrast plan</h1><p>The selected route changes the training objective while preserving heldout pair-prompt boundaries.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Decision</span><strong>pair_readiness_objective_level_contrast_plan_ready</strong></div><div class="card"><span>Ready</span><strong>True</strong></div><div class="card"><span>Rows</span><strong>26</strong></div><div class="card"><span>Next</span><strong>pair_readiness_objective_level_contrast_contract</strong></div></section>
+<section class="panel"><h2>Contract Design Rows</h2><div class="table-wrap"><table>
+<thead><tr><th>Row family</th><th>Count</th><th>Purpose</th><th>Guardrail</th></tr></thead>
+<tbody><tr><td>objective-header</td><td>6</td><td>state the response objective before answer text</td><td>no heldout prompt surface</td></tr><tr><td>branch-role-contrast</td><td>8</td><td>contrast fixed/loss branch roles under explicit task ids</td><td>balanced by branch</td></tr><tr><td>pair-answer-contrast</td><td>8</td><td>ask for both answer terms through varied objective labels</td><td>avoid exact heldout pair prompt</td></tr><tr><td>separator-neutral-answer</td><td>4</td><td>separate answer terms through non-heldout separators</td><td>do not reuse fixed=|loss= as prompt</td></tr></tbody>
+</table></div></section>
+<section class="panel"><h2>Heldout Boundaries</h2><ul><li>exact-heldout-pair prompt surface remains eval-only</li><li>spaced-heldout-pair prompt surface remains eval-only</li><li>arrow-heldout-pair prompt surface remains eval-only</li></ul></section>
+<section class="panel"><h2>Acceptance Checks</h2><ul><li>contract row count is balanced across fixed/loss roles</li><li>no training prompt equals a heldout pair prompt</li><li>row families expose objective labels before answer text</li><li>materializer can consume the contract without special-case code</li></ul></section>
+<section class="panel"><h2>Input Checks</h2><div class="table-wrap"><table>
+<thead><tr><th>Check</th><th>Status</th><th>Actual</th><th>Detail</th></tr></thead>
+<tbody><tr><td>selector_passed</td><td>pass</td><td>pass</td><td>source selector must pass</td></tr><tr><td>selector_decision</td><td>pass</td><td>pair_readiness_objective_or_decoding_alternative_selected</td><td>plan follows only the objective-or-decoding selector</td></tr><tr><td>selector_ready</td><td>pass</td><td>True</td><td>selector must be ready</td></tr><tr><td>selected_objective_route</td><td>pass</td><td>objective_level_contrast</td><td>objective-level contrast must be selected</td></tr><tr><td>selected_score_high</td><td>pass</td><td>92</td><td>selected route score must be high enough for contract planning</td></tr><tr><td>selected_next_artifact</td><td>pass</td><td>pair_readiness_objective_level_contrast_plan</td><td>selector must point at this plan artifact</td></tr><tr><td>single_selected_route</td><td>pass</td><td>1</td><td>selector should mark exactly one route as selected</td></tr></tbody>
+</table></div></section>
+<section class="panel"><h2>Next Action</h2><p>build pair_readiness_objective_level_contrast_contract</p></section>
+</main>
+</body>
+</html>
