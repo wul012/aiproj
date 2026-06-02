@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v701.0.0` turns the minimal-prompt tradeoff into a balanced first-token repair plan.
+Version `v702.0.0` runs the balanced minimal-prompt corpus as a real tiny training negative-result check.
+
+## Latest v702 checkpoint
+
+- Ran real seed `3535` training with `minimal_prompt_balanced_first_token_repair_objective`.
+- Confirmed `training_status=pass` and `checkpoint_exists=True`.
+- Confirmed `decision=required_term_pair_coexistence_refresh_no_pair_full`.
+- Observed `fixed=` drift to `lix=los=loss`, while `loss=` still hits the loss branch.
+- Confirmed `pair_full_observed=False` and `model_quality_claim=not_claimed`.
+- Archived v702 evidence in `e/702` and added the code explanation in `代码讲解记录_模型能力阶段/716-v702-minimal-prompt-balanced-training.md`.
 
 ## Latest v701 checkpoint
 
@@ -15,8 +24,6 @@ Version `v701.0.0` turns the minimal-prompt tradeoff into a balanced first-token
 - Confirmed `proposed_corpus_mode=minimal_prompt_balanced_first_token_repair_objective`.
 - Confirmed `seed_to_rerun=3535`.
 - Archived v701 evidence in `e/701` and added the code explanation in `代码讲解记录_模型能力阶段/715-v701-minimal-prompt-balanced-repair-plan.md`.
-
-## Latest v700 checkpoint
 
 ## Latest v700 checkpoint
 

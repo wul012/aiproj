@@ -991,3 +991,8 @@ e/663/解释/说明.md
 - `e/701/图片`
 - `e/701/解释/说明.md`
 - v701 minimal prompt balanced repair plan 的运行截图和解释。
+## v702 补充索引
+
+- `e/702/图片`
+- `e/702/解释/说明.md`
+- v702 minimal prompt balanced training 的运行截图和解释。
