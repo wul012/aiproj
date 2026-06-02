@@ -785,6 +785,9 @@
 744-v730-surface-mismatch-diagnostic.md
  -> v730 code explanation: diagnose the v729 double direct miss as raw prompt surface mismatch and identify the bridge patch target.
 
+745-v731-direct-prompt-bridge-contract-patch.md
+ -> v731 code explanation: add checked raw fixed=/loss= bridge rows while preserving heldout pair isolation and materializer compatibility.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

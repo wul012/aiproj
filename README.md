@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v730.0.0` diagnoses the objective-structure training miss as direct prompt surface mismatch.
+Version `v731.0.0` patches the objective-structure contract with checked direct-prompt bridge rows.
+
+## Latest v731 checkpoint
+
+- Added `model_capability_required_term_pair_readiness_direct_prompt_bridge_contract_patch`.
+- Consumed v730 surface mismatch diagnostic and v727 base contract.
+- Added 8 bridge rows: 4 for `fixed=` and 4 for `loss=`.
+- Confirmed `decision=pair_readiness_direct_prompt_bridge_contract_patch_ready`.
+- Connected the bridge patch decision and JSON filename to corpus materialization.
+- Archived v731 evidence in `e/731` and added the code explanation in `代码讲解记录_模型能力阶段/745-v731-direct-prompt-bridge-contract-patch.md`.
 
 ## Latest v730 checkpoint
 

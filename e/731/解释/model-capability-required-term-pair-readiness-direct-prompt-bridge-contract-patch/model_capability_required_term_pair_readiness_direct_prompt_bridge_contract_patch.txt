@@ -1,0 +1,11 @@
+status=pass
+decision=pair_readiness_direct_prompt_bridge_contract_patch_ready
+failed_count=0
+patch_ready=True
+base_training_row_count=18
+patched_training_row_count=26
+bridge_row_count=8
+fixed_bridge_row_count=4
+loss_bridge_row_count=4
+model_quality_claim=contract_patch_only
+next_action=materialize the direct-prompt bridge contract and rerun pair-readiness training

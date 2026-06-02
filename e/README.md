@@ -1136,3 +1136,8 @@ e/663/解释/说明.md
 - `e/730/图片`
 - `e/730/解释/说明.md`
 - v730 surface mismatch diagnostic 的运行截图和解释。
+## v731 补充索引
+
+- `e/731/图片`
+- `e/731/解释/说明.md`
+- v731 direct-prompt bridge contract patch 的运行截图和解释。
