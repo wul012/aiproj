@@ -4,7 +4,18 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v695.0.0` registers and validates the minimal-prompt equals-surface corpus contract before real training.
+Version `v696.0.0` runs the first real tiny checkpoint for the minimal-prompt equals-surface objective and preserves the negative result.
+
+## Latest v696 checkpoint
+
+- Ran real seed `3535` training with `minimal_prompt_equals_surface_objective`.
+- Confirmed `training_status=pass` and `checkpoint_exists=True`.
+- Confirmed `decision=required_term_pair_coexistence_refresh_no_pair_full`.
+- Observed `fixed=` hits fixed, while `loss=` still continues as `fixed=fixed=`.
+- Confirmed `pair_full_observed=False` and `model_quality_claim=not_claimed`.
+- Archived v696 evidence in `e/696` and added the code explanation in `代码讲解记录_模型能力阶段/710-v696-minimal-prompt-training.md`.
+
+## Latest v695 checkpoint
 
 ## Latest v695 checkpoint
 
@@ -16,8 +27,6 @@ Version `v695.0.0` registers and validates the minimal-prompt equals-surface cor
 - Confirmed `source_prompts=['fixed=', 'loss=']`.
 - Confirmed `anchor_hit_count=0`, keeping contextual answer-bearing anchors out of the next training route.
 - Archived v695 evidence in `e/695` and added the code explanation in `代码讲解记录_模型能力阶段/709-v695-minimal-prompt-corpus-contract.md`.
-
-## Latest v694 checkpoint
 
 ## Latest v694 checkpoint
 

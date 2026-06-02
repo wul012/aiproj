@@ -680,6 +680,9 @@
 709-v695-minimal-prompt-corpus-contract.md
  -> v695 code explanation: register and validate the no-contextual-anchor minimal prompt equals-surface corpus contract.
 
+710-v696-minimal-prompt-training.md
+ -> v696 code explanation: run the first real minimal-prompt tiny checkpoint and preserve the loss-branch failure as negative evidence.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

@@ -961,3 +961,8 @@ e/663/解释/说明.md
 - `e/695/图片`
 - `e/695/解释/说明.md`
 - v695 minimal prompt corpus contract 的运行截图和解释。
+## v696 补充索引
+
+- `e/696/图片`
+- `e/696/解释/说明.md`
+- v696 minimal prompt training 的运行截图和解释。
