@@ -959,6 +959,9 @@
 802-v788-seed-handoff-review-summary-split.md
  -> v788 code explanation: extract promoted seed handoff review summary builders from the requirement and automation gate module.
 
+803-v789-objective-level-contrast-acceptance-review.md
+ -> v789 code explanation: accept the objective-level contrast route inside the tiny pair-probe boundary using the v772 seed-stability rollup.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

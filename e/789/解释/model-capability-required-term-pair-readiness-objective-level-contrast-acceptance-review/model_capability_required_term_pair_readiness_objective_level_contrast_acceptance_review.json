@@ -1,0 +1,164 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT pair-readiness objective-level contrast acceptance review",
+  "generated_at": "2026-06-03T00:19:48Z",
+  "status": "pass",
+  "decision": "pair_readiness_objective_level_contrast_acceptance_review_accepted",
+  "failed_count": 0,
+  "issues": [],
+  "source_seed_stability_rollup_path": "e\\772\\解释\\model-capability-required-term-pair-readiness-objective-level-contrast-seed-stability-rollup\\model_capability_required_term_pair_readiness_objective_level_contrast_seed_stability_rollup.json",
+  "source_seed_stability_rollup": {
+    "status": "pass",
+    "decision": "pair_readiness_objective_level_contrast_seed_stability_ready_for_acceptance_review",
+    "summary": {
+      "seed_stability_rollup_ready": true,
+      "acceptance_review_ready": true,
+      "promotion_allowed": false,
+      "expected_seed_count": 3,
+      "observed_seed_count": 3,
+      "ready_replay_count": 3,
+      "minimum_ready_replay_count": 2,
+      "pair_full_counts": {
+        "3636": 3,
+        "3737": 2,
+        "3838": 2
+      },
+      "min_pair_full_count": 2,
+      "max_pair_full_count": 3,
+      "uniform_pair_full_strength": false,
+      "failed_check_count": 0
+    }
+  },
+  "settings": {
+    "minimum_pair_full_count": 2,
+    "require_uniform_strength": false,
+    "review_boundary": "accept the objective-level contrast route only inside the tiny pair-probe benchmark boundary"
+  },
+  "seed_rows": [
+    {
+      "seed": 3636,
+      "ready": true,
+      "pair_full_count": 3,
+      "pair_full_rate": 1.0,
+      "exact_heldout_pair_full": true,
+      "required_all_pair_full": true,
+      "source_path": "e\\764\\解释\\model-capability-required-term-pair-readiness-objective-level-contrast-pair-probe-replay\\model_capability_required_term_pair_readiness_fixed_preserving_transfer_pair_probe_replay.json"
+    },
+    {
+      "seed": 3737,
+      "ready": true,
+      "pair_full_count": 2,
+      "pair_full_rate": 0.6667,
+      "exact_heldout_pair_full": true,
+      "required_all_pair_full": true,
+      "source_path": "e\\769\\解释\\model-capability-required-term-pair-readiness-objective-level-contrast-seed-3737-pair-probe-replay\\model_capability_required_term_pair_readiness_fixed_preserving_transfer_pair_probe_replay.json"
+    },
+    {
+      "seed": 3838,
+      "ready": true,
+      "pair_full_count": 2,
+      "pair_full_rate": 0.6667,
+      "exact_heldout_pair_full": true,
+      "required_all_pair_full": true,
+      "source_path": "e\\771\\解释\\model-capability-required-term-pair-readiness-objective-level-contrast-seed-3838-pair-probe-replay\\model_capability_required_term_pair_readiness_fixed_preserving_transfer_pair_probe_replay.json"
+    }
+  ],
+  "check_rows": [
+    {
+      "id": "rollup_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "seed stability rollup must pass"
+    },
+    {
+      "id": "rollup_decision_ready",
+      "status": "pass",
+      "actual": "pair_readiness_objective_level_contrast_seed_stability_ready_for_acceptance_review",
+      "detail": "acceptance review follows only a ready seed-stability rollup"
+    },
+    {
+      "id": "rollup_acceptance_review_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "rollup must explicitly be ready for acceptance review"
+    },
+    {
+      "id": "rollup_not_preapproved",
+      "status": "pass",
+      "actual": false,
+      "detail": "rollup should not have already allowed promotion before this review"
+    },
+    {
+      "id": "observed_expected_seed_count",
+      "status": "pass",
+      "actual": {
+        "expected": 3,
+        "observed": 3,
+        "rows": 3
+      },
+      "detail": "all expected seeds must be represented by replay rows"
+    },
+    {
+      "id": "all_seed_replays_ready",
+      "status": "pass",
+      "actual": {
+        "ready": 3,
+        "rows": 3
+      },
+      "detail": "each seed replay must be ready"
+    },
+    {
+      "id": "minimum_pair_full_strength",
+      "status": "pass",
+      "actual": {
+        "minimum": 2,
+        "observed_min": 2
+      },
+      "detail": "each accepted seed should keep enough pair-full surfaces"
+    },
+    {
+      "id": "uniform_strength_when_required",
+      "status": "pass",
+      "actual": {
+        "min": 2,
+        "max": 3,
+        "required": false
+      },
+      "detail": "uniform pair-full strength is optional unless explicitly required"
+    },
+    {
+      "id": "rollup_checks_clean",
+      "status": "pass",
+      "actual": 0,
+      "detail": "source rollup should have no failed checks"
+    }
+  ],
+  "summary": {
+    "acceptance_review_passed": true,
+    "promotion_allowed": true,
+    "accepted_route": "objective_level_contrast",
+    "model_quality_boundary": "tiny_required_term_pair_probe_only",
+    "expected_seed_count": 3,
+    "observed_seed_count": 3,
+    "ready_replay_count": 3,
+    "minimum_ready_replay_count": 2,
+    "pair_full_counts": {
+      "3636": 3,
+      "3737": 2,
+      "3838": 2
+    },
+    "minimum_pair_full_count": 2,
+    "min_pair_full_count": 2,
+    "max_pair_full_count": 3,
+    "pair_full_strength_spread": 1,
+    "uniform_strength_required": false,
+    "uniform_pair_full_strength": false,
+    "passed_check_count": 9,
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "seed_stable_pair_probe_route_accepted",
+    "reason": "All planned seed replays are ready and each seed retains the required pair-full strength.",
+    "next_action": "promote the route inside the tiny pair-probe benchmark boundary and keep production claims out of scope"
+  }
+}

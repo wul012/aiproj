@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT objective-level contrast acceptance review</title>
+<style>
+:root{color-scheme:light;--ink:#172026;--muted:#5d6975;--line:#d8dee4;--panel:#f7f9fb;--accent:#166534}
+*{box-sizing:border-box}
+body{margin:0;background:#eef2f5;color:var(--ink);font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1120px;margin:0 auto;padding:28px}
+h1{font-size:30px;margin:0 0 8px;letter-spacing:0}
+h2{font-size:18px;margin:0 0 12px;letter-spacing:0}
+p{color:var(--muted);line-height:1.55;overflow-wrap:anywhere}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:18px 0}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:8px}
+.card{padding:14px}
+.card span{display:block;color:var(--muted);font-size:12px;text-transform:uppercase}
+.card strong{display:block;margin-top:6px;font-size:18px;line-height:1.2;color:var(--accent);overflow-wrap:anywhere}
+.panel{padding:16px;margin:14px 0}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:#334155}
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT objective-level contrast acceptance review</h1><p>All planned seed replays are ready and each seed retains the required pair-full strength.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Decision</span><strong>pair_readiness_objective_level_contrast_acceptance_review_accepted</strong></div><div class="card"><span>Promotion</span><strong>True</strong></div><div class="card"><span>Route</span><strong>objective_level_contrast</strong></div><div class="card"><span>Min pair-full</span><strong>2</strong></div><div class="card"><span>Claim</span><strong>seed_stable_pair_probe_route_accepted</strong></div></section>
+<section class="panel"><h2>Seed Replays</h2><div class="table-wrap"><table>
+<thead><tr><th>Seed</th><th>Ready</th><th>Pair Full</th><th>Rate</th><th>Source</th></tr></thead>
+<tbody><tr><td>3636</td><td>True</td><td>3</td><td>1.0</td><td>e\764\解释\model-capability-required-term-pair-readiness-objective-level-contrast-pair-probe-replay\model_capability_required_term_pair_readiness_fixed_preserving_transfer_pair_probe_replay.json</td></tr><tr><td>3737</td><td>True</td><td>2</td><td>0.6667</td><td>e\769\解释\model-capability-required-term-pair-readiness-objective-level-contrast-seed-3737-pair-probe-replay\model_capability_required_term_pair_readiness_fixed_preserving_transfer_pair_probe_replay.json</td></tr><tr><td>3838</td><td>True</td><td>2</td><td>0.6667</td><td>e\771\解释\model-capability-required-term-pair-readiness-objective-level-contrast-seed-3838-pair-probe-replay\model_capability_required_term_pair_readiness_fixed_preserving_transfer_pair_probe_replay.json</td></tr></tbody>
+</table></div></section>
+<section class="panel"><h2>Checks</h2><div class="table-wrap"><table>
+<thead><tr><th>Check</th><th>Status</th><th>Actual</th><th>Detail</th></tr></thead>
+<tbody><tr><td>rollup_passed</td><td>pass</td><td>pass</td><td>seed stability rollup must pass</td></tr><tr><td>rollup_decision_ready</td><td>pass</td><td>pair_readiness_objective_level_contrast_seed_stability_ready_for_acceptance_review</td><td>acceptance review follows only a ready seed-stability rollup</td></tr><tr><td>rollup_acceptance_review_ready</td><td>pass</td><td>True</td><td>rollup must explicitly be ready for acceptance review</td></tr><tr><td>rollup_not_preapproved</td><td>pass</td><td>False</td><td>rollup should not have already allowed promotion before this review</td></tr><tr><td>observed_expected_seed_count</td><td>pass</td><td>{&#x27;expected&#x27;: 3, &#x27;observed&#x27;: 3, &#x27;rows&#x27;: 3}</td><td>all expected seeds must be represented by replay rows</td></tr><tr><td>all_seed_replays_ready</td><td>pass</td><td>{&#x27;ready&#x27;: 3, &#x27;rows&#x27;: 3}</td><td>each seed replay must be ready</td></tr><tr><td>minimum_pair_full_strength</td><td>pass</td><td>{&#x27;minimum&#x27;: 2, &#x27;observed_min&#x27;: 2}</td><td>each accepted seed should keep enough pair-full surfaces</td></tr><tr><td>uniform_strength_when_required</td><td>pass</td><td>{&#x27;min&#x27;: 2, &#x27;max&#x27;: 3, &#x27;required&#x27;: False}</td><td>uniform pair-full strength is optional unless explicitly required</td></tr><tr><td>rollup_checks_clean</td><td>pass</td><td>0</td><td>source rollup should have no failed checks</td></tr></tbody>
+</table></div></section>
+<section class="panel"><h2>Next Action</h2><p>promote the route inside the tiny pair-probe benchmark boundary and keep production claims out of scope</p></section>
+</main>
+</body>
+</html>

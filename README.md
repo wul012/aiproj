@@ -4,7 +4,17 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v783.0.0` extracts promoted seed handoff Markdown rendering from the sections renderer module.
+Version `v789.0.0` accepts the objective-level contrast route inside the tiny pair-probe boundary using the v772 seed-stability rollup.
+
+## Latest v789 checkpoint
+
+- Added `model_capability_required_term_pair_readiness_objective_level_contrast_acceptance_review`.
+- Added CLI `scripts/run_model_capability_required_term_pair_readiness_objective_level_contrast_acceptance_review.py`.
+- Consumed the real v772 seed-stability rollup from `e/772`.
+- Produced `decision=pair_readiness_objective_level_contrast_acceptance_review_accepted`.
+- Kept the model-quality boundary explicit: `tiny_required_term_pair_probe_only`.
+- Verified with `8 passed` objective-level contrast focused tests.
+- Archived v789 evidence in `e/789` and added the code explanation in `代码讲解记录_模型能力阶段/803-v789-objective-level-contrast-acceptance-review.md`.
 
 ## Latest v783 checkpoint
 

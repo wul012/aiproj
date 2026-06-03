@@ -1448,3 +1448,9 @@ e/663/解释/说明.md
 - `e/788/图片`
 - `e/788/解释/说明.md`
 - v788 seed handoff review summary split 的运行截图和解释。
+
+## v789 补充索引
+
+- `e/789/图片`
+- `e/789/解释/说明.md`
+- v789 objective-level contrast acceptance review 的运行截图和解释。
