@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT objective-level contrast promotion manifest</title>
+<style>
+:root{color-scheme:light;--ink:#172026;--muted:#5d6975;--line:#d8dee4;--panel:#f7f9fb;--accent:#1d4ed8}
+*{box-sizing:border-box}
+body{margin:0;background:#eef2f5;color:var(--ink);font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1120px;margin:0 auto;padding:28px}
+h1{font-size:30px;margin:0 0 8px;letter-spacing:0}
+h2{font-size:18px;margin:0 0 12px;letter-spacing:0}
+p{color:var(--muted);line-height:1.55;overflow-wrap:anywhere}
+pre{white-space:pre-wrap;overflow-wrap:anywhere;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:12px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:18px 0}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:8px}
+.card{padding:14px}
+.card span{display:block;color:var(--muted);font-size:12px;text-transform:uppercase}
+.card strong{display:block;margin-top:6px;font-size:18px;line-height:1.2;color:var(--accent);overflow-wrap:anywhere}
+.panel{padding:16px;margin:14px 0}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:#334155}
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT objective-level contrast promotion manifest</h1><p>The accepted objective-level contrast route is now represented as a benchmark-history-ready promotion manifest.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Decision</span><strong>pair_readiness_objective_level_contrast_promotion_manifest_ready</strong></div><div class="card"><span>Route</span><strong>objective_level_contrast</strong></div><div class="card"><span>Route status</span><strong>promoted</strong></div><div class="card"><span>History ready</span><strong>True</strong></div><div class="card"><span>Claim</span><strong>seed_stable_pair_probe_route_accepted</strong></div></section>
+<section class="panel"><h2>Benchmark History Entry</h2><pre>{&#x27;entry_type&#x27;: &#x27;model_capability_route_promotion&#x27;, &#x27;route_id&#x27;: &#x27;objective_level_contrast&#x27;, &#x27;status&#x27;: &#x27;ready&#x27;, &#x27;boundary&#x27;: &#x27;tiny_required_term_pair_probe_only&#x27;, &#x27;model_quality_claim&#x27;: &#x27;seed_stable_pair_probe_route_accepted&#x27;, &#x27;seed_count&#x27;: 3, &#x27;min_pair_full_count&#x27;: 2, &#x27;pair_full_strength_spread&#x27;: 1}</pre></section>
+<section class="panel"><h2>Seed Evidence</h2><div class="table-wrap"><table>
+<thead><tr><th>Seed</th><th>Ready</th><th>Pair Full</th><th>Source</th></tr></thead>
+<tbody><tr><td>3636</td><td>True</td><td>3</td><td>e\764\解释\model-capability-required-term-pair-readiness-objective-level-contrast-pair-probe-replay\model_capability_required_term_pair_readiness_fixed_preserving_transfer_pair_probe_replay.json</td></tr><tr><td>3737</td><td>True</td><td>2</td><td>e\769\解释\model-capability-required-term-pair-readiness-objective-level-contrast-seed-3737-pair-probe-replay\model_capability_required_term_pair_readiness_fixed_preserving_transfer_pair_probe_replay.json</td></tr><tr><td>3838</td><td>True</td><td>2</td><td>e\771\解释\model-capability-required-term-pair-readiness-objective-level-contrast-seed-3838-pair-probe-replay\model_capability_required_term_pair_readiness_fixed_preserving_transfer_pair_probe_replay.json</td></tr></tbody>
+</table></div></section>
+<section class="panel"><h2>Checks</h2><div class="table-wrap"><table>
+<thead><tr><th>Check</th><th>Status</th><th>Actual</th><th>Detail</th></tr></thead>
+<tbody><tr><td>acceptance_review_passed</td><td>pass</td><td>pass</td><td>acceptance review must pass</td></tr><tr><td>acceptance_decision</td><td>pass</td><td>pair_readiness_objective_level_contrast_acceptance_review_accepted</td><td>promotion manifest follows only an accepted objective-level contrast review</td></tr><tr><td>promotion_allowed</td><td>pass</td><td>True</td><td>acceptance review must allow promotion inside its declared boundary</td></tr><tr><td>route_id_matches</td><td>pass</td><td>objective_level_contrast</td><td>accepted route must match manifest route id</td></tr><tr><td>boundary_scoped</td><td>pass</td><td>tiny_required_term_pair_probe_only</td><td>promotion manifest must preserve the tiny pair-probe boundary</td></tr><tr><td>claim_scoped</td><td>pass</td><td>seed_stable_pair_probe_route_accepted</td><td>accepted claim must remain route/probe scoped</td></tr><tr><td>seed_rows_present</td><td>pass</td><td>{&#x27;seed_count&#x27;: 3, &#x27;ready&#x27;: 3}</td><td>manifest should carry ready seed evidence</td></tr><tr><td>source_rollup_was_review_ready</td><td>pass</td><td>True</td><td>manifest must trace back to a review-ready seed-stability rollup</td></tr></tbody>
+</table></div></section>
+</main>
+</body>
+</html>

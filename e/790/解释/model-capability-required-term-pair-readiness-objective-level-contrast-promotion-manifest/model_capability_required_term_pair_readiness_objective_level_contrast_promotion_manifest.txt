@@ -1,0 +1,9 @@
+status=pass
+decision=pair_readiness_objective_level_contrast_promotion_manifest_ready
+failed_count=0
+promotion_manifest_ready=True
+promoted_route_id=objective_level_contrast
+route_status=promoted
+can_feed_benchmark_history=True
+benchmark_history_entry_status=ready
+model_quality_claim=seed_stable_pair_probe_route_accepted

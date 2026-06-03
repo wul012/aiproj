@@ -1,0 +1,163 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT pair-readiness objective-level contrast promotion manifest",
+  "generated_at": "2026-06-03T00:30:48Z",
+  "status": "pass",
+  "decision": "pair_readiness_objective_level_contrast_promotion_manifest_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_acceptance_review_path": "e\\789\\解释\\model-capability-required-term-pair-readiness-objective-level-contrast-acceptance-review\\model_capability_required_term_pair_readiness_objective_level_contrast_acceptance_review.json",
+  "source_acceptance_review": {
+    "status": "pass",
+    "decision": "pair_readiness_objective_level_contrast_acceptance_review_accepted",
+    "summary": {
+      "acceptance_review_passed": true,
+      "promotion_allowed": true,
+      "accepted_route": "objective_level_contrast",
+      "model_quality_boundary": "tiny_required_term_pair_probe_only",
+      "expected_seed_count": 3,
+      "observed_seed_count": 3,
+      "ready_replay_count": 3,
+      "minimum_ready_replay_count": 2,
+      "pair_full_counts": {
+        "3636": 3,
+        "3737": 2,
+        "3838": 2
+      },
+      "minimum_pair_full_count": 2,
+      "min_pair_full_count": 2,
+      "max_pair_full_count": 3,
+      "pair_full_strength_spread": 1,
+      "uniform_strength_required": false,
+      "uniform_pair_full_strength": false,
+      "passed_check_count": 9,
+      "failed_check_count": 0
+    },
+    "interpretation": {
+      "model_quality_claim": "seed_stable_pair_probe_route_accepted",
+      "reason": "All planned seed replays are ready and each seed retains the required pair-full strength.",
+      "next_action": "promote the route inside the tiny pair-probe benchmark boundary and keep production claims out of scope"
+    }
+  },
+  "source_seed_stability_rollup_path": "e\\772\\解释\\model-capability-required-term-pair-readiness-objective-level-contrast-seed-stability-rollup\\model_capability_required_term_pair_readiness_objective_level_contrast_seed_stability_rollup.json",
+  "check_rows": [
+    {
+      "id": "acceptance_review_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "acceptance review must pass"
+    },
+    {
+      "id": "acceptance_decision",
+      "status": "pass",
+      "actual": "pair_readiness_objective_level_contrast_acceptance_review_accepted",
+      "detail": "promotion manifest follows only an accepted objective-level contrast review"
+    },
+    {
+      "id": "promotion_allowed",
+      "status": "pass",
+      "actual": true,
+      "detail": "acceptance review must allow promotion inside its declared boundary"
+    },
+    {
+      "id": "route_id_matches",
+      "status": "pass",
+      "actual": "objective_level_contrast",
+      "detail": "accepted route must match manifest route id"
+    },
+    {
+      "id": "boundary_scoped",
+      "status": "pass",
+      "actual": "tiny_required_term_pair_probe_only",
+      "detail": "promotion manifest must preserve the tiny pair-probe boundary"
+    },
+    {
+      "id": "claim_scoped",
+      "status": "pass",
+      "actual": "seed_stable_pair_probe_route_accepted",
+      "detail": "accepted claim must remain route/probe scoped"
+    },
+    {
+      "id": "seed_rows_present",
+      "status": "pass",
+      "actual": {
+        "seed_count": 3,
+        "ready": 3
+      },
+      "detail": "manifest should carry ready seed evidence"
+    },
+    {
+      "id": "source_rollup_was_review_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "manifest must trace back to a review-ready seed-stability rollup"
+    }
+  ],
+  "seed_rows": [
+    {
+      "seed": 3636,
+      "ready": true,
+      "pair_full_count": 3,
+      "pair_full_rate": 1.0,
+      "source_path": "e\\764\\解释\\model-capability-required-term-pair-readiness-objective-level-contrast-pair-probe-replay\\model_capability_required_term_pair_readiness_fixed_preserving_transfer_pair_probe_replay.json"
+    },
+    {
+      "seed": 3737,
+      "ready": true,
+      "pair_full_count": 2,
+      "pair_full_rate": 0.6667,
+      "source_path": "e\\769\\解释\\model-capability-required-term-pair-readiness-objective-level-contrast-seed-3737-pair-probe-replay\\model_capability_required_term_pair_readiness_fixed_preserving_transfer_pair_probe_replay.json"
+    },
+    {
+      "seed": 3838,
+      "ready": true,
+      "pair_full_count": 2,
+      "pair_full_rate": 0.6667,
+      "source_path": "e\\771\\解释\\model-capability-required-term-pair-readiness-objective-level-contrast-seed-3838-pair-probe-replay\\model_capability_required_term_pair_readiness_fixed_preserving_transfer_pair_probe_replay.json"
+    }
+  ],
+  "manifest": {
+    "route_id": "objective_level_contrast",
+    "route_status": "promoted",
+    "promotion_ready": true,
+    "promotion_scope": "tiny_required_term_pair_probe_only",
+    "model_quality_claim": "seed_stable_pair_probe_route_accepted",
+    "accepted_seed_count": 3,
+    "ready_replay_count": 3,
+    "minimum_ready_replay_count": 2,
+    "pair_full_counts": {
+      "3636": 3,
+      "3737": 2,
+      "3838": 2
+    },
+    "min_pair_full_count": 2,
+    "max_pair_full_count": 3,
+    "pair_full_strength_spread": 1,
+    "source_rollup_expected_seed_count": 3,
+    "source_rollup_observed_seed_count": 3,
+    "benchmark_history_entry": {
+      "entry_type": "model_capability_route_promotion",
+      "route_id": "objective_level_contrast",
+      "status": "ready",
+      "boundary": "tiny_required_term_pair_probe_only",
+      "model_quality_claim": "seed_stable_pair_probe_route_accepted",
+      "seed_count": 3,
+      "min_pair_full_count": 2,
+      "pair_full_strength_spread": 1
+    }
+  },
+  "summary": {
+    "promotion_manifest_ready": true,
+    "promoted_route_id": "objective_level_contrast",
+    "route_status": "promoted",
+    "can_feed_benchmark_history": true,
+    "benchmark_history_entry_status": "ready",
+    "passed_check_count": 8,
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "seed_stable_pair_probe_route_accepted",
+    "reason": "The accepted objective-level contrast route is now represented as a benchmark-history-ready promotion manifest.",
+    "next_action": "append the manifest benchmark_history_entry to the model capability benchmark history"
+  }
+}

@@ -1454,3 +1454,9 @@ e/663/解释/说明.md
 - `e/789/图片`
 - `e/789/解释/说明.md`
 - v789 objective-level contrast acceptance review 的运行截图和解释。
+
+## v790 补充索引
+
+- `e/790/图片`
+- `e/790/解释/说明.md`
+- v790 objective-level contrast promotion manifest 的运行截图和解释。
