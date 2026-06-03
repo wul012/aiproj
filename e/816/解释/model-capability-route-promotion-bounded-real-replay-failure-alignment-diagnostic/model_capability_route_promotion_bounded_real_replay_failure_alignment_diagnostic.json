@@ -1,0 +1,229 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability route promotion bounded real replay failure alignment diagnostic",
+  "generated_at": "2026-06-03T09:37:59Z",
+  "status": "pass",
+  "decision": "model_capability_route_promotion_bounded_real_replay_failure_alignment_diagnostic_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_benchmark_suite": "D:\\aiproj\\e\\803\\解释\\model-capability-route-promotion-bounded-benchmark-suite\\model_capability_route_promotion_bounded_benchmark_suite.json",
+  "source_comparison": "D:\\aiproj\\e\\815\\解释\\model-capability-route-promotion-bounded-real-replay-repair-checkpoint-revision-replay\\comparison\\model_capability_route_promotion_bounded_real_replay_repair_checkpoint_comparison.json",
+  "source_seed_revision": "D:\\aiproj\\e\\813\\解释\\model-capability-route-promotion-bounded-real-replay-repair-seed-revision\\model_capability_route_promotion_bounded_real_replay_repair_seed_revision.json",
+  "source_training_revision": "D:\\aiproj\\e\\814\\解释\\model-capability-route-promotion-bounded-real-replay-repair-training-run-revision\\model_capability_route_promotion_bounded_real_replay_repair_training_run_revision.json",
+  "source_corpus": "D:\\aiproj\\e\\813\\解释\\model-capability-route-promotion-bounded-real-replay-repair-seed-revision\\model_capability_route_promotion_bounded_real_replay_repair_seed_revision_corpus.txt",
+  "source_summaries": {
+    "comparison": {
+      "bounded_repair_checkpoint_comparison_ready": true,
+      "repair_checkpoint_improved": false,
+      "repair_checkpoint_regressed": true,
+      "baseline_passed_case_count": 2,
+      "repair_passed_case_count": 0,
+      "passed_case_delta": -2,
+      "baseline_pass_rate": 0.4,
+      "repair_pass_rate": 0.0,
+      "pass_rate_delta": -0.4,
+      "promotion_ready": false,
+      "case_count": 5,
+      "next_step": "revise_bounded_repair_seed_or_training_strategy_before_replay_promotion",
+      "failed_check_count": 0
+    },
+    "seed_revision": {
+      "bounded_real_replay_repair_seed_revision_ready": true,
+      "original_example_count": 6,
+      "added_example_count": 12,
+      "example_count": 18,
+      "case_count": 5,
+      "baseline_preservation_example_count": 2,
+      "case_action_count": 5,
+      "proposed_next_artifact": "model_capability_route_promotion_bounded_real_replay_repair_training_run_revision",
+      "next_step": "train_bounded_real_replay_repair_seed_revision",
+      "failed_check_count": 0
+    },
+    "training_revision": {
+      "bounded_real_replay_repair_training_revision_ready": true,
+      "artifact_count": 7,
+      "metric_record_count": 4,
+      "final_step": 25,
+      "final_train_loss": 3.968329429626465,
+      "final_val_loss": 3.9442343711853027,
+      "train_loss_delta": -0.302411,
+      "val_loss_delta": -0.328931,
+      "seed_revision_example_count": 18,
+      "baseline_preservation_example_count": 2,
+      "proposed_next_artifact": "model_capability_route_promotion_bounded_real_replay_repair_checkpoint_revision_replay",
+      "next_step": "run_repair_checkpoint_revision_bounded_replay",
+      "failed_check_count": 0
+    }
+  },
+  "case_diagnostics": [
+    {
+      "case_id": "objective-answer-direct",
+      "prompt_in_corpus": true,
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "repair_pass": false,
+      "repair_continuation": "esttdet diene eeee\n\n iii",
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "corpus_fixed_count": 30,
+      "corpus_loss_count": 30,
+      "diagnosis": "required_terms_present_but_generation_not_anchored",
+      "recommended_action": "add_decoder_anchoring_examples_or_adjust_decoding"
+    },
+    {
+      "case_id": "objective-answer-role",
+      "prompt_in_corpus": true,
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "repair_pass": false,
+      "repair_continuation": "aired required terms 的两个角色词。\n输出：d  enlsee eet  s\nel eeee",
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "corpus_fixed_count": 30,
+      "corpus_loss_count": 30,
+      "diagnosis": "required_terms_present_but_generation_not_anchored",
+      "recommended_action": "add_decoder_anchoring_examples_or_adjust_decoding"
+    },
+    {
+      "case_id": "objective-answer-contrast",
+      "prompt_in_corpus": false,
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "repair_pass": false,
+      "repair_continuation": "��任务：�要��，只��目标 pair tokens。\n��：eeed  snle\nto lsodenlene",
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "corpus_fixed_count": 30,
+      "corpus_loss_count": 30,
+      "diagnosis": "benchmark_prompt_not_represented_in_training_corpus",
+      "recommended_action": "add_exact_benchmark_prompt_completion_examples"
+    },
+    {
+      "case_id": "objective-answer-jsonish",
+      "prompt_in_corpus": false,
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "repair_pass": false,
+      "repair_continuation": "wer�terms，��两个英文词。\nanswer�terms:sel   eeleote\nlioltleeee",
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "corpus_fixed_count": 30,
+      "corpus_loss_count": 30,
+      "diagnosis": "benchmark_prompt_not_represented_in_training_corpus",
+      "recommended_action": "add_exact_benchmark_prompt_completion_examples"
+    },
+    {
+      "case_id": "objective-answer-check",
+      "prompt_in_corpus": true,
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "repair_pass": false,
+      "repair_continuation": "o\ne nel\no  n e ldleeene ",
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "corpus_fixed_count": 30,
+      "corpus_loss_count": 30,
+      "diagnosis": "required_terms_present_but_generation_not_anchored",
+      "recommended_action": "add_decoder_anchoring_examples_or_adjust_decoding"
+    }
+  ],
+  "root_causes": [
+    {
+      "cause_id": "benchmark_prompt_training_corpus_gap",
+      "severity": "high",
+      "evidence": 2,
+      "detail": "Benchmark prompts are not exactly represented in the revised training corpus."
+    },
+    {
+      "cause_id": "repair_training_not_replay_aligned",
+      "severity": "high",
+      "evidence": -0.4,
+      "detail": "Training produced a checkpoint, but bounded replay still regressed against baseline."
+    },
+    {
+      "cause_id": "loss_improvement_not_sufficient_for_exact_terms",
+      "severity": "medium",
+      "evidence": 3.9442343711853027,
+      "detail": "Loss evidence is not enough for fixed/loss exact-term generation."
+    }
+  ],
+  "check_rows": [
+    {
+      "id": "benchmark_suite_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "benchmark suite must pass"
+    },
+    {
+      "id": "comparison_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "comparison must pass"
+    },
+    {
+      "id": "promotion_blocked",
+      "status": "pass",
+      "actual": false,
+      "detail": "diagnostic is for blocked promotion"
+    },
+    {
+      "id": "seed_revision_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "seed revision must pass"
+    },
+    {
+      "id": "training_revision_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "training revision must pass"
+    },
+    {
+      "id": "corpus_present",
+      "status": "pass",
+      "actual": 1755,
+      "detail": "corpus must be readable"
+    },
+    {
+      "id": "case_diagnostics_present",
+      "status": "pass",
+      "actual": 5,
+      "detail": "diagnostic must inspect benchmark cases"
+    }
+  ],
+  "summary": {
+    "bounded_real_replay_failure_alignment_diagnostic_ready": true,
+    "case_count": 5,
+    "failed_case_count": 5,
+    "prompt_gap_count": 2,
+    "root_cause_count": 3,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_real_replay_prompt_aligned_seed_revision",
+    "next_step": "build_prompt_aligned_seed_revision",
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "not_improved",
+    "reason": "Replay remains failed; diagnostic points to prompt/corpus alignment and exact-term anchoring gaps.",
+    "next_action": "build_prompt_aligned_seed_revision"
+  }
+}

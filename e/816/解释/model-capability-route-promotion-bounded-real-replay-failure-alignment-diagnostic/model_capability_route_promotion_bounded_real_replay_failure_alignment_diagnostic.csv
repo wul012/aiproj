@@ -1,0 +1,6 @@
+case_id,prompt_in_corpus,repair_pass,missed_terms,diagnosis,recommended_action
+objective-answer-direct,True,False,"[""fixed"", ""loss""]",required_terms_present_but_generation_not_anchored,add_decoder_anchoring_examples_or_adjust_decoding
+objective-answer-role,True,False,"[""fixed"", ""loss""]",required_terms_present_but_generation_not_anchored,add_decoder_anchoring_examples_or_adjust_decoding
+objective-answer-contrast,False,False,"[""fixed"", ""loss""]",benchmark_prompt_not_represented_in_training_corpus,add_exact_benchmark_prompt_completion_examples
+objective-answer-jsonish,False,False,"[""fixed"", ""loss""]",benchmark_prompt_not_represented_in_training_corpus,add_exact_benchmark_prompt_completion_examples
+objective-answer-check,True,False,"[""fixed"", ""loss""]",required_terms_present_but_generation_not_anchored,add_decoder_anchoring_examples_or_adjust_decoding

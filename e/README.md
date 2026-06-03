@@ -1610,3 +1610,9 @@ e/663/解释/说明.md
 - `e/815/图片`
 - `e/815/解释/说明.md`
 - v815 model capability route promotion bounded real replay repair checkpoint revision comparison 的运行截图和解释。
+
+## v816 补充索引
+
+- `e/816/图片`
+- `e/816/解释/说明.md`
+- v816 model capability route promotion bounded real replay failure alignment diagnostic 的运行截图和解释。

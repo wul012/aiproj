@@ -1040,6 +1040,9 @@
 829-v815-route-promotion-bounded-real-replay-repair-checkpoint-revision-comparison.md
  -> v815 code explanation: replay the v814 revised repair checkpoint and show it still regresses against the v806 baseline.
 
+830-v816-route-promotion-bounded-real-replay-failure-alignment-diagnostic.md
+ -> v816 code explanation: diagnose failed bounded replay alignment across benchmark prompts, revised corpus coverage, and generated continuations.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

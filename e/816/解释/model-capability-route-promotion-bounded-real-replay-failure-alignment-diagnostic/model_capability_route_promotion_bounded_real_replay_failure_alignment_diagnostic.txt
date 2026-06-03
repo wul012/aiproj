@@ -1,0 +1,8 @@
+status=pass
+decision=model_capability_route_promotion_bounded_real_replay_failure_alignment_diagnostic_ready
+diagnostic_ready=True
+case_count=5
+failed_case_count=5
+prompt_gap_count=2
+root_cause_count=3
+next_step=build_prompt_aligned_seed_revision

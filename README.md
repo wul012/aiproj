@@ -4,7 +4,19 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v815.0.0` replays the v814 revised repair checkpoint against the bounded benchmark and confirms it still regresses against the v806 baseline.
+Version `v816.0.0` diagnoses why revised repair training still fails bounded replay by comparing benchmark prompts, revised corpus coverage, and generated continuations.
+
+## Latest v816 checkpoint
+
+- Added `model_capability_route_promotion_bounded_real_replay_failure_alignment_diagnostic`.
+- Added CLI `scripts/diagnose_model_capability_route_promotion_bounded_real_replay_failure_alignment.py`.
+- Consumed the real v803 suite, v815 comparison, v813 seed revision, v814 training revision, and v813 corpus.
+- Produced `decision=model_capability_route_promotion_bounded_real_replay_failure_alignment_diagnostic_ready`.
+- Recorded `case_count=5`, `failed_case_count=5`, `prompt_gap_count=2`, and `root_cause_count=3`.
+- Identified `benchmark_prompt_training_corpus_gap` and `loss_improvement_not_sufficient_for_exact_terms`.
+- Routed the next step to prompt-aligned seed revision rather than another blind repair training loop.
+- Verified with `2 passed` focused diagnostic tests.
+- Archived v816 evidence in `e/816` and added the code explanation in `代码讲解记录_模型能力阶段/830-v816-route-promotion-bounded-real-replay-failure-alignment-diagnostic.md`.
 
 ## Latest v815 checkpoint
 
