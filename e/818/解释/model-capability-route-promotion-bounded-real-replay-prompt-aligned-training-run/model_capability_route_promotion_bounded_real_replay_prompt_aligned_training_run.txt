@@ -1,0 +1,10 @@
+status=pass
+decision=model_capability_route_promotion_bounded_real_replay_prompt_aligned_training_run_ready
+failed_count=0
+prompt_aligned_training_ready=True
+final_step=30
+final_train_loss=4.178743362426758
+final_val_loss=4.215392112731934
+prompt_aligned_example_count=28
+exact_prompt_answer_count=5
+next_step=run_prompt_aligned_checkpoint_bounded_replay

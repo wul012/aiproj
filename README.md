@@ -4,7 +4,19 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v817.0.0` builds a prompt-aligned seed revision that adds exact bounded benchmark prompt completions to close the corpus gap found in v816.
+Version `v818.0.0` trains a real prompt-aligned bounded replay checkpoint from the v817 corpus and records the training artifacts without claiming model-quality improvement before replay.
+
+## Latest v818 checkpoint
+
+- Added `model_capability_route_promotion_bounded_real_replay_prompt_aligned_training_run`.
+- Added CLI `scripts/build_model_capability_route_promotion_bounded_real_replay_prompt_aligned_training_run.py`.
+- Trained from the real v817 prompt-aligned corpus with 28 examples and 5 exact benchmark prompt answers.
+- Produced a real checkpoint under `e/818/解释/model-capability-route-promotion-bounded-real-replay-prompt-aligned-training-run/run`.
+- Recorded `final_step=30`, `final_train_loss=4.1787`, and `final_val_loss=4.2154`.
+- Verified all 7 required training artifacts and `failed_count=0`.
+- Kept the model-quality claim gated behind the next bounded replay comparison.
+- Verified with `4 passed` focused prompt-aligned training tests.
+- Archived v818 evidence in `e/818` and added the code explanation in `代码讲解记录_模型能力阶段/832-v818-route-promotion-bounded-real-replay-prompt-aligned-training-run.md`.
 
 ## Latest v817 checkpoint
 

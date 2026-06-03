@@ -1,0 +1,9 @@
+prompt: 任务：只输出两个英文关键词，表示本轮目标答案。
+答案：
+max_new_tokens: 24
+temperature: 0.2
+top_k: 10
+
+任务：只输出两个英文关键词，表示本轮目标答案。
+答案：:fet si  fii d  sdd
+i  e

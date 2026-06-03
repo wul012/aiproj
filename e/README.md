@@ -17,6 +17,14 @@ e/<version>/解释/说明.md
 
 ## 当前索引
 
+最新条目：
+
+```text
+e/818/图片
+e/818/解释/说明.md
+ -> v818 prompt-aligned bounded replay training run 的运行截图和解释
+```
+
 ```text
 e/473/图片
 e/473/解释/说明.md
