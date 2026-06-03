@@ -1,0 +1,6 @@
+step_id,purpose
+load-verified-route-card,Load the contract-verified route card from the governance snapshot.
+preserve-bounded-scope,Carry only bounded_model_capability_governance_only into downstream artifacts.
+map-objective-route,Map objective_level_contrast to the existing objective-level contrast benchmark family.
+prepare-suite-contract,Prepare benchmark-suite fields without changing model checkpoints.
+emit-next-artifact,Emit a bounded benchmark suite that can be executed or reviewed next.

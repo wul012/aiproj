@@ -4,7 +4,17 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v801.0.0` adds a downstream guard for bounded route promotion governance snapshot consumers.
+Version `v802.0.0` builds a bounded route promotion consumer plan from the downstream guard.
+
+## Latest v802 checkpoint
+
+- Added `model_capability_route_promotion_consumer_plan`.
+- Added CLI `scripts/build_model_capability_route_promotion_consumer_plan.py`.
+- Consumed the real v801 downstream guard.
+- Produced `decision=model_capability_route_promotion_consumer_plan_ready`.
+- Planned the next artifact `model_capability_route_promotion_bounded_benchmark_suite`.
+- Verified with `6 passed` consumer plan focused tests.
+- Archived v802 evidence in `e/802` and added the code explanation in `代码讲解记录_模型能力阶段/816-v802-route-promotion-consumer-plan.md`.
 
 ## Latest v801 checkpoint
 

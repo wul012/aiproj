@@ -1526,3 +1526,9 @@ e/663/解释/说明.md
 - `e/801/图片`
 - `e/801/解释/说明.md`
 - v801 model capability route promotion downstream guard 的运行截图和解释。
+
+## v802 补充索引
+
+- `e/802/图片`
+- `e/802/解释/说明.md`
+- v802 model capability route promotion consumer plan 的运行截图和解释。

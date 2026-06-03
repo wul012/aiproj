@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability route promotion consumer plan",
+  "generated_at": "2026-06-03T07:10:38Z",
+  "status": "pass",
+  "decision": "model_capability_route_promotion_consumer_plan_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_downstream_guard": "e\\801\\解释\\model-capability-route-promotion-downstream-guard\\model_capability_route_promotion_downstream_guard.json",
+  "source_guard_summary": {
+    "downstream_guard_ready": true,
+    "access_allowed": true,
+    "consumer_name": "bounded-benchmark-planner",
+    "route_id": "objective_level_contrast",
+    "allowed_scope": "bounded_model_capability_governance_only",
+    "boundary": "tiny_required_term_pair_probe_only",
+    "model_quality_claim": "seed_stable_pair_probe_route_accepted",
+    "next_step": "build_bounded_route_promotion_consumer_plan",
+    "passed_check_count": 9,
+    "failed_check_count": 0
+  },
+  "source_guard_request": {
+    "route_id": "objective_level_contrast",
+    "consumer_name": "bounded-benchmark-planner",
+    "requested_scope": "bounded_model_capability_governance_only",
+    "required_boundary": "tiny_required_term_pair_probe_only"
+  },
+  "check_rows": [
+    {
+      "id": "guard_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "downstream guard must pass"
+    },
+    {
+      "id": "guard_decision_allowed",
+      "status": "pass",
+      "actual": "model_capability_route_promotion_downstream_guard_allowed",
+      "detail": "downstream guard decision must allow access"
+    },
+    {
+      "id": "access_allowed",
+      "status": "pass",
+      "actual": {
+        "summary": true,
+        "access": true
+      },
+      "detail": "access must be allowed"
+    },
+    {
+      "id": "objective_route_selected",
+      "status": "pass",
+      "actual": "objective_level_contrast",
+      "detail": "consumer plan currently supports objective_level_contrast route"
+    },
+    {
+      "id": "bounded_scope",
+      "status": "pass",
+      "actual": "bounded_model_capability_governance_only",
+      "detail": "consumer plan must stay in bounded governance scope"
+    },
+    {
+      "id": "boundary_scoped",
+      "status": "pass",
+      "actual": "tiny_required_term_pair_probe_only",
+      "detail": "consumer plan boundary must match the required boundary"
+    },
+    {
+      "id": "next_step_matches",
+      "status": "pass",
+      "actual": "build_bounded_route_promotion_consumer_plan",
+      "detail": "guard must point at consumer plan construction"
+    },
+    {
+      "id": "claim_bounded",
+      "status": "pass",
+      "actual": "seed_stable_pair_probe_route_accepted",
+      "detail": "consumer plan claim must remain pair-probe scoped"
+    },
+    {
+      "id": "consumer_named",
+      "status": "pass",
+      "actual": "bounded-benchmark-planner",
+      "detail": "consumer name must be explicit"
+    }
+  ],
+  "consumer_plan": {
+    "ready": true,
+    "route_id": "objective_level_contrast",
+    "consumer_name": "bounded-benchmark-planner",
+    "allowed_scope": "bounded_model_capability_governance_only",
+    "boundary": "tiny_required_term_pair_probe_only",
+    "model_quality_claim": "seed_stable_pair_probe_route_accepted",
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_benchmark_suite",
+    "execution_phase": "bounded_route_benchmark_planning",
+    "required_inputs": [
+      "route_promotion_governance_snapshot",
+      "route_promotion_downstream_guard",
+      "objective_level_contrast_route_card"
+    ],
+    "plan_steps": [
+      {
+        "step_id": "load-verified-route-card",
+        "purpose": "Load the contract-verified route card from the governance snapshot."
+      },
+      {
+        "step_id": "preserve-bounded-scope",
+        "purpose": "Carry only bounded_model_capability_governance_only into downstream artifacts."
+      },
+      {
+        "step_id": "map-objective-route",
+        "purpose": "Map objective_level_contrast to the existing objective-level contrast benchmark family."
+      },
+      {
+        "step_id": "prepare-suite-contract",
+        "purpose": "Prepare benchmark-suite fields without changing model checkpoints."
+      },
+      {
+        "step_id": "emit-next-artifact",
+        "purpose": "Emit a bounded benchmark suite that can be executed or reviewed next."
+      }
+    ],
+    "non_goals": [
+      "do not claim production model release readiness",
+      "do not widen beyond tiny required-term pair-probe boundary",
+      "do not train or mutate checkpoints in the consumer plan"
+    ]
+  },
+  "summary": {
+    "consumer_plan_ready": true,
+    "route_id": "objective_level_contrast",
+    "consumer_name": "bounded-benchmark-planner",
+    "allowed_scope": "bounded_model_capability_governance_only",
+    "boundary": "tiny_required_term_pair_probe_only",
+    "model_quality_claim": "seed_stable_pair_probe_route_accepted",
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_benchmark_suite",
+    "plan_step_count": 5,
+    "required_input_count": 3,
+    "non_goal_count": 3,
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "seed_stable_pair_probe_route_accepted",
+    "reason": "The verified route can feed a bounded benchmark-suite plan without widening the model-quality claim.",
+    "next_action": "build model_capability_route_promotion_bounded_benchmark_suite"
+  }
+}

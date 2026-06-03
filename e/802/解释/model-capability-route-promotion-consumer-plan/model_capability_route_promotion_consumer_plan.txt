@@ -1,0 +1,9 @@
+status=pass
+decision=model_capability_route_promotion_consumer_plan_ready
+failed_count=0
+consumer_plan_ready=True
+route_id=objective_level_contrast
+consumer_name=bounded-benchmark-planner
+allowed_scope=bounded_model_capability_governance_only
+proposed_next_artifact=model_capability_route_promotion_bounded_benchmark_suite
+plan_step_count=5

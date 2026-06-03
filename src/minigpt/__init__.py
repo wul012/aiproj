@@ -122,6 +122,8 @@ __all__ = [
     "write_model_capability_route_promotion_governance_snapshot_outputs",
     "build_model_capability_route_promotion_downstream_guard",
     "write_model_capability_route_promotion_downstream_guard_outputs",
+    "build_model_capability_route_promotion_consumer_plan",
+    "write_model_capability_route_promotion_consumer_plan_outputs",
     "build_promoted_training_scale_seed_handoff_receipt_contract_summary",
     "write_promoted_training_scale_seed_handoff_receipt_contract_summary_outputs",
     "check_promoted_training_scale_seed_handoff_receipt_contract_summary",
@@ -310,6 +312,14 @@ _EXPORTS = {
     "write_model_capability_route_promotion_downstream_guard_outputs": (
         "model_capability_route_promotion_downstream_guard_artifacts",
         "write_model_capability_route_promotion_downstream_guard_outputs",
+    ),
+    "build_model_capability_route_promotion_consumer_plan": (
+        "model_capability_route_promotion_consumer_plan",
+        "build_model_capability_route_promotion_consumer_plan",
+    ),
+    "write_model_capability_route_promotion_consumer_plan_outputs": (
+        "model_capability_route_promotion_consumer_plan_artifacts",
+        "write_model_capability_route_promotion_consumer_plan_outputs",
     ),
     "build_promoted_training_scale_seed_handoff_receipt_contract_summary": (
         "promoted_training_scale_seed_handoff_receipt_contract",
