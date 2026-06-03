@@ -1,0 +1,16 @@
+case_id,case_pass,hit_terms,missed_terms,continuation
+objective-answer-direct,False,,"fixed,loss","esttdet diene eeee
+
+ iii"
+objective-answer-role,False,,"fixed,loss","aired required terms 的两个角色词。
+输出：d  enlsee eet  s
+el eeee"
+objective-answer-contrast,False,,"fixed,loss","��任务：�要��，只��目标 pair tokens。
+��：eeed  snle
+to lsodenlene"
+objective-answer-jsonish,False,,"fixed,loss","wer�terms，��两个英文词。
+answer�terms:sel   eeleote
+lioltleeee"
+objective-answer-check,False,,"fixed,loss","o
+e nel
+o  n e ldleeene "

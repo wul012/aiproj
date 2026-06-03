@@ -1,0 +1,12 @@
+status=pass
+decision=model_capability_route_promotion_bounded_real_replay_repair_checkpoint_regressed
+failed_count=0
+comparison_ready=True
+repair_checkpoint_improved=False
+repair_checkpoint_regressed=True
+baseline_passed_case_count=2
+repair_passed_case_count=0
+passed_case_delta=-2
+pass_rate_delta=-0.4
+promotion_ready=False
+next_step=revise_bounded_repair_seed_or_training_strategy_before_replay_promotion
