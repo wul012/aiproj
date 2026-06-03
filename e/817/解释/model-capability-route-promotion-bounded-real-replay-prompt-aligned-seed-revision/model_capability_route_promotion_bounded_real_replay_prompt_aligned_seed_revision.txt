@@ -1,0 +1,8 @@
+status=pass
+decision=model_capability_route_promotion_bounded_real_replay_prompt_aligned_seed_revision_ready
+prompt_aligned_seed_ready=True
+original_example_count=18
+added_example_count=10
+example_count=28
+exact_prompt_answer_count=5
+next_step=train_prompt_aligned_bounded_repair_seed

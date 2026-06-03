@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT model capability route promotion bounded real replay prompt-aligned seed revision</title>
+<style>
+:root{color-scheme:light;--ink:#16212a;--muted:#667381;--line:#d8dee4;--panel:#f8fafc;--accent:#0f766e}
+*{box-sizing:border-box}
+body{margin:0;background:#edf3f4;color:var(--ink);font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1240px;margin:0 auto;padding:28px}
+h1{font-size:30px;margin:0 0 8px;letter-spacing:0}
+h2{font-size:18px;margin:0 0 12px;letter-spacing:0}
+p{color:var(--muted);line-height:1.55;overflow-wrap:anywhere}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:10px;margin:18px 0}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:8px}
+.card{padding:14px}
+.card span{display:block;color:var(--muted);font-size:12px;text-transform:uppercase}
+.card strong{display:block;margin-top:6px;font-size:18px;line-height:1.2;color:var(--accent);overflow-wrap:anywhere}
+.panel{padding:16px;margin:14px 0}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:#334155}
+td{overflow-wrap:anywhere}
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT model capability route promotion bounded real replay prompt-aligned seed revision</h1><p>Adds exact benchmark prompt completions to close the prompt/corpus gap found by the failure alignment diagnostic.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Decision</span><strong>model_capability_route_promotion_bounded_real_replay_prompt_aligned_seed_revision_ready</strong></div><div class="card"><span>Ready</span><strong>True</strong></div><div class="card"><span>Added</span><strong>10</strong></div><div class="card"><span>Total</span><strong>28</strong></div><div class="card"><span>Exact prompts</span><strong>5</strong></div></section>
+<section class="panel"><h2>Seed Examples</h2><div class="table-wrap"><table>
+<thead><tr><th>Example</th><th>Case</th><th>Type</th><th>Completion</th><th>Guardrail</th><th>Prompt</th></tr></thead>
+<tbody><tr><td>prompt-aligned-carry-revision-carry-repair-objective-answer-direct-direct_case_answer</td><td>objective-answer-direct</td><td>carry_forward_seed_revision</td><td>fixed loss</td><td>retain_revised_seed_signal</td><td>任务：只输出两个英文关键词，表示本轮目标答案。
+答案：</td></tr><tr><td>prompt-aligned-carry-revision-carry-repair-objective-answer-direct-self_check_answer</td><td>objective-answer-direct</td><td>carry_forward_seed_revision</td><td>fixed loss</td><td>retain_revised_seed_signal</td><td>任务：只输出两个英文关键词，表示本轮目标答案。
+答案：
+Self-check: include both required terms exactly once.</td></tr><tr><td>prompt-aligned-carry-revision-carry-repair-objective-answer-role-direct_case_answer</td><td>objective-answer-role</td><td>carry_forward_seed_revision</td><td>fixed loss</td><td>retain_revised_seed_signal</td><td>目标：给出 paired required terms 的两个角色词。
+输出：</td></tr><tr><td>prompt-aligned-carry-revision-carry-repair-objective-answer-role-self_check_answer</td><td>objective-answer-role</td><td>carry_forward_seed_revision</td><td>fixed loss</td><td>retain_revised_seed_signal</td><td>目标：给出 paired required terms 的两个角色词。
+输出：
+Self-check: include both required terms exactly once.</td></tr><tr><td>prompt-aligned-carry-revision-carry-repair-objective-answer-check-direct_case_answer</td><td>objective-answer-check</td><td>carry_forward_seed_revision</td><td>fixed loss</td><td>retain_revised_seed_signal</td><td>自检：本题需要同时出现 fixed 与 loss。最终答案：</td></tr><tr><td>prompt-aligned-carry-revision-carry-repair-objective-answer-check-self_check_answer</td><td>objective-answer-check</td><td>carry_forward_seed_revision</td><td>fixed loss</td><td>retain_revised_seed_signal</td><td>自检：本题需要同时出现 fixed 与 loss。最终答案：
+Self-check: include both required terms exactly once.</td></tr><tr><td>prompt-aligned-carry-revision-objective-answer-check-missing_term_retention</td><td>objective-answer-check</td><td>carry_forward_seed_revision</td><td>fixed loss</td><td>retain_revised_seed_signal</td><td>Repair objective-answer-check: include missing terms fixed, loss and answer directly.
+Answer:</td></tr><tr><td>prompt-aligned-carry-revision-objective-answer-check-contrastive_self_check</td><td>objective-answer-check</td><td>carry_forward_seed_revision</td><td>fixed loss</td><td>retain_revised_seed_signal</td><td>Self-check objective-answer-check: the continuation is valid only if it contains fixed and loss.
+Answer:</td></tr><tr><td>prompt-aligned-carry-revision-objective-answer-contrast-baseline_preservation</td><td>objective-answer-contrast</td><td>carry_forward_seed_revision</td><td>fixed loss</td><td>retain_revised_seed_signal</td><td>Baseline preservation for objective-answer-contrast: output the two route terms exactly.
+Answer:</td></tr><tr><td>prompt-aligned-carry-revision-objective-answer-contrast-missing_term_retention</td><td>objective-answer-contrast</td><td>carry_forward_seed_revision</td><td>fixed loss</td><td>retain_revised_seed_signal</td><td>Repair objective-answer-contrast: include missing terms fixed, loss and answer directly.
+Answer:</td></tr><tr><td>prompt-aligned-carry-revision-objective-answer-contrast-contrastive_self_check</td><td>objective-answer-contrast</td><td>carry_forward_seed_revision</td><td>fixed loss</td><td>retain_revised_seed_signal</td><td>Self-check objective-answer-contrast: the continuation is valid only if it contains fixed and loss.
+Answer:</td></tr><tr><td>prompt-aligned-carry-revision-objective-answer-direct-missing_term_retention</td><td>objective-answer-direct</td><td>carry_forward_seed_revision</td><td>fixed loss</td><td>retain_revised_seed_signal</td><td>Repair objective-answer-direct: include missing terms fixed, loss and answer directly.
+Answer:</td></tr><tr><td>prompt-aligned-carry-revision-objective-answer-direct-contrastive_self_check</td><td>objective-answer-direct</td><td>carry_forward_seed_revision</td><td>fixed loss</td><td>retain_revised_seed_signal</td><td>Self-check objective-answer-direct: the continuation is valid only if it contains fixed and loss.
+Answer:</td></tr><tr><td>prompt-aligned-carry-revision-objective-answer-jsonish-baseline_preservation</td><td>objective-answer-jsonish</td><td>carry_forward_seed_revision</td><td>fixed loss</td><td>retain_revised_seed_signal</td><td>Baseline preservation for objective-answer-jsonish: output the two route terms exactly.
+Answer:</td></tr><tr><td>prompt-aligned-carry-revision-objective-answer-jsonish-missing_term_retention</td><td>objective-answer-jsonish</td><td>carry_forward_seed_revision</td><td>fixed loss</td><td>retain_revised_seed_signal</td><td>Repair objective-answer-jsonish: include missing terms fixed, loss and answer directly.
+Answer:</td></tr><tr><td>prompt-aligned-carry-revision-objective-answer-jsonish-contrastive_self_check</td><td>objective-answer-jsonish</td><td>carry_forward_seed_revision</td><td>fixed loss</td><td>retain_revised_seed_signal</td><td>Self-check objective-answer-jsonish: the continuation is valid only if it contains fixed and loss.
+Answer:</td></tr><tr><td>prompt-aligned-carry-revision-objective-answer-role-missing_term_retention</td><td>objective-answer-role</td><td>carry_forward_seed_revision</td><td>fixed loss</td><td>retain_revised_seed_signal</td><td>Repair objective-answer-role: include missing terms fixed, loss and answer directly.
+Answer:</td></tr><tr><td>prompt-aligned-carry-revision-objective-answer-role-contrastive_self_check</td><td>objective-answer-role</td><td>carry_forward_seed_revision</td><td>fixed loss</td><td>retain_revised_seed_signal</td><td>Self-check objective-answer-role: the continuation is valid only if it contains fixed and loss.
+Answer:</td></tr><tr><td>prompt-aligned-objective-answer-direct-exact_benchmark_prompt_answer</td><td>objective-answer-direct</td><td>exact_benchmark_prompt_answer</td><td>fixed loss</td><td>exact_benchmark_prompt_alignment</td><td>任务：只输出两个英文关键词，表示本轮目标答案。
+答案：</td></tr><tr><td>prompt-aligned-objective-answer-direct-exact_benchmark_prompt_self_check</td><td>objective-answer-direct</td><td>exact_benchmark_prompt_self_check</td><td>fixed loss</td><td>exact_benchmark_prompt_alignment</td><td>任务：只输出两个英文关键词，表示本轮目标答案。
+答案：
+Self-check: include fixed and loss exactly.
+Answer:</td></tr><tr><td>prompt-aligned-objective-answer-role-exact_benchmark_prompt_answer</td><td>objective-answer-role</td><td>exact_benchmark_prompt_answer</td><td>fixed loss</td><td>exact_benchmark_prompt_alignment</td><td>目标：给出 paired required terms 的两个角色词。
+输出：</td></tr><tr><td>prompt-aligned-objective-answer-role-exact_benchmark_prompt_self_check</td><td>objective-answer-role</td><td>exact_benchmark_prompt_self_check</td><td>fixed loss</td><td>exact_benchmark_prompt_alignment</td><td>目标：给出 paired required terms 的两个角色词。
+输出：
+Self-check: include fixed and loss exactly.
+Answer:</td></tr><tr><td>prompt-aligned-objective-answer-contrast-exact_benchmark_prompt_answer</td><td>objective-answer-contrast</td><td>exact_benchmark_prompt_answer</td><td>fixed loss</td><td>exact_benchmark_prompt_alignment</td><td>对比任务：不要解释，只返回目标 pair tokens。
+结果：</td></tr><tr><td>prompt-aligned-objective-answer-contrast-exact_benchmark_prompt_self_check</td><td>objective-answer-contrast</td><td>exact_benchmark_prompt_self_check</td><td>fixed loss</td><td>exact_benchmark_prompt_alignment</td><td>对比任务：不要解释，只返回目标 pair tokens。
+结果：
+Self-check: include fixed and loss exactly.
+Answer:</td></tr><tr><td>prompt-aligned-objective-answer-jsonish-exact_benchmark_prompt_answer</td><td>objective-answer-jsonish</td><td>exact_benchmark_prompt_answer</td><td>fixed loss</td><td>exact_benchmark_prompt_alignment</td><td>请用 JSON 风格写出 answer_terms，包含两个英文词。
+answer_terms:</td></tr><tr><td>prompt-aligned-objective-answer-jsonish-exact_benchmark_prompt_self_check</td><td>objective-answer-jsonish</td><td>exact_benchmark_prompt_self_check</td><td>fixed loss</td><td>exact_benchmark_prompt_alignment</td><td>请用 JSON 风格写出 answer_terms，包含两个英文词。
+answer_terms:
+Self-check: include fixed and loss exactly.
+Answer:</td></tr><tr><td>prompt-aligned-objective-answer-check-exact_benchmark_prompt_answer</td><td>objective-answer-check</td><td>exact_benchmark_prompt_answer</td><td>fixed loss</td><td>exact_benchmark_prompt_alignment</td><td>自检：本题需要同时出现 fixed 与 loss。最终答案：</td></tr><tr><td>prompt-aligned-objective-answer-check-exact_benchmark_prompt_self_check</td><td>objective-answer-check</td><td>exact_benchmark_prompt_self_check</td><td>fixed loss</td><td>exact_benchmark_prompt_alignment</td><td>自检：本题需要同时出现 fixed 与 loss。最终答案：
+Self-check: include fixed and loss exactly.
+Answer:</td></tr></tbody>
+</table></div></section>
+</main>
+</body>
+</html>

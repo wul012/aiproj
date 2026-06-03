@@ -1616,3 +1616,9 @@ e/663/解释/说明.md
 - `e/816/图片`
 - `e/816/解释/说明.md`
 - v816 model capability route promotion bounded real replay failure alignment diagnostic 的运行截图和解释。
+
+## v817 补充索引
+
+- `e/817/图片`
+- `e/817/解释/说明.md`
+- v817 model capability route promotion bounded real replay prompt-aligned seed revision 的运行截图和解释。

@@ -4,7 +4,19 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v816.0.0` diagnoses why revised repair training still fails bounded replay by comparing benchmark prompts, revised corpus coverage, and generated continuations.
+Version `v817.0.0` builds a prompt-aligned seed revision that adds exact bounded benchmark prompt completions to close the corpus gap found in v816.
+
+## Latest v817 checkpoint
+
+- Added `model_capability_route_promotion_bounded_real_replay_prompt_aligned_seed_revision`.
+- Added CLI `scripts/build_model_capability_route_promotion_bounded_real_replay_prompt_aligned_seed_revision.py`.
+- Consumed the real v803 benchmark suite, v816 diagnostic, and v813 repair seed revision.
+- Produced `decision=model_capability_route_promotion_bounded_real_replay_prompt_aligned_seed_revision_ready`.
+- Carried forward 18 revised seed examples and added 10 prompt-aligned examples.
+- Added 5 exact benchmark prompt answer examples, one per suite case.
+- Wrote JSONL and corpus outputs for prompt-aligned training.
+- Verified with `2 passed` focused prompt-aligned seed tests.
+- Archived v817 evidence in `e/817` and added the code explanation in `代码讲解记录_模型能力阶段/831-v817-route-promotion-bounded-real-replay-prompt-aligned-seed-revision.md`.
 
 ## Latest v816 checkpoint
 

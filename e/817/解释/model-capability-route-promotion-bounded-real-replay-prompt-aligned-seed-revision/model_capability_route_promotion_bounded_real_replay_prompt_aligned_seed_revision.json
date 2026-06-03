@@ -1,0 +1,476 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability route promotion bounded real replay prompt-aligned seed revision",
+  "generated_at": "2026-06-03T09:50:14Z",
+  "status": "pass",
+  "decision": "model_capability_route_promotion_bounded_real_replay_prompt_aligned_seed_revision_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_benchmark_suite": "D:\\aiproj\\e\\803\\解释\\model-capability-route-promotion-bounded-benchmark-suite\\model_capability_route_promotion_bounded_benchmark_suite.json",
+  "source_failure_alignment_diagnostic": "D:\\aiproj\\e\\816\\解释\\model-capability-route-promotion-bounded-real-replay-failure-alignment-diagnostic\\model_capability_route_promotion_bounded_real_replay_failure_alignment_diagnostic.json",
+  "source_repair_seed_revision": "D:\\aiproj\\e\\813\\解释\\model-capability-route-promotion-bounded-real-replay-repair-seed-revision\\model_capability_route_promotion_bounded_real_replay_repair_seed_revision.json",
+  "source_summaries": {
+    "diagnostic": {
+      "bounded_real_replay_failure_alignment_diagnostic_ready": true,
+      "case_count": 5,
+      "failed_case_count": 5,
+      "prompt_gap_count": 2,
+      "root_cause_count": 3,
+      "proposed_next_artifact": "model_capability_route_promotion_bounded_real_replay_prompt_aligned_seed_revision",
+      "next_step": "build_prompt_aligned_seed_revision",
+      "failed_check_count": 0
+    },
+    "repair_seed_revision": {
+      "bounded_real_replay_repair_seed_revision_ready": true,
+      "original_example_count": 6,
+      "added_example_count": 12,
+      "example_count": 18,
+      "case_count": 5,
+      "baseline_preservation_example_count": 2,
+      "case_action_count": 5,
+      "proposed_next_artifact": "model_capability_route_promotion_bounded_real_replay_repair_training_run_revision",
+      "next_step": "train_bounded_real_replay_repair_seed_revision",
+      "failed_check_count": 0
+    }
+  },
+  "seed_examples": [
+    {
+      "example_id": "prompt-aligned-carry-revision-carry-repair-objective-answer-direct-direct_case_answer",
+      "case_id": "objective-answer-direct",
+      "revision_type": "carry_forward_seed_revision",
+      "prompt": "任务：只输出两个英文关键词，表示本轮目标答案。\n答案：",
+      "completion": "fixed loss",
+      "text": "任务：只输出两个英文关键词，表示本轮目标答案。\n答案：fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "guardrail": "retain_revised_seed_signal"
+    },
+    {
+      "example_id": "prompt-aligned-carry-revision-carry-repair-objective-answer-direct-self_check_answer",
+      "case_id": "objective-answer-direct",
+      "revision_type": "carry_forward_seed_revision",
+      "prompt": "任务：只输出两个英文关键词，表示本轮目标答案。\n答案：\nSelf-check: include both required terms exactly once.",
+      "completion": "fixed loss",
+      "text": "任务：只输出两个英文关键词，表示本轮目标答案。\n答案：\nSelf-check: include both required terms exactly once.fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "guardrail": "retain_revised_seed_signal"
+    },
+    {
+      "example_id": "prompt-aligned-carry-revision-carry-repair-objective-answer-role-direct_case_answer",
+      "case_id": "objective-answer-role",
+      "revision_type": "carry_forward_seed_revision",
+      "prompt": "目标：给出 paired required terms 的两个角色词。\n输出：",
+      "completion": "fixed loss",
+      "text": "目标：给出 paired required terms 的两个角色词。\n输出：fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "guardrail": "retain_revised_seed_signal"
+    },
+    {
+      "example_id": "prompt-aligned-carry-revision-carry-repair-objective-answer-role-self_check_answer",
+      "case_id": "objective-answer-role",
+      "revision_type": "carry_forward_seed_revision",
+      "prompt": "目标：给出 paired required terms 的两个角色词。\n输出：\nSelf-check: include both required terms exactly once.",
+      "completion": "fixed loss",
+      "text": "目标：给出 paired required terms 的两个角色词。\n输出：\nSelf-check: include both required terms exactly once.fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "guardrail": "retain_revised_seed_signal"
+    },
+    {
+      "example_id": "prompt-aligned-carry-revision-carry-repair-objective-answer-check-direct_case_answer",
+      "case_id": "objective-answer-check",
+      "revision_type": "carry_forward_seed_revision",
+      "prompt": "自检：本题需要同时出现 fixed 与 loss。最终答案：",
+      "completion": "fixed loss",
+      "text": "自检：本题需要同时出现 fixed 与 loss。最终答案：fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "guardrail": "retain_revised_seed_signal"
+    },
+    {
+      "example_id": "prompt-aligned-carry-revision-carry-repair-objective-answer-check-self_check_answer",
+      "case_id": "objective-answer-check",
+      "revision_type": "carry_forward_seed_revision",
+      "prompt": "自检：本题需要同时出现 fixed 与 loss。最终答案：\nSelf-check: include both required terms exactly once.",
+      "completion": "fixed loss",
+      "text": "自检：本题需要同时出现 fixed 与 loss。最终答案：\nSelf-check: include both required terms exactly once.fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "guardrail": "retain_revised_seed_signal"
+    },
+    {
+      "example_id": "prompt-aligned-carry-revision-objective-answer-check-missing_term_retention",
+      "case_id": "objective-answer-check",
+      "revision_type": "carry_forward_seed_revision",
+      "prompt": "Repair objective-answer-check: include missing terms fixed, loss and answer directly.\nAnswer:",
+      "completion": "fixed loss",
+      "text": "Repair objective-answer-check: include missing terms fixed, loss and answer directly.\nAnswer:fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "guardrail": "retain_revised_seed_signal"
+    },
+    {
+      "example_id": "prompt-aligned-carry-revision-objective-answer-check-contrastive_self_check",
+      "case_id": "objective-answer-check",
+      "revision_type": "carry_forward_seed_revision",
+      "prompt": "Self-check objective-answer-check: the continuation is valid only if it contains fixed and loss.\nAnswer:",
+      "completion": "fixed loss",
+      "text": "Self-check objective-answer-check: the continuation is valid only if it contains fixed and loss.\nAnswer:fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "guardrail": "retain_revised_seed_signal"
+    },
+    {
+      "example_id": "prompt-aligned-carry-revision-objective-answer-contrast-baseline_preservation",
+      "case_id": "objective-answer-contrast",
+      "revision_type": "carry_forward_seed_revision",
+      "prompt": "Baseline preservation for objective-answer-contrast: output the two route terms exactly.\nAnswer:",
+      "completion": "fixed loss",
+      "text": "Baseline preservation for objective-answer-contrast: output the two route terms exactly.\nAnswer:fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "guardrail": "retain_revised_seed_signal"
+    },
+    {
+      "example_id": "prompt-aligned-carry-revision-objective-answer-contrast-missing_term_retention",
+      "case_id": "objective-answer-contrast",
+      "revision_type": "carry_forward_seed_revision",
+      "prompt": "Repair objective-answer-contrast: include missing terms fixed, loss and answer directly.\nAnswer:",
+      "completion": "fixed loss",
+      "text": "Repair objective-answer-contrast: include missing terms fixed, loss and answer directly.\nAnswer:fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "guardrail": "retain_revised_seed_signal"
+    },
+    {
+      "example_id": "prompt-aligned-carry-revision-objective-answer-contrast-contrastive_self_check",
+      "case_id": "objective-answer-contrast",
+      "revision_type": "carry_forward_seed_revision",
+      "prompt": "Self-check objective-answer-contrast: the continuation is valid only if it contains fixed and loss.\nAnswer:",
+      "completion": "fixed loss",
+      "text": "Self-check objective-answer-contrast: the continuation is valid only if it contains fixed and loss.\nAnswer:fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "guardrail": "retain_revised_seed_signal"
+    },
+    {
+      "example_id": "prompt-aligned-carry-revision-objective-answer-direct-missing_term_retention",
+      "case_id": "objective-answer-direct",
+      "revision_type": "carry_forward_seed_revision",
+      "prompt": "Repair objective-answer-direct: include missing terms fixed, loss and answer directly.\nAnswer:",
+      "completion": "fixed loss",
+      "text": "Repair objective-answer-direct: include missing terms fixed, loss and answer directly.\nAnswer:fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "guardrail": "retain_revised_seed_signal"
+    },
+    {
+      "example_id": "prompt-aligned-carry-revision-objective-answer-direct-contrastive_self_check",
+      "case_id": "objective-answer-direct",
+      "revision_type": "carry_forward_seed_revision",
+      "prompt": "Self-check objective-answer-direct: the continuation is valid only if it contains fixed and loss.\nAnswer:",
+      "completion": "fixed loss",
+      "text": "Self-check objective-answer-direct: the continuation is valid only if it contains fixed and loss.\nAnswer:fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "guardrail": "retain_revised_seed_signal"
+    },
+    {
+      "example_id": "prompt-aligned-carry-revision-objective-answer-jsonish-baseline_preservation",
+      "case_id": "objective-answer-jsonish",
+      "revision_type": "carry_forward_seed_revision",
+      "prompt": "Baseline preservation for objective-answer-jsonish: output the two route terms exactly.\nAnswer:",
+      "completion": "fixed loss",
+      "text": "Baseline preservation for objective-answer-jsonish: output the two route terms exactly.\nAnswer:fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "guardrail": "retain_revised_seed_signal"
+    },
+    {
+      "example_id": "prompt-aligned-carry-revision-objective-answer-jsonish-missing_term_retention",
+      "case_id": "objective-answer-jsonish",
+      "revision_type": "carry_forward_seed_revision",
+      "prompt": "Repair objective-answer-jsonish: include missing terms fixed, loss and answer directly.\nAnswer:",
+      "completion": "fixed loss",
+      "text": "Repair objective-answer-jsonish: include missing terms fixed, loss and answer directly.\nAnswer:fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "guardrail": "retain_revised_seed_signal"
+    },
+    {
+      "example_id": "prompt-aligned-carry-revision-objective-answer-jsonish-contrastive_self_check",
+      "case_id": "objective-answer-jsonish",
+      "revision_type": "carry_forward_seed_revision",
+      "prompt": "Self-check objective-answer-jsonish: the continuation is valid only if it contains fixed and loss.\nAnswer:",
+      "completion": "fixed loss",
+      "text": "Self-check objective-answer-jsonish: the continuation is valid only if it contains fixed and loss.\nAnswer:fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "guardrail": "retain_revised_seed_signal"
+    },
+    {
+      "example_id": "prompt-aligned-carry-revision-objective-answer-role-missing_term_retention",
+      "case_id": "objective-answer-role",
+      "revision_type": "carry_forward_seed_revision",
+      "prompt": "Repair objective-answer-role: include missing terms fixed, loss and answer directly.\nAnswer:",
+      "completion": "fixed loss",
+      "text": "Repair objective-answer-role: include missing terms fixed, loss and answer directly.\nAnswer:fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "guardrail": "retain_revised_seed_signal"
+    },
+    {
+      "example_id": "prompt-aligned-carry-revision-objective-answer-role-contrastive_self_check",
+      "case_id": "objective-answer-role",
+      "revision_type": "carry_forward_seed_revision",
+      "prompt": "Self-check objective-answer-role: the continuation is valid only if it contains fixed and loss.\nAnswer:",
+      "completion": "fixed loss",
+      "text": "Self-check objective-answer-role: the continuation is valid only if it contains fixed and loss.\nAnswer:fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "guardrail": "retain_revised_seed_signal"
+    },
+    {
+      "example_id": "prompt-aligned-objective-answer-direct-exact_benchmark_prompt_answer",
+      "case_id": "objective-answer-direct",
+      "revision_type": "exact_benchmark_prompt_answer",
+      "prompt": "任务：只输出两个英文关键词，表示本轮目标答案。\n答案：",
+      "completion": "fixed loss",
+      "text": "任务：只输出两个英文关键词，表示本轮目标答案。\n答案：fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "guardrail": "exact_benchmark_prompt_alignment"
+    },
+    {
+      "example_id": "prompt-aligned-objective-answer-direct-exact_benchmark_prompt_self_check",
+      "case_id": "objective-answer-direct",
+      "revision_type": "exact_benchmark_prompt_self_check",
+      "prompt": "任务：只输出两个英文关键词，表示本轮目标答案。\n答案：\nSelf-check: include fixed and loss exactly.\nAnswer:",
+      "completion": "fixed loss",
+      "text": "任务：只输出两个英文关键词，表示本轮目标答案。\n答案：\nSelf-check: include fixed and loss exactly.\nAnswer:fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "guardrail": "exact_benchmark_prompt_alignment"
+    },
+    {
+      "example_id": "prompt-aligned-objective-answer-role-exact_benchmark_prompt_answer",
+      "case_id": "objective-answer-role",
+      "revision_type": "exact_benchmark_prompt_answer",
+      "prompt": "目标：给出 paired required terms 的两个角色词。\n输出：",
+      "completion": "fixed loss",
+      "text": "目标：给出 paired required terms 的两个角色词。\n输出：fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "guardrail": "exact_benchmark_prompt_alignment"
+    },
+    {
+      "example_id": "prompt-aligned-objective-answer-role-exact_benchmark_prompt_self_check",
+      "case_id": "objective-answer-role",
+      "revision_type": "exact_benchmark_prompt_self_check",
+      "prompt": "目标：给出 paired required terms 的两个角色词。\n输出：\nSelf-check: include fixed and loss exactly.\nAnswer:",
+      "completion": "fixed loss",
+      "text": "目标：给出 paired required terms 的两个角色词。\n输出：\nSelf-check: include fixed and loss exactly.\nAnswer:fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "guardrail": "exact_benchmark_prompt_alignment"
+    },
+    {
+      "example_id": "prompt-aligned-objective-answer-contrast-exact_benchmark_prompt_answer",
+      "case_id": "objective-answer-contrast",
+      "revision_type": "exact_benchmark_prompt_answer",
+      "prompt": "对比任务：不要解释，只返回目标 pair tokens。\n结果：",
+      "completion": "fixed loss",
+      "text": "对比任务：不要解释，只返回目标 pair tokens。\n结果：fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "guardrail": "exact_benchmark_prompt_alignment"
+    },
+    {
+      "example_id": "prompt-aligned-objective-answer-contrast-exact_benchmark_prompt_self_check",
+      "case_id": "objective-answer-contrast",
+      "revision_type": "exact_benchmark_prompt_self_check",
+      "prompt": "对比任务：不要解释，只返回目标 pair tokens。\n结果：\nSelf-check: include fixed and loss exactly.\nAnswer:",
+      "completion": "fixed loss",
+      "text": "对比任务：不要解释，只返回目标 pair tokens。\n结果：\nSelf-check: include fixed and loss exactly.\nAnswer:fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "guardrail": "exact_benchmark_prompt_alignment"
+    },
+    {
+      "example_id": "prompt-aligned-objective-answer-jsonish-exact_benchmark_prompt_answer",
+      "case_id": "objective-answer-jsonish",
+      "revision_type": "exact_benchmark_prompt_answer",
+      "prompt": "请用 JSON 风格写出 answer_terms，包含两个英文词。\nanswer_terms:",
+      "completion": "fixed loss",
+      "text": "请用 JSON 风格写出 answer_terms，包含两个英文词。\nanswer_terms:fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "guardrail": "exact_benchmark_prompt_alignment"
+    },
+    {
+      "example_id": "prompt-aligned-objective-answer-jsonish-exact_benchmark_prompt_self_check",
+      "case_id": "objective-answer-jsonish",
+      "revision_type": "exact_benchmark_prompt_self_check",
+      "prompt": "请用 JSON 风格写出 answer_terms，包含两个英文词。\nanswer_terms:\nSelf-check: include fixed and loss exactly.\nAnswer:",
+      "completion": "fixed loss",
+      "text": "请用 JSON 风格写出 answer_terms，包含两个英文词。\nanswer_terms:\nSelf-check: include fixed and loss exactly.\nAnswer:fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "guardrail": "exact_benchmark_prompt_alignment"
+    },
+    {
+      "example_id": "prompt-aligned-objective-answer-check-exact_benchmark_prompt_answer",
+      "case_id": "objective-answer-check",
+      "revision_type": "exact_benchmark_prompt_answer",
+      "prompt": "自检：本题需要同时出现 fixed 与 loss。最终答案：",
+      "completion": "fixed loss",
+      "text": "自检：本题需要同时出现 fixed 与 loss。最终答案：fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "guardrail": "exact_benchmark_prompt_alignment"
+    },
+    {
+      "example_id": "prompt-aligned-objective-answer-check-exact_benchmark_prompt_self_check",
+      "case_id": "objective-answer-check",
+      "revision_type": "exact_benchmark_prompt_self_check",
+      "prompt": "自检：本题需要同时出现 fixed 与 loss。最终答案：\nSelf-check: include fixed and loss exactly.\nAnswer:",
+      "completion": "fixed loss",
+      "text": "自检：本题需要同时出现 fixed 与 loss。最终答案：\nSelf-check: include fixed and loss exactly.\nAnswer:fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "guardrail": "exact_benchmark_prompt_alignment"
+    }
+  ],
+  "check_rows": [
+    {
+      "id": "benchmark_suite_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "benchmark suite must pass"
+    },
+    {
+      "id": "diagnostic_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "failure alignment diagnostic must pass"
+    },
+    {
+      "id": "diagnostic_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "diagnostic summary must be ready"
+    },
+    {
+      "id": "repair_seed_revision_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "repair seed revision must pass"
+    },
+    {
+      "id": "cases_present",
+      "status": "pass",
+      "actual": 5,
+      "detail": "prompt-aligned seed must inspect benchmark cases"
+    },
+    {
+      "id": "exact_prompt_examples_cover_cases",
+      "status": "pass",
+      "actual": {
+        "exact_prompt_examples": 5,
+        "cases": 5
+      },
+      "detail": "each benchmark case needs one exact prompt answer example"
+    },
+    {
+      "id": "seed_examples_have_text",
+      "status": "pass",
+      "actual": 28,
+      "detail": "every seed example must have text"
+    }
+  ],
+  "prompt_aligned_seed_revision": {
+    "ready": true,
+    "original_example_count": 18,
+    "added_example_count": 10,
+    "example_count": 28,
+    "case_count": 5,
+    "prompt_gap_count_from_diagnostic": 2,
+    "exact_prompt_answer_count": 5,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_real_replay_prompt_aligned_training_run",
+    "next_step": "train_prompt_aligned_bounded_repair_seed"
+  },
+  "summary": {
+    "prompt_aligned_seed_revision_ready": true,
+    "original_example_count": 18,
+    "added_example_count": 10,
+    "example_count": 28,
+    "case_count": 5,
+    "exact_prompt_answer_count": 5,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_real_replay_prompt_aligned_training_run",
+    "next_step": "train_prompt_aligned_bounded_repair_seed",
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "prompt_aligned_seed_only",
+    "reason": "Exact benchmark prompts are now represented in the training seed; improvement still requires training and replay.",
+    "next_action": "train_prompt_aligned_bounded_repair_seed"
+  }
+}
