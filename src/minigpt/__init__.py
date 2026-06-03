@@ -128,6 +128,8 @@ __all__ = [
     "write_model_capability_route_promotion_bounded_benchmark_suite_outputs",
     "build_model_capability_route_promotion_bounded_benchmark_suite_review",
     "write_model_capability_route_promotion_bounded_benchmark_suite_review_outputs",
+    "build_model_capability_route_promotion_bounded_benchmark_dry_run",
+    "write_model_capability_route_promotion_bounded_benchmark_dry_run_outputs",
     "build_promoted_training_scale_seed_handoff_receipt_contract_summary",
     "write_promoted_training_scale_seed_handoff_receipt_contract_summary_outputs",
     "check_promoted_training_scale_seed_handoff_receipt_contract_summary",
@@ -340,6 +342,14 @@ _EXPORTS = {
     "write_model_capability_route_promotion_bounded_benchmark_suite_review_outputs": (
         "model_capability_route_promotion_bounded_benchmark_suite_review_artifacts",
         "write_model_capability_route_promotion_bounded_benchmark_suite_review_outputs",
+    ),
+    "build_model_capability_route_promotion_bounded_benchmark_dry_run": (
+        "model_capability_route_promotion_bounded_benchmark_dry_run",
+        "build_model_capability_route_promotion_bounded_benchmark_dry_run",
+    ),
+    "write_model_capability_route_promotion_bounded_benchmark_dry_run_outputs": (
+        "model_capability_route_promotion_bounded_benchmark_dry_run_artifacts",
+        "write_model_capability_route_promotion_bounded_benchmark_dry_run_outputs",
     ),
     "build_promoted_training_scale_seed_handoff_receipt_contract_summary": (
         "promoted_training_scale_seed_handoff_receipt_contract",

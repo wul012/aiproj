@@ -1,0 +1,159 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability route promotion bounded benchmark dry run",
+  "generated_at": "2026-06-03T07:34:30Z",
+  "status": "pass",
+  "decision": "model_capability_route_promotion_bounded_benchmark_dry_run_passed",
+  "failed_count": 0,
+  "issues": [],
+  "source_suite_review": "e\\804\\解释\\model-capability-route-promotion-bounded-benchmark-suite-review\\model_capability_route_promotion_bounded_benchmark_suite_review.json",
+  "source_benchmark_suite": "e\\803\\解释\\model-capability-route-promotion-bounded-benchmark-suite\\model_capability_route_promotion_bounded_benchmark_suite.json",
+  "positive_continuation": "fixed loss",
+  "negative_continuation": "fixed only",
+  "dry_run_rows": [
+    {
+      "case_id": "objective-answer-direct",
+      "continuation": "fixed loss",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "missed_terms": [],
+      "case_pass": true
+    },
+    {
+      "case_id": "objective-answer-role",
+      "continuation": "fixed loss",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "missed_terms": [],
+      "case_pass": true
+    },
+    {
+      "case_id": "objective-answer-contrast",
+      "continuation": "fixed loss",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "missed_terms": [],
+      "case_pass": true
+    },
+    {
+      "case_id": "objective-answer-jsonish",
+      "continuation": "fixed loss",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "missed_terms": [],
+      "case_pass": true
+    },
+    {
+      "case_id": "objective-answer-check",
+      "continuation": "fixed loss",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "missed_terms": [],
+      "case_pass": true
+    }
+  ],
+  "negative_control": {
+    "hit_terms": [
+      "fixed"
+    ],
+    "missed_terms": [
+      "loss"
+    ],
+    "case_pass": false
+  },
+  "check_rows": [
+    {
+      "id": "suite_review_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "suite review must pass"
+    },
+    {
+      "id": "suite_review_approved",
+      "status": "pass",
+      "actual": true,
+      "detail": "suite review must approve execution"
+    },
+    {
+      "id": "benchmark_suite_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "benchmark suite must pass"
+    },
+    {
+      "id": "expected_terms_fixed_loss",
+      "status": "pass",
+      "actual": [
+        "fixed",
+        "loss"
+      ],
+      "detail": "scoring contract expected terms must be fixed/loss"
+    },
+    {
+      "id": "dry_rows_present",
+      "status": "pass",
+      "actual": 5,
+      "detail": "dry run must score suite cases"
+    },
+    {
+      "id": "positive_rows_pass",
+      "status": "pass",
+      "actual": 5,
+      "detail": "positive continuation should pass every case"
+    },
+    {
+      "id": "negative_control_fails",
+      "status": "pass",
+      "actual": false,
+      "detail": "negative control must fail missing required term"
+    }
+  ],
+  "summary": {
+    "bounded_benchmark_dry_run_ready": true,
+    "case_count": 5,
+    "passed_case_count": 5,
+    "failed_case_count": 0,
+    "expected_terms": [
+      "fixed",
+      "loss"
+    ],
+    "negative_control_passed": false,
+    "next_step": "run_bounded_route_promotion_real_replay",
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "scorer_validated_only",
+    "reason": "The scoring contract correctly passes positive fixed/loss continuations and fails a missing-term negative control.",
+    "next_action": "run_bounded_route_promotion_real_replay"
+  }
+}

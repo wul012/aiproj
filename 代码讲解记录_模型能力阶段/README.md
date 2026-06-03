@@ -1007,6 +1007,9 @@
 818-v804-route-promotion-bounded-benchmark-suite-review.md
  -> v804 code explanation: review the bounded benchmark suite before dry-run execution.
 
+819-v805-route-promotion-bounded-benchmark-dry-run.md
+ -> v805 code explanation: dry-run the bounded benchmark scoring contract with controlled continuations.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

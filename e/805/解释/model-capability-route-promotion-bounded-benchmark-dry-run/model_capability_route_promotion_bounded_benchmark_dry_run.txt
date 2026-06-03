@@ -1,0 +1,8 @@
+status=pass
+decision=model_capability_route_promotion_bounded_benchmark_dry_run_passed
+failed_count=0
+bounded_benchmark_dry_run_ready=True
+case_count=5
+passed_case_count=5
+negative_control_passed=False
+next_step=run_bounded_route_promotion_real_replay

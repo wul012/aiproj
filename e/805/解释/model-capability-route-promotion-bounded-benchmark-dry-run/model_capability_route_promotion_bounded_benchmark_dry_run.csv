@@ -1,0 +1,6 @@
+case_id,case_pass,hit_terms,missed_terms,continuation
+objective-answer-direct,True,"fixed,loss",,fixed loss
+objective-answer-role,True,"fixed,loss",,fixed loss
+objective-answer-contrast,True,"fixed,loss",,fixed loss
+objective-answer-jsonish,True,"fixed,loss",,fixed loss
+objective-answer-check,True,"fixed,loss",,fixed loss

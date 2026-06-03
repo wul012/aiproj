@@ -1544,3 +1544,9 @@ e/663/解释/说明.md
 - `e/804/图片`
 - `e/804/解释/说明.md`
 - v804 model capability route promotion bounded benchmark suite review 的运行截图和解释。
+
+## v805 补充索引
+
+- `e/805/图片`
+- `e/805/解释/说明.md`
+- v805 model capability route promotion bounded benchmark dry-run 的运行截图和解释。

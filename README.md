@@ -4,7 +4,17 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v804.0.0` reviews the bounded route promotion benchmark suite before execution.
+Version `v805.0.0` dry-runs the bounded benchmark scoring contract with controlled continuations.
+
+## Latest v805 checkpoint
+
+- Added `model_capability_route_promotion_bounded_benchmark_dry_run`.
+- Added CLI `scripts/run_model_capability_route_promotion_bounded_benchmark_dry_run.py`.
+- Consumed the real v803 bounded benchmark suite and v804 suite review.
+- Produced `decision=model_capability_route_promotion_bounded_benchmark_dry_run_passed`.
+- Verified 5 positive dry-run cases pass and the missing-term negative control fails.
+- Verified with `6 passed` dry-run focused tests.
+- Archived v805 evidence in `e/805` and added the code explanation in `代码讲解记录_模型能力阶段/819-v805-route-promotion-bounded-benchmark-dry-run.md`.
 
 ## Latest v804 checkpoint
 
