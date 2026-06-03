@@ -4,7 +4,17 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v790.0.0` converts the accepted objective-level contrast route into a benchmark-history-ready promotion manifest.
+Version `v791.0.0` records the objective-level contrast promotion manifest in a bounded route promotion history ledger.
+
+## Latest v791 checkpoint
+
+- Added `model_capability_route_promotion_history`.
+- Added CLI `scripts/build_model_capability_route_promotion_history.py`.
+- Consumed the real v790 promotion manifest from `e/790`.
+- Produced `decision=model_capability_route_promotion_history_ready`.
+- Kept the ledger boundary explicit: `tiny_required_term_pair_probe_only`.
+- Verified with `7 passed` route promotion history focused tests.
+- Archived v791 evidence in `e/791` and added the code explanation in `代码讲解记录_模型能力阶段/805-v791-route-promotion-history.md`.
 
 ## Latest v790 checkpoint
 

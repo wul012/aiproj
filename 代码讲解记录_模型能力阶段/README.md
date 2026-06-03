@@ -965,6 +965,9 @@
 804-v790-objective-level-contrast-promotion-manifest.md
  -> v790 code explanation: convert the accepted objective-level contrast route into a benchmark-history-ready promotion manifest.
 
+805-v791-route-promotion-history.md
+ -> v791 code explanation: record the route promotion manifest in a bounded model capability history ledger.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

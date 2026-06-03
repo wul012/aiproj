@@ -1460,3 +1460,9 @@ e/663/解释/说明.md
 - `e/790/图片`
 - `e/790/解释/说明.md`
 - v790 objective-level contrast promotion manifest 的运行截图和解释。
+
+## v791 补充索引
+
+- `e/791/图片`
+- `e/791/解释/说明.md`
+- v791 model capability route promotion history 的运行截图和解释。

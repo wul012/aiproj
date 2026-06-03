@@ -1,0 +1,9 @@
+status=pass
+decision=model_capability_route_promotion_history_ready
+entry_count=1
+ready_count=1
+blocked_count=0
+boundary_mismatch_count=0
+model_quality_claim=seed_stable_pair_probe_route_accepted
+readiness_requirement_status=pass
+readiness_requirement_failed_reasons=

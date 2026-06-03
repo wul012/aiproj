@@ -100,6 +100,8 @@ __all__ = [
     "write_benchmark_scorecard_decision_outputs",
     "build_benchmark_history",
     "write_benchmark_history_outputs",
+    "build_model_capability_route_promotion_history",
+    "write_model_capability_route_promotion_history_outputs",
     "build_promoted_training_scale_seed_handoff_receipt_contract_summary",
     "write_promoted_training_scale_seed_handoff_receipt_contract_summary_outputs",
     "check_promoted_training_scale_seed_handoff_receipt_contract_summary",
@@ -201,6 +203,14 @@ _EXPORTS = {
     "write_benchmark_scorecard_decision_outputs": ("benchmark_scorecard_decision", "write_benchmark_scorecard_decision_outputs"),
     "build_benchmark_history": ("benchmark_history", "build_benchmark_history"),
     "write_benchmark_history_outputs": ("benchmark_history", "write_benchmark_history_outputs"),
+    "build_model_capability_route_promotion_history": (
+        "model_capability_route_promotion_history",
+        "build_model_capability_route_promotion_history",
+    ),
+    "write_model_capability_route_promotion_history_outputs": (
+        "model_capability_route_promotion_history_artifacts",
+        "write_model_capability_route_promotion_history_outputs",
+    ),
     "build_promoted_training_scale_seed_handoff_receipt_contract_summary": (
         "promoted_training_scale_seed_handoff_receipt_contract",
         "build_promoted_training_scale_seed_handoff_receipt_contract_summary",

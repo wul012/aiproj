@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability route promotion history",
+  "generated_at": "2026-06-03T00:39:17Z",
+  "status": "pass",
+  "decision": "model_capability_route_promotion_history_ready",
+  "entries": [
+    {
+      "index": 0,
+      "name": "objective-level contrast v790",
+      "source_manifest_path": "e\\790\\解释\\model-capability-required-term-pair-readiness-objective-level-contrast-promotion-manifest\\model_capability_required_term_pair_readiness_objective_level_contrast_promotion_manifest.json",
+      "source_acceptance_review_path": "e\\789\\解释\\model-capability-required-term-pair-readiness-objective-level-contrast-acceptance-review\\model_capability_required_term_pair_readiness_objective_level_contrast_acceptance_review.json",
+      "source_seed_stability_rollup_path": "e\\772\\解释\\model-capability-required-term-pair-readiness-objective-level-contrast-seed-stability-rollup\\model_capability_required_term_pair_readiness_objective_level_contrast_seed_stability_rollup.json",
+      "route_id": "objective_level_contrast",
+      "route_status": "promoted",
+      "history_entry_status": "ready",
+      "promotion_readiness": "ready",
+      "promotion_manifest_status": "pass",
+      "promotion_manifest_decision": "pair_readiness_objective_level_contrast_promotion_manifest_ready",
+      "acceptance_review_status": "pass",
+      "acceptance_review_decision": "pair_readiness_objective_level_contrast_acceptance_review_accepted",
+      "boundary": "tiny_required_term_pair_probe_only",
+      "required_boundary": "tiny_required_term_pair_probe_only",
+      "boundary_matches": true,
+      "model_quality_claim": "seed_stable_pair_probe_route_accepted",
+      "seed_count": 3,
+      "min_pair_full_count": 2,
+      "pair_full_strength_spread": 1,
+      "accepted_seed_count": 3,
+      "source_ready_replay_count": 3,
+      "source_min_pair_full_count": 2,
+      "source_pair_full_strength_spread": 1
+    }
+  ],
+  "summary": {
+    "entry_count": 1,
+    "ready_count": 1,
+    "blocked_count": 0,
+    "boundary_mismatch_count": 0,
+    "required_boundary": "tiny_required_term_pair_probe_only",
+    "route_ids": [
+      "objective_level_contrast"
+    ],
+    "route_id_count": 1,
+    "model_quality_claims": [
+      "seed_stable_pair_probe_route_accepted"
+    ],
+    "model_quality_claim": "seed_stable_pair_probe_route_accepted",
+    "ready_route_ids": [
+      "objective_level_contrast"
+    ],
+    "blocked_route_ids": [],
+    "min_seed_count": 3,
+    "max_seed_count": 3,
+    "min_pair_full_count": 2,
+    "max_pair_full_strength_spread": 1
+  },
+  "readiness_requirement": {
+    "status": "pass",
+    "decision": "continue",
+    "exit_code": 0,
+    "min_ready_entries": 1,
+    "ready_count": 1,
+    "entry_count": 1,
+    "failed_reasons": []
+  },
+  "recommendations": [
+    "Use the ready route promotion ledger as bounded model capability history for: objective_level_contrast.",
+    "Keep the tiny pair-probe boundary visible when this ledger is consumed by portfolio or regression reviews."
+  ]
+}
