@@ -35,6 +35,10 @@ e/820/解释/说明.md
 e/821/图片
 e/821/解释/说明.md
  -> v821 bounded replay decoder anchor probe 的运行截图和解释
+
+e/822/图片
+e/822/解释/说明.md
+ -> v822 bounded replay decoder anchor policy 的运行截图和解释
 ```
 
 ```text

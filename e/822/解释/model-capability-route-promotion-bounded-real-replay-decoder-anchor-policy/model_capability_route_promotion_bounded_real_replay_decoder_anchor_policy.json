@@ -1,0 +1,129 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability route promotion bounded real replay decoder anchor policy",
+  "generated_at": "2026-06-03T11:52:23Z",
+  "status": "pass",
+  "decision": "model_capability_route_promotion_bounded_real_replay_decoder_anchor_policy_ready_with_partial_coverage",
+  "failed_count": 0,
+  "issues": [],
+  "source_decoder_anchor_probe": "e\\821\\解释\\model-capability-route-promotion-bounded-real-replay-decoder-anchor-probe\\model_capability_route_promotion_bounded_real_replay_decoder_anchor_probe.json",
+  "probe_summary": {
+    "decoder_anchor_probe_ready": true,
+    "profile_count": 3,
+    "case_count": 5,
+    "probe_row_count": 15,
+    "anchor_assisted_pass_count": 2,
+    "completion_pass_count": 2,
+    "new_text_pass_count": 2,
+    "anchor_completion_success": true,
+    "new_text_success": true,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_real_replay_decoder_anchor_policy",
+    "next_step": "build_decoder_anchor_policy",
+    "failed_check_count": 0
+  },
+  "policy_rows": [
+    {
+      "case_id": "objective-answer-check",
+      "profile_id": "prefix_fixed_space",
+      "anchor": "fixed ",
+      "anchor_length": 6,
+      "completion_hit_terms": [
+        "loss"
+      ],
+      "new_text_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "policy_type": "case_specific_decoder_anchor",
+      "claim_boundary": "anchor_assisted_only",
+      "recommended_use": "controlled_policy_replay_only"
+    }
+  ],
+  "uncovered_cases": [
+    {
+      "case_id": "objective-answer-contrast",
+      "reason": "no_completion_pass_profile"
+    },
+    {
+      "case_id": "objective-answer-direct",
+      "reason": "no_completion_pass_profile"
+    },
+    {
+      "case_id": "objective-answer-jsonish",
+      "reason": "no_completion_pass_profile"
+    },
+    {
+      "case_id": "objective-answer-role",
+      "reason": "no_completion_pass_profile"
+    }
+  ],
+  "guardrails": [
+    {
+      "id": "not_unassisted_model_capability",
+      "severity": "blocker",
+      "detail": "Anchors are injected into prompts and must not be counted as unassisted bounded replay success."
+    },
+    {
+      "id": "partial_policy_coverage",
+      "severity": "warning",
+      "detail": "Policy covers 1 cases and leaves 4 uncovered."
+    },
+    {
+      "id": "requires_policy_replay",
+      "severity": "blocker",
+      "detail": "The policy must be replayed before any downstream use."
+    }
+  ],
+  "check_rows": [
+    {
+      "id": "decoder_anchor_probe_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "decoder anchor probe must pass"
+    },
+    {
+      "id": "decoder_anchor_probe_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "probe summary must be ready"
+    },
+    {
+      "id": "probe_rows_present",
+      "status": "pass",
+      "actual": 15,
+      "detail": "policy must read probe rows"
+    },
+    {
+      "id": "completion_signal_present",
+      "status": "pass",
+      "actual": 1,
+      "detail": "policy requires at least one completion-pass probe row"
+    }
+  ],
+  "policy": {
+    "ready": true,
+    "policy_case_count": 1,
+    "uncovered_case_count": 4,
+    "guardrail_count": 3,
+    "coverage_is_partial": true,
+    "promotion_ready": false,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_real_replay_decoder_anchor_policy_replay",
+    "next_step": "run_decoder_anchor_policy_replay"
+  },
+  "summary": {
+    "decoder_anchor_policy_ready": true,
+    "policy_case_count": 1,
+    "uncovered_case_count": 4,
+    "guardrail_count": 3,
+    "coverage_is_partial": true,
+    "promotion_ready": false,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_real_replay_decoder_anchor_policy_replay",
+    "next_step": "run_decoder_anchor_policy_replay",
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "anchor_assisted_only",
+    "reason": "Policy is based on forced-prefix completion signals and is not unassisted model capability evidence.",
+    "next_action": "run_decoder_anchor_policy_replay"
+  }
+}

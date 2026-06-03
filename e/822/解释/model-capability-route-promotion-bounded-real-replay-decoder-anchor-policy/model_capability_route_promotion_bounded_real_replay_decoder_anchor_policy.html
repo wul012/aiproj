@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT model capability route promotion bounded real replay decoder anchor policy</title>
+<style>
+:root{color-scheme:light;--ink:#17212b;--muted:#667381;--line:#d8dee5;--panel:#f7f9fb;--accent:#155e75}
+*{box-sizing:border-box}
+body{margin:0;background:#f0f3f7;color:var(--ink);font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1240px;margin:0 auto;padding:28px}
+h1{font-size:30px;margin:0 0 8px;letter-spacing:0}
+h2{font-size:18px;margin:0 0 12px;letter-spacing:0}
+p{color:var(--muted);line-height:1.55;overflow-wrap:anywhere}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:10px;margin:18px 0}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:8px}
+.card{padding:14px}
+.card span{display:block;color:var(--muted);font-size:12px;text-transform:uppercase}
+.card strong{display:block;margin-top:6px;font-size:18px;line-height:1.2;color:var(--accent);overflow-wrap:anywhere}
+.panel{padding:16px;margin:14px 0}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:#334155}
+td{overflow-wrap:anywhere}
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT model capability route promotion bounded real replay decoder anchor policy</h1><p>Turns successful decoder anchor probe rows into a guarded policy for controlled replay. The policy is not promotion evidence.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Decision</span><strong>model_capability_route_promotion_bounded_real_replay_decoder_anchor_policy_ready_with_partial_coverage</strong></div><div class="card"><span>Policy cases</span><strong>1</strong></div><div class="card"><span>Uncovered</span><strong>4</strong></div><div class="card"><span>Partial</span><strong>True</strong></div><div class="card"><span>Promotion</span><strong>False</strong></div><div class="card"><span>Next</span><strong>run_decoder_anchor_policy_replay</strong></div></section>
+<section class="panel"><h2>Policy Rows</h2><div class="table-wrap"><table>
+<thead><tr><th>Case</th><th>Profile</th><th>Anchor</th><th>Hits</th><th>Boundary</th><th>Use</th></tr></thead>
+<tbody><tr><td>objective-answer-check</td><td>prefix_fixed_space</td><td>fixed </td><td>loss</td><td>anchor_assisted_only</td><td>controlled_policy_replay_only</td></tr></tbody>
+</table></div></section>
+<section class="panel"><h2>Guardrails</h2><div class="table-wrap"><table>
+<thead><tr><th>ID</th><th>Severity</th><th>Detail</th></tr></thead>
+<tbody><tr><td>not_unassisted_model_capability</td><td>blocker</td><td>Anchors are injected into prompts and must not be counted as unassisted bounded replay success.</td></tr><tr><td>partial_policy_coverage</td><td>warning</td><td>Policy covers 1 cases and leaves 4 uncovered.</td></tr><tr><td>requires_policy_replay</td><td>blocker</td><td>The policy must be replayed before any downstream use.</td></tr></tbody>
+</table></div></section>
+</main>
+</body>
+</html>

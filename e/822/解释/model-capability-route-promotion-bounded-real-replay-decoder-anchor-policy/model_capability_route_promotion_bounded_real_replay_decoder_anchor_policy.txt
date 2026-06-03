@@ -1,0 +1,8 @@
+status=pass
+decision=model_capability_route_promotion_bounded_real_replay_decoder_anchor_policy_ready_with_partial_coverage
+policy_ready=True
+policy_case_count=1
+uncovered_case_count=4
+coverage_is_partial=True
+promotion_ready=False
+next_step=run_decoder_anchor_policy_replay

@@ -23,6 +23,9 @@
 835-v821-route-promotion-bounded-real-replay-decoder-anchor-probe.md
  -> v821 code explanation: run forced-prefix decoder anchor probes and separate anchor-assisted completion from unassisted replay success.
 
+836-v822-route-promotion-bounded-real-replay-decoder-anchor-policy.md
+ -> v822 code explanation: convert decoder anchor probe signals into a guarded partial policy for controlled replay.
+
 487-v473-baseline-candidate-capability-delta.md
  -> v473 code explanation: carry real tiny training loss and generation-quality deltas into the baseline-candidate eval loop.
 
