@@ -4,7 +4,19 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v831.0.0` replays the v830 rebalanced checkpoint and compares it with baseline, prompt-aligned, and decoder-anchor checkpoints, confirming the rebalanced route still has no bounded replay recovery.
+Version `v832.0.0` diagnoses why the v830 rebalanced checkpoint still fails bounded replay, showing that repaired training distribution still produces zero-hit, fragment-like continuations.
+
+## Latest v832 checkpoint
+
+- Added `model_capability_route_promotion_bounded_real_replay_decoder_anchor_rebalanced_failure_diagnostic`.
+- Added CLI `scripts/diagnose_model_capability_route_promotion_bounded_real_replay_decoder_anchor_rebalanced_failure.py`.
+- Consumed v831 rebalanced replay/comparison, v829 rebalanced seed/corpus, and v830 training evidence.
+- Produced `failed_case_count=5`, `zero_hit_case_count=5`, `fragment_like_case_count=5`, and `root_cause_count=4`.
+- Confirmed the distribution was repaired (`direct_answer_share=0.375`, `carry_forward_share=0.25`) but replay still emitted no required terms.
+- Kept the model-quality claim as `not_improved`.
+- Routed the next step to `run_rebalanced_decoder_profile_sweep_before_more_training`.
+- Verified with `3 passed` focused rebalanced failure diagnostic tests.
+- Archived v832 evidence in `e/832` and added the code explanation in `代码讲解记录_模型能力阶段/846-v832-route-promotion-bounded-real-replay-decoder-anchor-rebalanced-failure-diagnostic.md`.
 
 ## Latest v831 checkpoint
 

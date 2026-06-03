@@ -53,6 +53,9 @@
 845-v831-route-promotion-bounded-real-replay-decoder-anchor-rebalanced-checkpoint-comparison.md
  -> v831 code explanation: replay and compare the rebalanced checkpoint against baseline, prompt-aligned, and decoder-anchor routes.
 
+846-v832-route-promotion-bounded-real-replay-decoder-anchor-rebalanced-failure-diagnostic.md
+ -> v832 code explanation: diagnose why the rebalanced checkpoint still produces zero-hit fragmented bounded replay.
+
 487-v473-baseline-candidate-capability-delta.md
  -> v473 code explanation: carry real tiny training loss and generation-quality deltas into the baseline-candidate eval loop.
 

@@ -1,0 +1,9 @@
+status=pass
+decision=model_capability_route_promotion_bounded_real_replay_decoder_anchor_rebalanced_failure_diagnostic_ready
+diagnostic_ready=True
+case_count=5
+failed_case_count=5
+zero_hit_case_count=5
+fragment_like_case_count=5
+root_cause_count=4
+next_step=run_rebalanced_decoder_profile_sweep_before_more_training

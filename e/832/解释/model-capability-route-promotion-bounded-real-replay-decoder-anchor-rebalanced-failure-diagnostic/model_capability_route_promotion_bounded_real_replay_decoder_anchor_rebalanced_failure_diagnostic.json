@@ -1,0 +1,331 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability route promotion bounded real replay decoder anchor rebalanced failure diagnostic",
+  "generated_at": "2026-06-03T14:51:56Z",
+  "status": "pass",
+  "decision": "model_capability_route_promotion_bounded_real_replay_decoder_anchor_rebalanced_failure_diagnostic_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_rebalanced_replay": "e\\831\\解释\\model-capability-route-promotion-bounded-real-replay-decoder-anchor-rebalanced-checkpoint-comparison\\rebalanced-replay\\model_capability_route_promotion_bounded_real_replay.json",
+  "source_rebalanced_comparison": "e\\831\\解释\\model-capability-route-promotion-bounded-real-replay-decoder-anchor-rebalanced-checkpoint-comparison\\model_capability_route_promotion_bounded_real_replay_decoder_anchor_rebalanced_checkpoint_comparison.json",
+  "source_rebalanced_seed_revision": "e\\829\\解释\\model-capability-route-promotion-bounded-real-replay-decoder-anchor-rebalanced-seed-revision\\model_capability_route_promotion_bounded_real_replay_decoder_anchor_rebalanced_seed_revision.json",
+  "source_rebalanced_training_run": "e\\830\\解释\\model-capability-route-promotion-bounded-real-replay-decoder-anchor-rebalanced-training-run\\model_capability_route_promotion_bounded_real_replay_decoder_anchor_rebalanced_training_run.json",
+  "source_corpus": "e\\829\\解释\\model-capability-route-promotion-bounded-real-replay-decoder-anchor-rebalanced-seed-revision\\model_capability_route_promotion_bounded_real_replay_decoder_anchor_rebalanced_seed_revision_corpus.txt",
+  "source_summaries": {
+    "replay": {
+      "bounded_real_replay_executed": true,
+      "model_route_quality_ready": false,
+      "case_count": 5,
+      "executed_case_count": 5,
+      "passed_case_count": 0,
+      "failed_case_count": 5,
+      "pass_rate": 0.0,
+      "next_step": "review_bounded_route_promotion_real_replay",
+      "failed_check_count": 0
+    },
+    "comparison": {
+      "rebalanced_checkpoint_comparison_ready": true,
+      "baseline_passed_case_count": 2,
+      "prompt_aligned_passed_case_count": 0,
+      "decoder_anchor_passed_case_count": 0,
+      "rebalanced_passed_case_count": 0,
+      "rebalanced_vs_baseline_pass_rate_delta": -0.4,
+      "rebalanced_vs_prompt_pass_rate_delta": 0.0,
+      "rebalanced_vs_decoder_anchor_pass_rate_delta": 0.0,
+      "rebalanced_checkpoint_improved_over_baseline": false,
+      "rebalanced_checkpoint_recovered_over_prompt": false,
+      "rebalanced_checkpoint_recovered_over_decoder_anchor": false,
+      "promotion_ready": false,
+      "next_step": "diagnose_rebalanced_checkpoint_replay_failure_before_more_training",
+      "failed_check_count": 0
+    },
+    "rebalanced_seed_revision": {
+      "decoder_anchor_rebalanced_seed_revision_ready": true,
+      "source_example_count": 48,
+      "example_count": 40,
+      "case_count": 5,
+      "carry_forward_count": 10,
+      "direct_answer_count": 15,
+      "decoder_bridge_count": 15,
+      "carry_forward_share": 0.25,
+      "direct_answer_share": 0.375,
+      "decoder_bridge_share": 0.375,
+      "dropped_carry_forward_count": 18,
+      "added_direct_answer_count": 10,
+      "source_distribution_risk_count": 3,
+      "proposed_next_artifact": "model_capability_route_promotion_bounded_real_replay_decoder_anchor_rebalanced_training_run",
+      "next_step": "train_decoder_anchor_rebalanced_seed_revision",
+      "failed_check_count": 0
+    },
+    "rebalanced_training_run": {
+      "decoder_anchor_rebalanced_training_ready": true,
+      "artifact_count": 7,
+      "metric_record_count": 5,
+      "final_step": 35,
+      "final_train_loss": 4.193515300750732,
+      "final_val_loss": 4.194498062133789,
+      "train_loss_delta": -0.338792,
+      "val_loss_delta": -0.377685,
+      "rebalanced_example_count": 40,
+      "direct_answer_count": 15,
+      "decoder_bridge_count": 15,
+      "carry_forward_count": 10,
+      "proposed_next_artifact": "model_capability_route_promotion_bounded_real_replay_decoder_anchor_rebalanced_checkpoint_replay",
+      "next_step": "run_decoder_anchor_rebalanced_checkpoint_bounded_replay",
+      "failed_check_count": 0
+    }
+  },
+  "case_diagnostics": [
+    {
+      "case_id": "objective-answer-direct",
+      "case_pass": false,
+      "prompt_in_seed": true,
+      "prompt_in_corpus": true,
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "zero_hit": true,
+      "fragment_like_generation": true,
+      "term_seed_count": {
+        "fixed": 50,
+        "loss": 50
+      },
+      "term_corpus_count": {
+        "fixed": 50,
+        "loss": 50
+      },
+      "continuation_preview": "两 rrssu siesmssitsssseee",
+      "diagnosis": "rebalanced_training_still_fragmented",
+      "recommended_action": "run_rebalanced_decoder_profile_sweep_before_more_training"
+    },
+    {
+      "case_id": "objective-answer-role",
+      "case_pass": false,
+      "prompt_in_seed": true,
+      "prompt_in_corpus": true,
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "zero_hit": true,
+      "fragment_like_generation": true,
+      "term_seed_count": {
+        "fixed": 50,
+        "loss": 50
+      },
+      "term_corpus_count": {
+        "fixed": 50,
+        "loss": 50
+      },
+      "continuation_preview": "aired required terms 的两个角色词。\n输出：\n\n\niiir  lxssssos  x:  t",
+      "diagnosis": "rebalanced_training_still_fragmented",
+      "recommended_action": "run_rebalanced_decoder_profile_sweep_before_more_training"
+    },
+    {
+      "case_id": "objective-answer-contrast",
+      "case_pass": false,
+      "prompt_in_seed": true,
+      "prompt_in_corpus": true,
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "zero_hit": true,
+      "fragment_like_generation": true,
+      "term_seed_count": {
+        "fixed": 50,
+        "loss": 50
+      },
+      "term_corpus_count": {
+        "fixed": 50,
+        "loss": 50
+      },
+      "continuation_preview": "fis_  owsossttssoswsssss",
+      "diagnosis": "rebalanced_training_still_fragmented",
+      "recommended_action": "run_rebalanced_decoder_profile_sweep_before_more_training"
+    },
+    {
+      "case_id": "objective-answer-jsonish",
+      "case_pass": false,
+      "prompt_in_seed": true,
+      "prompt_in_corpus": true,
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "zero_hit": true,
+      "fragment_like_generation": true,
+      "term_seed_count": {
+        "fixed": 50,
+        "loss": 50
+      },
+      "term_corpus_count": {
+        "fixed": 50,
+        "loss": 50
+      },
+      "continuation_preview": "wer_terms，包含两个英文词。\nanswer_terms:otssssssmssssssemssssoss",
+      "diagnosis": "rebalanced_training_still_fragmented",
+      "recommended_action": "run_rebalanced_decoder_profile_sweep_before_more_training"
+    },
+    {
+      "case_id": "objective-answer-check",
+      "case_pass": false,
+      "prompt_in_seed": true,
+      "prompt_in_corpus": true,
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "zero_hit": true,
+      "fragment_like_generation": true,
+      "term_seed_count": {
+        "fixed": 50,
+        "loss": 50
+      },
+      "term_corpus_count": {
+        "fixed": 50,
+        "loss": 50
+      },
+      "continuation_preview": "fim  resssesser seemse  ",
+      "diagnosis": "rebalanced_training_still_fragmented",
+      "recommended_action": "run_rebalanced_decoder_profile_sweep_before_more_training"
+    }
+  ],
+  "root_causes": [
+    {
+      "cause_id": "rebalanced_distribution_repaired_but_replay_zero_hit",
+      "severity": "high",
+      "evidence": {
+        "direct_share": 0.375,
+        "carry_share": 0.25
+      },
+      "detail": "The direct/carry distribution was repaired, but replay still produced zero required-term hits."
+    },
+    {
+      "cause_id": "zero_required_term_hits_after_rebalance",
+      "severity": "high",
+      "evidence": 5,
+      "detail": "All or some rebalanced replay cases still miss every required term."
+    },
+    {
+      "cause_id": "fragmented_generation_after_rebalance",
+      "severity": "medium",
+      "evidence": 5,
+      "detail": "The checkpoint emits fragments or repeated characters instead of complete fixed/loss terms."
+    },
+    {
+      "cause_id": "rebalanced_loss_did_not_recover_replay",
+      "severity": "medium",
+      "evidence": 4.194498062133789,
+      "detail": "The rebalanced training run completed, but bounded replay did not recover over the decoder-anchor checkpoint."
+    }
+  ],
+  "check_rows": [
+    {
+      "id": "rebalanced_replay_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "rebalanced replay execution must pass"
+    },
+    {
+      "id": "rebalanced_comparison_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "rebalanced checkpoint comparison must pass"
+    },
+    {
+      "id": "promotion_blocked",
+      "status": "pass",
+      "actual": false,
+      "detail": "diagnostic should run only on blocked promotion evidence"
+    },
+    {
+      "id": "rebalanced_seed_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "rebalanced seed revision must pass"
+    },
+    {
+      "id": "rebalanced_training_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "rebalanced training run must pass"
+    },
+    {
+      "id": "corpus_present",
+      "status": "pass",
+      "actual": 2271,
+      "detail": "rebalanced corpus must be readable"
+    },
+    {
+      "id": "case_diagnostics_present",
+      "status": "pass",
+      "actual": 5,
+      "detail": "diagnostic must inspect replay cases"
+    }
+  ],
+  "diagnostic": {
+    "ready": true,
+    "case_count": 5,
+    "failed_case_count": 5,
+    "zero_hit_case_count": 5,
+    "fragment_like_case_count": 5,
+    "prompt_in_corpus_count": 5,
+    "direct_answer_share": 0.375,
+    "carry_forward_share": 0.25,
+    "final_val_loss": 4.194498062133789,
+    "rebalanced_vs_baseline_pass_rate_delta": -0.4,
+    "rebalanced_vs_decoder_anchor_pass_rate_delta": 0.0,
+    "root_cause_count": 4,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_real_replay_decoder_anchor_rebalanced_profile_sweep",
+    "next_step": "run_rebalanced_decoder_profile_sweep_before_more_training"
+  },
+  "summary": {
+    "rebalanced_failure_diagnostic_ready": true,
+    "case_count": 5,
+    "failed_case_count": 5,
+    "zero_hit_case_count": 5,
+    "fragment_like_case_count": 5,
+    "prompt_in_corpus_count": 5,
+    "direct_answer_share": 0.375,
+    "carry_forward_share": 0.25,
+    "final_val_loss": 4.194498062133789,
+    "rebalanced_vs_baseline_pass_rate_delta": -0.4,
+    "rebalanced_vs_decoder_anchor_pass_rate_delta": 0.0,
+    "root_cause_count": 4,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_real_replay_decoder_anchor_rebalanced_profile_sweep",
+    "next_step": "run_rebalanced_decoder_profile_sweep_before_more_training",
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "not_improved",
+    "reason": "Rebalanced training repaired data distribution but did not recover bounded replay required-term generation.",
+    "next_action": "run_rebalanced_decoder_profile_sweep_before_more_training"
+  }
+}
