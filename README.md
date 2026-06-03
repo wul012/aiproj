@@ -4,7 +4,19 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v823.0.0` replays the guarded decoder-anchor policy and reproduces one anchored bounded replay pass while keeping promotion blocked.
+Version `v824.0.0` converts the v823 decoder-anchor signal into a training-ready seed revision with direct-answer and bridge-completion examples.
+
+## Latest v824 checkpoint
+
+- Added `model_capability_route_promotion_bounded_real_replay_decoder_anchor_seed_revision`.
+- Added CLI `scripts/build_model_capability_route_promotion_bounded_real_replay_decoder_anchor_seed_revision.py`.
+- Consumed the real v817 prompt-aligned seed revision, v819 prompt-aligned replay, and v823 decoder anchor policy replay.
+- Carried forward 28 prompt-aligned seed examples and added 20 decoder-anchor-informed examples.
+- Produced `example_count=48`, `added_example_count=20`, `bridge_example_count=15`, and `unanchored_direct_example_count=5`.
+- Wrote JSON, CSV, JSONL, corpus text, plain text, Markdown, and HTML outputs for the next training run.
+- Kept the interpretation as `training_data_revision_only`; this is not model-quality proof until v825 trains and replays it.
+- Verified with `3 passed` focused decoder anchor seed revision tests.
+- Archived v824 evidence in `e/824` and added the code explanation in `代码讲解记录_模型能力阶段/838-v824-route-promotion-bounded-real-replay-decoder-anchor-seed-revision.md`.
 
 ## Latest v823 checkpoint
 

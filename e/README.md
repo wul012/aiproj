@@ -43,6 +43,10 @@ e/822/解释/说明.md
 e/823/图片
 e/823/解释/说明.md
  -> v823 bounded replay decoder anchor policy replay 的运行截图和解释
+
+e/824/图片
+e/824/解释/说明.md
+ -> v824 bounded replay decoder anchor seed revision 的运行截图和解释
 ```
 
 ```text

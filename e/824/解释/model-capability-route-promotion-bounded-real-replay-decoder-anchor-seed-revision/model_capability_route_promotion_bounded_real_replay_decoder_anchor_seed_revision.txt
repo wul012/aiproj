@@ -1,0 +1,8 @@
+status=pass
+decision=model_capability_route_promotion_bounded_real_replay_decoder_anchor_seed_revision_ready
+seed_ready=True
+example_count=48
+added_example_count=20
+bridge_example_count=15
+unanchored_direct_example_count=5
+next_step=train_decoder_anchor_seed_revision

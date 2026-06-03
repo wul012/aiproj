@@ -29,6 +29,9 @@
 837-v823-route-promotion-bounded-real-replay-decoder-anchor-policy-replay.md
  -> v823 code explanation: replay the guarded decoder-anchor policy and confirm the partial signal remains promotion-blocked.
 
+838-v824-route-promotion-bounded-real-replay-decoder-anchor-seed-revision.md
+ -> v824 code explanation: convert the decoder-anchor replay signal into a training-ready seed revision with direct-answer and bridge-completion examples.
+
 487-v473-baseline-candidate-capability-delta.md
  -> v473 code explanation: carry real tiny training loss and generation-quality deltas into the baseline-candidate eval loop.
 

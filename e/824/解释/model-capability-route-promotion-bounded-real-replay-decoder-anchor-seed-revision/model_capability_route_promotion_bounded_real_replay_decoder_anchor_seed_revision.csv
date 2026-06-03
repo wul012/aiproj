@@ -1,0 +1,102 @@
+example_id,case_id,revision_type,prompt,completion,guardrail
+decoder-anchor-carry-prompt-aligned-carry-revision-carry-repair-objective-answer-direct-direct_case_answer,objective-answer-direct,carry_forward_prompt_aligned_seed,"任务：只输出两个英文关键词，表示本轮目标答案。
+答案：",fixed loss,retain_prompt_aligned_seed_signal
+decoder-anchor-carry-prompt-aligned-carry-revision-carry-repair-objective-answer-direct-self_check_answer,objective-answer-direct,carry_forward_prompt_aligned_seed,"任务：只输出两个英文关键词，表示本轮目标答案。
+答案：
+Self-check: include both required terms exactly once.",fixed loss,retain_prompt_aligned_seed_signal
+decoder-anchor-carry-prompt-aligned-carry-revision-carry-repair-objective-answer-role-direct_case_answer,objective-answer-role,carry_forward_prompt_aligned_seed,"目标：给出 paired required terms 的两个角色词。
+输出：",fixed loss,retain_prompt_aligned_seed_signal
+decoder-anchor-carry-prompt-aligned-carry-revision-carry-repair-objective-answer-role-self_check_answer,objective-answer-role,carry_forward_prompt_aligned_seed,"目标：给出 paired required terms 的两个角色词。
+输出：
+Self-check: include both required terms exactly once.",fixed loss,retain_prompt_aligned_seed_signal
+decoder-anchor-carry-prompt-aligned-carry-revision-carry-repair-objective-answer-check-direct_case_answer,objective-answer-check,carry_forward_prompt_aligned_seed,自检：本题需要同时出现 fixed 与 loss。最终答案：,fixed loss,retain_prompt_aligned_seed_signal
+decoder-anchor-carry-prompt-aligned-carry-revision-carry-repair-objective-answer-check-self_check_answer,objective-answer-check,carry_forward_prompt_aligned_seed,"自检：本题需要同时出现 fixed 与 loss。最终答案：
+Self-check: include both required terms exactly once.",fixed loss,retain_prompt_aligned_seed_signal
+decoder-anchor-carry-prompt-aligned-carry-revision-objective-answer-check-missing_term_retention,objective-answer-check,carry_forward_prompt_aligned_seed,"Repair objective-answer-check: include missing terms fixed, loss and answer directly.
+Answer:",fixed loss,retain_prompt_aligned_seed_signal
+decoder-anchor-carry-prompt-aligned-carry-revision-objective-answer-check-contrastive_self_check,objective-answer-check,carry_forward_prompt_aligned_seed,"Self-check objective-answer-check: the continuation is valid only if it contains fixed and loss.
+Answer:",fixed loss,retain_prompt_aligned_seed_signal
+decoder-anchor-carry-prompt-aligned-carry-revision-objective-answer-contrast-baseline_preservation,objective-answer-contrast,carry_forward_prompt_aligned_seed,"Baseline preservation for objective-answer-contrast: output the two route terms exactly.
+Answer:",fixed loss,retain_prompt_aligned_seed_signal
+decoder-anchor-carry-prompt-aligned-carry-revision-objective-answer-contrast-missing_term_retention,objective-answer-contrast,carry_forward_prompt_aligned_seed,"Repair objective-answer-contrast: include missing terms fixed, loss and answer directly.
+Answer:",fixed loss,retain_prompt_aligned_seed_signal
+decoder-anchor-carry-prompt-aligned-carry-revision-objective-answer-contrast-contrastive_self_check,objective-answer-contrast,carry_forward_prompt_aligned_seed,"Self-check objective-answer-contrast: the continuation is valid only if it contains fixed and loss.
+Answer:",fixed loss,retain_prompt_aligned_seed_signal
+decoder-anchor-carry-prompt-aligned-carry-revision-objective-answer-direct-missing_term_retention,objective-answer-direct,carry_forward_prompt_aligned_seed,"Repair objective-answer-direct: include missing terms fixed, loss and answer directly.
+Answer:",fixed loss,retain_prompt_aligned_seed_signal
+decoder-anchor-carry-prompt-aligned-carry-revision-objective-answer-direct-contrastive_self_check,objective-answer-direct,carry_forward_prompt_aligned_seed,"Self-check objective-answer-direct: the continuation is valid only if it contains fixed and loss.
+Answer:",fixed loss,retain_prompt_aligned_seed_signal
+decoder-anchor-carry-prompt-aligned-carry-revision-objective-answer-jsonish-baseline_preservation,objective-answer-jsonish,carry_forward_prompt_aligned_seed,"Baseline preservation for objective-answer-jsonish: output the two route terms exactly.
+Answer:",fixed loss,retain_prompt_aligned_seed_signal
+decoder-anchor-carry-prompt-aligned-carry-revision-objective-answer-jsonish-missing_term_retention,objective-answer-jsonish,carry_forward_prompt_aligned_seed,"Repair objective-answer-jsonish: include missing terms fixed, loss and answer directly.
+Answer:",fixed loss,retain_prompt_aligned_seed_signal
+decoder-anchor-carry-prompt-aligned-carry-revision-objective-answer-jsonish-contrastive_self_check,objective-answer-jsonish,carry_forward_prompt_aligned_seed,"Self-check objective-answer-jsonish: the continuation is valid only if it contains fixed and loss.
+Answer:",fixed loss,retain_prompt_aligned_seed_signal
+decoder-anchor-carry-prompt-aligned-carry-revision-objective-answer-role-missing_term_retention,objective-answer-role,carry_forward_prompt_aligned_seed,"Repair objective-answer-role: include missing terms fixed, loss and answer directly.
+Answer:",fixed loss,retain_prompt_aligned_seed_signal
+decoder-anchor-carry-prompt-aligned-carry-revision-objective-answer-role-contrastive_self_check,objective-answer-role,carry_forward_prompt_aligned_seed,"Self-check objective-answer-role: the continuation is valid only if it contains fixed and loss.
+Answer:",fixed loss,retain_prompt_aligned_seed_signal
+decoder-anchor-carry-prompt-aligned-objective-answer-direct-exact_benchmark_prompt_answer,objective-answer-direct,carry_forward_prompt_aligned_seed,"任务：只输出两个英文关键词，表示本轮目标答案。
+答案：",fixed loss,retain_prompt_aligned_seed_signal
+decoder-anchor-carry-prompt-aligned-objective-answer-direct-exact_benchmark_prompt_self_check,objective-answer-direct,carry_forward_prompt_aligned_seed,"任务：只输出两个英文关键词，表示本轮目标答案。
+答案：
+Self-check: include fixed and loss exactly.
+Answer:",fixed loss,retain_prompt_aligned_seed_signal
+decoder-anchor-carry-prompt-aligned-objective-answer-role-exact_benchmark_prompt_answer,objective-answer-role,carry_forward_prompt_aligned_seed,"目标：给出 paired required terms 的两个角色词。
+输出：",fixed loss,retain_prompt_aligned_seed_signal
+decoder-anchor-carry-prompt-aligned-objective-answer-role-exact_benchmark_prompt_self_check,objective-answer-role,carry_forward_prompt_aligned_seed,"目标：给出 paired required terms 的两个角色词。
+输出：
+Self-check: include fixed and loss exactly.
+Answer:",fixed loss,retain_prompt_aligned_seed_signal
+decoder-anchor-carry-prompt-aligned-objective-answer-contrast-exact_benchmark_prompt_answer,objective-answer-contrast,carry_forward_prompt_aligned_seed,"对比任务：不要解释，只返回目标 pair tokens。
+结果：",fixed loss,retain_prompt_aligned_seed_signal
+decoder-anchor-carry-prompt-aligned-objective-answer-contrast-exact_benchmark_prompt_self_check,objective-answer-contrast,carry_forward_prompt_aligned_seed,"对比任务：不要解释，只返回目标 pair tokens。
+结果：
+Self-check: include fixed and loss exactly.
+Answer:",fixed loss,retain_prompt_aligned_seed_signal
+decoder-anchor-carry-prompt-aligned-objective-answer-jsonish-exact_benchmark_prompt_answer,objective-answer-jsonish,carry_forward_prompt_aligned_seed,"请用 JSON 风格写出 answer_terms，包含两个英文词。
+answer_terms:",fixed loss,retain_prompt_aligned_seed_signal
+decoder-anchor-carry-prompt-aligned-objective-answer-jsonish-exact_benchmark_prompt_self_check,objective-answer-jsonish,carry_forward_prompt_aligned_seed,"请用 JSON 风格写出 answer_terms，包含两个英文词。
+answer_terms:
+Self-check: include fixed and loss exactly.
+Answer:",fixed loss,retain_prompt_aligned_seed_signal
+decoder-anchor-carry-prompt-aligned-objective-answer-check-exact_benchmark_prompt_answer,objective-answer-check,carry_forward_prompt_aligned_seed,自检：本题需要同时出现 fixed 与 loss。最终答案：,fixed loss,retain_prompt_aligned_seed_signal
+decoder-anchor-carry-prompt-aligned-objective-answer-check-exact_benchmark_prompt_self_check,objective-answer-check,carry_forward_prompt_aligned_seed,"自检：本题需要同时出现 fixed 与 loss。最终答案：
+Self-check: include fixed and loss exactly.
+Answer:",fixed loss,retain_prompt_aligned_seed_signal
+decoder-anchor-objective-answer-direct-unanchored_direct_answer,objective-answer-direct,unanchored_direct_answer,"任务：只输出两个英文关键词，表示本轮目标答案。
+答案：",fixed loss,unanchored_exact_answer
+decoder-anchor-objective-answer-direct-prefix_f_bridge,objective-answer-direct,prefix_f_bridge,"任务：只输出两个英文关键词，表示本轮目标答案。
+答案：f",ixed loss,first_character_bridge
+decoder-anchor-objective-answer-direct-prefix_fixed_space_bridge,objective-answer-direct,prefix_fixed_space_bridge,"任务：只输出两个英文关键词，表示本轮目标答案。
+答案：fixed ",loss,first_term_to_second_term_bridge
+decoder-anchor-objective-answer-direct-prefix_fixed_l_bridge,objective-answer-direct,prefix_fixed_l_bridge,"任务：只输出两个英文关键词，表示本轮目标答案。
+答案：fixed l",oss,second_term_prefix_bridge
+decoder-anchor-objective-answer-role-unanchored_direct_answer,objective-answer-role,unanchored_direct_answer,"目标：给出 paired required terms 的两个角色词。
+输出：",fixed loss,unanchored_exact_answer
+decoder-anchor-objective-answer-role-prefix_f_bridge,objective-answer-role,prefix_f_bridge,"目标：给出 paired required terms 的两个角色词。
+输出：f",ixed loss,first_character_bridge
+decoder-anchor-objective-answer-role-prefix_fixed_space_bridge,objective-answer-role,prefix_fixed_space_bridge,"目标：给出 paired required terms 的两个角色词。
+输出：fixed ",loss,first_term_to_second_term_bridge
+decoder-anchor-objective-answer-role-prefix_fixed_l_bridge,objective-answer-role,prefix_fixed_l_bridge,"目标：给出 paired required terms 的两个角色词。
+输出：fixed l",oss,second_term_prefix_bridge
+decoder-anchor-objective-answer-contrast-unanchored_direct_answer,objective-answer-contrast,unanchored_direct_answer,"对比任务：不要解释，只返回目标 pair tokens。
+结果：",fixed loss,unanchored_exact_answer
+decoder-anchor-objective-answer-contrast-prefix_f_bridge,objective-answer-contrast,prefix_f_bridge,"对比任务：不要解释，只返回目标 pair tokens。
+结果：f",ixed loss,first_character_bridge
+decoder-anchor-objective-answer-contrast-prefix_fixed_space_bridge,objective-answer-contrast,prefix_fixed_space_bridge,"对比任务：不要解释，只返回目标 pair tokens。
+结果：fixed ",loss,first_term_to_second_term_bridge
+decoder-anchor-objective-answer-contrast-prefix_fixed_l_bridge,objective-answer-contrast,prefix_fixed_l_bridge,"对比任务：不要解释，只返回目标 pair tokens。
+结果：fixed l",oss,second_term_prefix_bridge
+decoder-anchor-objective-answer-jsonish-unanchored_direct_answer,objective-answer-jsonish,unanchored_direct_answer,"请用 JSON 风格写出 answer_terms，包含两个英文词。
+answer_terms:",fixed loss,unanchored_exact_answer
+decoder-anchor-objective-answer-jsonish-prefix_f_bridge,objective-answer-jsonish,prefix_f_bridge,"请用 JSON 风格写出 answer_terms，包含两个英文词。
+answer_terms:f",ixed loss,first_character_bridge
+decoder-anchor-objective-answer-jsonish-prefix_fixed_space_bridge,objective-answer-jsonish,prefix_fixed_space_bridge,"请用 JSON 风格写出 answer_terms，包含两个英文词。
+answer_terms:fixed ",loss,first_term_to_second_term_bridge
+decoder-anchor-objective-answer-jsonish-prefix_fixed_l_bridge,objective-answer-jsonish,prefix_fixed_l_bridge,"请用 JSON 风格写出 answer_terms，包含两个英文词。
+answer_terms:fixed l",oss,second_term_prefix_bridge
+decoder-anchor-objective-answer-check-unanchored_direct_answer,objective-answer-check,unanchored_direct_answer,自检：本题需要同时出现 fixed 与 loss。最终答案：,fixed loss,unanchored_exact_answer
+decoder-anchor-objective-answer-check-prefix_f_bridge,objective-answer-check,prefix_f_bridge,自检：本题需要同时出现 fixed 与 loss。最终答案：f,ixed loss,first_character_bridge
+decoder-anchor-objective-answer-check-prefix_fixed_space_bridge,objective-answer-check,prefix_fixed_space_bridge,自检：本题需要同时出现 fixed 与 loss。最终答案：fixed ,loss,first_term_to_second_term_bridge
+decoder-anchor-objective-answer-check-prefix_fixed_l_bridge,objective-answer-check,prefix_fixed_l_bridge,自检：本题需要同时出现 fixed 与 loss。最终答案：fixed l,oss,second_term_prefix_bridge
