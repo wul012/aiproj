@@ -1,0 +1,203 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability route promotion bounded real replay repair seed",
+  "generated_at": "2026-06-03T08:15:33Z",
+  "status": "pass",
+  "decision": "model_capability_route_promotion_bounded_real_replay_repair_seed_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_repair_plan": "D:\\aiproj\\e\\808\\解释\\model-capability-route-promotion-bounded-real-replay-repair-plan\\model_capability_route_promotion_bounded_real_replay_repair_plan.json",
+  "source_real_replay": "D:\\aiproj\\e\\806\\解释\\model-capability-route-promotion-bounded-real-replay\\model_capability_route_promotion_bounded_real_replay.json",
+  "seed_examples": [
+    {
+      "example_id": "repair-objective-answer-direct-direct_case_answer",
+      "case_id": "objective-answer-direct",
+      "task_id": "repair-objective-answer-direct",
+      "example_type": "direct_case_answer",
+      "prompt": "任务：只输出两个英文关键词，表示本轮目标答案。\n答案：",
+      "completion": "fixed loss",
+      "text": "任务：只输出两个英文关键词，表示本轮目标答案。\n答案：fixed loss",
+      "repair_type": "missing_term_retention_repair",
+      "missed_terms": [
+        "fixed"
+      ],
+      "required_terms": [
+        "fixed",
+        "loss"
+      ]
+    },
+    {
+      "example_id": "repair-objective-answer-direct-self_check_answer",
+      "case_id": "objective-answer-direct",
+      "task_id": "repair-objective-answer-direct",
+      "example_type": "self_check_answer",
+      "prompt": "任务：只输出两个英文关键词，表示本轮目标答案。\n答案：\nSelf-check: include both required terms exactly once.",
+      "completion": "fixed loss",
+      "text": "任务：只输出两个英文关键词，表示本轮目标答案。\n答案：\nSelf-check: include both required terms exactly once.fixed loss",
+      "repair_type": "missing_term_retention_repair",
+      "missed_terms": [
+        "fixed"
+      ],
+      "required_terms": [
+        "fixed",
+        "loss"
+      ]
+    },
+    {
+      "example_id": "repair-objective-answer-role-direct_case_answer",
+      "case_id": "objective-answer-role",
+      "task_id": "repair-objective-answer-role",
+      "example_type": "direct_case_answer",
+      "prompt": "目标：给出 paired required terms 的两个角色词。\n输出：",
+      "completion": "fixed loss",
+      "text": "目标：给出 paired required terms 的两个角色词。\n输出：fixed loss",
+      "repair_type": "prompt_to_required_terms_bridge_repair",
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "required_terms": [
+        "fixed",
+        "loss"
+      ]
+    },
+    {
+      "example_id": "repair-objective-answer-role-self_check_answer",
+      "case_id": "objective-answer-role",
+      "task_id": "repair-objective-answer-role",
+      "example_type": "self_check_answer",
+      "prompt": "目标：给出 paired required terms 的两个角色词。\n输出：\nSelf-check: include both required terms exactly once.",
+      "completion": "fixed loss",
+      "text": "目标：给出 paired required terms 的两个角色词。\n输出：\nSelf-check: include both required terms exactly once.fixed loss",
+      "repair_type": "prompt_to_required_terms_bridge_repair",
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "required_terms": [
+        "fixed",
+        "loss"
+      ]
+    },
+    {
+      "example_id": "repair-objective-answer-check-direct_case_answer",
+      "case_id": "objective-answer-check",
+      "task_id": "repair-objective-answer-check",
+      "example_type": "direct_case_answer",
+      "prompt": "自检：本题需要同时出现 fixed 与 loss。最终答案：",
+      "completion": "fixed loss",
+      "text": "自检：本题需要同时出现 fixed 与 loss。最终答案：fixed loss",
+      "repair_type": "missing_term_retention_repair",
+      "missed_terms": [
+        "fixed"
+      ],
+      "required_terms": [
+        "fixed",
+        "loss"
+      ]
+    },
+    {
+      "example_id": "repair-objective-answer-check-self_check_answer",
+      "case_id": "objective-answer-check",
+      "task_id": "repair-objective-answer-check",
+      "example_type": "self_check_answer",
+      "prompt": "自检：本题需要同时出现 fixed 与 loss。最终答案：\nSelf-check: include both required terms exactly once.",
+      "completion": "fixed loss",
+      "text": "自检：本题需要同时出现 fixed 与 loss。最终答案：\nSelf-check: include both required terms exactly once.fixed loss",
+      "repair_type": "missing_term_retention_repair",
+      "missed_terms": [
+        "fixed"
+      ],
+      "required_terms": [
+        "fixed",
+        "loss"
+      ]
+    }
+  ],
+  "check_rows": [
+    {
+      "id": "repair_plan_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "repair plan must pass"
+    },
+    {
+      "id": "repair_plan_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "repair plan must be ready"
+    },
+    {
+      "id": "real_replay_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "real replay source must pass execution checks"
+    },
+    {
+      "id": "repair_tasks_present",
+      "status": "pass",
+      "actual": 3,
+      "detail": "seed must have repair tasks"
+    },
+    {
+      "id": "seed_examples_present",
+      "status": "pass",
+      "actual": 6,
+      "detail": "seed must generate examples"
+    },
+    {
+      "id": "two_examples_per_task",
+      "status": "pass",
+      "actual": {
+        "examples": 6,
+        "tasks": 3
+      },
+      "detail": "seed should create two examples per repair task"
+    },
+    {
+      "id": "all_tasks_seeded",
+      "status": "pass",
+      "actual": {
+        "tasks": [
+          "repair-objective-answer-check",
+          "repair-objective-answer-direct",
+          "repair-objective-answer-role"
+        ],
+        "seeded": [
+          "repair-objective-answer-check",
+          "repair-objective-answer-direct",
+          "repair-objective-answer-role"
+        ]
+      },
+      "detail": "every repair task must have seed examples"
+    }
+  ],
+  "repair_seed": {
+    "ready": true,
+    "example_count": 6,
+    "case_count": 3,
+    "source_pass_rate": 0.4,
+    "target_pass_rate": 1.0,
+    "required_terms": [
+      "fixed",
+      "loss"
+    ],
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_real_replay_repair_training_run",
+    "next_step": "run_bounded_real_replay_repair_training"
+  },
+  "summary": {
+    "bounded_real_replay_repair_seed_ready": true,
+    "example_count": 6,
+    "case_count": 3,
+    "source_pass_rate": 0.4,
+    "target_pass_rate": 1.0,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_real_replay_repair_training_run",
+    "next_step": "run_bounded_real_replay_repair_training",
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "repair_seed_only",
+    "reason": "The seed converts failed bounded replay cases into training text; it does not prove improvement until retrained and replayed.",
+    "next_action": "run_bounded_real_replay_repair_training"
+  }
+}

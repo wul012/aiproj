@@ -1019,6 +1019,9 @@
 822-v808-route-promotion-bounded-real-replay-repair-plan.md
  -> v808 code explanation: turn bounded real replay misses into targeted repair-plan tasks.
 
+823-v809-route-promotion-bounded-real-replay-repair-seed.md
+ -> v809 code explanation: convert bounded repair tasks into JSONL and corpus seed examples.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

@@ -1568,3 +1568,9 @@ e/663/解释/说明.md
 - `e/808/图片`
 - `e/808/解释/说明.md`
 - v808 model capability route promotion bounded real replay repair plan 的运行截图和解释。
+
+## v809 补充索引
+
+- `e/809/图片`
+- `e/809/解释/说明.md`
+- v809 model capability route promotion bounded real replay repair seed 的运行截图和解释。

@@ -1,0 +1,7 @@
+example_id,case_id,task_id,example_type,completion,repair_type
+repair-objective-answer-direct-direct_case_answer,objective-answer-direct,repair-objective-answer-direct,direct_case_answer,fixed loss,missing_term_retention_repair
+repair-objective-answer-direct-self_check_answer,objective-answer-direct,repair-objective-answer-direct,self_check_answer,fixed loss,missing_term_retention_repair
+repair-objective-answer-role-direct_case_answer,objective-answer-role,repair-objective-answer-role,direct_case_answer,fixed loss,prompt_to_required_terms_bridge_repair
+repair-objective-answer-role-self_check_answer,objective-answer-role,repair-objective-answer-role,self_check_answer,fixed loss,prompt_to_required_terms_bridge_repair
+repair-objective-answer-check-direct_case_answer,objective-answer-check,repair-objective-answer-check,direct_case_answer,fixed loss,missing_term_retention_repair
+repair-objective-answer-check-self_check_answer,objective-answer-check,repair-objective-answer-check,self_check_answer,fixed loss,missing_term_retention_repair

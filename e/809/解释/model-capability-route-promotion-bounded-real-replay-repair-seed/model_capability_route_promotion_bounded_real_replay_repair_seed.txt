@@ -1,0 +1,8 @@
+status=pass
+decision=model_capability_route_promotion_bounded_real_replay_repair_seed_ready
+failed_count=0
+bounded_real_replay_repair_seed_ready=True
+example_count=6
+case_count=3
+proposed_next_artifact=model_capability_route_promotion_bounded_real_replay_repair_training_run
+next_step=run_bounded_real_replay_repair_training
