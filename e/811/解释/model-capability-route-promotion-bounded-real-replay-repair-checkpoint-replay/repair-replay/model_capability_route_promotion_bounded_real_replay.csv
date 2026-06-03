@@ -1,0 +1,13 @@
+case_id,case_pass,hit_terms,missed_terms,continuation
+objective-answer-direct,False,,"fixed,loss",eeelidd i文ded 答rdd ddcoc
+objective-answer-role,False,,"fixed,loss","aired required terms 的两个角色词。
+输出：iieeds  cceee  ec r文e文文e"
+objective-answer-contrast,False,,"fixed,loss","��任务：�要��，只��目标 pair tokens。
+��：clcle c
+
+
+
+dc答deei sreen"
+objective-answer-jsonish,False,,"fixed,loss","�er�terms，��两个英文词。
+ans�er�terms:i文rd文ddddissecroernneior"
+objective-answer-check,False,,"fixed,loss",输e答  d答答c 答iicdcirec i d

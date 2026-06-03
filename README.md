@@ -4,7 +4,19 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v810.0.0` trains a bounded repair checkpoint from the v809 repair seed and records training evidence.
+Version `v811.0.0` compares the v810 repair checkpoint replay against the v806 baseline bounded replay and blocks promotion because the repair checkpoint regressed.
+
+## Latest v811 checkpoint
+
+- Added `model_capability_route_promotion_bounded_real_replay_repair_checkpoint_comparison`.
+- Added CLI `scripts/compare_model_capability_route_promotion_bounded_real_replay_repair_checkpoint.py`.
+- Replayed the v810 repair checkpoint on the same v803 bounded benchmark suite.
+- Compared the repair replay with the v806 baseline replay.
+- Recorded `baseline_passed_case_count=2`, `repair_passed_case_count=0`, and `pass_rate_delta=-0.4`.
+- Produced `decision=model_capability_route_promotion_bounded_real_replay_repair_checkpoint_regressed`.
+- Kept `promotion_ready=False` and routed the next step to repair seed or training strategy revision.
+- Verified with `4 passed` focused comparison tests.
+- Archived v811 evidence in `e/811` and added the code explanation in `代码讲解记录_模型能力阶段/825-v811-route-promotion-bounded-real-replay-repair-checkpoint-comparison.md`.
 
 ## Latest v810 checkpoint
 

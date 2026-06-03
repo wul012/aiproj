@@ -1580,3 +1580,9 @@ e/663/解释/说明.md
 - `e/810/图片`
 - `e/810/解释/说明.md`
 - v810 model capability route promotion bounded real replay repair training run 的运行截图和解释。
+
+## v811 补充索引
+
+- `e/811/图片`
+- `e/811/解释/说明.md`
+- v811 model capability route promotion bounded real replay repair checkpoint comparison 的运行截图和解释。

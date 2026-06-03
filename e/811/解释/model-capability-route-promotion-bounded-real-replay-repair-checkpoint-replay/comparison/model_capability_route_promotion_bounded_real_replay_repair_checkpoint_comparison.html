@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT model capability route promotion bounded real replay repair checkpoint comparison</title>
+<style>
+:root{color-scheme:light;--ink:#17212b;--muted:#667381;--line:#d8dee5;--panel:#f7f9fb;--accent:#9a3412}
+*{box-sizing:border-box}
+body{margin:0;background:#f0f3f7;color:var(--ink);font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1240px;margin:0 auto;padding:28px}
+h1{font-size:30px;margin:0 0 8px;letter-spacing:0}
+h2{font-size:18px;margin:0 0 12px;letter-spacing:0}
+p{color:var(--muted);line-height:1.55;overflow-wrap:anywhere}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:10px;margin:18px 0}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:8px}
+.card{padding:14px}
+.card span{display:block;color:var(--muted);font-size:12px;text-transform:uppercase}
+.card strong{display:block;margin-top:6px;font-size:18px;line-height:1.2;color:var(--accent);overflow-wrap:anywhere}
+.panel{padding:16px;margin:14px 0}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:#334155}
+td{overflow-wrap:anywhere}
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT model capability route promotion bounded real replay repair checkpoint comparison</h1><p>Compares the baseline bounded replay with the repair checkpoint replay and keeps promotion blocked unless the repair checkpoint beats the baseline.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Decision</span><strong>model_capability_route_promotion_bounded_real_replay_repair_checkpoint_regressed</strong></div><div class="card"><span>Baseline passed</span><strong>2</strong></div><div class="card"><span>Repair passed</span><strong>0</strong></div><div class="card"><span>Pass delta</span><strong>-2</strong></div><div class="card"><span>Rate delta</span><strong>-0.4</strong></div><div class="card"><span>Promotion ready</span><strong>False</strong></div></section>
+<section class="panel"><h2>Case Comparison</h2><div class="table-wrap"><table>
+<thead><tr><th>Case</th><th>Baseline pass</th><th>Repair pass</th><th>Delta</th><th>Baseline hits</th><th>Repair hits</th><th>Repair misses</th></tr></thead>
+<tbody><tr><td>objective-answer-check</td><td>False</td><td>False</td><td>0</td><td>loss</td><td></td><td>fixed,loss</td></tr><tr><td>objective-answer-contrast</td><td>True</td><td>False</td><td>-1</td><td>fixed,loss</td><td></td><td>fixed,loss</td></tr><tr><td>objective-answer-direct</td><td>False</td><td>False</td><td>0</td><td>loss</td><td></td><td>fixed,loss</td></tr><tr><td>objective-answer-jsonish</td><td>True</td><td>False</td><td>-1</td><td>fixed,loss</td><td></td><td>fixed,loss</td></tr><tr><td>objective-answer-role</td><td>False</td><td>False</td><td>0</td><td></td><td></td><td>fixed,loss</td></tr></tbody>
+</table></div></section>
+<section class="panel"><h2>Checks</h2><div class="table-wrap"><table>
+<thead><tr><th>Check</th><th>Status</th><th>Actual</th><th>Detail</th></tr></thead>
+<tbody><tr><td>baseline_replay_passed</td><td>pass</td><td>pass</td><td>baseline replay execution must pass</td></tr><tr><td>repair_replay_passed</td><td>pass</td><td>pass</td><td>repair replay execution must pass</td></tr><tr><td>training_run_ready_when_provided</td><td>pass</td><td>True</td><td>repair training run evidence is optional, but must be ready when provided</td></tr><tr><td>case_counts_match</td><td>pass</td><td>{&#x27;baseline&#x27;: 5, &#x27;repair&#x27;: 5}</td><td>baseline and repair replay should cover the same suite</td></tr><tr><td>case_rows_present</td><td>pass</td><td>5</td><td>comparison must include case rows</td></tr></tbody>
+</table></div></section>
+</main>
+</body>
+</html>

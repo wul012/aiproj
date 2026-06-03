@@ -1,0 +1,211 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability route promotion bounded real replay repair checkpoint comparison",
+  "generated_at": "2026-06-03T08:36:50Z",
+  "status": "pass",
+  "decision": "model_capability_route_promotion_bounded_real_replay_repair_checkpoint_regressed",
+  "failed_count": 0,
+  "issues": [],
+  "source_baseline_replay": "D:\\aiproj\\e\\806\\解释\\model-capability-route-promotion-bounded-real-replay\\model_capability_route_promotion_bounded_real_replay.json",
+  "source_repair_replay": "D:\\aiproj\\e\\811\\解释\\model-capability-route-promotion-bounded-real-replay-repair-checkpoint-replay\\repair-replay\\model_capability_route_promotion_bounded_real_replay.json",
+  "source_training_run": "D:\\aiproj\\e\\810\\解释\\model-capability-route-promotion-bounded-real-replay-repair-training-run\\training-evidence\\model_capability_route_promotion_bounded_real_replay_repair_training_run.json",
+  "baseline_summary": {
+    "bounded_real_replay_executed": true,
+    "model_route_quality_ready": false,
+    "case_count": 5,
+    "executed_case_count": 5,
+    "passed_case_count": 2,
+    "failed_case_count": 3,
+    "pass_rate": 0.4,
+    "next_step": "review_bounded_route_promotion_real_replay",
+    "failed_check_count": 0
+  },
+  "repair_summary": {
+    "bounded_real_replay_executed": true,
+    "model_route_quality_ready": false,
+    "case_count": 5,
+    "executed_case_count": 5,
+    "passed_case_count": 0,
+    "failed_case_count": 5,
+    "pass_rate": 0.0,
+    "next_step": "review_bounded_route_promotion_real_replay",
+    "failed_check_count": 0
+  },
+  "training_summary": {
+    "bounded_real_replay_repair_training_ready": true,
+    "artifact_count": 7,
+    "metric_record_count": 3,
+    "final_step": 20,
+    "final_train_loss": 3.9741125106811523,
+    "final_val_loss": 3.9439306259155273,
+    "train_loss_delta": -0.200651,
+    "val_loss_delta": -0.234615,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_real_replay_repair_checkpoint_replay",
+    "next_step": "run_repair_checkpoint_bounded_replay",
+    "failed_check_count": 0
+  },
+  "case_rows": [
+    {
+      "case_id": "objective-answer-check",
+      "baseline_pass": false,
+      "repair_pass": false,
+      "delta": 0,
+      "baseline_hit_terms": [
+        "loss"
+      ],
+      "baseline_missed_terms": [
+        "fixed"
+      ],
+      "baseline_continuation": "xed � loss������bred lossssssssssss fixe",
+      "repair_hit_terms": [],
+      "repair_missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "repair_continuation": "输e答  d答答c 答iicdcirec i d"
+    },
+    {
+      "case_id": "objective-answer-contrast",
+      "baseline_pass": true,
+      "repair_pass": false,
+      "delta": -1,
+      "baseline_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "baseline_missed_terms": [],
+      "baseline_continuation": "pair tokens�\n���obred fixed fixed lossss",
+      "repair_hit_terms": [],
+      "repair_missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "repair_continuation": "��任务：�要��，只��目标 pair tokens。\n��：clcle c\n\n\n\ndc答deei sreen"
+    },
+    {
+      "case_id": "objective-answer-direct",
+      "baseline_pass": false,
+      "repair_pass": false,
+      "delta": 0,
+      "baseline_hit_terms": [
+        "loss"
+      ],
+      "baseline_missed_terms": [
+        "fixed"
+      ],
+      "baseline_continuation": "������������\n���branch lossssssssssss fi",
+      "repair_hit_terms": [],
+      "repair_missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "repair_continuation": "eeelidd i文ded 答rdd ddcoc"
+    },
+    {
+      "case_id": "objective-answer-jsonish",
+      "baseline_pass": true,
+      "repair_pass": false,
+      "delta": -1,
+      "baseline_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "baseline_missed_terms": [],
+      "baseline_continuation": "��\nanswer_terms�s fixed losss\nbrassssseq",
+      "repair_hit_terms": [],
+      "repair_missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "repair_continuation": "�er�terms，��两个英文词。\nans�er�terms:i文rd文ddddissecroernneior"
+    },
+    {
+      "case_id": "objective-answer-role",
+      "baseline_pass": false,
+      "repair_pass": false,
+      "delta": 0,
+      "baseline_hit_terms": [],
+      "baseline_missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "baseline_continuation": "erms �������\n���epans loswer lorerered l",
+      "repair_hit_terms": [],
+      "repair_missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "repair_continuation": "aired required terms 的两个角色词。\n输出：iieeds  cceee  ec r文e文文e"
+    }
+  ],
+  "check_rows": [
+    {
+      "id": "baseline_replay_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "baseline replay execution must pass"
+    },
+    {
+      "id": "repair_replay_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "repair replay execution must pass"
+    },
+    {
+      "id": "training_run_ready_when_provided",
+      "status": "pass",
+      "actual": true,
+      "detail": "repair training run evidence is optional, but must be ready when provided"
+    },
+    {
+      "id": "case_counts_match",
+      "status": "pass",
+      "actual": {
+        "baseline": 5,
+        "repair": 5
+      },
+      "detail": "baseline and repair replay should cover the same suite"
+    },
+    {
+      "id": "case_rows_present",
+      "status": "pass",
+      "actual": 5,
+      "detail": "comparison must include case rows"
+    }
+  ],
+  "comparison": {
+    "ready": true,
+    "baseline_passed_case_count": 2,
+    "repair_passed_case_count": 0,
+    "passed_case_delta": -2,
+    "baseline_pass_rate": 0.4,
+    "repair_pass_rate": 0.0,
+    "pass_rate_delta": -0.4,
+    "repair_model_route_quality_ready": false,
+    "repair_checkpoint_improved": false,
+    "repair_checkpoint_regressed": true,
+    "promotion_ready": false,
+    "case_count": 5,
+    "next_step": "revise_bounded_repair_seed_or_training_strategy_before_replay_promotion"
+  },
+  "summary": {
+    "bounded_repair_checkpoint_comparison_ready": true,
+    "repair_checkpoint_improved": false,
+    "repair_checkpoint_regressed": true,
+    "baseline_passed_case_count": 2,
+    "repair_passed_case_count": 0,
+    "passed_case_delta": -2,
+    "baseline_pass_rate": 0.4,
+    "repair_pass_rate": 0.0,
+    "pass_rate_delta": -0.4,
+    "promotion_ready": false,
+    "case_count": 5,
+    "next_step": "revise_bounded_repair_seed_or_training_strategy_before_replay_promotion",
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "not_improved",
+    "reason": "Repair checkpoint passed fewer bounded replay cases than baseline.",
+    "next_action": "revise_bounded_repair_seed_or_training_strategy_before_replay_promotion"
+  }
+}
