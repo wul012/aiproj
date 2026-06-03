@@ -1031,6 +1031,9 @@
 826-v812-route-promotion-bounded-real-replay-repair-strategy-revision.md
  -> v812 code explanation: turn the regressed repair checkpoint comparison into a bounded repair strategy revision with case actions and guardrails.
 
+827-v813-route-promotion-bounded-real-replay-repair-seed-revision.md
+ -> v813 code explanation: build a revised repair seed with original signal carry-forward and baseline preservation examples.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

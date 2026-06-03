@@ -1592,3 +1592,9 @@ e/663/解释/说明.md
 - `e/812/图片`
 - `e/812/解释/说明.md`
 - v812 model capability route promotion bounded real replay repair strategy revision 的运行截图和解释。
+
+## v813 补充索引
+
+- `e/813/图片`
+- `e/813/解释/说明.md`
+- v813 model capability route promotion bounded real replay repair seed revision 的运行截图和解释。

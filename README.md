@@ -4,7 +4,19 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v812.0.0` turns the v811 repair-checkpoint regression into a bounded repair strategy revision with case-level actions and promotion guardrails.
+Version `v813.0.0` builds a revised bounded repair seed from the v812 strategy revision, carrying original repair signal and adding baseline preservation examples.
+
+## Latest v813 checkpoint
+
+- Added `model_capability_route_promotion_bounded_real_replay_repair_seed_revision`.
+- Added CLI `scripts/build_model_capability_route_promotion_bounded_real_replay_repair_seed_revision.py`.
+- Consumed the real v812 strategy revision and v809 repair seed.
+- Produced `decision=model_capability_route_promotion_bounded_real_replay_repair_seed_revision_ready`.
+- Carried forward 6 original repair examples and added 12 revised examples.
+- Added 2 baseline preservation examples for regression cases.
+- Wrote JSONL and corpus outputs for the next repair training run.
+- Verified with `3 passed` focused seed-revision tests.
+- Archived v813 evidence in `e/813` and added the code explanation in `代码讲解记录_模型能力阶段/827-v813-route-promotion-bounded-real-replay-repair-seed-revision.md`.
 
 ## Latest v812 checkpoint
 

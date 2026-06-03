@@ -1,0 +1,9 @@
+status=pass
+decision=model_capability_route_promotion_bounded_real_replay_repair_seed_revision_ready
+failed_count=0
+seed_revision_ready=True
+original_example_count=6
+added_example_count=12
+example_count=18
+baseline_preservation_example_count=2
+next_step=train_bounded_real_replay_repair_seed_revision
