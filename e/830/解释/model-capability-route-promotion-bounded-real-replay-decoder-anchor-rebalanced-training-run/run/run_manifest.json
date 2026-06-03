@@ -1,0 +1,393 @@
+{
+  "schema_version": 1,
+  "run_dir": "e\\830\\解释\\model-capability-route-promotion-bounded-real-replay-decoder-anchor-rebalanced-training-run\\run",
+  "created_at": "2026-06-03T13:36:05Z",
+  "started_at": "2026-06-03T13:36:03Z",
+  "finished_at": "2026-06-03T13:36:05Z",
+  "duration_seconds": 2.0,
+  "command": [
+    "python.exe",
+    "scripts\\train.py",
+    "--prepared-data",
+    "e\\829\\解释\\model-capability-route-promotion-bounded-real-replay-decoder-anchor-rebalanced-seed-revision\\model_capability_route_promotion_bounded_real_replay_decoder_anchor_rebalanced_seed_revision_corpus.txt",
+    "--out-dir",
+    "e\\830\\解释\\model-capability-route-promotion-bounded-real-replay-decoder-anchor-rebalanced-training-run\\run",
+    "--max-iters",
+    "35",
+    "--eval-interval",
+    "10",
+    "--eval-iters",
+    "2",
+    "--batch-size",
+    "4",
+    "--block-size",
+    "32",
+    "--n-layer",
+    "2",
+    "--n-head",
+    "2",
+    "--n-embd",
+    "32",
+    "--dropout",
+    "0.0",
+    "--seed",
+    "1093",
+    "--device",
+    "cpu",
+    "--sample-prompt",
+    "自检：本题需要同时出现 fixed 与 loss。最终答案：",
+    "--sample-tokens",
+    "24",
+    "--sample-temperature",
+    "0.2",
+    "--sample-top-k",
+    "10"
+  ],
+  "git": {
+    "commit": "47d89c2644c58719c3f69ca257169f389a1673f3",
+    "short_commit": "47d89c2",
+    "branch": "main",
+    "tag": "v829.0.0",
+    "dirty": true
+  },
+  "environment": {
+    "python": "3.13.3",
+    "platform": "Windows-11-10.0.26100-SP0",
+    "executable": "D:\\python\\python.exe",
+    "torch": "2.6.0+cu124",
+    "numpy": "2.2.1"
+  },
+  "data": {
+    "source": {
+      "kind": "prepared_data",
+      "path": "e\\829\\解释\\model-capability-route-promotion-bounded-real-replay-decoder-anchor-rebalanced-seed-revision\\model_capability_route_promotion_bounded_real_replay_decoder_anchor_rebalanced_seed_revision_corpus.txt"
+    },
+    "token_count": 2271,
+    "train_token_count": 2043,
+    "val_token_count": 228,
+    "dataset_report": null,
+    "dataset_quality": null,
+    "dataset_version": null
+  },
+  "model": {
+    "config": {
+      "vocab_size": 94,
+      "block_size": 32,
+      "n_layer": 2,
+      "n_head": 2,
+      "n_embd": 32,
+      "dropout": 0.0,
+      "bias": true
+    },
+    "parameter_count": 29504
+  },
+  "training": {
+    "args": {
+      "data": "D:\\aiproj\\data\\sample_zh.txt",
+      "data_dir": null,
+      "prepared_data": "e\\829\\解释\\model-capability-route-promotion-bounded-real-replay-decoder-anchor-rebalanced-seed-revision\\model_capability_route_promotion_bounded_real_replay_decoder_anchor_rebalanced_seed_revision_corpus.txt",
+      "out_dir": "e\\830\\解释\\model-capability-route-promotion-bounded-real-replay-decoder-anchor-rebalanced-training-run\\run",
+      "resume": null,
+      "tokenizer": "char",
+      "bpe_vocab_size": 256,
+      "bpe_min_frequency": 2,
+      "batch_size": 4,
+      "block_size": 32,
+      "max_iters": 35,
+      "eval_interval": 10,
+      "eval_iters": 2,
+      "learning_rate": 0.0003,
+      "train_ratio": 0.9,
+      "n_layer": 2,
+      "n_head": 2,
+      "n_embd": 32,
+      "dropout": 0.0,
+      "seed": 1093,
+      "device": "cpu",
+      "sample_prompt": "自检：本题需要同时出现 fixed 与 loss。最终答案：",
+      "sample_tokens": 24,
+      "sample_temperature": 0.2,
+      "sample_top_k": 10,
+      "no_sample": false,
+      "device_used": "cpu",
+      "data_source": {
+        "kind": "prepared_data",
+        "path": "e\\829\\解释\\model-capability-route-promotion-bounded-real-replay-decoder-anchor-rebalanced-seed-revision\\model_capability_route_promotion_bounded_real_replay_decoder_anchor_rebalanced_seed_revision_corpus.txt"
+      }
+    },
+    "tokenizer": "char",
+    "device_used": "cpu",
+    "start_step": 1,
+    "end_step": 35
+  },
+  "results": {
+    "last_loss": 4.2512335777282715,
+    "history_summary": {
+      "record_count": 5,
+      "first_step": 1,
+      "last_step": 35,
+      "best_val_step": 35,
+      "best_val_loss": 4.194498062133789,
+      "last_train_loss": 4.193515300750732,
+      "last_val_loss": 4.194498062133789
+    }
+  },
+  "artifacts": [
+    {
+      "key": "checkpoint",
+      "path": "checkpoint.pt",
+      "description": "model and optimizer state",
+      "exists": true,
+      "size_bytes": 395662,
+      "sha256": "73e29c380a1d40e1072c30b30a7d62b127f037593579e774dec5fb3263f12562"
+    },
+    {
+      "key": "tokenizer",
+      "path": "tokenizer.json",
+      "description": "tokenizer vocabulary and metadata",
+      "exists": true,
+      "size_bytes": 1118,
+      "sha256": "76408d7df34580e2ca941e2d1897cc5bf2f205983deec287e0ecc64a3bfc64be"
+    },
+    {
+      "key": "train_config",
+      "path": "train_config.json",
+      "description": "training command configuration",
+      "exists": true,
+      "size_bytes": 1295,
+      "sha256": "3bf230d98fcea621537c546a1c52ac4eb7c09a1038bf640319789a1f175d16ed"
+    },
+    {
+      "key": "metrics",
+      "path": "metrics.jsonl",
+      "description": "step-by-step training metrics",
+      "exists": true,
+      "size_bytes": 552,
+      "sha256": "99976788e659f30f35c702a7fdab77fbcf356cf84c3261b13f0602aa7dd3c348"
+    },
+    {
+      "key": "history_summary",
+      "path": "history_summary.json",
+      "description": "best/latest loss summary",
+      "exists": true,
+      "size_bytes": 208,
+      "sha256": "5b043313b2f5573e690e6ef6f07c6e3f2fc129b2c0030ecc172a0ddb36cfe6b2"
+    },
+    {
+      "key": "loss_curve",
+      "path": "loss_curve.svg",
+      "description": "loss curve chart",
+      "exists": true,
+      "size_bytes": 1401,
+      "sha256": "5d8225215afbbf58005f0dcdecc4c5806b5d004dff74e9406280efe01aada52f"
+    },
+    {
+      "key": "prepared_corpus",
+      "path": "prepared_corpus.txt",
+      "description": "merged training corpus",
+      "exists": true,
+      "size_bytes": 3737,
+      "sha256": "8702a8a5a420cbf23a5b874992928b91de2b78ab5f3334dade6d7ed6793aa3b8"
+    },
+    {
+      "key": "dataset_report",
+      "path": "dataset_report.json",
+      "description": "dataset source statistics",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "dataset_chart",
+      "path": "dataset_report.svg",
+      "description": "dataset source chart",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "dataset_quality",
+      "path": "dataset_quality.json",
+      "description": "dataset quality report",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "dataset_quality_chart",
+      "path": "dataset_quality.svg",
+      "description": "dataset quality chart",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "dataset_version",
+      "path": "dataset_version.json",
+      "description": "dataset version manifest",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "dataset_version_html",
+      "path": "dataset_version.html",
+      "description": "browser dataset version report",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "sample",
+      "path": "sample.txt",
+      "description": "post-training sample",
+      "exists": true,
+      "size_bytes": 225,
+      "sha256": "2360f17fbea4f8214136b329a5ebede7fd320222740a9b707354223179944164"
+    },
+    {
+      "key": "eval_report",
+      "path": "eval_report.json",
+      "description": "checkpoint evaluation report",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "eval_suite",
+      "path": "eval_suite/eval_suite.json",
+      "description": "fixed prompt evaluation suite",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "eval_suite_csv",
+      "path": "eval_suite/eval_suite.csv",
+      "description": "fixed prompt evaluation table",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "eval_suite_chart",
+      "path": "eval_suite/eval_suite.svg",
+      "description": "fixed prompt evaluation chart",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "eval_suite_html",
+      "path": "eval_suite/eval_suite.html",
+      "description": "browser benchmark evaluation report",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "model_report",
+      "path": "model_report/model_report.json",
+      "description": "model architecture report",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "model_chart",
+      "path": "model_report/model_architecture.svg",
+      "description": "model architecture chart",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "prediction_report",
+      "path": "predictions/predictions.json",
+      "description": "next-token prediction report",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "prediction_chart",
+      "path": "predictions/predictions.svg",
+      "description": "next-token prediction chart",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "attention_report",
+      "path": "attention/attention.json",
+      "description": "attention inspection report",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "attention_chart",
+      "path": "attention/attention.svg",
+      "description": "attention heatmap",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "transcript",
+      "path": "transcript.json",
+      "description": "chat transcript",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "generated",
+      "path": "generated.txt",
+      "description": "standalone generation output",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "experiment_card_json",
+      "path": "experiment_card.json",
+      "description": "machine-readable experiment card",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "experiment_card_md",
+      "path": "experiment_card.md",
+      "description": "markdown experiment card",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "experiment_card_html",
+      "path": "experiment_card.html",
+      "description": "browser experiment card",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "dashboard",
+      "path": "dashboard.html",
+      "description": "static dashboard",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    },
+    {
+      "key": "playground",
+      "path": "playground.html",
+      "description": "static playground",
+      "exists": false,
+      "size_bytes": null,
+      "sha256": null
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "data": "D:\\aiproj\\data\\sample_zh.txt",
+  "data_dir": null,
+  "prepared_data": "e\\829\\解释\\model-capability-route-promotion-bounded-real-replay-decoder-anchor-rebalanced-seed-revision\\model_capability_route_promotion_bounded_real_replay_decoder_anchor_rebalanced_seed_revision_corpus.txt",
+  "out_dir": "e\\830\\解释\\model-capability-route-promotion-bounded-real-replay-decoder-anchor-rebalanced-training-run\\run",
+  "resume": null,
+  "tokenizer": "char",
+  "bpe_vocab_size": 256,
+  "bpe_min_frequency": 2,
+  "batch_size": 4,
+  "block_size": 32,
+  "max_iters": 35,
+  "eval_interval": 10,
+  "eval_iters": 2,
+  "learning_rate": 0.0003,
+  "train_ratio": 0.9,
+  "n_layer": 2,
+  "n_head": 2,
+  "n_embd": 32,
+  "dropout": 0.0,
+  "seed": 1093,
+  "device": "cpu",
+  "sample_prompt": "自检：本题需要同时出现 fixed 与 loss。最终答案：",
+  "sample_tokens": 24,
+  "sample_temperature": 0.2,
+  "sample_top_k": 10,
+  "no_sample": false,
+  "device_used": "cpu",
+  "data_source": {
+    "kind": "prepared_data",
+    "path": "e\\829\\解释\\model-capability-route-promotion-bounded-real-replay-decoder-anchor-rebalanced-seed-revision\\model_capability_route_promotion_bounded_real_replay_decoder_anchor_rebalanced_seed_revision_corpus.txt"
+  }
+}

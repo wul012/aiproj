@@ -1,0 +1,8 @@
+prompt: 自检：本题需要同时出现 fixed 与 loss。最终答案：
+max_new_tokens: 24
+temperature: 0.2
+top_k: 10
+
+自检：本题需要同时出现 fixed 与 loss。最终答案：答
+
+，k词 ro ssoetteeeesssu

@@ -67,6 +67,10 @@ e/828/解释/说明.md
 e/829/图片
 e/829/解释/说明.md
  -> v829 bounded replay decoder anchor rebalanced seed revision 的运行截图和解释
+
+e/830/图片
+e/830/解释/说明.md
+ -> v830 bounded replay decoder anchor rebalanced training run 的运行截图和解释
 ```
 
 ```text

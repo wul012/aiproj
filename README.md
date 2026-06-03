@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v829.0.0` builds a rebalanced decoder-anchor seed revision, turning the v828 distribution audit into a training-ready corpus with capped carry-forward rows and upweighted direct answers.
+Version `v830.0.0` trains a real checkpoint from the v829 rebalanced decoder-anchor corpus and records the training artifacts for the next bounded replay.
+
+## Latest v830 checkpoint
+
+- Added `model_capability_route_promotion_bounded_real_replay_decoder_anchor_rebalanced_training_run`.
+- Added CLI `scripts/build_model_capability_route_promotion_bounded_real_replay_decoder_anchor_rebalanced_training_run.py`.
+- Trained from the real v829 rebalanced corpus with 40 examples: 10 carry-forward, 15 direct-answer, and 15 bridge examples.
+- Produced a real checkpoint under `e/830/解释/model-capability-route-promotion-bounded-real-replay-decoder-anchor-rebalanced-training-run/run`.
+- Recorded `final_step=35`, `final_train_loss=4.1935`, and `final_val_loss=4.1945`.
+- Verified checkpoint, tokenizer, metrics, train config, run manifest, sample, and prepared corpus artifacts.
+- Kept the model-quality claim as `training_artifact_only`; improvement still requires bounded replay comparison.
+- Routed the next step to `run_decoder_anchor_rebalanced_checkpoint_bounded_replay`.
+- Verified with `4 passed` focused decoder anchor rebalanced training tests.
+- Archived v830 evidence in `e/830` and added the code explanation in `代码讲解记录_模型能力阶段/844-v830-route-promotion-bounded-real-replay-decoder-anchor-rebalanced-training-run.md`.
 
 ## Latest v829 checkpoint
 
