@@ -4,7 +4,17 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v799.0.0` contract-checks the route promotion decision index by rebuilding it from source decisions.
+Version `v800.0.0` publishes a contract-verified route promotion governance snapshot.
+
+## Latest v800 checkpoint
+
+- Added `model_capability_route_promotion_governance_snapshot`.
+- Added CLI `scripts/build_model_capability_route_promotion_governance_snapshot.py`.
+- Consumed the real v798 route promotion decision index and v799 contract check.
+- Produced `decision=model_capability_route_promotion_governance_snapshot_ready`.
+- Published a route card for `objective_level_contrast` with `verification_status=contract_verified`.
+- Verified with `10 passed` route promotion governance snapshot focused tests.
+- Archived v800 evidence in `e/800` and added the code explanation in `代码讲解记录_模型能力阶段/814-v800-route-promotion-governance-snapshot.md`.
 
 ## Latest v799 checkpoint
 

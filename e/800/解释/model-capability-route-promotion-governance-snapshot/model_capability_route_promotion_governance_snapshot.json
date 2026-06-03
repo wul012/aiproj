@@ -1,0 +1,143 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability route promotion governance snapshot",
+  "generated_at": "2026-06-03T06:57:15Z",
+  "status": "pass",
+  "decision": "model_capability_route_promotion_governance_snapshot_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_decision_index": "e\\798\\解释\\model-capability-route-promotion-decision-index\\model_capability_route_promotion_decision_index.json",
+  "source_index_contract_check": "e\\799\\解释\\model-capability-route-promotion-decision-index-check\\model_capability_route_promotion_decision_index_check.json",
+  "index_summary": {
+    "decision_index_ready": true,
+    "source_decision_count": 1,
+    "accepted_source_count": 1,
+    "route_entry_count": 1,
+    "accepted_route_count": 1,
+    "min_ready_routes": 1,
+    "route_ids": [
+      "objective_level_contrast"
+    ],
+    "route_id_count": 1,
+    "required_boundary": "tiny_required_term_pair_probe_only",
+    "boundary": "tiny_required_term_pair_probe_only",
+    "model_quality_claims": [
+      "seed_stable_pair_probe_route_accepted"
+    ],
+    "model_quality_claim": "seed_stable_pair_probe_route_accepted",
+    "passed_check_count": 6,
+    "failed_check_count": 0,
+    "source_decision_paths": [
+      "e\\797\\解释\\model-capability-route-promotion-review-decision\\model_capability_route_promotion_review_decision.json"
+    ]
+  },
+  "contract_check_summary": {
+    "contract_check_ready": true,
+    "source_decision_count": 1,
+    "original_decision": "model_capability_route_promotion_decision_index_ready",
+    "rebuilt_decision": "model_capability_route_promotion_decision_index_ready",
+    "original_route_ids": [
+      "objective_level_contrast"
+    ],
+    "rebuilt_route_ids": [
+      "objective_level_contrast"
+    ],
+    "original_accepted_route_count": 1,
+    "rebuilt_accepted_route_count": 1,
+    "passed_check_count": 10,
+    "failed_check_count": 0
+  },
+  "route_cards": [
+    {
+      "route_id": "objective_level_contrast",
+      "route_status": "accepted",
+      "verification_status": "contract_verified",
+      "governance_status": "available_for_downstream_bounded_governance",
+      "review_scope": "bounded_route_promotion_review_only",
+      "boundary": "tiny_required_term_pair_probe_only",
+      "model_quality_claim": "seed_stable_pair_probe_route_accepted",
+      "source_decision_path": "e\\797\\解释\\model-capability-route-promotion-review-decision\\model_capability_route_promotion_review_decision.json",
+      "allowed_downstream_use": "bounded_model_capability_governance_only",
+      "required_boundary": "tiny_required_term_pair_probe_only"
+    }
+  ],
+  "check_rows": [
+    {
+      "id": "decision_index_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "decision index must pass"
+    },
+    {
+      "id": "decision_index_ready",
+      "status": "pass",
+      "actual": "model_capability_route_promotion_decision_index_ready",
+      "detail": "decision index must be ready"
+    },
+    {
+      "id": "contract_check_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "contract check must pass"
+    },
+    {
+      "id": "contract_check_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "contract check must be ready"
+    },
+    {
+      "id": "route_cards_present",
+      "status": "pass",
+      "actual": 1,
+      "detail": "snapshot must include route cards"
+    },
+    {
+      "id": "verified_route_cards",
+      "status": "pass",
+      "actual": 1,
+      "detail": "all route cards must be contract verified"
+    },
+    {
+      "id": "accepted_route_count_matches",
+      "status": "pass",
+      "actual": {
+        "index": 1,
+        "rebuilt": 1
+      },
+      "detail": "index and rebuilt accepted route count must match"
+    },
+    {
+      "id": "boundary_scoped",
+      "status": "pass",
+      "actual": 0,
+      "detail": "all route cards must keep the required boundary"
+    }
+  ],
+  "summary": {
+    "governance_snapshot_ready": true,
+    "route_card_count": 1,
+    "verified_route_count": 1,
+    "route_ids": [
+      "objective_level_contrast"
+    ],
+    "route_id_count": 1,
+    "required_boundary": "tiny_required_term_pair_probe_only",
+    "boundary": "tiny_required_term_pair_probe_only",
+    "model_quality_claims": [
+      "seed_stable_pair_probe_route_accepted"
+    ],
+    "model_quality_claim": "seed_stable_pair_probe_route_accepted",
+    "passed_check_count": 8,
+    "failed_check_count": 0,
+    "next_step": "publish_bounded_route_promotion_governance_snapshot"
+  },
+  "downstream_policy": {
+    "allowed": true,
+    "allowed_scope": "bounded_model_capability_governance_only",
+    "route_ids": [
+      "objective_level_contrast"
+    ],
+    "reason": "all accepted route cards are contract verified and boundary scoped"
+  }
+}

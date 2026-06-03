@@ -992,6 +992,9 @@
 813-v799-route-promotion-decision-index-check.md
  -> v799 code explanation: contract-check the route promotion decision index by rebuilding it from source decisions.
 
+814-v800-route-promotion-governance-snapshot.md
+ -> v800 code explanation: publish a contract-verified route promotion governance snapshot.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

@@ -1,0 +1,9 @@
+status=pass
+decision=model_capability_route_promotion_governance_snapshot_ready
+failed_count=0
+governance_snapshot_ready=True
+verified_route_count=1
+route_ids=objective_level_contrast
+boundary=tiny_required_term_pair_probe_only
+model_quality_claim=seed_stable_pair_probe_route_accepted
+next_step=publish_bounded_route_promotion_governance_snapshot
