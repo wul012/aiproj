@@ -47,6 +47,10 @@ e/823/解释/说明.md
 e/824/图片
 e/824/解释/说明.md
  -> v824 bounded replay decoder anchor seed revision 的运行截图和解释
+
+e/825/图片
+e/825/解释/说明.md
+ -> v825 bounded replay decoder anchor training run 的运行截图和解释
 ```
 
 ```text

@@ -32,6 +32,9 @@
 838-v824-route-promotion-bounded-real-replay-decoder-anchor-seed-revision.md
  -> v824 code explanation: convert the decoder-anchor replay signal into a training-ready seed revision with direct-answer and bridge-completion examples.
 
+839-v825-route-promotion-bounded-real-replay-decoder-anchor-training-run.md
+ -> v825 code explanation: train the v824 decoder-anchor seed revision into a real checkpoint while keeping capability claims gated behind bounded replay.
+
 487-v473-baseline-candidate-capability-delta.md
  -> v473 code explanation: carry real tiny training loss and generation-quality deltas into the baseline-candidate eval loop.
 

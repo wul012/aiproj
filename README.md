@@ -4,7 +4,19 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v824.0.0` converts the v823 decoder-anchor signal into a training-ready seed revision with direct-answer and bridge-completion examples.
+Version `v825.0.0` trains the v824 decoder-anchor seed revision into a real checkpoint while keeping model-quality claims gated behind bounded replay.
+
+## Latest v825 checkpoint
+
+- Added `model_capability_route_promotion_bounded_real_replay_decoder_anchor_training_run`.
+- Added CLI `scripts/build_model_capability_route_promotion_bounded_real_replay_decoder_anchor_training_run.py`.
+- Trained from the real v824 decoder-anchor corpus with 48 examples, including 15 bridge examples and 5 direct-answer examples.
+- Produced a real checkpoint under `e/825/解释/model-capability-route-promotion-bounded-real-replay-decoder-anchor-training-run/run`.
+- Recorded `final_step=35`, `final_train_loss=4.2080`, and `final_val_loss=4.2626`.
+- Verified checkpoint, tokenizer, metrics, train config, run manifest, sample, and prepared corpus artifacts.
+- Kept the model-quality claim as `training_artifact_only`; the next step is bounded replay of this checkpoint.
+- Verified with `4 passed` focused decoder anchor training tests.
+- Archived v825 evidence in `e/825` and added the code explanation in `代码讲解记录_模型能力阶段/839-v825-route-promotion-bounded-real-replay-decoder-anchor-training-run.md`.
 
 ## Latest v824 checkpoint
 

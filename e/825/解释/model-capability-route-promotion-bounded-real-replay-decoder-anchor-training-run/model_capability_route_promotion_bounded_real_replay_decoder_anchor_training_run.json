@@ -1,0 +1,616 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability route promotion bounded real replay decoder anchor training run",
+  "generated_at": "2026-06-03T12:32:35Z",
+  "status": "pass",
+  "decision": "model_capability_route_promotion_bounded_real_replay_decoder_anchor_training_run_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_decoder_anchor_seed_revision": "e\\824\\解释\\model-capability-route-promotion-bounded-real-replay-decoder-anchor-seed-revision\\model_capability_route_promotion_bounded_real_replay_decoder_anchor_seed_revision.json",
+  "run_dir": "e\\825\\解释\\model-capability-route-promotion-bounded-real-replay-decoder-anchor-training-run\\run",
+  "decoder_anchor_seed_summary": {
+    "decoder_anchor_seed_revision_ready": true,
+    "original_example_count": 28,
+    "added_example_count": 20,
+    "example_count": 48,
+    "case_count": 5,
+    "bridge_example_count": 15,
+    "unanchored_direct_example_count": 5,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_real_replay_decoder_anchor_training_run",
+    "next_step": "train_decoder_anchor_seed_revision",
+    "failed_check_count": 0
+  },
+  "artifacts": [
+    {
+      "key": "checkpoint",
+      "path": "e\\825\\解释\\model-capability-route-promotion-bounded-real-replay-decoder-anchor-training-run\\run\\checkpoint.pt",
+      "exists": true,
+      "size": 395662
+    },
+    {
+      "key": "tokenizer",
+      "path": "e\\825\\解释\\model-capability-route-promotion-bounded-real-replay-decoder-anchor-training-run\\run\\tokenizer.json",
+      "exists": true,
+      "size": 1118
+    },
+    {
+      "key": "metrics",
+      "path": "e\\825\\解释\\model-capability-route-promotion-bounded-real-replay-decoder-anchor-training-run\\run\\metrics.jsonl",
+      "exists": true,
+      "size": 550
+    },
+    {
+      "key": "train_config",
+      "path": "e\\825\\解释\\model-capability-route-promotion-bounded-real-replay-decoder-anchor-training-run\\run\\train_config.json",
+      "exists": true,
+      "size": 1239
+    },
+    {
+      "key": "run_manifest",
+      "path": "e\\825\\解释\\model-capability-route-promotion-bounded-real-replay-decoder-anchor-training-run\\run\\run_manifest.json",
+      "exists": true,
+      "size": 11340
+    },
+    {
+      "key": "sample",
+      "path": "e\\825\\解释\\model-capability-route-promotion-bounded-real-replay-decoder-anchor-training-run\\run\\sample.txt",
+      "exists": true,
+      "size": 218
+    },
+    {
+      "key": "prepared_corpus",
+      "path": "e\\825\\解释\\model-capability-route-promotion-bounded-real-replay-decoder-anchor-training-run\\run\\prepared_corpus.txt",
+      "exists": true,
+      "size": 4931
+    }
+  ],
+  "metrics": {
+    "record_count": 5,
+    "first": {
+      "last_loss": 4.542296409606934,
+      "step": 1,
+      "train_loss": 4.523384094238281,
+      "val_loss": 4.533301830291748
+    },
+    "last": {
+      "last_loss": 4.3061442375183105,
+      "step": 35,
+      "train_loss": 4.207976341247559,
+      "val_loss": 4.262609481811523
+    },
+    "train_loss_delta": -0.315408,
+    "val_loss_delta": -0.270692
+  },
+  "train_config": {
+    "data": "D:\\aiproj\\data\\sample_zh.txt",
+    "data_dir": null,
+    "prepared_data": "e\\824\\解释\\model-capability-route-promotion-bounded-real-replay-decoder-anchor-seed-revision\\model_capability_route_promotion_bounded_real_replay_decoder_anchor_seed_revision_corpus.txt",
+    "out_dir": "e\\825\\解释\\model-capability-route-promotion-bounded-real-replay-decoder-anchor-training-run\\run",
+    "resume": null,
+    "tokenizer": "char",
+    "bpe_vocab_size": 256,
+    "bpe_min_frequency": 2,
+    "batch_size": 4,
+    "block_size": 32,
+    "max_iters": 35,
+    "eval_interval": 10,
+    "eval_iters": 2,
+    "learning_rate": 0.0003,
+    "train_ratio": 0.9,
+    "n_layer": 2,
+    "n_head": 2,
+    "n_embd": 32,
+    "dropout": 0.0,
+    "seed": 993,
+    "device": "cpu",
+    "sample_prompt": "自检：本题需要同时出现 fixed 与 loss。最终答案：",
+    "sample_tokens": 24,
+    "sample_temperature": 0.2,
+    "sample_top_k": 10,
+    "no_sample": false,
+    "device_used": "cpu",
+    "data_source": {
+      "kind": "prepared_data",
+      "path": "e\\824\\解释\\model-capability-route-promotion-bounded-real-replay-decoder-anchor-seed-revision\\model_capability_route_promotion_bounded_real_replay_decoder_anchor_seed_revision_corpus.txt"
+    }
+  },
+  "manifest": {
+    "schema_version": 1,
+    "run_dir": "e\\825\\解释\\model-capability-route-promotion-bounded-real-replay-decoder-anchor-training-run\\run",
+    "created_at": "2026-06-03T12:32:20Z",
+    "started_at": "2026-06-03T12:32:18Z",
+    "finished_at": "2026-06-03T12:32:20Z",
+    "duration_seconds": 2.0,
+    "command": [
+      "python.exe",
+      "scripts\\train.py",
+      "--prepared-data",
+      "e\\824\\解释\\model-capability-route-promotion-bounded-real-replay-decoder-anchor-seed-revision\\model_capability_route_promotion_bounded_real_replay_decoder_anchor_seed_revision_corpus.txt",
+      "--out-dir",
+      "e\\825\\解释\\model-capability-route-promotion-bounded-real-replay-decoder-anchor-training-run\\run",
+      "--max-iters",
+      "35",
+      "--eval-interval",
+      "10",
+      "--eval-iters",
+      "2",
+      "--batch-size",
+      "4",
+      "--block-size",
+      "32",
+      "--n-layer",
+      "2",
+      "--n-head",
+      "2",
+      "--n-embd",
+      "32",
+      "--dropout",
+      "0.0",
+      "--seed",
+      "993",
+      "--device",
+      "cpu",
+      "--sample-prompt",
+      "自检：本题需要同时出现 fixed 与 loss。最终答案：",
+      "--sample-tokens",
+      "24",
+      "--sample-temperature",
+      "0.2",
+      "--sample-top-k",
+      "10"
+    ],
+    "git": {
+      "commit": "ae985c3510c759c8441033f26884419d4fd28584",
+      "short_commit": "ae985c3",
+      "branch": "main",
+      "tag": "v824.0.0",
+      "dirty": true
+    },
+    "environment": {
+      "python": "3.13.3",
+      "platform": "Windows-11-10.0.26100-SP0",
+      "executable": "D:\\python\\python.exe",
+      "torch": "2.6.0+cu124",
+      "numpy": "2.2.1"
+    },
+    "data": {
+      "source": {
+        "kind": "prepared_data",
+        "path": "e\\824\\解释\\model-capability-route-promotion-bounded-real-replay-decoder-anchor-seed-revision\\model_capability_route_promotion_bounded_real_replay_decoder_anchor_seed_revision_corpus.txt"
+      },
+      "token_count": 3431,
+      "train_token_count": 3087,
+      "val_token_count": 344,
+      "dataset_report": null,
+      "dataset_quality": null,
+      "dataset_version": null
+    },
+    "model": {
+      "config": {
+        "vocab_size": 94,
+        "block_size": 32,
+        "n_layer": 2,
+        "n_head": 2,
+        "n_embd": 32,
+        "dropout": 0.0,
+        "bias": true
+      },
+      "parameter_count": 29504
+    },
+    "training": {
+      "args": {
+        "data": "D:\\aiproj\\data\\sample_zh.txt",
+        "data_dir": null,
+        "prepared_data": "e\\824\\解释\\model-capability-route-promotion-bounded-real-replay-decoder-anchor-seed-revision\\model_capability_route_promotion_bounded_real_replay_decoder_anchor_seed_revision_corpus.txt",
+        "out_dir": "e\\825\\解释\\model-capability-route-promotion-bounded-real-replay-decoder-anchor-training-run\\run",
+        "resume": null,
+        "tokenizer": "char",
+        "bpe_vocab_size": 256,
+        "bpe_min_frequency": 2,
+        "batch_size": 4,
+        "block_size": 32,
+        "max_iters": 35,
+        "eval_interval": 10,
+        "eval_iters": 2,
+        "learning_rate": 0.0003,
+        "train_ratio": 0.9,
+        "n_layer": 2,
+        "n_head": 2,
+        "n_embd": 32,
+        "dropout": 0.0,
+        "seed": 993,
+        "device": "cpu",
+        "sample_prompt": "自检：本题需要同时出现 fixed 与 loss。最终答案：",
+        "sample_tokens": 24,
+        "sample_temperature": 0.2,
+        "sample_top_k": 10,
+        "no_sample": false,
+        "device_used": "cpu",
+        "data_source": {
+          "kind": "prepared_data",
+          "path": "e\\824\\解释\\model-capability-route-promotion-bounded-real-replay-decoder-anchor-seed-revision\\model_capability_route_promotion_bounded_real_replay_decoder_anchor_seed_revision_corpus.txt"
+        }
+      },
+      "tokenizer": "char",
+      "device_used": "cpu",
+      "start_step": 1,
+      "end_step": 35
+    },
+    "results": {
+      "last_loss": 4.3061442375183105,
+      "history_summary": {
+        "record_count": 5,
+        "first_step": 1,
+        "last_step": 35,
+        "best_val_step": 35,
+        "best_val_loss": 4.262609481811523,
+        "last_train_loss": 4.207976341247559,
+        "last_val_loss": 4.262609481811523
+      }
+    },
+    "artifacts": [
+      {
+        "key": "checkpoint",
+        "path": "checkpoint.pt",
+        "description": "model and optimizer state",
+        "exists": true,
+        "size_bytes": 395662,
+        "sha256": "00a18fce131096e11a9a6c4ec1b208787a4a160f3037a47d7bae6da4152a7415"
+      },
+      {
+        "key": "tokenizer",
+        "path": "tokenizer.json",
+        "description": "tokenizer vocabulary and metadata",
+        "exists": true,
+        "size_bytes": 1118,
+        "sha256": "76408d7df34580e2ca941e2d1897cc5bf2f205983deec287e0ecc64a3bfc64be"
+      },
+      {
+        "key": "train_config",
+        "path": "train_config.json",
+        "description": "training command configuration",
+        "exists": true,
+        "size_bytes": 1239,
+        "sha256": "c83cc2a40b272d3a923632b7b42898ee3089f1cdd862d055856c4583d6cc1b21"
+      },
+      {
+        "key": "metrics",
+        "path": "metrics.jsonl",
+        "description": "step-by-step training metrics",
+        "exists": true,
+        "size_bytes": 550,
+        "sha256": "8f3c7b28228da27c97158c0ee755618e9b3a35f860db74c303bcef3a5fe7ea47"
+      },
+      {
+        "key": "history_summary",
+        "path": "history_summary.json",
+        "description": "best/latest loss summary",
+        "exists": true,
+        "size_bytes": 208,
+        "sha256": "13d3ff5e4bd37be793884e6832457fc187cf72da25ea13e16473b79c778d178f"
+      },
+      {
+        "key": "loss_curve",
+        "path": "loss_curve.svg",
+        "description": "loss curve chart",
+        "exists": true,
+        "size_bytes": 1401,
+        "sha256": "bcf993b74deb0bb6c122535e81b0bebb5b6f7084e3f37a1a50cd195c2b0a7665"
+      },
+      {
+        "key": "prepared_corpus",
+        "path": "prepared_corpus.txt",
+        "description": "merged training corpus",
+        "exists": true,
+        "size_bytes": 4931,
+        "sha256": "3fbce4cdeddfb08bab78365438326ad139f32076f800b19d9ef77a4b72179143"
+      },
+      {
+        "key": "dataset_report",
+        "path": "dataset_report.json",
+        "description": "dataset source statistics",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "dataset_chart",
+        "path": "dataset_report.svg",
+        "description": "dataset source chart",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "dataset_quality",
+        "path": "dataset_quality.json",
+        "description": "dataset quality report",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "dataset_quality_chart",
+        "path": "dataset_quality.svg",
+        "description": "dataset quality chart",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "dataset_version",
+        "path": "dataset_version.json",
+        "description": "dataset version manifest",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "dataset_version_html",
+        "path": "dataset_version.html",
+        "description": "browser dataset version report",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "sample",
+        "path": "sample.txt",
+        "description": "post-training sample",
+        "exists": true,
+        "size_bytes": 218,
+        "sha256": "982b8d98c4f59ebdf461c751227cd90401a6bf5143d513b3153fca2db7ff7508"
+      },
+      {
+        "key": "eval_report",
+        "path": "eval_report.json",
+        "description": "checkpoint evaluation report",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "eval_suite",
+        "path": "eval_suite/eval_suite.json",
+        "description": "fixed prompt evaluation suite",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "eval_suite_csv",
+        "path": "eval_suite/eval_suite.csv",
+        "description": "fixed prompt evaluation table",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "eval_suite_chart",
+        "path": "eval_suite/eval_suite.svg",
+        "description": "fixed prompt evaluation chart",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "eval_suite_html",
+        "path": "eval_suite/eval_suite.html",
+        "description": "browser benchmark evaluation report",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "model_report",
+        "path": "model_report/model_report.json",
+        "description": "model architecture report",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "model_chart",
+        "path": "model_report/model_architecture.svg",
+        "description": "model architecture chart",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "prediction_report",
+        "path": "predictions/predictions.json",
+        "description": "next-token prediction report",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "prediction_chart",
+        "path": "predictions/predictions.svg",
+        "description": "next-token prediction chart",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "attention_report",
+        "path": "attention/attention.json",
+        "description": "attention inspection report",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "attention_chart",
+        "path": "attention/attention.svg",
+        "description": "attention heatmap",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "transcript",
+        "path": "transcript.json",
+        "description": "chat transcript",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "generated",
+        "path": "generated.txt",
+        "description": "standalone generation output",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "experiment_card_json",
+        "path": "experiment_card.json",
+        "description": "machine-readable experiment card",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "experiment_card_md",
+        "path": "experiment_card.md",
+        "description": "markdown experiment card",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "experiment_card_html",
+        "path": "experiment_card.html",
+        "description": "browser experiment card",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "dashboard",
+        "path": "dashboard.html",
+        "description": "static dashboard",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "playground",
+        "path": "playground.html",
+        "description": "static playground",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      }
+    ]
+  },
+  "check_rows": [
+    {
+      "id": "decoder_anchor_seed_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "decoder anchor seed revision must pass"
+    },
+    {
+      "id": "decoder_anchor_seed_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "decoder anchor seed revision must be ready"
+    },
+    {
+      "id": "bridge_examples_present",
+      "status": "pass",
+      "actual": 15,
+      "detail": "seed must contain decoder bridge examples"
+    },
+    {
+      "id": "direct_examples_present",
+      "status": "pass",
+      "actual": 5,
+      "detail": "seed must contain direct answer examples"
+    },
+    {
+      "id": "checkpoint_exists",
+      "status": "pass",
+      "actual": "e\\825\\解释\\model-capability-route-promotion-bounded-real-replay-decoder-anchor-training-run\\run\\checkpoint.pt",
+      "detail": "training must produce checkpoint.pt"
+    },
+    {
+      "id": "tokenizer_exists",
+      "status": "pass",
+      "actual": "e\\825\\解释\\model-capability-route-promotion-bounded-real-replay-decoder-anchor-training-run\\run\\tokenizer.json",
+      "detail": "training must produce tokenizer.json"
+    },
+    {
+      "id": "metrics_exists",
+      "status": "pass",
+      "actual": "e\\825\\解释\\model-capability-route-promotion-bounded-real-replay-decoder-anchor-training-run\\run\\metrics.jsonl",
+      "detail": "training must produce metrics.jsonl"
+    },
+    {
+      "id": "manifest_exists",
+      "status": "pass",
+      "actual": "e\\825\\解释\\model-capability-route-promotion-bounded-real-replay-decoder-anchor-training-run\\run\\run_manifest.json",
+      "detail": "training must produce run_manifest.json"
+    },
+    {
+      "id": "prepared_corpus_exists",
+      "status": "pass",
+      "actual": "e\\825\\解释\\model-capability-route-promotion-bounded-real-replay-decoder-anchor-training-run\\run\\prepared_corpus.txt",
+      "detail": "training must copy prepared corpus"
+    },
+    {
+      "id": "metrics_records_present",
+      "status": "pass",
+      "actual": 5,
+      "detail": "training should record at least first and last metrics"
+    },
+    {
+      "id": "max_iters_positive",
+      "status": "pass",
+      "actual": 35,
+      "detail": "train_config must record positive max_iters"
+    }
+  ],
+  "decoder_anchor_training": {
+    "ready": true,
+    "artifact_count": 7,
+    "metric_record_count": 5,
+    "final_step": 35,
+    "final_train_loss": 4.207976341247559,
+    "final_val_loss": 4.262609481811523,
+    "train_loss_delta": -0.315408,
+    "val_loss_delta": -0.270692,
+    "max_iters": 35,
+    "seed": 993,
+    "decoder_anchor_example_count": 48,
+    "bridge_example_count": 15,
+    "unanchored_direct_example_count": 5,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_real_replay_decoder_anchor_checkpoint_replay",
+    "next_step": "run_decoder_anchor_checkpoint_bounded_replay"
+  },
+  "summary": {
+    "decoder_anchor_training_ready": true,
+    "artifact_count": 7,
+    "metric_record_count": 5,
+    "final_step": 35,
+    "final_train_loss": 4.207976341247559,
+    "final_val_loss": 4.262609481811523,
+    "train_loss_delta": -0.315408,
+    "val_loss_delta": -0.270692,
+    "decoder_anchor_example_count": 48,
+    "bridge_example_count": 15,
+    "unanchored_direct_example_count": 5,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_real_replay_decoder_anchor_checkpoint_replay",
+    "next_step": "run_decoder_anchor_checkpoint_bounded_replay",
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "training_artifact_only",
+    "reason": "A decoder-anchor-informed checkpoint exists, but model improvement still requires bounded replay comparison.",
+    "next_action": "run_decoder_anchor_checkpoint_bounded_replay"
+  }
+}
