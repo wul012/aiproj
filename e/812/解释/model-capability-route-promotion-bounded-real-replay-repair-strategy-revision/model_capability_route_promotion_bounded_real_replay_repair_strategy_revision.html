@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT model capability route promotion bounded real replay repair strategy revision</title>
+<style>
+:root{color-scheme:light;--ink:#16212a;--muted:#667381;--line:#d8dee4;--panel:#f8fafc;--accent:#1d4ed8}
+*{box-sizing:border-box}
+body{margin:0;background:#eef2f7;color:var(--ink);font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1240px;margin:0 auto;padding:28px}
+h1{font-size:30px;margin:0 0 8px;letter-spacing:0}
+h2{font-size:18px;margin:0 0 12px;letter-spacing:0}
+p{color:var(--muted);line-height:1.55;overflow-wrap:anywhere}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:18px 0}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:8px}
+.card{padding:14px}
+.card span{display:block;color:var(--muted);font-size:12px;text-transform:uppercase}
+.card strong{display:block;margin-top:6px;font-size:18px;line-height:1.2;color:var(--accent);overflow-wrap:anywhere}
+.panel{padding:16px;margin:14px 0}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:#334155}
+td{overflow-wrap:anywhere}
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT model capability route promotion bounded real replay repair strategy revision</h1><p>Turns the regressed repair checkpoint comparison into a concrete next repair strategy while keeping promotion blocked.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Decision</span><strong>model_capability_route_promotion_bounded_real_replay_repair_strategy_revision_ready</strong></div><div class="card"><span>Blocked</span><strong>True</strong></div><div class="card"><span>Regression</span><strong>True</strong></div><div class="card"><span>Pass delta</span><strong>-2</strong></div><div class="card"><span>Rate delta</span><strong>-0.4</strong></div><div class="card"><span>Next</span><strong>build_bounded_real_replay_repair_seed_revision</strong></div></section>
+<section class="panel"><h2>Case Actions</h2><div class="table-wrap"><table>
+<thead><tr><th>Case</th><th>Severity</th><th>Baseline pass</th><th>Repair pass</th><th>Seed change</th><th>Guardrail</th></tr></thead>
+<tbody><tr><td>objective-answer-check</td><td>persistent_gap</td><td>False</td><td>False</td><td>add_direct_prompt_to_fixed_loss_bridge_examples</td><td>prove_failed_case_recovery_before_promotion</td></tr><tr><td>objective-answer-contrast</td><td>regression</td><td>True</td><td>False</td><td>add_baseline_preservation_and_contrastive_repair_examples</td><td>preserve_baseline_pass_before_accepting_repair_checkpoint</td></tr><tr><td>objective-answer-direct</td><td>persistent_gap</td><td>False</td><td>False</td><td>add_direct_prompt_to_fixed_loss_bridge_examples</td><td>prove_failed_case_recovery_before_promotion</td></tr><tr><td>objective-answer-jsonish</td><td>regression</td><td>True</td><td>False</td><td>add_baseline_preservation_and_contrastive_repair_examples</td><td>preserve_baseline_pass_before_accepting_repair_checkpoint</td></tr><tr><td>objective-answer-role</td><td>persistent_gap</td><td>False</td><td>False</td><td>add_direct_prompt_to_fixed_loss_bridge_examples</td><td>prove_failed_case_recovery_before_promotion</td></tr></tbody>
+</table></div></section>
+<section class="panel"><h2>Strategy Actions</h2><div class="table-wrap"><table>
+<thead><tr><th>Action</th><th>Category</th><th>Evidence</th><th>Detail</th></tr></thead>
+<tbody><tr><td>block_current_repair_checkpoint</td><td>gate</td><td>-2</td><td>Do not promote the v810 repair checkpoint after replay regression.</td></tr><tr><td>add_baseline_preservation_examples</td><td>seed</td><td>2</td><td>Include examples that protect cases the baseline already passed.</td></tr><tr><td>balance_direct_and_self_check_examples</td><td>seed</td><td>6</td><td>Keep direct answers and self-check answers, but add preservation and contrastive coverage.</td></tr><tr><td>short_training_with_replay_first</td><td>training</td><td>20</td><td>Keep repair training bounded and require immediate replay comparison before promotion.</td></tr><tr><td>retain_original_repair_tasks</td><td>plan</td><td>3</td><td>Carry the original failed-case repair tasks forward instead of inventing unrelated objectives.</td></tr></tbody>
+</table></div></section>
+</main>
+</body>
+</html>

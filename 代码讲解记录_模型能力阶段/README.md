@@ -1028,6 +1028,9 @@
 825-v811-route-promotion-bounded-real-replay-repair-checkpoint-comparison.md
  -> v811 code explanation: compare the v810 repair checkpoint replay against the v806 baseline bounded replay and block promotion after regression.
 
+826-v812-route-promotion-bounded-real-replay-repair-strategy-revision.md
+ -> v812 code explanation: turn the regressed repair checkpoint comparison into a bounded repair strategy revision with case actions and guardrails.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

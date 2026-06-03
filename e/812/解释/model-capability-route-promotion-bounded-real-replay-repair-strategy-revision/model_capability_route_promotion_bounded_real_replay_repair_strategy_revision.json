@@ -1,0 +1,267 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability route promotion bounded real replay repair strategy revision",
+  "generated_at": "2026-06-03T08:50:23Z",
+  "status": "pass",
+  "decision": "model_capability_route_promotion_bounded_real_replay_repair_strategy_revision_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_comparison": "D:\\aiproj\\e\\811\\解释\\model-capability-route-promotion-bounded-real-replay-repair-checkpoint-replay\\comparison\\model_capability_route_promotion_bounded_real_replay_repair_checkpoint_comparison.json",
+  "source_repair_plan": "D:\\aiproj\\e\\808\\解释\\model-capability-route-promotion-bounded-real-replay-repair-plan\\model_capability_route_promotion_bounded_real_replay_repair_plan.json",
+  "source_repair_seed": "D:\\aiproj\\e\\809\\解释\\model-capability-route-promotion-bounded-real-replay-repair-seed\\model_capability_route_promotion_bounded_real_replay_repair_seed.json",
+  "source_training_run": "D:\\aiproj\\e\\810\\解释\\model-capability-route-promotion-bounded-real-replay-repair-training-run\\training-evidence\\model_capability_route_promotion_bounded_real_replay_repair_training_run.json",
+  "source_summaries": {
+    "comparison": {
+      "bounded_repair_checkpoint_comparison_ready": true,
+      "repair_checkpoint_improved": false,
+      "repair_checkpoint_regressed": true,
+      "baseline_passed_case_count": 2,
+      "repair_passed_case_count": 0,
+      "passed_case_delta": -2,
+      "baseline_pass_rate": 0.4,
+      "repair_pass_rate": 0.0,
+      "pass_rate_delta": -0.4,
+      "promotion_ready": false,
+      "case_count": 5,
+      "next_step": "revise_bounded_repair_seed_or_training_strategy_before_replay_promotion",
+      "failed_check_count": 0
+    },
+    "repair_plan": {
+      "bounded_real_replay_repair_plan_ready": true,
+      "task_count": 3,
+      "source_pass_rate": 0.4,
+      "target_pass_rate": 1.0,
+      "proposed_next_artifact": "model_capability_route_promotion_bounded_real_replay_repair_seed",
+      "next_step": "build_bounded_real_replay_repair_seed",
+      "failed_check_count": 0
+    },
+    "repair_seed": {
+      "bounded_real_replay_repair_seed_ready": true,
+      "example_count": 6,
+      "case_count": 3,
+      "source_pass_rate": 0.4,
+      "target_pass_rate": 1.0,
+      "proposed_next_artifact": "model_capability_route_promotion_bounded_real_replay_repair_training_run",
+      "next_step": "run_bounded_real_replay_repair_training",
+      "failed_check_count": 0
+    },
+    "training_run": {
+      "bounded_real_replay_repair_training_ready": true,
+      "artifact_count": 7,
+      "metric_record_count": 3,
+      "final_step": 20,
+      "final_train_loss": 3.9741125106811523,
+      "final_val_loss": 3.9439306259155273,
+      "train_loss_delta": -0.200651,
+      "val_loss_delta": -0.234615,
+      "proposed_next_artifact": "model_capability_route_promotion_bounded_real_replay_repair_checkpoint_replay",
+      "next_step": "run_repair_checkpoint_bounded_replay",
+      "failed_check_count": 0
+    }
+  },
+  "case_actions": [
+    {
+      "case_id": "objective-answer-check",
+      "severity": "persistent_gap",
+      "baseline_pass": false,
+      "repair_pass": false,
+      "baseline_hit_terms": [
+        "loss"
+      ],
+      "repair_hit_terms": [],
+      "repair_missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "recommended_seed_change": "add_direct_prompt_to_fixed_loss_bridge_examples",
+      "required_guardrail": "prove_failed_case_recovery_before_promotion"
+    },
+    {
+      "case_id": "objective-answer-contrast",
+      "severity": "regression",
+      "baseline_pass": true,
+      "repair_pass": false,
+      "baseline_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "repair_hit_terms": [],
+      "repair_missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "recommended_seed_change": "add_baseline_preservation_and_contrastive_repair_examples",
+      "required_guardrail": "preserve_baseline_pass_before_accepting_repair_checkpoint"
+    },
+    {
+      "case_id": "objective-answer-direct",
+      "severity": "persistent_gap",
+      "baseline_pass": false,
+      "repair_pass": false,
+      "baseline_hit_terms": [
+        "loss"
+      ],
+      "repair_hit_terms": [],
+      "repair_missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "recommended_seed_change": "add_direct_prompt_to_fixed_loss_bridge_examples",
+      "required_guardrail": "prove_failed_case_recovery_before_promotion"
+    },
+    {
+      "case_id": "objective-answer-jsonish",
+      "severity": "regression",
+      "baseline_pass": true,
+      "repair_pass": false,
+      "baseline_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "repair_hit_terms": [],
+      "repair_missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "recommended_seed_change": "add_baseline_preservation_and_contrastive_repair_examples",
+      "required_guardrail": "preserve_baseline_pass_before_accepting_repair_checkpoint"
+    },
+    {
+      "case_id": "objective-answer-role",
+      "severity": "persistent_gap",
+      "baseline_pass": false,
+      "repair_pass": false,
+      "baseline_hit_terms": [],
+      "repair_hit_terms": [],
+      "repair_missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "recommended_seed_change": "add_direct_prompt_to_fixed_loss_bridge_examples",
+      "required_guardrail": "prove_failed_case_recovery_before_promotion"
+    }
+  ],
+  "strategy_actions": [
+    {
+      "action_id": "block_current_repair_checkpoint",
+      "category": "gate",
+      "detail": "Do not promote the v810 repair checkpoint after replay regression.",
+      "evidence": -2
+    },
+    {
+      "action_id": "add_baseline_preservation_examples",
+      "category": "seed",
+      "detail": "Include examples that protect cases the baseline already passed.",
+      "evidence": 2
+    },
+    {
+      "action_id": "balance_direct_and_self_check_examples",
+      "category": "seed",
+      "detail": "Keep direct answers and self-check answers, but add preservation and contrastive coverage.",
+      "evidence": 6
+    },
+    {
+      "action_id": "short_training_with_replay_first",
+      "category": "training",
+      "detail": "Keep repair training bounded and require immediate replay comparison before promotion.",
+      "evidence": 20
+    },
+    {
+      "action_id": "retain_original_repair_tasks",
+      "category": "plan",
+      "detail": "Carry the original failed-case repair tasks forward instead of inventing unrelated objectives.",
+      "evidence": 3
+    }
+  ],
+  "check_rows": [
+    {
+      "id": "comparison_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "comparison evidence must pass"
+    },
+    {
+      "id": "comparison_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "comparison summary must be ready"
+    },
+    {
+      "id": "repair_not_improved",
+      "status": "pass",
+      "actual": false,
+      "detail": "strategy revision is only needed when repair checkpoint did not improve"
+    },
+    {
+      "id": "promotion_blocked",
+      "status": "pass",
+      "actual": false,
+      "detail": "promotion must already be blocked by comparison"
+    },
+    {
+      "id": "repair_plan_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "source repair plan must pass"
+    },
+    {
+      "id": "repair_seed_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "source repair seed must pass"
+    },
+    {
+      "id": "training_run_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "source training evidence must pass"
+    },
+    {
+      "id": "case_rows_present",
+      "status": "pass",
+      "actual": 5,
+      "detail": "strategy revision must inspect case rows"
+    },
+    {
+      "id": "case_actions_present",
+      "status": "pass",
+      "actual": 5,
+      "detail": "strategy revision must create case actions for failed repair replay cases"
+    }
+  ],
+  "strategy_revision": {
+    "ready": true,
+    "blocked_checkpoint": true,
+    "regression_detected": true,
+    "repair_checkpoint_improved": false,
+    "passed_case_delta": -2,
+    "pass_rate_delta": -0.4,
+    "case_action_count": 5,
+    "strategy_action_count": 5,
+    "required_guardrails": [
+      "do_not_promote_regressed_checkpoint",
+      "preserve_baseline_passed_cases",
+      "require_replay_comparison_after_each_repair_training"
+    ],
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_real_replay_repair_seed_revision",
+    "next_step": "build_bounded_real_replay_repair_seed_revision"
+  },
+  "summary": {
+    "bounded_real_replay_repair_strategy_revision_ready": true,
+    "blocked_checkpoint": true,
+    "regression_detected": true,
+    "repair_checkpoint_improved": false,
+    "passed_case_delta": -2,
+    "pass_rate_delta": -0.4,
+    "case_action_count": 5,
+    "strategy_action_count": 5,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_real_replay_repair_seed_revision",
+    "next_step": "build_bounded_real_replay_repair_seed_revision",
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "repair_strategy_only",
+    "reason": "The strategy revises the repair route after regression; it does not prove model improvement until a revised seed is trained and replayed.",
+    "next_action": "build_bounded_real_replay_repair_seed_revision"
+  }
+}

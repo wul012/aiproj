@@ -1586,3 +1586,9 @@ e/663/解释/说明.md
 - `e/811/图片`
 - `e/811/解释/说明.md`
 - v811 model capability route promotion bounded real replay repair checkpoint comparison 的运行截图和解释。
+
+## v812 补充索引
+
+- `e/812/图片`
+- `e/812/解释/说明.md`
+- v812 model capability route promotion bounded real replay repair strategy revision 的运行截图和解释。

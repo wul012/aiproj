@@ -1,0 +1,11 @@
+status=pass
+decision=model_capability_route_promotion_bounded_real_replay_repair_strategy_revision_ready
+failed_count=0
+strategy_revision_ready=True
+blocked_checkpoint=True
+regression_detected=True
+passed_case_delta=-2
+pass_rate_delta=-0.4
+case_action_count=5
+strategy_action_count=5
+next_step=build_bounded_real_replay_repair_seed_revision
