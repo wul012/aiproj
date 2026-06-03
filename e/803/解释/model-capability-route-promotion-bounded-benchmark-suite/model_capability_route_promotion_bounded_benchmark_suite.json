@@ -1,0 +1,235 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability route promotion bounded benchmark suite",
+  "generated_at": "2026-06-03T07:18:14Z",
+  "status": "pass",
+  "decision": "model_capability_route_promotion_bounded_benchmark_suite_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_consumer_plan": "e\\802\\解释\\model-capability-route-promotion-consumer-plan\\model_capability_route_promotion_consumer_plan.json",
+  "source_plan_summary": {
+    "consumer_plan_ready": true,
+    "route_id": "objective_level_contrast",
+    "consumer_name": "bounded-benchmark-planner",
+    "allowed_scope": "bounded_model_capability_governance_only",
+    "boundary": "tiny_required_term_pair_probe_only",
+    "model_quality_claim": "seed_stable_pair_probe_route_accepted",
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_benchmark_suite",
+    "plan_step_count": 5,
+    "required_input_count": 3,
+    "non_goal_count": 3,
+    "failed_check_count": 0
+  },
+  "check_rows": [
+    {
+      "id": "consumer_plan_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "consumer plan must pass"
+    },
+    {
+      "id": "consumer_plan_ready",
+      "status": "pass",
+      "actual": "model_capability_route_promotion_consumer_plan_ready",
+      "detail": "consumer plan decision must be ready"
+    },
+    {
+      "id": "route_objective_level_contrast",
+      "status": "pass",
+      "actual": "objective_level_contrast",
+      "detail": "suite supports objective_level_contrast route"
+    },
+    {
+      "id": "bounded_scope",
+      "status": "pass",
+      "actual": "bounded_model_capability_governance_only",
+      "detail": "suite must stay bounded"
+    },
+    {
+      "id": "next_artifact_matches",
+      "status": "pass",
+      "actual": "model_capability_route_promotion_bounded_benchmark_suite",
+      "detail": "consumer plan must request this suite"
+    },
+    {
+      "id": "plan_steps_present",
+      "status": "pass",
+      "actual": 5,
+      "detail": "consumer plan should include enough execution steps"
+    },
+    {
+      "id": "non_goals_present",
+      "status": "pass",
+      "actual": 3,
+      "detail": "consumer plan must carry non-goals"
+    }
+  ],
+  "benchmark_suite": {
+    "ready": true,
+    "suite_name": "route-promotion-objective-level-contrast-bounded-suite",
+    "suite_version": "v803",
+    "route_id": "objective_level_contrast",
+    "consumer_name": "bounded-benchmark-planner",
+    "allowed_scope": "bounded_model_capability_governance_only",
+    "boundary": "tiny_required_term_pair_probe_only",
+    "model_quality_claim": "seed_stable_pair_probe_route_accepted",
+    "cases": [
+      {
+        "case_id": "objective-answer-direct",
+        "prompt_case": {
+          "name": "objective-answer-direct",
+          "prompt": "任务：只输出两个英文关键词，表示本轮目标答案。\n答案：",
+          "max_new_tokens": 24,
+          "temperature": 0.2,
+          "top_k": 10,
+          "seed": 901,
+          "task_type": "route-promotion-objective-level-contrast",
+          "difficulty": "medium",
+          "expected_behavior": "direct objective answer",
+          "tags": [
+            "route-promotion",
+            "objective-level-contrast",
+            "required-terms"
+          ]
+        },
+        "expected_terms": [
+          "fixed",
+          "loss"
+        ],
+        "required_term_count": 2
+      },
+      {
+        "case_id": "objective-answer-role",
+        "prompt_case": {
+          "name": "objective-answer-role",
+          "prompt": "目标：给出 paired required terms 的两个角色词。\n输出：",
+          "max_new_tokens": 24,
+          "temperature": 0.2,
+          "top_k": 10,
+          "seed": 902,
+          "task_type": "route-promotion-objective-level-contrast",
+          "difficulty": "medium",
+          "expected_behavior": "role-labeled objective answer",
+          "tags": [
+            "route-promotion",
+            "objective-level-contrast",
+            "required-terms"
+          ]
+        },
+        "expected_terms": [
+          "fixed",
+          "loss"
+        ],
+        "required_term_count": 2
+      },
+      {
+        "case_id": "objective-answer-contrast",
+        "prompt_case": {
+          "name": "objective-answer-contrast",
+          "prompt": "对比任务：不要解释，只返回目标 pair tokens。\n结果：",
+          "max_new_tokens": 24,
+          "temperature": 0.2,
+          "top_k": 10,
+          "seed": 903,
+          "task_type": "route-promotion-objective-level-contrast",
+          "difficulty": "medium",
+          "expected_behavior": "contrast objective answer",
+          "tags": [
+            "route-promotion",
+            "objective-level-contrast",
+            "required-terms"
+          ]
+        },
+        "expected_terms": [
+          "fixed",
+          "loss"
+        ],
+        "required_term_count": 2
+      },
+      {
+        "case_id": "objective-answer-jsonish",
+        "prompt_case": {
+          "name": "objective-answer-jsonish",
+          "prompt": "请用 JSON 风格写出 answer_terms，包含两个英文词。\nanswer_terms:",
+          "max_new_tokens": 24,
+          "temperature": 0.2,
+          "top_k": 10,
+          "seed": 904,
+          "task_type": "route-promotion-objective-level-contrast",
+          "difficulty": "medium",
+          "expected_behavior": "structured objective answer",
+          "tags": [
+            "route-promotion",
+            "objective-level-contrast",
+            "required-terms"
+          ]
+        },
+        "expected_terms": [
+          "fixed",
+          "loss"
+        ],
+        "required_term_count": 2
+      },
+      {
+        "case_id": "objective-answer-check",
+        "prompt_case": {
+          "name": "objective-answer-check",
+          "prompt": "自检：本题需要同时出现 fixed 与 loss。最终答案：",
+          "max_new_tokens": 24,
+          "temperature": 0.2,
+          "top_k": 10,
+          "seed": 905,
+          "task_type": "route-promotion-objective-level-contrast",
+          "difficulty": "medium",
+          "expected_behavior": "self-check objective answer",
+          "tags": [
+            "route-promotion",
+            "objective-level-contrast",
+            "required-terms"
+          ]
+        },
+        "expected_terms": [
+          "fixed",
+          "loss"
+        ],
+        "required_term_count": 2
+      }
+    ],
+    "scoring_contract": {
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "case_pass_condition": "generated_continuation_contains_both_expected_terms",
+      "suite_pass_condition": "all_cases_pass_without_scope_or_boundary_widening",
+      "minimum_case_count": 5
+    },
+    "guardrails": [
+      "do not reuse heldout pair prompt surfaces as training data",
+      "do not treat constrained decoding as model-quality proof",
+      "do not claim production model release readiness"
+    ],
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_benchmark_suite_review"
+  },
+  "summary": {
+    "bounded_benchmark_suite_ready": true,
+    "suite_name": "route-promotion-objective-level-contrast-bounded-suite",
+    "route_id": "objective_level_contrast",
+    "consumer_name": "bounded-benchmark-planner",
+    "case_count": 5,
+    "expected_terms": [
+      "fixed",
+      "loss"
+    ],
+    "minimum_case_count": 5,
+    "boundary": "tiny_required_term_pair_probe_only",
+    "model_quality_claim": "seed_stable_pair_probe_route_accepted",
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_benchmark_suite_review",
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "seed_stable_pair_probe_route_accepted",
+    "reason": "The accepted route now has a bounded benchmark suite with explicit expected terms and guardrails.",
+    "next_action": "build model_capability_route_promotion_bounded_benchmark_suite_review"
+  }
+}

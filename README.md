@@ -4,7 +4,17 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v802.0.0` builds a bounded route promotion consumer plan from the downstream guard.
+Version `v803.0.0` builds a bounded benchmark suite with concrete route-promotion prompt cases.
+
+## Latest v803 checkpoint
+
+- Added `model_capability_route_promotion_bounded_benchmark_suite`.
+- Added CLI `scripts/build_model_capability_route_promotion_bounded_benchmark_suite.py`.
+- Consumed the real v802 route promotion consumer plan.
+- Produced `decision=model_capability_route_promotion_bounded_benchmark_suite_ready`.
+- Added 5 bounded prompt cases with expected terms `fixed,loss`.
+- Verified with `6 passed` bounded benchmark suite focused tests.
+- Archived v803 evidence in `e/803` and added the code explanation in `代码讲解记录_模型能力阶段/817-v803-route-promotion-bounded-benchmark-suite.md`.
 
 ## Latest v802 checkpoint
 

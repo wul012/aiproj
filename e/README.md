@@ -1532,3 +1532,9 @@ e/663/解释/说明.md
 - `e/802/图片`
 - `e/802/解释/说明.md`
 - v802 model capability route promotion consumer plan 的运行截图和解释。
+
+## v803 补充索引
+
+- `e/803/图片`
+- `e/803/解释/说明.md`
+- v803 model capability route promotion bounded benchmark suite 的运行截图和解释。

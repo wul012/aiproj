@@ -1001,6 +1001,9 @@
 816-v802-route-promotion-consumer-plan.md
  -> v802 code explanation: build a bounded route promotion consumer plan from downstream guard evidence.
 
+817-v803-route-promotion-bounded-benchmark-suite.md
+ -> v803 code explanation: build concrete bounded benchmark prompt cases from the route promotion consumer plan.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

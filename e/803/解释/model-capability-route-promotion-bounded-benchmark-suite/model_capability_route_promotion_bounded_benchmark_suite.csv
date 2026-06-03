@@ -1,0 +1,10 @@
+case_id,prompt,expected_terms,task_type,seed
+objective-answer-direct,"任务：只输出两个英文关键词，表示本轮目标答案。
+答案：","fixed,loss",route-promotion-objective-level-contrast,901
+objective-answer-role,"目标：给出 paired required terms 的两个角色词。
+输出：","fixed,loss",route-promotion-objective-level-contrast,902
+objective-answer-contrast,"对比任务：不要解释，只返回目标 pair tokens。
+结果：","fixed,loss",route-promotion-objective-level-contrast,903
+objective-answer-jsonish,"请用 JSON 风格写出 answer_terms，包含两个英文词。
+answer_terms:","fixed,loss",route-promotion-objective-level-contrast,904
+objective-answer-check,自检：本题需要同时出现 fixed 与 loss。最终答案：,"fixed,loss",route-promotion-objective-level-contrast,905

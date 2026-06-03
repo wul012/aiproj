@@ -1,0 +1,9 @@
+status=pass
+decision=model_capability_route_promotion_bounded_benchmark_suite_ready
+failed_count=0
+bounded_benchmark_suite_ready=True
+suite_name=route-promotion-objective-level-contrast-bounded-suite
+route_id=objective_level_contrast
+case_count=5
+expected_terms=fixed,loss
+proposed_next_artifact=model_capability_route_promotion_bounded_benchmark_suite_review
