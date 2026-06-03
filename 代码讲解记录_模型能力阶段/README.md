@@ -26,6 +26,9 @@
 836-v822-route-promotion-bounded-real-replay-decoder-anchor-policy.md
  -> v822 code explanation: convert decoder anchor probe signals into a guarded partial policy for controlled replay.
 
+837-v823-route-promotion-bounded-real-replay-decoder-anchor-policy-replay.md
+ -> v823 code explanation: replay the guarded decoder-anchor policy and confirm the partial signal remains promotion-blocked.
+
 487-v473-baseline-candidate-capability-delta.md
  -> v473 code explanation: carry real tiny training loss and generation-quality deltas into the baseline-candidate eval loop.
 

@@ -4,7 +4,19 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v822.0.0` converts the v821 decoder anchor probe into a guarded partial decoder-anchor policy for controlled replay.
+Version `v823.0.0` replays the guarded decoder-anchor policy and reproduces one anchored bounded replay pass while keeping promotion blocked.
+
+## Latest v823 checkpoint
+
+- Added `model_capability_route_promotion_bounded_real_replay_decoder_anchor_policy_replay`.
+- Added CLI `scripts/run_model_capability_route_promotion_bounded_real_replay_decoder_anchor_policy_replay.py`.
+- Consumed the real v819 prompt-aligned replay, v822 decoder anchor policy, and v818 checkpoint.
+- Replayed all 5 bounded cases, applying the policy only to `objective-answer-check`.
+- Recorded `passed_case_count=1`, `policy_applied_case_count=1`, and `policy_applied_pass_count=1`.
+- Produced `decision=model_capability_route_promotion_bounded_real_replay_decoder_anchor_policy_replay_reproduced_partial_signal`.
+- Kept `promotion_ready=False` because the pass is anchor-assisted and 4 cases remain uncovered.
+- Verified with `3 passed` focused decoder anchor policy replay tests.
+- Archived v823 evidence in `e/823` and added the code explanation in `代码讲解记录_模型能力阶段/837-v823-route-promotion-bounded-real-replay-decoder-anchor-policy-replay.md`.
 
 ## Latest v822 checkpoint
 

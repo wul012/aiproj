@@ -1,0 +1,9 @@
+status=pass
+decision=model_capability_route_promotion_bounded_real_replay_decoder_anchor_policy_replay_reproduced_partial_signal
+replay_ready=True
+passed_case_count=1
+policy_applied_case_count=1
+policy_applied_pass_count=1
+policy_replay_success=True
+promotion_ready=False
+next_step=review_decoder_anchor_policy_replay

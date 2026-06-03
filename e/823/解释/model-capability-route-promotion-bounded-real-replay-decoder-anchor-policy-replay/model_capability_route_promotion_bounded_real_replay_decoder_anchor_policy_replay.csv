@@ -1,0 +1,6 @@
+case_id,policy_applied,profile_id,anchor,case_pass,combined_hit_terms,new_text_hit_terms,missed_terms
+objective-answer-direct,False,,,False,[],[],"[""fixed"", ""loss""]"
+objective-answer-role,False,,,False,[],[],"[""fixed"", ""loss""]"
+objective-answer-contrast,False,,,False,[],[],"[""fixed"", ""loss""]"
+objective-answer-jsonish,False,,,False,[],[],"[""fixed"", ""loss""]"
+objective-answer-check,True,prefix_fixed_space,fixed ,True,"[""fixed"", ""loss""]","[""fixed"", ""loss""]",[]

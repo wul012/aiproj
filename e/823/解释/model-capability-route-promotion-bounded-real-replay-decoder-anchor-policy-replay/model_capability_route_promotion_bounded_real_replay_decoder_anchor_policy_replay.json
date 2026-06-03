@@ -1,0 +1,248 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability route promotion bounded real replay decoder anchor policy replay",
+  "generated_at": "2026-06-03T12:06:00Z",
+  "status": "pass",
+  "decision": "model_capability_route_promotion_bounded_real_replay_decoder_anchor_policy_replay_reproduced_partial_signal",
+  "failed_count": 0,
+  "issues": [],
+  "source_prompt_aligned_replay": "e\\819\\解释\\model-capability-route-promotion-bounded-real-replay-prompt-aligned-checkpoint-replay\\prompt-aligned-replay\\model_capability_route_promotion_bounded_real_replay.json",
+  "source_decoder_anchor_policy": "e\\822\\解释\\model-capability-route-promotion-bounded-real-replay-decoder-anchor-policy\\model_capability_route_promotion_bounded_real_replay_decoder_anchor_policy.json",
+  "checkpoint": "e\\818\\解释\\model-capability-route-promotion-bounded-real-replay-prompt-aligned-training-run\\run\\checkpoint.pt",
+  "tokenizer": "e\\818\\解释\\model-capability-route-promotion-bounded-real-replay-prompt-aligned-training-run\\run\\tokenizer.json",
+  "device": "cpu",
+  "policy_rows": [
+    {
+      "case_id": "objective-answer-check",
+      "profile_id": "prefix_fixed_space",
+      "anchor": "fixed ",
+      "anchor_length": 6,
+      "completion_hit_terms": [
+        "loss"
+      ],
+      "new_text_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "policy_type": "case_specific_decoder_anchor",
+      "claim_boundary": "anchor_assisted_only",
+      "recommended_use": "controlled_policy_replay_only"
+    }
+  ],
+  "replay_rows": [
+    {
+      "case_id": "objective-answer-direct",
+      "policy_applied": false,
+      "profile_id": "",
+      "anchor": "",
+      "continuation": "txrd Ai si\n t iits\nssdee",
+      "combined": "txrd Ai si\n t iits\nssdee",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "combined_hit_terms": [],
+      "new_text_hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "case_pass": false,
+      "new_text_pass": false,
+      "seed": 901,
+      "max_new_tokens": 24,
+      "temperature": 0.2,
+      "top_k": 10
+    },
+    {
+      "case_id": "objective-answer-role",
+      "policy_applied": false,
+      "profile_id": "",
+      "anchor": "",
+      "continuation": "aired required terms 的两个角色词。\n输出：\n  i\ni  d  a  dt\na  n ff",
+      "combined": "aired required terms 的两个角色词。\n输出：\n  i\ni  d  a  dt\na  n ff",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "combined_hit_terms": [],
+      "new_text_hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "case_pass": false,
+      "new_text_pass": false,
+      "seed": 902,
+      "max_new_tokens": 24,
+      "temperature": 0.2,
+      "top_k": 10
+    },
+    {
+      "case_id": "objective-answer-contrast",
+      "policy_applied": false,
+      "profile_id": "",
+      "anchor": "",
+      "continuation": "fi i     t\nnt   ddtiffdd",
+      "combined": "fi i     t\nnt   ddtiffdd",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "combined_hit_terms": [],
+      "new_text_hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "case_pass": false,
+      "new_text_pass": false,
+      "seed": 903,
+      "max_new_tokens": 24,
+      "temperature": 0.2,
+      "top_k": 10
+    },
+    {
+      "case_id": "objective-answer-jsonish",
+      "policy_applied": false,
+      "profile_id": "",
+      "anchor": "",
+      "continuation": "wer_terms，包含两个英文词。\nanswer_terms:fts   td st  \n ets dfta ",
+      "combined": "wer_terms，包含两个英文词。\nanswer_terms:fts   td st  \n ets dfta ",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "combined_hit_terms": [],
+      "new_text_hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "case_pass": false,
+      "new_text_pass": false,
+      "seed": 904,
+      "max_new_tokens": 24,
+      "temperature": 0.2,
+      "top_k": 10
+    },
+    {
+      "case_id": "objective-answer-check",
+      "policy_applied": true,
+      "profile_id": "prefix_fixed_space",
+      "anchor": "fixed ",
+      "continuation": "题需要同时出现 fixed 与 loss。最终答案：fixed fi    \n\n   t e  ien\nff  ",
+      "combined": "fixed 题需要同时出现 fixed 与 loss。最终答案：fixed fi    \n\n   t e  ien\nff  ",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "combined_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "new_text_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "missed_terms": [],
+      "case_pass": true,
+      "new_text_pass": true,
+      "seed": 905,
+      "max_new_tokens": 24,
+      "temperature": 0.2,
+      "top_k": 10
+    }
+  ],
+  "replay_errors": [],
+  "check_rows": [
+    {
+      "id": "prompt_aligned_replay_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "source replay execution must pass"
+    },
+    {
+      "id": "decoder_anchor_policy_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "decoder anchor policy must pass"
+    },
+    {
+      "id": "decoder_anchor_policy_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "policy summary must be ready"
+    },
+    {
+      "id": "checkpoint_exists",
+      "status": "pass",
+      "actual": "e\\818\\解释\\model-capability-route-promotion-bounded-real-replay-prompt-aligned-training-run\\run\\checkpoint.pt",
+      "detail": "checkpoint.pt must exist"
+    },
+    {
+      "id": "tokenizer_exists",
+      "status": "pass",
+      "actual": "e\\818\\解释\\model-capability-route-promotion-bounded-real-replay-prompt-aligned-training-run\\run\\tokenizer.json",
+      "detail": "tokenizer.json must exist"
+    },
+    {
+      "id": "source_rows_present",
+      "status": "pass",
+      "actual": 5,
+      "detail": "source replay rows must be present"
+    },
+    {
+      "id": "policy_rows_present",
+      "status": "pass",
+      "actual": 1,
+      "detail": "policy must contain at least one row"
+    },
+    {
+      "id": "all_cases_replayed",
+      "status": "pass",
+      "actual": 5,
+      "detail": "policy replay should replay every source case"
+    },
+    {
+      "id": "no_replay_errors",
+      "status": "pass",
+      "actual": 0,
+      "detail": "policy replay should not raise generation errors"
+    }
+  ],
+  "policy_replay": {
+    "ready": true,
+    "case_count": 5,
+    "passed_case_count": 1,
+    "failed_case_count": 4,
+    "policy_case_count": 1,
+    "policy_applied_case_count": 1,
+    "policy_applied_pass_count": 1,
+    "pass_rate": 0.2,
+    "policy_replay_success": true,
+    "promotion_ready": false,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_real_replay_decoder_anchor_policy_review",
+    "next_step": "review_decoder_anchor_policy_replay"
+  },
+  "summary": {
+    "decoder_anchor_policy_replay_ready": true,
+    "case_count": 5,
+    "passed_case_count": 1,
+    "failed_case_count": 4,
+    "policy_case_count": 1,
+    "policy_applied_case_count": 1,
+    "policy_applied_pass_count": 1,
+    "pass_rate": 0.2,
+    "policy_replay_success": true,
+    "promotion_ready": false,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_real_replay_decoder_anchor_policy_review",
+    "next_step": "review_decoder_anchor_policy_replay",
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "anchor_assisted_only",
+    "reason": "Policy replay reproduced a partial anchored case, but uncovered cases remain and promotion stays blocked.",
+    "next_action": "review_decoder_anchor_policy_replay"
+  }
+}
