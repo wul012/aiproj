@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v830.0.0` trains a real checkpoint from the v829 rebalanced decoder-anchor corpus and records the training artifacts for the next bounded replay.
+Version `v831.0.0` replays the v830 rebalanced checkpoint and compares it with baseline, prompt-aligned, and decoder-anchor checkpoints, confirming the rebalanced route still has no bounded replay recovery.
+
+## Latest v831 checkpoint
+
+- Added `model_capability_route_promotion_bounded_real_replay_decoder_anchor_rebalanced_checkpoint_comparison`.
+- Added CLI `scripts/compare_model_capability_route_promotion_bounded_real_replay_decoder_anchor_rebalanced_checkpoint.py`.
+- Replayed the v830 rebalanced checkpoint on the same v803 bounded benchmark suite.
+- Produced rebalanced replay result `passed_case_count=0/5`, `pass_rate=0.0`, and `model_route_quality_ready=False`.
+- Compared v806 baseline `2/5`, v819 prompt-aligned `0/5`, v826 decoder-anchor `0/5`, and v831 rebalanced `0/5`.
+- Recorded `rebalanced_vs_baseline_pass_rate_delta=-0.4` and `rebalanced_vs_decoder_anchor_pass_rate_delta=0.0`.
+- Kept the model-quality claim as `not_improved`; rebalancing did not recover bounded replay behavior.
+- Routed the next step to `diagnose_rebalanced_checkpoint_replay_failure_before_more_training`.
+- Verified with `3 passed` focused rebalanced checkpoint comparison tests.
+- Archived v831 evidence in `e/831` and added the code explanation in `代码讲解记录_模型能力阶段/845-v831-route-promotion-bounded-real-replay-decoder-anchor-rebalanced-checkpoint-comparison.md`.
 
 ## Latest v830 checkpoint
 

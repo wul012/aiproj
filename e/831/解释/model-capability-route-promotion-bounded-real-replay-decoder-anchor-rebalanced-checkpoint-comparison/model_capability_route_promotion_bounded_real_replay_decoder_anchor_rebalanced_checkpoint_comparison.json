@@ -1,0 +1,166 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability route promotion bounded real replay decoder anchor rebalanced checkpoint comparison",
+  "generated_at": "2026-06-03T13:53:13Z",
+  "status": "pass",
+  "decision": "model_capability_route_promotion_bounded_real_replay_decoder_anchor_rebalanced_checkpoint_still_regressed_from_baseline",
+  "failed_count": 0,
+  "issues": [],
+  "source_baseline_replay": "e\\806\\解释\\model-capability-route-promotion-bounded-real-replay\\model_capability_route_promotion_bounded_real_replay.json",
+  "source_prompt_aligned_replay": "e\\819\\解释\\model-capability-route-promotion-bounded-real-replay-prompt-aligned-checkpoint-replay\\prompt-aligned-replay\\model_capability_route_promotion_bounded_real_replay.json",
+  "source_decoder_anchor_replay": "e\\826\\解释\\model-capability-route-promotion-bounded-real-replay-decoder-anchor-checkpoint-comparison\\decoder-anchor-replay\\model_capability_route_promotion_bounded_real_replay.json",
+  "source_rebalanced_replay": "e\\831\\解释\\model-capability-route-promotion-bounded-real-replay-decoder-anchor-rebalanced-checkpoint-comparison\\rebalanced-replay\\model_capability_route_promotion_bounded_real_replay.json",
+  "source_rebalanced_training": "e\\830\\解释\\model-capability-route-promotion-bounded-real-replay-decoder-anchor-rebalanced-training-run\\model_capability_route_promotion_bounded_real_replay_decoder_anchor_rebalanced_training_run.json",
+  "route_rows": [
+    {
+      "label": "baseline",
+      "status": "pass",
+      "executed": true,
+      "case_count": 5,
+      "passed_case_count": 2,
+      "failed_case_count": 3,
+      "pass_rate": 0.4,
+      "model_route_quality_ready": false
+    },
+    {
+      "label": "prompt_aligned",
+      "status": "pass",
+      "executed": true,
+      "case_count": 5,
+      "passed_case_count": 0,
+      "failed_case_count": 5,
+      "pass_rate": 0.0,
+      "model_route_quality_ready": false
+    },
+    {
+      "label": "decoder_anchor",
+      "status": "pass",
+      "executed": true,
+      "case_count": 5,
+      "passed_case_count": 0,
+      "failed_case_count": 5,
+      "pass_rate": 0.0,
+      "model_route_quality_ready": false
+    },
+    {
+      "label": "rebalanced",
+      "status": "pass",
+      "executed": true,
+      "case_count": 5,
+      "passed_case_count": 0,
+      "failed_case_count": 5,
+      "pass_rate": 0.0,
+      "model_route_quality_ready": false
+    }
+  ],
+  "training_summary": {
+    "decoder_anchor_rebalanced_training_ready": true,
+    "artifact_count": 7,
+    "metric_record_count": 5,
+    "final_step": 35,
+    "final_train_loss": 4.193515300750732,
+    "final_val_loss": 4.194498062133789,
+    "train_loss_delta": -0.338792,
+    "val_loss_delta": -0.377685,
+    "rebalanced_example_count": 40,
+    "direct_answer_count": 15,
+    "decoder_bridge_count": 15,
+    "carry_forward_count": 10,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_real_replay_decoder_anchor_rebalanced_checkpoint_replay",
+    "next_step": "run_decoder_anchor_rebalanced_checkpoint_bounded_replay",
+    "failed_check_count": 0
+  },
+  "check_rows": [
+    {
+      "id": "baseline_replay_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "baseline replay must pass"
+    },
+    {
+      "id": "prompt_aligned_replay_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "prompt_aligned replay must pass"
+    },
+    {
+      "id": "decoder_anchor_replay_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "decoder_anchor replay must pass"
+    },
+    {
+      "id": "rebalanced_replay_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "rebalanced replay must pass"
+    },
+    {
+      "id": "baseline_replay_executed",
+      "status": "pass",
+      "actual": true,
+      "detail": "baseline replay must execute"
+    },
+    {
+      "id": "prompt_aligned_replay_executed",
+      "status": "pass",
+      "actual": true,
+      "detail": "prompt_aligned replay must execute"
+    },
+    {
+      "id": "decoder_anchor_replay_executed",
+      "status": "pass",
+      "actual": true,
+      "detail": "decoder_anchor replay must execute"
+    },
+    {
+      "id": "rebalanced_replay_executed",
+      "status": "pass",
+      "actual": true,
+      "detail": "rebalanced replay must execute"
+    },
+    {
+      "id": "rebalanced_training_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "optional rebalanced training evidence must be ready"
+    }
+  ],
+  "checkpoint_comparison": {
+    "ready": true,
+    "baseline_passed_case_count": 2,
+    "prompt_aligned_passed_case_count": 0,
+    "decoder_anchor_passed_case_count": 0,
+    "rebalanced_passed_case_count": 0,
+    "rebalanced_vs_baseline_pass_rate_delta": -0.4,
+    "rebalanced_vs_prompt_pass_rate_delta": 0.0,
+    "rebalanced_vs_decoder_anchor_pass_rate_delta": 0.0,
+    "rebalanced_checkpoint_improved_over_baseline": false,
+    "rebalanced_checkpoint_recovered_over_prompt": false,
+    "rebalanced_checkpoint_recovered_over_decoder_anchor": false,
+    "promotion_ready": false,
+    "final_val_loss": 4.194498062133789,
+    "next_step": "diagnose_rebalanced_checkpoint_replay_failure_before_more_training"
+  },
+  "summary": {
+    "rebalanced_checkpoint_comparison_ready": true,
+    "baseline_passed_case_count": 2,
+    "prompt_aligned_passed_case_count": 0,
+    "decoder_anchor_passed_case_count": 0,
+    "rebalanced_passed_case_count": 0,
+    "rebalanced_vs_baseline_pass_rate_delta": -0.4,
+    "rebalanced_vs_prompt_pass_rate_delta": 0.0,
+    "rebalanced_vs_decoder_anchor_pass_rate_delta": 0.0,
+    "rebalanced_checkpoint_improved_over_baseline": false,
+    "rebalanced_checkpoint_recovered_over_prompt": false,
+    "rebalanced_checkpoint_recovered_over_decoder_anchor": false,
+    "promotion_ready": false,
+    "next_step": "diagnose_rebalanced_checkpoint_replay_failure_before_more_training",
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "not_improved",
+    "reason": "Rebalanced replay does not exceed the baseline pass rate.",
+    "next_action": "diagnose_rebalanced_checkpoint_replay_failure_before_more_training"
+  }
+}

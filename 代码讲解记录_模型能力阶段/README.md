@@ -50,6 +50,9 @@
 844-v830-route-promotion-bounded-real-replay-decoder-anchor-rebalanced-training-run.md
  -> v830 code explanation: train the rebalanced decoder-anchor corpus and verify checkpoint artifacts before replay.
 
+845-v831-route-promotion-bounded-real-replay-decoder-anchor-rebalanced-checkpoint-comparison.md
+ -> v831 code explanation: replay and compare the rebalanced checkpoint against baseline, prompt-aligned, and decoder-anchor routes.
+
 487-v473-baseline-candidate-capability-delta.md
  -> v473 code explanation: carry real tiny training loss and generation-quality deltas into the baseline-candidate eval loop.
 

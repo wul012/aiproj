@@ -71,6 +71,10 @@ e/829/解释/说明.md
 e/830/图片
 e/830/解释/说明.md
  -> v830 bounded replay decoder anchor rebalanced training run 的运行截图和解释
+
+e/831/图片
+e/831/解释/说明.md
+ -> v831 bounded replay decoder anchor rebalanced checkpoint comparison 的运行截图和解释
 ```
 
 ```text

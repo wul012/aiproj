@@ -1,0 +1,5 @@
+label,status,executed,case_count,passed_case_count,failed_case_count,pass_rate,model_route_quality_ready
+baseline,pass,True,5,2,3,0.4,False
+prompt_aligned,pass,True,5,0,5,0.0,False
+decoder_anchor,pass,True,5,0,5,0.0,False
+rebalanced,pass,True,5,0,5,0.0,False
