@@ -1,0 +1,12 @@
+id,status,actual,detail
+portfolio_passed,pass,pass,route promotion portfolio must pass
+portfolio_decision_ready,pass,model_capability_route_promotion_portfolio_ready,route promotion portfolio must be ready
+regression_monitor_passed,pass,pass,route promotion regression monitor must pass
+regression_decision_passed,pass,model_capability_route_promotion_regression_monitor_passed,regression monitor decision must pass
+active_routes_present,pass,"[""objective_level_contrast""]",at least one active route is required
+portfolio_boundary_scoped,pass,tiny_required_term_pair_probe_only,portfolio must keep the required boundary
+regression_boundary_stable,pass,"{""changed"": false, ""current"": ""tiny_required_term_pair_probe_only""}",regression monitor must preserve the required boundary
+no_lost_active_routes,pass,0,gate blocks when active routes are lost
+no_claim_widening,pass,False,gate blocks claim widening
+portfolio_checks_clean,pass,0,portfolio should have no failed checks
+regression_checks_clean,pass,0,regression monitor should have no failed checks

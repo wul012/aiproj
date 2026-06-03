@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability route promotion gate",
+  "generated_at": "2026-06-03T05:56:16Z",
+  "status": "pass",
+  "decision": "model_capability_route_promotion_gate_passed",
+  "exit_code": 0,
+  "failed_count": 0,
+  "issues": [],
+  "portfolio_path": "e\\792\\解释\\model-capability-route-promotion-portfolio\\model_capability_route_promotion_portfolio.json",
+  "regression_monitor_path": "e\\793\\解释\\model-capability-route-promotion-regression-monitor\\model_capability_route_promotion_regression_monitor.json",
+  "portfolio_summary": {
+    "route_promotion_portfolio_ready": true,
+    "route_count": 1,
+    "active_route_count": 1,
+    "blocked_route_count": 0,
+    "active_routes": [
+      "objective_level_contrast"
+    ],
+    "boundary": "tiny_required_term_pair_probe_only",
+    "model_quality_claim": "seed_stable_pair_probe_route_accepted",
+    "min_seed_count": 3,
+    "min_pair_full_count": 2,
+    "max_pair_full_strength_spread": 1,
+    "passed_check_count": 7,
+    "failed_check_count": 0
+  },
+  "regression_monitor_summary": {
+    "regression_monitor_passed": true,
+    "baseline_active_route_count": 1,
+    "current_active_route_count": 1,
+    "lost_active_route_count": 0,
+    "gained_active_route_count": 0,
+    "boundary_changed": false,
+    "baseline_boundary": "tiny_required_term_pair_probe_only",
+    "current_boundary": "tiny_required_term_pair_probe_only",
+    "model_quality_claim_changed": false,
+    "baseline_model_quality_claim": "seed_stable_pair_probe_route_accepted",
+    "current_model_quality_claim": "seed_stable_pair_probe_route_accepted",
+    "route_delta_count": 1,
+    "passed_check_count": 7,
+    "failed_check_count": 0
+  },
+  "check_rows": [
+    {
+      "id": "portfolio_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "route promotion portfolio must pass"
+    },
+    {
+      "id": "portfolio_decision_ready",
+      "status": "pass",
+      "actual": "model_capability_route_promotion_portfolio_ready",
+      "detail": "route promotion portfolio must be ready"
+    },
+    {
+      "id": "regression_monitor_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "route promotion regression monitor must pass"
+    },
+    {
+      "id": "regression_decision_passed",
+      "status": "pass",
+      "actual": "model_capability_route_promotion_regression_monitor_passed",
+      "detail": "regression monitor decision must pass"
+    },
+    {
+      "id": "active_routes_present",
+      "status": "pass",
+      "actual": [
+        "objective_level_contrast"
+      ],
+      "detail": "at least one active route is required"
+    },
+    {
+      "id": "portfolio_boundary_scoped",
+      "status": "pass",
+      "actual": "tiny_required_term_pair_probe_only",
+      "detail": "portfolio must keep the required boundary"
+    },
+    {
+      "id": "regression_boundary_stable",
+      "status": "pass",
+      "actual": {
+        "changed": false,
+        "current": "tiny_required_term_pair_probe_only"
+      },
+      "detail": "regression monitor must preserve the required boundary"
+    },
+    {
+      "id": "no_lost_active_routes",
+      "status": "pass",
+      "actual": 0,
+      "detail": "gate blocks when active routes are lost"
+    },
+    {
+      "id": "no_claim_widening",
+      "status": "pass",
+      "actual": false,
+      "detail": "gate blocks claim widening"
+    },
+    {
+      "id": "portfolio_checks_clean",
+      "status": "pass",
+      "actual": 0,
+      "detail": "portfolio should have no failed checks"
+    },
+    {
+      "id": "regression_checks_clean",
+      "status": "pass",
+      "actual": 0,
+      "detail": "regression monitor should have no failed checks"
+    }
+  ],
+  "gate": {
+    "gate_ready": true,
+    "gate_decision": "allow_downstream_model_capability_review",
+    "allowed_next_steps": [
+      "route_promotion_release_packet",
+      "model_capability_route_review"
+    ],
+    "blocked_next_steps": [],
+    "active_routes": [
+      "objective_level_contrast"
+    ],
+    "active_route_count": 1,
+    "boundary": "tiny_required_term_pair_probe_only",
+    "model_quality_claim": "seed_stable_pair_probe_route_accepted",
+    "lost_active_route_count": 0,
+    "boundary_changed": false,
+    "claim_changed": false
+  },
+  "summary": {
+    "route_promotion_gate_ready": true,
+    "gate_decision": "allow_downstream_model_capability_review",
+    "active_route_count": 1,
+    "active_routes": [
+      "objective_level_contrast"
+    ],
+    "boundary": "tiny_required_term_pair_probe_only",
+    "model_quality_claim": "seed_stable_pair_probe_route_accepted",
+    "passed_check_count": 11,
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "seed_stable_pair_probe_route_accepted",
+    "reason": "The active route portfolio and regression monitor are clean enough for bounded downstream model capability review.",
+    "next_action": "build a route-promotion release packet that carries the portfolio and regression gate evidence"
+  }
+}

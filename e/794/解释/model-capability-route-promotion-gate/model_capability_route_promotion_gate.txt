@@ -1,0 +1,10 @@
+status=pass
+decision=model_capability_route_promotion_gate_passed
+exit_code=0
+failed_count=0
+route_promotion_gate_ready=True
+gate_decision=allow_downstream_model_capability_review
+active_route_count=1
+boundary=tiny_required_term_pair_probe_only
+model_quality_claim=seed_stable_pair_probe_route_accepted
+allowed_next_steps=route_promotion_release_packet,model_capability_route_review

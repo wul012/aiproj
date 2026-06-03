@@ -106,6 +106,8 @@ __all__ = [
     "write_model_capability_route_promotion_portfolio_outputs",
     "build_model_capability_route_promotion_regression_monitor",
     "write_model_capability_route_promotion_regression_monitor_outputs",
+    "build_model_capability_route_promotion_gate",
+    "write_model_capability_route_promotion_gate_outputs",
     "build_promoted_training_scale_seed_handoff_receipt_contract_summary",
     "write_promoted_training_scale_seed_handoff_receipt_contract_summary_outputs",
     "check_promoted_training_scale_seed_handoff_receipt_contract_summary",
@@ -230,6 +232,14 @@ _EXPORTS = {
     "write_model_capability_route_promotion_regression_monitor_outputs": (
         "model_capability_route_promotion_regression_monitor_artifacts",
         "write_model_capability_route_promotion_regression_monitor_outputs",
+    ),
+    "build_model_capability_route_promotion_gate": (
+        "model_capability_route_promotion_gate",
+        "build_model_capability_route_promotion_gate",
+    ),
+    "write_model_capability_route_promotion_gate_outputs": (
+        "model_capability_route_promotion_gate_artifacts",
+        "write_model_capability_route_promotion_gate_outputs",
     ),
     "build_promoted_training_scale_seed_handoff_receipt_contract_summary": (
         "promoted_training_scale_seed_handoff_receipt_contract",

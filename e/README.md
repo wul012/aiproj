@@ -1478,3 +1478,9 @@ e/663/解释/说明.md
 - `e/793/图片`
 - `e/793/解释/说明.md`
 - v793 model capability route promotion regression monitor 的运行截图和解释。
+
+## v794 补充索引
+
+- `e/794/图片`
+- `e/794/解释/说明.md`
+- v794 model capability route promotion gate 的运行截图和解释。

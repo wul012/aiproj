@@ -974,6 +974,9 @@
 807-v793-route-promotion-regression-monitor.md
  -> v793 code explanation: add an active-route, boundary, and claim regression monitor for route promotion portfolios.
 
+808-v794-route-promotion-gate.md
+ -> v794 code explanation: combine the route portfolio and regression monitor into a downstream review gate.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。
