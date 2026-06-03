@@ -1,0 +1,9 @@
+status=pass
+decision=model_capability_route_promotion_bounded_real_replay_decoder_anchor_probe_found_completion_signal
+probe_ready=True
+probe_row_count=15
+anchor_assisted_pass_count=2
+completion_pass_count=2
+new_text_pass_count=2
+anchor_completion_success=True
+next_step=build_decoder_anchor_policy

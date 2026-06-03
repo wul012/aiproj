@@ -20,6 +20,9 @@
 834-v820-route-promotion-bounded-real-replay-prompt-aligned-failure-diagnostic.md
  -> v820 code explanation: diagnose why exact prompt-aligned training still produced zero required-term hits in bounded replay.
 
+835-v821-route-promotion-bounded-real-replay-decoder-anchor-probe.md
+ -> v821 code explanation: run forced-prefix decoder anchor probes and separate anchor-assisted completion from unassisted replay success.
+
 487-v473-baseline-candidate-capability-delta.md
  -> v473 code explanation: carry real tiny training loss and generation-quality deltas into the baseline-candidate eval loop.
 

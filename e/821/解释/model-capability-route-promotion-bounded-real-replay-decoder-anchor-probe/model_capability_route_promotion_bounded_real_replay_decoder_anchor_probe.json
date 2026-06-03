@@ -1,0 +1,479 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability route promotion bounded real replay decoder anchor probe",
+  "generated_at": "2026-06-03T11:39:37Z",
+  "status": "pass",
+  "decision": "model_capability_route_promotion_bounded_real_replay_decoder_anchor_probe_found_completion_signal",
+  "failed_count": 0,
+  "issues": [],
+  "source_prompt_aligned_replay": "e\\819\\解释\\model-capability-route-promotion-bounded-real-replay-prompt-aligned-checkpoint-replay\\prompt-aligned-replay\\model_capability_route_promotion_bounded_real_replay.json",
+  "source_failure_diagnostic": "e\\820\\解释\\model-capability-route-promotion-bounded-real-replay-prompt-aligned-failure-diagnostic\\model_capability_route_promotion_bounded_real_replay_prompt_aligned_failure_diagnostic.json",
+  "checkpoint": "e\\818\\解释\\model-capability-route-promotion-bounded-real-replay-prompt-aligned-training-run\\run\\checkpoint.pt",
+  "tokenizer": "e\\818\\解释\\model-capability-route-promotion-bounded-real-replay-prompt-aligned-training-run\\run\\tokenizer.json",
+  "device": "cpu",
+  "anchor_profiles": [
+    {
+      "profile_id": "prefix_f",
+      "anchor": "f",
+      "max_new_tokens": 20,
+      "seed_offset": 1100,
+      "description": "Give only the first character of fixed."
+    },
+    {
+      "profile_id": "prefix_fixed_space",
+      "anchor": "fixed ",
+      "max_new_tokens": 18,
+      "seed_offset": 1200,
+      "description": "Give the first full term and ask the model to complete loss."
+    },
+    {
+      "profile_id": "prefix_fixed_l",
+      "anchor": "fixed l",
+      "max_new_tokens": 16,
+      "seed_offset": 1300,
+      "description": "Give fixed and the first character of loss."
+    }
+  ],
+  "probe_rows": [
+    {
+      "case_id": "objective-answer-direct",
+      "profile_id": "prefix_f",
+      "anchor": "f",
+      "continuation": "f-f  tix   f  a   td",
+      "combined": "ff-f  tix   f  a   td",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "anchor_assisted_hit_terms": [],
+      "new_text_hit_terms": [],
+      "completion_hit_terms": [],
+      "anchor_assisted_pass": false,
+      "new_text_pass": false,
+      "completion_pass": false,
+      "seed": 2001,
+      "max_new_tokens": 20,
+      "temperature": 0.2,
+      "top_k": 10
+    },
+    {
+      "case_id": "objective-answer-direct",
+      "profile_id": "prefix_fixed_space",
+      "anchor": "fixed ",
+      "continuation": "务：只输出两个英文关键词，表示本轮目标答案。\n答案：fixed  a itfdd  sniftdd ",
+      "combined": "fixed 务：只输出两个英文关键词，表示本轮目标答案。\n答案：fixed  a itfdd  sniftdd ",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "anchor_assisted_hit_terms": [
+        "fixed"
+      ],
+      "new_text_hit_terms": [
+        "fixed"
+      ],
+      "completion_hit_terms": [],
+      "anchor_assisted_pass": false,
+      "new_text_pass": false,
+      "completion_pass": false,
+      "seed": 2101,
+      "max_new_tokens": 18,
+      "temperature": 0.2,
+      "top_k": 10
+    },
+    {
+      "case_id": "objective-answer-direct",
+      "profile_id": "prefix_fixed_l",
+      "anchor": "fixed l",
+      "continuation": "：只输出两个英文关键词，表示本轮目标答案。\n答案：fixed ld f   f  s trtrt",
+      "combined": "fixed l：只输出两个英文关键词，表示本轮目标答案。\n答案：fixed ld f   f  s trtrt",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "anchor_assisted_hit_terms": [
+        "fixed"
+      ],
+      "new_text_hit_terms": [
+        "fixed"
+      ],
+      "completion_hit_terms": [],
+      "anchor_assisted_pass": false,
+      "new_text_pass": false,
+      "completion_pass": false,
+      "seed": 2201,
+      "max_new_tokens": 16,
+      "temperature": 0.2,
+      "top_k": 10
+    },
+    {
+      "case_id": "objective-answer-role",
+      "profile_id": "prefix_f",
+      "anchor": "f",
+      "continuation": "ired required terms 的两个角色词。\n输出：f  lt  iieii  fe ds  ",
+      "combined": "fired required terms 的两个角色词。\n输出：f  lt  iieii  fe ds  ",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "anchor_assisted_hit_terms": [],
+      "new_text_hit_terms": [],
+      "completion_hit_terms": [],
+      "anchor_assisted_pass": false,
+      "new_text_pass": false,
+      "completion_pass": false,
+      "seed": 2002,
+      "max_new_tokens": 20,
+      "temperature": 0.2,
+      "top_k": 10
+    },
+    {
+      "case_id": "objective-answer-role",
+      "profile_id": "prefix_fixed_space",
+      "anchor": "fixed ",
+      "continuation": "required terms 的两个角色词。\n输出：fixed ft  es  i    edixe",
+      "combined": "fixed required terms 的两个角色词。\n输出：fixed ft  es  i    edixe",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "anchor_assisted_hit_terms": [
+        "fixed"
+      ],
+      "new_text_hit_terms": [
+        "fixed"
+      ],
+      "completion_hit_terms": [],
+      "anchor_assisted_pass": false,
+      "new_text_pass": false,
+      "completion_pass": false,
+      "seed": 2102,
+      "max_new_tokens": 18,
+      "temperature": 0.2,
+      "top_k": 10
+    },
+    {
+      "case_id": "objective-answer-role",
+      "profile_id": "prefix_fixed_l",
+      "anchor": "fixed l",
+      "continuation": "equired terms 的两个角色词。\n输出：fixed li atetss fdtftr ",
+      "combined": "fixed lequired terms 的两个角色词。\n输出：fixed li atetss fdtftr ",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "anchor_assisted_hit_terms": [
+        "fixed"
+      ],
+      "new_text_hit_terms": [
+        "fixed"
+      ],
+      "completion_hit_terms": [],
+      "anchor_assisted_pass": false,
+      "new_text_pass": false,
+      "completion_pass": false,
+      "seed": 2202,
+      "max_new_tokens": 16,
+      "temperature": 0.2,
+      "top_k": 10
+    },
+    {
+      "case_id": "objective-answer-contrast",
+      "profile_id": "prefix_f",
+      "anchor": "f",
+      "continuation": "比任务：不要解释，只返回目标 pair tokens。\n结果：ffitrtest ereeed iife",
+      "combined": "f比任务：不要解释，只返回目标 pair tokens。\n结果：ffitrtest ereeed iife",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "anchor_assisted_hit_terms": [],
+      "new_text_hit_terms": [],
+      "completion_hit_terms": [],
+      "anchor_assisted_pass": false,
+      "new_text_pass": false,
+      "completion_pass": false,
+      "seed": 2003,
+      "max_new_tokens": 20,
+      "temperature": 0.2,
+      "top_k": 10
+    },
+    {
+      "case_id": "objective-answer-contrast",
+      "profile_id": "prefix_fixed_space",
+      "anchor": "fixed ",
+      "continuation": "要解释，只返回目标 pair tokens。\n结果：fixed       i  i   sftdd",
+      "combined": "fixed 要解释，只返回目标 pair tokens。\n结果：fixed       i  i   sftdd",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "anchor_assisted_hit_terms": [
+        "fixed"
+      ],
+      "new_text_hit_terms": [
+        "fixed"
+      ],
+      "completion_hit_terms": [],
+      "anchor_assisted_pass": false,
+      "new_text_pass": false,
+      "completion_pass": false,
+      "seed": 2103,
+      "max_new_tokens": 18,
+      "temperature": 0.2,
+      "top_k": 10
+    },
+    {
+      "case_id": "objective-answer-contrast",
+      "profile_id": "prefix_fixed_l",
+      "anchor": "fixed l",
+      "continuation": "解释，只返回目标 pair tokens。\n结果：fixed l eefe  d i tt  n",
+      "combined": "fixed l解释，只返回目标 pair tokens。\n结果：fixed l eefe  d i tt  n",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "anchor_assisted_hit_terms": [
+        "fixed"
+      ],
+      "new_text_hit_terms": [
+        "fixed"
+      ],
+      "completion_hit_terms": [],
+      "anchor_assisted_pass": false,
+      "new_text_pass": false,
+      "completion_pass": false,
+      "seed": 2203,
+      "max_new_tokens": 16,
+      "temperature": 0.2,
+      "top_k": 10
+    },
+    {
+      "case_id": "objective-answer-jsonish",
+      "profile_id": "prefix_f",
+      "anchor": "f",
+      "continuation": "er_terms，包含两个英文词。\nanswer_terms:f    i    setit  e dd",
+      "combined": "fer_terms，包含两个英文词。\nanswer_terms:f    i    setit  e dd",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "anchor_assisted_hit_terms": [],
+      "new_text_hit_terms": [],
+      "completion_hit_terms": [],
+      "anchor_assisted_pass": false,
+      "new_text_pass": false,
+      "completion_pass": false,
+      "seed": 2004,
+      "max_new_tokens": 20,
+      "temperature": 0.2,
+      "top_k": 10
+    },
+    {
+      "case_id": "objective-answer-jsonish",
+      "profile_id": "prefix_fixed_space",
+      "anchor": "fixed ",
+      "continuation": "rms，包含两个英文词。\nanswer_terms:fixed i i\nfr f t  dtli n",
+      "combined": "fixed rms，包含两个英文词。\nanswer_terms:fixed i i\nfr f t  dtli n",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "anchor_assisted_hit_terms": [
+        "fixed"
+      ],
+      "new_text_hit_terms": [
+        "fixed"
+      ],
+      "completion_hit_terms": [],
+      "anchor_assisted_pass": false,
+      "new_text_pass": false,
+      "completion_pass": false,
+      "seed": 2104,
+      "max_new_tokens": 18,
+      "temperature": 0.2,
+      "top_k": 10
+    },
+    {
+      "case_id": "objective-answer-jsonish",
+      "profile_id": "prefix_fixed_l",
+      "anchor": "fixed l",
+      "continuation": "ms，包含两个英文词。\nanswer_terms:fixed l i sns  d\nsseed ",
+      "combined": "fixed lms，包含两个英文词。\nanswer_terms:fixed l i sns  d\nsseed ",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "anchor_assisted_hit_terms": [
+        "fixed"
+      ],
+      "new_text_hit_terms": [
+        "fixed"
+      ],
+      "completion_hit_terms": [],
+      "anchor_assisted_pass": false,
+      "new_text_pass": false,
+      "completion_pass": false,
+      "seed": 2204,
+      "max_new_tokens": 16,
+      "temperature": 0.2,
+      "top_k": 10
+    },
+    {
+      "case_id": "objective-answer-check",
+      "profile_id": "prefix_f",
+      "anchor": "f",
+      "continuation": "ts d   intti     iet",
+      "combined": "fts d   intti     iet",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "anchor_assisted_hit_terms": [],
+      "new_text_hit_terms": [],
+      "completion_hit_terms": [],
+      "anchor_assisted_pass": false,
+      "new_text_pass": false,
+      "completion_pass": false,
+      "seed": 2005,
+      "max_new_tokens": 20,
+      "temperature": 0.2,
+      "top_k": 10
+    },
+    {
+      "case_id": "objective-answer-check",
+      "profile_id": "prefix_fixed_space",
+      "anchor": "fixed ",
+      "continuation": "题需要同时出现 fixed 与 loss。最终答案：fixed aniixte    trdss i",
+      "combined": "fixed 题需要同时出现 fixed 与 loss。最终答案：fixed aniixte    trdss i",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "anchor_assisted_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "new_text_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "completion_hit_terms": [
+        "loss"
+      ],
+      "anchor_assisted_pass": true,
+      "new_text_pass": true,
+      "completion_pass": true,
+      "seed": 2105,
+      "max_new_tokens": 18,
+      "temperature": 0.2,
+      "top_k": 10
+    },
+    {
+      "case_id": "objective-answer-check",
+      "profile_id": "prefix_fixed_l",
+      "anchor": "fixed l",
+      "continuation": "需要同时出现 fixed 与 loss。最终答案：fixed loi at    tden  t",
+      "combined": "fixed l需要同时出现 fixed 与 loss。最终答案：fixed loi at    tden  t",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "anchor_assisted_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "new_text_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "completion_hit_terms": [
+        "loss"
+      ],
+      "anchor_assisted_pass": true,
+      "new_text_pass": true,
+      "completion_pass": true,
+      "seed": 2205,
+      "max_new_tokens": 16,
+      "temperature": 0.2,
+      "top_k": 10
+    }
+  ],
+  "probe_errors": [],
+  "check_rows": [
+    {
+      "id": "prompt_aligned_replay_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "prompt-aligned replay must pass execution"
+    },
+    {
+      "id": "failure_diagnostic_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "failure diagnostic must pass"
+    },
+    {
+      "id": "checkpoint_exists",
+      "status": "pass",
+      "actual": "e\\818\\解释\\model-capability-route-promotion-bounded-real-replay-prompt-aligned-training-run\\run\\checkpoint.pt",
+      "detail": "checkpoint.pt must exist"
+    },
+    {
+      "id": "tokenizer_exists",
+      "status": "pass",
+      "actual": "e\\818\\解释\\model-capability-route-promotion-bounded-real-replay-prompt-aligned-training-run\\run\\tokenizer.json",
+      "detail": "tokenizer.json must exist"
+    },
+    {
+      "id": "failed_replay_rows_present",
+      "status": "pass",
+      "actual": 5,
+      "detail": "probe must have replay rows"
+    },
+    {
+      "id": "all_probe_rows_executed",
+      "status": "pass",
+      "actual": 15,
+      "detail": "probe must execute every case/profile pair"
+    },
+    {
+      "id": "no_probe_errors",
+      "status": "pass",
+      "actual": 0,
+      "detail": "probe should not raise generation errors"
+    }
+  ],
+  "probe": {
+    "ready": true,
+    "profile_count": 3,
+    "case_count": 5,
+    "probe_row_count": 15,
+    "anchor_assisted_pass_count": 2,
+    "completion_pass_count": 2,
+    "new_text_pass_count": 2,
+    "anchor_completion_success": true,
+    "new_text_success": true,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_real_replay_decoder_anchor_policy",
+    "next_step": "build_decoder_anchor_policy"
+  },
+  "summary": {
+    "decoder_anchor_probe_ready": true,
+    "profile_count": 3,
+    "case_count": 5,
+    "probe_row_count": 15,
+    "anchor_assisted_pass_count": 2,
+    "completion_pass_count": 2,
+    "new_text_pass_count": 2,
+    "anchor_completion_success": true,
+    "new_text_success": true,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_real_replay_decoder_anchor_policy",
+    "next_step": "build_decoder_anchor_policy",
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "anchor_assisted_only",
+    "reason": "Anchored prompts can recover at least one required term completion, but this is not unassisted bounded replay success.",
+    "next_action": "build_decoder_anchor_policy"
+  }
+}

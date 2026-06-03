@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v820.0.0` diagnoses the v819 prompt-aligned replay failure and narrows the blocker from corpus coverage to generation anchoring.
+Version `v821.0.0` runs decoder anchor probes on the v818 prompt-aligned checkpoint and finds a limited anchor-assisted completion signal.
+
+## Latest v821 checkpoint
+
+- Added `model_capability_route_promotion_bounded_real_replay_decoder_anchor_probe`.
+- Added CLI `scripts/run_model_capability_route_promotion_bounded_real_replay_decoder_anchor_probe.py`.
+- Consumed the real v819 prompt-aligned replay and v820 failure diagnostic.
+- Ran 3 anchor profiles across 5 failed bounded replay cases, producing 15 probe rows.
+- Recorded `anchor_assisted_pass_count=2`, `completion_pass_count=2`, and `new_text_pass_count=2`.
+- Found the signal only in `objective-answer-check` with `prefix_fixed_space` and `prefix_fixed_l`.
+- Kept the claim as `anchor_assisted_only`; this is not unassisted bounded replay success.
+- Routed the next step to `build_decoder_anchor_policy`.
+- Verified with `3 passed` focused decoder anchor probe tests.
+- Archived v821 evidence in `e/821` and added the code explanation in `代码讲解记录_模型能力阶段/835-v821-route-promotion-bounded-real-replay-decoder-anchor-probe.md`.
 
 ## Latest v820 checkpoint
 

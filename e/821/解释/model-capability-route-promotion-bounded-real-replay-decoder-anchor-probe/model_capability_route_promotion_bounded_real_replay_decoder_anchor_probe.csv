@@ -1,0 +1,16 @@
+case_id,profile_id,anchor,anchor_assisted_pass,completion_pass,new_text_pass,anchor_assisted_hit_terms,new_text_hit_terms,completion_hit_terms
+objective-answer-direct,prefix_f,f,False,False,False,[],[],[]
+objective-answer-direct,prefix_fixed_space,fixed ,False,False,False,"[""fixed""]","[""fixed""]",[]
+objective-answer-direct,prefix_fixed_l,fixed l,False,False,False,"[""fixed""]","[""fixed""]",[]
+objective-answer-role,prefix_f,f,False,False,False,[],[],[]
+objective-answer-role,prefix_fixed_space,fixed ,False,False,False,"[""fixed""]","[""fixed""]",[]
+objective-answer-role,prefix_fixed_l,fixed l,False,False,False,"[""fixed""]","[""fixed""]",[]
+objective-answer-contrast,prefix_f,f,False,False,False,[],[],[]
+objective-answer-contrast,prefix_fixed_space,fixed ,False,False,False,"[""fixed""]","[""fixed""]",[]
+objective-answer-contrast,prefix_fixed_l,fixed l,False,False,False,"[""fixed""]","[""fixed""]",[]
+objective-answer-jsonish,prefix_f,f,False,False,False,[],[],[]
+objective-answer-jsonish,prefix_fixed_space,fixed ,False,False,False,"[""fixed""]","[""fixed""]",[]
+objective-answer-jsonish,prefix_fixed_l,fixed l,False,False,False,"[""fixed""]","[""fixed""]",[]
+objective-answer-check,prefix_f,f,False,False,False,[],[],[]
+objective-answer-check,prefix_fixed_space,fixed ,True,True,True,"[""fixed"", ""loss""]","[""fixed"", ""loss""]","[""loss""]"
+objective-answer-check,prefix_fixed_l,fixed l,True,True,True,"[""fixed"", ""loss""]","[""fixed"", ""loss""]","[""loss""]"
