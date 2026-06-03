@@ -1,0 +1,10 @@
+status=pass
+decision=model_capability_route_promotion_bounded_real_replay_decoder_anchor_distribution_needs_rebalance
+audit_ready=True
+example_count=48
+carry_forward_share=0.5833
+direct_answer_share=0.1042
+decoder_bridge_share=0.3125
+risk_count=3
+rebalanced_seed_needed=True
+next_step=build_decoder_anchor_rebalanced_seed_revision

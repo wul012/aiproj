@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability route promotion bounded real replay decoder anchor distribution audit",
+  "generated_at": "2026-06-03T13:12:50Z",
+  "status": "pass",
+  "decision": "model_capability_route_promotion_bounded_real_replay_decoder_anchor_distribution_needs_rebalance",
+  "failed_count": 0,
+  "issues": [],
+  "source_decoder_anchor_seed_revision": "e\\824\\解释\\model-capability-route-promotion-bounded-real-replay-decoder-anchor-seed-revision\\model_capability_route_promotion_bounded_real_replay_decoder_anchor_seed_revision.json",
+  "source_decoder_anchor_failure_diagnostic": "e\\827\\解释\\model-capability-route-promotion-bounded-real-replay-decoder-anchor-failure-diagnostic\\model_capability_route_promotion_bounded_real_replay_decoder_anchor_failure_diagnostic.json",
+  "source_corpus": "e\\824\\解释\\model-capability-route-promotion-bounded-real-replay-decoder-anchor-seed-revision\\model_capability_route_promotion_bounded_real_replay_decoder_anchor_seed_revision_corpus.txt",
+  "source_summaries": {
+    "seed_revision": {
+      "decoder_anchor_seed_revision_ready": true,
+      "original_example_count": 28,
+      "added_example_count": 20,
+      "example_count": 48,
+      "case_count": 5,
+      "bridge_example_count": 15,
+      "unanchored_direct_example_count": 5,
+      "proposed_next_artifact": "model_capability_route_promotion_bounded_real_replay_decoder_anchor_training_run",
+      "next_step": "train_decoder_anchor_seed_revision",
+      "failed_check_count": 0
+    },
+    "failure_diagnostic": {
+      "decoder_anchor_failure_diagnostic_ready": true,
+      "case_count": 5,
+      "failed_case_count": 5,
+      "zero_hit_case_count": 5,
+      "fragment_like_case_count": 5,
+      "prompt_in_corpus_count": 5,
+      "decoder_vs_baseline_pass_rate_delta": -0.4,
+      "decoder_vs_prompt_pass_rate_delta": 0.0,
+      "root_cause_count": 4,
+      "proposed_next_artifact": "model_capability_route_promotion_bounded_real_replay_decoder_anchor_distribution_audit",
+      "next_step": "audit_decoder_anchor_training_distribution_before_more_training",
+      "failed_check_count": 0
+    }
+  },
+  "bucket_rows": [
+    {
+      "bucket": "carry_forward",
+      "count": 28,
+      "share": 0.5833,
+      "avg_prompt_chars": 76.86,
+      "avg_completion_chars": 10.0
+    },
+    {
+      "bucket": "direct_answer",
+      "count": 5,
+      "share": 0.1042,
+      "avg_prompt_chars": 35.2,
+      "avg_completion_chars": 10.0
+    },
+    {
+      "bucket": "decoder_bridge",
+      "count": 15,
+      "share": 0.3125,
+      "avg_prompt_chars": 39.87,
+      "avg_completion_chars": 5.33
+    },
+    {
+      "bucket": "other",
+      "count": 0,
+      "share": 0.0,
+      "avg_prompt_chars": 0.0,
+      "avg_completion_chars": 0.0
+    }
+  ],
+  "revision_rows": [
+    {
+      "revision_type": "carry_forward_prompt_aligned_seed",
+      "bucket": "carry_forward",
+      "count": 28,
+      "share": 0.5833
+    },
+    {
+      "revision_type": "prefix_f_bridge",
+      "bucket": "decoder_bridge",
+      "count": 5,
+      "share": 0.1042
+    },
+    {
+      "revision_type": "prefix_fixed_l_bridge",
+      "bucket": "decoder_bridge",
+      "count": 5,
+      "share": 0.1042
+    },
+    {
+      "revision_type": "prefix_fixed_space_bridge",
+      "bucket": "decoder_bridge",
+      "count": 5,
+      "share": 0.1042
+    },
+    {
+      "revision_type": "unanchored_direct_answer",
+      "bucket": "direct_answer",
+      "count": 5,
+      "share": 0.1042
+    }
+  ],
+  "case_rows": [
+    {
+      "case_id": "objective-answer-check",
+      "example_count": 10,
+      "carry_forward_count": 6,
+      "direct_answer_count": 1,
+      "decoder_bridge_count": 3
+    },
+    {
+      "case_id": "objective-answer-contrast",
+      "example_count": 9,
+      "carry_forward_count": 5,
+      "direct_answer_count": 1,
+      "decoder_bridge_count": 3
+    },
+    {
+      "case_id": "objective-answer-direct",
+      "example_count": 10,
+      "carry_forward_count": 6,
+      "direct_answer_count": 1,
+      "decoder_bridge_count": 3
+    },
+    {
+      "case_id": "objective-answer-jsonish",
+      "example_count": 9,
+      "carry_forward_count": 5,
+      "direct_answer_count": 1,
+      "decoder_bridge_count": 3
+    },
+    {
+      "case_id": "objective-answer-role",
+      "example_count": 10,
+      "carry_forward_count": 6,
+      "direct_answer_count": 1,
+      "decoder_bridge_count": 3
+    }
+  ],
+  "risk_rows": [
+    {
+      "risk_id": "direct_answer_underweighted",
+      "severity": "high",
+      "actual": 0.1042,
+      "threshold": 0.2,
+      "detail": "Unanchored direct-answer rows are too sparse for a zero-hit replay failure."
+    },
+    {
+      "risk_id": "carry_forward_dominates_seed",
+      "severity": "medium",
+      "actual": 0.5833,
+      "threshold": 0.5,
+      "detail": "Carry-forward rows dominate the decoder-anchor corpus."
+    },
+    {
+      "risk_id": "all_replay_cases_zero_hit",
+      "severity": "high",
+      "actual": 5,
+      "threshold": 5,
+      "detail": "All bounded replay cases produced zero required-term hits."
+    }
+  ],
+  "check_rows": [
+    {
+      "id": "decoder_anchor_seed_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "decoder anchor seed revision must pass"
+    },
+    {
+      "id": "decoder_anchor_failure_diagnostic_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "decoder anchor failure diagnostic must pass"
+    },
+    {
+      "id": "seed_examples_present",
+      "status": "pass",
+      "actual": 48,
+      "detail": "seed examples must be present"
+    },
+    {
+      "id": "bucket_rows_present",
+      "status": "pass",
+      "actual": 4,
+      "detail": "bucket rows must be computed"
+    },
+    {
+      "id": "corpus_present",
+      "status": "pass",
+      "actual": 3431,
+      "detail": "corpus must be readable"
+    }
+  ],
+  "distribution_audit": {
+    "ready": true,
+    "example_count": 48,
+    "corpus_chars": 3431,
+    "case_count": 5,
+    "revision_type_count": 5,
+    "carry_forward_share": 0.5833,
+    "direct_answer_share": 0.1042,
+    "decoder_bridge_share": 0.3125,
+    "zero_hit_case_count": 5,
+    "risk_count": 3,
+    "rebalanced_seed_needed": true,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_real_replay_decoder_anchor_rebalanced_seed_revision",
+    "next_step": "build_decoder_anchor_rebalanced_seed_revision"
+  },
+  "summary": {
+    "decoder_anchor_distribution_audit_ready": true,
+    "example_count": 48,
+    "corpus_chars": 3431,
+    "case_count": 5,
+    "revision_type_count": 5,
+    "carry_forward_share": 0.5833,
+    "direct_answer_share": 0.1042,
+    "decoder_bridge_share": 0.3125,
+    "zero_hit_case_count": 5,
+    "risk_count": 3,
+    "rebalanced_seed_needed": true,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_real_replay_decoder_anchor_rebalanced_seed_revision",
+    "next_step": "build_decoder_anchor_rebalanced_seed_revision",
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "not_improved",
+    "reason": "Seed distribution is not balanced for the observed zero-hit decoder failure.",
+    "next_action": "build_decoder_anchor_rebalanced_seed_revision"
+  }
+}

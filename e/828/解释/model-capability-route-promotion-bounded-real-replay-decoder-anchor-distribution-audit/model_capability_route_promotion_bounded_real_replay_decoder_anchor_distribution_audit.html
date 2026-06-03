@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT model capability route promotion bounded real replay decoder anchor distribution audit</title>
+<style>
+:root{color-scheme:light;--ink:#17212b;--muted:#667381;--line:#d8dee5;--panel:#f7f9fb;--accent:#0f766e}
+*{box-sizing:border-box}
+body{margin:0;background:#f0f3f7;color:var(--ink);font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1240px;margin:0 auto;padding:28px}
+h1{font-size:30px;margin:0 0 8px;letter-spacing:0}
+h2{font-size:18px;margin:0 0 12px;letter-spacing:0}
+p{color:var(--muted);line-height:1.55;overflow-wrap:anywhere}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:10px;margin:18px 0}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:8px}
+.card{padding:14px}
+.card span{display:block;color:var(--muted);font-size:12px;text-transform:uppercase}
+.card strong{display:block;margin-top:6px;font-size:18px;line-height:1.2;color:var(--accent);overflow-wrap:anywhere}
+.panel{padding:16px;margin:14px 0}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:#334155}
+td{overflow-wrap:anywhere}
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT model capability route promotion bounded real replay decoder anchor distribution audit</h1><p>Audits carry-forward, direct-answer, and decoder-bridge proportions before further training.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Decision</span><strong>model_capability_route_promotion_bounded_real_replay_decoder_anchor_distribution_needs_rebalance</strong></div><div class="card"><span>Examples</span><strong>48</strong></div><div class="card"><span>Carry share</span><strong>0.5833</strong></div><div class="card"><span>Direct share</span><strong>0.1042</strong></div><div class="card"><span>Bridge share</span><strong>0.3125</strong></div><div class="card"><span>Risks</span><strong>3</strong></div></section>
+<section class="panel"><h2>Buckets</h2><div class="table-wrap"><table>
+<thead><tr><th>Bucket</th><th>Count</th><th>Share</th><th>Avg prompt</th><th>Avg completion</th></tr></thead>
+<tbody><tr><td>carry_forward</td><td>28</td><td>0.5833</td><td>76.86</td><td>10.0</td></tr><tr><td>direct_answer</td><td>5</td><td>0.1042</td><td>35.2</td><td>10.0</td></tr><tr><td>decoder_bridge</td><td>15</td><td>0.3125</td><td>39.87</td><td>5.33</td></tr><tr><td>other</td><td>0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr></tbody>
+</table></div></section>
+<section class="panel"><h2>Risks</h2><div class="table-wrap"><table>
+<thead><tr><th>Risk</th><th>Severity</th><th>Actual</th><th>Threshold</th><th>Detail</th></tr></thead>
+<tbody><tr><td>direct_answer_underweighted</td><td>high</td><td>0.1042</td><td>0.2</td><td>Unanchored direct-answer rows are too sparse for a zero-hit replay failure.</td></tr><tr><td>carry_forward_dominates_seed</td><td>medium</td><td>0.5833</td><td>0.5</td><td>Carry-forward rows dominate the decoder-anchor corpus.</td></tr><tr><td>all_replay_cases_zero_hit</td><td>high</td><td>5</td><td>5</td><td>All bounded replay cases produced zero required-term hits.</td></tr></tbody>
+</table></div></section>
+</main>
+</body>
+</html>

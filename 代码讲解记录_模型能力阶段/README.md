@@ -41,6 +41,9 @@
 841-v827-route-promotion-bounded-real-replay-decoder-anchor-failure-diagnostic.md
  -> v827 code explanation: diagnose why decoder-anchor training still produced zero-hit bounded replay before further training.
 
+842-v828-route-promotion-bounded-real-replay-decoder-anchor-distribution-audit.md
+ -> v828 code explanation: audit decoder-anchor seed distribution and route the next work to a rebalanced seed revision before more training.
+
 487-v473-baseline-candidate-capability-delta.md
  -> v473 code explanation: carry real tiny training loss and generation-quality deltas into the baseline-candidate eval loop.
 

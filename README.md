@@ -4,7 +4,19 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v827.0.0` diagnoses why the v825 decoder-anchor checkpoint still failed all bounded replay cases before any further training.
+Version `v828.0.0` audits the decoder-anchor training distribution before more training, confirming the next step should rebalance the seed rather than blindly extend the run.
+
+## Latest v828 checkpoint
+
+- Added `model_capability_route_promotion_bounded_real_replay_decoder_anchor_distribution_audit`.
+- Added CLI `scripts/audit_model_capability_route_promotion_bounded_real_replay_decoder_anchor_distribution.py`.
+- Consumed the real v824 decoder-anchor seed/corpus and the v827 failure diagnostic.
+- Produced `example_count=48`, `case_count=5`, `carry_forward_share=0.5833`, `direct_answer_share=0.1042`, and `decoder_bridge_share=0.3125`.
+- Flagged three concrete risks: direct-answer rows are underweighted, carry-forward rows dominate, and all replay cases remain zero-hit.
+- Kept the model-quality claim as `not_improved`; this is a training-data distribution audit, not a capability improvement.
+- Routed the next step to `build_decoder_anchor_rebalanced_seed_revision`.
+- Verified with `3 passed` focused decoder anchor distribution audit tests.
+- Archived v828 evidence in `e/828` and added the code explanation in `代码讲解记录_模型能力阶段/842-v828-route-promotion-bounded-real-replay-decoder-anchor-distribution-audit.md`.
 
 ## Latest v827 checkpoint
 
