@@ -1,0 +1,172 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability route promotion bounded real replay review",
+  "generated_at": "2026-06-03T07:59:02Z",
+  "status": "pass",
+  "decision": "model_capability_route_promotion_bounded_real_replay_review_needs_repair",
+  "failed_count": 0,
+  "issues": [],
+  "source_real_replay": "D:\\aiproj\\e\\806\\解释\\model-capability-route-promotion-bounded-real-replay\\model_capability_route_promotion_bounded_real_replay.json",
+  "source_replay_summary": {
+    "bounded_real_replay_executed": true,
+    "model_route_quality_ready": false,
+    "case_count": 5,
+    "executed_case_count": 5,
+    "passed_case_count": 2,
+    "failed_case_count": 3,
+    "pass_rate": 0.4,
+    "next_step": "review_bounded_route_promotion_real_replay",
+    "failed_check_count": 0
+  },
+  "case_reviews": [
+    {
+      "case_id": "objective-answer-direct",
+      "case_pass": false,
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "loss"
+      ],
+      "missed_terms": [
+        "fixed"
+      ],
+      "continuation_chars": 40,
+      "unknown_token_surface": true,
+      "diagnosis": "partial_required_terms_generated_with_unknown_token_surface",
+      "severity": "repair",
+      "recommended_action": "target_missing_terms_without_forgetting_hits"
+    },
+    {
+      "case_id": "objective-answer-role",
+      "case_pass": false,
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "continuation_chars": 40,
+      "unknown_token_surface": true,
+      "diagnosis": "no_required_terms_generated_with_unknown_token_surface",
+      "severity": "repair",
+      "recommended_action": "repair_prompt_to_required_term_bridge"
+    },
+    {
+      "case_id": "objective-answer-contrast",
+      "case_pass": true,
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "missed_terms": [],
+      "continuation_chars": 40,
+      "unknown_token_surface": true,
+      "diagnosis": "case_passed",
+      "severity": "info",
+      "recommended_action": "keep_case_as_replay_anchor"
+    },
+    {
+      "case_id": "objective-answer-jsonish",
+      "case_pass": true,
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "missed_terms": [],
+      "continuation_chars": 40,
+      "unknown_token_surface": true,
+      "diagnosis": "case_passed",
+      "severity": "info",
+      "recommended_action": "keep_case_as_replay_anchor"
+    },
+    {
+      "case_id": "objective-answer-check",
+      "case_pass": false,
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "loss"
+      ],
+      "missed_terms": [
+        "fixed"
+      ],
+      "continuation_chars": 40,
+      "unknown_token_surface": true,
+      "diagnosis": "partial_required_terms_generated_with_unknown_token_surface",
+      "severity": "repair",
+      "recommended_action": "target_missing_terms_without_forgetting_hits"
+    }
+  ],
+  "check_rows": [
+    {
+      "id": "real_replay_status_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "real replay execution status must pass"
+    },
+    {
+      "id": "real_replay_executed",
+      "status": "pass",
+      "actual": true,
+      "detail": "real replay must have executed"
+    },
+    {
+      "id": "case_reviews_present",
+      "status": "pass",
+      "actual": 5,
+      "detail": "review must inspect replay rows"
+    },
+    {
+      "id": "case_count_matches_summary",
+      "status": "pass",
+      "actual": {
+        "reviews": 5,
+        "summary": 5
+      },
+      "detail": "reviewed cases must match replay summary"
+    },
+    {
+      "id": "no_source_execution_failures",
+      "status": "pass",
+      "actual": 0,
+      "detail": "source replay must have no execution check failures"
+    }
+  ],
+  "summary": {
+    "bounded_real_replay_review_ready": true,
+    "promotion_ready": false,
+    "repair_review_ready": true,
+    "case_count": 5,
+    "passed_case_count": 2,
+    "failed_case_count": 3,
+    "pass_rate": 0.4,
+    "diagnosis_counts": {
+      "case_passed": 2,
+      "no_required_terms_generated_with_unknown_token_surface": 1,
+      "partial_required_terms_generated_with_unknown_token_surface": 2
+    },
+    "unknown_token_surface_count": 5,
+    "next_step": "build_bounded_real_replay_repair_plan",
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "bounded_replay_repair_needed",
+    "reason": "Replay ran but missed required terms in one or more cases.",
+    "next_action": "build_bounded_real_replay_repair_plan"
+  }
+}

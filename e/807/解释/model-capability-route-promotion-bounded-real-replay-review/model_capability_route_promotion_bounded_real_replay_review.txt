@@ -1,0 +1,10 @@
+status=pass
+decision=model_capability_route_promotion_bounded_real_replay_review_needs_repair
+failed_count=0
+bounded_real_replay_review_ready=True
+promotion_ready=False
+repair_review_ready=True
+passed_case_count=2
+failed_case_count=3
+pass_rate=0.4
+next_step=build_bounded_real_replay_repair_plan

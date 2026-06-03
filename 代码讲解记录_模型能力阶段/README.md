@@ -1013,6 +1013,9 @@
 820-v806-route-promotion-bounded-real-replay.md
  -> v806 code explanation: run the bounded benchmark suite against a real checkpoint and record partial fixed/loss model-quality evidence.
 
+821-v807-route-promotion-bounded-real-replay-review.md
+ -> v807 code explanation: review partial bounded real replay results and route model gaps to a repair plan.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

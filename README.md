@@ -4,7 +4,18 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v806.0.0` runs the bounded benchmark suite against a real checkpoint and records partial model-quality evidence.
+Version `v807.0.0` reviews the bounded real replay result and routes partial model quality to a repair plan.
+
+## Latest v807 checkpoint
+
+- Added `model_capability_route_promotion_bounded_real_replay_review`.
+- Added CLI `scripts/review_model_capability_route_promotion_bounded_real_replay.py`.
+- Consumed the real v806 bounded real replay evidence.
+- Produced `decision=model_capability_route_promotion_bounded_real_replay_review_needs_repair`.
+- Kept `promotion_ready=False` while marking `repair_review_ready=True`.
+- Preserved the real replay result `passed_case_count=2/5`, `pass_rate=0.4`.
+- Verified with `8 passed` focused real replay review tests.
+- Archived v807 evidence in `e/807` and added the code explanation in `代码讲解记录_模型能力阶段/821-v807-route-promotion-bounded-real-replay-review.md`.
 
 ## Latest v806 checkpoint
 

@@ -1,0 +1,6 @@
+case_id,case_pass,diagnosis,severity,hit_terms,missed_terms,recommended_action
+objective-answer-direct,False,partial_required_terms_generated_with_unknown_token_surface,repair,loss,fixed,target_missing_terms_without_forgetting_hits
+objective-answer-role,False,no_required_terms_generated_with_unknown_token_surface,repair,,"fixed,loss",repair_prompt_to_required_term_bridge
+objective-answer-contrast,True,case_passed,info,"fixed,loss",,keep_case_as_replay_anchor
+objective-answer-jsonish,True,case_passed,info,"fixed,loss",,keep_case_as_replay_anchor
+objective-answer-check,False,partial_required_terms_generated_with_unknown_token_surface,repair,loss,fixed,target_missing_terms_without_forgetting_hits
