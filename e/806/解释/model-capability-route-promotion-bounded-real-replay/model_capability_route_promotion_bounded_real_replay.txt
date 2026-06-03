@@ -1,0 +1,10 @@
+status=pass
+decision=model_capability_route_promotion_bounded_real_replay_completed_with_model_gaps
+failed_count=0
+bounded_real_replay_executed=True
+model_route_quality_ready=False
+case_count=5
+passed_case_count=2
+failed_case_count=3
+pass_rate=0.4
+next_step=review_bounded_route_promotion_real_replay

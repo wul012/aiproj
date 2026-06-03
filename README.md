@@ -4,7 +4,18 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v805.0.0` dry-runs the bounded benchmark scoring contract with controlled continuations.
+Version `v806.0.0` runs the bounded benchmark suite against a real checkpoint and records partial model-quality evidence.
+
+## Latest v806 checkpoint
+
+- Added `model_capability_route_promotion_bounded_real_replay`.
+- Added CLI `scripts/run_model_capability_route_promotion_bounded_real_replay.py`.
+- Consumed the real v803 bounded benchmark suite, v804 suite review, and v805 dry-run.
+- Used the v770 objective-level contrast checkpoint/tokenizer for real replay.
+- Produced `decision=model_capability_route_promotion_bounded_real_replay_completed_with_model_gaps`.
+- Recorded `passed_case_count=2/5`, `pass_rate=0.4`, and `model_route_quality_ready=False`.
+- Verified with `13 passed` focused route-promotion bounded benchmark tests.
+- Archived v806 evidence in `e/806` and added the code explanation in `代码讲解记录_模型能力阶段/820-v806-route-promotion-bounded-real-replay.md`.
 
 ## Latest v805 checkpoint
 

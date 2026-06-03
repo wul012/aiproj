@@ -1,0 +1,198 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability route promotion bounded real replay",
+  "generated_at": "2026-06-03T07:48:43Z",
+  "status": "pass",
+  "decision": "model_capability_route_promotion_bounded_real_replay_completed_with_model_gaps",
+  "failed_count": 0,
+  "issues": [],
+  "source_suite_review": "D:\\aiproj\\e\\804\\解释\\model-capability-route-promotion-bounded-benchmark-suite-review\\model_capability_route_promotion_bounded_benchmark_suite_review.json",
+  "source_benchmark_suite": "D:\\aiproj\\e\\803\\解释\\model-capability-route-promotion-bounded-benchmark-suite\\model_capability_route_promotion_bounded_benchmark_suite.json",
+  "source_dry_run": "D:\\aiproj\\e\\805\\解释\\model-capability-route-promotion-bounded-benchmark-dry-run\\model_capability_route_promotion_bounded_benchmark_dry_run.json",
+  "checkpoint": "D:\\aiproj\\e\\770\\解释\\model-capability-required-term-pair-readiness-objective-level-contrast-seed-3838-training-run\\pair-readiness-training-run\\checkpoint.pt",
+  "tokenizer": "D:\\aiproj\\e\\770\\解释\\model-capability-required-term-pair-readiness-objective-level-contrast-seed-3838-training-run\\pair-readiness-training-run\\tokenizer.json",
+  "device": "cpu",
+  "replay_rows": [
+    {
+      "case_id": "objective-answer-direct",
+      "prompt": "任务：只输出两个英文关键词，表示本轮目标答案。\n答案：",
+      "continuation": "������������\n���branch lossssssssssss fi",
+      "generated": "������������\n���branch lossssssssssss fi",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "loss"
+      ],
+      "missed_terms": [
+        "fixed"
+      ],
+      "case_pass": false,
+      "seed": 901,
+      "max_new_tokens": 24,
+      "temperature": 0.2,
+      "top_k": 10
+    },
+    {
+      "case_id": "objective-answer-role",
+      "prompt": "目标：给出 paired required terms 的两个角色词。\n输出：",
+      "continuation": "erms �������\n���epans loswer lorerered l",
+      "generated": "erms �������\n���epans loswer lorerered l",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "case_pass": false,
+      "seed": 902,
+      "max_new_tokens": 24,
+      "temperature": 0.2,
+      "top_k": 10
+    },
+    {
+      "case_id": "objective-answer-contrast",
+      "prompt": "对比任务：不要解释，只返回目标 pair tokens。\n结果：",
+      "continuation": "pair tokens�\n���obred fixed fixed lossss",
+      "generated": "pair tokens�\n���obred fixed fixed lossss",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "missed_terms": [],
+      "case_pass": true,
+      "seed": 903,
+      "max_new_tokens": 24,
+      "temperature": 0.2,
+      "top_k": 10
+    },
+    {
+      "case_id": "objective-answer-jsonish",
+      "prompt": "请用 JSON 风格写出 answer_terms，包含两个英文词。\nanswer_terms:",
+      "continuation": "��\nanswer_terms�s fixed losss\nbrassssseq",
+      "generated": "��\nanswer_terms�s fixed losss\nbrassssseq",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "missed_terms": [],
+      "case_pass": true,
+      "seed": 904,
+      "max_new_tokens": 24,
+      "temperature": 0.2,
+      "top_k": 10
+    },
+    {
+      "case_id": "objective-answer-check",
+      "prompt": "自检：本题需要同时出现 fixed 与 loss。最终答案：",
+      "continuation": "xed � loss������bred lossssssssssss fixe",
+      "generated": "xed � loss������bred lossssssssssss fixe",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "loss"
+      ],
+      "missed_terms": [
+        "fixed"
+      ],
+      "case_pass": false,
+      "seed": 905,
+      "max_new_tokens": 24,
+      "temperature": 0.2,
+      "top_k": 10
+    }
+  ],
+  "replay_errors": [],
+  "check_rows": [
+    {
+      "id": "suite_review_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "suite review must pass before real replay"
+    },
+    {
+      "id": "suite_review_approved",
+      "status": "pass",
+      "actual": true,
+      "detail": "suite review must approve real replay"
+    },
+    {
+      "id": "benchmark_suite_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "benchmark suite must pass"
+    },
+    {
+      "id": "dry_run_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "dry-run scorer must pass before real replay"
+    },
+    {
+      "id": "dry_run_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "dry-run summary must be ready"
+    },
+    {
+      "id": "checkpoint_exists",
+      "status": "pass",
+      "actual": "D:\\aiproj\\e\\770\\解释\\model-capability-required-term-pair-readiness-objective-level-contrast-seed-3838-training-run\\pair-readiness-training-run\\checkpoint.pt",
+      "detail": "checkpoint.pt must exist"
+    },
+    {
+      "id": "tokenizer_exists",
+      "status": "pass",
+      "actual": "D:\\aiproj\\e\\770\\解释\\model-capability-required-term-pair-readiness-objective-level-contrast-seed-3838-training-run\\pair-readiness-training-run\\tokenizer.json",
+      "detail": "tokenizer.json must exist"
+    },
+    {
+      "id": "cases_present",
+      "status": "pass",
+      "actual": 5,
+      "detail": "benchmark suite must provide replay cases"
+    },
+    {
+      "id": "all_cases_executed",
+      "status": "pass",
+      "actual": 5,
+      "detail": "real replay should execute every case"
+    },
+    {
+      "id": "no_replay_errors",
+      "status": "pass",
+      "actual": 0,
+      "detail": "real replay should not raise generation errors"
+    }
+  ],
+  "summary": {
+    "bounded_real_replay_executed": true,
+    "model_route_quality_ready": false,
+    "case_count": 5,
+    "executed_case_count": 5,
+    "passed_case_count": 2,
+    "failed_case_count": 3,
+    "pass_rate": 0.4,
+    "next_step": "review_bounded_route_promotion_real_replay",
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "bounded_replay_partial_only",
+    "reason": "Replay executed, but at least one case missed a required term.",
+    "next_action": "review missed cases before promoting model capability"
+  }
+}

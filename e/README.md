@@ -1550,3 +1550,9 @@ e/663/解释/说明.md
 - `e/805/图片`
 - `e/805/解释/说明.md`
 - v805 model capability route promotion bounded benchmark dry-run 的运行截图和解释。
+
+## v806 补充索引
+
+- `e/806/图片`
+- `e/806/解释/说明.md`
+- v806 model capability route promotion bounded real replay 的运行截图和解释。
