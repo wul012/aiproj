@@ -1,0 +1,168 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability route promotion bounded benchmark suite review",
+  "generated_at": "2026-06-03T07:25:12Z",
+  "status": "pass",
+  "decision": "model_capability_route_promotion_bounded_benchmark_suite_review_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_benchmark_suite": "e\\803\\解释\\model-capability-route-promotion-bounded-benchmark-suite\\model_capability_route_promotion_bounded_benchmark_suite.json",
+  "source_suite_summary": {
+    "bounded_benchmark_suite_ready": true,
+    "suite_name": "route-promotion-objective-level-contrast-bounded-suite",
+    "route_id": "objective_level_contrast",
+    "consumer_name": "bounded-benchmark-planner",
+    "case_count": 5,
+    "expected_terms": [
+      "fixed",
+      "loss"
+    ],
+    "minimum_case_count": 5,
+    "boundary": "tiny_required_term_pair_probe_only",
+    "model_quality_claim": "seed_stable_pair_probe_route_accepted",
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_benchmark_suite_review",
+    "failed_check_count": 0
+  },
+  "case_reviews": [
+    {
+      "case_id": "objective-answer-direct",
+      "prompt_present": true,
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "expected_term_count": 2,
+      "has_fixed_loss": true,
+      "forbidden_surface_hits": [],
+      "review_status": "pass"
+    },
+    {
+      "case_id": "objective-answer-role",
+      "prompt_present": true,
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "expected_term_count": 2,
+      "has_fixed_loss": true,
+      "forbidden_surface_hits": [],
+      "review_status": "pass"
+    },
+    {
+      "case_id": "objective-answer-contrast",
+      "prompt_present": true,
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "expected_term_count": 2,
+      "has_fixed_loss": true,
+      "forbidden_surface_hits": [],
+      "review_status": "pass"
+    },
+    {
+      "case_id": "objective-answer-jsonish",
+      "prompt_present": true,
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "expected_term_count": 2,
+      "has_fixed_loss": true,
+      "forbidden_surface_hits": [],
+      "review_status": "pass"
+    },
+    {
+      "case_id": "objective-answer-check",
+      "prompt_present": true,
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "expected_term_count": 2,
+      "has_fixed_loss": true,
+      "forbidden_surface_hits": [],
+      "review_status": "pass"
+    }
+  ],
+  "check_rows": [
+    {
+      "id": "suite_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "source suite must pass"
+    },
+    {
+      "id": "suite_decision_ready",
+      "status": "pass",
+      "actual": "model_capability_route_promotion_bounded_benchmark_suite_ready",
+      "detail": "source suite decision must be ready"
+    },
+    {
+      "id": "suite_ready",
+      "status": "pass",
+      "actual": {
+        "summary": true,
+        "suite": true
+      },
+      "detail": "suite must be ready"
+    },
+    {
+      "id": "case_count",
+      "status": "pass",
+      "actual": 5,
+      "detail": "suite must include at least five cases"
+    },
+    {
+      "id": "expected_terms",
+      "status": "pass",
+      "actual": [
+        "fixed",
+        "loss"
+      ],
+      "detail": "suite expected terms must be fixed/loss"
+    },
+    {
+      "id": "case_reviews_clean",
+      "status": "pass",
+      "actual": 0,
+      "detail": "all case reviews must pass"
+    },
+    {
+      "id": "prompt_uniqueness",
+      "status": "pass",
+      "actual": 0,
+      "detail": "suite prompts must be unique"
+    },
+    {
+      "id": "next_artifact_review",
+      "status": "pass",
+      "actual": "model_capability_route_promotion_bounded_benchmark_suite_review",
+      "detail": "suite must point at this review artifact"
+    }
+  ],
+  "review": {
+    "ready": true,
+    "approved_for_execution": true,
+    "suite_name": "route-promotion-objective-level-contrast-bounded-suite",
+    "route_id": "objective_level_contrast",
+    "case_count": 5,
+    "passed_case_review_count": 5,
+    "next_step": "run_bounded_route_promotion_benchmark_dry_run"
+  },
+  "summary": {
+    "bounded_benchmark_suite_review_ready": true,
+    "approved_for_execution": true,
+    "suite_name": "route-promotion-objective-level-contrast-bounded-suite",
+    "route_id": "objective_level_contrast",
+    "case_count": 5,
+    "passed_case_review_count": 5,
+    "next_step": "run_bounded_route_promotion_benchmark_dry_run",
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "suite_review_only",
+    "reason": "The bounded suite cases, expected terms, and guardrails are ready for dry-run execution.",
+    "next_action": "run_bounded_route_promotion_benchmark_dry_run"
+  }
+}

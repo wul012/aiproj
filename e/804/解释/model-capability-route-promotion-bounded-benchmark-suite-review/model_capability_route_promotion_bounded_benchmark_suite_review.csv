@@ -1,0 +1,6 @@
+case_id,review_status,expected_terms,forbidden_surface_hits
+objective-answer-direct,pass,"fixed,loss",
+objective-answer-role,pass,"fixed,loss",
+objective-answer-contrast,pass,"fixed,loss",
+objective-answer-jsonish,pass,"fixed,loss",
+objective-answer-check,pass,"fixed,loss",

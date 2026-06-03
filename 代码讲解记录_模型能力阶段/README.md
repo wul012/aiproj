@@ -1004,6 +1004,9 @@
 817-v803-route-promotion-bounded-benchmark-suite.md
  -> v803 code explanation: build concrete bounded benchmark prompt cases from the route promotion consumer plan.
 
+818-v804-route-promotion-bounded-benchmark-suite-review.md
+ -> v804 code explanation: review the bounded benchmark suite before dry-run execution.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

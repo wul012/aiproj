@@ -1,0 +1,8 @@
+status=pass
+decision=model_capability_route_promotion_bounded_benchmark_suite_review_ready
+failed_count=0
+bounded_benchmark_suite_review_ready=True
+approved_for_execution=True
+case_count=5
+passed_case_review_count=5
+next_step=run_bounded_route_promotion_benchmark_dry_run

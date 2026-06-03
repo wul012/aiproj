@@ -1538,3 +1538,9 @@ e/663/解释/说明.md
 - `e/803/图片`
 - `e/803/解释/说明.md`
 - v803 model capability route promotion bounded benchmark suite 的运行截图和解释。
+
+## v804 补充索引
+
+- `e/804/图片`
+- `e/804/解释/说明.md`
+- v804 model capability route promotion bounded benchmark suite review 的运行截图和解释。

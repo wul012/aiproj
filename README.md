@@ -4,7 +4,17 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v803.0.0` builds a bounded benchmark suite with concrete route-promotion prompt cases.
+Version `v804.0.0` reviews the bounded route promotion benchmark suite before execution.
+
+## Latest v804 checkpoint
+
+- Added `model_capability_route_promotion_bounded_benchmark_suite_review`.
+- Added CLI `scripts/review_model_capability_route_promotion_bounded_benchmark_suite.py`.
+- Consumed the real v803 bounded benchmark suite.
+- Produced `decision=model_capability_route_promotion_bounded_benchmark_suite_review_ready`.
+- Approved all 5 suite cases for dry-run execution.
+- Verified with `6 passed` bounded benchmark suite review focused tests.
+- Archived v804 evidence in `e/804` and added the code explanation in `代码讲解记录_模型能力阶段/818-v804-route-promotion-bounded-benchmark-suite-review.md`.
 
 ## Latest v803 checkpoint
 
