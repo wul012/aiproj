@@ -1,0 +1,6 @@
+case_id,baseline_pass,prompt_aligned_pass,decoder_anchor_pass,decoder_vs_baseline_delta,decoder_vs_prompt_delta,decoder_anchor_hit_terms,decoder_anchor_missed_terms
+objective-answer-check,False,False,False,0,0,[],"[""fixed"", ""loss""]"
+objective-answer-contrast,True,False,False,-1,0,[],"[""fixed"", ""loss""]"
+objective-answer-direct,False,False,False,0,0,[],"[""fixed"", ""loss""]"
+objective-answer-jsonish,True,False,False,-1,0,[],"[""fixed"", ""loss""]"
+objective-answer-role,False,False,False,0,0,[],"[""fixed"", ""loss""]"

@@ -35,6 +35,9 @@
 839-v825-route-promotion-bounded-real-replay-decoder-anchor-training-run.md
  -> v825 code explanation: train the v824 decoder-anchor seed revision into a real checkpoint while keeping capability claims gated behind bounded replay.
 
+840-v826-route-promotion-bounded-real-replay-decoder-anchor-checkpoint-comparison.md
+ -> v826 code explanation: replay the decoder-anchor checkpoint and compare it with baseline and prompt-aligned results before any capability claim.
+
 487-v473-baseline-candidate-capability-delta.md
  -> v473 code explanation: carry real tiny training loss and generation-quality deltas into the baseline-candidate eval loop.
 

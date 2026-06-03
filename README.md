@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v825.0.0` trains the v824 decoder-anchor seed revision into a real checkpoint while keeping model-quality claims gated behind bounded replay.
+Version `v826.0.0` replays the v825 decoder-anchor checkpoint and compares it against the v806 baseline and v819 prompt-aligned checkpoint.
+
+## Latest v826 checkpoint
+
+- Added `model_capability_route_promotion_bounded_real_replay_decoder_anchor_checkpoint_comparison`.
+- Added CLI `scripts/compare_model_capability_route_promotion_bounded_real_replay_decoder_anchor_checkpoint.py`.
+- Replayed the v825 decoder-anchor checkpoint on the same v803 bounded benchmark suite.
+- Produced decoder-anchor replay result `passed_case_count=0/5`, `pass_rate=0.0`, and `model_route_quality_ready=False`.
+- Compared v806 baseline `2/5`, v819 prompt-aligned `0/5`, and v826 decoder-anchor `0/5`.
+- Produced `decision=model_capability_route_promotion_bounded_real_replay_decoder_anchor_checkpoint_regressed_from_baseline`.
+- Recorded `decoder_vs_baseline_pass_rate_delta=-0.4`, `decoder_vs_prompt_pass_rate_delta=0.0`, and `promotion_ready=False`.
+- Fixed the comparison CLI so `--force` preserves nested `decoder-anchor-replay/` evidence.
+- Verified with `5 passed` focused decoder anchor checkpoint comparison tests.
+- Archived v826 evidence in `e/826` and added the code explanation in `代码讲解记录_模型能力阶段/840-v826-route-promotion-bounded-real-replay-decoder-anchor-checkpoint-comparison.md`.
 
 ## Latest v825 checkpoint
 

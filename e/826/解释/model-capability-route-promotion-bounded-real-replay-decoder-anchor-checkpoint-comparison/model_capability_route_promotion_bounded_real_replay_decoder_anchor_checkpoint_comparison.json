@@ -1,0 +1,283 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability route promotion bounded real replay decoder anchor checkpoint comparison",
+  "generated_at": "2026-06-03T12:46:47Z",
+  "status": "pass",
+  "decision": "model_capability_route_promotion_bounded_real_replay_decoder_anchor_checkpoint_regressed_from_baseline",
+  "failed_count": 0,
+  "issues": [],
+  "source_baseline_replay": "e\\806\\解释\\model-capability-route-promotion-bounded-real-replay\\model_capability_route_promotion_bounded_real_replay.json",
+  "source_prompt_aligned_replay": "e\\819\\解释\\model-capability-route-promotion-bounded-real-replay-prompt-aligned-checkpoint-replay\\prompt-aligned-replay\\model_capability_route_promotion_bounded_real_replay.json",
+  "source_decoder_anchor_replay": "e\\826\\解释\\model-capability-route-promotion-bounded-real-replay-decoder-anchor-checkpoint-comparison\\decoder-anchor-replay\\model_capability_route_promotion_bounded_real_replay.json",
+  "source_training_run": "e\\825\\解释\\model-capability-route-promotion-bounded-real-replay-decoder-anchor-training-run\\model_capability_route_promotion_bounded_real_replay_decoder_anchor_training_run.json",
+  "baseline_summary": {
+    "bounded_real_replay_executed": true,
+    "model_route_quality_ready": false,
+    "case_count": 5,
+    "executed_case_count": 5,
+    "passed_case_count": 2,
+    "failed_case_count": 3,
+    "pass_rate": 0.4,
+    "next_step": "review_bounded_route_promotion_real_replay",
+    "failed_check_count": 0
+  },
+  "prompt_aligned_summary": {
+    "bounded_real_replay_executed": true,
+    "model_route_quality_ready": false,
+    "case_count": 5,
+    "executed_case_count": 5,
+    "passed_case_count": 0,
+    "failed_case_count": 5,
+    "pass_rate": 0.0,
+    "next_step": "review_bounded_route_promotion_real_replay",
+    "failed_check_count": 0
+  },
+  "decoder_anchor_summary": {
+    "bounded_real_replay_executed": true,
+    "model_route_quality_ready": false,
+    "case_count": 5,
+    "executed_case_count": 5,
+    "passed_case_count": 0,
+    "failed_case_count": 5,
+    "pass_rate": 0.0,
+    "next_step": "review_bounded_route_promotion_real_replay",
+    "failed_check_count": 0
+  },
+  "training_summary": {
+    "decoder_anchor_training_ready": true,
+    "artifact_count": 7,
+    "metric_record_count": 5,
+    "final_step": 35,
+    "final_train_loss": 4.207976341247559,
+    "final_val_loss": 4.262609481811523,
+    "train_loss_delta": -0.315408,
+    "val_loss_delta": -0.270692,
+    "decoder_anchor_example_count": 48,
+    "bridge_example_count": 15,
+    "unanchored_direct_example_count": 5,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_real_replay_decoder_anchor_checkpoint_replay",
+    "next_step": "run_decoder_anchor_checkpoint_bounded_replay",
+    "failed_check_count": 0
+  },
+  "case_rows": [
+    {
+      "case_id": "objective-answer-check",
+      "baseline_pass": false,
+      "prompt_aligned_pass": false,
+      "decoder_anchor_pass": false,
+      "decoder_vs_baseline_delta": 0,
+      "decoder_vs_prompt_delta": 0,
+      "baseline_hit_terms": [
+        "loss"
+      ],
+      "baseline_missed_terms": [
+        "fixed"
+      ],
+      "baseline_continuation": "xed � loss������bred lossssssssssss fixe",
+      "prompt_aligned_hit_terms": [],
+      "prompt_aligned_missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "prompt_aligned_continuation": "fi    \n\n   t e  ien\nff  ",
+      "decoder_anchor_hit_terms": [],
+      "decoder_anchor_missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor_continuation": "fid   \n\n   \n e diee\nfe  "
+    },
+    {
+      "case_id": "objective-answer-contrast",
+      "baseline_pass": true,
+      "prompt_aligned_pass": false,
+      "decoder_anchor_pass": false,
+      "decoder_vs_baseline_delta": -1,
+      "decoder_vs_prompt_delta": 0,
+      "baseline_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "baseline_missed_terms": [],
+      "baseline_continuation": "pair tokens�\n���obred fixed fixed lossss",
+      "prompt_aligned_hit_terms": [],
+      "prompt_aligned_missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "prompt_aligned_continuation": "fi i     t\nnt   ddtiffdd",
+      "decoder_anchor_hit_terms": [],
+      "decoder_anchor_missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor_continuation": "fiti     t\n\nt   dltiffdd"
+    },
+    {
+      "case_id": "objective-answer-direct",
+      "baseline_pass": false,
+      "prompt_aligned_pass": false,
+      "decoder_anchor_pass": false,
+      "decoder_vs_baseline_delta": 0,
+      "decoder_vs_prompt_delta": 0,
+      "baseline_hit_terms": [
+        "loss"
+      ],
+      "baseline_missed_terms": [
+        "fixed"
+      ],
+      "baseline_continuation": "������������\n���branch lossssssssssss fi",
+      "prompt_aligned_hit_terms": [],
+      "prompt_aligned_missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "prompt_aligned_continuation": "txrd Ai si\n t iits\nssdee",
+      "decoder_anchor_hit_terms": [],
+      "decoder_anchor_missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor_continuation": "。 rd    sillt iiti\nssdee"
+    },
+    {
+      "case_id": "objective-answer-jsonish",
+      "baseline_pass": true,
+      "prompt_aligned_pass": false,
+      "decoder_anchor_pass": false,
+      "decoder_vs_baseline_delta": -1,
+      "decoder_vs_prompt_delta": 0,
+      "baseline_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "baseline_missed_terms": [],
+      "baseline_continuation": "��\nanswer_terms�s fixed losss\nbrassssseq",
+      "prompt_aligned_hit_terms": [],
+      "prompt_aligned_missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "prompt_aligned_continuation": "wer_terms，包含两个英文词。\nanswer_terms:fts   td st  \n ets dfta ",
+      "decoder_anchor_hit_terms": [],
+      "decoder_anchor_missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor_continuation": "wer_terms，包含两个英文词。\nanswer_terms:ftl   td stid\n etx dft  "
+    },
+    {
+      "case_id": "objective-answer-role",
+      "baseline_pass": false,
+      "prompt_aligned_pass": false,
+      "decoder_anchor_pass": false,
+      "decoder_vs_baseline_delta": 0,
+      "decoder_vs_prompt_delta": 0,
+      "baseline_hit_terms": [],
+      "baseline_missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "baseline_continuation": "erms �������\n���epans loswer lorerered l",
+      "prompt_aligned_hit_terms": [],
+      "prompt_aligned_missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "prompt_aligned_continuation": "aired required terms 的两个角色词。\n输出：\n  i\ni  d  a  dt\na  n ff",
+      "decoder_anchor_hit_terms": [],
+      "decoder_anchor_missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor_continuation": "aired required terms 的两个角色词。\n输出：\n  i\ni  dl l  do\n  xd ff"
+    }
+  ],
+  "check_rows": [
+    {
+      "id": "baseline_replay_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "baseline replay execution must pass"
+    },
+    {
+      "id": "prompt_aligned_replay_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "prompt-aligned replay execution must pass"
+    },
+    {
+      "id": "decoder_anchor_replay_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "decoder anchor replay execution must pass"
+    },
+    {
+      "id": "decoder_anchor_training_ready_when_provided",
+      "status": "pass",
+      "actual": true,
+      "detail": "decoder anchor training evidence is optional, but must be ready when provided"
+    },
+    {
+      "id": "case_counts_match",
+      "status": "pass",
+      "actual": {
+        "baseline": 5,
+        "prompt_aligned": 5,
+        "decoder_anchor": 5
+      },
+      "detail": "baseline, prompt-aligned, and decoder-anchor replay should cover the same suite"
+    },
+    {
+      "id": "case_rows_present",
+      "status": "pass",
+      "actual": 5,
+      "detail": "comparison must include case rows"
+    }
+  ],
+  "comparison": {
+    "ready": true,
+    "baseline_passed_case_count": 2,
+    "prompt_aligned_passed_case_count": 0,
+    "decoder_anchor_passed_case_count": 0,
+    "decoder_vs_baseline_passed_case_delta": -2,
+    "decoder_vs_prompt_passed_case_delta": 0,
+    "baseline_pass_rate": 0.4,
+    "prompt_aligned_pass_rate": 0.0,
+    "decoder_anchor_pass_rate": 0.0,
+    "decoder_vs_baseline_pass_rate_delta": -0.4,
+    "decoder_vs_prompt_pass_rate_delta": 0.0,
+    "decoder_anchor_model_route_quality_ready": false,
+    "decoder_anchor_checkpoint_improved_over_baseline": false,
+    "decoder_anchor_checkpoint_recovered_over_prompt": false,
+    "decoder_anchor_checkpoint_regressed_from_baseline": true,
+    "promotion_ready": false,
+    "case_count": 5,
+    "next_step": "diagnose_decoder_anchor_checkpoint_replay_failure_before_more_training"
+  },
+  "summary": {
+    "bounded_decoder_anchor_checkpoint_comparison_ready": true,
+    "decoder_anchor_checkpoint_improved_over_baseline": false,
+    "decoder_anchor_checkpoint_recovered_over_prompt": false,
+    "decoder_anchor_checkpoint_regressed_from_baseline": true,
+    "baseline_passed_case_count": 2,
+    "prompt_aligned_passed_case_count": 0,
+    "decoder_anchor_passed_case_count": 0,
+    "decoder_vs_baseline_passed_case_delta": -2,
+    "decoder_vs_prompt_passed_case_delta": 0,
+    "baseline_pass_rate": 0.4,
+    "prompt_aligned_pass_rate": 0.0,
+    "decoder_anchor_pass_rate": 0.0,
+    "decoder_vs_baseline_pass_rate_delta": -0.4,
+    "decoder_vs_prompt_pass_rate_delta": 0.0,
+    "promotion_ready": false,
+    "case_count": 5,
+    "next_step": "diagnose_decoder_anchor_checkpoint_replay_failure_before_more_training",
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "not_improved",
+    "reason": "Decoder-anchor checkpoint did not recover the baseline bounded replay pass count.",
+    "next_action": "diagnose_decoder_anchor_checkpoint_replay_failure_before_more_training"
+  }
+}
