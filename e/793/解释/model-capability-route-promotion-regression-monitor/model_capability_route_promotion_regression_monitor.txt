@@ -1,0 +1,9 @@
+status=pass
+decision=model_capability_route_promotion_regression_monitor_passed
+failed_count=0
+regression_monitor_passed=True
+lost_active_route_count=0
+gained_active_route_count=0
+boundary_changed=False
+model_quality_claim_changed=False
+current_model_quality_claim=seed_stable_pair_probe_route_accepted

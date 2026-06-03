@@ -4,7 +4,17 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v792.0.0` turns the route promotion history ledger into a bounded model capability route portfolio snapshot.
+Version `v793.0.0` adds a regression monitor for bounded model capability route promotion portfolios.
+
+## Latest v793 checkpoint
+
+- Added `model_capability_route_promotion_regression_monitor`.
+- Added CLI `scripts/check_model_capability_route_promotion_regression.py`.
+- Consumed the real v792 route promotion portfolio as both baseline and current.
+- Produced `decision=model_capability_route_promotion_regression_monitor_passed`.
+- Verified no active route loss, boundary change, or claim widening.
+- Verified with `6 passed` route promotion regression focused tests.
+- Archived v793 evidence in `e/793` and added the code explanation in `代码讲解记录_模型能力阶段/807-v793-route-promotion-regression-monitor.md`.
 
 ## Latest v792 checkpoint
 

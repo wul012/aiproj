@@ -1472,3 +1472,9 @@ e/663/解释/说明.md
 - `e/792/图片`
 - `e/792/解释/说明.md`
 - v792 model capability route promotion portfolio 的运行截图和解释。
+
+## v793 补充索引
+
+- `e/793/图片`
+- `e/793/解释/说明.md`
+- v793 model capability route promotion regression monitor 的运行截图和解释。

@@ -1,0 +1,129 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability route promotion regression monitor",
+  "generated_at": "2026-06-03T00:54:01Z",
+  "status": "pass",
+  "decision": "model_capability_route_promotion_regression_monitor_passed",
+  "failed_count": 0,
+  "issues": [],
+  "baseline_path": "e\\792\\解释\\model-capability-route-promotion-portfolio\\model_capability_route_promotion_portfolio.json",
+  "current_path": "e\\792\\解释\\model-capability-route-promotion-portfolio\\model_capability_route_promotion_portfolio.json",
+  "baseline_summary": {
+    "route_promotion_portfolio_ready": true,
+    "route_count": 1,
+    "active_route_count": 1,
+    "blocked_route_count": 0,
+    "active_routes": [
+      "objective_level_contrast"
+    ],
+    "boundary": "tiny_required_term_pair_probe_only",
+    "model_quality_claim": "seed_stable_pair_probe_route_accepted",
+    "min_seed_count": 3,
+    "min_pair_full_count": 2,
+    "max_pair_full_strength_spread": 1,
+    "passed_check_count": 7,
+    "failed_check_count": 0
+  },
+  "current_summary": {
+    "route_promotion_portfolio_ready": true,
+    "route_count": 1,
+    "active_route_count": 1,
+    "blocked_route_count": 0,
+    "active_routes": [
+      "objective_level_contrast"
+    ],
+    "boundary": "tiny_required_term_pair_probe_only",
+    "model_quality_claim": "seed_stable_pair_probe_route_accepted",
+    "min_seed_count": 3,
+    "min_pair_full_count": 2,
+    "max_pair_full_strength_spread": 1,
+    "passed_check_count": 7,
+    "failed_check_count": 0
+  },
+  "check_rows": [
+    {
+      "id": "baseline_portfolio_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "baseline portfolio must pass"
+    },
+    {
+      "id": "current_portfolio_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "current portfolio must pass"
+    },
+    {
+      "id": "current_portfolio_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "current portfolio must be ready"
+    },
+    {
+      "id": "no_active_route_loss",
+      "status": "pass",
+      "actual": [],
+      "detail": "current portfolio must not lose baseline active routes"
+    },
+    {
+      "id": "no_boundary_changes",
+      "status": "pass",
+      "actual": {
+        "baseline": "tiny_required_term_pair_probe_only",
+        "current": "tiny_required_term_pair_probe_only",
+        "route_changes": 0
+      },
+      "detail": "portfolio boundary must stay stable"
+    },
+    {
+      "id": "no_claim_widening",
+      "status": "pass",
+      "actual": [],
+      "detail": "model quality claim must not widen"
+    },
+    {
+      "id": "active_route_count_not_decreased",
+      "status": "pass",
+      "actual": {
+        "baseline": 1,
+        "current": 1
+      },
+      "detail": "active route count must not decrease"
+    }
+  ],
+  "route_deltas": [
+    {
+      "route_id": "objective_level_contrast",
+      "baseline_status": "active",
+      "current_status": "active",
+      "relation": "stable_active",
+      "baseline_boundary": "tiny_required_term_pair_probe_only",
+      "current_boundary": "tiny_required_term_pair_probe_only",
+      "baseline_claim": "seed_stable_pair_probe_route_accepted",
+      "current_claim": "seed_stable_pair_probe_route_accepted",
+      "baseline_seed_count": 3,
+      "current_seed_count": 3
+    }
+  ],
+  "summary": {
+    "regression_monitor_passed": true,
+    "baseline_active_route_count": 1,
+    "current_active_route_count": 1,
+    "lost_active_route_count": 0,
+    "gained_active_route_count": 0,
+    "boundary_changed": false,
+    "baseline_boundary": "tiny_required_term_pair_probe_only",
+    "current_boundary": "tiny_required_term_pair_probe_only",
+    "model_quality_claim_changed": false,
+    "baseline_model_quality_claim": "seed_stable_pair_probe_route_accepted",
+    "current_model_quality_claim": "seed_stable_pair_probe_route_accepted",
+    "route_delta_count": 1,
+    "passed_check_count": 7,
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "seed_stable_pair_probe_route_accepted",
+    "reason": "No active route loss, boundary change, or claim widening was detected.",
+    "next_action": "use this monitor as the regression guard for the next route portfolio update"
+  }
+}
