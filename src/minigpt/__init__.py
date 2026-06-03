@@ -116,6 +116,8 @@ __all__ = [
     "write_model_capability_route_promotion_review_decision_outputs",
     "build_model_capability_route_promotion_decision_index",
     "write_model_capability_route_promotion_decision_index_outputs",
+    "build_model_capability_route_promotion_decision_index_check",
+    "write_model_capability_route_promotion_decision_index_check_outputs",
     "build_promoted_training_scale_seed_handoff_receipt_contract_summary",
     "write_promoted_training_scale_seed_handoff_receipt_contract_summary_outputs",
     "check_promoted_training_scale_seed_handoff_receipt_contract_summary",
@@ -280,6 +282,14 @@ _EXPORTS = {
     "write_model_capability_route_promotion_decision_index_outputs": (
         "model_capability_route_promotion_decision_index_artifacts",
         "write_model_capability_route_promotion_decision_index_outputs",
+    ),
+    "build_model_capability_route_promotion_decision_index_check": (
+        "model_capability_route_promotion_decision_index_check",
+        "build_model_capability_route_promotion_decision_index_check",
+    ),
+    "write_model_capability_route_promotion_decision_index_check_outputs": (
+        "model_capability_route_promotion_decision_index_check_artifacts",
+        "write_model_capability_route_promotion_decision_index_check_outputs",
     ),
     "build_promoted_training_scale_seed_handoff_receipt_contract_summary": (
         "promoted_training_scale_seed_handoff_receipt_contract",

@@ -1508,3 +1508,9 @@ e/663/解释/说明.md
 - `e/798/图片`
 - `e/798/解释/说明.md`
 - v798 model capability route promotion decision index 的运行截图和解释。
+
+## v799 补充索引
+
+- `e/799/图片`
+- `e/799/解释/说明.md`
+- v799 model capability route promotion decision index contract check 的运行截图和解释。

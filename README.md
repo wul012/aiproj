@@ -4,7 +4,17 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v798.0.0` indexes accepted bounded route promotion decisions for downstream model capability governance.
+Version `v799.0.0` contract-checks the route promotion decision index by rebuilding it from source decisions.
+
+## Latest v799 checkpoint
+
+- Added `model_capability_route_promotion_decision_index_check`.
+- Added CLI `scripts/check_model_capability_route_promotion_decision_index.py`.
+- Consumed the real v798 route promotion decision index.
+- Rebuilt the index from the recorded v797 source decision.
+- Produced `decision=model_capability_route_promotion_decision_index_contract_check_passed`.
+- Verified with `7 passed` route promotion decision index check focused tests.
+- Archived v799 evidence in `e/799` and added the code explanation in `代码讲解记录_模型能力阶段/813-v799-route-promotion-decision-index-check.md`.
 
 ## Latest v798 checkpoint
 

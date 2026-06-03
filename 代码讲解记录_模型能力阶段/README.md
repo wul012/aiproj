@@ -989,6 +989,9 @@
 812-v798-route-promotion-decision-index.md
  -> v798 code explanation: index accepted bounded route promotion decisions for downstream model capability governance.
 
+813-v799-route-promotion-decision-index-check.md
+ -> v799 code explanation: contract-check the route promotion decision index by rebuilding it from source decisions.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

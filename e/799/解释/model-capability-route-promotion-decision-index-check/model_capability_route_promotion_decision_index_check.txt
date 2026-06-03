@@ -1,0 +1,7 @@
+status=pass
+decision=model_capability_route_promotion_decision_index_contract_check_passed
+failed_count=0
+contract_check_ready=True
+source_decision_count=1
+original_accepted_route_count=1
+rebuilt_accepted_route_count=1
