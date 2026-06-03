@@ -4,7 +4,17 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v796.0.0` reviews the route promotion release packet for bounded route promotion review readiness.
+Version `v797.0.0` accepts the bounded route promotion review decision from the v796 release packet review.
+
+## Latest v797 checkpoint
+
+- Added `model_capability_route_promotion_review_decision`.
+- Added CLI `scripts/decide_model_capability_route_promotion_review.py`.
+- Consumed the real v796 route promotion release packet review.
+- Produced `decision=model_capability_route_promotion_final_review_accepted`.
+- Preserved `final_decision=accept_bounded_route_promotion` and `review_scope=bounded_route_promotion_review_only`.
+- Verified with `6 passed` route promotion review decision focused tests.
+- Archived v797 evidence in `e/797` and added the code explanation in `代码讲解记录_模型能力阶段/811-v797-route-promotion-review-decision.md`.
 
 ## Latest v796 checkpoint
 

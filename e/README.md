@@ -1496,3 +1496,9 @@ e/663/解释/说明.md
 - `e/796/图片`
 - `e/796/解释/说明.md`
 - v796 model capability route promotion release packet review 的运行截图和解释。
+
+## v797 补充索引
+
+- `e/797/图片`
+- `e/797/解释/说明.md`
+- v797 model capability route promotion review decision 的运行截图和解释。

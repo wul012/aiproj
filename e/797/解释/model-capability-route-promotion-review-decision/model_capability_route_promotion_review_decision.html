@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT model capability route promotion review decision</title>
+<style>
+:root{color-scheme:light;--ink:#16212a;--muted:#64717d;--line:#d8dee4;--panel:#f8fafc;--accent:#0f766e}
+*{box-sizing:border-box}
+body{margin:0;background:#eef1f5;color:var(--ink);font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1120px;margin:0 auto;padding:28px}
+h1{font-size:30px;margin:0 0 8px;letter-spacing:0}
+h2{font-size:18px;margin:0 0 12px;letter-spacing:0}
+p{color:var(--muted);line-height:1.55;overflow-wrap:anywhere}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:18px 0}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:8px}
+.card{padding:14px}
+.card span{display:block;color:var(--muted);font-size:12px;text-transform:uppercase}
+.card strong{display:block;margin-top:6px;font-size:18px;line-height:1.2;color:var(--accent);overflow-wrap:anywhere}
+.panel{padding:16px;margin:14px 0}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:#334155}
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT model capability route promotion review decision</h1><p>The route promotion is accepted inside the bounded tiny pair-probe review scope.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Decision</span><strong>model_capability_route_promotion_final_review_accepted</strong></div><div class="card"><span>Final</span><strong>accept_bounded_route_promotion</strong></div><div class="card"><span>Routes</span><strong>1</strong></div><div class="card"><span>Boundary</span><strong>tiny_required_term_pair_probe_only</strong></div><div class="card"><span>Claim</span><strong>seed_stable_pair_probe_route_accepted</strong></div><div class="card"><span>Scope</span><strong>bounded_route_promotion_review_only</strong></div></section>
+<section class="panel"><h2>Checks</h2><div class="table-wrap"><table>
+<thead><tr><th>Check</th><th>Status</th><th>Actual</th><th>Detail</th></tr></thead>
+<tbody><tr><td>review_passed</td><td>pass</td><td>pass</td><td>release packet review must pass</td></tr><tr><td>review_decision_ready</td><td>pass</td><td>model_capability_route_promotion_release_packet_review_ready</td><td>release packet review decision must be ready</td></tr><tr><td>review_accepts_packet</td><td>pass</td><td>accept_route_promotion_packet_for_bounded_review</td><td>source review must accept the packet</td></tr><tr><td>review_scope_bounded</td><td>pass</td><td>bounded_route_promotion_review_only</td><td>review scope must stay bounded</td></tr><tr><td>active_route_present</td><td>pass</td><td>1</td><td>final decision requires active routes</td></tr><tr><td>boundary_scoped</td><td>pass</td><td>tiny_required_term_pair_probe_only</td><td>final decision boundary must remain tiny pair-probe scoped</td></tr><tr><td>claim_bounded</td><td>pass</td><td>seed_stable_pair_probe_route_accepted</td><td>final decision claim must remain pair-probe scoped</td></tr><tr><td>source_review_checks_clean</td><td>pass</td><td>0</td><td>source review checks must be clean</td></tr></tbody>
+</table></div></section>
+</main>
+</body>
+</html>

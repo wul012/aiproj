@@ -1,0 +1,9 @@
+status=pass
+decision=model_capability_route_promotion_final_review_accepted
+failed_count=0
+route_promotion_review_decision_ready=True
+final_decision=accept_bounded_route_promotion
+active_route_count=1
+boundary=tiny_required_term_pair_probe_only
+model_quality_claim=seed_stable_pair_probe_route_accepted
+review_scope=bounded_route_promotion_review_only

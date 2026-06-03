@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability route promotion review decision",
+  "generated_at": "2026-06-03T06:27:13Z",
+  "status": "pass",
+  "decision": "model_capability_route_promotion_final_review_accepted",
+  "failed_count": 0,
+  "issues": [],
+  "release_packet_review_path": "e\\796\\解释\\model-capability-route-promotion-release-packet-review\\model_capability_route_promotion_release_packet_review.json",
+  "source_review_summary": {
+    "release_packet_review_ready": true,
+    "review_decision": "accept_route_promotion_packet_for_bounded_review",
+    "active_route_count": 1,
+    "active_routes": [
+      "objective_level_contrast"
+    ],
+    "boundary": "tiny_required_term_pair_probe_only",
+    "model_quality_claim": "seed_stable_pair_probe_route_accepted",
+    "review_scope": "bounded_route_promotion_review_only",
+    "evidence_count": 3,
+    "passed_check_count": 10,
+    "failed_check_count": 0
+  },
+  "source_review": {
+    "review_ready": true,
+    "review_decision": "accept_route_promotion_packet_for_bounded_review",
+    "active_routes": [
+      "objective_level_contrast"
+    ],
+    "active_route_count": 1,
+    "boundary": "tiny_required_term_pair_probe_only",
+    "model_quality_claim": "seed_stable_pair_probe_route_accepted",
+    "handoff_status": "ready_for_route_promotion_review",
+    "evidence_count": 3,
+    "review_scope": "bounded_route_promotion_review_only"
+  },
+  "check_rows": [
+    {
+      "id": "review_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "release packet review must pass"
+    },
+    {
+      "id": "review_decision_ready",
+      "status": "pass",
+      "actual": "model_capability_route_promotion_release_packet_review_ready",
+      "detail": "release packet review decision must be ready"
+    },
+    {
+      "id": "review_accepts_packet",
+      "status": "pass",
+      "actual": "accept_route_promotion_packet_for_bounded_review",
+      "detail": "source review must accept the packet"
+    },
+    {
+      "id": "review_scope_bounded",
+      "status": "pass",
+      "actual": "bounded_route_promotion_review_only",
+      "detail": "review scope must stay bounded"
+    },
+    {
+      "id": "active_route_present",
+      "status": "pass",
+      "actual": 1,
+      "detail": "final decision requires active routes"
+    },
+    {
+      "id": "boundary_scoped",
+      "status": "pass",
+      "actual": "tiny_required_term_pair_probe_only",
+      "detail": "final decision boundary must remain tiny pair-probe scoped"
+    },
+    {
+      "id": "claim_bounded",
+      "status": "pass",
+      "actual": "seed_stable_pair_probe_route_accepted",
+      "detail": "final decision claim must remain pair-probe scoped"
+    },
+    {
+      "id": "source_review_checks_clean",
+      "status": "pass",
+      "actual": 0,
+      "detail": "source review checks must be clean"
+    }
+  ],
+  "final_decision": {
+    "accepted": true,
+    "decision": "accept_bounded_route_promotion",
+    "active_routes": [
+      "objective_level_contrast"
+    ],
+    "active_route_count": 1,
+    "boundary": "tiny_required_term_pair_probe_only",
+    "model_quality_claim": "seed_stable_pair_probe_route_accepted",
+    "review_scope": "bounded_route_promotion_review_only",
+    "next_step": "index_bounded_route_promotion_decision"
+  },
+  "summary": {
+    "route_promotion_review_decision_ready": true,
+    "final_decision": "accept_bounded_route_promotion",
+    "active_route_count": 1,
+    "active_routes": [
+      "objective_level_contrast"
+    ],
+    "boundary": "tiny_required_term_pair_probe_only",
+    "model_quality_claim": "seed_stable_pair_probe_route_accepted",
+    "review_scope": "bounded_route_promotion_review_only",
+    "passed_check_count": 8,
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "seed_stable_pair_probe_route_accepted",
+    "reason": "The route promotion is accepted inside the bounded tiny pair-probe review scope.",
+    "next_action": "index the bounded route promotion decision for route history consumers"
+  }
+}

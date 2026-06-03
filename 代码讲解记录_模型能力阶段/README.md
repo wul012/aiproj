@@ -983,6 +983,9 @@
 810-v796-route-promotion-release-packet-review.md
  -> v796 code explanation: review the route promotion release packet for bounded route promotion review readiness.
 
+811-v797-route-promotion-review-decision.md
+ -> v797 code explanation: accept the bounded route promotion review decision from the v796 release packet review.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。
