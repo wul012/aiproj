@@ -4,7 +4,17 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v795.0.0` packages the route promotion portfolio, regression monitor, and gate into a release packet for bounded review.
+Version `v796.0.0` reviews the route promotion release packet for bounded route promotion review readiness.
+
+## Latest v796 checkpoint
+
+- Added `model_capability_route_promotion_release_packet_review`.
+- Added CLI `scripts/review_model_capability_route_promotion_release_packet.py`.
+- Consumed the real v795 route promotion release packet.
+- Produced `decision=model_capability_route_promotion_release_packet_review_ready`.
+- Preserved `review_scope=bounded_route_promotion_review_only`.
+- Verified with `6 passed` route promotion release packet review focused tests.
+- Archived v796 evidence in `e/796` and added the code explanation in `代码讲解记录_模型能力阶段/810-v796-route-promotion-release-packet-review.md`.
 
 ## Latest v795 checkpoint
 

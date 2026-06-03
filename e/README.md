@@ -1490,3 +1490,9 @@ e/663/解释/说明.md
 - `e/795/图片`
 - `e/795/解释/说明.md`
 - v795 model capability route promotion release packet 的运行截图和解释。
+
+## v796 补充索引
+
+- `e/796/图片`
+- `e/796/解释/说明.md`
+- v796 model capability route promotion release packet review 的运行截图和解释。

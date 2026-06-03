@@ -1,0 +1,11 @@
+id,status,actual,detail
+release_packet_passed,pass,pass,release packet must pass
+release_packet_decision_ready,pass,model_capability_route_promotion_release_packet_ready,release packet decision must be ready
+packet_ready,pass,True,packet must be ready
+handoff_ready,pass,ready_for_route_promotion_review,packet must be ready for route promotion review
+active_routes_present,pass,"[""objective_level_contrast""]",review requires active route evidence
+boundary_scoped,pass,tiny_required_term_pair_probe_only,review boundary must remain tiny pair-probe scoped
+claim_bounded,pass,seed_stable_pair_probe_route_accepted,review claim must remain pair-probe scoped
+evidence_count,pass,3,"review requires portfolio, regression, and gate evidence"
+evidence_files_exist,pass,"[{""exists"": true, ""kind"": ""portfolio"", ""path"": ""e\\792\\解释\\model-capability-route-promotion-portfolio\\model_capability_route_promotion_portfolio.json""}, {""exists"": true, ""kind"": ""regression_monitor"", ""path"": ""e\\793\\解释\\model-capability-route-promotion-regression-monitor\\model_capability_route_promotion_regression_monitor.json""}, {""exists"": true, ""kind"": ""gate"", ""path"": ""e\\794\\解释\\model-capability-route-promotion-gate\\model_capability_route_promotion_gate.json""}]",all packet evidence rows must exist
+packet_checks_clean,pass,0,packet source checks must be clean

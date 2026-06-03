@@ -980,6 +980,9 @@
 809-v795-route-promotion-release-packet.md
  -> v795 code explanation: package the route portfolio, regression monitor, and gate into a bounded review release packet.
 
+810-v796-route-promotion-release-packet-review.md
+ -> v796 code explanation: review the route promotion release packet for bounded route promotion review readiness.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。
