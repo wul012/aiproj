@@ -1520,3 +1520,9 @@ e/663/解释/说明.md
 - `e/800/图片`
 - `e/800/解释/说明.md`
 - v800 model capability route promotion governance snapshot 的运行截图和解释。
+
+## v801 补充索引
+
+- `e/801/图片`
+- `e/801/解释/说明.md`
+- v801 model capability route promotion downstream guard 的运行截图和解释。

@@ -4,7 +4,17 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v800.0.0` publishes a contract-verified route promotion governance snapshot.
+Version `v801.0.0` adds a downstream guard for bounded route promotion governance snapshot consumers.
+
+## Latest v801 checkpoint
+
+- Added `model_capability_route_promotion_downstream_guard`.
+- Added CLI `scripts/check_model_capability_route_promotion_downstream_guard.py`.
+- Consumed the real v800 route promotion governance snapshot.
+- Allowed `bounded-benchmark-planner` to use `objective_level_contrast` only under `bounded_model_capability_governance_only`.
+- Rejected wider requested scopes in tests.
+- Verified with `6 passed` downstream guard focused tests.
+- Archived v801 evidence in `e/801` and added the code explanation in `代码讲解记录_模型能力阶段/815-v801-route-promotion-downstream-guard.md`.
 
 ## Latest v800 checkpoint
 

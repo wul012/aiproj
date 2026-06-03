@@ -995,6 +995,9 @@
 814-v800-route-promotion-governance-snapshot.md
  -> v800 code explanation: publish a contract-verified route promotion governance snapshot.
 
+815-v801-route-promotion-downstream-guard.md
+ -> v801 code explanation: guard downstream access to a contract-verified bounded route promotion card.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

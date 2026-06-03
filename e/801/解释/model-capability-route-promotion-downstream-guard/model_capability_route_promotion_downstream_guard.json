@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability route promotion downstream guard",
+  "generated_at": "2026-06-03T07:03:29Z",
+  "status": "pass",
+  "decision": "model_capability_route_promotion_downstream_guard_allowed",
+  "failed_count": 0,
+  "issues": [],
+  "source_governance_snapshot": "e\\800\\解释\\model-capability-route-promotion-governance-snapshot\\model_capability_route_promotion_governance_snapshot.json",
+  "request": {
+    "route_id": "objective_level_contrast",
+    "consumer_name": "bounded-benchmark-planner",
+    "requested_scope": "bounded_model_capability_governance_only",
+    "required_boundary": "tiny_required_term_pair_probe_only"
+  },
+  "route_card": {
+    "route_id": "objective_level_contrast",
+    "route_status": "accepted",
+    "verification_status": "contract_verified",
+    "governance_status": "available_for_downstream_bounded_governance",
+    "review_scope": "bounded_route_promotion_review_only",
+    "boundary": "tiny_required_term_pair_probe_only",
+    "model_quality_claim": "seed_stable_pair_probe_route_accepted",
+    "source_decision_path": "e\\797\\解释\\model-capability-route-promotion-review-decision\\model_capability_route_promotion_review_decision.json",
+    "allowed_downstream_use": "bounded_model_capability_governance_only",
+    "required_boundary": "tiny_required_term_pair_probe_only"
+  },
+  "downstream_policy": {
+    "allowed": true,
+    "allowed_scope": "bounded_model_capability_governance_only",
+    "route_ids": [
+      "objective_level_contrast"
+    ],
+    "reason": "all accepted route cards are contract verified and boundary scoped"
+  },
+  "check_rows": [
+    {
+      "id": "snapshot_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "governance snapshot must pass"
+    },
+    {
+      "id": "snapshot_ready",
+      "status": "pass",
+      "actual": "model_capability_route_promotion_governance_snapshot_ready",
+      "detail": "governance snapshot decision must be ready"
+    },
+    {
+      "id": "downstream_policy_allowed",
+      "status": "pass",
+      "actual": true,
+      "detail": "downstream policy must allow bounded use"
+    },
+    {
+      "id": "route_card_present",
+      "status": "pass",
+      "actual": "objective_level_contrast",
+      "detail": "requested route must exist in route cards"
+    },
+    {
+      "id": "route_contract_verified",
+      "status": "pass",
+      "actual": "contract_verified",
+      "detail": "route card must be contract verified"
+    },
+    {
+      "id": "route_governance_available",
+      "status": "pass",
+      "actual": "available_for_downstream_bounded_governance",
+      "detail": "route must be available for bounded governance"
+    },
+    {
+      "id": "requested_scope_allowed",
+      "status": "pass",
+      "actual": {
+        "requested": "bounded_model_capability_governance_only",
+        "policy": "bounded_model_capability_governance_only",
+        "route": "bounded_model_capability_governance_only"
+      },
+      "detail": "requested scope must match allowed bounded scope"
+    },
+    {
+      "id": "boundary_scoped",
+      "status": "pass",
+      "actual": "tiny_required_term_pair_probe_only",
+      "detail": "route card boundary must match the required boundary"
+    },
+    {
+      "id": "claim_bounded",
+      "status": "pass",
+      "actual": "seed_stable_pair_probe_route_accepted",
+      "detail": "route claim must remain pair-probe scoped"
+    }
+  ],
+  "access_decision": {
+    "allowed": true,
+    "consumer_name": "bounded-benchmark-planner",
+    "route_id": "objective_level_contrast",
+    "allowed_scope": "bounded_model_capability_governance_only",
+    "boundary": "tiny_required_term_pair_probe_only",
+    "model_quality_claim": "seed_stable_pair_probe_route_accepted",
+    "next_step": "build_bounded_route_promotion_consumer_plan"
+  },
+  "summary": {
+    "downstream_guard_ready": true,
+    "access_allowed": true,
+    "consumer_name": "bounded-benchmark-planner",
+    "route_id": "objective_level_contrast",
+    "allowed_scope": "bounded_model_capability_governance_only",
+    "boundary": "tiny_required_term_pair_probe_only",
+    "model_quality_claim": "seed_stable_pair_probe_route_accepted",
+    "next_step": "build_bounded_route_promotion_consumer_plan",
+    "passed_check_count": 9,
+    "failed_check_count": 0
+  }
+}

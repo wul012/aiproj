@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT model capability route promotion downstream guard</title>
+<style>
+:root{color-scheme:light;--ink:#16212a;--muted:#64717d;--line:#d8dee4;--panel:#f8fafc;--accent:#be123c}
+*{box-sizing:border-box}
+body{margin:0;background:#f2f4f8;color:var(--ink);font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1120px;margin:0 auto;padding:28px}
+h1{font-size:30px;margin:0 0 8px;letter-spacing:0}
+h2{font-size:18px;margin:0 0 12px;letter-spacing:0}
+p{color:var(--muted);line-height:1.55;overflow-wrap:anywhere}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:18px 0}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:8px}
+.card{padding:14px}
+.card span{display:block;color:var(--muted);font-size:12px;text-transform:uppercase}
+.card strong{display:block;margin-top:6px;font-size:18px;line-height:1.2;color:var(--accent);overflow-wrap:anywhere}
+.panel{padding:16px;margin:14px 0}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:#334155}
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT model capability route promotion downstream guard</h1><p>Checks whether a downstream consumer may use a contract-verified bounded route.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Decision</span><strong>model_capability_route_promotion_downstream_guard_allowed</strong></div><div class="card"><span>Allowed</span><strong>True</strong></div><div class="card"><span>Consumer</span><strong>bounded-benchmark-planner</strong></div><div class="card"><span>Route</span><strong>objective_level_contrast</strong></div><div class="card"><span>Scope</span><strong>bounded_model_capability_governance_only</strong></div><div class="card"><span>Boundary</span><strong>tiny_required_term_pair_probe_only</strong></div></section>
+<section class="panel"><h2>Checks</h2><div class="table-wrap"><table>
+<thead><tr><th>Check</th><th>Status</th><th>Actual</th><th>Detail</th></tr></thead>
+<tbody><tr><td>snapshot_passed</td><td>pass</td><td>pass</td><td>governance snapshot must pass</td></tr><tr><td>snapshot_ready</td><td>pass</td><td>model_capability_route_promotion_governance_snapshot_ready</td><td>governance snapshot decision must be ready</td></tr><tr><td>downstream_policy_allowed</td><td>pass</td><td>True</td><td>downstream policy must allow bounded use</td></tr><tr><td>route_card_present</td><td>pass</td><td>objective_level_contrast</td><td>requested route must exist in route cards</td></tr><tr><td>route_contract_verified</td><td>pass</td><td>contract_verified</td><td>route card must be contract verified</td></tr><tr><td>route_governance_available</td><td>pass</td><td>available_for_downstream_bounded_governance</td><td>route must be available for bounded governance</td></tr><tr><td>requested_scope_allowed</td><td>pass</td><td>{&#x27;requested&#x27;: &#x27;bounded_model_capability_governance_only&#x27;, &#x27;policy&#x27;: &#x27;bounded_model_capability_governance_only&#x27;, &#x27;route&#x27;: &#x27;bounded_model_capability_governance_only&#x27;}</td><td>requested scope must match allowed bounded scope</td></tr><tr><td>boundary_scoped</td><td>pass</td><td>tiny_required_term_pair_probe_only</td><td>route card boundary must match the required boundary</td></tr><tr><td>claim_bounded</td><td>pass</td><td>seed_stable_pair_probe_route_accepted</td><td>route claim must remain pair-probe scoped</td></tr></tbody>
+</table></div></section>
+</main>
+</body>
+</html>

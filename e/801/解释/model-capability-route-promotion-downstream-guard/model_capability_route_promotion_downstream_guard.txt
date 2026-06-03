@@ -1,0 +1,10 @@
+status=pass
+decision=model_capability_route_promotion_downstream_guard_allowed
+failed_count=0
+downstream_guard_ready=True
+access_allowed=True
+consumer_name=bounded-benchmark-planner
+route_id=objective_level_contrast
+allowed_scope=bounded_model_capability_governance_only
+boundary=tiny_required_term_pair_probe_only
+next_step=build_bounded_route_promotion_consumer_plan
