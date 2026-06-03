@@ -1,0 +1,310 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability route promotion bounded real replay prompt-aligned failure diagnostic",
+  "generated_at": "2026-06-03T11:25:50Z",
+  "status": "pass",
+  "decision": "model_capability_route_promotion_bounded_real_replay_prompt_aligned_failure_diagnostic_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_prompt_aligned_replay": "e\\819\\解释\\model-capability-route-promotion-bounded-real-replay-prompt-aligned-checkpoint-replay\\prompt-aligned-replay\\model_capability_route_promotion_bounded_real_replay.json",
+  "source_prompt_aligned_comparison": "e\\819\\解释\\model-capability-route-promotion-bounded-real-replay-prompt-aligned-checkpoint-replay\\comparison\\model_capability_route_promotion_bounded_real_replay_prompt_aligned_checkpoint_comparison.json",
+  "source_prompt_aligned_seed_revision": "e\\817\\解释\\model-capability-route-promotion-bounded-real-replay-prompt-aligned-seed-revision\\model_capability_route_promotion_bounded_real_replay_prompt_aligned_seed_revision.json",
+  "source_prompt_aligned_training_run": "e\\818\\解释\\model-capability-route-promotion-bounded-real-replay-prompt-aligned-training-run\\model_capability_route_promotion_bounded_real_replay_prompt_aligned_training_run.json",
+  "source_corpus": "e\\817\\解释\\model-capability-route-promotion-bounded-real-replay-prompt-aligned-seed-revision\\model_capability_route_promotion_bounded_real_replay_prompt_aligned_seed_revision_corpus.txt",
+  "source_summaries": {
+    "replay": {
+      "bounded_real_replay_executed": true,
+      "model_route_quality_ready": false,
+      "case_count": 5,
+      "executed_case_count": 5,
+      "passed_case_count": 0,
+      "failed_case_count": 5,
+      "pass_rate": 0.0,
+      "next_step": "review_bounded_route_promotion_real_replay",
+      "failed_check_count": 0
+    },
+    "comparison": {
+      "bounded_prompt_aligned_checkpoint_comparison_ready": true,
+      "prompt_aligned_checkpoint_improved": false,
+      "prompt_aligned_checkpoint_regressed": true,
+      "baseline_passed_case_count": 2,
+      "prompt_aligned_passed_case_count": 0,
+      "passed_case_delta": -2,
+      "baseline_pass_rate": 0.4,
+      "prompt_aligned_pass_rate": 0.0,
+      "pass_rate_delta": -0.4,
+      "promotion_ready": false,
+      "case_count": 5,
+      "next_step": "diagnose_prompt_aligned_checkpoint_replay_failure_before_more_training",
+      "failed_check_count": 0
+    },
+    "seed_revision": {
+      "prompt_aligned_seed_revision_ready": true,
+      "original_example_count": 18,
+      "added_example_count": 10,
+      "example_count": 28,
+      "case_count": 5,
+      "exact_prompt_answer_count": 5,
+      "proposed_next_artifact": "model_capability_route_promotion_bounded_real_replay_prompt_aligned_training_run",
+      "next_step": "train_prompt_aligned_bounded_repair_seed",
+      "failed_check_count": 0
+    },
+    "training_run": {
+      "prompt_aligned_training_ready": true,
+      "artifact_count": 7,
+      "metric_record_count": 4,
+      "final_step": 30,
+      "final_train_loss": 4.178743362426758,
+      "final_val_loss": 4.215392112731934,
+      "train_loss_delta": -0.349051,
+      "val_loss_delta": -0.306461,
+      "prompt_aligned_example_count": 28,
+      "exact_prompt_answer_count": 5,
+      "proposed_next_artifact": "model_capability_route_promotion_bounded_real_replay_prompt_aligned_checkpoint_replay",
+      "next_step": "run_prompt_aligned_checkpoint_bounded_replay",
+      "failed_check_count": 0
+    }
+  },
+  "case_diagnostics": [
+    {
+      "case_id": "objective-answer-direct",
+      "case_pass": false,
+      "prompt_in_seed": true,
+      "prompt_in_corpus": true,
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "zero_hit": true,
+      "fragment_like_generation": true,
+      "term_seed_count": {
+        "fixed": 47,
+        "loss": 47
+      },
+      "term_corpus_count": {
+        "fixed": 47,
+        "loss": 47
+      },
+      "continuation_preview": "txrd Ai si\n t iits\nssdee",
+      "diagnosis": "character_fragmentation_without_term_anchoring",
+      "recommended_action": "run_decoder_anchor_or_forced_prefix_probe"
+    },
+    {
+      "case_id": "objective-answer-role",
+      "case_pass": false,
+      "prompt_in_seed": true,
+      "prompt_in_corpus": true,
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "zero_hit": true,
+      "fragment_like_generation": true,
+      "term_seed_count": {
+        "fixed": 47,
+        "loss": 47
+      },
+      "term_corpus_count": {
+        "fixed": 47,
+        "loss": 47
+      },
+      "continuation_preview": "aired required terms 的两个角色词。\n输出：\n  i\ni  d  a  dt\na  n ff",
+      "diagnosis": "character_fragmentation_without_term_anchoring",
+      "recommended_action": "run_decoder_anchor_or_forced_prefix_probe"
+    },
+    {
+      "case_id": "objective-answer-contrast",
+      "case_pass": false,
+      "prompt_in_seed": true,
+      "prompt_in_corpus": true,
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "zero_hit": true,
+      "fragment_like_generation": true,
+      "term_seed_count": {
+        "fixed": 47,
+        "loss": 47
+      },
+      "term_corpus_count": {
+        "fixed": 47,
+        "loss": 47
+      },
+      "continuation_preview": "fi i     t\nnt   ddtiffdd",
+      "diagnosis": "character_fragmentation_without_term_anchoring",
+      "recommended_action": "run_decoder_anchor_or_forced_prefix_probe"
+    },
+    {
+      "case_id": "objective-answer-jsonish",
+      "case_pass": false,
+      "prompt_in_seed": true,
+      "prompt_in_corpus": true,
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "zero_hit": true,
+      "fragment_like_generation": true,
+      "term_seed_count": {
+        "fixed": 47,
+        "loss": 47
+      },
+      "term_corpus_count": {
+        "fixed": 47,
+        "loss": 47
+      },
+      "continuation_preview": "wer_terms，包含两个英文词。\nanswer_terms:fts   td st  \n ets dfta ",
+      "diagnosis": "character_fragmentation_without_term_anchoring",
+      "recommended_action": "run_decoder_anchor_or_forced_prefix_probe"
+    },
+    {
+      "case_id": "objective-answer-check",
+      "case_pass": false,
+      "prompt_in_seed": true,
+      "prompt_in_corpus": true,
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "zero_hit": true,
+      "fragment_like_generation": true,
+      "term_seed_count": {
+        "fixed": 47,
+        "loss": 47
+      },
+      "term_corpus_count": {
+        "fixed": 47,
+        "loss": 47
+      },
+      "continuation_preview": "fi    \n\n   t e  ien\nff  ",
+      "diagnosis": "character_fragmentation_without_term_anchoring",
+      "recommended_action": "run_decoder_anchor_or_forced_prefix_probe"
+    }
+  ],
+  "root_causes": [
+    {
+      "cause_id": "exact_prompts_present_but_generation_unanchored",
+      "severity": "high",
+      "evidence": 5,
+      "detail": "The corpus contains exact prompts, but replay still misses fixed/loss."
+    },
+    {
+      "cause_id": "zero_required_term_hits",
+      "severity": "high",
+      "evidence": 5,
+      "detail": "Replay continuations did not contain any expected required terms."
+    },
+    {
+      "cause_id": "character_fragmentation_dominates_generation",
+      "severity": "medium",
+      "evidence": 5,
+      "detail": "Continuations contain scattered character fragments instead of complete required terms."
+    },
+    {
+      "cause_id": "loss_reduction_did_not_transfer_to_replay",
+      "severity": "medium",
+      "evidence": 4.215392112731934,
+      "detail": "The prompt-aligned run trained successfully, but replay still regressed against baseline."
+    }
+  ],
+  "check_rows": [
+    {
+      "id": "prompt_aligned_replay_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "prompt-aligned replay execution must pass"
+    },
+    {
+      "id": "prompt_aligned_comparison_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "prompt-aligned comparison must pass"
+    },
+    {
+      "id": "promotion_blocked",
+      "status": "pass",
+      "actual": false,
+      "detail": "diagnostic should run only on blocked promotion evidence"
+    },
+    {
+      "id": "seed_revision_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "prompt-aligned seed revision must pass"
+    },
+    {
+      "id": "training_run_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "prompt-aligned training run must pass"
+    },
+    {
+      "id": "corpus_present",
+      "status": "pass",
+      "actual": 2487,
+      "detail": "prompt-aligned corpus must be readable"
+    },
+    {
+      "id": "case_diagnostics_present",
+      "status": "pass",
+      "actual": 5,
+      "detail": "diagnostic must inspect replay cases"
+    }
+  ],
+  "diagnostic": {
+    "ready": true,
+    "case_count": 5,
+    "failed_case_count": 5,
+    "zero_hit_case_count": 5,
+    "fragment_like_case_count": 5,
+    "prompt_in_corpus_count": 5,
+    "pass_rate_delta": -0.4,
+    "root_cause_count": 4,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_real_replay_decoder_anchor_probe",
+    "next_step": "run_decoder_anchor_or_forced_prefix_probe"
+  },
+  "summary": {
+    "prompt_aligned_failure_diagnostic_ready": true,
+    "case_count": 5,
+    "failed_case_count": 5,
+    "zero_hit_case_count": 5,
+    "fragment_like_case_count": 5,
+    "prompt_in_corpus_count": 5,
+    "pass_rate_delta": -0.4,
+    "root_cause_count": 4,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_real_replay_decoder_anchor_probe",
+    "next_step": "run_decoder_anchor_or_forced_prefix_probe",
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "not_improved",
+    "reason": "Exact prompts are present, but replay output still fragments before emitting required terms.",
+    "next_action": "run_decoder_anchor_or_forced_prefix_probe"
+  }
+}

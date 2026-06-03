@@ -4,7 +4,19 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v819.0.0` replays the v818 prompt-aligned checkpoint on the bounded benchmark suite and compares it with the v806 baseline, confirming the prompt-aligned checkpoint still regresses.
+Version `v820.0.0` diagnoses the v819 prompt-aligned replay failure and narrows the blocker from corpus coverage to generation anchoring.
+
+## Latest v820 checkpoint
+
+- Added `model_capability_route_promotion_bounded_real_replay_prompt_aligned_failure_diagnostic`.
+- Added CLI `scripts/diagnose_model_capability_route_promotion_bounded_real_replay_prompt_aligned_failure.py`.
+- Consumed the real v819 prompt-aligned replay, v819 comparison, v817 seed revision, v818 training evidence, and v817 corpus.
+- Confirmed `case_count=5`, `failed_case_count=5`, `zero_hit_case_count=5`, and `fragment_like_case_count=5`.
+- Confirmed all 5 benchmark prompts are present in the corpus and `fixed/loss` each appear 47 times.
+- Produced 4 root causes, led by `exact_prompts_present_but_generation_unanchored` and `zero_required_term_hits`.
+- Routed the next step to `run_decoder_anchor_or_forced_prefix_probe` rather than another blind training run.
+- Verified with `3 passed` focused prompt-aligned failure diagnostic tests.
+- Archived v820 evidence in `e/820` and added the code explanation in `代码讲解记录_模型能力阶段/834-v820-route-promotion-bounded-real-replay-prompt-aligned-failure-diagnostic.md`.
 
 ## Latest v819 checkpoint
 
