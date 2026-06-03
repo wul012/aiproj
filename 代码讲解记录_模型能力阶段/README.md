@@ -44,6 +44,9 @@
 842-v828-route-promotion-bounded-real-replay-decoder-anchor-distribution-audit.md
  -> v828 code explanation: audit decoder-anchor seed distribution and route the next work to a rebalanced seed revision before more training.
 
+843-v829-route-promotion-bounded-real-replay-decoder-anchor-rebalanced-seed-revision.md
+ -> v829 code explanation: turn the distribution audit into a rebalanced decoder-anchor seed and training-ready corpus.
+
 487-v473-baseline-candidate-capability-delta.md
  -> v473 code explanation: carry real tiny training loss and generation-quality deltas into the baseline-candidate eval loop.
 

@@ -1,0 +1,76 @@
+example_id,case_id,revision_type,prompt,completion,guardrail,rebalance_action,rebalance_reason
+decoder-anchor-carry-prompt-aligned-carry-revision-carry-repair-objective-answer-check-direct_case_answer,objective-answer-check,carry_forward_prompt_aligned_seed,自检：本题需要同时出现 fixed 与 loss。最终答案：,fixed loss,retain_prompt_aligned_seed_signal,keep,carry_forward_cap
+decoder-anchor-carry-prompt-aligned-carry-revision-carry-repair-objective-answer-check-self_check_answer,objective-answer-check,carry_forward_prompt_aligned_seed,"自检：本题需要同时出现 fixed 与 loss。最终答案：
+Self-check: include both required terms exactly once.",fixed loss,retain_prompt_aligned_seed_signal,keep,carry_forward_cap
+decoder-anchor-objective-answer-check-unanchored_direct_answer,objective-answer-check,unanchored_direct_answer,自检：本题需要同时出现 fixed 与 loss。最终答案：,fixed loss,unanchored_exact_answer,keep,direct_answer_preserve
+decoder-anchor-objective-answer-check-prefix_f_bridge,objective-answer-check,prefix_f_bridge,自检：本题需要同时出现 fixed 与 loss。最终答案：f,ixed loss,first_character_bridge,keep,decoder_bridge_preserve
+decoder-anchor-objective-answer-check-prefix_fixed_space_bridge,objective-answer-check,prefix_fixed_space_bridge,自检：本题需要同时出现 fixed 与 loss。最终答案：fixed ,loss,first_term_to_second_term_bridge,keep,decoder_bridge_preserve
+decoder-anchor-objective-answer-check-prefix_fixed_l_bridge,objective-answer-check,prefix_fixed_l_bridge,自检：本题需要同时出现 fixed 与 loss。最终答案：fixed l,oss,second_term_prefix_bridge,keep,decoder_bridge_preserve
+decoder-anchor-rebalanced-objective-answer-check-direct-weight-1,objective-answer-check,rebalanced_unanchored_direct_answer,自检：本题需要同时出现 fixed 与 loss。最终答案：,fixed loss,increase_direct_answer_weight_without_promotion_claim,add,direct_answer_underweighted
+decoder-anchor-rebalanced-objective-answer-check-direct-weight-2,objective-answer-check,rebalanced_unanchored_direct_answer,自检：本题需要同时出现 fixed 与 loss。最终答案：,fixed loss,increase_direct_answer_weight_without_promotion_claim,add,direct_answer_underweighted
+decoder-anchor-carry-prompt-aligned-carry-revision-objective-answer-contrast-baseline_preservation,objective-answer-contrast,carry_forward_prompt_aligned_seed,"Baseline preservation for objective-answer-contrast: output the two route terms exactly.
+Answer:",fixed loss,retain_prompt_aligned_seed_signal,keep,carry_forward_cap
+decoder-anchor-carry-prompt-aligned-carry-revision-objective-answer-contrast-missing_term_retention,objective-answer-contrast,carry_forward_prompt_aligned_seed,"Repair objective-answer-contrast: include missing terms fixed, loss and answer directly.
+Answer:",fixed loss,retain_prompt_aligned_seed_signal,keep,carry_forward_cap
+decoder-anchor-objective-answer-contrast-unanchored_direct_answer,objective-answer-contrast,unanchored_direct_answer,"对比任务：不要解释，只返回目标 pair tokens。
+结果：",fixed loss,unanchored_exact_answer,keep,direct_answer_preserve
+decoder-anchor-objective-answer-contrast-prefix_f_bridge,objective-answer-contrast,prefix_f_bridge,"对比任务：不要解释，只返回目标 pair tokens。
+结果：f",ixed loss,first_character_bridge,keep,decoder_bridge_preserve
+decoder-anchor-objective-answer-contrast-prefix_fixed_space_bridge,objective-answer-contrast,prefix_fixed_space_bridge,"对比任务：不要解释，只返回目标 pair tokens。
+结果：fixed ",loss,first_term_to_second_term_bridge,keep,decoder_bridge_preserve
+decoder-anchor-objective-answer-contrast-prefix_fixed_l_bridge,objective-answer-contrast,prefix_fixed_l_bridge,"对比任务：不要解释，只返回目标 pair tokens。
+结果：fixed l",oss,second_term_prefix_bridge,keep,decoder_bridge_preserve
+decoder-anchor-rebalanced-objective-answer-contrast-direct-weight-1,objective-answer-contrast,rebalanced_unanchored_direct_answer,"对比任务：不要解释，只返回目标 pair tokens。
+结果：",fixed loss,increase_direct_answer_weight_without_promotion_claim,add,direct_answer_underweighted
+decoder-anchor-rebalanced-objective-answer-contrast-direct-weight-2,objective-answer-contrast,rebalanced_unanchored_direct_answer,"对比任务：不要解释，只返回目标 pair tokens。
+结果：",fixed loss,increase_direct_answer_weight_without_promotion_claim,add,direct_answer_underweighted
+decoder-anchor-carry-prompt-aligned-carry-revision-carry-repair-objective-answer-direct-direct_case_answer,objective-answer-direct,carry_forward_prompt_aligned_seed,"任务：只输出两个英文关键词，表示本轮目标答案。
+答案：",fixed loss,retain_prompt_aligned_seed_signal,keep,carry_forward_cap
+decoder-anchor-carry-prompt-aligned-carry-revision-carry-repair-objective-answer-direct-self_check_answer,objective-answer-direct,carry_forward_prompt_aligned_seed,"任务：只输出两个英文关键词，表示本轮目标答案。
+答案：
+Self-check: include both required terms exactly once.",fixed loss,retain_prompt_aligned_seed_signal,keep,carry_forward_cap
+decoder-anchor-objective-answer-direct-unanchored_direct_answer,objective-answer-direct,unanchored_direct_answer,"任务：只输出两个英文关键词，表示本轮目标答案。
+答案：",fixed loss,unanchored_exact_answer,keep,direct_answer_preserve
+decoder-anchor-objective-answer-direct-prefix_f_bridge,objective-answer-direct,prefix_f_bridge,"任务：只输出两个英文关键词，表示本轮目标答案。
+答案：f",ixed loss,first_character_bridge,keep,decoder_bridge_preserve
+decoder-anchor-objective-answer-direct-prefix_fixed_space_bridge,objective-answer-direct,prefix_fixed_space_bridge,"任务：只输出两个英文关键词，表示本轮目标答案。
+答案：fixed ",loss,first_term_to_second_term_bridge,keep,decoder_bridge_preserve
+decoder-anchor-objective-answer-direct-prefix_fixed_l_bridge,objective-answer-direct,prefix_fixed_l_bridge,"任务：只输出两个英文关键词，表示本轮目标答案。
+答案：fixed l",oss,second_term_prefix_bridge,keep,decoder_bridge_preserve
+decoder-anchor-rebalanced-objective-answer-direct-direct-weight-1,objective-answer-direct,rebalanced_unanchored_direct_answer,"任务：只输出两个英文关键词，表示本轮目标答案。
+答案：",fixed loss,increase_direct_answer_weight_without_promotion_claim,add,direct_answer_underweighted
+decoder-anchor-rebalanced-objective-answer-direct-direct-weight-2,objective-answer-direct,rebalanced_unanchored_direct_answer,"任务：只输出两个英文关键词，表示本轮目标答案。
+答案：",fixed loss,increase_direct_answer_weight_without_promotion_claim,add,direct_answer_underweighted
+decoder-anchor-carry-prompt-aligned-carry-revision-objective-answer-jsonish-baseline_preservation,objective-answer-jsonish,carry_forward_prompt_aligned_seed,"Baseline preservation for objective-answer-jsonish: output the two route terms exactly.
+Answer:",fixed loss,retain_prompt_aligned_seed_signal,keep,carry_forward_cap
+decoder-anchor-carry-prompt-aligned-carry-revision-objective-answer-jsonish-missing_term_retention,objective-answer-jsonish,carry_forward_prompt_aligned_seed,"Repair objective-answer-jsonish: include missing terms fixed, loss and answer directly.
+Answer:",fixed loss,retain_prompt_aligned_seed_signal,keep,carry_forward_cap
+decoder-anchor-objective-answer-jsonish-unanchored_direct_answer,objective-answer-jsonish,unanchored_direct_answer,"请用 JSON 风格写出 answer_terms，包含两个英文词。
+answer_terms:",fixed loss,unanchored_exact_answer,keep,direct_answer_preserve
+decoder-anchor-objective-answer-jsonish-prefix_f_bridge,objective-answer-jsonish,prefix_f_bridge,"请用 JSON 风格写出 answer_terms，包含两个英文词。
+answer_terms:f",ixed loss,first_character_bridge,keep,decoder_bridge_preserve
+decoder-anchor-objective-answer-jsonish-prefix_fixed_space_bridge,objective-answer-jsonish,prefix_fixed_space_bridge,"请用 JSON 风格写出 answer_terms，包含两个英文词。
+answer_terms:fixed ",loss,first_term_to_second_term_bridge,keep,decoder_bridge_preserve
+decoder-anchor-objective-answer-jsonish-prefix_fixed_l_bridge,objective-answer-jsonish,prefix_fixed_l_bridge,"请用 JSON 风格写出 answer_terms，包含两个英文词。
+answer_terms:fixed l",oss,second_term_prefix_bridge,keep,decoder_bridge_preserve
+decoder-anchor-rebalanced-objective-answer-jsonish-direct-weight-1,objective-answer-jsonish,rebalanced_unanchored_direct_answer,"请用 JSON 风格写出 answer_terms，包含两个英文词。
+answer_terms:",fixed loss,increase_direct_answer_weight_without_promotion_claim,add,direct_answer_underweighted
+decoder-anchor-rebalanced-objective-answer-jsonish-direct-weight-2,objective-answer-jsonish,rebalanced_unanchored_direct_answer,"请用 JSON 风格写出 answer_terms，包含两个英文词。
+answer_terms:",fixed loss,increase_direct_answer_weight_without_promotion_claim,add,direct_answer_underweighted
+decoder-anchor-carry-prompt-aligned-carry-revision-carry-repair-objective-answer-role-direct_case_answer,objective-answer-role,carry_forward_prompt_aligned_seed,"目标：给出 paired required terms 的两个角色词。
+输出：",fixed loss,retain_prompt_aligned_seed_signal,keep,carry_forward_cap
+decoder-anchor-carry-prompt-aligned-carry-revision-carry-repair-objective-answer-role-self_check_answer,objective-answer-role,carry_forward_prompt_aligned_seed,"目标：给出 paired required terms 的两个角色词。
+输出：
+Self-check: include both required terms exactly once.",fixed loss,retain_prompt_aligned_seed_signal,keep,carry_forward_cap
+decoder-anchor-objective-answer-role-unanchored_direct_answer,objective-answer-role,unanchored_direct_answer,"目标：给出 paired required terms 的两个角色词。
+输出：",fixed loss,unanchored_exact_answer,keep,direct_answer_preserve
+decoder-anchor-objective-answer-role-prefix_f_bridge,objective-answer-role,prefix_f_bridge,"目标：给出 paired required terms 的两个角色词。
+输出：f",ixed loss,first_character_bridge,keep,decoder_bridge_preserve
+decoder-anchor-objective-answer-role-prefix_fixed_space_bridge,objective-answer-role,prefix_fixed_space_bridge,"目标：给出 paired required terms 的两个角色词。
+输出：fixed ",loss,first_term_to_second_term_bridge,keep,decoder_bridge_preserve
+decoder-anchor-objective-answer-role-prefix_fixed_l_bridge,objective-answer-role,prefix_fixed_l_bridge,"目标：给出 paired required terms 的两个角色词。
+输出：fixed l",oss,second_term_prefix_bridge,keep,decoder_bridge_preserve
+decoder-anchor-rebalanced-objective-answer-role-direct-weight-1,objective-answer-role,rebalanced_unanchored_direct_answer,"目标：给出 paired required terms 的两个角色词。
+输出：",fixed loss,increase_direct_answer_weight_without_promotion_claim,add,direct_answer_underweighted
+decoder-anchor-rebalanced-objective-answer-role-direct-weight-2,objective-answer-role,rebalanced_unanchored_direct_answer,"目标：给出 paired required terms 的两个角色词。
+输出：",fixed loss,increase_direct_answer_weight_without_promotion_claim,add,direct_answer_underweighted

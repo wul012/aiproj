@@ -1,0 +1,10 @@
+status=pass
+decision=model_capability_route_promotion_bounded_real_replay_decoder_anchor_rebalanced_seed_revision_ready
+seed_ready=True
+example_count=40
+carry_forward_share=0.25
+direct_answer_share=0.375
+decoder_bridge_share=0.375
+dropped_carry_forward_count=18
+added_direct_answer_count=10
+next_step=train_decoder_anchor_rebalanced_seed_revision

@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v828.0.0` audits the decoder-anchor training distribution before more training, confirming the next step should rebalance the seed rather than blindly extend the run.
+Version `v829.0.0` builds a rebalanced decoder-anchor seed revision, turning the v828 distribution audit into a training-ready corpus with capped carry-forward rows and upweighted direct answers.
+
+## Latest v829 checkpoint
+
+- Added `model_capability_route_promotion_bounded_real_replay_decoder_anchor_rebalanced_seed_revision`.
+- Added CLI `scripts/build_model_capability_route_promotion_bounded_real_replay_decoder_anchor_rebalanced_seed_revision.py`.
+- Consumed the real v824 decoder-anchor seed revision and the v828 distribution audit.
+- Kept all 15 decoder bridge examples, capped carry-forward rows at 2 per case, and added 10 direct-answer weighting rows.
+- Produced `example_count=40`, `carry_forward_share=0.25`, `direct_answer_share=0.375`, and `decoder_bridge_share=0.375`.
+- Dropped 18 carry-forward rows and repaired the v828 direct/carry distribution risks.
+- Kept the model-quality claim as `training_data_revision_only`; the next step is training and replay, not promotion.
+- Routed the next step to `train_decoder_anchor_rebalanced_seed_revision`.
+- Verified with `3 passed` focused decoder anchor rebalanced seed revision tests.
+- Archived v829 evidence in `e/829` and added the code explanation in `代码讲解记录_模型能力阶段/843-v829-route-promotion-bounded-real-replay-decoder-anchor-rebalanced-seed-revision.md`.
 
 ## Latest v828 checkpoint
 
