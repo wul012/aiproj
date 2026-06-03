@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability route promotion portfolio",
+  "generated_at": "2026-06-03T00:46:49Z",
+  "status": "pass",
+  "decision": "model_capability_route_promotion_portfolio_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_history_path": "e\\791\\解释\\model-capability-route-promotion-history\\model_capability_route_promotion_history.json",
+  "source_history": {
+    "status": "pass",
+    "decision": "model_capability_route_promotion_history_ready",
+    "summary": {
+      "entry_count": 1,
+      "ready_count": 1,
+      "blocked_count": 0,
+      "boundary_mismatch_count": 0,
+      "required_boundary": "tiny_required_term_pair_probe_only",
+      "route_ids": [
+        "objective_level_contrast"
+      ],
+      "route_id_count": 1,
+      "model_quality_claims": [
+        "seed_stable_pair_probe_route_accepted"
+      ],
+      "model_quality_claim": "seed_stable_pair_probe_route_accepted",
+      "ready_route_ids": [
+        "objective_level_contrast"
+      ],
+      "blocked_route_ids": [],
+      "min_seed_count": 3,
+      "max_seed_count": 3,
+      "min_pair_full_count": 2,
+      "max_pair_full_strength_spread": 1
+    },
+    "readiness_requirement": {
+      "status": "pass",
+      "decision": "continue",
+      "exit_code": 0,
+      "min_ready_entries": 1,
+      "ready_count": 1,
+      "entry_count": 1,
+      "failed_reasons": []
+    }
+  },
+  "check_rows": [
+    {
+      "id": "history_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "source history must pass"
+    },
+    {
+      "id": "history_readiness_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "source history readiness requirement must pass"
+    },
+    {
+      "id": "minimum_ready_routes",
+      "status": "pass",
+      "actual": {
+        "ready": 1,
+        "required": 1
+      },
+      "detail": "portfolio must carry enough active route promotions"
+    },
+    {
+      "id": "no_blocked_routes",
+      "status": "pass",
+      "actual": 0,
+      "detail": "route portfolio should not include blocked routes"
+    },
+    {
+      "id": "no_boundary_mismatches",
+      "status": "pass",
+      "actual": 0,
+      "detail": "all routes must keep the required boundary"
+    },
+    {
+      "id": "boundary_matches_history",
+      "status": "pass",
+      "actual": "tiny_required_term_pair_probe_only",
+      "detail": "history boundary must match portfolio boundary"
+    },
+    {
+      "id": "claims_are_bounded",
+      "status": "pass",
+      "actual": [
+        "seed_stable_pair_probe_route_accepted"
+      ],
+      "detail": "claims must remain pair-probe scoped"
+    }
+  ],
+  "route_cards": [
+    {
+      "name": "objective-level contrast v790",
+      "route_id": "objective_level_contrast",
+      "portfolio_status": "active",
+      "promotion_readiness": "ready",
+      "route_status": "promoted",
+      "history_entry_status": "ready",
+      "boundary": "tiny_required_term_pair_probe_only",
+      "boundary_matches": true,
+      "model_quality_claim": "seed_stable_pair_probe_route_accepted",
+      "seed_count": 3,
+      "min_pair_full_count": 2,
+      "pair_full_strength_spread": 1,
+      "source_history_path": "e\\791\\解释\\model-capability-route-promotion-history\\model_capability_route_promotion_history.json",
+      "source_manifest_path": "e\\790\\解释\\model-capability-required-term-pair-readiness-objective-level-contrast-promotion-manifest\\model_capability_required_term_pair_readiness_objective_level_contrast_promotion_manifest.json",
+      "source_acceptance_review_path": "e\\789\\解释\\model-capability-required-term-pair-readiness-objective-level-contrast-acceptance-review\\model_capability_required_term_pair_readiness_objective_level_contrast_acceptance_review.json",
+      "source_seed_stability_rollup_path": "e\\772\\解释\\model-capability-required-term-pair-readiness-objective-level-contrast-seed-stability-rollup\\model_capability_required_term_pair_readiness_objective_level_contrast_seed_stability_rollup.json"
+    }
+  ],
+  "portfolio": {
+    "portfolio_type": "model_capability_route_promotion",
+    "portfolio_ready": true,
+    "boundary": "tiny_required_term_pair_probe_only",
+    "active_routes": [
+      "objective_level_contrast"
+    ],
+    "blocked_routes": [],
+    "route_count": 1,
+    "active_route_count": 1,
+    "blocked_route_count": 0,
+    "next_consumers": [
+      "route_promotion_regression_monitor",
+      "model_capability_portfolio_review"
+    ]
+  },
+  "summary": {
+    "route_promotion_portfolio_ready": true,
+    "route_count": 1,
+    "active_route_count": 1,
+    "blocked_route_count": 0,
+    "active_routes": [
+      "objective_level_contrast"
+    ],
+    "boundary": "tiny_required_term_pair_probe_only",
+    "model_quality_claim": "seed_stable_pair_probe_route_accepted",
+    "min_seed_count": 3,
+    "min_pair_full_count": 2,
+    "max_pair_full_strength_spread": 1,
+    "passed_check_count": 7,
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "seed_stable_pair_probe_route_accepted",
+    "reason": "Ready route promotions are now grouped into a bounded portfolio snapshot: objective_level_contrast.",
+    "next_action": "use the portfolio snapshot as input to route regression monitoring"
+  }
+}

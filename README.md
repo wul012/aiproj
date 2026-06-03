@@ -4,7 +4,17 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v791.0.0` records the objective-level contrast promotion manifest in a bounded route promotion history ledger.
+Version `v792.0.0` turns the route promotion history ledger into a bounded model capability route portfolio snapshot.
+
+## Latest v792 checkpoint
+
+- Added `model_capability_route_promotion_portfolio`.
+- Added CLI `scripts/build_model_capability_route_promotion_portfolio.py`.
+- Consumed the real v791 route promotion history from `e/791`.
+- Produced `decision=model_capability_route_promotion_portfolio_ready`.
+- Kept the portfolio boundary explicit: `tiny_required_term_pair_probe_only`.
+- Verified with `6 passed` route promotion portfolio focused tests.
+- Archived v792 evidence in `e/792` and added the code explanation in `代码讲解记录_模型能力阶段/806-v792-route-promotion-portfolio.md`.
 
 ## Latest v791 checkpoint
 

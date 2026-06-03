@@ -1,0 +1,9 @@
+status=pass
+decision=model_capability_route_promotion_portfolio_ready
+failed_count=0
+route_promotion_portfolio_ready=True
+route_count=1
+active_route_count=1
+blocked_route_count=0
+boundary=tiny_required_term_pair_probe_only
+model_quality_claim=seed_stable_pair_probe_route_accepted

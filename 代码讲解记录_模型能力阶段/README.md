@@ -968,6 +968,9 @@
 805-v791-route-promotion-history.md
  -> v791 code explanation: record the route promotion manifest in a bounded model capability history ledger.
 
+806-v792-route-promotion-portfolio.md
+ -> v792 code explanation: turn route promotion history into a bounded active-route portfolio snapshot.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

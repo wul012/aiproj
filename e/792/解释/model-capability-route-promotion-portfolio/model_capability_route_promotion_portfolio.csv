@@ -1,0 +1,2 @@
+name,route_id,portfolio_status,promotion_readiness,boundary,model_quality_claim,seed_count,min_pair_full_count,pair_full_strength_spread,source_manifest_path
+objective-level contrast v790,objective_level_contrast,active,ready,tiny_required_term_pair_probe_only,seed_stable_pair_probe_route_accepted,3,2,1,e\790\解释\model-capability-required-term-pair-readiness-objective-level-contrast-promotion-manifest\model_capability_required_term_pair_readiness_objective_level_contrast_promotion_manifest.json
