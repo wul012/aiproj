@@ -1,0 +1,18 @@
+case_id,case_pass,hit_terms,missed_terms,continuation
+objective-answer-direct,False,,"fixed,loss","txrd Ai si
+ t iits
+ssdee"
+objective-answer-role,False,,"fixed,loss","aired required terms 的两个角色词。
+输出：
+  i
+i  d  a  dt
+a  n ff"
+objective-answer-contrast,False,,"fixed,loss","fi i     t
+nt   ddtiffdd"
+objective-answer-jsonish,False,,"fixed,loss","wer_terms，包含两个英文词。
+answer_terms:fts   td st
+ ets dfta "
+objective-answer-check,False,,"fixed,loss","fi
+
+   t e  ien
+ff  "

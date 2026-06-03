@@ -1,0 +1,6 @@
+case_id,baseline_pass,prompt_aligned_pass,delta,baseline_hit_terms,prompt_aligned_hit_terms,prompt_aligned_missed_terms
+objective-answer-check,False,False,0,"[""loss""]",[],"[""fixed"", ""loss""]"
+objective-answer-contrast,True,False,-1,"[""fixed"", ""loss""]",[],"[""fixed"", ""loss""]"
+objective-answer-direct,False,False,0,"[""loss""]",[],"[""fixed"", ""loss""]"
+objective-answer-jsonish,True,False,-1,"[""fixed"", ""loss""]",[],"[""fixed"", ""loss""]"
+objective-answer-role,False,False,0,[],[],"[""fixed"", ""loss""]"

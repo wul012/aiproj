@@ -14,6 +14,9 @@
 832-v818-route-promotion-bounded-real-replay-prompt-aligned-training-run.md
  -> v818 code explanation: train the v817 prompt-aligned bounded replay corpus into a real checkpoint while keeping quality claims gated behind replay.
 
+833-v819-route-promotion-bounded-real-replay-prompt-aligned-checkpoint-comparison.md
+ -> v819 code explanation: replay the v818 prompt-aligned checkpoint and compare it with the v806 baseline before deciding the next repair move.
+
 487-v473-baseline-candidate-capability-delta.md
  -> v473 code explanation: carry real tiny training loss and generation-quality deltas into the baseline-candidate eval loop.
 

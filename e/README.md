@@ -23,6 +23,10 @@ e/<version>/解释/说明.md
 e/818/图片
 e/818/解释/说明.md
  -> v818 prompt-aligned bounded replay training run 的运行截图和解释
+
+e/819/图片
+e/819/解释/说明.md
+ -> v819 prompt-aligned bounded replay checkpoint comparison 的运行截图和解释
 ```
 
 ```text

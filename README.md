@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v818.0.0` trains a real prompt-aligned bounded replay checkpoint from the v817 corpus and records the training artifacts without claiming model-quality improvement before replay.
+Version `v819.0.0` replays the v818 prompt-aligned checkpoint on the bounded benchmark suite and compares it with the v806 baseline, confirming the prompt-aligned checkpoint still regresses.
+
+## Latest v819 checkpoint
+
+- Added `model_capability_route_promotion_bounded_real_replay_prompt_aligned_checkpoint_comparison`.
+- Added CLI `scripts/compare_model_capability_route_promotion_bounded_real_replay_prompt_aligned_checkpoint.py`.
+- Replayed the v818 prompt-aligned checkpoint on the v803 bounded benchmark suite.
+- Produced `passed_case_count=0/5`, `pass_rate=0.0`, and `model_route_quality_ready=False`.
+- Compared v819 prompt-aligned replay with the v806 baseline replay.
+- Recorded `baseline_passed_case_count=2`, `prompt_aligned_passed_case_count=0`, and `pass_rate_delta=-0.4`.
+- Produced `decision=model_capability_route_promotion_bounded_real_replay_prompt_aligned_checkpoint_regressed`.
+- Kept `promotion_ready=False` and routed the next step to prompt-aligned replay failure diagnosis.
+- Verified with `3 passed` focused prompt-aligned comparison tests.
+- Archived v819 evidence in `e/819` and added the code explanation in `代码讲解记录_模型能力阶段/833-v819-route-promotion-bounded-real-replay-prompt-aligned-checkpoint-comparison.md`.
 
 ## Latest v818 checkpoint
 

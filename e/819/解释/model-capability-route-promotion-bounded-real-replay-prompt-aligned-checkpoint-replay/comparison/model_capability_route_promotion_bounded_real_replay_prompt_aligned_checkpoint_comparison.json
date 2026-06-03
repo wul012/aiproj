@@ -1,0 +1,213 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability route promotion bounded real replay prompt-aligned checkpoint comparison",
+  "generated_at": "2026-06-03T11:11:11Z",
+  "status": "pass",
+  "decision": "model_capability_route_promotion_bounded_real_replay_prompt_aligned_checkpoint_regressed",
+  "failed_count": 0,
+  "issues": [],
+  "source_baseline_replay": "e\\806\\解释\\model-capability-route-promotion-bounded-real-replay\\model_capability_route_promotion_bounded_real_replay.json",
+  "source_prompt_aligned_replay": "e\\819\\解释\\model-capability-route-promotion-bounded-real-replay-prompt-aligned-checkpoint-replay\\prompt-aligned-replay\\model_capability_route_promotion_bounded_real_replay.json",
+  "source_training_run": "e\\818\\解释\\model-capability-route-promotion-bounded-real-replay-prompt-aligned-training-run\\model_capability_route_promotion_bounded_real_replay_prompt_aligned_training_run.json",
+  "baseline_summary": {
+    "bounded_real_replay_executed": true,
+    "model_route_quality_ready": false,
+    "case_count": 5,
+    "executed_case_count": 5,
+    "passed_case_count": 2,
+    "failed_case_count": 3,
+    "pass_rate": 0.4,
+    "next_step": "review_bounded_route_promotion_real_replay",
+    "failed_check_count": 0
+  },
+  "prompt_aligned_summary": {
+    "bounded_real_replay_executed": true,
+    "model_route_quality_ready": false,
+    "case_count": 5,
+    "executed_case_count": 5,
+    "passed_case_count": 0,
+    "failed_case_count": 5,
+    "pass_rate": 0.0,
+    "next_step": "review_bounded_route_promotion_real_replay",
+    "failed_check_count": 0
+  },
+  "training_summary": {
+    "prompt_aligned_training_ready": true,
+    "artifact_count": 7,
+    "metric_record_count": 4,
+    "final_step": 30,
+    "final_train_loss": 4.178743362426758,
+    "final_val_loss": 4.215392112731934,
+    "train_loss_delta": -0.349051,
+    "val_loss_delta": -0.306461,
+    "prompt_aligned_example_count": 28,
+    "exact_prompt_answer_count": 5,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_real_replay_prompt_aligned_checkpoint_replay",
+    "next_step": "run_prompt_aligned_checkpoint_bounded_replay",
+    "failed_check_count": 0
+  },
+  "case_rows": [
+    {
+      "case_id": "objective-answer-check",
+      "baseline_pass": false,
+      "prompt_aligned_pass": false,
+      "delta": 0,
+      "baseline_hit_terms": [
+        "loss"
+      ],
+      "baseline_missed_terms": [
+        "fixed"
+      ],
+      "baseline_continuation": "xed � loss������bred lossssssssssss fixe",
+      "prompt_aligned_hit_terms": [],
+      "prompt_aligned_missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "prompt_aligned_continuation": "fi    \n\n   t e  ien\nff  "
+    },
+    {
+      "case_id": "objective-answer-contrast",
+      "baseline_pass": true,
+      "prompt_aligned_pass": false,
+      "delta": -1,
+      "baseline_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "baseline_missed_terms": [],
+      "baseline_continuation": "pair tokens�\n���obred fixed fixed lossss",
+      "prompt_aligned_hit_terms": [],
+      "prompt_aligned_missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "prompt_aligned_continuation": "fi i     t\nnt   ddtiffdd"
+    },
+    {
+      "case_id": "objective-answer-direct",
+      "baseline_pass": false,
+      "prompt_aligned_pass": false,
+      "delta": 0,
+      "baseline_hit_terms": [
+        "loss"
+      ],
+      "baseline_missed_terms": [
+        "fixed"
+      ],
+      "baseline_continuation": "������������\n���branch lossssssssssss fi",
+      "prompt_aligned_hit_terms": [],
+      "prompt_aligned_missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "prompt_aligned_continuation": "txrd Ai si\n t iits\nssdee"
+    },
+    {
+      "case_id": "objective-answer-jsonish",
+      "baseline_pass": true,
+      "prompt_aligned_pass": false,
+      "delta": -1,
+      "baseline_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "baseline_missed_terms": [],
+      "baseline_continuation": "��\nanswer_terms�s fixed losss\nbrassssseq",
+      "prompt_aligned_hit_terms": [],
+      "prompt_aligned_missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "prompt_aligned_continuation": "wer_terms，包含两个英文词。\nanswer_terms:fts   td st  \n ets dfta "
+    },
+    {
+      "case_id": "objective-answer-role",
+      "baseline_pass": false,
+      "prompt_aligned_pass": false,
+      "delta": 0,
+      "baseline_hit_terms": [],
+      "baseline_missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "baseline_continuation": "erms �������\n���epans loswer lorerered l",
+      "prompt_aligned_hit_terms": [],
+      "prompt_aligned_missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "prompt_aligned_continuation": "aired required terms 的两个角色词。\n输出：\n  i\ni  d  a  dt\na  n ff"
+    }
+  ],
+  "check_rows": [
+    {
+      "id": "baseline_replay_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "baseline replay execution must pass"
+    },
+    {
+      "id": "prompt_aligned_replay_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "prompt-aligned replay execution must pass"
+    },
+    {
+      "id": "prompt_aligned_training_ready_when_provided",
+      "status": "pass",
+      "actual": true,
+      "detail": "prompt-aligned training evidence is optional, but must be ready when provided"
+    },
+    {
+      "id": "case_counts_match",
+      "status": "pass",
+      "actual": {
+        "baseline": 5,
+        "prompt_aligned": 5
+      },
+      "detail": "baseline and prompt-aligned replay should cover the same suite"
+    },
+    {
+      "id": "case_rows_present",
+      "status": "pass",
+      "actual": 5,
+      "detail": "comparison must include case rows"
+    }
+  ],
+  "comparison": {
+    "ready": true,
+    "baseline_passed_case_count": 2,
+    "prompt_aligned_passed_case_count": 0,
+    "passed_case_delta": -2,
+    "baseline_pass_rate": 0.4,
+    "prompt_aligned_pass_rate": 0.0,
+    "pass_rate_delta": -0.4,
+    "prompt_aligned_model_route_quality_ready": false,
+    "prompt_aligned_checkpoint_improved": false,
+    "prompt_aligned_checkpoint_regressed": true,
+    "promotion_ready": false,
+    "case_count": 5,
+    "next_step": "diagnose_prompt_aligned_checkpoint_replay_failure_before_more_training"
+  },
+  "summary": {
+    "bounded_prompt_aligned_checkpoint_comparison_ready": true,
+    "prompt_aligned_checkpoint_improved": false,
+    "prompt_aligned_checkpoint_regressed": true,
+    "baseline_passed_case_count": 2,
+    "prompt_aligned_passed_case_count": 0,
+    "passed_case_delta": -2,
+    "baseline_pass_rate": 0.4,
+    "prompt_aligned_pass_rate": 0.0,
+    "pass_rate_delta": -0.4,
+    "promotion_ready": false,
+    "case_count": 5,
+    "next_step": "diagnose_prompt_aligned_checkpoint_replay_failure_before_more_training",
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "not_improved",
+    "reason": "Prompt-aligned checkpoint passed fewer bounded replay cases than baseline.",
+    "next_action": "diagnose_prompt_aligned_checkpoint_replay_failure_before_more_training"
+  }
+}

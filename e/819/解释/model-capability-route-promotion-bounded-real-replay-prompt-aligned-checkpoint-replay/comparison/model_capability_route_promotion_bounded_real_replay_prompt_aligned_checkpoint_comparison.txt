@@ -1,0 +1,12 @@
+status=pass
+decision=model_capability_route_promotion_bounded_real_replay_prompt_aligned_checkpoint_regressed
+failed_count=0
+comparison_ready=True
+prompt_aligned_checkpoint_improved=False
+prompt_aligned_checkpoint_regressed=True
+baseline_passed_case_count=2
+prompt_aligned_passed_case_count=0
+passed_case_delta=-2
+pass_rate_delta=-0.4
+promotion_ready=False
+next_step=diagnose_prompt_aligned_checkpoint_replay_failure_before_more_training
