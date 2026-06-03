@@ -1574,3 +1574,9 @@ e/663/解释/说明.md
 - `e/809/图片`
 - `e/809/解释/说明.md`
 - v809 model capability route promotion bounded real replay repair seed 的运行截图和解释。
+
+## v810 补充索引
+
+- `e/810/图片`
+- `e/810/解释/说明.md`
+- v810 model capability route promotion bounded real replay repair training run 的运行截图和解释。

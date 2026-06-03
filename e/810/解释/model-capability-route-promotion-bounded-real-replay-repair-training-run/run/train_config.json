@@ -1,0 +1,33 @@
+{
+  "data": "D:\\aiproj\\data\\sample_zh.txt",
+  "data_dir": null,
+  "prepared_data": "D:\\aiproj\\e\\809\\解释\\model-capability-route-promotion-bounded-real-replay-repair-seed\\model_capability_route_promotion_bounded_real_replay_repair_seed_corpus.txt",
+  "out_dir": "e\\810\\解释\\model-capability-route-promotion-bounded-real-replay-repair-training-run\\run",
+  "resume": null,
+  "tokenizer": "char",
+  "bpe_vocab_size": 256,
+  "bpe_min_frequency": 2,
+  "batch_size": 4,
+  "block_size": 32,
+  "max_iters": 20,
+  "eval_interval": 10,
+  "eval_iters": 2,
+  "learning_rate": 0.0003,
+  "train_ratio": 0.9,
+  "n_layer": 2,
+  "n_head": 2,
+  "n_embd": 32,
+  "dropout": 0.0,
+  "seed": 991,
+  "device": "cpu",
+  "sample_prompt": "任务：只输出两个英文关键词，表示本轮目标答案。\n答案：",
+  "sample_tokens": 24,
+  "sample_temperature": 0.2,
+  "sample_top_k": 10,
+  "no_sample": false,
+  "device_used": "cpu",
+  "data_source": {
+    "kind": "prepared_data",
+    "path": "D:\\aiproj\\e\\809\\解释\\model-capability-route-promotion-bounded-real-replay-repair-seed\\model_capability_route_promotion_bounded_real_replay_repair_seed_corpus.txt"
+  }
+}

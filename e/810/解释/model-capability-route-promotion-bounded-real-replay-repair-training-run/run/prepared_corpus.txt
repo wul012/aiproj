@@ -1,0 +1,18 @@
+任务：只输出两个英文关键词，表示本轮目标答案。
+答案：fixed loss
+
+任务：只输出两个英文关键词，表示本轮目标答案。
+答案：
+Self-check: include both required terms exactly once.fixed loss
+
+目标：给出 paired required terms 的两个角色词。
+输出：fixed loss
+
+目标：给出 paired required terms 的两个角色词。
+输出：
+Self-check: include both required terms exactly once.fixed loss
+
+自检：本题需要同时出现 fixed 与 loss。最终答案：fixed loss
+
+自检：本题需要同时出现 fixed 与 loss。最终答案：
+Self-check: include both required terms exactly once.fixed loss

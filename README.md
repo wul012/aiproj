@@ -4,7 +4,18 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v809.0.0` converts bounded real replay repair tasks into JSONL and corpus seed examples.
+Version `v810.0.0` trains a bounded repair checkpoint from the v809 repair seed and records training evidence.
+
+## Latest v810 checkpoint
+
+- Ran real CPU training from the v809 repair seed corpus.
+- Added `model_capability_route_promotion_bounded_real_replay_repair_training_run`.
+- Added CLI `scripts/build_model_capability_route_promotion_bounded_real_replay_repair_training_run.py`.
+- Produced a repair checkpoint under `e/810/解释/model-capability-route-promotion-bounded-real-replay-repair-training-run/run`.
+- Recorded `final_step=20`, `final_train_loss=3.9741`, and `final_val_loss=3.9439`.
+- Kept the model-quality claim gated behind the next replay step.
+- Verified with `6 passed` focused repair-training tests.
+- Archived v810 evidence in `e/810` and added the code explanation in `代码讲解记录_模型能力阶段/824-v810-route-promotion-bounded-real-replay-repair-training-run.md`.
 
 ## Latest v809 checkpoint
 
