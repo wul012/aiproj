@@ -1,0 +1,9 @@
+status=pass
+decision=model_capability_route_promotion_release_packet_ready
+failed_count=0
+release_packet_ready=True
+handoff_status=ready_for_route_promotion_review
+active_route_count=1
+boundary=tiny_required_term_pair_probe_only
+model_quality_claim=seed_stable_pair_probe_route_accepted
+evidence_count=3

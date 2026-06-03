@@ -1484,3 +1484,9 @@ e/663/解释/说明.md
 - `e/794/图片`
 - `e/794/解释/说明.md`
 - v794 model capability route promotion gate 的运行截图和解释。
+
+## v795 补充索引
+
+- `e/795/图片`
+- `e/795/解释/说明.md`
+- v795 model capability route promotion release packet 的运行截图和解释。

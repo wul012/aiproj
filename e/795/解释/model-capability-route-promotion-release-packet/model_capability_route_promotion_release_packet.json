@@ -1,0 +1,231 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability route promotion release packet",
+  "generated_at": "2026-06-03T06:07:12Z",
+  "status": "pass",
+  "decision": "model_capability_route_promotion_release_packet_ready",
+  "failed_count": 0,
+  "issues": [],
+  "portfolio_summary": {
+    "route_promotion_portfolio_ready": true,
+    "route_count": 1,
+    "active_route_count": 1,
+    "blocked_route_count": 0,
+    "active_routes": [
+      "objective_level_contrast"
+    ],
+    "boundary": "tiny_required_term_pair_probe_only",
+    "model_quality_claim": "seed_stable_pair_probe_route_accepted",
+    "min_seed_count": 3,
+    "min_pair_full_count": 2,
+    "max_pair_full_strength_spread": 1,
+    "passed_check_count": 7,
+    "failed_check_count": 0
+  },
+  "regression_monitor_summary": {
+    "regression_monitor_passed": true,
+    "baseline_active_route_count": 1,
+    "current_active_route_count": 1,
+    "lost_active_route_count": 0,
+    "gained_active_route_count": 0,
+    "boundary_changed": false,
+    "baseline_boundary": "tiny_required_term_pair_probe_only",
+    "current_boundary": "tiny_required_term_pair_probe_only",
+    "model_quality_claim_changed": false,
+    "baseline_model_quality_claim": "seed_stable_pair_probe_route_accepted",
+    "current_model_quality_claim": "seed_stable_pair_probe_route_accepted",
+    "route_delta_count": 1,
+    "passed_check_count": 7,
+    "failed_check_count": 0
+  },
+  "gate_summary": {
+    "route_promotion_gate_ready": true,
+    "gate_decision": "allow_downstream_model_capability_review",
+    "active_route_count": 1,
+    "active_routes": [
+      "objective_level_contrast"
+    ],
+    "boundary": "tiny_required_term_pair_probe_only",
+    "model_quality_claim": "seed_stable_pair_probe_route_accepted",
+    "passed_check_count": 11,
+    "failed_check_count": 0
+  },
+  "route_cards": [
+    {
+      "name": "objective-level contrast v790",
+      "route_id": "objective_level_contrast",
+      "portfolio_status": "active",
+      "promotion_readiness": "ready",
+      "route_status": "promoted",
+      "history_entry_status": "ready",
+      "boundary": "tiny_required_term_pair_probe_only",
+      "boundary_matches": true,
+      "model_quality_claim": "seed_stable_pair_probe_route_accepted",
+      "seed_count": 3,
+      "min_pair_full_count": 2,
+      "pair_full_strength_spread": 1,
+      "source_history_path": "e\\791\\解释\\model-capability-route-promotion-history\\model_capability_route_promotion_history.json",
+      "source_manifest_path": "e\\790\\解释\\model-capability-required-term-pair-readiness-objective-level-contrast-promotion-manifest\\model_capability_required_term_pair_readiness_objective_level_contrast_promotion_manifest.json",
+      "source_acceptance_review_path": "e\\789\\解释\\model-capability-required-term-pair-readiness-objective-level-contrast-acceptance-review\\model_capability_required_term_pair_readiness_objective_level_contrast_acceptance_review.json",
+      "source_seed_stability_rollup_path": "e\\772\\解释\\model-capability-required-term-pair-readiness-objective-level-contrast-seed-stability-rollup\\model_capability_required_term_pair_readiness_objective_level_contrast_seed_stability_rollup.json"
+    }
+  ],
+  "evidence_rows": [
+    {
+      "kind": "portfolio",
+      "path": "e\\792\\解释\\model-capability-route-promotion-portfolio\\model_capability_route_promotion_portfolio.json",
+      "exists": true
+    },
+    {
+      "kind": "regression_monitor",
+      "path": "e\\793\\解释\\model-capability-route-promotion-regression-monitor\\model_capability_route_promotion_regression_monitor.json",
+      "exists": true
+    },
+    {
+      "kind": "gate",
+      "path": "e\\794\\解释\\model-capability-route-promotion-gate\\model_capability_route_promotion_gate.json",
+      "exists": true
+    }
+  ],
+  "check_rows": [
+    {
+      "id": "portfolio_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "portfolio must pass"
+    },
+    {
+      "id": "regression_monitor_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "regression monitor must pass"
+    },
+    {
+      "id": "gate_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "gate must pass"
+    },
+    {
+      "id": "gate_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "gate summary must be ready"
+    },
+    {
+      "id": "active_routes_present",
+      "status": "pass",
+      "actual": 1,
+      "detail": "release packet needs active routes"
+    },
+    {
+      "id": "no_lost_active_routes",
+      "status": "pass",
+      "actual": 0,
+      "detail": "release packet blocks active-route regressions"
+    },
+    {
+      "id": "boundary_stable",
+      "status": "pass",
+      "actual": false,
+      "detail": "release packet boundary must be stable"
+    },
+    {
+      "id": "claim_not_widened",
+      "status": "pass",
+      "actual": false,
+      "detail": "release packet claim must not widen"
+    },
+    {
+      "id": "evidence_files_exist",
+      "status": "pass",
+      "actual": [
+        {
+          "kind": "portfolio",
+          "path": "e\\792\\解释\\model-capability-route-promotion-portfolio\\model_capability_route_promotion_portfolio.json",
+          "exists": true
+        },
+        {
+          "kind": "regression_monitor",
+          "path": "e\\793\\解释\\model-capability-route-promotion-regression-monitor\\model_capability_route_promotion_regression_monitor.json",
+          "exists": true
+        },
+        {
+          "kind": "gate",
+          "path": "e\\794\\解释\\model-capability-route-promotion-gate\\model_capability_route_promotion_gate.json",
+          "exists": true
+        }
+      ],
+      "detail": "packet evidence source files must exist"
+    }
+  ],
+  "packet": {
+    "packet_ready": true,
+    "handoff_status": "ready_for_route_promotion_review",
+    "active_routes": [
+      "objective_level_contrast"
+    ],
+    "active_route_count": 1,
+    "boundary": "tiny_required_term_pair_probe_only",
+    "model_quality_claim": "seed_stable_pair_probe_route_accepted",
+    "gate_decision": "allow_downstream_model_capability_review",
+    "lost_active_route_count": 0,
+    "boundary_changed": false,
+    "model_quality_claim_changed": false,
+    "route_cards": [
+      {
+        "name": "objective-level contrast v790",
+        "route_id": "objective_level_contrast",
+        "portfolio_status": "active",
+        "promotion_readiness": "ready",
+        "route_status": "promoted",
+        "history_entry_status": "ready",
+        "boundary": "tiny_required_term_pair_probe_only",
+        "boundary_matches": true,
+        "model_quality_claim": "seed_stable_pair_probe_route_accepted",
+        "seed_count": 3,
+        "min_pair_full_count": 2,
+        "pair_full_strength_spread": 1,
+        "source_history_path": "e\\791\\解释\\model-capability-route-promotion-history\\model_capability_route_promotion_history.json",
+        "source_manifest_path": "e\\790\\解释\\model-capability-required-term-pair-readiness-objective-level-contrast-promotion-manifest\\model_capability_required_term_pair_readiness_objective_level_contrast_promotion_manifest.json",
+        "source_acceptance_review_path": "e\\789\\解释\\model-capability-required-term-pair-readiness-objective-level-contrast-acceptance-review\\model_capability_required_term_pair_readiness_objective_level_contrast_acceptance_review.json",
+        "source_seed_stability_rollup_path": "e\\772\\解释\\model-capability-required-term-pair-readiness-objective-level-contrast-seed-stability-rollup\\model_capability_required_term_pair_readiness_objective_level_contrast_seed_stability_rollup.json"
+      }
+    ],
+    "evidence_rows": [
+      {
+        "kind": "portfolio",
+        "path": "e\\792\\解释\\model-capability-route-promotion-portfolio\\model_capability_route_promotion_portfolio.json",
+        "exists": true
+      },
+      {
+        "kind": "regression_monitor",
+        "path": "e\\793\\解释\\model-capability-route-promotion-regression-monitor\\model_capability_route_promotion_regression_monitor.json",
+        "exists": true
+      },
+      {
+        "kind": "gate",
+        "path": "e\\794\\解释\\model-capability-route-promotion-gate\\model_capability_route_promotion_gate.json",
+        "exists": true
+      }
+    ]
+  },
+  "summary": {
+    "release_packet_ready": true,
+    "handoff_status": "ready_for_route_promotion_review",
+    "active_route_count": 1,
+    "active_routes": [
+      "objective_level_contrast"
+    ],
+    "boundary": "tiny_required_term_pair_probe_only",
+    "model_quality_claim": "seed_stable_pair_probe_route_accepted",
+    "evidence_count": 3,
+    "passed_check_count": 9,
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "seed_stable_pair_probe_route_accepted",
+    "reason": "Portfolio, regression, and gate evidence are packaged for bounded route promotion review.",
+    "next_action": "review the packet before adding any broader model-quality claim"
+  }
+}

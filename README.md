@@ -4,7 +4,17 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v794.0.0` adds a gate that combines the route promotion portfolio and regression monitor before downstream review.
+Version `v795.0.0` packages the route promotion portfolio, regression monitor, and gate into a release packet for bounded review.
+
+## Latest v795 checkpoint
+
+- Added `model_capability_route_promotion_release_packet`.
+- Added CLI `scripts/build_model_capability_route_promotion_release_packet.py`.
+- Consumed the real v792 portfolio, v793 regression monitor, and v794 gate.
+- Produced `decision=model_capability_route_promotion_release_packet_ready`.
+- Preserved `handoff_status=ready_for_route_promotion_review` with three source evidence files.
+- Verified with `6 passed` route promotion release packet focused tests.
+- Archived v795 evidence in `e/795` and added the code explanation in `代码讲解记录_模型能力阶段/809-v795-route-promotion-release-packet.md`.
 
 ## Latest v794 checkpoint
 
