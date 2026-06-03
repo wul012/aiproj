@@ -1502,3 +1502,9 @@ e/663/解释/说明.md
 - `e/797/图片`
 - `e/797/解释/说明.md`
 - v797 model capability route promotion review decision 的运行截图和解释。
+
+## v798 补充索引
+
+- `e/798/图片`
+- `e/798/解释/说明.md`
+- v798 model capability route promotion decision index 的运行截图和解释。

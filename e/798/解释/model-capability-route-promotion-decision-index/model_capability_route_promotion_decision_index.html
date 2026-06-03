@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT model capability route promotion decision index</title>
+<style>
+:root{color-scheme:light;--ink:#15202b;--muted:#64717d;--line:#d8dee4;--panel:#f8fafc;--accent:#1d4ed8}
+*{box-sizing:border-box}
+body{margin:0;background:#eef2f7;color:var(--ink);font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1120px;margin:0 auto;padding:28px}
+h1{font-size:30px;margin:0 0 8px;letter-spacing:0}
+h2{font-size:18px;margin:0 0 12px;letter-spacing:0}
+p{color:var(--muted);line-height:1.55;overflow-wrap:anywhere}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:18px 0}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:8px}
+.card{padding:14px}
+.card span{display:block;color:var(--muted);font-size:12px;text-transform:uppercase}
+.card strong{display:block;margin-top:6px;font-size:18px;line-height:1.2;color:var(--accent);overflow-wrap:anywhere}
+.panel{padding:16px;margin:14px 0}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:#334155}
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT model capability route promotion decision index</h1><p>Indexes accepted bounded route promotion decisions for downstream model capability governance.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Decision</span><strong>model_capability_route_promotion_decision_index_ready</strong></div><div class="card"><span>Ready</span><strong>True</strong></div><div class="card"><span>Routes</span><strong>1</strong></div><div class="card"><span>Boundary</span><strong>tiny_required_term_pair_probe_only</strong></div><div class="card"><span>Claim</span><strong>seed_stable_pair_probe_route_accepted</strong></div></section>
+<section class="panel"><h2>Route Entries</h2><div class="table-wrap"><table>
+<thead><tr><th>Route</th><th>Status</th><th>Scope</th><th>Boundary</th><th>Claim</th></tr></thead>
+<tbody><tr><td>objective_level_contrast</td><td>accepted</td><td>bounded_route_promotion_review_only</td><td>tiny_required_term_pair_probe_only</td><td>seed_stable_pair_probe_route_accepted</td></tr></tbody>
+</table></div></section>
+<section class="panel"><h2>Checks</h2><div class="table-wrap"><table>
+<thead><tr><th>Check</th><th>Status</th><th>Actual</th><th>Detail</th></tr></thead>
+<tbody><tr><td>decision_sources_present</td><td>pass</td><td>1</td><td>at least one source decision is required</td></tr><tr><td>accepted_source_present</td><td>pass</td><td>1</td><td>at least one source decision must be accepted</td></tr><tr><td>ready_route_count</td><td>pass</td><td>1</td><td>accepted route count must satisfy the index threshold</td></tr><tr><td>blocked_sources_absent</td><td>pass</td><td>0</td><td>all source decisions must be accepted</td></tr><tr><td>boundary_scoped</td><td>pass</td><td>0</td><td>all indexed routes must keep the required boundary</td></tr><tr><td>review_scope_bounded</td><td>pass</td><td>0</td><td>all indexed routes must keep bounded review scope</td></tr></tbody>
+</table></div></section>
+</main>
+</body>
+</html>

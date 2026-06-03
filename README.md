@@ -4,7 +4,17 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v797.0.0` accepts the bounded route promotion review decision from the v796 release packet review.
+Version `v798.0.0` indexes accepted bounded route promotion decisions for downstream model capability governance.
+
+## Latest v798 checkpoint
+
+- Added `model_capability_route_promotion_decision_index`.
+- Added CLI `scripts/build_model_capability_route_promotion_decision_index.py`.
+- Consumed the real v797 route promotion review decision.
+- Produced `decision=model_capability_route_promotion_decision_index_ready`.
+- Indexed `objective_level_contrast` as an accepted bounded route promotion entry.
+- Verified with `6 passed` route promotion decision index focused tests.
+- Archived v798 evidence in `e/798` and added the code explanation in `代码讲解记录_模型能力阶段/812-v798-route-promotion-decision-index.md`.
 
 ## Latest v797 checkpoint
 

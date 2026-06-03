@@ -986,6 +986,9 @@
 811-v797-route-promotion-review-decision.md
  -> v797 code explanation: accept the bounded route promotion review decision from the v796 release packet review.
 
+812-v798-route-promotion-decision-index.md
+ -> v798 code explanation: index accepted bounded route promotion decisions for downstream model capability governance.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

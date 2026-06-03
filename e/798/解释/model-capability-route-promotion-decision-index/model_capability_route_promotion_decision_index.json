@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability route promotion decision index",
+  "generated_at": "2026-06-03T06:42:24Z",
+  "status": "pass",
+  "decision": "model_capability_route_promotion_decision_index_ready",
+  "failed_count": 0,
+  "issues": [],
+  "check_rows": [
+    {
+      "id": "decision_sources_present",
+      "status": "pass",
+      "actual": 1,
+      "detail": "at least one source decision is required"
+    },
+    {
+      "id": "accepted_source_present",
+      "status": "pass",
+      "actual": 1,
+      "detail": "at least one source decision must be accepted"
+    },
+    {
+      "id": "ready_route_count",
+      "status": "pass",
+      "actual": 1,
+      "detail": "accepted route count must satisfy the index threshold"
+    },
+    {
+      "id": "blocked_sources_absent",
+      "status": "pass",
+      "actual": 0,
+      "detail": "all source decisions must be accepted"
+    },
+    {
+      "id": "boundary_scoped",
+      "status": "pass",
+      "actual": 0,
+      "detail": "all indexed routes must keep the required boundary"
+    },
+    {
+      "id": "review_scope_bounded",
+      "status": "pass",
+      "actual": 0,
+      "detail": "all indexed routes must keep bounded review scope"
+    }
+  ],
+  "sources": [
+    {
+      "index": 0,
+      "source_decision_path": "e\\797\\解释\\model-capability-route-promotion-review-decision\\model_capability_route_promotion_review_decision.json",
+      "source_status": "pass",
+      "source_decision": "model_capability_route_promotion_final_review_accepted",
+      "source_failed_count": 0,
+      "final_decision": "accept_bounded_route_promotion",
+      "accepted": true,
+      "review_scope": "bounded_route_promotion_review_only",
+      "boundary": "tiny_required_term_pair_probe_only",
+      "model_quality_claim": "seed_stable_pair_probe_route_accepted",
+      "active_route_count": 1,
+      "source_check_failed_count": 0,
+      "route_entries": [
+        {
+          "route_id": "objective_level_contrast",
+          "entry_status": "accepted",
+          "source_index": 0,
+          "source_decision_path": "e\\797\\解释\\model-capability-route-promotion-review-decision\\model_capability_route_promotion_review_decision.json",
+          "review_scope": "bounded_route_promotion_review_only",
+          "boundary": "tiny_required_term_pair_probe_only",
+          "model_quality_claim": "seed_stable_pair_probe_route_accepted",
+          "next_step": "index_bounded_route_promotion_decision"
+        }
+      ]
+    }
+  ],
+  "entries": [
+    {
+      "route_id": "objective_level_contrast",
+      "entry_status": "accepted",
+      "source_index": 0,
+      "source_decision_path": "e\\797\\解释\\model-capability-route-promotion-review-decision\\model_capability_route_promotion_review_decision.json",
+      "review_scope": "bounded_route_promotion_review_only",
+      "boundary": "tiny_required_term_pair_probe_only",
+      "model_quality_claim": "seed_stable_pair_probe_route_accepted",
+      "next_step": "index_bounded_route_promotion_decision"
+    }
+  ],
+  "summary": {
+    "decision_index_ready": true,
+    "source_decision_count": 1,
+    "accepted_source_count": 1,
+    "route_entry_count": 1,
+    "accepted_route_count": 1,
+    "min_ready_routes": 1,
+    "route_ids": [
+      "objective_level_contrast"
+    ],
+    "route_id_count": 1,
+    "required_boundary": "tiny_required_term_pair_probe_only",
+    "boundary": "tiny_required_term_pair_probe_only",
+    "model_quality_claims": [
+      "seed_stable_pair_probe_route_accepted"
+    ],
+    "model_quality_claim": "seed_stable_pair_probe_route_accepted",
+    "passed_check_count": 6,
+    "failed_check_count": 0,
+    "source_decision_paths": [
+      "e\\797\\解释\\model-capability-route-promotion-review-decision\\model_capability_route_promotion_review_decision.json"
+    ]
+  },
+  "recommendations": [
+    "Use the accepted bounded route promotion decision index for downstream route consumers: objective_level_contrast.",
+    "Keep this index scoped to tiny required-term pair probes until a stronger model-quality evaluation exists."
+  ]
+}
