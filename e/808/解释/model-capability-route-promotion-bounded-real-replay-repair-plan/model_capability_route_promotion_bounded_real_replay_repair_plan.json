@@ -1,0 +1,148 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability route promotion bounded real replay repair plan",
+  "generated_at": "2026-06-03T08:07:05Z",
+  "status": "pass",
+  "decision": "model_capability_route_promotion_bounded_real_replay_repair_plan_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_real_replay_review": "D:\\aiproj\\e\\807\\解释\\model-capability-route-promotion-bounded-real-replay-review\\model_capability_route_promotion_bounded_real_replay_review.json",
+  "source_review_summary": {
+    "bounded_real_replay_review_ready": true,
+    "promotion_ready": false,
+    "repair_review_ready": true,
+    "case_count": 5,
+    "passed_case_count": 2,
+    "failed_case_count": 3,
+    "pass_rate": 0.4,
+    "diagnosis_counts": {
+      "case_passed": 2,
+      "no_required_terms_generated_with_unknown_token_surface": 1,
+      "partial_required_terms_generated_with_unknown_token_surface": 2
+    },
+    "unknown_token_surface_count": 5,
+    "next_step": "build_bounded_real_replay_repair_plan",
+    "failed_check_count": 0
+  },
+  "repair_tasks": [
+    {
+      "task_id": "repair-objective-answer-direct",
+      "case_id": "objective-answer-direct",
+      "repair_type": "missing_term_retention_repair",
+      "diagnosis": "partial_required_terms_generated_with_unknown_token_surface",
+      "hit_terms": [
+        "loss"
+      ],
+      "missed_terms": [
+        "fixed"
+      ],
+      "surface_probe": "unknown_token_surface_probe",
+      "training_focus": "preserve observed hit terms while adding missed required terms",
+      "required_success_condition": "continuation_contains_fixed_and_loss",
+      "recommended_action": "target_missing_terms_without_forgetting_hits"
+    },
+    {
+      "task_id": "repair-objective-answer-role",
+      "case_id": "objective-answer-role",
+      "repair_type": "prompt_to_required_terms_bridge_repair",
+      "diagnosis": "no_required_terms_generated_with_unknown_token_surface",
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "surface_probe": "unknown_token_surface_probe",
+      "training_focus": "teach the prompt surface to emit both required terms directly",
+      "required_success_condition": "continuation_contains_fixed_and_loss",
+      "recommended_action": "repair_prompt_to_required_term_bridge"
+    },
+    {
+      "task_id": "repair-objective-answer-check",
+      "case_id": "objective-answer-check",
+      "repair_type": "missing_term_retention_repair",
+      "diagnosis": "partial_required_terms_generated_with_unknown_token_surface",
+      "hit_terms": [
+        "loss"
+      ],
+      "missed_terms": [
+        "fixed"
+      ],
+      "surface_probe": "unknown_token_surface_probe",
+      "training_focus": "preserve observed hit terms while adding missed required terms",
+      "required_success_condition": "continuation_contains_fixed_and_loss",
+      "recommended_action": "target_missing_terms_without_forgetting_hits"
+    }
+  ],
+  "check_rows": [
+    {
+      "id": "review_status_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "source replay review must pass"
+    },
+    {
+      "id": "review_needs_repair",
+      "status": "pass",
+      "actual": false,
+      "detail": "repair plan is only needed when promotion is not ready"
+    },
+    {
+      "id": "repair_review_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "source review must be ready for repair planning"
+    },
+    {
+      "id": "case_reviews_present",
+      "status": "pass",
+      "actual": 5,
+      "detail": "repair plan must inspect case reviews"
+    },
+    {
+      "id": "repair_tasks_present",
+      "status": "pass",
+      "actual": 3,
+      "detail": "repair plan must include failed-case tasks"
+    },
+    {
+      "id": "repair_task_count_matches_failed_cases",
+      "status": "pass",
+      "actual": {
+        "tasks": 3,
+        "failed_cases": 3
+      },
+      "detail": "repair tasks must match failed replay cases"
+    }
+  ],
+  "repair_plan": {
+    "ready": true,
+    "task_count": 3,
+    "source_pass_rate": 0.4,
+    "target_pass_rate": 1.0,
+    "required_terms": [
+      "fixed",
+      "loss"
+    ],
+    "non_goals": [
+      "do_not_claim_general_llm_quality",
+      "do_not_expand_beyond_bounded_fixed_loss_route",
+      "do_not_promote_until_real_replay_passes_all_cases"
+    ],
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_real_replay_repair_seed",
+    "next_step": "build_bounded_real_replay_repair_seed"
+  },
+  "summary": {
+    "bounded_real_replay_repair_plan_ready": true,
+    "task_count": 3,
+    "source_pass_rate": 0.4,
+    "target_pass_rate": 1.0,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_real_replay_repair_seed",
+    "next_step": "build_bounded_real_replay_repair_seed",
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "repair_plan_only",
+    "reason": "The plan translates missed bounded replay cases into targeted repair tasks; it does not prove model improvement.",
+    "next_action": "build_bounded_real_replay_repair_seed"
+  }
+}

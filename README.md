@@ -4,7 +4,18 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v807.0.0` reviews the bounded real replay result and routes partial model quality to a repair plan.
+Version `v808.0.0` turns bounded real replay misses into targeted repair-plan tasks.
+
+## Latest v808 checkpoint
+
+- Added `model_capability_route_promotion_bounded_real_replay_repair_plan`.
+- Added CLI `scripts/build_model_capability_route_promotion_bounded_real_replay_repair_plan.py`.
+- Consumed the real v807 bounded real replay review.
+- Produced `decision=model_capability_route_promotion_bounded_real_replay_repair_plan_ready`.
+- Converted 3 failed replay cases into 3 repair tasks.
+- Preserved `source_pass_rate=0.4` and set bounded `target_pass_rate=1.0`.
+- Verified with `7 passed` focused repair-plan tests.
+- Archived v808 evidence in `e/808` and added the code explanation in `代码讲解记录_模型能力阶段/822-v808-route-promotion-bounded-real-replay-repair-plan.md`.
 
 ## Latest v807 checkpoint
 

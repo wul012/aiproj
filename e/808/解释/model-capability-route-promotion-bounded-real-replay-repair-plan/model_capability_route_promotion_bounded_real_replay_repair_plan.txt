@@ -1,0 +1,9 @@
+status=pass
+decision=model_capability_route_promotion_bounded_real_replay_repair_plan_ready
+failed_count=0
+bounded_real_replay_repair_plan_ready=True
+task_count=3
+source_pass_rate=0.4
+target_pass_rate=1.0
+proposed_next_artifact=model_capability_route_promotion_bounded_real_replay_repair_seed
+next_step=build_bounded_real_replay_repair_seed
