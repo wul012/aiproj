@@ -1034,6 +1034,9 @@
 827-v813-route-promotion-bounded-real-replay-repair-seed-revision.md
  -> v813 code explanation: build a revised repair seed with original signal carry-forward and baseline preservation examples.
 
+828-v814-route-promotion-bounded-real-replay-repair-training-run-revision.md
+ -> v814 code explanation: train a revised bounded repair checkpoint and record training evidence while keeping model-quality claims gated behind replay.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

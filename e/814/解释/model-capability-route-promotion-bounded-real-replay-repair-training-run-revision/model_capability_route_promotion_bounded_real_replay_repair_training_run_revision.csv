@@ -1,0 +1,8 @@
+key,exists,size,path
+checkpoint,True,387982,e\814\解释\model-capability-route-promotion-bounded-real-replay-repair-training-run-revision\run\checkpoint.pt
+tokenizer,True,886,e\814\解释\model-capability-route-promotion-bounded-real-replay-repair-training-run-revision\run\tokenizer.json
+metrics,True,440,e\814\解释\model-capability-route-promotion-bounded-real-replay-repair-training-run-revision\run\metrics.jsonl
+train_config,True,1246,e\814\解释\model-capability-route-promotion-bounded-real-replay-repair-training-run-revision\run\train_config.json
+run_manifest,True,11355,e\814\解释\model-capability-route-promotion-bounded-real-replay-repair-training-run-revision\run\run_manifest.json
+sample,True,246,e\814\解释\model-capability-route-promotion-bounded-real-replay-repair-training-run-revision\run\sample.txt
+prepared_corpus,True,2045,e\814\解释\model-capability-route-promotion-bounded-real-replay-repair-training-run-revision\run\prepared_corpus.txt

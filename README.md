@@ -4,7 +4,19 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v813.0.0` builds a revised bounded repair seed from the v812 strategy revision, carrying original repair signal and adding baseline preservation examples.
+Version `v814.0.0` trains a revised bounded repair checkpoint from the v813 seed revision and records training-run evidence while gating model-quality claims behind replay.
+
+## Latest v814 checkpoint
+
+- Added `model_capability_route_promotion_bounded_real_replay_repair_training_run_revision`.
+- Added CLI `scripts/build_model_capability_route_promotion_bounded_real_replay_repair_training_run_revision.py`.
+- Fixed the training-evidence CLI so `--force` preserves nested `run/` directories.
+- Trained from the v813 revised corpus with 18 examples and 2 baseline-preservation examples.
+- Produced a real checkpoint under `e/814/解释/model-capability-route-promotion-bounded-real-replay-repair-training-run-revision/run`.
+- Recorded `final_step=25`, `final_train_loss=3.9683`, and `final_val_loss=3.9442`.
+- Kept the model-quality claim gated behind the next replay comparison.
+- Verified with `4 passed` focused training-revision tests.
+- Archived v814 evidence in `e/814` and added the code explanation in `代码讲解记录_模型能力阶段/828-v814-route-promotion-bounded-real-replay-repair-training-run-revision.md`.
 
 ## Latest v813 checkpoint
 

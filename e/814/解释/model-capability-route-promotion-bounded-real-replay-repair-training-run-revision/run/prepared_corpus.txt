@@ -1,0 +1,54 @@
+任务：只输出两个英文关键词，表示本轮目标答案。
+答案：fixed loss
+
+任务：只输出两个英文关键词，表示本轮目标答案。
+答案：
+Self-check: include both required terms exactly once.fixed loss
+
+目标：给出 paired required terms 的两个角色词。
+输出：fixed loss
+
+目标：给出 paired required terms 的两个角色词。
+输出：
+Self-check: include both required terms exactly once.fixed loss
+
+自检：本题需要同时出现 fixed 与 loss。最终答案：fixed loss
+
+自检：本题需要同时出现 fixed 与 loss。最终答案：
+Self-check: include both required terms exactly once.fixed loss
+
+Repair objective-answer-check: include missing terms fixed, loss and answer directly.
+Answer:fixed loss
+
+Self-check objective-answer-check: the continuation is valid only if it contains fixed and loss.
+Answer:fixed loss
+
+Baseline preservation for objective-answer-contrast: output the two route terms exactly.
+Answer:fixed loss
+
+Repair objective-answer-contrast: include missing terms fixed, loss and answer directly.
+Answer:fixed loss
+
+Self-check objective-answer-contrast: the continuation is valid only if it contains fixed and loss.
+Answer:fixed loss
+
+Repair objective-answer-direct: include missing terms fixed, loss and answer directly.
+Answer:fixed loss
+
+Self-check objective-answer-direct: the continuation is valid only if it contains fixed and loss.
+Answer:fixed loss
+
+Baseline preservation for objective-answer-jsonish: output the two route terms exactly.
+Answer:fixed loss
+
+Repair objective-answer-jsonish: include missing terms fixed, loss and answer directly.
+Answer:fixed loss
+
+Self-check objective-answer-jsonish: the continuation is valid only if it contains fixed and loss.
+Answer:fixed loss
+
+Repair objective-answer-role: include missing terms fixed, loss and answer directly.
+Answer:fixed loss
+
+Self-check objective-answer-role: the continuation is valid only if it contains fixed and loss.
+Answer:fixed loss

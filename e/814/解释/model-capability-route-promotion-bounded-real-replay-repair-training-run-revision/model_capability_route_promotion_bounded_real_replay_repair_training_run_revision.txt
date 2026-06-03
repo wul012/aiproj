@@ -1,0 +1,10 @@
+status=pass
+decision=model_capability_route_promotion_bounded_real_replay_repair_training_run_revision_ready
+failed_count=0
+training_revision_ready=True
+final_step=25
+final_train_loss=3.968329429626465
+final_val_loss=3.9442343711853027
+seed_revision_example_count=18
+baseline_preservation_example_count=2
+next_step=run_repair_checkpoint_revision_bounded_replay
