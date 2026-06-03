@@ -38,6 +38,9 @@
 840-v826-route-promotion-bounded-real-replay-decoder-anchor-checkpoint-comparison.md
  -> v826 code explanation: replay the decoder-anchor checkpoint and compare it with baseline and prompt-aligned results before any capability claim.
 
+841-v827-route-promotion-bounded-real-replay-decoder-anchor-failure-diagnostic.md
+ -> v827 code explanation: diagnose why decoder-anchor training still produced zero-hit bounded replay before further training.
+
 487-v473-baseline-candidate-capability-delta.md
  -> v473 code explanation: carry real tiny training loss and generation-quality deltas into the baseline-candidate eval loop.
 

@@ -1,0 +1,6 @@
+case_id,case_pass,prompt_in_corpus,zero_hit,fragment_like_generation,missed_terms,diagnosis,recommended_action
+objective-answer-direct,False,True,True,True,"[""fixed"", ""loss""]",character_fragmentation_without_term_anchoring,audit_decoder_anchor_distribution_and_sampling
+objective-answer-role,False,True,True,True,"[""fixed"", ""loss""]",character_fragmentation_without_term_anchoring,audit_decoder_anchor_distribution_and_sampling
+objective-answer-contrast,False,True,True,True,"[""fixed"", ""loss""]",character_fragmentation_without_term_anchoring,audit_decoder_anchor_distribution_and_sampling
+objective-answer-jsonish,False,True,True,True,"[""fixed"", ""loss""]",character_fragmentation_without_term_anchoring,audit_decoder_anchor_distribution_and_sampling
+objective-answer-check,False,True,True,True,"[""fixed"", ""loss""]",character_fragmentation_without_term_anchoring,audit_decoder_anchor_distribution_and_sampling

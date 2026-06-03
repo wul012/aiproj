@@ -4,7 +4,19 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v826.0.0` replays the v825 decoder-anchor checkpoint and compares it against the v806 baseline and v819 prompt-aligned checkpoint.
+Version `v827.0.0` diagnoses why the v825 decoder-anchor checkpoint still failed all bounded replay cases before any further training.
+
+## Latest v827 checkpoint
+
+- Added `model_capability_route_promotion_bounded_real_replay_decoder_anchor_failure_diagnostic`.
+- Added CLI `scripts/diagnose_model_capability_route_promotion_bounded_real_replay_decoder_anchor_failure.py`.
+- Consumed v826 decoder-anchor replay/comparison, v824 seed revision, v825 training evidence, and the v824 corpus.
+- Produced `failed_case_count=5`, `zero_hit_case_count=5`, `fragment_like_case_count=5`, and `root_cause_count=4`.
+- Confirmed decoder-anchor bridge/direct examples are present, but replay still emits no required terms.
+- Kept the model-quality claim as `not_improved`.
+- Routed the next step to `audit_decoder_anchor_training_distribution_before_more_training`.
+- Verified with `3 passed` focused decoder anchor failure diagnostic tests.
+- Archived v827 evidence in `e/827` and added the code explanation in `代码讲解记录_模型能力阶段/841-v827-route-promotion-bounded-real-replay-decoder-anchor-failure-diagnostic.md`.
 
 ## Latest v826 checkpoint
 

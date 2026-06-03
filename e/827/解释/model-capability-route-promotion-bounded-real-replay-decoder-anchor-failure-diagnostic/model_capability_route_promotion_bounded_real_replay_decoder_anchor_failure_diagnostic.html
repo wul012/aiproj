@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT model capability route promotion bounded real replay decoder anchor failure diagnostic</title>
+<style>
+:root{color-scheme:light;--ink:#17212b;--muted:#667381;--line:#d8dee5;--panel:#f7f9fb;--accent:#7c2d12}
+*{box-sizing:border-box}
+body{margin:0;background:#f0f3f7;color:var(--ink);font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1240px;margin:0 auto;padding:28px}
+h1{font-size:30px;margin:0 0 8px;letter-spacing:0}
+h2{font-size:18px;margin:0 0 12px;letter-spacing:0}
+p{color:var(--muted);line-height:1.55;overflow-wrap:anywhere}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:10px;margin:18px 0}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:8px}
+.card{padding:14px}
+.card span{display:block;color:var(--muted);font-size:12px;text-transform:uppercase}
+.card strong{display:block;margin-top:6px;font-size:18px;line-height:1.2;color:var(--accent);overflow-wrap:anywhere}
+.panel{padding:16px;margin:14px 0}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:#334155}
+td{overflow-wrap:anywhere}
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT model capability route promotion bounded real replay decoder anchor failure diagnostic</h1><p>Diagnoses why decoder-anchor-informed training still produced zero required-term hits in bounded replay.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Decision</span><strong>model_capability_route_promotion_bounded_real_replay_decoder_anchor_failure_diagnostic_ready</strong></div><div class="card"><span>Failed</span><strong>5/5</strong></div><div class="card"><span>Zero hit</span><strong>5</strong></div><div class="card"><span>Fragments</span><strong>5</strong></div><div class="card"><span>Causes</span><strong>4</strong></div><div class="card"><span>Next</span><strong>audit_decoder_anchor_training_distribution_before_more_training</strong></div></section>
+<section class="panel"><h2>Case Diagnostics</h2><div class="table-wrap"><table>
+<thead><tr><th>Case</th><th>Pass</th><th>Prompt in corpus</th><th>Zero hit</th><th>Fragment</th><th>Missed</th><th>Diagnosis</th><th>Action</th></tr></thead>
+<tbody><tr><td>objective-answer-direct</td><td>False</td><td>True</td><td>True</td><td>True</td><td>fixed,loss</td><td>character_fragmentation_without_term_anchoring</td><td>audit_decoder_anchor_distribution_and_sampling</td></tr><tr><td>objective-answer-role</td><td>False</td><td>True</td><td>True</td><td>True</td><td>fixed,loss</td><td>character_fragmentation_without_term_anchoring</td><td>audit_decoder_anchor_distribution_and_sampling</td></tr><tr><td>objective-answer-contrast</td><td>False</td><td>True</td><td>True</td><td>True</td><td>fixed,loss</td><td>character_fragmentation_without_term_anchoring</td><td>audit_decoder_anchor_distribution_and_sampling</td></tr><tr><td>objective-answer-jsonish</td><td>False</td><td>True</td><td>True</td><td>True</td><td>fixed,loss</td><td>character_fragmentation_without_term_anchoring</td><td>audit_decoder_anchor_distribution_and_sampling</td></tr><tr><td>objective-answer-check</td><td>False</td><td>True</td><td>True</td><td>True</td><td>fixed,loss</td><td>character_fragmentation_without_term_anchoring</td><td>audit_decoder_anchor_distribution_and_sampling</td></tr></tbody>
+</table></div></section>
+<section class="panel"><h2>Root Causes</h2><div class="table-wrap"><table>
+<thead><tr><th>Cause</th><th>Severity</th><th>Evidence</th><th>Detail</th></tr></thead>
+<tbody><tr><td>decoder_anchor_examples_present_but_replay_zero_hit</td><td>high</td><td>{&#x27;bridge&#x27;: 15, &#x27;direct&#x27;: 5}</td><td>The corpus contains decoder-anchor bridge/direct examples, but replay still misses fixed/loss.</td></tr><tr><td>zero_required_term_hits</td><td>high</td><td>5</td><td>Decoder-anchor checkpoint continuations did not contain any expected required terms.</td></tr><tr><td>character_fragmentation_dominates_generation</td><td>medium</td><td>5</td><td>Continuations contain scattered character fragments instead of complete required terms.</td></tr><tr><td>loss_reduction_did_not_transfer_to_bounded_replay</td><td>medium</td><td>4.262609481811523</td><td>The decoder-anchor run trained successfully, but replay still failed against baseline.</td></tr></tbody>
+</table></div></section>
+</main>
+</body>
+</html>

@@ -55,6 +55,10 @@ e/825/解释/说明.md
 e/826/图片
 e/826/解释/说明.md
  -> v826 bounded replay decoder anchor checkpoint comparison 的运行截图和解释
+
+e/827/图片
+e/827/解释/说明.md
+ -> v827 bounded replay decoder anchor failure diagnostic 的运行截图和解释
 ```
 
 ```text

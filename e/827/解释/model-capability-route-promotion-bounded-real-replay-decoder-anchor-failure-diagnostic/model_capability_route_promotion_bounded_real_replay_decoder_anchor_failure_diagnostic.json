@@ -1,0 +1,322 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability route promotion bounded real replay decoder anchor failure diagnostic",
+  "generated_at": "2026-06-03T12:58:42Z",
+  "status": "pass",
+  "decision": "model_capability_route_promotion_bounded_real_replay_decoder_anchor_failure_diagnostic_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_decoder_anchor_replay": "e\\826\\解释\\model-capability-route-promotion-bounded-real-replay-decoder-anchor-checkpoint-comparison\\decoder-anchor-replay\\model_capability_route_promotion_bounded_real_replay.json",
+  "source_decoder_anchor_comparison": "e\\826\\解释\\model-capability-route-promotion-bounded-real-replay-decoder-anchor-checkpoint-comparison\\model_capability_route_promotion_bounded_real_replay_decoder_anchor_checkpoint_comparison.json",
+  "source_decoder_anchor_seed_revision": "e\\824\\解释\\model-capability-route-promotion-bounded-real-replay-decoder-anchor-seed-revision\\model_capability_route_promotion_bounded_real_replay_decoder_anchor_seed_revision.json",
+  "source_decoder_anchor_training_run": "e\\825\\解释\\model-capability-route-promotion-bounded-real-replay-decoder-anchor-training-run\\model_capability_route_promotion_bounded_real_replay_decoder_anchor_training_run.json",
+  "source_corpus": "e\\824\\解释\\model-capability-route-promotion-bounded-real-replay-decoder-anchor-seed-revision\\model_capability_route_promotion_bounded_real_replay_decoder_anchor_seed_revision_corpus.txt",
+  "source_summaries": {
+    "replay": {
+      "bounded_real_replay_executed": true,
+      "model_route_quality_ready": false,
+      "case_count": 5,
+      "executed_case_count": 5,
+      "passed_case_count": 0,
+      "failed_case_count": 5,
+      "pass_rate": 0.0,
+      "next_step": "review_bounded_route_promotion_real_replay",
+      "failed_check_count": 0
+    },
+    "comparison": {
+      "bounded_decoder_anchor_checkpoint_comparison_ready": true,
+      "decoder_anchor_checkpoint_improved_over_baseline": false,
+      "decoder_anchor_checkpoint_recovered_over_prompt": false,
+      "decoder_anchor_checkpoint_regressed_from_baseline": true,
+      "baseline_passed_case_count": 2,
+      "prompt_aligned_passed_case_count": 0,
+      "decoder_anchor_passed_case_count": 0,
+      "decoder_vs_baseline_passed_case_delta": -2,
+      "decoder_vs_prompt_passed_case_delta": 0,
+      "baseline_pass_rate": 0.4,
+      "prompt_aligned_pass_rate": 0.0,
+      "decoder_anchor_pass_rate": 0.0,
+      "decoder_vs_baseline_pass_rate_delta": -0.4,
+      "decoder_vs_prompt_pass_rate_delta": 0.0,
+      "promotion_ready": false,
+      "case_count": 5,
+      "next_step": "diagnose_decoder_anchor_checkpoint_replay_failure_before_more_training",
+      "failed_check_count": 0
+    },
+    "seed_revision": {
+      "decoder_anchor_seed_revision_ready": true,
+      "original_example_count": 28,
+      "added_example_count": 20,
+      "example_count": 48,
+      "case_count": 5,
+      "bridge_example_count": 15,
+      "unanchored_direct_example_count": 5,
+      "proposed_next_artifact": "model_capability_route_promotion_bounded_real_replay_decoder_anchor_training_run",
+      "next_step": "train_decoder_anchor_seed_revision",
+      "failed_check_count": 0
+    },
+    "training_run": {
+      "decoder_anchor_training_ready": true,
+      "artifact_count": 7,
+      "metric_record_count": 5,
+      "final_step": 35,
+      "final_train_loss": 4.207976341247559,
+      "final_val_loss": 4.262609481811523,
+      "train_loss_delta": -0.315408,
+      "val_loss_delta": -0.270692,
+      "decoder_anchor_example_count": 48,
+      "bridge_example_count": 15,
+      "unanchored_direct_example_count": 5,
+      "proposed_next_artifact": "model_capability_route_promotion_bounded_real_replay_decoder_anchor_checkpoint_replay",
+      "next_step": "run_decoder_anchor_checkpoint_bounded_replay",
+      "failed_check_count": 0
+    }
+  },
+  "case_diagnostics": [
+    {
+      "case_id": "objective-answer-direct",
+      "case_pass": false,
+      "prompt_in_seed": true,
+      "prompt_in_corpus": true,
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "zero_hit": true,
+      "fragment_like_generation": true,
+      "term_seed_count": {
+        "fixed": 71,
+        "loss": 71
+      },
+      "term_corpus_count": {
+        "fixed": 71,
+        "loss": 71
+      },
+      "continuation_preview": "。 rd    sillt iiti\nssdee",
+      "diagnosis": "character_fragmentation_without_term_anchoring",
+      "recommended_action": "audit_decoder_anchor_distribution_and_sampling"
+    },
+    {
+      "case_id": "objective-answer-role",
+      "case_pass": false,
+      "prompt_in_seed": true,
+      "prompt_in_corpus": true,
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "zero_hit": true,
+      "fragment_like_generation": true,
+      "term_seed_count": {
+        "fixed": 71,
+        "loss": 71
+      },
+      "term_corpus_count": {
+        "fixed": 71,
+        "loss": 71
+      },
+      "continuation_preview": "aired required terms 的两个角色词。\n输出：\n  i\ni  dl l  do\n  xd ff",
+      "diagnosis": "character_fragmentation_without_term_anchoring",
+      "recommended_action": "audit_decoder_anchor_distribution_and_sampling"
+    },
+    {
+      "case_id": "objective-answer-contrast",
+      "case_pass": false,
+      "prompt_in_seed": true,
+      "prompt_in_corpus": true,
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "zero_hit": true,
+      "fragment_like_generation": true,
+      "term_seed_count": {
+        "fixed": 71,
+        "loss": 71
+      },
+      "term_corpus_count": {
+        "fixed": 71,
+        "loss": 71
+      },
+      "continuation_preview": "fiti     t\n\nt   dltiffdd",
+      "diagnosis": "character_fragmentation_without_term_anchoring",
+      "recommended_action": "audit_decoder_anchor_distribution_and_sampling"
+    },
+    {
+      "case_id": "objective-answer-jsonish",
+      "case_pass": false,
+      "prompt_in_seed": true,
+      "prompt_in_corpus": true,
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "zero_hit": true,
+      "fragment_like_generation": true,
+      "term_seed_count": {
+        "fixed": 71,
+        "loss": 71
+      },
+      "term_corpus_count": {
+        "fixed": 71,
+        "loss": 71
+      },
+      "continuation_preview": "wer_terms，包含两个英文词。\nanswer_terms:ftl   td stid\n etx dft  ",
+      "diagnosis": "character_fragmentation_without_term_anchoring",
+      "recommended_action": "audit_decoder_anchor_distribution_and_sampling"
+    },
+    {
+      "case_id": "objective-answer-check",
+      "case_pass": false,
+      "prompt_in_seed": true,
+      "prompt_in_corpus": true,
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "zero_hit": true,
+      "fragment_like_generation": true,
+      "term_seed_count": {
+        "fixed": 71,
+        "loss": 71
+      },
+      "term_corpus_count": {
+        "fixed": 71,
+        "loss": 71
+      },
+      "continuation_preview": "fid   \n\n   \n e diee\nfe  ",
+      "diagnosis": "character_fragmentation_without_term_anchoring",
+      "recommended_action": "audit_decoder_anchor_distribution_and_sampling"
+    }
+  ],
+  "root_causes": [
+    {
+      "cause_id": "decoder_anchor_examples_present_but_replay_zero_hit",
+      "severity": "high",
+      "evidence": {
+        "bridge": 15,
+        "direct": 5
+      },
+      "detail": "The corpus contains decoder-anchor bridge/direct examples, but replay still misses fixed/loss."
+    },
+    {
+      "cause_id": "zero_required_term_hits",
+      "severity": "high",
+      "evidence": 5,
+      "detail": "Decoder-anchor checkpoint continuations did not contain any expected required terms."
+    },
+    {
+      "cause_id": "character_fragmentation_dominates_generation",
+      "severity": "medium",
+      "evidence": 5,
+      "detail": "Continuations contain scattered character fragments instead of complete required terms."
+    },
+    {
+      "cause_id": "loss_reduction_did_not_transfer_to_bounded_replay",
+      "severity": "medium",
+      "evidence": 4.262609481811523,
+      "detail": "The decoder-anchor run trained successfully, but replay still failed against baseline."
+    }
+  ],
+  "check_rows": [
+    {
+      "id": "decoder_anchor_replay_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "decoder anchor replay execution must pass"
+    },
+    {
+      "id": "decoder_anchor_comparison_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "decoder anchor comparison must pass"
+    },
+    {
+      "id": "promotion_blocked",
+      "status": "pass",
+      "actual": false,
+      "detail": "diagnostic should run only on blocked promotion evidence"
+    },
+    {
+      "id": "decoder_anchor_seed_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "decoder anchor seed revision must pass"
+    },
+    {
+      "id": "decoder_anchor_training_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "decoder anchor training run must pass"
+    },
+    {
+      "id": "corpus_present",
+      "status": "pass",
+      "actual": 3431,
+      "detail": "decoder anchor corpus must be readable"
+    },
+    {
+      "id": "case_diagnostics_present",
+      "status": "pass",
+      "actual": 5,
+      "detail": "diagnostic must inspect replay cases"
+    }
+  ],
+  "diagnostic": {
+    "ready": true,
+    "case_count": 5,
+    "failed_case_count": 5,
+    "zero_hit_case_count": 5,
+    "fragment_like_case_count": 5,
+    "prompt_in_corpus_count": 5,
+    "decoder_vs_baseline_pass_rate_delta": -0.4,
+    "decoder_vs_prompt_pass_rate_delta": 0.0,
+    "root_cause_count": 4,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_real_replay_decoder_anchor_distribution_audit",
+    "next_step": "audit_decoder_anchor_training_distribution_before_more_training"
+  },
+  "summary": {
+    "decoder_anchor_failure_diagnostic_ready": true,
+    "case_count": 5,
+    "failed_case_count": 5,
+    "zero_hit_case_count": 5,
+    "fragment_like_case_count": 5,
+    "prompt_in_corpus_count": 5,
+    "decoder_vs_baseline_pass_rate_delta": -0.4,
+    "decoder_vs_prompt_pass_rate_delta": 0.0,
+    "root_cause_count": 4,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_real_replay_decoder_anchor_distribution_audit",
+    "next_step": "audit_decoder_anchor_training_distribution_before_more_training",
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "not_improved",
+    "reason": "Decoder-anchor examples are present, but replay output still fails to emit required terms.",
+    "next_action": "audit_decoder_anchor_training_distribution_before_more_training"
+  }
+}
