@@ -4,7 +4,19 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v844.0.0` reviews the bounded-objective decoder anchor policy replay and closes the assisted-anchor path as a capability route.
+Version `v845.0.0` turns the closed decoder-anchor branch into a bounded-objective unassisted repair plan.
+
+## Latest v845 checkpoint
+
+- Added `model_capability_route_promotion_bounded_objective_unassisted_repair_plan`.
+- Added CLI `scripts/build_model_capability_route_promotion_bounded_objective_unassisted_repair_plan.py`.
+- Consumed the real v844 decoder anchor policy review from `e/844`.
+- Confirmed the assisted-anchor path is closed and the selected track is `unassisted_objective_repair`.
+- Produced `work_item_count=5`, `acceptance_gate_count=4`, and `blocked_action_count=3`.
+- Kept `promotion_ready=False`, `new_training_allowed=False`, and model-quality claim `plan_only`.
+- Routed the next artifact to `model_capability_route_promotion_bounded_objective_unassisted_repair_seed`.
+- Verified with `3 passed` focused bounded objective unassisted repair plan tests.
+- Archived v845 evidence in `e/845` and added the code explanation in `代码讲解记录_模型能力阶段/859-v845-route-promotion-bounded-objective-unassisted-repair-plan.md`.
 
 ## Latest v844 checkpoint
 

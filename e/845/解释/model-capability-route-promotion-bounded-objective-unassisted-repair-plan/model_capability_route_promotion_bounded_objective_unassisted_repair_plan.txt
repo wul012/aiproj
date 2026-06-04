@@ -1,0 +1,9 @@
+status=pass
+decision=model_capability_route_promotion_bounded_objective_unassisted_repair_plan_ready
+bounded_objective_unassisted_repair_plan_ready=True
+route=bounded_objective_unassisted_repair
+work_item_count=5
+acceptance_gate_count=4
+promotion_ready=False
+model_quality_claim=plan_only
+next_action=build_bounded_objective_unassisted_repair_seed

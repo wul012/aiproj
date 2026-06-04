@@ -92,6 +92,9 @@
 858-v844-route-promotion-bounded-objective-decoder-anchor-policy-review.md
  -> v844 code explanation: review the assisted-only policy replay and close decoder anchors as a capability route.
 
+859-v845-route-promotion-bounded-objective-unassisted-repair-plan.md
+ -> v845 code explanation: convert the closed decoder-anchor branch into a bounded objective unassisted repair plan.
+
 487-v473-baseline-candidate-capability-delta.md
  -> v473 code explanation: carry real tiny training loss and generation-quality deltas into the baseline-candidate eval loop.
 
