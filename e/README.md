@@ -87,6 +87,10 @@ e/833/解释/说明.md
 e/834/图片
 e/834/解释/说明.md
  -> v834 bounded rebalanced intervention decision 的运行截图和解释
+
+e/835/图片
+e/835/解释/说明.md
+ -> v835 bounded objective intervention plan 的运行截图和解释
 ```
 
 ```text

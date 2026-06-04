@@ -62,6 +62,9 @@
 848-v834-route-promotion-bounded-rebalanced-intervention-decision.md
  -> v834 code explanation: close the rebalanced decoder-rescue branch and select objective-contract intervention before more training.
 
+849-v835-route-promotion-bounded-objective-intervention-plan.md
+ -> v835 code explanation: convert the closed rebalanced rescue route into a bounded objective-contract intervention plan before any new training.
+
 487-v473-baseline-candidate-capability-delta.md
  -> v473 code explanation: carry real tiny training loss and generation-quality deltas into the baseline-candidate eval loop.
 

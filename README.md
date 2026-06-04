@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v834.0.0` closes the rebalanced decoder-rescue branch and selects an objective-contract intervention before any further training.
+Version `v835.0.0` turns the v834 route decision into a bounded objective-contract intervention plan.
+
+## Latest v835 checkpoint
+
+- Added `model_capability_route_promotion_bounded_objective_intervention_plan`.
+- Added CLI `scripts/build_model_capability_route_promotion_bounded_objective_intervention_plan.py`.
+- Consumed the real v834 intervention decision from `e/834`.
+- Confirmed the closed route is `decoder_anchor_rebalanced_rescue` and the selected track is `objective_contract_intervention_first`.
+- Defined objective contract `bounded_fixed_loss_direct_completion_contract` with canonical prompt/completion, target terms `fixed/loss`, allowed surfaces, and blocked rescue surfaces.
+- Produced `work_item_count=5`, `acceptance_gate_count=4`, and `unchanged_suite_check_required=True`.
+- Routed the next artifact to `model_capability_route_promotion_bounded_objective_contract`.
+- Kept the model-quality claim as `plan_only`; this is a bounded intervention plan, not model improvement evidence.
+- Verified with `4 passed` focused objective intervention plan tests.
+- Archived v835 evidence in `e/835` and added the code explanation in `代码讲解记录_模型能力阶段/849-v835-route-promotion-bounded-objective-intervention-plan.md`.
 
 ## Latest v834 checkpoint
 
