@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v865.0.0` trains a real tiny checkpoint from the v864 pair-binding patch corpus and records training evidence.
+Version `v866.0.0` replays the v865 pair-binding checkpoint and records a zero-hit regression against the bounded objective contract.
+
+## Latest v866 checkpoint
+
+- Added short-name module `bounded_objective_loss_signal_bridge_pair_binding_replay_comparison`.
+- Added CLI `scripts/run_bounded_objective_loss_signal_bridge_pair_binding_replay_comparison.py`.
+- Replayed the real v865 checkpoint against the unchanged v836 bounded objective contract on CPU.
+- Recorded `case_count=3`, `passed_case_count=0`, `any_hit_case_count=0`, `zero_hit_case_count=3`, and `pass_rate=0.0`.
+- Confirmed `objective_contract_recovered=False`, `canonical_case_pass=False`, and `promotion_ready=False`.
+- Observed a regression from v862 partial signal to zero-hit continuations such as `answer:` and `ans`.
+- Kept `model_quality_claim=not_improved`.
+- Routed the next artifact to `diagnose_bounded_objective_loss_signal_bridge_pair_binding_zero_hit_before_more_training`.
+- Verified with `4 passed` focused pair-binding replay-comparison tests and Playwright MCP screenshot evidence.
+- Archived v866 evidence in `e/866` and added the code explanation in `代码讲解记录_模型能力阶段/880-v866-bounded-objective-loss-signal-bridge-pair-binding-replay-comparison.md`.
 
 ## Latest v865 checkpoint
 

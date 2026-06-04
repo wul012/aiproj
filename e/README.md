@@ -211,6 +211,10 @@ e/864/解释/说明.md
 e/865/图片
 e/865/解释/说明.md
  -> v865 bounded objective loss signal bridge pair-binding training run 的运行截图和解释
+
+e/866/图片
+e/866/解释/说明.md
+ -> v866 bounded objective loss signal bridge pair-binding replay comparison 的运行截图和解释
 ```
 
 ```text

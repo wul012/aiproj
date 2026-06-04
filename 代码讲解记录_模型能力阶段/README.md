@@ -155,6 +155,9 @@
 879-v865-bounded-objective-loss-signal-bridge-pair-binding-training-run.md
  -> v865 code explanation: train the pair-binding patch corpus into a real checkpoint while keeping capability gated behind replay.
 
+880-v866-bounded-objective-loss-signal-bridge-pair-binding-replay-comparison.md
+ -> v866 code explanation: replay the pair-binding checkpoint and record the zero-hit regression before further repair.
+
 487-v473-baseline-candidate-capability-delta.md
  -> v473 code explanation: carry real tiny training loss and generation-quality deltas into the baseline-candidate eval loop.
 
