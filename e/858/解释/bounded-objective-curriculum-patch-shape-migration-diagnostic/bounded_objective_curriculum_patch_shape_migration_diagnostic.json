@@ -1,0 +1,243 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability route promotion bounded objective unassisted repair seed revision curriculum patch shape migration diagnostic",
+  "generated_at": "2026-06-04T11:59:39Z",
+  "status": "pass",
+  "decision": "model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_curriculum_patch_shape_migration_diagnosed_profile_sweep_required",
+  "failed_count": 0,
+  "issues": [],
+  "source_seed_revision_replay_comparison": "e\\853\\解释\\model-capability-route-promotion-bounded-objective-unassisted-repair-seed-revision-replay-comparison\\model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_replay_comparison.json",
+  "source_curriculum_patch_replay_comparison": "e\\857\\解释\\model-capability-route-promotion-bounded-objective-unassisted-repair-seed-revision-curriculum-patch-replay-comparison\\model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_curriculum_patch_replay_comparison.json",
+  "seed_revision_replay_summary": {
+    "bounded_objective_replay_comparison_ready": true,
+    "objective_contract_recovered": false,
+    "canonical_case_pass": false,
+    "case_count": 3,
+    "executed_case_count": 3,
+    "passed_case_count": 0,
+    "failed_case_count": 3,
+    "any_hit_case_count": 2,
+    "zero_hit_case_count": 1,
+    "pass_rate": 0.0,
+    "promotion_ready": false,
+    "next_step": "diagnose_bounded_objective_unassisted_repair_seed_revision_partial_hit_before_more_training",
+    "failed_check_count": 0,
+    "bounded_objective_unassisted_repair_replay_comparison_ready": true,
+    "decoder_anchor_used": false,
+    "route": "bounded_objective_unassisted_repair_seed_revision",
+    "bounded_objective_unassisted_repair_seed_revision_replay_comparison_ready": true
+  },
+  "curriculum_patch_replay_summary": {
+    "bounded_objective_replay_comparison_ready": true,
+    "objective_contract_recovered": false,
+    "canonical_case_pass": false,
+    "case_count": 3,
+    "executed_case_count": 3,
+    "passed_case_count": 0,
+    "failed_case_count": 3,
+    "any_hit_case_count": 2,
+    "zero_hit_case_count": 1,
+    "pass_rate": 0.0,
+    "promotion_ready": false,
+    "next_step": "diagnose_bounded_objective_unassisted_repair_seed_revision_curriculum_patch_partial_hit_before_more_training",
+    "failed_check_count": 0,
+    "bounded_objective_unassisted_repair_replay_comparison_ready": true,
+    "decoder_anchor_used": false,
+    "route": "bounded_objective_unassisted_repair_seed_revision_curriculum_patch",
+    "bounded_objective_unassisted_repair_seed_revision_replay_comparison_ready": true,
+    "bounded_objective_unassisted_repair_seed_revision_curriculum_patch_replay_comparison_ready": true
+  },
+  "migration_rows": [
+    {
+      "case_id": "canonical_direct_completion",
+      "pre_case_pass": false,
+      "post_case_pass": false,
+      "pre_any_hit": true,
+      "post_any_hit": true,
+      "pre_hit_terms": [
+        "fixed"
+      ],
+      "post_hit_terms": [
+        "fixed"
+      ],
+      "pre_missed_terms": [
+        "loss"
+      ],
+      "post_missed_terms": [
+        "loss"
+      ],
+      "pre_continuation": " fixed t",
+      "post_continuation": " fixed l",
+      "migration_class": "stable_partial"
+    },
+    {
+      "case_id": "minimal_direct_completion",
+      "pre_case_pass": false,
+      "post_case_pass": false,
+      "pre_any_hit": true,
+      "post_any_hit": false,
+      "pre_hit_terms": [
+        "fixed"
+      ],
+      "post_hit_terms": [],
+      "pre_missed_terms": [
+        "loss"
+      ],
+      "post_missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "pre_continuation": " fixed t",
+      "post_continuation": " loswed ",
+      "migration_class": "regressed_to_zero"
+    },
+    {
+      "case_id": "completion_label_surface",
+      "pre_case_pass": false,
+      "post_case_pass": false,
+      "pre_any_hit": false,
+      "post_any_hit": true,
+      "pre_hit_terms": [],
+      "post_hit_terms": [
+        "fixed"
+      ],
+      "pre_missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "post_missed_terms": [
+        "loss"
+      ],
+      "pre_continuation": " ler: lo",
+      "post_continuation": " fixed l",
+      "migration_class": "improved_to_partial"
+    }
+  ],
+  "root_causes": [
+    {
+      "cause_id": "summary_masked_case_migration",
+      "severity": "high",
+      "detail": "Aggregate any-hit counts stayed flat while case-level surfaces moved in opposite directions.",
+      "evidence": [
+        "completion_label_surface",
+        "minimal_direct_completion"
+      ]
+    },
+    {
+      "cause_id": "completion_surface_fixed_only_improved",
+      "severity": "medium",
+      "detail": "At least one post-patch surface gained the `fixed` term but still missed `loss`.",
+      "evidence": [
+        "completion_label_surface"
+      ]
+    },
+    {
+      "cause_id": "minimal_surface_regressed_to_zero_hit",
+      "severity": "high",
+      "detail": "At least one previously partial-hit surface became zero-hit after the curriculum patch.",
+      "evidence": [
+        "minimal_direct_completion"
+      ]
+    },
+    {
+      "cause_id": "loss_term_still_missing_after_patch",
+      "severity": "high",
+      "detail": "`loss` remains absent from post-patch replay continuations.",
+      "evidence": [
+        "canonical_direct_completion",
+        "minimal_direct_completion",
+        "completion_label_surface"
+      ]
+    },
+    {
+      "cause_id": "contract_not_recovered",
+      "severity": "high",
+      "detail": "No case-level migration is enough to recover the bounded objective contract.",
+      "evidence": []
+    }
+  ],
+  "check_rows": [
+    {
+      "id": "seed_revision_replay_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "seed revision replay must pass structurally"
+    },
+    {
+      "id": "seed_revision_replay_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "seed revision replay must be ready"
+    },
+    {
+      "id": "curriculum_patch_replay_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "curriculum patch replay must pass structurally"
+    },
+    {
+      "id": "curriculum_patch_replay_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "curriculum patch replay must be ready"
+    },
+    {
+      "id": "same_case_ids",
+      "status": "pass",
+      "actual": {
+        "seed": [
+          "canonical_direct_completion",
+          "completion_label_surface",
+          "minimal_direct_completion"
+        ],
+        "patch": [
+          "canonical_direct_completion",
+          "completion_label_surface",
+          "minimal_direct_completion"
+        ]
+      },
+      "detail": "both replays must cover the same non-empty contract cases"
+    },
+    {
+      "id": "post_cases_not_missing",
+      "status": "pass",
+      "actual": [],
+      "detail": "every seed revision case needs a post-patch row"
+    }
+  ],
+  "summary": {
+    "bounded_objective_unassisted_repair_seed_revision_curriculum_patch_shape_migration_diagnostic_ready": true,
+    "case_count": 3,
+    "improved_case_count": 1,
+    "regressed_case_count": 1,
+    "stable_case_count": 1,
+    "stable_partial_case_count": 1,
+    "recovered_case_count": 0,
+    "lost_case_count": 0,
+    "pre_any_hit_case_count": 2,
+    "post_any_hit_case_count": 2,
+    "any_hit_case_delta": 0,
+    "pre_zero_hit_case_count": 1,
+    "post_zero_hit_case_count": 1,
+    "zero_hit_case_delta": 0,
+    "passed_case_delta": 0,
+    "loss_missed_after_count": 3,
+    "fixed_missed_after_count": 1,
+    "objective_contract_recovered_after": false,
+    "root_cause_count": 5,
+    "model_quality_claim": "partial_signal_shape_migration_without_contract_recovery",
+    "next_action": "run_bounded_objective_unassisted_repair_seed_revision_curriculum_patch_profile_sweep_before_more_training"
+  },
+  "interpretation": {
+    "model_quality_claim": "partial_signal_shape_migration_without_contract_recovery",
+    "reason": "The curriculum patch changed which prompt surfaces show partial signal, but it did not recover `fixed loss`.",
+    "root_cause_ids": [
+      "summary_masked_case_migration",
+      "completion_surface_fixed_only_improved",
+      "minimal_surface_regressed_to_zero_hit",
+      "loss_term_still_missing_after_patch",
+      "contract_not_recovered"
+    ],
+    "next_action": "run_bounded_objective_unassisted_repair_seed_revision_curriculum_patch_profile_sweep_before_more_training"
+  }
+}

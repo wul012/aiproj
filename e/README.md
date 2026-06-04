@@ -179,6 +179,10 @@ e/856/解释/说明.md
 e/857/图片
 e/857/解释/说明.md
  -> v857 bounded objective unassisted repair seed revision curriculum patch replay comparison 的运行截图和解释
+
+e/858/图片
+e/858/解释/说明.md
+ -> v858 bounded objective curriculum patch shape migration diagnostic 的运行截图和解释
 ```
 
 ```text

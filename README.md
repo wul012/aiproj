@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v857.0.0` replays the v856 curriculum patch checkpoint and records partial-hit shape migration without contract recovery.
+Version `v858.0.0` diagnoses case-level shape migration between v853 seed revision replay and v857 curriculum patch replay.
+
+## Latest v858 checkpoint
+
+- Added `model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_curriculum_patch_shape_migration_diagnostic`.
+- Added CLI `scripts/diagnose_model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_curriculum_patch_shape_migration.py`.
+- Compared v853 and v857 replay rows case by case instead of trusting unchanged aggregate counts.
+- Recorded `case_count=3`, `improved_case_count=1`, `regressed_case_count=1`, `stable_partial_case_count=1`, `any_hit_case_delta=0`, and `zero_hit_case_delta=0`.
+- Confirmed `loss_missed_after_count=3`; the curriculum patch moved partial signal but did not recover `fixed loss`.
+- Kept `model_quality_claim=partial_signal_shape_migration_without_contract_recovery`.
+- Routed the next artifact to `run_bounded_objective_unassisted_repair_seed_revision_curriculum_patch_profile_sweep_before_more_training`.
+- Shortened v858 artifact filenames after a real Windows path-length failure during evidence generation.
+- Verified with `3 passed` focused shape-migration tests and Playwright MCP screenshot evidence.
+- Archived v858 evidence in `e/858` and added the code explanation in `代码讲解记录_模型能力阶段/872-v858-route-promotion-bounded-objective-unassisted-repair-seed-revision-curriculum-patch-shape-migration-diagnostic.md`.
 
 ## Latest v857 checkpoint
 

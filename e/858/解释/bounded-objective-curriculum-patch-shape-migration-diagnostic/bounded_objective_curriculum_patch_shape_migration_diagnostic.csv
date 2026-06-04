@@ -1,0 +1,4 @@
+case_id,migration_class,pre_hit_terms,post_hit_terms,pre_missed_terms,post_missed_terms,pre_continuation,post_continuation
+canonical_direct_completion,stable_partial,['fixed'],['fixed'],['loss'],['loss'], fixed t, fixed l
+minimal_direct_completion,regressed_to_zero,['fixed'],[],['loss'],"['fixed', 'loss']", fixed t, loswed 
+completion_label_surface,improved_to_partial,[],['fixed'],"['fixed', 'loss']",['loss'], ler: lo, fixed l
