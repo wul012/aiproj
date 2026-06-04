@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v836.0.0` converts the v835 intervention plan into a bounded objective contract artifact.
+Version `v837.0.0` turns the v836 bounded objective contract into a direct seed corpus.
+
+## Latest v837 checkpoint
+
+- Added `model_capability_route_promotion_bounded_objective_seed`.
+- Added CLI `scripts/build_model_capability_route_promotion_bounded_objective_seed.py`.
+- Consumed the real v836 objective contract from `e/836`.
+- Generated `example_count=18` direct completion seed examples from three contract cases.
+- Produced `direct_example_count=18`, `carry_forward_example_count=0`, and `corpus_char_count=1163`.
+- Wrote JSON, CSV, JSONL, corpus TXT, Markdown, HTML, and text summary outputs.
+- Routed the next artifact to `model_capability_route_promotion_bounded_objective_training_run`.
+- Kept the model-quality claim as `seed_only`; capability still requires controlled training and replay.
+- Verified with `4 passed` focused bounded objective seed tests.
+- Archived v837 evidence in `e/837` and added the code explanation in `代码讲解记录_模型能力阶段/851-v837-route-promotion-bounded-objective-seed.md`.
 
 ## Latest v836 checkpoint
 

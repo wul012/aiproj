@@ -68,6 +68,9 @@
 850-v836-route-promotion-bounded-objective-contract.md
  -> v836 code explanation: normalize the v835 plan into a bounded objective contract with contract cases, seed blueprint, and holdout rule.
 
+851-v837-route-promotion-bounded-objective-seed.md
+ -> v837 code explanation: generate a direct-only bounded objective seed corpus from the v836 contract.
+
 487-v473-baseline-candidate-capability-delta.md
  -> v473 code explanation: carry real tiny training loss and generation-quality deltas into the baseline-candidate eval loop.
 

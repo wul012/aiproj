@@ -1,0 +1,53 @@
+Answer with exactly two tokens: fixed loss
+answer: fixed loss
+
+Answer with exactly two tokens: fixed loss
+answer: fixed loss
+
+Answer with exactly two tokens: fixed loss
+answer: fixed loss
+
+Answer with exactly two tokens: fixed loss
+answer: fixed loss
+
+Answer with exactly two tokens: fixed loss
+answer: fixed loss
+
+Answer with exactly two tokens: fixed loss
+answer: fixed loss
+
+Answer with exactly two words: fixed loss
+answer: fixed loss
+
+Answer with exactly two words: fixed loss
+answer: fixed loss
+
+Answer with exactly two words: fixed loss
+answer: fixed loss
+
+Answer with exactly two words: fixed loss
+answer: fixed loss
+
+Answer with exactly two words: fixed loss
+answer: fixed loss
+
+Answer with exactly two words: fixed loss
+answer: fixed loss
+
+Complete with exactly two tokens: fixed loss
+completion: fixed loss
+
+Complete with exactly two tokens: fixed loss
+completion: fixed loss
+
+Complete with exactly two tokens: fixed loss
+completion: fixed loss
+
+Complete with exactly two tokens: fixed loss
+completion: fixed loss
+
+Complete with exactly two tokens: fixed loss
+completion: fixed loss
+
+Complete with exactly two tokens: fixed loss
+completion: fixed loss

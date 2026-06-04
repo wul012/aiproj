@@ -1,0 +1,414 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability route promotion bounded objective seed",
+  "generated_at": "2026-06-04T01:11:42Z",
+  "status": "pass",
+  "decision": "model_capability_route_promotion_bounded_objective_seed_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_objective_contract": "e\\836\\解释\\model-capability-route-promotion-bounded-objective-contract\\model_capability_route_promotion_bounded_objective_contract.json",
+  "source_contract_summary": {
+    "bounded_objective_contract_ready": true,
+    "contract_id": "bounded_fixed_loss_direct_completion_contract",
+    "target_terms": [
+      "fixed",
+      "loss"
+    ],
+    "contract_case_count": 3,
+    "planned_seed_example_count": 18,
+    "unchanged_suite_check_required": true,
+    "promotion_claim_allowed": false,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_objective_seed",
+    "failed_check_count": 0
+  },
+  "seed_examples": [
+    {
+      "example_id": "canonical_direct_completion-direct_prompt_completion-01",
+      "case_id": "canonical_direct_completion",
+      "example_mode": "direct_prompt_completion",
+      "prompt": "Answer with exactly two tokens: fixed loss\nanswer:",
+      "completion": "fixed loss",
+      "text": "Answer with exactly two tokens: fixed loss\nanswer: fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "surface": "canonical_direct_completion_surface",
+      "direct_completion": true,
+      "guardrail": "bounded_objective_contract_direct_seed"
+    },
+    {
+      "example_id": "canonical_direct_completion-direct_prompt_completion-02",
+      "case_id": "canonical_direct_completion",
+      "example_mode": "direct_prompt_completion",
+      "prompt": "Answer with exactly two tokens: fixed loss\nanswer:",
+      "completion": "fixed loss",
+      "text": "Answer with exactly two tokens: fixed loss\nanswer: fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "surface": "canonical_direct_completion_surface",
+      "direct_completion": true,
+      "guardrail": "bounded_objective_contract_direct_seed"
+    },
+    {
+      "example_id": "canonical_direct_completion-direct_prompt_completion-03",
+      "case_id": "canonical_direct_completion",
+      "example_mode": "direct_prompt_completion",
+      "prompt": "Answer with exactly two tokens: fixed loss\nanswer:",
+      "completion": "fixed loss",
+      "text": "Answer with exactly two tokens: fixed loss\nanswer: fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "surface": "canonical_direct_completion_surface",
+      "direct_completion": true,
+      "guardrail": "bounded_objective_contract_direct_seed"
+    },
+    {
+      "example_id": "canonical_direct_completion-direct_prompt_completion-04",
+      "case_id": "canonical_direct_completion",
+      "example_mode": "direct_prompt_completion",
+      "prompt": "Answer with exactly two tokens: fixed loss\nanswer:",
+      "completion": "fixed loss",
+      "text": "Answer with exactly two tokens: fixed loss\nanswer: fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "surface": "canonical_direct_completion_surface",
+      "direct_completion": true,
+      "guardrail": "bounded_objective_contract_direct_seed"
+    },
+    {
+      "example_id": "canonical_direct_completion-direct_prompt_completion-05",
+      "case_id": "canonical_direct_completion",
+      "example_mode": "direct_prompt_completion",
+      "prompt": "Answer with exactly two tokens: fixed loss\nanswer:",
+      "completion": "fixed loss",
+      "text": "Answer with exactly two tokens: fixed loss\nanswer: fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "surface": "canonical_direct_completion_surface",
+      "direct_completion": true,
+      "guardrail": "bounded_objective_contract_direct_seed"
+    },
+    {
+      "example_id": "canonical_direct_completion-direct_prompt_completion-06",
+      "case_id": "canonical_direct_completion",
+      "example_mode": "direct_prompt_completion",
+      "prompt": "Answer with exactly two tokens: fixed loss\nanswer:",
+      "completion": "fixed loss",
+      "text": "Answer with exactly two tokens: fixed loss\nanswer: fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "surface": "canonical_direct_completion_surface",
+      "direct_completion": true,
+      "guardrail": "bounded_objective_contract_direct_seed"
+    },
+    {
+      "example_id": "minimal_direct_completion-minimal_surface_repeat-01",
+      "case_id": "minimal_direct_completion",
+      "example_mode": "minimal_surface_repeat",
+      "prompt": "Answer with exactly two words: fixed loss\nanswer:",
+      "completion": "fixed loss",
+      "text": "Answer with exactly two words: fixed loss\nanswer: fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "surface": "canonical_direct_completion_surface",
+      "direct_completion": true,
+      "guardrail": "bounded_objective_contract_direct_seed"
+    },
+    {
+      "example_id": "minimal_direct_completion-minimal_surface_repeat-02",
+      "case_id": "minimal_direct_completion",
+      "example_mode": "minimal_surface_repeat",
+      "prompt": "Answer with exactly two words: fixed loss\nanswer:",
+      "completion": "fixed loss",
+      "text": "Answer with exactly two words: fixed loss\nanswer: fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "surface": "canonical_direct_completion_surface",
+      "direct_completion": true,
+      "guardrail": "bounded_objective_contract_direct_seed"
+    },
+    {
+      "example_id": "minimal_direct_completion-minimal_surface_repeat-03",
+      "case_id": "minimal_direct_completion",
+      "example_mode": "minimal_surface_repeat",
+      "prompt": "Answer with exactly two words: fixed loss\nanswer:",
+      "completion": "fixed loss",
+      "text": "Answer with exactly two words: fixed loss\nanswer: fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "surface": "canonical_direct_completion_surface",
+      "direct_completion": true,
+      "guardrail": "bounded_objective_contract_direct_seed"
+    },
+    {
+      "example_id": "minimal_direct_completion-minimal_surface_repeat-04",
+      "case_id": "minimal_direct_completion",
+      "example_mode": "minimal_surface_repeat",
+      "prompt": "Answer with exactly two words: fixed loss\nanswer:",
+      "completion": "fixed loss",
+      "text": "Answer with exactly two words: fixed loss\nanswer: fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "surface": "canonical_direct_completion_surface",
+      "direct_completion": true,
+      "guardrail": "bounded_objective_contract_direct_seed"
+    },
+    {
+      "example_id": "minimal_direct_completion-minimal_surface_repeat-05",
+      "case_id": "minimal_direct_completion",
+      "example_mode": "minimal_surface_repeat",
+      "prompt": "Answer with exactly two words: fixed loss\nanswer:",
+      "completion": "fixed loss",
+      "text": "Answer with exactly two words: fixed loss\nanswer: fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "surface": "canonical_direct_completion_surface",
+      "direct_completion": true,
+      "guardrail": "bounded_objective_contract_direct_seed"
+    },
+    {
+      "example_id": "minimal_direct_completion-minimal_surface_repeat-06",
+      "case_id": "minimal_direct_completion",
+      "example_mode": "minimal_surface_repeat",
+      "prompt": "Answer with exactly two words: fixed loss\nanswer:",
+      "completion": "fixed loss",
+      "text": "Answer with exactly two words: fixed loss\nanswer: fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "surface": "canonical_direct_completion_surface",
+      "direct_completion": true,
+      "guardrail": "bounded_objective_contract_direct_seed"
+    },
+    {
+      "example_id": "completion_label_surface-label_surface_repeat-01",
+      "case_id": "completion_label_surface",
+      "example_mode": "label_surface_repeat",
+      "prompt": "Complete with exactly two tokens: fixed loss\ncompletion:",
+      "completion": "fixed loss",
+      "text": "Complete with exactly two tokens: fixed loss\ncompletion: fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "surface": "canonical_direct_completion_surface",
+      "direct_completion": true,
+      "guardrail": "bounded_objective_contract_direct_seed"
+    },
+    {
+      "example_id": "completion_label_surface-label_surface_repeat-02",
+      "case_id": "completion_label_surface",
+      "example_mode": "label_surface_repeat",
+      "prompt": "Complete with exactly two tokens: fixed loss\ncompletion:",
+      "completion": "fixed loss",
+      "text": "Complete with exactly two tokens: fixed loss\ncompletion: fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "surface": "canonical_direct_completion_surface",
+      "direct_completion": true,
+      "guardrail": "bounded_objective_contract_direct_seed"
+    },
+    {
+      "example_id": "completion_label_surface-label_surface_repeat-03",
+      "case_id": "completion_label_surface",
+      "example_mode": "label_surface_repeat",
+      "prompt": "Complete with exactly two tokens: fixed loss\ncompletion:",
+      "completion": "fixed loss",
+      "text": "Complete with exactly two tokens: fixed loss\ncompletion: fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "surface": "canonical_direct_completion_surface",
+      "direct_completion": true,
+      "guardrail": "bounded_objective_contract_direct_seed"
+    },
+    {
+      "example_id": "completion_label_surface-label_surface_repeat-04",
+      "case_id": "completion_label_surface",
+      "example_mode": "label_surface_repeat",
+      "prompt": "Complete with exactly two tokens: fixed loss\ncompletion:",
+      "completion": "fixed loss",
+      "text": "Complete with exactly two tokens: fixed loss\ncompletion: fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "surface": "canonical_direct_completion_surface",
+      "direct_completion": true,
+      "guardrail": "bounded_objective_contract_direct_seed"
+    },
+    {
+      "example_id": "completion_label_surface-label_surface_repeat-05",
+      "case_id": "completion_label_surface",
+      "example_mode": "label_surface_repeat",
+      "prompt": "Complete with exactly two tokens: fixed loss\ncompletion:",
+      "completion": "fixed loss",
+      "text": "Complete with exactly two tokens: fixed loss\ncompletion: fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "surface": "canonical_direct_completion_surface",
+      "direct_completion": true,
+      "guardrail": "bounded_objective_contract_direct_seed"
+    },
+    {
+      "example_id": "completion_label_surface-label_surface_repeat-06",
+      "case_id": "completion_label_surface",
+      "example_mode": "label_surface_repeat",
+      "prompt": "Complete with exactly two tokens: fixed loss\ncompletion:",
+      "completion": "fixed loss",
+      "text": "Complete with exactly two tokens: fixed loss\ncompletion: fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "surface": "canonical_direct_completion_surface",
+      "direct_completion": true,
+      "guardrail": "bounded_objective_contract_direct_seed"
+    }
+  ],
+  "corpus_text": "Answer with exactly two tokens: fixed loss\nanswer: fixed loss\n\nAnswer with exactly two tokens: fixed loss\nanswer: fixed loss\n\nAnswer with exactly two tokens: fixed loss\nanswer: fixed loss\n\nAnswer with exactly two tokens: fixed loss\nanswer: fixed loss\n\nAnswer with exactly two tokens: fixed loss\nanswer: fixed loss\n\nAnswer with exactly two tokens: fixed loss\nanswer: fixed loss\n\nAnswer with exactly two words: fixed loss\nanswer: fixed loss\n\nAnswer with exactly two words: fixed loss\nanswer: fixed loss\n\nAnswer with exactly two words: fixed loss\nanswer: fixed loss\n\nAnswer with exactly two words: fixed loss\nanswer: fixed loss\n\nAnswer with exactly two words: fixed loss\nanswer: fixed loss\n\nAnswer with exactly two words: fixed loss\nanswer: fixed loss\n\nComplete with exactly two tokens: fixed loss\ncompletion: fixed loss\n\nComplete with exactly two tokens: fixed loss\ncompletion: fixed loss\n\nComplete with exactly two tokens: fixed loss\ncompletion: fixed loss\n\nComplete with exactly two tokens: fixed loss\ncompletion: fixed loss\n\nComplete with exactly two tokens: fixed loss\ncompletion: fixed loss\n\nComplete with exactly two tokens: fixed loss\ncompletion: fixed loss\n",
+  "check_rows": [
+    {
+      "id": "contract_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "source objective contract must pass"
+    },
+    {
+      "id": "contract_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "source objective contract must be ready"
+    },
+    {
+      "id": "next_artifact_matches",
+      "status": "pass",
+      "actual": "model_capability_route_promotion_bounded_objective_seed",
+      "detail": "source contract must request objective seed"
+    },
+    {
+      "id": "target_terms_exact",
+      "status": "pass",
+      "actual": [
+        "fixed",
+        "loss"
+      ],
+      "detail": "seed must preserve fixed/loss target terms"
+    },
+    {
+      "id": "contract_cases_match_summary",
+      "status": "pass",
+      "actual": {
+        "cases": 3,
+        "summary": 3
+      },
+      "detail": "contract case count must match summary"
+    },
+    {
+      "id": "planned_count_matches",
+      "status": "pass",
+      "actual": {
+        "examples": 18,
+        "planned": 18
+      },
+      "detail": "seed examples must match deterministic blueprint"
+    },
+    {
+      "id": "all_examples_direct",
+      "status": "pass",
+      "actual": 18,
+      "detail": "all seed examples must be direct-completion rows"
+    },
+    {
+      "id": "no_carry_forward_examples",
+      "status": "pass",
+      "actual": [
+        "direct_prompt_completion",
+        "direct_prompt_completion",
+        "direct_prompt_completion",
+        "direct_prompt_completion",
+        "direct_prompt_completion",
+        "direct_prompt_completion",
+        "minimal_surface_repeat",
+        "minimal_surface_repeat",
+        "minimal_surface_repeat",
+        "minimal_surface_repeat",
+        "minimal_surface_repeat",
+        "minimal_surface_repeat",
+        "label_surface_repeat",
+        "label_surface_repeat",
+        "label_surface_repeat",
+        "label_surface_repeat",
+        "label_surface_repeat",
+        "label_surface_repeat"
+      ],
+      "detail": "objective seed must not contain carry-forward rows"
+    },
+    {
+      "id": "all_examples_have_required_terms",
+      "status": "pass",
+      "actual": 18,
+      "detail": "every seed example text must contain fixed/loss"
+    }
+  ],
+  "seed": {
+    "ready": true,
+    "contract_id": "bounded_fixed_loss_direct_completion_contract",
+    "example_count": 18,
+    "corpus_char_count": 1163,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_objective_training_run",
+    "next_step": "train_bounded_objective_seed"
+  },
+  "summary": {
+    "bounded_objective_seed_ready": true,
+    "contract_id": "bounded_fixed_loss_direct_completion_contract",
+    "target_terms": [
+      "fixed",
+      "loss"
+    ],
+    "example_count": 18,
+    "direct_example_count": 18,
+    "carry_forward_example_count": 0,
+    "example_modes": [
+      "direct_prompt_completion",
+      "label_surface_repeat",
+      "minimal_surface_repeat"
+    ],
+    "corpus_char_count": 1163,
+    "promotion_claim_allowed": false,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_objective_training_run",
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "seed_only",
+    "reason": "The corpus is direct and bounded; capability still requires controlled training and replay.",
+    "next_action": "model_capability_route_promotion_bounded_objective_training_run"
+  }
+}
