@@ -4,7 +4,21 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v856.0.0` trains a real tiny checkpoint from the v855 no-anchor curriculum patched corpus.
+Version `v857.0.0` replays the v856 curriculum patch checkpoint and records partial-hit shape migration without contract recovery.
+
+## Latest v857 checkpoint
+
+- Added `model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_curriculum_patch_replay_comparison`.
+- Added CLI `scripts/run_model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_curriculum_patch_replay_comparison.py`.
+- Replayed the real v856 checkpoint against the v836 bounded objective contract without decoder anchors.
+- Recorded `case_count=3`, `passed_case_count=0`, `any_hit_case_count=2`, `zero_hit_case_count=1`, and `pass_rate=0.0`.
+- Kept `objective_contract_recovered=False`, `canonical_case_pass=False`, and `promotion_ready=False`.
+- Observed `completion_label_surface` improved from zero-hit to fixed-only partial, while `minimal_direct_completion` became zero-hit.
+- Kept `model_quality_claim=partial_required_term_signal`; capability is still blocked.
+- Routed the next artifact to `diagnose_bounded_objective_unassisted_repair_seed_revision_curriculum_patch_partial_hit_before_more_training`.
+- Verified with `3 passed` focused bounded objective unassisted repair seed revision curriculum patch replay-comparison tests and `1750 passed` full pytest.
+- Confirmed source encoding hygiene with `source_count=1288`, `clean_count=1288`, `bom_count=0`, and `syntax_error_count=0`.
+- Archived v857 evidence in `e/857` and added the code explanation in `代码讲解记录_模型能力阶段/871-v857-route-promotion-bounded-objective-unassisted-repair-seed-revision-curriculum-patch-replay-comparison.md`.
 
 ## Latest v856 checkpoint
 

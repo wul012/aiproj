@@ -128,6 +128,9 @@
 870-v856-route-promotion-bounded-objective-unassisted-repair-seed-revision-curriculum-patch-training-run.md
  -> v856 code explanation: train the no-anchor patched corpus into a real checkpoint while keeping capability gated behind replay.
 
+871-v857-route-promotion-bounded-objective-unassisted-repair-seed-revision-curriculum-patch-replay-comparison.md
+ -> v857 code explanation: replay the curriculum patch checkpoint and separate shape migration from contract recovery.
+
 487-v473-baseline-candidate-capability-delta.md
  -> v473 code explanation: carry real tiny training loss and generation-quality deltas into the baseline-candidate eval loop.
 
