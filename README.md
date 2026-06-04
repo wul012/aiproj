@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v868.0.0` turns the v867 label-echo diagnosis into a no-anchor single-line completion surface patch.
+Version `v869.0.0` trains a real tiny checkpoint from the v868 single-line surface patch corpus.
+
+## Latest v869 checkpoint
+
+- Added short-name module `bounded_objective_loss_signal_bridge_single_line_surface_training_run`.
+- Added CLI `scripts/build_bounded_objective_loss_signal_bridge_single_line_surface_training_run.py`.
+- Trained a real tiny checkpoint from the v868 single-line surface patch corpus for `140` steps on CPU.
+- Recorded `final_train_loss=1.2041561603546143`, `final_val_loss=0.8147876858711243`, and `train_loss_delta=-2.376716`.
+- Preserved `repair_example_count=14`, `neutral_prompt_example_count=6`, and `decoder_anchor_example_count=0`.
+- Produced checkpoint, tokenizer, metrics, train config, run manifest, sample, loss curve, and prepared corpus artifacts.
+- Kept `model_quality_claim=training_artifact_only`; sample produced `fansweved l`, not `fixed loss`.
+- Routed the next artifact to `bounded_objective_loss_signal_bridge_single_line_surface_replay_comparison`.
+- Verified with `3 passed` focused single-line surface training-run tests and Playwright MCP screenshot evidence.
+- Archived v869 evidence in `e/869` and added the code explanation in `代码讲解记录_模型能力阶段/883-v869-bounded-objective-loss-signal-bridge-single-line-surface-training-run.md`.
 
 ## Latest v868 checkpoint
 
