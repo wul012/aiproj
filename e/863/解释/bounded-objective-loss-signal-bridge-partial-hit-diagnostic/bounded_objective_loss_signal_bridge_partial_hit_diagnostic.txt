@@ -1,0 +1,10 @@
+status=pass
+decision=bounded_objective_loss_signal_bridge_partial_hit_pair_binding_gap
+partial_hit_diagnostic_ready=True
+partial_case_count=2
+fixed_only_case_count=1
+loss_only_case_count=1
+zero_hit_case_count=1
+paired_signal_split=True
+model_quality_claim=partial_signal_split_without_pair_binding
+next_action=build_bounded_objective_loss_signal_bridge_pair_binding_patch

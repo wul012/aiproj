@@ -146,6 +146,9 @@
 876-v862-bounded-objective-loss-signal-bridge-replay-comparison.md
  -> v862 code explanation: replay the loss-signal bridge checkpoint against the bounded objective contract and separate partial required-term signal from contract recovery.
 
+877-v863-bounded-objective-loss-signal-bridge-partial-hit-diagnostic.md
+ -> v863 code explanation: diagnose fixed/loss split partial hits as a pair-binding gap before building the next patch.
+
 487-v473-baseline-candidate-capability-delta.md
  -> v473 code explanation: carry real tiny training loss and generation-quality deltas into the baseline-candidate eval loop.
 

@@ -199,6 +199,10 @@ e/861/解释/说明.md
 e/862/图片
 e/862/解释/说明.md
  -> v862 bounded objective loss signal bridge replay comparison 的运行截图和解释
+
+e/863/图片
+e/863/解释/说明.md
+ -> v863 bounded objective loss signal bridge partial-hit diagnostic 的运行截图和解释
 ```
 
 ```text

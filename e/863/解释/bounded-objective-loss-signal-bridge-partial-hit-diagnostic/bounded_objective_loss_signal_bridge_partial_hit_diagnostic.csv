@@ -1,0 +1,5 @@
+case_id,label,hit_terms,missed_terms,continuation,has_fixed_fragment,has_loss_fragment
+canonical_direct_completion,loss_only,loss,fixed, lossswe,False,True
+minimal_direct_completion,fixed_only,fixed,loss,"
+fixed l",True,False
+completion_label_surface,zero_hit,,"fixed,loss", lonssss,False,False

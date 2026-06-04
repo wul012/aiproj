@@ -1,0 +1,179 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT bounded objective loss signal bridge partial-hit diagnostic",
+  "generated_at": "2026-06-04T13:29:53Z",
+  "status": "pass",
+  "decision": "bounded_objective_loss_signal_bridge_partial_hit_pair_binding_gap",
+  "failed_count": 0,
+  "issues": [],
+  "source_replay_comparison": "e\\862\\解释\\bounded-objective-loss-signal-bridge-replay-comparison\\bounded_objective_loss_signal_bridge_replay_comparison.json",
+  "replay_summary": {
+    "bounded_objective_replay_comparison_ready": true,
+    "objective_contract_recovered": false,
+    "canonical_case_pass": false,
+    "case_count": 3,
+    "executed_case_count": 3,
+    "passed_case_count": 0,
+    "failed_case_count": 3,
+    "any_hit_case_count": 2,
+    "zero_hit_case_count": 1,
+    "pass_rate": 0.0,
+    "promotion_ready": false,
+    "next_step": "diagnose_bounded_objective_loss_signal_bridge_partial_hit_before_more_training",
+    "failed_check_count": 0,
+    "bounded_objective_loss_signal_bridge_replay_comparison_ready": true,
+    "decoder_anchor_used": false,
+    "route": "bounded_objective_loss_signal_bridge"
+  },
+  "training_summary": {
+    "bounded_objective_unassisted_repair_training_ready": true,
+    "artifact_count": 7,
+    "metric_record_count": 11,
+    "final_step": 100,
+    "final_train_loss": 1.4715137481689453,
+    "final_val_loss": 1.118106722831726,
+    "train_loss_delta": -2.121356,
+    "val_loss_delta": -2.474321,
+    "repair_example_count": 16,
+    "neutral_prompt_example_count": 6,
+    "decoder_anchor_example_count": 0,
+    "proposed_next_artifact": "bounded_objective_loss_signal_bridge_replay_comparison",
+    "next_step": "run_bounded_objective_loss_signal_bridge_replay_comparison",
+    "failed_check_count": 0,
+    "bounded_objective_unassisted_repair_seed_revision_training_ready": true,
+    "bounded_objective_loss_signal_bridge_training_ready": true
+  },
+  "case_diagnostics": [
+    {
+      "case_id": "canonical_direct_completion",
+      "label": "loss_only",
+      "case_pass": false,
+      "any_hit": true,
+      "hit_terms": [
+        "loss"
+      ],
+      "missed_terms": [
+        "fixed"
+      ],
+      "continuation": " lossswe",
+      "continuation_len": 8,
+      "max_new_tokens": 8,
+      "has_fixed_fragment": false,
+      "has_loss_fragment": true
+    },
+    {
+      "case_id": "minimal_direct_completion",
+      "label": "fixed_only",
+      "case_pass": false,
+      "any_hit": true,
+      "hit_terms": [
+        "fixed"
+      ],
+      "missed_terms": [
+        "loss"
+      ],
+      "continuation": "\nfixed l",
+      "continuation_len": 8,
+      "max_new_tokens": 8,
+      "has_fixed_fragment": true,
+      "has_loss_fragment": false
+    },
+    {
+      "case_id": "completion_label_surface",
+      "label": "zero_hit",
+      "case_pass": false,
+      "any_hit": false,
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "continuation": " lonssss",
+      "continuation_len": 8,
+      "max_new_tokens": 8,
+      "has_fixed_fragment": false,
+      "has_loss_fragment": false
+    }
+  ],
+  "root_causes": [
+    {
+      "id": "paired_term_binding_gap",
+      "detail": "fixed and loss appear separately, but no case binds the pair."
+    },
+    {
+      "id": "completion_surface_zero_hit",
+      "detail": "the completion-label surface still loses both required terms."
+    },
+    {
+      "id": "fragmented_required_term_surface",
+      "detail": "continuations show short fragments around fixed/loss instead of stable pair output."
+    },
+    {
+      "id": "no_anchor_partial_signal",
+      "detail": "partial signal is unassisted and should be repaired through pair-binding data, not decoder anchors."
+    }
+  ],
+  "check_rows": [
+    {
+      "id": "replay_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "replay comparison must pass"
+    },
+    {
+      "id": "replay_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "loss-signal bridge replay must be ready"
+    },
+    {
+      "id": "not_recovered",
+      "status": "pass",
+      "actual": false,
+      "detail": "diagnostic only applies before contract recovery"
+    },
+    {
+      "id": "has_partial_hits",
+      "status": "pass",
+      "actual": 2,
+      "detail": "diagnostic requires at least one required-term hit"
+    },
+    {
+      "id": "has_case_rows",
+      "status": "pass",
+      "actual": 3,
+      "detail": "diagnostic needs replay rows"
+    }
+  ],
+  "diagnostic": {
+    "ready": true,
+    "fixed_only_case_count": 1,
+    "loss_only_case_count": 1,
+    "zero_hit_case_count": 1,
+    "pair_pass_case_count": 0,
+    "paired_signal_split": true,
+    "root_cause_ids": [
+      "paired_term_binding_gap",
+      "completion_surface_zero_hit",
+      "fragmented_required_term_surface",
+      "no_anchor_partial_signal"
+    ],
+    "next_step": "build_bounded_objective_loss_signal_bridge_pair_binding_patch"
+  },
+  "summary": {
+    "bounded_objective_loss_signal_bridge_partial_hit_diagnostic_ready": true,
+    "case_count": 3,
+    "partial_case_count": 2,
+    "fixed_only_case_count": 1,
+    "loss_only_case_count": 1,
+    "zero_hit_case_count": 1,
+    "paired_signal_split": true,
+    "root_cause_count": 4,
+    "next_step": "build_bounded_objective_loss_signal_bridge_pair_binding_patch"
+  },
+  "interpretation": {
+    "model_quality_claim": "partial_signal_split_without_pair_binding",
+    "reason": "The checkpoint emits fixed and loss on separate cases, so the next data patch should reinforce the ordered pair.",
+    "next_action": "build_bounded_objective_loss_signal_bridge_pair_binding_patch"
+  }
+}

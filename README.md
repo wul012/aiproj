@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v862.0.0` replays the v861 loss-signal bridge checkpoint against the bounded objective contract and records partial required-term evidence.
+Version `v863.0.0` diagnoses the v862 partial replay result as a pair-binding gap between `fixed` and `loss`.
+
+## Latest v863 checkpoint
+
+- Added short-name module `bounded_objective_loss_signal_bridge_partial_hit_diagnostic`.
+- Added CLI `scripts/diagnose_bounded_objective_loss_signal_bridge_partial_hit.py`.
+- Consumed the real v862 loss-signal bridge replay comparison.
+- Classified replay rows as `loss_only`, `fixed_only`, and `zero_hit`.
+- Recorded `partial_case_count=2`, `fixed_only_case_count=1`, `loss_only_case_count=1`, `zero_hit_case_count=1`, and `paired_signal_split=True`.
+- Identified root causes: `paired_term_binding_gap`, `completion_surface_zero_hit`, `fragmented_required_term_surface`, and `no_anchor_partial_signal`.
+- Kept `model_quality_claim=partial_signal_split_without_pair_binding`.
+- Routed the next artifact to `build_bounded_objective_loss_signal_bridge_pair_binding_patch`.
+- Verified with `3 passed` focused partial-hit diagnostic tests and Playwright MCP screenshot evidence.
+- Archived v863 evidence in `e/863` and added the code explanation in `代码讲解记录_模型能力阶段/877-v863-bounded-objective-loss-signal-bridge-partial-hit-diagnostic.md`.
 
 ## Latest v862 checkpoint
 
