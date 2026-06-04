@@ -71,6 +71,9 @@
 851-v837-route-promotion-bounded-objective-seed.md
  -> v837 code explanation: generate a direct-only bounded objective seed corpus from the v836 contract.
 
+852-v838-route-promotion-bounded-objective-training-run.md
+ -> v838 code explanation: train a real bounded-objective checkpoint from the v837 direct seed while keeping quality claims gated behind replay.
+
 487-v473-baseline-candidate-capability-delta.md
  -> v473 code explanation: carry real tiny training loss and generation-quality deltas into the baseline-candidate eval loop.
 

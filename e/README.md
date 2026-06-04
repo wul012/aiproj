@@ -99,6 +99,10 @@ e/836/解释/说明.md
 e/837/图片
 e/837/解释/说明.md
  -> v837 bounded objective seed 的运行截图和解释
+
+e/838/图片
+e/838/解释/说明.md
+ -> v838 bounded objective training run 的运行截图和解释
 ```
 
 ```text

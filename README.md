@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v837.0.0` turns the v836 bounded objective contract into a direct seed corpus.
+Version `v838.0.0` trains a real bounded-objective checkpoint from the v837 direct seed corpus.
+
+## Latest v838 checkpoint
+
+- Added `model_capability_route_promotion_bounded_objective_training_run`.
+- Added CLI `scripts/build_model_capability_route_promotion_bounded_objective_training_run.py`.
+- Trained from the real v837 direct-only corpus with `example_count=18` and `direct_example_count=18`.
+- Produced a real checkpoint under `e/838/解释/model-capability-route-promotion-bounded-objective-training-run/run`.
+- Recorded `final_step=40`, `final_train_loss=1.4958`, `final_val_loss=1.7003`, and `train_loss_delta=-1.556213`.
+- Verified checkpoint, tokenizer, metrics, train config, run manifest, sample, and prepared corpus artifacts.
+- Routed the next artifact to `model_capability_route_promotion_bounded_objective_replay_comparison`.
+- Kept the model-quality claim as `training_artifact_only`; improvement still requires bounded replay comparison.
+- Verified with `4 passed` focused bounded objective training run tests.
+- Archived v838 evidence in `e/838` and added the code explanation in `代码讲解记录_模型能力阶段/852-v838-route-promotion-bounded-objective-training-run.md`.
 
 ## Latest v837 checkpoint
 

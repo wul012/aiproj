@@ -1,0 +1,12 @@
+status=pass
+decision=model_capability_route_promotion_bounded_objective_training_run_ready
+bounded_objective_training_ready=True
+final_step=40
+final_train_loss=1.4957764148712158
+final_val_loss=1.7002859115600586
+train_loss_delta=-1.556213
+objective_example_count=18
+direct_example_count=18
+proposed_next_artifact=model_capability_route_promotion_bounded_objective_replay_comparison
+model_quality_claim=training_artifact_only
+next_action=run_bounded_objective_checkpoint_replay
