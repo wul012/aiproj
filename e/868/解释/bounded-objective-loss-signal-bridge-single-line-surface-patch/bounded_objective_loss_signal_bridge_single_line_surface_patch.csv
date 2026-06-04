@@ -1,0 +1,15 @@
+example_id,kind,text,source_case_id,decoder_anchor
+canonical_direct_completion-single-line-case-a,single_line_case_surface,Answer with exactly two tokens: fixed loss answer: fixed loss,canonical_direct_completion,False
+canonical_direct_completion-single-line-case-b,single_line_case_surface,Answer with exactly two tokens: fixed loss answer: fixed loss,canonical_direct_completion,False
+minimal_direct_completion-single-line-case-a,single_line_case_surface,Answer with exactly two words: fixed loss answer: fixed loss,minimal_direct_completion,False
+minimal_direct_completion-single-line-case-b,single_line_case_surface,Answer with exactly two words: fixed loss answer: fixed loss,minimal_direct_completion,False
+completion_label_surface-single-line-case-a,single_line_case_surface,Complete with exactly two tokens: fixed loss completion: fixed loss,completion_label_surface,False
+completion_label_surface-single-line-case-b,single_line_case_surface,Complete with exactly two tokens: fixed loss completion: fixed loss,completion_label_surface,False
+answer-label-direct-a,direct_label_surface,answer: fixed loss,global,False
+answer-label-direct-b,direct_label_surface,answer: fixed loss,global,False
+completion-label-direct-a,direct_label_surface,completion: fixed loss,global,False
+completion-label-direct-b,direct_label_surface,completion: fixed loss,global,False
+target-label-direct-a,direct_label_surface,target: fixed loss,global,False
+target-label-direct-b,direct_label_surface,target: fixed loss,global,False
+fixed-loss-plain-a,completion_surface_single_line,fixed loss,global,False
+fixed-loss-plain-b,completion_surface_single_line,fixed loss,global,False

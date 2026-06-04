@@ -161,6 +161,9 @@
 881-v867-bounded-objective-loss-signal-bridge-pair-binding-zero-hit-diagnostic.md
  -> v867 code explanation: diagnose pair-binding zero-hit replay as label echo regression and route to single-line surface repair.
 
+882-v868-bounded-objective-loss-signal-bridge-single-line-surface-patch.md
+ -> v868 code explanation: convert label-echo zero-hit diagnosis into a no-anchor single-line surface patch corpus for the next training run.
+
 487-v473-baseline-candidate-capability-delta.md
  -> v473 code explanation: carry real tiny training loss and generation-quality deltas into the baseline-candidate eval loop.
 

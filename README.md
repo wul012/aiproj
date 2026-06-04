@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v867.0.0` diagnoses the v866 pair-binding zero-hit regression as label echo over target terms.
+Version `v868.0.0` turns the v867 label-echo diagnosis into a no-anchor single-line completion surface patch.
+
+## Latest v868 checkpoint
+
+- Added short-name module `bounded_objective_loss_signal_bridge_single_line_surface_patch`.
+- Added CLI `scripts/build_bounded_objective_loss_signal_bridge_single_line_surface_patch.py`.
+- Consumed the real v867 zero-hit diagnostic, v866 pair-binding replay comparison, and v865 prepared corpus.
+- Generated `patch_example_count=14`, including `single_line_case_example_count=6`, `direct_label_example_count=6`, and `completion_surface_example_count=2`.
+- Kept `decoder_anchor_example_count=0`.
+- Produced `bounded_objective_loss_signal_bridge_single_line_surface_patch_examples.jsonl` and `bounded_objective_loss_signal_bridge_single_line_surface_patch_corpus.txt`.
+- Kept `model_quality_claim=single_line_surface_patch_only`; no checkpoint capability is claimed before training and replay.
+- Routed the next artifact to `train_bounded_objective_loss_signal_bridge_single_line_surface_patch`.
+- Verified with `3 passed` focused single-line surface patch tests and Playwright MCP screenshot evidence.
+- Archived v868 evidence in `e/868` and added the code explanation in `代码讲解记录_模型能力阶段/882-v868-bounded-objective-loss-signal-bridge-single-line-surface-patch.md`.
 
 ## Latest v867 checkpoint
 

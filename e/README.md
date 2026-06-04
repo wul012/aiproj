@@ -219,6 +219,10 @@ e/866/解释/说明.md
 e/867/图片
 e/867/解释/说明.md
  -> v867 bounded objective loss signal bridge pair-binding zero-hit diagnostic 的运行截图和解释
+
+e/868/图片
+e/868/解释/说明.md
+ -> v868 bounded objective loss signal bridge single-line surface patch 的运行截图和解释
 ```
 
 ```text
