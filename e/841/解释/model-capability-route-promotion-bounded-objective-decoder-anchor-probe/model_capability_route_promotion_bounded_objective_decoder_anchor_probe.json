@@ -1,0 +1,417 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability route promotion bounded objective decoder anchor probe",
+  "generated_at": "2026-06-04T04:22:35Z",
+  "status": "pass",
+  "decision": "model_capability_route_promotion_bounded_objective_decoder_anchor_probe_found_completion_signal",
+  "failed_count": 0,
+  "issues": [],
+  "source_replay_comparison": "D:\\aiproj\\e\\839\\解释\\model-capability-route-promotion-bounded-objective-replay-comparison\\model_capability_route_promotion_bounded_objective_replay_comparison.json",
+  "source_zero_hit_diagnostic": "D:\\aiproj\\e\\840\\解释\\model-capability-route-promotion-bounded-objective-replay-zero-hit-diagnostic\\model_capability_route_promotion_bounded_objective_replay_zero_hit_diagnostic.json",
+  "checkpoint": "D:\\aiproj\\e\\838\\解释\\model-capability-route-promotion-bounded-objective-training-run\\run\\checkpoint.pt",
+  "tokenizer": "D:\\aiproj\\e\\838\\解释\\model-capability-route-promotion-bounded-objective-training-run\\run\\tokenizer.json",
+  "device": "cpu",
+  "anchor_profiles": [
+    {
+      "profile_id": "prefix_f",
+      "anchor": "f",
+      "max_new_tokens": 12,
+      "seed_offset": 1100,
+      "description": "Give only the first character of fixed."
+    },
+    {
+      "profile_id": "prefix_fixed_space",
+      "anchor": "fixed ",
+      "max_new_tokens": 12,
+      "seed_offset": 1200,
+      "description": "Give the first target term and ask for loss."
+    },
+    {
+      "profile_id": "prefix_fixed_l",
+      "anchor": "fixed l",
+      "max_new_tokens": 12,
+      "seed_offset": 1300,
+      "description": "Give fixed and the first character of loss."
+    }
+  ],
+  "source_summaries": {
+    "replay_comparison": {
+      "bounded_objective_replay_comparison_ready": true,
+      "objective_contract_recovered": false,
+      "canonical_case_pass": false,
+      "case_count": 3,
+      "executed_case_count": 3,
+      "passed_case_count": 0,
+      "failed_case_count": 3,
+      "any_hit_case_count": 0,
+      "zero_hit_case_count": 3,
+      "pass_rate": 0.0,
+      "promotion_ready": false,
+      "next_step": "diagnose_bounded_objective_replay_zero_hit_before_more_training",
+      "failed_check_count": 0
+    },
+    "zero_hit_diagnostic": {
+      "bounded_objective_zero_hit_diagnostic_ready": true,
+      "case_count": 3,
+      "zero_hit_case_count": 3,
+      "near_miss_case_count": 3,
+      "prompt_in_corpus_count": 3,
+      "root_cause_count": 4,
+      "train_loss_delta": -1.556213,
+      "proposed_next_artifact": "model_capability_route_promotion_bounded_objective_decoder_anchor_probe",
+      "next_step": "run_bounded_objective_decoder_anchor_probe",
+      "failed_check_count": 0
+    }
+  },
+  "probe_rows": [
+    {
+      "case_id": "canonical_direct_completion",
+      "profile_id": "prefix_f",
+      "anchor": "f",
+      "continuation": "ixed losssss",
+      "combined": "fixed losssss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "anchor_assisted_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "new_text_hit_terms": [
+        "loss"
+      ],
+      "completion_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "anchor_assisted_pass": true,
+      "new_text_pass": false,
+      "completion_pass": true,
+      "seed": 2939,
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 20
+    },
+    {
+      "case_id": "canonical_direct_completion",
+      "profile_id": "prefix_fixed_space",
+      "anchor": "fixed ",
+      "continuation": "loss\n\n\n\nansw",
+      "combined": "fixed loss\n\n\n\nansw",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "anchor_assisted_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "new_text_hit_terms": [
+        "loss"
+      ],
+      "completion_hit_terms": [
+        "loss"
+      ],
+      "anchor_assisted_pass": true,
+      "new_text_pass": false,
+      "completion_pass": true,
+      "seed": 3039,
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 20
+    },
+    {
+      "case_id": "canonical_direct_completion",
+      "profile_id": "prefix_fixed_l",
+      "anchor": "fixed l",
+      "continuation": "osss\n\n\n\n\n\n\na",
+      "combined": "fixed losss\n\n\n\n\n\n\na",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "anchor_assisted_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "new_text_hit_terms": [],
+      "completion_hit_terms": [
+        "loss"
+      ],
+      "anchor_assisted_pass": true,
+      "new_text_pass": false,
+      "completion_pass": true,
+      "seed": 3139,
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 20
+    },
+    {
+      "case_id": "minimal_direct_completion",
+      "profile_id": "prefix_f",
+      "anchor": "f",
+      "continuation": "ixed loss\n\n\n",
+      "combined": "fixed loss\n\n\n",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "anchor_assisted_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "new_text_hit_terms": [
+        "loss"
+      ],
+      "completion_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "anchor_assisted_pass": true,
+      "new_text_pass": false,
+      "completion_pass": true,
+      "seed": 2939,
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 20
+    },
+    {
+      "case_id": "minimal_direct_completion",
+      "profile_id": "prefix_fixed_space",
+      "anchor": "fixed ",
+      "continuation": "loss\n\n\n\nansw",
+      "combined": "fixed loss\n\n\n\nansw",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "anchor_assisted_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "new_text_hit_terms": [
+        "loss"
+      ],
+      "completion_hit_terms": [
+        "loss"
+      ],
+      "anchor_assisted_pass": true,
+      "new_text_pass": false,
+      "completion_pass": true,
+      "seed": 3039,
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 20
+    },
+    {
+      "case_id": "minimal_direct_completion",
+      "profile_id": "prefix_fixed_l",
+      "anchor": "fixed l",
+      "continuation": "osss\n\n\n\n\n\n\na",
+      "combined": "fixed losss\n\n\n\n\n\n\na",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "anchor_assisted_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "new_text_hit_terms": [],
+      "completion_hit_terms": [
+        "loss"
+      ],
+      "anchor_assisted_pass": true,
+      "new_text_pass": false,
+      "completion_pass": true,
+      "seed": 3139,
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 20
+    },
+    {
+      "case_id": "completion_label_surface",
+      "profile_id": "prefix_f",
+      "anchor": "f",
+      "continuation": "ixed losssss",
+      "combined": "fixed losssss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "anchor_assisted_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "new_text_hit_terms": [
+        "loss"
+      ],
+      "completion_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "anchor_assisted_pass": true,
+      "new_text_pass": false,
+      "completion_pass": true,
+      "seed": 2939,
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 20
+    },
+    {
+      "case_id": "completion_label_surface",
+      "profile_id": "prefix_fixed_space",
+      "anchor": "fixed ",
+      "continuation": "lossssssssss",
+      "combined": "fixed lossssssssss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "anchor_assisted_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "new_text_hit_terms": [
+        "loss"
+      ],
+      "completion_hit_terms": [
+        "loss"
+      ],
+      "anchor_assisted_pass": true,
+      "new_text_pass": false,
+      "completion_pass": true,
+      "seed": 3039,
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 20
+    },
+    {
+      "case_id": "completion_label_surface",
+      "profile_id": "prefix_fixed_l",
+      "anchor": "fixed l",
+      "continuation": "osssssss\n\n\na",
+      "combined": "fixed losssssss\n\n\na",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "anchor_assisted_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "new_text_hit_terms": [],
+      "completion_hit_terms": [
+        "loss"
+      ],
+      "anchor_assisted_pass": true,
+      "new_text_pass": false,
+      "completion_pass": true,
+      "seed": 3139,
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 20
+    }
+  ],
+  "probe_errors": [],
+  "check_rows": [
+    {
+      "id": "replay_comparison_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "objective replay comparison must pass"
+    },
+    {
+      "id": "replay_comparison_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "objective replay comparison must be ready"
+    },
+    {
+      "id": "objective_not_recovered",
+      "status": "pass",
+      "actual": false,
+      "detail": "anchor probe should run before objective recovery"
+    },
+    {
+      "id": "zero_hit_diagnostic_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "zero-hit diagnostic must pass"
+    },
+    {
+      "id": "zero_hit_diagnostic_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "zero-hit diagnostic must be ready"
+    },
+    {
+      "id": "checkpoint_exists",
+      "status": "pass",
+      "actual": "D:\\aiproj\\e\\838\\解释\\model-capability-route-promotion-bounded-objective-training-run\\run\\checkpoint.pt",
+      "detail": "checkpoint.pt must exist"
+    },
+    {
+      "id": "tokenizer_exists",
+      "status": "pass",
+      "actual": "D:\\aiproj\\e\\838\\解释\\model-capability-route-promotion-bounded-objective-training-run\\run\\tokenizer.json",
+      "detail": "tokenizer.json must exist"
+    },
+    {
+      "id": "replay_rows_present",
+      "status": "pass",
+      "actual": 3,
+      "detail": "probe must have objective replay rows"
+    },
+    {
+      "id": "all_probe_rows_executed",
+      "status": "pass",
+      "actual": 9,
+      "detail": "probe must execute every case/profile pair"
+    },
+    {
+      "id": "no_probe_errors",
+      "status": "pass",
+      "actual": 0,
+      "detail": "probe should not raise generation errors"
+    }
+  ],
+  "probe": {
+    "ready": true,
+    "case_count": 3,
+    "profile_count": 3,
+    "probe_row_count": 9,
+    "source_zero_hit_case_count": 3,
+    "diagnosed_near_miss_case_count": 3,
+    "anchor_assisted_pass_count": 9,
+    "completion_pass_count": 9,
+    "new_text_pass_count": 0,
+    "anchor_completion_success": true,
+    "new_text_success": false,
+    "promotion_ready": false,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_objective_decoder_anchor_policy",
+    "next_step": "build_bounded_objective_decoder_anchor_policy"
+  },
+  "summary": {
+    "bounded_objective_decoder_anchor_probe_ready": true,
+    "case_count": 3,
+    "profile_count": 3,
+    "probe_row_count": 9,
+    "source_zero_hit_case_count": 3,
+    "anchor_assisted_pass_count": 9,
+    "completion_pass_count": 9,
+    "new_text_pass_count": 0,
+    "anchor_completion_success": true,
+    "new_text_success": false,
+    "promotion_ready": false,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_objective_decoder_anchor_policy",
+    "next_step": "build_bounded_objective_decoder_anchor_policy",
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "decoder_anchor_signal_only",
+    "reason": "Anchored prompts can complete fixed/loss, but this is assisted evidence and does not repair unassisted objective replay.",
+    "next_action": "build_bounded_objective_decoder_anchor_policy"
+  }
+}

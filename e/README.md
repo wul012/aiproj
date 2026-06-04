@@ -111,6 +111,10 @@ e/839/解释/说明.md
 e/840/图片
 e/840/解释/说明.md
  -> v840 bounded objective zero-hit diagnostic 的运行截图和解释
+
+e/841/图片
+e/841/解释/说明.md
+ -> v841 bounded objective decoder anchor probe 的运行截图和解释
 ```
 
 ```text

@@ -80,6 +80,9 @@
 854-v840-route-promotion-bounded-objective-zero-hit-diagnostic.md
  -> v840 code explanation: diagnose why direct objective training still produced zero-hit near-miss generations.
 
+855-v841-route-promotion-bounded-objective-decoder-anchor-probe.md
+ -> v841 code explanation: probe whether decoder anchors can recover bounded objective terms while keeping promotion blocked.
+
 487-v473-baseline-candidate-capability-delta.md
  -> v473 code explanation: carry real tiny training loss and generation-quality deltas into the baseline-candidate eval loop.
 

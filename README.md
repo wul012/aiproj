@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v840.0.0` diagnoses why the v839 bounded-objective replay produced zero required-term hits.
+Version `v841.0.0` probes whether decoder anchors can recover the v839 bounded-objective zero-hit cases without claiming unassisted promotion.
+
+## Latest v841 checkpoint
+
+- Added `model_capability_route_promotion_bounded_objective_decoder_anchor_probe`.
+- Added CLI `scripts/run_model_capability_route_promotion_bounded_objective_decoder_anchor_probe.py`.
+- Consumed the real v839 replay comparison, v840 zero-hit diagnostic, and v838 checkpoint/tokenizer.
+- Ran three anchor profiles (`prefix_f`, `prefix_fixed_space`, `prefix_fixed_l`) across the three objective replay cases.
+- Produced `probe_row_count=9`, `anchor_assisted_pass_count=9`, `completion_pass_count=9`, and `new_text_pass_count=0`.
+- Confirmed `anchor_completion_success=True` while keeping `promotion_ready=False`.
+- Kept the model-quality claim as `decoder_anchor_signal_only`; this is assisted decoder evidence, not unassisted replay recovery.
+- Routed the next artifact to `model_capability_route_promotion_bounded_objective_decoder_anchor_policy`.
+- Verified with `4 passed` focused bounded objective decoder anchor probe tests.
+- Archived v841 evidence in `e/841` and added the code explanation in `代码讲解记录_模型能力阶段/855-v841-route-promotion-bounded-objective-decoder-anchor-probe.md`.
 
 ## Latest v840 checkpoint
 
