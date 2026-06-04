@@ -1,0 +1,32 @@
+example_id,kind,prompt,completion,source_profile_id,source_case_id,decoder_anchor
+longer-top20-minimal-direct-completion-loss-to-pair,loss_signal_pair_bridge,"Answer with exactly two words: fixed loss
+answer:",fixed loss,longer-top20,minimal_direct_completion,False
+longer-top20-minimal-direct-completion-loss-prefix-repair,loss_signal_prefix_repair,"Answer with exactly two words: fixed loss
+answer:
+loss",fixed loss,longer-top20,minimal_direct_completion,False
+longer-open-canonical-direct-completion-loss-to-pair,loss_signal_pair_bridge,"Answer with exactly two tokens: fixed loss
+answer:",fixed loss,longer-open,canonical_direct_completion,False
+longer-open-canonical-direct-completion-loss-prefix-repair,loss_signal_prefix_repair,"Answer with exactly two tokens: fixed loss
+answer:
+loss",fixed loss,longer-open,canonical_direct_completion,False
+longer-open-completion-label-surface-loss-to-pair,loss_signal_pair_bridge,"Complete with exactly two tokens: fixed loss
+completion:",fixed loss,longer-open,completion_label_surface,False
+longer-open-completion-label-surface-loss-prefix-repair,loss_signal_prefix_repair,"Complete with exactly two tokens: fixed loss
+completion:
+loss",fixed loss,longer-open,completion_label_surface,False
+v857-baseline-canonical-direct-completion-fixed-to-pair,fixed_signal_pair_bridge,"Answer with exactly two tokens: fixed loss
+answer:",fixed loss,v857-baseline,canonical_direct_completion,False
+v857-baseline-completion-label-surface-fixed-to-pair,fixed_signal_pair_bridge,"Complete with exactly two tokens: fixed loss
+completion:",fixed loss,v857-baseline,completion_label_surface,False
+top1-low-temp-canonical-direct-completion-fixed-to-pair,fixed_signal_pair_bridge,"Answer with exactly two tokens: fixed loss
+answer:",fixed loss,top1-low-temp,canonical_direct_completion,False
+top1-low-temp-completion-label-surface-fixed-to-pair,fixed_signal_pair_bridge,"Complete with exactly two tokens: fixed loss
+completion:",fixed loss,top1-low-temp,completion_label_surface,False
+top3-low-temp-completion-label-surface-fixed-to-pair,fixed_signal_pair_bridge,"Complete with exactly two tokens: fixed loss
+completion:",fixed loss,top3-low-temp,completion_label_surface,False
+longer-top20-canonical-direct-completion-fixed-to-pair,fixed_signal_pair_bridge,"Answer with exactly two tokens: fixed loss
+answer:",fixed loss,longer-top20,canonical_direct_completion,False
+pair-direct-repeat-a,pair_reinforcement,answer:,fixed loss,,,False
+pair-direct-repeat-b,pair_reinforcement,completion:,fixed loss,,,False
+fixed-loss-line-bridge,pair_reinforcement,fixed,loss,,,False
+loss-needs-fixed-context,pair_reinforcement,loss belongs with,fixed loss,,,False

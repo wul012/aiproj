@@ -137,6 +137,9 @@
 873-v859-bounded-objective-curriculum-patch-profile-sweep.md
  -> v859 code explanation: sweep decode profiles and isolate loss signal without contract recovery.
 
+874-v860-bounded-objective-loss-signal-bridge.md
+ -> v860 code explanation: convert loss-only and fixed-only profile signals into no-anchor bridge corpus.
+
 487-v473-baseline-candidate-capability-delta.md
  -> v473 code explanation: carry real tiny training loss and generation-quality deltas into the baseline-candidate eval loop.
 

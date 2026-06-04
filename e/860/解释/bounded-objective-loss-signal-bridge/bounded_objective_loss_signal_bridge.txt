@@ -1,0 +1,10 @@
+status=pass
+decision=bounded_objective_loss_signal_bridge_ready
+bounded_objective_loss_signal_bridge_ready=True
+bridge_example_count=16
+loss_signal_bridge_example_count=6
+fixed_signal_bridge_example_count=6
+pair_reinforcement_example_count=4
+bridged_corpus_char_count=3908
+model_quality_claim=bridge_corpus_only
+next_step=train_bounded_objective_loss_signal_bridge

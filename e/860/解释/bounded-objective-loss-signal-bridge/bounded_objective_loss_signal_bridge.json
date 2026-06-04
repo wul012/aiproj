@@ -1,0 +1,383 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT bounded objective loss signal bridge",
+  "generated_at": "2026-06-04T12:23:31Z",
+  "status": "pass",
+  "decision": "bounded_objective_loss_signal_bridge_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_profile_sweep": "e\\859\\解释\\bounded-objective-curriculum-patch-profile-sweep\\bounded_objective_curriculum_patch_profile_sweep.json",
+  "source_corpus": "e\\855\\解释\\model-capability-route-promotion-bounded-objective-unassisted-repair-seed-revision-curriculum-patch\\model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_curriculum_patch_corpus.txt",
+  "profile_sweep_summary": {
+    "bounded_objective_curriculum_patch_profile_sweep_ready": true,
+    "case_count": 3,
+    "profile_count": 5,
+    "sweep_row_count": 15,
+    "any_profile_recovered": false,
+    "profile_with_loss_hit_count": 2,
+    "max_passed_case_count": 0,
+    "max_any_hit_case_count": 3,
+    "max_loss_hit_case_count": 2,
+    "best_profile_id": "longer-open",
+    "best_profile_loss_hit_case_count": 2,
+    "best_profile_any_hit_case_count": 2,
+    "model_quality_claim": "decode_profile_sweep_only",
+    "next_action": "build_loss_signal_bridge_without_promotion"
+  },
+  "source_signal_summary": {
+    "loss_only_row_count": 3,
+    "fixed_only_row_count": 7,
+    "loss_signal_case_ids": [
+      "canonical_direct_completion",
+      "completion_label_surface",
+      "minimal_direct_completion"
+    ],
+    "fixed_signal_case_ids": [
+      "canonical_direct_completion",
+      "completion_label_surface"
+    ],
+    "loss_signal_profile_ids": [
+      "longer-open",
+      "longer-top20"
+    ]
+  },
+  "bridge_examples": [
+    {
+      "example_id": "longer-top20-minimal-direct-completion-loss-to-pair",
+      "kind": "loss_signal_pair_bridge",
+      "prompt": "Answer with exactly two words: fixed loss\nanswer:",
+      "completion": "fixed loss",
+      "text": "Answer with exactly two words: fixed loss\nanswer:\nfixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "source_profile_id": "longer-top20",
+      "source_case_id": "minimal_direct_completion",
+      "source_continuation": " loss\n\n\n\n\n\n\n",
+      "purpose": "turn a loss-only generation signal into the exact fixed loss pair"
+    },
+    {
+      "example_id": "longer-top20-minimal-direct-completion-loss-prefix-repair",
+      "kind": "loss_signal_prefix_repair",
+      "prompt": "Answer with exactly two words: fixed loss\nanswer:\nloss",
+      "completion": "fixed loss",
+      "text": "Answer with exactly two words: fixed loss\nanswer:\nloss\nfixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "source_profile_id": "longer-top20",
+      "source_case_id": "minimal_direct_completion",
+      "source_continuation": " loss\n\n\n\n\n\n\n",
+      "purpose": "teach that a loss prefix still needs fixed loss as the canonical pair"
+    },
+    {
+      "example_id": "longer-open-canonical-direct-completion-loss-to-pair",
+      "kind": "loss_signal_pair_bridge",
+      "prompt": "Answer with exactly two tokens: fixed loss\nanswer:",
+      "completion": "fixed loss",
+      "text": "Answer with exactly two tokens: fixed loss\nanswer:\nfixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "source_profile_id": "longer-open",
+      "source_case_id": "canonical_direct_completion",
+      "source_continuation": " fixer: loss",
+      "purpose": "turn a loss-only generation signal into the exact fixed loss pair"
+    },
+    {
+      "example_id": "longer-open-canonical-direct-completion-loss-prefix-repair",
+      "kind": "loss_signal_prefix_repair",
+      "prompt": "Answer with exactly two tokens: fixed loss\nanswer:\nloss",
+      "completion": "fixed loss",
+      "text": "Answer with exactly two tokens: fixed loss\nanswer:\nloss\nfixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "source_profile_id": "longer-open",
+      "source_case_id": "canonical_direct_completion",
+      "source_continuation": " fixer: loss",
+      "purpose": "teach that a loss prefix still needs fixed loss as the canonical pair"
+    },
+    {
+      "example_id": "longer-open-completion-label-surface-loss-to-pair",
+      "kind": "loss_signal_pair_bridge",
+      "prompt": "Complete with exactly two tokens: fixed loss\ncompletion:",
+      "completion": "fixed loss",
+      "text": "Complete with exactly two tokens: fixed loss\ncompletion:\nfixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "source_profile_id": "longer-open",
+      "source_case_id": "completion_label_surface",
+      "source_continuation": " fixet lossw",
+      "purpose": "turn a loss-only generation signal into the exact fixed loss pair"
+    },
+    {
+      "example_id": "longer-open-completion-label-surface-loss-prefix-repair",
+      "kind": "loss_signal_prefix_repair",
+      "prompt": "Complete with exactly two tokens: fixed loss\ncompletion:\nloss",
+      "completion": "fixed loss",
+      "text": "Complete with exactly two tokens: fixed loss\ncompletion:\nloss\nfixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "source_profile_id": "longer-open",
+      "source_case_id": "completion_label_surface",
+      "source_continuation": " fixet lossw",
+      "purpose": "teach that a loss prefix still needs fixed loss as the canonical pair"
+    },
+    {
+      "example_id": "v857-baseline-canonical-direct-completion-fixed-to-pair",
+      "kind": "fixed_signal_pair_bridge",
+      "prompt": "Answer with exactly two tokens: fixed loss\nanswer:",
+      "completion": "fixed loss",
+      "text": "Answer with exactly two tokens: fixed loss\nanswer:\nfixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "source_profile_id": "v857-baseline",
+      "source_case_id": "canonical_direct_completion",
+      "source_continuation": " fixed l",
+      "purpose": "retain fixed while adding loss in the same completion"
+    },
+    {
+      "example_id": "v857-baseline-completion-label-surface-fixed-to-pair",
+      "kind": "fixed_signal_pair_bridge",
+      "prompt": "Complete with exactly two tokens: fixed loss\ncompletion:",
+      "completion": "fixed loss",
+      "text": "Complete with exactly two tokens: fixed loss\ncompletion:\nfixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "source_profile_id": "v857-baseline",
+      "source_case_id": "completion_label_surface",
+      "source_continuation": " fixed l",
+      "purpose": "retain fixed while adding loss in the same completion"
+    },
+    {
+      "example_id": "top1-low-temp-canonical-direct-completion-fixed-to-pair",
+      "kind": "fixed_signal_pair_bridge",
+      "prompt": "Answer with exactly two tokens: fixed loss\nanswer:",
+      "completion": "fixed loss",
+      "text": "Answer with exactly two tokens: fixed loss\nanswer:\nfixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "source_profile_id": "top1-low-temp",
+      "source_case_id": "canonical_direct_completion",
+      "source_continuation": " fixed l",
+      "purpose": "retain fixed while adding loss in the same completion"
+    },
+    {
+      "example_id": "top1-low-temp-completion-label-surface-fixed-to-pair",
+      "kind": "fixed_signal_pair_bridge",
+      "prompt": "Complete with exactly two tokens: fixed loss\ncompletion:",
+      "completion": "fixed loss",
+      "text": "Complete with exactly two tokens: fixed loss\ncompletion:\nfixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "source_profile_id": "top1-low-temp",
+      "source_case_id": "completion_label_surface",
+      "source_continuation": " fixed l",
+      "purpose": "retain fixed while adding loss in the same completion"
+    },
+    {
+      "example_id": "top3-low-temp-completion-label-surface-fixed-to-pair",
+      "kind": "fixed_signal_pair_bridge",
+      "prompt": "Complete with exactly two tokens: fixed loss\ncompletion:",
+      "completion": "fixed loss",
+      "text": "Complete with exactly two tokens: fixed loss\ncompletion:\nfixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "source_profile_id": "top3-low-temp",
+      "source_case_id": "completion_label_surface",
+      "source_continuation": " fixed los",
+      "purpose": "retain fixed while adding loss in the same completion"
+    },
+    {
+      "example_id": "longer-top20-canonical-direct-completion-fixed-to-pair",
+      "kind": "fixed_signal_pair_bridge",
+      "prompt": "Answer with exactly two tokens: fixed loss\nanswer:",
+      "completion": "fixed loss",
+      "text": "Answer with exactly two tokens: fixed loss\nanswer:\nfixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "source_profile_id": "longer-top20",
+      "source_case_id": "canonical_direct_completion",
+      "source_continuation": " fixed los\n\n",
+      "purpose": "retain fixed while adding loss in the same completion"
+    },
+    {
+      "example_id": "pair-direct-repeat-a",
+      "kind": "pair_reinforcement",
+      "prompt": "answer:",
+      "completion": "fixed loss",
+      "text": "answer:\nfixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "source_profile_id": null,
+      "source_case_id": null,
+      "source_continuation": null,
+      "purpose": "repeat the exact bounded objective pair without decoder anchors"
+    },
+    {
+      "example_id": "pair-direct-repeat-b",
+      "kind": "pair_reinforcement",
+      "prompt": "completion:",
+      "completion": "fixed loss",
+      "text": "completion:\nfixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "source_profile_id": null,
+      "source_case_id": null,
+      "source_continuation": null,
+      "purpose": "repeat the exact bounded objective pair without decoder anchors"
+    },
+    {
+      "example_id": "fixed-loss-line-bridge",
+      "kind": "pair_reinforcement",
+      "prompt": "fixed",
+      "completion": "loss",
+      "text": "fixed\nloss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "source_profile_id": null,
+      "source_case_id": null,
+      "source_continuation": null,
+      "purpose": "repeat the exact bounded objective pair without decoder anchors"
+    },
+    {
+      "example_id": "loss-needs-fixed-context",
+      "kind": "pair_reinforcement",
+      "prompt": "loss belongs with",
+      "completion": "fixed loss",
+      "text": "loss belongs with\nfixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "source_profile_id": null,
+      "source_case_id": null,
+      "source_continuation": null,
+      "purpose": "repeat the exact bounded objective pair without decoder anchors"
+    }
+  ],
+  "bridged_corpus_text": "Answer with exactly two tokens: fixed loss\nanswer: fixed loss\n\nReturn the exact two-token objective output.\nanswer: # canonical_direct_completion fixed loss\n\nObserved fragment `los` is incomplete. Write the full target answer.\nanswer: # canonical_direct_completion fixed loss\n\nanswer: # canonical_direct_completion fixed loss\n\nAnswer with exactly two tokens: fixed loss\nanswer:\nReturn only the answer.\nanswer: fixed loss\n\nEmit the canonical target response.\nanswer: # canonical_direct_completion fixed loss\n\nObserved fragment `wixed` is incomplete. Write the full target answer.\nanswer: # canonical_direct_completion fixed loss\n\ncompletion: # canonical_direct_completion fixed loss\n\nAnswer with exactly two words: fixed loss\nanswer: fixed loss\n\nReturn the exact two-token objective output.\nanswer: # minimal_direct_completion fixed loss\n\nObserved fragment `los` is incomplete. Write the full target answer.\nanswer: # minimal_direct_completion fixed loss\n\nanswer: # minimal_direct_completion fixed loss\n\nAnswer with exactly two words: fixed loss\nanswer:\nReturn only the answer.\nanswer: fixed loss\n\nEmit the canonical target response.\nanswer: # minimal_direct_completion fixed loss\n\nObserved fragment `wixed` is incomplete. Write the full target answer.\nanswer: # minimal_direct_completion fixed loss\n\ncompletion: # minimal_direct_completion fixed loss\n\nComplete with exactly two tokens: fixed loss\ncompletion: fixed loss\n\nReturn the exact two-token objective output.\nanswer: # completion_label_surface fixed loss\n\nObserved fragment `los` is incomplete. Write the full target answer.\nanswer: # completion_label_surface fixed loss\n\nanswer: # completion_label_surface fixed loss\n\nComplete with exactly two tokens: fixed loss\ncompletion:\nReturn only the answer.\nanswer: fixed loss\n\nEmit the canonical target response.\nanswer: # completion_label_surface fixed loss\n\nObserved fragment `wixed` is incomplete. Write the full target answer.\nanswer: # completion_label_surface fixed loss\n\ncompletion: # completion_label_surface fixed loss\n\n# v855 curriculum patch\n\nAnswer with exactly two tokens: fixed loss\nanswer:\nfixed loss\n\nAnswer with exactly two tokens: fixed loss\nanswer:\nfixed loss\n\nAnswer with exactly two tokens: fixed loss\nanswer:\nfixed\nloss\n\nAnswer with exactly two tokens: fixed loss\nanswer:\nfixed loss\nnot: fixed t\n\nAnswer with exactly two words: fixed loss\nanswer:\nfixed loss\n\nAnswer with exactly two words: fixed loss\nanswer:\nfixed loss\n\nAnswer with exactly two words: fixed loss\nanswer:\nfixed\nloss\n\nAnswer with exactly two words: fixed loss\nanswer:\nfixed loss\nnot: fixed t\n\nComplete with exactly two tokens: fixed loss\ncompletion:\nfixed loss\n\nComplete with exactly two tokens: fixed loss\ncompletion:\nfixed loss\n\nComplete with exactly two tokens: fixed loss\ncompletion:\nfixed\nloss\n\nComplete with exactly two tokens: fixed loss\ncompletion:\nfixed loss\nnot: fixed t\n\nfixed\nloss\n\nContinue after fixed:\nloss\n\ntarget:\nfixed loss\n\ntarget:\nfixed loss\n\ncompletion:\nfixed loss\n\ncompletion:\nfixed loss\n\n# v860 loss signal bridge\n\nAnswer with exactly two words: fixed loss\nanswer:\nfixed loss\n\nAnswer with exactly two words: fixed loss\nanswer:\nloss\nfixed loss\n\nAnswer with exactly two tokens: fixed loss\nanswer:\nfixed loss\n\nAnswer with exactly two tokens: fixed loss\nanswer:\nloss\nfixed loss\n\nComplete with exactly two tokens: fixed loss\ncompletion:\nfixed loss\n\nComplete with exactly two tokens: fixed loss\ncompletion:\nloss\nfixed loss\n\nAnswer with exactly two tokens: fixed loss\nanswer:\nfixed loss\n\nComplete with exactly two tokens: fixed loss\ncompletion:\nfixed loss\n\nAnswer with exactly two tokens: fixed loss\nanswer:\nfixed loss\n\nComplete with exactly two tokens: fixed loss\ncompletion:\nfixed loss\n\nComplete with exactly two tokens: fixed loss\ncompletion:\nfixed loss\n\nAnswer with exactly two tokens: fixed loss\nanswer:\nfixed loss\n\nanswer:\nfixed loss\n\ncompletion:\nfixed loss\n\nfixed\nloss\n\nloss belongs with\nfixed loss\n",
+  "check_rows": [
+    {
+      "id": "profile_sweep_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "profile sweep must pass structurally"
+    },
+    {
+      "id": "profile_sweep_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "profile sweep must be ready"
+    },
+    {
+      "id": "loss_signal_present",
+      "status": "pass",
+      "actual": 2,
+      "detail": "bridge should only follow a profile sweep with loss signal"
+    },
+    {
+      "id": "contract_not_recovered",
+      "status": "pass",
+      "actual": false,
+      "detail": "bridge should not replace holdout if a profile already recovered the contract"
+    },
+    {
+      "id": "sweep_rows_present",
+      "status": "pass",
+      "actual": 15,
+      "detail": "profile sweep rows must be present"
+    },
+    {
+      "id": "bridge_examples_present",
+      "status": "pass",
+      "actual": 16,
+      "detail": "bridge examples must be generated"
+    },
+    {
+      "id": "decoder_anchor_free",
+      "status": "pass",
+      "actual": false,
+      "detail": "bridge examples must stay no-anchor"
+    }
+  ],
+  "loss_signal_bridge": {
+    "ready": true,
+    "bridge_example_count": 16,
+    "loss_signal_bridge_example_count": 6,
+    "fixed_signal_bridge_example_count": 6,
+    "pair_reinforcement_example_count": 4,
+    "decoder_anchor_example_count": 0,
+    "bridged_corpus_char_count": 3908,
+    "proposed_next_artifact": "bounded_objective_loss_signal_bridge_training_run",
+    "next_step": "train_bounded_objective_loss_signal_bridge"
+  },
+  "summary": {
+    "bounded_objective_loss_signal_bridge_ready": true,
+    "bridge_example_count": 16,
+    "loss_signal_bridge_example_count": 6,
+    "fixed_signal_bridge_example_count": 6,
+    "pair_reinforcement_example_count": 4,
+    "decoder_anchor_example_count": 0,
+    "original_corpus_char_count": 2996,
+    "bridged_corpus_char_count": 3908,
+    "bridge_kinds": [
+      "fixed_signal_pair_bridge",
+      "loss_signal_pair_bridge",
+      "loss_signal_prefix_repair",
+      "pair_reinforcement"
+    ],
+    "failed_check_count": 0,
+    "model_quality_claim": "bridge_corpus_only",
+    "proposed_next_artifact": "bounded_objective_loss_signal_bridge_training_run",
+    "next_step": "train_bounded_objective_loss_signal_bridge"
+  },
+  "interpretation": {
+    "model_quality_claim": "bridge_corpus_only",
+    "reason": "Loss appears in profile sweep rows, but fixed/loss co-occurrence still needs bridge training.",
+    "next_action": "train_bounded_objective_loss_signal_bridge"
+  }
+}

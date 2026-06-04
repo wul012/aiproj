@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v859.0.0` runs a CPU-aligned decode profile sweep for the v856 curriculum patch checkpoint and finds loss signal without contract recovery.
+Version `v860.0.0` converts v859 loss-only and fixed-only profile signals into a no-anchor bridge corpus for the next training run.
+
+## Latest v860 checkpoint
+
+- Added short-name module `bounded_objective_loss_signal_bridge`.
+- Added CLI `scripts/build_bounded_objective_loss_signal_bridge.py`.
+- Consumed v859 profile sweep plus the v855 patched corpus.
+- Generated `bridge_example_count=16`, including `loss_signal_bridge_example_count=6`, `fixed_signal_bridge_example_count=6`, and `pair_reinforcement_example_count=4`.
+- Produced `bounded_objective_loss_signal_bridge_examples.jsonl` and `bounded_objective_loss_signal_bridge_corpus.txt`.
+- Kept every bridge example `decoder_anchor=False`.
+- Kept `model_quality_claim=bridge_corpus_only`; no checkpoint capability is claimed before training/replay.
+- Routed the next artifact to `train_bounded_objective_loss_signal_bridge`.
+- Verified with `3 passed` focused loss-signal-bridge tests and Playwright MCP screenshot evidence.
+- Archived v860 evidence in `e/860` and added the code explanation in `代码讲解记录_模型能力阶段/874-v860-bounded-objective-loss-signal-bridge.md`.
 
 ## Latest v859 checkpoint
 
