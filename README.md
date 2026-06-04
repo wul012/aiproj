@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v833.0.0` runs a real decoder profile sweep on the v830 rebalanced checkpoint and confirms that sampling changes do not recover bounded replay required-term hits.
+Version `v834.0.0` closes the rebalanced decoder-rescue branch and selects an objective-contract intervention before any further training.
+
+## Latest v834 checkpoint
+
+- Added `model_capability_route_promotion_bounded_rebalanced_intervention_decision`.
+- Added CLI `scripts/build_model_capability_route_promotion_bounded_rebalanced_intervention_decision.py`.
+- Consumed v829 rebalanced seed, v830 training, v831 comparison, v832 diagnostic, and v833 profile sweep evidence.
+- Confirmed the rescue branch has repaired distribution, real training, zero-hit replay, no profile recovery, and no required-term hits across profiles.
+- Produced `decision=stop_rebalanced_decoder_rescue_and_design_objective_contract_intervention`.
+- Selected `objective_contract_intervention_first` with fallback `architecture_capacity_probe_if_objective_contract_fails`.
+- Kept `promotion_allowed=False` and `new_training_allowed=False` until a new objective intervention plan exists.
+- Routed the next artifact to `model_capability_route_promotion_bounded_objective_intervention_plan`.
+- Verified with `4 passed` focused intervention decision tests.
+- Archived v834 evidence in `e/834` and added the code explanation in `代码讲解记录_模型能力阶段/848-v834-route-promotion-bounded-rebalanced-intervention-decision.md`.
 
 ## Latest v833 checkpoint
 

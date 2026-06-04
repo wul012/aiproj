@@ -1,0 +1,6 @@
+stage,status,signal,values
+rebalanced_seed_revision,pass,direct/carry distribution repaired,"{""carry_forward_share"": 0.25, ""direct_answer_share"": 0.375}"
+rebalanced_training_run,pass,real checkpoint was trained from the rebalanced corpus,"{""final_val_loss"": 4.194498062133789}"
+checkpoint_comparison,pass,rebalanced checkpoint did not beat baseline or recover promotion,"{""delta_baseline"": -0.4, ""passed"": 0}"
+failure_diagnostic,pass,all replay cases remained zero-hit after rebalancing,"{""fragment_like_case_count"": 5, ""zero_hit_case_count"": 5}"
+profile_sweep,pass,decoder profile sweep did not recover required terms,"{""best_any_hit_case_count"": 0, ""best_passed_case_count"": 0, ""best_profile_id"": ""greedy_short""}"

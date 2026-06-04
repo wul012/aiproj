@@ -59,6 +59,9 @@
 847-v833-route-promotion-bounded-real-replay-decoder-anchor-rebalanced-profile-sweep.md
  -> v833 code explanation: sweep decoder profiles against the real rebalanced checkpoint and decide whether sampling can recover bounded replay.
 
+848-v834-route-promotion-bounded-rebalanced-intervention-decision.md
+ -> v834 code explanation: close the rebalanced decoder-rescue branch and select objective-contract intervention before more training.
+
 487-v473-baseline-candidate-capability-delta.md
  -> v473 code explanation: carry real tiny training loss and generation-quality deltas into the baseline-candidate eval loop.
 

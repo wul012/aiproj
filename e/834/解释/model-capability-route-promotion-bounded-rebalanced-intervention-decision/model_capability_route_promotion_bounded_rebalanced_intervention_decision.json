@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability route promotion bounded rebalanced intervention decision",
+  "generated_at": "2026-06-04T00:30:34Z",
+  "status": "pass",
+  "decision": "stop_rebalanced_decoder_rescue_and_design_objective_contract_intervention",
+  "failed_count": 0,
+  "issues": [],
+  "source_rebalanced_seed_revision": "e\\829\\解释\\model-capability-route-promotion-bounded-real-replay-decoder-anchor-rebalanced-seed-revision\\model_capability_route_promotion_bounded_real_replay_decoder_anchor_rebalanced_seed_revision.json",
+  "source_rebalanced_training_run": "e\\830\\解释\\model-capability-route-promotion-bounded-real-replay-decoder-anchor-rebalanced-training-run\\model_capability_route_promotion_bounded_real_replay_decoder_anchor_rebalanced_training_run.json",
+  "source_rebalanced_comparison": "e\\831\\解释\\model-capability-route-promotion-bounded-real-replay-decoder-anchor-rebalanced-checkpoint-comparison\\model_capability_route_promotion_bounded_real_replay_decoder_anchor_rebalanced_checkpoint_comparison.json",
+  "source_failure_diagnostic": "e\\832\\解释\\model-capability-route-promotion-bounded-real-replay-decoder-anchor-rebalanced-failure-diagnostic\\model_capability_route_promotion_bounded_real_replay_decoder_anchor_rebalanced_failure_diagnostic.json",
+  "source_profile_sweep": "e\\833\\解释\\model-capability-route-promotion-bounded-real-replay-decoder-anchor-rebalanced-profile-sweep\\model_capability_route_promotion_bounded_real_replay_decoder_anchor_rebalanced_profile_sweep.json",
+  "evidence_rows": [
+    {
+      "stage": "rebalanced_seed_revision",
+      "status": "pass",
+      "signal": "direct/carry distribution repaired",
+      "values": {
+        "direct_answer_share": 0.375,
+        "carry_forward_share": 0.25
+      }
+    },
+    {
+      "stage": "rebalanced_training_run",
+      "status": "pass",
+      "signal": "real checkpoint was trained from the rebalanced corpus",
+      "values": {
+        "final_val_loss": 4.194498062133789
+      }
+    },
+    {
+      "stage": "checkpoint_comparison",
+      "status": "pass",
+      "signal": "rebalanced checkpoint did not beat baseline or recover promotion",
+      "values": {
+        "delta_baseline": -0.4,
+        "passed": 0
+      }
+    },
+    {
+      "stage": "failure_diagnostic",
+      "status": "pass",
+      "signal": "all replay cases remained zero-hit after rebalancing",
+      "values": {
+        "zero_hit_case_count": 5,
+        "fragment_like_case_count": 5
+      }
+    },
+    {
+      "stage": "profile_sweep",
+      "status": "pass",
+      "signal": "decoder profile sweep did not recover required terms",
+      "values": {
+        "best_profile_id": "greedy_short",
+        "best_passed_case_count": 0,
+        "best_any_hit_case_count": 0
+      }
+    }
+  ],
+  "route": {
+    "closed_route": "decoder_anchor_rebalanced_rescue",
+    "evidence_window": "v829-v833",
+    "selected_intervention_track": "objective_contract_intervention_first",
+    "fallback_intervention_track": "architecture_capacity_probe_if_objective_contract_fails",
+    "recommended_next_artifact": "model_capability_route_promotion_bounded_objective_intervention_plan",
+    "promotion_allowed": false,
+    "new_training_allowed": false,
+    "blocked_actions": [
+      "do_not_continue_decoder_profile_rescue",
+      "do_not_add_more_rebalanced_training_epochs_without_new_objective",
+      "do_not_claim_model_quality_improvement"
+    ],
+    "stop_reasons": [
+      "distribution_repaired",
+      "rebalanced_replay_zero_hit",
+      "decoder_profile_sweep_no_recovery",
+      "no_required_term_hit_across_profiles"
+    ]
+  },
+  "signals": {
+    "case_count": 5,
+    "distribution_repaired": true,
+    "direct_answer_share": 0.375,
+    "carry_forward_share": 0.25,
+    "decoder_bridge_share": 0.375,
+    "training_ready": true,
+    "final_val_loss": 4.194498062133789,
+    "rebalanced_vs_baseline_pass_rate_delta": -0.4,
+    "rebalanced_vs_decoder_anchor_pass_rate_delta": 0.0,
+    "rebalanced_passed_case_count": 0,
+    "comparison_promotion_ready": false,
+    "zero_hit_all_cases": true,
+    "zero_hit_case_count": 5,
+    "fragment_like_case_count": 5,
+    "root_cause_count": 4,
+    "profile_sweep_no_recovery": true,
+    "best_profile_id": "greedy_short",
+    "best_passed_case_count": 0,
+    "best_any_hit_case_count": 0,
+    "any_profile_recovered": false,
+    "profile_promotion_ready": false
+  },
+  "summary": {
+    "intervention_decision_ready": true,
+    "intervention_selected": true,
+    "selected_intervention_track": "objective_contract_intervention_first",
+    "fallback_intervention_track": "architecture_capacity_probe_if_objective_contract_fails",
+    "recommended_next_artifact": "model_capability_route_promotion_bounded_objective_intervention_plan",
+    "promotion_allowed": false,
+    "new_training_allowed": false,
+    "case_count": 5,
+    "distribution_repaired": true,
+    "zero_hit_all_cases": true,
+    "profile_sweep_no_recovery": true,
+    "best_profile_id": "greedy_short",
+    "best_passed_case_count": 0,
+    "best_any_hit_case_count": 0,
+    "stop_reason_count": 4,
+    "blocked_action_count": 3,
+    "evidence_row_count": 5,
+    "failed_check_count": 0,
+    "next_step": "model_capability_route_promotion_bounded_objective_intervention_plan"
+  },
+  "interpretation": {
+    "model_quality_claim": "route_decision_only",
+    "reason": "Distribution repair, training, comparison, diagnostic, and profile sweep all indicate the rebalanced decoder-rescue route has no required-term recovery.",
+    "next_action": "model_capability_route_promotion_bounded_objective_intervention_plan"
+  }
+}
