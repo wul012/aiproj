@@ -191,6 +191,10 @@ e/859/解释/说明.md
 e/860/图片
 e/860/解释/说明.md
  -> v860 bounded objective loss signal bridge 的运行截图和解释
+
+e/861/图片
+e/861/解释/说明.md
+ -> v861 bounded objective loss signal bridge training run 的运行截图和解释
 ```
 
 ```text

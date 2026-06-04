@@ -140,6 +140,9 @@
 874-v860-bounded-objective-loss-signal-bridge.md
  -> v860 code explanation: convert loss-only and fixed-only profile signals into no-anchor bridge corpus.
 
+875-v861-bounded-objective-loss-signal-bridge-training-run.md
+ -> v861 code explanation: train the loss-signal bridge corpus into a real checkpoint while keeping capability gated behind replay.
+
 487-v473-baseline-candidate-capability-delta.md
  -> v473 code explanation: carry real tiny training loss and generation-quality deltas into the baseline-candidate eval loop.
 

@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v860.0.0` converts v859 loss-only and fixed-only profile signals into a no-anchor bridge corpus for the next training run.
+Version `v861.0.0` trains a real tiny checkpoint from the v860 loss-signal bridge corpus and records training evidence.
+
+## Latest v861 checkpoint
+
+- Added short-name module `bounded_objective_loss_signal_bridge_training_run`.
+- Added CLI `scripts/build_bounded_objective_loss_signal_bridge_training_run.py`.
+- Trained a real tiny checkpoint from `bounded_objective_loss_signal_bridge_corpus.txt` for `100` steps on CPU.
+- Recorded `final_train_loss=1.4715137481689453`, `final_val_loss=1.118106722831726`, and `train_loss_delta=-2.121356`.
+- Preserved `repair_example_count=16`, `neutral_prompt_example_count=6`, and `decoder_anchor_example_count=0`.
+- Produced checkpoint, tokenizer, metrics, train config, run manifest, sample, loss curve, and prepared corpus artifacts.
+- Kept `model_quality_claim=training_artifact_only`; capability still requires replay.
+- Routed the next artifact to `bounded_objective_loss_signal_bridge_replay_comparison`.
+- Verified with `3 passed` focused loss-signal-bridge training-run tests and Playwright MCP screenshot evidence.
+- Archived v861 evidence in `e/861` and added the code explanation in `代码讲解记录_模型能力阶段/875-v861-bounded-objective-loss-signal-bridge-training-run.md`.
 
 ## Latest v860 checkpoint
 
