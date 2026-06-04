@@ -4,7 +4,22 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v852.0.0` trains a real tiny checkpoint from the bounded-objective unassisted repair seed revision.
+Version `v853.0.0` replays the v852 seed revision checkpoint against the bounded objective contract and records partial required-term uptake.
+
+## Latest v853 checkpoint
+
+- Added `model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_replay_comparison`.
+- Added CLI `scripts/run_model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_replay_comparison.py`.
+- Replayed the real v852 checkpoint against the v836 bounded objective contract without decoder anchors.
+- Recorded `case_count=3`, `passed_case_count=0`, `any_hit_case_count=2`, `zero_hit_case_count=1`, and `pass_rate=0.0`.
+- Kept `objective_contract_recovered=False`, `canonical_case_pass=False`, and `promotion_ready=False`.
+- Upgraded the previous zero-hit branch into `model_quality_claim=partial_required_term_signal`, not a promotion claim.
+- Routed the next artifact to `diagnose_bounded_objective_unassisted_repair_seed_revision_partial_hit_before_more_training`.
+- Verified with `4 passed` focused bounded objective unassisted repair seed revision replay-comparison tests and `1738 passed` full pytest.
+- Confirmed source encoding hygiene with `source_count=1272`, `clean_count=1272`, `bom_count=0`, and `syntax_error_count=0`.
+- Archived v853 evidence in `e/853` and added the code explanation in `代码讲解记录_模型能力阶段/867-v853-route-promotion-bounded-objective-unassisted-repair-seed-revision-replay-comparison.md`.
+
+## Latest v852 checkpoint
 
 ## Latest v852 checkpoint
 

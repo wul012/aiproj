@@ -1,0 +1,4 @@
+case_id,case_pass,any_hit,hit_terms,missed_terms,continuation
+canonical_direct_completion,False,True,fixed,loss, fixed t
+minimal_direct_completion,False,True,fixed,loss, fixed t
+completion_label_surface,False,False,,"fixed,loss", ler: lo

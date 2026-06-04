@@ -116,6 +116,9 @@
 866-v852-route-promotion-bounded-objective-unassisted-repair-seed-revision-training-run.md
  -> v852 code explanation: train a real checkpoint from the revised no-anchor seed while keeping capability gated behind replay.
 
+867-v853-route-promotion-bounded-objective-unassisted-repair-seed-revision-replay-comparison.md
+ -> v853 code explanation: replay the revised no-anchor checkpoint and separate partial required-term uptake from contract recovery.
+
 487-v473-baseline-candidate-capability-delta.md
  -> v473 code explanation: carry real tiny training loss and generation-quality deltas into the baseline-candidate eval loop.
 
