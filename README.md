@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v845.0.0` turns the closed decoder-anchor branch into a bounded-objective unassisted repair plan.
+Version `v846.0.0` builds the bounded-objective unassisted repair seed corpus from the v845 plan.
+
+## Latest v846 checkpoint
+
+- Added `model_capability_route_promotion_bounded_objective_unassisted_repair_seed`.
+- Added CLI `scripts/build_model_capability_route_promotion_bounded_objective_unassisted_repair_seed.py`.
+- Consumed the real v845 repair plan and the real v836 objective contract.
+- Generated `example_count=24` direct examples with `neutral_prompt_example_count=12`.
+- Kept `decoder_anchor_example_count=0` and wrote JSON, CSV, JSONL, corpus TXT, Markdown, HTML, and text outputs.
+- Produced `corpus_char_count=1778`.
+- Kept the model-quality claim as `seed_only`.
+- Routed the next artifact to `model_capability_route_promotion_bounded_objective_unassisted_repair_training_run`.
+- Verified with `3 passed` focused bounded objective unassisted repair seed tests.
+- Archived v846 evidence in `e/846` and added the code explanation in `代码讲解记录_模型能力阶段/860-v846-route-promotion-bounded-objective-unassisted-repair-seed.md`.
 
 ## Latest v845 checkpoint
 

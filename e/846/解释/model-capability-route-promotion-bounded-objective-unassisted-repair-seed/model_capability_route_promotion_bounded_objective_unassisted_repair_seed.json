@@ -1,0 +1,526 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability route promotion bounded objective unassisted repair seed",
+  "generated_at": "2026-06-04T05:12:41Z",
+  "status": "pass",
+  "decision": "model_capability_route_promotion_bounded_objective_unassisted_repair_seed_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_repair_plan": "D:\\aiproj\\e\\845\\解释\\model-capability-route-promotion-bounded-objective-unassisted-repair-plan\\model_capability_route_promotion_bounded_objective_unassisted_repair_plan.json",
+  "source_objective_contract": "D:\\aiproj\\e\\836\\解释\\model-capability-route-promotion-bounded-objective-contract\\model_capability_route_promotion_bounded_objective_contract.json",
+  "source_plan_summary": {
+    "bounded_objective_unassisted_repair_plan_ready": true,
+    "route": "bounded_objective_unassisted_repair",
+    "work_item_count": 5,
+    "acceptance_gate_count": 4,
+    "blocked_action_count": 3,
+    "promotion_ready": false,
+    "new_training_allowed": false,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_objective_unassisted_repair_seed",
+    "next_step": "build_bounded_objective_unassisted_repair_seed",
+    "failed_check_count": 0
+  },
+  "source_contract_summary": {
+    "bounded_objective_contract_ready": true,
+    "contract_id": "bounded_fixed_loss_direct_completion_contract",
+    "target_terms": [
+      "fixed",
+      "loss"
+    ],
+    "contract_case_count": 3,
+    "planned_seed_example_count": 18,
+    "unchanged_suite_check_required": true,
+    "promotion_claim_allowed": false,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_objective_seed",
+    "failed_check_count": 0
+  },
+  "seed_examples": [
+    {
+      "example_id": "canonical_direct_completion-contract_prompt_unassisted_completion-01",
+      "case_id": "canonical_direct_completion",
+      "example_mode": "contract_prompt_unassisted_completion",
+      "prompt": "Answer with exactly two tokens: fixed loss\nanswer:",
+      "completion": "fixed loss",
+      "text": "Answer with exactly two tokens: fixed loss\nanswer: fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "prompt_contains_target_terms": true,
+      "decoder_anchor_used": false,
+      "direct_completion": true,
+      "guardrail": "bounded_objective_unassisted_repair_seed"
+    },
+    {
+      "example_id": "canonical_direct_completion-neutral_prompt_unassisted_completion-01",
+      "case_id": "canonical_direct_completion",
+      "example_mode": "neutral_prompt_unassisted_completion",
+      "prompt": "Return the bounded objective answer.\nanswer: # canonical_direct_completion",
+      "completion": "fixed loss",
+      "text": "Return the bounded objective answer.\nanswer: # canonical_direct_completion fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "prompt_contains_target_terms": false,
+      "decoder_anchor_used": false,
+      "direct_completion": true,
+      "guardrail": "bounded_objective_unassisted_repair_seed"
+    },
+    {
+      "example_id": "canonical_direct_completion-contract_prompt_unassisted_completion-02",
+      "case_id": "canonical_direct_completion",
+      "example_mode": "contract_prompt_unassisted_completion",
+      "prompt": "Answer with exactly two tokens: fixed loss\nanswer:",
+      "completion": "fixed loss",
+      "text": "Answer with exactly two tokens: fixed loss\nanswer: fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "prompt_contains_target_terms": true,
+      "decoder_anchor_used": false,
+      "direct_completion": true,
+      "guardrail": "bounded_objective_unassisted_repair_seed"
+    },
+    {
+      "example_id": "canonical_direct_completion-neutral_prompt_unassisted_completion-02",
+      "case_id": "canonical_direct_completion",
+      "example_mode": "neutral_prompt_unassisted_completion",
+      "prompt": "Write the required two-token output.\nanswer: # canonical_direct_completion",
+      "completion": "fixed loss",
+      "text": "Write the required two-token output.\nanswer: # canonical_direct_completion fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "prompt_contains_target_terms": false,
+      "decoder_anchor_used": false,
+      "direct_completion": true,
+      "guardrail": "bounded_objective_unassisted_repair_seed"
+    },
+    {
+      "example_id": "canonical_direct_completion-contract_prompt_unassisted_completion-03",
+      "case_id": "canonical_direct_completion",
+      "example_mode": "contract_prompt_unassisted_completion",
+      "prompt": "Answer with exactly two tokens: fixed loss\nanswer:",
+      "completion": "fixed loss",
+      "text": "Answer with exactly two tokens: fixed loss\nanswer: fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "prompt_contains_target_terms": true,
+      "decoder_anchor_used": false,
+      "direct_completion": true,
+      "guardrail": "bounded_objective_unassisted_repair_seed"
+    },
+    {
+      "example_id": "canonical_direct_completion-neutral_prompt_unassisted_completion-03",
+      "case_id": "canonical_direct_completion",
+      "example_mode": "neutral_prompt_unassisted_completion",
+      "prompt": "Emit the canonical repair target.\nanswer: # canonical_direct_completion",
+      "completion": "fixed loss",
+      "text": "Emit the canonical repair target.\nanswer: # canonical_direct_completion fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "prompt_contains_target_terms": false,
+      "decoder_anchor_used": false,
+      "direct_completion": true,
+      "guardrail": "bounded_objective_unassisted_repair_seed"
+    },
+    {
+      "example_id": "canonical_direct_completion-contract_prompt_unassisted_completion-04",
+      "case_id": "canonical_direct_completion",
+      "example_mode": "contract_prompt_unassisted_completion",
+      "prompt": "Answer with exactly two tokens: fixed loss\nanswer:",
+      "completion": "fixed loss",
+      "text": "Answer with exactly two tokens: fixed loss\nanswer: fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "prompt_contains_target_terms": true,
+      "decoder_anchor_used": false,
+      "direct_completion": true,
+      "guardrail": "bounded_objective_unassisted_repair_seed"
+    },
+    {
+      "example_id": "canonical_direct_completion-neutral_prompt_unassisted_completion-04",
+      "case_id": "canonical_direct_completion",
+      "example_mode": "neutral_prompt_unassisted_completion",
+      "prompt": "Complete the objective response.\nanswer: # canonical_direct_completion",
+      "completion": "fixed loss",
+      "text": "Complete the objective response.\nanswer: # canonical_direct_completion fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "prompt_contains_target_terms": false,
+      "decoder_anchor_used": false,
+      "direct_completion": true,
+      "guardrail": "bounded_objective_unassisted_repair_seed"
+    },
+    {
+      "example_id": "minimal_direct_completion-contract_prompt_unassisted_completion-01",
+      "case_id": "minimal_direct_completion",
+      "example_mode": "contract_prompt_unassisted_completion",
+      "prompt": "Answer with exactly two words: fixed loss\nanswer:",
+      "completion": "fixed loss",
+      "text": "Answer with exactly two words: fixed loss\nanswer: fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "prompt_contains_target_terms": true,
+      "decoder_anchor_used": false,
+      "direct_completion": true,
+      "guardrail": "bounded_objective_unassisted_repair_seed"
+    },
+    {
+      "example_id": "minimal_direct_completion-neutral_prompt_unassisted_completion-01",
+      "case_id": "minimal_direct_completion",
+      "example_mode": "neutral_prompt_unassisted_completion",
+      "prompt": "Return the bounded objective answer.\nanswer: # minimal_direct_completion",
+      "completion": "fixed loss",
+      "text": "Return the bounded objective answer.\nanswer: # minimal_direct_completion fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "prompt_contains_target_terms": false,
+      "decoder_anchor_used": false,
+      "direct_completion": true,
+      "guardrail": "bounded_objective_unassisted_repair_seed"
+    },
+    {
+      "example_id": "minimal_direct_completion-contract_prompt_unassisted_completion-02",
+      "case_id": "minimal_direct_completion",
+      "example_mode": "contract_prompt_unassisted_completion",
+      "prompt": "Answer with exactly two words: fixed loss\nanswer:",
+      "completion": "fixed loss",
+      "text": "Answer with exactly two words: fixed loss\nanswer: fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "prompt_contains_target_terms": true,
+      "decoder_anchor_used": false,
+      "direct_completion": true,
+      "guardrail": "bounded_objective_unassisted_repair_seed"
+    },
+    {
+      "example_id": "minimal_direct_completion-neutral_prompt_unassisted_completion-02",
+      "case_id": "minimal_direct_completion",
+      "example_mode": "neutral_prompt_unassisted_completion",
+      "prompt": "Write the required two-token output.\nanswer: # minimal_direct_completion",
+      "completion": "fixed loss",
+      "text": "Write the required two-token output.\nanswer: # minimal_direct_completion fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "prompt_contains_target_terms": false,
+      "decoder_anchor_used": false,
+      "direct_completion": true,
+      "guardrail": "bounded_objective_unassisted_repair_seed"
+    },
+    {
+      "example_id": "minimal_direct_completion-contract_prompt_unassisted_completion-03",
+      "case_id": "minimal_direct_completion",
+      "example_mode": "contract_prompt_unassisted_completion",
+      "prompt": "Answer with exactly two words: fixed loss\nanswer:",
+      "completion": "fixed loss",
+      "text": "Answer with exactly two words: fixed loss\nanswer: fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "prompt_contains_target_terms": true,
+      "decoder_anchor_used": false,
+      "direct_completion": true,
+      "guardrail": "bounded_objective_unassisted_repair_seed"
+    },
+    {
+      "example_id": "minimal_direct_completion-neutral_prompt_unassisted_completion-03",
+      "case_id": "minimal_direct_completion",
+      "example_mode": "neutral_prompt_unassisted_completion",
+      "prompt": "Emit the canonical repair target.\nanswer: # minimal_direct_completion",
+      "completion": "fixed loss",
+      "text": "Emit the canonical repair target.\nanswer: # minimal_direct_completion fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "prompt_contains_target_terms": false,
+      "decoder_anchor_used": false,
+      "direct_completion": true,
+      "guardrail": "bounded_objective_unassisted_repair_seed"
+    },
+    {
+      "example_id": "minimal_direct_completion-contract_prompt_unassisted_completion-04",
+      "case_id": "minimal_direct_completion",
+      "example_mode": "contract_prompt_unassisted_completion",
+      "prompt": "Answer with exactly two words: fixed loss\nanswer:",
+      "completion": "fixed loss",
+      "text": "Answer with exactly two words: fixed loss\nanswer: fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "prompt_contains_target_terms": true,
+      "decoder_anchor_used": false,
+      "direct_completion": true,
+      "guardrail": "bounded_objective_unassisted_repair_seed"
+    },
+    {
+      "example_id": "minimal_direct_completion-neutral_prompt_unassisted_completion-04",
+      "case_id": "minimal_direct_completion",
+      "example_mode": "neutral_prompt_unassisted_completion",
+      "prompt": "Complete the objective response.\nanswer: # minimal_direct_completion",
+      "completion": "fixed loss",
+      "text": "Complete the objective response.\nanswer: # minimal_direct_completion fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "prompt_contains_target_terms": false,
+      "decoder_anchor_used": false,
+      "direct_completion": true,
+      "guardrail": "bounded_objective_unassisted_repair_seed"
+    },
+    {
+      "example_id": "completion_label_surface-contract_prompt_unassisted_completion-01",
+      "case_id": "completion_label_surface",
+      "example_mode": "contract_prompt_unassisted_completion",
+      "prompt": "Complete with exactly two tokens: fixed loss\ncompletion:",
+      "completion": "fixed loss",
+      "text": "Complete with exactly two tokens: fixed loss\ncompletion: fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "prompt_contains_target_terms": true,
+      "decoder_anchor_used": false,
+      "direct_completion": true,
+      "guardrail": "bounded_objective_unassisted_repair_seed"
+    },
+    {
+      "example_id": "completion_label_surface-neutral_prompt_unassisted_completion-01",
+      "case_id": "completion_label_surface",
+      "example_mode": "neutral_prompt_unassisted_completion",
+      "prompt": "Return the bounded objective answer.\nanswer: # completion_label_surface",
+      "completion": "fixed loss",
+      "text": "Return the bounded objective answer.\nanswer: # completion_label_surface fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "prompt_contains_target_terms": false,
+      "decoder_anchor_used": false,
+      "direct_completion": true,
+      "guardrail": "bounded_objective_unassisted_repair_seed"
+    },
+    {
+      "example_id": "completion_label_surface-contract_prompt_unassisted_completion-02",
+      "case_id": "completion_label_surface",
+      "example_mode": "contract_prompt_unassisted_completion",
+      "prompt": "Complete with exactly two tokens: fixed loss\ncompletion:",
+      "completion": "fixed loss",
+      "text": "Complete with exactly two tokens: fixed loss\ncompletion: fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "prompt_contains_target_terms": true,
+      "decoder_anchor_used": false,
+      "direct_completion": true,
+      "guardrail": "bounded_objective_unassisted_repair_seed"
+    },
+    {
+      "example_id": "completion_label_surface-neutral_prompt_unassisted_completion-02",
+      "case_id": "completion_label_surface",
+      "example_mode": "neutral_prompt_unassisted_completion",
+      "prompt": "Write the required two-token output.\nanswer: # completion_label_surface",
+      "completion": "fixed loss",
+      "text": "Write the required two-token output.\nanswer: # completion_label_surface fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "prompt_contains_target_terms": false,
+      "decoder_anchor_used": false,
+      "direct_completion": true,
+      "guardrail": "bounded_objective_unassisted_repair_seed"
+    },
+    {
+      "example_id": "completion_label_surface-contract_prompt_unassisted_completion-03",
+      "case_id": "completion_label_surface",
+      "example_mode": "contract_prompt_unassisted_completion",
+      "prompt": "Complete with exactly two tokens: fixed loss\ncompletion:",
+      "completion": "fixed loss",
+      "text": "Complete with exactly two tokens: fixed loss\ncompletion: fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "prompt_contains_target_terms": true,
+      "decoder_anchor_used": false,
+      "direct_completion": true,
+      "guardrail": "bounded_objective_unassisted_repair_seed"
+    },
+    {
+      "example_id": "completion_label_surface-neutral_prompt_unassisted_completion-03",
+      "case_id": "completion_label_surface",
+      "example_mode": "neutral_prompt_unassisted_completion",
+      "prompt": "Emit the canonical repair target.\nanswer: # completion_label_surface",
+      "completion": "fixed loss",
+      "text": "Emit the canonical repair target.\nanswer: # completion_label_surface fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "prompt_contains_target_terms": false,
+      "decoder_anchor_used": false,
+      "direct_completion": true,
+      "guardrail": "bounded_objective_unassisted_repair_seed"
+    },
+    {
+      "example_id": "completion_label_surface-contract_prompt_unassisted_completion-04",
+      "case_id": "completion_label_surface",
+      "example_mode": "contract_prompt_unassisted_completion",
+      "prompt": "Complete with exactly two tokens: fixed loss\ncompletion:",
+      "completion": "fixed loss",
+      "text": "Complete with exactly two tokens: fixed loss\ncompletion: fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "prompt_contains_target_terms": true,
+      "decoder_anchor_used": false,
+      "direct_completion": true,
+      "guardrail": "bounded_objective_unassisted_repair_seed"
+    },
+    {
+      "example_id": "completion_label_surface-neutral_prompt_unassisted_completion-04",
+      "case_id": "completion_label_surface",
+      "example_mode": "neutral_prompt_unassisted_completion",
+      "prompt": "Complete the objective response.\nanswer: # completion_label_surface",
+      "completion": "fixed loss",
+      "text": "Complete the objective response.\nanswer: # completion_label_surface fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "prompt_contains_target_terms": false,
+      "decoder_anchor_used": false,
+      "direct_completion": true,
+      "guardrail": "bounded_objective_unassisted_repair_seed"
+    }
+  ],
+  "corpus_text": "Answer with exactly two tokens: fixed loss\nanswer: fixed loss\n\nReturn the bounded objective answer.\nanswer: # canonical_direct_completion fixed loss\n\nAnswer with exactly two tokens: fixed loss\nanswer: fixed loss\n\nWrite the required two-token output.\nanswer: # canonical_direct_completion fixed loss\n\nAnswer with exactly two tokens: fixed loss\nanswer: fixed loss\n\nEmit the canonical repair target.\nanswer: # canonical_direct_completion fixed loss\n\nAnswer with exactly two tokens: fixed loss\nanswer: fixed loss\n\nComplete the objective response.\nanswer: # canonical_direct_completion fixed loss\n\nAnswer with exactly two words: fixed loss\nanswer: fixed loss\n\nReturn the bounded objective answer.\nanswer: # minimal_direct_completion fixed loss\n\nAnswer with exactly two words: fixed loss\nanswer: fixed loss\n\nWrite the required two-token output.\nanswer: # minimal_direct_completion fixed loss\n\nAnswer with exactly two words: fixed loss\nanswer: fixed loss\n\nEmit the canonical repair target.\nanswer: # minimal_direct_completion fixed loss\n\nAnswer with exactly two words: fixed loss\nanswer: fixed loss\n\nComplete the objective response.\nanswer: # minimal_direct_completion fixed loss\n\nComplete with exactly two tokens: fixed loss\ncompletion: fixed loss\n\nReturn the bounded objective answer.\nanswer: # completion_label_surface fixed loss\n\nComplete with exactly two tokens: fixed loss\ncompletion: fixed loss\n\nWrite the required two-token output.\nanswer: # completion_label_surface fixed loss\n\nComplete with exactly two tokens: fixed loss\ncompletion: fixed loss\n\nEmit the canonical repair target.\nanswer: # completion_label_surface fixed loss\n\nComplete with exactly two tokens: fixed loss\ncompletion: fixed loss\n\nComplete the objective response.\nanswer: # completion_label_surface fixed loss\n",
+  "check_rows": [
+    {
+      "id": "repair_plan_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "source repair plan must pass"
+    },
+    {
+      "id": "repair_plan_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "source repair plan must be ready"
+    },
+    {
+      "id": "next_artifact_matches",
+      "status": "pass",
+      "actual": "model_capability_route_promotion_bounded_objective_unassisted_repair_seed",
+      "detail": "plan must request unassisted repair seed"
+    },
+    {
+      "id": "contract_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "source objective contract must pass"
+    },
+    {
+      "id": "contract_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "source objective contract must be ready"
+    },
+    {
+      "id": "target_terms_exact",
+      "status": "pass",
+      "actual": [
+        "fixed",
+        "loss"
+      ],
+      "detail": "seed must preserve fixed/loss target terms"
+    },
+    {
+      "id": "contract_cases_present",
+      "status": "pass",
+      "actual": 3,
+      "detail": "seed needs objective contract cases"
+    },
+    {
+      "id": "example_count_matches",
+      "status": "pass",
+      "actual": 24,
+      "detail": "seed must create 8 examples per case"
+    },
+    {
+      "id": "neutral_prompts_present",
+      "status": "pass",
+      "actual": 12,
+      "detail": "half of examples must avoid target terms in the prompt"
+    },
+    {
+      "id": "no_decoder_anchors",
+      "status": "pass",
+      "actual": 24,
+      "detail": "unassisted repair seed must not use decoder anchors"
+    },
+    {
+      "id": "all_examples_have_required_terms",
+      "status": "pass",
+      "actual": 24,
+      "detail": "every seed example text must contain fixed/loss"
+    }
+  ],
+  "seed": {
+    "ready": true,
+    "contract_id": "bounded_fixed_loss_direct_completion_contract",
+    "example_count": 24,
+    "corpus_char_count": 1778,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_objective_unassisted_repair_training_run",
+    "next_step": "train_bounded_objective_unassisted_repair_seed"
+  },
+  "summary": {
+    "bounded_objective_unassisted_repair_seed_ready": true,
+    "contract_id": "bounded_fixed_loss_direct_completion_contract",
+    "target_terms": [
+      "fixed",
+      "loss"
+    ],
+    "example_count": 24,
+    "neutral_prompt_example_count": 12,
+    "target_term_prompt_example_count": 12,
+    "decoder_anchor_example_count": 0,
+    "direct_example_count": 24,
+    "corpus_char_count": 1778,
+    "promotion_claim_allowed": false,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_objective_unassisted_repair_training_run",
+    "next_step": "train_bounded_objective_unassisted_repair_seed",
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "seed_only",
+    "reason": "The corpus removes decoder anchors and adds neutral prompts, but capability still requires training and unassisted replay.",
+    "next_action": "train_bounded_objective_unassisted_repair_seed"
+  }
+}

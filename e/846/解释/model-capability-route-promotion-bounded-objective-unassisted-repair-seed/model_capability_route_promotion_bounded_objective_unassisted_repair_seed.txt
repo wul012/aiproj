@@ -1,0 +1,9 @@
+status=pass
+decision=model_capability_route_promotion_bounded_objective_unassisted_repair_seed_ready
+bounded_objective_unassisted_repair_seed_ready=True
+example_count=24
+neutral_prompt_example_count=12
+decoder_anchor_example_count=0
+corpus_char_count=1778
+model_quality_claim=seed_only
+next_action=train_bounded_objective_unassisted_repair_seed

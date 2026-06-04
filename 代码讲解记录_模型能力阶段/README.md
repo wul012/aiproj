@@ -95,6 +95,9 @@
 859-v845-route-promotion-bounded-objective-unassisted-repair-plan.md
  -> v845 code explanation: convert the closed decoder-anchor branch into a bounded objective unassisted repair plan.
 
+860-v846-route-promotion-bounded-objective-unassisted-repair-seed.md
+ -> v846 code explanation: build a no-decoder-anchor bounded objective repair seed with neutral prompts.
+
 487-v473-baseline-candidate-capability-delta.md
  -> v473 code explanation: carry real tiny training loss and generation-quality deltas into the baseline-candidate eval loop.
 

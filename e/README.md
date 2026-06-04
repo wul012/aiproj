@@ -131,6 +131,10 @@ e/844/解释/说明.md
 e/845/图片
 e/845/解释/说明.md
  -> v845 bounded objective unassisted repair plan 的运行截图和解释
+
+e/846/图片
+e/846/解释/说明.md
+ -> v846 bounded objective unassisted repair seed 的运行截图和解释
 ```
 
 ```text
