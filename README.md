@@ -4,7 +4,19 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v832.0.0` diagnoses why the v830 rebalanced checkpoint still fails bounded replay, showing that repaired training distribution still produces zero-hit, fragment-like continuations.
+Version `v833.0.0` runs a real decoder profile sweep on the v830 rebalanced checkpoint and confirms that sampling changes do not recover bounded replay required-term hits.
+
+## Latest v833 checkpoint
+
+- Added `model_capability_route_promotion_bounded_real_replay_decoder_anchor_rebalanced_profile_sweep`.
+- Added CLI `scripts/sweep_model_capability_route_promotion_bounded_real_replay_decoder_anchor_rebalanced_profiles.py`.
+- Reused the v803 bounded benchmark suite, v804 review, v805 dry-run scorer, and v832 failure diagnostic.
+- Ran five real decoder profiles against the v830 rebalanced checkpoint: default bounded, near-greedy short, near-greedy long, longer low-temperature, and wider rescue.
+- Produced `profile_count=5`, `case_count=5`, `best_profile_id=greedy_short`, `best_passed_case_count=0`, and `best_any_hit_case_count=0`.
+- Confirmed `any_profile_recovered=False` and `promotion_ready=False`; decoding changes did not recover the route.
+- Routed the next step to `route_to_objective_or_architecture_intervention`.
+- Verified with `5 passed` focused rebalanced profile sweep tests.
+- Archived v833 evidence in `e/833` and added the code explanation in `代码讲解记录_模型能力阶段/847-v833-route-promotion-bounded-real-replay-decoder-anchor-rebalanced-profile-sweep.md`.
 
 ## Latest v832 checkpoint
 

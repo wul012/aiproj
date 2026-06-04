@@ -1,0 +1,680 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability route promotion bounded real replay decoder anchor rebalanced profile sweep",
+  "generated_at": "2026-06-04T00:18:58Z",
+  "status": "pass",
+  "decision": "model_capability_route_promotion_bounded_real_replay_decoder_anchor_rebalanced_profile_sweep_no_recovery",
+  "failed_count": 0,
+  "issues": [],
+  "source_suite_review": "e\\804\\解释\\model-capability-route-promotion-bounded-benchmark-suite-review\\model_capability_route_promotion_bounded_benchmark_suite_review.json",
+  "source_benchmark_suite": "e\\803\\解释\\model-capability-route-promotion-bounded-benchmark-suite\\model_capability_route_promotion_bounded_benchmark_suite.json",
+  "source_dry_run": "e\\805\\解释\\model-capability-route-promotion-bounded-benchmark-dry-run\\model_capability_route_promotion_bounded_benchmark_dry_run.json",
+  "source_failure_diagnostic": "e\\832\\解释\\model-capability-route-promotion-bounded-real-replay-decoder-anchor-rebalanced-failure-diagnostic\\model_capability_route_promotion_bounded_real_replay_decoder_anchor_rebalanced_failure_diagnostic.json",
+  "checkpoint": "e\\830\\解释\\model-capability-route-promotion-bounded-real-replay-decoder-anchor-rebalanced-training-run\\run\\checkpoint.pt",
+  "tokenizer": "e\\830\\解释\\model-capability-route-promotion-bounded-real-replay-decoder-anchor-rebalanced-training-run\\run\\tokenizer.json",
+  "device": "auto",
+  "profiles": [
+    {
+      "profile_id": "default_bounded",
+      "label": "default bounded replay",
+      "max_new_tokens": 24,
+      "temperature": 0.2,
+      "top_k": 10
+    },
+    {
+      "profile_id": "greedy_short",
+      "label": "near-greedy short replay",
+      "max_new_tokens": 24,
+      "temperature": 0.05,
+      "top_k": 1
+    },
+    {
+      "profile_id": "greedy_long",
+      "label": "near-greedy long replay",
+      "max_new_tokens": 64,
+      "temperature": 0.05,
+      "top_k": 1
+    },
+    {
+      "profile_id": "longer_low_temp",
+      "label": "longer low-temperature replay",
+      "max_new_tokens": 64,
+      "temperature": 0.2,
+      "top_k": 10
+    },
+    {
+      "profile_id": "wider_rescue",
+      "label": "wider rescue replay",
+      "max_new_tokens": 80,
+      "temperature": 0.6,
+      "top_k": 30
+    }
+  ],
+  "profile_rows": [
+    {
+      "profile_id": "default_bounded",
+      "label": "default bounded replay",
+      "status": "pass",
+      "decision": "model_capability_route_promotion_bounded_real_replay_completed_with_model_gaps",
+      "max_new_tokens": 24,
+      "temperature": 0.2,
+      "top_k": 10,
+      "case_count": 5,
+      "executed_case_count": 5,
+      "passed_case_count": 0,
+      "failed_case_count": 5,
+      "pass_rate": 0.0,
+      "zero_hit_case_count": 5,
+      "fragment_like_case_count": 5,
+      "any_hit_case_count": 0,
+      "model_route_quality_ready": false
+    },
+    {
+      "profile_id": "greedy_short",
+      "label": "near-greedy short replay",
+      "status": "pass",
+      "decision": "model_capability_route_promotion_bounded_real_replay_completed_with_model_gaps",
+      "max_new_tokens": 24,
+      "temperature": 0.05,
+      "top_k": 1,
+      "case_count": 5,
+      "executed_case_count": 5,
+      "passed_case_count": 0,
+      "failed_case_count": 5,
+      "pass_rate": 0.0,
+      "zero_hit_case_count": 5,
+      "fragment_like_case_count": 2,
+      "any_hit_case_count": 0,
+      "model_route_quality_ready": false
+    },
+    {
+      "profile_id": "greedy_long",
+      "label": "near-greedy long replay",
+      "status": "pass",
+      "decision": "model_capability_route_promotion_bounded_real_replay_completed_with_model_gaps",
+      "max_new_tokens": 64,
+      "temperature": 0.05,
+      "top_k": 1,
+      "case_count": 5,
+      "executed_case_count": 5,
+      "passed_case_count": 0,
+      "failed_case_count": 5,
+      "pass_rate": 0.0,
+      "zero_hit_case_count": 5,
+      "fragment_like_case_count": 2,
+      "any_hit_case_count": 0,
+      "model_route_quality_ready": false
+    },
+    {
+      "profile_id": "longer_low_temp",
+      "label": "longer low-temperature replay",
+      "status": "pass",
+      "decision": "model_capability_route_promotion_bounded_real_replay_completed_with_model_gaps",
+      "max_new_tokens": 64,
+      "temperature": 0.2,
+      "top_k": 10,
+      "case_count": 5,
+      "executed_case_count": 5,
+      "passed_case_count": 0,
+      "failed_case_count": 5,
+      "pass_rate": 0.0,
+      "zero_hit_case_count": 5,
+      "fragment_like_case_count": 5,
+      "any_hit_case_count": 0,
+      "model_route_quality_ready": false
+    },
+    {
+      "profile_id": "wider_rescue",
+      "label": "wider rescue replay",
+      "status": "pass",
+      "decision": "model_capability_route_promotion_bounded_real_replay_completed_with_model_gaps",
+      "max_new_tokens": 80,
+      "temperature": 0.6,
+      "top_k": 30,
+      "case_count": 5,
+      "executed_case_count": 5,
+      "passed_case_count": 0,
+      "failed_case_count": 5,
+      "pass_rate": 0.0,
+      "zero_hit_case_count": 5,
+      "fragment_like_case_count": 5,
+      "any_hit_case_count": 0,
+      "model_route_quality_ready": false
+    }
+  ],
+  "case_profile_rows": [
+    {
+      "profile_id": "default_bounded",
+      "case_id": "objective-answer-direct",
+      "case_pass": false,
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "zero_hit": true,
+      "fragment_like_generation": true,
+      "continuation_preview": "\n\nOO任标标两，asseeser   lsss",
+      "max_new_tokens": 24,
+      "temperature": 0.2,
+      "top_k": 10,
+      "seed": 901
+    },
+    {
+      "profile_id": "default_bounded",
+      "case_id": "objective-answer-role",
+      "case_pass": false,
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "zero_hit": true,
+      "fragment_like_generation": true,
+      "continuation_preview": "aired required terms 的两个角色词。\n输出： e    rsusssetssseesss e",
+      "max_new_tokens": 24,
+      "temperature": 0.2,
+      "top_k": 10,
+      "seed": 902
+    },
+    {
+      "profile_id": "default_bounded",
+      "case_id": "objective-answer-contrast",
+      "case_pass": false,
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "zero_hit": true,
+      "fragment_like_generation": true,
+      "continuation_preview": "两 sss_sssssssiettsssssts",
+      "max_new_tokens": 24,
+      "temperature": 0.2,
+      "top_k": 10,
+      "seed": 903
+    },
+    {
+      "profile_id": "default_bounded",
+      "case_id": "objective-answer-jsonish",
+      "case_pass": false,
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "zero_hit": true,
+      "fragment_like_generation": true,
+      "continuation_preview": "wer_terms，包含两个英文词。\nanswer_terms::ssosssssswsossw r esses",
+      "max_new_tokens": 24,
+      "temperature": 0.2,
+      "top_k": 10,
+      "seed": 904
+    },
+    {
+      "profile_id": "default_bounded",
+      "case_id": "objective-answer-check",
+      "case_pass": false,
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "zero_hit": true,
+      "fragment_like_generation": true,
+      "continuation_preview": "\n\n包时出lllssssssssos  osse",
+      "max_new_tokens": 24,
+      "temperature": 0.2,
+      "top_k": 10,
+      "seed": 905
+    },
+    {
+      "profile_id": "greedy_short",
+      "case_id": "objective-answer-direct",
+      "case_pass": false,
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "zero_hit": true,
+      "fragment_like_generation": false,
+      "continuation_preview": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+      "max_new_tokens": 24,
+      "temperature": 0.05,
+      "top_k": 1,
+      "seed": 901
+    },
+    {
+      "profile_id": "greedy_short",
+      "case_id": "objective-answer-role",
+      "case_pass": false,
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "zero_hit": true,
+      "fragment_like_generation": true,
+      "continuation_preview": "aired required terms 的两个角色词。\n输出：                        ",
+      "max_new_tokens": 24,
+      "temperature": 0.05,
+      "top_k": 1,
+      "seed": 902
+    },
+    {
+      "profile_id": "greedy_short",
+      "case_id": "objective-answer-contrast",
+      "case_pass": false,
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "zero_hit": true,
+      "fragment_like_generation": false,
+      "continuation_preview": "                        ",
+      "max_new_tokens": 24,
+      "temperature": 0.05,
+      "top_k": 1,
+      "seed": 903
+    },
+    {
+      "profile_id": "greedy_short",
+      "case_id": "objective-answer-jsonish",
+      "case_pass": false,
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "zero_hit": true,
+      "fragment_like_generation": true,
+      "continuation_preview": "wer_terms，包含两个英文词。\nanswer_terms:                        ",
+      "max_new_tokens": 24,
+      "temperature": 0.05,
+      "top_k": 1,
+      "seed": 904
+    },
+    {
+      "profile_id": "greedy_short",
+      "case_id": "objective-answer-check",
+      "case_pass": false,
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "zero_hit": true,
+      "fragment_like_generation": false,
+      "continuation_preview": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+      "max_new_tokens": 24,
+      "temperature": 0.05,
+      "top_k": 1,
+      "seed": 905
+    },
+    {
+      "profile_id": "greedy_long",
+      "case_id": "objective-answer-direct",
+      "case_pass": false,
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "zero_hit": true,
+      "fragment_like_generation": false,
+      "continuation_preview": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+      "max_new_tokens": 64,
+      "temperature": 0.05,
+      "top_k": 1,
+      "seed": 901
+    },
+    {
+      "profile_id": "greedy_long",
+      "case_id": "objective-answer-role",
+      "case_pass": false,
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "zero_hit": true,
+      "fragment_like_generation": true,
+      "continuation_preview": "aired required terms 的两个角色词。\n输出：                                                                ",
+      "max_new_tokens": 64,
+      "temperature": 0.05,
+      "top_k": 1,
+      "seed": 902
+    },
+    {
+      "profile_id": "greedy_long",
+      "case_id": "objective-answer-contrast",
+      "case_pass": false,
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "zero_hit": true,
+      "fragment_like_generation": false,
+      "continuation_preview": "                                                                ",
+      "max_new_tokens": 64,
+      "temperature": 0.05,
+      "top_k": 1,
+      "seed": 903
+    },
+    {
+      "profile_id": "greedy_long",
+      "case_id": "objective-answer-jsonish",
+      "case_pass": false,
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "zero_hit": true,
+      "fragment_like_generation": true,
+      "continuation_preview": "wer_terms，包含两个英文词。\nanswer_terms:                                                                ",
+      "max_new_tokens": 64,
+      "temperature": 0.05,
+      "top_k": 1,
+      "seed": 904
+    },
+    {
+      "profile_id": "greedy_long",
+      "case_id": "objective-answer-check",
+      "case_pass": false,
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "zero_hit": true,
+      "fragment_like_generation": false,
+      "continuation_preview": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+      "max_new_tokens": 64,
+      "temperature": 0.05,
+      "top_k": 1,
+      "seed": 905
+    },
+    {
+      "profile_id": "longer_low_temp",
+      "case_id": "objective-answer-direct",
+      "case_pass": false,
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "zero_hit": true,
+      "fragment_like_generation": true,
+      "continuation_preview": "\n\nOO任标标两，asseeser   lssssse  ixeemcssse  sssssesssssmoo o em oee",
+      "max_new_tokens": 64,
+      "temperature": 0.2,
+      "top_k": 10,
+      "seed": 901
+    },
+    {
+      "profile_id": "longer_low_temp",
+      "case_id": "objective-answer-role",
+      "case_pass": false,
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "zero_hit": true,
+      "fragment_like_generation": true,
+      "continuation_preview": "aired required terms 的两个角色词。\n输出： e    rsusssetssseesss etsssemxsssss  ssosssssssstssmsss ssoss e",
+      "max_new_tokens": 64,
+      "temperature": 0.2,
+      "top_k": 10,
+      "seed": 902
+    },
+    {
+      "profile_id": "longer_low_temp",
+      "case_id": "objective-answer-contrast",
+      "case_pass": false,
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "zero_hit": true,
+      "fragment_like_generation": true,
+      "continuation_preview": "两 sss_sssssssiettssssstsssssssue oo osssssssesee siosssssssswsse",
+      "max_new_tokens": 64,
+      "temperature": 0.2,
+      "top_k": 10,
+      "seed": 903
+    },
+    {
+      "profile_id": "longer_low_temp",
+      "case_id": "objective-answer-jsonish",
+      "case_pass": false,
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "zero_hit": true,
+      "fragment_like_generation": true,
+      "continuation_preview": "wer_terms，包含两个英文词。\nanswer_terms::ssosssssswsossw r esseswe  ixeesswstsssssssssss_rrrr  eeessssos",
+      "max_new_tokens": 64,
+      "temperature": 0.2,
+      "top_k": 10,
+      "seed": 904
+    },
+    {
+      "profile_id": "longer_low_temp",
+      "case_id": "objective-answer-check",
+      "case_pass": false,
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "zero_hit": true,
+      "fragment_like_generation": true,
+      "continuation_preview": "\n\n包时出lllssssssssos  ossessssmssosssswiixest edeees  ossssswssuss",
+      "max_new_tokens": 64,
+      "temperature": 0.2,
+      "top_k": 10,
+      "seed": 905
+    },
+    {
+      "profile_id": "wider_rescue",
+      "case_id": "objective-answer-direct",
+      "case_pass": false,
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "zero_hit": true,
+      "fragment_like_generation": true,
+      "continuation_preview": "自出风答irrd出出现词：标果英两_ixly, ，，\n轮包a,c.用c:cseh两ss两两xeh终:格两，k\n flel文oee rv个u文e:ovole。eo",
+      "max_new_tokens": 80,
+      "temperature": 0.6,
+      "top_k": 30,
+      "seed": 901
+    },
+    {
+      "profile_id": "wider_rescue",
+      "case_id": "objective-answer-role",
+      "case_pass": false,
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "zero_hit": true,
+      "fragment_like_generation": true,
+      "continuation_preview": "aired required terms 的两个角色词。\n输出：ne  ,包a给u词_l用to。iee终务风 w轮\n\n请，自xslurr需请s.ocw文个l文英sfc。mke个lsfocl ovc词\n_c文 ddoe答noo",
+      "max_new_tokens": 80,
+      "temperature": 0.6,
+      "top_k": 30,
+      "seed": 902
+    },
+    {
+      "profile_id": "wider_rescue",
+      "case_id": "objective-answer-contrast",
+      "case_pass": false,
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "zero_hit": true,
+      "fragment_like_generation": true,
+      "continuation_preview": "两包果检格现个x答xsw用iet个ss答答个词ss文两fi果l，需_l _两ffs个个包键务标风个fi务\nf需s个两最最终标出exotx务bdsnx答uo文两英",
+      "max_new_tokens": 80,
+      "temperature": 0.6,
+      "top_k": 30,
+      "seed": 903
+    },
+    {
+      "profile_id": "wider_rescue",
+      "case_id": "objective-answer-jsonish",
+      "case_pass": false,
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "zero_hit": true,
+      "fragment_like_generation": true,
+      "continuation_preview": "wer_terms，包含两个英文词。\nanswer_terms::词答oe。包,需sclo用a给 rou_mx_we。n英.ieuxw。t词，srl答lssll文请u英两 个_a果t 务个，案个n，个个，，。词\n_tmu两用",
+      "max_new_tokens": 80,
+      "temperature": 0.6,
+      "top_k": 30,
+      "seed": 904
+    },
+    {
+      "profile_id": "wider_rescue",
+      "case_id": "objective-answer-check",
+      "case_pass": false,
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "zero_hit": true,
+      "fragment_like_generation": true,
+      "continuation_preview": "au风:occx答o文词s:文答rrdwoihcsur_m词_c词个l.wiix,\n务检edcues_xo:af需tw文 uxim_mwwxt用需i ct,词包",
+      "max_new_tokens": 80,
+      "temperature": 0.6,
+      "top_k": 30,
+      "seed": 905
+    }
+  ],
+  "check_rows": [
+    {
+      "id": "failure_diagnostic_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "failure diagnostic must pass before profile sweep"
+    },
+    {
+      "id": "diagnostic_requests_profile_sweep",
+      "status": "pass",
+      "actual": "run_rebalanced_decoder_profile_sweep_before_more_training",
+      "detail": "diagnostic should route to this profile sweep"
+    },
+    {
+      "id": "checkpoint_exists",
+      "status": "pass",
+      "actual": "e\\830\\解释\\model-capability-route-promotion-bounded-real-replay-decoder-anchor-rebalanced-training-run\\run\\checkpoint.pt",
+      "detail": "rebalanced checkpoint must exist"
+    },
+    {
+      "id": "tokenizer_exists",
+      "status": "pass",
+      "actual": "e\\830\\解释\\model-capability-route-promotion-bounded-real-replay-decoder-anchor-rebalanced-training-run\\run\\tokenizer.json",
+      "detail": "rebalanced tokenizer must exist"
+    },
+    {
+      "id": "profiles_present",
+      "status": "pass",
+      "actual": 5,
+      "detail": "profile sweep must include at least one decoder profile"
+    },
+    {
+      "id": "cases_present",
+      "status": "pass",
+      "actual": 5,
+      "detail": "benchmark suite must provide bounded cases"
+    },
+    {
+      "id": "all_profile_replays_passed",
+      "status": "pass",
+      "actual": [
+        "pass",
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "detail": "all profile replays must execute successfully"
+    },
+    {
+      "id": "all_profiles_execute_all_cases",
+      "status": "pass",
+      "actual": [
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "detail": "every profile must execute every case"
+    }
+  ],
+  "sweep": {
+    "ready": true,
+    "profile_count": 5,
+    "case_count": 5,
+    "case_profile_row_count": 25,
+    "default_profile_id": "default_bounded",
+    "default_passed_case_count": 0,
+    "default_pass_rate": 0.0,
+    "best_profile_id": "greedy_short",
+    "best_passed_case_count": 0,
+    "best_pass_rate": 0.0,
+    "best_any_hit_case_count": 0,
+    "best_zero_hit_case_count": 5,
+    "best_fragment_like_case_count": 2,
+    "best_vs_default_pass_rate_delta": 0.0,
+    "any_profile_recovered": false,
+    "any_profile_has_required_term_hit": false,
+    "promotion_ready": false,
+    "next_step": "route_to_objective_or_architecture_intervention"
+  },
+  "summary": {
+    "rebalanced_profile_sweep_ready": true,
+    "profile_count": 5,
+    "case_count": 5,
+    "case_profile_row_count": 25,
+    "default_profile_id": "default_bounded",
+    "default_passed_case_count": 0,
+    "default_pass_rate": 0.0,
+    "best_profile_id": "greedy_short",
+    "best_passed_case_count": 0,
+    "best_pass_rate": 0.0,
+    "best_any_hit_case_count": 0,
+    "best_zero_hit_case_count": 5,
+    "best_fragment_like_case_count": 2,
+    "best_vs_default_pass_rate_delta": 0.0,
+    "any_profile_recovered": false,
+    "any_profile_has_required_term_hit": false,
+    "promotion_ready": false,
+    "next_step": "route_to_objective_or_architecture_intervention",
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "not_improved",
+    "reason": "Changing decoding profile did not recover required-term replay.",
+    "next_action": "route_to_objective_or_architecture_intervention"
+  }
+}

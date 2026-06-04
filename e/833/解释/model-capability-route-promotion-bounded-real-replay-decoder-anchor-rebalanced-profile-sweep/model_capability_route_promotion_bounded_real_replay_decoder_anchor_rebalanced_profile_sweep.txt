@@ -1,0 +1,12 @@
+status=pass
+decision=model_capability_route_promotion_bounded_real_replay_decoder_anchor_rebalanced_profile_sweep_no_recovery
+profile_sweep_ready=True
+profile_count=5
+case_count=5
+best_profile_id=greedy_short
+best_passed_case_count=0
+best_pass_rate=0.0
+best_any_hit_case_count=0
+any_profile_recovered=False
+promotion_ready=False
+next_step=route_to_objective_or_architecture_intervention

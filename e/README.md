@@ -79,6 +79,10 @@ e/831/解释/说明.md
 e/832/图片
 e/832/解释/说明.md
  -> v832 bounded replay decoder anchor rebalanced failure diagnostic 的运行截图和解释
+
+e/833/图片
+e/833/解释/说明.md
+ -> v833 bounded replay decoder anchor rebalanced profile sweep 的运行截图和解释
 ```
 
 ```text
