@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v863.0.0` diagnoses the v862 partial replay result as a pair-binding gap between `fixed` and `loss`.
+Version `v864.0.0` turns the v863 pair-binding diagnosis into a no-anchor training patch corpus.
+
+## Latest v864 checkpoint
+
+- Added short-name module `bounded_objective_loss_signal_bridge_pair_binding_patch`.
+- Added CLI `scripts/build_bounded_objective_loss_signal_bridge_pair_binding_patch.py`.
+- Consumed v863 partial-hit diagnostic, v862 replay rows, and the v861 prepared corpus.
+- Generated `patch_example_count=18`, including `case_pair_repeat_count=6`, `pair_binding_example_count=6`, and `completion_surface_example_count=2`.
+- Kept `decoder_anchor_example_count=0`.
+- Produced `bounded_objective_loss_signal_bridge_pair_binding_patch_examples.jsonl` and `bounded_objective_loss_signal_bridge_pair_binding_patch_corpus.txt`.
+- Kept `model_quality_claim=pair_binding_patch_only`.
+- Routed the next artifact to `train_bounded_objective_loss_signal_bridge_pair_binding_patch`.
+- Verified with `3 passed` focused pair-binding patch tests and Playwright MCP screenshot evidence.
+- Archived v864 evidence in `e/864` and added the code explanation in `代码讲解记录_模型能力阶段/878-v864-bounded-objective-loss-signal-bridge-pair-binding-patch.md`.
 
 ## Latest v863 checkpoint
 

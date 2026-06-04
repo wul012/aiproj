@@ -149,6 +149,9 @@
 877-v863-bounded-objective-loss-signal-bridge-partial-hit-diagnostic.md
  -> v863 code explanation: diagnose fixed/loss split partial hits as a pair-binding gap before building the next patch.
 
+878-v864-bounded-objective-loss-signal-bridge-pair-binding-patch.md
+ -> v864 code explanation: turn the fixed/loss pair-binding gap into no-anchor JSONL and corpus patch examples.
+
 487-v473-baseline-candidate-capability-delta.md
  -> v473 code explanation: carry real tiny training loss and generation-quality deltas into the baseline-candidate eval loop.
 

@@ -1,0 +1,10 @@
+status=pass
+decision=bounded_objective_loss_signal_bridge_pair_binding_patch_ready
+pair_binding_patch_ready=True
+patch_example_count=18
+case_pair_repeat_count=6
+pair_binding_example_count=6
+completion_surface_example_count=2
+decoder_anchor_example_count=0
+model_quality_claim=pair_binding_patch_only
+next_step=train_bounded_objective_loss_signal_bridge_pair_binding_patch

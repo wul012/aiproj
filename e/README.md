@@ -203,6 +203,10 @@ e/862/解释/说明.md
 e/863/图片
 e/863/解释/说明.md
  -> v863 bounded objective loss signal bridge partial-hit diagnostic 的运行截图和解释
+
+e/864/图片
+e/864/解释/说明.md
+ -> v864 bounded objective loss signal bridge pair-binding patch 的运行截图和解释
 ```
 
 ```text
