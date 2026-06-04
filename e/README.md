@@ -139,6 +139,10 @@ e/846/解释/说明.md
 e/847/图片
 e/847/解释/说明.md
  -> v847 bounded objective unassisted repair training run 的运行截图和解释
+
+e/848/图片
+e/848/解释/说明.md
+ -> v848 bounded objective unassisted repair replay comparison 的运行截图和解释
 ```
 
 ```text

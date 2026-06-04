@@ -4,7 +4,22 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v847.0.0` trains a real tiny checkpoint from the bounded-objective unassisted repair seed.
+Version `v848.0.0` replays the bounded-objective contract against the v847 unassisted repair checkpoint.
+
+## Latest v848 checkpoint
+
+- Added `model_capability_route_promotion_bounded_objective_unassisted_repair_replay_comparison`.
+- Added CLI `scripts/run_model_capability_route_promotion_bounded_objective_unassisted_repair_replay_comparison.py`.
+- Reused the existing bounded objective replay engine through an adapter instead of duplicating generation and scoring logic.
+- Consumed the real v836 objective contract and v847 training run.
+- Confirmed the replay used no decoder anchors.
+- Produced `case_count=3`, `passed_case_count=0`, `any_hit_case_count=0`, `zero_hit_case_count=3`, and `pass_rate=0.0`.
+- Recorded `decision=model_capability_route_promotion_bounded_objective_unassisted_repair_replay_zero_hit`.
+- Kept `promotion_ready=False` and model-quality claim `not_improved`.
+- Routed the next artifact to `diagnose_bounded_objective_unassisted_repair_replay_zero_hit_before_more_training`.
+- Verified with `4 passed` focused bounded objective unassisted repair replay comparison tests.
+- Verified full regression with `1722 passed`.
+- Archived v848 evidence in `e/848` and added the code explanation in `代码讲解记录_模型能力阶段/862-v848-route-promotion-bounded-objective-unassisted-repair-replay-comparison.md`.
 
 ## Latest v847 checkpoint
 

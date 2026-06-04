@@ -101,6 +101,9 @@
 861-v847-route-promotion-bounded-objective-unassisted-repair-training-run.md
  -> v847 code explanation: train a real checkpoint from the no-decoder-anchor repair seed while keeping capability claims gated behind replay.
 
+862-v848-route-promotion-bounded-objective-unassisted-repair-replay-comparison.md
+ -> v848 code explanation: replay the v847 checkpoint without decoder anchors and record the zero-hit outcome.
+
 487-v473-baseline-candidate-capability-delta.md
  -> v473 code explanation: carry real tiny training loss and generation-quality deltas into the baseline-candidate eval loop.
 

@@ -1,0 +1,13 @@
+status=pass
+decision=model_capability_route_promotion_bounded_objective_unassisted_repair_replay_zero_hit
+bounded_objective_unassisted_repair_replay_comparison_ready=True
+objective_contract_recovered=False
+canonical_case_pass=False
+case_count=3
+passed_case_count=0
+any_hit_case_count=0
+zero_hit_case_count=3
+pass_rate=0.0
+promotion_ready=False
+model_quality_claim=not_improved
+next_action=diagnose_bounded_objective_unassisted_repair_replay_zero_hit_before_more_training
