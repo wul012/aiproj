@@ -171,6 +171,10 @@ e/854/解释/说明.md
 e/855/图片
 e/855/解释/说明.md
  -> v855 bounded objective unassisted repair seed revision curriculum patch 的运行截图和解释
+
+e/856/图片
+e/856/解释/说明.md
+ -> v856 bounded objective unassisted repair seed revision curriculum patch training run 的运行截图和解释
 ```
 
 ```text
