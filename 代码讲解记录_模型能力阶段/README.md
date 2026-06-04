@@ -110,6 +110,9 @@
 864-v850-route-promotion-bounded-objective-unassisted-repair-curriculum-revision.md
  -> v850 code explanation: convert the zero-hit diagnostic into a no-anchor curriculum revision.
 
+865-v851-route-promotion-bounded-objective-unassisted-repair-seed-revision.md
+ -> v851 code explanation: generate a revised no-anchor seed corpus from the curriculum revision.
+
 487-v473-baseline-candidate-capability-delta.md
  -> v473 code explanation: carry real tiny training loss and generation-quality deltas into the baseline-candidate eval loop.
 

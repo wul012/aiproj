@@ -151,6 +151,10 @@ e/849/解释/说明.md
 e/850/图片
 e/850/解释/说明.md
  -> v850 bounded objective unassisted repair curriculum revision 的运行截图和解释
+
+e/851/图片
+e/851/解释/说明.md
+ -> v851 bounded objective unassisted repair seed revision 的运行截图和解释
 ```
 
 ```text

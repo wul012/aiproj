@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v850.0.0` turns the v849 zero-hit diagnostic into an unassisted repair curriculum revision.
+Version `v851.0.0` builds the bounded-objective unassisted repair seed revision corpus from the v850 curriculum revision.
+
+## Latest v851 checkpoint
+
+- Added `model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision`.
+- Added CLI `scripts/build_model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision.py`.
+- Consumed the real v850 curriculum revision and v836 objective contract.
+- Generated `example_count=24`, `neutral_prompt_example_count=18`, `decoder_anchor_example_count=0`, and `corpus_char_count=2028`.
+- Added output-position examples, neutral exact-completion repetition, fragment contrast examples for `los/wixed`, and short completion repetition.
+- Kept model-quality claim `seed_revision_only`.
+- Routed the next artifact to `model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_training_run`.
+- Verified with `3 passed` focused bounded objective unassisted repair seed revision tests.
+- Verified full regression with `1731 passed`.
+- Archived v851 evidence in `e/851` and added the code explanation in `代码讲解记录_模型能力阶段/865-v851-route-promotion-bounded-objective-unassisted-repair-seed-revision.md`.
 
 ## Latest v850 checkpoint
 
