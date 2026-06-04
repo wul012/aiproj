@@ -1,0 +1,8 @@
+item_id,priority,stage,decoder_anchor_allowed,promotion_claim_allowed,action
+output_position_anchor_examples,high,seed_revision,False,False,"Add examples where the answer appears immediately after the final answer marker, with no explanatory tokens before fixed loss."
+neutral_prompt_exact_completion_repetition,high,seed_revision,False,False,Repeat neutral prompts with the exact two-token completion so target terms are learned without appearing in the prompt.
+fragment_contrast_examples,medium,seed_revision,False,False,"Add positive correction surfaces for observed fragments such as los, while keeping the training target as fixed loss."
+short_decoding_profile_probe,medium,replay_revision,False,False,"After training, replay with short deterministic decoding before trying larger sampling changes."
+unchanged_contract_holdout,high,holdout,False,False,Keep the v836 objective contract unchanged so the revised seed cannot move the goalposts.
+prompt_surface_balance,medium,seed_revision,False,False,Balance contract prompt surfaces and neutral prompt surfaces so one prompt form does not dominate.
+near_miss_fragment_tracking,medium,diagnostic,False,False,Track los/wixed-style fragments in the next replay comparison as diagnostic-only evidence.

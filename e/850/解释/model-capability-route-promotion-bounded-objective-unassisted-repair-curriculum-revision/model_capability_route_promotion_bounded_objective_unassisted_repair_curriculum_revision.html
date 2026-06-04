@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT model capability route promotion bounded objective unassisted repair curriculum revision</title>
+<style>
+:root{color-scheme:light;--ink:#17212b;--muted:#64717d;--line:#d8dee5;--panel:#f8fafc;--accent:#0369a1}
+*{box-sizing:border-box}
+body{margin:0;background:#f4f7fb;color:var(--ink);font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1240px;margin:0 auto;padding:28px}
+h1{font-size:30px;margin:0 0 8px;letter-spacing:0}
+h2{font-size:18px;margin:0 0 12px;letter-spacing:0}
+p{color:var(--muted);line-height:1.55;overflow-wrap:anywhere}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:18px 0}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:8px}
+.card{padding:14px}
+.card span{display:block;color:var(--muted);font-size:12px;text-transform:uppercase}
+.card strong{display:block;margin-top:6px;font-size:18px;line-height:1.2;color:var(--accent);overflow-wrap:anywhere}
+.panel{padding:16px;margin:14px 0}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:#334155}
+td{overflow-wrap:anywhere}
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT model capability route promotion bounded objective unassisted repair curriculum revision</h1><p>The zero-hit branch now has a revised data curriculum, but no new seed or checkpoint has been produced yet.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Decision</span><strong>model_capability_route_promotion_bounded_objective_unassisted_repair_curriculum_revision_ready</strong></div><div class="card"><span>Items</span><strong>7</strong></div><div class="card"><span>Gates</span><strong>4</strong></div><div class="card"><span>Anchors</span><strong>False</strong></div><div class="card"><span>Claim</span><strong>curriculum_revision_only</strong></div></section>
+<section class="panel"><h2>Revision Items</h2><div class="table-wrap"><table>
+<thead><tr><th>Item</th><th>Priority</th><th>Stage</th><th>Anchor</th><th>Action</th></tr></thead>
+<tbody><tr><td>output_position_anchor_examples</td><td>high</td><td>seed_revision</td><td>False</td><td>Add examples where the answer appears immediately after the final answer marker, with no explanatory tokens before fixed loss.</td></tr><tr><td>neutral_prompt_exact_completion_repetition</td><td>high</td><td>seed_revision</td><td>False</td><td>Repeat neutral prompts with the exact two-token completion so target terms are learned without appearing in the prompt.</td></tr><tr><td>fragment_contrast_examples</td><td>medium</td><td>seed_revision</td><td>False</td><td>Add positive correction surfaces for observed fragments such as los, while keeping the training target as fixed loss.</td></tr><tr><td>short_decoding_profile_probe</td><td>medium</td><td>replay_revision</td><td>False</td><td>After training, replay with short deterministic decoding before trying larger sampling changes.</td></tr><tr><td>unchanged_contract_holdout</td><td>high</td><td>holdout</td><td>False</td><td>Keep the v836 objective contract unchanged so the revised seed cannot move the goalposts.</td></tr><tr><td>prompt_surface_balance</td><td>medium</td><td>seed_revision</td><td>False</td><td>Balance contract prompt surfaces and neutral prompt surfaces so one prompt form does not dominate.</td></tr><tr><td>near_miss_fragment_tracking</td><td>medium</td><td>diagnostic</td><td>False</td><td>Track los/wixed-style fragments in the next replay comparison as diagnostic-only evidence.</td></tr></tbody>
+</table></div></section>
+<section class="panel"><h2>Acceptance Gates</h2><div class="table-wrap"><table>
+<thead><tr><th>Gate</th><th>Required</th><th>Detail</th></tr></thead>
+<tbody><tr><td>seed_revision_ready</td><td>True</td><td>revised seed must pass and keep decoder_anchor_example_count=0</td></tr><tr><td>training_artifacts_ready</td><td>True</td><td>revised training run must produce checkpoint, tokenizer, metrics, manifest, sample, and prepared corpus</td></tr><tr><td>unassisted_replay_improves</td><td>True</td><td>next replay must improve any_hit_case_count or pass_rate before further promotion review</td></tr><tr><td>unchanged_contract_preserved</td><td>True</td><td>v836 objective contract cases must remain unchanged</td></tr></tbody>
+</table></div></section>
+</main>
+</body>
+</html>

@@ -107,6 +107,9 @@
 863-v849-route-promotion-bounded-objective-unassisted-repair-zero-hit-diagnostic.md
  -> v849 code explanation: diagnose the v848 zero-hit outcome and route the next step to curriculum revision.
 
+864-v850-route-promotion-bounded-objective-unassisted-repair-curriculum-revision.md
+ -> v850 code explanation: convert the zero-hit diagnostic into a no-anchor curriculum revision.
+
 487-v473-baseline-candidate-capability-delta.md
  -> v473 code explanation: carry real tiny training loss and generation-quality deltas into the baseline-candidate eval loop.
 

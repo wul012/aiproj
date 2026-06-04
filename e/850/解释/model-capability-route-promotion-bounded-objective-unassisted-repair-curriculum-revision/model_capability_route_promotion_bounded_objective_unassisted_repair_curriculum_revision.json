@@ -1,0 +1,281 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability route promotion bounded objective unassisted repair curriculum revision",
+  "generated_at": "2026-06-04T06:00:54Z",
+  "status": "pass",
+  "decision": "model_capability_route_promotion_bounded_objective_unassisted_repair_curriculum_revision_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_zero_hit_diagnostic": "e\\849\\解释\\model-capability-route-promotion-bounded-objective-unassisted-repair-zero-hit-diagnostic\\model_capability_route_promotion_bounded_objective_unassisted_repair_zero_hit_diagnostic.json",
+  "diagnostic_summary": {
+    "bounded_objective_zero_hit_diagnostic_ready": true,
+    "case_count": 3,
+    "zero_hit_case_count": 3,
+    "near_miss_case_count": 1,
+    "prompt_in_corpus_count": 3,
+    "root_cause_count": 4,
+    "train_loss_delta": -1.344413,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_objective_unassisted_repair_curriculum_revision",
+    "next_step": "build_bounded_objective_unassisted_repair_curriculum_revision",
+    "failed_check_count": 0,
+    "bounded_objective_unassisted_repair_zero_hit_diagnostic_ready": true,
+    "decoder_anchor_used": false,
+    "route": "bounded_objective_unassisted_repair"
+  },
+  "diagnostic": {
+    "ready": true,
+    "case_count": 3,
+    "zero_hit_case_count": 3,
+    "near_miss_case_count": 1,
+    "prompt_in_corpus_count": 3,
+    "root_cause_count": 4,
+    "final_train_loss": 2.125275135040283,
+    "final_val_loss": 2.230360507965088,
+    "train_loss_delta": -1.344413,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_objective_unassisted_repair_curriculum_revision",
+    "next_step": "build_bounded_objective_unassisted_repair_curriculum_revision",
+    "route": "bounded_objective_unassisted_repair",
+    "decoder_anchor_used": false
+  },
+  "root_causes": [
+    {
+      "cause_id": "objective_replay_zero_required_term_hits",
+      "severity": "high",
+      "evidence": 3,
+      "detail": "All replay rows missed fixed/loss despite a trained checkpoint."
+    },
+    {
+      "cause_id": "near_miss_character_substitution",
+      "severity": "high",
+      "evidence": 1,
+      "detail": "Continuations are close to required terms, for example wixed, but do not exactly hit them."
+    },
+    {
+      "cause_id": "direct_prompts_present_but_generation_unanchored",
+      "severity": "medium",
+      "evidence": 3,
+      "detail": "The direct objective prompts are present in corpus, so the failure is not a missing-prompt corpus gap."
+    },
+    {
+      "cause_id": "loss_reduction_did_not_transfer_to_exact_generation",
+      "severity": "medium",
+      "evidence": -1.344413,
+      "detail": "Training loss dropped on direct examples, but generation did not recover exact required terms."
+    }
+  ],
+  "case_diagnostics": [
+    {
+      "case_id": "canonical_direct_completion",
+      "case_pass": false,
+      "prompt_in_corpus": true,
+      "zero_hit": true,
+      "near_miss_terms": [],
+      "term_corpus_count": {
+        "fixed": 36,
+        "loss": 36
+      },
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "continuation_preview": " tos\n\nan",
+      "diagnosis": "zero_required_term_generation",
+      "recommended_action": "add_output_position_anchor_or_capacity_probe"
+    },
+    {
+      "case_id": "minimal_direct_completion",
+      "case_pass": false,
+      "prompt_in_corpus": true,
+      "zero_hit": true,
+      "near_miss_terms": [],
+      "term_corpus_count": {
+        "fixed": 36,
+        "loss": 36
+      },
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "continuation_preview": " thed te",
+      "diagnosis": "zero_required_term_generation",
+      "recommended_action": "add_output_position_anchor_or_capacity_probe"
+    },
+    {
+      "case_id": "completion_label_surface",
+      "case_pass": false,
+      "prompt_in_corpus": true,
+      "zero_hit": true,
+      "near_miss_terms": [
+        "loss"
+      ],
+      "term_corpus_count": {
+        "fixed": 36,
+        "loss": 36
+      },
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "continuation_preview": " los\n\nan",
+      "diagnosis": "near_miss_character_substitution_without_exact_term",
+      "recommended_action": "probe_decoder_anchor_and_exact_prefix_bias"
+    }
+  ],
+  "revision_items": [
+    {
+      "item_id": "output_position_anchor_examples",
+      "priority": "high",
+      "stage": "seed_revision",
+      "action": "Add examples where the answer appears immediately after the final answer marker, with no explanatory tokens before fixed loss.",
+      "decoder_anchor_allowed": false,
+      "promotion_claim_allowed": false
+    },
+    {
+      "item_id": "neutral_prompt_exact_completion_repetition",
+      "priority": "high",
+      "stage": "seed_revision",
+      "action": "Repeat neutral prompts with the exact two-token completion so target terms are learned without appearing in the prompt.",
+      "decoder_anchor_allowed": false,
+      "promotion_claim_allowed": false
+    },
+    {
+      "item_id": "fragment_contrast_examples",
+      "priority": "medium",
+      "stage": "seed_revision",
+      "action": "Add positive correction surfaces for observed fragments such as los, while keeping the training target as fixed loss.",
+      "decoder_anchor_allowed": false,
+      "promotion_claim_allowed": false
+    },
+    {
+      "item_id": "short_decoding_profile_probe",
+      "priority": "medium",
+      "stage": "replay_revision",
+      "action": "After training, replay with short deterministic decoding before trying larger sampling changes.",
+      "decoder_anchor_allowed": false,
+      "promotion_claim_allowed": false
+    },
+    {
+      "item_id": "unchanged_contract_holdout",
+      "priority": "high",
+      "stage": "holdout",
+      "action": "Keep the v836 objective contract unchanged so the revised seed cannot move the goalposts.",
+      "decoder_anchor_allowed": false,
+      "promotion_claim_allowed": false
+    },
+    {
+      "item_id": "prompt_surface_balance",
+      "priority": "medium",
+      "stage": "seed_revision",
+      "action": "Balance contract prompt surfaces and neutral prompt surfaces so one prompt form does not dominate.",
+      "decoder_anchor_allowed": false,
+      "promotion_claim_allowed": false
+    },
+    {
+      "item_id": "near_miss_fragment_tracking",
+      "priority": "medium",
+      "stage": "diagnostic",
+      "action": "Track los/wixed-style fragments in the next replay comparison as diagnostic-only evidence.",
+      "decoder_anchor_allowed": false,
+      "promotion_claim_allowed": false
+    }
+  ],
+  "acceptance_gates": [
+    {
+      "gate_id": "seed_revision_ready",
+      "required": true,
+      "detail": "revised seed must pass and keep decoder_anchor_example_count=0"
+    },
+    {
+      "gate_id": "training_artifacts_ready",
+      "required": true,
+      "detail": "revised training run must produce checkpoint, tokenizer, metrics, manifest, sample, and prepared corpus"
+    },
+    {
+      "gate_id": "unassisted_replay_improves",
+      "required": true,
+      "detail": "next replay must improve any_hit_case_count or pass_rate before further promotion review"
+    },
+    {
+      "gate_id": "unchanged_contract_preserved",
+      "required": true,
+      "detail": "v836 objective contract cases must remain unchanged"
+    }
+  ],
+  "check_rows": [
+    {
+      "id": "diagnostic_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "zero-hit diagnostic must pass"
+    },
+    {
+      "id": "diagnostic_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "unassisted zero-hit diagnostic must be ready"
+    },
+    {
+      "id": "zero_hit_evidence_present",
+      "status": "pass",
+      "actual": 3,
+      "detail": "curriculum revision needs zero-hit evidence"
+    },
+    {
+      "id": "root_causes_present",
+      "status": "pass",
+      "actual": 4,
+      "detail": "curriculum revision needs root causes"
+    },
+    {
+      "id": "case_diagnostics_present",
+      "status": "pass",
+      "actual": 3,
+      "detail": "curriculum revision needs case diagnostics"
+    },
+    {
+      "id": "diagnostic_routes_curriculum",
+      "status": "pass",
+      "actual": "model_capability_route_promotion_bounded_objective_unassisted_repair_curriculum_revision",
+      "detail": "diagnostic must route to curriculum revision"
+    },
+    {
+      "id": "revision_items_present",
+      "status": "pass",
+      "actual": 7,
+      "detail": "curriculum revision should include seed, replay, and holdout items"
+    },
+    {
+      "id": "no_decoder_anchor_items",
+      "status": "pass",
+      "actual": 7,
+      "detail": "curriculum revision must stay unassisted"
+    }
+  ],
+  "curriculum_revision": {
+    "ready": true,
+    "revision_item_count": 7,
+    "acceptance_gate_count": 4,
+    "decoder_anchor_allowed": false,
+    "promotion_claim_allowed": false,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision",
+    "next_step": "build_bounded_objective_unassisted_repair_seed_revision"
+  },
+  "summary": {
+    "bounded_objective_unassisted_repair_curriculum_revision_ready": true,
+    "revision_item_count": 7,
+    "acceptance_gate_count": 4,
+    "decoder_anchor_allowed": false,
+    "promotion_claim_allowed": false,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision",
+    "next_step": "build_bounded_objective_unassisted_repair_seed_revision",
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "curriculum_revision_only",
+    "reason": "The zero-hit branch now has a revised data curriculum, but no new seed or checkpoint has been produced yet.",
+    "next_action": "build_bounded_objective_unassisted_repair_seed_revision"
+  }
+}

@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v849.0.0` diagnoses the v848 unassisted repair replay zero-hit failure.
+Version `v850.0.0` turns the v849 zero-hit diagnostic into an unassisted repair curriculum revision.
+
+## Latest v850 checkpoint
+
+- Added `model_capability_route_promotion_bounded_objective_unassisted_repair_curriculum_revision`.
+- Added CLI `scripts/build_model_capability_route_promotion_bounded_objective_unassisted_repair_curriculum_revision.py`.
+- Consumed the real v849 zero-hit diagnostic.
+- Produced `revision_item_count=7` and `acceptance_gate_count=4`.
+- Kept `decoder_anchor_allowed=False`, `promotion_claim_allowed=False`, and model-quality claim `curriculum_revision_only`.
+- Included revision items for output-position anchoring, neutral prompt exact completion repetition, fragment contrast examples, deterministic replay probe, unchanged contract holdout, prompt surface balance, and near-miss fragment tracking.
+- Routed the next artifact to `model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision`.
+- Verified with `3 passed` focused bounded objective unassisted repair curriculum revision tests.
+- Verified full regression with `1728 passed`.
+- Archived v850 evidence in `e/850` and added the code explanation in `代码讲解记录_模型能力阶段/864-v850-route-promotion-bounded-objective-unassisted-repair-curriculum-revision.md`.
 
 ## Latest v849 checkpoint
 
