@@ -91,6 +91,10 @@ e/834/解释/说明.md
 e/835/图片
 e/835/解释/说明.md
  -> v835 bounded objective intervention plan 的运行截图和解释
+
+e/836/图片
+e/836/解释/说明.md
+ -> v836 bounded objective contract 的运行截图和解释
 ```
 
 ```text

@@ -65,6 +65,9 @@
 849-v835-route-promotion-bounded-objective-intervention-plan.md
  -> v835 code explanation: convert the closed rebalanced rescue route into a bounded objective-contract intervention plan before any new training.
 
+850-v836-route-promotion-bounded-objective-contract.md
+ -> v836 code explanation: normalize the v835 plan into a bounded objective contract with contract cases, seed blueprint, and holdout rule.
+
 487-v473-baseline-candidate-capability-delta.md
  -> v473 code explanation: carry real tiny training loss and generation-quality deltas into the baseline-candidate eval loop.
 

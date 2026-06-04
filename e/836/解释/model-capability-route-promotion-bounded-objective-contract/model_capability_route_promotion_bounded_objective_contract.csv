@@ -1,0 +1,7 @@
+case_id,prompt,expected_completion,required_terms,surface,canonical,exact_completion_required
+canonical_direct_completion,"Answer with exactly two tokens: fixed loss
+answer:",fixed loss,"fixed,loss",canonical_direct_completion_surface,True,True
+minimal_direct_completion,"Answer with exactly two words: fixed loss
+answer:",fixed loss,"fixed,loss",canonical_direct_completion_surface,False,True
+completion_label_surface,"Complete with exactly two tokens: fixed loss
+completion:",fixed loss,"fixed,loss",canonical_direct_completion_surface,False,True

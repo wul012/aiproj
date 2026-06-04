@@ -4,7 +4,21 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v835.0.0` turns the v834 route decision into a bounded objective-contract intervention plan.
+Version `v836.0.0` converts the v835 intervention plan into a bounded objective contract artifact.
+
+## Latest v836 checkpoint
+
+- Added `model_capability_route_promotion_bounded_objective_contract`.
+- Added CLI `scripts/build_model_capability_route_promotion_bounded_objective_contract.py`.
+- Consumed the real v835 objective intervention plan from `e/835`.
+- Normalized contract `bounded_fixed_loss_direct_completion_contract` with exact target terms `fixed/loss`.
+- Required canonical completion `fixed loss` and blocked forced-prefix/carry-forward/more-epoch rescue surfaces.
+- Defined `contract_case_count=3` and a deterministic seed blueprint with `planned_seed_example_count=18`.
+- Preserved `unchanged_suite_check_required=True`; canonical success alone still cannot justify route promotion.
+- Routed the next artifact to `model_capability_route_promotion_bounded_objective_seed`.
+- Kept the model-quality claim as `contract_only`.
+- Verified with `4 passed` focused bounded objective contract tests.
+- Archived v836 evidence in `e/836` and added the code explanation in `代码讲解记录_模型能力阶段/850-v836-route-promotion-bounded-objective-contract.md`.
 
 ## Latest v835 checkpoint
 

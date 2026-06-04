@@ -1,0 +1,241 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability route promotion bounded objective contract",
+  "generated_at": "2026-06-04T01:01:38Z",
+  "status": "pass",
+  "decision": "model_capability_route_promotion_bounded_objective_contract_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_objective_intervention_plan": "e\\835\\解释\\model-capability-route-promotion-bounded-objective-intervention-plan\\model_capability_route_promotion_bounded_objective_intervention_plan.json",
+  "source_plan_summary": {
+    "objective_intervention_plan_ready": true,
+    "plan_id": "bounded_objective_contract_intervention_v835",
+    "selected_intervention_track": "objective_contract_intervention_first",
+    "fallback_intervention_track": "architecture_capacity_probe_if_objective_contract_fails",
+    "contract_id": "bounded_fixed_loss_direct_completion_contract",
+    "work_item_count": 5,
+    "acceptance_gate_count": 4,
+    "non_goal_count": 3,
+    "unchanged_suite_check_required": true,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_objective_contract",
+    "next_step": "build_bounded_objective_contract",
+    "failed_check_count": 0
+  },
+  "objective_contract": {
+    "contract_id": "bounded_fixed_loss_direct_completion_contract",
+    "target_terms": [
+      "fixed",
+      "loss"
+    ],
+    "canonical_prompt": "Answer with exactly two tokens: fixed loss\nanswer:",
+    "canonical_completion": "fixed loss",
+    "expected_token_count": 2,
+    "required_exact_completion": "fixed loss",
+    "allowed_surfaces": [
+      "canonical_direct_completion_surface",
+      "v803_prompt_surface_replay_as_holdout_check"
+    ],
+    "blocked_surfaces": [
+      "forced_prefix_decoder_anchor_as_quality_claim",
+      "carry_forward_only_seed_expansion",
+      "more_training_epochs_without_contract_change"
+    ],
+    "unchanged_suite_check_required": true,
+    "promotion_claim_allowed": false
+  },
+  "contract_cases": [
+    {
+      "case_id": "canonical_direct_completion",
+      "prompt": "Answer with exactly two tokens: fixed loss\nanswer:",
+      "expected_completion": "fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "surface": "canonical_direct_completion_surface",
+      "canonical": true,
+      "exact_completion_required": true
+    },
+    {
+      "case_id": "minimal_direct_completion",
+      "prompt": "Answer with exactly two words: fixed loss\nanswer:",
+      "expected_completion": "fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "surface": "canonical_direct_completion_surface",
+      "canonical": false,
+      "exact_completion_required": true
+    },
+    {
+      "case_id": "completion_label_surface",
+      "prompt": "Complete with exactly two tokens: fixed loss\ncompletion:",
+      "expected_completion": "fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "surface": "canonical_direct_completion_surface",
+      "canonical": false,
+      "exact_completion_required": true
+    }
+  ],
+  "seed_blueprint": {
+    "blueprint_id": "bounded_objective_direct_seed_v837_blueprint",
+    "source_contract_case_count": 3,
+    "examples_per_case": 6,
+    "planned_example_count": 18,
+    "allowed_example_modes": [
+      "direct_prompt_completion",
+      "minimal_surface_repeat",
+      "label_surface_repeat"
+    ],
+    "blocked_example_modes": [
+      "carry_forward_fragment",
+      "forced_prefix_anchor",
+      "unbounded_generation_target"
+    ],
+    "next_artifact": "model_capability_route_promotion_bounded_objective_seed"
+  },
+  "holdout_rule": {
+    "holdout_id": "unchanged_v803_bounded_suite_holdout",
+    "unchanged_suite_check_required": true,
+    "purpose": "canonical contract success is not enough for route promotion; unchanged v803 bounded replay must remain visible",
+    "promotion_gate": "dual_replay_required_before_quality_claim"
+  },
+  "check_rows": [
+    {
+      "id": "plan_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "source objective intervention plan must pass"
+    },
+    {
+      "id": "plan_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "source plan must be ready"
+    },
+    {
+      "id": "next_artifact_matches",
+      "status": "pass",
+      "actual": "model_capability_route_promotion_bounded_objective_contract",
+      "detail": "source plan must request this contract artifact"
+    },
+    {
+      "id": "contract_id_matches",
+      "status": "pass",
+      "actual": "bounded_fixed_loss_direct_completion_contract",
+      "detail": "contract id must match v835 plan"
+    },
+    {
+      "id": "target_terms_exact",
+      "status": "pass",
+      "actual": [
+        "fixed",
+        "loss"
+      ],
+      "detail": "contract must target exactly fixed/loss"
+    },
+    {
+      "id": "canonical_completion_exact",
+      "status": "pass",
+      "actual": "fixed loss",
+      "detail": "source canonical completion must remain fixed loss"
+    },
+    {
+      "id": "completion_exact",
+      "status": "pass",
+      "actual": "fixed loss",
+      "detail": "contract must require fixed loss completion"
+    },
+    {
+      "id": "canonical_prompt_present",
+      "status": "pass",
+      "actual": "Answer with exactly two tokens: fixed loss\nanswer:",
+      "detail": "canonical prompt must be present"
+    },
+    {
+      "id": "canonical_surface_allowed",
+      "status": "pass",
+      "actual": [
+        "canonical_direct_completion_surface",
+        "v803_prompt_surface_replay_as_holdout_check"
+      ],
+      "detail": "canonical direct completion surface must be allowed"
+    },
+    {
+      "id": "blocked_rescue_surfaces_present",
+      "status": "pass",
+      "actual": [
+        "carry_forward_only_seed_expansion",
+        "forced_prefix_decoder_anchor_as_quality_claim",
+        "more_training_epochs_without_contract_change"
+      ],
+      "detail": "contract must block rescue surfaces that caused drift"
+    },
+    {
+      "id": "unchanged_holdout_required",
+      "status": "pass",
+      "actual": true,
+      "detail": "unchanged v803 holdout must remain required"
+    },
+    {
+      "id": "contract_cases_present",
+      "status": "pass",
+      "actual": 3,
+      "detail": "contract must define canonical plus support surfaces"
+    },
+    {
+      "id": "seed_blueprint_ready",
+      "status": "pass",
+      "actual": 18,
+      "detail": "seed blueprint must have deterministic planned examples"
+    },
+    {
+      "id": "direct_seed_work_item_present",
+      "status": "pass",
+      "actual": [
+        "contract_fixture",
+        "controlled_training",
+        "direct_seed_corpus",
+        "dual_replay",
+        "fallback_decision"
+      ],
+      "detail": "plan must include direct seed work item"
+    },
+    {
+      "id": "dual_replay_work_item_present",
+      "status": "pass",
+      "actual": [
+        "contract_fixture",
+        "controlled_training",
+        "direct_seed_corpus",
+        "dual_replay",
+        "fallback_decision"
+      ],
+      "detail": "plan must include dual replay work item"
+    }
+  ],
+  "summary": {
+    "bounded_objective_contract_ready": true,
+    "contract_id": "bounded_fixed_loss_direct_completion_contract",
+    "target_terms": [
+      "fixed",
+      "loss"
+    ],
+    "contract_case_count": 3,
+    "planned_seed_example_count": 18,
+    "unchanged_suite_check_required": true,
+    "promotion_claim_allowed": false,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_objective_seed",
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "contract_only",
+    "reason": "The contract fixes the direct completion target before creating any new seed corpus or checkpoint.",
+    "next_action": "model_capability_route_promotion_bounded_objective_seed",
+    "contract": "bounded_fixed_loss_direct_completion_contract"
+  }
+}
