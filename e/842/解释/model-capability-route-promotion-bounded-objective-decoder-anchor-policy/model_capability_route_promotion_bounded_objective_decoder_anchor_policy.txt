@@ -1,0 +1,9 @@
+status=pass
+decision=model_capability_route_promotion_bounded_objective_decoder_anchor_policy_ready
+bounded_objective_decoder_anchor_policy_ready=True
+policy_case_count=3
+uncovered_case_count=0
+coverage_is_partial=False
+promotion_ready=False
+model_quality_claim=decoder_anchor_policy_only
+next_action=run_bounded_objective_decoder_anchor_policy_replay

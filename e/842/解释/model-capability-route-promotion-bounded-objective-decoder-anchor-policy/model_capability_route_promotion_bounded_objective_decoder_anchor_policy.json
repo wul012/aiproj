@@ -1,0 +1,154 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability route promotion bounded objective decoder anchor policy",
+  "generated_at": "2026-06-04T04:34:34Z",
+  "status": "pass",
+  "decision": "model_capability_route_promotion_bounded_objective_decoder_anchor_policy_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_decoder_anchor_probe": "D:\\aiproj\\e\\841\\解释\\model-capability-route-promotion-bounded-objective-decoder-anchor-probe\\model_capability_route_promotion_bounded_objective_decoder_anchor_probe.json",
+  "probe_summary": {
+    "bounded_objective_decoder_anchor_probe_ready": true,
+    "case_count": 3,
+    "profile_count": 3,
+    "probe_row_count": 9,
+    "source_zero_hit_case_count": 3,
+    "anchor_assisted_pass_count": 9,
+    "completion_pass_count": 9,
+    "new_text_pass_count": 0,
+    "anchor_completion_success": true,
+    "new_text_success": false,
+    "promotion_ready": false,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_objective_decoder_anchor_policy",
+    "next_step": "build_bounded_objective_decoder_anchor_policy",
+    "failed_check_count": 0
+  },
+  "policy_rows": [
+    {
+      "case_id": "canonical_direct_completion",
+      "profile_id": "prefix_f",
+      "anchor": "f",
+      "anchor_length": 1,
+      "completion_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "new_text_hit_terms": [
+        "loss"
+      ],
+      "combined_preview": "fixed losssss",
+      "policy_type": "case_specific_bounded_objective_decoder_anchor",
+      "claim_boundary": "decoder_anchor_signal_only",
+      "recommended_use": "controlled_policy_replay_only"
+    },
+    {
+      "case_id": "completion_label_surface",
+      "profile_id": "prefix_f",
+      "anchor": "f",
+      "anchor_length": 1,
+      "completion_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "new_text_hit_terms": [
+        "loss"
+      ],
+      "combined_preview": "fixed losssss",
+      "policy_type": "case_specific_bounded_objective_decoder_anchor",
+      "claim_boundary": "decoder_anchor_signal_only",
+      "recommended_use": "controlled_policy_replay_only"
+    },
+    {
+      "case_id": "minimal_direct_completion",
+      "profile_id": "prefix_f",
+      "anchor": "f",
+      "anchor_length": 1,
+      "completion_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "new_text_hit_terms": [
+        "loss"
+      ],
+      "combined_preview": "fixed loss\n\n\n",
+      "policy_type": "case_specific_bounded_objective_decoder_anchor",
+      "claim_boundary": "decoder_anchor_signal_only",
+      "recommended_use": "controlled_policy_replay_only"
+    }
+  ],
+  "uncovered_cases": [],
+  "guardrails": [
+    {
+      "id": "not_unassisted_model_capability",
+      "severity": "blocker",
+      "detail": "Injected anchors must not be counted as unassisted bounded objective replay success."
+    },
+    {
+      "id": "requires_policy_replay",
+      "severity": "blocker",
+      "detail": "The selected anchors must be replayed before any downstream use."
+    },
+    {
+      "id": "substring_scoring_not_final_exactness",
+      "severity": "warning",
+      "detail": "Policy is based on required-term completion hits; replay must still check final generated text and exact contract behavior."
+    },
+    {
+      "id": "policy_coverage",
+      "severity": "info",
+      "detail": "Policy covers 3 cases and leaves 0 uncovered."
+    }
+  ],
+  "check_rows": [
+    {
+      "id": "decoder_anchor_probe_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "decoder anchor probe must pass"
+    },
+    {
+      "id": "bounded_objective_decoder_anchor_probe_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "bounded objective probe summary must be ready"
+    },
+    {
+      "id": "probe_rows_present",
+      "status": "pass",
+      "actual": 9,
+      "detail": "policy must read probe rows"
+    },
+    {
+      "id": "completion_signal_present",
+      "status": "pass",
+      "actual": 3,
+      "detail": "policy requires at least one completion-pass probe row"
+    }
+  ],
+  "policy": {
+    "ready": true,
+    "policy_case_count": 3,
+    "uncovered_case_count": 0,
+    "guardrail_count": 4,
+    "coverage_is_partial": false,
+    "promotion_ready": false,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_objective_decoder_anchor_policy_replay",
+    "next_step": "run_bounded_objective_decoder_anchor_policy_replay"
+  },
+  "summary": {
+    "bounded_objective_decoder_anchor_policy_ready": true,
+    "policy_case_count": 3,
+    "uncovered_case_count": 0,
+    "guardrail_count": 4,
+    "coverage_is_partial": false,
+    "promotion_ready": false,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_objective_decoder_anchor_policy_replay",
+    "next_step": "run_bounded_objective_decoder_anchor_policy_replay",
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "decoder_anchor_policy_only",
+    "reason": "Policy is based on assisted decoder anchors and must be replayed before any capability claim.",
+    "next_action": "run_bounded_objective_decoder_anchor_policy_replay"
+  }
+}

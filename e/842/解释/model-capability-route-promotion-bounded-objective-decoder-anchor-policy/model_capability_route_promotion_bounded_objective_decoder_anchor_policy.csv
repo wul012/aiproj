@@ -1,0 +1,4 @@
+case_id,profile_id,anchor,anchor_length,completion_hit_terms,new_text_hit_terms,claim_boundary,recommended_use
+canonical_direct_completion,prefix_f,f,1,"[""fixed"", ""loss""]","[""loss""]",decoder_anchor_signal_only,controlled_policy_replay_only
+completion_label_surface,prefix_f,f,1,"[""fixed"", ""loss""]","[""loss""]",decoder_anchor_signal_only,controlled_policy_replay_only
+minimal_direct_completion,prefix_f,f,1,"[""fixed"", ""loss""]","[""loss""]",decoder_anchor_signal_only,controlled_policy_replay_only

@@ -115,6 +115,10 @@ e/840/解释/说明.md
 e/841/图片
 e/841/解释/说明.md
  -> v841 bounded objective decoder anchor probe 的运行截图和解释
+
+e/842/图片
+e/842/解释/说明.md
+ -> v842 bounded objective decoder anchor policy 的运行截图和解释
 ```
 
 ```text

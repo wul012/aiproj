@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v841.0.0` probes whether decoder anchors can recover the v839 bounded-objective zero-hit cases without claiming unassisted promotion.
+Version `v842.0.0` converts the v841 bounded-objective decoder anchor signal into a guarded replay-only policy.
+
+## Latest v842 checkpoint
+
+- Added `model_capability_route_promotion_bounded_objective_decoder_anchor_policy`.
+- Added CLI `scripts/build_model_capability_route_promotion_bounded_objective_decoder_anchor_policy.py`.
+- Consumed the real v841 decoder anchor probe output from `e/841`.
+- Selected the shortest completion-pass anchor per objective replay case.
+- Produced `policy_case_count=3`, `uncovered_case_count=0`, and `coverage_is_partial=False`.
+- Added guardrails for non-unassisted capability, required policy replay, and substring-scoring exactness.
+- Kept `promotion_ready=False` and model-quality claim `decoder_anchor_policy_only`.
+- Routed the next artifact to `model_capability_route_promotion_bounded_objective_decoder_anchor_policy_replay`.
+- Verified with `3 passed` focused bounded objective decoder anchor policy tests.
+- Archived v842 evidence in `e/842` and added the code explanation in `代码讲解记录_模型能力阶段/856-v842-route-promotion-bounded-objective-decoder-anchor-policy.md`.
 
 ## Latest v841 checkpoint
 
