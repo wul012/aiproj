@@ -143,6 +143,9 @@
 875-v861-bounded-objective-loss-signal-bridge-training-run.md
  -> v861 code explanation: train the loss-signal bridge corpus into a real checkpoint while keeping capability gated behind replay.
 
+876-v862-bounded-objective-loss-signal-bridge-replay-comparison.md
+ -> v862 code explanation: replay the loss-signal bridge checkpoint against the bounded objective contract and separate partial required-term signal from contract recovery.
+
 487-v473-baseline-candidate-capability-delta.md
  -> v473 code explanation: carry real tiny training loss and generation-quality deltas into the baseline-candidate eval loop.
 

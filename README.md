@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v861.0.0` trains a real tiny checkpoint from the v860 loss-signal bridge corpus and records training evidence.
+Version `v862.0.0` replays the v861 loss-signal bridge checkpoint against the bounded objective contract and records partial required-term evidence.
+
+## Latest v862 checkpoint
+
+- Added short-name module `bounded_objective_loss_signal_bridge_replay_comparison`.
+- Added CLI `scripts/run_bounded_objective_loss_signal_bridge_replay_comparison.py`.
+- Replayed the real v861 checkpoint against the unchanged v836 bounded objective contract on CPU.
+- Recorded `case_count=3`, `passed_case_count=0`, `any_hit_case_count=2`, `zero_hit_case_count=1`, and `pass_rate=0.0`.
+- Confirmed `objective_contract_recovered=False`, `canonical_case_pass=False`, and `promotion_ready=False`.
+- Observed partial required-term signal: one case hit `loss`, one case hit `fixed`, and one case stayed zero-hit.
+- Kept `model_quality_claim=partial_required_term_signal`.
+- Routed the next artifact to `diagnose_bounded_objective_loss_signal_bridge_partial_hit_before_more_training`.
+- Verified with `4 passed` focused replay-comparison tests and Playwright MCP screenshot evidence.
+- Archived v862 evidence in `e/862` and added the code explanation in `代码讲解记录_模型能力阶段/876-v862-bounded-objective-loss-signal-bridge-replay-comparison.md`.
 
 ## Latest v861 checkpoint
 

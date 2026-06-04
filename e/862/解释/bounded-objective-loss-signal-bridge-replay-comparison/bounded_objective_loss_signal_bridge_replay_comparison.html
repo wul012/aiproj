@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT bounded objective loss signal bridge replay comparison</title>
+<style>
+:root{color-scheme:light;--ink:#17212b;--muted:#64717d;--line:#d8dee5;--panel:#f8fafc;--accent:#991b1b}
+*{box-sizing:border-box}
+body{margin:0;background:#f3f4f6;color:var(--ink);font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1240px;margin:0 auto;padding:28px}
+h1{font-size:30px;margin:0 0 8px;letter-spacing:0}
+h2{font-size:18px;margin:0 0 12px;letter-spacing:0}
+p{color:var(--muted);line-height:1.55;overflow-wrap:anywhere}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:18px 0}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:8px}
+.card{padding:14px}
+.card span{display:block;color:var(--muted);font-size:12px;text-transform:uppercase}
+.card strong{display:block;margin-top:6px;font-size:18px;line-height:1.2;color:var(--accent);overflow-wrap:anywhere}
+.panel{padding:16px;margin:14px 0}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:#334155}
+td{overflow-wrap:anywhere}
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT bounded objective loss signal bridge replay comparison</h1><p>The loss-signal bridge checkpoint produced partial required-term signal without recovering the full contract.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Decision</span><strong>bounded_objective_loss_signal_bridge_replay_partial_required_term_hit</strong></div><div class="card"><span>Recovered</span><strong>False</strong></div><div class="card"><span>Cases</span><strong>3</strong></div><div class="card"><span>Passed</span><strong>0</strong></div><div class="card"><span>Any hits</span><strong>2</strong></div><div class="card"><span>Zero hits</span><strong>1</strong></div><div class="card"><span>Claim</span><strong>partial_required_term_signal</strong></div></section>
+<section class="panel"><h2>Replay Rows</h2><div class="table-wrap"><table>
+<thead><tr><th>Case</th><th>Pass</th><th>Hit</th><th>Missed</th><th>Continuation</th></tr></thead>
+<tbody><tr><td>canonical_direct_completion</td><td>False</td><td>loss</td><td>fixed</td><td> lossswe</td></tr><tr><td>minimal_direct_completion</td><td>False</td><td>fixed</td><td>loss</td><td>
+fixed l</td></tr><tr><td>completion_label_surface</td><td>False</td><td></td><td>fixed,loss</td><td> lonssss</td></tr></tbody>
+</table></div></section>
+</main>
+</body>
+</html>
