@@ -1,0 +1,240 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability route promotion bounded objective decoder anchor policy replay",
+  "generated_at": "2026-06-04T04:44:17Z",
+  "status": "pass",
+  "decision": "model_capability_route_promotion_bounded_objective_decoder_anchor_policy_replay_reproduced_assisted_signal",
+  "failed_count": 0,
+  "issues": [],
+  "source_replay_comparison": "D:\\aiproj\\e\\839\\解释\\model-capability-route-promotion-bounded-objective-replay-comparison\\model_capability_route_promotion_bounded_objective_replay_comparison.json",
+  "source_decoder_anchor_policy": "D:\\aiproj\\e\\842\\解释\\model-capability-route-promotion-bounded-objective-decoder-anchor-policy\\model_capability_route_promotion_bounded_objective_decoder_anchor_policy.json",
+  "checkpoint": "D:\\aiproj\\e\\838\\解释\\model-capability-route-promotion-bounded-objective-training-run\\run\\checkpoint.pt",
+  "tokenizer": "D:\\aiproj\\e\\838\\解释\\model-capability-route-promotion-bounded-objective-training-run\\run\\tokenizer.json",
+  "device": "cpu",
+  "policy_rows": [
+    {
+      "case_id": "canonical_direct_completion",
+      "profile_id": "prefix_f",
+      "anchor": "f",
+      "anchor_length": 1,
+      "completion_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "new_text_hit_terms": [
+        "loss"
+      ],
+      "combined_preview": "fixed losssss",
+      "policy_type": "case_specific_bounded_objective_decoder_anchor",
+      "claim_boundary": "decoder_anchor_signal_only",
+      "recommended_use": "controlled_policy_replay_only"
+    },
+    {
+      "case_id": "completion_label_surface",
+      "profile_id": "prefix_f",
+      "anchor": "f",
+      "anchor_length": 1,
+      "completion_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "new_text_hit_terms": [
+        "loss"
+      ],
+      "combined_preview": "fixed losssss",
+      "policy_type": "case_specific_bounded_objective_decoder_anchor",
+      "claim_boundary": "decoder_anchor_signal_only",
+      "recommended_use": "controlled_policy_replay_only"
+    },
+    {
+      "case_id": "minimal_direct_completion",
+      "profile_id": "prefix_f",
+      "anchor": "f",
+      "anchor_length": 1,
+      "completion_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "new_text_hit_terms": [
+        "loss"
+      ],
+      "combined_preview": "fixed loss\n\n\n",
+      "policy_type": "case_specific_bounded_objective_decoder_anchor",
+      "claim_boundary": "decoder_anchor_signal_only",
+      "recommended_use": "controlled_policy_replay_only"
+    }
+  ],
+  "replay_rows": [
+    {
+      "case_id": "canonical_direct_completion",
+      "policy_applied": true,
+      "profile_id": "prefix_f",
+      "anchor": "f",
+      "continuation": "ixed losssss",
+      "combined": "fixed losssss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "combined_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "new_text_hit_terms": [
+        "loss"
+      ],
+      "missed_terms": [],
+      "case_pass": true,
+      "new_text_pass": false,
+      "seed": 2939,
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 20
+    },
+    {
+      "case_id": "minimal_direct_completion",
+      "policy_applied": true,
+      "profile_id": "prefix_f",
+      "anchor": "f",
+      "continuation": "ixed loss\n\n\n",
+      "combined": "fixed loss\n\n\n",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "combined_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "new_text_hit_terms": [
+        "loss"
+      ],
+      "missed_terms": [],
+      "case_pass": true,
+      "new_text_pass": false,
+      "seed": 2939,
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 20
+    },
+    {
+      "case_id": "completion_label_surface",
+      "policy_applied": true,
+      "profile_id": "prefix_f",
+      "anchor": "f",
+      "continuation": "ixed losssss",
+      "combined": "fixed losssss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "combined_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "new_text_hit_terms": [
+        "loss"
+      ],
+      "missed_terms": [],
+      "case_pass": true,
+      "new_text_pass": false,
+      "seed": 2939,
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": 20
+    }
+  ],
+  "replay_errors": [],
+  "check_rows": [
+    {
+      "id": "replay_comparison_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "source objective replay comparison must pass"
+    },
+    {
+      "id": "decoder_anchor_policy_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "decoder anchor policy must pass"
+    },
+    {
+      "id": "bounded_objective_decoder_anchor_policy_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "bounded objective decoder anchor policy must be ready"
+    },
+    {
+      "id": "checkpoint_exists",
+      "status": "pass",
+      "actual": "D:\\aiproj\\e\\838\\解释\\model-capability-route-promotion-bounded-objective-training-run\\run\\checkpoint.pt",
+      "detail": "checkpoint.pt must exist"
+    },
+    {
+      "id": "tokenizer_exists",
+      "status": "pass",
+      "actual": "D:\\aiproj\\e\\838\\解释\\model-capability-route-promotion-bounded-objective-training-run\\run\\tokenizer.json",
+      "detail": "tokenizer.json must exist"
+    },
+    {
+      "id": "source_rows_present",
+      "status": "pass",
+      "actual": 3,
+      "detail": "source replay rows must be present"
+    },
+    {
+      "id": "policy_rows_present",
+      "status": "pass",
+      "actual": 3,
+      "detail": "policy must contain at least one row"
+    },
+    {
+      "id": "all_cases_replayed",
+      "status": "pass",
+      "actual": 3,
+      "detail": "policy replay should replay every source case"
+    },
+    {
+      "id": "no_replay_errors",
+      "status": "pass",
+      "actual": 0,
+      "detail": "policy replay should not raise generation errors"
+    }
+  ],
+  "policy_replay": {
+    "ready": true,
+    "case_count": 3,
+    "passed_case_count": 3,
+    "failed_case_count": 0,
+    "policy_case_count": 3,
+    "policy_applied_case_count": 3,
+    "policy_applied_pass_count": 3,
+    "new_text_pass_count": 0,
+    "pass_rate": 1.0,
+    "policy_replay_success": true,
+    "promotion_ready": false,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_objective_decoder_anchor_policy_review",
+    "next_step": "review_bounded_objective_decoder_anchor_policy_replay"
+  },
+  "summary": {
+    "bounded_objective_decoder_anchor_policy_replay_ready": true,
+    "case_count": 3,
+    "passed_case_count": 3,
+    "failed_case_count": 0,
+    "policy_case_count": 3,
+    "policy_applied_case_count": 3,
+    "policy_applied_pass_count": 3,
+    "new_text_pass_count": 0,
+    "pass_rate": 1.0,
+    "policy_replay_success": true,
+    "promotion_ready": false,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_objective_decoder_anchor_policy_review",
+    "next_step": "review_bounded_objective_decoder_anchor_policy_replay",
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "decoder_anchor_policy_replay_only",
+    "reason": "Policy replay reproduced assisted required-term hits, but new-text success remains separate and promotion stays blocked.",
+    "next_action": "review_bounded_objective_decoder_anchor_policy_replay"
+  }
+}

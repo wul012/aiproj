@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v842.0.0` converts the v841 bounded-objective decoder anchor signal into a guarded replay-only policy.
+Version `v843.0.0` replays the bounded-objective decoder anchor policy and confirms the assisted signal remains promotion-blocked.
+
+## Latest v843 checkpoint
+
+- Added `model_capability_route_promotion_bounded_objective_decoder_anchor_policy_replay`.
+- Added CLI `scripts/run_model_capability_route_promotion_bounded_objective_decoder_anchor_policy_replay.py`.
+- Consumed the real v839 replay comparison, v842 policy, and v838 checkpoint/tokenizer.
+- Replayed the selected policy anchors with the same profile seed-offset mapping used by v841.
+- Produced `passed_case_count=3`, `policy_applied_case_count=3`, `policy_applied_pass_count=3`, and `new_text_pass_count=0`.
+- Confirmed `policy_replay_success=True` while keeping `promotion_ready=False`.
+- Kept the model-quality claim as `decoder_anchor_policy_replay_only`.
+- Routed the next artifact to `model_capability_route_promotion_bounded_objective_decoder_anchor_policy_review`.
+- Verified with `3 passed` focused bounded objective decoder anchor policy replay tests.
+- Archived v843 evidence in `e/843` and added the code explanation in `代码讲解记录_模型能力阶段/857-v843-route-promotion-bounded-objective-decoder-anchor-policy-replay.md`.
 
 ## Latest v842 checkpoint
 

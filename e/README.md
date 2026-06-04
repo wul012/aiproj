@@ -119,6 +119,10 @@ e/841/解释/说明.md
 e/842/图片
 e/842/解释/说明.md
  -> v842 bounded objective decoder anchor policy 的运行截图和解释
+
+e/843/图片
+e/843/解释/说明.md
+ -> v843 bounded objective decoder anchor policy replay 的运行截图和解释
 ```
 
 ```text
