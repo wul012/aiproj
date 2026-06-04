@@ -4,7 +4,19 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v866.0.0` replays the v865 pair-binding checkpoint and records a zero-hit regression against the bounded objective contract.
+Version `v867.0.0` diagnoses the v866 pair-binding zero-hit regression as label echo over target terms.
+
+## Latest v867 checkpoint
+
+- Added short-name module `bounded_objective_loss_signal_bridge_pair_binding_zero_hit_diagnostic`.
+- Added CLI `scripts/diagnose_bounded_objective_loss_signal_bridge_pair_binding_zero_hit.py`.
+- Consumed the real v866 pair-binding replay comparison.
+- Recorded `case_count=3`, `label_echo_case_count=3`, `zero_hit_case_count=3`, and `all_cases_label_echo=True`.
+- Identified root causes: `label_echo_over_target_terms`, `partial_signal_regressed_to_zero_hit`, `no_anchor_failure_needs_surface_repair`, and `short_decode_label_fragment`.
+- Kept `model_quality_claim=label_echo_regression`.
+- Routed the next artifact to `build_single_line_completion_surface_patch`.
+- Verified with `3 passed` focused zero-hit diagnostic tests and Playwright MCP screenshot evidence.
+- Archived v867 evidence in `e/867` and added the code explanation in `代码讲解记录_模型能力阶段/881-v867-bounded-objective-loss-signal-bridge-pair-binding-zero-hit-diagnostic.md`.
 
 ## Latest v866 checkpoint
 

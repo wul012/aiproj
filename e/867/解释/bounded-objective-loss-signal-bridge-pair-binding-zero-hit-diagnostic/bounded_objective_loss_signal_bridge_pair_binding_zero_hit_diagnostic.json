@@ -1,0 +1,172 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT bounded objective loss signal bridge pair-binding zero-hit diagnostic",
+  "generated_at": "2026-06-04T14:09:22Z",
+  "status": "pass",
+  "decision": "bounded_objective_loss_signal_bridge_pair_binding_zero_hit_label_echo",
+  "failed_count": 0,
+  "issues": [],
+  "source_replay_comparison": "e\\866\\解释\\bounded-objective-loss-signal-bridge-pair-binding-replay-comparison\\bounded_objective_loss_signal_bridge_pair_binding_replay_comparison.json",
+  "replay_summary": {
+    "bounded_objective_replay_comparison_ready": true,
+    "objective_contract_recovered": false,
+    "canonical_case_pass": false,
+    "case_count": 3,
+    "executed_case_count": 3,
+    "passed_case_count": 0,
+    "failed_case_count": 3,
+    "any_hit_case_count": 0,
+    "zero_hit_case_count": 3,
+    "pass_rate": 0.0,
+    "promotion_ready": false,
+    "next_step": "diagnose_bounded_objective_loss_signal_bridge_pair_binding_zero_hit_before_more_training",
+    "failed_check_count": 0,
+    "bounded_objective_loss_signal_bridge_replay_comparison_ready": true,
+    "decoder_anchor_used": false,
+    "route": "bounded_objective_loss_signal_bridge_pair_binding",
+    "bounded_objective_loss_signal_bridge_pair_binding_replay_comparison_ready": true
+  },
+  "training_summary": {
+    "bounded_objective_unassisted_repair_training_ready": true,
+    "artifact_count": 7,
+    "metric_record_count": 13,
+    "final_step": 120,
+    "final_train_loss": 1.2852036952972412,
+    "final_val_loss": 1.0368845462799072,
+    "train_loss_delta": -2.32423,
+    "val_loss_delta": -2.550792,
+    "repair_example_count": 18,
+    "neutral_prompt_example_count": 6,
+    "decoder_anchor_example_count": 0,
+    "proposed_next_artifact": "bounded_objective_loss_signal_bridge_pair_binding_replay_comparison",
+    "next_step": "run_bounded_objective_loss_signal_bridge_pair_binding_replay_comparison",
+    "failed_check_count": 0,
+    "bounded_objective_unassisted_repair_seed_revision_training_ready": true,
+    "bounded_objective_loss_signal_bridge_training_ready": true,
+    "bounded_objective_loss_signal_bridge_pair_binding_training_ready": true
+  },
+  "case_diagnostics": [
+    {
+      "case_id": "canonical_direct_completion",
+      "continuation": "\nanswer:",
+      "normalized_continuation": "answer:",
+      "case_pass": false,
+      "any_hit": false,
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "label_echo": true,
+      "empty_or_label_only": true,
+      "continuation_len": 8
+    },
+    {
+      "case_id": "minimal_direct_completion",
+      "continuation": "\nanswer:",
+      "normalized_continuation": "answer:",
+      "case_pass": false,
+      "any_hit": false,
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "label_echo": true,
+      "empty_or_label_only": true,
+      "continuation_len": 8
+    },
+    {
+      "case_id": "completion_label_surface",
+      "continuation": "\nans\n\n\n\n",
+      "normalized_continuation": "ans",
+      "case_pass": false,
+      "any_hit": false,
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "label_echo": true,
+      "empty_or_label_only": true,
+      "continuation_len": 8
+    }
+  ],
+  "root_causes": [
+    {
+      "id": "label_echo_over_target_terms",
+      "detail": "all continuations echo answer/completion labels instead of fixed loss."
+    },
+    {
+      "id": "partial_signal_regressed_to_zero_hit",
+      "detail": "pair-binding training regressed the prior partial required-term signal to zero-hit replay."
+    },
+    {
+      "id": "no_anchor_failure_needs_surface_repair",
+      "detail": "failure remains unassisted; repair should target surface format rather than decoder anchors."
+    },
+    {
+      "id": "short_decode_label_fragment",
+      "detail": "short continuations are consumed by label fragments before target terms appear."
+    }
+  ],
+  "check_rows": [
+    {
+      "id": "replay_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "pair-binding replay must pass structurally"
+    },
+    {
+      "id": "replay_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "pair-binding replay must be ready"
+    },
+    {
+      "id": "zero_hit_replay",
+      "status": "pass",
+      "actual": 0,
+      "detail": "diagnostic only applies to zero-hit replay"
+    },
+    {
+      "id": "not_recovered",
+      "status": "pass",
+      "actual": false,
+      "detail": "diagnostic only applies before recovery"
+    },
+    {
+      "id": "case_rows_present",
+      "status": "pass",
+      "actual": 3,
+      "detail": "diagnostic needs replay rows"
+    }
+  ],
+  "diagnostic": {
+    "ready": true,
+    "label_echo_case_count": 3,
+    "zero_hit_case_count": 3,
+    "all_cases_label_echo": true,
+    "root_cause_ids": [
+      "label_echo_over_target_terms",
+      "partial_signal_regressed_to_zero_hit",
+      "no_anchor_failure_needs_surface_repair",
+      "short_decode_label_fragment"
+    ],
+    "next_step": "build_single_line_completion_surface_patch"
+  },
+  "summary": {
+    "bounded_objective_loss_signal_bridge_pair_binding_zero_hit_diagnostic_ready": true,
+    "case_count": 3,
+    "label_echo_case_count": 3,
+    "zero_hit_case_count": 3,
+    "all_cases_label_echo": true,
+    "root_cause_count": 4,
+    "next_step": "build_single_line_completion_surface_patch"
+  },
+  "interpretation": {
+    "model_quality_claim": "label_echo_regression",
+    "reason": "The checkpoint echoed answer/completion labels on every case, so the next patch should favor single-line target completions.",
+    "next_action": "build_single_line_completion_surface_patch"
+  }
+}

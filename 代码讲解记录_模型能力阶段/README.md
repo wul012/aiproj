@@ -158,6 +158,9 @@
 880-v866-bounded-objective-loss-signal-bridge-pair-binding-replay-comparison.md
  -> v866 code explanation: replay the pair-binding checkpoint and record the zero-hit regression before further repair.
 
+881-v867-bounded-objective-loss-signal-bridge-pair-binding-zero-hit-diagnostic.md
+ -> v867 code explanation: diagnose pair-binding zero-hit replay as label echo regression and route to single-line surface repair.
+
 487-v473-baseline-candidate-capability-delta.md
  -> v473 code explanation: carry real tiny training loss and generation-quality deltas into the baseline-candidate eval loop.
 

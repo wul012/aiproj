@@ -215,6 +215,10 @@ e/865/解释/说明.md
 e/866/图片
 e/866/解释/说明.md
  -> v866 bounded objective loss signal bridge pair-binding replay comparison 的运行截图和解释
+
+e/867/图片
+e/867/解释/说明.md
+ -> v867 bounded objective loss signal bridge pair-binding zero-hit diagnostic 的运行截图和解释
 ```
 
 ```text

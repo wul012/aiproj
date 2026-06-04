@@ -1,0 +1,9 @@
+status=pass
+decision=bounded_objective_loss_signal_bridge_pair_binding_zero_hit_label_echo
+zero_hit_diagnostic_ready=True
+case_count=3
+label_echo_case_count=3
+zero_hit_case_count=3
+all_cases_label_echo=True
+model_quality_claim=label_echo_regression
+next_action=build_single_line_completion_surface_patch
