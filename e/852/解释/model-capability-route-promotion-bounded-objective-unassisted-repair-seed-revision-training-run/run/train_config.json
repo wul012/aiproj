@@ -1,0 +1,33 @@
+{
+  "data": "D:\\aiproj\\data\\sample_zh.txt",
+  "data_dir": null,
+  "prepared_data": "e\\851\\解释\\model-capability-route-promotion-bounded-objective-unassisted-repair-seed-revision\\model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_corpus.txt",
+  "out_dir": "e\\852\\解释\\model-capability-route-promotion-bounded-objective-unassisted-repair-seed-revision-training-run\\run",
+  "resume": null,
+  "tokenizer": "char",
+  "bpe_vocab_size": 256,
+  "bpe_min_frequency": 2,
+  "batch_size": 8,
+  "block_size": 64,
+  "max_iters": 50,
+  "eval_interval": 10,
+  "eval_iters": 5,
+  "learning_rate": 0.001,
+  "train_ratio": 0.9,
+  "n_layer": 2,
+  "n_head": 2,
+  "n_embd": 64,
+  "dropout": 0.0,
+  "seed": 1852,
+  "device": "cpu",
+  "sample_prompt": "Complete the objective response.\nanswer:",
+  "sample_tokens": 12,
+  "sample_temperature": 0.8,
+  "sample_top_k": 20,
+  "no_sample": false,
+  "device_used": "cpu",
+  "data_source": {
+    "kind": "prepared_data",
+    "path": "e\\851\\解释\\model-capability-route-promotion-bounded-objective-unassisted-repair-seed-revision\\model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_corpus.txt"
+  }
+}

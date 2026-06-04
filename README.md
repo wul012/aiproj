@@ -4,7 +4,21 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v851.0.0` builds the bounded-objective unassisted repair seed revision corpus from the v850 curriculum revision.
+Version `v852.0.0` trains a real tiny checkpoint from the bounded-objective unassisted repair seed revision.
+
+## Latest v852 checkpoint
+
+- Added `model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_training_run`.
+- Added CLI `scripts/build_model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_training_run.py`.
+- Trained a real tiny checkpoint from the v851 revised corpus.
+- Produced `checkpoint.pt`, `tokenizer.json`, `metrics.jsonl`, `train_config.json`, `run_manifest.json`, `sample.txt`, and `prepared_corpus.txt`.
+- Recorded `final_step=50`, `final_train_loss=2.1270718574523926`, `final_val_loss=2.2989022731781006`, and `train_loss_delta=-1.356824`.
+- Preserved `neutral_prompt_example_count=18` and `decoder_anchor_example_count=0`.
+- Kept model-quality claim `training_artifact_only`.
+- Routed the next artifact to `model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_replay_comparison`.
+- Verified with `3 passed` focused bounded objective unassisted repair seed revision training-run tests and `1734 passed` full pytest.
+- Confirmed source encoding hygiene with `source_count=1268`, `clean_count=1268`, `bom_count=0`, and `syntax_error_count=0`.
+- Archived v852 evidence in `e/852` and added the code explanation in `代码讲解记录_模型能力阶段/866-v852-route-promotion-bounded-objective-unassisted-repair-seed-revision-training-run.md`.
 
 ## Latest v851 checkpoint
 

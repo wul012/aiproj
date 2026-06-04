@@ -1,0 +1,8 @@
+prompt: Complete the objective response.
+answer:
+max_new_tokens: 12
+temperature: 0.8
+top_k: 20
+
+Complete the objective response.
+answer: t: funselos

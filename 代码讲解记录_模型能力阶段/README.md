@@ -113,6 +113,9 @@
 865-v851-route-promotion-bounded-objective-unassisted-repair-seed-revision.md
  -> v851 code explanation: generate a revised no-anchor seed corpus from the curriculum revision.
 
+866-v852-route-promotion-bounded-objective-unassisted-repair-seed-revision-training-run.md
+ -> v852 code explanation: train a real checkpoint from the revised no-anchor seed while keeping capability gated behind replay.
+
 487-v473-baseline-candidate-capability-delta.md
  -> v473 code explanation: carry real tiny training loss and generation-quality deltas into the baseline-candidate eval loop.
 

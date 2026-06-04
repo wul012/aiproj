@@ -1,0 +1,660 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability route promotion bounded objective unassisted repair seed revision training run",
+  "generated_at": "2026-06-04T06:23:18Z",
+  "status": "pass",
+  "decision": "model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_training_run_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_unassisted_repair_seed": "e\\851\\解释\\model-capability-route-promotion-bounded-objective-unassisted-repair-seed-revision\\model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision.json",
+  "run_dir": "e\\852\\解释\\model-capability-route-promotion-bounded-objective-unassisted-repair-seed-revision-training-run\\run",
+  "unassisted_repair_seed_summary": {
+    "bounded_objective_unassisted_repair_seed_revision_ready": true,
+    "example_count": 24,
+    "neutral_prompt_example_count": 18,
+    "target_term_prompt_example_count": 6,
+    "decoder_anchor_example_count": 0,
+    "corpus_char_count": 2028,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_objective_unassisted_repair_training_run",
+    "next_step": "train_bounded_objective_unassisted_repair_seed_revision",
+    "failed_check_count": 0,
+    "bounded_objective_unassisted_repair_seed_ready": true,
+    "direct_example_count": 24
+  },
+  "artifacts": [
+    {
+      "key": "checkpoint",
+      "path": "e\\852\\解释\\model-capability-route-promotion-bounded-objective-unassisted-repair-seed-revision-training-run\\run\\checkpoint.pt",
+      "exists": true,
+      "size": 1346510
+    },
+    {
+      "key": "tokenizer",
+      "path": "e\\852\\解释\\model-capability-route-promotion-bounded-objective-unassisted-repair-seed-revision-training-run\\run\\tokenizer.json",
+      "exists": true,
+      "size": 460
+    },
+    {
+      "key": "metrics",
+      "path": "e\\852\\解释\\model-capability-route-promotion-bounded-objective-unassisted-repair-seed-revision-training-run\\run\\metrics.jsonl",
+      "exists": true,
+      "size": 669
+    },
+    {
+      "key": "train_config",
+      "path": "e\\852\\解释\\model-capability-route-promotion-bounded-objective-unassisted-repair-seed-revision-training-run\\run\\train_config.json",
+      "exists": true,
+      "size": 1233
+    },
+    {
+      "key": "run_manifest",
+      "path": "e\\852\\解释\\model-capability-route-promotion-bounded-objective-unassisted-repair-seed-revision-training-run\\run\\run_manifest.json",
+      "exists": true,
+      "size": 11453
+    },
+    {
+      "key": "sample",
+      "path": "e\\852\\解释\\model-capability-route-promotion-bounded-objective-unassisted-repair-seed-revision-training-run\\run\\sample.txt",
+      "exists": true,
+      "size": 155
+    },
+    {
+      "key": "prepared_corpus",
+      "path": "e\\852\\解释\\model-capability-route-promotion-bounded-objective-unassisted-repair-seed-revision-training-run\\run\\prepared_corpus.txt",
+      "exists": true,
+      "size": 2099
+    }
+  ],
+  "metrics": {
+    "record_count": 6,
+    "first": {
+      "last_loss": 3.659418821334839,
+      "step": 1,
+      "train_loss": 3.4838955402374268,
+      "val_loss": 3.4959418773651123
+    },
+    "last": {
+      "last_loss": 2.0817651748657227,
+      "step": 50,
+      "train_loss": 2.1270718574523926,
+      "val_loss": 2.2989022731781006
+    },
+    "train_loss_delta": -1.356824,
+    "val_loss_delta": -1.19704
+  },
+  "train_config": {
+    "data": "D:\\aiproj\\data\\sample_zh.txt",
+    "data_dir": null,
+    "prepared_data": "e\\851\\解释\\model-capability-route-promotion-bounded-objective-unassisted-repair-seed-revision\\model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_corpus.txt",
+    "out_dir": "e\\852\\解释\\model-capability-route-promotion-bounded-objective-unassisted-repair-seed-revision-training-run\\run",
+    "resume": null,
+    "tokenizer": "char",
+    "bpe_vocab_size": 256,
+    "bpe_min_frequency": 2,
+    "batch_size": 8,
+    "block_size": 64,
+    "max_iters": 50,
+    "eval_interval": 10,
+    "eval_iters": 5,
+    "learning_rate": 0.001,
+    "train_ratio": 0.9,
+    "n_layer": 2,
+    "n_head": 2,
+    "n_embd": 64,
+    "dropout": 0.0,
+    "seed": 1852,
+    "device": "cpu",
+    "sample_prompt": "Complete the objective response.\nanswer:",
+    "sample_tokens": 12,
+    "sample_temperature": 0.8,
+    "sample_top_k": 20,
+    "no_sample": false,
+    "device_used": "cpu",
+    "data_source": {
+      "kind": "prepared_data",
+      "path": "e\\851\\解释\\model-capability-route-promotion-bounded-objective-unassisted-repair-seed-revision\\model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_corpus.txt"
+    }
+  },
+  "manifest": {
+    "schema_version": 1,
+    "run_dir": "e\\852\\解释\\model-capability-route-promotion-bounded-objective-unassisted-repair-seed-revision-training-run\\run",
+    "created_at": "2026-06-04T06:23:01Z",
+    "started_at": "2026-06-04T06:22:58Z",
+    "finished_at": "2026-06-04T06:23:01Z",
+    "duration_seconds": 3.0,
+    "command": [
+      "python.exe",
+      "scripts\\train.py",
+      "--prepared-data",
+      "e\\851\\解释\\model-capability-route-promotion-bounded-objective-unassisted-repair-seed-revision\\model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_corpus.txt",
+      "--out-dir",
+      "e\\852\\解释\\model-capability-route-promotion-bounded-objective-unassisted-repair-seed-revision-training-run\\run",
+      "--tokenizer",
+      "char",
+      "--batch-size",
+      "8",
+      "--block-size",
+      "64",
+      "--max-iters",
+      "50",
+      "--eval-interval",
+      "10",
+      "--eval-iters",
+      "5",
+      "--learning-rate",
+      "0.001",
+      "--train-ratio",
+      "0.9",
+      "--n-layer",
+      "2",
+      "--n-head",
+      "2",
+      "--n-embd",
+      "64",
+      "--dropout",
+      "0.0",
+      "--seed",
+      "1852",
+      "--device",
+      "cpu",
+      "--sample-prompt",
+      "Complete the objective response.\nanswer:",
+      "--sample-tokens",
+      "12",
+      "--sample-temperature",
+      "0.8",
+      "--sample-top-k",
+      "20"
+    ],
+    "git": {
+      "commit": "78df3b440f5e85a3aec043f78607e2740ef1db72",
+      "short_commit": "78df3b4",
+      "branch": "main",
+      "tag": "v851.0.0",
+      "dirty": true
+    },
+    "environment": {
+      "python": "3.13.3",
+      "platform": "Windows-11-10.0.26100-SP0",
+      "executable": "D:\\python\\python.exe",
+      "torch": "2.6.0+cu124",
+      "numpy": "2.2.1"
+    },
+    "data": {
+      "source": {
+        "kind": "prepared_data",
+        "path": "e\\851\\解释\\model-capability-route-promotion-bounded-objective-unassisted-repair-seed-revision\\model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_corpus.txt"
+      },
+      "token_count": 2028,
+      "train_token_count": 1825,
+      "val_token_count": 203,
+      "dataset_report": null,
+      "dataset_quality": null,
+      "dataset_version": null
+    },
+    "model": {
+      "config": {
+        "vocab_size": 39,
+        "block_size": 64,
+        "n_layer": 2,
+        "n_head": 2,
+        "n_embd": 64,
+        "dropout": 0.0,
+        "bias": true
+      },
+      "parameter_count": 106688
+    },
+    "training": {
+      "args": {
+        "data": "D:\\aiproj\\data\\sample_zh.txt",
+        "data_dir": null,
+        "prepared_data": "e\\851\\解释\\model-capability-route-promotion-bounded-objective-unassisted-repair-seed-revision\\model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_corpus.txt",
+        "out_dir": "e\\852\\解释\\model-capability-route-promotion-bounded-objective-unassisted-repair-seed-revision-training-run\\run",
+        "resume": null,
+        "tokenizer": "char",
+        "bpe_vocab_size": 256,
+        "bpe_min_frequency": 2,
+        "batch_size": 8,
+        "block_size": 64,
+        "max_iters": 50,
+        "eval_interval": 10,
+        "eval_iters": 5,
+        "learning_rate": 0.001,
+        "train_ratio": 0.9,
+        "n_layer": 2,
+        "n_head": 2,
+        "n_embd": 64,
+        "dropout": 0.0,
+        "seed": 1852,
+        "device": "cpu",
+        "sample_prompt": "Complete the objective response.\nanswer:",
+        "sample_tokens": 12,
+        "sample_temperature": 0.8,
+        "sample_top_k": 20,
+        "no_sample": false,
+        "device_used": "cpu",
+        "data_source": {
+          "kind": "prepared_data",
+          "path": "e\\851\\解释\\model-capability-route-promotion-bounded-objective-unassisted-repair-seed-revision\\model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_corpus.txt"
+        }
+      },
+      "tokenizer": "char",
+      "device_used": "cpu",
+      "start_step": 1,
+      "end_step": 50
+    },
+    "results": {
+      "last_loss": 2.0817651748657227,
+      "history_summary": {
+        "record_count": 6,
+        "first_step": 1,
+        "last_step": 50,
+        "best_val_step": 50,
+        "best_val_loss": 2.2989022731781006,
+        "last_train_loss": 2.1270718574523926,
+        "last_val_loss": 2.2989022731781006
+      }
+    },
+    "artifacts": [
+      {
+        "key": "checkpoint",
+        "path": "checkpoint.pt",
+        "description": "model and optimizer state",
+        "exists": true,
+        "size_bytes": 1346510,
+        "sha256": "562ad00dc176c1da192a50261e5f62ec7bc0b549b57c5a937b4669c0e1bade8b"
+      },
+      {
+        "key": "tokenizer",
+        "path": "tokenizer.json",
+        "description": "tokenizer vocabulary and metadata",
+        "exists": true,
+        "size_bytes": 460,
+        "sha256": "be901a9b3baf7419f6e66eff4e0ed790fb76970cc66e9da1abe797e458ab61ff"
+      },
+      {
+        "key": "train_config",
+        "path": "train_config.json",
+        "description": "training command configuration",
+        "exists": true,
+        "size_bytes": 1233,
+        "sha256": "e240ed8f73d22bbc6c2f0f30f5fffae6dfdb21cf4393f5f6d6fe09bdbdfcae2c"
+      },
+      {
+        "key": "metrics",
+        "path": "metrics.jsonl",
+        "description": "step-by-step training metrics",
+        "exists": true,
+        "size_bytes": 669,
+        "sha256": "cbe1d2147e45dc9ae73dccef689a79457cafd99a6432d6ef38b82384e15e4785"
+      },
+      {
+        "key": "history_summary",
+        "path": "history_summary.json",
+        "description": "best/latest loss summary",
+        "exists": true,
+        "size_bytes": 211,
+        "sha256": "697964ffddbe11f517e686771a6525dbac70000be54059613b499bb2ec9c9cae"
+      },
+      {
+        "key": "loss_curve",
+        "path": "loss_curve.svg",
+        "description": "loss curve chart",
+        "exists": true,
+        "size_bytes": 1425,
+        "sha256": "36b101d24f2dd8171e5ce3462159a17007972631e931160f04715f0f716045a2"
+      },
+      {
+        "key": "prepared_corpus",
+        "path": "prepared_corpus.txt",
+        "description": "merged training corpus",
+        "exists": true,
+        "size_bytes": 2099,
+        "sha256": "339d2d0f2fd1ab32dd2a8c35da324c3eb68fb417a3d7c275646cbb5ded52217a"
+      },
+      {
+        "key": "dataset_report",
+        "path": "dataset_report.json",
+        "description": "dataset source statistics",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "dataset_chart",
+        "path": "dataset_report.svg",
+        "description": "dataset source chart",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "dataset_quality",
+        "path": "dataset_quality.json",
+        "description": "dataset quality report",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "dataset_quality_chart",
+        "path": "dataset_quality.svg",
+        "description": "dataset quality chart",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "dataset_version",
+        "path": "dataset_version.json",
+        "description": "dataset version manifest",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "dataset_version_html",
+        "path": "dataset_version.html",
+        "description": "browser dataset version report",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "sample",
+        "path": "sample.txt",
+        "description": "post-training sample",
+        "exists": true,
+        "size_bytes": 155,
+        "sha256": "e261c7b6842f2b300d1181363bbd91152a3b2d070e1c2d27a5a4e9d28a94d09a"
+      },
+      {
+        "key": "eval_report",
+        "path": "eval_report.json",
+        "description": "checkpoint evaluation report",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "eval_suite",
+        "path": "eval_suite/eval_suite.json",
+        "description": "fixed prompt evaluation suite",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "eval_suite_csv",
+        "path": "eval_suite/eval_suite.csv",
+        "description": "fixed prompt evaluation table",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "eval_suite_chart",
+        "path": "eval_suite/eval_suite.svg",
+        "description": "fixed prompt evaluation chart",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "eval_suite_html",
+        "path": "eval_suite/eval_suite.html",
+        "description": "browser benchmark evaluation report",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "model_report",
+        "path": "model_report/model_report.json",
+        "description": "model architecture report",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "model_chart",
+        "path": "model_report/model_architecture.svg",
+        "description": "model architecture chart",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "prediction_report",
+        "path": "predictions/predictions.json",
+        "description": "next-token prediction report",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "prediction_chart",
+        "path": "predictions/predictions.svg",
+        "description": "next-token prediction chart",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "attention_report",
+        "path": "attention/attention.json",
+        "description": "attention inspection report",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "attention_chart",
+        "path": "attention/attention.svg",
+        "description": "attention heatmap",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "transcript",
+        "path": "transcript.json",
+        "description": "chat transcript",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "generated",
+        "path": "generated.txt",
+        "description": "standalone generation output",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "experiment_card_json",
+        "path": "experiment_card.json",
+        "description": "machine-readable experiment card",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "experiment_card_md",
+        "path": "experiment_card.md",
+        "description": "markdown experiment card",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "experiment_card_html",
+        "path": "experiment_card.html",
+        "description": "browser experiment card",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "dashboard",
+        "path": "dashboard.html",
+        "description": "static dashboard",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "playground",
+        "path": "playground.html",
+        "description": "static playground",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      }
+    ]
+  },
+  "check_rows": [
+    {
+      "id": "unassisted_repair_seed_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "unassisted repair seed must pass"
+    },
+    {
+      "id": "unassisted_repair_seed_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "unassisted repair seed must be ready"
+    },
+    {
+      "id": "next_artifact_matches",
+      "status": "pass",
+      "actual": "model_capability_route_promotion_bounded_objective_unassisted_repair_training_run",
+      "detail": "seed must request unassisted repair training"
+    },
+    {
+      "id": "neutral_prompt_examples_present",
+      "status": "pass",
+      "actual": 18,
+      "detail": "unassisted repair seed needs neutral prompts"
+    },
+    {
+      "id": "no_decoder_anchor_examples",
+      "status": "pass",
+      "actual": 0,
+      "detail": "unassisted repair training must not depend on decoder anchors"
+    },
+    {
+      "id": "direct_examples_match",
+      "status": "pass",
+      "actual": 24,
+      "detail": "all repair seed rows must be direct completions"
+    },
+    {
+      "id": "corpus_chars_present",
+      "status": "pass",
+      "actual": 2028,
+      "detail": "seed corpus must contain training text"
+    },
+    {
+      "id": "checkpoint_exists",
+      "status": "pass",
+      "actual": "e\\852\\解释\\model-capability-route-promotion-bounded-objective-unassisted-repair-seed-revision-training-run\\run\\checkpoint.pt",
+      "detail": "training must produce checkpoint.pt"
+    },
+    {
+      "id": "tokenizer_exists",
+      "status": "pass",
+      "actual": "e\\852\\解释\\model-capability-route-promotion-bounded-objective-unassisted-repair-seed-revision-training-run\\run\\tokenizer.json",
+      "detail": "training must produce tokenizer.json"
+    },
+    {
+      "id": "metrics_exists",
+      "status": "pass",
+      "actual": "e\\852\\解释\\model-capability-route-promotion-bounded-objective-unassisted-repair-seed-revision-training-run\\run\\metrics.jsonl",
+      "detail": "training must produce metrics.jsonl"
+    },
+    {
+      "id": "manifest_exists",
+      "status": "pass",
+      "actual": "e\\852\\解释\\model-capability-route-promotion-bounded-objective-unassisted-repair-seed-revision-training-run\\run\\run_manifest.json",
+      "detail": "training must produce run_manifest.json"
+    },
+    {
+      "id": "sample_exists",
+      "status": "pass",
+      "actual": "e\\852\\解释\\model-capability-route-promotion-bounded-objective-unassisted-repair-seed-revision-training-run\\run\\sample.txt",
+      "detail": "training must produce a sample for later replay review"
+    },
+    {
+      "id": "prepared_corpus_exists",
+      "status": "pass",
+      "actual": "e\\852\\解释\\model-capability-route-promotion-bounded-objective-unassisted-repair-seed-revision-training-run\\run\\prepared_corpus.txt",
+      "detail": "training must copy prepared corpus"
+    },
+    {
+      "id": "metrics_records_present",
+      "status": "pass",
+      "actual": 6,
+      "detail": "training should record at least first and last metrics"
+    },
+    {
+      "id": "max_iters_positive",
+      "status": "pass",
+      "actual": 50,
+      "detail": "train_config must record positive max_iters"
+    }
+  ],
+  "unassisted_repair_training": {
+    "ready": true,
+    "artifact_count": 7,
+    "metric_record_count": 6,
+    "final_step": 50,
+    "final_train_loss": 2.1270718574523926,
+    "final_val_loss": 2.2989022731781006,
+    "train_loss_delta": -1.356824,
+    "val_loss_delta": -1.19704,
+    "max_iters": 50,
+    "seed": 1852,
+    "repair_example_count": 24,
+    "neutral_prompt_example_count": 18,
+    "decoder_anchor_example_count": 0,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_replay_comparison",
+    "next_step": "run_bounded_objective_unassisted_repair_seed_revision_replay_comparison"
+  },
+  "summary": {
+    "bounded_objective_unassisted_repair_training_ready": true,
+    "artifact_count": 7,
+    "metric_record_count": 6,
+    "final_step": 50,
+    "final_train_loss": 2.1270718574523926,
+    "final_val_loss": 2.2989022731781006,
+    "train_loss_delta": -1.356824,
+    "val_loss_delta": -1.19704,
+    "repair_example_count": 24,
+    "neutral_prompt_example_count": 18,
+    "decoder_anchor_example_count": 0,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_replay_comparison",
+    "next_step": "run_bounded_objective_unassisted_repair_seed_revision_replay_comparison",
+    "failed_check_count": 0,
+    "bounded_objective_unassisted_repair_seed_revision_training_ready": true
+  },
+  "interpretation": {
+    "model_quality_claim": "training_artifact_only",
+    "reason": "A checkpoint was trained from the revised unassisted seed, but capability still requires replay comparison.",
+    "next_action": "run_bounded_objective_unassisted_repair_seed_revision_replay_comparison"
+  },
+  "source_seed_revision": "e\\851\\解释\\model-capability-route-promotion-bounded-objective-unassisted-repair-seed-revision\\model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision.json",
+  "seed_revision_summary": {
+    "bounded_objective_unassisted_repair_seed_revision_ready": true,
+    "example_count": 24,
+    "neutral_prompt_example_count": 18,
+    "target_term_prompt_example_count": 6,
+    "decoder_anchor_example_count": 0,
+    "corpus_char_count": 2028,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_training_run",
+    "next_step": "train_bounded_objective_unassisted_repair_seed_revision",
+    "failed_check_count": 0
+  }
+}

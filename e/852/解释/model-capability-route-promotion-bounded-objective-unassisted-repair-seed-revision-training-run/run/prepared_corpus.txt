@@ -1,0 +1,71 @@
+Answer with exactly two tokens: fixed loss
+answer: fixed loss
+
+Return the exact two-token objective output.
+answer: # canonical_direct_completion fixed loss
+
+Observed fragment `los` is incomplete. Write the full target answer.
+answer: # canonical_direct_completion fixed loss
+
+answer: # canonical_direct_completion fixed loss
+
+Answer with exactly two tokens: fixed loss
+answer:
+Return only the answer.
+answer: fixed loss
+
+Emit the canonical target response.
+answer: # canonical_direct_completion fixed loss
+
+Observed fragment `wixed` is incomplete. Write the full target answer.
+answer: # canonical_direct_completion fixed loss
+
+completion: # canonical_direct_completion fixed loss
+
+Answer with exactly two words: fixed loss
+answer: fixed loss
+
+Return the exact two-token objective output.
+answer: # minimal_direct_completion fixed loss
+
+Observed fragment `los` is incomplete. Write the full target answer.
+answer: # minimal_direct_completion fixed loss
+
+answer: # minimal_direct_completion fixed loss
+
+Answer with exactly two words: fixed loss
+answer:
+Return only the answer.
+answer: fixed loss
+
+Emit the canonical target response.
+answer: # minimal_direct_completion fixed loss
+
+Observed fragment `wixed` is incomplete. Write the full target answer.
+answer: # minimal_direct_completion fixed loss
+
+completion: # minimal_direct_completion fixed loss
+
+Complete with exactly two tokens: fixed loss
+completion: fixed loss
+
+Return the exact two-token objective output.
+answer: # completion_label_surface fixed loss
+
+Observed fragment `los` is incomplete. Write the full target answer.
+answer: # completion_label_surface fixed loss
+
+answer: # completion_label_surface fixed loss
+
+Complete with exactly two tokens: fixed loss
+completion:
+Return only the answer.
+answer: fixed loss
+
+Emit the canonical target response.
+answer: # completion_label_surface fixed loss
+
+Observed fragment `wixed` is incomplete. Write the full target answer.
+answer: # completion_label_surface fixed loss
+
+completion: # completion_label_surface fixed loss
