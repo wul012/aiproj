@@ -1,0 +1,10 @@
+status=pass
+decision=model_capability_route_promotion_bounded_objective_replay_zero_hit_diagnostic_ready
+bounded_objective_zero_hit_diagnostic_ready=True
+case_count=3
+zero_hit_case_count=3
+near_miss_case_count=3
+prompt_in_corpus_count=3
+root_cause_count=4
+model_quality_claim=not_improved_diagnosed
+next_action=run_bounded_objective_decoder_anchor_probe

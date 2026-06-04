@@ -77,6 +77,9 @@
 853-v839-route-promotion-bounded-objective-replay-comparison.md
  -> v839 code explanation: replay the v838 checkpoint against the bounded objective contract and record the zero-hit outcome.
 
+854-v840-route-promotion-bounded-objective-zero-hit-diagnostic.md
+ -> v840 code explanation: diagnose why direct objective training still produced zero-hit near-miss generations.
+
 487-v473-baseline-candidate-capability-delta.md
  -> v473 code explanation: carry real tiny training loss and generation-quality deltas into the baseline-candidate eval loop.
 

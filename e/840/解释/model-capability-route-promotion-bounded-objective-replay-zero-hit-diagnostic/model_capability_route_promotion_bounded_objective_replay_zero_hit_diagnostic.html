@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT model capability route promotion bounded objective replay zero-hit diagnostic</title>
+<style>
+:root{color-scheme:light;--ink:#17212b;--muted:#64717d;--line:#d8dee5;--panel:#f8fafc;--accent:#a16207}
+*{box-sizing:border-box}
+body{margin:0;background:#f4f5f7;color:var(--ink);font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1240px;margin:0 auto;padding:28px}
+h1{font-size:30px;margin:0 0 8px;letter-spacing:0}
+h2{font-size:18px;margin:0 0 12px;letter-spacing:0}
+p{color:var(--muted);line-height:1.55;overflow-wrap:anywhere}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:18px 0}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:8px}
+.card{padding:14px}
+.card span{display:block;color:var(--muted);font-size:12px;text-transform:uppercase}
+.card strong{display:block;margin-top:6px;font-size:18px;line-height:1.2;color:var(--accent);overflow-wrap:anywhere}
+.panel{padding:16px;margin:14px 0}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:#334155}
+td{overflow-wrap:anywhere}
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT model capability route promotion bounded objective replay zero-hit diagnostic</h1><p>Direct prompts are present and training loss fell, but replay still has zero exact required-term hits.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Decision</span><strong>model_capability_route_promotion_bounded_objective_replay_zero_hit_diagnostic_ready</strong></div><div class="card"><span>Zero hit</span><strong>3</strong></div><div class="card"><span>Near miss</span><strong>3</strong></div><div class="card"><span>In corpus</span><strong>3</strong></div><div class="card"><span>Causes</span><strong>4</strong></div><div class="card"><span>Claim</span><strong>not_improved_diagnosed</strong></div></section>
+<section class="panel"><h2>Case Diagnostics</h2><div class="table-wrap"><table>
+<thead><tr><th>Case</th><th>Zero</th><th>Near Miss</th><th>In Corpus</th><th>Diagnosis</th><th>Action</th><th>Continuation</th></tr></thead>
+<tbody><tr><td>canonical_direct_completion</td><td>True</td><td>fixed</td><td>True</td><td>near_miss_character_substitution_without_exact_term</td><td>probe_decoder_anchor_and_exact_prefix_bias</td><td> wixed w</td></tr><tr><td>minimal_direct_completion</td><td>True</td><td>fixed</td><td>True</td><td>near_miss_character_substitution_without_exact_term</td><td>probe_decoder_anchor_and_exact_prefix_bias</td><td> wixed w</td></tr><tr><td>completion_label_surface</td><td>True</td><td>fixed</td><td>True</td><td>near_miss_character_substitution_without_exact_term</td><td>probe_decoder_anchor_and_exact_prefix_bias</td><td> wixed w</td></tr></tbody>
+</table></div></section>
+<section class="panel"><h2>Root Causes</h2><div class="table-wrap"><table>
+<thead><tr><th>Cause</th><th>Severity</th><th>Evidence</th><th>Detail</th></tr></thead>
+<tbody><tr><td>objective_replay_zero_required_term_hits</td><td>high</td><td>3</td><td>All replay rows missed fixed/loss despite a trained checkpoint.</td></tr><tr><td>near_miss_character_substitution</td><td>high</td><td>3</td><td>Continuations are close to required terms, for example wixed, but do not exactly hit them.</td></tr><tr><td>direct_prompts_present_but_generation_unanchored</td><td>medium</td><td>3</td><td>The direct objective prompts are present in corpus, so the failure is not a missing-prompt corpus gap.</td></tr><tr><td>loss_reduction_did_not_transfer_to_exact_generation</td><td>medium</td><td>-1.556213</td><td>Training loss dropped on direct examples, but generation did not recover exact required terms.</td></tr></tbody>
+</table></div></section>
+</main>
+</body>
+</html>

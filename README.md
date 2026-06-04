@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v839.0.0` replays the v838 checkpoint against the bounded objective contract and records a zero-hit result.
+Version `v840.0.0` diagnoses why the v839 bounded-objective replay produced zero required-term hits.
+
+## Latest v840 checkpoint
+
+- Added `model_capability_route_promotion_bounded_objective_replay_zero_hit_diagnostic`.
+- Added CLI `scripts/diagnose_model_capability_route_promotion_bounded_objective_replay_zero_hit.py`.
+- Consumed the real v839 replay comparison, v837 objective seed, v838 training run, and v837 corpus.
+- Produced `zero_hit_case_count=3`, `near_miss_case_count=3`, `prompt_in_corpus_count=3`, and `root_cause_count=4`.
+- Confirmed prompts are present in corpus and training loss fell, but exact required-term generation still failed.
+- Identified near-miss character substitution (`wixed`) rather than a missing-prompt corpus gap.
+- Routed the next artifact to `model_capability_route_promotion_bounded_objective_decoder_anchor_probe`.
+- Kept the model-quality claim as `not_improved_diagnosed`.
+- Verified with `3 passed` focused zero-hit diagnostic tests.
+- Archived v840 evidence in `e/840` and added the code explanation in `代码讲解记录_模型能力阶段/854-v840-route-promotion-bounded-objective-zero-hit-diagnostic.md`.
 
 ## Latest v839 checkpoint
 
