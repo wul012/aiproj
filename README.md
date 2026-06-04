@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v838.0.0` trains a real bounded-objective checkpoint from the v837 direct seed corpus.
+Version `v839.0.0` replays the v838 checkpoint against the bounded objective contract and records a zero-hit result.
+
+## Latest v839 checkpoint
+
+- Added `model_capability_route_promotion_bounded_objective_replay_comparison`.
+- Added CLI `scripts/run_model_capability_route_promotion_bounded_objective_replay_comparison.py`.
+- Consumed the real v836 objective contract and the real v838 training run.
+- Replayed three objective contract cases against the v838 checkpoint.
+- Produced `case_count=3`, `passed_case_count=0`, `any_hit_case_count=0`, `zero_hit_case_count=3`, and `pass_rate=0.0`.
+- Recorded `decision=model_capability_route_promotion_bounded_objective_replay_zero_hit`.
+- Kept `promotion_ready=False` and `model_quality_claim=not_improved`.
+- Routed the next step to `diagnose_bounded_objective_replay_zero_hit_before_more_training`.
+- Verified with `4 passed` focused bounded objective replay comparison tests.
+- Archived v839 evidence in `e/839` and added the code explanation in `代码讲解记录_模型能力阶段/853-v839-route-promotion-bounded-objective-replay-comparison.md`.
 
 ## Latest v838 checkpoint
 

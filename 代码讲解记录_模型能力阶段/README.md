@@ -74,6 +74,9 @@
 852-v838-route-promotion-bounded-objective-training-run.md
  -> v838 code explanation: train a real bounded-objective checkpoint from the v837 direct seed while keeping quality claims gated behind replay.
 
+853-v839-route-promotion-bounded-objective-replay-comparison.md
+ -> v839 code explanation: replay the v838 checkpoint against the bounded objective contract and record the zero-hit outcome.
+
 487-v473-baseline-candidate-capability-delta.md
  -> v473 code explanation: carry real tiny training loss and generation-quality deltas into the baseline-candidate eval loop.
 

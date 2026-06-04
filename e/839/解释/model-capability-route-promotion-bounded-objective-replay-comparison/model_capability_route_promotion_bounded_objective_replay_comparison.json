@@ -1,0 +1,206 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability route promotion bounded objective replay comparison",
+  "generated_at": "2026-06-04T03:57:44Z",
+  "status": "pass",
+  "decision": "model_capability_route_promotion_bounded_objective_replay_zero_hit",
+  "failed_count": 0,
+  "issues": [],
+  "source_objective_contract": "e\\836\\解释\\model-capability-route-promotion-bounded-objective-contract\\model_capability_route_promotion_bounded_objective_contract.json",
+  "source_objective_training_run": "e\\838\\解释\\model-capability-route-promotion-bounded-objective-training-run\\model_capability_route_promotion_bounded_objective_training_run.json",
+  "checkpoint": "e\\838\\解释\\model-capability-route-promotion-bounded-objective-training-run\\run\\checkpoint.pt",
+  "tokenizer": "e\\838\\解释\\model-capability-route-promotion-bounded-objective-training-run\\run\\tokenizer.json",
+  "device": "cpu",
+  "contract_summary": {
+    "bounded_objective_contract_ready": true,
+    "contract_id": "bounded_fixed_loss_direct_completion_contract",
+    "target_terms": [
+      "fixed",
+      "loss"
+    ],
+    "contract_case_count": 3,
+    "planned_seed_example_count": 18,
+    "unchanged_suite_check_required": true,
+    "promotion_claim_allowed": false,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_objective_seed",
+    "failed_check_count": 0
+  },
+  "training_summary": {
+    "bounded_objective_training_ready": true,
+    "artifact_count": 7,
+    "metric_record_count": 5,
+    "final_step": 40,
+    "final_train_loss": 1.4957764148712158,
+    "final_val_loss": 1.7002859115600586,
+    "train_loss_delta": -1.556213,
+    "val_loss_delta": -1.400862,
+    "objective_example_count": 18,
+    "direct_example_count": 18,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_objective_replay_comparison",
+    "next_step": "run_bounded_objective_checkpoint_replay",
+    "failed_check_count": 0
+  },
+  "replay_rows": [
+    {
+      "case_id": "canonical_direct_completion",
+      "prompt": "Answer with exactly two tokens: fixed loss\nanswer:",
+      "continuation": " wixed w",
+      "generated": "Answer with exactly two tokens: fixed loss\nanswer: wixed w",
+      "expected_completion": "fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "case_pass": false,
+      "any_hit": false,
+      "max_new_tokens": 8,
+      "temperature": 0.2,
+      "top_k": 20,
+      "seed": 1839
+    },
+    {
+      "case_id": "minimal_direct_completion",
+      "prompt": "Answer with exactly two words: fixed loss\nanswer:",
+      "continuation": " wixed w",
+      "generated": "Answer with exactly two words: fixed loss\nanswer: wixed w",
+      "expected_completion": "fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "case_pass": false,
+      "any_hit": false,
+      "max_new_tokens": 8,
+      "temperature": 0.2,
+      "top_k": 20,
+      "seed": 1839
+    },
+    {
+      "case_id": "completion_label_surface",
+      "prompt": "Complete with exactly two tokens: fixed loss\ncompletion:",
+      "continuation": " wixed w",
+      "generated": "Complete with exactly two tokens: fixed loss\ncompletion: wixed w",
+      "expected_completion": "fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "case_pass": false,
+      "any_hit": false,
+      "max_new_tokens": 8,
+      "temperature": 0.2,
+      "top_k": 20,
+      "seed": 1839
+    }
+  ],
+  "replay_errors": [],
+  "check_rows": [
+    {
+      "id": "contract_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "objective contract must pass"
+    },
+    {
+      "id": "contract_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "objective contract must be ready"
+    },
+    {
+      "id": "training_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "objective training evidence must pass"
+    },
+    {
+      "id": "training_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "objective training must be ready"
+    },
+    {
+      "id": "checkpoint_exists",
+      "status": "pass",
+      "actual": "e\\838\\解释\\model-capability-route-promotion-bounded-objective-training-run\\run\\checkpoint.pt",
+      "detail": "checkpoint.pt must exist"
+    },
+    {
+      "id": "tokenizer_exists",
+      "status": "pass",
+      "actual": "e\\838\\解释\\model-capability-route-promotion-bounded-objective-training-run\\run\\tokenizer.json",
+      "detail": "tokenizer.json must exist"
+    },
+    {
+      "id": "cases_present",
+      "status": "pass",
+      "actual": 3,
+      "detail": "objective contract must provide replay cases"
+    },
+    {
+      "id": "all_cases_executed",
+      "status": "pass",
+      "actual": 3,
+      "detail": "objective replay should execute every contract case"
+    },
+    {
+      "id": "no_replay_errors",
+      "status": "pass",
+      "actual": 0,
+      "detail": "objective replay should not raise generation errors"
+    }
+  ],
+  "comparison": {
+    "ready": true,
+    "case_count": 3,
+    "executed_case_count": 3,
+    "passed_case_count": 0,
+    "failed_case_count": 3,
+    "any_hit_case_count": 0,
+    "zero_hit_case_count": 3,
+    "canonical_case_pass": false,
+    "pass_rate": 0.0,
+    "objective_contract_recovered": false,
+    "unchanged_suite_check_required": true,
+    "promotion_ready": false,
+    "final_train_loss": 1.4957764148712158,
+    "final_val_loss": 1.7002859115600586,
+    "train_loss_delta": -1.556213,
+    "next_step": "diagnose_bounded_objective_replay_zero_hit_before_more_training"
+  },
+  "summary": {
+    "bounded_objective_replay_comparison_ready": true,
+    "objective_contract_recovered": false,
+    "canonical_case_pass": false,
+    "case_count": 3,
+    "executed_case_count": 3,
+    "passed_case_count": 0,
+    "failed_case_count": 3,
+    "any_hit_case_count": 0,
+    "zero_hit_case_count": 3,
+    "pass_rate": 0.0,
+    "promotion_ready": false,
+    "next_step": "diagnose_bounded_objective_replay_zero_hit_before_more_training",
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "not_improved",
+    "reason": "The trained checkpoint produced zero required-term hits on the objective contract replay.",
+    "next_action": "diagnose_bounded_objective_replay_zero_hit_before_more_training"
+  }
+}
