@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v864.0.0` turns the v863 pair-binding diagnosis into a no-anchor training patch corpus.
+Version `v865.0.0` trains a real tiny checkpoint from the v864 pair-binding patch corpus and records training evidence.
+
+## Latest v865 checkpoint
+
+- Added short-name module `bounded_objective_loss_signal_bridge_pair_binding_training_run`.
+- Added CLI `scripts/build_bounded_objective_loss_signal_bridge_pair_binding_training_run.py`.
+- Trained a real tiny checkpoint from the v864 pair-binding patch corpus for `120` steps on CPU.
+- Recorded `final_train_loss=1.2852036952972412`, `final_val_loss=1.0368845462799072`, and `train_loss_delta=-2.32423`.
+- Preserved `repair_example_count=18`, `neutral_prompt_example_count=6`, and `decoder_anchor_example_count=0`.
+- Produced checkpoint, tokenizer, metrics, train config, run manifest, sample, loss curve, and prepared corpus artifacts.
+- Kept `model_quality_claim=training_artifact_only`; sample did not directly output `fixed loss`.
+- Routed the next artifact to `bounded_objective_loss_signal_bridge_pair_binding_replay_comparison`.
+- Verified with `3 passed` focused pair-binding training-run tests and Playwright MCP screenshot evidence.
+- Archived v865 evidence in `e/865` and added the code explanation in `代码讲解记录_模型能力阶段/879-v865-bounded-objective-loss-signal-bridge-pair-binding-training-run.md`.
 
 ## Latest v864 checkpoint
 

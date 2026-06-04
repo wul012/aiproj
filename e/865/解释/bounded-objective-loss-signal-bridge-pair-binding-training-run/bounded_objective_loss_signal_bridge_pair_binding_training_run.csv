@@ -1,0 +1,8 @@
+key,exists,size,path
+checkpoint,True,1350286,e\865\解释\bounded-objective-loss-signal-bridge-pair-binding-training-run\run\checkpoint.pt
+tokenizer,True,510,e\865\解释\bounded-objective-loss-signal-bridge-pair-binding-training-run\run\tokenizer.json
+metrics,True,1456,e\865\解释\bounded-objective-loss-signal-bridge-pair-binding-training-run\run\metrics.jsonl
+train_config,True,1109,e\865\解释\bounded-objective-loss-signal-bridge-pair-binding-training-run\run\train_config.json
+run_manifest,True,11142,e\865\解释\bounded-objective-loss-signal-bridge-pair-binding-training-run\run\run_manifest.json
+sample,True,191,e\865\解释\bounded-objective-loss-signal-bridge-pair-binding-training-run\run\sample.txt
+prepared_corpus,True,5050,e\865\解释\bounded-objective-loss-signal-bridge-pair-binding-training-run\run\prepared_corpus.txt

@@ -1,0 +1,791 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT bounded objective loss signal bridge pair-binding training run",
+  "generated_at": "2026-06-04T13:50:36Z",
+  "status": "pass",
+  "decision": "bounded_objective_loss_signal_bridge_pair_binding_training_run_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_unassisted_repair_seed": "e\\864\\解释\\bounded-objective-loss-signal-bridge-pair-binding-patch\\bounded_objective_loss_signal_bridge_pair_binding_patch.json",
+  "run_dir": "e\\865\\解释\\bounded-objective-loss-signal-bridge-pair-binding-training-run\\run",
+  "unassisted_repair_seed_summary": {
+    "bounded_objective_loss_signal_bridge_pair_binding_patch_ready": true,
+    "patch_example_count": 18,
+    "case_pair_repeat_count": 6,
+    "pair_binding_example_count": 6,
+    "completion_surface_example_count": 2,
+    "decoder_anchor_example_count": 0,
+    "original_corpus_char_count": 3908,
+    "patched_corpus_char_count": 4771,
+    "patch_kinds": [
+      "case_pair_repeat",
+      "completion_surface_pair_repair",
+      "fixed_to_loss_binding",
+      "fixed_to_pair_binding",
+      "global_pair_binding",
+      "global_pair_repeat",
+      "loss_left_context_binding",
+      "loss_to_pair_binding"
+    ],
+    "failed_check_count": 0,
+    "model_quality_claim": "pair_binding_patch_only",
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_objective_unassisted_repair_training_run",
+    "next_step": "train_bounded_objective_loss_signal_bridge_pair_binding_patch",
+    "bounded_objective_loss_signal_bridge_ready": true,
+    "bridge_example_count": 18,
+    "loss_signal_bridge_example_count": 6,
+    "bridged_corpus_char_count": 4771,
+    "bounded_objective_unassisted_repair_seed_revision_ready": true,
+    "example_count": 18,
+    "direct_example_count": 18,
+    "neutral_prompt_example_count": 6,
+    "corpus_char_count": 4771,
+    "bounded_objective_unassisted_repair_seed_ready": true
+  },
+  "artifacts": [
+    {
+      "key": "checkpoint",
+      "path": "e\\865\\解释\\bounded-objective-loss-signal-bridge-pair-binding-training-run\\run\\checkpoint.pt",
+      "exists": true,
+      "size": 1350286
+    },
+    {
+      "key": "tokenizer",
+      "path": "e\\865\\解释\\bounded-objective-loss-signal-bridge-pair-binding-training-run\\run\\tokenizer.json",
+      "exists": true,
+      "size": 510
+    },
+    {
+      "key": "metrics",
+      "path": "e\\865\\解释\\bounded-objective-loss-signal-bridge-pair-binding-training-run\\run\\metrics.jsonl",
+      "exists": true,
+      "size": 1456
+    },
+    {
+      "key": "train_config",
+      "path": "e\\865\\解释\\bounded-objective-loss-signal-bridge-pair-binding-training-run\\run\\train_config.json",
+      "exists": true,
+      "size": 1109
+    },
+    {
+      "key": "run_manifest",
+      "path": "e\\865\\解释\\bounded-objective-loss-signal-bridge-pair-binding-training-run\\run\\run_manifest.json",
+      "exists": true,
+      "size": 11142
+    },
+    {
+      "key": "sample",
+      "path": "e\\865\\解释\\bounded-objective-loss-signal-bridge-pair-binding-training-run\\run\\sample.txt",
+      "exists": true,
+      "size": 191
+    },
+    {
+      "key": "prepared_corpus",
+      "path": "e\\865\\解释\\bounded-objective-loss-signal-bridge-pair-binding-training-run\\run\\prepared_corpus.txt",
+      "exists": true,
+      "size": 5050
+    }
+  ],
+  "metrics": {
+    "record_count": 13,
+    "first": {
+      "last_loss": 3.807650327682495,
+      "step": 1,
+      "train_loss": 3.60943341255188,
+      "val_loss": 3.587677001953125
+    },
+    "last": {
+      "last_loss": 1.277747631072998,
+      "step": 120,
+      "train_loss": 1.2852036952972412,
+      "val_loss": 1.0368845462799072
+    },
+    "train_loss_delta": -2.32423,
+    "val_loss_delta": -2.550792
+  },
+  "train_config": {
+    "data": "D:\\aiproj\\data\\sample_zh.txt",
+    "data_dir": null,
+    "prepared_data": "e\\864\\解释\\bounded-objective-loss-signal-bridge-pair-binding-patch\\bounded_objective_loss_signal_bridge_pair_binding_patch_corpus.txt",
+    "out_dir": "e\\865\\解释\\bounded-objective-loss-signal-bridge-pair-binding-training-run\\run",
+    "resume": null,
+    "tokenizer": "char",
+    "bpe_vocab_size": 256,
+    "bpe_min_frequency": 2,
+    "batch_size": 8,
+    "block_size": 64,
+    "max_iters": 120,
+    "eval_interval": 10,
+    "eval_iters": 5,
+    "learning_rate": 0.001,
+    "train_ratio": 0.9,
+    "n_layer": 2,
+    "n_head": 2,
+    "n_embd": 64,
+    "dropout": 0.0,
+    "seed": 1865,
+    "device": "cpu",
+    "sample_prompt": "Complete with exactly two tokens: fixed loss\ncompletion:",
+    "sample_tokens": 12,
+    "sample_temperature": 0.8,
+    "sample_top_k": 20,
+    "no_sample": false,
+    "device_used": "cpu",
+    "data_source": {
+      "kind": "prepared_data",
+      "path": "e\\864\\解释\\bounded-objective-loss-signal-bridge-pair-binding-patch\\bounded_objective_loss_signal_bridge_pair_binding_patch_corpus.txt"
+    }
+  },
+  "manifest": {
+    "schema_version": 1,
+    "run_dir": "e\\865\\解释\\bounded-objective-loss-signal-bridge-pair-binding-training-run\\run",
+    "created_at": "2026-06-04T13:50:22Z",
+    "started_at": "2026-06-04T13:50:16Z",
+    "finished_at": "2026-06-04T13:50:22Z",
+    "duration_seconds": 6.0,
+    "command": [
+      "python.exe",
+      "scripts\\train.py",
+      "--prepared-data",
+      "e\\864\\解释\\bounded-objective-loss-signal-bridge-pair-binding-patch\\bounded_objective_loss_signal_bridge_pair_binding_patch_corpus.txt",
+      "--out-dir",
+      "e\\865\\解释\\bounded-objective-loss-signal-bridge-pair-binding-training-run\\run",
+      "--tokenizer",
+      "char",
+      "--batch-size",
+      "8",
+      "--block-size",
+      "64",
+      "--max-iters",
+      "120",
+      "--eval-interval",
+      "10",
+      "--eval-iters",
+      "5",
+      "--learning-rate",
+      "0.001",
+      "--n-layer",
+      "2",
+      "--n-head",
+      "2",
+      "--n-embd",
+      "64",
+      "--dropout",
+      "0.0",
+      "--seed",
+      "1865",
+      "--device",
+      "cpu",
+      "--sample-prompt",
+      "Complete with exactly two tokens: fixed loss\ncompletion:",
+      "--sample-tokens",
+      "12",
+      "--sample-temperature",
+      "0.8",
+      "--sample-top-k",
+      "20"
+    ],
+    "git": {
+      "commit": "32bd5e9f4ef23479be16dd6869021408beb1e75c",
+      "short_commit": "32bd5e9",
+      "branch": "main",
+      "tag": "v864.0.0",
+      "dirty": true
+    },
+    "environment": {
+      "python": "3.13.3",
+      "platform": "Windows-11-10.0.26100-SP0",
+      "executable": "D:\\python\\python.exe",
+      "torch": "2.6.0+cu124",
+      "numpy": "2.2.1"
+    },
+    "data": {
+      "source": {
+        "kind": "prepared_data",
+        "path": "e\\864\\解释\\bounded-objective-loss-signal-bridge-pair-binding-patch\\bounded_objective_loss_signal_bridge_pair_binding_patch_corpus.txt"
+      },
+      "token_count": 4771,
+      "train_token_count": 4293,
+      "val_token_count": 478,
+      "dataset_report": null,
+      "dataset_quality": null,
+      "dataset_version": null
+    },
+    "model": {
+      "config": {
+        "vocab_size": 44,
+        "block_size": 64,
+        "n_layer": 2,
+        "n_head": 2,
+        "n_embd": 64,
+        "dropout": 0.0,
+        "bias": true
+      },
+      "parameter_count": 107008
+    },
+    "training": {
+      "args": {
+        "data": "D:\\aiproj\\data\\sample_zh.txt",
+        "data_dir": null,
+        "prepared_data": "e\\864\\解释\\bounded-objective-loss-signal-bridge-pair-binding-patch\\bounded_objective_loss_signal_bridge_pair_binding_patch_corpus.txt",
+        "out_dir": "e\\865\\解释\\bounded-objective-loss-signal-bridge-pair-binding-training-run\\run",
+        "resume": null,
+        "tokenizer": "char",
+        "bpe_vocab_size": 256,
+        "bpe_min_frequency": 2,
+        "batch_size": 8,
+        "block_size": 64,
+        "max_iters": 120,
+        "eval_interval": 10,
+        "eval_iters": 5,
+        "learning_rate": 0.001,
+        "train_ratio": 0.9,
+        "n_layer": 2,
+        "n_head": 2,
+        "n_embd": 64,
+        "dropout": 0.0,
+        "seed": 1865,
+        "device": "cpu",
+        "sample_prompt": "Complete with exactly two tokens: fixed loss\ncompletion:",
+        "sample_tokens": 12,
+        "sample_temperature": 0.8,
+        "sample_top_k": 20,
+        "no_sample": false,
+        "device_used": "cpu",
+        "data_source": {
+          "kind": "prepared_data",
+          "path": "e\\864\\解释\\bounded-objective-loss-signal-bridge-pair-binding-patch\\bounded_objective_loss_signal_bridge_pair_binding_patch_corpus.txt"
+        }
+      },
+      "tokenizer": "char",
+      "device_used": "cpu",
+      "start_step": 1,
+      "end_step": 120
+    },
+    "results": {
+      "last_loss": 1.277747631072998,
+      "history_summary": {
+        "record_count": 13,
+        "first_step": 1,
+        "last_step": 120,
+        "best_val_step": 120,
+        "best_val_loss": 1.0368845462799072,
+        "last_train_loss": 1.2852036952972412,
+        "last_val_loss": 1.0368845462799072
+      }
+    },
+    "artifacts": [
+      {
+        "key": "checkpoint",
+        "path": "checkpoint.pt",
+        "description": "model and optimizer state",
+        "exists": true,
+        "size_bytes": 1350286,
+        "sha256": "5ba15ada29e4f27836e1f4034e46215f463378ca700542f8d3024e66bd9ab360"
+      },
+      {
+        "key": "tokenizer",
+        "path": "tokenizer.json",
+        "description": "tokenizer vocabulary and metadata",
+        "exists": true,
+        "size_bytes": 510,
+        "sha256": "e3700c4b0ac1c9e415d2f55e72665ab5169f120528a2d669c574e8ec361938da"
+      },
+      {
+        "key": "train_config",
+        "path": "train_config.json",
+        "description": "training command configuration",
+        "exists": true,
+        "size_bytes": 1109,
+        "sha256": "74731519697fc5103eed3721729b43a6d211fbb1edc2c039c81da37dca4a6ddd"
+      },
+      {
+        "key": "metrics",
+        "path": "metrics.jsonl",
+        "description": "step-by-step training metrics",
+        "exists": true,
+        "size_bytes": 1456,
+        "sha256": "37205e728ed706b7000f45e9d4ad525fcdde1e286b2f659a97d6ad1304a86d61"
+      },
+      {
+        "key": "history_summary",
+        "path": "history_summary.json",
+        "description": "best/latest loss summary",
+        "exists": true,
+        "size_bytes": 214,
+        "sha256": "121b52ade10bdd22974e67ab15f278adbbfeedd1f187bf348910498bcd14338e"
+      },
+      {
+        "key": "loss_curve",
+        "path": "loss_curve.svg",
+        "description": "loss curve chart",
+        "exists": true,
+        "size_bytes": 1595,
+        "sha256": "b0f96d8f5cbd43725de6e079c89008b6fa8581b500940b2d93b6937c0904a944"
+      },
+      {
+        "key": "prepared_corpus",
+        "path": "prepared_corpus.txt",
+        "description": "merged training corpus",
+        "exists": true,
+        "size_bytes": 5050,
+        "sha256": "b3e5d872e4b4773043f2b23a231ff12c74c66509c9d906cc0af0fd4aa60465b4"
+      },
+      {
+        "key": "dataset_report",
+        "path": "dataset_report.json",
+        "description": "dataset source statistics",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "dataset_chart",
+        "path": "dataset_report.svg",
+        "description": "dataset source chart",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "dataset_quality",
+        "path": "dataset_quality.json",
+        "description": "dataset quality report",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "dataset_quality_chart",
+        "path": "dataset_quality.svg",
+        "description": "dataset quality chart",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "dataset_version",
+        "path": "dataset_version.json",
+        "description": "dataset version manifest",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "dataset_version_html",
+        "path": "dataset_version.html",
+        "description": "browser dataset version report",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "sample",
+        "path": "sample.txt",
+        "description": "post-training sample",
+        "exists": true,
+        "size_bytes": 191,
+        "sha256": "9f25a1530ca88db0181188c4ae0220928a776683d40f3fb0fd7d69ce05b205d5"
+      },
+      {
+        "key": "eval_report",
+        "path": "eval_report.json",
+        "description": "checkpoint evaluation report",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "eval_suite",
+        "path": "eval_suite/eval_suite.json",
+        "description": "fixed prompt evaluation suite",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "eval_suite_csv",
+        "path": "eval_suite/eval_suite.csv",
+        "description": "fixed prompt evaluation table",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "eval_suite_chart",
+        "path": "eval_suite/eval_suite.svg",
+        "description": "fixed prompt evaluation chart",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "eval_suite_html",
+        "path": "eval_suite/eval_suite.html",
+        "description": "browser benchmark evaluation report",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "model_report",
+        "path": "model_report/model_report.json",
+        "description": "model architecture report",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "model_chart",
+        "path": "model_report/model_architecture.svg",
+        "description": "model architecture chart",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "prediction_report",
+        "path": "predictions/predictions.json",
+        "description": "next-token prediction report",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "prediction_chart",
+        "path": "predictions/predictions.svg",
+        "description": "next-token prediction chart",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "attention_report",
+        "path": "attention/attention.json",
+        "description": "attention inspection report",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "attention_chart",
+        "path": "attention/attention.svg",
+        "description": "attention heatmap",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "transcript",
+        "path": "transcript.json",
+        "description": "chat transcript",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "generated",
+        "path": "generated.txt",
+        "description": "standalone generation output",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "experiment_card_json",
+        "path": "experiment_card.json",
+        "description": "machine-readable experiment card",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "experiment_card_md",
+        "path": "experiment_card.md",
+        "description": "markdown experiment card",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "experiment_card_html",
+        "path": "experiment_card.html",
+        "description": "browser experiment card",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "dashboard",
+        "path": "dashboard.html",
+        "description": "static dashboard",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "playground",
+        "path": "playground.html",
+        "description": "static playground",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      }
+    ]
+  },
+  "check_rows": [
+    {
+      "id": "unassisted_repair_seed_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "unassisted repair seed must pass"
+    },
+    {
+      "id": "unassisted_repair_seed_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "unassisted repair seed must be ready"
+    },
+    {
+      "id": "next_artifact_matches",
+      "status": "pass",
+      "actual": "model_capability_route_promotion_bounded_objective_unassisted_repair_training_run",
+      "detail": "seed must request unassisted repair training"
+    },
+    {
+      "id": "neutral_prompt_examples_present",
+      "status": "pass",
+      "actual": 6,
+      "detail": "unassisted repair seed needs neutral prompts"
+    },
+    {
+      "id": "no_decoder_anchor_examples",
+      "status": "pass",
+      "actual": 0,
+      "detail": "unassisted repair training must not depend on decoder anchors"
+    },
+    {
+      "id": "direct_examples_match",
+      "status": "pass",
+      "actual": 18,
+      "detail": "all repair seed rows must be direct completions"
+    },
+    {
+      "id": "corpus_chars_present",
+      "status": "pass",
+      "actual": 4771,
+      "detail": "seed corpus must contain training text"
+    },
+    {
+      "id": "checkpoint_exists",
+      "status": "pass",
+      "actual": "e\\865\\解释\\bounded-objective-loss-signal-bridge-pair-binding-training-run\\run\\checkpoint.pt",
+      "detail": "training must produce checkpoint.pt"
+    },
+    {
+      "id": "tokenizer_exists",
+      "status": "pass",
+      "actual": "e\\865\\解释\\bounded-objective-loss-signal-bridge-pair-binding-training-run\\run\\tokenizer.json",
+      "detail": "training must produce tokenizer.json"
+    },
+    {
+      "id": "metrics_exists",
+      "status": "pass",
+      "actual": "e\\865\\解释\\bounded-objective-loss-signal-bridge-pair-binding-training-run\\run\\metrics.jsonl",
+      "detail": "training must produce metrics.jsonl"
+    },
+    {
+      "id": "manifest_exists",
+      "status": "pass",
+      "actual": "e\\865\\解释\\bounded-objective-loss-signal-bridge-pair-binding-training-run\\run\\run_manifest.json",
+      "detail": "training must produce run_manifest.json"
+    },
+    {
+      "id": "sample_exists",
+      "status": "pass",
+      "actual": "e\\865\\解释\\bounded-objective-loss-signal-bridge-pair-binding-training-run\\run\\sample.txt",
+      "detail": "training must produce a sample for later replay review"
+    },
+    {
+      "id": "prepared_corpus_exists",
+      "status": "pass",
+      "actual": "e\\865\\解释\\bounded-objective-loss-signal-bridge-pair-binding-training-run\\run\\prepared_corpus.txt",
+      "detail": "training must copy prepared corpus"
+    },
+    {
+      "id": "metrics_records_present",
+      "status": "pass",
+      "actual": 13,
+      "detail": "training should record at least first and last metrics"
+    },
+    {
+      "id": "max_iters_positive",
+      "status": "pass",
+      "actual": 120,
+      "detail": "train_config must record positive max_iters"
+    }
+  ],
+  "unassisted_repair_training": {
+    "ready": true,
+    "artifact_count": 7,
+    "metric_record_count": 13,
+    "final_step": 120,
+    "final_train_loss": 1.2852036952972412,
+    "final_val_loss": 1.0368845462799072,
+    "train_loss_delta": -2.32423,
+    "val_loss_delta": -2.550792,
+    "max_iters": 120,
+    "seed": 1865,
+    "repair_example_count": 18,
+    "neutral_prompt_example_count": 6,
+    "decoder_anchor_example_count": 0,
+    "proposed_next_artifact": "bounded_objective_loss_signal_bridge_replay_comparison",
+    "next_step": "run_bounded_objective_loss_signal_bridge_replay_comparison"
+  },
+  "summary": {
+    "bounded_objective_unassisted_repair_training_ready": true,
+    "artifact_count": 7,
+    "metric_record_count": 13,
+    "final_step": 120,
+    "final_train_loss": 1.2852036952972412,
+    "final_val_loss": 1.0368845462799072,
+    "train_loss_delta": -2.32423,
+    "val_loss_delta": -2.550792,
+    "repair_example_count": 18,
+    "neutral_prompt_example_count": 6,
+    "decoder_anchor_example_count": 0,
+    "proposed_next_artifact": "bounded_objective_loss_signal_bridge_pair_binding_replay_comparison",
+    "next_step": "run_bounded_objective_loss_signal_bridge_pair_binding_replay_comparison",
+    "failed_check_count": 0,
+    "bounded_objective_unassisted_repair_seed_revision_training_ready": true,
+    "bounded_objective_loss_signal_bridge_training_ready": true,
+    "bounded_objective_loss_signal_bridge_pair_binding_training_ready": true
+  },
+  "interpretation": {
+    "model_quality_claim": "training_artifact_only",
+    "reason": "A checkpoint was trained from the pair-binding patch corpus, but capability still requires replay comparison.",
+    "next_action": "run_bounded_objective_loss_signal_bridge_pair_binding_replay_comparison"
+  },
+  "source_seed_revision": "e\\864\\解释\\bounded-objective-loss-signal-bridge-pair-binding-patch\\bounded_objective_loss_signal_bridge_pair_binding_patch.json",
+  "seed_revision_summary": {
+    "bounded_objective_loss_signal_bridge_pair_binding_patch_ready": true,
+    "patch_example_count": 18,
+    "case_pair_repeat_count": 6,
+    "pair_binding_example_count": 6,
+    "completion_surface_example_count": 2,
+    "decoder_anchor_example_count": 0,
+    "original_corpus_char_count": 3908,
+    "patched_corpus_char_count": 4771,
+    "patch_kinds": [
+      "case_pair_repeat",
+      "completion_surface_pair_repair",
+      "fixed_to_loss_binding",
+      "fixed_to_pair_binding",
+      "global_pair_binding",
+      "global_pair_repeat",
+      "loss_left_context_binding",
+      "loss_to_pair_binding"
+    ],
+    "failed_check_count": 0,
+    "model_quality_claim": "pair_binding_patch_only",
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_training_run",
+    "next_step": "train_bounded_objective_loss_signal_bridge_pair_binding_patch",
+    "bounded_objective_loss_signal_bridge_ready": true,
+    "bridge_example_count": 18,
+    "loss_signal_bridge_example_count": 6,
+    "bridged_corpus_char_count": 4771,
+    "bounded_objective_unassisted_repair_seed_revision_ready": true,
+    "example_count": 18,
+    "direct_example_count": 18,
+    "neutral_prompt_example_count": 6,
+    "corpus_char_count": 4771
+  },
+  "source_loss_signal_bridge": "e\\864\\解释\\bounded-objective-loss-signal-bridge-pair-binding-patch\\bounded_objective_loss_signal_bridge_pair_binding_patch.json",
+  "loss_signal_bridge_summary": {
+    "bounded_objective_loss_signal_bridge_pair_binding_patch_ready": true,
+    "patch_example_count": 18,
+    "case_pair_repeat_count": 6,
+    "pair_binding_example_count": 6,
+    "completion_surface_example_count": 2,
+    "decoder_anchor_example_count": 0,
+    "original_corpus_char_count": 3908,
+    "patched_corpus_char_count": 4771,
+    "patch_kinds": [
+      "case_pair_repeat",
+      "completion_surface_pair_repair",
+      "fixed_to_loss_binding",
+      "fixed_to_pair_binding",
+      "global_pair_binding",
+      "global_pair_repeat",
+      "loss_left_context_binding",
+      "loss_to_pair_binding"
+    ],
+    "failed_check_count": 0,
+    "model_quality_claim": "pair_binding_patch_only",
+    "proposed_next_artifact": "bounded_objective_loss_signal_bridge_pair_binding_training_run",
+    "next_step": "train_bounded_objective_loss_signal_bridge_pair_binding_patch",
+    "bounded_objective_loss_signal_bridge_ready": true,
+    "bridge_example_count": 18,
+    "loss_signal_bridge_example_count": 6,
+    "bridged_corpus_char_count": 4771
+  },
+  "loss_signal_bridge_training": {
+    "ready": true,
+    "artifact_count": 7,
+    "metric_record_count": 13,
+    "final_step": 120,
+    "final_train_loss": 1.2852036952972412,
+    "final_val_loss": 1.0368845462799072,
+    "train_loss_delta": -2.32423,
+    "val_loss_delta": -2.550792,
+    "max_iters": 120,
+    "seed": 1865,
+    "repair_example_count": 18,
+    "neutral_prompt_example_count": 6,
+    "decoder_anchor_example_count": 0,
+    "proposed_next_artifact": "bounded_objective_loss_signal_bridge_replay_comparison",
+    "next_step": "run_bounded_objective_loss_signal_bridge_replay_comparison"
+  },
+  "source_pair_binding_patch": "e\\864\\解释\\bounded-objective-loss-signal-bridge-pair-binding-patch\\bounded_objective_loss_signal_bridge_pair_binding_patch.json",
+  "pair_binding_patch_summary": {
+    "bounded_objective_loss_signal_bridge_pair_binding_patch_ready": true,
+    "patch_example_count": 18,
+    "case_pair_repeat_count": 6,
+    "pair_binding_example_count": 6,
+    "completion_surface_example_count": 2,
+    "decoder_anchor_example_count": 0,
+    "original_corpus_char_count": 3908,
+    "patched_corpus_char_count": 4771,
+    "patch_kinds": [
+      "case_pair_repeat",
+      "completion_surface_pair_repair",
+      "fixed_to_loss_binding",
+      "fixed_to_pair_binding",
+      "global_pair_binding",
+      "global_pair_repeat",
+      "loss_left_context_binding",
+      "loss_to_pair_binding"
+    ],
+    "failed_check_count": 0,
+    "model_quality_claim": "pair_binding_patch_only",
+    "proposed_next_artifact": "bounded_objective_loss_signal_bridge_pair_binding_training_run",
+    "next_step": "train_bounded_objective_loss_signal_bridge_pair_binding_patch"
+  },
+  "pair_binding_training": {
+    "ready": true,
+    "artifact_count": 7,
+    "metric_record_count": 13,
+    "final_step": 120,
+    "final_train_loss": 1.2852036952972412,
+    "final_val_loss": 1.0368845462799072,
+    "train_loss_delta": -2.32423,
+    "val_loss_delta": -2.550792,
+    "max_iters": 120,
+    "seed": 1865,
+    "repair_example_count": 18,
+    "neutral_prompt_example_count": 6,
+    "decoder_anchor_example_count": 0,
+    "proposed_next_artifact": "bounded_objective_loss_signal_bridge_pair_binding_replay_comparison",
+    "next_step": "run_bounded_objective_loss_signal_bridge_pair_binding_replay_comparison"
+  }
+}

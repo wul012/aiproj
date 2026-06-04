@@ -152,6 +152,9 @@
 878-v864-bounded-objective-loss-signal-bridge-pair-binding-patch.md
  -> v864 code explanation: turn the fixed/loss pair-binding gap into no-anchor JSONL and corpus patch examples.
 
+879-v865-bounded-objective-loss-signal-bridge-pair-binding-training-run.md
+ -> v865 code explanation: train the pair-binding patch corpus into a real checkpoint while keeping capability gated behind replay.
+
 487-v473-baseline-candidate-capability-delta.md
  -> v473 code explanation: carry real tiny training loss and generation-quality deltas into the baseline-candidate eval loop.
 

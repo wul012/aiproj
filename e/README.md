@@ -207,6 +207,10 @@ e/863/解释/说明.md
 e/864/图片
 e/864/解释/说明.md
  -> v864 bounded objective loss signal bridge pair-binding patch 的运行截图和解释
+
+e/865/图片
+e/865/解释/说明.md
+ -> v865 bounded objective loss signal bridge pair-binding training run 的运行截图和解释
 ```
 
 ```text
