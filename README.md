@@ -4,7 +4,22 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v848.0.0` replays the bounded-objective contract against the v847 unassisted repair checkpoint.
+Version `v849.0.0` diagnoses the v848 unassisted repair replay zero-hit failure.
+
+## Latest v849 checkpoint
+
+- Added `model_capability_route_promotion_bounded_objective_unassisted_repair_zero_hit_diagnostic`.
+- Added CLI `scripts/diagnose_model_capability_route_promotion_bounded_objective_unassisted_repair_zero_hit.py`.
+- Reused the existing v840 zero-hit diagnostic engine through an adapter instead of duplicating near-miss/root-cause logic.
+- Consumed the real v848 replay comparison, v846 seed, v847 training run, and v846 corpus.
+- Produced `zero_hit_case_count=3`, `near_miss_case_count=1`, `prompt_in_corpus_count=3`, and `root_cause_count=4`.
+- Confirmed the failure is not a missing-prompt corpus gap; all replay prompts are present in the corpus.
+- Recorded root causes for zero required-term hits, partial `loss` near-miss, unanchored generation, and loss reduction not transferring to exact generation.
+- Kept model-quality claim `not_improved_diagnosed`.
+- Routed the next artifact to `model_capability_route_promotion_bounded_objective_unassisted_repair_curriculum_revision`.
+- Verified with `3 passed` focused bounded objective unassisted repair zero-hit diagnostic tests.
+- Verified full regression with `1725 passed`.
+- Archived v849 evidence in `e/849` and added the code explanation in `代码讲解记录_模型能力阶段/863-v849-route-promotion-bounded-objective-unassisted-repair-zero-hit-diagnostic.md`.
 
 ## Latest v848 checkpoint
 

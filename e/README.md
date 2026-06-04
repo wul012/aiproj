@@ -143,6 +143,10 @@ e/847/解释/说明.md
 e/848/图片
 e/848/解释/说明.md
  -> v848 bounded objective unassisted repair replay comparison 的运行截图和解释
+
+e/849/图片
+e/849/解释/说明.md
+ -> v849 bounded objective unassisted repair zero-hit diagnostic 的运行截图和解释
 ```
 
 ```text

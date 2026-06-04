@@ -104,6 +104,9 @@
 862-v848-route-promotion-bounded-objective-unassisted-repair-replay-comparison.md
  -> v848 code explanation: replay the v847 checkpoint without decoder anchors and record the zero-hit outcome.
 
+863-v849-route-promotion-bounded-objective-unassisted-repair-zero-hit-diagnostic.md
+ -> v849 code explanation: diagnose the v848 zero-hit outcome and route the next step to curriculum revision.
+
 487-v473-baseline-candidate-capability-delta.md
  -> v473 code explanation: carry real tiny training loss and generation-quality deltas into the baseline-candidate eval loop.
 

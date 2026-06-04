@@ -1,0 +1,287 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability route promotion bounded objective unassisted repair zero-hit diagnostic",
+  "generated_at": "2026-06-04T05:50:11Z",
+  "status": "pass",
+  "decision": "model_capability_route_promotion_bounded_objective_unassisted_repair_zero_hit_diagnostic_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_replay_comparison": "e\\848\\解释\\model-capability-route-promotion-bounded-objective-unassisted-repair-replay-comparison\\model_capability_route_promotion_bounded_objective_unassisted_repair_replay_comparison.json",
+  "source_objective_seed": "e\\846\\解释\\model-capability-route-promotion-bounded-objective-unassisted-repair-seed\\model_capability_route_promotion_bounded_objective_unassisted_repair_seed.json",
+  "source_objective_training_run": "e\\847\\解释\\model-capability-route-promotion-bounded-objective-unassisted-repair-training-run\\model_capability_route_promotion_bounded_objective_unassisted_repair_training_run.json",
+  "source_corpus": "e\\846\\解释\\model-capability-route-promotion-bounded-objective-unassisted-repair-seed\\model_capability_route_promotion_bounded_objective_unassisted_repair_seed_corpus.txt",
+  "source_summaries": {
+    "replay_comparison": {
+      "bounded_objective_replay_comparison_ready": true,
+      "objective_contract_recovered": false,
+      "canonical_case_pass": false,
+      "case_count": 3,
+      "executed_case_count": 3,
+      "passed_case_count": 0,
+      "failed_case_count": 3,
+      "any_hit_case_count": 0,
+      "zero_hit_case_count": 3,
+      "pass_rate": 0.0,
+      "promotion_ready": false,
+      "next_step": "diagnose_bounded_objective_unassisted_repair_replay_zero_hit_before_more_training",
+      "failed_check_count": 0,
+      "bounded_objective_unassisted_repair_replay_comparison_ready": true,
+      "decoder_anchor_used": false,
+      "route": "bounded_objective_unassisted_repair"
+    },
+    "objective_seed": {
+      "bounded_objective_unassisted_repair_seed_ready": true,
+      "contract_id": "bounded_fixed_loss_direct_completion_contract",
+      "target_terms": [
+        "fixed",
+        "loss"
+      ],
+      "example_count": 24,
+      "neutral_prompt_example_count": 12,
+      "target_term_prompt_example_count": 12,
+      "decoder_anchor_example_count": 0,
+      "direct_example_count": 24,
+      "corpus_char_count": 1778,
+      "promotion_claim_allowed": false,
+      "proposed_next_artifact": "model_capability_route_promotion_bounded_objective_unassisted_repair_training_run",
+      "next_step": "train_bounded_objective_unassisted_repair_seed",
+      "failed_check_count": 0,
+      "bounded_objective_seed_ready": true
+    },
+    "objective_training_run": {
+      "bounded_objective_unassisted_repair_training_ready": true,
+      "artifact_count": 7,
+      "metric_record_count": 5,
+      "final_step": 40,
+      "final_train_loss": 2.125275135040283,
+      "final_val_loss": 2.230360507965088,
+      "train_loss_delta": -1.344413,
+      "val_loss_delta": -1.237019,
+      "repair_example_count": 24,
+      "neutral_prompt_example_count": 12,
+      "decoder_anchor_example_count": 0,
+      "proposed_next_artifact": "model_capability_route_promotion_bounded_objective_unassisted_repair_replay_comparison",
+      "next_step": "run_bounded_objective_unassisted_repair_replay_comparison",
+      "failed_check_count": 0,
+      "bounded_objective_training_ready": true
+    }
+  },
+  "case_diagnostics": [
+    {
+      "case_id": "canonical_direct_completion",
+      "case_pass": false,
+      "prompt_in_corpus": true,
+      "zero_hit": true,
+      "near_miss_terms": [],
+      "term_corpus_count": {
+        "fixed": 36,
+        "loss": 36
+      },
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "continuation_preview": " tos\n\nan",
+      "diagnosis": "zero_required_term_generation",
+      "recommended_action": "add_output_position_anchor_or_capacity_probe"
+    },
+    {
+      "case_id": "minimal_direct_completion",
+      "case_pass": false,
+      "prompt_in_corpus": true,
+      "zero_hit": true,
+      "near_miss_terms": [],
+      "term_corpus_count": {
+        "fixed": 36,
+        "loss": 36
+      },
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "continuation_preview": " thed te",
+      "diagnosis": "zero_required_term_generation",
+      "recommended_action": "add_output_position_anchor_or_capacity_probe"
+    },
+    {
+      "case_id": "completion_label_surface",
+      "case_pass": false,
+      "prompt_in_corpus": true,
+      "zero_hit": true,
+      "near_miss_terms": [
+        "loss"
+      ],
+      "term_corpus_count": {
+        "fixed": 36,
+        "loss": 36
+      },
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "continuation_preview": " los\n\nan",
+      "diagnosis": "near_miss_character_substitution_without_exact_term",
+      "recommended_action": "probe_decoder_anchor_and_exact_prefix_bias"
+    }
+  ],
+  "root_causes": [
+    {
+      "cause_id": "objective_replay_zero_required_term_hits",
+      "severity": "high",
+      "evidence": 3,
+      "detail": "All replay rows missed fixed/loss despite a trained checkpoint."
+    },
+    {
+      "cause_id": "near_miss_character_substitution",
+      "severity": "high",
+      "evidence": 1,
+      "detail": "Continuations are close to required terms, for example wixed, but do not exactly hit them."
+    },
+    {
+      "cause_id": "direct_prompts_present_but_generation_unanchored",
+      "severity": "medium",
+      "evidence": 3,
+      "detail": "The direct objective prompts are present in corpus, so the failure is not a missing-prompt corpus gap."
+    },
+    {
+      "cause_id": "loss_reduction_did_not_transfer_to_exact_generation",
+      "severity": "medium",
+      "evidence": -1.344413,
+      "detail": "Training loss dropped on direct examples, but generation did not recover exact required terms."
+    }
+  ],
+  "check_rows": [
+    {
+      "id": "replay_comparison_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "objective replay comparison must pass"
+    },
+    {
+      "id": "replay_comparison_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "objective replay comparison must be ready"
+    },
+    {
+      "id": "objective_not_recovered",
+      "status": "pass",
+      "actual": false,
+      "detail": "diagnostic should run on unrecovered objective evidence"
+    },
+    {
+      "id": "zero_hit_present",
+      "status": "pass",
+      "actual": 3,
+      "detail": "diagnostic needs zero-hit evidence"
+    },
+    {
+      "id": "objective_seed_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "objective seed must pass"
+    },
+    {
+      "id": "objective_seed_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "objective seed must be ready"
+    },
+    {
+      "id": "training_run_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "objective training run must pass"
+    },
+    {
+      "id": "training_run_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "objective training run must be ready"
+    },
+    {
+      "id": "corpus_present",
+      "status": "pass",
+      "actual": 1778,
+      "detail": "objective seed corpus must be readable"
+    },
+    {
+      "id": "case_diagnostics_present",
+      "status": "pass",
+      "actual": 3,
+      "detail": "diagnostic must inspect replay rows"
+    }
+  ],
+  "diagnostic": {
+    "ready": true,
+    "case_count": 3,
+    "zero_hit_case_count": 3,
+    "near_miss_case_count": 1,
+    "prompt_in_corpus_count": 3,
+    "root_cause_count": 4,
+    "final_train_loss": 2.125275135040283,
+    "final_val_loss": 2.230360507965088,
+    "train_loss_delta": -1.344413,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_objective_unassisted_repair_curriculum_revision",
+    "next_step": "build_bounded_objective_unassisted_repair_curriculum_revision",
+    "route": "bounded_objective_unassisted_repair",
+    "decoder_anchor_used": false
+  },
+  "summary": {
+    "bounded_objective_zero_hit_diagnostic_ready": true,
+    "case_count": 3,
+    "zero_hit_case_count": 3,
+    "near_miss_case_count": 1,
+    "prompt_in_corpus_count": 3,
+    "root_cause_count": 4,
+    "train_loss_delta": -1.344413,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_objective_unassisted_repair_curriculum_revision",
+    "next_step": "build_bounded_objective_unassisted_repair_curriculum_revision",
+    "failed_check_count": 0,
+    "bounded_objective_unassisted_repair_zero_hit_diagnostic_ready": true,
+    "decoder_anchor_used": false,
+    "route": "bounded_objective_unassisted_repair"
+  },
+  "interpretation": {
+    "model_quality_claim": "not_improved_diagnosed",
+    "reason": "The unassisted repair checkpoint still has zero exact required-term hits; one row shows only a partial loss fragment, so the next step is corpus/curriculum revision rather than promotion.",
+    "next_action": "build_bounded_objective_unassisted_repair_curriculum_revision"
+  },
+  "source_unassisted_repair_seed_summary": {
+    "bounded_objective_unassisted_repair_seed_ready": true,
+    "contract_id": "bounded_fixed_loss_direct_completion_contract",
+    "target_terms": [
+      "fixed",
+      "loss"
+    ],
+    "example_count": 24,
+    "neutral_prompt_example_count": 12,
+    "target_term_prompt_example_count": 12,
+    "decoder_anchor_example_count": 0,
+    "direct_example_count": 24,
+    "corpus_char_count": 1778,
+    "promotion_claim_allowed": false,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_objective_unassisted_repair_training_run",
+    "next_step": "train_bounded_objective_unassisted_repair_seed",
+    "failed_check_count": 0
+  },
+  "source_unassisted_repair_training_summary": {
+    "bounded_objective_unassisted_repair_training_ready": true,
+    "artifact_count": 7,
+    "metric_record_count": 5,
+    "final_step": 40,
+    "final_train_loss": 2.125275135040283,
+    "final_val_loss": 2.230360507965088,
+    "train_loss_delta": -1.344413,
+    "val_loss_delta": -1.237019,
+    "repair_example_count": 24,
+    "neutral_prompt_example_count": 12,
+    "decoder_anchor_example_count": 0,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_objective_unassisted_repair_replay_comparison",
+    "next_step": "run_bounded_objective_unassisted_repair_replay_comparison",
+    "failed_check_count": 0
+  }
+}
