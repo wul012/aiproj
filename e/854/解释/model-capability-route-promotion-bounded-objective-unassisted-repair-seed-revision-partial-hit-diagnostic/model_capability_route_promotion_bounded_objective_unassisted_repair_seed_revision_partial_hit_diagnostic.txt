@@ -1,0 +1,10 @@
+status=pass
+decision=model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_partial_hit_diagnostic_ready
+bounded_objective_unassisted_repair_seed_revision_partial_hit_diagnostic_ready=True
+partial_hit_case_count=2
+zero_hit_case_count=1
+hit_terms=['fixed']
+missed_terms=['fixed', 'loss']
+root_cause_count=6
+model_quality_claim=partial_required_term_signal_diagnosed
+next_action=build_bounded_objective_unassisted_repair_seed_revision_curriculum_patch

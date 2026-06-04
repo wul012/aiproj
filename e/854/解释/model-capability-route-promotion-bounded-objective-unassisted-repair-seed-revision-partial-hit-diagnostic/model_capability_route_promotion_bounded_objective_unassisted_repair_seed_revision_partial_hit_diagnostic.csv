@@ -1,0 +1,4 @@
+case_id,partial_hit,zero_hit,hit_terms,missed_terms,continuation_preview
+canonical_direct_completion,True,False,['fixed'],['loss'], fixed t
+minimal_direct_completion,True,False,['fixed'],['loss'], fixed t
+completion_label_surface,False,True,[],"['fixed', 'loss']", ler: lo

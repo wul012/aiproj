@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v853.0.0` replays the v852 seed revision checkpoint against the bounded objective contract and records partial required-term uptake.
+Version `v854.0.0` diagnoses the v853 partial required-term signal and routes the next step to a curriculum patch.
+
+## Latest v854 checkpoint
+
+- Added `model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_partial_hit_diagnostic`.
+- Added CLI `scripts/diagnose_model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_partial_hit.py`.
+- Diagnosed the real v853 replay comparison against the v851 seed revision corpus and v852 training run.
+- Recorded `partial_hit_case_count=2`, `zero_hit_case_count=1`, `hit_terms=['fixed']`, `missed_terms=['fixed', 'loss']`, and `root_cause_count=6`.
+- Identified `first_term_only_uptake`, `loss_term_not_stabilized`, `prompt_surface_still_zero_hit`, and `no_case_passed_contract`.
+- Kept `model_quality_claim=partial_required_term_signal_diagnosed`, with promotion still blocked.
+- Routed the next artifact to `model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_curriculum_patch`.
+- Verified with `3 passed` focused bounded objective unassisted repair seed revision partial-hit diagnostic tests and `1741 passed` full pytest.
+- Confirmed source encoding hygiene with `source_count=1276`, `clean_count=1276`, `bom_count=0`, and `syntax_error_count=0`.
+- Archived v854 evidence in `e/854` and added the code explanation in `代码讲解记录_模型能力阶段/868-v854-route-promotion-bounded-objective-unassisted-repair-seed-revision-partial-hit-diagnostic.md`.
 
 ## Latest v853 checkpoint
 
@@ -18,8 +31,6 @@ Version `v853.0.0` replays the v852 seed revision checkpoint against the bounded
 - Verified with `4 passed` focused bounded objective unassisted repair seed revision replay-comparison tests and `1738 passed` full pytest.
 - Confirmed source encoding hygiene with `source_count=1272`, `clean_count=1272`, `bom_count=0`, and `syntax_error_count=0`.
 - Archived v853 evidence in `e/853` and added the code explanation in `代码讲解记录_模型能力阶段/867-v853-route-promotion-bounded-objective-unassisted-repair-seed-revision-replay-comparison.md`.
-
-## Latest v852 checkpoint
 
 ## Latest v852 checkpoint
 

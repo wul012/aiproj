@@ -119,6 +119,9 @@
 867-v853-route-promotion-bounded-objective-unassisted-repair-seed-revision-replay-comparison.md
  -> v853 code explanation: replay the revised no-anchor checkpoint and separate partial required-term uptake from contract recovery.
 
+868-v854-route-promotion-bounded-objective-unassisted-repair-seed-revision-partial-hit-diagnostic.md
+ -> v854 code explanation: diagnose fixed-only partial uptake and route the next work to a curriculum patch.
+
 487-v473-baseline-candidate-capability-delta.md
  -> v473 code explanation: carry real tiny training loss and generation-quality deltas into the baseline-candidate eval loop.
 

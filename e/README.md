@@ -163,6 +163,10 @@ e/852/解释/说明.md
 e/853/图片
 e/853/解释/说明.md
  -> v853 bounded objective unassisted repair seed revision replay comparison 的运行截图和解释
+
+e/854/图片
+e/854/解释/说明.md
+ -> v854 bounded objective unassisted repair seed revision partial-hit diagnostic 的运行截图和解释
 ```
 
 ```text

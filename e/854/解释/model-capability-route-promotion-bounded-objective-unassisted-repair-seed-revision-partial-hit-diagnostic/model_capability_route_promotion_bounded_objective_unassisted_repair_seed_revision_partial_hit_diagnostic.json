@@ -1,0 +1,252 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability route promotion bounded objective unassisted repair seed revision partial-hit diagnostic",
+  "generated_at": "2026-06-04T11:02:11Z",
+  "status": "pass",
+  "decision": "model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_partial_hit_diagnostic_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_replay_comparison": "D:\\aiproj\\e\\853\\解释\\model-capability-route-promotion-bounded-objective-unassisted-repair-seed-revision-replay-comparison\\model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_replay_comparison.json",
+  "source_seed_revision": "D:\\aiproj\\e\\851\\解释\\model-capability-route-promotion-bounded-objective-unassisted-repair-seed-revision\\model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision.json",
+  "source_training_run": "D:\\aiproj\\e\\852\\解释\\model-capability-route-promotion-bounded-objective-unassisted-repair-seed-revision-training-run\\model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_training_run.json",
+  "source_corpus": "D:\\aiproj\\e\\851\\解释\\model-capability-route-promotion-bounded-objective-unassisted-repair-seed-revision\\model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_corpus.txt",
+  "replay_summary": {
+    "bounded_objective_replay_comparison_ready": true,
+    "objective_contract_recovered": false,
+    "canonical_case_pass": false,
+    "case_count": 3,
+    "executed_case_count": 3,
+    "passed_case_count": 0,
+    "failed_case_count": 3,
+    "any_hit_case_count": 2,
+    "zero_hit_case_count": 1,
+    "pass_rate": 0.0,
+    "promotion_ready": false,
+    "next_step": "diagnose_bounded_objective_unassisted_repair_seed_revision_partial_hit_before_more_training",
+    "failed_check_count": 0,
+    "bounded_objective_unassisted_repair_replay_comparison_ready": true,
+    "decoder_anchor_used": false,
+    "route": "bounded_objective_unassisted_repair_seed_revision",
+    "bounded_objective_unassisted_repair_seed_revision_replay_comparison_ready": true
+  },
+  "seed_revision_summary": {
+    "bounded_objective_unassisted_repair_seed_revision_ready": true,
+    "example_count": 24,
+    "neutral_prompt_example_count": 18,
+    "target_term_prompt_example_count": 6,
+    "decoder_anchor_example_count": 0,
+    "corpus_char_count": 2028,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_training_run",
+    "next_step": "train_bounded_objective_unassisted_repair_seed_revision",
+    "failed_check_count": 0
+  },
+  "training_summary": {
+    "bounded_objective_unassisted_repair_training_ready": true,
+    "artifact_count": 7,
+    "metric_record_count": 6,
+    "final_step": 50,
+    "final_train_loss": 2.1270718574523926,
+    "final_val_loss": 2.2989022731781006,
+    "train_loss_delta": -1.356824,
+    "val_loss_delta": -1.19704,
+    "repair_example_count": 24,
+    "neutral_prompt_example_count": 18,
+    "decoder_anchor_example_count": 0,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_replay_comparison",
+    "next_step": "run_bounded_objective_unassisted_repair_seed_revision_replay_comparison",
+    "failed_check_count": 0,
+    "bounded_objective_unassisted_repair_seed_revision_training_ready": true
+  },
+  "case_diagnostics": [
+    {
+      "case_id": "canonical_direct_completion",
+      "prompt": "Answer with exactly two tokens: fixed loss\nanswer:",
+      "continuation": " fixed t",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "fixed"
+      ],
+      "missed_terms": [
+        "loss"
+      ],
+      "case_pass": false,
+      "any_hit": true,
+      "partial_hit": true,
+      "zero_hit": false,
+      "missed_terms_present_in_corpus": [
+        "loss"
+      ],
+      "continuation_preview": " fixed t"
+    },
+    {
+      "case_id": "minimal_direct_completion",
+      "prompt": "Answer with exactly two words: fixed loss\nanswer:",
+      "continuation": " fixed t",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "fixed"
+      ],
+      "missed_terms": [
+        "loss"
+      ],
+      "case_pass": false,
+      "any_hit": true,
+      "partial_hit": true,
+      "zero_hit": false,
+      "missed_terms_present_in_corpus": [
+        "loss"
+      ],
+      "continuation_preview": " fixed t"
+    },
+    {
+      "case_id": "completion_label_surface",
+      "prompt": "Complete with exactly two tokens: fixed loss\ncompletion:",
+      "continuation": " ler: lo",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "case_pass": false,
+      "any_hit": false,
+      "partial_hit": false,
+      "zero_hit": true,
+      "missed_terms_present_in_corpus": [
+        "fixed",
+        "loss"
+      ],
+      "continuation_preview": " ler: lo"
+    }
+  ],
+  "root_causes": [
+    {
+      "cause_id": "first_term_only_uptake",
+      "severity": "high",
+      "detail": "2 cases hit a required term but still missed another term.",
+      "evidence": [
+        "canonical_direct_completion",
+        "minimal_direct_completion"
+      ]
+    },
+    {
+      "cause_id": "loss_term_not_stabilized",
+      "severity": "high",
+      "detail": "`fixed` appears in replay continuations, but `loss` remains missed even though it exists in the revised corpus.",
+      "evidence": [
+        "canonical_direct_completion",
+        "minimal_direct_completion",
+        "completion_label_surface"
+      ]
+    },
+    {
+      "cause_id": "prompt_surface_still_zero_hit",
+      "severity": "medium",
+      "detail": "At least one contract prompt surface still has no required-term hit.",
+      "evidence": [
+        "completion_label_surface"
+      ]
+    },
+    {
+      "cause_id": "corpus_contains_missed_terms",
+      "severity": "medium",
+      "detail": "The missed terms are present in the seed corpus, so this is an uptake/generation issue rather than missing raw data.",
+      "evidence": [
+        "fixed",
+        "loss"
+      ]
+    },
+    {
+      "cause_id": "no_case_passed_contract",
+      "severity": "high",
+      "detail": "No replay case satisfied all required terms, so promotion remains blocked.",
+      "evidence": []
+    },
+    {
+      "cause_id": "unassisted_path_confirmed",
+      "severity": "low",
+      "detail": "The checkpoint came from the no-anchor revised seed path; partial uptake is unassisted evidence.",
+      "evidence": []
+    }
+  ],
+  "check_rows": [
+    {
+      "id": "replay_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "seed revision replay comparison must pass structurally"
+    },
+    {
+      "id": "replay_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "seed revision replay comparison must be ready"
+    },
+    {
+      "id": "objective_not_recovered",
+      "status": "pass",
+      "actual": false,
+      "detail": "diagnostic is only for unrecovered objective contracts"
+    },
+    {
+      "id": "partial_hit_present",
+      "status": "pass",
+      "actual": 2,
+      "detail": "at least one replay case must be a partial hit"
+    },
+    {
+      "id": "seed_revision_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "seed revision must be ready"
+    },
+    {
+      "id": "training_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "seed revision training run must be ready"
+    }
+  ],
+  "diagnostic": {
+    "ready": true,
+    "route": "bounded_objective_unassisted_repair_seed_revision",
+    "partial_hit_case_count": 2,
+    "zero_hit_case_count": 1,
+    "root_cause_count": 6,
+    "decoder_anchor_used": false,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_curriculum_patch",
+    "next_step": "build_bounded_objective_unassisted_repair_seed_revision_curriculum_patch"
+  },
+  "summary": {
+    "bounded_objective_unassisted_repair_seed_revision_partial_hit_diagnostic_ready": true,
+    "case_count": 3,
+    "partial_hit_case_count": 2,
+    "zero_hit_case_count": 1,
+    "hit_terms": [
+      "fixed"
+    ],
+    "missed_terms": [
+      "fixed",
+      "loss"
+    ],
+    "root_cause_count": 6,
+    "decoder_anchor_used": false,
+    "model_quality_claim": "partial_required_term_signal_diagnosed",
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_curriculum_patch",
+    "next_step": "build_bounded_objective_unassisted_repair_seed_revision_curriculum_patch"
+  },
+  "interpretation": {
+    "model_quality_claim": "partial_required_term_signal_diagnosed",
+    "reason": "The revised no-anchor checkpoint partially learned the objective surface, but the dominant diagnostic is `first_term_only_uptake`.",
+    "next_action": "build_bounded_objective_unassisted_repair_seed_revision_curriculum_patch"
+  }
+}

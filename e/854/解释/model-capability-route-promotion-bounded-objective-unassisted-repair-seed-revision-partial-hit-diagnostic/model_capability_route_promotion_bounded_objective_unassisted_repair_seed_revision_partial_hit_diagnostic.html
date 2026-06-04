@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT model capability route promotion bounded objective unassisted repair seed revision partial-hit diagnostic</title>
+<style>
+body{font-family:Arial,'Microsoft YaHei',sans-serif;margin:24px;background:#f6f8fa;color:#172033;line-height:1.5}
+main{max-width:1160px;margin:auto;background:#fff;border:1px solid #d0d7de;border-radius:8px;padding:20px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin:16px 0}
+.card{border:1px solid #d8dee4;border-radius:8px;padding:10px;background:#fbfcfd}
+.label{font-size:12px;color:#57606a}strong{display:block;overflow-wrap:anywhere}
+table{width:100%;border-collapse:collapse;margin:12px 0}th,td{border-bottom:1px solid #d8dee4;padding:8px;text-align:left;vertical-align:top}pre{white-space:pre-wrap;overflow-wrap:anywhere}
+</style>
+</head>
+<body><main>
+<header><h1>MiniGPT model capability route promotion bounded objective unassisted repair seed revision partial-hit diagnostic</h1><p>The revised no-anchor checkpoint partially learned the objective surface, but the dominant diagnostic is `first_term_only_uptake`.</p></header>
+<section class="stats"><div class="card"><div class="label">Status</div><strong>pass</strong></div><div class="card"><div class="label">Decision</div><strong>model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_partial_hit_diagnostic_ready</strong></div><div class="card"><div class="label">Partial hits</div><strong>2</strong></div><div class="card"><div class="label">Zero hits</div><strong>1</strong></div><div class="card"><div class="label">Hit terms</div><strong>[&#x27;fixed&#x27;]</strong></div><div class="card"><div class="label">Missed terms</div><strong>[&#x27;fixed&#x27;, &#x27;loss&#x27;]</strong></div><div class="card"><div class="label">Claim</div><strong>partial_required_term_signal_diagnosed</strong></div></section>
+<section><h2>Case Diagnostics</h2><table><thead><tr><th>Case</th><th>Partial</th><th>Zero</th><th>Hit terms</th><th>Missed terms</th><th>Continuation</th></tr></thead><tbody><tr><td>canonical_direct_completion</td><td>True</td><td>False</td><td>[&#x27;fixed&#x27;]</td><td>[&#x27;loss&#x27;]</td><td><pre> fixed t</pre></td></tr><tr><td>minimal_direct_completion</td><td>True</td><td>False</td><td>[&#x27;fixed&#x27;]</td><td>[&#x27;loss&#x27;]</td><td><pre> fixed t</pre></td></tr><tr><td>completion_label_surface</td><td>False</td><td>True</td><td>[]</td><td>[&#x27;fixed&#x27;, &#x27;loss&#x27;]</td><td><pre> ler: lo</pre></td></tr></tbody></table></section>
+<section><h2>Root Causes</h2><table><thead><tr><th>Cause</th><th>Severity</th><th>Detail</th><th>Evidence</th></tr></thead><tbody><tr><td>first_term_only_uptake</td><td>high</td><td>2 cases hit a required term but still missed another term.</td><td>[&#x27;canonical_direct_completion&#x27;, &#x27;minimal_direct_completion&#x27;]</td></tr><tr><td>loss_term_not_stabilized</td><td>high</td><td>`fixed` appears in replay continuations, but `loss` remains missed even though it exists in the revised corpus.</td><td>[&#x27;canonical_direct_completion&#x27;, &#x27;minimal_direct_completion&#x27;, &#x27;completion_label_surface&#x27;]</td></tr><tr><td>prompt_surface_still_zero_hit</td><td>medium</td><td>At least one contract prompt surface still has no required-term hit.</td><td>[&#x27;completion_label_surface&#x27;]</td></tr><tr><td>corpus_contains_missed_terms</td><td>medium</td><td>The missed terms are present in the seed corpus, so this is an uptake/generation issue rather than missing raw data.</td><td>[&#x27;fixed&#x27;, &#x27;loss&#x27;]</td></tr><tr><td>no_case_passed_contract</td><td>high</td><td>No replay case satisfied all required terms, so promotion remains blocked.</td><td>[]</td></tr><tr><td>unassisted_path_confirmed</td><td>low</td><td>The checkpoint came from the no-anchor revised seed path; partial uptake is unassisted evidence.</td><td>[]</td></tr></tbody></table></section>
+<section><h2>Next Action</h2><p>build_bounded_objective_unassisted_repair_seed_revision_curriculum_patch</p></section>
+</main></body></html>
