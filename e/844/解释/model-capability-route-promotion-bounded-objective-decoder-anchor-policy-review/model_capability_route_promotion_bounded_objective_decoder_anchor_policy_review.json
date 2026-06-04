@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability route promotion bounded objective decoder anchor policy review",
+  "generated_at": "2026-06-04T04:53:20Z",
+  "status": "pass",
+  "decision": "close_bounded_objective_decoder_anchor_policy_as_capability_path",
+  "failed_count": 0,
+  "issues": [],
+  "source_policy_replay": "D:\\aiproj\\e\\843\\解释\\model-capability-route-promotion-bounded-objective-decoder-anchor-policy-replay\\model_capability_route_promotion_bounded_objective_decoder_anchor_policy_replay.json",
+  "replay_summary": {
+    "bounded_objective_decoder_anchor_policy_replay_ready": true,
+    "case_count": 3,
+    "passed_case_count": 3,
+    "failed_case_count": 0,
+    "policy_case_count": 3,
+    "policy_applied_case_count": 3,
+    "policy_applied_pass_count": 3,
+    "new_text_pass_count": 0,
+    "pass_rate": 1.0,
+    "policy_replay_success": true,
+    "promotion_ready": false,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_objective_decoder_anchor_policy_review",
+    "next_step": "review_bounded_objective_decoder_anchor_policy_replay",
+    "failed_check_count": 0
+  },
+  "signals": {
+    "policy_replay_status": "pass",
+    "policy_replay_ready": true,
+    "policy_replay_success": true,
+    "case_count": 3,
+    "policy_applied_case_count": 3,
+    "policy_applied_pass_count": 3,
+    "new_text_pass_count": 0,
+    "promotion_ready": false,
+    "all_policy_cases_reproduced": true,
+    "unassisted_recovery_present": false,
+    "assisted_only_recovery": true,
+    "sample_continuations": [
+      "ixed losssss",
+      "ixed loss\n\n\n",
+      "ixed losssss"
+    ]
+  },
+  "recommendations": [
+    {
+      "id": "close_assisted_anchor_path",
+      "priority": "high",
+      "action": "stop_treating_decoder_anchor_policy_as_capability_path"
+    },
+    {
+      "id": "design_unassisted_objective_repair",
+      "priority": "high",
+      "action": "move_to_unassisted_objective_repair_plan"
+    },
+    {
+      "id": "preserve_anchor_policy_as_diagnostic",
+      "priority": "medium",
+      "action": "keep_policy_artifacts_for_decoder_diagnostics_only"
+    }
+  ],
+  "review": {
+    "ready": true,
+    "assisted_anchor_path_closed": true,
+    "selected_track": "unassisted_objective_repair",
+    "promotion_ready": false,
+    "new_training_allowed": false,
+    "recommendation_count": 3,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_objective_unassisted_repair_plan",
+    "next_step": "design_bounded_objective_unassisted_repair_plan"
+  },
+  "check_rows": [
+    {
+      "id": "policy_replay_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "policy replay must pass"
+    },
+    {
+      "id": "policy_replay_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "policy replay must be ready"
+    },
+    {
+      "id": "replay_rows_present",
+      "status": "pass",
+      "actual": 3,
+      "detail": "review must have replay rows"
+    },
+    {
+      "id": "promotion_still_blocked",
+      "status": "pass",
+      "actual": false,
+      "detail": "policy replay must not already allow promotion"
+    },
+    {
+      "id": "policy_signal_present",
+      "status": "pass",
+      "actual": 3,
+      "detail": "review expects a reproduced assisted signal"
+    }
+  ],
+  "summary": {
+    "bounded_objective_decoder_anchor_policy_review_ready": true,
+    "assisted_anchor_path_closed": true,
+    "selected_track": "unassisted_objective_repair",
+    "promotion_ready": false,
+    "new_training_allowed": false,
+    "recommendation_count": 3,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_objective_unassisted_repair_plan",
+    "next_step": "design_bounded_objective_unassisted_repair_plan",
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "review_only",
+    "reason": "Decoder anchor policy replay is assisted-only evidence; it should guide diagnostics but not serve as a capability route.",
+    "next_action": "design_bounded_objective_unassisted_repair_plan"
+  }
+}

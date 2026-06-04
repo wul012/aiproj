@@ -1,0 +1,8 @@
+status=pass
+decision=close_bounded_objective_decoder_anchor_policy_as_capability_path
+bounded_objective_decoder_anchor_policy_review_ready=True
+assisted_anchor_path_closed=True
+selected_track=unassisted_objective_repair
+promotion_ready=False
+model_quality_claim=review_only
+next_action=design_bounded_objective_unassisted_repair_plan

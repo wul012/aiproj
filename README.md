@@ -4,7 +4,19 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v843.0.0` replays the bounded-objective decoder anchor policy and confirms the assisted signal remains promotion-blocked.
+Version `v844.0.0` reviews the bounded-objective decoder anchor policy replay and closes the assisted-anchor path as a capability route.
+
+## Latest v844 checkpoint
+
+- Added `model_capability_route_promotion_bounded_objective_decoder_anchor_policy_review`.
+- Added CLI `scripts/review_model_capability_route_promotion_bounded_objective_decoder_anchor_policy.py`.
+- Consumed the real v843 policy replay from `e/843`.
+- Confirmed policy replay passed through assisted anchors, while `new_text_pass_count=0`.
+- Produced `assisted_anchor_path_closed=True` and `selected_track=unassisted_objective_repair`.
+- Kept `promotion_ready=False`, `new_training_allowed=False`, and model-quality claim `review_only`.
+- Routed the next artifact to `model_capability_route_promotion_bounded_objective_unassisted_repair_plan`.
+- Verified with `3 passed` focused bounded objective decoder anchor policy review tests.
+- Archived v844 evidence in `e/844` and added the code explanation in `代码讲解记录_模型能力阶段/858-v844-route-promotion-bounded-objective-decoder-anchor-policy-review.md`.
 
 ## Latest v843 checkpoint
 

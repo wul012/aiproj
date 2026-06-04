@@ -89,6 +89,9 @@
 857-v843-route-promotion-bounded-objective-decoder-anchor-policy-replay.md
  -> v843 code explanation: replay the guarded bounded objective decoder anchor policy and keep promotion blocked.
 
+858-v844-route-promotion-bounded-objective-decoder-anchor-policy-review.md
+ -> v844 code explanation: review the assisted-only policy replay and close decoder anchors as a capability route.
+
 487-v473-baseline-candidate-capability-delta.md
  -> v473 code explanation: carry real tiny training loss and generation-quality deltas into the baseline-candidate eval loop.
 
