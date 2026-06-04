@@ -1,0 +1,37 @@
+example_id,kind,prompt,completion,decoder_anchor,purpose
+canonical_direct_completion-second-term-repeat-1,loss_second_term_repeat,"Answer with exactly two tokens: fixed loss
+answer:",fixed loss,False,repeat the full two-token target after the original contract prompt
+canonical_direct_completion-second-term-repeat-2,loss_second_term_repeat,"Answer with exactly two tokens: fixed loss
+answer:",fixed loss,False,repeat the full two-token target after the original contract prompt
+canonical_direct_completion-fixed-to-loss-bridge,fixed_to_loss_bridge,"Answer with exactly two tokens: fixed loss
+answer:
+fixed",loss,False,teach loss as the immediate continuation after fixed
+canonical_direct_completion-full-completion-contrast,full_completion_contrast,"Answer with exactly two tokens: fixed loss
+answer:","fixed loss
+not: fixed t",False,separate full fixed loss completion from fixed t near misses
+minimal_direct_completion-second-term-repeat-1,loss_second_term_repeat,"Answer with exactly two words: fixed loss
+answer:",fixed loss,False,repeat the full two-token target after the original contract prompt
+minimal_direct_completion-second-term-repeat-2,loss_second_term_repeat,"Answer with exactly two words: fixed loss
+answer:",fixed loss,False,repeat the full two-token target after the original contract prompt
+minimal_direct_completion-fixed-to-loss-bridge,fixed_to_loss_bridge,"Answer with exactly two words: fixed loss
+answer:
+fixed",loss,False,teach loss as the immediate continuation after fixed
+minimal_direct_completion-full-completion-contrast,full_completion_contrast,"Answer with exactly two words: fixed loss
+answer:","fixed loss
+not: fixed t",False,separate full fixed loss completion from fixed t near misses
+completion_label_surface-second-term-repeat-1,loss_second_term_repeat,"Complete with exactly two tokens: fixed loss
+completion:",fixed loss,False,repeat the full two-token target after the original contract prompt
+completion_label_surface-second-term-repeat-2,loss_second_term_repeat,"Complete with exactly two tokens: fixed loss
+completion:",fixed loss,False,repeat the full two-token target after the original contract prompt
+completion_label_surface-fixed-to-loss-bridge,fixed_to_loss_bridge,"Complete with exactly two tokens: fixed loss
+completion:
+fixed",loss,False,teach loss as the immediate continuation after fixed
+completion_label_surface-full-completion-contrast,full_completion_contrast,"Complete with exactly two tokens: fixed loss
+completion:","fixed loss
+not: fixed t",False,separate full fixed loss completion from fixed t near misses
+loss-after-fixed-short,loss_after_fixed_short,fixed,loss,False,short bridge for the second required term
+loss-after-fixed-label,loss_after_fixed_label,Continue after fixed:,loss,False,labelled bridge for the second required term
+two-token-target-repeat-a,two_token_target_repeat,target:,fixed loss,False,repeat the exact target in a compact surface
+two-token-target-repeat-b,two_token_target_repeat,target:,fixed loss,False,repeat the exact target in a compact surface
+completion-surface-short-a,completion_surface_short,completion:,fixed loss,False,repair completion-label prompt surface
+completion-surface-short-b,completion_surface_short,completion:,fixed loss,False,repair completion-label prompt surface

@@ -122,6 +122,9 @@
 868-v854-route-promotion-bounded-objective-unassisted-repair-seed-revision-partial-hit-diagnostic.md
  -> v854 code explanation: diagnose fixed-only partial uptake and route the next work to a curriculum patch.
 
+869-v855-route-promotion-bounded-objective-unassisted-repair-seed-revision-curriculum-patch.md
+ -> v855 code explanation: convert the partial-hit diagnostic into a no-anchor patched corpus for the next training run.
+
 487-v473-baseline-candidate-capability-delta.md
  -> v473 code explanation: carry real tiny training loss and generation-quality deltas into the baseline-candidate eval loop.
 

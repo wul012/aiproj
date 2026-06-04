@@ -1,0 +1,374 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability route promotion bounded objective unassisted repair seed revision curriculum patch",
+  "generated_at": "2026-06-04T11:17:08Z",
+  "status": "pass",
+  "decision": "model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_curriculum_patch_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_partial_hit_diagnostic": "D:\\aiproj\\e\\854\\解释\\model-capability-route-promotion-bounded-objective-unassisted-repair-seed-revision-partial-hit-diagnostic\\model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_partial_hit_diagnostic.json",
+  "source_seed_revision": "D:\\aiproj\\e\\851\\解释\\model-capability-route-promotion-bounded-objective-unassisted-repair-seed-revision\\model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision.json",
+  "source_objective_contract": "D:\\aiproj\\e\\836\\解释\\model-capability-route-promotion-bounded-objective-contract\\model_capability_route_promotion_bounded_objective_contract.json",
+  "source_corpus": "D:\\aiproj\\e\\851\\解释\\model-capability-route-promotion-bounded-objective-unassisted-repair-seed-revision\\model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_corpus.txt",
+  "partial_hit_diagnostic_summary": {
+    "bounded_objective_unassisted_repair_seed_revision_partial_hit_diagnostic_ready": true,
+    "case_count": 3,
+    "partial_hit_case_count": 2,
+    "zero_hit_case_count": 1,
+    "hit_terms": [
+      "fixed"
+    ],
+    "missed_terms": [
+      "fixed",
+      "loss"
+    ],
+    "root_cause_count": 6,
+    "decoder_anchor_used": false,
+    "model_quality_claim": "partial_required_term_signal_diagnosed",
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_curriculum_patch",
+    "next_step": "build_bounded_objective_unassisted_repair_seed_revision_curriculum_patch"
+  },
+  "seed_revision_summary": {
+    "bounded_objective_unassisted_repair_seed_revision_ready": true,
+    "example_count": 24,
+    "neutral_prompt_example_count": 18,
+    "target_term_prompt_example_count": 6,
+    "decoder_anchor_example_count": 0,
+    "corpus_char_count": 2028,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_training_run",
+    "next_step": "train_bounded_objective_unassisted_repair_seed_revision",
+    "failed_check_count": 0
+  },
+  "objective_contract_summary": {
+    "bounded_objective_contract_ready": true,
+    "contract_id": "bounded_fixed_loss_direct_completion_contract",
+    "target_terms": [
+      "fixed",
+      "loss"
+    ],
+    "contract_case_count": 3,
+    "planned_seed_example_count": 18,
+    "unchanged_suite_check_required": true,
+    "promotion_claim_allowed": false,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_objective_seed",
+    "failed_check_count": 0
+  },
+  "patch_examples": [
+    {
+      "example_id": "canonical_direct_completion-second-term-repeat-1",
+      "kind": "loss_second_term_repeat",
+      "prompt": "Answer with exactly two tokens: fixed loss\nanswer:",
+      "completion": "fixed loss",
+      "text": "Answer with exactly two tokens: fixed loss\nanswer:\nfixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "purpose": "repeat the full two-token target after the original contract prompt"
+    },
+    {
+      "example_id": "canonical_direct_completion-second-term-repeat-2",
+      "kind": "loss_second_term_repeat",
+      "prompt": "Answer with exactly two tokens: fixed loss\nanswer:",
+      "completion": "fixed loss",
+      "text": "Answer with exactly two tokens: fixed loss\nanswer:\nfixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "purpose": "repeat the full two-token target after the original contract prompt"
+    },
+    {
+      "example_id": "canonical_direct_completion-fixed-to-loss-bridge",
+      "kind": "fixed_to_loss_bridge",
+      "prompt": "Answer with exactly two tokens: fixed loss\nanswer:\nfixed",
+      "completion": "loss",
+      "text": "Answer with exactly two tokens: fixed loss\nanswer:\nfixed\nloss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "purpose": "teach loss as the immediate continuation after fixed"
+    },
+    {
+      "example_id": "canonical_direct_completion-full-completion-contrast",
+      "kind": "full_completion_contrast",
+      "prompt": "Answer with exactly two tokens: fixed loss\nanswer:",
+      "completion": "fixed loss\nnot: fixed t",
+      "text": "Answer with exactly two tokens: fixed loss\nanswer:\nfixed loss\nnot: fixed t",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "purpose": "separate full fixed loss completion from fixed t near misses"
+    },
+    {
+      "example_id": "minimal_direct_completion-second-term-repeat-1",
+      "kind": "loss_second_term_repeat",
+      "prompt": "Answer with exactly two words: fixed loss\nanswer:",
+      "completion": "fixed loss",
+      "text": "Answer with exactly two words: fixed loss\nanswer:\nfixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "purpose": "repeat the full two-token target after the original contract prompt"
+    },
+    {
+      "example_id": "minimal_direct_completion-second-term-repeat-2",
+      "kind": "loss_second_term_repeat",
+      "prompt": "Answer with exactly two words: fixed loss\nanswer:",
+      "completion": "fixed loss",
+      "text": "Answer with exactly two words: fixed loss\nanswer:\nfixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "purpose": "repeat the full two-token target after the original contract prompt"
+    },
+    {
+      "example_id": "minimal_direct_completion-fixed-to-loss-bridge",
+      "kind": "fixed_to_loss_bridge",
+      "prompt": "Answer with exactly two words: fixed loss\nanswer:\nfixed",
+      "completion": "loss",
+      "text": "Answer with exactly two words: fixed loss\nanswer:\nfixed\nloss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "purpose": "teach loss as the immediate continuation after fixed"
+    },
+    {
+      "example_id": "minimal_direct_completion-full-completion-contrast",
+      "kind": "full_completion_contrast",
+      "prompt": "Answer with exactly two words: fixed loss\nanswer:",
+      "completion": "fixed loss\nnot: fixed t",
+      "text": "Answer with exactly two words: fixed loss\nanswer:\nfixed loss\nnot: fixed t",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "purpose": "separate full fixed loss completion from fixed t near misses"
+    },
+    {
+      "example_id": "completion_label_surface-second-term-repeat-1",
+      "kind": "loss_second_term_repeat",
+      "prompt": "Complete with exactly two tokens: fixed loss\ncompletion:",
+      "completion": "fixed loss",
+      "text": "Complete with exactly two tokens: fixed loss\ncompletion:\nfixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "purpose": "repeat the full two-token target after the original contract prompt"
+    },
+    {
+      "example_id": "completion_label_surface-second-term-repeat-2",
+      "kind": "loss_second_term_repeat",
+      "prompt": "Complete with exactly two tokens: fixed loss\ncompletion:",
+      "completion": "fixed loss",
+      "text": "Complete with exactly two tokens: fixed loss\ncompletion:\nfixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "purpose": "repeat the full two-token target after the original contract prompt"
+    },
+    {
+      "example_id": "completion_label_surface-fixed-to-loss-bridge",
+      "kind": "fixed_to_loss_bridge",
+      "prompt": "Complete with exactly two tokens: fixed loss\ncompletion:\nfixed",
+      "completion": "loss",
+      "text": "Complete with exactly two tokens: fixed loss\ncompletion:\nfixed\nloss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "purpose": "teach loss as the immediate continuation after fixed"
+    },
+    {
+      "example_id": "completion_label_surface-full-completion-contrast",
+      "kind": "full_completion_contrast",
+      "prompt": "Complete with exactly two tokens: fixed loss\ncompletion:",
+      "completion": "fixed loss\nnot: fixed t",
+      "text": "Complete with exactly two tokens: fixed loss\ncompletion:\nfixed loss\nnot: fixed t",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "purpose": "separate full fixed loss completion from fixed t near misses"
+    },
+    {
+      "example_id": "loss-after-fixed-short",
+      "kind": "loss_after_fixed_short",
+      "prompt": "fixed",
+      "completion": "loss",
+      "text": "fixed\nloss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "purpose": "short bridge for the second required term"
+    },
+    {
+      "example_id": "loss-after-fixed-label",
+      "kind": "loss_after_fixed_label",
+      "prompt": "Continue after fixed:",
+      "completion": "loss",
+      "text": "Continue after fixed:\nloss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "purpose": "labelled bridge for the second required term"
+    },
+    {
+      "example_id": "two-token-target-repeat-a",
+      "kind": "two_token_target_repeat",
+      "prompt": "target:",
+      "completion": "fixed loss",
+      "text": "target:\nfixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "purpose": "repeat the exact target in a compact surface"
+    },
+    {
+      "example_id": "two-token-target-repeat-b",
+      "kind": "two_token_target_repeat",
+      "prompt": "target:",
+      "completion": "fixed loss",
+      "text": "target:\nfixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "purpose": "repeat the exact target in a compact surface"
+    },
+    {
+      "example_id": "completion-surface-short-a",
+      "kind": "completion_surface_short",
+      "prompt": "completion:",
+      "completion": "fixed loss",
+      "text": "completion:\nfixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "purpose": "repair completion-label prompt surface"
+    },
+    {
+      "example_id": "completion-surface-short-b",
+      "kind": "completion_surface_short",
+      "prompt": "completion:",
+      "completion": "fixed loss",
+      "text": "completion:\nfixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "purpose": "repair completion-label prompt surface"
+    }
+  ],
+  "patched_corpus_text": "Answer with exactly two tokens: fixed loss\nanswer: fixed loss\n\nReturn the exact two-token objective output.\nanswer: # canonical_direct_completion fixed loss\n\nObserved fragment `los` is incomplete. Write the full target answer.\nanswer: # canonical_direct_completion fixed loss\n\nanswer: # canonical_direct_completion fixed loss\n\nAnswer with exactly two tokens: fixed loss\nanswer:\nReturn only the answer.\nanswer: fixed loss\n\nEmit the canonical target response.\nanswer: # canonical_direct_completion fixed loss\n\nObserved fragment `wixed` is incomplete. Write the full target answer.\nanswer: # canonical_direct_completion fixed loss\n\ncompletion: # canonical_direct_completion fixed loss\n\nAnswer with exactly two words: fixed loss\nanswer: fixed loss\n\nReturn the exact two-token objective output.\nanswer: # minimal_direct_completion fixed loss\n\nObserved fragment `los` is incomplete. Write the full target answer.\nanswer: # minimal_direct_completion fixed loss\n\nanswer: # minimal_direct_completion fixed loss\n\nAnswer with exactly two words: fixed loss\nanswer:\nReturn only the answer.\nanswer: fixed loss\n\nEmit the canonical target response.\nanswer: # minimal_direct_completion fixed loss\n\nObserved fragment `wixed` is incomplete. Write the full target answer.\nanswer: # minimal_direct_completion fixed loss\n\ncompletion: # minimal_direct_completion fixed loss\n\nComplete with exactly two tokens: fixed loss\ncompletion: fixed loss\n\nReturn the exact two-token objective output.\nanswer: # completion_label_surface fixed loss\n\nObserved fragment `los` is incomplete. Write the full target answer.\nanswer: # completion_label_surface fixed loss\n\nanswer: # completion_label_surface fixed loss\n\nComplete with exactly two tokens: fixed loss\ncompletion:\nReturn only the answer.\nanswer: fixed loss\n\nEmit the canonical target response.\nanswer: # completion_label_surface fixed loss\n\nObserved fragment `wixed` is incomplete. Write the full target answer.\nanswer: # completion_label_surface fixed loss\n\ncompletion: # completion_label_surface fixed loss\n\n# v855 curriculum patch\n\nAnswer with exactly two tokens: fixed loss\nanswer:\nfixed loss\n\nAnswer with exactly two tokens: fixed loss\nanswer:\nfixed loss\n\nAnswer with exactly two tokens: fixed loss\nanswer:\nfixed\nloss\n\nAnswer with exactly two tokens: fixed loss\nanswer:\nfixed loss\nnot: fixed t\n\nAnswer with exactly two words: fixed loss\nanswer:\nfixed loss\n\nAnswer with exactly two words: fixed loss\nanswer:\nfixed loss\n\nAnswer with exactly two words: fixed loss\nanswer:\nfixed\nloss\n\nAnswer with exactly two words: fixed loss\nanswer:\nfixed loss\nnot: fixed t\n\nComplete with exactly two tokens: fixed loss\ncompletion:\nfixed loss\n\nComplete with exactly two tokens: fixed loss\ncompletion:\nfixed loss\n\nComplete with exactly two tokens: fixed loss\ncompletion:\nfixed\nloss\n\nComplete with exactly two tokens: fixed loss\ncompletion:\nfixed loss\nnot: fixed t\n\nfixed\nloss\n\nContinue after fixed:\nloss\n\ntarget:\nfixed loss\n\ntarget:\nfixed loss\n\ncompletion:\nfixed loss\n\ncompletion:\nfixed loss\n",
+  "check_rows": [
+    {
+      "id": "diagnostic_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "partial-hit diagnostic must pass"
+    },
+    {
+      "id": "diagnostic_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "partial-hit diagnostic must be ready"
+    },
+    {
+      "id": "partial_hit_present",
+      "status": "pass",
+      "actual": 2,
+      "detail": "patch should only follow a partial-hit diagnostic"
+    },
+    {
+      "id": "seed_revision_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "seed revision must be ready"
+    },
+    {
+      "id": "contract_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "objective contract must be ready"
+    },
+    {
+      "id": "patch_examples_present",
+      "status": "pass",
+      "actual": 18,
+      "detail": "patch examples must be generated"
+    },
+    {
+      "id": "decoder_anchor_free",
+      "status": "pass",
+      "actual": false,
+      "detail": "patch examples must stay no-anchor"
+    }
+  ],
+  "curriculum_patch": {
+    "ready": true,
+    "patch_example_count": 18,
+    "loss_focus_example_count": 18,
+    "completion_surface_example_count": 2,
+    "decoder_anchor_example_count": 0,
+    "patched_corpus_char_count": 2996,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_curriculum_patch_training_run",
+    "next_step": "train_bounded_objective_unassisted_repair_seed_revision_curriculum_patch"
+  },
+  "summary": {
+    "bounded_objective_unassisted_repair_seed_revision_curriculum_patch_ready": true,
+    "patch_example_count": 18,
+    "loss_focus_example_count": 18,
+    "completion_surface_example_count": 2,
+    "decoder_anchor_example_count": 0,
+    "original_corpus_char_count": 2028,
+    "patched_corpus_char_count": 2996,
+    "patch_kinds": [
+      "completion_surface_short",
+      "fixed_to_loss_bridge",
+      "full_completion_contrast",
+      "loss_after_fixed_label",
+      "loss_after_fixed_short",
+      "loss_second_term_repeat",
+      "two_token_target_repeat"
+    ],
+    "failed_check_count": 0,
+    "model_quality_claim": "curriculum_patch_only",
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_curriculum_patch_training_run",
+    "next_step": "train_bounded_objective_unassisted_repair_seed_revision_curriculum_patch"
+  },
+  "interpretation": {
+    "model_quality_claim": "curriculum_patch_only",
+    "reason": "The patch targets loss second-term stabilization and completion-surface zero-hit cases; capability still requires training and replay.",
+    "next_action": "train_bounded_objective_unassisted_repair_seed_revision_curriculum_patch"
+  }
+}

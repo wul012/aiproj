@@ -167,6 +167,10 @@ e/853/解释/说明.md
 e/854/图片
 e/854/解释/说明.md
  -> v854 bounded objective unassisted repair seed revision partial-hit diagnostic 的运行截图和解释
+
+e/855/图片
+e/855/解释/说明.md
+ -> v855 bounded objective unassisted repair seed revision curriculum patch 的运行截图和解释
 ```
 
 ```text

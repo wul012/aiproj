@@ -4,7 +4,21 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v854.0.0` diagnoses the v853 partial required-term signal and routes the next step to a curriculum patch.
+Version `v855.0.0` builds a no-anchor curriculum patch from the v854 partial-hit diagnostic.
+
+## Latest v855 checkpoint
+
+- Added `model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_curriculum_patch`.
+- Added CLI `scripts/build_model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_curriculum_patch.py`.
+- Consumed the real v854 partial-hit diagnostic, v851 seed revision, v836 objective contract, and v851 source corpus.
+- Generated `patch_example_count=18`, `loss_focus_example_count=18`, `completion_surface_example_count=2`, and `decoder_anchor_example_count=0`.
+- Expanded corpus from `original_corpus_char_count=2028` to `patched_corpus_char_count=2996`.
+- Added patch kinds `loss_second_term_repeat`, `fixed_to_loss_bridge`, `full_completion_contrast`, `completion_surface_short`, `two_token_target_repeat`, `loss_after_fixed_short`, and `loss_after_fixed_label`.
+- Kept `model_quality_claim=curriculum_patch_only`; capability still requires training and replay.
+- Routed the next artifact to `model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_curriculum_patch_training_run`.
+- Verified with `3 passed` focused bounded objective unassisted repair seed revision curriculum patch tests and `1744 passed` full pytest.
+- Confirmed source encoding hygiene with `source_count=1280`, `clean_count=1280`, `bom_count=0`, and `syntax_error_count=0`.
+- Archived v855 evidence in `e/855` and added the code explanation in `代码讲解记录_模型能力阶段/869-v855-route-promotion-bounded-objective-unassisted-repair-seed-revision-curriculum-patch.md`.
 
 ## Latest v854 checkpoint
 
