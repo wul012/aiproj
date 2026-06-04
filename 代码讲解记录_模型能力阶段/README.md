@@ -98,6 +98,9 @@
 860-v846-route-promotion-bounded-objective-unassisted-repair-seed.md
  -> v846 code explanation: build a no-decoder-anchor bounded objective repair seed with neutral prompts.
 
+861-v847-route-promotion-bounded-objective-unassisted-repair-training-run.md
+ -> v847 code explanation: train a real checkpoint from the no-decoder-anchor repair seed while keeping capability claims gated behind replay.
+
 487-v473-baseline-candidate-capability-delta.md
  -> v473 code explanation: carry real tiny training loss and generation-quality deltas into the baseline-candidate eval loop.
 

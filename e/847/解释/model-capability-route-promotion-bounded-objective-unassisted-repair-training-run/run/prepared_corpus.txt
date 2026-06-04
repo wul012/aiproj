@@ -1,0 +1,71 @@
+Answer with exactly two tokens: fixed loss
+answer: fixed loss
+
+Return the bounded objective answer.
+answer: # canonical_direct_completion fixed loss
+
+Answer with exactly two tokens: fixed loss
+answer: fixed loss
+
+Write the required two-token output.
+answer: # canonical_direct_completion fixed loss
+
+Answer with exactly two tokens: fixed loss
+answer: fixed loss
+
+Emit the canonical repair target.
+answer: # canonical_direct_completion fixed loss
+
+Answer with exactly two tokens: fixed loss
+answer: fixed loss
+
+Complete the objective response.
+answer: # canonical_direct_completion fixed loss
+
+Answer with exactly two words: fixed loss
+answer: fixed loss
+
+Return the bounded objective answer.
+answer: # minimal_direct_completion fixed loss
+
+Answer with exactly two words: fixed loss
+answer: fixed loss
+
+Write the required two-token output.
+answer: # minimal_direct_completion fixed loss
+
+Answer with exactly two words: fixed loss
+answer: fixed loss
+
+Emit the canonical repair target.
+answer: # minimal_direct_completion fixed loss
+
+Answer with exactly two words: fixed loss
+answer: fixed loss
+
+Complete the objective response.
+answer: # minimal_direct_completion fixed loss
+
+Complete with exactly two tokens: fixed loss
+completion: fixed loss
+
+Return the bounded objective answer.
+answer: # completion_label_surface fixed loss
+
+Complete with exactly two tokens: fixed loss
+completion: fixed loss
+
+Write the required two-token output.
+answer: # completion_label_surface fixed loss
+
+Complete with exactly two tokens: fixed loss
+completion: fixed loss
+
+Emit the canonical repair target.
+answer: # completion_label_surface fixed loss
+
+Complete with exactly two tokens: fixed loss
+completion: fixed loss
+
+Complete the objective response.
+answer: # completion_label_surface fixed loss

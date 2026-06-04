@@ -4,7 +4,21 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v846.0.0` builds the bounded-objective unassisted repair seed corpus from the v845 plan.
+Version `v847.0.0` trains a real tiny checkpoint from the bounded-objective unassisted repair seed.
+
+## Latest v847 checkpoint
+
+- Added `model_capability_route_promotion_bounded_objective_unassisted_repair_training_run`.
+- Added CLI `scripts/build_model_capability_route_promotion_bounded_objective_unassisted_repair_training_run.py`.
+- Trained a real tiny checkpoint from the v846 seed corpus.
+- Verified seed guards: `neutral_prompt_example_count=12` and `decoder_anchor_example_count=0`.
+- Produced `checkpoint.pt`, `tokenizer.json`, `metrics.jsonl`, `train_config.json`, `run_manifest.json`, `sample.txt`, and `prepared_corpus.txt`.
+- Recorded `final_step=40`, `final_train_loss=2.125275135040283`, `final_val_loss=2.230360507965088`, and `train_loss_delta=-1.344413`.
+- Kept the model-quality claim as `training_artifact_only`; replay comparison is still required before any capability claim.
+- Routed the next artifact to `model_capability_route_promotion_bounded_objective_unassisted_repair_replay_comparison`.
+- Verified with `4 passed` focused bounded objective unassisted repair training-run tests.
+- Verified full regression with `1718 passed`.
+- Archived v847 evidence in `e/847` and added the code explanation in `代码讲解记录_模型能力阶段/861-v847-route-promotion-bounded-objective-unassisted-repair-training-run.md`.
 
 ## Latest v846 checkpoint
 
