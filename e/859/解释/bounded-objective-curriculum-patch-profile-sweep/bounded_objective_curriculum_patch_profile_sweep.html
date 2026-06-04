@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT bounded objective curriculum patch profile sweep</title>
+<style>
+body{font-family:Arial,'Microsoft YaHei',sans-serif;margin:24px;background:#f6f8fa;color:#172033;line-height:1.5}
+main{max-width:1200px;margin:auto;background:#fff;border:1px solid #d0d7de;border-radius:8px;padding:20px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin:16px 0}
+.card{border:1px solid #d8dee4;border-radius:8px;padding:10px;background:#fbfcfd}
+.label{font-size:12px;color:#57606a}strong{display:block;overflow-wrap:anywhere}
+table{width:100%;border-collapse:collapse;margin:12px 0}th,td{border-bottom:1px solid #d8dee4;padding:8px;text-align:left;vertical-align:top}pre{white-space:pre-wrap;overflow-wrap:anywhere}
+</style>
+</head>
+<body><main>
+<header><h1>MiniGPT bounded objective curriculum patch profile sweep</h1><p>At least one profile produced `loss`, but no profile recovered the full bounded objective contract.</p></header>
+<section class="stats"><div class="card"><div class="label">Status</div><strong>pass</strong></div><div class="card"><div class="label">Decision</div><strong>bounded_objective_curriculum_patch_profile_sweep_found_loss_signal_bridge_required</strong></div><div class="card"><div class="label">Profiles</div><strong>5</strong></div><div class="card"><div class="label">Rows</div><strong>15</strong></div><div class="card"><div class="label">Recovered</div><strong>False</strong></div><div class="card"><div class="label">Loss profiles</div><strong>2</strong></div><div class="card"><div class="label">Max loss hits</div><strong>2</strong></div><div class="card"><div class="label">Best profile</div><strong>longer-open</strong></div></section>
+<section><h2>Profile Summaries</h2><table><thead><tr><th>Profile</th><th>Passed</th><th>Any hit</th><th>Zero hit</th><th>Loss hits</th><th>Recovered</th></tr></thead><tbody><tr><td>v857-baseline</td><td>0</td><td>2</td><td>1</td><td>0</td><td>False</td></tr><tr><td>top1-low-temp</td><td>0</td><td>2</td><td>1</td><td>0</td><td>False</td></tr><tr><td>top3-low-temp</td><td>0</td><td>1</td><td>2</td><td>0</td><td>False</td></tr><tr><td>longer-top20</td><td>0</td><td>3</td><td>0</td><td>1</td><td>False</td></tr><tr><td>longer-open</td><td>0</td><td>2</td><td>1</td><td>2</td><td>False</td></tr></tbody></table></section>
+<section><h2>Sweep Rows</h2><table><thead><tr><th>Profile</th><th>Case</th><th>Hit</th><th>Missed</th><th>Continuation</th></tr></thead><tbody><tr><td>v857-baseline</td><td>canonical_direct_completion</td><td>[&#x27;fixed&#x27;]</td><td>[&#x27;loss&#x27;]</td><td><pre> fixed l</pre></td></tr><tr><td>v857-baseline</td><td>minimal_direct_completion</td><td>[]</td><td>[&#x27;fixed&#x27;, &#x27;loss&#x27;]</td><td><pre> loswed </pre></td></tr><tr><td>v857-baseline</td><td>completion_label_surface</td><td>[&#x27;fixed&#x27;]</td><td>[&#x27;loss&#x27;]</td><td><pre> fixed l</pre></td></tr><tr><td>top1-low-temp</td><td>canonical_direct_completion</td><td>[&#x27;fixed&#x27;]</td><td>[&#x27;loss&#x27;]</td><td><pre> fixed l</pre></td></tr><tr><td>top1-low-temp</td><td>minimal_direct_completion</td><td>[]</td><td>[&#x27;fixed&#x27;, &#x27;loss&#x27;]</td><td><pre> los
+
+
+
+</pre></td></tr><tr><td>top1-low-temp</td><td>completion_label_surface</td><td>[&#x27;fixed&#x27;]</td><td>[&#x27;loss&#x27;]</td><td><pre> fixed l</pre></td></tr><tr><td>top3-low-temp</td><td>canonical_direct_completion</td><td>[]</td><td>[&#x27;fixed&#x27;, &#x27;loss&#x27;]</td><td><pre> los
+
+
+
+
+
+</pre></td></tr><tr><td>top3-low-temp</td><td>minimal_direct_completion</td><td>[]</td><td>[&#x27;fixed&#x27;, &#x27;loss&#x27;]</td><td><pre> los
+
+
+
+
+
+</pre></td></tr><tr><td>top3-low-temp</td><td>completion_label_surface</td><td>[&#x27;fixed&#x27;]</td><td>[&#x27;loss&#x27;]</td><td><pre> fixed los</pre></td></tr><tr><td>longer-top20</td><td>canonical_direct_completion</td><td>[&#x27;fixed&#x27;]</td><td>[&#x27;loss&#x27;]</td><td><pre> fixed los
+
+</pre></td></tr><tr><td>longer-top20</td><td>minimal_direct_completion</td><td>[&#x27;loss&#x27;]</td><td>[&#x27;fixed&#x27;]</td><td><pre> loss
+
+
+
+
+
+
+</pre></td></tr><tr><td>longer-top20</td><td>completion_label_surface</td><td>[&#x27;fixed&#x27;]</td><td>[&#x27;loss&#x27;]</td><td><pre> fixed los
+
+</pre></td></tr><tr><td>longer-open</td><td>canonical_direct_completion</td><td>[&#x27;loss&#x27;]</td><td>[&#x27;fixed&#x27;]</td><td><pre> fixer: loss</pre></td></tr><tr><td>longer-open</td><td>minimal_direct_completion</td><td>[]</td><td>[&#x27;fixed&#x27;, &#x27;loss&#x27;]</td><td><pre> los
+
+
+
+
+
+
+
+</pre></td></tr><tr><td>longer-open</td><td>completion_label_surface</td><td>[&#x27;loss&#x27;]</td><td>[&#x27;fixed&#x27;]</td><td><pre> fixet lossw</pre></td></tr></tbody></table></section>
+<section><h2>Next Action</h2><p>build_loss_signal_bridge_without_promotion</p></section>
+</main></body></html>

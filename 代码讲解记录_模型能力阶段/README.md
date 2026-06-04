@@ -134,6 +134,9 @@
 872-v858-route-promotion-bounded-objective-unassisted-repair-seed-revision-curriculum-patch-shape-migration-diagnostic.md
  -> v858 code explanation: compare v853 and v857 case-level replay migration before more training.
 
+873-v859-bounded-objective-curriculum-patch-profile-sweep.md
+ -> v859 code explanation: sweep decode profiles and isolate loss signal without contract recovery.
+
 487-v473-baseline-candidate-capability-delta.md
  -> v473 code explanation: carry real tiny training loss and generation-quality deltas into the baseline-candidate eval loop.
 

@@ -183,6 +183,10 @@ e/857/解释/说明.md
 e/858/图片
 e/858/解释/说明.md
  -> v858 bounded objective curriculum patch shape migration diagnostic 的运行截图和解释
+
+e/859/图片
+e/859/解释/说明.md
+ -> v859 bounded objective curriculum patch profile sweep 的运行截图和解释
 ```
 
 ```text

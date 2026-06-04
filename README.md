@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v858.0.0` diagnoses case-level shape migration between v853 seed revision replay and v857 curriculum patch replay.
+Version `v859.0.0` runs a CPU-aligned decode profile sweep for the v856 curriculum patch checkpoint and finds loss signal without contract recovery.
+
+## Latest v859 checkpoint
+
+- Added short-name module `bounded_objective_curriculum_patch_profile_sweep`.
+- Added CLI `scripts/run_bounded_objective_curriculum_patch_profile_sweep.py`.
+- Ran 5 decode profiles over the unchanged v836 bounded objective cases and v856 checkpoint.
+- Recorded `profile_count=5`, `sweep_row_count=15`, `any_profile_recovered=False`, `profile_with_loss_hit_count=2`, and `max_loss_hit_case_count=2`.
+- Selected `best_profile_id=longer-open`.
+- Confirmed `loss` can appear under longer decode profiles, but `fixed` and `loss` still do not stably co-occur across the contract.
+- Kept `model_quality_claim=decode_profile_sweep_only`.
+- Routed the next artifact to `build_loss_signal_bridge_without_promotion`.
+- Verified with `3 passed` focused profile-sweep tests and Playwright MCP screenshot evidence.
+- Archived v859 evidence in `e/859` and added the code explanation in `代码讲解记录_模型能力阶段/873-v859-bounded-objective-curriculum-patch-profile-sweep.md`.
 
 ## Latest v858 checkpoint
 

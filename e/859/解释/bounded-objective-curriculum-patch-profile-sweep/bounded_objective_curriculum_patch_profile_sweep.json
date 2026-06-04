@@ -1,0 +1,626 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT bounded objective curriculum patch profile sweep",
+  "generated_at": "2026-06-04T12:13:44Z",
+  "status": "pass",
+  "decision": "bounded_objective_curriculum_patch_profile_sweep_found_loss_signal_bridge_required",
+  "failed_count": 0,
+  "issues": [],
+  "source_objective_contract": "e\\836\\解释\\model-capability-route-promotion-bounded-objective-contract\\model_capability_route_promotion_bounded_objective_contract.json",
+  "source_training_run": "e\\856\\解释\\model-capability-route-promotion-bounded-objective-unassisted-repair-seed-revision-curriculum-patch-training-run\\model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_curriculum_patch_training_run.json",
+  "source_shape_migration_diagnostic": "e\\858\\解释\\bounded-objective-curriculum-patch-shape-migration-diagnostic\\bounded_objective_curriculum_patch_shape_migration_diagnostic.json",
+  "checkpoint": "e\\856\\解释\\model-capability-route-promotion-bounded-objective-unassisted-repair-seed-revision-curriculum-patch-training-run\\run\\checkpoint.pt",
+  "tokenizer": "e\\856\\解释\\model-capability-route-promotion-bounded-objective-unassisted-repair-seed-revision-curriculum-patch-training-run\\run\\tokenizer.json",
+  "device": "cpu",
+  "profiles": [
+    {
+      "profile_id": "v857-baseline",
+      "max_new_tokens": 8,
+      "temperature": 0.2,
+      "top_k": 20,
+      "seed": 1839
+    },
+    {
+      "profile_id": "top1-low-temp",
+      "max_new_tokens": 8,
+      "temperature": 0.05,
+      "top_k": 1,
+      "seed": 1839
+    },
+    {
+      "profile_id": "top3-low-temp",
+      "max_new_tokens": 10,
+      "temperature": 0.1,
+      "top_k": 3,
+      "seed": 1840
+    },
+    {
+      "profile_id": "longer-top20",
+      "max_new_tokens": 12,
+      "temperature": 0.15,
+      "top_k": 20,
+      "seed": 1841
+    },
+    {
+      "profile_id": "longer-open",
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": null,
+      "seed": 1842
+    }
+  ],
+  "contract_summary": {
+    "bounded_objective_contract_ready": true,
+    "contract_id": "bounded_fixed_loss_direct_completion_contract",
+    "target_terms": [
+      "fixed",
+      "loss"
+    ],
+    "contract_case_count": 3,
+    "planned_seed_example_count": 18,
+    "unchanged_suite_check_required": true,
+    "promotion_claim_allowed": false,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_objective_seed",
+    "failed_check_count": 0
+  },
+  "training_summary": {
+    "bounded_objective_unassisted_repair_training_ready": true,
+    "artifact_count": 7,
+    "metric_record_count": 9,
+    "final_step": 80,
+    "final_train_loss": 1.6474262475967407,
+    "final_val_loss": 1.7552181482315063,
+    "train_loss_delta": -1.906295,
+    "val_loss_delta": -1.801269,
+    "repair_example_count": 18,
+    "neutral_prompt_example_count": 18,
+    "decoder_anchor_example_count": 0,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_curriculum_patch_replay_comparison",
+    "next_step": "run_bounded_objective_unassisted_repair_seed_revision_curriculum_patch_replay_comparison",
+    "failed_check_count": 0,
+    "bounded_objective_unassisted_repair_seed_revision_training_ready": true,
+    "bounded_objective_unassisted_repair_seed_revision_curriculum_patch_training_ready": true
+  },
+  "shape_migration_summary": {
+    "bounded_objective_unassisted_repair_seed_revision_curriculum_patch_shape_migration_diagnostic_ready": true,
+    "case_count": 3,
+    "improved_case_count": 1,
+    "regressed_case_count": 1,
+    "stable_case_count": 1,
+    "stable_partial_case_count": 1,
+    "recovered_case_count": 0,
+    "lost_case_count": 0,
+    "pre_any_hit_case_count": 2,
+    "post_any_hit_case_count": 2,
+    "any_hit_case_delta": 0,
+    "pre_zero_hit_case_count": 1,
+    "post_zero_hit_case_count": 1,
+    "zero_hit_case_delta": 0,
+    "passed_case_delta": 0,
+    "loss_missed_after_count": 3,
+    "fixed_missed_after_count": 1,
+    "objective_contract_recovered_after": false,
+    "root_cause_count": 5,
+    "model_quality_claim": "partial_signal_shape_migration_without_contract_recovery",
+    "next_action": "run_bounded_objective_unassisted_repair_seed_revision_curriculum_patch_profile_sweep_before_more_training"
+  },
+  "sweep_rows": [
+    {
+      "profile_id": "v857-baseline",
+      "case_id": "canonical_direct_completion",
+      "prompt": "Answer with exactly two tokens: fixed loss\nanswer:",
+      "continuation": " fixed l",
+      "generated": "Answer with exactly two tokens: fixed loss\nanswer: fixed l",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "fixed"
+      ],
+      "missed_terms": [
+        "loss"
+      ],
+      "case_pass": false,
+      "any_hit": true,
+      "loss_hit": false,
+      "fixed_hit": true,
+      "max_new_tokens": 8,
+      "temperature": 0.2,
+      "top_k": 20,
+      "seed": 1839
+    },
+    {
+      "profile_id": "v857-baseline",
+      "case_id": "minimal_direct_completion",
+      "prompt": "Answer with exactly two words: fixed loss\nanswer:",
+      "continuation": " loswed ",
+      "generated": "Answer with exactly two words: fixed loss\nanswer: loswed ",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "case_pass": false,
+      "any_hit": false,
+      "loss_hit": false,
+      "fixed_hit": false,
+      "max_new_tokens": 8,
+      "temperature": 0.2,
+      "top_k": 20,
+      "seed": 1839
+    },
+    {
+      "profile_id": "v857-baseline",
+      "case_id": "completion_label_surface",
+      "prompt": "Complete with exactly two tokens: fixed loss\ncompletion:",
+      "continuation": " fixed l",
+      "generated": "Complete with exactly two tokens: fixed loss\ncompletion: fixed l",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "fixed"
+      ],
+      "missed_terms": [
+        "loss"
+      ],
+      "case_pass": false,
+      "any_hit": true,
+      "loss_hit": false,
+      "fixed_hit": true,
+      "max_new_tokens": 8,
+      "temperature": 0.2,
+      "top_k": 20,
+      "seed": 1839
+    },
+    {
+      "profile_id": "top1-low-temp",
+      "case_id": "canonical_direct_completion",
+      "prompt": "Answer with exactly two tokens: fixed loss\nanswer:",
+      "continuation": " fixed l",
+      "generated": "Answer with exactly two tokens: fixed loss\nanswer: fixed l",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "fixed"
+      ],
+      "missed_terms": [
+        "loss"
+      ],
+      "case_pass": false,
+      "any_hit": true,
+      "loss_hit": false,
+      "fixed_hit": true,
+      "max_new_tokens": 8,
+      "temperature": 0.05,
+      "top_k": 1,
+      "seed": 1839
+    },
+    {
+      "profile_id": "top1-low-temp",
+      "case_id": "minimal_direct_completion",
+      "prompt": "Answer with exactly two words: fixed loss\nanswer:",
+      "continuation": " los\n\n\n\n",
+      "generated": "Answer with exactly two words: fixed loss\nanswer: los\n\n\n\n",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "case_pass": false,
+      "any_hit": false,
+      "loss_hit": false,
+      "fixed_hit": false,
+      "max_new_tokens": 8,
+      "temperature": 0.05,
+      "top_k": 1,
+      "seed": 1839
+    },
+    {
+      "profile_id": "top1-low-temp",
+      "case_id": "completion_label_surface",
+      "prompt": "Complete with exactly two tokens: fixed loss\ncompletion:",
+      "continuation": " fixed l",
+      "generated": "Complete with exactly two tokens: fixed loss\ncompletion: fixed l",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "fixed"
+      ],
+      "missed_terms": [
+        "loss"
+      ],
+      "case_pass": false,
+      "any_hit": true,
+      "loss_hit": false,
+      "fixed_hit": true,
+      "max_new_tokens": 8,
+      "temperature": 0.05,
+      "top_k": 1,
+      "seed": 1839
+    },
+    {
+      "profile_id": "top3-low-temp",
+      "case_id": "canonical_direct_completion",
+      "prompt": "Answer with exactly two tokens: fixed loss\nanswer:",
+      "continuation": " los\n\n\n\n\n\n",
+      "generated": "Answer with exactly two tokens: fixed loss\nanswer: los\n\n\n\n\n\n",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "case_pass": false,
+      "any_hit": false,
+      "loss_hit": false,
+      "fixed_hit": false,
+      "max_new_tokens": 10,
+      "temperature": 0.1,
+      "top_k": 3,
+      "seed": 1840
+    },
+    {
+      "profile_id": "top3-low-temp",
+      "case_id": "minimal_direct_completion",
+      "prompt": "Answer with exactly two words: fixed loss\nanswer:",
+      "continuation": " los\n\n\n\n\n\n",
+      "generated": "Answer with exactly two words: fixed loss\nanswer: los\n\n\n\n\n\n",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "case_pass": false,
+      "any_hit": false,
+      "loss_hit": false,
+      "fixed_hit": false,
+      "max_new_tokens": 10,
+      "temperature": 0.1,
+      "top_k": 3,
+      "seed": 1840
+    },
+    {
+      "profile_id": "top3-low-temp",
+      "case_id": "completion_label_surface",
+      "prompt": "Complete with exactly two tokens: fixed loss\ncompletion:",
+      "continuation": " fixed los",
+      "generated": "Complete with exactly two tokens: fixed loss\ncompletion: fixed los",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "fixed"
+      ],
+      "missed_terms": [
+        "loss"
+      ],
+      "case_pass": false,
+      "any_hit": true,
+      "loss_hit": false,
+      "fixed_hit": true,
+      "max_new_tokens": 10,
+      "temperature": 0.1,
+      "top_k": 3,
+      "seed": 1840
+    },
+    {
+      "profile_id": "longer-top20",
+      "case_id": "canonical_direct_completion",
+      "prompt": "Answer with exactly two tokens: fixed loss\nanswer:",
+      "continuation": " fixed los\n\n",
+      "generated": "Answer with exactly two tokens: fixed loss\nanswer: fixed los\n\n",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "fixed"
+      ],
+      "missed_terms": [
+        "loss"
+      ],
+      "case_pass": false,
+      "any_hit": true,
+      "loss_hit": false,
+      "fixed_hit": true,
+      "max_new_tokens": 12,
+      "temperature": 0.15,
+      "top_k": 20,
+      "seed": 1841
+    },
+    {
+      "profile_id": "longer-top20",
+      "case_id": "minimal_direct_completion",
+      "prompt": "Answer with exactly two words: fixed loss\nanswer:",
+      "continuation": " loss\n\n\n\n\n\n\n",
+      "generated": "Answer with exactly two words: fixed loss\nanswer: loss\n\n\n\n\n\n\n",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "loss"
+      ],
+      "missed_terms": [
+        "fixed"
+      ],
+      "case_pass": false,
+      "any_hit": true,
+      "loss_hit": true,
+      "fixed_hit": false,
+      "max_new_tokens": 12,
+      "temperature": 0.15,
+      "top_k": 20,
+      "seed": 1841
+    },
+    {
+      "profile_id": "longer-top20",
+      "case_id": "completion_label_surface",
+      "prompt": "Complete with exactly two tokens: fixed loss\ncompletion:",
+      "continuation": " fixed los\n\n",
+      "generated": "Complete with exactly two tokens: fixed loss\ncompletion: fixed los\n\n",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "fixed"
+      ],
+      "missed_terms": [
+        "loss"
+      ],
+      "case_pass": false,
+      "any_hit": true,
+      "loss_hit": false,
+      "fixed_hit": true,
+      "max_new_tokens": 12,
+      "temperature": 0.15,
+      "top_k": 20,
+      "seed": 1841
+    },
+    {
+      "profile_id": "longer-open",
+      "case_id": "canonical_direct_completion",
+      "prompt": "Answer with exactly two tokens: fixed loss\nanswer:",
+      "continuation": " fixer: loss",
+      "generated": "Answer with exactly two tokens: fixed loss\nanswer: fixer: loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "loss"
+      ],
+      "missed_terms": [
+        "fixed"
+      ],
+      "case_pass": false,
+      "any_hit": true,
+      "loss_hit": true,
+      "fixed_hit": false,
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": null,
+      "seed": 1842
+    },
+    {
+      "profile_id": "longer-open",
+      "case_id": "minimal_direct_completion",
+      "prompt": "Answer with exactly two words: fixed loss\nanswer:",
+      "continuation": " los\n\n\n\n\n\n\n\n",
+      "generated": "Answer with exactly two words: fixed loss\nanswer: los\n\n\n\n\n\n\n\n",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "case_pass": false,
+      "any_hit": false,
+      "loss_hit": false,
+      "fixed_hit": false,
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": null,
+      "seed": 1842
+    },
+    {
+      "profile_id": "longer-open",
+      "case_id": "completion_label_surface",
+      "prompt": "Complete with exactly two tokens: fixed loss\ncompletion:",
+      "continuation": " fixet lossw",
+      "generated": "Complete with exactly two tokens: fixed loss\ncompletion: fixet lossw",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "loss"
+      ],
+      "missed_terms": [
+        "fixed"
+      ],
+      "case_pass": false,
+      "any_hit": true,
+      "loss_hit": true,
+      "fixed_hit": false,
+      "max_new_tokens": 12,
+      "temperature": 0.2,
+      "top_k": null,
+      "seed": 1842
+    }
+  ],
+  "sweep_errors": [],
+  "profile_summaries": [
+    {
+      "profile_id": "v857-baseline",
+      "case_count": 3,
+      "passed_case_count": 0,
+      "any_hit_case_count": 2,
+      "zero_hit_case_count": 1,
+      "loss_hit_case_count": 0,
+      "fixed_hit_case_count": 2,
+      "pass_rate": 0.0,
+      "objective_contract_recovered": false
+    },
+    {
+      "profile_id": "top1-low-temp",
+      "case_count": 3,
+      "passed_case_count": 0,
+      "any_hit_case_count": 2,
+      "zero_hit_case_count": 1,
+      "loss_hit_case_count": 0,
+      "fixed_hit_case_count": 2,
+      "pass_rate": 0.0,
+      "objective_contract_recovered": false
+    },
+    {
+      "profile_id": "top3-low-temp",
+      "case_count": 3,
+      "passed_case_count": 0,
+      "any_hit_case_count": 1,
+      "zero_hit_case_count": 2,
+      "loss_hit_case_count": 0,
+      "fixed_hit_case_count": 1,
+      "pass_rate": 0.0,
+      "objective_contract_recovered": false
+    },
+    {
+      "profile_id": "longer-top20",
+      "case_count": 3,
+      "passed_case_count": 0,
+      "any_hit_case_count": 3,
+      "zero_hit_case_count": 0,
+      "loss_hit_case_count": 1,
+      "fixed_hit_case_count": 2,
+      "pass_rate": 0.0,
+      "objective_contract_recovered": false
+    },
+    {
+      "profile_id": "longer-open",
+      "case_count": 3,
+      "passed_case_count": 0,
+      "any_hit_case_count": 2,
+      "zero_hit_case_count": 1,
+      "loss_hit_case_count": 2,
+      "fixed_hit_case_count": 0,
+      "pass_rate": 0.0,
+      "objective_contract_recovered": false
+    }
+  ],
+  "check_rows": [
+    {
+      "id": "contract_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "objective contract must pass"
+    },
+    {
+      "id": "contract_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "objective contract must be ready"
+    },
+    {
+      "id": "training_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "curriculum patch training run must pass"
+    },
+    {
+      "id": "training_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "curriculum patch training run must be ready"
+    },
+    {
+      "id": "shape_diagnostic_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "shape migration diagnostic must pass"
+    },
+    {
+      "id": "shape_diagnostic_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "shape migration diagnostic must be ready"
+    },
+    {
+      "id": "cases_present",
+      "status": "pass",
+      "actual": 3,
+      "detail": "objective contract must provide replay cases"
+    },
+    {
+      "id": "profiles_present",
+      "status": "pass",
+      "actual": 5,
+      "detail": "profile sweep must include at least one profile"
+    },
+    {
+      "id": "checkpoint_exists",
+      "status": "pass",
+      "actual": "e\\856\\解释\\model-capability-route-promotion-bounded-objective-unassisted-repair-seed-revision-curriculum-patch-training-run\\run\\checkpoint.pt",
+      "detail": "checkpoint.pt must exist"
+    },
+    {
+      "id": "tokenizer_exists",
+      "status": "pass",
+      "actual": "e\\856\\解释\\model-capability-route-promotion-bounded-objective-unassisted-repair-seed-revision-curriculum-patch-training-run\\run\\tokenizer.json",
+      "detail": "tokenizer.json must exist"
+    },
+    {
+      "id": "no_sweep_errors",
+      "status": "pass",
+      "actual": 0,
+      "detail": "all profile/case generations should complete"
+    }
+  ],
+  "summary": {
+    "bounded_objective_curriculum_patch_profile_sweep_ready": true,
+    "case_count": 3,
+    "profile_count": 5,
+    "sweep_row_count": 15,
+    "any_profile_recovered": false,
+    "profile_with_loss_hit_count": 2,
+    "max_passed_case_count": 0,
+    "max_any_hit_case_count": 3,
+    "max_loss_hit_case_count": 2,
+    "best_profile_id": "longer-open",
+    "best_profile_loss_hit_case_count": 2,
+    "best_profile_any_hit_case_count": 2,
+    "model_quality_claim": "decode_profile_sweep_only",
+    "next_action": "build_loss_signal_bridge_without_promotion"
+  },
+  "interpretation": {
+    "model_quality_claim": "decode_profile_sweep_only",
+    "reason": "At least one profile produced `loss`, but no profile recovered the full bounded objective contract.",
+    "next_action": "build_loss_signal_bridge_without_promotion"
+  }
+}

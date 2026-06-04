@@ -1,0 +1,10 @@
+status=pass
+decision=bounded_objective_curriculum_patch_profile_sweep_found_loss_signal_bridge_required
+bounded_objective_curriculum_patch_profile_sweep_ready=True
+profile_count=5
+sweep_row_count=15
+any_profile_recovered=False
+profile_with_loss_hit_count=2
+max_loss_hit_case_count=2
+best_profile_id=longer-open
+next_action=build_loss_signal_bridge_without_promotion

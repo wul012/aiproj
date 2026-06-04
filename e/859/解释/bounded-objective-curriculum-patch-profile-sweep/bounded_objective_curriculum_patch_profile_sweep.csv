@@ -1,0 +1,51 @@
+profile_id,case_id,case_pass,hit_terms,missed_terms,loss_hit,fixed_hit,continuation
+v857-baseline,canonical_direct_completion,False,"[""fixed""]","[""loss""]",False,True, fixed l
+v857-baseline,minimal_direct_completion,False,[],"[""fixed"", ""loss""]",False,False, loswed 
+v857-baseline,completion_label_surface,False,"[""fixed""]","[""loss""]",False,True, fixed l
+top1-low-temp,canonical_direct_completion,False,"[""fixed""]","[""loss""]",False,True, fixed l
+top1-low-temp,minimal_direct_completion,False,[],"[""fixed"", ""loss""]",False,False," los
+
+
+
+"
+top1-low-temp,completion_label_surface,False,"[""fixed""]","[""loss""]",False,True, fixed l
+top3-low-temp,canonical_direct_completion,False,[],"[""fixed"", ""loss""]",False,False," los
+
+
+
+
+
+"
+top3-low-temp,minimal_direct_completion,False,[],"[""fixed"", ""loss""]",False,False," los
+
+
+
+
+
+"
+top3-low-temp,completion_label_surface,False,"[""fixed""]","[""loss""]",False,True, fixed los
+longer-top20,canonical_direct_completion,False,"[""fixed""]","[""loss""]",False,True," fixed los
+
+"
+longer-top20,minimal_direct_completion,False,"[""loss""]","[""fixed""]",True,False," loss
+
+
+
+
+
+
+"
+longer-top20,completion_label_surface,False,"[""fixed""]","[""loss""]",False,True," fixed los
+
+"
+longer-open,canonical_direct_completion,False,"[""loss""]","[""fixed""]",True,False, fixer: loss
+longer-open,minimal_direct_completion,False,[],"[""fixed"", ""loss""]",False,False," los
+
+
+
+
+
+
+
+"
+longer-open,completion_label_surface,False,"[""loss""]","[""fixed""]",True,False, fixet lossw
