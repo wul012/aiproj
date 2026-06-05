@@ -1951,3 +1951,8 @@ e/663/解释/说明.md
 - `e/893/图片`
 - `e/893/解释/说明.md`
 - v893 bounded objective loss signal bridge target-only memory loss-token probability probe screenshots and explanation.
+## v894 supplemental index
+
+- `e/894/图片`
+- `e/894/解释/说明.md`
+- v894 bounded objective loss signal bridge target-only memory decoder budget audit screenshots and explanation.

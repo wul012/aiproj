@@ -1274,6 +1274,9 @@
 907-v893-bounded-objective-loss-signal-bridge-target-only-memory-loss-token-probability-probe.md
  -> v893 code explanation: probe teacher-forced oss token probabilities after fixed-l and route the next work to decoder budget inspection.
 
+908-v894-bounded-objective-loss-signal-bridge-target-only-memory-decoder-budget-audit.md
+ -> v894 code explanation: prove v891 exhausted max-new-token budget at newline fixed-l before the top-1 oss suffix could be emitted.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

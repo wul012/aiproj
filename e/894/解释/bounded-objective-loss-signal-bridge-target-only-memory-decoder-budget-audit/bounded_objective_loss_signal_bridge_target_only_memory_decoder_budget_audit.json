@@ -1,0 +1,175 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT bounded objective loss signal bridge target-only memory decoder budget audit",
+  "generated_at": "2026-06-05T10:21:24Z",
+  "status": "pass",
+  "decision": "bounded_objective_loss_signal_bridge_target_only_memory_decoder_budget_exhausted_before_loss_suffix",
+  "failed_count": 0,
+  "issues": [],
+  "source_replay_comparison": "e\\891\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-stagnation-aware-suffix-replay-comparison\\bounded_objective_loss_signal_bridge_target_only_memory_stagnation_aware_suffix_replay_comparison.json",
+  "source_loss_token_probability_probe": "e\\893\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-loss-token-probability-probe\\bounded_objective_loss_signal_bridge_target_only_memory_loss_token_probability_probe.json",
+  "tokenizer": "e\\890\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-stagnation-aware-suffix-training-run\\run\\tokenizer.json",
+  "replay_summary": {
+    "bounded_objective_replay_comparison_ready": true,
+    "objective_contract_recovered": false,
+    "canonical_case_pass": false,
+    "case_count": 3,
+    "executed_case_count": 3,
+    "passed_case_count": 0,
+    "failed_case_count": 3,
+    "any_hit_case_count": 3,
+    "zero_hit_case_count": 0,
+    "pass_rate": 0.0,
+    "promotion_ready": false,
+    "next_step": "diagnose_bounded_objective_loss_signal_bridge_target_only_memory_stagnation_aware_suffix_partial_hit_before_more_training",
+    "failed_check_count": 0,
+    "bounded_objective_loss_signal_bridge_replay_comparison_ready": true,
+    "decoder_anchor_used": false,
+    "route": "bounded_objective_loss_signal_bridge_target_only_memory_stagnation_aware_suffix",
+    "bounded_objective_loss_signal_bridge_target_only_memory_stagnation_aware_suffix_replay_comparison_ready": true
+  },
+  "probability_probe_summary": {
+    "bounded_objective_loss_signal_bridge_target_only_memory_loss_token_probability_probe_ready": true,
+    "source_contract_case_count": 3,
+    "source_replay_no_contract_gain_confirmed": true,
+    "probe_step_count": 9,
+    "case_count": 3,
+    "target_top1_step_count": 9,
+    "target_topk_step_count": 9,
+    "target_top1_rate": 1.0,
+    "target_topk_rate": 1.0,
+    "min_target_probability": 0.9280321598052979,
+    "mean_target_probability": 0.952898469236162,
+    "max_target_rank": 1,
+    "low_probability_step_count": 0,
+    "all_cases_loss_suffix_top1": true,
+    "all_cases_loss_suffix_topk": true,
+    "next_step": "inspect_decoding_temperature_or_stop_condition_for_loss_suffix"
+  },
+  "case_rows": [
+    {
+      "case_id": "canonical_direct_completion",
+      "continuation": "\nfixed l",
+      "continuation_token_count": 8,
+      "max_new_tokens": 8,
+      "remaining_budget": 0,
+      "target_suffix": "oss",
+      "target_suffix_token_count": 3,
+      "needed_max_new_tokens": 11,
+      "additional_tokens_needed": 3,
+      "loss_suffix_top1": true,
+      "loss_suffix_topk": true,
+      "budget_exhausted_before_suffix": true,
+      "state_label": "budget_exhausted_before_top1_suffix"
+    },
+    {
+      "case_id": "minimal_direct_completion",
+      "continuation": "\nfixed l",
+      "continuation_token_count": 8,
+      "max_new_tokens": 8,
+      "remaining_budget": 0,
+      "target_suffix": "oss",
+      "target_suffix_token_count": 3,
+      "needed_max_new_tokens": 11,
+      "additional_tokens_needed": 3,
+      "loss_suffix_top1": true,
+      "loss_suffix_topk": true,
+      "budget_exhausted_before_suffix": true,
+      "state_label": "budget_exhausted_before_top1_suffix"
+    },
+    {
+      "case_id": "completion_label_surface",
+      "continuation": "\nfixed l",
+      "continuation_token_count": 8,
+      "max_new_tokens": 8,
+      "remaining_budget": 0,
+      "target_suffix": "oss",
+      "target_suffix_token_count": 3,
+      "needed_max_new_tokens": 11,
+      "additional_tokens_needed": 3,
+      "loss_suffix_top1": true,
+      "loss_suffix_topk": true,
+      "budget_exhausted_before_suffix": true,
+      "state_label": "budget_exhausted_before_top1_suffix"
+    }
+  ],
+  "diagnostic": {
+    "ready": true,
+    "case_count": 3,
+    "budget_exhausted_case_count": 3,
+    "loss_suffix_top1_case_count": 3,
+    "all_cases_budget_exhausted_before_top1_suffix": true,
+    "source_probe_all_cases_loss_suffix_top1": true,
+    "recommended_max_new_tokens": 11,
+    "max_additional_tokens_needed": 3,
+    "next_step": "rerun_stagnation_aware_suffix_replay_with_max_new_tokens_11"
+  },
+  "check_rows": [
+    {
+      "id": "replay_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "stagnation-aware suffix replay must pass structurally"
+    },
+    {
+      "id": "replay_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "stagnation-aware suffix replay must be ready"
+    },
+    {
+      "id": "probability_probe_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "loss-token probability probe must pass structurally"
+    },
+    {
+      "id": "probability_probe_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "loss-token probability probe must be ready"
+    },
+    {
+      "id": "probability_probe_top1",
+      "status": "pass",
+      "actual": true,
+      "detail": "budget audit requires top-1 loss suffix probabilities"
+    },
+    {
+      "id": "tokenizer_exists",
+      "status": "pass",
+      "actual": "e\\890\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-stagnation-aware-suffix-training-run\\run\\tokenizer.json",
+      "detail": "tokenizer.json must exist"
+    },
+    {
+      "id": "replay_rows_present",
+      "status": "pass",
+      "actual": 3,
+      "detail": "replay report must include rows"
+    },
+    {
+      "id": "budget_exhaustion_confirmed",
+      "status": "pass",
+      "actual": 3,
+      "detail": "all cases should exhaust decode budget before top-1 suffix"
+    }
+  ],
+  "summary": {
+    "bounded_objective_loss_signal_bridge_target_only_memory_decoder_budget_audit_ready": true,
+    "source_replay_passed_case_count": 0,
+    "source_replay_any_hit_case_count": 3,
+    "source_probe_target_top1_rate": 1.0,
+    "case_count": 3,
+    "budget_exhausted_case_count": 3,
+    "loss_suffix_top1_case_count": 3,
+    "all_cases_budget_exhausted_before_top1_suffix": true,
+    "recommended_max_new_tokens": 11,
+    "max_additional_tokens_needed": 3,
+    "next_step": "rerun_stagnation_aware_suffix_replay_with_max_new_tokens_11"
+  },
+  "interpretation": {
+    "model_quality_claim": "decoder_budget_blocked_loss_suffix_replay",
+    "reason": "Replay used all available new-token budget on newline fixed-l while the probability probe shows the missing oss suffix is top-1.",
+    "next_action": "rerun_stagnation_aware_suffix_replay_with_max_new_tokens_11"
+  }
+}

@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v893.0.0` probes teacher-forced `oss` token probabilities after the v891 fixed-l replay state.
+Version `v894.0.0` audits the replay decoder budget that stopped v891 before the top-1 `oss` suffix.
+
+## Latest v894 checkpoint
+
+- Added short-name module `bounded_objective_loss_signal_bridge_target_only_memory_decoder_budget_audit`.
+- Added CLI `scripts/audit_bounded_objective_loss_signal_bridge_target_only_memory_decoder_budget.py`.
+- Compared v891 replay rows with v893 loss-token probability probe and the v890 tokenizer.
+- Confirmed all three replay cases used `max_new_tokens=8` and consumed all 8 tokens on `\nfixed l`.
+- Confirmed the missing suffix `oss` needs 3 additional tokens, so `recommended_max_new_tokens=11`.
+- Recorded `budget_exhausted_case_count=3`, `loss_suffix_top1_case_count=3`, and `max_additional_tokens_needed=3`.
+- Kept `model_quality_claim=decoder_budget_blocked_loss_suffix_replay`; this explains the replay miss but does not yet pass the contract.
+- Routed the next artifact to `rerun_stagnation_aware_suffix_replay_with_max_new_tokens_11`.
+- Verified with `4 passed` focused decoder-budget audit tests and Playwright MCP screenshot evidence.
+- Archived v894 evidence in `e/894` and added the code explanation in `代码讲解记录_模型能力阶段/908-v894-bounded-objective-loss-signal-bridge-target-only-memory-decoder-budget-audit.md`.
 
 ## Latest v893 checkpoint
 

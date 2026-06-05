@@ -1,0 +1,4 @@
+case_id,continuation_token_count,max_new_tokens,remaining_budget,target_suffix,target_suffix_token_count,needed_max_new_tokens,additional_tokens_needed,loss_suffix_top1,state_label
+canonical_direct_completion,8,8,0,oss,3,11,3,True,budget_exhausted_before_top1_suffix
+minimal_direct_completion,8,8,0,oss,3,11,3,True,budget_exhausted_before_top1_suffix
+completion_label_surface,8,8,0,oss,3,11,3,True,budget_exhausted_before_top1_suffix
