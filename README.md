@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v879.0.0` diagnoses the v878 loss-suffix replay regression against the v874 baseline and v877 sample.
+Version `v880.0.0` builds a completion-surface stabilization patch from the v879 regression diagnostic.
+
+## Latest v880 checkpoint
+
+- Added short-name module `bounded_objective_loss_signal_bridge_target_only_memory_completion_surface_stabilization_patch`.
+- Added CLI `scripts/build_bounded_objective_loss_signal_bridge_target_only_memory_completion_surface_stabilization_patch.py`.
+- Consumed the real v879 replay-regression diagnostic and v877 prepared corpus.
+- Generated `patch_example_count=28` with `completion_surface_example_count=12`, `answer_surface_carry_forward_count=6`, `prefix_fragment_bridge_count=6`, and `completion_fragment_resistance_count=4`.
+- Kept `decoder_anchor_example_count=0`.
+- Produced JSON, CSV, JSONL, corpus, TXT, Markdown, and HTML outputs.
+- Kept `model_quality_claim=completion_surface_stabilization_patch_only`; no checkpoint capability is claimed before training and replay.
+- Routed the next artifact to `train_bounded_objective_loss_signal_bridge_target_only_memory_completion_surface_stabilization_patch`.
+- Verified with `4 passed` focused completion-surface stabilization patch tests and Playwright MCP screenshot evidence.
+- Archived v880 evidence in `e/880` and added the code explanation in `代码讲解记录_模型能力阶段/894-v880-bounded-objective-loss-signal-bridge-target-only-memory-completion-surface-stabilization-patch.md`.
 
 ## Latest v879 checkpoint
 

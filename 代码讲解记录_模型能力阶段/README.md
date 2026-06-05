@@ -1232,6 +1232,9 @@
 893-v879-bounded-objective-loss-signal-bridge-target-only-memory-loss-suffix-replay-regression-diagnostic.md
  -> v879 code explanation: diagnose why the v877 sample success did not recover the v878 fixed contract replay and route the next repair to completion surface stabilization.
 
+894-v880-bounded-objective-loss-signal-bridge-target-only-memory-completion-surface-stabilization-patch.md
+ -> v880 code explanation: turn the v879 completion-surface regression into a no-anchor patch corpus before the next training run.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。
