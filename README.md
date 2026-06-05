@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v873.0.0` trains the v872 target-only memory patch into a real checkpoint while keeping capability claims gated behind replay.
+Version `v874.0.0` replays the v873 target-only memory checkpoint against the unchanged bounded objective contract and records partial required-term recovery.
+
+## Latest v874 checkpoint
+
+- Added short-name module `bounded_objective_loss_signal_bridge_target_only_memory_replay_comparison`.
+- Added CLI `scripts/run_bounded_objective_loss_signal_bridge_target_only_memory_replay_comparison.py`.
+- Replayed the real v873 checkpoint against the unchanged v836 bounded objective contract on CPU.
+- Recorded `case_count=3`, `passed_case_count=0`, `any_hit_case_count=3`, `zero_hit_case_count=0`, and `pass_rate=0.0`.
+- Confirmed `objective_contract_recovered=False`, `canonical_case_pass=False`, and `promotion_ready=False`.
+- Observed all three contract cases produce `fixed l`, hitting `fixed` while still missing `loss`.
+- Kept `model_quality_claim=partial_required_term_signal`.
+- Routed the next artifact to `diagnose_bounded_objective_loss_signal_bridge_target_only_memory_partial_hit_before_more_training`.
+- Verified with `4 passed` focused target-only memory replay-comparison tests and Playwright MCP screenshot evidence.
+- Archived v874 evidence in `e/874` and added the code explanation in `代码讲解记录_模型能力阶段/888-v874-bounded-objective-loss-signal-bridge-target-only-memory-replay-comparison.md`.
 
 ## Latest v873 checkpoint
 

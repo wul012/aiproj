@@ -179,6 +179,9 @@
 887-v873-bounded-objective-loss-signal-bridge-target-only-memory-training-run.md
  -> v873 code explanation: train the target-only memory patch into a real checkpoint while keeping capability claims replay-gated.
 
+888-v874-bounded-objective-loss-signal-bridge-target-only-memory-replay-comparison.md
+ -> v874 code explanation: replay the target-only memory checkpoint and record partial required-term recovery against the unchanged contract.
+
 487-v473-baseline-candidate-capability-delta.md
  -> v473 code explanation: carry real tiny training loss and generation-quality deltas into the baseline-candidate eval loop.
 
