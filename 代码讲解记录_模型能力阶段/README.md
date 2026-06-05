@@ -173,6 +173,9 @@
 885-v871-bounded-objective-loss-signal-bridge-single-line-surface-zero-hit-diagnostic.md
  -> v871 code explanation: diagnose single-line surface zero-hit replay as persisted label echo despite lower training loss.
 
+886-v872-bounded-objective-loss-signal-bridge-target-only-memory-patch.md
+ -> v872 code explanation: convert persisted label echo into no-anchor target-only memory patch corpus.
+
 487-v473-baseline-candidate-capability-delta.md
  -> v473 code explanation: carry real tiny training loss and generation-quality deltas into the baseline-candidate eval loop.
 

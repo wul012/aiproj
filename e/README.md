@@ -235,6 +235,10 @@ e/870/解释/说明.md
 e/871/图片
 e/871/解释/说明.md
  -> v871 bounded objective loss signal bridge single-line surface zero-hit diagnostic 的运行截图和解释
+
+e/872/图片
+e/872/解释/说明.md
+ -> v872 bounded objective loss signal bridge target-only memory patch 的运行截图和解释
 ```
 
 ```text

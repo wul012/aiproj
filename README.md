@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v871.0.0` diagnoses the v870 zero-hit replay as persisted label echo after single-line surface training.
+Version `v872.0.0` turns the v871 persisted label-echo diagnosis into a target-only completion memory patch.
+
+## Latest v872 checkpoint
+
+- Added short-name module `bounded_objective_loss_signal_bridge_target_only_memory_patch`.
+- Added CLI `scripts/build_bounded_objective_loss_signal_bridge_target_only_memory_patch.py`.
+- Consumed the real v871 zero-hit diagnostic, v870 replay comparison, and v869 prepared corpus.
+- Generated `patch_example_count=24`, including `target_only_example_count=14`, `prompt_target_memory_count=3`, and `label_target_memory_count=3`.
+- Kept `decoder_anchor_example_count=0`.
+- Produced `bounded_objective_loss_signal_bridge_target_only_memory_patch_examples.jsonl` and `bounded_objective_loss_signal_bridge_target_only_memory_patch_corpus.txt`.
+- Kept `model_quality_claim=target_only_memory_patch_only`; no checkpoint capability is claimed before training and replay.
+- Routed the next artifact to `train_bounded_objective_loss_signal_bridge_target_only_memory_patch`.
+- Verified with `3 passed` focused target-only memory patch tests and Playwright MCP screenshot evidence.
+- Archived v872 evidence in `e/872` and added the code explanation in `代码讲解记录_模型能力阶段/886-v872-bounded-objective-loss-signal-bridge-target-only-memory-patch.md`.
 
 ## Latest v871 checkpoint
 

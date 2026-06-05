@@ -1,0 +1,29 @@
+example_id,kind,text,source_case_id,source_continuation_class,decoder_anchor
+canonical_direct_completion-target-only-a,target_only_completion_memory,fixed loss,canonical_direct_completion,exact_label_echo,False
+canonical_direct_completion-target-only-b,target_only_completion_memory,fixed loss,canonical_direct_completion,exact_label_echo,False
+canonical_direct_completion-prompt-target-memory,prompt_target_memory,Answer with exactly two tokens: fixed loss fixed loss,canonical_direct_completion,exact_label_echo,False
+canonical_direct_completion-label-target-memory,label_target_memory,"answer:
+fixed loss",canonical_direct_completion,exact_label_echo,False
+minimal_direct_completion-target-only-a,target_only_completion_memory,fixed loss,minimal_direct_completion,exact_label_echo,False
+minimal_direct_completion-target-only-b,target_only_completion_memory,fixed loss,minimal_direct_completion,exact_label_echo,False
+minimal_direct_completion-prompt-target-memory,prompt_target_memory,Answer with exactly two words: fixed loss fixed loss,minimal_direct_completion,exact_label_echo,False
+minimal_direct_completion-label-target-memory,label_target_memory,"answer:
+fixed loss",minimal_direct_completion,exact_label_echo,False
+completion_label_surface-target-only-a,target_only_completion_memory,fixed loss,completion_label_surface,label_prefix_fragment,False
+completion_label_surface-target-only-b,target_only_completion_memory,fixed loss,completion_label_surface,label_prefix_fragment,False
+completion_label_surface-prompt-target-memory,prompt_target_memory,Complete with exactly two tokens: fixed loss fixed loss,completion_label_surface,label_prefix_fragment,False
+completion_label_surface-label-target-memory,label_target_memory,"completion:
+fixed loss",completion_label_surface,label_prefix_fragment,False
+global-fixed-loss-memory-1,target_only_completion_memory,fixed loss,global,target_memory,False
+global-fixed-loss-memory-2,target_only_completion_memory,fixed loss,global,target_memory,False
+global-fixed-loss-memory-3,target_only_completion_memory,fixed loss,global,target_memory,False
+global-fixed-loss-memory-4,target_only_completion_memory,fixed loss,global,target_memory,False
+global-fixed-loss-memory-5,target_only_completion_memory,fixed loss,global,target_memory,False
+global-fixed-loss-memory-6,target_only_completion_memory,fixed loss,global,target_memory,False
+global-fixed-loss-memory-7,target_only_completion_memory,fixed loss,global,target_memory,False
+global-fixed-loss-memory-8,target_only_completion_memory,fixed loss,global,target_memory,False
+global-two-token-answer,plain_target_statement,two token answer fixed loss,global,target_memory,False
+global-canonical-completion,plain_target_statement,canonical completion fixed loss,global,target_memory,False
+global-no-label-repeat-a,target_pair_repeat,"fixed loss
+fixed loss",global,target_memory,False
+global-no-label-repeat-b,target_pair_repeat,fixed loss fixed loss,global,target_memory,False
