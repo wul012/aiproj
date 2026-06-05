@@ -1,0 +1,28 @@
+example_id,kind,source_case_id,completion,decoder_anchor,purpose
+canonical_direct_completion-space-exact,replay_prompt_boundary,canonical_direct_completion,fixed loss,False,space exact contract completion
+canonical_direct_completion-newline-exact,replay_prompt_boundary,canonical_direct_completion,fixed loss,False,newline exact contract completion
+canonical_direct_completion-fixed-l-loss-space,suffix_position,canonical_direct_completion,fixed loss,False,force loss after fixed-l fragment
+canonical_direct_completion-fixed-l-loss-newline,suffix_position,canonical_direct_completion,fixed loss,False,force loss after newline fixed-l fragment
+canonical_direct_completion-fixed-lo-loss-space,suffix_position,canonical_direct_completion,fixed loss,False,force loss after fixed-lo fragment
+canonical_direct_completion-fixed-lo-loss-newline,suffix_position,canonical_direct_completion,fixed loss,False,force loss after newline fixed-lo fragment
+minimal_direct_completion-space-exact,replay_prompt_boundary,minimal_direct_completion,fixed loss,False,space exact contract completion
+minimal_direct_completion-newline-exact,replay_prompt_boundary,minimal_direct_completion,fixed loss,False,newline exact contract completion
+minimal_direct_completion-fixed-l-loss-space,suffix_position,minimal_direct_completion,fixed loss,False,force loss after fixed-l fragment
+minimal_direct_completion-fixed-l-loss-newline,suffix_position,minimal_direct_completion,fixed loss,False,force loss after newline fixed-l fragment
+minimal_direct_completion-fixed-lo-loss-space,suffix_position,minimal_direct_completion,fixed loss,False,force loss after fixed-lo fragment
+minimal_direct_completion-fixed-lo-loss-newline,suffix_position,minimal_direct_completion,fixed loss,False,force loss after newline fixed-lo fragment
+completion_label_surface-space-exact,replay_prompt_boundary,completion_label_surface,fixed loss,False,space exact contract completion
+completion_label_surface-newline-exact,replay_prompt_boundary,completion_label_surface,fixed loss,False,newline exact contract completion
+completion_label_surface-fixed-l-loss-space,suffix_position,completion_label_surface,fixed loss,False,force loss after fixed-l fragment
+completion_label_surface-fixed-l-loss-newline,suffix_position,completion_label_surface,fixed loss,False,force loss after newline fixed-l fragment
+completion_label_surface-fixed-lo-loss-space,suffix_position,completion_label_surface,fixed loss,False,force loss after fixed-lo fragment
+completion_label_surface-fixed-lo-loss-newline,suffix_position,completion_label_surface,fixed loss,False,force loss after newline fixed-lo fragment
+surface-answer-space,surface_format,global,fixed loss,False,preserve space answer surface
+surface-answer-newline,surface_format,global,fixed loss,False,preserve newline answer surface
+surface-completion-space,surface_format,global,fixed loss,False,preserve space completion surface
+surface-completion-newline,surface_format,global,fixed loss,False,preserve newline completion surface
+suffix-ratio-fixed-l-a,training_corpus_ratio,global,fixed loss,False,increase suffix uptake density
+suffix-ratio-fixed-l-b,training_corpus_ratio,global,fixed loss,False,increase suffix uptake density
+suffix-ratio-fixed-lo-a,training_corpus_ratio,global,fixed loss,False,increase suffix uptake density
+suffix-ratio-fixed-lo-b,training_corpus_ratio,global,fixed loss,False,increase suffix uptake density
+verification-gate-note,verification_gate,global,fixed loss,False,keep replay gate explicit

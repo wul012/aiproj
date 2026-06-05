@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v888.0.0` turns the v887 no-contract-gain diagnosis into a stagnation-aware suffix repair plan.
+Version `v889.0.0` materializes the v888 stagnation-aware suffix repair plan into a no-anchor patch corpus.
+
+## Latest v889 checkpoint
+
+- Added short-name module `bounded_objective_loss_signal_bridge_target_only_memory_stagnation_aware_suffix_patch`.
+- Added CLI `scripts/build_bounded_objective_loss_signal_bridge_target_only_memory_stagnation_aware_suffix_patch.py`.
+- Consumed the real v888 repair plan and v884 source corpus.
+- Generated `patch_example_count=27`, including `replay_prompt_boundary_example_count=6`, `suffix_position_example_count=12`, `surface_format_example_count=4`, and `training_corpus_ratio_example_count=4`.
+- Kept `decoder_anchor_example_count=0`.
+- Produced JSON, CSV, JSONL, corpus, TXT, Markdown, and HTML outputs.
+- Kept `model_quality_claim=stagnation_aware_suffix_patch_only`; no checkpoint capability is claimed before training and replay.
+- Routed the next artifact to `train_bounded_objective_loss_signal_bridge_target_only_memory_stagnation_aware_suffix_patch`.
+- Verified with `3 passed` focused stagnation-aware suffix patch tests and Playwright MCP screenshot evidence.
+- Archived v889 evidence in `e/889` and added the code explanation in `代码讲解记录_模型能力阶段/903-v889-bounded-objective-loss-signal-bridge-target-only-memory-stagnation-aware-suffix-patch.md`.
 
 ## Latest v888 checkpoint
 
