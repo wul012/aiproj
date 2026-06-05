@@ -247,6 +247,10 @@ e/873/解释/说明.md
 e/874/图片
 e/874/解释/说明.md
  -> v874 bounded objective loss signal bridge target-only memory replay comparison 的运行截图和解释
+
+e/875/图片
+e/875/解释/说明.md
+ -> v875 bounded objective loss signal bridge target-only memory partial-hit diagnostic 的运行截图和解释
 ```
 
 ```text

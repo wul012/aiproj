@@ -1,0 +1,186 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT bounded objective loss signal bridge target-only memory partial-hit diagnostic",
+  "generated_at": "2026-06-05T02:14:05Z",
+  "status": "pass",
+  "decision": "bounded_objective_loss_signal_bridge_target_only_memory_partial_hit_loss_suffix_gap",
+  "failed_count": 0,
+  "issues": [],
+  "source_replay_comparison": "e\\874\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-replay-comparison\\bounded_objective_loss_signal_bridge_target_only_memory_replay_comparison.json",
+  "replay_summary": {
+    "bounded_objective_replay_comparison_ready": true,
+    "objective_contract_recovered": false,
+    "canonical_case_pass": false,
+    "case_count": 3,
+    "executed_case_count": 3,
+    "passed_case_count": 0,
+    "failed_case_count": 3,
+    "any_hit_case_count": 3,
+    "zero_hit_case_count": 0,
+    "pass_rate": 0.0,
+    "promotion_ready": false,
+    "next_step": "diagnose_bounded_objective_loss_signal_bridge_target_only_memory_partial_hit_before_more_training",
+    "failed_check_count": 0,
+    "bounded_objective_loss_signal_bridge_replay_comparison_ready": true,
+    "decoder_anchor_used": false,
+    "route": "bounded_objective_loss_signal_bridge_target_only_memory",
+    "bounded_objective_loss_signal_bridge_target_only_memory_replay_comparison_ready": true
+  },
+  "training_summary": {
+    "bounded_objective_unassisted_repair_training_ready": true,
+    "artifact_count": 7,
+    "metric_record_count": 19,
+    "final_step": 180,
+    "final_train_loss": 0.9454461932182312,
+    "final_val_loss": 0.8332666158676147,
+    "train_loss_delta": -2.710383,
+    "val_loss_delta": -2.753982,
+    "repair_example_count": 24,
+    "neutral_prompt_example_count": 6,
+    "decoder_anchor_example_count": 0,
+    "proposed_next_artifact": "bounded_objective_loss_signal_bridge_target_only_memory_replay_comparison",
+    "next_step": "run_bounded_objective_loss_signal_bridge_target_only_memory_replay_comparison",
+    "failed_check_count": 0,
+    "bounded_objective_unassisted_repair_seed_revision_training_ready": true,
+    "bounded_objective_loss_signal_bridge_training_ready": true,
+    "bounded_objective_loss_signal_bridge_target_only_memory_training_ready": true
+  },
+  "case_diagnostics": [
+    {
+      "case_id": "canonical_direct_completion",
+      "label": "fixed_with_loss_prefix",
+      "case_pass": false,
+      "any_hit": true,
+      "hit_terms": [
+        "fixed"
+      ],
+      "missed_terms": [
+        "loss"
+      ],
+      "continuation": "\nfixed l",
+      "continuation_len": 8,
+      "has_fixed": true,
+      "has_loss": false,
+      "has_loss_prefix": true,
+      "completion_budget_used": 8
+    },
+    {
+      "case_id": "minimal_direct_completion",
+      "label": "fixed_with_loss_prefix",
+      "case_pass": false,
+      "any_hit": true,
+      "hit_terms": [
+        "fixed"
+      ],
+      "missed_terms": [
+        "loss"
+      ],
+      "continuation": "\nfixed l",
+      "continuation_len": 8,
+      "has_fixed": true,
+      "has_loss": false,
+      "has_loss_prefix": true,
+      "completion_budget_used": 8
+    },
+    {
+      "case_id": "completion_label_surface",
+      "label": "fixed_with_loss_prefix",
+      "case_pass": false,
+      "any_hit": true,
+      "hit_terms": [
+        "fixed"
+      ],
+      "missed_terms": [
+        "loss"
+      ],
+      "continuation": " fixed l",
+      "continuation_len": 8,
+      "has_fixed": true,
+      "has_loss": false,
+      "has_loss_prefix": true,
+      "completion_budget_used": 8
+    }
+  ],
+  "root_causes": [
+    {
+      "id": "loss_suffix_uptake_gap",
+      "detail": "all cases reach fixed and a loss prefix, but none complete the loss token."
+    },
+    {
+      "id": "fixed_dominates_required_pair",
+      "detail": "target-only memory strengthened fixed more than the full fixed loss pair."
+    },
+    {
+      "id": "no_anchor_partial_signal",
+      "detail": "partial signal is unassisted; next repair should remain data-level unless replay regresses."
+    },
+    {
+      "id": "partial_signal_without_contract_pass",
+      "detail": "required-term signal improved, but no case satisfies the full objective."
+    }
+  ],
+  "check_rows": [
+    {
+      "id": "replay_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "replay comparison must pass"
+    },
+    {
+      "id": "target_only_memory_replay_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "target-only memory replay comparison must be ready"
+    },
+    {
+      "id": "not_recovered",
+      "status": "pass",
+      "actual": false,
+      "detail": "diagnostic only applies before contract recovery"
+    },
+    {
+      "id": "has_partial_hits",
+      "status": "pass",
+      "actual": 3,
+      "detail": "diagnostic requires at least one required-term hit"
+    },
+    {
+      "id": "has_case_rows",
+      "status": "pass",
+      "actual": 3,
+      "detail": "diagnostic needs replay rows"
+    }
+  ],
+  "diagnostic": {
+    "ready": true,
+    "fixed_without_loss_case_count": 3,
+    "loss_hit_case_count": 0,
+    "loss_prefix_case_count": 3,
+    "all_cases_fixed_without_loss": true,
+    "all_cases_loss_prefix": true,
+    "root_cause_ids": [
+      "loss_suffix_uptake_gap",
+      "fixed_dominates_required_pair",
+      "no_anchor_partial_signal",
+      "partial_signal_without_contract_pass"
+    ],
+    "next_step": "build_bounded_objective_loss_signal_bridge_target_only_memory_loss_suffix_patch"
+  },
+  "summary": {
+    "bounded_objective_loss_signal_bridge_target_only_memory_partial_hit_diagnostic_ready": true,
+    "case_count": 3,
+    "partial_case_count": 3,
+    "fixed_without_loss_case_count": 3,
+    "loss_hit_case_count": 0,
+    "loss_prefix_case_count": 3,
+    "all_cases_fixed_without_loss": true,
+    "all_cases_loss_prefix": true,
+    "root_cause_count": 4,
+    "next_step": "build_bounded_objective_loss_signal_bridge_target_only_memory_loss_suffix_patch"
+  },
+  "interpretation": {
+    "model_quality_claim": "fixed_prefix_recovered_loss_suffix_missing",
+    "reason": "The checkpoint consistently reaches fixed and a loss prefix, but still fails to emit the complete loss term.",
+    "next_action": "build_bounded_objective_loss_signal_bridge_target_only_memory_loss_suffix_patch"
+  }
+}

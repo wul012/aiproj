@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v874.0.0` replays the v873 target-only memory checkpoint against the unchanged bounded objective contract and records partial required-term recovery.
+Version `v875.0.0` diagnoses the v874 target-only memory partial-hit replay as a consistent loss-suffix uptake gap.
+
+## Latest v875 checkpoint
+
+- Added short-name module `bounded_objective_loss_signal_bridge_target_only_memory_partial_hit_diagnostic`.
+- Added CLI `scripts/diagnose_bounded_objective_loss_signal_bridge_target_only_memory_partial_hit.py`.
+- Consumed the real v874 target-only memory replay comparison.
+- Recorded `partial_case_count=3`, `fixed_without_loss_case_count=3`, `loss_prefix_case_count=3`, and `loss_hit_case_count=0`.
+- Confirmed all three replay continuations reach `fixed l` but do not complete `loss`.
+- Identified root causes: `loss_suffix_uptake_gap`, `fixed_dominates_required_pair`, `no_anchor_partial_signal`, and `partial_signal_without_contract_pass`.
+- Kept `model_quality_claim=fixed_prefix_recovered_loss_suffix_missing`.
+- Routed the next artifact to `build_bounded_objective_loss_signal_bridge_target_only_memory_loss_suffix_patch`.
+- Verified with `3 passed` focused target-only memory partial-hit diagnostic tests and Playwright MCP screenshot evidence.
+- Archived v875 evidence in `e/875` and added the code explanation in `代码讲解记录_模型能力阶段/889-v875-bounded-objective-loss-signal-bridge-target-only-memory-partial-hit-diagnostic.md`.
 
 ## Latest v874 checkpoint
 

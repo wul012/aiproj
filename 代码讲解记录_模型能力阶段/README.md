@@ -182,6 +182,9 @@
 888-v874-bounded-objective-loss-signal-bridge-target-only-memory-replay-comparison.md
  -> v874 code explanation: replay the target-only memory checkpoint and record partial required-term recovery against the unchanged contract.
 
+889-v875-bounded-objective-loss-signal-bridge-target-only-memory-partial-hit-diagnostic.md
+ -> v875 code explanation: diagnose target-only memory partial hits as a consistent loss-suffix uptake gap.
+
 487-v473-baseline-candidate-capability-delta.md
  -> v473 code explanation: carry real tiny training loss and generation-quality deltas into the baseline-candidate eval loop.
 
