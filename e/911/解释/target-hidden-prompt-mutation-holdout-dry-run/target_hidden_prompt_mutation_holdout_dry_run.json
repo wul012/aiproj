@@ -1,0 +1,354 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT target-hidden prompt-mutation holdout dry-run",
+  "generated_at": "2026-06-05T14:39:24Z",
+  "status": "pass",
+  "decision": "target_hidden_prompt_mutation_holdout_dry_run_passed",
+  "failed_count": 0,
+  "issues": [],
+  "source_holdout_suite": "e\\910\\解释\\target-hidden-prompt-mutation-holdout-suite\\target_hidden_prompt_mutation_holdout_suite.json",
+  "source_holdout_suite_summary": {
+    "target_hidden_prompt_mutation_holdout_suite_ready": true,
+    "source_case_count": 5,
+    "candidate_case_count": 10,
+    "mutation_factor": 2.0,
+    "tokenizer_covered_case_count": 10,
+    "target_hidden_case_count": 10,
+    "task_hint_case_count": 0,
+    "prompt_mutated_case_count": 10,
+    "candidate_prompt_unknown_token_count": 0,
+    "source_clean_prompt_case_count": 5,
+    "source_pass_rate": 1.0,
+    "expected_terms": [
+      "fixed",
+      "loss"
+    ],
+    "promotion_ready": false,
+    "model_quality_claim": "suite_construction_only",
+    "next_step": "run_target_hidden_prompt_mutation_holdout_dry_run",
+    "failed_check_count": 0
+  },
+  "positive_continuation": " fixed loss",
+  "negative_continuation": " fixed only",
+  "check_rows": [
+    {
+      "id": "holdout_suite_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "prompt-mutation holdout suite must pass"
+    },
+    {
+      "id": "holdout_suite_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "prompt-mutation holdout suite summary must be ready"
+    },
+    {
+      "id": "suite_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "benchmark suite must be ready"
+    },
+    {
+      "id": "cases_present",
+      "status": "pass",
+      "actual": 10,
+      "detail": "prompt-mutation holdout suite must include cases"
+    },
+    {
+      "id": "case_count_matches_summary",
+      "status": "pass",
+      "actual": 10,
+      "detail": "candidate case count must match suite cases"
+    },
+    {
+      "id": "mutation_factor_at_least_two",
+      "status": "pass",
+      "actual": 2.0,
+      "detail": "prompt mutation suite should expand source cases by at least 2x"
+    },
+    {
+      "id": "prompt_mutated_rows_complete",
+      "status": "pass",
+      "actual": 10,
+      "detail": "every candidate prompt should be marked mutated"
+    },
+    {
+      "id": "prompt_mutation_no_task_hints",
+      "status": "pass",
+      "actual": 0,
+      "detail": "prompt mutation suite should have no known task hints"
+    },
+    {
+      "id": "expected_terms_complete",
+      "status": "pass",
+      "actual": [
+        "fixed",
+        "loss"
+      ],
+      "detail": "dry-run expects fixed/loss scoring contract"
+    },
+    {
+      "id": "positive_rows_pass",
+      "status": "pass",
+      "actual": 10,
+      "detail": "positive continuation must pass every case"
+    },
+    {
+      "id": "negative_rows_fail",
+      "status": "pass",
+      "actual": 0,
+      "detail": "negative continuation must not pass any case"
+    }
+  ],
+  "dry_run_rows": [
+    {
+      "case_id": "prompt-mutation-memory_final",
+      "source_case_id": "semantic-hidden-memory_answer",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_continuation": " fixed loss",
+      "positive_case_pass": true,
+      "positive_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_missed_terms": [],
+      "negative_continuation": " fixed only",
+      "negative_case_pass": false,
+      "negative_hit_terms": [
+        "fixed"
+      ],
+      "negative_missed_terms": [
+        "loss"
+      ]
+    },
+    {
+      "case_id": "prompt-mutation-stored_memory",
+      "source_case_id": "semantic-hidden-stored_result",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_continuation": " fixed loss",
+      "positive_case_pass": true,
+      "positive_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_missed_terms": [],
+      "negative_continuation": " fixed only",
+      "negative_case_pass": false,
+      "negative_hit_terms": [
+        "fixed"
+      ],
+      "negative_missed_terms": [
+        "loss"
+      ]
+    },
+    {
+      "case_id": "prompt-mutation-route_final",
+      "source_case_id": "semantic-hidden-learned_route",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_continuation": " fixed loss",
+      "positive_case_pass": true,
+      "positive_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_missed_terms": [],
+      "negative_continuation": " fixed only",
+      "negative_case_pass": false,
+      "negative_hit_terms": [
+        "fixed"
+      ],
+      "negative_missed_terms": [
+        "loss"
+      ]
+    },
+    {
+      "case_id": "prompt-mutation-write_memory",
+      "source_case_id": "semantic-hidden-final_words",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_continuation": " fixed loss",
+      "positive_case_pass": true,
+      "positive_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_missed_terms": [],
+      "negative_continuation": " fixed only",
+      "negative_case_pass": false,
+      "negative_hit_terms": [
+        "fixed"
+      ],
+      "negative_missed_terms": [
+        "loss"
+      ]
+    },
+    {
+      "case_id": "prompt-mutation-complete_stored",
+      "source_case_id": "semantic-hidden-memory_self_check",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_continuation": " fixed loss",
+      "positive_case_pass": true,
+      "positive_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_missed_terms": [],
+      "negative_continuation": " fixed only",
+      "negative_case_pass": false,
+      "negative_hit_terms": [
+        "fixed"
+      ],
+      "negative_missed_terms": [
+        "loss"
+      ]
+    },
+    {
+      "case_id": "prompt-mutation-self_check_output",
+      "source_case_id": "semantic-hidden-memory_answer",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_continuation": " fixed loss",
+      "positive_case_pass": true,
+      "positive_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_missed_terms": [],
+      "negative_continuation": " fixed only",
+      "negative_case_pass": false,
+      "negative_hit_terms": [
+        "fixed"
+      ],
+      "negative_missed_terms": [
+        "loss"
+      ]
+    },
+    {
+      "case_id": "prompt-mutation-return_memory",
+      "source_case_id": "semantic-hidden-stored_result",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_continuation": " fixed loss",
+      "positive_case_pass": true,
+      "positive_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_missed_terms": [],
+      "negative_continuation": " fixed only",
+      "negative_case_pass": false,
+      "negative_hit_terms": [
+        "fixed"
+      ],
+      "negative_missed_terms": [
+        "loss"
+      ]
+    },
+    {
+      "case_id": "prompt-mutation-final_words_memory",
+      "source_case_id": "semantic-hidden-learned_route",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_continuation": " fixed loss",
+      "positive_case_pass": true,
+      "positive_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_missed_terms": [],
+      "negative_continuation": " fixed only",
+      "negative_case_pass": false,
+      "negative_hit_terms": [
+        "fixed"
+      ],
+      "negative_missed_terms": [
+        "loss"
+      ]
+    },
+    {
+      "case_id": "prompt-mutation-stored_final",
+      "source_case_id": "semantic-hidden-final_words",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_continuation": " fixed loss",
+      "positive_case_pass": true,
+      "positive_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_missed_terms": [],
+      "negative_continuation": " fixed only",
+      "negative_case_pass": false,
+      "negative_hit_terms": [
+        "fixed"
+      ],
+      "negative_missed_terms": [
+        "loss"
+      ]
+    },
+    {
+      "case_id": "prompt-mutation-complete_memory",
+      "source_case_id": "semantic-hidden-memory_self_check",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_continuation": " fixed loss",
+      "positive_case_pass": true,
+      "positive_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_missed_terms": [],
+      "negative_continuation": " fixed only",
+      "negative_case_pass": false,
+      "negative_hit_terms": [
+        "fixed"
+      ],
+      "negative_missed_terms": [
+        "loss"
+      ]
+    }
+  ],
+  "summary": {
+    "target_hidden_prompt_mutation_holdout_dry_run_ready": true,
+    "case_count": 10,
+    "source_mutation_factor": 2.0,
+    "source_prompt_mutated_case_count": 10,
+    "positive_passed_case_count": 10,
+    "negative_passed_case_count": 0,
+    "negative_control_passed": false,
+    "promotion_ready": false,
+    "model_quality_claim": "dry_run_only",
+    "next_step": "run_target_hidden_prompt_mutation_holdout_real_replay",
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "dry_run_only",
+    "reason": "The prompt-mutation target-hidden holdout scoring contract passes dry-run checks; real replay is next.",
+    "next_action": "run_target_hidden_prompt_mutation_holdout_real_replay"
+  }
+}

@@ -1325,6 +1325,9 @@
 924-v910-target-hidden-prompt-mutation-holdout-suite.md
  -> v910 code explanation: build a 10-case tokenizer-covered prompt-mutation target-hidden holdout suite from the v909 clean review.
 
+925-v911-target-hidden-prompt-mutation-holdout-dry-run.md
+ -> v911 code explanation: dry-run the 10-case prompt-mutation target-hidden holdout scoring contract before real replay.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

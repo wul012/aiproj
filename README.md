@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v910.0.0` builds a 10-case prompt-mutation target-hidden holdout suite from the clean v909 review.
+Version `v911.0.0` dry-runs the 10-case prompt-mutation target-hidden holdout scoring contract.
+
+## Latest v911 checkpoint
+
+- Added short-name module `target_hidden_prompt_mutation_holdout_dry_run`.
+- Added CLI `scripts/dry_run_target_hidden_prompt_mutation_holdout.py`.
+- Consumed the real v910 prompt-mutation target-hidden holdout suite.
+- Verified the positive continuation ` fixed loss` passes all 10 mutation cases.
+- Verified the negative continuation ` fixed only` passes 0 cases.
+- Recorded `case_count=10`, `source_mutation_factor=2.0`, `source_prompt_mutated_case_count=10`, `positive_passed_case_count=10`, `negative_passed_case_count=0`, and `negative_control_passed=False`.
+- Kept `promotion_ready=False` and `model_quality_claim=dry_run_only`.
+- Routed the next action to `run_target_hidden_prompt_mutation_holdout_real_replay`.
+- Verified with `4 passed` focused prompt-mutation dry-run tests and Playwright MCP screenshot evidence.
+- Archived v911 evidence in `e/911` and added the code explanation in `代码讲解记录_模型能力阶段/925-v911-target-hidden-prompt-mutation-holdout-dry-run.md`.
 
 ## Latest v910 checkpoint
 

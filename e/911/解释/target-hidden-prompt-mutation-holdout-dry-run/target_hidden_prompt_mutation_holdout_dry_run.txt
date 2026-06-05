@@ -1,0 +1,13 @@
+status=pass
+decision=target_hidden_prompt_mutation_holdout_dry_run_passed
+failed_count=0
+target_hidden_prompt_mutation_holdout_dry_run_ready=True
+case_count=10
+source_mutation_factor=2.0
+source_prompt_mutated_case_count=10
+positive_passed_case_count=10
+negative_passed_case_count=0
+negative_control_passed=False
+promotion_ready=False
+model_quality_claim=dry_run_only
+next_step=run_target_hidden_prompt_mutation_holdout_real_replay

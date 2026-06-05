@@ -1,0 +1,11 @@
+case_id,positive_case_pass,negative_case_pass,positive_hit_terms,negative_hit_terms,negative_missed_terms
+prompt-mutation-memory_final,True,False,"fixed,loss",fixed,loss
+prompt-mutation-stored_memory,True,False,"fixed,loss",fixed,loss
+prompt-mutation-route_final,True,False,"fixed,loss",fixed,loss
+prompt-mutation-write_memory,True,False,"fixed,loss",fixed,loss
+prompt-mutation-complete_stored,True,False,"fixed,loss",fixed,loss
+prompt-mutation-self_check_output,True,False,"fixed,loss",fixed,loss
+prompt-mutation-return_memory,True,False,"fixed,loss",fixed,loss
+prompt-mutation-final_words_memory,True,False,"fixed,loss",fixed,loss
+prompt-mutation-stored_final,True,False,"fixed,loss",fixed,loss
+prompt-mutation-complete_memory,True,False,"fixed,loss",fixed,loss
