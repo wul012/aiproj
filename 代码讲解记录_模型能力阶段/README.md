@@ -1295,6 +1295,9 @@
 914-v900-bounded-objective-loss-signal-bridge-target-only-memory-tokenizer-coverage-aware-holdout-real-replay.md
  -> v900 code explanation: replay the tokenizer-covered holdout suite against the real v890 checkpoint and record a 5/5 result with review still required.
 
+915-v901-bounded-objective-loss-signal-bridge-target-only-memory-tokenizer-coverage-aware-holdout-replay-review.md
+ -> v901 code explanation: review the v900 5/5 replay result and block promotion because every prompt leaks fixed/loss.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

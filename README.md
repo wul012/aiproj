@@ -4,7 +4,19 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v900.0.0` runs the tokenizer-coverage-aware holdout suite against the real v890 checkpoint.
+Version `v901.0.0` reviews the tokenizer-covered holdout replay and blocks promotion due to target leakage.
+
+## Latest v901 checkpoint
+
+- Added short-name module `bounded_objective_loss_signal_bridge_target_only_memory_tokenizer_coverage_aware_holdout_replay_review`.
+- Added CLI `scripts/review_bounded_objective_loss_signal_bridge_target_only_memory_tokenizer_coverage_aware_holdout_replay.py`.
+- Reviewed the real v900 5/5 tokenizer-covered replay result against the v898 suite prompts.
+- Confirmed `source_holdout_model_quality_ready=True`.
+- Detected `target_leakage_case_count=5` and `target_hidden_case_count=0`.
+- Kept `approved_for_promotion=False`, `promotion_ready=False`, and `model_quality_claim=target_leaked_holdout_pass_review_only`.
+- Routed the next action to `build_target_hidden_tokenizer_covered_holdout_suite`.
+- Verified with `4 passed` focused replay-review tests and Playwright MCP screenshot evidence.
+- Archived v901 evidence in `e/901` and added the code explanation in `代码讲解记录_模型能力阶段/915-v901-bounded-objective-loss-signal-bridge-target-only-memory-tokenizer-coverage-aware-holdout-replay-review.md`.
 
 ## Latest v900 checkpoint
 

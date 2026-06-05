@@ -1,0 +1,6 @@
+case_id,source_case_id,target_leakage,leaked_terms,review_status,detail
+tokenizer-covered-answer_exact_terms,objective-answer-direct,True,"fixed,loss",block_promotion,prompt contains expected terms
+tokenizer-covered-return_target_words,objective-answer-role,True,"fixed,loss",block_promotion,prompt contains expected terms
+tokenizer-covered-contrast_route_result,objective-answer-contrast,True,"fixed,loss",block_promotion,prompt contains expected terms
+tokenizer-covered-jsonish_answer_terms,objective-answer-jsonish,True,"fixed,loss",block_promotion,prompt contains expected terms
+tokenizer-covered-self_check_terms,objective-answer-check,True,"fixed,loss",block_promotion,prompt contains expected terms

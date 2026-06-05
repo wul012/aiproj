@@ -1,0 +1,158 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT bounded objective loss signal bridge target-only memory tokenizer-coverage-aware holdout replay review",
+  "generated_at": "2026-06-05T12:08:04Z",
+  "status": "pass",
+  "decision": "bounded_objective_loss_signal_bridge_target_only_memory_tokenizer_coverage_aware_holdout_replay_review_target_leakage_blocks_promotion",
+  "failed_count": 0,
+  "issues": [],
+  "source_real_replay": "e\\900\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-tokenizer-coverage-aware-holdout-real-replay\\bounded_objective_loss_signal_bridge_target_only_memory_tokenizer_coverage_aware_holdout_real_replay.json",
+  "source_holdout_suite": "e\\898\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-tokenizer-coverage-aware-holdout-suite\\bounded_objective_loss_signal_bridge_target_only_memory_tokenizer_coverage_aware_holdout_suite.json",
+  "source_real_replay_summary": {
+    "bounded_objective_loss_signal_bridge_target_only_memory_tokenizer_coverage_aware_holdout_real_replay_ready": true,
+    "case_count": 5,
+    "executed_case_count": 5,
+    "passed_case_count": 5,
+    "failed_case_count": 0,
+    "any_hit_case_count": 5,
+    "zero_hit_case_count": 0,
+    "pass_rate": 1.0,
+    "holdout_model_quality_ready": true,
+    "promotion_ready": false,
+    "model_quality_claim": "tokenizer_covered_holdout_replay_only",
+    "next_step": "review_tokenizer_coverage_aware_holdout_replay_result",
+    "failed_check_count": 0
+  },
+  "check_rows": [
+    {
+      "id": "real_replay_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "real replay must pass structurally"
+    },
+    {
+      "id": "real_replay_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "real replay summary must be ready"
+    },
+    {
+      "id": "suite_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "holdout suite must pass"
+    },
+    {
+      "id": "suite_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "holdout suite summary must be ready"
+    },
+    {
+      "id": "cases_present",
+      "status": "pass",
+      "actual": 5,
+      "detail": "suite cases must be present"
+    },
+    {
+      "id": "review_rows_complete",
+      "status": "pass",
+      "actual": 5,
+      "detail": "review must cover every case"
+    }
+  ],
+  "review_rows": [
+    {
+      "case_id": "tokenizer-covered-answer_exact_terms",
+      "source_case_id": "objective-answer-direct",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "leaked_terms": [
+        "fixed",
+        "loss"
+      ],
+      "target_leakage": true,
+      "review_status": "block_promotion",
+      "detail": "prompt contains expected terms"
+    },
+    {
+      "case_id": "tokenizer-covered-return_target_words",
+      "source_case_id": "objective-answer-role",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "leaked_terms": [
+        "fixed",
+        "loss"
+      ],
+      "target_leakage": true,
+      "review_status": "block_promotion",
+      "detail": "prompt contains expected terms"
+    },
+    {
+      "case_id": "tokenizer-covered-contrast_route_result",
+      "source_case_id": "objective-answer-contrast",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "leaked_terms": [
+        "fixed",
+        "loss"
+      ],
+      "target_leakage": true,
+      "review_status": "block_promotion",
+      "detail": "prompt contains expected terms"
+    },
+    {
+      "case_id": "tokenizer-covered-jsonish_answer_terms",
+      "source_case_id": "objective-answer-jsonish",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "leaked_terms": [
+        "fixed",
+        "loss"
+      ],
+      "target_leakage": true,
+      "review_status": "block_promotion",
+      "detail": "prompt contains expected terms"
+    },
+    {
+      "case_id": "tokenizer-covered-self_check_terms",
+      "source_case_id": "objective-answer-check",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "leaked_terms": [
+        "fixed",
+        "loss"
+      ],
+      "target_leakage": true,
+      "review_status": "block_promotion",
+      "detail": "prompt contains expected terms"
+    }
+  ],
+  "summary": {
+    "bounded_objective_loss_signal_bridge_target_only_memory_tokenizer_coverage_aware_holdout_replay_review_ready": true,
+    "source_holdout_model_quality_ready": true,
+    "case_count": 5,
+    "target_leakage_case_count": 5,
+    "target_hidden_case_count": 0,
+    "approved_for_promotion": false,
+    "promotion_ready": false,
+    "model_quality_claim": "target_leaked_holdout_pass_review_only",
+    "next_step": "build_target_hidden_tokenizer_covered_holdout_suite",
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "target_leaked_holdout_pass_review_only",
+    "reason": "The replay passed, but the holdout prompts leak expected terms and cannot approve promotion.",
+    "next_action": "build_target_hidden_tokenizer_covered_holdout_suite"
+  }
+}
