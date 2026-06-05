@@ -1,0 +1,4 @@
+case_id,label,hit_terms,missed_terms,continuation,has_fixed_l_prefix
+canonical_direct_completion,fixed_l_partial,fixed,loss, fixed l,True
+minimal_direct_completion,fixed_l_partial,fixed,loss, fixed l,True
+completion_label_surface,fixed_l_partial,fixed,loss, fixed l,True

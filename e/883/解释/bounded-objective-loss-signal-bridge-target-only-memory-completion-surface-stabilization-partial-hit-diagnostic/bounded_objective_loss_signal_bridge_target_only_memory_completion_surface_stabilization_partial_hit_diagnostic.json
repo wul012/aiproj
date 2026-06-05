@@ -1,0 +1,198 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT bounded objective loss signal bridge target-only memory completion-surface stabilization partial-hit diagnostic",
+  "generated_at": "2026-06-05T04:20:52Z",
+  "status": "pass",
+  "decision": "bounded_objective_loss_signal_bridge_target_only_memory_completion_surface_stabilized_loss_suffix_missing",
+  "failed_count": 0,
+  "issues": [],
+  "source_replay_comparison": "e\\882\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-completion-surface-stabilization-replay-comparison\\bounded_objective_loss_signal_bridge_target_only_memory_completion_surface_stabilization_replay_comparison.json",
+  "source_regression_diagnostic": "e\\879\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-loss-suffix-replay-regression-diagnostic\\bounded_objective_loss_signal_bridge_target_only_memory_loss_suffix_replay_regression_diagnostic.json",
+  "replay_summary": {
+    "bounded_objective_replay_comparison_ready": true,
+    "objective_contract_recovered": false,
+    "canonical_case_pass": false,
+    "case_count": 3,
+    "executed_case_count": 3,
+    "passed_case_count": 0,
+    "failed_case_count": 3,
+    "any_hit_case_count": 3,
+    "zero_hit_case_count": 0,
+    "pass_rate": 0.0,
+    "promotion_ready": false,
+    "next_step": "diagnose_bounded_objective_loss_signal_bridge_target_only_memory_completion_surface_stabilization_partial_hit_before_more_training",
+    "failed_check_count": 0,
+    "bounded_objective_loss_signal_bridge_replay_comparison_ready": true,
+    "decoder_anchor_used": false,
+    "route": "bounded_objective_loss_signal_bridge_target_only_memory_completion_surface_stabilization",
+    "bounded_objective_loss_signal_bridge_target_only_memory_completion_surface_stabilization_replay_comparison_ready": true
+  },
+  "regression_summary": {
+    "bounded_objective_loss_signal_bridge_target_only_memory_loss_suffix_replay_regression_diagnostic_ready": true,
+    "current_case_count": 3,
+    "baseline_case_count": 3,
+    "sample_contract_gap": true,
+    "objective_contract_recovered": false,
+    "any_hit_delta": -1,
+    "zero_hit_delta": 1,
+    "completion_surface_regressed_to_zero": true,
+    "fixed_l_partial_case_count": 2,
+    "next_step": "build_bounded_objective_loss_signal_bridge_target_only_memory_completion_surface_stabilization_patch"
+  },
+  "regression": {
+    "ready": true,
+    "sample_contract_gap": true,
+    "objective_contract_recovered": false,
+    "current_passed_case_count": 0,
+    "baseline_passed_case_count": 0,
+    "passed_case_delta": 0,
+    "current_any_hit_case_count": 2,
+    "baseline_any_hit_case_count": 3,
+    "any_hit_delta": -1,
+    "current_zero_hit_case_count": 1,
+    "baseline_zero_hit_case_count": 0,
+    "zero_hit_delta": 1,
+    "completion_surface_regressed_to_zero": true,
+    "fixed_l_partial_case_count": 2,
+    "completion_surface_current_label": "completion_surface_zero_regression",
+    "completion_surface_baseline_label": "fixed_l_partial",
+    "next_step": "build_bounded_objective_loss_signal_bridge_target_only_memory_completion_surface_stabilization_patch"
+  },
+  "case_diagnostics": [
+    {
+      "case_id": "canonical_direct_completion",
+      "label": "fixed_l_partial",
+      "case_pass": false,
+      "any_hit": true,
+      "hit_terms": [
+        "fixed"
+      ],
+      "missed_terms": [
+        "loss"
+      ],
+      "continuation": " fixed l",
+      "has_fixed": true,
+      "has_loss": false,
+      "has_fixed_l_prefix": true
+    },
+    {
+      "case_id": "minimal_direct_completion",
+      "label": "fixed_l_partial",
+      "case_pass": false,
+      "any_hit": true,
+      "hit_terms": [
+        "fixed"
+      ],
+      "missed_terms": [
+        "loss"
+      ],
+      "continuation": " fixed l",
+      "has_fixed": true,
+      "has_loss": false,
+      "has_fixed_l_prefix": true
+    },
+    {
+      "case_id": "completion_label_surface",
+      "label": "fixed_l_partial",
+      "case_pass": false,
+      "any_hit": true,
+      "hit_terms": [
+        "fixed"
+      ],
+      "missed_terms": [
+        "loss"
+      ],
+      "continuation": " fixed l",
+      "has_fixed": true,
+      "has_loss": false,
+      "has_fixed_l_prefix": true
+    }
+  ],
+  "diagnostic": {
+    "ready": true,
+    "completion_surface_stabilized": true,
+    "zero_hit_resolved": true,
+    "all_cases_fixed_l_partial": true,
+    "fixed_l_partial_case_count": 3,
+    "loss_hit_case_count": 0,
+    "suffix_gap_after_surface_stabilization": true,
+    "source_any_hit_delta": -1,
+    "source_zero_hit_delta": 1,
+    "current_any_hit_case_count": 3,
+    "current_zero_hit_case_count": 0,
+    "source_sample_contract_gap": true,
+    "next_step": "build_bounded_objective_loss_signal_bridge_target_only_memory_stabilized_loss_suffix_uptake_patch"
+  },
+  "check_rows": [
+    {
+      "id": "replay_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "completion-surface stabilization replay must pass structurally"
+    },
+    {
+      "id": "replay_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "completion-surface stabilization replay must be ready"
+    },
+    {
+      "id": "regression_diagnostic_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "source regression diagnostic must pass"
+    },
+    {
+      "id": "source_sample_contract_gap",
+      "status": "pass",
+      "actual": true,
+      "detail": "source diagnostic must have a sample-contract gap"
+    },
+    {
+      "id": "contract_not_recovered",
+      "status": "pass",
+      "actual": false,
+      "detail": "diagnostic only applies before contract recovery"
+    },
+    {
+      "id": "all_cases_have_required_signal",
+      "status": "pass",
+      "actual": 3,
+      "detail": "all current cases should have partial required-term signal"
+    },
+    {
+      "id": "zero_hit_resolved",
+      "status": "pass",
+      "actual": true,
+      "detail": "completion zero-hit regression should be resolved"
+    },
+    {
+      "id": "all_fixed_l_partial",
+      "status": "pass",
+      "actual": 3,
+      "detail": "all cases should stabilize at fixed l"
+    },
+    {
+      "id": "loss_still_missing",
+      "status": "pass",
+      "actual": 0,
+      "detail": "diagnostic requires loss still missing"
+    }
+  ],
+  "summary": {
+    "bounded_objective_loss_signal_bridge_target_only_memory_completion_surface_stabilization_partial_hit_diagnostic_ready": true,
+    "case_count": 3,
+    "completion_surface_stabilized": true,
+    "zero_hit_resolved": true,
+    "all_cases_fixed_l_partial": true,
+    "fixed_l_partial_case_count": 3,
+    "loss_hit_case_count": 0,
+    "suffix_gap_after_surface_stabilization": true,
+    "next_step": "build_bounded_objective_loss_signal_bridge_target_only_memory_stabilized_loss_suffix_uptake_patch"
+  },
+  "interpretation": {
+    "model_quality_claim": "completion_surface_stabilized_suffix_missing",
+    "reason": "The completion surface recovered from zero-hit to fixed l, but every contract case still misses the loss suffix.",
+    "next_action": "build_bounded_objective_loss_signal_bridge_target_only_memory_stabilized_loss_suffix_uptake_patch"
+  }
+}

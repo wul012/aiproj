@@ -4,7 +4,19 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v882.0.0` replays the v881 completion-surface stabilization checkpoint against the unchanged bounded objective contract.
+Version `v883.0.0` diagnoses the v882 stabilized partial-hit replay and routes the next repair toward loss-suffix uptake.
+
+## Latest v883 checkpoint
+
+- Added short-name module `bounded_objective_loss_signal_bridge_target_only_memory_completion_surface_stabilization_partial_hit_diagnostic`.
+- Added CLI `scripts/diagnose_bounded_objective_loss_signal_bridge_target_only_memory_completion_surface_stabilization_partial_hit.py`.
+- Consumed the real v882 replay comparison and v879 replay-regression diagnostic.
+- Confirmed `completion_surface_stabilized=True`, `zero_hit_resolved=True`, and `all_cases_fixed_l_partial=True`.
+- Recorded `fixed_l_partial_case_count=3` and `loss_hit_case_count=0`.
+- Kept `model_quality_claim=completion_surface_stabilized_suffix_missing`.
+- Routed the next artifact to `build_bounded_objective_loss_signal_bridge_target_only_memory_stabilized_loss_suffix_uptake_patch`.
+- Verified with `4 passed` focused completion-surface stabilization partial-hit diagnostic tests and Playwright MCP screenshot evidence.
+- Archived v883 evidence in `e/883` and added the code explanation in `代码讲解记录_模型能力阶段/897-v883-bounded-objective-loss-signal-bridge-target-only-memory-completion-surface-stabilization-partial-hit-diagnostic.md`.
 
 ## Latest v882 checkpoint
 

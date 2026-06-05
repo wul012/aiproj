@@ -1241,6 +1241,9 @@
 896-v882-bounded-objective-loss-signal-bridge-target-only-memory-completion-surface-stabilization-replay-comparison.md
  -> v882 code explanation: replay the v881 completion-surface stabilization checkpoint and show the surface recovered to partial signal while the loss suffix remains missing.
 
+897-v883-bounded-objective-loss-signal-bridge-target-only-memory-completion-surface-stabilization-partial-hit-diagnostic.md
+ -> v883 code explanation: diagnose the stabilized fixed-l partial state and route the next repair to loss suffix uptake.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。
