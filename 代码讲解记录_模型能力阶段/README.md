@@ -1238,6 +1238,9 @@
 895-v881-bounded-objective-loss-signal-bridge-target-only-memory-completion-surface-stabilization-training-run.md
  -> v881 code explanation: train the v880 completion-surface stabilization corpus into a real checkpoint while keeping capability gated behind replay.
 
+896-v882-bounded-objective-loss-signal-bridge-target-only-memory-completion-surface-stabilization-replay-comparison.md
+ -> v882 code explanation: replay the v881 completion-surface stabilization checkpoint and show the surface recovered to partial signal while the loss suffix remains missing.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。
