@@ -1280,6 +1280,9 @@
 909-v895-bounded-objective-loss-signal-bridge-target-only-memory-decoder-budget-replay-comparison.md
  -> v895 code explanation: rerun the same checkpoint with the audited 11-token replay budget and recover the bounded objective contract before holdout.
 
+910-v896-bounded-objective-loss-signal-bridge-target-only-memory-decoder-budget-holdout-replay.md
+ -> v896 code explanation: run the unchanged bounded holdout suite after decoder-budget recovery and block route promotion after a 1/5 holdout pass.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

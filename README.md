@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v895.0.0` reruns the stagnation-aware suffix replay with the audited 11-token decoder budget.
+Version `v896.0.0` runs the unchanged bounded holdout suite after the audited decoder-budget contract recovery.
+
+## Latest v896 checkpoint
+
+- Added short-name module `bounded_objective_loss_signal_bridge_target_only_memory_decoder_budget_holdout_replay`.
+- Added CLI `scripts/run_bounded_objective_loss_signal_bridge_target_only_memory_decoder_budget_holdout_replay.py`.
+- Reused the unchanged v803 benchmark suite, v804 suite review, and v805 dry-run as holdout inputs.
+- Used the real v890 checkpoint/tokenizer and the v895 decoder-budget replay comparison as the required source recovery evidence.
+- Confirmed `source_objective_contract_recovered=True` while the unchanged holdout still failed promotion.
+- Recorded `passed_case_count=1`, `failed_case_count=4`, `any_hit_case_count=1`, `zero_hit_case_count=4`, and `pass_rate=0.2`.
+- Kept `promotion_ready=False` and `model_quality_claim=objective_contract_recovered_holdout_failed`.
+- Routed the next action to `diagnose_holdout_prompt_generalization_gap_before_more_training`.
+- Verified with `4 passed` focused holdout replay tests and Playwright MCP screenshot evidence.
+- Archived v896 evidence in `e/896` and added the code explanation in `代码讲解记录_模型能力阶段/910-v896-bounded-objective-loss-signal-bridge-target-only-memory-decoder-budget-holdout-replay.md`.
 
 ## Latest v895 checkpoint
 

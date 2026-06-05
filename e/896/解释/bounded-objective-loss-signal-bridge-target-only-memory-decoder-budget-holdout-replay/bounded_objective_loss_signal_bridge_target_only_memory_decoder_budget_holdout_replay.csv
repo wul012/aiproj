@@ -1,0 +1,14 @@
+case_id,case_pass,hit_terms,missed_terms,max_new_tokens,continuation
+objective-answer-direct,False,,"fixed,loss",24,"�����������������������
+���n can can cal ss
+canompl"
+objective-answer-role,False,,"fixed,loss",24,"����� paired required terms �������
+���an tin can cacacacacact "
+objective-answer-contrast,False,,"fixed,loss",24,"��������������� pair tokens�
+���nis canompletion s: s ca"
+objective-answer-jsonish,False,,"fixed,loss",24,"�� ��O� ���� answer_terms���������
+answer_terms: canicaly th
+anss
+acactl"
+objective-answer-check,True,"fixed,loss",,24,"����������� fixed � loss������et t os can cacat s
+caca"

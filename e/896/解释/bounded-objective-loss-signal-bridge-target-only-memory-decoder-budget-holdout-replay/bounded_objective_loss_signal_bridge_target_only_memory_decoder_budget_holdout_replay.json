@@ -1,0 +1,248 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT bounded objective loss signal bridge target-only memory decoder-budget holdout replay",
+  "generated_at": "2026-06-05T10:52:38Z",
+  "status": "pass",
+  "decision": "bounded_objective_loss_signal_bridge_target_only_memory_decoder_budget_holdout_replay_partial_model_gap",
+  "failed_count": 0,
+  "issues": [],
+  "source_suite_review": "e\\804\\解释\\model-capability-route-promotion-bounded-benchmark-suite-review\\model_capability_route_promotion_bounded_benchmark_suite_review.json",
+  "source_benchmark_suite": "e\\803\\解释\\model-capability-route-promotion-bounded-benchmark-suite\\model_capability_route_promotion_bounded_benchmark_suite.json",
+  "source_dry_run": "e\\805\\解释\\model-capability-route-promotion-bounded-benchmark-dry-run\\model_capability_route_promotion_bounded_benchmark_dry_run.json",
+  "checkpoint": "e\\890\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-stagnation-aware-suffix-training-run\\run\\checkpoint.pt",
+  "tokenizer": "e\\890\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-stagnation-aware-suffix-training-run\\run\\tokenizer.json",
+  "device": "cpu",
+  "replay_rows": [
+    {
+      "case_id": "objective-answer-direct",
+      "prompt": "任务：只输出两个英文关键词，表示本轮目标答案。\n答案：",
+      "continuation": "�����������������������\n���n can can cal ss\ncanompl",
+      "generated": "�����������������������\n���n can can cal ss\ncanompl",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "case_pass": false,
+      "seed": 901,
+      "max_new_tokens": 24,
+      "temperature": 0.2,
+      "top_k": 10
+    },
+    {
+      "case_id": "objective-answer-role",
+      "prompt": "目标：给出 paired required terms 的两个角色词。\n输出：",
+      "continuation": "����� paired required terms �������\n���an tin can cacacacacact ",
+      "generated": "����� paired required terms �������\n���an tin can cacacacacact ",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "case_pass": false,
+      "seed": 902,
+      "max_new_tokens": 24,
+      "temperature": 0.2,
+      "top_k": 10
+    },
+    {
+      "case_id": "objective-answer-contrast",
+      "prompt": "对比任务：不要解释，只返回目标 pair tokens。\n结果：",
+      "continuation": "��������������� pair tokens�\n���nis canompletion s: s ca",
+      "generated": "��������������� pair tokens�\n���nis canompletion s: s ca",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "case_pass": false,
+      "seed": 903,
+      "max_new_tokens": 24,
+      "temperature": 0.2,
+      "top_k": 10
+    },
+    {
+      "case_id": "objective-answer-jsonish",
+      "prompt": "请用 JSON 风格写出 answer_terms，包含两个英文词。\nanswer_terms:",
+      "continuation": "�� ��O� ���� answer_terms���������\nanswer_terms: canicaly th\nanss\nacactl",
+      "generated": "�� ��O� ���� answer_terms���������\nanswer_terms: canicaly th\nanss\nacactl",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "case_pass": false,
+      "seed": 904,
+      "max_new_tokens": 24,
+      "temperature": 0.2,
+      "top_k": 10
+    },
+    {
+      "case_id": "objective-answer-check",
+      "prompt": "自检：本题需要同时出现 fixed 与 loss。最终答案：",
+      "continuation": "����������� fixed � loss������et t os can cacat s\ncaca",
+      "generated": "����������� fixed � loss������et t os can cacat s\ncaca",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "missed_terms": [],
+      "case_pass": true,
+      "seed": 905,
+      "max_new_tokens": 24,
+      "temperature": 0.2,
+      "top_k": 10
+    }
+  ],
+  "replay_errors": [],
+  "check_rows": [
+    {
+      "id": "suite_review_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "suite review must pass before real replay"
+    },
+    {
+      "id": "suite_review_approved",
+      "status": "pass",
+      "actual": true,
+      "detail": "suite review must approve real replay"
+    },
+    {
+      "id": "benchmark_suite_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "benchmark suite must pass"
+    },
+    {
+      "id": "dry_run_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "dry-run scorer must pass before real replay"
+    },
+    {
+      "id": "dry_run_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "dry-run summary must be ready"
+    },
+    {
+      "id": "checkpoint_exists",
+      "status": "pass",
+      "actual": "e\\890\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-stagnation-aware-suffix-training-run\\run\\checkpoint.pt",
+      "detail": "checkpoint.pt must exist"
+    },
+    {
+      "id": "tokenizer_exists",
+      "status": "pass",
+      "actual": "e\\890\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-stagnation-aware-suffix-training-run\\run\\tokenizer.json",
+      "detail": "tokenizer.json must exist"
+    },
+    {
+      "id": "cases_present",
+      "status": "pass",
+      "actual": 5,
+      "detail": "benchmark suite must provide replay cases"
+    },
+    {
+      "id": "all_cases_executed",
+      "status": "pass",
+      "actual": 5,
+      "detail": "real replay should execute every case"
+    },
+    {
+      "id": "no_replay_errors",
+      "status": "pass",
+      "actual": 0,
+      "detail": "real replay should not raise generation errors"
+    },
+    {
+      "id": "decoder_budget_replay_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "decoder-budget replay must pass structurally"
+    },
+    {
+      "id": "decoder_budget_replay_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "decoder-budget replay comparison must be ready"
+    },
+    {
+      "id": "source_objective_contract_recovered",
+      "status": "pass",
+      "actual": true,
+      "detail": "source replay must recover the original objective contract before holdout"
+    },
+    {
+      "id": "source_next_step_requires_holdout",
+      "status": "pass",
+      "actual": "run_unchanged_bounded_suite_holdout_replay",
+      "detail": "source replay must explicitly require unchanged holdout replay"
+    }
+  ],
+  "summary": {
+    "bounded_objective_loss_signal_bridge_target_only_memory_decoder_budget_holdout_replay_ready": true,
+    "source_objective_contract_recovered": true,
+    "holdout_model_route_quality_ready": false,
+    "case_count": 5,
+    "executed_case_count": 5,
+    "passed_case_count": 1,
+    "failed_case_count": 4,
+    "any_hit_case_count": 1,
+    "zero_hit_case_count": 4,
+    "pass_rate": 0.2,
+    "promotion_ready": false,
+    "model_quality_claim": "objective_contract_recovered_holdout_failed",
+    "next_step": "diagnose_holdout_prompt_generalization_gap_before_more_training",
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "objective_contract_recovered_holdout_failed",
+    "reason": "The objective contract recovered under the audited decoder budget, but the unchanged bounded holdout suite still exposes a model gap.",
+    "next_action": "diagnose_holdout_prompt_generalization_gap_before_more_training"
+  },
+  "source_decoder_budget_replay": "e\\895\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-decoder-budget-replay-comparison\\bounded_objective_loss_signal_bridge_target_only_memory_decoder_budget_replay_comparison.json",
+  "source_decoder_budget_replay_summary": {
+    "bounded_objective_replay_comparison_ready": true,
+    "objective_contract_recovered": true,
+    "canonical_case_pass": true,
+    "case_count": 3,
+    "executed_case_count": 3,
+    "passed_case_count": 3,
+    "failed_case_count": 0,
+    "any_hit_case_count": 3,
+    "zero_hit_case_count": 0,
+    "pass_rate": 1.0,
+    "promotion_ready": false,
+    "next_step": "run_unchanged_bounded_suite_holdout_replay",
+    "failed_check_count": 0,
+    "bounded_objective_loss_signal_bridge_replay_comparison_ready": true,
+    "decoder_anchor_used": false,
+    "route": "bounded_objective_loss_signal_bridge_target_only_memory_decoder_budget",
+    "bounded_objective_loss_signal_bridge_target_only_memory_stagnation_aware_suffix_replay_comparison_ready": true,
+    "bounded_objective_loss_signal_bridge_target_only_memory_decoder_budget_replay_comparison_ready": true,
+    "decoder_budget_max_new_tokens": 11,
+    "source_recommended_max_new_tokens": 11
+  }
+}
