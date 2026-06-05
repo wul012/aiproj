@@ -1,0 +1,11 @@
+case_id,source_case_id,tokenizer_covered,target_hidden,task_hint,prompt_unknown_count,prompt
+semantic-hidden-memory_answer,target-hidden-answer_learned_pair,True,True,False,0,"answer from memory
+answer:"
+semantic-hidden-stored_result,target-hidden-return_target_pair,True,True,False,0,"write stored result
+output:"
+semantic-hidden-learned_route,target-hidden-contrast_route_pair,True,True,False,0,"complete learned route
+result:"
+semantic-hidden-final_words,target-hidden-jsonish_answer_terms,True,True,False,0,"return final words
+answer:"
+semantic-hidden-memory_self_check,target-hidden-self_check_pair,True,True,False,0,"self check memory result
+final:"

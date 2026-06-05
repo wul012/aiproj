@@ -2011,3 +2011,8 @@ e/663/解释/说明.md
 - `e/905/图片`
 - `e/905/解释/说明.md`
 - v905 bounded objective loss signal bridge target-only memory target-hidden tokenizer-covered holdout replay review screenshots and explanation.
+## v906 supplemental index
+
+- `e/906/图片`
+- `e/906/解释/说明.md`
+- v906 target-hidden semantic paraphrase tokenizer-covered holdout suite screenshots and explanation.

@@ -4,7 +4,21 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v905.0.0` reviews the target-hidden holdout 5/5 replay and routes it to wider semantic holdout instead of promotion.
+Version `v906.0.0` builds a semantic-paraphrase target-hidden holdout suite without known pair/target task hints.
+
+## Latest v906 checkpoint
+
+- Added short-name module `target_hidden_semantic_holdout_suite`.
+- Added CLI `scripts/build_target_hidden_semantic_holdout_suite.py`.
+- Consumed the real v905 replay review, v902 source target-hidden suite, and v890 tokenizer.
+- Preserved the 5-case shape and the `fixed/loss` scoring contract.
+- Replaced the task-hinted v902 prompts with semantic prompts such as `answer from memory`, `write stored result`, and `complete learned route`.
+- Recorded `candidate_case_count=5`, `tokenizer_covered_case_count=5`, `target_hidden_case_count=5`, `task_hint_case_count=0`, and `candidate_prompt_unknown_token_count=0`.
+- Carried forward `source_task_hint_case_count=5` from v905 to show the improvement.
+- Kept `promotion_ready=False` and `model_quality_claim=suite_construction_only`.
+- Routed the next action to `run_target_hidden_semantic_holdout_dry_run`.
+- Verified with `4 passed` focused semantic holdout suite tests and Playwright MCP screenshot evidence.
+- Archived v906 evidence in `e/906` and added the code explanation in `代码讲解记录_模型能力阶段/920-v906-target-hidden-semantic-holdout-suite.md`.
 
 ## Latest v905 checkpoint
 

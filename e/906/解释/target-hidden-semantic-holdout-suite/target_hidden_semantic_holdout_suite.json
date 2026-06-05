@@ -1,0 +1,317 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT target-hidden semantic paraphrase tokenizer-covered holdout suite",
+  "generated_at": "2026-06-05T13:26:16Z",
+  "status": "pass",
+  "decision": "target_hidden_semantic_holdout_suite_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_replay_review": "e\\905\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-target-hidden-tokenizer-covered-holdout-replay-review\\bounded_objective_loss_signal_bridge_target_only_memory_target_hidden_tokenizer_covered_holdout_replay_review.json",
+  "source_holdout_suite": "e\\902\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-target-hidden-tokenizer-covered-holdout-suite\\bounded_objective_loss_signal_bridge_target_only_memory_target_hidden_tokenizer_covered_holdout_suite.json",
+  "tokenizer_path": "e\\890\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-stagnation-aware-suffix-training-run\\run\\tokenizer.json",
+  "check_rows": [
+    {
+      "id": "replay_review_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "v905 replay review must pass"
+    },
+    {
+      "id": "review_approves_wider_holdout",
+      "status": "pass",
+      "actual": true,
+      "detail": "review must approve wider holdout"
+    },
+    {
+      "id": "review_routes_to_semantic_suite",
+      "status": "pass",
+      "actual": "build_semantic_paraphrase_target_hidden_holdout_suite",
+      "detail": "review must route to semantic suite"
+    },
+    {
+      "id": "source_suite_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "source target-hidden suite must pass"
+    },
+    {
+      "id": "tokenizer_exists",
+      "status": "pass",
+      "actual": "e\\890\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-stagnation-aware-suffix-training-run\\run\\tokenizer.json",
+      "detail": "tokenizer.json must exist"
+    },
+    {
+      "id": "case_count_preserved",
+      "status": "pass",
+      "actual": 5,
+      "detail": "semantic suite must preserve case count"
+    },
+    {
+      "id": "coverage_rows_complete",
+      "status": "pass",
+      "actual": 5,
+      "detail": "coverage rows must cover every case"
+    },
+    {
+      "id": "all_prompts_tokenizer_covered",
+      "status": "pass",
+      "actual": 5,
+      "detail": "all prompts must be tokenizer covered"
+    },
+    {
+      "id": "all_prompts_target_hidden",
+      "status": "pass",
+      "actual": 5,
+      "detail": "all prompts must hide expected terms"
+    },
+    {
+      "id": "no_prompt_task_hints",
+      "status": "pass",
+      "actual": 0,
+      "detail": "semantic suite should avoid known task-hint terms"
+    }
+  ],
+  "coverage_rows": [
+    {
+      "case_id": "semantic-hidden-memory_answer",
+      "source_case_id": "target-hidden-answer_learned_pair",
+      "prompt_unknown_count": 0,
+      "tokenizer_covered": true,
+      "leaked_terms": [],
+      "target_hidden": true,
+      "task_hint_terms": [],
+      "task_hint": false
+    },
+    {
+      "case_id": "semantic-hidden-stored_result",
+      "source_case_id": "target-hidden-return_target_pair",
+      "prompt_unknown_count": 0,
+      "tokenizer_covered": true,
+      "leaked_terms": [],
+      "target_hidden": true,
+      "task_hint_terms": [],
+      "task_hint": false
+    },
+    {
+      "case_id": "semantic-hidden-learned_route",
+      "source_case_id": "target-hidden-contrast_route_pair",
+      "prompt_unknown_count": 0,
+      "tokenizer_covered": true,
+      "leaked_terms": [],
+      "target_hidden": true,
+      "task_hint_terms": [],
+      "task_hint": false
+    },
+    {
+      "case_id": "semantic-hidden-final_words",
+      "source_case_id": "target-hidden-jsonish_answer_terms",
+      "prompt_unknown_count": 0,
+      "tokenizer_covered": true,
+      "leaked_terms": [],
+      "target_hidden": true,
+      "task_hint_terms": [],
+      "task_hint": false
+    },
+    {
+      "case_id": "semantic-hidden-memory_self_check",
+      "source_case_id": "target-hidden-self_check_pair",
+      "prompt_unknown_count": 0,
+      "tokenizer_covered": true,
+      "leaked_terms": [],
+      "target_hidden": true,
+      "task_hint_terms": [],
+      "task_hint": false
+    }
+  ],
+  "benchmark_suite": {
+    "ready": true,
+    "suite_name": "route-promotion-objective-level-contrast-semantic-paraphrase-target-hidden-holdout-suite",
+    "suite_version": "v906",
+    "source_suite_name": "route-promotion-objective-level-contrast-target-hidden-tokenizer-covered-holdout-suite",
+    "route_id": "objective_level_contrast",
+    "consumer_name": "target-hidden-semantic-holdout-builder",
+    "allowed_scope": "bounded_model_capability_governance_only",
+    "boundary": "semantic_paraphrase_target_hidden_ascii_tokenizer_covered_holdout_only",
+    "model_quality_claim": "not_claimed",
+    "cases": [
+      {
+        "case_id": "semantic-hidden-memory_answer",
+        "source_case_id": "target-hidden-answer_learned_pair",
+        "prompt_case": {
+          "name": "memory_answer",
+          "prompt": "answer from memory\nanswer:",
+          "max_new_tokens": 24,
+          "temperature": 0.2,
+          "top_k": 10,
+          "seed": 2007,
+          "task_type": "route-promotion-objective-level-contrast-semantic-target-hidden",
+          "difficulty": "medium",
+          "expected_behavior": "semantic hidden memory answer",
+          "tags": [
+            "route-promotion",
+            "objective-level-contrast",
+            "required-terms",
+            "tokenizer-covered",
+            "target-hidden",
+            "semantic-paraphrase"
+          ]
+        },
+        "expected_terms": [
+          "fixed",
+          "loss"
+        ],
+        "required_term_count": 2
+      },
+      {
+        "case_id": "semantic-hidden-stored_result",
+        "source_case_id": "target-hidden-return_target_pair",
+        "prompt_case": {
+          "name": "stored_result",
+          "prompt": "write stored result\noutput:",
+          "max_new_tokens": 24,
+          "temperature": 0.2,
+          "top_k": 10,
+          "seed": 2008,
+          "task_type": "route-promotion-objective-level-contrast-semantic-target-hidden",
+          "difficulty": "medium",
+          "expected_behavior": "semantic hidden stored result",
+          "tags": [
+            "route-promotion",
+            "objective-level-contrast",
+            "required-terms",
+            "tokenizer-covered",
+            "target-hidden",
+            "semantic-paraphrase"
+          ]
+        },
+        "expected_terms": [
+          "fixed",
+          "loss"
+        ],
+        "required_term_count": 2
+      },
+      {
+        "case_id": "semantic-hidden-learned_route",
+        "source_case_id": "target-hidden-contrast_route_pair",
+        "prompt_case": {
+          "name": "learned_route",
+          "prompt": "complete learned route\nresult:",
+          "max_new_tokens": 24,
+          "temperature": 0.2,
+          "top_k": 10,
+          "seed": 2009,
+          "task_type": "route-promotion-objective-level-contrast-semantic-target-hidden",
+          "difficulty": "medium",
+          "expected_behavior": "semantic hidden route completion",
+          "tags": [
+            "route-promotion",
+            "objective-level-contrast",
+            "required-terms",
+            "tokenizer-covered",
+            "target-hidden",
+            "semantic-paraphrase"
+          ]
+        },
+        "expected_terms": [
+          "fixed",
+          "loss"
+        ],
+        "required_term_count": 2
+      },
+      {
+        "case_id": "semantic-hidden-final_words",
+        "source_case_id": "target-hidden-jsonish_answer_terms",
+        "prompt_case": {
+          "name": "final_words",
+          "prompt": "return final words\nanswer:",
+          "max_new_tokens": 24,
+          "temperature": 0.2,
+          "top_k": 10,
+          "seed": 2010,
+          "task_type": "route-promotion-objective-level-contrast-semantic-target-hidden",
+          "difficulty": "medium",
+          "expected_behavior": "semantic hidden final words",
+          "tags": [
+            "route-promotion",
+            "objective-level-contrast",
+            "required-terms",
+            "tokenizer-covered",
+            "target-hidden",
+            "semantic-paraphrase"
+          ]
+        },
+        "expected_terms": [
+          "fixed",
+          "loss"
+        ],
+        "required_term_count": 2
+      },
+      {
+        "case_id": "semantic-hidden-memory_self_check",
+        "source_case_id": "target-hidden-self_check_pair",
+        "prompt_case": {
+          "name": "memory_self_check",
+          "prompt": "self check memory result\nfinal:",
+          "max_new_tokens": 24,
+          "temperature": 0.2,
+          "top_k": 10,
+          "seed": 2011,
+          "task_type": "route-promotion-objective-level-contrast-semantic-target-hidden",
+          "difficulty": "medium",
+          "expected_behavior": "semantic hidden self-check",
+          "tags": [
+            "route-promotion",
+            "objective-level-contrast",
+            "required-terms",
+            "tokenizer-covered",
+            "target-hidden",
+            "semantic-paraphrase"
+          ]
+        },
+        "expected_terms": [
+          "fixed",
+          "loss"
+        ],
+        "required_term_count": 2
+      }
+    ],
+    "scoring_contract": {
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "case_pass_condition": "generated_continuation_contains_both_expected_terms",
+      "suite_pass_condition": "all_cases_pass_without_scope_or_boundary_widening",
+      "minimum_case_count": 5
+    },
+    "guardrails": [
+      "do not include fixed or loss in prompts",
+      "do not use known pair/target task-hint terms",
+      "do not claim promotion before dry-run, replay, and review"
+    ],
+    "proposed_next_artifact": "target_hidden_semantic_holdout_dry_run"
+  },
+  "summary": {
+    "target_hidden_semantic_holdout_suite_ready": true,
+    "source_case_count": 5,
+    "candidate_case_count": 5,
+    "tokenizer_covered_case_count": 5,
+    "target_hidden_case_count": 5,
+    "task_hint_case_count": 0,
+    "candidate_prompt_unknown_token_count": 0,
+    "source_task_hint_case_count": 5,
+    "expected_terms": [
+      "fixed",
+      "loss"
+    ],
+    "promotion_ready": false,
+    "model_quality_claim": "suite_construction_only",
+    "next_step": "run_target_hidden_semantic_holdout_dry_run",
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "suite_construction_only",
+    "reason": "Built tokenizer-covered target-hidden prompts without known pair/target task-hint terms.",
+    "next_action": "run_target_hidden_semantic_holdout_dry_run"
+  }
+}
