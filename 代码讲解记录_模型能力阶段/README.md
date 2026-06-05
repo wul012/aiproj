@@ -1235,6 +1235,9 @@
 894-v880-bounded-objective-loss-signal-bridge-target-only-memory-completion-surface-stabilization-patch.md
  -> v880 code explanation: turn the v879 completion-surface regression into a no-anchor patch corpus before the next training run.
 
+895-v881-bounded-objective-loss-signal-bridge-target-only-memory-completion-surface-stabilization-training-run.md
+ -> v881 code explanation: train the v880 completion-surface stabilization corpus into a real checkpoint while keeping capability gated behind replay.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

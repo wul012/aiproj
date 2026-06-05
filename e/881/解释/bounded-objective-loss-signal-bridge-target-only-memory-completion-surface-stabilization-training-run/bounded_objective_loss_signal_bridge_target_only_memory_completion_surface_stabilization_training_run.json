@@ -1,0 +1,759 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT bounded objective loss signal bridge target-only memory completion-surface stabilization training run",
+  "generated_at": "2026-06-05T03:59:30Z",
+  "status": "pass",
+  "decision": "bounded_objective_loss_signal_bridge_target_only_memory_completion_surface_stabilization_training_run_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_unassisted_repair_seed": "e\\880\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-completion-surface-stabilization-patch\\bounded_objective_loss_signal_bridge_target_only_memory_completion_surface_stabilization_patch.json",
+  "run_dir": "e\\881\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-completion-surface-stabilization-training-run\\run",
+  "unassisted_repair_seed_summary": {
+    "bounded_objective_loss_signal_bridge_target_only_memory_completion_surface_stabilization_patch_ready": true,
+    "patch_example_count": 28,
+    "completion_surface_example_count": 12,
+    "answer_surface_carry_forward_count": 6,
+    "prefix_fragment_bridge_count": 6,
+    "completion_fragment_resistance_count": 4,
+    "decoder_anchor_example_count": 0,
+    "source_sample_contract_gap": true,
+    "source_zero_hit_delta": 1,
+    "source_any_hit_delta": -1,
+    "patched_corpus_char_count": 7772,
+    "model_quality_claim": "completion_surface_stabilization_patch_only",
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_objective_unassisted_repair_training_run",
+    "next_step": "train_bounded_objective_loss_signal_bridge_target_only_memory_completion_surface_stabilization_patch",
+    "bounded_objective_loss_signal_bridge_ready": true,
+    "bridge_example_count": 28,
+    "loss_signal_bridge_example_count": 12,
+    "bridged_corpus_char_count": 7772,
+    "bounded_objective_unassisted_repair_seed_revision_ready": true,
+    "example_count": 28,
+    "direct_example_count": 28,
+    "neutral_prompt_example_count": 12,
+    "corpus_char_count": 7772,
+    "bounded_objective_unassisted_repair_seed_ready": true
+  },
+  "artifacts": [
+    {
+      "key": "checkpoint",
+      "path": "e\\881\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-completion-surface-stabilization-training-run\\run\\checkpoint.pt",
+      "exists": true,
+      "size": 1353422
+    },
+    {
+      "key": "tokenizer",
+      "path": "e\\881\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-completion-surface-stabilization-training-run\\run\\tokenizer.json",
+      "exists": true,
+      "size": 550
+    },
+    {
+      "key": "metrics",
+      "path": "e\\881\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-completion-surface-stabilization-training-run\\run\\metrics.jsonl",
+      "exists": true,
+      "size": 2812
+    },
+    {
+      "key": "train_config",
+      "path": "e\\881\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-completion-surface-stabilization-training-run\\run\\train_config.json",
+      "exists": true,
+      "size": 1303
+    },
+    {
+      "key": "run_manifest",
+      "path": "e\\881\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-completion-surface-stabilization-training-run\\run\\run_manifest.json",
+      "exists": true,
+      "size": 11573
+    },
+    {
+      "key": "sample",
+      "path": "e\\881\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-completion-surface-stabilization-training-run\\run\\sample.txt",
+      "exists": true,
+      "size": 186
+    },
+    {
+      "key": "prepared_corpus",
+      "path": "e\\881\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-completion-surface-stabilization-training-run\\run\\prepared_corpus.txt",
+      "exists": true,
+      "size": 8302
+    }
+  ],
+  "metrics": {
+    "record_count": 25,
+    "first": {
+      "last_loss": 3.8965957164764404,
+      "step": 1,
+      "train_loss": 3.6769862174987793,
+      "val_loss": 3.674151659011841
+    },
+    "last": {
+      "last_loss": 0.6203061938285828,
+      "step": 240,
+      "train_loss": 0.7887188792228699,
+      "val_loss": 0.36948448419570923
+    },
+    "train_loss_delta": -2.888267,
+    "val_loss_delta": -3.304667
+  },
+  "train_config": {
+    "data": "D:\\aiproj\\data\\sample_zh.txt",
+    "data_dir": null,
+    "prepared_data": "e\\880\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-completion-surface-stabilization-patch\\bounded_objective_loss_signal_bridge_target_only_memory_completion_surface_stabilization_patch_corpus.txt",
+    "out_dir": "e\\881\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-completion-surface-stabilization-training-run\\run",
+    "resume": null,
+    "tokenizer": "char",
+    "bpe_vocab_size": 256,
+    "bpe_min_frequency": 2,
+    "batch_size": 8,
+    "block_size": 64,
+    "max_iters": 240,
+    "eval_interval": 10,
+    "eval_iters": 5,
+    "learning_rate": 0.001,
+    "train_ratio": 0.9,
+    "n_layer": 2,
+    "n_head": 2,
+    "n_embd": 64,
+    "dropout": 0.0,
+    "seed": 1881,
+    "device": "cpu",
+    "sample_prompt": "Complete with exactly two tokens: fixed loss completion:",
+    "sample_tokens": 12,
+    "sample_temperature": 0.8,
+    "sample_top_k": 20,
+    "no_sample": false,
+    "device_used": "cpu",
+    "data_source": {
+      "kind": "prepared_data",
+      "path": "e\\880\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-completion-surface-stabilization-patch\\bounded_objective_loss_signal_bridge_target_only_memory_completion_surface_stabilization_patch_corpus.txt"
+    }
+  },
+  "manifest": {
+    "schema_version": 1,
+    "run_dir": "e\\881\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-completion-surface-stabilization-training-run\\run",
+    "created_at": "2026-06-05T03:58:46Z",
+    "started_at": "2026-06-05T03:58:36Z",
+    "finished_at": "2026-06-05T03:58:46Z",
+    "duration_seconds": 10.0,
+    "command": [
+      "python.exe",
+      "scripts\\train.py",
+      "--prepared-data",
+      "e\\880\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-completion-surface-stabilization-patch\\bounded_objective_loss_signal_bridge_target_only_memory_completion_surface_stabilization_patch_corpus.txt",
+      "--out-dir",
+      "e\\881\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-completion-surface-stabilization-training-run\\run",
+      "--tokenizer",
+      "char",
+      "--batch-size",
+      "8",
+      "--block-size",
+      "64",
+      "--max-iters",
+      "240",
+      "--eval-interval",
+      "10",
+      "--eval-iters",
+      "5",
+      "--learning-rate",
+      "0.001",
+      "--n-layer",
+      "2",
+      "--n-head",
+      "2",
+      "--n-embd",
+      "64",
+      "--dropout",
+      "0.0",
+      "--seed",
+      "1881",
+      "--device",
+      "cpu",
+      "--sample-prompt",
+      "Complete with exactly two tokens: fixed loss completion:",
+      "--sample-tokens",
+      "12",
+      "--sample-temperature",
+      "0.8",
+      "--sample-top-k",
+      "20"
+    ],
+    "git": {
+      "commit": "83a4d895b96f1bc10d79045426f118ca5bbe8002",
+      "short_commit": "83a4d89",
+      "branch": "main",
+      "tag": "v880.0.0",
+      "dirty": true
+    },
+    "environment": {
+      "python": "3.13.3",
+      "platform": "Windows-11-10.0.26100-SP0",
+      "executable": "D:\\python\\python.exe",
+      "torch": "2.6.0+cu124",
+      "numpy": "2.2.1"
+    },
+    "data": {
+      "source": {
+        "kind": "prepared_data",
+        "path": "e\\880\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-completion-surface-stabilization-patch\\bounded_objective_loss_signal_bridge_target_only_memory_completion_surface_stabilization_patch_corpus.txt"
+      },
+      "token_count": 7772,
+      "train_token_count": 6994,
+      "val_token_count": 778,
+      "dataset_report": null,
+      "dataset_quality": null,
+      "dataset_version": null
+    },
+    "model": {
+      "config": {
+        "vocab_size": 48,
+        "block_size": 64,
+        "n_layer": 2,
+        "n_head": 2,
+        "n_embd": 64,
+        "dropout": 0.0,
+        "bias": true
+      },
+      "parameter_count": 107264
+    },
+    "training": {
+      "args": {
+        "data": "D:\\aiproj\\data\\sample_zh.txt",
+        "data_dir": null,
+        "prepared_data": "e\\880\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-completion-surface-stabilization-patch\\bounded_objective_loss_signal_bridge_target_only_memory_completion_surface_stabilization_patch_corpus.txt",
+        "out_dir": "e\\881\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-completion-surface-stabilization-training-run\\run",
+        "resume": null,
+        "tokenizer": "char",
+        "bpe_vocab_size": 256,
+        "bpe_min_frequency": 2,
+        "batch_size": 8,
+        "block_size": 64,
+        "max_iters": 240,
+        "eval_interval": 10,
+        "eval_iters": 5,
+        "learning_rate": 0.001,
+        "train_ratio": 0.9,
+        "n_layer": 2,
+        "n_head": 2,
+        "n_embd": 64,
+        "dropout": 0.0,
+        "seed": 1881,
+        "device": "cpu",
+        "sample_prompt": "Complete with exactly two tokens: fixed loss completion:",
+        "sample_tokens": 12,
+        "sample_temperature": 0.8,
+        "sample_top_k": 20,
+        "no_sample": false,
+        "device_used": "cpu",
+        "data_source": {
+          "kind": "prepared_data",
+          "path": "e\\880\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-completion-surface-stabilization-patch\\bounded_objective_loss_signal_bridge_target_only_memory_completion_surface_stabilization_patch_corpus.txt"
+        }
+      },
+      "tokenizer": "char",
+      "device_used": "cpu",
+      "start_step": 1,
+      "end_step": 240
+    },
+    "results": {
+      "last_loss": 0.6203061938285828,
+      "history_summary": {
+        "record_count": 25,
+        "first_step": 1,
+        "last_step": 240,
+        "best_val_step": 240,
+        "best_val_loss": 0.36948448419570923,
+        "last_train_loss": 0.7887188792228699,
+        "last_val_loss": 0.36948448419570923
+      }
+    },
+    "artifacts": [
+      {
+        "key": "checkpoint",
+        "path": "checkpoint.pt",
+        "description": "model and optimizer state",
+        "exists": true,
+        "size_bytes": 1353422,
+        "sha256": "fbd66040a1c880dd84fd43b589d54277fb44d73e7e2275ad38aa954cfb1219d4"
+      },
+      {
+        "key": "tokenizer",
+        "path": "tokenizer.json",
+        "description": "tokenizer vocabulary and metadata",
+        "exists": true,
+        "size_bytes": 550,
+        "sha256": "b972d402fc6b01f1b5e11e000b818624552762081dc4fce797684973b51eaa63"
+      },
+      {
+        "key": "train_config",
+        "path": "train_config.json",
+        "description": "training command configuration",
+        "exists": true,
+        "size_bytes": 1303,
+        "sha256": "88ad447bac14de64c62e8f86f251934020b474d5da868e09cf7b3a339c2ec1b0"
+      },
+      {
+        "key": "metrics",
+        "path": "metrics.jsonl",
+        "description": "step-by-step training metrics",
+        "exists": true,
+        "size_bytes": 2812,
+        "sha256": "520ad5cbe31235d19201c74c3d9e8fba83a5b84c139c028a28fad11c1ca83aef"
+      },
+      {
+        "key": "history_summary",
+        "path": "history_summary.json",
+        "description": "best/latest loss summary",
+        "exists": true,
+        "size_bytes": 216,
+        "sha256": "79bb50b38eaa6e2a3c257af1b9c696629beeee50f35c0c53946705e099a2345d"
+      },
+      {
+        "key": "loss_curve",
+        "path": "loss_curve.svg",
+        "description": "loss curve chart",
+        "exists": true,
+        "size_bytes": 1879,
+        "sha256": "efd17c285da052ff989cd4d67c29676f2aca0e1ef9ae1c07a587fe0d759792b2"
+      },
+      {
+        "key": "prepared_corpus",
+        "path": "prepared_corpus.txt",
+        "description": "merged training corpus",
+        "exists": true,
+        "size_bytes": 8302,
+        "sha256": "7c5ba82f8b0b453a933a00eaa65383e6a73dab603cb99c52f6d3856ff6c6d7f3"
+      },
+      {
+        "key": "dataset_report",
+        "path": "dataset_report.json",
+        "description": "dataset source statistics",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "dataset_chart",
+        "path": "dataset_report.svg",
+        "description": "dataset source chart",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "dataset_quality",
+        "path": "dataset_quality.json",
+        "description": "dataset quality report",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "dataset_quality_chart",
+        "path": "dataset_quality.svg",
+        "description": "dataset quality chart",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "dataset_version",
+        "path": "dataset_version.json",
+        "description": "dataset version manifest",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "dataset_version_html",
+        "path": "dataset_version.html",
+        "description": "browser dataset version report",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "sample",
+        "path": "sample.txt",
+        "description": "post-training sample",
+        "exists": true,
+        "size_bytes": 186,
+        "sha256": "da6475e880383cd2934a199fc02ff15307e6c6e42bc0f9df828906005100bb91"
+      },
+      {
+        "key": "eval_report",
+        "path": "eval_report.json",
+        "description": "checkpoint evaluation report",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "eval_suite",
+        "path": "eval_suite/eval_suite.json",
+        "description": "fixed prompt evaluation suite",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "eval_suite_csv",
+        "path": "eval_suite/eval_suite.csv",
+        "description": "fixed prompt evaluation table",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "eval_suite_chart",
+        "path": "eval_suite/eval_suite.svg",
+        "description": "fixed prompt evaluation chart",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "eval_suite_html",
+        "path": "eval_suite/eval_suite.html",
+        "description": "browser benchmark evaluation report",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "model_report",
+        "path": "model_report/model_report.json",
+        "description": "model architecture report",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "model_chart",
+        "path": "model_report/model_architecture.svg",
+        "description": "model architecture chart",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "prediction_report",
+        "path": "predictions/predictions.json",
+        "description": "next-token prediction report",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "prediction_chart",
+        "path": "predictions/predictions.svg",
+        "description": "next-token prediction chart",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "attention_report",
+        "path": "attention/attention.json",
+        "description": "attention inspection report",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "attention_chart",
+        "path": "attention/attention.svg",
+        "description": "attention heatmap",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "transcript",
+        "path": "transcript.json",
+        "description": "chat transcript",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "generated",
+        "path": "generated.txt",
+        "description": "standalone generation output",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "experiment_card_json",
+        "path": "experiment_card.json",
+        "description": "machine-readable experiment card",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "experiment_card_md",
+        "path": "experiment_card.md",
+        "description": "markdown experiment card",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "experiment_card_html",
+        "path": "experiment_card.html",
+        "description": "browser experiment card",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "dashboard",
+        "path": "dashboard.html",
+        "description": "static dashboard",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "playground",
+        "path": "playground.html",
+        "description": "static playground",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      }
+    ]
+  },
+  "check_rows": [
+    {
+      "id": "unassisted_repair_seed_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "unassisted repair seed must pass"
+    },
+    {
+      "id": "unassisted_repair_seed_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "unassisted repair seed must be ready"
+    },
+    {
+      "id": "next_artifact_matches",
+      "status": "pass",
+      "actual": "model_capability_route_promotion_bounded_objective_unassisted_repair_training_run",
+      "detail": "seed must request unassisted repair training"
+    },
+    {
+      "id": "neutral_prompt_examples_present",
+      "status": "pass",
+      "actual": 12,
+      "detail": "unassisted repair seed needs neutral prompts"
+    },
+    {
+      "id": "no_decoder_anchor_examples",
+      "status": "pass",
+      "actual": 0,
+      "detail": "unassisted repair training must not depend on decoder anchors"
+    },
+    {
+      "id": "direct_examples_match",
+      "status": "pass",
+      "actual": 28,
+      "detail": "all repair seed rows must be direct completions"
+    },
+    {
+      "id": "corpus_chars_present",
+      "status": "pass",
+      "actual": 7772,
+      "detail": "seed corpus must contain training text"
+    },
+    {
+      "id": "checkpoint_exists",
+      "status": "pass",
+      "actual": "e\\881\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-completion-surface-stabilization-training-run\\run\\checkpoint.pt",
+      "detail": "training must produce checkpoint.pt"
+    },
+    {
+      "id": "tokenizer_exists",
+      "status": "pass",
+      "actual": "e\\881\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-completion-surface-stabilization-training-run\\run\\tokenizer.json",
+      "detail": "training must produce tokenizer.json"
+    },
+    {
+      "id": "metrics_exists",
+      "status": "pass",
+      "actual": "e\\881\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-completion-surface-stabilization-training-run\\run\\metrics.jsonl",
+      "detail": "training must produce metrics.jsonl"
+    },
+    {
+      "id": "manifest_exists",
+      "status": "pass",
+      "actual": "e\\881\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-completion-surface-stabilization-training-run\\run\\run_manifest.json",
+      "detail": "training must produce run_manifest.json"
+    },
+    {
+      "id": "sample_exists",
+      "status": "pass",
+      "actual": "e\\881\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-completion-surface-stabilization-training-run\\run\\sample.txt",
+      "detail": "training must produce a sample for later replay review"
+    },
+    {
+      "id": "prepared_corpus_exists",
+      "status": "pass",
+      "actual": "e\\881\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-completion-surface-stabilization-training-run\\run\\prepared_corpus.txt",
+      "detail": "training must copy prepared corpus"
+    },
+    {
+      "id": "metrics_records_present",
+      "status": "pass",
+      "actual": 25,
+      "detail": "training should record at least first and last metrics"
+    },
+    {
+      "id": "max_iters_positive",
+      "status": "pass",
+      "actual": 240,
+      "detail": "train_config must record positive max_iters"
+    }
+  ],
+  "unassisted_repair_training": {
+    "ready": true,
+    "artifact_count": 7,
+    "metric_record_count": 25,
+    "final_step": 240,
+    "final_train_loss": 0.7887188792228699,
+    "final_val_loss": 0.36948448419570923,
+    "train_loss_delta": -2.888267,
+    "val_loss_delta": -3.304667,
+    "max_iters": 240,
+    "seed": 1881,
+    "repair_example_count": 28,
+    "neutral_prompt_example_count": 12,
+    "decoder_anchor_example_count": 0,
+    "proposed_next_artifact": "bounded_objective_loss_signal_bridge_replay_comparison",
+    "next_step": "run_bounded_objective_loss_signal_bridge_replay_comparison"
+  },
+  "summary": {
+    "bounded_objective_unassisted_repair_training_ready": true,
+    "artifact_count": 7,
+    "metric_record_count": 25,
+    "final_step": 240,
+    "final_train_loss": 0.7887188792228699,
+    "final_val_loss": 0.36948448419570923,
+    "train_loss_delta": -2.888267,
+    "val_loss_delta": -3.304667,
+    "repair_example_count": 28,
+    "neutral_prompt_example_count": 12,
+    "decoder_anchor_example_count": 0,
+    "proposed_next_artifact": "bounded_objective_loss_signal_bridge_target_only_memory_completion_surface_stabilization_replay_comparison",
+    "next_step": "run_bounded_objective_loss_signal_bridge_target_only_memory_completion_surface_stabilization_replay_comparison",
+    "failed_check_count": 0,
+    "bounded_objective_unassisted_repair_seed_revision_training_ready": true,
+    "bounded_objective_loss_signal_bridge_training_ready": true,
+    "bounded_objective_loss_signal_bridge_target_only_memory_completion_surface_stabilization_training_ready": true
+  },
+  "interpretation": {
+    "model_quality_claim": "training_artifact_only",
+    "reason": "A checkpoint was trained from the completion-surface stabilization patch corpus, but capability still requires replay comparison.",
+    "next_action": "run_bounded_objective_loss_signal_bridge_target_only_memory_completion_surface_stabilization_replay_comparison"
+  },
+  "source_seed_revision": "e\\880\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-completion-surface-stabilization-patch\\bounded_objective_loss_signal_bridge_target_only_memory_completion_surface_stabilization_patch.json",
+  "seed_revision_summary": {
+    "bounded_objective_loss_signal_bridge_target_only_memory_completion_surface_stabilization_patch_ready": true,
+    "patch_example_count": 28,
+    "completion_surface_example_count": 12,
+    "answer_surface_carry_forward_count": 6,
+    "prefix_fragment_bridge_count": 6,
+    "completion_fragment_resistance_count": 4,
+    "decoder_anchor_example_count": 0,
+    "source_sample_contract_gap": true,
+    "source_zero_hit_delta": 1,
+    "source_any_hit_delta": -1,
+    "patched_corpus_char_count": 7772,
+    "model_quality_claim": "completion_surface_stabilization_patch_only",
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_training_run",
+    "next_step": "train_bounded_objective_loss_signal_bridge_target_only_memory_completion_surface_stabilization_patch",
+    "bounded_objective_loss_signal_bridge_ready": true,
+    "bridge_example_count": 28,
+    "loss_signal_bridge_example_count": 12,
+    "bridged_corpus_char_count": 7772,
+    "bounded_objective_unassisted_repair_seed_revision_ready": true,
+    "example_count": 28,
+    "direct_example_count": 28,
+    "neutral_prompt_example_count": 12,
+    "corpus_char_count": 7772
+  },
+  "source_loss_signal_bridge": "e\\880\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-completion-surface-stabilization-patch\\bounded_objective_loss_signal_bridge_target_only_memory_completion_surface_stabilization_patch.json",
+  "loss_signal_bridge_summary": {
+    "bounded_objective_loss_signal_bridge_target_only_memory_completion_surface_stabilization_patch_ready": true,
+    "patch_example_count": 28,
+    "completion_surface_example_count": 12,
+    "answer_surface_carry_forward_count": 6,
+    "prefix_fragment_bridge_count": 6,
+    "completion_fragment_resistance_count": 4,
+    "decoder_anchor_example_count": 0,
+    "source_sample_contract_gap": true,
+    "source_zero_hit_delta": 1,
+    "source_any_hit_delta": -1,
+    "patched_corpus_char_count": 7772,
+    "model_quality_claim": "completion_surface_stabilization_patch_only",
+    "proposed_next_artifact": "bounded_objective_loss_signal_bridge_target_only_memory_completion_surface_stabilization_training_run",
+    "next_step": "train_bounded_objective_loss_signal_bridge_target_only_memory_completion_surface_stabilization_patch",
+    "bounded_objective_loss_signal_bridge_ready": true,
+    "bridge_example_count": 28,
+    "loss_signal_bridge_example_count": 12,
+    "bridged_corpus_char_count": 7772
+  },
+  "loss_signal_bridge_training": {
+    "ready": true,
+    "artifact_count": 7,
+    "metric_record_count": 25,
+    "final_step": 240,
+    "final_train_loss": 0.7887188792228699,
+    "final_val_loss": 0.36948448419570923,
+    "train_loss_delta": -2.888267,
+    "val_loss_delta": -3.304667,
+    "max_iters": 240,
+    "seed": 1881,
+    "repair_example_count": 28,
+    "neutral_prompt_example_count": 12,
+    "decoder_anchor_example_count": 0,
+    "proposed_next_artifact": "bounded_objective_loss_signal_bridge_replay_comparison",
+    "next_step": "run_bounded_objective_loss_signal_bridge_replay_comparison"
+  },
+  "source_completion_surface_stabilization_patch": "e\\880\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-completion-surface-stabilization-patch\\bounded_objective_loss_signal_bridge_target_only_memory_completion_surface_stabilization_patch.json",
+  "completion_surface_stabilization_patch_summary": {
+    "bounded_objective_loss_signal_bridge_target_only_memory_completion_surface_stabilization_patch_ready": true,
+    "patch_example_count": 28,
+    "completion_surface_example_count": 12,
+    "answer_surface_carry_forward_count": 6,
+    "prefix_fragment_bridge_count": 6,
+    "completion_fragment_resistance_count": 4,
+    "decoder_anchor_example_count": 0,
+    "source_sample_contract_gap": true,
+    "source_zero_hit_delta": 1,
+    "source_any_hit_delta": -1,
+    "patched_corpus_char_count": 7772,
+    "model_quality_claim": "completion_surface_stabilization_patch_only",
+    "proposed_next_artifact": "bounded_objective_loss_signal_bridge_target_only_memory_completion_surface_stabilization_training_run",
+    "next_step": "train_bounded_objective_loss_signal_bridge_target_only_memory_completion_surface_stabilization_patch"
+  },
+  "completion_surface_stabilization_training": {
+    "ready": true,
+    "artifact_count": 7,
+    "metric_record_count": 25,
+    "final_step": 240,
+    "final_train_loss": 0.7887188792228699,
+    "final_val_loss": 0.36948448419570923,
+    "train_loss_delta": -2.888267,
+    "val_loss_delta": -3.304667,
+    "max_iters": 240,
+    "seed": 1881,
+    "repair_example_count": 28,
+    "neutral_prompt_example_count": 12,
+    "decoder_anchor_example_count": 0,
+    "proposed_next_artifact": "bounded_objective_loss_signal_bridge_target_only_memory_completion_surface_stabilization_replay_comparison",
+    "next_step": "run_bounded_objective_loss_signal_bridge_target_only_memory_completion_surface_stabilization_replay_comparison"
+  }
+}

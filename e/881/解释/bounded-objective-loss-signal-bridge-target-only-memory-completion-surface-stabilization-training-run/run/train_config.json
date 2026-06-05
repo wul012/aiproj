@@ -1,0 +1,33 @@
+{
+  "data": "D:\\aiproj\\data\\sample_zh.txt",
+  "data_dir": null,
+  "prepared_data": "e\\880\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-completion-surface-stabilization-patch\\bounded_objective_loss_signal_bridge_target_only_memory_completion_surface_stabilization_patch_corpus.txt",
+  "out_dir": "e\\881\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-completion-surface-stabilization-training-run\\run",
+  "resume": null,
+  "tokenizer": "char",
+  "bpe_vocab_size": 256,
+  "bpe_min_frequency": 2,
+  "batch_size": 8,
+  "block_size": 64,
+  "max_iters": 240,
+  "eval_interval": 10,
+  "eval_iters": 5,
+  "learning_rate": 0.001,
+  "train_ratio": 0.9,
+  "n_layer": 2,
+  "n_head": 2,
+  "n_embd": 64,
+  "dropout": 0.0,
+  "seed": 1881,
+  "device": "cpu",
+  "sample_prompt": "Complete with exactly two tokens: fixed loss completion:",
+  "sample_tokens": 12,
+  "sample_temperature": 0.8,
+  "sample_top_k": 20,
+  "no_sample": false,
+  "device_used": "cpu",
+  "data_source": {
+    "kind": "prepared_data",
+    "path": "e\\880\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-completion-surface-stabilization-patch\\bounded_objective_loss_signal_bridge_target_only_memory_completion_surface_stabilization_patch_corpus.txt"
+  }
+}

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="420" viewBox="0 0 820 420">
+  <rect width="100%" height="100%" fill="#fbfbf7"/>
+  <text x="64" y="22" font-family="Arial, sans-serif" font-size="16" fill="#111827">MiniGPT loss curve</text>
+  <line x1="64" y1="32" x2="64" y2="366" stroke="#374151" stroke-width="1"/>
+  <line x1="64" y1="366" x2="792" y2="366" stroke="#374151" stroke-width="1"/>
+  <polyline points="64.0,32.0 91.4,88.8 121.9,129.1 152.3,155.4 182.8,187.2 213.3,200.9 243.7,223.2 274.2,241.9 304.6,236.5 335.1,259.4 365.6,261.2 396.0,274.8 426.5,276.4 456.9,285.6 487.4,281.7 517.9,289.9 548.3,304.1 578.8,299.4 609.2,309.4 639.7,317.4 670.2,329.0 700.6,323.3 731.1,323.5 761.5,343.2 792.0,323.7" fill="none" stroke="#2563eb" stroke-width="3"/>
+  <polyline points="64.0,32.3 91.4,98.6 121.9,142.9 152.3,183.6 182.8,212.8 213.3,237.8 243.7,248.2 274.2,269.3 304.6,280.2 335.1,292.7 365.6,302.4 396.0,309.8 426.5,312.2 456.9,323.5 487.4,330.4 517.9,334.4 548.3,341.7 578.8,346.2 609.2,349.1 639.7,354.6 670.2,357.6 700.6,363.4 731.1,361.9 761.5,361.3 792.0,366.0" fill="none" stroke="#dc2626" stroke-width="3"/>
+  <text x="64" y="398" font-family="Arial, sans-serif" font-size="13" fill="#374151">step 1 to 240</text>
+  <text x="560" y="398" font-family="Arial, sans-serif" font-size="13" fill="#374151">best val: 0.3695 @ step 240</text>
+  <circle cx="792.0" cy="366.0" r="5" fill="#dc2626"/>
+  <rect x="650" y="30" width="130" height="54" rx="4" fill="#ffffff" stroke="#d1d5db"/>
+  <line x1="664" y1="50" x2="704" y2="50" stroke="#2563eb" stroke-width="3"/>
+  <text x="714" y="54" font-family="Arial, sans-serif" font-size="13" fill="#111827">train</text>
+  <line x1="664" y1="72" x2="704" y2="72" stroke="#dc2626" stroke-width="3"/>
+  <text x="714" y="76" font-family="Arial, sans-serif" font-size="13" fill="#111827">val</text>
+</svg>

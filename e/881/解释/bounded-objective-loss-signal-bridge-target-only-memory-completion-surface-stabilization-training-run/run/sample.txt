@@ -1,0 +1,6 @@
+prompt: Complete with exactly two tokens: fixed loss completion:
+max_new_tokens: 12
+temperature: 0.8
+top_k: 20
+
+Complete with exactly two tokens: fixed loss completion: fixed loss

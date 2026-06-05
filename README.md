@@ -4,7 +4,21 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v880.0.0` builds a completion-surface stabilization patch from the v879 regression diagnostic.
+Version `v881.0.0` trains the v880 completion-surface stabilization patch into a real tiny checkpoint.
+
+## Latest v881 checkpoint
+
+- Added short-name module `bounded_objective_loss_signal_bridge_target_only_memory_completion_surface_stabilization_training_run`.
+- Added CLI `scripts/build_bounded_objective_loss_signal_bridge_target_only_memory_completion_surface_stabilization_training_run.py`.
+- Trained a real CPU checkpoint from the v880 completion-surface stabilization corpus for `240` steps.
+- Recorded `final_train_loss=0.7887188792228699`, `final_val_loss=0.36948448419570923`, and `train_loss_delta=-2.888267`.
+- Preserved `repair_example_count=28`, `neutral_prompt_example_count=12`, and `decoder_anchor_example_count=0`.
+- Produced checkpoint, tokenizer, metrics, train config, run manifest, sample, loss curve, and prepared corpus artifacts.
+- Sample emits the completion surface target: `Complete with exactly two tokens: fixed loss completion: fixed loss`.
+- Kept `model_quality_claim=training_artifact_only`; v882 replay must verify whether this checkpoint recovers the bounded objective.
+- Routed the next artifact to `bounded_objective_loss_signal_bridge_target_only_memory_completion_surface_stabilization_replay_comparison`.
+- Verified with `3 passed` focused completion-surface stabilization training-run tests and Playwright MCP screenshot evidence.
+- Archived v881 evidence in `e/881` and added the code explanation in `代码讲解记录_模型能力阶段/895-v881-bounded-objective-loss-signal-bridge-target-only-memory-completion-surface-stabilization-training-run.md`.
 
 ## Latest v880 checkpoint
 

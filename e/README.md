@@ -1882,3 +1882,9 @@ e/663/解释/说明.md
 - `e/880/图片`
 - `e/880/解释/说明.md`
 - v880 bounded objective loss signal bridge target-only memory completion-surface stabilization patch 的运行截图和解释。
+
+## v881 补充索引
+
+- `e/881/图片`
+- `e/881/解释/说明.md`
+- v881 bounded objective loss signal bridge target-only memory completion-surface stabilization training run 的运行截图和解释。
