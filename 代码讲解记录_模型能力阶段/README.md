@@ -1262,6 +1262,9 @@
 903-v889-bounded-objective-loss-signal-bridge-target-only-memory-stagnation-aware-suffix-patch.md
  -> v889 code explanation: materialize the repair plan into exact contract prompt, suffix-bridge, surface-format, ratio, and replay-gate patch examples.
 
+904-v890-bounded-objective-loss-signal-bridge-target-only-memory-stagnation-aware-suffix-training-run.md
+ -> v890 code explanation: train the stagnation-aware suffix patch corpus into a real checkpoint while keeping capability gated behind replay.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

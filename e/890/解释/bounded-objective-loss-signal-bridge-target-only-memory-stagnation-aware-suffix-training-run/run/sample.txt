@@ -1,0 +1,7 @@
+prompt: Answer with exactly two tokens: fixed loss answer:
+max_new_tokens: 12
+temperature: 0.8
+top_k: 20
+
+Answer with exactly two tokens: fixed loss answer:
+answer: fix

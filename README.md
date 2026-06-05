@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v889.0.0` materializes the v888 stagnation-aware suffix repair plan into a no-anchor patch corpus.
+Version `v890.0.0` trains a real checkpoint from the v889 stagnation-aware suffix patch corpus.
+
+## Latest v890 checkpoint
+
+- Added short-name module `bounded_objective_loss_signal_bridge_target_only_memory_stagnation_aware_suffix_training_run`.
+- Added CLI `scripts/build_bounded_objective_loss_signal_bridge_target_only_memory_stagnation_aware_suffix_training_run.py`.
+- Trained a real CPU checkpoint from the v889 stagnation-aware suffix patch corpus for `280` steps.
+- Recorded `final_train_loss=0.4759935438632965`, `final_val_loss=0.44544440507888794`, and `train_loss_delta=-3.207202`.
+- Preserved `repair_example_count=27`, `neutral_prompt_example_count=22`, and `decoder_anchor_example_count=0`.
+- Sample output is not a success claim: `Answer with exactly two tokens: fixed loss answer: answer: fix`.
+- Kept `model_quality_claim=training_artifact_only`; v891 replay must verify whether this checkpoint recovers the bounded objective.
+- Routed the next artifact to `bounded_objective_loss_signal_bridge_target_only_memory_stagnation_aware_suffix_replay_comparison`.
+- Verified with `3 passed` focused stagnation-aware suffix training-run tests and Playwright MCP screenshot evidence.
+- Archived v890 evidence in `e/890` and added the code explanation in `代码讲解记录_模型能力阶段/904-v890-bounded-objective-loss-signal-bridge-target-only-memory-stagnation-aware-suffix-training-run.md`.
 
 ## Latest v889 checkpoint
 
