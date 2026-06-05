@@ -1,0 +1,6 @@
+case_id,positive_case_pass,negative_case_pass,positive_hit_terms,negative_hit_terms
+tokenizer-covered-answer_exact_terms,True,False,"fixed,loss",fixed
+tokenizer-covered-return_target_words,True,False,"fixed,loss",fixed
+tokenizer-covered-contrast_route_result,True,False,"fixed,loss",fixed
+tokenizer-covered-jsonish_answer_terms,True,False,"fixed,loss",fixed
+tokenizer-covered-self_check_terms,True,False,"fixed,loss",fixed

@@ -1976,3 +1976,8 @@ e/663/解释/说明.md
 - `e/898/图片`
 - `e/898/解释/说明.md`
 - v898 bounded objective loss signal bridge target-only memory tokenizer-coverage-aware holdout suite screenshots and explanation.
+## v899 supplemental index
+
+- `e/899/图片`
+- `e/899/解释/说明.md`
+- v899 bounded objective loss signal bridge target-only memory tokenizer-coverage-aware holdout dry-run screenshots and explanation.

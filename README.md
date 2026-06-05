@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v898.0.0` builds a tokenizer-coverage-aware holdout suite after diagnosing the v896 holdout failure.
+Version `v899.0.0` dry-runs the tokenizer-coverage-aware holdout suite scoring contract before real replay.
+
+## Latest v899 checkpoint
+
+- Added short-name module `bounded_objective_loss_signal_bridge_target_only_memory_tokenizer_coverage_aware_holdout_dry_run`.
+- Added CLI `scripts/dry_run_bounded_objective_loss_signal_bridge_target_only_memory_tokenizer_coverage_aware_holdout.py`.
+- Consumed the real v898 tokenizer-coverage-aware holdout suite without running a model.
+- Verified the positive continuation `fixed loss` passes all 5 cases.
+- Verified the negative continuation `fixed only` passes 0 cases.
+- Recorded `positive_passed_case_count=5`, `negative_passed_case_count=0`, and `negative_control_passed=False`.
+- Kept `promotion_ready=False` and `model_quality_claim=dry_run_only`.
+- Routed the next action to `run_tokenizer_coverage_aware_holdout_real_replay`.
+- Verified with `4 passed` focused tokenizer-coverage-aware dry-run tests and Playwright MCP screenshot evidence.
+- Archived v899 evidence in `e/899` and added the code explanation in `代码讲解记录_模型能力阶段/913-v899-bounded-objective-loss-signal-bridge-target-only-memory-tokenizer-coverage-aware-holdout-dry-run.md`.
 
 ## Latest v898 checkpoint
 
