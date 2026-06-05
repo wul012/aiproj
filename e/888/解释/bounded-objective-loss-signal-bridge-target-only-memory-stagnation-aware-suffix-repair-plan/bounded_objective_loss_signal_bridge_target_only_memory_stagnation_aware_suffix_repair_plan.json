@@ -1,0 +1,225 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT bounded objective loss signal bridge target-only memory stagnation-aware suffix repair plan",
+  "generated_at": "2026-06-05T09:06:39Z",
+  "status": "pass",
+  "decision": "bounded_objective_loss_signal_bridge_target_only_memory_stagnation_aware_suffix_repair_plan_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_stagnation_diagnostic": "e\\887\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-stabilized-loss-suffix-uptake-stagnation-diagnostic\\bounded_objective_loss_signal_bridge_target_only_memory_stabilized_loss_suffix_uptake_stagnation_diagnostic.json",
+  "stagnation_summary": {
+    "bounded_objective_loss_signal_bridge_target_only_memory_stabilized_loss_suffix_uptake_stagnation_diagnostic_ready": true,
+    "case_count": 3,
+    "baseline_passed_case_count": 0,
+    "current_passed_case_count": 0,
+    "pass_delta": 0,
+    "any_hit_delta": 0,
+    "zero_hit_delta": 0,
+    "continuation_changed_count": 2,
+    "loss_newly_hit_case_count": 0,
+    "unchanged_fixed_l_partial_case_count": 1,
+    "stagnation_confirmed": false,
+    "surface_format_changed_without_suffix_gain": true,
+    "no_contract_gain_confirmed": true,
+    "next_step": "build_bounded_objective_loss_signal_bridge_target_only_memory_stagnation_aware_suffix_repair_plan"
+  },
+  "stagnation_diagnostic": {
+    "ready": true,
+    "pass_delta": 0,
+    "any_hit_delta": 0,
+    "zero_hit_delta": 0,
+    "continuation_changed_count": 2,
+    "loss_newly_hit_case_count": 0,
+    "unchanged_fixed_l_partial_case_count": 1,
+    "current_fixed_l_partial_case_count": 3,
+    "stagnation_confirmed": false,
+    "surface_format_changed_without_suffix_gain": true,
+    "no_contract_gain_confirmed": true,
+    "next_step": "build_bounded_objective_loss_signal_bridge_target_only_memory_stagnation_aware_suffix_repair_plan"
+  },
+  "source_case_diagnostics": [
+    {
+      "case_id": "canonical_direct_completion",
+      "baseline_present": true,
+      "current_present": true,
+      "baseline_continuation": " fixed l",
+      "current_continuation": " fixed l",
+      "continuation_changed": false,
+      "baseline_hit_terms": [
+        "fixed"
+      ],
+      "current_hit_terms": [
+        "fixed"
+      ],
+      "hit_terms_changed": false,
+      "baseline_case_pass": false,
+      "current_case_pass": false,
+      "loss_newly_hit": false,
+      "current_fixed_l_partial": true,
+      "state_label": "unchanged_fixed_l_partial"
+    },
+    {
+      "case_id": "completion_label_surface",
+      "baseline_present": true,
+      "current_present": true,
+      "baseline_continuation": " fixed l",
+      "current_continuation": "\nfixed l",
+      "continuation_changed": true,
+      "baseline_hit_terms": [
+        "fixed"
+      ],
+      "current_hit_terms": [
+        "fixed"
+      ],
+      "hit_terms_changed": false,
+      "baseline_case_pass": false,
+      "current_case_pass": false,
+      "loss_newly_hit": false,
+      "current_fixed_l_partial": true,
+      "state_label": "changed_fixed_l_partial"
+    },
+    {
+      "case_id": "minimal_direct_completion",
+      "baseline_present": true,
+      "current_present": true,
+      "baseline_continuation": " fixed l",
+      "current_continuation": "\nfixed l",
+      "continuation_changed": true,
+      "baseline_hit_terms": [
+        "fixed"
+      ],
+      "current_hit_terms": [
+        "fixed"
+      ],
+      "hit_terms_changed": false,
+      "baseline_case_pass": false,
+      "current_case_pass": false,
+      "loss_newly_hit": false,
+      "current_fixed_l_partial": true,
+      "state_label": "changed_fixed_l_partial"
+    }
+  ],
+  "plan_actions": [
+    {
+      "action_id": "suffix-position-bridge",
+      "category": "suffix_position",
+      "priority": "required",
+      "purpose": "Add examples where loss immediately follows the fixed-l and fixed-lo fragments under the exact contract labels.",
+      "implementation_hint": "Generate paired snippets for `fixed l -> fixed loss`, `fixed lo -> fixed loss`, and direct `fixed loss` completions.",
+      "evidence_count": 3,
+      "next_artifact_role": "patch_requirement"
+    },
+    {
+      "action_id": "surface-format-normalization",
+      "category": "surface_format",
+      "priority": "required",
+      "purpose": "Preserve both space-prefixed and newline-prefixed continuations so formatting drift does not hide suffix progress.",
+      "implementation_hint": "Create parallel answer/completion examples for ` answer: fixed loss` and `answer:\\nfixed loss` surfaces.",
+      "evidence_count": 2,
+      "next_artifact_role": "patch_requirement"
+    },
+    {
+      "action_id": "replay-prompt-boundary-lock",
+      "category": "replay_prompt_boundary",
+      "priority": "required",
+      "purpose": "Bind patch examples to the unchanged v836 prompts instead of relying on free-form sample prompts.",
+      "implementation_hint": "Use the canonical/minimal/completion contract prompts as literal prefixes in the next patch corpus.",
+      "evidence_count": 3,
+      "next_artifact_role": "patch_requirement"
+    },
+    {
+      "action_id": "suffix-ratio-increase",
+      "category": "training_corpus_ratio",
+      "priority": "required",
+      "purpose": "Raise suffix-uptake examples above surface carry-forward examples because the prior patch changed formatting without adding loss hits.",
+      "implementation_hint": "Target at least 2:1 suffix-uptake to surface-carry-forward examples, while keeping decoder anchors at zero.",
+      "evidence_count": 0,
+      "next_artifact_role": "patch_requirement"
+    },
+    {
+      "action_id": "contract-gated-training-stop",
+      "category": "verification_gate",
+      "priority": "required",
+      "purpose": "Keep training claims gated behind unchanged contract replay, since v885 sample success did not transfer.",
+      "implementation_hint": "Require a replay comparison before any promotion or holdout route; do not infer recovery from sample text.",
+      "evidence_count": 0,
+      "next_artifact_role": "patch_requirement"
+    }
+  ],
+  "check_rows": [
+    {
+      "id": "diagnostic_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "source stagnation diagnostic must pass"
+    },
+    {
+      "id": "diagnostic_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "source stagnation diagnostic must be ready"
+    },
+    {
+      "id": "no_contract_gain",
+      "status": "pass",
+      "actual": true,
+      "detail": "repair plan applies only after no contract gain is confirmed"
+    },
+    {
+      "id": "loss_not_newly_hit",
+      "status": "pass",
+      "actual": 0,
+      "detail": "repair plan should not override genuine loss recovery"
+    },
+    {
+      "id": "cases_present",
+      "status": "pass",
+      "actual": 3,
+      "detail": "case diagnostics must be present"
+    },
+    {
+      "id": "actions_present",
+      "status": "pass",
+      "actual": 5,
+      "detail": "repair plan needs multiple targeted actions"
+    },
+    {
+      "id": "required_categories",
+      "status": "pass",
+      "actual": [
+        "replay_prompt_boundary",
+        "suffix_position",
+        "surface_format",
+        "training_corpus_ratio",
+        "verification_gate"
+      ],
+      "detail": "repair plan must cover suffix, surface, prompt boundary, ratio, and verification"
+    },
+    {
+      "id": "next_step_matches",
+      "status": "pass",
+      "actual": "build_bounded_objective_loss_signal_bridge_target_only_memory_stagnation_aware_suffix_repair_plan",
+      "detail": "source diagnostic should route to this plan"
+    }
+  ],
+  "summary": {
+    "bounded_objective_loss_signal_bridge_target_only_memory_stagnation_aware_suffix_repair_plan_ready": true,
+    "action_count": 5,
+    "required_action_count": 5,
+    "suffix_position_action_count": 1,
+    "surface_format_action_count": 1,
+    "replay_prompt_boundary_action_count": 1,
+    "training_corpus_ratio_action_count": 1,
+    "verification_gate_action_count": 1,
+    "source_no_contract_gain_confirmed": true,
+    "source_surface_format_changed_without_suffix_gain": true,
+    "model_quality_claim": "repair_plan_only",
+    "proposed_next_artifact": "bounded_objective_loss_signal_bridge_target_only_memory_stagnation_aware_suffix_patch",
+    "next_step": "build_bounded_objective_loss_signal_bridge_target_only_memory_stagnation_aware_suffix_patch"
+  },
+  "interpretation": {
+    "model_quality_claim": "repair_plan_only",
+    "reason": "The plan converts no-contract-gain evidence into targeted suffix, surface, prompt-boundary, ratio, and replay-gate repair actions.",
+    "next_action": "build_bounded_objective_loss_signal_bridge_target_only_memory_stagnation_aware_suffix_patch"
+  }
+}

@@ -1256,6 +1256,9 @@
 901-v887-bounded-objective-loss-signal-bridge-target-only-memory-stabilized-loss-suffix-uptake-stagnation-diagnostic.md
  -> v887 code explanation: compare v882 and v886 replay rows and show v885 changed surface formatting without contract-level suffix gain.
 
+902-v888-bounded-objective-loss-signal-bridge-target-only-memory-stagnation-aware-suffix-repair-plan.md
+ -> v888 code explanation: convert the no-contract-gain diagnosis into targeted suffix, surface, prompt-boundary, ratio, and replay-gate repair actions.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

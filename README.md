@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v887.0.0` diagnoses the v882-to-v886 replay delta and confirms no contract gain after stabilized loss-suffix uptake training.
+Version `v888.0.0` turns the v887 no-contract-gain diagnosis into a stagnation-aware suffix repair plan.
+
+## Latest v888 checkpoint
+
+- Added short-name module `bounded_objective_loss_signal_bridge_target_only_memory_stagnation_aware_suffix_repair_plan`.
+- Added CLI `scripts/build_bounded_objective_loss_signal_bridge_target_only_memory_stagnation_aware_suffix_repair_plan.py`.
+- Consumed the real v887 stagnation diagnostic.
+- Generated `action_count=5` and `required_action_count=5`.
+- Covered suffix position, surface formatting, replay prompt boundary, training corpus ratio, and verification gate actions.
+- Preserved source signals `source_no_contract_gain_confirmed=True` and `source_surface_format_changed_without_suffix_gain=True`.
+- Kept `model_quality_claim=repair_plan_only`; this version does not patch data or train.
+- Routed the next artifact to `build_bounded_objective_loss_signal_bridge_target_only_memory_stagnation_aware_suffix_patch`.
+- Verified with `4 passed` focused stagnation-aware suffix repair-plan tests and Playwright MCP screenshot evidence.
+- Archived v888 evidence in `e/888` and added the code explanation in `代码讲解记录_模型能力阶段/902-v888-bounded-objective-loss-signal-bridge-target-only-memory-stagnation-aware-suffix-repair-plan.md`.
 
 ## Latest v887 checkpoint
 
