@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v884.0.0` builds a stabilized loss-suffix uptake patch from the v883 partial-hit diagnostic.
+Version `v885.0.0` trains a real checkpoint from the v884 stabilized loss-suffix uptake patch corpus.
+
+## Latest v885 checkpoint
+
+- Added short-name module `bounded_objective_loss_signal_bridge_target_only_memory_stabilized_loss_suffix_uptake_training_run`.
+- Added CLI `scripts/build_bounded_objective_loss_signal_bridge_target_only_memory_stabilized_loss_suffix_uptake_training_run.py`.
+- Trained a real CPU checkpoint from the v884 stabilized loss-suffix uptake patch corpus for `260` steps.
+- Recorded `final_train_loss=0.48616647720336914`, `final_val_loss=0.5385479927062988`, and `train_loss_delta=-3.176852`.
+- Preserved `repair_example_count=24`, `neutral_prompt_example_count=15`, and `decoder_anchor_example_count=0`.
+- Sample emits the canonical answer surface target: `Answer with exactly two tokens: fixed loss answer: fixed loss`.
+- Kept `model_quality_claim=training_artifact_only`; v886 replay must verify whether this checkpoint recovers the bounded objective.
+- Routed the next artifact to `bounded_objective_loss_signal_bridge_target_only_memory_stabilized_loss_suffix_uptake_replay_comparison`.
+- Verified with `3 passed` focused stabilized loss-suffix uptake training-run tests and Playwright MCP screenshot evidence.
+- Archived v885 evidence in `e/885` and added the code explanation in `代码讲解记录_模型能力阶段/899-v885-bounded-objective-loss-signal-bridge-target-only-memory-stabilized-loss-suffix-uptake-training-run.md`.
 
 ## Latest v884 checkpoint
 

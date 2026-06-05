@@ -1247,6 +1247,9 @@
 898-v884-bounded-objective-loss-signal-bridge-target-only-memory-stabilized-loss-suffix-uptake-patch.md
  -> v884 code explanation: convert the stabilized fixed-l suffix gap into a no-anchor loss-suffix uptake patch corpus.
 
+899-v885-bounded-objective-loss-signal-bridge-target-only-memory-stabilized-loss-suffix-uptake-training-run.md
+ -> v885 code explanation: train the stabilized loss-suffix uptake corpus into a real checkpoint while keeping capability gated behind replay.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。
