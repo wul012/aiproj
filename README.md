@@ -4,7 +4,19 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v883.0.0` diagnoses the v882 stabilized partial-hit replay and routes the next repair toward loss-suffix uptake.
+Version `v884.0.0` builds a stabilized loss-suffix uptake patch from the v883 partial-hit diagnostic.
+
+## Latest v884 checkpoint
+
+- Added short-name module `bounded_objective_loss_signal_bridge_target_only_memory_stabilized_loss_suffix_uptake_patch`.
+- Added CLI `scripts/build_bounded_objective_loss_signal_bridge_target_only_memory_stabilized_loss_suffix_uptake_patch.py`.
+- Consumed the real v883 partial-hit diagnostic and v881 prepared corpus.
+- Generated `patch_example_count=24`, with `fixed_l_to_loss_uptake_count=6`, `fixed_lo_to_loss_uptake_count=3`, `global_suffix_uptake_count=6`, and `surface_pair_carry_forward_count=9`.
+- Kept `decoder_anchor_example_count=0`.
+- Kept `model_quality_claim=stabilized_loss_suffix_uptake_patch_only`; no checkpoint capability is claimed before training and replay.
+- Routed the next artifact to `train_bounded_objective_loss_signal_bridge_target_only_memory_stabilized_loss_suffix_uptake_patch`.
+- Verified with `4 passed` focused stabilized loss-suffix uptake patch tests and Playwright MCP screenshot evidence.
+- Archived v884 evidence in `e/884` and added the code explanation in `代码讲解记录_模型能力阶段/898-v884-bounded-objective-loss-signal-bridge-target-only-memory-stabilized-loss-suffix-uptake-patch.md`.
 
 ## Latest v883 checkpoint
 

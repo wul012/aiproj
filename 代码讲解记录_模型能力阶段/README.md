@@ -1244,6 +1244,9 @@
 897-v883-bounded-objective-loss-signal-bridge-target-only-memory-completion-surface-stabilization-partial-hit-diagnostic.md
  -> v883 code explanation: diagnose the stabilized fixed-l partial state and route the next repair to loss suffix uptake.
 
+898-v884-bounded-objective-loss-signal-bridge-target-only-memory-stabilized-loss-suffix-uptake-patch.md
+ -> v884 code explanation: convert the stabilized fixed-l suffix gap into a no-anchor loss-suffix uptake patch corpus.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。
