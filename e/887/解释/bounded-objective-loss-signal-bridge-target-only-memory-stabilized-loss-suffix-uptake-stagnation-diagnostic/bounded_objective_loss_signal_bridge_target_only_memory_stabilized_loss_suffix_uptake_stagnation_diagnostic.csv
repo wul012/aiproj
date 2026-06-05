@@ -1,0 +1,6 @@
+case_id,state_label,baseline_continuation,current_continuation,continuation_changed,loss_newly_hit
+canonical_direct_completion,unchanged_fixed_l_partial, fixed l, fixed l,False,False
+completion_label_surface,changed_fixed_l_partial, fixed l,"
+fixed l",True,False
+minimal_direct_completion,changed_fixed_l_partial, fixed l,"
+fixed l",True,False

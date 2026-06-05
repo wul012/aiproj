@@ -1253,6 +1253,9 @@
 900-v886-bounded-objective-loss-signal-bridge-target-only-memory-stabilized-loss-suffix-uptake-replay-comparison.md
  -> v886 code explanation: replay the stabilized loss-suffix uptake checkpoint and show it remains a fixed-l partial signal instead of full fixed-loss recovery.
 
+901-v887-bounded-objective-loss-signal-bridge-target-only-memory-stabilized-loss-suffix-uptake-stagnation-diagnostic.md
+ -> v887 code explanation: compare v882 and v886 replay rows and show v885 changed surface formatting without contract-level suffix gain.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

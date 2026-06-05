@@ -4,7 +4,19 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v886.0.0` replays the v885 stabilized loss-suffix uptake checkpoint against the unchanged bounded objective contract.
+Version `v887.0.0` diagnoses the v882-to-v886 replay delta and confirms no contract gain after stabilized loss-suffix uptake training.
+
+## Latest v887 checkpoint
+
+- Added short-name module `bounded_objective_loss_signal_bridge_target_only_memory_stabilized_loss_suffix_uptake_stagnation_diagnostic`.
+- Added CLI `scripts/diagnose_bounded_objective_loss_signal_bridge_target_only_memory_stabilized_loss_suffix_uptake_stagnation.py`.
+- Compared the real v882 completion-surface stabilization replay with the real v886 stabilized loss-suffix uptake replay.
+- Confirmed `no_contract_gain_confirmed=True`, with `pass_delta=0`, `any_hit_delta=0`, `zero_hit_delta=0`, and `loss_newly_hit_case_count=0`.
+- Recorded `continuation_changed_count=2`, so the route changed surface formatting but did not add `loss` suffix uptake.
+- Kept `model_quality_claim=stabilized_loss_suffix_uptake_no_contract_gain`.
+- Routed the next artifact to `build_bounded_objective_loss_signal_bridge_target_only_memory_stagnation_aware_suffix_repair_plan`.
+- Verified with `5 passed` focused stagnation diagnostic tests and Playwright MCP screenshot evidence.
+- Archived v887 evidence in `e/887` and added the code explanation in `代码讲解记录_模型能力阶段/901-v887-bounded-objective-loss-signal-bridge-target-only-memory-stabilized-loss-suffix-uptake-stagnation-diagnostic.md`.
 
 ## Latest v886 checkpoint
 
