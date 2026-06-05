@@ -4,7 +4,21 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v872.0.0` turns the v871 persisted label-echo diagnosis into a target-only completion memory patch.
+Version `v873.0.0` trains the v872 target-only memory patch into a real checkpoint while keeping capability claims gated behind replay.
+
+## Latest v873 checkpoint
+
+- Added short-name module `bounded_objective_loss_signal_bridge_target_only_memory_training_run`.
+- Added CLI `scripts/build_bounded_objective_loss_signal_bridge_target_only_memory_training_run.py`.
+- Trained a real CPU checkpoint from the v872 target-only memory patch corpus for `180` steps.
+- Recorded `final_train_loss=0.9454461932182312`, `final_val_loss=0.8332666158676147`, and `train_loss_delta=-2.710383`.
+- Preserved `repair_example_count=24`, `neutral_prompt_example_count=6`, and `decoder_anchor_example_count=0`.
+- Produced checkpoint, tokenizer, metrics, train config, run manifest, sample, loss curve, and prepared corpus artifacts.
+- Sample moved closer to the target surface: `Answer with exactly two tokens: fixed loss answer: fixed los`.
+- Kept `model_quality_claim=training_artifact_only`; v874 replay must verify whether this checkpoint recovers the bounded objective.
+- Routed the next artifact to `bounded_objective_loss_signal_bridge_target_only_memory_replay_comparison`.
+- Verified with `3 passed` focused target-only memory training-run tests and Playwright MCP screenshot evidence.
+- Archived v873 evidence in `e/873` and added the code explanation in `代码讲解记录_模型能力阶段/887-v873-bounded-objective-loss-signal-bridge-target-only-memory-training-run.md`.
 
 ## Latest v872 checkpoint
 
