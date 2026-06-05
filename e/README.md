@@ -259,6 +259,10 @@ e/876/解释/说明.md
 e/877/图片
 e/877/解释/说明.md
  -> v877 bounded objective loss signal bridge target-only memory loss-suffix training run 的运行截图和解释
+
+e/878/图片
+e/878/解释/说明.md
+ -> v878 bounded objective loss signal bridge target-only memory loss-suffix replay comparison 的运行截图和解释
 ```
 
 ```text

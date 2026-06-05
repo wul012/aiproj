@@ -191,6 +191,9 @@
 891-v877-bounded-objective-loss-signal-bridge-target-only-memory-loss-suffix-training-run.md
  -> v877 code explanation: train the loss-suffix patch into a real checkpoint while leaving capability claims to replay.
 
+892-v878-bounded-objective-loss-signal-bridge-target-only-memory-loss-suffix-replay-comparison.md
+ -> v878 code explanation: replay the loss-suffix checkpoint and show sample-level success did not recover the contract.
+
 487-v473-baseline-candidate-capability-delta.md
  -> v473 code explanation: carry real tiny training loss and generation-quality deltas into the baseline-candidate eval loop.
 

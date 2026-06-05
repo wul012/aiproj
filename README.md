@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v877.0.0` trains the v876 loss-suffix patch into a real checkpoint whose sample now emits the complete `fixed loss` target.
+Version `v878.0.0` replays the v877 loss-suffix checkpoint and shows the complete sample did not recover the bounded objective contract.
+
+## Latest v878 checkpoint
+
+- Added short-name module `bounded_objective_loss_signal_bridge_target_only_memory_loss_suffix_replay_comparison`.
+- Added CLI `scripts/run_bounded_objective_loss_signal_bridge_target_only_memory_loss_suffix_replay_comparison.py`.
+- Replayed the real v877 checkpoint against the unchanged v836 bounded objective contract on CPU.
+- Recorded `case_count=3`, `passed_case_count=0`, `any_hit_case_count=2`, `zero_hit_case_count=1`, and `pass_rate=0.0`.
+- Confirmed `objective_contract_recovered=False`, `canonical_case_pass=False`, and `promotion_ready=False`.
+- Observed canonical/minimal still output `fixed l`, while completion surface regressed to `an: fix`.
+- Kept `model_quality_claim=partial_required_term_signal`; v877 sample improvement is not contract recovery.
+- Routed the next artifact to `diagnose_bounded_objective_loss_signal_bridge_target_only_memory_loss_suffix_partial_hit_before_more_training`.
+- Verified with `4 passed` focused loss-suffix replay-comparison tests and Playwright MCP screenshot evidence.
+- Archived v878 evidence in `e/878` and added the code explanation in `代码讲解记录_模型能力阶段/892-v878-bounded-objective-loss-signal-bridge-target-only-memory-loss-suffix-replay-comparison.md`.
 
 ## Latest v877 checkpoint
 
