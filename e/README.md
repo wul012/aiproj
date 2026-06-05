@@ -251,6 +251,10 @@ e/874/解释/说明.md
 e/875/图片
 e/875/解释/说明.md
  -> v875 bounded objective loss signal bridge target-only memory partial-hit diagnostic 的运行截图和解释
+
+e/876/图片
+e/876/解释/说明.md
+ -> v876 bounded objective loss signal bridge target-only memory loss-suffix patch 的运行截图和解释
 ```
 
 ```text

@@ -185,6 +185,9 @@
 889-v875-bounded-objective-loss-signal-bridge-target-only-memory-partial-hit-diagnostic.md
  -> v875 code explanation: diagnose target-only memory partial hits as a consistent loss-suffix uptake gap.
 
+890-v876-bounded-objective-loss-signal-bridge-target-only-memory-loss-suffix-patch.md
+ -> v876 code explanation: convert the loss-suffix gap into a no-anchor patch corpus for the next training run.
+
 487-v473-baseline-candidate-capability-delta.md
  -> v473 code explanation: carry real tiny training loss and generation-quality deltas into the baseline-candidate eval loop.
 

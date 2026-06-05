@@ -1,0 +1,494 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT bounded objective loss signal bridge target-only memory loss-suffix patch",
+  "generated_at": "2026-06-05T02:26:12Z",
+  "status": "pass",
+  "decision": "bounded_objective_loss_signal_bridge_target_only_memory_loss_suffix_patch_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_partial_hit_diagnostic": "e\\875\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-partial-hit-diagnostic\\bounded_objective_loss_signal_bridge_target_only_memory_partial_hit_diagnostic.json",
+  "source_replay_comparison": "e\\874\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-replay-comparison\\bounded_objective_loss_signal_bridge_target_only_memory_replay_comparison.json",
+  "source_corpus": "e\\873\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-training-run\\run\\prepared_corpus.txt",
+  "partial_hit_diagnostic_summary": {
+    "bounded_objective_loss_signal_bridge_target_only_memory_partial_hit_diagnostic_ready": true,
+    "case_count": 3,
+    "partial_case_count": 3,
+    "fixed_without_loss_case_count": 3,
+    "loss_hit_case_count": 0,
+    "loss_prefix_case_count": 3,
+    "all_cases_fixed_without_loss": true,
+    "all_cases_loss_prefix": true,
+    "root_cause_count": 4,
+    "next_step": "build_bounded_objective_loss_signal_bridge_target_only_memory_loss_suffix_patch"
+  },
+  "replay_summary": {
+    "bounded_objective_replay_comparison_ready": true,
+    "objective_contract_recovered": false,
+    "canonical_case_pass": false,
+    "case_count": 3,
+    "executed_case_count": 3,
+    "passed_case_count": 0,
+    "failed_case_count": 3,
+    "any_hit_case_count": 3,
+    "zero_hit_case_count": 0,
+    "pass_rate": 0.0,
+    "promotion_ready": false,
+    "next_step": "diagnose_bounded_objective_loss_signal_bridge_target_only_memory_partial_hit_before_more_training",
+    "failed_check_count": 0,
+    "bounded_objective_loss_signal_bridge_replay_comparison_ready": true,
+    "decoder_anchor_used": false,
+    "route": "bounded_objective_loss_signal_bridge_target_only_memory",
+    "bounded_objective_loss_signal_bridge_target_only_memory_replay_comparison_ready": true
+  },
+  "patch_examples": [
+    {
+      "example_id": "canonical_direct_completion-target-pair-a",
+      "kind": "target_pair_memory",
+      "text": "fixed loss",
+      "completion": "fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "source_case_id": "canonical_direct_completion",
+      "source_continuation": "\nfixed l",
+      "purpose": "reinforce the complete fixed loss pair after fixed-prefix recovery"
+    },
+    {
+      "example_id": "canonical_direct_completion-target-pair-b",
+      "kind": "target_pair_memory",
+      "text": "fixed loss",
+      "completion": "fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "source_case_id": "canonical_direct_completion",
+      "source_continuation": "\nfixed l",
+      "purpose": "reinforce the complete fixed loss pair after fixed-prefix recovery"
+    },
+    {
+      "example_id": "canonical_direct_completion-loss-suffix",
+      "kind": "loss_suffix_memory",
+      "text": "loss",
+      "completion": "loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "source_case_id": "canonical_direct_completion",
+      "source_continuation": "\nfixed l",
+      "purpose": "strengthen the missing loss suffix token"
+    },
+    {
+      "example_id": "canonical_direct_completion-prefix-bridge",
+      "kind": "loss_prefix_bridge",
+      "text": "fixed l\nloss\nfixed loss",
+      "completion": "fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "source_case_id": "canonical_direct_completion",
+      "source_continuation": "\nfixed l",
+      "purpose": "bridge the observed fixed l partial continuation to complete fixed loss"
+    },
+    {
+      "example_id": "canonical_direct_completion-label-pair",
+      "kind": "minimal_label_pair",
+      "text": "completion:\nfixed loss",
+      "completion": "fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "source_case_id": "canonical_direct_completion",
+      "source_continuation": "\nfixed l",
+      "purpose": "keep a minimal replay-label to complete-pair bridge"
+    },
+    {
+      "example_id": "minimal_direct_completion-target-pair-a",
+      "kind": "target_pair_memory",
+      "text": "fixed loss",
+      "completion": "fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "source_case_id": "minimal_direct_completion",
+      "source_continuation": "\nfixed l",
+      "purpose": "reinforce the complete fixed loss pair after fixed-prefix recovery"
+    },
+    {
+      "example_id": "minimal_direct_completion-target-pair-b",
+      "kind": "target_pair_memory",
+      "text": "fixed loss",
+      "completion": "fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "source_case_id": "minimal_direct_completion",
+      "source_continuation": "\nfixed l",
+      "purpose": "reinforce the complete fixed loss pair after fixed-prefix recovery"
+    },
+    {
+      "example_id": "minimal_direct_completion-loss-suffix",
+      "kind": "loss_suffix_memory",
+      "text": "loss",
+      "completion": "loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "source_case_id": "minimal_direct_completion",
+      "source_continuation": "\nfixed l",
+      "purpose": "strengthen the missing loss suffix token"
+    },
+    {
+      "example_id": "minimal_direct_completion-prefix-bridge",
+      "kind": "loss_prefix_bridge",
+      "text": "fixed l\nloss\nfixed loss",
+      "completion": "fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "source_case_id": "minimal_direct_completion",
+      "source_continuation": "\nfixed l",
+      "purpose": "bridge the observed fixed l partial continuation to complete fixed loss"
+    },
+    {
+      "example_id": "minimal_direct_completion-label-pair",
+      "kind": "minimal_label_pair",
+      "text": "completion:\nfixed loss",
+      "completion": "fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "source_case_id": "minimal_direct_completion",
+      "source_continuation": "\nfixed l",
+      "purpose": "keep a minimal replay-label to complete-pair bridge"
+    },
+    {
+      "example_id": "completion_label_surface-target-pair-a",
+      "kind": "target_pair_memory",
+      "text": "fixed loss",
+      "completion": "fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "source_case_id": "completion_label_surface",
+      "source_continuation": " fixed l",
+      "purpose": "reinforce the complete fixed loss pair after fixed-prefix recovery"
+    },
+    {
+      "example_id": "completion_label_surface-target-pair-b",
+      "kind": "target_pair_memory",
+      "text": "fixed loss",
+      "completion": "fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "source_case_id": "completion_label_surface",
+      "source_continuation": " fixed l",
+      "purpose": "reinforce the complete fixed loss pair after fixed-prefix recovery"
+    },
+    {
+      "example_id": "completion_label_surface-loss-suffix",
+      "kind": "loss_suffix_memory",
+      "text": "loss",
+      "completion": "loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "source_case_id": "completion_label_surface",
+      "source_continuation": " fixed l",
+      "purpose": "strengthen the missing loss suffix token"
+    },
+    {
+      "example_id": "completion_label_surface-prefix-bridge",
+      "kind": "loss_prefix_bridge",
+      "text": "fixed l\nloss\nfixed loss",
+      "completion": "fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "source_case_id": "completion_label_surface",
+      "source_continuation": " fixed l",
+      "purpose": "bridge the observed fixed l partial continuation to complete fixed loss"
+    },
+    {
+      "example_id": "completion_label_surface-label-pair",
+      "kind": "minimal_label_pair",
+      "text": "completion:\nfixed loss",
+      "completion": "fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "source_case_id": "completion_label_surface",
+      "source_continuation": " fixed l",
+      "purpose": "keep a minimal replay-label to complete-pair bridge"
+    },
+    {
+      "example_id": "global-loss-memory-1",
+      "kind": "loss_suffix_memory",
+      "text": "loss",
+      "completion": "loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "source_case_id": "global",
+      "source_continuation": "",
+      "purpose": "strengthen the missing loss suffix token"
+    },
+    {
+      "example_id": "global-loss-memory-2",
+      "kind": "loss_suffix_memory",
+      "text": "loss",
+      "completion": "loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "source_case_id": "global",
+      "source_continuation": "",
+      "purpose": "strengthen the missing loss suffix token"
+    },
+    {
+      "example_id": "global-loss-memory-3",
+      "kind": "loss_suffix_memory",
+      "text": "loss",
+      "completion": "loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "source_case_id": "global",
+      "source_continuation": "",
+      "purpose": "strengthen the missing loss suffix token"
+    },
+    {
+      "example_id": "global-loss-memory-4",
+      "kind": "loss_suffix_memory",
+      "text": "loss",
+      "completion": "loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "source_case_id": "global",
+      "source_continuation": "",
+      "purpose": "strengthen the missing loss suffix token"
+    },
+    {
+      "example_id": "global-loss-memory-5",
+      "kind": "loss_suffix_memory",
+      "text": "loss",
+      "completion": "loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "source_case_id": "global",
+      "source_continuation": "",
+      "purpose": "strengthen the missing loss suffix token"
+    },
+    {
+      "example_id": "global-loss-memory-6",
+      "kind": "loss_suffix_memory",
+      "text": "loss",
+      "completion": "loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "source_case_id": "global",
+      "source_continuation": "",
+      "purpose": "strengthen the missing loss suffix token"
+    },
+    {
+      "example_id": "global-fixed-loss-pair-1",
+      "kind": "target_pair_memory",
+      "text": "fixed loss",
+      "completion": "fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "source_case_id": "global",
+      "source_continuation": "",
+      "purpose": "reinforce the complete fixed loss pair after fixed-prefix recovery"
+    },
+    {
+      "example_id": "global-fixed-loss-pair-2",
+      "kind": "target_pair_memory",
+      "text": "fixed loss",
+      "completion": "fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "source_case_id": "global",
+      "source_continuation": "",
+      "purpose": "reinforce the complete fixed loss pair after fixed-prefix recovery"
+    },
+    {
+      "example_id": "global-fixed-loss-pair-3",
+      "kind": "target_pair_memory",
+      "text": "fixed loss",
+      "completion": "fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "source_case_id": "global",
+      "source_continuation": "",
+      "purpose": "reinforce the complete fixed loss pair after fixed-prefix recovery"
+    },
+    {
+      "example_id": "global-fixed-loss-pair-4",
+      "kind": "target_pair_memory",
+      "text": "fixed loss",
+      "completion": "fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "source_case_id": "global",
+      "source_continuation": "",
+      "purpose": "reinforce the complete fixed loss pair after fixed-prefix recovery"
+    },
+    {
+      "example_id": "global-fixed-loss-pair-5",
+      "kind": "target_pair_memory",
+      "text": "fixed loss",
+      "completion": "fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "source_case_id": "global",
+      "source_continuation": "",
+      "purpose": "reinforce the complete fixed loss pair after fixed-prefix recovery"
+    },
+    {
+      "example_id": "global-fixed-loss-pair-6",
+      "kind": "target_pair_memory",
+      "text": "fixed loss",
+      "completion": "fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "source_case_id": "global",
+      "source_continuation": "",
+      "purpose": "reinforce the complete fixed loss pair after fixed-prefix recovery"
+    }
+  ],
+  "patched_corpus_text": "Answer with exactly two tokens: fixed loss\nanswer: fixed loss\n\nReturn the exact two-token objective output.\nanswer: # canonical_direct_completion fixed loss\n\nObserved fragment `los` is incomplete. Write the full target answer.\nanswer: # canonical_direct_completion fixed loss\n\nanswer: # canonical_direct_completion fixed loss\n\nAnswer with exactly two tokens: fixed loss\nanswer:\nReturn only the answer.\nanswer: fixed loss\n\nEmit the canonical target response.\nanswer: # canonical_direct_completion fixed loss\n\nObserved fragment `wixed` is incomplete. Write the full target answer.\nanswer: # canonical_direct_completion fixed loss\n\ncompletion: # canonical_direct_completion fixed loss\n\nAnswer with exactly two words: fixed loss\nanswer: fixed loss\n\nReturn the exact two-token objective output.\nanswer: # minimal_direct_completion fixed loss\n\nObserved fragment `los` is incomplete. Write the full target answer.\nanswer: # minimal_direct_completion fixed loss\n\nanswer: # minimal_direct_completion fixed loss\n\nAnswer with exactly two words: fixed loss\nanswer:\nReturn only the answer.\nanswer: fixed loss\n\nEmit the canonical target response.\nanswer: # minimal_direct_completion fixed loss\n\nObserved fragment `wixed` is incomplete. Write the full target answer.\nanswer: # minimal_direct_completion fixed loss\n\ncompletion: # minimal_direct_completion fixed loss\n\nComplete with exactly two tokens: fixed loss\ncompletion: fixed loss\n\nReturn the exact two-token objective output.\nanswer: # completion_label_surface fixed loss\n\nObserved fragment `los` is incomplete. Write the full target answer.\nanswer: # completion_label_surface fixed loss\n\nanswer: # completion_label_surface fixed loss\n\nComplete with exactly two tokens: fixed loss\ncompletion:\nReturn only the answer.\nanswer: fixed loss\n\nEmit the canonical target response.\nanswer: # completion_label_surface fixed loss\n\nObserved fragment `wixed` is incomplete. Write the full target answer.\nanswer: # completion_label_surface fixed loss\n\ncompletion: # completion_label_surface fixed loss\n\n# v855 curriculum patch\n\nAnswer with exactly two tokens: fixed loss\nanswer:\nfixed loss\n\nAnswer with exactly two tokens: fixed loss\nanswer:\nfixed loss\n\nAnswer with exactly two tokens: fixed loss\nanswer:\nfixed\nloss\n\nAnswer with exactly two tokens: fixed loss\nanswer:\nfixed loss\nnot: fixed t\n\nAnswer with exactly two words: fixed loss\nanswer:\nfixed loss\n\nAnswer with exactly two words: fixed loss\nanswer:\nfixed loss\n\nAnswer with exactly two words: fixed loss\nanswer:\nfixed\nloss\n\nAnswer with exactly two words: fixed loss\nanswer:\nfixed loss\nnot: fixed t\n\nComplete with exactly two tokens: fixed loss\ncompletion:\nfixed loss\n\nComplete with exactly two tokens: fixed loss\ncompletion:\nfixed loss\n\nComplete with exactly two tokens: fixed loss\ncompletion:\nfixed\nloss\n\nComplete with exactly two tokens: fixed loss\ncompletion:\nfixed loss\nnot: fixed t\n\nfixed\nloss\n\nContinue after fixed:\nloss\n\ntarget:\nfixed loss\n\ntarget:\nfixed loss\n\ncompletion:\nfixed loss\n\ncompletion:\nfixed loss\n\n# v860 loss signal bridge\n\nAnswer with exactly two words: fixed loss\nanswer:\nfixed loss\n\nAnswer with exactly two words: fixed loss\nanswer:\nloss\nfixed loss\n\nAnswer with exactly two tokens: fixed loss\nanswer:\nfixed loss\n\nAnswer with exactly two tokens: fixed loss\nanswer:\nloss\nfixed loss\n\nComplete with exactly two tokens: fixed loss\ncompletion:\nfixed loss\n\nComplete with exactly two tokens: fixed loss\ncompletion:\nloss\nfixed loss\n\nAnswer with exactly two tokens: fixed loss\nanswer:\nfixed loss\n\nComplete with exactly two tokens: fixed loss\ncompletion:\nfixed loss\n\nAnswer with exactly two tokens: fixed loss\nanswer:\nfixed loss\n\nComplete with exactly two tokens: fixed loss\ncompletion:\nfixed loss\n\nComplete with exactly two tokens: fixed loss\ncompletion:\nfixed loss\n\nAnswer with exactly two tokens: fixed loss\nanswer:\nfixed loss\n\nanswer:\nfixed loss\n\ncompletion:\nfixed loss\n\nfixed\nloss\n\nloss belongs with\nfixed loss\n\n# v864 loss signal bridge pair-binding patch\n\nAnswer with exactly two tokens: fixed loss\nanswer:\nfixed loss\n\nAnswer with exactly two tokens: fixed loss\nanswer:\nfixed loss\n\nAnswer with exactly two tokens: fixed loss\nanswer:\nloss\nfixed loss\n\nloss belongs with\nfixed loss\n\nAnswer with exactly two words: fixed loss\nanswer:\nfixed loss\n\nAnswer with exactly two words: fixed loss\nanswer:\nfixed loss\n\nAnswer with exactly two words: fixed loss\nanswer:\nfixed\nloss\n\nAnswer with exactly two words: fixed loss\nanswer:\nfixed\nfixed loss\n\nComplete with exactly two tokens: fixed loss\ncompletion:\nfixed loss\n\nComplete with exactly two tokens: fixed loss\ncompletion:\nfixed loss\n\nComplete with exactly two tokens: fixed loss\ncompletion:\nfixed loss\n\ncompletion:\nfixed loss\n\nfixed\nloss\n\nfixed\nloss\n\ntarget:\nfixed loss\n\ntarget:\nfixed loss\n\nanswer:\nfixed loss\n\ncompletion:\nfixed loss\n\n# v868 single-line completion surface patch\n\nAnswer with exactly two tokens: fixed loss answer: fixed loss\n\nAnswer with exactly two tokens: fixed loss answer: fixed loss\n\nAnswer with exactly two words: fixed loss answer: fixed loss\n\nAnswer with exactly two words: fixed loss answer: fixed loss\n\nComplete with exactly two tokens: fixed loss completion: fixed loss\n\nComplete with exactly two tokens: fixed loss completion: fixed loss\n\nanswer: fixed loss\n\nanswer: fixed loss\n\ncompletion: fixed loss\n\ncompletion: fixed loss\n\ntarget: fixed loss\n\ntarget: fixed loss\n\nfixed loss\n\nfixed loss\n\n# v872 target-only completion memory patch\n\nfixed loss\n\nfixed loss\n\nAnswer with exactly two tokens: fixed loss fixed loss\n\nanswer:\nfixed loss\n\nfixed loss\n\nfixed loss\n\nAnswer with exactly two words: fixed loss fixed loss\n\nanswer:\nfixed loss\n\nfixed loss\n\nfixed loss\n\nComplete with exactly two tokens: fixed loss fixed loss\n\ncompletion:\nfixed loss\n\nfixed loss\n\nfixed loss\n\nfixed loss\n\nfixed loss\n\nfixed loss\n\nfixed loss\n\nfixed loss\n\nfixed loss\n\ntwo token answer fixed loss\n\ncanonical completion fixed loss\n\nfixed loss\nfixed loss\n\nfixed loss fixed loss\n\n# v876 target-only memory loss-suffix patch\n\nfixed loss\n\nfixed loss\n\nloss\n\nfixed l\nloss\nfixed loss\n\ncompletion:\nfixed loss\n\nfixed loss\n\nfixed loss\n\nloss\n\nfixed l\nloss\nfixed loss\n\ncompletion:\nfixed loss\n\nfixed loss\n\nfixed loss\n\nloss\n\nfixed l\nloss\nfixed loss\n\ncompletion:\nfixed loss\n\nloss\n\nloss\n\nloss\n\nloss\n\nloss\n\nloss\n\nfixed loss\n\nfixed loss\n\nfixed loss\n\nfixed loss\n\nfixed loss\n\nfixed loss\n",
+  "check_rows": [
+    {
+      "id": "diagnostic_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "partial-hit diagnostic must pass"
+    },
+    {
+      "id": "diagnostic_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "target-only memory partial-hit diagnostic must be ready"
+    },
+    {
+      "id": "all_cases_loss_prefix",
+      "status": "pass",
+      "actual": true,
+      "detail": "patch only applies when every case reaches the loss prefix"
+    },
+    {
+      "id": "no_loss_hit_yet",
+      "status": "pass",
+      "actual": 0,
+      "detail": "loss suffix patch only applies before loss hits are present"
+    },
+    {
+      "id": "replay_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "replay comparison must pass"
+    },
+    {
+      "id": "replay_partial_hit",
+      "status": "pass",
+      "actual": 3,
+      "detail": "replay must contain partial hits"
+    },
+    {
+      "id": "patch_examples_present",
+      "status": "pass",
+      "actual": 27,
+      "detail": "loss suffix patch needs examples"
+    },
+    {
+      "id": "decoder_anchor_free",
+      "status": "pass",
+      "actual": false,
+      "detail": "patch must stay no-anchor"
+    }
+  ],
+  "summary": {
+    "bounded_objective_loss_signal_bridge_target_only_memory_loss_suffix_patch_ready": true,
+    "patch_example_count": 27,
+    "target_pair_example_count": 12,
+    "loss_suffix_example_count": 9,
+    "loss_prefix_bridge_example_count": 3,
+    "minimal_label_pair_example_count": 3,
+    "decoder_anchor_example_count": 0,
+    "source_loss_prefix_case_count": 3,
+    "source_any_hit_case_count": 3,
+    "patched_corpus_char_count": 6296,
+    "model_quality_claim": "loss_suffix_patch_only",
+    "proposed_next_artifact": "bounded_objective_loss_signal_bridge_target_only_memory_loss_suffix_training_run",
+    "next_step": "train_bounded_objective_loss_signal_bridge_target_only_memory_loss_suffix_patch"
+  },
+  "interpretation": {
+    "model_quality_claim": "loss_suffix_patch_only",
+    "reason": "The patch targets the missing loss suffix after replay consistently reached fixed l.",
+    "next_action": "train_bounded_objective_loss_signal_bridge_target_only_memory_loss_suffix_patch"
+  }
+}

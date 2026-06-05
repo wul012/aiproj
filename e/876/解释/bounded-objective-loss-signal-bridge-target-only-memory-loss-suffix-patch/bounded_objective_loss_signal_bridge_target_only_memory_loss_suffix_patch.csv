@@ -1,0 +1,37 @@
+example_id,kind,text,source_case_id,decoder_anchor
+canonical_direct_completion-target-pair-a,target_pair_memory,fixed loss,canonical_direct_completion,False
+canonical_direct_completion-target-pair-b,target_pair_memory,fixed loss,canonical_direct_completion,False
+canonical_direct_completion-loss-suffix,loss_suffix_memory,loss,canonical_direct_completion,False
+canonical_direct_completion-prefix-bridge,loss_prefix_bridge,"fixed l
+loss
+fixed loss",canonical_direct_completion,False
+canonical_direct_completion-label-pair,minimal_label_pair,"completion:
+fixed loss",canonical_direct_completion,False
+minimal_direct_completion-target-pair-a,target_pair_memory,fixed loss,minimal_direct_completion,False
+minimal_direct_completion-target-pair-b,target_pair_memory,fixed loss,minimal_direct_completion,False
+minimal_direct_completion-loss-suffix,loss_suffix_memory,loss,minimal_direct_completion,False
+minimal_direct_completion-prefix-bridge,loss_prefix_bridge,"fixed l
+loss
+fixed loss",minimal_direct_completion,False
+minimal_direct_completion-label-pair,minimal_label_pair,"completion:
+fixed loss",minimal_direct_completion,False
+completion_label_surface-target-pair-a,target_pair_memory,fixed loss,completion_label_surface,False
+completion_label_surface-target-pair-b,target_pair_memory,fixed loss,completion_label_surface,False
+completion_label_surface-loss-suffix,loss_suffix_memory,loss,completion_label_surface,False
+completion_label_surface-prefix-bridge,loss_prefix_bridge,"fixed l
+loss
+fixed loss",completion_label_surface,False
+completion_label_surface-label-pair,minimal_label_pair,"completion:
+fixed loss",completion_label_surface,False
+global-loss-memory-1,loss_suffix_memory,loss,global,False
+global-loss-memory-2,loss_suffix_memory,loss,global,False
+global-loss-memory-3,loss_suffix_memory,loss,global,False
+global-loss-memory-4,loss_suffix_memory,loss,global,False
+global-loss-memory-5,loss_suffix_memory,loss,global,False
+global-loss-memory-6,loss_suffix_memory,loss,global,False
+global-fixed-loss-pair-1,target_pair_memory,fixed loss,global,False
+global-fixed-loss-pair-2,target_pair_memory,fixed loss,global,False
+global-fixed-loss-pair-3,target_pair_memory,fixed loss,global,False
+global-fixed-loss-pair-4,target_pair_memory,fixed loss,global,False
+global-fixed-loss-pair-5,target_pair_memory,fixed loss,global,False
+global-fixed-loss-pair-6,target_pair_memory,fixed loss,global,False

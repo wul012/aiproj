@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v875.0.0` diagnoses the v874 target-only memory partial-hit replay as a consistent loss-suffix uptake gap.
+Version `v876.0.0` turns the v875 loss-suffix diagnostic into a narrow no-anchor patch corpus for the next training run.
+
+## Latest v876 checkpoint
+
+- Added short-name module `bounded_objective_loss_signal_bridge_target_only_memory_loss_suffix_patch`.
+- Added CLI `scripts/build_bounded_objective_loss_signal_bridge_target_only_memory_loss_suffix_patch.py`.
+- Consumed the real v875 partial-hit diagnostic, v874 replay comparison, and v873 prepared corpus.
+- Generated `patch_example_count=27`, including `target_pair_example_count=12`, `loss_suffix_example_count=9`, `loss_prefix_bridge_example_count=3`, and `minimal_label_pair_example_count=3`.
+- Kept `decoder_anchor_example_count=0`.
+- Produced `bounded_objective_loss_signal_bridge_target_only_memory_loss_suffix_patch_examples.jsonl` and `bounded_objective_loss_signal_bridge_target_only_memory_loss_suffix_patch_corpus.txt`.
+- Kept `model_quality_claim=loss_suffix_patch_only`; no checkpoint capability is claimed before training and replay.
+- Routed the next artifact to `train_bounded_objective_loss_signal_bridge_target_only_memory_loss_suffix_patch`.
+- Verified with `3 passed` focused loss-suffix patch tests and Playwright MCP screenshot evidence.
+- Archived v876 evidence in `e/876` and added the code explanation in `代码讲解记录_模型能力阶段/890-v876-bounded-objective-loss-signal-bridge-target-only-memory-loss-suffix-patch.md`.
 
 ## Latest v875 checkpoint
 
