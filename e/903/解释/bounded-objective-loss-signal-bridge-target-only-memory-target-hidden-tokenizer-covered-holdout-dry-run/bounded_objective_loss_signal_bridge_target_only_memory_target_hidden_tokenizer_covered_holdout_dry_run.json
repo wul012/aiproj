@@ -1,0 +1,215 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT bounded objective loss signal bridge target-only memory target-hidden tokenizer-covered holdout dry-run",
+  "generated_at": "2026-06-05T12:35:06Z",
+  "status": "pass",
+  "decision": "bounded_objective_loss_signal_bridge_target_only_memory_target_hidden_tokenizer_covered_holdout_dry_run_passed",
+  "failed_count": 0,
+  "issues": [],
+  "source_holdout_suite": "e\\902\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-target-hidden-tokenizer-covered-holdout-suite\\bounded_objective_loss_signal_bridge_target_only_memory_target_hidden_tokenizer_covered_holdout_suite.json",
+  "source_holdout_suite_summary": {
+    "bounded_objective_loss_signal_bridge_target_only_memory_target_hidden_tokenizer_covered_holdout_suite_ready": true,
+    "source_case_count": 5,
+    "candidate_case_count": 5,
+    "tokenizer_covered_case_count": 5,
+    "target_hidden_case_count": 5,
+    "candidate_prompt_unknown_token_count": 0,
+    "source_target_leakage_case_count": 5,
+    "expected_terms": [
+      "fixed",
+      "loss"
+    ],
+    "promotion_ready": false,
+    "model_quality_claim": "suite_construction_only",
+    "next_step": "run_target_hidden_tokenizer_covered_holdout_dry_run",
+    "failed_check_count": 0
+  },
+  "positive_continuation": " fixed loss",
+  "negative_continuation": " fixed only",
+  "check_rows": [
+    {
+      "id": "holdout_suite_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "target-hidden holdout suite must pass"
+    },
+    {
+      "id": "holdout_suite_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "target-hidden suite summary must be ready"
+    },
+    {
+      "id": "suite_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "benchmark suite must be ready"
+    },
+    {
+      "id": "cases_present",
+      "status": "pass",
+      "actual": 5,
+      "detail": "target-hidden holdout suite must include cases"
+    },
+    {
+      "id": "target_hidden_cases_present",
+      "status": "pass",
+      "actual": 5,
+      "detail": "every source case must be target-hidden"
+    },
+    {
+      "id": "expected_terms_complete",
+      "status": "pass",
+      "actual": [
+        "fixed",
+        "loss"
+      ],
+      "detail": "dry-run expects fixed/loss scoring contract"
+    },
+    {
+      "id": "positive_rows_pass",
+      "status": "pass",
+      "actual": 5,
+      "detail": "positive continuation must pass every case"
+    },
+    {
+      "id": "negative_rows_fail",
+      "status": "pass",
+      "actual": 0,
+      "detail": "negative continuation must not pass any case"
+    }
+  ],
+  "dry_run_rows": [
+    {
+      "case_id": "target-hidden-answer_learned_pair",
+      "source_case_id": "tokenizer-covered-answer_exact_terms",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_continuation": " fixed loss",
+      "positive_case_pass": true,
+      "positive_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_missed_terms": [],
+      "negative_continuation": " fixed only",
+      "negative_case_pass": false,
+      "negative_hit_terms": [
+        "fixed"
+      ],
+      "negative_missed_terms": [
+        "loss"
+      ]
+    },
+    {
+      "case_id": "target-hidden-return_target_pair",
+      "source_case_id": "tokenizer-covered-return_target_words",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_continuation": " fixed loss",
+      "positive_case_pass": true,
+      "positive_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_missed_terms": [],
+      "negative_continuation": " fixed only",
+      "negative_case_pass": false,
+      "negative_hit_terms": [
+        "fixed"
+      ],
+      "negative_missed_terms": [
+        "loss"
+      ]
+    },
+    {
+      "case_id": "target-hidden-contrast_route_pair",
+      "source_case_id": "tokenizer-covered-contrast_route_result",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_continuation": " fixed loss",
+      "positive_case_pass": true,
+      "positive_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_missed_terms": [],
+      "negative_continuation": " fixed only",
+      "negative_case_pass": false,
+      "negative_hit_terms": [
+        "fixed"
+      ],
+      "negative_missed_terms": [
+        "loss"
+      ]
+    },
+    {
+      "case_id": "target-hidden-jsonish_answer_terms",
+      "source_case_id": "tokenizer-covered-jsonish_answer_terms",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_continuation": " fixed loss",
+      "positive_case_pass": true,
+      "positive_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_missed_terms": [],
+      "negative_continuation": " fixed only",
+      "negative_case_pass": false,
+      "negative_hit_terms": [
+        "fixed"
+      ],
+      "negative_missed_terms": [
+        "loss"
+      ]
+    },
+    {
+      "case_id": "target-hidden-self_check_pair",
+      "source_case_id": "tokenizer-covered-self_check_terms",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_continuation": " fixed loss",
+      "positive_case_pass": true,
+      "positive_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_missed_terms": [],
+      "negative_continuation": " fixed only",
+      "negative_case_pass": false,
+      "negative_hit_terms": [
+        "fixed"
+      ],
+      "negative_missed_terms": [
+        "loss"
+      ]
+    }
+  ],
+  "summary": {
+    "bounded_objective_loss_signal_bridge_target_only_memory_target_hidden_tokenizer_covered_holdout_dry_run_ready": true,
+    "case_count": 5,
+    "positive_passed_case_count": 5,
+    "negative_passed_case_count": 0,
+    "negative_control_passed": false,
+    "promotion_ready": false,
+    "model_quality_claim": "dry_run_only",
+    "next_step": "run_target_hidden_tokenizer_covered_holdout_real_replay",
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "dry_run_only",
+    "reason": "The target-hidden tokenizer-covered holdout suite scoring contract passes dry-run checks; real replay is now the next evidence step.",
+    "next_action": "run_target_hidden_tokenizer_covered_holdout_real_replay"
+  }
+}

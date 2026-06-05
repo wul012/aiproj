@@ -1,0 +1,6 @@
+case_id,positive_case_pass,negative_case_pass,positive_hit_terms,negative_hit_terms,negative_missed_terms
+target-hidden-answer_learned_pair,True,False,"fixed,loss",fixed,loss
+target-hidden-return_target_pair,True,False,"fixed,loss",fixed,loss
+target-hidden-contrast_route_pair,True,False,"fixed,loss",fixed,loss
+target-hidden-jsonish_answer_terms,True,False,"fixed,loss",fixed,loss
+target-hidden-self_check_pair,True,False,"fixed,loss",fixed,loss

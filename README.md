@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v902.0.0` builds a target-hidden tokenizer-covered holdout suite after the v901 leakage review.
+Version `v903.0.0` dry-runs the target-hidden tokenizer-covered holdout scoring contract before real replay.
+
+## Latest v903 checkpoint
+
+- Added short-name module `bounded_objective_loss_signal_bridge_target_only_memory_target_hidden_tokenizer_covered_holdout_dry_run`.
+- Added CLI `scripts/dry_run_bounded_objective_loss_signal_bridge_target_only_memory_target_hidden_tokenizer_covered_holdout.py`.
+- Consumed the real v902 target-hidden tokenizer-covered holdout suite.
+- Verified the positive continuation ` fixed loss` passes all 5 target-hidden cases.
+- Verified the negative continuation ` fixed only` passes 0 cases.
+- Recorded `positive_passed_case_count=5`, `negative_passed_case_count=0`, and `negative_control_passed=False`.
+- Kept `promotion_ready=False` and `model_quality_claim=dry_run_only`.
+- Routed the next action to `run_target_hidden_tokenizer_covered_holdout_real_replay`.
+- Verified with `5 passed` focused target-hidden dry-run tests and Playwright MCP screenshot evidence.
+- Archived v903 evidence in `e/903` and added the code explanation in `代码讲解记录_模型能力阶段/917-v903-bounded-objective-loss-signal-bridge-target-only-memory-target-hidden-tokenizer-covered-holdout-dry-run.md`.
 
 ## Latest v902 checkpoint
 

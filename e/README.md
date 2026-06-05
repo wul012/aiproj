@@ -1996,3 +1996,8 @@ e/663/解释/说明.md
 - `e/902/图片`
 - `e/902/解释/说明.md`
 - v902 bounded objective loss signal bridge target-only memory target-hidden tokenizer-covered holdout suite screenshots and explanation.
+## v903 supplemental index
+
+- `e/903/图片`
+- `e/903/解释/说明.md`
+- v903 bounded objective loss signal bridge target-only memory target-hidden tokenizer-covered holdout dry-run screenshots and explanation.
