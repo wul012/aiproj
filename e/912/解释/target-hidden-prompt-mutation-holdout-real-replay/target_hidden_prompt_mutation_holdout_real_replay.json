@@ -1,0 +1,327 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT target-hidden prompt-mutation holdout real replay",
+  "generated_at": "2026-06-05T14:52:24Z",
+  "status": "pass",
+  "decision": "target_hidden_prompt_mutation_holdout_real_replay_passed_review_required",
+  "failed_count": 0,
+  "issues": [],
+  "source_holdout_suite": "e\\910\\解释\\target-hidden-prompt-mutation-holdout-suite\\target_hidden_prompt_mutation_holdout_suite.json",
+  "source_dry_run": "e\\911\\解释\\target-hidden-prompt-mutation-holdout-dry-run\\target_hidden_prompt_mutation_holdout_dry_run.json",
+  "checkpoint": "e\\890\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-stagnation-aware-suffix-training-run\\run\\checkpoint.pt",
+  "tokenizer": "e\\890\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-stagnation-aware-suffix-training-run\\run\\tokenizer.json",
+  "device": "cpu",
+  "check_rows": [
+    {
+      "id": "holdout_suite_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "prompt-mutation holdout suite must pass"
+    },
+    {
+      "id": "holdout_suite_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "prompt-mutation holdout suite summary must be ready"
+    },
+    {
+      "id": "mutation_factor_at_least_two",
+      "status": "pass",
+      "actual": 2.0,
+      "detail": "prompt mutation suite should expand source cases"
+    },
+    {
+      "id": "prompt_mutated_rows_complete",
+      "status": "pass",
+      "actual": 10,
+      "detail": "all candidate prompts should be mutated"
+    },
+    {
+      "id": "dry_run_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "dry-run must pass before real replay"
+    },
+    {
+      "id": "dry_run_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "dry-run summary must be ready"
+    },
+    {
+      "id": "expected_terms_complete",
+      "status": "pass",
+      "actual": [
+        "fixed",
+        "loss"
+      ],
+      "detail": "real replay expects fixed/loss contract"
+    },
+    {
+      "id": "checkpoint_exists",
+      "status": "pass",
+      "actual": "e\\890\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-stagnation-aware-suffix-training-run\\run\\checkpoint.pt",
+      "detail": "checkpoint.pt must exist"
+    },
+    {
+      "id": "tokenizer_exists",
+      "status": "pass",
+      "actual": "e\\890\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-stagnation-aware-suffix-training-run\\run\\tokenizer.json",
+      "detail": "tokenizer.json must exist"
+    },
+    {
+      "id": "cases_present",
+      "status": "pass",
+      "actual": 10,
+      "detail": "prompt-mutation holdout suite must include cases"
+    },
+    {
+      "id": "all_cases_executed",
+      "status": "pass",
+      "actual": 10,
+      "detail": "real replay should execute every case"
+    },
+    {
+      "id": "no_replay_errors",
+      "status": "pass",
+      "actual": 0,
+      "detail": "real replay should not raise generation errors"
+    }
+  ],
+  "replay_rows": [
+    {
+      "case_id": "prompt-mutation-memory_final",
+      "source_case_id": "semantic-hidden-memory_answer",
+      "prompt": "memory answer\nfinal:",
+      "continuation": " fixed losss\n\n\n\n\n\n\nfixed",
+      "generated": "memory answer\nfinal: fixed losss\n\n\n\n\n\n\nfixed",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "missed_terms": [],
+      "case_pass": true,
+      "seed": 3011,
+      "max_new_tokens": 24,
+      "temperature": 0.2,
+      "top_k": 10
+    },
+    {
+      "case_id": "prompt-mutation-stored_memory",
+      "source_case_id": "semantic-hidden-stored_result",
+      "prompt": "stored memory\noutput:",
+      "continuation": " fixed loss\n\n\n\n\nfixed lo",
+      "generated": "stored memory\noutput: fixed loss\n\n\n\n\nfixed lo",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "missed_terms": [],
+      "case_pass": true,
+      "seed": 3012,
+      "max_new_tokens": 24,
+      "temperature": 0.2,
+      "top_k": 10
+    },
+    {
+      "case_id": "prompt-mutation-route_final",
+      "source_case_id": "semantic-hidden-learned_route",
+      "prompt": "learned final route\nresult:",
+      "continuation": " fixed loss\n\n\n\nfixed los",
+      "generated": "learned final route\nresult: fixed loss\n\n\n\nfixed los",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "missed_terms": [],
+      "case_pass": true,
+      "seed": 3013,
+      "max_new_tokens": 24,
+      "temperature": 0.2,
+      "top_k": 10
+    },
+    {
+      "case_id": "prompt-mutation-write_memory",
+      "source_case_id": "semantic-hidden-final_words",
+      "prompt": "write final memory\nanswer:",
+      "continuation": " fixed loss\n\n\nfixed loss",
+      "generated": "write final memory\nanswer: fixed loss\n\n\nfixed loss",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "missed_terms": [],
+      "case_pass": true,
+      "seed": 3014,
+      "max_new_tokens": 24,
+      "temperature": 0.2,
+      "top_k": 10
+    },
+    {
+      "case_id": "prompt-mutation-complete_stored",
+      "source_case_id": "semantic-hidden-memory_self_check",
+      "prompt": "complete stored route\nfinal:",
+      "continuation": "\nfixed loss\n\n\nfixed loss",
+      "generated": "complete stored route\nfinal:\nfixed loss\n\n\nfixed loss",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "missed_terms": [],
+      "case_pass": true,
+      "seed": 3015,
+      "max_new_tokens": 24,
+      "temperature": 0.2,
+      "top_k": 10
+    },
+    {
+      "case_id": "prompt-mutation-self_check_output",
+      "source_case_id": "semantic-hidden-memory_answer",
+      "prompt": "self check stored memory\noutput:",
+      "continuation": " fixed losss\n\n\n\n\n\n\nfixed",
+      "generated": "self check stored memory\noutput: fixed losss\n\n\n\n\n\n\nfixed",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "missed_terms": [],
+      "case_pass": true,
+      "seed": 3016,
+      "max_new_tokens": 24,
+      "temperature": 0.2,
+      "top_k": 10
+    },
+    {
+      "case_id": "prompt-mutation-return_memory",
+      "source_case_id": "semantic-hidden-stored_result",
+      "prompt": "return learned memory\nresult:",
+      "continuation": " fixed loss\n\n\n\n\n\nfixed l",
+      "generated": "return learned memory\nresult: fixed loss\n\n\n\n\n\nfixed l",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "missed_terms": [],
+      "case_pass": true,
+      "seed": 3017,
+      "max_new_tokens": 24,
+      "temperature": 0.2,
+      "top_k": 10
+    },
+    {
+      "case_id": "prompt-mutation-final_words_memory",
+      "source_case_id": "semantic-hidden-learned_route",
+      "prompt": "final words memory\nanswer:",
+      "continuation": " fixed loss\n\n\nfixed loss",
+      "generated": "final words memory\nanswer: fixed loss\n\n\nfixed loss",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "missed_terms": [],
+      "case_pass": true,
+      "seed": 3018,
+      "max_new_tokens": 24,
+      "temperature": 0.2,
+      "top_k": 10
+    },
+    {
+      "case_id": "prompt-mutation-stored_final",
+      "source_case_id": "semantic-hidden-final_words",
+      "prompt": "stored final words\noutput:",
+      "continuation": " fixed loss\n\n\nfixed loss",
+      "generated": "stored final words\noutput: fixed loss\n\n\nfixed loss",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "missed_terms": [],
+      "case_pass": true,
+      "seed": 3019,
+      "max_new_tokens": 24,
+      "temperature": 0.2,
+      "top_k": 10
+    },
+    {
+      "case_id": "prompt-mutation-complete_memory",
+      "source_case_id": "semantic-hidden-memory_self_check",
+      "prompt": "complete memory route\nresult:",
+      "continuation": " fixed loss\n\n\n\n\n\nfixed l",
+      "generated": "complete memory route\nresult: fixed loss\n\n\n\n\n\nfixed l",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "missed_terms": [],
+      "case_pass": true,
+      "seed": 3020,
+      "max_new_tokens": 24,
+      "temperature": 0.2,
+      "top_k": 10
+    }
+  ],
+  "replay_errors": [],
+  "summary": {
+    "target_hidden_prompt_mutation_holdout_real_replay_ready": true,
+    "case_count": 10,
+    "source_mutation_factor": 2.0,
+    "source_prompt_mutated_case_count": 10,
+    "executed_case_count": 10,
+    "passed_case_count": 10,
+    "failed_case_count": 0,
+    "any_hit_case_count": 10,
+    "zero_hit_case_count": 0,
+    "pass_rate": 1.0,
+    "holdout_model_quality_ready": true,
+    "prompt_mutation_holdout_model_quality_ready": true,
+    "promotion_ready": false,
+    "model_quality_claim": "prompt_mutation_target_hidden_holdout_replay_only",
+    "next_step": "review_target_hidden_prompt_mutation_holdout_replay_result",
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "prompt_mutation_target_hidden_holdout_replay_only",
+    "reason": "The checkpoint passed every prompt-mutation target-hidden holdout case; review remains required before promotion.",
+    "next_action": "review_target_hidden_prompt_mutation_holdout_replay_result"
+  }
+}

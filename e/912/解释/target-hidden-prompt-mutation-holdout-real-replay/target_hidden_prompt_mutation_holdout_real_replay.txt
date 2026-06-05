@@ -1,0 +1,16 @@
+status=pass
+decision=target_hidden_prompt_mutation_holdout_real_replay_passed_review_required
+failed_count=0
+target_hidden_prompt_mutation_holdout_real_replay_ready=True
+prompt_mutation_holdout_model_quality_ready=True
+case_count=10
+source_mutation_factor=2.0
+executed_case_count=10
+passed_case_count=10
+failed_case_count=0
+any_hit_case_count=10
+zero_hit_case_count=0
+pass_rate=1.0
+promotion_ready=False
+model_quality_claim=prompt_mutation_target_hidden_holdout_replay_only
+next_step=review_target_hidden_prompt_mutation_holdout_replay_result
