@@ -1971,3 +1971,8 @@ e/663/解释/说明.md
 - `e/897/图片`
 - `e/897/解释/说明.md`
 - v897 bounded objective loss signal bridge target-only memory decoder-budget holdout gap diagnostic screenshots and explanation.
+## v898 supplemental index
+
+- `e/898/图片`
+- `e/898/解释/说明.md`
+- v898 bounded objective loss signal bridge target-only memory tokenizer-coverage-aware holdout suite screenshots and explanation.

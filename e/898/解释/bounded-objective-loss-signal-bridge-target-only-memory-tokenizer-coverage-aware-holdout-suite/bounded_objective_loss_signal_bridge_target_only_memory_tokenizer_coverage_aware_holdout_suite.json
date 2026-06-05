@@ -1,0 +1,284 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT bounded objective loss signal bridge target-only memory tokenizer-coverage-aware holdout suite",
+  "generated_at": "2026-06-05T11:27:14Z",
+  "status": "pass",
+  "decision": "bounded_objective_loss_signal_bridge_target_only_memory_tokenizer_coverage_aware_holdout_suite_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_holdout_gap_diagnostic": "e\\897\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-decoder-budget-holdout-gap-diagnostic\\bounded_objective_loss_signal_bridge_target_only_memory_decoder_budget_holdout_gap_diagnostic.json",
+  "source_benchmark_suite": "e\\803\\解释\\model-capability-route-promotion-bounded-benchmark-suite\\model_capability_route_promotion_bounded_benchmark_suite.json",
+  "tokenizer_path": "e\\890\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-stagnation-aware-suffix-training-run\\run\\tokenizer.json",
+  "check_rows": [
+    {
+      "id": "holdout_gap_diagnostic_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "holdout gap diagnostic must pass"
+    },
+    {
+      "id": "diagnostic_routes_to_tokenizer_coverage_suite",
+      "status": "pass",
+      "actual": "build_tokenizer_coverage_aware_holdout_suite_before_more_training",
+      "detail": "diagnostic must route to tokenizer-coverage-aware holdout suite"
+    },
+    {
+      "id": "source_benchmark_suite_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "source benchmark suite must pass"
+    },
+    {
+      "id": "tokenizer_exists",
+      "status": "pass",
+      "actual": "e\\890\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-stagnation-aware-suffix-training-run\\run\\tokenizer.json",
+      "detail": "tokenizer.json must exist"
+    },
+    {
+      "id": "case_count_preserved",
+      "status": "pass",
+      "actual": 5,
+      "detail": "candidate suite must preserve source case count"
+    },
+    {
+      "id": "coverage_rows_complete",
+      "status": "pass",
+      "actual": 5,
+      "detail": "coverage report must cover every candidate case"
+    },
+    {
+      "id": "all_candidate_prompts_tokenizer_covered",
+      "status": "pass",
+      "actual": 5,
+      "detail": "every candidate prompt must be tokenizer covered"
+    }
+  ],
+  "coverage_rows": [
+    {
+      "case_id": "tokenizer-covered-answer_exact_terms",
+      "source_case_id": "objective-answer-direct",
+      "prompt_char_count": 49,
+      "prompt_unknown_count": 0,
+      "prompt_unknown_rate": 0.0,
+      "prompt_unknown_chars": [],
+      "tokenizer_covered": true
+    },
+    {
+      "case_id": "tokenizer-covered-return_target_words",
+      "source_case_id": "objective-answer-role",
+      "prompt_char_count": 46,
+      "prompt_unknown_count": 0,
+      "prompt_unknown_rate": 0.0,
+      "prompt_unknown_chars": [],
+      "tokenizer_covered": true
+    },
+    {
+      "case_id": "tokenizer-covered-contrast_route_result",
+      "source_case_id": "objective-answer-contrast",
+      "prompt_char_count": 40,
+      "prompt_unknown_count": 0,
+      "prompt_unknown_rate": 0.0,
+      "prompt_unknown_chars": [],
+      "tokenizer_covered": true
+    },
+    {
+      "case_id": "tokenizer-covered-jsonish_answer_terms",
+      "source_case_id": "objective-answer-jsonish",
+      "prompt_char_count": 45,
+      "prompt_unknown_count": 0,
+      "prompt_unknown_rate": 0.0,
+      "prompt_unknown_chars": [],
+      "tokenizer_covered": true
+    },
+    {
+      "case_id": "tokenizer-covered-self_check_terms",
+      "source_case_id": "objective-answer-check",
+      "prompt_char_count": 48,
+      "prompt_unknown_count": 0,
+      "prompt_unknown_rate": 0.0,
+      "prompt_unknown_chars": [],
+      "tokenizer_covered": true
+    }
+  ],
+  "benchmark_suite": {
+    "ready": true,
+    "suite_name": "route-promotion-objective-level-contrast-tokenizer-coverage-aware-holdout-suite",
+    "suite_version": "v898",
+    "source_suite_name": "route-promotion-objective-level-contrast-bounded-suite",
+    "source_suite_version": "v803",
+    "route_id": "objective_level_contrast",
+    "consumer_name": "tokenizer-coverage-aware-holdout-builder",
+    "allowed_scope": "bounded_model_capability_governance_only",
+    "boundary": "ascii_tokenizer_coverage_aware_holdout_only",
+    "model_quality_claim": "not_claimed",
+    "cases": [
+      {
+        "case_id": "tokenizer-covered-answer_exact_terms",
+        "source_case_id": "objective-answer-direct",
+        "prompt_case": {
+          "name": "answer_exact_terms",
+          "prompt": "answer with exactly two words: fixed loss\nanswer:",
+          "max_new_tokens": 24,
+          "temperature": 0.2,
+          "top_k": 10,
+          "seed": 1899,
+          "task_type": "route-promotion-objective-level-contrast-tokenizer-covered",
+          "difficulty": "medium",
+          "expected_behavior": "ascii exact objective answer",
+          "tags": [
+            "route-promotion",
+            "objective-level-contrast",
+            "required-terms",
+            "tokenizer-covered"
+          ]
+        },
+        "expected_terms": [
+          "fixed",
+          "loss"
+        ],
+        "required_term_count": 2
+      },
+      {
+        "case_id": "tokenizer-covered-return_target_words",
+        "source_case_id": "objective-answer-role",
+        "prompt_case": {
+          "name": "return_target_words",
+          "prompt": "return the two target words fixed loss\noutput:",
+          "max_new_tokens": 24,
+          "temperature": 0.2,
+          "top_k": 10,
+          "seed": 1900,
+          "task_type": "route-promotion-objective-level-contrast-tokenizer-covered",
+          "difficulty": "medium",
+          "expected_behavior": "ascii target words answer",
+          "tags": [
+            "route-promotion",
+            "objective-level-contrast",
+            "required-terms",
+            "tokenizer-covered"
+          ]
+        },
+        "expected_terms": [
+          "fixed",
+          "loss"
+        ],
+        "required_term_count": 2
+      },
+      {
+        "case_id": "tokenizer-covered-contrast_route_result",
+        "source_case_id": "objective-answer-contrast",
+        "prompt_case": {
+          "name": "contrast_route_result",
+          "prompt": "contrast route result fixed loss\nresult:",
+          "max_new_tokens": 24,
+          "temperature": 0.2,
+          "top_k": 10,
+          "seed": 1901,
+          "task_type": "route-promotion-objective-level-contrast-tokenizer-covered",
+          "difficulty": "medium",
+          "expected_behavior": "ascii contrast objective answer",
+          "tags": [
+            "route-promotion",
+            "objective-level-contrast",
+            "required-terms",
+            "tokenizer-covered"
+          ]
+        },
+        "expected_terms": [
+          "fixed",
+          "loss"
+        ],
+        "required_term_count": 2
+      },
+      {
+        "case_id": "tokenizer-covered-jsonish_answer_terms",
+        "source_case_id": "objective-answer-jsonish",
+        "prompt_case": {
+          "name": "jsonish_answer_terms",
+          "prompt": "jsonish answer_terms fixed loss\nanswer_terms:",
+          "max_new_tokens": 24,
+          "temperature": 0.2,
+          "top_k": 10,
+          "seed": 1902,
+          "task_type": "route-promotion-objective-level-contrast-tokenizer-covered",
+          "difficulty": "medium",
+          "expected_behavior": "ascii structured objective answer",
+          "tags": [
+            "route-promotion",
+            "objective-level-contrast",
+            "required-terms",
+            "tokenizer-covered"
+          ]
+        },
+        "expected_terms": [
+          "fixed",
+          "loss"
+        ],
+        "required_term_count": 2
+      },
+      {
+        "case_id": "tokenizer-covered-self_check_terms",
+        "source_case_id": "objective-answer-check",
+        "prompt_case": {
+          "name": "self_check_terms",
+          "prompt": "self check requires fixed and loss\nfinal answer:",
+          "max_new_tokens": 24,
+          "temperature": 0.2,
+          "top_k": 10,
+          "seed": 1903,
+          "task_type": "route-promotion-objective-level-contrast-tokenizer-covered",
+          "difficulty": "medium",
+          "expected_behavior": "ascii self-check objective answer",
+          "tags": [
+            "route-promotion",
+            "objective-level-contrast",
+            "required-terms",
+            "tokenizer-covered"
+          ]
+        },
+        "expected_terms": [
+          "fixed",
+          "loss"
+        ],
+        "required_term_count": 2
+      }
+    ],
+    "scoring_contract": {
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "case_pass_condition": "generated_continuation_contains_both_expected_terms",
+      "suite_pass_condition": "all_cases_pass_without_scope_or_boundary_widening",
+      "minimum_case_count": 5
+    },
+    "guardrails": [
+      "do not treat tokenizer-covered suite construction as model capability proof",
+      "do not train on these holdout prompts before replay",
+      "do not widen expected terms beyond fixed and loss"
+    ],
+    "proposed_next_artifact": "bounded_objective_loss_signal_bridge_target_only_memory_tokenizer_coverage_aware_holdout_dry_run"
+  },
+  "summary": {
+    "bounded_objective_loss_signal_bridge_target_only_memory_tokenizer_coverage_aware_holdout_suite_ready": true,
+    "source_case_count": 5,
+    "candidate_case_count": 5,
+    "tokenizer_covered_case_count": 5,
+    "candidate_prompt_unknown_token_count": 0,
+    "source_prompt_unknown_row_count": 5,
+    "source_prompt_unknown_token_count": 96,
+    "expected_terms": [
+      "fixed",
+      "loss"
+    ],
+    "promotion_ready": false,
+    "model_quality_claim": "suite_construction_only",
+    "next_step": "run_tokenizer_coverage_aware_holdout_dry_run",
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "suite_construction_only",
+    "reason": "The holdout suite has been rebuilt with prompts fully covered by the v890 tokenizer while preserving the fixed/loss scoring contract.",
+    "next_action": "run_tokenizer_coverage_aware_holdout_dry_run"
+  }
+}

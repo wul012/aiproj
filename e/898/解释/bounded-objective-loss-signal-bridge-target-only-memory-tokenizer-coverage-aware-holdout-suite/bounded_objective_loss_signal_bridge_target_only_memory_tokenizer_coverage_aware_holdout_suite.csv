@@ -1,0 +1,11 @@
+case_id,source_case_id,tokenizer_covered,prompt_unknown_count,prompt
+tokenizer-covered-answer_exact_terms,objective-answer-direct,True,0,"answer with exactly two words: fixed loss
+answer:"
+tokenizer-covered-return_target_words,objective-answer-role,True,0,"return the two target words fixed loss
+output:"
+tokenizer-covered-contrast_route_result,objective-answer-contrast,True,0,"contrast route result fixed loss
+result:"
+tokenizer-covered-jsonish_answer_terms,objective-answer-jsonish,True,0,"jsonish answer_terms fixed loss
+answer_terms:"
+tokenizer-covered-self_check_terms,objective-answer-check,True,0,"self check requires fixed and loss
+final answer:"

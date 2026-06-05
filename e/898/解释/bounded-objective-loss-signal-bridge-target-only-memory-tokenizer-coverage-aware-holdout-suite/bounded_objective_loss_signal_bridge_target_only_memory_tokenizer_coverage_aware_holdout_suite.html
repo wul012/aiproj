@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT bounded objective loss signal bridge target-only memory tokenizer-coverage-aware holdout suite</title>
+<style>
+:root{color-scheme:light;--ink:#17212b;--muted:#62717d;--line:#d7dee5;--panel:#f8fafc;--accent:#1d4ed8}
+*{box-sizing:border-box}
+body{margin:0;background:#f2f4f7;color:var(--ink);font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1240px;margin:0 auto;padding:28px}
+h1{font-size:30px;margin:0 0 8px;letter-spacing:0}
+h2{font-size:18px;margin:0 0 12px;letter-spacing:0}
+p{color:var(--muted);line-height:1.55;overflow-wrap:anywhere}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:18px 0}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:8px}
+.card{padding:14px}
+.card span{display:block;color:var(--muted);font-size:12px;text-transform:uppercase}
+.card strong{display:block;margin-top:6px;font-size:18px;line-height:1.2;color:var(--accent);overflow-wrap:anywhere}
+.panel{padding:16px;margin:14px 0}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:#334155}
+td{overflow-wrap:anywhere}
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT bounded objective loss signal bridge target-only memory tokenizer-coverage-aware holdout suite</h1><p>The holdout suite has been rebuilt with prompts fully covered by the v890 tokenizer while preserving the fixed/loss scoring contract.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Candidate cases</span><strong>5</strong></div><div class="card"><span>Covered cases</span><strong>5</strong></div><div class="card"><span>Candidate unknown</span><strong>0</strong></div><div class="card"><span>Source unknown rows</span><strong>5</strong></div><div class="card"><span>Source unknown tokens</span><strong>96</strong></div><div class="card"><span>Promotion</span><strong>False</strong></div><div class="card"><span>Next</span><strong>run_tokenizer_coverage_aware_holdout_dry_run</strong></div></section>
+<section class="panel"><h2>Coverage Rows</h2><div class="table-wrap"><table>
+<thead><tr><th>Case</th><th>Source</th><th>Covered</th><th>Unknown</th><th>Prompt</th></tr></thead>
+<tbody><tr><td>tokenizer-covered-answer_exact_terms</td><td>objective-answer-direct</td><td>True</td><td>0</td><td>answer with exactly two words: fixed loss
+answer:</td></tr><tr><td>tokenizer-covered-return_target_words</td><td>objective-answer-role</td><td>True</td><td>0</td><td>return the two target words fixed loss
+output:</td></tr><tr><td>tokenizer-covered-contrast_route_result</td><td>objective-answer-contrast</td><td>True</td><td>0</td><td>contrast route result fixed loss
+result:</td></tr><tr><td>tokenizer-covered-jsonish_answer_terms</td><td>objective-answer-jsonish</td><td>True</td><td>0</td><td>jsonish answer_terms fixed loss
+answer_terms:</td></tr><tr><td>tokenizer-covered-self_check_terms</td><td>objective-answer-check</td><td>True</td><td>0</td><td>self check requires fixed and loss
+final answer:</td></tr></tbody>
+</table></div></section>
+<section class="panel"><h2>Checks</h2><div class="table-wrap"><table>
+<thead><tr><th>Check</th><th>Status</th><th>Actual</th><th>Detail</th></tr></thead>
+<tbody><tr><td>holdout_gap_diagnostic_passed</td><td>pass</td><td>pass</td><td>holdout gap diagnostic must pass</td></tr><tr><td>diagnostic_routes_to_tokenizer_coverage_suite</td><td>pass</td><td>build_tokenizer_coverage_aware_holdout_suite_before_more_training</td><td>diagnostic must route to tokenizer-coverage-aware holdout suite</td></tr><tr><td>source_benchmark_suite_passed</td><td>pass</td><td>pass</td><td>source benchmark suite must pass</td></tr><tr><td>tokenizer_exists</td><td>pass</td><td>e\890\解释\bounded-objective-loss-signal-bridge-target-only-memory-stagnation-aware-suffix-training-run\run\tokenizer.json</td><td>tokenizer.json must exist</td></tr><tr><td>case_count_preserved</td><td>pass</td><td>5</td><td>candidate suite must preserve source case count</td></tr><tr><td>coverage_rows_complete</td><td>pass</td><td>5</td><td>coverage report must cover every candidate case</td></tr><tr><td>all_candidate_prompts_tokenizer_covered</td><td>pass</td><td>5</td><td>every candidate prompt must be tokenizer covered</td></tr></tbody>
+</table></div></section>
+</main>
+</body>
+</html>

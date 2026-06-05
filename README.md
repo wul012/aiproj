@@ -4,7 +4,21 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v897.0.0` diagnoses the tokenizer/corpus/prompt gap behind the unchanged holdout replay failure.
+Version `v898.0.0` builds a tokenizer-coverage-aware holdout suite after diagnosing the v896 holdout failure.
+
+## Latest v898 checkpoint
+
+- Added short-name module `bounded_objective_loss_signal_bridge_target_only_memory_tokenizer_coverage_aware_holdout_suite`.
+- Added CLI `scripts/build_bounded_objective_loss_signal_bridge_target_only_memory_tokenizer_coverage_aware_holdout_suite.py`.
+- Read the real v897 holdout-gap diagnostic, v803 source benchmark suite, and v890 tokenizer.
+- Preserved the 5-case holdout shape and the `fixed/loss` scoring contract.
+- Replaced the unsupported Chinese prompt surfaces with ASCII prompts fully covered by the v890 tokenizer.
+- Recorded `candidate_case_count=5`, `tokenizer_covered_case_count=5`, and `candidate_prompt_unknown_token_count=0`.
+- Carried forward the source gap evidence: `source_prompt_unknown_row_count=5` and `source_prompt_unknown_token_count=96`.
+- Kept `promotion_ready=False` and `model_quality_claim=suite_construction_only`.
+- Routed the next action to `run_tokenizer_coverage_aware_holdout_dry_run`.
+- Verified with `4 passed` focused tokenizer-coverage-aware suite tests and Playwright MCP screenshot evidence.
+- Archived v898 evidence in `e/898` and added the code explanation in `代码讲解记录_模型能力阶段/912-v898-bounded-objective-loss-signal-bridge-target-only-memory-tokenizer-coverage-aware-holdout-suite.md`.
 
 ## Latest v897 checkpoint
 
