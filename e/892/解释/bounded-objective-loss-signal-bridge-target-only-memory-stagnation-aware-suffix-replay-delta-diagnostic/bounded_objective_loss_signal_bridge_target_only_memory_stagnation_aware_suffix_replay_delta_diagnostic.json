@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT bounded objective loss signal bridge target-only memory stagnation-aware suffix replay delta diagnostic",
+  "generated_at": "2026-06-05T09:55:33Z",
+  "status": "pass",
+  "decision": "bounded_objective_loss_signal_bridge_target_only_memory_stagnation_aware_suffix_replay_newline_fixed_l_converged_without_loss_gain",
+  "failed_count": 0,
+  "issues": [],
+  "source_baseline_replay_comparison": "e\\886\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-stabilized-loss-suffix-uptake-replay-comparison\\bounded_objective_loss_signal_bridge_target_only_memory_stabilized_loss_suffix_uptake_replay_comparison.json",
+  "source_current_replay_comparison": "e\\891\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-stagnation-aware-suffix-replay-comparison\\bounded_objective_loss_signal_bridge_target_only_memory_stagnation_aware_suffix_replay_comparison.json",
+  "baseline_summary": {
+    "bounded_objective_replay_comparison_ready": true,
+    "objective_contract_recovered": false,
+    "canonical_case_pass": false,
+    "case_count": 3,
+    "executed_case_count": 3,
+    "passed_case_count": 0,
+    "failed_case_count": 3,
+    "any_hit_case_count": 3,
+    "zero_hit_case_count": 0,
+    "pass_rate": 0.0,
+    "promotion_ready": false,
+    "next_step": "diagnose_bounded_objective_loss_signal_bridge_target_only_memory_stabilized_loss_suffix_uptake_partial_hit_before_more_training",
+    "failed_check_count": 0,
+    "bounded_objective_loss_signal_bridge_replay_comparison_ready": true,
+    "decoder_anchor_used": false,
+    "route": "bounded_objective_loss_signal_bridge_target_only_memory_stabilized_loss_suffix_uptake",
+    "bounded_objective_loss_signal_bridge_target_only_memory_stabilized_loss_suffix_uptake_replay_comparison_ready": true
+  },
+  "current_summary": {
+    "bounded_objective_replay_comparison_ready": true,
+    "objective_contract_recovered": false,
+    "canonical_case_pass": false,
+    "case_count": 3,
+    "executed_case_count": 3,
+    "passed_case_count": 0,
+    "failed_case_count": 3,
+    "any_hit_case_count": 3,
+    "zero_hit_case_count": 0,
+    "pass_rate": 0.0,
+    "promotion_ready": false,
+    "next_step": "diagnose_bounded_objective_loss_signal_bridge_target_only_memory_stagnation_aware_suffix_partial_hit_before_more_training",
+    "failed_check_count": 0,
+    "bounded_objective_loss_signal_bridge_replay_comparison_ready": true,
+    "decoder_anchor_used": false,
+    "route": "bounded_objective_loss_signal_bridge_target_only_memory_stagnation_aware_suffix",
+    "bounded_objective_loss_signal_bridge_target_only_memory_stagnation_aware_suffix_replay_comparison_ready": true
+  },
+  "case_diagnostics": [
+    {
+      "case_id": "canonical_direct_completion",
+      "baseline_present": true,
+      "current_present": true,
+      "baseline_continuation": " fixed l",
+      "current_continuation": "\nfixed l",
+      "baseline_hit_terms": [
+        "fixed"
+      ],
+      "current_hit_terms": [
+        "fixed"
+      ],
+      "baseline_case_pass": false,
+      "current_case_pass": false,
+      "continuation_changed": true,
+      "hit_terms_changed": false,
+      "loss_newly_hit": false,
+      "baseline_fixed_l_partial": true,
+      "current_newline_fixed_l_partial": true,
+      "space_to_newline_fixed_l": true,
+      "state_label": "newline_fixed_l_converged_without_loss"
+    },
+    {
+      "case_id": "completion_label_surface",
+      "baseline_present": true,
+      "current_present": true,
+      "baseline_continuation": "\nfixed l",
+      "current_continuation": "\nfixed l",
+      "baseline_hit_terms": [
+        "fixed"
+      ],
+      "current_hit_terms": [
+        "fixed"
+      ],
+      "baseline_case_pass": false,
+      "current_case_pass": false,
+      "continuation_changed": false,
+      "hit_terms_changed": false,
+      "loss_newly_hit": false,
+      "baseline_fixed_l_partial": true,
+      "current_newline_fixed_l_partial": true,
+      "space_to_newline_fixed_l": false,
+      "state_label": "unchanged_newline_fixed_l_without_loss"
+    },
+    {
+      "case_id": "minimal_direct_completion",
+      "baseline_present": true,
+      "current_present": true,
+      "baseline_continuation": "\nfixed l",
+      "current_continuation": "\nfixed l",
+      "baseline_hit_terms": [
+        "fixed"
+      ],
+      "current_hit_terms": [
+        "fixed"
+      ],
+      "baseline_case_pass": false,
+      "current_case_pass": false,
+      "continuation_changed": false,
+      "hit_terms_changed": false,
+      "loss_newly_hit": false,
+      "baseline_fixed_l_partial": true,
+      "current_newline_fixed_l_partial": true,
+      "space_to_newline_fixed_l": false,
+      "state_label": "unchanged_newline_fixed_l_without_loss"
+    }
+  ],
+  "diagnostic": {
+    "ready": true,
+    "matching_case_set": true,
+    "pass_delta": 0,
+    "any_hit_delta": 0,
+    "zero_hit_delta": 0,
+    "continuation_changed_count": 1,
+    "loss_newly_hit_case_count": 0,
+    "current_newline_fixed_l_partial_case_count": 3,
+    "space_to_newline_fixed_l_case_count": 1,
+    "loss_missing_all_current_cases": true,
+    "surface_converged_without_suffix_gain": true,
+    "no_contract_gain_confirmed": true,
+    "next_step": "probe_bounded_objective_loss_signal_bridge_target_only_memory_loss_token_probability"
+  },
+  "check_rows": [
+    {
+      "id": "baseline_replay_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "baseline replay must pass structurally"
+    },
+    {
+      "id": "current_replay_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "current replay must pass structurally"
+    },
+    {
+      "id": "baseline_replay_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "v886 stabilized loss-suffix uptake replay must be ready"
+    },
+    {
+      "id": "current_replay_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "v891 stagnation-aware suffix replay must be ready"
+    },
+    {
+      "id": "matching_case_set",
+      "status": "pass",
+      "actual": 3,
+      "detail": "baseline and current replay cases must match"
+    },
+    {
+      "id": "contract_still_unrecovered",
+      "status": "pass",
+      "actual": false,
+      "detail": "diagnostic only applies while contract is unrecovered"
+    },
+    {
+      "id": "no_pass_delta",
+      "status": "pass",
+      "actual": 0,
+      "detail": "delta requires no pass-count gain"
+    },
+    {
+      "id": "no_required_term_delta",
+      "status": "pass",
+      "actual": {
+        "any": 0,
+        "zero": 0
+      },
+      "detail": "required-term hit counts should not change"
+    },
+    {
+      "id": "no_loss_newly_hit",
+      "status": "pass",
+      "actual": 0,
+      "detail": "loss suffix must not be newly hit"
+    },
+    {
+      "id": "all_current_newline_fixed_l_partial",
+      "status": "pass",
+      "actual": 3,
+      "detail": "all current cases should converge to newline fixed-l partial"
+    }
+  ],
+  "summary": {
+    "bounded_objective_loss_signal_bridge_target_only_memory_stagnation_aware_suffix_replay_delta_diagnostic_ready": true,
+    "case_count": 3,
+    "baseline_passed_case_count": 0,
+    "current_passed_case_count": 0,
+    "baseline_any_hit_case_count": 3,
+    "current_any_hit_case_count": 3,
+    "pass_delta": 0,
+    "any_hit_delta": 0,
+    "zero_hit_delta": 0,
+    "continuation_changed_count": 1,
+    "loss_newly_hit_case_count": 0,
+    "current_newline_fixed_l_partial_case_count": 3,
+    "space_to_newline_fixed_l_case_count": 1,
+    "loss_missing_all_current_cases": true,
+    "surface_converged_without_suffix_gain": true,
+    "no_contract_gain_confirmed": true,
+    "next_step": "probe_bounded_objective_loss_signal_bridge_target_only_memory_loss_token_probability"
+  },
+  "interpretation": {
+    "model_quality_claim": "newline_fixed_l_surface_convergence_without_loss_gain",
+    "reason": "The stagnation-aware suffix checkpoint unified replay surfaces at newline fixed-l, but it added no loss suffix hits and no objective-contract passes.",
+    "next_action": "probe_bounded_objective_loss_signal_bridge_target_only_memory_loss_token_probability"
+  }
+}

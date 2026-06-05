@@ -1268,6 +1268,9 @@
 905-v891-bounded-objective-loss-signal-bridge-target-only-memory-stagnation-aware-suffix-replay-comparison.md
  -> v891 code explanation: replay the stagnation-aware suffix checkpoint and show it still misses loss while unifying surfaces at newline fixed-l.
 
+906-v892-bounded-objective-loss-signal-bridge-target-only-memory-stagnation-aware-suffix-replay-delta-diagnostic.md
+ -> v892 code explanation: compare v886 and v891 replay rows and show newline fixed-l surface convergence without loss-suffix gain.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

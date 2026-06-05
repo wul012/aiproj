@@ -4,7 +4,19 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v891.0.0` replays the v890 stagnation-aware suffix checkpoint against the unchanged bounded objective contract.
+Version `v892.0.0` diagnoses the replay delta between v886 stabilized loss-suffix uptake and v891 stagnation-aware suffix replay.
+
+## Latest v892 checkpoint
+
+- Added short-name module `bounded_objective_loss_signal_bridge_target_only_memory_stagnation_aware_suffix_replay_delta_diagnostic`.
+- Added CLI `scripts/diagnose_bounded_objective_loss_signal_bridge_target_only_memory_stagnation_aware_suffix_replay_delta.py`.
+- Compared the real v886 replay JSON with the real v891 replay JSON without retraining or regenerating either checkpoint.
+- Confirmed `pass_delta=0`, `any_hit_delta=0`, `zero_hit_delta=0`, `loss_newly_hit_case_count=0`, and `continuation_changed_count=1`.
+- Confirmed `surface_converged_without_suffix_gain=True`: canonical replay changed from `" fixed l"` to `"\nfixed l"`, while all three cases still miss `loss`.
+- Kept `model_quality_claim=newline_fixed_l_surface_convergence_without_loss_gain`; this is not a model-quality promotion.
+- Routed the next artifact to `probe_bounded_objective_loss_signal_bridge_target_only_memory_loss_token_probability` instead of another blind suffix patch.
+- Verified with `4 passed` focused replay-delta diagnostic tests and Playwright MCP screenshot evidence.
+- Archived v892 evidence in `e/892` and added the code explanation in `代码讲解记录_模型能力阶段/906-v892-bounded-objective-loss-signal-bridge-target-only-memory-stagnation-aware-suffix-replay-delta-diagnostic.md`.
 
 ## Latest v891 checkpoint
 
