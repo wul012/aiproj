@@ -1,0 +1,6 @@
+case_id,case_pass,failure_class,prompt_unknown_count,prompt_unknown_rate,prompt_exact_in_corpus,continuation_replacement_count,hit_terms,missed_terms
+objective-answer-direct,False,tokenizer_prompt_coverage_gap,26,0.963,False,26,,"fixed,loss"
+objective-answer-role,False,tokenizer_prompt_coverage_gap,15,0.3846,False,15,,"fixed,loss"
+objective-answer-contrast,False,tokenizer_prompt_coverage_gap,19,0.5938,False,19,,"fixed,loss"
+objective-answer-jsonish,False,tokenizer_prompt_coverage_gap,18,0.375,False,18,,"fixed,loss"
+objective-answer-check,True,passed,18,0.6,False,18,"fixed,loss",

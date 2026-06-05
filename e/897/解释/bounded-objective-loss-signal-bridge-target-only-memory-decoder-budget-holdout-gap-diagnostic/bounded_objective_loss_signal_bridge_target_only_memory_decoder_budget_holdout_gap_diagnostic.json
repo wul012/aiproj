@@ -1,0 +1,284 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT bounded objective loss signal bridge target-only memory decoder-budget holdout gap diagnostic",
+  "generated_at": "2026-06-05T11:13:30Z",
+  "status": "pass",
+  "decision": "bounded_objective_loss_signal_bridge_target_only_memory_decoder_budget_holdout_gap_tokenizer_coverage_blocks_promotion",
+  "failed_count": 0,
+  "issues": [],
+  "source_holdout_replay": "e\\896\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-decoder-budget-holdout-replay\\bounded_objective_loss_signal_bridge_target_only_memory_decoder_budget_holdout_replay.json",
+  "source_holdout_replay_summary": {
+    "bounded_objective_loss_signal_bridge_target_only_memory_decoder_budget_holdout_replay_ready": true,
+    "source_objective_contract_recovered": true,
+    "holdout_model_route_quality_ready": false,
+    "case_count": 5,
+    "executed_case_count": 5,
+    "passed_case_count": 1,
+    "failed_case_count": 4,
+    "any_hit_case_count": 1,
+    "zero_hit_case_count": 4,
+    "pass_rate": 0.2,
+    "promotion_ready": false,
+    "model_quality_claim": "objective_contract_recovered_holdout_failed",
+    "next_step": "diagnose_holdout_prompt_generalization_gap_before_more_training",
+    "failed_check_count": 0
+  },
+  "tokenizer_path": "e\\890\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-stagnation-aware-suffix-training-run\\run\\tokenizer.json",
+  "training_corpus_path": "e\\890\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-stagnation-aware-suffix-training-run\\run\\prepared_corpus.txt",
+  "check_rows": [
+    {
+      "id": "holdout_replay_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "holdout replay must pass structurally"
+    },
+    {
+      "id": "tokenizer_exists",
+      "status": "pass",
+      "actual": "e\\890\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-stagnation-aware-suffix-training-run\\run\\tokenizer.json",
+      "detail": "tokenizer.json must exist"
+    },
+    {
+      "id": "training_corpus_exists",
+      "status": "pass",
+      "actual": "e\\890\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-stagnation-aware-suffix-training-run\\run\\prepared_corpus.txt",
+      "detail": "prepared training corpus must exist"
+    },
+    {
+      "id": "replay_rows_present",
+      "status": "pass",
+      "actual": 5,
+      "detail": "holdout replay must include replay rows"
+    },
+    {
+      "id": "diagnostic_rows_complete",
+      "status": "pass",
+      "actual": 5,
+      "detail": "diagnostic should cover every replay row"
+    }
+  ],
+  "diagnostic_rows": [
+    {
+      "case_id": "objective-answer-direct",
+      "case_pass": false,
+      "prompt_char_count": 27,
+      "prompt_unknown_count": 26,
+      "prompt_unknown_rate": 0.963,
+      "prompt_unknown_chars": [
+        "。",
+        "两",
+        "个",
+        "任",
+        "关",
+        "出",
+        "务",
+        "只",
+        "文",
+        "本",
+        "标",
+        "案",
+        "目",
+        "示",
+        "答",
+        "英",
+        "表",
+        "词",
+        "轮",
+        "输",
+        "键",
+        "，",
+        "："
+      ],
+      "prompt_exact_in_corpus": false,
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "expected_terms_missing_from_corpus": [],
+      "continuation_replacement_count": 26,
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "failure_class": "tokenizer_prompt_coverage_gap"
+    },
+    {
+      "case_id": "objective-answer-role",
+      "case_pass": false,
+      "prompt_char_count": 39,
+      "prompt_unknown_count": 15,
+      "prompt_unknown_rate": 0.3846,
+      "prompt_unknown_chars": [
+        "。",
+        "两",
+        "个",
+        "出",
+        "标",
+        "的",
+        "目",
+        "给",
+        "色",
+        "角",
+        "词",
+        "输",
+        "："
+      ],
+      "prompt_exact_in_corpus": false,
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "expected_terms_missing_from_corpus": [],
+      "continuation_replacement_count": 15,
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "failure_class": "tokenizer_prompt_coverage_gap"
+    },
+    {
+      "case_id": "objective-answer-contrast",
+      "case_pass": false,
+      "prompt_char_count": 32,
+      "prompt_unknown_count": 19,
+      "prompt_unknown_rate": 0.5938,
+      "prompt_unknown_chars": [
+        "。",
+        "不",
+        "任",
+        "务",
+        "只",
+        "回",
+        "对",
+        "果",
+        "标",
+        "比",
+        "目",
+        "结",
+        "要",
+        "解",
+        "返",
+        "释",
+        "，",
+        "："
+      ],
+      "prompt_exact_in_corpus": false,
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "expected_terms_missing_from_corpus": [],
+      "continuation_replacement_count": 19,
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "failure_class": "tokenizer_prompt_coverage_gap"
+    },
+    {
+      "case_id": "objective-answer-jsonish",
+      "case_pass": false,
+      "prompt_char_count": 48,
+      "prompt_unknown_count": 18,
+      "prompt_unknown_rate": 0.375,
+      "prompt_unknown_chars": [
+        "J",
+        "N",
+        "S",
+        "。",
+        "两",
+        "个",
+        "写",
+        "出",
+        "包",
+        "含",
+        "文",
+        "格",
+        "用",
+        "英",
+        "词",
+        "请",
+        "风",
+        "，"
+      ],
+      "prompt_exact_in_corpus": false,
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "expected_terms_missing_from_corpus": [],
+      "continuation_replacement_count": 18,
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "failure_class": "tokenizer_prompt_coverage_gap"
+    },
+    {
+      "case_id": "objective-answer-check",
+      "case_pass": true,
+      "prompt_char_count": 30,
+      "prompt_unknown_count": 18,
+      "prompt_unknown_rate": 0.6,
+      "prompt_unknown_chars": [
+        "。",
+        "与",
+        "出",
+        "同",
+        "时",
+        "最",
+        "本",
+        "案",
+        "检",
+        "现",
+        "答",
+        "终",
+        "自",
+        "要",
+        "需",
+        "题",
+        "："
+      ],
+      "prompt_exact_in_corpus": false,
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "expected_terms_missing_from_corpus": [],
+      "continuation_replacement_count": 18,
+      "hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "missed_terms": [],
+      "failure_class": "passed"
+    }
+  ],
+  "summary": {
+    "bounded_objective_loss_signal_bridge_target_only_memory_decoder_budget_holdout_gap_diagnostic_ready": true,
+    "source_promotion_ready": false,
+    "source_holdout_pass_rate": 0.2,
+    "case_count": 5,
+    "passed_case_count": 1,
+    "tokenizer_prompt_coverage_gap_count": 4,
+    "holdout_prompt_unseen_surface_gap_count": 0,
+    "required_term_generation_gap_count": 0,
+    "continuation_replacement_row_count": 5,
+    "prompt_unknown_row_count": 5,
+    "prompt_unknown_token_count": 96,
+    "dominant_gap": "tokenizer_prompt_coverage_gap",
+    "promotion_ready": false,
+    "model_quality_claim": "holdout_gap_diagnostic_only",
+    "next_step": "build_tokenizer_coverage_aware_holdout_suite_before_more_training",
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "holdout_gap_diagnostic_only",
+    "reason": "The dominant v896 holdout gap is tokenizer_prompt_coverage_gap; this is diagnostic evidence only and does not promote the model.",
+    "next_action": "build_tokenizer_coverage_aware_holdout_suite_before_more_training"
+  }
+}

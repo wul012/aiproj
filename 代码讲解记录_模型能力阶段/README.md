@@ -1283,6 +1283,9 @@
 910-v896-bounded-objective-loss-signal-bridge-target-only-memory-decoder-budget-holdout-replay.md
  -> v896 code explanation: run the unchanged bounded holdout suite after decoder-budget recovery and block route promotion after a 1/5 holdout pass.
 
+911-v897-bounded-objective-loss-signal-bridge-target-only-memory-decoder-budget-holdout-gap-diagnostic.md
+ -> v897 code explanation: diagnose the v896 holdout failure as tokenizer prompt coverage gap before more training.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

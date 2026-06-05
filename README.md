@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v896.0.0` runs the unchanged bounded holdout suite after the audited decoder-budget contract recovery.
+Version `v897.0.0` diagnoses the tokenizer/corpus/prompt gap behind the unchanged holdout replay failure.
+
+## Latest v897 checkpoint
+
+- Added short-name module `bounded_objective_loss_signal_bridge_target_only_memory_decoder_budget_holdout_gap_diagnostic`.
+- Added CLI `scripts/diagnose_bounded_objective_loss_signal_bridge_target_only_memory_decoder_budget_holdout_gap.py`.
+- Read the real v896 holdout replay, v890 tokenizer, and v890 prepared corpus without retraining or regenerating replay.
+- Confirmed `dominant_gap=tokenizer_prompt_coverage_gap`.
+- Recorded `tokenizer_prompt_coverage_gap_count=4`, `prompt_unknown_row_count=5`, `prompt_unknown_token_count=96`, and `continuation_replacement_row_count=5`.
+- Confirmed the unchanged v803 holdout suite is not aligned with the v890 49-character tokenizer, which has no Chinese vocabulary.
+- Kept `promotion_ready=False` and `model_quality_claim=holdout_gap_diagnostic_only`.
+- Routed the next action to `build_tokenizer_coverage_aware_holdout_suite_before_more_training`.
+- Verified with `4 passed` focused holdout-gap diagnostic tests and Playwright MCP screenshot evidence.
+- Archived v897 evidence in `e/897` and added the code explanation in `代码讲解记录_模型能力阶段/911-v897-bounded-objective-loss-signal-bridge-target-only-memory-decoder-budget-holdout-gap-diagnostic.md`.
 
 ## Latest v896 checkpoint
 

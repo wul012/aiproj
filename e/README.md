@@ -1966,3 +1966,8 @@ e/663/解释/说明.md
 - `e/896/图片`
 - `e/896/解释/说明.md`
 - v896 bounded objective loss signal bridge target-only memory decoder-budget holdout replay screenshots and explanation.
+## v897 supplemental index
+
+- `e/897/图片`
+- `e/897/解释/说明.md`
+- v897 bounded objective loss signal bridge target-only memory decoder-budget holdout gap diagnostic screenshots and explanation.
