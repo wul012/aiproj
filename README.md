@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v885.0.0` trains a real checkpoint from the v884 stabilized loss-suffix uptake patch corpus.
+Version `v886.0.0` replays the v885 stabilized loss-suffix uptake checkpoint against the unchanged bounded objective contract.
+
+## Latest v886 checkpoint
+
+- Added short-name module `bounded_objective_loss_signal_bridge_target_only_memory_stabilized_loss_suffix_uptake_replay_comparison`.
+- Added CLI `scripts/run_bounded_objective_loss_signal_bridge_target_only_memory_stabilized_loss_suffix_uptake_replay_comparison.py`.
+- Replayed the real v885 checkpoint against the unchanged v836 bounded objective contract on CPU.
+- Recorded `case_count=3`, `passed_case_count=0`, `any_hit_case_count=3`, `zero_hit_case_count=0`, and `pass_rate=0.0`.
+- Confirmed `objective_contract_recovered=False`, `canonical_case_pass=False`, and `promotion_ready=False`.
+- Observed all three contract surfaces still continue to `fixed l`, so v885's sample success did not transfer to contract replay.
+- Kept `model_quality_claim=partial_required_term_signal`; full `fixed loss` recovery is still blocked.
+- Routed the next artifact to `diagnose_bounded_objective_loss_signal_bridge_target_only_memory_stabilized_loss_suffix_uptake_partial_hit_before_more_training`.
+- Verified with `4 passed` focused stabilized loss-suffix uptake replay-comparison tests and Playwright MCP screenshot evidence.
+- Archived v886 evidence in `e/886` and added the code explanation in `代码讲解记录_模型能力阶段/900-v886-bounded-objective-loss-signal-bridge-target-only-memory-stabilized-loss-suffix-uptake-replay-comparison.md`.
 
 ## Latest v885 checkpoint
 

@@ -1,0 +1,261 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT bounded objective loss signal bridge target-only memory stabilized loss-suffix uptake replay comparison",
+  "generated_at": "2026-06-05T06:13:56Z",
+  "status": "pass",
+  "decision": "bounded_objective_loss_signal_bridge_target_only_memory_stabilized_loss_suffix_uptake_replay_partial_required_term_hit",
+  "failed_count": 0,
+  "issues": [],
+  "source_objective_contract": "e\\836\\解释\\model-capability-route-promotion-bounded-objective-contract\\model_capability_route_promotion_bounded_objective_contract.json",
+  "source_objective_training_run": "e\\885\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-stabilized-loss-suffix-uptake-training-run\\bounded_objective_loss_signal_bridge_target_only_memory_stabilized_loss_suffix_uptake_training_run.json",
+  "checkpoint": "e\\885\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-stabilized-loss-suffix-uptake-training-run\\run\\checkpoint.pt",
+  "tokenizer": "e\\885\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-stabilized-loss-suffix-uptake-training-run\\run\\tokenizer.json",
+  "device": "cpu",
+  "contract_summary": {
+    "bounded_objective_contract_ready": true,
+    "contract_id": "bounded_fixed_loss_direct_completion_contract",
+    "target_terms": [
+      "fixed",
+      "loss"
+    ],
+    "contract_case_count": 3,
+    "planned_seed_example_count": 18,
+    "unchanged_suite_check_required": true,
+    "promotion_claim_allowed": false,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_objective_seed",
+    "failed_check_count": 0
+  },
+  "training_summary": {
+    "bounded_objective_unassisted_repair_training_ready": true,
+    "artifact_count": 7,
+    "metric_record_count": 27,
+    "final_step": 260,
+    "final_train_loss": 0.48616647720336914,
+    "final_val_loss": 0.5385479927062988,
+    "train_loss_delta": -3.176852,
+    "val_loss_delta": -3.087026,
+    "repair_example_count": 24,
+    "neutral_prompt_example_count": 15,
+    "decoder_anchor_example_count": 0,
+    "proposed_next_artifact": "bounded_objective_loss_signal_bridge_target_only_memory_stabilized_loss_suffix_uptake_replay_comparison",
+    "next_step": "run_bounded_objective_loss_signal_bridge_target_only_memory_stabilized_loss_suffix_uptake_replay_comparison",
+    "failed_check_count": 0,
+    "bounded_objective_unassisted_repair_seed_revision_training_ready": true,
+    "bounded_objective_loss_signal_bridge_training_ready": true,
+    "bounded_objective_loss_signal_bridge_target_only_memory_stabilized_loss_suffix_uptake_training_ready": true,
+    "bounded_objective_training_ready": true
+  },
+  "replay_rows": [
+    {
+      "case_id": "canonical_direct_completion",
+      "prompt": "Answer with exactly two tokens: fixed loss\nanswer:",
+      "continuation": " fixed l",
+      "generated": "Answer with exactly two tokens: fixed loss\nanswer: fixed l",
+      "expected_completion": "fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "fixed"
+      ],
+      "missed_terms": [
+        "loss"
+      ],
+      "case_pass": false,
+      "any_hit": true,
+      "max_new_tokens": 8,
+      "temperature": 0.2,
+      "top_k": 20,
+      "seed": 1839
+    },
+    {
+      "case_id": "minimal_direct_completion",
+      "prompt": "Answer with exactly two words: fixed loss\nanswer:",
+      "continuation": "\nfixed l",
+      "generated": "Answer with exactly two words: fixed loss\nanswer:\nfixed l",
+      "expected_completion": "fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "fixed"
+      ],
+      "missed_terms": [
+        "loss"
+      ],
+      "case_pass": false,
+      "any_hit": true,
+      "max_new_tokens": 8,
+      "temperature": 0.2,
+      "top_k": 20,
+      "seed": 1839
+    },
+    {
+      "case_id": "completion_label_surface",
+      "prompt": "Complete with exactly two tokens: fixed loss\ncompletion:",
+      "continuation": "\nfixed l",
+      "generated": "Complete with exactly two tokens: fixed loss\ncompletion:\nfixed l",
+      "expected_completion": "fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "fixed"
+      ],
+      "missed_terms": [
+        "loss"
+      ],
+      "case_pass": false,
+      "any_hit": true,
+      "max_new_tokens": 8,
+      "temperature": 0.2,
+      "top_k": 20,
+      "seed": 1839
+    }
+  ],
+  "replay_errors": [],
+  "check_rows": [
+    {
+      "id": "contract_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "objective contract must pass"
+    },
+    {
+      "id": "contract_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "objective contract must be ready"
+    },
+    {
+      "id": "training_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "objective training evidence must pass"
+    },
+    {
+      "id": "training_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "objective training must be ready"
+    },
+    {
+      "id": "checkpoint_exists",
+      "status": "pass",
+      "actual": "e\\885\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-stabilized-loss-suffix-uptake-training-run\\run\\checkpoint.pt",
+      "detail": "checkpoint.pt must exist"
+    },
+    {
+      "id": "tokenizer_exists",
+      "status": "pass",
+      "actual": "e\\885\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-stabilized-loss-suffix-uptake-training-run\\run\\tokenizer.json",
+      "detail": "tokenizer.json must exist"
+    },
+    {
+      "id": "cases_present",
+      "status": "pass",
+      "actual": 3,
+      "detail": "objective contract must provide replay cases"
+    },
+    {
+      "id": "all_cases_executed",
+      "status": "pass",
+      "actual": 3,
+      "detail": "objective replay should execute every contract case"
+    },
+    {
+      "id": "no_replay_errors",
+      "status": "pass",
+      "actual": 0,
+      "detail": "objective replay should not raise generation errors"
+    }
+  ],
+  "comparison": {
+    "ready": true,
+    "case_count": 3,
+    "executed_case_count": 3,
+    "passed_case_count": 0,
+    "failed_case_count": 3,
+    "any_hit_case_count": 3,
+    "zero_hit_case_count": 0,
+    "canonical_case_pass": false,
+    "pass_rate": 0.0,
+    "objective_contract_recovered": false,
+    "unchanged_suite_check_required": true,
+    "promotion_ready": false,
+    "final_train_loss": 0.48616647720336914,
+    "final_val_loss": 0.5385479927062988,
+    "train_loss_delta": -3.176852,
+    "next_step": "diagnose_bounded_objective_loss_signal_bridge_target_only_memory_stabilized_loss_suffix_uptake_partial_hit_before_more_training",
+    "route": "bounded_objective_loss_signal_bridge_target_only_memory_stabilized_loss_suffix_uptake",
+    "decoder_anchor_used": false,
+    "training_source": "bounded_objective_loss_signal_bridge_target_only_memory_stabilized_loss_suffix_uptake_training_run"
+  },
+  "summary": {
+    "bounded_objective_replay_comparison_ready": true,
+    "objective_contract_recovered": false,
+    "canonical_case_pass": false,
+    "case_count": 3,
+    "executed_case_count": 3,
+    "passed_case_count": 0,
+    "failed_case_count": 3,
+    "any_hit_case_count": 3,
+    "zero_hit_case_count": 0,
+    "pass_rate": 0.0,
+    "promotion_ready": false,
+    "next_step": "diagnose_bounded_objective_loss_signal_bridge_target_only_memory_stabilized_loss_suffix_uptake_partial_hit_before_more_training",
+    "failed_check_count": 0,
+    "bounded_objective_loss_signal_bridge_replay_comparison_ready": true,
+    "decoder_anchor_used": false,
+    "route": "bounded_objective_loss_signal_bridge_target_only_memory_stabilized_loss_suffix_uptake",
+    "bounded_objective_loss_signal_bridge_target_only_memory_stabilized_loss_suffix_uptake_replay_comparison_ready": true
+  },
+  "interpretation": {
+    "model_quality_claim": "partial_required_term_signal",
+    "reason": "The stabilized loss-suffix uptake checkpoint produced partial required-term signal without recovering the full contract.",
+    "next_action": "diagnose_bounded_objective_loss_signal_bridge_target_only_memory_stabilized_loss_suffix_uptake_partial_hit_before_more_training"
+  },
+  "source_loss_signal_bridge_training_run": "e\\885\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-stabilized-loss-suffix-uptake-training-run\\bounded_objective_loss_signal_bridge_target_only_memory_stabilized_loss_suffix_uptake_training_run.json",
+  "loss_signal_bridge_training_summary": {
+    "bounded_objective_unassisted_repair_training_ready": true,
+    "artifact_count": 7,
+    "metric_record_count": 27,
+    "final_step": 260,
+    "final_train_loss": 0.48616647720336914,
+    "final_val_loss": 0.5385479927062988,
+    "train_loss_delta": -3.176852,
+    "val_loss_delta": -3.087026,
+    "repair_example_count": 24,
+    "neutral_prompt_example_count": 15,
+    "decoder_anchor_example_count": 0,
+    "proposed_next_artifact": "bounded_objective_loss_signal_bridge_target_only_memory_stabilized_loss_suffix_uptake_replay_comparison",
+    "next_step": "run_bounded_objective_loss_signal_bridge_target_only_memory_stabilized_loss_suffix_uptake_replay_comparison",
+    "failed_check_count": 0,
+    "bounded_objective_unassisted_repair_seed_revision_training_ready": true,
+    "bounded_objective_loss_signal_bridge_training_ready": true,
+    "bounded_objective_loss_signal_bridge_target_only_memory_stabilized_loss_suffix_uptake_training_ready": true
+  },
+  "source_stabilized_loss_suffix_uptake_training_run": "e\\885\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-stabilized-loss-suffix-uptake-training-run\\bounded_objective_loss_signal_bridge_target_only_memory_stabilized_loss_suffix_uptake_training_run.json",
+  "stabilized_loss_suffix_uptake_training_summary": {
+    "bounded_objective_unassisted_repair_training_ready": true,
+    "artifact_count": 7,
+    "metric_record_count": 27,
+    "final_step": 260,
+    "final_train_loss": 0.48616647720336914,
+    "final_val_loss": 0.5385479927062988,
+    "train_loss_delta": -3.176852,
+    "val_loss_delta": -3.087026,
+    "repair_example_count": 24,
+    "neutral_prompt_example_count": 15,
+    "decoder_anchor_example_count": 0,
+    "proposed_next_artifact": "bounded_objective_loss_signal_bridge_target_only_memory_stabilized_loss_suffix_uptake_replay_comparison",
+    "next_step": "run_bounded_objective_loss_signal_bridge_target_only_memory_stabilized_loss_suffix_uptake_replay_comparison",
+    "failed_check_count": 0,
+    "bounded_objective_unassisted_repair_seed_revision_training_ready": true,
+    "bounded_objective_loss_signal_bridge_training_ready": true,
+    "bounded_objective_loss_signal_bridge_target_only_memory_stabilized_loss_suffix_uptake_training_ready": true
+  }
+}

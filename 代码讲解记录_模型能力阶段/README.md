@@ -1250,6 +1250,9 @@
 899-v885-bounded-objective-loss-signal-bridge-target-only-memory-stabilized-loss-suffix-uptake-training-run.md
  -> v885 code explanation: train the stabilized loss-suffix uptake corpus into a real checkpoint while keeping capability gated behind replay.
 
+900-v886-bounded-objective-loss-signal-bridge-target-only-memory-stabilized-loss-suffix-uptake-replay-comparison.md
+ -> v886 code explanation: replay the stabilized loss-suffix uptake checkpoint and show it remains a fixed-l partial signal instead of full fixed-loss recovery.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。
