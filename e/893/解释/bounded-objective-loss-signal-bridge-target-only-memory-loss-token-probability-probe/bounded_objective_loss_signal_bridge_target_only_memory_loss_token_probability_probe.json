@@ -1,0 +1,615 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT bounded objective loss signal bridge target-only memory loss-token probability probe",
+  "generated_at": "2026-06-05T10:10:02Z",
+  "status": "pass",
+  "decision": "bounded_objective_loss_signal_bridge_target_only_memory_loss_token_probability_probe_loss_suffix_top1_but_decode_blocked",
+  "failed_count": 0,
+  "issues": [],
+  "source_objective_contract": "e\\836\\解释\\model-capability-route-promotion-bounded-objective-contract\\model_capability_route_promotion_bounded_objective_contract.json",
+  "source_replay_delta_diagnostic": "e\\892\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-stagnation-aware-suffix-replay-delta-diagnostic\\bounded_objective_loss_signal_bridge_target_only_memory_stagnation_aware_suffix_replay_delta_diagnostic.json",
+  "checkpoint": "e\\890\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-stagnation-aware-suffix-training-run\\run\\checkpoint.pt",
+  "tokenizer": "e\\890\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-stagnation-aware-suffix-training-run\\run\\tokenizer.json",
+  "device": "cpu",
+  "top_k": 5,
+  "contract_summary": {
+    "bounded_objective_contract_ready": true,
+    "contract_id": "bounded_fixed_loss_direct_completion_contract",
+    "target_terms": [
+      "fixed",
+      "loss"
+    ],
+    "contract_case_count": 3,
+    "planned_seed_example_count": 18,
+    "unchanged_suite_check_required": true,
+    "promotion_claim_allowed": false,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_objective_seed",
+    "failed_check_count": 0
+  },
+  "replay_delta_summary": {
+    "bounded_objective_loss_signal_bridge_target_only_memory_stagnation_aware_suffix_replay_delta_diagnostic_ready": true,
+    "case_count": 3,
+    "baseline_passed_case_count": 0,
+    "current_passed_case_count": 0,
+    "baseline_any_hit_case_count": 3,
+    "current_any_hit_case_count": 3,
+    "pass_delta": 0,
+    "any_hit_delta": 0,
+    "zero_hit_delta": 0,
+    "continuation_changed_count": 1,
+    "loss_newly_hit_case_count": 0,
+    "current_newline_fixed_l_partial_case_count": 3,
+    "space_to_newline_fixed_l_case_count": 1,
+    "loss_missing_all_current_cases": true,
+    "surface_converged_without_suffix_gain": true,
+    "no_contract_gain_confirmed": true,
+    "next_step": "probe_bounded_objective_loss_signal_bridge_target_only_memory_loss_token_probability"
+  },
+  "probe_rows": [
+    {
+      "case_id": "canonical_direct_completion",
+      "step_index": 0,
+      "prompt": "Answer with exactly two tokens: fixed loss\nanswer:",
+      "fixed_l_prefix": "\nfixed l",
+      "context_suffix": "Answer with exactly two tokens: fixed loss\nanswer:\nfixed l",
+      "target_suffix": "oss",
+      "target_token": "o",
+      "target_token_id": 37,
+      "target_probability": 0.9545234441757202,
+      "target_rank": 1,
+      "target_in_top_k": true,
+      "top_token": "o",
+      "top_token_probability": 0.9545234441757202,
+      "top_candidates": [
+        {
+          "rank": 1,
+          "token_id": 37,
+          "token_text": "o",
+          "probability": 0.9545234441757202
+        },
+        {
+          "rank": 2,
+          "token_id": 1,
+          "token_text": "\n",
+          "probability": 0.013400442898273468
+        },
+        {
+          "rank": 3,
+          "token_id": 23,
+          "token_text": "a",
+          "probability": 0.004519780166447163
+        },
+        {
+          "rank": 4,
+          "token_id": 41,
+          "token_text": "s",
+          "probability": 0.0036293978337198496
+        },
+        {
+          "rank": 5,
+          "token_id": 2,
+          "token_text": " ",
+          "probability": 0.003485062625259161
+        }
+      ],
+      "state_label": "target_top1"
+    },
+    {
+      "case_id": "canonical_direct_completion",
+      "step_index": 1,
+      "prompt": "Answer with exactly two tokens: fixed loss\nanswer:",
+      "fixed_l_prefix": "\nfixed l",
+      "context_suffix": "Answer with exactly two tokens: fixed loss\nanswer:\nfixed lo",
+      "target_suffix": "oss",
+      "target_token": "s",
+      "target_token_id": 41,
+      "target_probability": 0.9480579495429993,
+      "target_rank": 1,
+      "target_in_top_k": true,
+      "top_token": "s",
+      "top_token_probability": 0.9480579495429993,
+      "top_candidates": [
+        {
+          "rank": 1,
+          "token_id": 41,
+          "token_text": "s",
+          "probability": 0.9480579495429993
+        },
+        {
+          "rank": 2,
+          "token_id": 1,
+          "token_text": "\n",
+          "probability": 0.020946141332387924
+        },
+        {
+          "rank": 3,
+          "token_id": 2,
+          "token_text": " ",
+          "probability": 0.005254513118416071
+        },
+        {
+          "rank": 4,
+          "token_id": 14,
+          "token_text": ":",
+          "probability": 0.0035627640318125486
+        },
+        {
+          "rank": 5,
+          "token_id": 37,
+          "token_text": "o",
+          "probability": 0.002794415457174182
+        }
+      ],
+      "state_label": "target_top1"
+    },
+    {
+      "case_id": "canonical_direct_completion",
+      "step_index": 2,
+      "prompt": "Answer with exactly two tokens: fixed loss\nanswer:",
+      "fixed_l_prefix": "\nfixed l",
+      "context_suffix": "Answer with exactly two tokens: fixed loss\nanswer:\nfixed los",
+      "target_suffix": "oss",
+      "target_token": "s",
+      "target_token_id": 41,
+      "target_probability": 0.965534508228302,
+      "target_rank": 1,
+      "target_in_top_k": true,
+      "top_token": "s",
+      "top_token_probability": 0.965534508228302,
+      "top_candidates": [
+        {
+          "rank": 1,
+          "token_id": 41,
+          "token_text": "s",
+          "probability": 0.965534508228302
+        },
+        {
+          "rank": 2,
+          "token_id": 1,
+          "token_text": "\n",
+          "probability": 0.013290603645145893
+        },
+        {
+          "rank": 3,
+          "token_id": 2,
+          "token_text": " ",
+          "probability": 0.0027762886602431536
+        },
+        {
+          "rank": 4,
+          "token_id": 14,
+          "token_text": ":",
+          "probability": 0.0024117985740303993
+        },
+        {
+          "rank": 5,
+          "token_id": 36,
+          "token_text": "n",
+          "probability": 0.0018675222527235746
+        }
+      ],
+      "state_label": "target_top1"
+    },
+    {
+      "case_id": "minimal_direct_completion",
+      "step_index": 0,
+      "prompt": "Answer with exactly two words: fixed loss\nanswer:",
+      "fixed_l_prefix": "\nfixed l",
+      "context_suffix": "Answer with exactly two words: fixed loss\nanswer:\nfixed l",
+      "target_suffix": "oss",
+      "target_token": "o",
+      "target_token_id": 37,
+      "target_probability": 0.9513438940048218,
+      "target_rank": 1,
+      "target_in_top_k": true,
+      "top_token": "o",
+      "top_token_probability": 0.9513438940048218,
+      "top_candidates": [
+        {
+          "rank": 1,
+          "token_id": 37,
+          "token_text": "o",
+          "probability": 0.9513438940048218
+        },
+        {
+          "rank": 2,
+          "token_id": 1,
+          "token_text": "\n",
+          "probability": 0.016000408679246902
+        },
+        {
+          "rank": 3,
+          "token_id": 23,
+          "token_text": "a",
+          "probability": 0.005377146415412426
+        },
+        {
+          "rank": 4,
+          "token_id": 41,
+          "token_text": "s",
+          "probability": 0.004187669605016708
+        },
+        {
+          "rank": 5,
+          "token_id": 2,
+          "token_text": " ",
+          "probability": 0.00379185751080513
+        }
+      ],
+      "state_label": "target_top1"
+    },
+    {
+      "case_id": "minimal_direct_completion",
+      "step_index": 1,
+      "prompt": "Answer with exactly two words: fixed loss\nanswer:",
+      "fixed_l_prefix": "\nfixed l",
+      "context_suffix": "Answer with exactly two words: fixed loss\nanswer:\nfixed lo",
+      "target_suffix": "oss",
+      "target_token": "s",
+      "target_token_id": 41,
+      "target_probability": 0.9547762870788574,
+      "target_rank": 1,
+      "target_in_top_k": true,
+      "top_token": "s",
+      "top_token_probability": 0.9547762870788574,
+      "top_candidates": [
+        {
+          "rank": 1,
+          "token_id": 41,
+          "token_text": "s",
+          "probability": 0.9547762870788574
+        },
+        {
+          "rank": 2,
+          "token_id": 1,
+          "token_text": "\n",
+          "probability": 0.015549088828265667
+        },
+        {
+          "rank": 3,
+          "token_id": 2,
+          "token_text": " ",
+          "probability": 0.004263960290700197
+        },
+        {
+          "rank": 4,
+          "token_id": 14,
+          "token_text": ":",
+          "probability": 0.0033331653103232384
+        },
+        {
+          "rank": 5,
+          "token_id": 37,
+          "token_text": "o",
+          "probability": 0.002842332236468792
+        }
+      ],
+      "state_label": "target_top1"
+    },
+    {
+      "case_id": "minimal_direct_completion",
+      "step_index": 2,
+      "prompt": "Answer with exactly two words: fixed loss\nanswer:",
+      "fixed_l_prefix": "\nfixed l",
+      "context_suffix": "Answer with exactly two words: fixed loss\nanswer:\nfixed los",
+      "target_suffix": "oss",
+      "target_token": "s",
+      "target_token_id": 41,
+      "target_probability": 0.9617397785186768,
+      "target_rank": 1,
+      "target_in_top_k": true,
+      "top_token": "s",
+      "top_token_probability": 0.9617397785186768,
+      "top_candidates": [
+        {
+          "rank": 1,
+          "token_id": 41,
+          "token_text": "s",
+          "probability": 0.9617397785186768
+        },
+        {
+          "rank": 2,
+          "token_id": 1,
+          "token_text": "\n",
+          "probability": 0.01659156009554863
+        },
+        {
+          "rank": 3,
+          "token_id": 2,
+          "token_text": " ",
+          "probability": 0.00330860773101449
+        },
+        {
+          "rank": 4,
+          "token_id": 35,
+          "token_text": "m",
+          "probability": 0.0022015732247382402
+        },
+        {
+          "rank": 5,
+          "token_id": 14,
+          "token_text": ":",
+          "probability": 0.00209040567278862
+        }
+      ],
+      "state_label": "target_top1"
+    },
+    {
+      "case_id": "completion_label_surface",
+      "step_index": 0,
+      "prompt": "Complete with exactly two tokens: fixed loss\ncompletion:",
+      "fixed_l_prefix": "\nfixed l",
+      "context_suffix": "Complete with exactly two tokens: fixed loss\ncompletion:\nfixed l",
+      "target_suffix": "oss",
+      "target_token": "o",
+      "target_token_id": 37,
+      "target_probability": 0.9280321598052979,
+      "target_rank": 1,
+      "target_in_top_k": true,
+      "top_token": "o",
+      "top_token_probability": 0.9280321598052979,
+      "top_candidates": [
+        {
+          "rank": 1,
+          "token_id": 37,
+          "token_text": "o",
+          "probability": 0.9280321598052979
+        },
+        {
+          "rank": 2,
+          "token_id": 1,
+          "token_text": "\n",
+          "probability": 0.020876934751868248
+        },
+        {
+          "rank": 3,
+          "token_id": 23,
+          "token_text": "a",
+          "probability": 0.012335739098489285
+        },
+        {
+          "rank": 4,
+          "token_id": 47,
+          "token_text": "y",
+          "probability": 0.005781184416264296
+        },
+        {
+          "rank": 5,
+          "token_id": 2,
+          "token_text": " ",
+          "probability": 0.005697817075997591
+        }
+      ],
+      "state_label": "target_top1"
+    },
+    {
+      "case_id": "completion_label_surface",
+      "step_index": 1,
+      "prompt": "Complete with exactly two tokens: fixed loss\ncompletion:",
+      "fixed_l_prefix": "\nfixed l",
+      "context_suffix": "Complete with exactly two tokens: fixed loss\ncompletion:\nfixed lo",
+      "target_suffix": "oss",
+      "target_token": "s",
+      "target_token_id": 41,
+      "target_probability": 0.9444912672042847,
+      "target_rank": 1,
+      "target_in_top_k": true,
+      "top_token": "s",
+      "top_token_probability": 0.9444912672042847,
+      "top_candidates": [
+        {
+          "rank": 1,
+          "token_id": 41,
+          "token_text": "s",
+          "probability": 0.9444912672042847
+        },
+        {
+          "rank": 2,
+          "token_id": 1,
+          "token_text": "\n",
+          "probability": 0.020465588197112083
+        },
+        {
+          "rank": 3,
+          "token_id": 2,
+          "token_text": " ",
+          "probability": 0.004778516944497824
+        },
+        {
+          "rank": 4,
+          "token_id": 37,
+          "token_text": "o",
+          "probability": 0.003822182770818472
+        },
+        {
+          "rank": 5,
+          "token_id": 45,
+          "token_text": "w",
+          "probability": 0.002983625279739499
+        }
+      ],
+      "state_label": "target_top1"
+    },
+    {
+      "case_id": "completion_label_surface",
+      "step_index": 2,
+      "prompt": "Complete with exactly two tokens: fixed loss\ncompletion:",
+      "fixed_l_prefix": "\nfixed l",
+      "context_suffix": "Complete with exactly two tokens: fixed loss\ncompletion:\nfixed los",
+      "target_suffix": "oss",
+      "target_token": "s",
+      "target_token_id": 41,
+      "target_probability": 0.9675869345664978,
+      "target_rank": 1,
+      "target_in_top_k": true,
+      "top_token": "s",
+      "top_token_probability": 0.9675869345664978,
+      "top_candidates": [
+        {
+          "rank": 1,
+          "token_id": 41,
+          "token_text": "s",
+          "probability": 0.9675869345664978
+        },
+        {
+          "rank": 2,
+          "token_id": 1,
+          "token_text": "\n",
+          "probability": 0.0041216337122023106
+        },
+        {
+          "rank": 3,
+          "token_id": 14,
+          "token_text": ":",
+          "probability": 0.004063362255692482
+        },
+        {
+          "rank": 4,
+          "token_id": 36,
+          "token_text": "n",
+          "probability": 0.00330843823030591
+        },
+        {
+          "rank": 5,
+          "token_id": 37,
+          "token_text": "o",
+          "probability": 0.0019636114593595266
+        }
+      ],
+      "state_label": "target_top1"
+    }
+  ],
+  "case_rows": [
+    {
+      "case_id": "canonical_direct_completion",
+      "step_count": 3,
+      "target_suffix": "oss",
+      "target_probability_product": 0.8737542151691882,
+      "min_target_probability": 0.9480579495429993,
+      "max_target_rank": 1,
+      "top1_step_count": 3,
+      "topk_step_count": 3,
+      "loss_suffix_top1": true,
+      "loss_suffix_topk": true
+    },
+    {
+      "case_id": "completion_label_surface",
+      "step_count": 3,
+      "target_suffix": "oss",
+      "target_probability_product": 0.8481076265615417,
+      "min_target_probability": 0.9280321598052979,
+      "max_target_rank": 1,
+      "top1_step_count": 3,
+      "topk_step_count": 3,
+      "loss_suffix_top1": true,
+      "loss_suffix_topk": true
+    },
+    {
+      "case_id": "minimal_direct_completion",
+      "step_count": 3,
+      "target_suffix": "oss",
+      "target_probability_product": 0.8735680438709811,
+      "min_target_probability": 0.9513438940048218,
+      "max_target_rank": 1,
+      "top1_step_count": 3,
+      "topk_step_count": 3,
+      "loss_suffix_top1": true,
+      "loss_suffix_topk": true
+    }
+  ],
+  "diagnostic": {
+    "ready": true,
+    "probe_step_count": 9,
+    "case_count": 3,
+    "target_top1_step_count": 9,
+    "target_topk_step_count": 9,
+    "target_top1_rate": 1.0,
+    "target_topk_rate": 1.0,
+    "min_target_probability": 0.9280321598052979,
+    "mean_target_probability": 0.952898469236162,
+    "max_target_rank": 1,
+    "low_probability_step_count": 0,
+    "all_cases_loss_suffix_top1": true,
+    "all_cases_loss_suffix_topk": true,
+    "next_step": "inspect_decoding_temperature_or_stop_condition_for_loss_suffix"
+  },
+  "check_rows": [
+    {
+      "id": "objective_contract_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "objective contract must pass structurally"
+    },
+    {
+      "id": "objective_contract_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "objective contract must be ready"
+    },
+    {
+      "id": "replay_delta_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "source replay delta diagnostic must pass structurally"
+    },
+    {
+      "id": "replay_delta_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "source replay delta diagnostic must be ready"
+    },
+    {
+      "id": "replay_delta_no_contract_gain",
+      "status": "pass",
+      "actual": true,
+      "detail": "probability probe should follow a no-contract-gain replay delta"
+    },
+    {
+      "id": "contract_cases_present",
+      "status": "pass",
+      "actual": 3,
+      "detail": "objective contract must expose contract cases"
+    },
+    {
+      "id": "checkpoint_exists",
+      "status": "pass",
+      "actual": "e\\890\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-stagnation-aware-suffix-training-run\\run\\checkpoint.pt",
+      "detail": "checkpoint.pt must exist"
+    },
+    {
+      "id": "tokenizer_exists",
+      "status": "pass",
+      "actual": "e\\890\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-stagnation-aware-suffix-training-run\\run\\tokenizer.json",
+      "detail": "tokenizer.json must exist"
+    },
+    {
+      "id": "probe_rows_scored",
+      "status": "pass",
+      "actual": 9,
+      "detail": "probe must score at least one target token"
+    }
+  ],
+  "summary": {
+    "bounded_objective_loss_signal_bridge_target_only_memory_loss_token_probability_probe_ready": true,
+    "source_contract_case_count": 3,
+    "source_replay_no_contract_gain_confirmed": true,
+    "probe_step_count": 9,
+    "case_count": 3,
+    "target_top1_step_count": 9,
+    "target_topk_step_count": 9,
+    "target_top1_rate": 1.0,
+    "target_topk_rate": 1.0,
+    "min_target_probability": 0.9280321598052979,
+    "mean_target_probability": 0.952898469236162,
+    "max_target_rank": 1,
+    "low_probability_step_count": 0,
+    "all_cases_loss_suffix_top1": true,
+    "all_cases_loss_suffix_topk": true,
+    "next_step": "inspect_decoding_temperature_or_stop_condition_for_loss_suffix"
+  },
+  "interpretation": {
+    "model_quality_claim": "loss_token_probability_probe_only",
+    "reason": "The probe measures teacher-forced target-token probability after fixed-l; it is diagnostic evidence, not a replay pass.",
+    "next_action": "inspect_decoding_temperature_or_stop_condition_for_loss_suffix"
+  }
+}

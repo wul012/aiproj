@@ -1271,6 +1271,9 @@
 906-v892-bounded-objective-loss-signal-bridge-target-only-memory-stagnation-aware-suffix-replay-delta-diagnostic.md
  -> v892 code explanation: compare v886 and v891 replay rows and show newline fixed-l surface convergence without loss-suffix gain.
 
+907-v893-bounded-objective-loss-signal-bridge-target-only-memory-loss-token-probability-probe.md
+ -> v893 code explanation: probe teacher-forced oss token probabilities after fixed-l and route the next work to decoder budget inspection.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

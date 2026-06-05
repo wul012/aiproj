@@ -1946,3 +1946,8 @@ e/663/解释/说明.md
 - `e/892/图片`
 - `e/892/解释/说明.md`
 - v892 bounded objective loss signal bridge target-only memory stagnation-aware suffix replay delta diagnostic screenshots and explanation.
+## v893 supplemental index
+
+- `e/893/图片`
+- `e/893/解释/说明.md`
+- v893 bounded objective loss signal bridge target-only memory loss-token probability probe screenshots and explanation.

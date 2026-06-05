@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v892.0.0` diagnoses the replay delta between v886 stabilized loss-suffix uptake and v891 stagnation-aware suffix replay.
+Version `v893.0.0` probes teacher-forced `oss` token probabilities after the v891 fixed-l replay state.
+
+## Latest v893 checkpoint
+
+- Added short-name module `bounded_objective_loss_signal_bridge_target_only_memory_loss_token_probability_probe`.
+- Added CLI `scripts/probe_bounded_objective_loss_signal_bridge_target_only_memory_loss_token_probability.py`.
+- Loaded the real v890 checkpoint/tokenizer and probed the unchanged v836 contract cases after `prompt + "\nfixed l"`.
+- Scored the required suffix `oss` step by step for all three contract cases.
+- Confirmed `target_top1_rate=1.0`, `target_topk_rate=1.0`, `max_target_rank=1`, and `low_probability_step_count=0`.
+- Recorded `min_target_probability=0.9280321598052979` and `mean_target_probability=0.952898469236162`.
+- Kept `model_quality_claim=loss_token_probability_probe_only`; this is diagnostic evidence, not a replay pass.
+- Routed the next artifact to `inspect_decoding_temperature_or_stop_condition_for_loss_suffix`, because v891 likely ran out of generation budget at `\nfixed l`.
+- Verified with `4 passed` focused probability-probe tests and Playwright MCP screenshot evidence.
+- Archived v893 evidence in `e/893` and added the code explanation in `代码讲解记录_模型能力阶段/907-v893-bounded-objective-loss-signal-bridge-target-only-memory-loss-token-probability-probe.md`.
 
 ## Latest v892 checkpoint
 

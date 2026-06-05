@@ -1,0 +1,10 @@
+case_id,step_index,target_token,target_probability,target_rank,target_in_top_k,top_token,top_token_probability,state_label
+canonical_direct_completion,0,o,0.9545234441757202,1,True,o,0.9545234441757202,target_top1
+canonical_direct_completion,1,s,0.9480579495429993,1,True,s,0.9480579495429993,target_top1
+canonical_direct_completion,2,s,0.965534508228302,1,True,s,0.965534508228302,target_top1
+minimal_direct_completion,0,o,0.9513438940048218,1,True,o,0.9513438940048218,target_top1
+minimal_direct_completion,1,s,0.9547762870788574,1,True,s,0.9547762870788574,target_top1
+minimal_direct_completion,2,s,0.9617397785186768,1,True,s,0.9617397785186768,target_top1
+completion_label_surface,0,o,0.9280321598052979,1,True,o,0.9280321598052979,target_top1
+completion_label_surface,1,s,0.9444912672042847,1,True,s,0.9444912672042847,target_top1
+completion_label_surface,2,s,0.9675869345664978,1,True,s,0.9675869345664978,target_top1
