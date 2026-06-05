@@ -1,0 +1,194 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT bounded objective loss signal bridge single-line surface zero-hit diagnostic",
+  "generated_at": "2026-06-05T01:03:47Z",
+  "status": "pass",
+  "decision": "bounded_objective_loss_signal_bridge_single_line_surface_zero_hit_label_echo_persisted",
+  "failed_count": 0,
+  "issues": [],
+  "source_replay_comparison": "e\\870\\解释\\bounded-objective-loss-signal-bridge-single-line-surface-replay-comparison\\bounded_objective_loss_signal_bridge_single_line_surface_replay_comparison.json",
+  "replay_summary": {
+    "bounded_objective_replay_comparison_ready": true,
+    "objective_contract_recovered": false,
+    "canonical_case_pass": false,
+    "case_count": 3,
+    "executed_case_count": 3,
+    "passed_case_count": 0,
+    "failed_case_count": 3,
+    "any_hit_case_count": 0,
+    "zero_hit_case_count": 3,
+    "pass_rate": 0.0,
+    "promotion_ready": false,
+    "next_step": "diagnose_bounded_objective_loss_signal_bridge_single_line_surface_zero_hit_before_more_training",
+    "failed_check_count": 0,
+    "bounded_objective_loss_signal_bridge_replay_comparison_ready": true,
+    "decoder_anchor_used": false,
+    "route": "bounded_objective_loss_signal_bridge_single_line_surface",
+    "bounded_objective_loss_signal_bridge_single_line_surface_replay_comparison_ready": true
+  },
+  "training_summary": {
+    "bounded_objective_unassisted_repair_training_ready": true,
+    "artifact_count": 7,
+    "metric_record_count": 15,
+    "final_step": 140,
+    "final_train_loss": 1.2041561603546143,
+    "final_val_loss": 0.8147876858711243,
+    "train_loss_delta": -2.376716,
+    "val_loss_delta": -2.726596,
+    "repair_example_count": 14,
+    "neutral_prompt_example_count": 6,
+    "decoder_anchor_example_count": 0,
+    "proposed_next_artifact": "bounded_objective_loss_signal_bridge_single_line_surface_replay_comparison",
+    "next_step": "run_bounded_objective_loss_signal_bridge_single_line_surface_replay_comparison",
+    "failed_check_count": 0,
+    "bounded_objective_unassisted_repair_seed_revision_training_ready": true,
+    "bounded_objective_loss_signal_bridge_training_ready": true,
+    "bounded_objective_loss_signal_bridge_single_line_surface_training_ready": true
+  },
+  "case_diagnostics": [
+    {
+      "case_id": "canonical_direct_completion",
+      "continuation": "\nanswer:",
+      "normalized_continuation": "answer:",
+      "continuation_class": "exact_label_echo",
+      "case_pass": false,
+      "any_hit": false,
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "exact_label_echo": true,
+      "label_prefix_fragment": false,
+      "label_or_fragment": true,
+      "continuation_len": 8
+    },
+    {
+      "case_id": "minimal_direct_completion",
+      "continuation": "\nanswer:",
+      "normalized_continuation": "answer:",
+      "continuation_class": "exact_label_echo",
+      "case_pass": false,
+      "any_hit": false,
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "exact_label_echo": true,
+      "label_prefix_fragment": false,
+      "label_or_fragment": true,
+      "continuation_len": 8
+    },
+    {
+      "case_id": "completion_label_surface",
+      "continuation": "\nansweti",
+      "normalized_continuation": "answeti",
+      "continuation_class": "label_prefix_fragment",
+      "case_pass": false,
+      "any_hit": false,
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "exact_label_echo": false,
+      "label_prefix_fragment": true,
+      "label_or_fragment": true,
+      "continuation_len": 8
+    }
+  ],
+  "root_causes": [
+    {
+      "id": "label_echo_persisted_after_single_line_patch",
+      "detail": "all continuations remain answer/completion label echoes or label-prefix fragments."
+    },
+    {
+      "id": "answer_label_echo_still_dominant",
+      "detail": "multiple direct-answer cases still emit answer labels instead of target terms."
+    },
+    {
+      "id": "completion_label_fragment",
+      "detail": "at least one continuation is a label-prefix fragment such as ans... rather than fixed loss."
+    },
+    {
+      "id": "loss_improved_without_required_term_uptake",
+      "detail": "training loss improved, but replay still has zero required-term hits."
+    },
+    {
+      "id": "no_anchor_surface_failure",
+      "detail": "failure remains on the unassisted no-anchor route."
+    },
+    {
+      "id": "short_decode_budget_consumed_by_label",
+      "detail": "short continuations are consumed by labels or fragments before target terms appear."
+    }
+  ],
+  "check_rows": [
+    {
+      "id": "replay_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "single-line surface replay must pass structurally"
+    },
+    {
+      "id": "replay_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "single-line surface replay must be ready"
+    },
+    {
+      "id": "zero_hit_replay",
+      "status": "pass",
+      "actual": 0,
+      "detail": "diagnostic only applies to zero-hit replay"
+    },
+    {
+      "id": "not_recovered",
+      "status": "pass",
+      "actual": false,
+      "detail": "diagnostic only applies before recovery"
+    },
+    {
+      "id": "case_rows_present",
+      "status": "pass",
+      "actual": 3,
+      "detail": "diagnostic needs replay rows"
+    }
+  ],
+  "diagnostic": {
+    "ready": true,
+    "exact_label_echo_case_count": 2,
+    "label_prefix_fragment_case_count": 1,
+    "label_or_fragment_case_count": 3,
+    "zero_hit_case_count": 3,
+    "all_cases_label_or_fragment": true,
+    "loss_improved_without_required_term_uptake": true,
+    "root_cause_ids": [
+      "label_echo_persisted_after_single_line_patch",
+      "answer_label_echo_still_dominant",
+      "completion_label_fragment",
+      "loss_improved_without_required_term_uptake",
+      "no_anchor_surface_failure",
+      "short_decode_budget_consumed_by_label"
+    ],
+    "next_step": "build_target_only_completion_memory_patch"
+  },
+  "summary": {
+    "bounded_objective_loss_signal_bridge_single_line_surface_zero_hit_diagnostic_ready": true,
+    "case_count": 3,
+    "exact_label_echo_case_count": 2,
+    "label_prefix_fragment_case_count": 1,
+    "label_or_fragment_case_count": 3,
+    "zero_hit_case_count": 3,
+    "all_cases_label_or_fragment": true,
+    "loss_improved_without_required_term_uptake": true,
+    "root_cause_count": 6,
+    "next_step": "build_target_only_completion_memory_patch"
+  },
+  "interpretation": {
+    "model_quality_claim": "label_echo_persisted_after_single_line_training",
+    "reason": "The checkpoint still emits answer/completion labels or label-prefix fragments after single-line surface training.",
+    "next_action": "build_target_only_completion_memory_patch"
+  }
+}

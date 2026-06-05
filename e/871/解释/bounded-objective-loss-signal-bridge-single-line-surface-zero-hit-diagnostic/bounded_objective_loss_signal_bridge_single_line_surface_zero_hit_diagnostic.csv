@@ -1,0 +1,7 @@
+case_id,continuation_class,exact_label_echo,label_prefix_fragment,any_hit,missed_terms,continuation
+canonical_direct_completion,exact_label_echo,True,False,False,"fixed,loss","
+answer:"
+minimal_direct_completion,exact_label_echo,True,False,False,"fixed,loss","
+answer:"
+completion_label_surface,label_prefix_fragment,False,True,False,"fixed,loss","
+answeti"

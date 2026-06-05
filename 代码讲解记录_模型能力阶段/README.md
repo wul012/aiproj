@@ -170,6 +170,9 @@
 884-v870-bounded-objective-loss-signal-bridge-single-line-surface-replay-comparison.md
  -> v870 code explanation: replay the v869 checkpoint against the unchanged objective contract and record the zero-hit outcome.
 
+885-v871-bounded-objective-loss-signal-bridge-single-line-surface-zero-hit-diagnostic.md
+ -> v871 code explanation: diagnose single-line surface zero-hit replay as persisted label echo despite lower training loss.
+
 487-v473-baseline-candidate-capability-delta.md
  -> v473 code explanation: carry real tiny training loss and generation-quality deltas into the baseline-candidate eval loop.
 

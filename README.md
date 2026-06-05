@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v870.0.0` replays the v869 checkpoint against the unchanged v836 objective contract and records a zero-hit result.
+Version `v871.0.0` diagnoses the v870 zero-hit replay as persisted label echo after single-line surface training.
+
+## Latest v871 checkpoint
+
+- Added short-name module `bounded_objective_loss_signal_bridge_single_line_surface_zero_hit_diagnostic`.
+- Added CLI `scripts/diagnose_bounded_objective_loss_signal_bridge_single_line_surface_zero_hit.py`.
+- Consumed the real v870 single-line surface replay comparison.
+- Recorded `case_count=3`, `exact_label_echo_case_count=2`, `label_prefix_fragment_case_count=1`, and `zero_hit_case_count=3`.
+- Confirmed `loss_improved_without_required_term_uptake=True`: v869 loss dropped, but v870 still had zero required-term hits.
+- Identified root causes including `label_echo_persisted_after_single_line_patch`, `answer_label_echo_still_dominant`, `completion_label_fragment`, and `short_decode_budget_consumed_by_label`.
+- Kept `model_quality_claim=label_echo_persisted_after_single_line_training`.
+- Routed the next artifact to `build_target_only_completion_memory_patch`.
+- Verified with `3 passed` focused single-line surface zero-hit diagnostic tests and Playwright MCP screenshot evidence.
+- Archived v871 evidence in `e/871` and added the code explanation in `代码讲解记录_模型能力阶段/885-v871-bounded-objective-loss-signal-bridge-single-line-surface-zero-hit-diagnostic.md`.
 
 ## Latest v870 checkpoint
 

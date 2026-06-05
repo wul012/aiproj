@@ -231,6 +231,10 @@ e/869/解释/说明.md
 e/870/图片
 e/870/解释/说明.md
  -> v870 bounded objective loss signal bridge single-line surface replay comparison 的运行截图和解释
+
+e/871/图片
+e/871/解释/说明.md
+ -> v871 bounded objective loss signal bridge single-line surface zero-hit diagnostic 的运行截图和解释
 ```
 
 ```text

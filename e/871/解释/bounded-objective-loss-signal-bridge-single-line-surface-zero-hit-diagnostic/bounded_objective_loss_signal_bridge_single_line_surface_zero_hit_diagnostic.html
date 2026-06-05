@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="data:,">
+<title>MiniGPT bounded objective loss signal bridge single-line surface zero-hit diagnostic</title><style>
+:root{color-scheme:light;--ink:#17212b;--muted:#64717d;--line:#d8dee5;--panel:#f8fafc;--accent:#991b1b}
+*{box-sizing:border-box}body{margin:0;background:#f4f6f8;color:var(--ink);font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1240px;margin:0 auto;padding:28px}h1{font-size:30px;margin:0 0 8px;letter-spacing:0}h2{font-size:18px;margin:0 0 12px;letter-spacing:0}
+p{color:var(--muted);line-height:1.55;overflow-wrap:anywhere}.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin:18px 0}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:8px}.card{padding:14px}.card span{display:block;color:var(--muted);font-size:12px;text-transform:uppercase}
+.card strong{display:block;margin-top:6px;font-size:18px;color:var(--accent);overflow-wrap:anywhere}.panel{padding:16px;margin:14px 0}.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}th{background:var(--panel);color:#334155}td{overflow-wrap:anywhere}li{margin:8px 0;line-height:1.5}
+</style></head>
+<body><main>
+<header><h1>MiniGPT bounded objective loss signal bridge single-line surface zero-hit diagnostic</h1><p>The checkpoint still emits answer/completion labels or label-prefix fragments after single-line surface training.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Decision</span><strong>bounded_objective_loss_signal_bridge_single_line_surface_zero_hit_label_echo_persisted</strong></div><div class="card"><span>Cases</span><strong>3</strong></div><div class="card"><span>Exact echo</span><strong>2</strong></div><div class="card"><span>Fragments</span><strong>1</strong></div><div class="card"><span>Zero hit</span><strong>3</strong></div><div class="card"><span>Loss improved no uptake</span><strong>True</strong></div><div class="card"><span>Claim</span><strong>label_echo_persisted_after_single_line_training</strong></div></section>
+<section class="panel"><h2>Case Diagnostics</h2><div class="table-wrap"><table><thead><tr><th>Case</th><th>Class</th><th>Echo</th><th>Fragment</th><th>Missed</th><th>Continuation</th></tr></thead><tbody><tr><td>canonical_direct_completion</td><td>exact_label_echo</td><td>True</td><td>False</td><td>fixed,loss</td><td>
+answer:</td></tr><tr><td>minimal_direct_completion</td><td>exact_label_echo</td><td>True</td><td>False</td><td>fixed,loss</td><td>
+answer:</td></tr><tr><td>completion_label_surface</td><td>label_prefix_fragment</td><td>False</td><td>True</td><td>fixed,loss</td><td>
+answeti</td></tr></tbody></table></div></section>
+<section class="panel"><h2>Root Causes</h2><ul><li><strong>label_echo_persisted_after_single_line_patch</strong>: all continuations remain answer/completion label echoes or label-prefix fragments.</li><li><strong>answer_label_echo_still_dominant</strong>: multiple direct-answer cases still emit answer labels instead of target terms.</li><li><strong>completion_label_fragment</strong>: at least one continuation is a label-prefix fragment such as ans... rather than fixed loss.</li><li><strong>loss_improved_without_required_term_uptake</strong>: training loss improved, but replay still has zero required-term hits.</li><li><strong>no_anchor_surface_failure</strong>: failure remains on the unassisted no-anchor route.</li><li><strong>short_decode_budget_consumed_by_label</strong>: short continuations are consumed by labels or fragments before target terms appear.</li></ul></section>
+</main></body></html>
