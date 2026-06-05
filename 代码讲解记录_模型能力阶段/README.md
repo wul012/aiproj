@@ -1307,6 +1307,9 @@
 918-v904-bounded-objective-loss-signal-bridge-target-only-memory-target-hidden-tokenizer-covered-holdout-real-replay.md
  -> v904 code explanation: real-replay the v890 checkpoint on target-hidden holdout prompts and keep the 5/5 result behind review.
 
+919-v905-bounded-objective-loss-signal-bridge-target-only-memory-target-hidden-tokenizer-covered-holdout-replay-review.md
+ -> v905 code explanation: review the target-hidden 5/5 replay as a strong but task-hinted signal requiring wider holdout before promotion.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

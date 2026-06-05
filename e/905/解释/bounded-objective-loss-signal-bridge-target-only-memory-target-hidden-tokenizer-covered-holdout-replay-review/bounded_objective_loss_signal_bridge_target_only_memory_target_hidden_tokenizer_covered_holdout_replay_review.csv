@@ -1,0 +1,6 @@
+case_id,source_case_id,target_leakage,leaked_terms,task_hint,task_hint_terms,review_status,detail
+target-hidden-answer_learned_pair,tokenizer-covered-answer_exact_terms,False,,True,"learned pair,pair",strong_signal_but_task_hinted,prompt hides expected terms but still hints target-pair task
+target-hidden-return_target_pair,tokenizer-covered-return_target_words,False,,True,"target pair,pair",strong_signal_but_task_hinted,prompt hides expected terms but still hints target-pair task
+target-hidden-contrast_route_pair,tokenizer-covered-contrast_route_result,False,,True,pair,strong_signal_but_task_hinted,prompt hides expected terms but still hints target-pair task
+target-hidden-jsonish_answer_terms,tokenizer-covered-jsonish_answer_terms,False,,True,"target pair,answer_terms,pair",strong_signal_but_task_hinted,prompt hides expected terms but still hints target-pair task
+target-hidden-self_check_pair,tokenizer-covered-self_check_terms,False,,True,"target pair,requires target pair,pair",strong_signal_but_task_hinted,prompt hides expected terms but still hints target-pair task

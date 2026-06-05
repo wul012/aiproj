@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v904.0.0` real-replays the target-hidden tokenizer-covered holdout suite against the v890 checkpoint.
+Version `v905.0.0` reviews the target-hidden holdout 5/5 replay and routes it to wider semantic holdout instead of promotion.
+
+## Latest v905 checkpoint
+
+- Added short-name module `bounded_objective_loss_signal_bridge_target_only_memory_target_hidden_tokenizer_covered_holdout_replay_review`.
+- Added CLI `scripts/review_bounded_objective_loss_signal_bridge_target_only_memory_target_hidden_tokenizer_covered_holdout_replay.py`.
+- Consumed the real v904 target-hidden replay and v902 target-hidden suite.
+- Confirmed `source_holdout_model_quality_ready=True`, `target_leakage_case_count=0`, and `target_hidden_case_count=5`.
+- Detected `task_hint_case_count=5`, because every prompt still hints at the target-pair task.
+- Recorded `approved_for_wider_holdout=True`, `approved_for_promotion=False`, and `promotion_ready=False`.
+- Kept `model_quality_claim=target_hidden_holdout_strong_signal_task_hinted_reviewed`.
+- Routed the next action to `build_semantic_paraphrase_target_hidden_holdout_suite`.
+- Verified with `4 passed` focused target-hidden replay-review tests and Playwright MCP screenshot evidence.
+- Archived v905 evidence in `e/905` and added the code explanation in `代码讲解记录_模型能力阶段/919-v905-bounded-objective-loss-signal-bridge-target-only-memory-target-hidden-tokenizer-covered-holdout-replay-review.md`.
 
 ## Latest v904 checkpoint
 
