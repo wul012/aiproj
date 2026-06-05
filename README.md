@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v890.0.0` trains a real checkpoint from the v889 stagnation-aware suffix patch corpus.
+Version `v891.0.0` replays the v890 stagnation-aware suffix checkpoint against the unchanged bounded objective contract.
+
+## Latest v891 checkpoint
+
+- Added short-name module `bounded_objective_loss_signal_bridge_target_only_memory_stagnation_aware_suffix_replay_comparison`.
+- Added CLI `scripts/run_bounded_objective_loss_signal_bridge_target_only_memory_stagnation_aware_suffix_replay_comparison.py`.
+- Replayed the real v890 checkpoint against the unchanged v836 bounded objective contract on CPU.
+- Recorded `case_count=3`, `passed_case_count=0`, `any_hit_case_count=3`, `zero_hit_case_count=0`, and `pass_rate=0.0`.
+- Confirmed `objective_contract_recovered=False`, `canonical_case_pass=False`, and `promotion_ready=False`.
+- Observed all three contract surfaces now produce newline `fixed l`; formatting became consistent, but `loss` remains missing.
+- Kept `model_quality_claim=partial_required_term_signal`.
+- Routed the next artifact to `diagnose_bounded_objective_loss_signal_bridge_target_only_memory_stagnation_aware_suffix_partial_hit_before_more_training`.
+- Verified with `4 passed` focused stagnation-aware suffix replay-comparison tests and Playwright MCP screenshot evidence.
+- Archived v891 evidence in `e/891` and added the code explanation in `代码讲解记录_模型能力阶段/905-v891-bounded-objective-loss-signal-bridge-target-only-memory-stagnation-aware-suffix-replay-comparison.md`.
 
 ## Latest v890 checkpoint
 

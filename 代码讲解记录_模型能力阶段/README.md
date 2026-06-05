@@ -1265,6 +1265,9 @@
 904-v890-bounded-objective-loss-signal-bridge-target-only-memory-stagnation-aware-suffix-training-run.md
  -> v890 code explanation: train the stagnation-aware suffix patch corpus into a real checkpoint while keeping capability gated behind replay.
 
+905-v891-bounded-objective-loss-signal-bridge-target-only-memory-stagnation-aware-suffix-replay-comparison.md
+ -> v891 code explanation: replay the stagnation-aware suffix checkpoint and show it still misses loss while unifying surfaces at newline fixed-l.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

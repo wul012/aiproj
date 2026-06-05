@@ -1936,3 +1936,8 @@ e/663/解释/说明.md
 - `e/890/图片`
 - `e/890/解释/说明.md`
 - v890 bounded objective loss signal bridge target-only memory stagnation-aware suffix training run screenshots and explanation.
+## v891 supplemental index
+
+- `e/891/图片`
+- `e/891/解释/说明.md`
+- v891 bounded objective loss signal bridge target-only memory stagnation-aware suffix replay comparison screenshots and explanation.
