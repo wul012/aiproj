@@ -1,0 +1,6 @@
+case_id,source_case_id,target_leakage,leaked_terms,task_hint,task_hint_terms,review_status,detail
+semantic-hidden-memory_answer,target-hidden-answer_learned_pair,False,,False,,clean_semantic_target_hidden_prompt,prompt hides expected terms without known pair/target task hints
+semantic-hidden-stored_result,target-hidden-return_target_pair,False,,False,,clean_semantic_target_hidden_prompt,prompt hides expected terms without known pair/target task hints
+semantic-hidden-learned_route,target-hidden-contrast_route_pair,False,,False,,clean_semantic_target_hidden_prompt,prompt hides expected terms without known pair/target task hints
+semantic-hidden-final_words,target-hidden-jsonish_answer_terms,False,,False,,clean_semantic_target_hidden_prompt,prompt hides expected terms without known pair/target task hints
+semantic-hidden-memory_self_check,target-hidden-self_check_pair,False,,False,,clean_semantic_target_hidden_prompt,prompt hides expected terms without known pair/target task hints

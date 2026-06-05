@@ -4,7 +4,21 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v908.0.0` replays the real v890 checkpoint against the semantic target-hidden holdout suite.
+Version `v909.0.0` reviews the semantic target-hidden replay and routes clean signal to prompt-mutation holdout.
+
+## Latest v909 checkpoint
+
+- Added short-name module `target_hidden_semantic_holdout_replay_review`.
+- Added CLI `scripts/review_target_hidden_semantic_holdout_replay.py`.
+- Consumed the real v908 semantic replay and v906 semantic target-hidden suite.
+- Confirmed `source_semantic_holdout_model_quality_ready=True`, `passed_case_count=5`, and `pass_rate=1.0`.
+- Rechecked every v906 prompt for expected-term leakage and known pair/target task hints.
+- Recorded `target_leakage_case_count=0`, `task_hint_case_count=0`, and `clean_prompt_case_count=5`.
+- Approved `approved_for_prompt_mutation_holdout=True` while keeping `approved_for_promotion=False`.
+- Kept `promotion_ready=False` and `model_quality_claim=semantic_target_hidden_holdout_clean_signal_reviewed`.
+- Routed the next action to `build_prompt_mutation_target_hidden_holdout_suite`.
+- Verified with `4 passed` focused semantic replay-review tests and Playwright MCP screenshot evidence.
+- Archived v909 evidence in `e/909` and added the code explanation in `代码讲解记录_模型能力阶段/923-v909-target-hidden-semantic-holdout-replay-review.md`.
 
 ## Latest v908 checkpoint
 

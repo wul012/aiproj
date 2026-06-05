@@ -2026,3 +2026,8 @@ e/663/解释/说明.md
 - `e/908/图片`
 - `e/908/解释/说明.md`
 - v908 target-hidden semantic paraphrase holdout real-replay screenshots and explanation.
+## v909 supplemental index
+
+- `e/909/图片`
+- `e/909/解释/说明.md`
+- v909 target-hidden semantic paraphrase holdout replay review screenshots and explanation.

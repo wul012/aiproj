@@ -1319,6 +1319,9 @@
 922-v908-target-hidden-semantic-holdout-real-replay.md
  -> v908 code explanation: replay the real checkpoint against the semantic target-hidden holdout suite and keep promotion gated behind review.
 
+923-v909-target-hidden-semantic-holdout-replay-review.md
+ -> v909 code explanation: review the clean semantic replay signal and route it to prompt-mutation holdout while blocking promotion.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

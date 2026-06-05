@@ -1,0 +1,196 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT target-hidden semantic paraphrase holdout replay review",
+  "generated_at": "2026-06-05T14:14:26Z",
+  "status": "pass",
+  "decision": "target_hidden_semantic_holdout_replay_review_clean_signal_prompt_mutation_holdout_required",
+  "failed_count": 0,
+  "issues": [],
+  "source_real_replay": "e\\908\\解释\\target-hidden-semantic-holdout-real-replay\\target_hidden_semantic_holdout_real_replay.json",
+  "source_holdout_suite": "e\\906\\解释\\target-hidden-semantic-holdout-suite\\target_hidden_semantic_holdout_suite.json",
+  "source_real_replay_summary": {
+    "target_hidden_semantic_holdout_real_replay_ready": true,
+    "case_count": 5,
+    "executed_case_count": 5,
+    "passed_case_count": 5,
+    "failed_case_count": 0,
+    "any_hit_case_count": 5,
+    "zero_hit_case_count": 0,
+    "pass_rate": 1.0,
+    "holdout_model_quality_ready": true,
+    "semantic_holdout_model_quality_ready": true,
+    "promotion_ready": false,
+    "model_quality_claim": "semantic_target_hidden_holdout_replay_only",
+    "next_step": "review_target_hidden_semantic_holdout_replay_result",
+    "failed_check_count": 0
+  },
+  "source_holdout_suite_summary": {
+    "target_hidden_semantic_holdout_suite_ready": true,
+    "source_case_count": 5,
+    "candidate_case_count": 5,
+    "tokenizer_covered_case_count": 5,
+    "target_hidden_case_count": 5,
+    "task_hint_case_count": 0,
+    "candidate_prompt_unknown_token_count": 0,
+    "source_task_hint_case_count": 5,
+    "expected_terms": [
+      "fixed",
+      "loss"
+    ],
+    "promotion_ready": false,
+    "model_quality_claim": "suite_construction_only",
+    "next_step": "run_target_hidden_semantic_holdout_dry_run",
+    "failed_check_count": 0
+  },
+  "check_rows": [
+    {
+      "id": "real_replay_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "semantic real replay must pass structurally"
+    },
+    {
+      "id": "real_replay_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "semantic real replay summary must be ready"
+    },
+    {
+      "id": "semantic_model_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "semantic holdout model quality signal must be ready"
+    },
+    {
+      "id": "suite_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "semantic holdout suite must pass"
+    },
+    {
+      "id": "suite_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "semantic holdout suite summary must be ready"
+    },
+    {
+      "id": "suite_no_task_hints",
+      "status": "pass",
+      "actual": 0,
+      "detail": "semantic suite should report no known task hints"
+    },
+    {
+      "id": "target_hidden_cases_present",
+      "status": "pass",
+      "actual": 5,
+      "detail": "every suite case must remain target-hidden"
+    },
+    {
+      "id": "cases_present",
+      "status": "pass",
+      "actual": 5,
+      "detail": "suite cases must be present"
+    },
+    {
+      "id": "review_rows_complete",
+      "status": "pass",
+      "actual": 5,
+      "detail": "review must cover every case"
+    }
+  ],
+  "review_rows": [
+    {
+      "case_id": "semantic-hidden-memory_answer",
+      "source_case_id": "target-hidden-answer_learned_pair",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "leaked_terms": [],
+      "target_leakage": false,
+      "task_hint_terms": [],
+      "task_hint": false,
+      "review_status": "clean_semantic_target_hidden_prompt",
+      "detail": "prompt hides expected terms without known pair/target task hints"
+    },
+    {
+      "case_id": "semantic-hidden-stored_result",
+      "source_case_id": "target-hidden-return_target_pair",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "leaked_terms": [],
+      "target_leakage": false,
+      "task_hint_terms": [],
+      "task_hint": false,
+      "review_status": "clean_semantic_target_hidden_prompt",
+      "detail": "prompt hides expected terms without known pair/target task hints"
+    },
+    {
+      "case_id": "semantic-hidden-learned_route",
+      "source_case_id": "target-hidden-contrast_route_pair",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "leaked_terms": [],
+      "target_leakage": false,
+      "task_hint_terms": [],
+      "task_hint": false,
+      "review_status": "clean_semantic_target_hidden_prompt",
+      "detail": "prompt hides expected terms without known pair/target task hints"
+    },
+    {
+      "case_id": "semantic-hidden-final_words",
+      "source_case_id": "target-hidden-jsonish_answer_terms",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "leaked_terms": [],
+      "target_leakage": false,
+      "task_hint_terms": [],
+      "task_hint": false,
+      "review_status": "clean_semantic_target_hidden_prompt",
+      "detail": "prompt hides expected terms without known pair/target task hints"
+    },
+    {
+      "case_id": "semantic-hidden-memory_self_check",
+      "source_case_id": "target-hidden-self_check_pair",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "leaked_terms": [],
+      "target_leakage": false,
+      "task_hint_terms": [],
+      "task_hint": false,
+      "review_status": "clean_semantic_target_hidden_prompt",
+      "detail": "prompt hides expected terms without known pair/target task hints"
+    }
+  ],
+  "summary": {
+    "target_hidden_semantic_holdout_replay_review_ready": true,
+    "source_holdout_model_quality_ready": true,
+    "source_semantic_holdout_model_quality_ready": true,
+    "case_count": 5,
+    "passed_case_count": 5,
+    "pass_rate": 1.0,
+    "target_leakage_case_count": 0,
+    "target_hidden_case_count": 5,
+    "task_hint_case_count": 0,
+    "clean_prompt_case_count": 5,
+    "approved_for_prompt_mutation_holdout": true,
+    "approved_for_promotion": false,
+    "promotion_ready": false,
+    "model_quality_claim": "semantic_target_hidden_holdout_clean_signal_reviewed",
+    "next_step": "build_prompt_mutation_target_hidden_holdout_suite",
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "semantic_target_hidden_holdout_clean_signal_reviewed",
+    "reason": "The semantic target-hidden replay passed clean prompts; build a prompt-mutation holdout before promotion.",
+    "next_action": "build_prompt_mutation_target_hidden_holdout_suite"
+  }
+}
