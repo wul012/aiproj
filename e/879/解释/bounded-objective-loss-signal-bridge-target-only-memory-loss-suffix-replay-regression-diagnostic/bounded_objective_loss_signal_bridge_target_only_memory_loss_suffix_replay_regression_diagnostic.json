@@ -1,0 +1,263 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT bounded objective loss signal bridge target-only memory loss-suffix replay regression diagnostic",
+  "generated_at": "2026-06-05T03:28:15Z",
+  "status": "pass",
+  "decision": "bounded_objective_loss_signal_bridge_target_only_memory_loss_suffix_sample_success_contract_regression",
+  "failed_count": 0,
+  "issues": [],
+  "source_current_replay_comparison": "e\\878\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-loss-suffix-replay-comparison\\bounded_objective_loss_signal_bridge_target_only_memory_loss_suffix_replay_comparison.json",
+  "source_baseline_replay_comparison": "e\\874\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-replay-comparison\\bounded_objective_loss_signal_bridge_target_only_memory_replay_comparison.json",
+  "source_sample": "e\\877\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-loss-suffix-training-run\\run\\sample.txt",
+  "current_summary": {
+    "bounded_objective_replay_comparison_ready": true,
+    "objective_contract_recovered": false,
+    "canonical_case_pass": false,
+    "case_count": 3,
+    "executed_case_count": 3,
+    "passed_case_count": 0,
+    "failed_case_count": 3,
+    "any_hit_case_count": 2,
+    "zero_hit_case_count": 1,
+    "pass_rate": 0.0,
+    "promotion_ready": false,
+    "next_step": "diagnose_bounded_objective_loss_signal_bridge_target_only_memory_loss_suffix_partial_hit_before_more_training",
+    "failed_check_count": 0,
+    "bounded_objective_loss_signal_bridge_replay_comparison_ready": true,
+    "decoder_anchor_used": false,
+    "route": "bounded_objective_loss_signal_bridge_target_only_memory_loss_suffix",
+    "bounded_objective_loss_signal_bridge_target_only_memory_loss_suffix_replay_comparison_ready": true
+  },
+  "baseline_summary": {
+    "bounded_objective_replay_comparison_ready": true,
+    "objective_contract_recovered": false,
+    "canonical_case_pass": false,
+    "case_count": 3,
+    "executed_case_count": 3,
+    "passed_case_count": 0,
+    "failed_case_count": 3,
+    "any_hit_case_count": 3,
+    "zero_hit_case_count": 0,
+    "pass_rate": 0.0,
+    "promotion_ready": false,
+    "next_step": "diagnose_bounded_objective_loss_signal_bridge_target_only_memory_partial_hit_before_more_training",
+    "failed_check_count": 0,
+    "bounded_objective_loss_signal_bridge_replay_comparison_ready": true,
+    "decoder_anchor_used": false,
+    "route": "bounded_objective_loss_signal_bridge_target_only_memory",
+    "bounded_objective_loss_signal_bridge_target_only_memory_replay_comparison_ready": true
+  },
+  "sample_diagnostic": {
+    "sample_char_count": 168,
+    "sample_fixed_loss": true,
+    "sample_fixed": true,
+    "sample_loss": true,
+    "sample_tail": "ss answer:\nmax_new_tokens: 12\ntemperature: 0.8\ntop_k: 20\n\nAnswer with exactly two tokens: fixed loss answer: fixed loss\n"
+  },
+  "current_case_diagnostics": [
+    {
+      "case_id": "canonical_direct_completion",
+      "label": "fixed_l_partial",
+      "case_pass": false,
+      "any_hit": true,
+      "hit_terms": [
+        "fixed"
+      ],
+      "missed_terms": [
+        "loss"
+      ],
+      "continuation": "\nfixed l",
+      "has_fixed": true,
+      "has_loss": false,
+      "has_fixed_l_prefix": true
+    },
+    {
+      "case_id": "minimal_direct_completion",
+      "label": "fixed_l_partial",
+      "case_pass": false,
+      "any_hit": true,
+      "hit_terms": [
+        "fixed"
+      ],
+      "missed_terms": [
+        "loss"
+      ],
+      "continuation": "\nfixed l",
+      "has_fixed": true,
+      "has_loss": false,
+      "has_fixed_l_prefix": true
+    },
+    {
+      "case_id": "completion_label_surface",
+      "label": "completion_surface_zero_regression",
+      "case_pass": false,
+      "any_hit": false,
+      "hit_terms": [],
+      "missed_terms": [
+        "fixed",
+        "loss"
+      ],
+      "continuation": "\nan: fix",
+      "has_fixed": false,
+      "has_loss": false,
+      "has_fixed_l_prefix": false
+    }
+  ],
+  "baseline_case_diagnostics": [
+    {
+      "case_id": "canonical_direct_completion",
+      "label": "fixed_l_partial",
+      "case_pass": false,
+      "any_hit": true,
+      "hit_terms": [
+        "fixed"
+      ],
+      "missed_terms": [
+        "loss"
+      ],
+      "continuation": "\nfixed l",
+      "has_fixed": true,
+      "has_loss": false,
+      "has_fixed_l_prefix": true
+    },
+    {
+      "case_id": "minimal_direct_completion",
+      "label": "fixed_l_partial",
+      "case_pass": false,
+      "any_hit": true,
+      "hit_terms": [
+        "fixed"
+      ],
+      "missed_terms": [
+        "loss"
+      ],
+      "continuation": "\nfixed l",
+      "has_fixed": true,
+      "has_loss": false,
+      "has_fixed_l_prefix": true
+    },
+    {
+      "case_id": "completion_label_surface",
+      "label": "fixed_l_partial",
+      "case_pass": false,
+      "any_hit": true,
+      "hit_terms": [
+        "fixed"
+      ],
+      "missed_terms": [
+        "loss"
+      ],
+      "continuation": " fixed l",
+      "has_fixed": true,
+      "has_loss": false,
+      "has_fixed_l_prefix": true
+    }
+  ],
+  "regression": {
+    "ready": true,
+    "sample_contract_gap": true,
+    "objective_contract_recovered": false,
+    "current_passed_case_count": 0,
+    "baseline_passed_case_count": 0,
+    "passed_case_delta": 0,
+    "current_any_hit_case_count": 2,
+    "baseline_any_hit_case_count": 3,
+    "any_hit_delta": -1,
+    "current_zero_hit_case_count": 1,
+    "baseline_zero_hit_case_count": 0,
+    "zero_hit_delta": 1,
+    "completion_surface_regressed_to_zero": true,
+    "fixed_l_partial_case_count": 2,
+    "completion_surface_current_label": "completion_surface_zero_regression",
+    "completion_surface_baseline_label": "fixed_l_partial",
+    "next_step": "build_bounded_objective_loss_signal_bridge_target_only_memory_completion_surface_stabilization_patch"
+  },
+  "check_rows": [
+    {
+      "id": "current_replay_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "current loss-suffix replay comparison must pass structurally"
+    },
+    {
+      "id": "baseline_replay_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "baseline target-only memory replay comparison must pass structurally"
+    },
+    {
+      "id": "current_loss_suffix_replay_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "current loss-suffix replay summary must be ready"
+    },
+    {
+      "id": "baseline_target_only_memory_replay_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "baseline target-only memory replay summary must be ready"
+    },
+    {
+      "id": "sample_contains_fixed_loss",
+      "status": "pass",
+      "actual": "ss answer:\nmax_new_tokens: 12\ntemperature: 0.8\ntop_k: 20\n\nAnswer with exactly two tokens: fixed loss answer: fixed loss\n",
+      "detail": "training sample must show the fixed loss phrase"
+    },
+    {
+      "id": "current_contract_not_recovered",
+      "status": "pass",
+      "actual": false,
+      "detail": "diagnostic applies only while contract is unrecovered"
+    },
+    {
+      "id": "has_current_cases",
+      "status": "pass",
+      "actual": 3,
+      "detail": "current replay rows must be present"
+    },
+    {
+      "id": "has_baseline_cases",
+      "status": "pass",
+      "actual": 3,
+      "detail": "baseline replay rows must be present"
+    },
+    {
+      "id": "sample_contract_gap",
+      "status": "pass",
+      "actual": true,
+      "detail": "sample success must be contrasted with replay contract failure"
+    },
+    {
+      "id": "replay_signal_regressed",
+      "status": "pass",
+      "actual": {
+        "any_hit_delta": -1,
+        "zero_hit_delta": 1
+      },
+      "detail": "current replay must regress against the baseline signal"
+    },
+    {
+      "id": "completion_surface_regressed",
+      "status": "pass",
+      "actual": true,
+      "detail": "completion surface should explain the zero-hit regression"
+    }
+  ],
+  "summary": {
+    "bounded_objective_loss_signal_bridge_target_only_memory_loss_suffix_replay_regression_diagnostic_ready": true,
+    "current_case_count": 3,
+    "baseline_case_count": 3,
+    "sample_contract_gap": true,
+    "objective_contract_recovered": false,
+    "any_hit_delta": -1,
+    "zero_hit_delta": 1,
+    "completion_surface_regressed_to_zero": true,
+    "fixed_l_partial_case_count": 2,
+    "next_step": "build_bounded_objective_loss_signal_bridge_target_only_memory_completion_surface_stabilization_patch"
+  },
+  "interpretation": {
+    "model_quality_claim": "sample_success_contract_regression",
+    "reason": "The training sample emits fixed loss, but fixed replay prompts still fail the contract and the completion surface regressed to zero required-term hits.",
+    "next_action": "build_bounded_objective_loss_signal_bridge_target_only_memory_completion_surface_stabilization_patch"
+  }
+}

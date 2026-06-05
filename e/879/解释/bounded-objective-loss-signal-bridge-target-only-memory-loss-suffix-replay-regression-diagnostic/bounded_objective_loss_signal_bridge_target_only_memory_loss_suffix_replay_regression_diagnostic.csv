@@ -1,0 +1,12 @@
+source,case_id,label,any_hit,hit_terms,missed_terms,continuation
+current,canonical_direct_completion,fixed_l_partial,True,fixed,loss,"
+fixed l"
+current,minimal_direct_completion,fixed_l_partial,True,fixed,loss,"
+fixed l"
+current,completion_label_surface,completion_surface_zero_regression,False,,"fixed,loss","
+an: fix"
+baseline,canonical_direct_completion,fixed_l_partial,True,fixed,loss,"
+fixed l"
+baseline,minimal_direct_completion,fixed_l_partial,True,fixed,loss,"
+fixed l"
+baseline,completion_label_surface,fixed_l_partial,True,fixed,loss, fixed l

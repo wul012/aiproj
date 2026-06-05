@@ -1870,3 +1870,9 @@ e/663/解释/说明.md
 - `e/817/图片`
 - `e/817/解释/说明.md`
 - v817 model capability route promotion bounded real replay prompt-aligned seed revision 的运行截图和解释。
+
+## v879 补充索引
+
+- `e/879/图片`
+- `e/879/解释/说明.md`
+- v879 bounded objective loss signal bridge target-only memory loss-suffix replay regression diagnostic 的运行截图和解释。

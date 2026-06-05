@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v878.0.0` replays the v877 loss-suffix checkpoint and shows the complete sample did not recover the bounded objective contract.
+Version `v879.0.0` diagnoses the v878 loss-suffix replay regression against the v874 baseline and v877 sample.
+
+## Latest v879 checkpoint
+
+- Added short-name module `bounded_objective_loss_signal_bridge_target_only_memory_loss_suffix_replay_regression_diagnostic`.
+- Added CLI `scripts/diagnose_bounded_objective_loss_signal_bridge_target_only_memory_loss_suffix_replay_regression.py`.
+- Consumed the real v878 loss-suffix replay, v874 target-only memory replay baseline, and v877 sample text.
+- Confirmed `sample_contract_gap=True`: the v877 sample emits `fixed loss`, but the v878 contract replay remains unrecovered.
+- Recorded `any_hit_delta=-1`, `zero_hit_delta=1`, and `completion_surface_regressed_to_zero=True`.
+- Classified canonical/minimal as `fixed_l_partial` and completion label as `completion_surface_zero_regression`.
+- Kept `model_quality_claim=sample_success_contract_regression`; no promotion or contract recovery is claimed.
+- Routed the next artifact to `build_bounded_objective_loss_signal_bridge_target_only_memory_completion_surface_stabilization_patch`.
+- Verified with `4 passed` focused loss-suffix replay-regression diagnostic tests and Playwright MCP screenshot evidence.
+- Archived v879 evidence in `e/879` and added the code explanation in `代码讲解记录_模型能力阶段/893-v879-bounded-objective-loss-signal-bridge-target-only-memory-loss-suffix-replay-regression-diagnostic.md`.
 
 ## Latest v878 checkpoint
 
