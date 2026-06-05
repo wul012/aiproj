@@ -1,0 +1,11 @@
+case_id,source_case_id,tokenizer_covered,target_hidden,prompt_unknown_count,leaked_terms,prompt
+target-hidden-answer_learned_pair,tokenizer-covered-answer_exact_terms,True,True,0,[],"answer with the learned pair
+answer:"
+target-hidden-return_target_pair,tokenizer-covered-return_target_words,True,True,0,[],"return the target pair
+output:"
+target-hidden-contrast_route_pair,tokenizer-covered-contrast_route_result,True,True,0,[],"contrast route pair
+result:"
+target-hidden-jsonish_answer_terms,tokenizer-covered-jsonish_answer_terms,True,True,0,[],"jsonish answer_terms target pair
+answer_terms:"
+target-hidden-self_check_pair,tokenizer-covered-self_check_terms,True,True,0,[],"self check requires target pair
+final answer:"

@@ -4,7 +4,21 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v901.0.0` reviews the tokenizer-covered holdout replay and blocks promotion due to target leakage.
+Version `v902.0.0` builds a target-hidden tokenizer-covered holdout suite after the v901 leakage review.
+
+## Latest v902 checkpoint
+
+- Added short-name module `bounded_objective_loss_signal_bridge_target_only_memory_target_hidden_tokenizer_covered_holdout_suite`.
+- Added CLI `scripts/build_bounded_objective_loss_signal_bridge_target_only_memory_target_hidden_tokenizer_covered_holdout_suite.py`.
+- Consumed the real v901 replay review, v898 tokenizer-covered source suite, and v890 tokenizer.
+- Preserved the 5-case holdout shape and the `fixed/loss` scoring contract.
+- Replaced the v898 leaked target prompts with tokenizer-covered prompts that hide both `fixed` and `loss`.
+- Recorded `candidate_case_count=5`, `tokenizer_covered_case_count=5`, `target_hidden_case_count=5`, and `candidate_prompt_unknown_token_count=0`.
+- Carried forward `source_target_leakage_case_count=5` from v901 to show the issue being corrected.
+- Kept `promotion_ready=False` and `model_quality_claim=suite_construction_only`.
+- Routed the next action to `run_target_hidden_tokenizer_covered_holdout_dry_run`.
+- Verified with `4 passed` focused target-hidden suite tests and Playwright MCP screenshot evidence.
+- Archived v902 evidence in `e/902` and added the code explanation in `代码讲解记录_模型能力阶段/916-v902-bounded-objective-loss-signal-bridge-target-only-memory-target-hidden-tokenizer-covered-holdout-suite.md`.
 
 ## Latest v901 checkpoint
 
