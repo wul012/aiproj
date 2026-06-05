@@ -2021,3 +2021,8 @@ e/663/解释/说明.md
 - `e/907/图片`
 - `e/907/解释/说明.md`
 - v907 target-hidden semantic paraphrase holdout dry-run screenshots and explanation.
+## v908 supplemental index
+
+- `e/908/图片`
+- `e/908/解释/说明.md`
+- v908 target-hidden semantic paraphrase holdout real-replay screenshots and explanation.

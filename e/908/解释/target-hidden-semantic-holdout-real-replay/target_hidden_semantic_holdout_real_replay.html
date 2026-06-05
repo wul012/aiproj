@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="data:,">
+<title>MiniGPT target-hidden semantic paraphrase holdout real replay</title><style>
+:root{color-scheme:light;--ink:#17212b;--muted:#62717d;--line:#d7dee5;--panel:#f8fafc;--accent:#2563eb}
+*{box-sizing:border-box}body{margin:0;background:#f2f4f7;color:var(--ink);font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1240px;margin:0 auto;padding:28px}h1{font-size:30px;margin:0 0 8px;letter-spacing:0}h2{font-size:18px;margin:0 0 12px;letter-spacing:0}
+p{color:var(--muted);line-height:1.55;overflow-wrap:anywhere}.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:18px 0}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:8px}.card{padding:14px}.card span{display:block;color:var(--muted);font-size:12px;text-transform:uppercase}
+.card strong{display:block;margin-top:6px;font-size:18px;line-height:1.2;color:var(--accent);overflow-wrap:anywhere}.panel{padding:16px;margin:14px 0}.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}th{background:var(--panel);color:#334155}td{overflow-wrap:anywhere;white-space:pre-wrap}
+</style></head>
+<body><main>
+<header><h1>MiniGPT target-hidden semantic paraphrase holdout real replay</h1><p>The checkpoint passed every semantic target-hidden holdout case; review remains required before promotion.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Quality ready</span><strong>True</strong></div><div class="card"><span>Semantic ready</span><strong>True</strong></div><div class="card"><span>Passed</span><strong>5/5</strong></div><div class="card"><span>Any hits</span><strong>5</strong></div><div class="card"><span>Zero hits</span><strong>0</strong></div><div class="card"><span>Pass rate</span><strong>1.0</strong></div><div class="card"><span>Promotion</span><strong>False</strong></div></section>
+<section class="panel"><h2>Replay Rows</h2><div class="table-wrap"><table><thead><tr><th>Case</th><th>Pass</th><th>Hit</th><th>Missed</th><th>Continuation</th></tr></thead><tbody><tr><td>semantic-hidden-memory_answer</td><td>True</td><td>fixed,loss</td><td></td><td> fixed loss
+
+
+
+
+fixed lo</td></tr><tr><td>semantic-hidden-stored_result</td><td>True</td><td>fixed,loss</td><td></td><td> fixed loss
+
+fixed loss
+</td></tr><tr><td>semantic-hidden-learned_route</td><td>True</td><td>fixed,loss</td><td></td><td> fixed loss
+
+
+
+
+
+fixed l</td></tr><tr><td>semantic-hidden-final_words</td><td>True</td><td>fixed,loss</td><td></td><td> fixed loss
+
+
+fixed loss</td></tr><tr><td>semantic-hidden-memory_self_check</td><td>True</td><td>fixed,loss</td><td></td><td> fixed loss
+
+
+
+
+Answer w</td></tr></tbody></table></div></section>
+<section class="panel"><h2>Checks</h2><div class="table-wrap"><table><thead><tr><th>Check</th><th>Status</th><th>Actual</th><th>Detail</th></tr></thead><tbody><tr><td>holdout_suite_passed</td><td>pass</td><td>pass</td><td>semantic holdout suite must pass</td></tr><tr><td>holdout_suite_ready</td><td>pass</td><td>True</td><td>semantic holdout suite summary must be ready</td></tr><tr><td>target_hidden_cases_present</td><td>pass</td><td>5</td><td>every semantic suite case must remain target-hidden</td></tr><tr><td>semantic_no_task_hints</td><td>pass</td><td>0</td><td>semantic holdout should have no known task hints</td></tr><tr><td>dry_run_passed</td><td>pass</td><td>pass</td><td>dry-run must pass before real replay</td></tr><tr><td>dry_run_ready</td><td>pass</td><td>True</td><td>dry-run summary must be ready</td></tr><tr><td>expected_terms_complete</td><td>pass</td><td>[&#x27;fixed&#x27;, &#x27;loss&#x27;]</td><td>real replay expects fixed/loss contract</td></tr><tr><td>checkpoint_exists</td><td>pass</td><td>e\890\解释\bounded-objective-loss-signal-bridge-target-only-memory-stagnation-aware-suffix-training-run\run\checkpoint.pt</td><td>checkpoint.pt must exist</td></tr><tr><td>tokenizer_exists</td><td>pass</td><td>e\890\解释\bounded-objective-loss-signal-bridge-target-only-memory-stagnation-aware-suffix-training-run\run\tokenizer.json</td><td>tokenizer.json must exist</td></tr><tr><td>cases_present</td><td>pass</td><td>5</td><td>semantic holdout suite must include cases</td></tr><tr><td>all_cases_executed</td><td>pass</td><td>5</td><td>real replay should execute every case</td></tr><tr><td>no_replay_errors</td><td>pass</td><td>0</td><td>real replay should not raise generation errors</td></tr></tbody></table></div></section>
+</main></body></html>

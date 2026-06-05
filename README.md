@@ -4,7 +4,21 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v907.0.0` dry-runs the semantic target-hidden holdout scoring contract before real replay.
+Version `v908.0.0` replays the real v890 checkpoint against the semantic target-hidden holdout suite.
+
+## Latest v908 checkpoint
+
+- Added short-name module `target_hidden_semantic_holdout_real_replay`.
+- Added CLI `scripts/run_target_hidden_semantic_holdout_real_replay.py`.
+- Consumed the real v906 semantic target-hidden holdout suite and v907 dry-run.
+- Replayed the real v890 checkpoint/tokenizer on CPU.
+- Executed all 5 semantic target-hidden prompts without reintroducing known pair/target task hints.
+- Recorded `passed_case_count=5`, `any_hit_case_count=5`, `zero_hit_case_count=0`, and `pass_rate=1.0`.
+- Confirmed `holdout_model_quality_ready=True` and `semantic_holdout_model_quality_ready=True`.
+- Kept `promotion_ready=False` and `model_quality_claim=semantic_target_hidden_holdout_replay_only`.
+- Routed the next action to `review_target_hidden_semantic_holdout_replay_result`.
+- Verified with `5 passed` focused semantic real-replay tests and Playwright MCP screenshot evidence.
+- Archived v908 evidence in `e/908` and added the code explanation in `代码讲解记录_模型能力阶段/922-v908-target-hidden-semantic-holdout-real-replay.md`.
 
 ## Latest v907 checkpoint
 

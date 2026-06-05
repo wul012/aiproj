@@ -1,0 +1,220 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT target-hidden semantic paraphrase holdout real replay",
+  "generated_at": "2026-06-05T13:56:58Z",
+  "status": "pass",
+  "decision": "target_hidden_semantic_holdout_real_replay_passed_review_required",
+  "failed_count": 0,
+  "issues": [],
+  "source_holdout_suite": "e\\906\\解释\\target-hidden-semantic-holdout-suite\\target_hidden_semantic_holdout_suite.json",
+  "source_dry_run": "e\\907\\解释\\target-hidden-semantic-holdout-dry-run\\target_hidden_semantic_holdout_dry_run.json",
+  "checkpoint": "e\\890\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-stagnation-aware-suffix-training-run\\run\\checkpoint.pt",
+  "tokenizer": "e\\890\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-stagnation-aware-suffix-training-run\\run\\tokenizer.json",
+  "device": "cpu",
+  "check_rows": [
+    {
+      "id": "holdout_suite_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "semantic holdout suite must pass"
+    },
+    {
+      "id": "holdout_suite_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "semantic holdout suite summary must be ready"
+    },
+    {
+      "id": "target_hidden_cases_present",
+      "status": "pass",
+      "actual": 5,
+      "detail": "every semantic suite case must remain target-hidden"
+    },
+    {
+      "id": "semantic_no_task_hints",
+      "status": "pass",
+      "actual": 0,
+      "detail": "semantic holdout should have no known task hints"
+    },
+    {
+      "id": "dry_run_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "dry-run must pass before real replay"
+    },
+    {
+      "id": "dry_run_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "dry-run summary must be ready"
+    },
+    {
+      "id": "expected_terms_complete",
+      "status": "pass",
+      "actual": [
+        "fixed",
+        "loss"
+      ],
+      "detail": "real replay expects fixed/loss contract"
+    },
+    {
+      "id": "checkpoint_exists",
+      "status": "pass",
+      "actual": "e\\890\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-stagnation-aware-suffix-training-run\\run\\checkpoint.pt",
+      "detail": "checkpoint.pt must exist"
+    },
+    {
+      "id": "tokenizer_exists",
+      "status": "pass",
+      "actual": "e\\890\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-stagnation-aware-suffix-training-run\\run\\tokenizer.json",
+      "detail": "tokenizer.json must exist"
+    },
+    {
+      "id": "cases_present",
+      "status": "pass",
+      "actual": 5,
+      "detail": "semantic holdout suite must include cases"
+    },
+    {
+      "id": "all_cases_executed",
+      "status": "pass",
+      "actual": 5,
+      "detail": "real replay should execute every case"
+    },
+    {
+      "id": "no_replay_errors",
+      "status": "pass",
+      "actual": 0,
+      "detail": "real replay should not raise generation errors"
+    }
+  ],
+  "replay_rows": [
+    {
+      "case_id": "semantic-hidden-memory_answer",
+      "source_case_id": "target-hidden-answer_learned_pair",
+      "prompt": "answer from memory\nanswer:",
+      "continuation": " fixed loss\n\n\n\n\nfixed lo",
+      "generated": "answer from memory\nanswer: fixed loss\n\n\n\n\nfixed lo",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "missed_terms": [],
+      "case_pass": true,
+      "seed": 2007,
+      "max_new_tokens": 24,
+      "temperature": 0.2,
+      "top_k": 10
+    },
+    {
+      "case_id": "semantic-hidden-stored_result",
+      "source_case_id": "target-hidden-return_target_pair",
+      "prompt": "write stored result\noutput:",
+      "continuation": " fixed loss\n\nfixed loss\n",
+      "generated": "write stored result\noutput: fixed loss\n\nfixed loss\n",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "missed_terms": [],
+      "case_pass": true,
+      "seed": 2008,
+      "max_new_tokens": 24,
+      "temperature": 0.2,
+      "top_k": 10
+    },
+    {
+      "case_id": "semantic-hidden-learned_route",
+      "source_case_id": "target-hidden-contrast_route_pair",
+      "prompt": "complete learned route\nresult:",
+      "continuation": " fixed loss\n\n\n\n\n\nfixed l",
+      "generated": "complete learned route\nresult: fixed loss\n\n\n\n\n\nfixed l",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "missed_terms": [],
+      "case_pass": true,
+      "seed": 2009,
+      "max_new_tokens": 24,
+      "temperature": 0.2,
+      "top_k": 10
+    },
+    {
+      "case_id": "semantic-hidden-final_words",
+      "source_case_id": "target-hidden-jsonish_answer_terms",
+      "prompt": "return final words\nanswer:",
+      "continuation": " fixed loss\n\n\nfixed loss",
+      "generated": "return final words\nanswer: fixed loss\n\n\nfixed loss",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "missed_terms": [],
+      "case_pass": true,
+      "seed": 2010,
+      "max_new_tokens": 24,
+      "temperature": 0.2,
+      "top_k": 10
+    },
+    {
+      "case_id": "semantic-hidden-memory_self_check",
+      "source_case_id": "target-hidden-self_check_pair",
+      "prompt": "self check memory result\nfinal:",
+      "continuation": " fixed loss\n\n\n\n\nAnswer w",
+      "generated": "self check memory result\nfinal: fixed loss\n\n\n\n\nAnswer w",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "missed_terms": [],
+      "case_pass": true,
+      "seed": 2011,
+      "max_new_tokens": 24,
+      "temperature": 0.2,
+      "top_k": 10
+    }
+  ],
+  "replay_errors": [],
+  "summary": {
+    "target_hidden_semantic_holdout_real_replay_ready": true,
+    "case_count": 5,
+    "executed_case_count": 5,
+    "passed_case_count": 5,
+    "failed_case_count": 0,
+    "any_hit_case_count": 5,
+    "zero_hit_case_count": 0,
+    "pass_rate": 1.0,
+    "holdout_model_quality_ready": true,
+    "semantic_holdout_model_quality_ready": true,
+    "promotion_ready": false,
+    "model_quality_claim": "semantic_target_hidden_holdout_replay_only",
+    "next_step": "review_target_hidden_semantic_holdout_replay_result",
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "semantic_target_hidden_holdout_replay_only",
+    "reason": "The checkpoint passed every semantic target-hidden holdout case; review remains required before promotion.",
+    "next_action": "review_target_hidden_semantic_holdout_replay_result"
+  }
+}

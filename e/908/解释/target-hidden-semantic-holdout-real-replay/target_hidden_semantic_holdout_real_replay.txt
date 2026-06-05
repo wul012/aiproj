@@ -1,0 +1,16 @@
+status=pass
+decision=target_hidden_semantic_holdout_real_replay_passed_review_required
+failed_count=0
+target_hidden_semantic_holdout_real_replay_ready=True
+holdout_model_quality_ready=True
+semantic_holdout_model_quality_ready=True
+case_count=5
+executed_case_count=5
+passed_case_count=5
+failed_case_count=0
+any_hit_case_count=5
+zero_hit_case_count=0
+pass_rate=1.0
+promotion_ready=False
+model_quality_claim=semantic_target_hidden_holdout_replay_only
+next_step=review_target_hidden_semantic_holdout_replay_result
