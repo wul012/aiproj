@@ -1,0 +1,6 @@
+case_id,positive_case_pass,negative_case_pass,positive_hit_terms,negative_hit_terms,negative_missed_terms
+semantic-hidden-memory_answer,True,False,"fixed,loss",fixed,loss
+semantic-hidden-stored_result,True,False,"fixed,loss",fixed,loss
+semantic-hidden-learned_route,True,False,"fixed,loss",fixed,loss
+semantic-hidden-final_words,True,False,"fixed,loss",fixed,loss
+semantic-hidden-memory_self_check,True,False,"fixed,loss",fixed,loss

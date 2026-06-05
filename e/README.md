@@ -2016,3 +2016,8 @@ e/663/解释/说明.md
 - `e/906/图片`
 - `e/906/解释/说明.md`
 - v906 target-hidden semantic paraphrase tokenizer-covered holdout suite screenshots and explanation.
+## v907 supplemental index
+
+- `e/907/图片`
+- `e/907/解释/说明.md`
+- v907 target-hidden semantic paraphrase holdout dry-run screenshots and explanation.

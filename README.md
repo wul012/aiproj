@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v906.0.0` builds a semantic-paraphrase target-hidden holdout suite without known pair/target task hints.
+Version `v907.0.0` dry-runs the semantic target-hidden holdout scoring contract before real replay.
+
+## Latest v907 checkpoint
+
+- Added short-name module `target_hidden_semantic_holdout_dry_run`.
+- Added CLI `scripts/dry_run_target_hidden_semantic_holdout.py`.
+- Consumed the real v906 semantic target-hidden holdout suite.
+- Verified the positive continuation ` fixed loss` passes all 5 semantic cases.
+- Verified the negative continuation ` fixed only` passes 0 cases.
+- Recorded `positive_passed_case_count=5`, `negative_passed_case_count=0`, and `negative_control_passed=False`.
+- Kept `promotion_ready=False` and `model_quality_claim=dry_run_only`.
+- Routed the next action to `run_target_hidden_semantic_holdout_real_replay`.
+- Verified with `4 passed` focused semantic dry-run tests and Playwright MCP screenshot evidence.
+- Archived v907 evidence in `e/907` and added the code explanation in `代码讲解记录_模型能力阶段/921-v907-target-hidden-semantic-holdout-dry-run.md`.
 
 ## Latest v906 checkpoint
 
