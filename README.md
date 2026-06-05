@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v869.0.0` trains a real tiny checkpoint from the v868 single-line surface patch corpus.
+Version `v870.0.0` replays the v869 checkpoint against the unchanged v836 objective contract and records a zero-hit result.
+
+## Latest v870 checkpoint
+
+- Added short-name module `bounded_objective_loss_signal_bridge_single_line_surface_replay_comparison`.
+- Added CLI `scripts/run_bounded_objective_loss_signal_bridge_single_line_surface_replay_comparison.py`.
+- Replayed the real v869 checkpoint against the unchanged v836 bounded objective contract on CPU.
+- Recorded `case_count=3`, `passed_case_count=0`, `any_hit_case_count=0`, `zero_hit_case_count=3`, and `pass_rate=0.0`.
+- Confirmed `objective_contract_recovered=False`, `canonical_case_pass=False`, and `promotion_ready=False`.
+- Observed that lower v869 loss did not recover the target behavior; two rows still echo `answer:` and one row outputs `answeti`.
+- Kept `model_quality_claim=not_improved`.
+- Routed the next artifact to `diagnose_bounded_objective_loss_signal_bridge_single_line_surface_zero_hit_before_more_training`.
+- Verified with `4 passed` focused single-line surface replay-comparison tests and Playwright MCP screenshot evidence.
+- Archived v870 evidence in `e/870` and added the code explanation in `代码讲解记录_模型能力阶段/884-v870-bounded-objective-loss-signal-bridge-single-line-surface-replay-comparison.md`.
 
 ## Latest v869 checkpoint
 

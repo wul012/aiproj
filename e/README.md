@@ -227,6 +227,10 @@ e/868/解释/说明.md
 e/869/图片
 e/869/解释/说明.md
  -> v869 bounded objective loss signal bridge single-line surface training run 的运行截图和解释
+
+e/870/图片
+e/870/解释/说明.md
+ -> v870 bounded objective loss signal bridge single-line surface replay comparison 的运行截图和解释
 ```
 
 ```text

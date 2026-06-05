@@ -167,6 +167,9 @@
 883-v869-bounded-objective-loss-signal-bridge-single-line-surface-training-run.md
  -> v869 code explanation: train the single-line surface patch corpus into a real checkpoint while keeping capability gated behind replay.
 
+884-v870-bounded-objective-loss-signal-bridge-single-line-surface-replay-comparison.md
+ -> v870 code explanation: replay the v869 checkpoint against the unchanged objective contract and record the zero-hit outcome.
+
 487-v473-baseline-candidate-capability-delta.md
  -> v473 code explanation: carry real tiny training loss and generation-quality deltas into the baseline-candidate eval loop.
 
