@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v903.0.0` dry-runs the target-hidden tokenizer-covered holdout scoring contract before real replay.
+Version `v904.0.0` real-replays the target-hidden tokenizer-covered holdout suite against the v890 checkpoint.
+
+## Latest v904 checkpoint
+
+- Added short-name module `bounded_objective_loss_signal_bridge_target_only_memory_target_hidden_tokenizer_covered_holdout_real_replay`.
+- Added CLI `scripts/run_bounded_objective_loss_signal_bridge_target_only_memory_target_hidden_tokenizer_covered_holdout_real_replay.py`.
+- Consumed the real v902 target-hidden suite, v903 dry-run, and v890 checkpoint/tokenizer.
+- Executed all 5 target-hidden prompts on CPU with the real `MiniGPTGenerator`.
+- Recorded `passed_case_count=5`, `any_hit_case_count=5`, `zero_hit_case_count=0`, and `pass_rate=1.0`.
+- Confirmed `holdout_model_quality_ready=True` while keeping `promotion_ready=False`.
+- Kept `model_quality_claim=target_hidden_holdout_replay_only`; review remains required before any promotion claim.
+- Routed the next action to `review_target_hidden_tokenizer_covered_holdout_replay_result`.
+- Verified with `4 passed` focused target-hidden real-replay tests and Playwright MCP screenshot evidence.
+- Archived v904 evidence in `e/904` and added the code explanation in `代码讲解记录_模型能力阶段/918-v904-bounded-objective-loss-signal-bridge-target-only-memory-target-hidden-tokenizer-covered-holdout-real-replay.md`.
 
 ## Latest v903 checkpoint
 

@@ -2001,3 +2001,8 @@ e/663/解释/说明.md
 - `e/903/图片`
 - `e/903/解释/说明.md`
 - v903 bounded objective loss signal bridge target-only memory target-hidden tokenizer-covered holdout dry-run screenshots and explanation.
+## v904 supplemental index
+
+- `e/904/图片`
+- `e/904/解释/说明.md`
+- v904 bounded objective loss signal bridge target-only memory target-hidden tokenizer-covered holdout real replay screenshots and explanation.

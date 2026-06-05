@@ -1304,6 +1304,9 @@
 917-v903-bounded-objective-loss-signal-bridge-target-only-memory-target-hidden-tokenizer-covered-holdout-dry-run.md
  -> v903 code explanation: dry-run the target-hidden holdout scoring contract with positive and negative continuations before real replay.
 
+918-v904-bounded-objective-loss-signal-bridge-target-only-memory-target-hidden-tokenizer-covered-holdout-real-replay.md
+ -> v904 code explanation: real-replay the v890 checkpoint on target-hidden holdout prompts and keep the 5/5 result behind review.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。
