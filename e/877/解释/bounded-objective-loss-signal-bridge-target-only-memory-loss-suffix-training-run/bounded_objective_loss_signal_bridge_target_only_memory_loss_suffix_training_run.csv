@@ -1,0 +1,8 @@
+key,exists,size,path
+checkpoint,True,1351822,e\877\解释\bounded-objective-loss-signal-bridge-target-only-memory-loss-suffix-training-run\run\checkpoint.pt
+tokenizer,True,530,e\877\解释\bounded-objective-loss-signal-bridge-target-only-memory-loss-suffix-training-run\run\tokenizer.json
+metrics,True,2597,e\877\解释\bounded-objective-loss-signal-bridge-target-only-memory-loss-suffix-training-run\run\metrics.jsonl
+train_config,True,1192,e\877\解释\bounded-objective-loss-signal-bridge-target-only-memory-loss-suffix-training-run\run\train_config.json
+run_manifest,True,11362,e\877\解释\bounded-objective-loss-signal-bridge-target-only-memory-loss-suffix-training-run\run\run_manifest.json
+sample,True,174,e\877\解释\bounded-objective-loss-signal-bridge-target-only-memory-loss-suffix-training-run\run\sample.txt
+prepared_corpus,True,6724,e\877\解释\bounded-objective-loss-signal-bridge-target-only-memory-loss-suffix-training-run\run\prepared_corpus.txt

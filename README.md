@@ -4,7 +4,21 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v876.0.0` turns the v875 loss-suffix diagnostic into a narrow no-anchor patch corpus for the next training run.
+Version `v877.0.0` trains the v876 loss-suffix patch into a real checkpoint whose sample now emits the complete `fixed loss` target.
+
+## Latest v877 checkpoint
+
+- Added short-name module `bounded_objective_loss_signal_bridge_target_only_memory_loss_suffix_training_run`.
+- Added CLI `scripts/build_bounded_objective_loss_signal_bridge_target_only_memory_loss_suffix_training_run.py`.
+- Trained a real CPU checkpoint from the v876 loss-suffix patch corpus for `220` steps.
+- Recorded `final_train_loss=0.6454294323921204`, `final_val_loss=0.8692289590835571`, and `train_loss_delta=-2.972881`.
+- Preserved `repair_example_count=27`, `neutral_prompt_example_count=9`, and `decoder_anchor_example_count=0`.
+- Produced checkpoint, tokenizer, metrics, train config, run manifest, sample, loss curve, and prepared corpus artifacts.
+- Sample now emits the complete target: `Answer with exactly two tokens: fixed loss answer: fixed loss`.
+- Kept `model_quality_claim=training_artifact_only`; v878 replay must verify whether this checkpoint recovers the bounded objective.
+- Routed the next artifact to `bounded_objective_loss_signal_bridge_target_only_memory_loss_suffix_replay_comparison`.
+- Verified with `3 passed` focused loss-suffix training-run tests and Playwright MCP screenshot evidence.
+- Archived v877 evidence in `e/877` and added the code explanation in `代码讲解记录_模型能力阶段/891-v877-bounded-objective-loss-signal-bridge-target-only-memory-loss-suffix-training-run.md`.
 
 ## Latest v876 checkpoint
 

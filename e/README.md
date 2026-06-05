@@ -255,6 +255,10 @@ e/875/解释/说明.md
 e/876/图片
 e/876/解释/说明.md
  -> v876 bounded objective loss signal bridge target-only memory loss-suffix patch 的运行截图和解释
+
+e/877/图片
+e/877/解释/说明.md
+ -> v877 bounded objective loss signal bridge target-only memory loss-suffix training run 的运行截图和解释
 ```
 
 ```text

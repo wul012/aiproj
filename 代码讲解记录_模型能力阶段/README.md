@@ -188,6 +188,9 @@
 890-v876-bounded-objective-loss-signal-bridge-target-only-memory-loss-suffix-patch.md
  -> v876 code explanation: convert the loss-suffix gap into a no-anchor patch corpus for the next training run.
 
+891-v877-bounded-objective-loss-signal-bridge-target-only-memory-loss-suffix-training-run.md
+ -> v877 code explanation: train the loss-suffix patch into a real checkpoint while leaving capability claims to replay.
+
 487-v473-baseline-candidate-capability-delta.md
  -> v473 code explanation: carry real tiny training loss and generation-quality deltas into the baseline-candidate eval loop.
 
