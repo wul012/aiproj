@@ -1277,6 +1277,9 @@
 908-v894-bounded-objective-loss-signal-bridge-target-only-memory-decoder-budget-audit.md
  -> v894 code explanation: prove v891 exhausted max-new-token budget at newline fixed-l before the top-1 oss suffix could be emitted.
 
+909-v895-bounded-objective-loss-signal-bridge-target-only-memory-decoder-budget-replay-comparison.md
+ -> v895 code explanation: rerun the same checkpoint with the audited 11-token replay budget and recover the bounded objective contract before holdout.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

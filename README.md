@@ -4,7 +4,19 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v894.0.0` audits the replay decoder budget that stopped v891 before the top-1 `oss` suffix.
+Version `v895.0.0` reruns the stagnation-aware suffix replay with the audited 11-token decoder budget.
+
+## Latest v895 checkpoint
+
+- Added short-name module `bounded_objective_loss_signal_bridge_target_only_memory_decoder_budget_replay_comparison`.
+- Added CLI `scripts/run_bounded_objective_loss_signal_bridge_target_only_memory_decoder_budget_replay_comparison.py`.
+- Replayed the same real v890 checkpoint against the unchanged v836 objective contract with `max_new_tokens=11`.
+- Confirmed all three contract cases output `\nfixed loss`.
+- Recorded `objective_contract_recovered=True`, `canonical_case_pass=True`, `passed_case_count=3`, `any_hit_case_count=3`, and `pass_rate=1.0`.
+- Kept `promotion_ready=False` and `model_quality_claim=objective_contract_recovered_only`; unchanged holdout replay remains required before any route promotion.
+- Routed the next artifact to `run_unchanged_bounded_suite_holdout_replay`.
+- Verified with `4 passed` focused decoder-budget replay tests and Playwright MCP screenshot evidence.
+- Archived v895 evidence in `e/895` and added the code explanation in `代码讲解记录_模型能力阶段/909-v895-bounded-objective-loss-signal-bridge-target-only-memory-decoder-budget-replay-comparison.md`.
 
 ## Latest v894 checkpoint
 
