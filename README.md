@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v899.0.0` dry-runs the tokenizer-coverage-aware holdout suite scoring contract before real replay.
+Version `v900.0.0` runs the tokenizer-coverage-aware holdout suite against the real v890 checkpoint.
+
+## Latest v900 checkpoint
+
+- Added short-name module `bounded_objective_loss_signal_bridge_target_only_memory_tokenizer_coverage_aware_holdout_real_replay`.
+- Added CLI `scripts/run_bounded_objective_loss_signal_bridge_target_only_memory_tokenizer_coverage_aware_holdout_real_replay.py`.
+- Consumed the real v898 tokenizer-coverage-aware holdout suite and v899 dry-run.
+- Replayed the real v890 checkpoint/tokenizer on CPU.
+- Confirmed all 5 continuation outputs contain both `fixed` and `loss`.
+- Recorded `holdout_model_quality_ready=True`, `passed_case_count=5`, `any_hit_case_count=5`, `zero_hit_case_count=0`, and `pass_rate=1.0`.
+- Kept `promotion_ready=False` and `model_quality_claim=tokenizer_covered_holdout_replay_only`; suite/result review remains required.
+- Routed the next action to `review_tokenizer_coverage_aware_holdout_replay_result`.
+- Verified with `4 passed` focused tokenizer-covered real replay tests and Playwright MCP screenshot evidence.
+- Archived v900 evidence in `e/900` and added the code explanation in `代码讲解记录_模型能力阶段/914-v900-bounded-objective-loss-signal-bridge-target-only-memory-tokenizer-coverage-aware-holdout-real-replay.md`.
 
 ## Latest v899 checkpoint
 

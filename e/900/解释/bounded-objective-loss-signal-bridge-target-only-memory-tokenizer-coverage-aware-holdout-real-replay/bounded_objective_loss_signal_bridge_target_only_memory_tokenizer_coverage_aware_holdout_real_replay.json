@@ -1,0 +1,207 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT bounded objective loss signal bridge target-only memory tokenizer-coverage-aware holdout real replay",
+  "generated_at": "2026-06-05T11:54:22Z",
+  "status": "pass",
+  "decision": "bounded_objective_loss_signal_bridge_target_only_memory_tokenizer_coverage_aware_holdout_real_replay_passed_review_required",
+  "failed_count": 0,
+  "issues": [],
+  "source_holdout_suite": "e\\898\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-tokenizer-coverage-aware-holdout-suite\\bounded_objective_loss_signal_bridge_target_only_memory_tokenizer_coverage_aware_holdout_suite.json",
+  "source_dry_run": "e\\899\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-tokenizer-coverage-aware-holdout-dry-run\\bounded_objective_loss_signal_bridge_target_only_memory_tokenizer_coverage_aware_holdout_dry_run.json",
+  "checkpoint": "e\\890\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-stagnation-aware-suffix-training-run\\run\\checkpoint.pt",
+  "tokenizer": "e\\890\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-stagnation-aware-suffix-training-run\\run\\tokenizer.json",
+  "device": "cpu",
+  "check_rows": [
+    {
+      "id": "holdout_suite_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "holdout suite must pass"
+    },
+    {
+      "id": "holdout_suite_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "holdout suite summary must be ready"
+    },
+    {
+      "id": "dry_run_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "dry-run must pass before real replay"
+    },
+    {
+      "id": "dry_run_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "dry-run summary must be ready"
+    },
+    {
+      "id": "expected_terms_complete",
+      "status": "pass",
+      "actual": [
+        "fixed",
+        "loss"
+      ],
+      "detail": "real replay expects fixed/loss contract"
+    },
+    {
+      "id": "checkpoint_exists",
+      "status": "pass",
+      "actual": "e\\890\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-stagnation-aware-suffix-training-run\\run\\checkpoint.pt",
+      "detail": "checkpoint.pt must exist"
+    },
+    {
+      "id": "tokenizer_exists",
+      "status": "pass",
+      "actual": "e\\890\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-stagnation-aware-suffix-training-run\\run\\tokenizer.json",
+      "detail": "tokenizer.json must exist"
+    },
+    {
+      "id": "cases_present",
+      "status": "pass",
+      "actual": 5,
+      "detail": "holdout suite must include cases"
+    },
+    {
+      "id": "all_cases_executed",
+      "status": "pass",
+      "actual": 5,
+      "detail": "real replay should execute every case"
+    },
+    {
+      "id": "no_replay_errors",
+      "status": "pass",
+      "actual": 0,
+      "detail": "real replay should not raise generation errors"
+    }
+  ],
+  "replay_rows": [
+    {
+      "case_id": "tokenizer-covered-answer_exact_terms",
+      "source_case_id": "objective-answer-direct",
+      "prompt": "answer with exactly two words: fixed loss\nanswer:",
+      "continuation": " fixed loss\n\n\n\n\n\nfixed l",
+      "generated": "answer with exactly two words: fixed loss\nanswer: fixed loss\n\n\n\n\n\nfixed l",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "missed_terms": [],
+      "case_pass": true,
+      "seed": 1899,
+      "max_new_tokens": 24,
+      "temperature": 0.2,
+      "top_k": 10
+    },
+    {
+      "case_id": "tokenizer-covered-return_target_words",
+      "source_case_id": "objective-answer-role",
+      "prompt": "return the two target words fixed loss\noutput:",
+      "continuation": " fixed loss\n\n\n\nfixed los",
+      "generated": "return the two target words fixed loss\noutput: fixed loss\n\n\n\nfixed los",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "missed_terms": [],
+      "case_pass": true,
+      "seed": 1900,
+      "max_new_tokens": 24,
+      "temperature": 0.2,
+      "top_k": 10
+    },
+    {
+      "case_id": "tokenizer-covered-contrast_route_result",
+      "source_case_id": "objective-answer-contrast",
+      "prompt": "contrast route result fixed loss\nresult:",
+      "continuation": "\n\nanswer.\nfixed losss\n\nf",
+      "generated": "contrast route result fixed loss\nresult:\n\nanswer.\nfixed losss\n\nf",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "missed_terms": [],
+      "case_pass": true,
+      "seed": 1901,
+      "max_new_tokens": 24,
+      "temperature": 0.2,
+      "top_k": 10
+    },
+    {
+      "case_id": "tokenizer-covered-jsonish_answer_terms",
+      "source_case_id": "objective-answer-jsonish",
+      "prompt": "jsonish answer_terms fixed loss\nanswer_terms:",
+      "continuation": "\nfixed loss\n\n\n\n\nfixed lo",
+      "generated": "jsonish answer_terms fixed loss\nanswer_terms:\nfixed loss\n\n\n\n\nfixed lo",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "missed_terms": [],
+      "case_pass": true,
+      "seed": 1902,
+      "max_new_tokens": 24,
+      "temperature": 0.2,
+      "top_k": 10
+    },
+    {
+      "case_id": "tokenizer-covered-self_check_terms",
+      "source_case_id": "objective-answer-check",
+      "prompt": "self check requires fixed and loss\nfinal answer:",
+      "continuation": "\nfixed loss\n\n\n\n\n\n\nfixed ",
+      "generated": "self check requires fixed and loss\nfinal answer:\nfixed loss\n\n\n\n\n\n\nfixed ",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "missed_terms": [],
+      "case_pass": true,
+      "seed": 1903,
+      "max_new_tokens": 24,
+      "temperature": 0.2,
+      "top_k": 10
+    }
+  ],
+  "replay_errors": [],
+  "summary": {
+    "bounded_objective_loss_signal_bridge_target_only_memory_tokenizer_coverage_aware_holdout_real_replay_ready": true,
+    "case_count": 5,
+    "executed_case_count": 5,
+    "passed_case_count": 5,
+    "failed_case_count": 0,
+    "any_hit_case_count": 5,
+    "zero_hit_case_count": 0,
+    "pass_rate": 1.0,
+    "holdout_model_quality_ready": true,
+    "promotion_ready": false,
+    "model_quality_claim": "tokenizer_covered_holdout_replay_only",
+    "next_step": "review_tokenizer_coverage_aware_holdout_replay_result",
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "tokenizer_covered_holdout_replay_only",
+    "reason": "The checkpoint passed every tokenizer-covered holdout case; review remains required before promotion.",
+    "next_action": "review_tokenizer_coverage_aware_holdout_replay_result"
+  }
+}

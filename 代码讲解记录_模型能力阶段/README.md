@@ -1292,6 +1292,9 @@
 913-v899-bounded-objective-loss-signal-bridge-target-only-memory-tokenizer-coverage-aware-holdout-dry-run.md
  -> v899 code explanation: dry-run the tokenizer-covered holdout suite scoring contract before real checkpoint replay.
 
+914-v900-bounded-objective-loss-signal-bridge-target-only-memory-tokenizer-coverage-aware-holdout-real-replay.md
+ -> v900 code explanation: replay the tokenizer-covered holdout suite against the real v890 checkpoint and record a 5/5 result with review still required.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。
