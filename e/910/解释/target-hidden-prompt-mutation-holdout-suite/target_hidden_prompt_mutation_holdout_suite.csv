@@ -1,0 +1,21 @@
+case_id,source_case_id,tokenizer_covered,target_hidden,task_hint,prompt_mutated,prompt_unknown_count,prompt
+prompt-mutation-memory_final,semantic-hidden-memory_answer,True,True,False,True,0,"memory answer
+final:"
+prompt-mutation-stored_memory,semantic-hidden-stored_result,True,True,False,True,0,"stored memory
+output:"
+prompt-mutation-route_final,semantic-hidden-learned_route,True,True,False,True,0,"learned final route
+result:"
+prompt-mutation-write_memory,semantic-hidden-final_words,True,True,False,True,0,"write final memory
+answer:"
+prompt-mutation-complete_stored,semantic-hidden-memory_self_check,True,True,False,True,0,"complete stored route
+final:"
+prompt-mutation-self_check_output,semantic-hidden-memory_answer,True,True,False,True,0,"self check stored memory
+output:"
+prompt-mutation-return_memory,semantic-hidden-stored_result,True,True,False,True,0,"return learned memory
+result:"
+prompt-mutation-final_words_memory,semantic-hidden-learned_route,True,True,False,True,0,"final words memory
+answer:"
+prompt-mutation-stored_final,semantic-hidden-final_words,True,True,False,True,0,"stored final words
+output:"
+prompt-mutation-complete_memory,semantic-hidden-memory_self_check,True,True,False,True,0,"complete memory route
+result:"

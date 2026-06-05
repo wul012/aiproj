@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v909.0.0` reviews the semantic target-hidden replay and routes clean signal to prompt-mutation holdout.
+Version `v910.0.0` builds a 10-case prompt-mutation target-hidden holdout suite from the clean v909 review.
+
+## Latest v910 checkpoint
+
+- Added short-name module `target_hidden_prompt_mutation_holdout_suite`.
+- Added CLI `scripts/build_target_hidden_prompt_mutation_holdout_suite.py`.
+- Consumed the real v909 clean semantic replay review, v906 semantic suite, and v890 tokenizer.
+- Expanded the source 5-case suite into 10 prompt-mutation cases.
+- Recorded `source_case_count=5`, `candidate_case_count=10`, and `mutation_factor=2.0`.
+- Confirmed `tokenizer_covered_case_count=10`, `target_hidden_case_count=10`, `task_hint_case_count=0`, `prompt_mutated_case_count=10`, and `candidate_prompt_unknown_token_count=0`.
+- Kept `promotion_ready=False` and `model_quality_claim=suite_construction_only`.
+- Routed the next action to `run_target_hidden_prompt_mutation_holdout_dry_run`.
+- Verified with `4 passed` focused prompt-mutation suite tests and Playwright MCP screenshot evidence.
+- Archived v910 evidence in `e/910` and added the code explanation in `代码讲解记录_模型能力阶段/924-v910-target-hidden-prompt-mutation-holdout-suite.md`.
 
 ## Latest v909 checkpoint
 

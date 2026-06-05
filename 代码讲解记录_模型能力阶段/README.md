@@ -1322,6 +1322,9 @@
 923-v909-target-hidden-semantic-holdout-replay-review.md
  -> v909 code explanation: review the clean semantic replay signal and route it to prompt-mutation holdout while blocking promotion.
 
+924-v910-target-hidden-prompt-mutation-holdout-suite.md
+ -> v910 code explanation: build a 10-case tokenizer-covered prompt-mutation target-hidden holdout suite from the v909 clean review.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

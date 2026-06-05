@@ -1,0 +1,542 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT target-hidden prompt-mutation tokenizer-covered holdout suite",
+  "generated_at": "2026-06-05T14:28:21Z",
+  "status": "pass",
+  "decision": "target_hidden_prompt_mutation_holdout_suite_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_replay_review": "e\\909\\解释\\target-hidden-semantic-holdout-replay-review\\target_hidden_semantic_holdout_replay_review.json",
+  "source_holdout_suite": "e\\906\\解释\\target-hidden-semantic-holdout-suite\\target_hidden_semantic_holdout_suite.json",
+  "tokenizer_path": "e\\890\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-stagnation-aware-suffix-training-run\\run\\tokenizer.json",
+  "check_rows": [
+    {
+      "id": "replay_review_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "v909 replay review must pass"
+    },
+    {
+      "id": "review_approves_prompt_mutation",
+      "status": "pass",
+      "actual": true,
+      "detail": "review must approve prompt-mutation holdout"
+    },
+    {
+      "id": "review_routes_to_prompt_mutation",
+      "status": "pass",
+      "actual": "build_prompt_mutation_target_hidden_holdout_suite",
+      "detail": "review must route to prompt-mutation suite"
+    },
+    {
+      "id": "source_suite_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "source semantic holdout suite must pass"
+    },
+    {
+      "id": "source_suite_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "source semantic suite summary must be ready"
+    },
+    {
+      "id": "tokenizer_exists",
+      "status": "pass",
+      "actual": "e\\890\\解释\\bounded-objective-loss-signal-bridge-target-only-memory-stagnation-aware-suffix-training-run\\run\\tokenizer.json",
+      "detail": "tokenizer.json must exist"
+    },
+    {
+      "id": "candidate_expands_source",
+      "status": "pass",
+      "actual": 10,
+      "detail": "prompt mutation suite should expand the source case count"
+    },
+    {
+      "id": "coverage_rows_complete",
+      "status": "pass",
+      "actual": 10,
+      "detail": "coverage rows must cover every case"
+    },
+    {
+      "id": "all_prompts_tokenizer_covered",
+      "status": "pass",
+      "actual": 10,
+      "detail": "all prompts must be tokenizer covered"
+    },
+    {
+      "id": "all_prompts_target_hidden",
+      "status": "pass",
+      "actual": 10,
+      "detail": "all prompts must hide expected terms"
+    },
+    {
+      "id": "no_prompt_task_hints",
+      "status": "pass",
+      "actual": 0,
+      "detail": "prompt mutations should avoid known task-hint terms"
+    },
+    {
+      "id": "all_prompts_mutated",
+      "status": "pass",
+      "actual": 10,
+      "detail": "candidate prompts should differ from source prompts"
+    }
+  ],
+  "coverage_rows": [
+    {
+      "case_id": "prompt-mutation-memory_final",
+      "source_case_id": "semantic-hidden-memory_answer",
+      "prompt_unknown_count": 0,
+      "tokenizer_covered": true,
+      "leaked_terms": [],
+      "target_hidden": true,
+      "task_hint_terms": [],
+      "task_hint": false,
+      "prompt_mutated": true
+    },
+    {
+      "case_id": "prompt-mutation-stored_memory",
+      "source_case_id": "semantic-hidden-stored_result",
+      "prompt_unknown_count": 0,
+      "tokenizer_covered": true,
+      "leaked_terms": [],
+      "target_hidden": true,
+      "task_hint_terms": [],
+      "task_hint": false,
+      "prompt_mutated": true
+    },
+    {
+      "case_id": "prompt-mutation-route_final",
+      "source_case_id": "semantic-hidden-learned_route",
+      "prompt_unknown_count": 0,
+      "tokenizer_covered": true,
+      "leaked_terms": [],
+      "target_hidden": true,
+      "task_hint_terms": [],
+      "task_hint": false,
+      "prompt_mutated": true
+    },
+    {
+      "case_id": "prompt-mutation-write_memory",
+      "source_case_id": "semantic-hidden-final_words",
+      "prompt_unknown_count": 0,
+      "tokenizer_covered": true,
+      "leaked_terms": [],
+      "target_hidden": true,
+      "task_hint_terms": [],
+      "task_hint": false,
+      "prompt_mutated": true
+    },
+    {
+      "case_id": "prompt-mutation-complete_stored",
+      "source_case_id": "semantic-hidden-memory_self_check",
+      "prompt_unknown_count": 0,
+      "tokenizer_covered": true,
+      "leaked_terms": [],
+      "target_hidden": true,
+      "task_hint_terms": [],
+      "task_hint": false,
+      "prompt_mutated": true
+    },
+    {
+      "case_id": "prompt-mutation-self_check_output",
+      "source_case_id": "semantic-hidden-memory_answer",
+      "prompt_unknown_count": 0,
+      "tokenizer_covered": true,
+      "leaked_terms": [],
+      "target_hidden": true,
+      "task_hint_terms": [],
+      "task_hint": false,
+      "prompt_mutated": true
+    },
+    {
+      "case_id": "prompt-mutation-return_memory",
+      "source_case_id": "semantic-hidden-stored_result",
+      "prompt_unknown_count": 0,
+      "tokenizer_covered": true,
+      "leaked_terms": [],
+      "target_hidden": true,
+      "task_hint_terms": [],
+      "task_hint": false,
+      "prompt_mutated": true
+    },
+    {
+      "case_id": "prompt-mutation-final_words_memory",
+      "source_case_id": "semantic-hidden-learned_route",
+      "prompt_unknown_count": 0,
+      "tokenizer_covered": true,
+      "leaked_terms": [],
+      "target_hidden": true,
+      "task_hint_terms": [],
+      "task_hint": false,
+      "prompt_mutated": true
+    },
+    {
+      "case_id": "prompt-mutation-stored_final",
+      "source_case_id": "semantic-hidden-final_words",
+      "prompt_unknown_count": 0,
+      "tokenizer_covered": true,
+      "leaked_terms": [],
+      "target_hidden": true,
+      "task_hint_terms": [],
+      "task_hint": false,
+      "prompt_mutated": true
+    },
+    {
+      "case_id": "prompt-mutation-complete_memory",
+      "source_case_id": "semantic-hidden-memory_self_check",
+      "prompt_unknown_count": 0,
+      "tokenizer_covered": true,
+      "leaked_terms": [],
+      "target_hidden": true,
+      "task_hint_terms": [],
+      "task_hint": false,
+      "prompt_mutated": true
+    }
+  ],
+  "benchmark_suite": {
+    "ready": true,
+    "suite_name": "route-promotion-objective-level-contrast-prompt-mutation-target-hidden-holdout-suite",
+    "suite_version": "v910",
+    "source_suite_name": "route-promotion-objective-level-contrast-semantic-paraphrase-target-hidden-holdout-suite",
+    "route_id": "objective_level_contrast",
+    "consumer_name": "target-hidden-prompt-mutation-holdout-builder",
+    "allowed_scope": "bounded_model_capability_governance_only",
+    "boundary": "prompt_mutation_target_hidden_ascii_tokenizer_covered_holdout_only",
+    "model_quality_claim": "not_claimed",
+    "cases": [
+      {
+        "case_id": "prompt-mutation-memory_final",
+        "source_case_id": "semantic-hidden-memory_answer",
+        "prompt_case": {
+          "name": "memory_final",
+          "prompt": "memory answer\nfinal:",
+          "max_new_tokens": 24,
+          "temperature": 0.2,
+          "top_k": 10,
+          "seed": 3011,
+          "task_type": "route-promotion-objective-level-contrast-prompt-mutation-target-hidden",
+          "difficulty": "medium",
+          "expected_behavior": "mutated memory final answer",
+          "tags": [
+            "route-promotion",
+            "objective-level-contrast",
+            "required-terms",
+            "tokenizer-covered",
+            "target-hidden",
+            "prompt-mutation"
+          ]
+        },
+        "expected_terms": [
+          "fixed",
+          "loss"
+        ],
+        "required_term_count": 2,
+        "mutation_source_index": 0
+      },
+      {
+        "case_id": "prompt-mutation-stored_memory",
+        "source_case_id": "semantic-hidden-stored_result",
+        "prompt_case": {
+          "name": "stored_memory",
+          "prompt": "stored memory\noutput:",
+          "max_new_tokens": 24,
+          "temperature": 0.2,
+          "top_k": 10,
+          "seed": 3012,
+          "task_type": "route-promotion-objective-level-contrast-prompt-mutation-target-hidden",
+          "difficulty": "medium",
+          "expected_behavior": "mutated stored memory output",
+          "tags": [
+            "route-promotion",
+            "objective-level-contrast",
+            "required-terms",
+            "tokenizer-covered",
+            "target-hidden",
+            "prompt-mutation"
+          ]
+        },
+        "expected_terms": [
+          "fixed",
+          "loss"
+        ],
+        "required_term_count": 2,
+        "mutation_source_index": 1
+      },
+      {
+        "case_id": "prompt-mutation-route_final",
+        "source_case_id": "semantic-hidden-learned_route",
+        "prompt_case": {
+          "name": "route_final",
+          "prompt": "learned final route\nresult:",
+          "max_new_tokens": 24,
+          "temperature": 0.2,
+          "top_k": 10,
+          "seed": 3013,
+          "task_type": "route-promotion-objective-level-contrast-prompt-mutation-target-hidden",
+          "difficulty": "medium",
+          "expected_behavior": "mutated route final result",
+          "tags": [
+            "route-promotion",
+            "objective-level-contrast",
+            "required-terms",
+            "tokenizer-covered",
+            "target-hidden",
+            "prompt-mutation"
+          ]
+        },
+        "expected_terms": [
+          "fixed",
+          "loss"
+        ],
+        "required_term_count": 2,
+        "mutation_source_index": 2
+      },
+      {
+        "case_id": "prompt-mutation-write_memory",
+        "source_case_id": "semantic-hidden-final_words",
+        "prompt_case": {
+          "name": "write_memory",
+          "prompt": "write final memory\nanswer:",
+          "max_new_tokens": 24,
+          "temperature": 0.2,
+          "top_k": 10,
+          "seed": 3014,
+          "task_type": "route-promotion-objective-level-contrast-prompt-mutation-target-hidden",
+          "difficulty": "medium",
+          "expected_behavior": "mutated final memory answer",
+          "tags": [
+            "route-promotion",
+            "objective-level-contrast",
+            "required-terms",
+            "tokenizer-covered",
+            "target-hidden",
+            "prompt-mutation"
+          ]
+        },
+        "expected_terms": [
+          "fixed",
+          "loss"
+        ],
+        "required_term_count": 2,
+        "mutation_source_index": 3
+      },
+      {
+        "case_id": "prompt-mutation-complete_stored",
+        "source_case_id": "semantic-hidden-memory_self_check",
+        "prompt_case": {
+          "name": "complete_stored",
+          "prompt": "complete stored route\nfinal:",
+          "max_new_tokens": 24,
+          "temperature": 0.2,
+          "top_k": 10,
+          "seed": 3015,
+          "task_type": "route-promotion-objective-level-contrast-prompt-mutation-target-hidden",
+          "difficulty": "medium",
+          "expected_behavior": "mutated stored route final",
+          "tags": [
+            "route-promotion",
+            "objective-level-contrast",
+            "required-terms",
+            "tokenizer-covered",
+            "target-hidden",
+            "prompt-mutation"
+          ]
+        },
+        "expected_terms": [
+          "fixed",
+          "loss"
+        ],
+        "required_term_count": 2,
+        "mutation_source_index": 4
+      },
+      {
+        "case_id": "prompt-mutation-self_check_output",
+        "source_case_id": "semantic-hidden-memory_answer",
+        "prompt_case": {
+          "name": "self_check_output",
+          "prompt": "self check stored memory\noutput:",
+          "max_new_tokens": 24,
+          "temperature": 0.2,
+          "top_k": 10,
+          "seed": 3016,
+          "task_type": "route-promotion-objective-level-contrast-prompt-mutation-target-hidden",
+          "difficulty": "medium",
+          "expected_behavior": "mutated self-check stored output",
+          "tags": [
+            "route-promotion",
+            "objective-level-contrast",
+            "required-terms",
+            "tokenizer-covered",
+            "target-hidden",
+            "prompt-mutation"
+          ]
+        },
+        "expected_terms": [
+          "fixed",
+          "loss"
+        ],
+        "required_term_count": 2,
+        "mutation_source_index": 0
+      },
+      {
+        "case_id": "prompt-mutation-return_memory",
+        "source_case_id": "semantic-hidden-stored_result",
+        "prompt_case": {
+          "name": "return_memory",
+          "prompt": "return learned memory\nresult:",
+          "max_new_tokens": 24,
+          "temperature": 0.2,
+          "top_k": 10,
+          "seed": 3017,
+          "task_type": "route-promotion-objective-level-contrast-prompt-mutation-target-hidden",
+          "difficulty": "medium",
+          "expected_behavior": "mutated learned memory result",
+          "tags": [
+            "route-promotion",
+            "objective-level-contrast",
+            "required-terms",
+            "tokenizer-covered",
+            "target-hidden",
+            "prompt-mutation"
+          ]
+        },
+        "expected_terms": [
+          "fixed",
+          "loss"
+        ],
+        "required_term_count": 2,
+        "mutation_source_index": 1
+      },
+      {
+        "case_id": "prompt-mutation-final_words_memory",
+        "source_case_id": "semantic-hidden-learned_route",
+        "prompt_case": {
+          "name": "final_words_memory",
+          "prompt": "final words memory\nanswer:",
+          "max_new_tokens": 24,
+          "temperature": 0.2,
+          "top_k": 10,
+          "seed": 3018,
+          "task_type": "route-promotion-objective-level-contrast-prompt-mutation-target-hidden",
+          "difficulty": "medium",
+          "expected_behavior": "mutated final words memory",
+          "tags": [
+            "route-promotion",
+            "objective-level-contrast",
+            "required-terms",
+            "tokenizer-covered",
+            "target-hidden",
+            "prompt-mutation"
+          ]
+        },
+        "expected_terms": [
+          "fixed",
+          "loss"
+        ],
+        "required_term_count": 2,
+        "mutation_source_index": 2
+      },
+      {
+        "case_id": "prompt-mutation-stored_final",
+        "source_case_id": "semantic-hidden-final_words",
+        "prompt_case": {
+          "name": "stored_final",
+          "prompt": "stored final words\noutput:",
+          "max_new_tokens": 24,
+          "temperature": 0.2,
+          "top_k": 10,
+          "seed": 3019,
+          "task_type": "route-promotion-objective-level-contrast-prompt-mutation-target-hidden",
+          "difficulty": "medium",
+          "expected_behavior": "mutated stored final output",
+          "tags": [
+            "route-promotion",
+            "objective-level-contrast",
+            "required-terms",
+            "tokenizer-covered",
+            "target-hidden",
+            "prompt-mutation"
+          ]
+        },
+        "expected_terms": [
+          "fixed",
+          "loss"
+        ],
+        "required_term_count": 2,
+        "mutation_source_index": 3
+      },
+      {
+        "case_id": "prompt-mutation-complete_memory",
+        "source_case_id": "semantic-hidden-memory_self_check",
+        "prompt_case": {
+          "name": "complete_memory",
+          "prompt": "complete memory route\nresult:",
+          "max_new_tokens": 24,
+          "temperature": 0.2,
+          "top_k": 10,
+          "seed": 3020,
+          "task_type": "route-promotion-objective-level-contrast-prompt-mutation-target-hidden",
+          "difficulty": "medium",
+          "expected_behavior": "mutated complete memory route",
+          "tags": [
+            "route-promotion",
+            "objective-level-contrast",
+            "required-terms",
+            "tokenizer-covered",
+            "target-hidden",
+            "prompt-mutation"
+          ]
+        },
+        "expected_terms": [
+          "fixed",
+          "loss"
+        ],
+        "required_term_count": 2,
+        "mutation_source_index": 4
+      }
+    ],
+    "scoring_contract": {
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "case_pass_condition": "generated_continuation_contains_both_expected_terms",
+      "suite_pass_condition": "all_cases_pass_without_scope_or_boundary_widening",
+      "minimum_case_count": 10
+    },
+    "guardrails": [
+      "do not include fixed or loss in prompts",
+      "do not use known pair/target task-hint terms",
+      "do not claim promotion before dry-run, replay, and review"
+    ],
+    "proposed_next_artifact": "target_hidden_prompt_mutation_holdout_dry_run"
+  },
+  "summary": {
+    "target_hidden_prompt_mutation_holdout_suite_ready": true,
+    "source_case_count": 5,
+    "candidate_case_count": 10,
+    "mutation_factor": 2.0,
+    "tokenizer_covered_case_count": 10,
+    "target_hidden_case_count": 10,
+    "task_hint_case_count": 0,
+    "prompt_mutated_case_count": 10,
+    "candidate_prompt_unknown_token_count": 0,
+    "source_clean_prompt_case_count": 5,
+    "source_pass_rate": 1.0,
+    "expected_terms": [
+      "fixed",
+      "loss"
+    ],
+    "promotion_ready": false,
+    "model_quality_claim": "suite_construction_only",
+    "next_step": "run_target_hidden_prompt_mutation_holdout_dry_run",
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "suite_construction_only",
+    "reason": "Built tokenizer-covered prompt mutations that hide expected terms and avoid known pair/target task hints.",
+    "next_action": "run_target_hidden_prompt_mutation_holdout_dry_run"
+  }
+}

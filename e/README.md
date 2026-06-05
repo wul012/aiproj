@@ -2031,3 +2031,8 @@ e/663/解释/说明.md
 - `e/909/图片`
 - `e/909/解释/说明.md`
 - v909 target-hidden semantic paraphrase holdout replay review screenshots and explanation.
+## v910 supplemental index
+
+- `e/910/图片`
+- `e/910/解释/说明.md`
+- v910 target-hidden prompt-mutation tokenizer-covered holdout suite screenshots and explanation.
