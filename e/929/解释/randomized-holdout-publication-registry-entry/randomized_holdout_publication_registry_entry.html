@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT randomized holdout publication registry entry</title>
+<style>
+:root{color-scheme:light;--ink:#17212b;--muted:#62717d;--line:#d7dee5;--panel:#f8fafc;--accent:#334155;--ok:#0f766e}
+*{box-sizing:border-box}
+body{margin:0;background:#f2f4f7;color:var(--ink);font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1180px;margin:0 auto;padding:28px}
+h1{font-size:30px;margin:0 0 8px;letter-spacing:0}
+h2{font-size:18px;margin:0 0 12px;letter-spacing:0}
+p{color:var(--muted);line-height:1.55;overflow-wrap:anywhere}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:18px 0}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:8px}
+.card{padding:14px}
+.card span{display:block;color:var(--muted);font-size:12px;text-transform:uppercase}
+.card strong{display:block;margin-top:6px;font-size:18px;line-height:1.2;color:var(--ok);overflow-wrap:anywhere}
+.panel{padding:16px;margin:14px 0}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:var(--accent)}
+td{overflow-wrap:anywhere}
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT randomized holdout publication registry entry</h1><p>The bounded randomized holdout publication decision is registered for governance lookup while direct promotion remains blocked.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Entry ready</span><strong>True</strong></div><div class="card"><span>Registry</span><strong>registered</strong></div><div class="card"><span>Bounded accepted</span><strong>True</strong></div><div class="card"><span>Promotion</span><strong>False</strong></div><div class="card"><span>Accepted</span><strong>1</strong></div><div class="card"><span>Blocked</span><strong>3</strong></div><div class="card"><span>Cases</span><strong>20</strong></div><div class="card"><span>Next</span><strong>check_randomized_holdout_publication_registry_entry</strong></div></section>
+<section class="panel"><h2>Registry Entry</h2><div class="table-wrap"><table>
+<thead><tr><th>Field</th><th>Value</th></tr></thead>
+<tbody><tr><td>entry_id</td><td>randomized-holdout-publication-v928</td></tr><tr><td>entry_type</td><td>bounded_model_capability_publication</td></tr><tr><td>source_index_path</td><td>e\928\解释\randomized-holdout-publication-decision-index\randomized_holdout_publication_decision_index.json</td></tr><tr><td>allowed_use</td><td>bounded_model_capability_governance_only</td></tr><tr><td>model_quality_claim</td><td>bounded_randomized_target_hidden_holdout_claim_only</td></tr><tr><td>decision_scope</td><td>bounded_randomized_holdout_publication_only</td></tr><tr><td>consumer_boundary</td><td>governance_lookup_only</td></tr><tr><td>next_step</td><td>check_randomized_holdout_publication_registry_entry</td></tr></tbody>
+</table></div></section>
+<section class="panel"><h2>Checks</h2><div class="table-wrap"><table>
+<thead><tr><th>Check</th><th>Status</th><th>Actual</th><th>Detail</th></tr></thead>
+<tbody><tr><td>source_index_file_exists</td><td>pass</td><td>e\928\解释\randomized-holdout-publication-decision-index\randomized_holdout_publication_decision_index.json</td><td>source publication decision index file must exist</td></tr><tr><td>source_index_passed</td><td>pass</td><td>pass</td><td>source publication decision index must pass</td></tr><tr><td>source_index_decision_ready</td><td>pass</td><td>randomized_holdout_publication_decision_index_ready</td><td>source publication decision index decision must be ready</td></tr><tr><td>source_index_summary_ready</td><td>pass</td><td>{&#x27;summary&#x27;: True, &#x27;index&#x27;: True}</td><td>source index summary and body must be ready</td></tr><tr><td>indexed_decision_expected</td><td>pass</td><td>accept_bounded_randomized_holdout_publication</td><td>registry entry expects the bounded publication acceptance decision</td></tr><tr><td>bounded_publication_accepted</td><td>pass</td><td>{&#x27;summary&#x27;: True, &#x27;index&#x27;: True}</td><td>registry entry only accepts bounded publication-ready indexes</td></tr><tr><td>accepted_claim_count</td><td>pass</td><td>1</td><td>registry entry expects exactly one accepted bounded claim</td></tr><tr><td>blocked_claim_count</td><td>pass</td><td>3</td><td>registry entry expects blocked claim boundaries</td></tr><tr><td>candidate_case_count</td><td>pass</td><td>20</td><td>registry entry expects the randomized 20-case floor</td></tr><tr><td>pass_rate_complete</td><td>pass</td><td>1.0</td><td>registry entry expects complete randomized replay pass rate</td></tr><tr><td>allowed_use_bounded</td><td>pass</td><td>{&#x27;summary&#x27;: &#x27;bounded_model_capability_governance_only&#x27;, &#x27;index&#x27;: &#x27;bounded_model_capability_governance_only&#x27;}</td><td>allowed use must stay bounded governance only</td></tr><tr><td>model_quality_claim_bounded</td><td>pass</td><td>{&#x27;summary&#x27;: &#x27;bounded_randomized_target_hidden_holdout_claim_only&#x27;, &#x27;index&#x27;: &#x27;bounded_randomized_target_hidden_holdout_claim_only&#x27;}</td><td>model quality claim must stay bounded to randomized holdout</td></tr><tr><td>promotion_still_false</td><td>pass</td><td>{&#x27;summary&#x27;: False, &#x27;index&#x27;: False}</td><td>registry entry must not enable direct promotion</td></tr><tr><td>approved_for_promotion_false</td><td>pass</td><td>{&#x27;summary&#x27;: False, &#x27;index&#x27;: False}</td><td>direct promotion approval must remain false</td></tr><tr><td>source_count_expected</td><td>pass</td><td>{&#x27;summary&#x27;: 3, &#x27;rows&#x27;: 3}</td><td>registry entry expects the three-source publication chain</td></tr><tr><td>source_kinds_expected</td><td>pass</td><td>[&#x27;publication_decision&#x27;, &#x27;publication_review&#x27;, &#x27;publication_packet&#x27;]</td><td>source kinds must keep publication decision, review, and packet order</td></tr><tr><td>source_checks_clean</td><td>pass</td><td>0</td><td>source index checks must be clean</td></tr><tr><td>source_next_step_matches</td><td>pass</td><td>build_randomized_holdout_publication_registry_entry</td><td>source index must route to registry entry build</td></tr></tbody>
+</table></div></section>
+</main>
+</body>
+</html>

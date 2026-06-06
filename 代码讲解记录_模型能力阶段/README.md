@@ -1379,6 +1379,9 @@
 942-v928-randomized-holdout-publication-decision-index.md
  -> v928 code explanation: index the v925-v927 bounded publication chain into a downstream lookup artifact while keeping direct promotion blocked.
 
+943-v929-randomized-holdout-publication-registry-entry.md
+ -> v929 code explanation: register the v928 publication index as a governance lookup entry while keeping direct promotion blocked.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

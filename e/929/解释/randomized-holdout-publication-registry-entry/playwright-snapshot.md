@@ -1,0 +1,20 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "MiniGPT randomized holdout publication registry entry" [level=1] [ref=e4]
+    - paragraph [ref=e5]: The bounded randomized holdout publication decision is registered for governance lookup while direct promotion remains blocked.
+  - generic [ref=e6]:
+    - generic [ref=e7]
+    - generic [ref=e10]
+    - generic [ref=e13]
+    - generic [ref=e16]
+    - generic [ref=e19]
+    - generic [ref=e22]
+    - generic [ref=e25]
+    - generic [ref=e28]
+    - generic [ref=e31]
+  - generic [ref=e34]:
+    - heading "Registry Entry" [level=2] [ref=e35]
+    - table [ref=e37]
+  - generic [ref=e67]:
+    - heading "Checks" [level=2] [ref=e68]
+    - table [ref=e70]

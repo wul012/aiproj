@@ -2126,3 +2126,8 @@ e/663/解释/说明.md
 - `e/928/图片`
 - `e/928/解释/说明.md`
 - v928 randomized holdout publication decision index screenshots and explanation.
+## v929 supplemental index
+
+- `e/929/图片`
+- `e/929/解释/说明.md`
+- v929 randomized holdout publication registry entry screenshots and explanation.
