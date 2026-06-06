@@ -1,0 +1,2 @@
+entry_id,registry_status,bounded_publication_accepted,promotion_ready,consumer_boundary,model_quality_claim
+randomized-holdout-publication-v928,registered,True,False,governance_lookup_only,bounded_randomized_target_hidden_holdout_claim_only

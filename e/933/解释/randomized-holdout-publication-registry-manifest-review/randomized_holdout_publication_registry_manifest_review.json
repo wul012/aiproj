@@ -1,0 +1,246 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT randomized holdout publication registry manifest review",
+  "generated_at": "2026-06-06T09:15:01Z",
+  "status": "pass",
+  "decision": "randomized_holdout_publication_registry_manifest_review_ready",
+  "failed_count": 0,
+  "issues": [],
+  "registry_manifest_path": "e\\932\\解释\\randomized-holdout-publication-registry-manifest\\randomized_holdout_publication_registry_manifest.json",
+  "source_manifest_summary": {
+    "randomized_holdout_publication_registry_manifest_ready": true,
+    "manifest_id": "randomized-holdout-publication-registry-manifest-v932",
+    "manifest_scope": "bounded_publication_registry_manifest_only",
+    "entry_count": 1,
+    "entry_id": "randomized-holdout-publication-v928",
+    "registry_status": "registered",
+    "contract_check_ready": true,
+    "bounded_publication_accepted": true,
+    "promotion_ready": false,
+    "approved_for_promotion": false,
+    "consumer_boundary": "governance_lookup_only",
+    "next_step": "review_randomized_holdout_publication_registry_manifest",
+    "passed_check_count": 16,
+    "failed_check_count": 0
+  },
+  "source_manifest": {
+    "manifest_ready": true,
+    "manifest_id": "randomized-holdout-publication-registry-manifest-v932",
+    "manifest_scope": "bounded_publication_registry_manifest_only",
+    "registry_packet_path": "e\\931\\解释\\randomized-holdout-publication-registry-packet\\randomized_holdout_publication_registry_packet.json",
+    "entry_count": 1,
+    "entries": [
+      {
+        "entry_id": "randomized-holdout-publication-v928",
+        "registry_status": "registered",
+        "bounded_publication_accepted": true,
+        "promotion_ready": false,
+        "accepted_claim_count": 1,
+        "blocked_claim_count": 3,
+        "candidate_case_count": 20,
+        "random_seed": 914,
+        "pass_rate": 1.0,
+        "allowed_use": "bounded_model_capability_governance_only",
+        "model_quality_claim": "bounded_randomized_target_hidden_holdout_claim_only",
+        "consumer_boundary": "governance_lookup_only"
+      }
+    ],
+    "entry_id": "randomized-holdout-publication-v928",
+    "registry_status": "registered",
+    "contract_check_ready": true,
+    "bounded_publication_accepted": true,
+    "promotion_ready": false,
+    "approved_for_promotion": false,
+    "consumer_boundary": "governance_lookup_only",
+    "next_step": "review_randomized_holdout_publication_registry_manifest"
+  },
+  "entry_rows": [
+    {
+      "entry_id": "randomized-holdout-publication-v928",
+      "registry_status": "registered",
+      "bounded_publication_accepted": true,
+      "promotion_ready": false,
+      "accepted_claim_count": 1,
+      "blocked_claim_count": 3,
+      "candidate_case_count": 20,
+      "random_seed": 914,
+      "pass_rate": 1.0,
+      "allowed_use": "bounded_model_capability_governance_only",
+      "model_quality_claim": "bounded_randomized_target_hidden_holdout_claim_only",
+      "consumer_boundary": "governance_lookup_only"
+    }
+  ],
+  "check_rows": [
+    {
+      "id": "registry_manifest_file_exists",
+      "status": "pass",
+      "actual": "e\\932\\解释\\randomized-holdout-publication-registry-manifest\\randomized_holdout_publication_registry_manifest.json",
+      "detail": "registry manifest file must exist"
+    },
+    {
+      "id": "registry_manifest_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "registry manifest must pass"
+    },
+    {
+      "id": "registry_manifest_decision_ready",
+      "status": "pass",
+      "actual": "randomized_holdout_publication_registry_manifest_ready",
+      "detail": "registry manifest decision must be ready"
+    },
+    {
+      "id": "manifest_summary_ready",
+      "status": "pass",
+      "actual": {
+        "summary": true,
+        "manifest": true
+      },
+      "detail": "manifest summary and body must be ready"
+    },
+    {
+      "id": "manifest_scope_bounded",
+      "status": "pass",
+      "actual": "bounded_publication_registry_manifest_only",
+      "detail": "manifest scope must remain bounded"
+    },
+    {
+      "id": "entry_count_positive",
+      "status": "pass",
+      "actual": {
+        "summary": 1,
+        "entries": 1
+      },
+      "detail": "manifest entry count must match entries"
+    },
+    {
+      "id": "entries_registered",
+      "status": "pass",
+      "actual": [
+        "registered"
+      ],
+      "detail": "all entries must be registered"
+    },
+    {
+      "id": "entries_bounded",
+      "status": "pass",
+      "actual": [
+        true
+      ],
+      "detail": "all entries must be bounded accepted"
+    },
+    {
+      "id": "entries_not_promoted",
+      "status": "pass",
+      "actual": [
+        false
+      ],
+      "detail": "review must not promote entries"
+    },
+    {
+      "id": "contract_check_ready",
+      "status": "pass",
+      "actual": {
+        "summary": true,
+        "manifest": true
+      },
+      "detail": "manifest must carry a ready contract check"
+    },
+    {
+      "id": "bounded_publication_accepted",
+      "status": "pass",
+      "actual": true,
+      "detail": "review only accepts bounded publication"
+    },
+    {
+      "id": "consumer_boundary_governance",
+      "status": "pass",
+      "actual": {
+        "summary": "governance_lookup_only",
+        "manifest": "governance_lookup_only"
+      },
+      "detail": "consumer boundary must remain governance lookup only"
+    },
+    {
+      "id": "model_quality_claim_bounded",
+      "status": "pass",
+      "actual": [
+        "bounded_randomized_target_hidden_holdout_claim_only"
+      ],
+      "detail": "entry claims must stay bounded"
+    },
+    {
+      "id": "promotion_still_false",
+      "status": "pass",
+      "actual": {
+        "summary": false,
+        "manifest": false
+      },
+      "detail": "review must not enable direct promotion"
+    },
+    {
+      "id": "approved_for_promotion_false",
+      "status": "pass",
+      "actual": {
+        "summary": false,
+        "manifest": false
+      },
+      "detail": "review must not approve promotion"
+    },
+    {
+      "id": "source_checks_clean",
+      "status": "pass",
+      "actual": 0,
+      "detail": "source manifest checks must be clean"
+    },
+    {
+      "id": "source_next_step_matches",
+      "status": "pass",
+      "actual": "review_randomized_holdout_publication_registry_manifest",
+      "detail": "source manifest must route to review"
+    }
+  ],
+  "review": {
+    "review_ready": true,
+    "review_id": "randomized-holdout-publication-registry-manifest-review-v933",
+    "review_status": "approved_for_governance_lookup_only",
+    "registry_manifest_path": "e\\932\\解释\\randomized-holdout-publication-registry-manifest\\randomized_holdout_publication_registry_manifest.json",
+    "entry_count": 1,
+    "reviewed_entry_ids": [
+      "randomized-holdout-publication-v928"
+    ],
+    "lookup_ready": true,
+    "bounded_publication_accepted": true,
+    "contract_check_ready": true,
+    "promotion_ready": false,
+    "approved_for_promotion": false,
+    "consumer_boundary": "governance_lookup_only",
+    "model_quality_claim": "bounded_randomized_target_hidden_holdout_claim_only",
+    "allowed_use": "governance_lookup_only",
+    "rejected_use": "production_promotion",
+    "next_step": "build_randomized_holdout_publication_registry_lookup_packet"
+  },
+  "summary": {
+    "randomized_holdout_publication_registry_manifest_review_ready": true,
+    "review_id": "randomized-holdout-publication-registry-manifest-review-v933",
+    "review_status": "approved_for_governance_lookup_only",
+    "entry_count": 1,
+    "lookup_ready": true,
+    "bounded_publication_accepted": true,
+    "contract_check_ready": true,
+    "promotion_ready": false,
+    "approved_for_promotion": false,
+    "consumer_boundary": "governance_lookup_only",
+    "model_quality_claim": "bounded_randomized_target_hidden_holdout_claim_only",
+    "allowed_use": "governance_lookup_only",
+    "rejected_use": "production_promotion",
+    "next_step": "build_randomized_holdout_publication_registry_lookup_packet",
+    "passed_check_count": 17,
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "bounded_randomized_target_hidden_holdout_claim_only",
+    "reason": "The publication registry manifest is approved only for governance lookup consumption; production promotion remains blocked.",
+    "next_action": "build_randomized_holdout_publication_registry_lookup_packet"
+  }
+}

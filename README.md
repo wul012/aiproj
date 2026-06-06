@@ -9489,6 +9489,8 @@ The randomized holdout publication registry packet layer packages the verified r
 
 The randomized holdout publication registry manifest layer summarizes that verified packet into a bounded governance lookup manifest, centralizes repeated publication boundary constants, and still keeps production promotion blocked.
 
+The randomized holdout publication registry manifest review layer approves that manifest only for governance lookup consumption, records `production_promotion` as rejected use, and routes the next work to a lookup packet.
+
 The run registry layer indexes multiple run directories so experiments can be scanned by commit, data fingerprint, quality status, eval suite coverage, metrics, artifact count, notes, tags, best-val rank, loss delta, a leaderboard, an interactive local HTML table, shareable URL state, and visible-row CSV export.
 
 The experiment card layer turns one run into a compact JSON/Markdown/HTML summary for review, handoff, or portfolio use.
