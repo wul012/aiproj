@@ -118,6 +118,8 @@ __all__ = [
     "write_randomized_holdout_candidate_promotion_packet_review_outputs",
     "build_randomized_holdout_bounded_promotion_gate",
     "write_randomized_holdout_bounded_promotion_gate_outputs",
+    "build_randomized_holdout_bounded_promotion_decision",
+    "write_randomized_holdout_bounded_promotion_decision_outputs",
     "build_model_capability_route_promotion_review_decision",
     "write_model_capability_route_promotion_review_decision_outputs",
     "build_model_capability_route_promotion_decision_index",
@@ -308,6 +310,14 @@ _EXPORTS = {
     "write_randomized_holdout_bounded_promotion_gate_outputs": (
         "randomized_holdout_bounded_promotion_gate_artifacts",
         "write_randomized_holdout_bounded_promotion_gate_outputs",
+    ),
+    "build_randomized_holdout_bounded_promotion_decision": (
+        "randomized_holdout_bounded_promotion_decision",
+        "build_randomized_holdout_bounded_promotion_decision",
+    ),
+    "write_randomized_holdout_bounded_promotion_decision_outputs": (
+        "randomized_holdout_bounded_promotion_decision_artifacts",
+        "write_randomized_holdout_bounded_promotion_decision_outputs",
     ),
     "build_model_capability_route_promotion_review_decision": (
         "model_capability_route_promotion_review_decision",

@@ -1355,6 +1355,9 @@
 934-v920-randomized-holdout-bounded-promotion-gate.md
  -> v920 code explanation: check the randomized holdout bounded promotion gate and allow only a bounded decision while direct promotion remains blocked.
 
+935-v921-randomized-holdout-bounded-promotion-decision.md
+ -> v921 code explanation: accept the randomized holdout result only as a bounded 20-case tiny-checkpoint claim while direct promotion remains blocked.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

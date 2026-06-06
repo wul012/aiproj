@@ -2086,3 +2086,8 @@ e/663/解释/说明.md
 - `e/920/图片`
 - `e/920/解释/说明.md`
 - v920 randomized holdout bounded promotion gate screenshots and explanation.
+## v921 supplemental index
+
+- `e/921/图片`
+- `e/921/解释/说明.md`
+- v921 randomized holdout bounded promotion decision screenshots and explanation.
