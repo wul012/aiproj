@@ -2066,3 +2066,8 @@ e/663/解释/说明.md
 - `e/916/图片`
 - `e/916/解释/说明.md`
 - v916 randomized target-hidden holdout real-replay screenshots and explanation.
+## v917 supplemental index
+
+- `e/917/图片`
+- `e/917/解释/说明.md`
+- v917 randomized target-hidden holdout replay review screenshots and explanation.

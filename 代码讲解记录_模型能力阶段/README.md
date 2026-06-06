@@ -1343,6 +1343,9 @@
 930-v916-randomized-target-hidden-holdout-real-replay.md
  -> v916 code explanation: replay the real checkpoint against the 20-case seeded randomized target-hidden holdout.
 
+931-v917-randomized-target-hidden-holdout-replay-review.md
+ -> v917 code explanation: review the randomized 20/20 replay and route the clean signal to a candidate promotion packet.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

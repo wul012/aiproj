@@ -4,7 +4,23 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v916.0.0` replays the real v890 checkpoint against the 20-case randomized target-hidden holdout.
+Version `v917.0.0` reviews the 20-case randomized replay and routes the clean signal to a candidate promotion packet.
+
+## Latest v917 checkpoint
+
+- Added short-name module `randomized_target_hidden_holdout_replay_review`.
+- Added CLI `scripts/review_randomized_target_hidden_holdout_replay.py`.
+- Consumed the real v916 randomized replay and v914 randomized suite.
+- Rechecked all 20 prompts for target leakage, task hints, uniqueness, and randomized prompt marking.
+- Recorded `case_count=20`, `passed_case_count=20`, `pass_rate=1.0`, `source_random_seed=914`, and `source_randomized_case_factor=2.0`.
+- Confirmed `target_leakage_case_count=0`, `task_hint_case_count=0`, `unique_prompt_count=20`, `randomized_prompt_count=20`, and `clean_randomized_case_count=20`.
+- Approved `approved_for_candidate_promotion_packet=True` while keeping `approved_for_promotion=False`.
+- Kept `promotion_ready=False` and `model_quality_claim=randomized_target_hidden_holdout_clean_signal_reviewed`.
+- Routed the next action to `build_randomized_holdout_candidate_promotion_packet`.
+- Verified with `4 passed` focused randomized replay-review tests and Playwright MCP screenshot evidence.
+- Archived v917 evidence in `e/917` and added the code explanation in `代码讲解记录_模型能力阶段/931-v917-randomized-target-hidden-holdout-replay-review.md`.
+
+## Latest v916 checkpoint
 
 ## Latest v916 checkpoint
 
