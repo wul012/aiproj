@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT randomized holdout publication registry downstream guard</title>
+<style>
+:root{color-scheme:light;--ink:#17212b;--muted:#62717d;--line:#d7dee5;--panel:#f8fafc;--accent:#0f766e}
+*{box-sizing:border-box}
+body{margin:0;background:#eef1f5;color:var(--ink);font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1160px;margin:0 auto;padding:28px}
+h1{font-size:30px;margin:0 0 8px;letter-spacing:0}
+h2{font-size:18px;margin:0 0 12px;letter-spacing:0}
+p{color:var(--muted);line-height:1.55;overflow-wrap:anywhere}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin:18px 0}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:8px}
+.card{padding:14px}
+.card span{display:block;color:var(--muted);font-size:12px;text-transform:uppercase}
+.card strong{display:block;margin-top:6px;font-size:16px;line-height:1.25;color:var(--accent);overflow-wrap:anywhere}
+.panel{padding:16px;margin:14px 0}
+dl{display:grid;grid-template-columns:minmax(150px,220px) 1fr;gap:8px 16px;margin:0;font-size:14px}
+dt{color:#334155;font-weight:700}
+dd{margin:0;overflow-wrap:anywhere}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:#334155}
+td{overflow-wrap:anywhere}
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT randomized holdout publication registry downstream guard</h1><p>Downstream governance lookup is allowed while production promotion and claim expansion remain blocked.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Guard ready</span><strong>True</strong></div><div class="card"><span>Downstream</span><strong>True</strong></div><div class="card"><span>Lookup</span><strong>True</strong></div><div class="card"><span>Promotion</span><strong>False</strong></div><div class="card"><span>Failed</span><strong>0</strong></div></section>
+<section class="panel"><h2>Guard Boundary</h2><dl>
+<dt>Allowed use</dt><dd>downstream_governance_lookup_only</dd>
+<dt>Blocked uses</dt><dd>[&#x27;production_promotion&#x27;, &#x27;model_quality_expansion&#x27;, &#x27;training_data_claim_expansion&#x27;]</dd>
+<dt>Next step</dt><dd>record_randomized_holdout_publication_registry_downstream_receipt</dd>
+</dl></section>
+<section class="panel"><h2>Entries</h2><div class="table-wrap"><table>
+<thead><tr><th>Lookup key</th><th>Entry</th><th>Status</th><th>Bounded</th><th>Promotion</th><th>Boundary</th><th>Claim</th></tr></thead>
+<tbody><tr><td>publication:randomized-holdout-publication-v928</td><td>randomized-holdout-publication-v928</td><td>registered</td><td>True</td><td>False</td><td>governance_lookup_only</td><td>bounded_randomized_target_hidden_holdout_claim_only</td></tr></tbody>
+</table></div></section>
+<section class="panel"><h2>Checks</h2><div class="table-wrap"><table>
+<thead><tr><th>Check</th><th>Status</th><th>Actual</th><th>Detail</th></tr></thead>
+<tbody><tr><td>lookup_index_review_file_exists</td><td>pass</td><td>e\937\解释\randomized-holdout-publication-registry-lookup-index-review\randomized_holdout_publication_registry_lookup_index_review.json</td><td>lookup index review file must exist</td></tr><tr><td>lookup_index_review_passed</td><td>pass</td><td>pass</td><td>lookup index review must pass</td></tr><tr><td>lookup_index_review_decision_ready</td><td>pass</td><td>randomized_holdout_publication_registry_lookup_index_review_ready</td><td>lookup index review decision must be ready</td></tr><tr><td>review_summary_ready</td><td>pass</td><td>{&#x27;summary&#x27;: True, &#x27;review&#x27;: True}</td><td>review summary and body must be ready</td></tr><tr><td>review_status_downstream_only</td><td>pass</td><td>{&#x27;summary&#x27;: &#x27;approved_for_downstream_governance_lookup_only&#x27;, &#x27;review&#x27;: &#x27;approved_for_downstream_governance_lookup_only&#x27;}</td><td>review must be downstream governance lookup only</td></tr><tr><td>downstream_ready</td><td>pass</td><td>{&#x27;summary&#x27;: True, &#x27;review&#x27;: True}</td><td>downstream lookup must be ready</td></tr><tr><td>lookup_ready</td><td>pass</td><td>{&#x27;summary&#x27;: True, &#x27;review&#x27;: True}</td><td>lookup must be ready</td></tr><tr><td>contract_check_ready</td><td>pass</td><td>{&#x27;summary&#x27;: True, &#x27;review&#x27;: True}</td><td>contract check must be ready</td></tr><tr><td>consumer_boundary_governance</td><td>pass</td><td>{&#x27;summary&#x27;: &#x27;governance_lookup_only&#x27;, &#x27;review&#x27;: &#x27;governance_lookup_only&#x27;}</td><td>consumer boundary must remain governance lookup only</td></tr><tr><td>allowed_use_downstream_only</td><td>pass</td><td>{&#x27;summary&#x27;: &#x27;downstream_governance_lookup_only&#x27;, &#x27;review&#x27;: &#x27;downstream_governance_lookup_only&#x27;}</td><td>allowed use must stay downstream lookup only</td></tr><tr><td>rejected_use_production_promotion</td><td>pass</td><td>{&#x27;summary&#x27;: &#x27;production_promotion&#x27;, &#x27;review&#x27;: &#x27;production_promotion&#x27;}</td><td>production promotion must stay rejected</td></tr><tr><td>promotion_still_false</td><td>pass</td><td>{&#x27;summary&#x27;: False, &#x27;review&#x27;: False}</td><td>downstream guard must not enable promotion</td></tr><tr><td>lookup_keys_publication_namespace</td><td>pass</td><td>[&#x27;publication:randomized-holdout-publication-v928&#x27;]</td><td>lookup keys must use publication namespace</td></tr><tr><td>entries_not_promoted</td><td>pass</td><td>[False]</td><td>entries must not be promoted</td></tr><tr><td>source_checks_clean</td><td>pass</td><td>0</td><td>source review checks must be clean</td></tr><tr><td>source_next_step_matches</td><td>pass</td><td>build_randomized_holdout_publication_registry_downstream_guard</td><td>source review must route to downstream guard</td></tr></tbody>
+</table></div></section>
+</main>
+</body>
+</html>

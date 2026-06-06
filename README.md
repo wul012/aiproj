@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v927.0.0` records the final bounded randomized holdout publication decision while direct promotion remains blocked.
+Version `v938.0.0` adds a downstream guard for the randomized holdout publication registry lookup index review, allowing downstream governance lookup while blocking production promotion and claim expansion.
+
+## Latest v938 checkpoint
+
+- Added short-name module `randomized_holdout_publication_registry_downstream_guard`.
+- Added CLI `scripts/build_randomized_holdout_publication_registry_downstream_guard.py`.
+- Consumed the real v937 lookup index review.
+- Checked review readiness, downstream lookup readiness, contract-check readiness, governance-only boundary, lookup-key namespace, source next step, and promotion-boundary fields.
+- Confirmed `randomized_holdout_publication_registry_downstream_guard_ready=True`, `guard_status=downstream_governance_lookup_allowed`, and `allowed_use=downstream_governance_lookup_only`.
+- Kept `promotion_ready=False` and `approved_for_promotion=False`.
+- Explicitly blocked `production_promotion`, `model_quality_expansion`, and `training_data_claim_expansion`.
+- Routed the next action to `record_randomized_holdout_publication_registry_downstream_receipt`.
+- Verified with focused downstream-guard tests and Playwright MCP screenshot evidence.
+- Archived v938 evidence in `e/938` and added the code explanation in `代码讲解记录_模型能力阶段/952-v938-randomized-holdout-publication-registry-downstream-guard.md`.
 
 ## Latest v927 checkpoint
 
@@ -9498,6 +9511,8 @@ The randomized holdout publication registry lookup packet contract-check layer r
 The randomized holdout publication registry lookup index layer combines the lookup packet and its contract check into one downstream-consumable governance lookup index with stable keys, evidence count, and promotion rejection.
 
 The randomized holdout publication registry lookup index review layer approves that index only for downstream governance lookup consumption and routes the next work to a downstream guard.
+
+The randomized holdout publication registry downstream guard layer allows only downstream governance lookup consumption while explicitly blocking production promotion, model-quality expansion, and training-data claim expansion.
 
 The run registry layer indexes multiple run directories so experiments can be scanned by commit, data fingerprint, quality status, eval suite coverage, metrics, artifact count, notes, tags, best-val rank, loss delta, a leaderboard, an interactive local HTML table, shareable URL state, and visible-row CSV export.
 
