@@ -1334,6 +1334,9 @@
 927-v913-target-hidden-prompt-mutation-holdout-replay-review.md
  -> v913 code explanation: review the clean prompt-mutation replay signal and route it to randomized holdout while blocking promotion.
 
+928-v914-randomized-target-hidden-holdout-suite.md
+ -> v914 code explanation: build a seeded 20-case randomized target-hidden holdout suite from the clean v913 review signal.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

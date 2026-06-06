@@ -2051,3 +2051,8 @@ e/663/解释/说明.md
 - `e/913/图片`
 - `e/913/解释/说明.md`
 - v913 target-hidden prompt-mutation holdout replay review screenshots and explanation.
+## v914 supplemental index
+
+- `e/914/图片`
+- `e/914/解释/说明.md`
+- v914 randomized target-hidden holdout suite screenshots and explanation.

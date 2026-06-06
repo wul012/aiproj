@@ -4,7 +4,22 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v913.0.0` reviews the v912 prompt-mutation target-hidden replay and routes the clean signal to randomized holdout instead of promotion.
+Version `v914.0.0` builds a seeded 20-case randomized target-hidden holdout suite from the v913 clean review signal.
+
+## Latest v914 checkpoint
+
+- Added short-name module `randomized_target_hidden_holdout_suite`.
+- Added CLI `scripts/build_randomized_target_hidden_holdout_suite.py`.
+- Consumed the real v913 replay review, v910 prompt-mutation suite, and v890 tokenizer.
+- Built 20 seeded randomized target-hidden prompts with `random_seed=914`.
+- Recorded `source_case_count=10`, `candidate_case_count=20`, and `randomized_case_factor=2.0`.
+- Confirmed `tokenizer_covered_case_count=20`, `target_hidden_case_count=20`, `task_hint_case_count=0`, `unique_prompt_count=20`, and `new_vs_source_prompt_count=20`.
+- Kept `promotion_ready=False` and `model_quality_claim=suite_construction_only`.
+- Routed the next action to `dry_run_randomized_target_hidden_holdout`.
+- Verified with `5 passed` focused randomized-suite tests and Playwright MCP screenshot evidence.
+- Archived v914 evidence in `e/914` and added the code explanation in `代码讲解记录_模型能力阶段/928-v914-randomized-target-hidden-holdout-suite.md`.
+
+## Latest v913 checkpoint
 
 ## Latest v913 checkpoint
 
