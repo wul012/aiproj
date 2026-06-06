@@ -4,7 +4,19 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v919.0.0` reviews the randomized candidate packet and approves only a bounded promotion gate while keeping direct promotion blocked.
+Version `v920.0.0` checks the randomized holdout bounded promotion gate and allows only a bounded decision while direct promotion remains blocked.
+
+## Latest v920 checkpoint
+
+- Added short-name module `randomized_holdout_bounded_promotion_gate`.
+- Added CLI `scripts/check_randomized_holdout_bounded_promotion_gate.py`.
+- Consumed the real v919 packet review and v918 candidate packet evidence.
+- Rechecked source file existence, review readiness, candidate packet readiness, 20-case floor, case count consistency, random seed consistency, pass rate, clean case count, negative-control rejection, and promotion-boundary fields.
+- Confirmed `randomized_holdout_bounded_promotion_gate_ready=True`, `candidate_case_count=20`, `random_seed=914`, `pass_rate=1.0`, and `approved_for_bounded_promotion_decision=True`.
+- Kept `promotion_ready=False`, `approved_for_promotion=False`, and `model_quality_claim=bounded_gate_only`.
+- Routed the next action to `record_randomized_holdout_bounded_promotion_decision`.
+- Verified with `5 passed` focused bounded-gate tests and Playwright MCP screenshot evidence.
+- Archived v920 evidence in `e/920` and added the code explanation in `代码讲解记录_模型能力阶段/934-v920-randomized-holdout-bounded-promotion-gate.md`.
 
 ## Latest v919 checkpoint
 

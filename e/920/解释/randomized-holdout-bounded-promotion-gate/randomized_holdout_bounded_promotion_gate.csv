@@ -1,0 +1,20 @@
+id,status,actual,detail
+review_file_exists,pass,e\919\解释\randomized-holdout-candidate-promotion-packet-review\randomized_holdout_candidate_promotion_packet_review.json,candidate packet review source file must exist
+packet_file_exists,pass,e\918\解释\randomized-holdout-candidate-promotion-packet\randomized_holdout_candidate_promotion_packet.json,candidate packet source file must exist
+review_passed,pass,pass,candidate packet review must pass
+review_decision_ready,pass,randomized_holdout_candidate_promotion_packet_review_ready,candidate packet review decision must be ready
+review_summary_ready,pass,True,review summary must be ready
+review_approves_bounded_gate,pass,True,review must approve bounded gate entry
+review_routes_to_gate,pass,build_randomized_holdout_bounded_promotion_gate,review must route to this gate
+packet_passed,pass,pass,candidate packet must pass
+packet_ready,pass,"{""packet"": true, ""summary"": true}",candidate packet must be ready
+candidate_count_floor,pass,"{""packet"": 20, ""review"": 20}",gate requires the randomized 20-case floor
+candidate_counts_match,pass,"{""packet"": 20, ""review"": 20}",review and packet candidate counts must match
+random_seed_matches,pass,"{""packet"": 914, ""review"": 914}",review and packet must carry the same randomized seed
+pass_rate_complete,pass,"{""packet"": 1.0, ""review"": 1.0}",gate requires a complete randomized replay pass rate
+clean_cases_match,pass,"{""packet"": 20, ""review"": 20}",clean randomized case counts must match candidate count
+packet_negative_control_rejected,pass,0,gate requires the packet negative control to remain rejected
+source_checks_clean,pass,"{""packet"": 0, ""review"": 0}",review and packet checks must be clean
+promotion_still_false,pass,"{""packet"": false, ""packet_summary"": false, ""review"": false}",bounded gate must not become direct promotion
+approved_for_promotion_false,pass,"{""packet"": false, ""packet_summary"": false, ""review"": false}",direct promotion approval must stay false
+claim_scope_bounded,pass,"{""packet"": ""candidate_packet_only"", ""review"": ""candidate_packet_review_only""}",claims must stay at packet-review and packet-only scope

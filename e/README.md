@@ -2081,3 +2081,8 @@ e/663/解释/说明.md
 - `e/919/图片`
 - `e/919/解释/说明.md`
 - v919 randomized holdout candidate promotion packet review screenshots and explanation.
+## v920 supplemental index
+
+- `e/920/图片`
+- `e/920/解释/说明.md`
+- v920 randomized holdout bounded promotion gate screenshots and explanation.

@@ -1352,6 +1352,9 @@
 933-v919-randomized-holdout-candidate-promotion-packet-review.md
  -> v919 code explanation: review the randomized candidate packet for bounded gate approval while keeping direct promotion blocked.
 
+934-v920-randomized-holdout-bounded-promotion-gate.md
+ -> v920 code explanation: check the randomized holdout bounded promotion gate and allow only a bounded decision while direct promotion remains blocked.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

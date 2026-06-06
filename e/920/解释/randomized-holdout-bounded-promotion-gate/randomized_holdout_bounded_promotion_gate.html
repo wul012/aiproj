@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT randomized holdout bounded promotion gate</title>
+<style>
+:root{color-scheme:light;--ink:#17212b;--muted:#62717d;--line:#d7dee5;--panel:#f8fafc;--accent:#0f766e}
+*{box-sizing:border-box}
+body{margin:0;background:#f2f4f7;color:var(--ink);font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1180px;margin:0 auto;padding:28px}
+h1{font-size:30px;margin:0 0 8px;letter-spacing:0}
+h2{font-size:18px;margin:0 0 12px;letter-spacing:0}
+p{color:var(--muted);line-height:1.55;overflow-wrap:anywhere}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:18px 0}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:8px}
+.card{padding:14px}
+.card span{display:block;color:var(--muted);font-size:12px;text-transform:uppercase}
+.card strong{display:block;margin-top:6px;font-size:18px;line-height:1.2;color:var(--accent);overflow-wrap:anywhere}
+.panel{padding:16px;margin:14px 0}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:#334155}
+td{overflow-wrap:anywhere}
+ul{margin:0;padding-left:20px}
+li{margin:6px 0}
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT randomized holdout bounded promotion gate</h1><p>The randomized holdout candidate packet and review are clean enough for a bounded promotion decision while direct promotion remains blocked.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Gate ready</span><strong>True</strong></div><div class="card"><span>Cases</span><strong>20</strong></div><div class="card"><span>Seed</span><strong>914</strong></div><div class="card"><span>Pass rate</span><strong>1.0</strong></div><div class="card"><span>Bounded decision</span><strong>True</strong></div><div class="card"><span>Promotion</span><strong>False</strong></div><div class="card"><span>Claim</span><strong>bounded_gate_only</strong></div><div class="card"><span>Next</span><strong>record_randomized_holdout_bounded_promotion_decision</strong></div></section>
+<section class="panel"><h2>Gate</h2><p>Decision: <strong>allow_bounded_randomized_holdout_promotion_decision</strong></p><ul><li>record_randomized_holdout_bounded_promotion_decision</li><li>build_randomized_holdout_decision_index</li></ul></section>
+<section class="panel"><h2>Checks</h2><div class="table-wrap"><table>
+<thead><tr><th>Check</th><th>Status</th><th>Actual</th><th>Detail</th></tr></thead>
+<tbody><tr><td>review_file_exists</td><td>pass</td><td>e\919\解释\randomized-holdout-candidate-promotion-packet-review\randomized_holdout_candidate_promotion_packet_review.json</td><td>candidate packet review source file must exist</td></tr><tr><td>packet_file_exists</td><td>pass</td><td>e\918\解释\randomized-holdout-candidate-promotion-packet\randomized_holdout_candidate_promotion_packet.json</td><td>candidate packet source file must exist</td></tr><tr><td>review_passed</td><td>pass</td><td>pass</td><td>candidate packet review must pass</td></tr><tr><td>review_decision_ready</td><td>pass</td><td>randomized_holdout_candidate_promotion_packet_review_ready</td><td>candidate packet review decision must be ready</td></tr><tr><td>review_summary_ready</td><td>pass</td><td>True</td><td>review summary must be ready</td></tr><tr><td>review_approves_bounded_gate</td><td>pass</td><td>True</td><td>review must approve bounded gate entry</td></tr><tr><td>review_routes_to_gate</td><td>pass</td><td>build_randomized_holdout_bounded_promotion_gate</td><td>review must route to this gate</td></tr><tr><td>packet_passed</td><td>pass</td><td>pass</td><td>candidate packet must pass</td></tr><tr><td>packet_ready</td><td>pass</td><td>{&#x27;summary&#x27;: True, &#x27;packet&#x27;: True}</td><td>candidate packet must be ready</td></tr><tr><td>candidate_count_floor</td><td>pass</td><td>{&#x27;review&#x27;: 20, &#x27;packet&#x27;: 20}</td><td>gate requires the randomized 20-case floor</td></tr><tr><td>candidate_counts_match</td><td>pass</td><td>{&#x27;review&#x27;: 20, &#x27;packet&#x27;: 20}</td><td>review and packet candidate counts must match</td></tr><tr><td>random_seed_matches</td><td>pass</td><td>{&#x27;review&#x27;: 914, &#x27;packet&#x27;: 914}</td><td>review and packet must carry the same randomized seed</td></tr><tr><td>pass_rate_complete</td><td>pass</td><td>{&#x27;review&#x27;: 1.0, &#x27;packet&#x27;: 1.0}</td><td>gate requires a complete randomized replay pass rate</td></tr><tr><td>clean_cases_match</td><td>pass</td><td>{&#x27;review&#x27;: 20, &#x27;packet&#x27;: 20}</td><td>clean randomized case counts must match candidate count</td></tr><tr><td>packet_negative_control_rejected</td><td>pass</td><td>0</td><td>gate requires the packet negative control to remain rejected</td></tr><tr><td>source_checks_clean</td><td>pass</td><td>{&#x27;review&#x27;: 0, &#x27;packet&#x27;: 0}</td><td>review and packet checks must be clean</td></tr><tr><td>promotion_still_false</td><td>pass</td><td>{&#x27;review&#x27;: False, &#x27;packet_summary&#x27;: False, &#x27;packet&#x27;: False}</td><td>bounded gate must not become direct promotion</td></tr><tr><td>approved_for_promotion_false</td><td>pass</td><td>{&#x27;review&#x27;: False, &#x27;packet_summary&#x27;: False, &#x27;packet&#x27;: False}</td><td>direct promotion approval must stay false</td></tr><tr><td>claim_scope_bounded</td><td>pass</td><td>{&#x27;review&#x27;: &#x27;candidate_packet_review_only&#x27;, &#x27;packet&#x27;: &#x27;candidate_packet_only&#x27;}</td><td>claims must stay at packet-review and packet-only scope</td></tr></tbody>
+</table></div></section>
+</main>
+</body>
+</html>
