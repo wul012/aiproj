@@ -1367,6 +1367,9 @@
 938-v924-randomized-holdout-acceptance-summary-check.md
  -> v924 code explanation: rebuild the randomized holdout acceptance summary from its source decision index and check stable claim fields.
 
+939-v925-randomized-holdout-acceptance-publication-packet.md
+ -> v925 code explanation: package the verified randomized holdout acceptance summary and contract check for bounded publication review.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

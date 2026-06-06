@@ -4,7 +4,19 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v924.0.0` adds a contract check that rebuilds the v923 acceptance summary from the v922 decision index and compares stable claim fields.
+Version `v925.0.0` packages the verified randomized holdout acceptance summary and contract check into a bounded publication packet for downstream review.
+
+## Latest v925 checkpoint
+
+- Added short-name module `randomized_holdout_acceptance_publication_packet`.
+- Added CLI `scripts/build_randomized_holdout_acceptance_publication_packet.py`.
+- Consumed the real v923 acceptance summary and v924 contract check.
+- Packaged two evidence rows: `acceptance_summary` and `acceptance_summary_contract_check`.
+- Confirmed `randomized_holdout_acceptance_publication_packet_ready=True`, `handoff_status=ready_for_bounded_acceptance_publication_review`, `accepted_claim_count=1`, `blocked_claim_count=3`, `evidence_count=2`, and `allowed_use=bounded_model_capability_governance_only`.
+- Kept `promotion_ready=False` and `approved_for_promotion=False`.
+- Routed the next action to `review_randomized_holdout_acceptance_publication_packet`.
+- Verified with `13 passed` focused publication-packet tests and Playwright MCP screenshot evidence.
+- Archived v925 evidence in `e/925` and added the code explanation in `代码讲解记录_模型能力阶段/939-v925-randomized-holdout-acceptance-publication-packet.md`.
 
 ## Latest v924 checkpoint
 
