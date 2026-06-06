@@ -1,0 +1,295 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT target-hidden prompt-mutation holdout replay review",
+  "generated_at": "2026-06-06T02:12:22Z",
+  "status": "pass",
+  "decision": "target_hidden_prompt_mutation_holdout_replay_review_clean_signal_randomized_holdout_required",
+  "failed_count": 0,
+  "issues": [],
+  "source_real_replay": "e\\912\\解释\\target-hidden-prompt-mutation-holdout-real-replay\\target_hidden_prompt_mutation_holdout_real_replay.json",
+  "source_holdout_suite": "e\\910\\解释\\target-hidden-prompt-mutation-holdout-suite\\target_hidden_prompt_mutation_holdout_suite.json",
+  "source_real_replay_summary": {
+    "target_hidden_prompt_mutation_holdout_real_replay_ready": true,
+    "case_count": 10,
+    "source_mutation_factor": 2.0,
+    "source_prompt_mutated_case_count": 10,
+    "executed_case_count": 10,
+    "passed_case_count": 10,
+    "failed_case_count": 0,
+    "any_hit_case_count": 10,
+    "zero_hit_case_count": 0,
+    "pass_rate": 1.0,
+    "holdout_model_quality_ready": true,
+    "prompt_mutation_holdout_model_quality_ready": true,
+    "promotion_ready": false,
+    "model_quality_claim": "prompt_mutation_target_hidden_holdout_replay_only",
+    "next_step": "review_target_hidden_prompt_mutation_holdout_replay_result",
+    "failed_check_count": 0
+  },
+  "source_holdout_suite_summary": {
+    "target_hidden_prompt_mutation_holdout_suite_ready": true,
+    "source_case_count": 5,
+    "candidate_case_count": 10,
+    "mutation_factor": 2.0,
+    "tokenizer_covered_case_count": 10,
+    "target_hidden_case_count": 10,
+    "task_hint_case_count": 0,
+    "prompt_mutated_case_count": 10,
+    "candidate_prompt_unknown_token_count": 0,
+    "source_clean_prompt_case_count": 5,
+    "source_pass_rate": 1.0,
+    "expected_terms": [
+      "fixed",
+      "loss"
+    ],
+    "promotion_ready": false,
+    "model_quality_claim": "suite_construction_only",
+    "next_step": "run_target_hidden_prompt_mutation_holdout_dry_run",
+    "failed_check_count": 0
+  },
+  "check_rows": [
+    {
+      "id": "real_replay_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "prompt-mutation real replay must pass structurally"
+    },
+    {
+      "id": "real_replay_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "prompt-mutation real replay summary must be ready"
+    },
+    {
+      "id": "prompt_mutation_model_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "prompt-mutation holdout model signal must be ready"
+    },
+    {
+      "id": "suite_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "prompt-mutation holdout suite must pass"
+    },
+    {
+      "id": "suite_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "prompt-mutation holdout suite summary must be ready"
+    },
+    {
+      "id": "mutation_factor_at_least_two",
+      "status": "pass",
+      "actual": 2.0,
+      "detail": "prompt-mutation suite should expand source cases"
+    },
+    {
+      "id": "suite_no_task_hints",
+      "status": "pass",
+      "actual": 0,
+      "detail": "prompt-mutation suite should report no known task hints"
+    },
+    {
+      "id": "prompt_mutated_rows_complete",
+      "status": "pass",
+      "actual": 10,
+      "detail": "every suite case should be prompt-mutated"
+    },
+    {
+      "id": "target_hidden_cases_present",
+      "status": "pass",
+      "actual": 10,
+      "detail": "every suite case must remain target-hidden"
+    },
+    {
+      "id": "cases_present",
+      "status": "pass",
+      "actual": 10,
+      "detail": "suite cases must be present"
+    },
+    {
+      "id": "review_rows_complete",
+      "status": "pass",
+      "actual": 10,
+      "detail": "review must cover every case"
+    }
+  ],
+  "review_rows": [
+    {
+      "case_id": "prompt-mutation-memory_final",
+      "source_case_id": "semantic-hidden-memory_answer",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "leaked_terms": [],
+      "target_leakage": false,
+      "task_hint_terms": [],
+      "task_hint": false,
+      "prompt_mutated": true,
+      "review_status": "clean_prompt_mutation_target_hidden_prompt",
+      "detail": "prompt hides expected terms, avoids known task hints, and differs from source prompts"
+    },
+    {
+      "case_id": "prompt-mutation-stored_memory",
+      "source_case_id": "semantic-hidden-stored_result",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "leaked_terms": [],
+      "target_leakage": false,
+      "task_hint_terms": [],
+      "task_hint": false,
+      "prompt_mutated": true,
+      "review_status": "clean_prompt_mutation_target_hidden_prompt",
+      "detail": "prompt hides expected terms, avoids known task hints, and differs from source prompts"
+    },
+    {
+      "case_id": "prompt-mutation-route_final",
+      "source_case_id": "semantic-hidden-learned_route",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "leaked_terms": [],
+      "target_leakage": false,
+      "task_hint_terms": [],
+      "task_hint": false,
+      "prompt_mutated": true,
+      "review_status": "clean_prompt_mutation_target_hidden_prompt",
+      "detail": "prompt hides expected terms, avoids known task hints, and differs from source prompts"
+    },
+    {
+      "case_id": "prompt-mutation-write_memory",
+      "source_case_id": "semantic-hidden-final_words",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "leaked_terms": [],
+      "target_leakage": false,
+      "task_hint_terms": [],
+      "task_hint": false,
+      "prompt_mutated": true,
+      "review_status": "clean_prompt_mutation_target_hidden_prompt",
+      "detail": "prompt hides expected terms, avoids known task hints, and differs from source prompts"
+    },
+    {
+      "case_id": "prompt-mutation-complete_stored",
+      "source_case_id": "semantic-hidden-memory_self_check",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "leaked_terms": [],
+      "target_leakage": false,
+      "task_hint_terms": [],
+      "task_hint": false,
+      "prompt_mutated": true,
+      "review_status": "clean_prompt_mutation_target_hidden_prompt",
+      "detail": "prompt hides expected terms, avoids known task hints, and differs from source prompts"
+    },
+    {
+      "case_id": "prompt-mutation-self_check_output",
+      "source_case_id": "semantic-hidden-memory_answer",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "leaked_terms": [],
+      "target_leakage": false,
+      "task_hint_terms": [],
+      "task_hint": false,
+      "prompt_mutated": true,
+      "review_status": "clean_prompt_mutation_target_hidden_prompt",
+      "detail": "prompt hides expected terms, avoids known task hints, and differs from source prompts"
+    },
+    {
+      "case_id": "prompt-mutation-return_memory",
+      "source_case_id": "semantic-hidden-stored_result",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "leaked_terms": [],
+      "target_leakage": false,
+      "task_hint_terms": [],
+      "task_hint": false,
+      "prompt_mutated": true,
+      "review_status": "clean_prompt_mutation_target_hidden_prompt",
+      "detail": "prompt hides expected terms, avoids known task hints, and differs from source prompts"
+    },
+    {
+      "case_id": "prompt-mutation-final_words_memory",
+      "source_case_id": "semantic-hidden-learned_route",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "leaked_terms": [],
+      "target_leakage": false,
+      "task_hint_terms": [],
+      "task_hint": false,
+      "prompt_mutated": true,
+      "review_status": "clean_prompt_mutation_target_hidden_prompt",
+      "detail": "prompt hides expected terms, avoids known task hints, and differs from source prompts"
+    },
+    {
+      "case_id": "prompt-mutation-stored_final",
+      "source_case_id": "semantic-hidden-final_words",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "leaked_terms": [],
+      "target_leakage": false,
+      "task_hint_terms": [],
+      "task_hint": false,
+      "prompt_mutated": true,
+      "review_status": "clean_prompt_mutation_target_hidden_prompt",
+      "detail": "prompt hides expected terms, avoids known task hints, and differs from source prompts"
+    },
+    {
+      "case_id": "prompt-mutation-complete_memory",
+      "source_case_id": "semantic-hidden-memory_self_check",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "leaked_terms": [],
+      "target_leakage": false,
+      "task_hint_terms": [],
+      "task_hint": false,
+      "prompt_mutated": true,
+      "review_status": "clean_prompt_mutation_target_hidden_prompt",
+      "detail": "prompt hides expected terms, avoids known task hints, and differs from source prompts"
+    }
+  ],
+  "summary": {
+    "target_hidden_prompt_mutation_holdout_replay_review_ready": true,
+    "source_holdout_model_quality_ready": true,
+    "source_prompt_mutation_holdout_model_quality_ready": true,
+    "case_count": 10,
+    "passed_case_count": 10,
+    "pass_rate": 1.0,
+    "source_mutation_factor": 2.0,
+    "target_leakage_case_count": 0,
+    "target_hidden_case_count": 10,
+    "task_hint_case_count": 0,
+    "prompt_mutated_case_count": 10,
+    "clean_prompt_mutation_case_count": 10,
+    "approved_for_randomized_prompt_holdout": true,
+    "approved_for_promotion": false,
+    "promotion_ready": false,
+    "model_quality_claim": "prompt_mutation_target_hidden_holdout_clean_signal_reviewed",
+    "next_step": "build_randomized_target_hidden_holdout_suite",
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "prompt_mutation_target_hidden_holdout_clean_signal_reviewed",
+    "reason": "The prompt-mutation target-hidden replay passed clean mutated prompts; build a randomized holdout before promotion.",
+    "next_action": "build_randomized_target_hidden_holdout_suite"
+  }
+}

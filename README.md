@@ -4,7 +4,21 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v912.0.0` replays the real v890 checkpoint against the 10-case prompt-mutation target-hidden holdout.
+Version `v913.0.0` reviews the v912 prompt-mutation target-hidden replay and routes the clean signal to randomized holdout instead of promotion.
+
+## Latest v913 checkpoint
+
+- Added short-name module `target_hidden_prompt_mutation_holdout_replay_review`.
+- Added CLI `scripts/review_target_hidden_prompt_mutation_holdout_replay.py`.
+- Consumed the real v912 prompt-mutation replay and v910 prompt-mutation suite.
+- Rechecked all 10 prompts for expected-term leakage, known task hints, and prompt mutation coverage.
+- Recorded `case_count=10`, `passed_case_count=10`, `pass_rate=1.0`, and `source_mutation_factor=2.0`.
+- Confirmed `target_leakage_case_count=0`, `task_hint_case_count=0`, `prompt_mutated_case_count=10`, and `clean_prompt_mutation_case_count=10`.
+- Approved `approved_for_randomized_prompt_holdout=True` while keeping `approved_for_promotion=False`.
+- Kept `promotion_ready=False` and `model_quality_claim=prompt_mutation_target_hidden_holdout_clean_signal_reviewed`.
+- Routed the next action to `build_randomized_target_hidden_holdout_suite`.
+- Verified with `5 passed` focused prompt-mutation replay-review tests and Playwright MCP screenshot evidence.
+- Archived v913 evidence in `e/913` and added the code explanation in `代码讲解记录_模型能力阶段/927-v913-target-hidden-prompt-mutation-holdout-replay-review.md`.
 
 ## Latest v912 checkpoint
 

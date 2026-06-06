@@ -1,0 +1,11 @@
+case_id,source_case_id,target_leakage,leaked_terms,task_hint,task_hint_terms,prompt_mutated,review_status,detail
+prompt-mutation-memory_final,semantic-hidden-memory_answer,False,,False,,True,clean_prompt_mutation_target_hidden_prompt,"prompt hides expected terms, avoids known task hints, and differs from source prompts"
+prompt-mutation-stored_memory,semantic-hidden-stored_result,False,,False,,True,clean_prompt_mutation_target_hidden_prompt,"prompt hides expected terms, avoids known task hints, and differs from source prompts"
+prompt-mutation-route_final,semantic-hidden-learned_route,False,,False,,True,clean_prompt_mutation_target_hidden_prompt,"prompt hides expected terms, avoids known task hints, and differs from source prompts"
+prompt-mutation-write_memory,semantic-hidden-final_words,False,,False,,True,clean_prompt_mutation_target_hidden_prompt,"prompt hides expected terms, avoids known task hints, and differs from source prompts"
+prompt-mutation-complete_stored,semantic-hidden-memory_self_check,False,,False,,True,clean_prompt_mutation_target_hidden_prompt,"prompt hides expected terms, avoids known task hints, and differs from source prompts"
+prompt-mutation-self_check_output,semantic-hidden-memory_answer,False,,False,,True,clean_prompt_mutation_target_hidden_prompt,"prompt hides expected terms, avoids known task hints, and differs from source prompts"
+prompt-mutation-return_memory,semantic-hidden-stored_result,False,,False,,True,clean_prompt_mutation_target_hidden_prompt,"prompt hides expected terms, avoids known task hints, and differs from source prompts"
+prompt-mutation-final_words_memory,semantic-hidden-learned_route,False,,False,,True,clean_prompt_mutation_target_hidden_prompt,"prompt hides expected terms, avoids known task hints, and differs from source prompts"
+prompt-mutation-stored_final,semantic-hidden-final_words,False,,False,,True,clean_prompt_mutation_target_hidden_prompt,"prompt hides expected terms, avoids known task hints, and differs from source prompts"
+prompt-mutation-complete_memory,semantic-hidden-memory_self_check,False,,False,,True,clean_prompt_mutation_target_hidden_prompt,"prompt hides expected terms, avoids known task hints, and differs from source prompts"
