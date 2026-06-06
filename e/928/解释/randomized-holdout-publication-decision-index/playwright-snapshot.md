@@ -1,0 +1,20 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "MiniGPT randomized holdout publication decision index" [level=1] [ref=e4]
+    - paragraph [ref=e5]: The bounded randomized holdout publication decision is indexed for downstream lookup while direct promotion remains blocked.
+  - generic [ref=e6]:
+    - generic [ref=e7]
+    - generic [ref=e10]
+    - generic [ref=e13]
+    - generic [ref=e16]
+    - generic [ref=e19]
+    - generic [ref=e22]
+    - generic [ref=e25]
+    - generic [ref=e28]
+    - generic [ref=e31]
+  - generic [ref=e34]:
+    - heading "Source Rows" [level=2] [ref=e35]
+    - table [ref=e37]
+  - generic [ref=e80]:
+    - heading "Checks" [level=2] [ref=e81]
+    - table [ref=e83]

@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT randomized holdout publication decision index</title>
+<style>
+:root{color-scheme:light;--ink:#17212b;--muted:#62717d;--line:#d7dee5;--panel:#f8fafc;--accent:#334155;--ok:#0f766e}
+*{box-sizing:border-box}
+body{margin:0;background:#f2f4f7;color:var(--ink);font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1220px;margin:0 auto;padding:28px}
+h1{font-size:30px;margin:0 0 8px;letter-spacing:0}
+h2{font-size:18px;margin:0 0 12px;letter-spacing:0}
+p{color:var(--muted);line-height:1.55;overflow-wrap:anywhere}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:18px 0}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:8px}
+.card{padding:14px}
+.card span{display:block;color:var(--muted);font-size:12px;text-transform:uppercase}
+.card strong{display:block;margin-top:6px;font-size:18px;line-height:1.2;color:var(--ok);overflow-wrap:anywhere}
+.panel{padding:16px;margin:14px 0}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:var(--accent)}
+td{overflow-wrap:anywhere}
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT randomized holdout publication decision index</h1><p>The bounded randomized holdout publication decision is indexed for downstream lookup while direct promotion remains blocked.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Index ready</span><strong>True</strong></div><div class="card"><span>Bounded accepted</span><strong>True</strong></div><div class="card"><span>Promotion</span><strong>False</strong></div><div class="card"><span>Accepted</span><strong>1</strong></div><div class="card"><span>Blocked</span><strong>3</strong></div><div class="card"><span>Cases</span><strong>20</strong></div><div class="card"><span>Sources</span><strong>3</strong></div><div class="card"><span>Next</span><strong>build_randomized_holdout_publication_registry_entry</strong></div></section>
+<section class="panel"><h2>Source Rows</h2><div class="table-wrap"><table>
+<thead><tr><th>Kind</th><th>Status</th><th>Ready</th><th>Accepted</th><th>Blocked</th><th>Cases</th><th>Use</th><th>Next</th><th>Path</th></tr></thead>
+<tbody><tr><td>publication_decision</td><td>pass</td><td>True</td><td>1</td><td>3</td><td>20</td><td>bounded_model_capability_governance_only</td><td>index_randomized_holdout_publication_decision</td><td>e\927\解释\randomized-holdout-publication-decision\randomized_holdout_publication_decision.json</td></tr><tr><td>publication_review</td><td>pass</td><td>True</td><td>1</td><td>3</td><td>20</td><td>bounded_model_capability_governance_only</td><td>record_randomized_holdout_publication_decision</td><td>e\926\解释\randomized-holdout-acceptance-publication-packet-review\randomized_holdout_acceptance_publication_packet_review.json</td></tr><tr><td>publication_packet</td><td>pass</td><td>True</td><td>1</td><td>3</td><td>20</td><td>bounded_model_capability_governance_only</td><td>review_randomized_holdout_acceptance_publication_packet</td><td>e\925\解释\randomized-holdout-acceptance-publication-packet\randomized_holdout_acceptance_publication_packet.json</td></tr></tbody>
+</table></div></section>
+<section class="panel"><h2>Checks</h2><div class="table-wrap"><table>
+<thead><tr><th>Check</th><th>Status</th><th>Actual</th><th>Detail</th></tr></thead>
+<tbody><tr><td>source_files_exist</td><td>pass</td><td>[True, True, True]</td><td>all indexed publication-chain source files must exist</td></tr><tr><td>decision_passed</td><td>pass</td><td>pass</td><td>publication decision must pass</td></tr><tr><td>decision_accepted</td><td>pass</td><td>randomized_holdout_publication_decision_accepted</td><td>publication decision must be accepted</td></tr><tr><td>decision_ready</td><td>pass</td><td>True</td><td>publication decision summary must be ready</td></tr><tr><td>decision_accepts_bounded_publication</td><td>pass</td><td>True</td><td>publication decision must accept only bounded publication</td></tr><tr><td>review_passed</td><td>pass</td><td>pass</td><td>publication review must pass</td></tr><tr><td>review_ready</td><td>pass</td><td>True</td><td>publication review summary must be ready</td></tr><tr><td>review_approved_publication</td><td>pass</td><td>True</td><td>publication review must approve bounded publication</td></tr><tr><td>packet_passed</td><td>pass</td><td>pass</td><td>publication packet must pass</td></tr><tr><td>packet_ready</td><td>pass</td><td>True</td><td>publication packet summary must be ready</td></tr><tr><td>accepted_counts_match</td><td>pass</td><td>[1, 1, 1]</td><td>accepted claim counts must match exactly one</td></tr><tr><td>blocked_counts_match</td><td>pass</td><td>[3, 3, 3]</td><td>blocked claim counts must match and preserve at least three boundaries</td></tr><tr><td>candidate_counts_match</td><td>pass</td><td>[20, 20, 20]</td><td>candidate case counts must match the randomized holdout floor</td></tr><tr><td>random_seed_matches</td><td>pass</td><td>[914, 914, 914]</td><td>all sources must preserve the same randomized seed</td></tr><tr><td>pass_rate_complete</td><td>pass</td><td>[1.0, 1.0, 1.0]</td><td>all sources must preserve complete randomized replay pass rate</td></tr><tr><td>allowed_use_bounded</td><td>pass</td><td>[&#x27;bounded_model_capability_governance_only&#x27;, &#x27;bounded_model_capability_governance_only&#x27;, &#x27;bounded_model_capability_governance_only&#x27;]</td><td>all sources must keep bounded governance allowed use</td></tr><tr><td>model_quality_claim_bounded</td><td>pass</td><td>[&#x27;bounded_randomized_target_hidden_holdout_claim_only&#x27;, &#x27;bounded_randomized_target_hidden_holdout_claim_only&#x27;, &#x27;bounded_randomized_target_hidden_holdout_claim_only&#x27;]</td><td>all sources must keep the bounded randomized holdout claim</td></tr><tr><td>promotion_still_false</td><td>pass</td><td>[False, False, False]</td><td>publication index must not widen into direct promotion</td></tr><tr><td>approved_for_promotion_false</td><td>pass</td><td>[False, False, False]</td><td>direct promotion approval must remain false</td></tr><tr><td>source_checks_clean</td><td>pass</td><td>[0, 0, 0]</td><td>all indexed source summaries must have clean checks</td></tr><tr><td>next_steps_aligned</td><td>pass</td><td>[&#x27;index_randomized_holdout_publication_decision&#x27;, &#x27;record_randomized_holdout_publication_decision&#x27;, &#x27;review_randomized_holdout_acceptance_publication_packet&#x27;]</td><td>source next-step routing must match packet -&gt; review -&gt; decision -&gt; index</td></tr></tbody>
+</table></div></section>
+</main>
+</body>
+</html>

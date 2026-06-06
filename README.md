@@ -9479,6 +9479,8 @@ The pair-readiness exact-surface repair replay layer independently reloads that 
 
 The pair-readiness exact-surface repair effectiveness layer compares the repaired replay against the fixed-preserving baseline and closes the near-exact repair route when every surface delta stays at zero.
 
+The randomized holdout publication decision index layer reads the v925 publication packet, v926 packet review, and v927 publication decision, verifies their bounded-publication fields still agree, and exposes a compact downstream lookup index while keeping direct production promotion blocked.
+
 The run registry layer indexes multiple run directories so experiments can be scanned by commit, data fingerprint, quality status, eval suite coverage, metrics, artifact count, notes, tags, best-val rank, loss delta, a leaderboard, an interactive local HTML table, shareable URL state, and visible-row CSV export.
 
 The experiment card layer turns one run into a compact JSON/Markdown/HTML summary for review, handoff, or portfolio use.
