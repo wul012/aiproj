@@ -1,0 +1,18 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "MiniGPT randomized holdout publication registry packet" [level=1] [ref=e4]
+    - paragraph [ref=e5]: The verified registry entry is packaged for publication registry manifest consumption while direct promotion remains blocked.
+  - generic [ref=e6]:
+    - generic [ref=e7]
+    - generic [ref=e10]
+    - generic [ref=e13]
+    - generic [ref=e16]
+    - generic [ref=e19]
+    - generic [ref=e22]
+    - generic [ref=e25]
+  - generic [ref=e28]:
+    - heading "Evidence" [level=2] [ref=e29]
+    - table [ref=e31]
+  - generic [ref=e46]:
+    - heading "Checks" [level=2] [ref=e47]
+    - table [ref=e49]

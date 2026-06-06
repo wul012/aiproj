@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT randomized holdout publication registry packet</title>
+<style>
+:root{color-scheme:light;--ink:#17212b;--muted:#62717d;--line:#d7dee5;--panel:#f8fafc;--accent:#0f766e}
+*{box-sizing:border-box}
+body{margin:0;background:#eef1f5;color:var(--ink);font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1160px;margin:0 auto;padding:28px}
+h1{font-size:30px;margin:0 0 8px;letter-spacing:0}
+h2{font-size:18px;margin:0 0 12px;letter-spacing:0}
+p{color:var(--muted);line-height:1.55;overflow-wrap:anywhere}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:18px 0}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:8px}
+.card{padding:14px}
+.card span{display:block;color:var(--muted);font-size:12px;text-transform:uppercase}
+.card strong{display:block;margin-top:6px;font-size:18px;line-height:1.2;color:var(--accent);overflow-wrap:anywhere}
+.panel{padding:16px;margin:14px 0}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:#334155}
+td{overflow-wrap:anywhere}
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT randomized holdout publication registry packet</h1><p>The verified registry entry is packaged for publication registry manifest consumption while direct promotion remains blocked.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Packet ready</span><strong>True</strong></div><div class="card"><span>Registry</span><strong>registered</strong></div><div class="card"><span>Contract</span><strong>True</strong></div><div class="card"><span>Boundary</span><strong>governance_lookup_only</strong></div><div class="card"><span>Evidence</span><strong>2</strong></div><div class="card"><span>Failed</span><strong>0</strong></div></section>
+<section class="panel"><h2>Evidence</h2><div class="table-wrap"><table>
+<thead><tr><th>Kind</th><th>Exists</th><th>Path</th></tr></thead>
+<tbody><tr><td>registry_entry</td><td>True</td><td>e\929\解释\randomized-holdout-publication-registry-entry\randomized_holdout_publication_registry_entry.json</td></tr><tr><td>registry_entry_contract_check</td><td>True</td><td>e\930\解释\randomized-holdout-publication-registry-entry-check\randomized_holdout_publication_registry_entry_check.json</td></tr></tbody>
+</table></div></section>
+<section class="panel"><h2>Checks</h2><div class="table-wrap"><table>
+<thead><tr><th>Check</th><th>Status</th><th>Actual</th><th>Detail</th></tr></thead>
+<tbody><tr><td>evidence_files_exist</td><td>pass</td><td>[{&#x27;kind&#x27;: &#x27;registry_entry&#x27;, &#x27;path&#x27;: &#x27;e\\929\\解释\\randomized-holdout-publication-registry-entry\\randomized_holdout_publication_registry_entry.json&#x27;, &#x27;exists&#x27;: True}, {&#x27;kind&#x27;: &#x27;registry_entry_contract_check&#x27;, &#x27;path&#x27;: &#x27;e\\930\\解释\\randomized-holdout-publication-registry-entry-check\\randomized_holdout_publication_registry_entry_check.json&#x27;, &#x27;exists&#x27;: True}]</td><td>registry packet evidence files must exist</td></tr><tr><td>entry_passed</td><td>pass</td><td>pass</td><td>registry entry must pass</td></tr><tr><td>entry_ready_decision</td><td>pass</td><td>randomized_holdout_publication_registry_entry_ready</td><td>registry entry decision must be ready</td></tr><tr><td>entry_summary_ready</td><td>pass</td><td>True</td><td>registry entry summary must be ready</td></tr><tr><td>entry_registered</td><td>pass</td><td>registered</td><td>registry entry must be registered</td></tr><tr><td>contract_check_passed</td><td>pass</td><td>pass</td><td>registry entry contract check must pass</td></tr><tr><td>contract_check_decision_passed</td><td>pass</td><td>randomized_holdout_publication_registry_entry_contract_check_passed</td><td>contract check decision must pass</td></tr><tr><td>contract_check_ready</td><td>pass</td><td>True</td><td>contract check summary must be ready</td></tr><tr><td>entry_id_matches_check</td><td>pass</td><td>{&#x27;entry&#x27;: &#x27;randomized-holdout-publication-v928&#x27;, &#x27;original&#x27;: &#x27;randomized-holdout-publication-v928&#x27;, &#x27;rebuilt&#x27;: &#x27;randomized-holdout-publication-v928&#x27;}</td><td>entry id must match original and rebuilt check values</td></tr><tr><td>bounded_publication_accepted</td><td>pass</td><td>{&#x27;entry&#x27;: True, &#x27;original&#x27;: True, &#x27;rebuilt&#x27;: True}</td><td>packet only accepts bounded publication-ready entries</td></tr><tr><td>consumer_boundary_governance</td><td>pass</td><td>{&#x27;entry&#x27;: &#x27;governance_lookup_only&#x27;, &#x27;original&#x27;: &#x27;governance_lookup_only&#x27;, &#x27;rebuilt&#x27;: &#x27;governance_lookup_only&#x27;}</td><td>consumer boundary must remain governance lookup only</td></tr><tr><td>allowed_use_bounded</td><td>pass</td><td>bounded_model_capability_governance_only</td><td>allowed use must stay bounded governance only</td></tr><tr><td>model_quality_claim_bounded</td><td>pass</td><td>bounded_randomized_target_hidden_holdout_claim_only</td><td>model quality claim must stay bounded</td></tr><tr><td>promotion_still_false</td><td>pass</td><td>False</td><td>packet must not enable direct promotion</td></tr><tr><td>approved_for_promotion_false</td><td>pass</td><td>False</td><td>packet must not approve direct promotion</td></tr><tr><td>source_checks_clean</td><td>pass</td><td>{&#x27;entry&#x27;: 0, &#x27;check&#x27;: 0}</td><td>entry and contract check must have no failed checks</td></tr></tbody>
+</table></div></section>
+</main>
+</body>
+</html>
