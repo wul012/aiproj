@@ -4,7 +4,22 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v914.0.0` builds a seeded 20-case randomized target-hidden holdout suite from the v913 clean review signal.
+Version `v915.0.0` dry-runs the 20-case randomized target-hidden holdout scoring contract before real replay.
+
+## Latest v915 checkpoint
+
+- Added short-name module `randomized_target_hidden_holdout_dry_run`.
+- Added CLI `scripts/dry_run_randomized_target_hidden_holdout.py`.
+- Consumed the real v914 randomized target-hidden suite.
+- Verified positive continuation ` fixed loss` passes all 20 randomized cases.
+- Verified negative continuation ` fixed only` passes 0 randomized cases.
+- Recorded `case_count=20`, `source_random_seed=914`, `source_randomized_case_factor=2.0`, `positive_passed_case_count=20`, `negative_passed_case_count=0`, and `negative_control_passed=False`.
+- Kept `promotion_ready=False` and `model_quality_claim=dry_run_only`.
+- Routed the next action to `run_randomized_target_hidden_holdout_real_replay`.
+- Verified with `4 passed` focused randomized dry-run tests and Playwright MCP screenshot evidence.
+- Archived v915 evidence in `e/915` and added the code explanation in `代码讲解记录_模型能力阶段/929-v915-randomized-target-hidden-holdout-dry-run.md`.
+
+## Latest v914 checkpoint
 
 ## Latest v914 checkpoint
 

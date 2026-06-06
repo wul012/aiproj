@@ -1,0 +1,14 @@
+status=pass
+decision=randomized_target_hidden_holdout_dry_run_passed
+failed_count=0
+randomized_target_hidden_holdout_dry_run_ready=True
+case_count=20
+source_random_seed=914
+source_randomized_case_factor=2.0
+source_unique_prompt_count=20
+positive_passed_case_count=20
+negative_passed_case_count=0
+negative_control_passed=False
+promotion_ready=False
+model_quality_claim=dry_run_only
+next_step=run_randomized_target_hidden_holdout_real_replay

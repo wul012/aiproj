@@ -1,0 +1,619 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT randomized target-hidden holdout dry-run",
+  "generated_at": "2026-06-06T02:38:45Z",
+  "status": "pass",
+  "decision": "randomized_target_hidden_holdout_dry_run_passed",
+  "failed_count": 0,
+  "issues": [],
+  "source_holdout_suite": "e\\914\\解释\\randomized-target-hidden-holdout-suite\\randomized_target_hidden_holdout_suite.json",
+  "source_holdout_suite_summary": {
+    "randomized_target_hidden_holdout_suite_ready": true,
+    "source_case_count": 10,
+    "candidate_case_count": 20,
+    "random_seed": 914,
+    "randomized_case_factor": 2.0,
+    "tokenizer_covered_case_count": 20,
+    "target_hidden_case_count": 20,
+    "task_hint_case_count": 0,
+    "unique_prompt_count": 20,
+    "new_vs_source_prompt_count": 20,
+    "candidate_prompt_unknown_token_count": 0,
+    "source_prompt_mutation_clean_case_count": 10,
+    "source_pass_rate": 1.0,
+    "expected_terms": [
+      "fixed",
+      "loss"
+    ],
+    "promotion_ready": false,
+    "model_quality_claim": "suite_construction_only",
+    "next_step": "dry_run_randomized_target_hidden_holdout",
+    "failed_check_count": 0
+  },
+  "positive_continuation": " fixed loss",
+  "negative_continuation": " fixed only",
+  "check_rows": [
+    {
+      "id": "holdout_suite_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "randomized holdout suite must pass"
+    },
+    {
+      "id": "holdout_suite_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "randomized holdout suite summary must be ready"
+    },
+    {
+      "id": "suite_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "benchmark suite must be ready"
+    },
+    {
+      "id": "cases_present",
+      "status": "pass",
+      "actual": 20,
+      "detail": "randomized holdout suite must include cases"
+    },
+    {
+      "id": "case_count_matches_summary",
+      "status": "pass",
+      "actual": 20,
+      "detail": "candidate case count must match suite cases"
+    },
+    {
+      "id": "randomized_case_factor_at_least_two",
+      "status": "pass",
+      "actual": 2.0,
+      "detail": "randomized suite should double the source case count"
+    },
+    {
+      "id": "all_cases_tokenizer_covered",
+      "status": "pass",
+      "actual": 20,
+      "detail": "all randomized cases must be tokenizer-covered"
+    },
+    {
+      "id": "all_cases_target_hidden",
+      "status": "pass",
+      "actual": 20,
+      "detail": "all randomized cases must hide expected terms"
+    },
+    {
+      "id": "no_task_hints",
+      "status": "pass",
+      "actual": 0,
+      "detail": "randomized suite should have no known task hints"
+    },
+    {
+      "id": "all_prompts_unique",
+      "status": "pass",
+      "actual": 20,
+      "detail": "randomized suite prompts must be unique"
+    },
+    {
+      "id": "expected_terms_complete",
+      "status": "pass",
+      "actual": [
+        "fixed",
+        "loss"
+      ],
+      "detail": "dry-run expects fixed/loss scoring contract"
+    },
+    {
+      "id": "positive_rows_pass",
+      "status": "pass",
+      "actual": 20,
+      "detail": "positive continuation must pass every case"
+    },
+    {
+      "id": "negative_rows_fail",
+      "status": "pass",
+      "actual": 0,
+      "detail": "negative continuation must not pass any case"
+    }
+  ],
+  "dry_run_rows": [
+    {
+      "case_id": "randomized-target-hidden-01",
+      "source_case_id": "prompt-mutation-memory_final",
+      "random_draw_index": 1,
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_continuation": " fixed loss",
+      "positive_case_pass": true,
+      "positive_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_missed_terms": [],
+      "negative_continuation": " fixed only",
+      "negative_case_pass": false,
+      "negative_hit_terms": [
+        "fixed"
+      ],
+      "negative_missed_terms": [
+        "loss"
+      ]
+    },
+    {
+      "case_id": "randomized-target-hidden-02",
+      "source_case_id": "prompt-mutation-stored_memory",
+      "random_draw_index": 2,
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_continuation": " fixed loss",
+      "positive_case_pass": true,
+      "positive_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_missed_terms": [],
+      "negative_continuation": " fixed only",
+      "negative_case_pass": false,
+      "negative_hit_terms": [
+        "fixed"
+      ],
+      "negative_missed_terms": [
+        "loss"
+      ]
+    },
+    {
+      "case_id": "randomized-target-hidden-03",
+      "source_case_id": "prompt-mutation-route_final",
+      "random_draw_index": 3,
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_continuation": " fixed loss",
+      "positive_case_pass": true,
+      "positive_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_missed_terms": [],
+      "negative_continuation": " fixed only",
+      "negative_case_pass": false,
+      "negative_hit_terms": [
+        "fixed"
+      ],
+      "negative_missed_terms": [
+        "loss"
+      ]
+    },
+    {
+      "case_id": "randomized-target-hidden-04",
+      "source_case_id": "prompt-mutation-write_memory",
+      "random_draw_index": 4,
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_continuation": " fixed loss",
+      "positive_case_pass": true,
+      "positive_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_missed_terms": [],
+      "negative_continuation": " fixed only",
+      "negative_case_pass": false,
+      "negative_hit_terms": [
+        "fixed"
+      ],
+      "negative_missed_terms": [
+        "loss"
+      ]
+    },
+    {
+      "case_id": "randomized-target-hidden-05",
+      "source_case_id": "prompt-mutation-complete_stored",
+      "random_draw_index": 5,
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_continuation": " fixed loss",
+      "positive_case_pass": true,
+      "positive_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_missed_terms": [],
+      "negative_continuation": " fixed only",
+      "negative_case_pass": false,
+      "negative_hit_terms": [
+        "fixed"
+      ],
+      "negative_missed_terms": [
+        "loss"
+      ]
+    },
+    {
+      "case_id": "randomized-target-hidden-06",
+      "source_case_id": "prompt-mutation-self_check_output",
+      "random_draw_index": 6,
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_continuation": " fixed loss",
+      "positive_case_pass": true,
+      "positive_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_missed_terms": [],
+      "negative_continuation": " fixed only",
+      "negative_case_pass": false,
+      "negative_hit_terms": [
+        "fixed"
+      ],
+      "negative_missed_terms": [
+        "loss"
+      ]
+    },
+    {
+      "case_id": "randomized-target-hidden-07",
+      "source_case_id": "prompt-mutation-return_memory",
+      "random_draw_index": 7,
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_continuation": " fixed loss",
+      "positive_case_pass": true,
+      "positive_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_missed_terms": [],
+      "negative_continuation": " fixed only",
+      "negative_case_pass": false,
+      "negative_hit_terms": [
+        "fixed"
+      ],
+      "negative_missed_terms": [
+        "loss"
+      ]
+    },
+    {
+      "case_id": "randomized-target-hidden-08",
+      "source_case_id": "prompt-mutation-final_words_memory",
+      "random_draw_index": 8,
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_continuation": " fixed loss",
+      "positive_case_pass": true,
+      "positive_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_missed_terms": [],
+      "negative_continuation": " fixed only",
+      "negative_case_pass": false,
+      "negative_hit_terms": [
+        "fixed"
+      ],
+      "negative_missed_terms": [
+        "loss"
+      ]
+    },
+    {
+      "case_id": "randomized-target-hidden-09",
+      "source_case_id": "prompt-mutation-stored_final",
+      "random_draw_index": 9,
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_continuation": " fixed loss",
+      "positive_case_pass": true,
+      "positive_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_missed_terms": [],
+      "negative_continuation": " fixed only",
+      "negative_case_pass": false,
+      "negative_hit_terms": [
+        "fixed"
+      ],
+      "negative_missed_terms": [
+        "loss"
+      ]
+    },
+    {
+      "case_id": "randomized-target-hidden-10",
+      "source_case_id": "prompt-mutation-complete_memory",
+      "random_draw_index": 10,
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_continuation": " fixed loss",
+      "positive_case_pass": true,
+      "positive_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_missed_terms": [],
+      "negative_continuation": " fixed only",
+      "negative_case_pass": false,
+      "negative_hit_terms": [
+        "fixed"
+      ],
+      "negative_missed_terms": [
+        "loss"
+      ]
+    },
+    {
+      "case_id": "randomized-target-hidden-11",
+      "source_case_id": "prompt-mutation-memory_final",
+      "random_draw_index": 11,
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_continuation": " fixed loss",
+      "positive_case_pass": true,
+      "positive_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_missed_terms": [],
+      "negative_continuation": " fixed only",
+      "negative_case_pass": false,
+      "negative_hit_terms": [
+        "fixed"
+      ],
+      "negative_missed_terms": [
+        "loss"
+      ]
+    },
+    {
+      "case_id": "randomized-target-hidden-12",
+      "source_case_id": "prompt-mutation-stored_memory",
+      "random_draw_index": 12,
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_continuation": " fixed loss",
+      "positive_case_pass": true,
+      "positive_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_missed_terms": [],
+      "negative_continuation": " fixed only",
+      "negative_case_pass": false,
+      "negative_hit_terms": [
+        "fixed"
+      ],
+      "negative_missed_terms": [
+        "loss"
+      ]
+    },
+    {
+      "case_id": "randomized-target-hidden-13",
+      "source_case_id": "prompt-mutation-route_final",
+      "random_draw_index": 13,
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_continuation": " fixed loss",
+      "positive_case_pass": true,
+      "positive_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_missed_terms": [],
+      "negative_continuation": " fixed only",
+      "negative_case_pass": false,
+      "negative_hit_terms": [
+        "fixed"
+      ],
+      "negative_missed_terms": [
+        "loss"
+      ]
+    },
+    {
+      "case_id": "randomized-target-hidden-14",
+      "source_case_id": "prompt-mutation-write_memory",
+      "random_draw_index": 14,
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_continuation": " fixed loss",
+      "positive_case_pass": true,
+      "positive_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_missed_terms": [],
+      "negative_continuation": " fixed only",
+      "negative_case_pass": false,
+      "negative_hit_terms": [
+        "fixed"
+      ],
+      "negative_missed_terms": [
+        "loss"
+      ]
+    },
+    {
+      "case_id": "randomized-target-hidden-15",
+      "source_case_id": "prompt-mutation-complete_stored",
+      "random_draw_index": 15,
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_continuation": " fixed loss",
+      "positive_case_pass": true,
+      "positive_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_missed_terms": [],
+      "negative_continuation": " fixed only",
+      "negative_case_pass": false,
+      "negative_hit_terms": [
+        "fixed"
+      ],
+      "negative_missed_terms": [
+        "loss"
+      ]
+    },
+    {
+      "case_id": "randomized-target-hidden-16",
+      "source_case_id": "prompt-mutation-self_check_output",
+      "random_draw_index": 16,
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_continuation": " fixed loss",
+      "positive_case_pass": true,
+      "positive_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_missed_terms": [],
+      "negative_continuation": " fixed only",
+      "negative_case_pass": false,
+      "negative_hit_terms": [
+        "fixed"
+      ],
+      "negative_missed_terms": [
+        "loss"
+      ]
+    },
+    {
+      "case_id": "randomized-target-hidden-17",
+      "source_case_id": "prompt-mutation-return_memory",
+      "random_draw_index": 17,
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_continuation": " fixed loss",
+      "positive_case_pass": true,
+      "positive_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_missed_terms": [],
+      "negative_continuation": " fixed only",
+      "negative_case_pass": false,
+      "negative_hit_terms": [
+        "fixed"
+      ],
+      "negative_missed_terms": [
+        "loss"
+      ]
+    },
+    {
+      "case_id": "randomized-target-hidden-18",
+      "source_case_id": "prompt-mutation-final_words_memory",
+      "random_draw_index": 18,
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_continuation": " fixed loss",
+      "positive_case_pass": true,
+      "positive_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_missed_terms": [],
+      "negative_continuation": " fixed only",
+      "negative_case_pass": false,
+      "negative_hit_terms": [
+        "fixed"
+      ],
+      "negative_missed_terms": [
+        "loss"
+      ]
+    },
+    {
+      "case_id": "randomized-target-hidden-19",
+      "source_case_id": "prompt-mutation-stored_final",
+      "random_draw_index": 19,
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_continuation": " fixed loss",
+      "positive_case_pass": true,
+      "positive_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_missed_terms": [],
+      "negative_continuation": " fixed only",
+      "negative_case_pass": false,
+      "negative_hit_terms": [
+        "fixed"
+      ],
+      "negative_missed_terms": [
+        "loss"
+      ]
+    },
+    {
+      "case_id": "randomized-target-hidden-20",
+      "source_case_id": "prompt-mutation-complete_memory",
+      "random_draw_index": 20,
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_continuation": " fixed loss",
+      "positive_case_pass": true,
+      "positive_hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "positive_missed_terms": [],
+      "negative_continuation": " fixed only",
+      "negative_case_pass": false,
+      "negative_hit_terms": [
+        "fixed"
+      ],
+      "negative_missed_terms": [
+        "loss"
+      ]
+    }
+  ],
+  "summary": {
+    "randomized_target_hidden_holdout_dry_run_ready": true,
+    "case_count": 20,
+    "source_random_seed": 914,
+    "source_randomized_case_factor": 2.0,
+    "source_unique_prompt_count": 20,
+    "positive_passed_case_count": 20,
+    "negative_passed_case_count": 0,
+    "negative_control_passed": false,
+    "promotion_ready": false,
+    "model_quality_claim": "dry_run_only",
+    "next_step": "run_randomized_target_hidden_holdout_real_replay",
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "dry_run_only",
+    "reason": "The randomized target-hidden holdout scoring contract passes dry-run checks; real replay is next.",
+    "next_action": "run_randomized_target_hidden_holdout_real_replay"
+  }
+}
