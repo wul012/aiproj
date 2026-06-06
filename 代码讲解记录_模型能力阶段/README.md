@@ -1403,6 +1403,9 @@
 950-v936-randomized-holdout-publication-registry-lookup-index.md
  -> v936 code explanation: combine the lookup packet and its contract check into one governance lookup index for downstream consumers.
 
+951-v937-randomized-holdout-publication-registry-lookup-index-review.md
+ -> v937 code explanation: review the lookup index for downstream governance lookup consumption while keeping production promotion rejected.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

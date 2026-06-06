@@ -2166,3 +2166,8 @@ e/663/解释/说明.md
 - `e/936/图片`
 - `e/936/解释/说明.md`
 - v936 randomized holdout publication registry lookup index screenshots and explanation.
+## v937 supplemental index
+
+- `e/937/图片`
+- `e/937/解释/说明.md`
+- v937 randomized holdout publication registry lookup index review screenshots and explanation.

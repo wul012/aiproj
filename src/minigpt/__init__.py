@@ -150,6 +150,8 @@ __all__ = [
     "write_randomized_holdout_publication_registry_lookup_packet_check_outputs",
     "build_randomized_holdout_publication_registry_lookup_index",
     "write_randomized_holdout_publication_registry_lookup_index_outputs",
+    "build_randomized_holdout_publication_registry_lookup_index_review",
+    "write_randomized_holdout_publication_registry_lookup_index_review_outputs",
     "build_model_capability_route_promotion_review_decision",
     "write_model_capability_route_promotion_review_decision_outputs",
     "build_model_capability_route_promotion_decision_index",
@@ -468,6 +470,14 @@ _EXPORTS = {
     "write_randomized_holdout_publication_registry_lookup_index_outputs": (
         "randomized_holdout_publication_registry_lookup_index_artifacts",
         "write_randomized_holdout_publication_registry_lookup_index_outputs",
+    ),
+    "build_randomized_holdout_publication_registry_lookup_index_review": (
+        "randomized_holdout_publication_registry_lookup_index_review",
+        "build_randomized_holdout_publication_registry_lookup_index_review",
+    ),
+    "write_randomized_holdout_publication_registry_lookup_index_review_outputs": (
+        "randomized_holdout_publication_registry_lookup_index_review_artifacts",
+        "write_randomized_holdout_publication_registry_lookup_index_review_outputs",
     ),
     "build_model_capability_route_promotion_review_decision": (
         "model_capability_route_promotion_review_decision",
