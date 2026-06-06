@@ -2091,3 +2091,8 @@ e/663/解释/说明.md
 - `e/921/图片`
 - `e/921/解释/说明.md`
 - v921 randomized holdout bounded promotion decision screenshots and explanation.
+## v922 supplemental index
+
+- `e/922/图片`
+- `e/922/解释/说明.md`
+- v922 randomized holdout decision index screenshots and explanation.

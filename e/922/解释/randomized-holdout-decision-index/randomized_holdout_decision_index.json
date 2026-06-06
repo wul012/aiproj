@@ -1,0 +1,315 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT randomized holdout decision index",
+  "generated_at": "2026-06-06T04:16:11Z",
+  "status": "pass",
+  "decision": "randomized_holdout_decision_index_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_rows": [
+    {
+      "kind": "bounded_decision",
+      "path": "e\\921\\解释\\randomized-holdout-bounded-promotion-decision\\randomized_holdout_bounded_promotion_decision.json",
+      "exists": true,
+      "status": "pass",
+      "decision": "randomized_holdout_bounded_promotion_decision_accepted",
+      "ready_key": "randomized_holdout_bounded_promotion_decision_ready",
+      "ready_value": true,
+      "candidate_case_count": 20,
+      "random_seed": 914,
+      "pass_rate": 1.0,
+      "promotion_ready": false,
+      "approved_for_promotion": false,
+      "model_quality_claim": "bounded_randomized_target_hidden_holdout_claim_only",
+      "failed_check_count": 0,
+      "role": "records the bounded randomized holdout acceptance without enabling direct promotion"
+    },
+    {
+      "kind": "bounded_gate",
+      "path": "e\\920\\解释\\randomized-holdout-bounded-promotion-gate\\randomized_holdout_bounded_promotion_gate.json",
+      "exists": true,
+      "status": "pass",
+      "decision": "randomized_holdout_bounded_promotion_gate_passed",
+      "ready_key": "randomized_holdout_bounded_promotion_gate_ready",
+      "ready_value": true,
+      "candidate_case_count": 20,
+      "random_seed": 914,
+      "pass_rate": 1.0,
+      "promotion_ready": false,
+      "approved_for_promotion": false,
+      "model_quality_claim": "bounded_gate_only",
+      "failed_check_count": 0,
+      "role": "verifies packet review and packet can enter bounded decision"
+    },
+    {
+      "kind": "candidate_packet_review",
+      "path": "e\\919\\解释\\randomized-holdout-candidate-promotion-packet-review\\randomized_holdout_candidate_promotion_packet_review.json",
+      "exists": true,
+      "status": "pass",
+      "decision": "randomized_holdout_candidate_promotion_packet_review_ready",
+      "ready_key": "randomized_holdout_candidate_promotion_packet_review_ready",
+      "ready_value": true,
+      "candidate_case_count": 20,
+      "random_seed": 914,
+      "pass_rate": 1.0,
+      "promotion_ready": false,
+      "approved_for_promotion": false,
+      "model_quality_claim": "candidate_packet_review_only",
+      "failed_check_count": 0,
+      "role": "reviews candidate packet for bounded gate only"
+    },
+    {
+      "kind": "candidate_packet",
+      "path": "e\\918\\解释\\randomized-holdout-candidate-promotion-packet\\randomized_holdout_candidate_promotion_packet.json",
+      "exists": true,
+      "status": "pass",
+      "decision": "randomized_holdout_candidate_promotion_packet_ready",
+      "ready_key": "randomized_holdout_candidate_promotion_packet_ready",
+      "ready_value": true,
+      "candidate_case_count": 20,
+      "random_seed": 914,
+      "pass_rate": 1.0,
+      "promotion_ready": false,
+      "approved_for_promotion": false,
+      "model_quality_claim": "candidate_packet_only",
+      "failed_check_count": 0,
+      "role": "packages randomized target-hidden evidence without direct promotion"
+    }
+  ],
+  "check_rows": [
+    {
+      "id": "source_files_exist",
+      "status": "pass",
+      "actual": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "detail": "all indexed source artifact files must exist"
+    },
+    {
+      "id": "bounded_decision_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "bounded decision must pass"
+    },
+    {
+      "id": "bounded_decision_accepted",
+      "status": "pass",
+      "actual": "randomized_holdout_bounded_promotion_decision_accepted",
+      "detail": "bounded decision must be accepted"
+    },
+    {
+      "id": "bounded_decision_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "bounded decision summary must be ready"
+    },
+    {
+      "id": "bounded_acceptance_true",
+      "status": "pass",
+      "actual": true,
+      "detail": "decision must accept bounded randomized holdout claim"
+    },
+    {
+      "id": "gate_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "bounded gate must pass"
+    },
+    {
+      "id": "gate_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "bounded gate summary must be ready"
+    },
+    {
+      "id": "gate_approves_decision",
+      "status": "pass",
+      "actual": true,
+      "detail": "gate must approve bounded decision entry"
+    },
+    {
+      "id": "review_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "candidate packet review must pass"
+    },
+    {
+      "id": "review_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "candidate packet review summary must be ready"
+    },
+    {
+      "id": "review_approves_gate",
+      "status": "pass",
+      "actual": true,
+      "detail": "review must approve bounded gate entry"
+    },
+    {
+      "id": "packet_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "candidate packet must pass"
+    },
+    {
+      "id": "packet_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "candidate packet summary must be ready"
+    },
+    {
+      "id": "packet_authorized",
+      "status": "pass",
+      "actual": true,
+      "detail": "candidate packet must be authorized"
+    },
+    {
+      "id": "candidate_count_floor",
+      "status": "pass",
+      "actual": [
+        20,
+        20,
+        20,
+        20
+      ],
+      "detail": "all levels must keep at least the randomized 20-case floor"
+    },
+    {
+      "id": "candidate_counts_match",
+      "status": "pass",
+      "actual": [
+        20,
+        20,
+        20,
+        20
+      ],
+      "detail": "decision, gate, review, and packet candidate counts must match"
+    },
+    {
+      "id": "clean_counts_match_candidate_count",
+      "status": "pass",
+      "actual": [
+        20,
+        20,
+        20
+      ],
+      "detail": "gate, review, and packet clean randomized counts must match candidate count"
+    },
+    {
+      "id": "random_seed_matches",
+      "status": "pass",
+      "actual": [
+        914,
+        914,
+        914,
+        914
+      ],
+      "detail": "all levels must carry the same randomized seed"
+    },
+    {
+      "id": "pass_rate_complete",
+      "status": "pass",
+      "actual": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "detail": "all levels must preserve the complete randomized replay pass rate"
+    },
+    {
+      "id": "source_checks_clean",
+      "status": "pass",
+      "actual": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "detail": "indexed source summaries must have no failed checks"
+    },
+    {
+      "id": "promotion_still_false",
+      "status": "pass",
+      "actual": [
+        false,
+        false,
+        false,
+        false
+      ],
+      "detail": "decision index must not widen into direct promotion"
+    },
+    {
+      "id": "approved_for_promotion_false",
+      "status": "pass",
+      "actual": [
+        false,
+        false,
+        false,
+        false
+      ],
+      "detail": "direct promotion approval must remain false"
+    },
+    {
+      "id": "claim_scopes_expected",
+      "status": "pass",
+      "actual": [
+        "bounded_randomized_target_hidden_holdout_claim_only",
+        "bounded_gate_only",
+        "candidate_packet_review_only",
+        "candidate_packet_only"
+      ],
+      "detail": "each layer must keep its bounded claim scope"
+    }
+  ],
+  "index": {
+    "index_ready": true,
+    "indexed_decision": "accept_bounded_randomized_holdout_claim",
+    "bounded_promotion_accepted": true,
+    "promotion_ready": false,
+    "approved_for_promotion": false,
+    "candidate_case_count": 20,
+    "random_seed": 914,
+    "pass_rate": 1.0,
+    "claim_scope": "randomized_target_hidden_20_case_tiny_checkpoint_only",
+    "model_quality_claim": "bounded_randomized_target_hidden_holdout_claim_only",
+    "source_count": 4,
+    "source_kinds": [
+      "bounded_decision",
+      "bounded_gate",
+      "candidate_packet_review",
+      "candidate_packet"
+    ],
+    "next_step": "build_randomized_holdout_acceptance_summary"
+  },
+  "summary": {
+    "randomized_holdout_decision_index_ready": true,
+    "indexed_decision": "accept_bounded_randomized_holdout_claim",
+    "bounded_promotion_accepted": true,
+    "promotion_ready": false,
+    "approved_for_promotion": false,
+    "candidate_case_count": 20,
+    "random_seed": 914,
+    "pass_rate": 1.0,
+    "claim_scope": "randomized_target_hidden_20_case_tiny_checkpoint_only",
+    "model_quality_claim": "bounded_randomized_target_hidden_holdout_claim_only",
+    "source_count": 4,
+    "source_kinds": [
+      "bounded_decision",
+      "bounded_gate",
+      "candidate_packet_review",
+      "candidate_packet"
+    ],
+    "next_step": "build_randomized_holdout_acceptance_summary",
+    "passed_check_count": 23,
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "bounded_randomized_target_hidden_holdout_claim_only",
+    "reason": "The bounded randomized holdout acceptance can now be consumed through a single decision index while direct promotion remains blocked.",
+    "next_action": "build_randomized_holdout_acceptance_summary"
+  }
+}

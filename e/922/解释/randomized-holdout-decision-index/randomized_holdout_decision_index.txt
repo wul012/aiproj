@@ -1,0 +1,15 @@
+status=pass
+decision=randomized_holdout_decision_index_ready
+failed_count=0
+randomized_holdout_decision_index_ready=True
+indexed_decision=accept_bounded_randomized_holdout_claim
+bounded_promotion_accepted=True
+promotion_ready=False
+candidate_case_count=20
+random_seed=914
+pass_rate=1.0
+model_quality_claim=bounded_randomized_target_hidden_holdout_claim_only
+source_count=4
+next_step=build_randomized_holdout_acceptance_summary
+passed_check_count=23
+failed_check_count=0
