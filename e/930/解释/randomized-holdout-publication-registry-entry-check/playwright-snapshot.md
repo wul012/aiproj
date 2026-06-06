@@ -1,0 +1,14 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "MiniGPT randomized holdout publication registry entry contract check" [level=1] [ref=e4]
+    - paragraph [ref=e5]: The registry entry can be rebuilt from the source publication decision index with stable bounded fields.
+  - generic [ref=e6]:
+    - generic [ref=e7]
+    - generic [ref=e10]
+    - generic [ref=e13]
+    - generic [ref=e16]
+    - generic [ref=e19]
+    - generic [ref=e22]
+  - generic [ref=e25]:
+    - heading "Checks" [level=2] [ref=e26]
+    - table [ref=e28]

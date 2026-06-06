@@ -1382,6 +1382,9 @@
 943-v929-randomized-holdout-publication-registry-entry.md
  -> v929 code explanation: register the v928 publication index as a governance lookup entry while keeping direct promotion blocked.
 
+944-v930-randomized-holdout-publication-registry-entry-check.md
+ -> v930 code explanation: rebuild the v929 registry entry from the v928 source index and compare stable bounded fields.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

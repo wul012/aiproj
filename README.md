@@ -9483,6 +9483,8 @@ The randomized holdout publication decision index layer reads the v925 publicati
 
 The randomized holdout publication registry entry layer consumes that compact index and registers it as a governance lookup entry, preserving the accepted/blocked claim counts, randomized seed, allowed-use boundary, and promotion=false guard.
 
+The randomized holdout publication registry entry contract check layer rebuilds that entry from the source decision index and compares stable bounded fields, so registry publication cannot drift into production promotion by artifact edits.
+
 The run registry layer indexes multiple run directories so experiments can be scanned by commit, data fingerprint, quality status, eval suite coverage, metrics, artifact count, notes, tags, best-val rank, loss delta, a leaderboard, an interactive local HTML table, shareable URL state, and visible-row CSV export.
 
 The experiment card layer turns one run into a compact JSON/Markdown/HTML summary for review, handoff, or portfolio use.
