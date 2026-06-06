@@ -1,0 +1,33 @@
+id,status,actual,detail
+source_manifest_review_present,pass,e\933\解释\randomized-holdout-publication-registry-manifest-review\randomized_holdout_publication_registry_manifest_review.json,lookup packet must record a source manifest review
+source_manifest_review_exists,pass,e\933\解释\randomized-holdout-publication-registry-manifest-review\randomized_holdout_publication_registry_manifest_review.json,source manifest review must exist
+status,pass,"{""rebuilt"": ""pass"", ""source"": ""pass""}",status must match the rebuilt lookup packet
+decision,pass,"{""rebuilt"": ""randomized_holdout_publication_registry_lookup_packet_ready"", ""source"": ""randomized_holdout_publication_registry_lookup_packet_ready""}",decision must match the rebuilt lookup packet
+failed_count,pass,"{""rebuilt"": 0, ""source"": 0}",failed_count must match the rebuilt lookup packet
+summary.randomized_holdout_publication_registry_lookup_packet_ready,pass,"{""rebuilt"": true, ""source"": true}",summary.randomized_holdout_publication_registry_lookup_packet_ready must match the rebuilt lookup packet
+summary.lookup_packet_id,pass,"{""rebuilt"": ""randomized-holdout-publication-registry-lookup-packet-v934"", ""source"": ""randomized-holdout-publication-registry-lookup-packet-v934""}",summary.lookup_packet_id must match the rebuilt lookup packet
+summary.lookup_scope,pass,"{""rebuilt"": ""governance_lookup_only"", ""source"": ""governance_lookup_only""}",summary.lookup_scope must match the rebuilt lookup packet
+summary.entry_count,pass,"{""rebuilt"": 1, ""source"": 1}",summary.entry_count must match the rebuilt lookup packet
+summary.lookup_ready,pass,"{""rebuilt"": true, ""source"": true}",summary.lookup_ready must match the rebuilt lookup packet
+summary.bounded_publication_accepted,pass,"{""rebuilt"": true, ""source"": true}",summary.bounded_publication_accepted must match the rebuilt lookup packet
+summary.promotion_ready,pass,"{""rebuilt"": false, ""source"": false}",summary.promotion_ready must match the rebuilt lookup packet
+summary.approved_for_promotion,pass,"{""rebuilt"": false, ""source"": false}",summary.approved_for_promotion must match the rebuilt lookup packet
+summary.consumer_boundary,pass,"{""rebuilt"": ""governance_lookup_only"", ""source"": ""governance_lookup_only""}",summary.consumer_boundary must match the rebuilt lookup packet
+summary.allowed_use,pass,"{""rebuilt"": ""governance_lookup_only"", ""source"": ""governance_lookup_only""}",summary.allowed_use must match the rebuilt lookup packet
+summary.rejected_use,pass,"{""rebuilt"": ""production_promotion"", ""source"": ""production_promotion""}",summary.rejected_use must match the rebuilt lookup packet
+summary.next_step,pass,"{""rebuilt"": ""check_randomized_holdout_publication_registry_lookup_packet"", ""source"": ""check_randomized_holdout_publication_registry_lookup_packet""}",summary.next_step must match the rebuilt lookup packet
+lookup_packet.packet_ready,pass,"{""rebuilt"": true, ""source"": true}",lookup_packet.packet_ready must match the rebuilt lookup packet
+lookup_packet.lookup_packet_id,pass,"{""rebuilt"": ""randomized-holdout-publication-registry-lookup-packet-v934"", ""source"": ""randomized-holdout-publication-registry-lookup-packet-v934""}",lookup_packet.lookup_packet_id must match the rebuilt lookup packet
+lookup_packet.lookup_scope,pass,"{""rebuilt"": ""governance_lookup_only"", ""source"": ""governance_lookup_only""}",lookup_packet.lookup_scope must match the rebuilt lookup packet
+lookup_packet.registry_manifest_review_path,pass,"{""rebuilt"": ""e\\933\\解释\\randomized-holdout-publication-registry-manifest-review\\randomized_holdout_publication_registry_manifest_review.json"", ""source"": ""e\\933\\解释\\randomized-holdout-publication-registry-manifest-review\\randomized_holdout_publication_registry_manifest_review.json""}",lookup_packet.registry_manifest_review_path must match the rebuilt lookup packet
+lookup_packet.entry_count,pass,"{""rebuilt"": 1, ""source"": 1}",lookup_packet.entry_count must match the rebuilt lookup packet
+lookup_packet.lookup_entries,pass,"{""rebuilt"": [{""allowed_use"": ""bounded_model_capability_governance_only"", ""bounded_publication_accepted"": true, ""consumer_boundary"": ""governance_lookup_only"", ""entry_id"": ""randomized-holdout-publication-v928"", ""lookup_key"": ""publication:randomized-holdout-publication-v928"", ""model_quality_claim"": ""bounded_randomized_target_hidden_holdout_claim_only"", ""pass_rate"": 1.0, ""promotion_ready"": false, ""random_seed"": 914, ""registry_status"": ""registered""}], ""source"": [{""allowed_use"": ""bounded_model_capability_governance_only"", ""bounded_publication_accepted"": true, ""consumer_boundary"": ""governance_lookup_only"", ""entry_id"": ""randomized-holdout-publication-v928"", ""lookup_key"": ""publication:randomized-holdout-publication-v928"", ""model_quality_claim"": ""bounded_randomized_target_hidden_holdout_claim_only"", ""pass_rate"": 1.0, ""promotion_ready"": false, ""random_seed"": 914, ""registry_status"": ""registered""}]}",lookup_packet.lookup_entries must match the rebuilt lookup packet
+lookup_packet.lookup_keys,pass,"{""rebuilt"": [""publication:randomized-holdout-publication-v928""], ""source"": [""publication:randomized-holdout-publication-v928""]}",lookup_packet.lookup_keys must match the rebuilt lookup packet
+lookup_packet.lookup_ready,pass,"{""rebuilt"": true, ""source"": true}",lookup_packet.lookup_ready must match the rebuilt lookup packet
+lookup_packet.bounded_publication_accepted,pass,"{""rebuilt"": true, ""source"": true}",lookup_packet.bounded_publication_accepted must match the rebuilt lookup packet
+lookup_packet.promotion_ready,pass,"{""rebuilt"": false, ""source"": false}",lookup_packet.promotion_ready must match the rebuilt lookup packet
+lookup_packet.approved_for_promotion,pass,"{""rebuilt"": false, ""source"": false}",lookup_packet.approved_for_promotion must match the rebuilt lookup packet
+lookup_packet.consumer_boundary,pass,"{""rebuilt"": ""governance_lookup_only"", ""source"": ""governance_lookup_only""}",lookup_packet.consumer_boundary must match the rebuilt lookup packet
+lookup_packet.allowed_use,pass,"{""rebuilt"": ""governance_lookup_only"", ""source"": ""governance_lookup_only""}",lookup_packet.allowed_use must match the rebuilt lookup packet
+lookup_packet.rejected_use,pass,"{""rebuilt"": ""production_promotion"", ""source"": ""production_promotion""}",lookup_packet.rejected_use must match the rebuilt lookup packet
+lookup_packet.next_step,pass,"{""rebuilt"": ""check_randomized_holdout_publication_registry_lookup_packet"", ""source"": ""check_randomized_holdout_publication_registry_lookup_packet""}",lookup_packet.next_step must match the rebuilt lookup packet

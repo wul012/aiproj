@@ -9493,6 +9493,8 @@ The randomized holdout publication registry manifest review layer approves that 
 
 The randomized holdout publication registry lookup packet layer turns the lookup-only review into a stable `publication:<entry_id>` query packet while preserving bounded claim scope and promotion rejection.
 
+The randomized holdout publication registry lookup packet contract-check layer rebuilds that lookup packet from the source manifest review and compares stable lookup-only fields, including lookup keys and production-promotion rejection.
+
 The run registry layer indexes multiple run directories so experiments can be scanned by commit, data fingerprint, quality status, eval suite coverage, metrics, artifact count, notes, tags, best-val rank, loss delta, a leaderboard, an interactive local HTML table, shareable URL state, and visible-row CSV export.
 
 The experiment card layer turns one run into a compact JSON/Markdown/HTML summary for review, handoff, or portfolio use.
