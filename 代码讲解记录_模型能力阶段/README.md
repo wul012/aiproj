@@ -1361,6 +1361,9 @@
 936-v922-randomized-holdout-decision-index.md
  -> v922 code explanation: index the v918-v921 randomized holdout bounded-acceptance chain while keeping direct promotion blocked.
 
+937-v923-randomized-holdout-acceptance-summary.md
+ -> v923 code explanation: summarize the bounded randomized holdout acceptance into accepted and blocked claims for downstream review.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

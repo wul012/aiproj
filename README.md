@@ -4,7 +4,21 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v922.0.0` indexes the v918-v921 randomized holdout bounded-acceptance chain as one reviewable decision index while direct promotion remains blocked.
+Version `v923.0.0` turns the v922 randomized holdout decision index into a bounded acceptance summary with explicit accepted and blocked claims.
+
+## Latest v923 checkpoint
+
+- Added short-name module `randomized_holdout_acceptance_summary`.
+- Added CLI `scripts/build_randomized_holdout_acceptance_summary.py`.
+- Consumed the real v922 randomized holdout decision index.
+- Split the result into one accepted claim and three blocked claims.
+- Accepted only `bounded_randomized_target_hidden_holdout_claim` for `bounded_model_capability_governance_only`.
+- Blocked `production_promotion`, `general_model_quality`, and `larger_corpus_transfer`.
+- Confirmed `randomized_holdout_acceptance_summary_ready=True`, `bounded_promotion_accepted=True`, `accepted_claim_count=1`, `blocked_claim_count=3`, `candidate_case_count=20`, `random_seed=914`, and `pass_rate=1.0`.
+- Kept `promotion_ready=False` and `approved_for_promotion=False`.
+- Routed the next action to `check_randomized_holdout_acceptance_summary_contract`.
+- Verified with `9 passed` focused acceptance-summary/index tests and Playwright MCP screenshot evidence.
+- Archived v923 evidence in `e/923` and added the code explanation in `代码讲解记录_模型能力阶段/937-v923-randomized-holdout-acceptance-summary.md`.
 
 ## Latest v922 checkpoint
 

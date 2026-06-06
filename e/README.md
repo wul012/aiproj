@@ -2096,3 +2096,8 @@ e/663/解释/说明.md
 - `e/922/图片`
 - `e/922/解释/说明.md`
 - v922 randomized holdout decision index screenshots and explanation.
+## v923 supplemental index
+
+- `e/923/图片`
+- `e/923/解释/说明.md`
+- v923 randomized holdout acceptance summary screenshots and explanation.

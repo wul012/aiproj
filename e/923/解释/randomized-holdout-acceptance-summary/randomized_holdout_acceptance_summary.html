@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT randomized holdout acceptance summary</title>
+<style>
+:root{color-scheme:light;--ink:#17212b;--muted:#62717d;--line:#d7dee5;--panel:#f8fafc;--accent:#0f766e}
+*{box-sizing:border-box}
+body{margin:0;background:#f2f4f7;color:var(--ink);font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1180px;margin:0 auto;padding:28px}
+h1{font-size:30px;margin:0 0 8px;letter-spacing:0}
+h2{font-size:18px;margin:0 0 12px;letter-spacing:0}
+p{color:var(--muted);line-height:1.55;overflow-wrap:anywhere}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:18px 0}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:8px}
+.card{padding:14px}
+.card span{display:block;color:var(--muted);font-size:12px;text-transform:uppercase}
+.card strong{display:block;margin-top:6px;font-size:18px;line-height:1.2;color:var(--accent);overflow-wrap:anywhere}
+.panel{padding:16px;margin:14px 0}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:#334155}
+td{overflow-wrap:anywhere}
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT randomized holdout acceptance summary</h1><p>The bounded randomized holdout acceptance is summarized for downstream governance while production promotion remains blocked.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Ready</span><strong>True</strong></div><div class="card"><span>Bounded accepted</span><strong>True</strong></div><div class="card"><span>Promotion</span><strong>False</strong></div><div class="card"><span>Cases</span><strong>20</strong></div><div class="card"><span>Seed</span><strong>914</strong></div><div class="card"><span>Allowed use</span><strong>bounded_model_capability_governance_only</strong></div><div class="card"><span>Next</span><strong>check_randomized_holdout_acceptance_summary_contract</strong></div></section>
+<section class="panel"><h2>Accepted Claims</h2><div class="table-wrap"><table>
+<thead><tr><th>Claim</th><th>Status</th><th>Scope</th><th>Cases</th><th>Allowed use</th></tr></thead>
+<tbody><tr><td>bounded_randomized_target_hidden_holdout_claim</td><td>accepted</td><td>randomized_target_hidden_20_case_tiny_checkpoint_only</td><td>20</td><td>bounded_model_capability_governance_only</td></tr></tbody>
+</table></div></section>
+<section class="panel"><h2>Blocked Claims</h2><div class="table-wrap"><table>
+<thead><tr><th>Claim</th><th>Status</th><th>Reason</th></tr></thead>
+<tbody><tr><td>production_promotion</td><td>blocked</td><td>promotion_ready remains false</td></tr><tr><td>general_model_quality</td><td>blocked</td><td>evidence is limited to a 20-case tiny-checkpoint randomized holdout</td></tr><tr><td>larger_corpus_transfer</td><td>blocked</td><td>no larger corpus or external benchmark evidence is attached</td></tr></tbody>
+</table></div></section>
+<section class="panel"><h2>Checks</h2><div class="table-wrap"><table>
+<thead><tr><th>Check</th><th>Status</th><th>Actual</th><th>Detail</th></tr></thead>
+<tbody><tr><td>decision_index_file_exists</td><td>pass</td><td>e\922\解释\randomized-holdout-decision-index\randomized_holdout_decision_index.json</td><td>source decision index file must exist</td></tr><tr><td>decision_index_passed</td><td>pass</td><td>pass</td><td>decision index must pass</td></tr><tr><td>decision_index_ready</td><td>pass</td><td>randomized_holdout_decision_index_ready</td><td>decision index must be ready</td></tr><tr><td>summary_ready</td><td>pass</td><td>True</td><td>index summary must be ready</td></tr><tr><td>bounded_acceptance_true</td><td>pass</td><td>True</td><td>bounded randomized holdout claim must be accepted</td></tr><tr><td>promotion_still_false</td><td>pass</td><td>False</td><td>acceptance summary must not become direct promotion</td></tr><tr><td>approved_for_promotion_false</td><td>pass</td><td>False</td><td>direct promotion approval must remain false</td></tr><tr><td>candidate_count_floor</td><td>pass</td><td>20</td><td>acceptance summary requires the randomized 20-case floor</td></tr><tr><td>seed_present</td><td>pass</td><td>914</td><td>acceptance summary must carry the randomized seed</td></tr><tr><td>pass_rate_complete</td><td>pass</td><td>1.0</td><td>acceptance summary requires complete randomized replay pass rate</td></tr><tr><td>claim_scope_bounded</td><td>pass</td><td>bounded_randomized_target_hidden_holdout_claim_only</td><td>accepted claim must remain bounded</td></tr><tr><td>source_rows_present</td><td>pass</td><td>4</td><td>summary must retain source rows</td></tr><tr><td>source_kinds_complete</td><td>pass</td><td>[&#x27;bounded_decision&#x27;, &#x27;bounded_gate&#x27;, &#x27;candidate_packet&#x27;, &#x27;candidate_packet_review&#x27;]</td><td>source rows must include packet, review, gate, and decision</td></tr><tr><td>source_rows_ready</td><td>pass</td><td>[True, True, True, True]</td><td>all source rows must remain passed and ready</td></tr><tr><td>source_rows_block_promotion</td><td>pass</td><td>[False, False, False, False]</td><td>all source rows must keep promotion false</td></tr></tbody>
+</table></div></section>
+</main>
+</body>
+</html>

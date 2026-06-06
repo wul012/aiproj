@@ -1,0 +1,5 @@
+claim_id,status,scope,model_quality_claim,candidate_case_count,random_seed,pass_rate,allowed_use,reason
+bounded_randomized_target_hidden_holdout_claim,accepted,randomized_target_hidden_20_case_tiny_checkpoint_only,bounded_randomized_target_hidden_holdout_claim_only,20,914,1.0,bounded_model_capability_governance_only,
+production_promotion,blocked,,,,,,,promotion_ready remains false
+general_model_quality,blocked,,,,,,,evidence is limited to a 20-case tiny-checkpoint randomized holdout
+larger_corpus_transfer,blocked,,,,,,,no larger corpus or external benchmark evidence is attached
