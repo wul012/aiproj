@@ -1,0 +1,276 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT randomized holdout publication registry downstream receipt",
+  "generated_at": "2026-06-06T11:43:30Z",
+  "status": "pass",
+  "decision": "randomized_holdout_publication_registry_downstream_receipt_ready",
+  "failed_count": 0,
+  "issues": [],
+  "downstream_guard_path": "e\\938\\解释\\randomized-holdout-publication-registry-downstream-guard\\randomized_holdout_publication_registry_downstream_guard.json",
+  "downstream_guard_sha256": "887540a6d58a8dc33517bc155b2fb25ff921f005123ff0d48efd7d46c3f0ce67",
+  "source_downstream_guard_summary": {
+    "randomized_holdout_publication_registry_downstream_guard_ready": true,
+    "guard_id": "randomized-holdout-publication-registry-downstream-guard-v938",
+    "guard_status": "downstream_governance_lookup_allowed",
+    "entry_count": 1,
+    "downstream_ready": true,
+    "lookup_ready": true,
+    "contract_check_ready": true,
+    "promotion_ready": false,
+    "approved_for_promotion": false,
+    "consumer_boundary": "governance_lookup_only",
+    "allowed_use": "downstream_governance_lookup_only",
+    "blocked_uses": [
+      "production_promotion",
+      "model_quality_expansion",
+      "training_data_claim_expansion"
+    ],
+    "next_step": "record_randomized_holdout_publication_registry_downstream_receipt",
+    "passed_check_count": 16,
+    "failed_check_count": 0
+  },
+  "source_downstream_guard": {
+    "guard_ready": true,
+    "guard_id": "randomized-holdout-publication-registry-downstream-guard-v938",
+    "guard_status": "downstream_governance_lookup_allowed",
+    "lookup_index_review_path": "e\\937\\解释\\randomized-holdout-publication-registry-lookup-index-review\\randomized_holdout_publication_registry_lookup_index_review.json",
+    "entry_count": 1,
+    "lookup_keys": [
+      "publication:randomized-holdout-publication-v928"
+    ],
+    "downstream_ready": true,
+    "lookup_ready": true,
+    "contract_check_ready": true,
+    "promotion_ready": false,
+    "approved_for_promotion": false,
+    "consumer_boundary": "governance_lookup_only",
+    "model_quality_claim": "bounded_randomized_target_hidden_holdout_claim_only",
+    "allowed_use": "downstream_governance_lookup_only",
+    "blocked_uses": [
+      "production_promotion",
+      "model_quality_expansion",
+      "training_data_claim_expansion"
+    ],
+    "next_step": "record_randomized_holdout_publication_registry_downstream_receipt"
+  },
+  "entry_rows": [
+    {
+      "lookup_key": "publication:randomized-holdout-publication-v928",
+      "entry_id": "randomized-holdout-publication-v928",
+      "registry_status": "registered",
+      "bounded_publication_accepted": true,
+      "promotion_ready": false,
+      "consumer_boundary": "governance_lookup_only",
+      "allowed_use": "bounded_model_capability_governance_only",
+      "model_quality_claim": "bounded_randomized_target_hidden_holdout_claim_only",
+      "random_seed": 914,
+      "pass_rate": 1.0
+    }
+  ],
+  "consumer_receipts": [
+    {
+      "consumer_name": "publication_registry_governance_lookup_reader",
+      "lookup_key": "publication:randomized-holdout-publication-v928",
+      "entry_id": "randomized-holdout-publication-v928",
+      "granted_use": "downstream_governance_lookup_only",
+      "blocked_uses": [
+        "production_promotion",
+        "model_quality_expansion",
+        "training_data_claim_expansion"
+      ],
+      "promotion_ready": false,
+      "receipt_status": "downstream_governance_lookup_receipted"
+    }
+  ],
+  "check_rows": [
+    {
+      "id": "downstream_guard_file_exists",
+      "status": "pass",
+      "actual": "e\\938\\解释\\randomized-holdout-publication-registry-downstream-guard\\randomized_holdout_publication_registry_downstream_guard.json",
+      "detail": "downstream guard file must exist"
+    },
+    {
+      "id": "downstream_guard_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "downstream guard must pass"
+    },
+    {
+      "id": "downstream_guard_decision_ready",
+      "status": "pass",
+      "actual": "randomized_holdout_publication_registry_downstream_guard_ready",
+      "detail": "downstream guard decision must be ready"
+    },
+    {
+      "id": "guard_summary_ready",
+      "status": "pass",
+      "actual": {
+        "summary": true,
+        "guard": true
+      },
+      "detail": "guard summary and body must be ready"
+    },
+    {
+      "id": "guard_status_allowed",
+      "status": "pass",
+      "actual": {
+        "summary": "downstream_governance_lookup_allowed",
+        "guard": "downstream_governance_lookup_allowed"
+      },
+      "detail": "guard must allow downstream governance lookup"
+    },
+    {
+      "id": "requested_use_allowed",
+      "status": "pass",
+      "actual": "downstream_governance_lookup_only",
+      "detail": "requested use must stay downstream governance lookup only"
+    },
+    {
+      "id": "blocked_uses_complete",
+      "status": "pass",
+      "actual": [
+        "production_promotion",
+        "model_quality_expansion",
+        "training_data_claim_expansion"
+      ],
+      "detail": "receipt must preserve all blocked uses"
+    },
+    {
+      "id": "promotion_still_false",
+      "status": "pass",
+      "actual": {
+        "summary": false,
+        "guard": false
+      },
+      "detail": "receipt must not enable promotion"
+    },
+    {
+      "id": "approved_for_promotion_false",
+      "status": "pass",
+      "actual": {
+        "summary": false,
+        "guard": false
+      },
+      "detail": "receipt must not approve production promotion"
+    },
+    {
+      "id": "downstream_lookup_ready",
+      "status": "pass",
+      "actual": {
+        "downstream": true,
+        "lookup": true
+      },
+      "detail": "downstream lookup must be ready"
+    },
+    {
+      "id": "contract_check_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "source contract check must be ready"
+    },
+    {
+      "id": "consumer_boundary_governance",
+      "status": "pass",
+      "actual": {
+        "summary": "governance_lookup_only",
+        "guard": "governance_lookup_only"
+      },
+      "detail": "consumer boundary must remain governance lookup only"
+    },
+    {
+      "id": "model_quality_claim_bounded",
+      "status": "pass",
+      "actual": "bounded_randomized_target_hidden_holdout_claim_only",
+      "detail": "model quality claim must remain bounded"
+    },
+    {
+      "id": "entries_present",
+      "status": "pass",
+      "actual": {
+        "entries": 1,
+        "summary_entry_count": 1
+      },
+      "detail": "receipt must cover all source entries"
+    },
+    {
+      "id": "lookup_keys_publication_namespace",
+      "status": "pass",
+      "actual": [
+        "publication:randomized-holdout-publication-v928"
+      ],
+      "detail": "lookup keys must use publication namespace"
+    },
+    {
+      "id": "entries_not_promoted",
+      "status": "pass",
+      "actual": [
+        false
+      ],
+      "detail": "entries must not be promoted"
+    },
+    {
+      "id": "source_checks_clean",
+      "status": "pass",
+      "actual": 0,
+      "detail": "source guard checks must be clean"
+    },
+    {
+      "id": "source_next_step_matches",
+      "status": "pass",
+      "actual": "record_randomized_holdout_publication_registry_downstream_receipt",
+      "detail": "source guard must route to downstream receipt"
+    }
+  ],
+  "receipt": {
+    "receipt_ready": true,
+    "receipt_id": "randomized-holdout-publication-registry-downstream-receipt-v939",
+    "receipt_type": "randomized_holdout_publication_registry_downstream",
+    "receipt_status": "downstream_governance_lookup_receipted",
+    "consumer_name": "publication_registry_governance_lookup_reader",
+    "requested_use": "downstream_governance_lookup_only",
+    "granted_use": "downstream_governance_lookup_only",
+    "downstream_guard_path": "e\\938\\解释\\randomized-holdout-publication-registry-downstream-guard\\randomized_holdout_publication_registry_downstream_guard.json",
+    "entry_count": 1,
+    "lookup_keys": [
+      "publication:randomized-holdout-publication-v928"
+    ],
+    "guard_id": "randomized-holdout-publication-registry-downstream-guard-v938",
+    "guard_status": "downstream_governance_lookup_allowed",
+    "blocked_uses": [
+      "production_promotion",
+      "model_quality_expansion",
+      "training_data_claim_expansion"
+    ],
+    "promotion_ready": false,
+    "approved_for_promotion": false,
+    "consumer_boundary": "governance_lookup_only",
+    "model_quality_claim": "bounded_randomized_target_hidden_holdout_claim_only",
+    "next_step": "review_randomized_holdout_publication_registry_downstream_receipt"
+  },
+  "summary": {
+    "randomized_holdout_publication_registry_downstream_receipt_ready": true,
+    "receipt_id": "randomized-holdout-publication-registry-downstream-receipt-v939",
+    "receipt_type": "randomized_holdout_publication_registry_downstream",
+    "receipt_status": "downstream_governance_lookup_receipted",
+    "consumer_name": "publication_registry_governance_lookup_reader",
+    "granted_use": "downstream_governance_lookup_only",
+    "entry_count": 1,
+    "lookup_key_count": 1,
+    "promotion_ready": false,
+    "approved_for_promotion": false,
+    "consumer_boundary": "governance_lookup_only",
+    "blocked_uses": [
+      "production_promotion",
+      "model_quality_expansion",
+      "training_data_claim_expansion"
+    ],
+    "next_step": "review_randomized_holdout_publication_registry_downstream_receipt",
+    "passed_check_count": 18,
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "bounded_randomized_target_hidden_holdout_claim_only",
+    "reason": "The downstream consumer receipt grants governance lookup only and keeps promotion and claim expansion blocked.",
+    "next_action": "review_randomized_holdout_publication_registry_downstream_receipt"
+  }
+}

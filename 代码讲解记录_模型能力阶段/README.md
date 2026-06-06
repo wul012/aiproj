@@ -1409,6 +1409,9 @@
 952-v938-randomized-holdout-publication-registry-downstream-guard.md
  -> v938 code explanation: allow downstream governance lookup consumption through an explicit guard while blocking production promotion, model-quality expansion, and training-data claim expansion.
 
+953-v939-randomized-holdout-publication-registry-downstream-receipt.md
+ -> v939 code explanation: record a downstream governance lookup receipt with consumer, granted-use, blocked-use, and source-digest fields.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

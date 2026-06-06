@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v938.0.0` adds a downstream guard for the randomized holdout publication registry lookup index review, allowing downstream governance lookup while blocking production promotion and claim expansion.
+Version `v939.0.0` records a downstream governance lookup receipt from the randomized holdout publication registry guard while keeping production promotion and claim expansion blocked.
+
+## Latest v939 checkpoint
+
+- Added short-name module `randomized_holdout_publication_registry_downstream_receipt`.
+- Added CLI `scripts/build_randomized_holdout_publication_registry_downstream_receipt.py`.
+- Consumed the real v938 downstream guard.
+- Checked guard readiness, downstream lookup readiness, blocked-use completeness, requested-use scope, entry coverage, lookup-key namespace, source digest, and promotion-boundary fields.
+- Confirmed `randomized_holdout_publication_registry_downstream_receipt_ready=True`, `receipt_status=downstream_governance_lookup_receipted`, and `granted_use=downstream_governance_lookup_only`.
+- Kept `promotion_ready=False` and `approved_for_promotion=False`.
+- Preserved blocked uses for `production_promotion`, `model_quality_expansion`, and `training_data_claim_expansion`.
+- Routed the next action to `review_randomized_holdout_publication_registry_downstream_receipt`.
+- Verified with focused downstream-receipt tests and Playwright MCP screenshot evidence.
+- Archived v939 evidence in `e/939` and added the code explanation in `代码讲解记录_模型能力阶段/953-v939-randomized-holdout-publication-registry-downstream-receipt.md`.
 
 ## Latest v938 checkpoint
 
@@ -9513,6 +9526,8 @@ The randomized holdout publication registry lookup index layer combines the look
 The randomized holdout publication registry lookup index review layer approves that index only for downstream governance lookup consumption and routes the next work to a downstream guard.
 
 The randomized holdout publication registry downstream guard layer allows only downstream governance lookup consumption while explicitly blocking production promotion, model-quality expansion, and training-data claim expansion.
+
+The randomized holdout publication registry downstream receipt layer records the allowed downstream consumer, granted lookup-only use, blocked-use list, and source guard digest so downstream modules can consume the registry lookup contract without expanding promotion or model-quality claims.
 
 The run registry layer indexes multiple run directories so experiments can be scanned by commit, data fingerprint, quality status, eval suite coverage, metrics, artifact count, notes, tags, best-val rank, loss delta, a leaderboard, an interactive local HTML table, shareable URL state, and visible-row CSV export.
 
