@@ -2161,3 +2161,8 @@ e/663/解释/说明.md
 - `e/935/图片`
 - `e/935/解释/说明.md`
 - v935 randomized holdout publication registry lookup packet contract check screenshots and explanation.
+## v936 supplemental index
+
+- `e/936/图片`
+- `e/936/解释/说明.md`
+- v936 randomized holdout publication registry lookup index screenshots and explanation.

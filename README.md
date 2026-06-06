@@ -9495,6 +9495,8 @@ The randomized holdout publication registry lookup packet layer turns the lookup
 
 The randomized holdout publication registry lookup packet contract-check layer rebuilds that lookup packet from the source manifest review and compares stable lookup-only fields, including lookup keys and production-promotion rejection.
 
+The randomized holdout publication registry lookup index layer combines the lookup packet and its contract check into one downstream-consumable governance lookup index with stable keys, evidence count, and promotion rejection.
+
 The run registry layer indexes multiple run directories so experiments can be scanned by commit, data fingerprint, quality status, eval suite coverage, metrics, artifact count, notes, tags, best-val rank, loss delta, a leaderboard, an interactive local HTML table, shareable URL state, and visible-row CSV export.
 
 The experiment card layer turns one run into a compact JSON/Markdown/HTML summary for review, handoff, or portfolio use.

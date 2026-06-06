@@ -1400,6 +1400,9 @@
 949-v935-randomized-holdout-publication-registry-lookup-packet-check.md
  -> v935 code explanation: rebuild the lookup packet from its source manifest review and compare stable lookup-only fields.
 
+950-v936-randomized-holdout-publication-registry-lookup-index.md
+ -> v936 code explanation: combine the lookup packet and its contract check into one governance lookup index for downstream consumers.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。
