@@ -5,6 +5,14 @@ from pathlib import Path
 from typing import Any
 
 from minigpt.randomized_holdout_publication_decision_index import RANDOMIZED_HOLDOUT_PUBLICATION_DECISION_INDEX_JSON_FILENAME
+from minigpt.randomized_holdout_publication_constants import (
+    RANDOMIZED_HOLDOUT_PUBLICATION_ALLOWED_USE,
+    RANDOMIZED_HOLDOUT_PUBLICATION_CONSUMER_BOUNDARY,
+    RANDOMIZED_HOLDOUT_PUBLICATION_ENTRY_ID,
+    RANDOMIZED_HOLDOUT_PUBLICATION_MODEL_QUALITY_CLAIM,
+    RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_ENTRY_CHECK_NEXT_STEP,
+    RANDOMIZED_HOLDOUT_PUBLICATION_SOURCE_KINDS,
+)
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 
 
@@ -13,12 +21,6 @@ RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_ENTRY_CSV_FILENAME = "randomized_holdout
 RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_ENTRY_TEXT_FILENAME = "randomized_holdout_publication_registry_entry.txt"
 RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_ENTRY_MARKDOWN_FILENAME = "randomized_holdout_publication_registry_entry.md"
 RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_ENTRY_HTML_FILENAME = "randomized_holdout_publication_registry_entry.html"
-
-EXPECTED_ALLOWED_USE = "bounded_model_capability_governance_only"
-EXPECTED_MODEL_QUALITY_CLAIM = "bounded_randomized_target_hidden_holdout_claim_only"
-EXPECTED_SOURCE_KINDS = ["publication_decision", "publication_review", "publication_packet"]
-NEXT_STEP = "check_randomized_holdout_publication_registry_entry"
-
 
 def locate_randomized_holdout_publication_decision_index(path: str | Path) -> Path:
     source = Path(path)
@@ -38,7 +40,7 @@ def build_randomized_holdout_publication_registry_entry(
     publication_decision_index: dict[str, Any],
     *,
     publication_decision_index_path: str | Path | None = None,
-    entry_id: str = "randomized-holdout-publication-v928",
+    entry_id: str = RANDOMIZED_HOLDOUT_PUBLICATION_ENTRY_ID,
     title: str = "MiniGPT randomized holdout publication registry entry",
     generated_at: str | None = None,
 ) -> dict[str, Any]:
@@ -103,12 +105,12 @@ def _checks(
         _check("blocked_claim_count", int(summary.get("blocked_claim_count") or 0) >= 3, summary.get("blocked_claim_count"), "registry entry expects blocked claim boundaries"),
         _check("candidate_case_count", int(summary.get("candidate_case_count") or 0) >= 20, summary.get("candidate_case_count"), "registry entry expects the randomized 20-case floor"),
         _check("pass_rate_complete", float(summary.get("pass_rate") or 0.0) == 1.0, summary.get("pass_rate"), "registry entry expects complete randomized replay pass rate"),
-        _check("allowed_use_bounded", summary.get("allowed_use") == EXPECTED_ALLOWED_USE and index.get("allowed_use") == EXPECTED_ALLOWED_USE, {"summary": summary.get("allowed_use"), "index": index.get("allowed_use")}, "allowed use must stay bounded governance only"),
-        _check("model_quality_claim_bounded", summary.get("model_quality_claim") == EXPECTED_MODEL_QUALITY_CLAIM and index.get("model_quality_claim") == EXPECTED_MODEL_QUALITY_CLAIM, {"summary": summary.get("model_quality_claim"), "index": index.get("model_quality_claim")}, "model quality claim must stay bounded to randomized holdout"),
+        _check("allowed_use_bounded", summary.get("allowed_use") == RANDOMIZED_HOLDOUT_PUBLICATION_ALLOWED_USE and index.get("allowed_use") == RANDOMIZED_HOLDOUT_PUBLICATION_ALLOWED_USE, {"summary": summary.get("allowed_use"), "index": index.get("allowed_use")}, "allowed use must stay bounded governance only"),
+        _check("model_quality_claim_bounded", summary.get("model_quality_claim") == RANDOMIZED_HOLDOUT_PUBLICATION_MODEL_QUALITY_CLAIM and index.get("model_quality_claim") == RANDOMIZED_HOLDOUT_PUBLICATION_MODEL_QUALITY_CLAIM, {"summary": summary.get("model_quality_claim"), "index": index.get("model_quality_claim")}, "model quality claim must stay bounded to randomized holdout"),
         _check("promotion_still_false", summary.get("promotion_ready") is False and index.get("promotion_ready") is False, {"summary": summary.get("promotion_ready"), "index": index.get("promotion_ready")}, "registry entry must not enable direct promotion"),
         _check("approved_for_promotion_false", summary.get("approved_for_promotion") is False and index.get("approved_for_promotion") is False, {"summary": summary.get("approved_for_promotion"), "index": index.get("approved_for_promotion")}, "direct promotion approval must remain false"),
         _check("source_count_expected", int(summary.get("source_count") or 0) == len(source_rows) == 3, {"summary": summary.get("source_count"), "rows": len(source_rows)}, "registry entry expects the three-source publication chain"),
-        _check("source_kinds_expected", list(summary.get("source_kinds") or []) == EXPECTED_SOURCE_KINDS, summary.get("source_kinds"), "source kinds must keep publication decision, review, and packet order"),
+        _check("source_kinds_expected", list(summary.get("source_kinds") or []) == RANDOMIZED_HOLDOUT_PUBLICATION_SOURCE_KINDS, summary.get("source_kinds"), "source kinds must keep publication decision, review, and packet order"),
         _check("source_checks_clean", int(summary.get("failed_check_count") or 0) == 0, summary.get("failed_check_count"), "source index checks must be clean"),
         _check("source_next_step_matches", summary.get("next_step") == "build_randomized_holdout_publication_registry_entry", summary.get("next_step"), "source index must route to registry entry build"),
     ]
@@ -146,13 +148,13 @@ def _entry(
         "candidate_case_count": summary.get("candidate_case_count"),
         "random_seed": summary.get("random_seed"),
         "pass_rate": summary.get("pass_rate"),
-        "allowed_use": EXPECTED_ALLOWED_USE if ready else "none",
-        "model_quality_claim": EXPECTED_MODEL_QUALITY_CLAIM if ready else "not_claimed",
+        "allowed_use": RANDOMIZED_HOLDOUT_PUBLICATION_ALLOWED_USE if ready else "none",
+        "model_quality_claim": RANDOMIZED_HOLDOUT_PUBLICATION_MODEL_QUALITY_CLAIM if ready else "not_claimed",
         "decision_scope": summary.get("decision_scope") if ready else "not_claimed",
         "source_count": len(source_rows),
         "source_kinds": [str(row.get("kind")) for row in source_rows],
-        "consumer_boundary": "governance_lookup_only",
-        "next_step": NEXT_STEP if ready else "repair_randomized_holdout_publication_decision_index",
+        "consumer_boundary": RANDOMIZED_HOLDOUT_PUBLICATION_CONSUMER_BOUNDARY,
+        "next_step": RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_ENTRY_CHECK_NEXT_STEP if ready else "repair_randomized_holdout_publication_decision_index",
     }
 
 

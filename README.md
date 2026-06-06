@@ -9487,6 +9487,8 @@ The randomized holdout publication registry entry contract check layer rebuilds 
 
 The randomized holdout publication registry packet layer packages the verified registry entry together with its contract check as manifest-ready evidence, keeping the consumer boundary at governance lookup only.
 
+The randomized holdout publication registry manifest layer summarizes that verified packet into a bounded governance lookup manifest, centralizes repeated publication boundary constants, and still keeps production promotion blocked.
+
 The run registry layer indexes multiple run directories so experiments can be scanned by commit, data fingerprint, quality status, eval suite coverage, metrics, artifact count, notes, tags, best-val rank, loss delta, a leaderboard, an interactive local HTML table, shareable URL state, and visible-row CSV export.
 
 The experiment card layer turns one run into a compact JSON/Markdown/HTML summary for review, handoff, or portfolio use.

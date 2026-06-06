@@ -2141,3 +2141,8 @@ e/663/解释/说明.md
 - `e/931/图片`
 - `e/931/解释/说明.md`
 - v931 randomized holdout publication registry packet screenshots and explanation.
+## v932 supplemental index
+
+- `e/932/图片`
+- `e/932/解释/说明.md`
+- v932 randomized holdout publication registry manifest screenshots and explanation.

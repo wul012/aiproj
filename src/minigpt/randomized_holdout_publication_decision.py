@@ -5,6 +5,10 @@ from pathlib import Path
 from typing import Any
 
 from minigpt.randomized_holdout_acceptance_publication_packet_review import RANDOMIZED_HOLDOUT_ACCEPTANCE_PUBLICATION_PACKET_REVIEW_JSON_FILENAME
+from minigpt.randomized_holdout_publication_constants import (
+    RANDOMIZED_HOLDOUT_PUBLICATION_ALLOWED_USE,
+    RANDOMIZED_HOLDOUT_PUBLICATION_DECISION_SCOPE,
+)
 from minigpt.report_utils import as_dict, utc_now
 
 
@@ -91,7 +95,7 @@ def _checks(
         _check("review_approves_bounded_publication", summary.get("approved_for_bounded_publication") is True and review.get("approved_for_bounded_publication") is True, {"summary": summary.get("approved_for_bounded_publication"), "review": review.get("approved_for_bounded_publication")}, "review must approve bounded publication"),
         _check("accepted_claim_count", int(summary.get("accepted_claim_count") or 0) == 1, summary.get("accepted_claim_count"), "decision expects exactly one accepted bounded claim"),
         _check("blocked_claim_count", int(summary.get("blocked_claim_count") or 0) >= 3, summary.get("blocked_claim_count"), "decision expects blocked claim boundaries"),
-        _check("allowed_use_bounded", summary.get("allowed_use") == "bounded_model_capability_governance_only", summary.get("allowed_use"), "allowed use must remain bounded governance only"),
+        _check("allowed_use_bounded", summary.get("allowed_use") == RANDOMIZED_HOLDOUT_PUBLICATION_ALLOWED_USE, summary.get("allowed_use"), "allowed use must remain bounded governance only"),
         _check("promotion_still_false", summary.get("promotion_ready") is False and review.get("promotion_ready") is False, {"summary": summary.get("promotion_ready"), "review": review.get("promotion_ready")}, "final decision must keep direct promotion blocked"),
         _check("approved_for_promotion_false", summary.get("approved_for_promotion") is False and review.get("approved_for_promotion") is False, {"summary": summary.get("approved_for_promotion"), "review": review.get("approved_for_promotion")}, "direct promotion approval must remain false"),
         _check("review_scope_bounded", summary.get("review_scope") == "bounded_randomized_holdout_publication_review_only", summary.get("review_scope"), "review scope must stay bounded"),
@@ -123,7 +127,7 @@ def _final_decision(status: str, review: dict[str, Any], summary: dict[str, Any]
         "pass_rate": summary.get("pass_rate") or review.get("pass_rate"),
         "allowed_use": summary.get("allowed_use") if accepted else "none",
         "model_quality_claim": summary.get("model_quality_claim") if accepted else "not_claimed",
-        "decision_scope": "bounded_randomized_holdout_publication_only" if accepted else "not_claimed",
+        "decision_scope": RANDOMIZED_HOLDOUT_PUBLICATION_DECISION_SCOPE if accepted else "not_claimed",
         "next_step": "index_randomized_holdout_publication_decision" if accepted else "repair_randomized_holdout_publication_review",
     }
 

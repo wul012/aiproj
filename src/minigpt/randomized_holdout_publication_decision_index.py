@@ -6,6 +6,11 @@ from typing import Any
 
 from minigpt.randomized_holdout_acceptance_publication_packet import RANDOMIZED_HOLDOUT_ACCEPTANCE_PUBLICATION_PACKET_JSON_FILENAME
 from minigpt.randomized_holdout_acceptance_publication_packet_review import RANDOMIZED_HOLDOUT_ACCEPTANCE_PUBLICATION_PACKET_REVIEW_JSON_FILENAME
+from minigpt.randomized_holdout_publication_constants import (
+    RANDOMIZED_HOLDOUT_PUBLICATION_ALLOWED_USE,
+    RANDOMIZED_HOLDOUT_PUBLICATION_DECISION_SCOPE,
+    RANDOMIZED_HOLDOUT_PUBLICATION_MODEL_QUALITY_CLAIM,
+)
 from minigpt.randomized_holdout_publication_decision import RANDOMIZED_HOLDOUT_PUBLICATION_DECISION_JSON_FILENAME
 from minigpt.report_utils import as_dict, utc_now
 
@@ -16,8 +21,6 @@ RANDOMIZED_HOLDOUT_PUBLICATION_DECISION_INDEX_TEXT_FILENAME = "randomized_holdou
 RANDOMIZED_HOLDOUT_PUBLICATION_DECISION_INDEX_MARKDOWN_FILENAME = "randomized_holdout_publication_decision_index.md"
 RANDOMIZED_HOLDOUT_PUBLICATION_DECISION_INDEX_HTML_FILENAME = "randomized_holdout_publication_decision_index.html"
 
-EXPECTED_ALLOWED_USE = "bounded_model_capability_governance_only"
-EXPECTED_MODEL_QUALITY_CLAIM = "bounded_randomized_target_hidden_holdout_claim_only"
 NEXT_STEP = "build_randomized_holdout_publication_registry_entry"
 
 
@@ -215,8 +218,8 @@ def _checks(
         _check("candidate_counts_match", _same_non_null(candidate_counts) and int(candidate_counts[0] or 0) >= 20, candidate_counts, "candidate case counts must match the randomized holdout floor"),
         _check("random_seed_matches", _same_non_null(seeds), seeds, "all sources must preserve the same randomized seed"),
         _check("pass_rate_complete", _same_non_null(pass_rates) and float(pass_rates[0] or 0.0) == 1.0, pass_rates, "all sources must preserve complete randomized replay pass rate"),
-        _check("allowed_use_bounded", all(row.get("allowed_use") == EXPECTED_ALLOWED_USE for row in source_rows), [row.get("allowed_use") for row in source_rows], "all sources must keep bounded governance allowed use"),
-        _check("model_quality_claim_bounded", all(row.get("model_quality_claim") == EXPECTED_MODEL_QUALITY_CLAIM for row in source_rows), [row.get("model_quality_claim") for row in source_rows], "all sources must keep the bounded randomized holdout claim"),
+        _check("allowed_use_bounded", all(row.get("allowed_use") == RANDOMIZED_HOLDOUT_PUBLICATION_ALLOWED_USE for row in source_rows), [row.get("allowed_use") for row in source_rows], "all sources must keep bounded governance allowed use"),
+        _check("model_quality_claim_bounded", all(row.get("model_quality_claim") == RANDOMIZED_HOLDOUT_PUBLICATION_MODEL_QUALITY_CLAIM for row in source_rows), [row.get("model_quality_claim") for row in source_rows], "all sources must keep the bounded randomized holdout claim"),
         _check("promotion_still_false", all(row.get("promotion_ready") is False for row in source_rows), [row.get("promotion_ready") for row in source_rows], "publication index must not widen into direct promotion"),
         _check("approved_for_promotion_false", all(row.get("approved_for_promotion") is False for row in source_rows), [row.get("approved_for_promotion") for row in source_rows], "direct promotion approval must remain false"),
         _check("source_checks_clean", all(int(row.get("failed_check_count") or 0) == 0 for row in source_rows), [row.get("failed_check_count") for row in source_rows], "all indexed source summaries must have clean checks"),
@@ -248,9 +251,9 @@ def _index(status: str, decision_summary: dict[str, Any], review_summary: dict[s
         "candidate_case_count": decision_summary.get("candidate_case_count") or review_summary.get("candidate_case_count") or packet_summary.get("candidate_case_count"),
         "random_seed": decision_summary.get("random_seed") or review_summary.get("random_seed") or packet_summary.get("random_seed"),
         "pass_rate": decision_summary.get("pass_rate") or review_summary.get("pass_rate") or packet_summary.get("pass_rate"),
-        "allowed_use": EXPECTED_ALLOWED_USE if ready else "none",
-        "model_quality_claim": EXPECTED_MODEL_QUALITY_CLAIM if ready else "not_claimed",
-        "decision_scope": "bounded_randomized_holdout_publication_only" if ready else "not_claimed",
+        "allowed_use": RANDOMIZED_HOLDOUT_PUBLICATION_ALLOWED_USE if ready else "none",
+        "model_quality_claim": RANDOMIZED_HOLDOUT_PUBLICATION_MODEL_QUALITY_CLAIM if ready else "not_claimed",
+        "decision_scope": RANDOMIZED_HOLDOUT_PUBLICATION_DECISION_SCOPE if ready else "not_claimed",
         "source_count": len(source_rows),
         "source_kinds": [str(row.get("kind")) for row in source_rows],
         "next_step": NEXT_STEP if ready else "repair_randomized_holdout_publication_decision_chain",

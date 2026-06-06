@@ -9,6 +9,10 @@ from minigpt.randomized_holdout_publication_registry_entry import (
     build_randomized_holdout_publication_registry_entry,
     read_json_report as read_registry_source_json,
 )
+from minigpt.randomized_holdout_publication_constants import (
+    RANDOMIZED_HOLDOUT_PUBLICATION_ENTRY_ID,
+    RANDOMIZED_HOLDOUT_PUBLICATION_MODEL_QUALITY_CLAIM,
+)
 from minigpt.report_utils import as_dict, utc_now
 
 
@@ -148,7 +152,7 @@ def _rebuild_entry(source_index: Path | None, original: dict[str, Any]) -> dict[
     return build_randomized_holdout_publication_registry_entry(
         read_registry_source_json(source_index),
         publication_decision_index_path=source_index,
-        entry_id=str(as_dict(original.get("summary")).get("entry_id") or "randomized-holdout-publication-v928"),
+        entry_id=str(as_dict(original.get("summary")).get("entry_id") or RANDOMIZED_HOLDOUT_PUBLICATION_ENTRY_ID),
     )
 
 
@@ -218,7 +222,7 @@ def _interpretation(status: str) -> dict[str, str]:
             "next_action": "repair randomized holdout publication registry entry",
         }
     return {
-        "model_quality_claim": "bounded_randomized_target_hidden_holdout_claim_only",
+            "model_quality_claim": RANDOMIZED_HOLDOUT_PUBLICATION_MODEL_QUALITY_CLAIM,
         "reason": "The registry entry can be rebuilt from the source publication decision index with stable bounded fields.",
         "next_action": "package_randomized_holdout_publication_registry_entry",
     }

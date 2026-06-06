@@ -16,6 +16,7 @@ from minigpt.randomized_holdout_publication_registry_entry import (  # noqa: E40
     read_json_report,
     resolve_exit_code,
 )
+from minigpt.randomized_holdout_publication_constants import RANDOMIZED_HOLDOUT_PUBLICATION_ENTRY_ID  # noqa: E402
 from minigpt.randomized_holdout_publication_registry_entry_artifacts import (  # noqa: E402
     render_randomized_holdout_publication_registry_entry_text,
     write_randomized_holdout_publication_registry_entry_outputs,
@@ -25,7 +26,7 @@ from minigpt.randomized_holdout_publication_registry_entry_artifacts import (  #
 def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Build a randomized holdout publication registry entry.")
     parser.add_argument("--publication-decision-index", type=Path, required=True, help="Publication decision index JSON or output directory.")
-    parser.add_argument("--entry-id", default="randomized-holdout-publication-v928")
+    parser.add_argument("--entry-id", default=RANDOMIZED_HOLDOUT_PUBLICATION_ENTRY_ID)
     parser.add_argument("--out-dir", type=Path, default=ROOT / "runs" / "randomized-holdout-publication-registry-entry")
     parser.add_argument("--require-entry-ready", action="store_true")
     parser.add_argument("--require-bounded-publication", action="store_true")

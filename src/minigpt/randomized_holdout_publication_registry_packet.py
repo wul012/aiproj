@@ -6,6 +6,12 @@ from typing import Any
 
 from minigpt.randomized_holdout_publication_registry_entry import RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_ENTRY_JSON_FILENAME
 from minigpt.randomized_holdout_publication_registry_entry_check import RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_ENTRY_CHECK_JSON_FILENAME
+from minigpt.randomized_holdout_publication_constants import (
+    RANDOMIZED_HOLDOUT_PUBLICATION_ALLOWED_USE,
+    RANDOMIZED_HOLDOUT_PUBLICATION_CONSUMER_BOUNDARY,
+    RANDOMIZED_HOLDOUT_PUBLICATION_MODEL_QUALITY_CLAIM,
+    RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_MANIFEST_NEXT_STEP,
+)
 from minigpt.report_utils import as_dict, utc_now
 
 
@@ -14,12 +20,6 @@ RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_PACKET_CSV_FILENAME = "randomized_holdou
 RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_PACKET_TEXT_FILENAME = "randomized_holdout_publication_registry_packet.txt"
 RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_PACKET_MARKDOWN_FILENAME = "randomized_holdout_publication_registry_packet.md"
 RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_PACKET_HTML_FILENAME = "randomized_holdout_publication_registry_packet.html"
-
-EXPECTED_ALLOWED_USE = "bounded_model_capability_governance_only"
-EXPECTED_MODEL_QUALITY_CLAIM = "bounded_randomized_target_hidden_holdout_claim_only"
-EXPECTED_CONSUMER_BOUNDARY = "governance_lookup_only"
-NEXT_STEP = "build_randomized_holdout_publication_registry_manifest"
-
 
 def locate_randomized_holdout_publication_registry_entry(path: str | Path) -> Path:
     source = Path(path)
@@ -125,9 +125,9 @@ def _checks(
         _check("contract_check_ready", check_summary.get("contract_check_ready") is True, check_summary.get("contract_check_ready"), "contract check summary must be ready"),
         _check("entry_id_matches_check", entry_summary.get("entry_id") == check_summary.get("original_entry_id") == check_summary.get("rebuilt_entry_id"), {"entry": entry_summary.get("entry_id"), "original": check_summary.get("original_entry_id"), "rebuilt": check_summary.get("rebuilt_entry_id")}, "entry id must match original and rebuilt check values"),
         _check("bounded_publication_accepted", entry_summary.get("bounded_publication_accepted") is True and check_summary.get("original_bounded_publication_accepted") is True and check_summary.get("rebuilt_bounded_publication_accepted") is True, {"entry": entry_summary.get("bounded_publication_accepted"), "original": check_summary.get("original_bounded_publication_accepted"), "rebuilt": check_summary.get("rebuilt_bounded_publication_accepted")}, "packet only accepts bounded publication-ready entries"),
-        _check("consumer_boundary_governance", entry_summary.get("consumer_boundary") == EXPECTED_CONSUMER_BOUNDARY and check_summary.get("original_consumer_boundary") == EXPECTED_CONSUMER_BOUNDARY and check_summary.get("rebuilt_consumer_boundary") == EXPECTED_CONSUMER_BOUNDARY, {"entry": entry_summary.get("consumer_boundary"), "original": check_summary.get("original_consumer_boundary"), "rebuilt": check_summary.get("rebuilt_consumer_boundary")}, "consumer boundary must remain governance lookup only"),
-        _check("allowed_use_bounded", entry_summary.get("allowed_use") == EXPECTED_ALLOWED_USE, entry_summary.get("allowed_use"), "allowed use must stay bounded governance only"),
-        _check("model_quality_claim_bounded", entry_summary.get("model_quality_claim") == EXPECTED_MODEL_QUALITY_CLAIM, entry_summary.get("model_quality_claim"), "model quality claim must stay bounded"),
+        _check("consumer_boundary_governance", entry_summary.get("consumer_boundary") == RANDOMIZED_HOLDOUT_PUBLICATION_CONSUMER_BOUNDARY and check_summary.get("original_consumer_boundary") == RANDOMIZED_HOLDOUT_PUBLICATION_CONSUMER_BOUNDARY and check_summary.get("rebuilt_consumer_boundary") == RANDOMIZED_HOLDOUT_PUBLICATION_CONSUMER_BOUNDARY, {"entry": entry_summary.get("consumer_boundary"), "original": check_summary.get("original_consumer_boundary"), "rebuilt": check_summary.get("rebuilt_consumer_boundary")}, "consumer boundary must remain governance lookup only"),
+        _check("allowed_use_bounded", entry_summary.get("allowed_use") == RANDOMIZED_HOLDOUT_PUBLICATION_ALLOWED_USE, entry_summary.get("allowed_use"), "allowed use must stay bounded governance only"),
+        _check("model_quality_claim_bounded", entry_summary.get("model_quality_claim") == RANDOMIZED_HOLDOUT_PUBLICATION_MODEL_QUALITY_CLAIM, entry_summary.get("model_quality_claim"), "model quality claim must stay bounded"),
         _check("promotion_still_false", entry_summary.get("promotion_ready") is False, entry_summary.get("promotion_ready"), "packet must not enable direct promotion"),
         _check("approved_for_promotion_false", entry_summary.get("approved_for_promotion") is False, entry_summary.get("approved_for_promotion"), "packet must not approve direct promotion"),
         _check("source_checks_clean", int(entry_summary.get("failed_check_count") or 0) == 0 and int(check_summary.get("failed_check_count") or 0) == 0, {"entry": entry_summary.get("failed_check_count"), "check": check_summary.get("failed_check_count")}, "entry and contract check must have no failed checks"),
@@ -154,11 +154,11 @@ def _packet(status: str, entry_summary: dict[str, Any], check_summary: dict[str,
         "candidate_case_count": entry_summary.get("candidate_case_count"),
         "random_seed": entry_summary.get("random_seed"),
         "pass_rate": entry_summary.get("pass_rate"),
-        "allowed_use": EXPECTED_ALLOWED_USE if ready else "none",
-        "model_quality_claim": EXPECTED_MODEL_QUALITY_CLAIM if ready else "not_claimed",
-        "consumer_boundary": EXPECTED_CONSUMER_BOUNDARY if ready else "not_ready",
+        "allowed_use": RANDOMIZED_HOLDOUT_PUBLICATION_ALLOWED_USE if ready else "none",
+        "model_quality_claim": RANDOMIZED_HOLDOUT_PUBLICATION_MODEL_QUALITY_CLAIM if ready else "not_claimed",
+        "consumer_boundary": RANDOMIZED_HOLDOUT_PUBLICATION_CONSUMER_BOUNDARY if ready else "not_ready",
         "evidence_count": len(evidence_rows),
-        "next_step": NEXT_STEP if ready else "repair_randomized_holdout_publication_registry_packet",
+        "next_step": RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_MANIFEST_NEXT_STEP if ready else "repair_randomized_holdout_publication_registry_packet",
     }
 
 
