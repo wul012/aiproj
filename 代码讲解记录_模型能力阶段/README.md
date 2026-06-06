@@ -1394,6 +1394,9 @@
 947-v933-randomized-holdout-publication-registry-manifest-review.md
  -> v933 code explanation: review the registry manifest for governance lookup consumption while keeping production promotion rejected.
 
+948-v934-randomized-holdout-publication-registry-lookup-packet.md
+ -> v934 code explanation: package the lookup-only manifest review into a stable governance lookup packet while preserving production-promotion rejection.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。
