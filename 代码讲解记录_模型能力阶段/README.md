@@ -1340,6 +1340,9 @@
 929-v915-randomized-target-hidden-holdout-dry-run.md
  -> v915 code explanation: dry-run the randomized target-hidden scoring contract before real checkpoint replay.
 
+930-v916-randomized-target-hidden-holdout-real-replay.md
+ -> v916 code explanation: replay the real checkpoint against the 20-case seeded randomized target-hidden holdout.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

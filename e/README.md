@@ -2061,3 +2061,8 @@ e/663/解释/说明.md
 - `e/915/图片`
 - `e/915/解释/说明.md`
 - v915 randomized target-hidden holdout dry-run screenshots and explanation.
+## v916 supplemental index
+
+- `e/916/图片`
+- `e/916/解释/说明.md`
+- v916 randomized target-hidden holdout real-replay screenshots and explanation.

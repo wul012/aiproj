@@ -4,7 +4,23 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v915.0.0` dry-runs the 20-case randomized target-hidden holdout scoring contract before real replay.
+Version `v916.0.0` replays the real v890 checkpoint against the 20-case randomized target-hidden holdout.
+
+## Latest v916 checkpoint
+
+- Added short-name module `randomized_target_hidden_holdout_real_replay`.
+- Added CLI `scripts/run_randomized_target_hidden_holdout_real_replay.py`.
+- Consumed the real v914 randomized suite and v915 dry-run.
+- Replayed the real v890 checkpoint/tokenizer on CPU.
+- Executed all 20 seeded randomized target-hidden prompts.
+- Recorded `passed_case_count=20`, `failed_case_count=0`, `any_hit_case_count=20`, `zero_hit_case_count=0`, and `pass_rate=1.0`.
+- Confirmed `randomized_holdout_model_quality_ready=True`.
+- Kept `promotion_ready=False` and `model_quality_claim=randomized_target_hidden_holdout_replay_only`.
+- Routed the next action to `review_randomized_target_hidden_holdout_replay_result`.
+- Verified with `4 passed` focused randomized real-replay tests and Playwright MCP screenshot evidence.
+- Archived v916 evidence in `e/916` and added the code explanation in `代码讲解记录_模型能力阶段/930-v916-randomized-target-hidden-holdout-real-replay.md`.
+
+## Latest v915 checkpoint
 
 ## Latest v915 checkpoint
 

@@ -1,0 +1,17 @@
+status=pass
+decision=randomized_target_hidden_holdout_real_replay_passed_review_required
+failed_count=0
+randomized_target_hidden_holdout_real_replay_ready=True
+randomized_holdout_model_quality_ready=True
+case_count=20
+source_random_seed=914
+source_randomized_case_factor=2.0
+executed_case_count=20
+passed_case_count=20
+failed_case_count=0
+any_hit_case_count=20
+zero_hit_case_count=0
+pass_rate=1.0
+promotion_ready=False
+model_quality_claim=randomized_target_hidden_holdout_replay_only
+next_step=review_randomized_target_hidden_holdout_replay_result
