@@ -1,0 +1,439 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT randomized holdout candidate promotion packet",
+  "generated_at": "2026-06-06T03:20:56Z",
+  "status": "pass",
+  "decision": "randomized_holdout_candidate_promotion_packet_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_replay_review": "e\\917\\解释\\randomized-target-hidden-holdout-replay-review\\randomized_target_hidden_holdout_replay_review.json",
+  "source_real_replay": "e\\916\\解释\\randomized-target-hidden-holdout-real-replay\\randomized_target_hidden_holdout_real_replay.json",
+  "source_dry_run": "e\\915\\解释\\randomized-target-hidden-holdout-dry-run\\randomized_target_hidden_holdout_dry_run.json",
+  "source_holdout_suite": "e\\914\\解释\\randomized-target-hidden-holdout-suite\\randomized_target_hidden_holdout_suite.json",
+  "replay_review_summary": {
+    "randomized_target_hidden_holdout_replay_review_ready": true,
+    "source_randomized_holdout_model_quality_ready": true,
+    "case_count": 20,
+    "passed_case_count": 20,
+    "pass_rate": 1.0,
+    "source_random_seed": 914,
+    "source_randomized_case_factor": 2.0,
+    "target_leakage_case_count": 0,
+    "target_hidden_case_count": 20,
+    "task_hint_case_count": 0,
+    "unique_prompt_count": 20,
+    "randomized_prompt_count": 20,
+    "clean_randomized_case_count": 20,
+    "approved_for_candidate_promotion_packet": true,
+    "approved_for_promotion": false,
+    "promotion_ready": false,
+    "model_quality_claim": "randomized_target_hidden_holdout_clean_signal_reviewed",
+    "next_step": "build_randomized_holdout_candidate_promotion_packet",
+    "failed_check_count": 0
+  },
+  "real_replay_summary": {
+    "randomized_target_hidden_holdout_real_replay_ready": true,
+    "case_count": 20,
+    "source_random_seed": 914,
+    "source_randomized_case_factor": 2.0,
+    "source_unique_prompt_count": 20,
+    "executed_case_count": 20,
+    "passed_case_count": 20,
+    "failed_case_count": 0,
+    "any_hit_case_count": 20,
+    "zero_hit_case_count": 0,
+    "pass_rate": 1.0,
+    "holdout_model_quality_ready": true,
+    "randomized_holdout_model_quality_ready": true,
+    "promotion_ready": false,
+    "model_quality_claim": "randomized_target_hidden_holdout_replay_only",
+    "next_step": "review_randomized_target_hidden_holdout_replay_result",
+    "failed_check_count": 0
+  },
+  "dry_run_summary": {
+    "randomized_target_hidden_holdout_dry_run_ready": true,
+    "case_count": 20,
+    "source_random_seed": 914,
+    "source_randomized_case_factor": 2.0,
+    "source_unique_prompt_count": 20,
+    "positive_passed_case_count": 20,
+    "negative_passed_case_count": 0,
+    "negative_control_passed": false,
+    "promotion_ready": false,
+    "model_quality_claim": "dry_run_only",
+    "next_step": "run_randomized_target_hidden_holdout_real_replay",
+    "failed_check_count": 0
+  },
+  "holdout_suite_summary": {
+    "randomized_target_hidden_holdout_suite_ready": true,
+    "source_case_count": 10,
+    "candidate_case_count": 20,
+    "random_seed": 914,
+    "randomized_case_factor": 2.0,
+    "tokenizer_covered_case_count": 20,
+    "target_hidden_case_count": 20,
+    "task_hint_case_count": 0,
+    "unique_prompt_count": 20,
+    "new_vs_source_prompt_count": 20,
+    "candidate_prompt_unknown_token_count": 0,
+    "source_prompt_mutation_clean_case_count": 10,
+    "source_pass_rate": 1.0,
+    "expected_terms": [
+      "fixed",
+      "loss"
+    ],
+    "promotion_ready": false,
+    "model_quality_claim": "suite_construction_only",
+    "next_step": "dry_run_randomized_target_hidden_holdout",
+    "failed_check_count": 0
+  },
+  "evidence_rows": [
+    {
+      "kind": "randomized_replay_review",
+      "path": "e\\917\\解释\\randomized-target-hidden-holdout-replay-review\\randomized_target_hidden_holdout_replay_review.json",
+      "exists": true,
+      "status": "pass",
+      "decision": "randomized_target_hidden_holdout_replay_review_clean_signal_candidate_packet_required",
+      "ready_key": "randomized_target_hidden_holdout_replay_review_ready",
+      "ready_value": true,
+      "promotion_ready": false,
+      "role": "authorizes candidate packet while blocking direct promotion"
+    },
+    {
+      "kind": "randomized_real_replay",
+      "path": "e\\916\\解释\\randomized-target-hidden-holdout-real-replay\\randomized_target_hidden_holdout_real_replay.json",
+      "exists": true,
+      "status": "pass",
+      "decision": "randomized_target_hidden_holdout_real_replay_passed_review_required",
+      "ready_key": "randomized_target_hidden_holdout_real_replay_ready",
+      "ready_value": true,
+      "promotion_ready": false,
+      "role": "proves the real checkpoint passes randomized target-hidden prompts"
+    },
+    {
+      "kind": "randomized_dry_run",
+      "path": "e\\915\\解释\\randomized-target-hidden-holdout-dry-run\\randomized_target_hidden_holdout_dry_run.json",
+      "exists": true,
+      "status": "pass",
+      "decision": "randomized_target_hidden_holdout_dry_run_passed",
+      "ready_key": "randomized_target_hidden_holdout_dry_run_ready",
+      "ready_value": true,
+      "promotion_ready": false,
+      "role": "proves the scoring contract rejects the fixed-only negative control"
+    },
+    {
+      "kind": "randomized_suite",
+      "path": "e\\914\\解释\\randomized-target-hidden-holdout-suite\\randomized_target_hidden_holdout_suite.json",
+      "exists": true,
+      "status": "pass",
+      "decision": "randomized_target_hidden_holdout_suite_ready",
+      "ready_key": "randomized_target_hidden_holdout_suite_ready",
+      "ready_value": true,
+      "promotion_ready": false,
+      "role": "defines the 20 target-hidden randomized prompts"
+    }
+  ],
+  "check_rows": [
+    {
+      "id": "replay_review_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "replay review must pass"
+    },
+    {
+      "id": "replay_review_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "review summary must be ready"
+    },
+    {
+      "id": "candidate_packet_authorized",
+      "status": "pass",
+      "actual": true,
+      "detail": "review must authorize a candidate packet"
+    },
+    {
+      "id": "review_blocks_direct_promotion",
+      "status": "pass",
+      "actual": {
+        "approved_for_promotion": false,
+        "promotion_ready": false
+      },
+      "detail": "review must not widen the claim into promotion"
+    },
+    {
+      "id": "review_routes_to_packet",
+      "status": "pass",
+      "actual": "build_randomized_holdout_candidate_promotion_packet",
+      "detail": "review should route to this packet"
+    },
+    {
+      "id": "real_replay_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "real replay must pass"
+    },
+    {
+      "id": "real_replay_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "real replay summary must be ready"
+    },
+    {
+      "id": "real_model_signal_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "real replay must carry the randomized model-quality signal"
+    },
+    {
+      "id": "dry_run_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "dry-run must pass structurally"
+    },
+    {
+      "id": "dry_run_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "dry-run summary must be ready"
+    },
+    {
+      "id": "negative_control_rejected",
+      "status": "pass",
+      "actual": false,
+      "detail": "negative control must not pass"
+    },
+    {
+      "id": "suite_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "randomized suite must pass"
+    },
+    {
+      "id": "suite_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "suite summary must be ready"
+    },
+    {
+      "id": "candidate_count_at_least_twenty",
+      "status": "pass",
+      "actual": 20,
+      "detail": "packet requires at least 20 randomized cases"
+    },
+    {
+      "id": "suite_cases_match_summary",
+      "status": "pass",
+      "actual": {
+        "cases": 20,
+        "summary": 20
+      },
+      "detail": "suite case list must match summary"
+    },
+    {
+      "id": "case_counts_consistent",
+      "status": "pass",
+      "actual": [
+        20,
+        20,
+        20,
+        20,
+        20
+      ],
+      "detail": "suite, dry-run, replay, and review must cover the same case count"
+    },
+    {
+      "id": "random_seed_consistent",
+      "status": "pass",
+      "actual": [
+        914,
+        914,
+        914,
+        914
+      ],
+      "detail": "all randomized reports must carry the same source seed"
+    },
+    {
+      "id": "pass_rate_complete",
+      "status": "pass",
+      "actual": {
+        "review": 1.0,
+        "real": 1.0
+      },
+      "detail": "candidate packet expects a 1.0 randomized replay pass rate"
+    },
+    {
+      "id": "clean_randomized_cases_complete",
+      "status": "pass",
+      "actual": 20,
+      "detail": "review must mark every randomized case clean"
+    },
+    {
+      "id": "target_hidden_complete",
+      "status": "pass",
+      "actual": 20,
+      "detail": "review must keep every randomized case target-hidden"
+    },
+    {
+      "id": "no_task_hints_or_leakage",
+      "status": "pass",
+      "actual": {
+        "hints": 0,
+        "leakage": 0
+      },
+      "detail": "review must report no hints or target leakage"
+    },
+    {
+      "id": "all_evidence_files_exist",
+      "status": "pass",
+      "actual": [
+        {
+          "kind": "randomized_replay_review",
+          "path": "e\\917\\解释\\randomized-target-hidden-holdout-replay-review\\randomized_target_hidden_holdout_replay_review.json",
+          "exists": true,
+          "status": "pass",
+          "decision": "randomized_target_hidden_holdout_replay_review_clean_signal_candidate_packet_required",
+          "ready_key": "randomized_target_hidden_holdout_replay_review_ready",
+          "ready_value": true,
+          "promotion_ready": false,
+          "role": "authorizes candidate packet while blocking direct promotion"
+        },
+        {
+          "kind": "randomized_real_replay",
+          "path": "e\\916\\解释\\randomized-target-hidden-holdout-real-replay\\randomized_target_hidden_holdout_real_replay.json",
+          "exists": true,
+          "status": "pass",
+          "decision": "randomized_target_hidden_holdout_real_replay_passed_review_required",
+          "ready_key": "randomized_target_hidden_holdout_real_replay_ready",
+          "ready_value": true,
+          "promotion_ready": false,
+          "role": "proves the real checkpoint passes randomized target-hidden prompts"
+        },
+        {
+          "kind": "randomized_dry_run",
+          "path": "e\\915\\解释\\randomized-target-hidden-holdout-dry-run\\randomized_target_hidden_holdout_dry_run.json",
+          "exists": true,
+          "status": "pass",
+          "decision": "randomized_target_hidden_holdout_dry_run_passed",
+          "ready_key": "randomized_target_hidden_holdout_dry_run_ready",
+          "ready_value": true,
+          "promotion_ready": false,
+          "role": "proves the scoring contract rejects the fixed-only negative control"
+        },
+        {
+          "kind": "randomized_suite",
+          "path": "e\\914\\解释\\randomized-target-hidden-holdout-suite\\randomized_target_hidden_holdout_suite.json",
+          "exists": true,
+          "status": "pass",
+          "decision": "randomized_target_hidden_holdout_suite_ready",
+          "ready_key": "randomized_target_hidden_holdout_suite_ready",
+          "ready_value": true,
+          "promotion_ready": false,
+          "role": "defines the 20 target-hidden randomized prompts"
+        }
+      ],
+      "detail": "all packet source files must exist"
+    },
+    {
+      "id": "all_inputs_keep_promotion_false",
+      "status": "pass",
+      "actual": [
+        false,
+        false,
+        false,
+        false
+      ],
+      "detail": "candidate packet must not silently become promotion"
+    }
+  ],
+  "packet": {
+    "packet_ready": true,
+    "handoff_status": "ready_for_candidate_promotion_packet_review",
+    "candidate_case_count": 20,
+    "suite_case_count": 20,
+    "random_seed": 914,
+    "randomized_case_factor": 2.0,
+    "passed_case_count": 20,
+    "pass_rate": 1.0,
+    "clean_randomized_case_count": 20,
+    "positive_dry_run_passed_case_count": 20,
+    "negative_dry_run_passed_case_count": 0,
+    "candidate_packet_authorized": true,
+    "promotion_ready": false,
+    "approved_for_promotion": false,
+    "model_quality_claim": "candidate_packet_only",
+    "next_step": "review_randomized_holdout_candidate_promotion_packet",
+    "evidence_rows": [
+      {
+        "kind": "randomized_replay_review",
+        "path": "e\\917\\解释\\randomized-target-hidden-holdout-replay-review\\randomized_target_hidden_holdout_replay_review.json",
+        "exists": true,
+        "status": "pass",
+        "decision": "randomized_target_hidden_holdout_replay_review_clean_signal_candidate_packet_required",
+        "ready_key": "randomized_target_hidden_holdout_replay_review_ready",
+        "ready_value": true,
+        "promotion_ready": false,
+        "role": "authorizes candidate packet while blocking direct promotion"
+      },
+      {
+        "kind": "randomized_real_replay",
+        "path": "e\\916\\解释\\randomized-target-hidden-holdout-real-replay\\randomized_target_hidden_holdout_real_replay.json",
+        "exists": true,
+        "status": "pass",
+        "decision": "randomized_target_hidden_holdout_real_replay_passed_review_required",
+        "ready_key": "randomized_target_hidden_holdout_real_replay_ready",
+        "ready_value": true,
+        "promotion_ready": false,
+        "role": "proves the real checkpoint passes randomized target-hidden prompts"
+      },
+      {
+        "kind": "randomized_dry_run",
+        "path": "e\\915\\解释\\randomized-target-hidden-holdout-dry-run\\randomized_target_hidden_holdout_dry_run.json",
+        "exists": true,
+        "status": "pass",
+        "decision": "randomized_target_hidden_holdout_dry_run_passed",
+        "ready_key": "randomized_target_hidden_holdout_dry_run_ready",
+        "ready_value": true,
+        "promotion_ready": false,
+        "role": "proves the scoring contract rejects the fixed-only negative control"
+      },
+      {
+        "kind": "randomized_suite",
+        "path": "e\\914\\解释\\randomized-target-hidden-holdout-suite\\randomized_target_hidden_holdout_suite.json",
+        "exists": true,
+        "status": "pass",
+        "decision": "randomized_target_hidden_holdout_suite_ready",
+        "ready_key": "randomized_target_hidden_holdout_suite_ready",
+        "ready_value": true,
+        "promotion_ready": false,
+        "role": "defines the 20 target-hidden randomized prompts"
+      }
+    ]
+  },
+  "summary": {
+    "randomized_holdout_candidate_promotion_packet_ready": true,
+    "handoff_status": "ready_for_candidate_promotion_packet_review",
+    "candidate_case_count": 20,
+    "suite_case_count": 20,
+    "random_seed": 914,
+    "randomized_case_factor": 2.0,
+    "passed_case_count": 20,
+    "pass_rate": 1.0,
+    "clean_randomized_case_count": 20,
+    "positive_dry_run_passed_case_count": 20,
+    "negative_dry_run_passed_case_count": 0,
+    "candidate_packet_authorized": true,
+    "promotion_ready": false,
+    "approved_for_promotion": false,
+    "model_quality_claim": "candidate_packet_only",
+    "next_step": "review_randomized_holdout_candidate_promotion_packet",
+    "evidence_count": 4,
+    "passed_check_count": 23,
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "candidate_packet_only",
+    "reason": "The randomized target-hidden holdout chain is packaged for candidate-promotion review without widening into promotion.",
+    "next_action": "review_randomized_holdout_candidate_promotion_packet"
+  }
+}

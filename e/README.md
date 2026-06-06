@@ -2071,3 +2071,8 @@ e/663/解释/说明.md
 - `e/917/图片`
 - `e/917/解释/说明.md`
 - v917 randomized target-hidden holdout replay review screenshots and explanation.
+## v918 supplemental index
+
+- `e/918/图片`
+- `e/918/解释/说明.md`
+- v918 randomized holdout candidate promotion packet screenshots and explanation.

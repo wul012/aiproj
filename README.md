@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v917.0.0` reviews the 20-case randomized replay and routes the clean signal to a candidate promotion packet.
+Version `v918.0.0` packages the randomized target-hidden evidence chain into a candidate promotion packet while keeping direct promotion blocked.
+
+## Latest v918 checkpoint
+
+- Added short-name module `randomized_holdout_candidate_promotion_packet`.
+- Added CLI `scripts/build_randomized_holdout_candidate_promotion_packet.py`.
+- Consumed v917 replay review, v916 real replay, v915 dry-run, and v914 randomized suite evidence.
+- Built a 4-source evidence manifest covering review, real replay, dry-run, and suite reports.
+- Checked source files exist, all inputs are `status=pass`, case counts match, random seed stays `914`, pass rate remains `1.0`, and the negative control remains rejected.
+- Confirmed `candidate_case_count=20`, `clean_randomized_case_count=20`, `candidate_packet_authorized=True`, and `randomized_holdout_candidate_promotion_packet_ready=True`.
+- Kept `promotion_ready=False`, `approved_for_promotion=False`, and `model_quality_claim=candidate_packet_only`.
+- Routed the next action to `review_randomized_holdout_candidate_promotion_packet`.
+- Verified with `5 passed` focused candidate-packet tests and Playwright MCP screenshot evidence.
+- Archived v918 evidence in `e/918` and added the code explanation in `代码讲解记录_模型能力阶段/932-v918-randomized-holdout-candidate-promotion-packet.md`.
 
 ## Latest v917 checkpoint
 
