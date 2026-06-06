@@ -4,7 +4,19 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v918.0.0` packages the randomized target-hidden evidence chain into a candidate promotion packet while keeping direct promotion blocked.
+Version `v919.0.0` reviews the randomized candidate packet and approves only a bounded promotion gate while keeping direct promotion blocked.
+
+## Latest v919 checkpoint
+
+- Added short-name module `randomized_holdout_candidate_promotion_packet_review`.
+- Added CLI `scripts/review_randomized_holdout_candidate_promotion_packet.py`.
+- Consumed the real v918 candidate promotion packet evidence.
+- Rechecked packet readiness, handoff status, 20-case floor, case-count consistency, seed presence, pass rate, negative-control rejection, evidence readiness, and promotion-boundary fields.
+- Confirmed `randomized_holdout_candidate_promotion_packet_review_ready=True`, `candidate_case_count=20`, `random_seed=914`, `pass_rate=1.0`, and `approved_for_bounded_promotion_gate=True`.
+- Kept `promotion_ready=False`, `approved_for_promotion=False`, and `model_quality_claim=candidate_packet_review_only`.
+- Routed the next action to `build_randomized_holdout_bounded_promotion_gate`.
+- Verified with `5 passed` focused packet-review tests and Playwright MCP screenshot evidence.
+- Archived v919 evidence in `e/919` and added the code explanation in `代码讲解记录_模型能力阶段/933-v919-randomized-holdout-candidate-promotion-packet-review.md`.
 
 ## Latest v918 checkpoint
 

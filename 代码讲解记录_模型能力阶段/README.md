@@ -1349,6 +1349,9 @@
 932-v918-randomized-holdout-candidate-promotion-packet.md
  -> v918 code explanation: package the randomized target-hidden suite, dry-run, real replay, and review evidence into a candidate promotion packet while keeping direct promotion blocked.
 
+933-v919-randomized-holdout-candidate-promotion-packet-review.md
+ -> v919 code explanation: review the randomized candidate packet for bounded gate approval while keeping direct promotion blocked.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

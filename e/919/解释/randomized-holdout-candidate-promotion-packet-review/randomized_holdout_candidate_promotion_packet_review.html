@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT randomized holdout candidate promotion packet review</title>
+<style>
+:root{color-scheme:light;--ink:#17212b;--muted:#62717d;--line:#d7dee5;--panel:#f8fafc;--accent:#1d4ed8}
+*{box-sizing:border-box}
+body{margin:0;background:#f2f4f7;color:var(--ink);font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1180px;margin:0 auto;padding:28px}
+h1{font-size:30px;margin:0 0 8px;letter-spacing:0}
+h2{font-size:18px;margin:0 0 12px;letter-spacing:0}
+p{color:var(--muted);line-height:1.55;overflow-wrap:anywhere}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:18px 0}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:8px}
+.card{padding:14px}
+.card span{display:block;color:var(--muted);font-size:12px;text-transform:uppercase}
+.card strong{display:block;margin-top:6px;font-size:18px;line-height:1.2;color:var(--accent);overflow-wrap:anywhere}
+.panel{padding:16px;margin:14px 0}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:#334155}
+td{overflow-wrap:anywhere}
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT randomized holdout candidate promotion packet review</h1><p>The randomized holdout candidate packet is ready for a bounded gate while direct promotion remains blocked.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Review ready</span><strong>True</strong></div><div class="card"><span>Cases</span><strong>20</strong></div><div class="card"><span>Seed</span><strong>914</strong></div><div class="card"><span>Pass rate</span><strong>1.0</strong></div><div class="card"><span>Bounded gate</span><strong>True</strong></div><div class="card"><span>Promotion</span><strong>False</strong></div><div class="card"><span>Scope</span><strong>bounded_randomized_holdout_candidate_review_only</strong></div><div class="card"><span>Next</span><strong>build_randomized_holdout_bounded_promotion_gate</strong></div></section>
+<section class="panel"><h2>Checks</h2><div class="table-wrap"><table>
+<thead><tr><th>Check</th><th>Status</th><th>Actual</th><th>Detail</th></tr></thead>
+<tbody><tr><td>candidate_packet_passed</td><td>pass</td><td>pass</td><td>candidate packet must pass</td></tr><tr><td>candidate_packet_decision_ready</td><td>pass</td><td>randomized_holdout_candidate_promotion_packet_ready</td><td>candidate packet decision must be ready</td></tr><tr><td>candidate_packet_summary_ready</td><td>pass</td><td>True</td><td>candidate packet summary must be ready</td></tr><tr><td>packet_ready</td><td>pass</td><td>True</td><td>source packet body must be ready</td></tr><tr><td>handoff_ready_for_review</td><td>pass</td><td>ready_for_candidate_promotion_packet_review</td><td>candidate packet must route to packet review</td></tr><tr><td>candidate_case_count_floor</td><td>pass</td><td>20</td><td>review requires the randomized 20-case floor</td></tr><tr><td>suite_case_count_matches</td><td>pass</td><td>{&#x27;suite&#x27;: 20, &#x27;candidate&#x27;: 20}</td><td>suite and candidate counts must match</td></tr><tr><td>clean_cases_complete</td><td>pass</td><td>20</td><td>all candidate prompts must remain clean randomized prompts</td></tr><tr><td>random_seed_present</td><td>pass</td><td>914</td><td>review needs the randomized source seed</td></tr><tr><td>pass_rate_complete</td><td>pass</td><td>1.0</td><td>candidate packet must preserve the 1.0 randomized replay pass rate</td></tr><tr><td>negative_control_rejected</td><td>pass</td><td>0</td><td>dry-run negative control must remain rejected</td></tr><tr><td>candidate_packet_authorized</td><td>pass</td><td>True</td><td>source review must authorize the candidate packet</td></tr><tr><td>source_checks_clean</td><td>pass</td><td>0</td><td>source packet checks must be clean</td></tr><tr><td>evidence_count</td><td>pass</td><td>4</td><td>review requires suite, dry-run, real replay, and replay review evidence</td></tr><tr><td>evidence_files_exist</td><td>pass</td><td>[{&#x27;kind&#x27;: &#x27;randomized_replay_review&#x27;, &#x27;path&#x27;: &#x27;e\\917\\解释\\randomized-target-hidden-holdout-replay-review\\randomized_target_hidden_holdout_replay_review.json&#x27;, &#x27;exists&#x27;: True, &#x27;status&#x27;: &#x27;pass&#x27;, &#x27;decision&#x27;: &#x27;randomized_target_hidden_holdout_replay_review_clean_signal_candidate_packet_required&#x27;, &#x27;ready_key&#x27;: &#x27;randomized_target_hidden_holdout_replay_review_ready&#x27;, &#x27;ready_value&#x27;: True, &#x27;promotion_ready&#x27;: False, &#x27;role&#x27;: &#x27;authorizes candidate packet while blocking direct promotion&#x27;}, {&#x27;kind&#x27;: &#x27;randomized_real_replay&#x27;, &#x27;path&#x27;: &#x27;e\\916\\解释\\randomized-target-hidden-holdout-real-replay\\randomized_target_hidden_holdout_real_replay.json&#x27;, &#x27;exists&#x27;: True, &#x27;status&#x27;: &#x27;pass&#x27;, &#x27;decision&#x27;: &#x27;randomized_target_hidden_holdout_real_replay_passed_review_required&#x27;, &#x27;ready_key&#x27;: &#x27;randomized_target_hidden_holdout_real_replay_ready&#x27;, &#x27;ready_value&#x27;: True, &#x27;promotion_ready&#x27;: False, &#x27;role&#x27;: &#x27;proves the real checkpoint passes randomized target-hidden prompts&#x27;}, {&#x27;kind&#x27;: &#x27;randomized_dry_run&#x27;, &#x27;path&#x27;: &#x27;e\\915\\解释\\randomized-target-hidden-holdout-dry-run\\randomized_target_hidden_holdout_dry_run.json&#x27;, &#x27;exists&#x27;: True, &#x27;status&#x27;: &#x27;pass&#x27;, &#x27;decision&#x27;: &#x27;randomized_target_hidden_holdout_dry_run_passed&#x27;, &#x27;ready_key&#x27;: &#x27;randomized_target_hidden_holdout_dry_run_ready&#x27;, &#x27;ready_value&#x27;: True, &#x27;promotion_ready&#x27;: False, &#x27;role&#x27;: &#x27;proves the scoring contract rejects the fixed-only negative control&#x27;}, {&#x27;kind&#x27;: &#x27;randomized_suite&#x27;, &#x27;path&#x27;: &#x27;e\\914\\解释\\randomized-target-hidden-holdout-suite\\randomized_target_hidden_holdout_suite.json&#x27;, &#x27;exists&#x27;: True, &#x27;status&#x27;: &#x27;pass&#x27;, &#x27;decision&#x27;: &#x27;randomized_target_hidden_holdout_suite_ready&#x27;, &#x27;ready_key&#x27;: &#x27;randomized_target_hidden_holdout_suite_ready&#x27;, &#x27;ready_value&#x27;: True, &#x27;promotion_ready&#x27;: False, &#x27;role&#x27;: &#x27;defines the 20 target-hidden randomized prompts&#x27;}]</td><td>all evidence source paths must exist</td></tr><tr><td>evidence_ready</td><td>pass</td><td>[True, True, True, True]</td><td>all evidence rows must report ready</td></tr><tr><td>evidence_keeps_promotion_false</td><td>pass</td><td>[False, False, False, False]</td><td>source evidence must not claim promotion</td></tr><tr><td>packet_keeps_promotion_false</td><td>pass</td><td>{&#x27;summary&#x27;: False, &#x27;packet&#x27;: False}</td><td>candidate packet review must not widen into promotion</td></tr><tr><td>approved_for_promotion_false</td><td>pass</td><td>{&#x27;summary&#x27;: False, &#x27;packet&#x27;: False}</td><td>direct promotion must remain false</td></tr><tr><td>claim_is_candidate_packet_only</td><td>pass</td><td>candidate_packet_only</td><td>source claim must remain candidate-packet only</td></tr></tbody>
+</table></div></section>
+</main>
+</body>
+</html>
