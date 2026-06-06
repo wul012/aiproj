@@ -4,7 +4,19 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v925.0.0` packages the verified randomized holdout acceptance summary and contract check into a bounded publication packet for downstream review.
+Version `v926.0.0` reviews the randomized holdout acceptance publication packet and approves only bounded downstream publication while keeping direct promotion blocked.
+
+## Latest v926 checkpoint
+
+- Added short-name module `randomized_holdout_acceptance_publication_packet_review`.
+- Added CLI `scripts/review_randomized_holdout_acceptance_publication_packet.py`.
+- Consumed the real v925 publication packet.
+- Checked packet readiness, handoff status, accepted/blocked claim counts, allowed-use boundary, contract-check readiness, evidence existence, and promotion-boundary fields.
+- Confirmed `randomized_holdout_acceptance_publication_packet_review_ready=True`, `approved_for_bounded_publication=True`, `allowed_use=bounded_model_capability_governance_only`, and `review_scope=bounded_randomized_holdout_publication_review_only`.
+- Kept `promotion_ready=False` and `approved_for_promotion=False`.
+- Routed the next action to `record_randomized_holdout_publication_decision`.
+- Verified with `8 passed` focused review tests and Playwright MCP screenshot evidence.
+- Archived v926 evidence in `e/926` and added the code explanation in `代码讲解记录_模型能力阶段/940-v926-randomized-holdout-acceptance-publication-packet-review.md`.
 
 ## Latest v925 checkpoint
 

@@ -2111,3 +2111,8 @@ e/663/解释/说明.md
 - `e/925/图片`
 - `e/925/解释/说明.md`
 - v925 randomized holdout acceptance publication packet screenshots and explanation.
+## v926 supplemental index
+
+- `e/926/图片`
+- `e/926/解释/说明.md`
+- v926 randomized holdout acceptance publication packet review screenshots and explanation.

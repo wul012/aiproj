@@ -1,0 +1,14 @@
+id,status,actual,detail
+publication_packet_passed,pass,pass,publication packet must pass
+publication_packet_ready_decision,pass,randomized_holdout_acceptance_publication_packet_ready,publication packet decision must be ready
+packet_ready,pass,"{""packet"": true, ""summary"": true}",packet and summary must both be ready
+handoff_ready_for_review,pass,ready_for_bounded_acceptance_publication_review,packet must route to bounded publication review
+accepted_claim_count,pass,"{""claims"": 1, ""summary"": 1}",review expects exactly one bounded accepted claim
+blocked_claim_count,pass,"{""claims"": 3, ""summary"": 3}",review expects blocked claim boundaries
+allowed_use_bounded,pass,"{""packet"": ""bounded_model_capability_governance_only"", ""summary"": ""bounded_model_capability_governance_only""}",allowed use must stay bounded governance only
+promotion_still_false,pass,"{""packet"": false, ""summary"": false}",review must keep direct promotion blocked
+approved_for_promotion_false,pass,"{""packet"": false, ""summary"": false}",direct promotion approval must remain false
+contract_check_ready,pass,True,packet must include a passing contract check
+evidence_count,pass,"{""rows"": 2, ""summary"": 2}",review requires summary and contract-check evidence
+evidence_files_exist,pass,"[{""exists"": true, ""kind"": ""acceptance_summary"", ""path"": ""e\\923\\解释\\randomized-holdout-acceptance-summary\\randomized_holdout_acceptance_summary.json""}, {""exists"": true, ""kind"": ""acceptance_summary_contract_check"", ""path"": ""e\\924\\解释\\randomized-holdout-acceptance-summary-check\\randomized_holdout_acceptance_summary_check.json""}]",all publication packet evidence rows must exist
+packet_checks_clean,pass,0,publication packet checks must be clean
