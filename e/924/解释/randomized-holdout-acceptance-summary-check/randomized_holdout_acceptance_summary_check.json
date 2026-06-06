@@ -1,0 +1,366 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT randomized holdout acceptance summary contract check",
+  "generated_at": "2026-06-06T04:40:39Z",
+  "status": "pass",
+  "decision": "randomized_holdout_acceptance_summary_contract_check_passed",
+  "failed_count": 0,
+  "issues": [],
+  "source_acceptance_summary": "e\\923\\解释\\randomized-holdout-acceptance-summary\\randomized_holdout_acceptance_summary.json",
+  "source_decision_index": "e\\922\\解释\\randomized-holdout-decision-index\\randomized_holdout_decision_index.json",
+  "source_summary": {
+    "randomized_holdout_acceptance_summary_ready": true,
+    "bounded_promotion_accepted": true,
+    "accepted_claim_count": 1,
+    "blocked_claim_count": 3,
+    "candidate_case_count": 20,
+    "random_seed": 914,
+    "pass_rate": 1.0,
+    "promotion_ready": false,
+    "approved_for_promotion": false,
+    "model_quality_claim": "bounded_randomized_target_hidden_holdout_claim_only",
+    "allowed_use": "bounded_model_capability_governance_only",
+    "source_count": 4,
+    "next_step": "check_randomized_holdout_acceptance_summary_contract",
+    "passed_check_count": 15,
+    "failed_check_count": 0
+  },
+  "rebuilt_summary": {
+    "randomized_holdout_acceptance_summary_ready": true,
+    "bounded_promotion_accepted": true,
+    "accepted_claim_count": 1,
+    "blocked_claim_count": 3,
+    "candidate_case_count": 20,
+    "random_seed": 914,
+    "pass_rate": 1.0,
+    "promotion_ready": false,
+    "approved_for_promotion": false,
+    "model_quality_claim": "bounded_randomized_target_hidden_holdout_claim_only",
+    "allowed_use": "bounded_model_capability_governance_only",
+    "source_count": 4,
+    "next_step": "check_randomized_holdout_acceptance_summary_contract",
+    "passed_check_count": 15,
+    "failed_check_count": 0
+  },
+  "check_rows": [
+    {
+      "id": "source_decision_index_present",
+      "status": "pass",
+      "actual": "e\\922\\解释\\randomized-holdout-decision-index\\randomized_holdout_decision_index.json",
+      "detail": "summary must record a source decision index"
+    },
+    {
+      "id": "source_decision_index_exists",
+      "status": "pass",
+      "actual": "e\\922\\解释\\randomized-holdout-decision-index\\randomized_holdout_decision_index.json",
+      "detail": "source decision index must exist"
+    },
+    {
+      "id": "status",
+      "status": "pass",
+      "actual": {
+        "source": "pass",
+        "rebuilt": "pass"
+      },
+      "detail": "status must match the rebuilt acceptance summary"
+    },
+    {
+      "id": "decision",
+      "status": "pass",
+      "actual": {
+        "source": "randomized_holdout_acceptance_summary_ready",
+        "rebuilt": "randomized_holdout_acceptance_summary_ready"
+      },
+      "detail": "decision must match the rebuilt acceptance summary"
+    },
+    {
+      "id": "failed_count",
+      "status": "pass",
+      "actual": {
+        "source": 0,
+        "rebuilt": 0
+      },
+      "detail": "failed_count must match the rebuilt acceptance summary"
+    },
+    {
+      "id": "randomized_holdout_acceptance_summary_ready",
+      "status": "pass",
+      "actual": {
+        "source": true,
+        "rebuilt": true
+      },
+      "detail": "randomized_holdout_acceptance_summary_ready must match the rebuilt acceptance summary"
+    },
+    {
+      "id": "bounded_promotion_accepted",
+      "status": "pass",
+      "actual": {
+        "source": true,
+        "rebuilt": true
+      },
+      "detail": "bounded_promotion_accepted must match the rebuilt acceptance summary"
+    },
+    {
+      "id": "accepted_claim_count",
+      "status": "pass",
+      "actual": {
+        "source": 1,
+        "rebuilt": 1
+      },
+      "detail": "accepted_claim_count must match the rebuilt acceptance summary"
+    },
+    {
+      "id": "blocked_claim_count",
+      "status": "pass",
+      "actual": {
+        "source": 3,
+        "rebuilt": 3
+      },
+      "detail": "blocked_claim_count must match the rebuilt acceptance summary"
+    },
+    {
+      "id": "candidate_case_count",
+      "status": "pass",
+      "actual": {
+        "source": 20,
+        "rebuilt": 20
+      },
+      "detail": "candidate_case_count must match the rebuilt acceptance summary"
+    },
+    {
+      "id": "random_seed",
+      "status": "pass",
+      "actual": {
+        "source": 914,
+        "rebuilt": 914
+      },
+      "detail": "random_seed must match the rebuilt acceptance summary"
+    },
+    {
+      "id": "pass_rate",
+      "status": "pass",
+      "actual": {
+        "source": 1.0,
+        "rebuilt": 1.0
+      },
+      "detail": "pass_rate must match the rebuilt acceptance summary"
+    },
+    {
+      "id": "promotion_ready",
+      "status": "pass",
+      "actual": {
+        "source": false,
+        "rebuilt": false
+      },
+      "detail": "promotion_ready must match the rebuilt acceptance summary"
+    },
+    {
+      "id": "approved_for_promotion",
+      "status": "pass",
+      "actual": {
+        "source": false,
+        "rebuilt": false
+      },
+      "detail": "approved_for_promotion must match the rebuilt acceptance summary"
+    },
+    {
+      "id": "model_quality_claim",
+      "status": "pass",
+      "actual": {
+        "source": "bounded_randomized_target_hidden_holdout_claim_only",
+        "rebuilt": "bounded_randomized_target_hidden_holdout_claim_only"
+      },
+      "detail": "model_quality_claim must match the rebuilt acceptance summary"
+    },
+    {
+      "id": "allowed_use",
+      "status": "pass",
+      "actual": {
+        "source": "bounded_model_capability_governance_only",
+        "rebuilt": "bounded_model_capability_governance_only"
+      },
+      "detail": "allowed_use must match the rebuilt acceptance summary"
+    },
+    {
+      "id": "source_count",
+      "status": "pass",
+      "actual": {
+        "source": 4,
+        "rebuilt": 4
+      },
+      "detail": "source_count must match the rebuilt acceptance summary"
+    },
+    {
+      "id": "next_step",
+      "status": "pass",
+      "actual": {
+        "source": "check_randomized_holdout_acceptance_summary_contract",
+        "rebuilt": "check_randomized_holdout_acceptance_summary_contract"
+      },
+      "detail": "next_step must match the rebuilt acceptance summary"
+    },
+    {
+      "id": "accepted_claims",
+      "status": "pass",
+      "actual": {
+        "source": [
+          {
+            "claim_id": "bounded_randomized_target_hidden_holdout_claim",
+            "status": "accepted",
+            "scope": "randomized_target_hidden_20_case_tiny_checkpoint_only",
+            "model_quality_claim": "bounded_randomized_target_hidden_holdout_claim_only",
+            "allowed_use": "bounded_model_capability_governance_only"
+          }
+        ],
+        "rebuilt": [
+          {
+            "claim_id": "bounded_randomized_target_hidden_holdout_claim",
+            "status": "accepted",
+            "scope": "randomized_target_hidden_20_case_tiny_checkpoint_only",
+            "model_quality_claim": "bounded_randomized_target_hidden_holdout_claim_only",
+            "allowed_use": "bounded_model_capability_governance_only"
+          }
+        ]
+      },
+      "detail": "accepted_claims must match the rebuilt acceptance summary"
+    },
+    {
+      "id": "blocked_claims",
+      "status": "pass",
+      "actual": {
+        "source": [
+          {
+            "claim_id": "production_promotion",
+            "status": "blocked",
+            "reason": "promotion_ready remains false"
+          },
+          {
+            "claim_id": "general_model_quality",
+            "status": "blocked",
+            "reason": "evidence is limited to a 20-case tiny-checkpoint randomized holdout"
+          },
+          {
+            "claim_id": "larger_corpus_transfer",
+            "status": "blocked",
+            "reason": "no larger corpus or external benchmark evidence is attached"
+          }
+        ],
+        "rebuilt": [
+          {
+            "claim_id": "production_promotion",
+            "status": "blocked",
+            "reason": "promotion_ready remains false"
+          },
+          {
+            "claim_id": "general_model_quality",
+            "status": "blocked",
+            "reason": "evidence is limited to a 20-case tiny-checkpoint randomized holdout"
+          },
+          {
+            "claim_id": "larger_corpus_transfer",
+            "status": "blocked",
+            "reason": "no larger corpus or external benchmark evidence is attached"
+          }
+        ]
+      },
+      "detail": "blocked_claims must match the rebuilt acceptance summary"
+    },
+    {
+      "id": "source_rows",
+      "status": "pass",
+      "actual": {
+        "source": [
+          {
+            "kind": "bounded_decision",
+            "status": "pass",
+            "decision": "randomized_holdout_bounded_promotion_decision_accepted",
+            "ready_key": "randomized_holdout_bounded_promotion_decision_ready",
+            "ready_value": true,
+            "promotion_ready": false,
+            "model_quality_claim": "bounded_randomized_target_hidden_holdout_claim_only"
+          },
+          {
+            "kind": "bounded_gate",
+            "status": "pass",
+            "decision": "randomized_holdout_bounded_promotion_gate_passed",
+            "ready_key": "randomized_holdout_bounded_promotion_gate_ready",
+            "ready_value": true,
+            "promotion_ready": false,
+            "model_quality_claim": "bounded_gate_only"
+          },
+          {
+            "kind": "candidate_packet_review",
+            "status": "pass",
+            "decision": "randomized_holdout_candidate_promotion_packet_review_ready",
+            "ready_key": "randomized_holdout_candidate_promotion_packet_review_ready",
+            "ready_value": true,
+            "promotion_ready": false,
+            "model_quality_claim": "candidate_packet_review_only"
+          },
+          {
+            "kind": "candidate_packet",
+            "status": "pass",
+            "decision": "randomized_holdout_candidate_promotion_packet_ready",
+            "ready_key": "randomized_holdout_candidate_promotion_packet_ready",
+            "ready_value": true,
+            "promotion_ready": false,
+            "model_quality_claim": "candidate_packet_only"
+          }
+        ],
+        "rebuilt": [
+          {
+            "kind": "bounded_decision",
+            "status": "pass",
+            "decision": "randomized_holdout_bounded_promotion_decision_accepted",
+            "ready_key": "randomized_holdout_bounded_promotion_decision_ready",
+            "ready_value": true,
+            "promotion_ready": false,
+            "model_quality_claim": "bounded_randomized_target_hidden_holdout_claim_only"
+          },
+          {
+            "kind": "bounded_gate",
+            "status": "pass",
+            "decision": "randomized_holdout_bounded_promotion_gate_passed",
+            "ready_key": "randomized_holdout_bounded_promotion_gate_ready",
+            "ready_value": true,
+            "promotion_ready": false,
+            "model_quality_claim": "bounded_gate_only"
+          },
+          {
+            "kind": "candidate_packet_review",
+            "status": "pass",
+            "decision": "randomized_holdout_candidate_promotion_packet_review_ready",
+            "ready_key": "randomized_holdout_candidate_promotion_packet_review_ready",
+            "ready_value": true,
+            "promotion_ready": false,
+            "model_quality_claim": "candidate_packet_review_only"
+          },
+          {
+            "kind": "candidate_packet",
+            "status": "pass",
+            "decision": "randomized_holdout_candidate_promotion_packet_ready",
+            "ready_key": "randomized_holdout_candidate_promotion_packet_ready",
+            "ready_value": true,
+            "promotion_ready": false,
+            "model_quality_claim": "candidate_packet_only"
+          }
+        ]
+      },
+      "detail": "source_rows must match the rebuilt acceptance summary"
+    }
+  ],
+  "summary": {
+    "contract_check_ready": true,
+    "source_decision_index": "e\\922\\解释\\randomized-holdout-decision-index\\randomized_holdout_decision_index.json",
+    "original_decision": "randomized_holdout_acceptance_summary_ready",
+    "rebuilt_decision": "randomized_holdout_acceptance_summary_ready",
+    "original_bounded_promotion_accepted": true,
+    "rebuilt_bounded_promotion_accepted": true,
+    "original_accepted_claim_count": 1,
+    "rebuilt_accepted_claim_count": 1,
+    "original_blocked_claim_count": 3,
+    "rebuilt_blocked_claim_count": 3,
+    "passed_check_count": 21,
+    "failed_check_count": 0
+  }
+}

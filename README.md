@@ -4,7 +4,18 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v923.0.0` turns the v922 randomized holdout decision index into a bounded acceptance summary with explicit accepted and blocked claims.
+Version `v924.0.0` adds a contract check that rebuilds the v923 acceptance summary from the v922 decision index and compares stable claim fields.
+
+## Latest v924 checkpoint
+
+- Added short-name module `randomized_holdout_acceptance_summary_check`.
+- Added CLI `scripts/check_randomized_holdout_acceptance_summary.py`.
+- Consumed the real v923 acceptance summary and rebuilt it from the recorded v922 decision index.
+- Compared `status`, `decision`, `failed_count`, core summary fields, accepted claims, blocked claims, and source-row fingerprints.
+- Confirmed `contract_check_ready=True`, `original_accepted_claim_count=1`, `rebuilt_accepted_claim_count=1`, `original_blocked_claim_count=3`, `rebuilt_blocked_claim_count=3`, and `failed_count=0`.
+- Verified tamper handling in tests for changed accepted claim usage and missing source decision index.
+- Verified with `9 passed` focused acceptance-summary check tests and Playwright MCP screenshot evidence.
+- Archived v924 evidence in `e/924` and added the code explanation in `代码讲解记录_模型能力阶段/938-v924-randomized-holdout-acceptance-summary-check.md`.
 
 ## Latest v923 checkpoint
 

@@ -1364,6 +1364,9 @@
 937-v923-randomized-holdout-acceptance-summary.md
  -> v923 code explanation: summarize the bounded randomized holdout acceptance into accepted and blocked claims for downstream review.
 
+938-v924-randomized-holdout-acceptance-summary-check.md
+ -> v924 code explanation: rebuild the randomized holdout acceptance summary from its source decision index and check stable claim fields.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

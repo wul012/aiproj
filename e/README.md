@@ -2101,3 +2101,8 @@ e/663/解释/说明.md
 - `e/923/图片`
 - `e/923/解释/说明.md`
 - v923 randomized holdout acceptance summary screenshots and explanation.
+## v924 supplemental index
+
+- `e/924/图片`
+- `e/924/解释/说明.md`
+- v924 randomized holdout acceptance summary contract check screenshots and explanation.
