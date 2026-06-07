@@ -29,6 +29,9 @@
 962-v948-randomized-holdout-publication-registry-downstream-consumer-ack-bundle-review.md
  -> v948 code explanation: review the ack bundle with digest-aware evidence checks before lookup-only publication.
 
+963-v949-randomized-holdout-publication-registry-downstream-consumer-ack-bundle-publication.md
+ -> v949 code explanation: publish the reviewed downstream consumer ack bundle for lookup-only consumption while keeping promotion blocked.
+
 832-v818-route-promotion-bounded-real-replay-prompt-aligned-training-run.md
  -> v818 code explanation: train the v817 prompt-aligned bounded replay corpus into a real checkpoint while keeping quality claims gated behind replay.
 
