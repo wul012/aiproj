@@ -4,7 +4,19 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v955.0.0` packages the reviewed randomized holdout publication registry downstream consumer acknowledgement bundle publication receipt for contract checking.
+Version `v956.0.0` contract-checks the randomized holdout publication registry downstream consumer acknowledgement bundle publication receipt packet before indexing.
+
+## Latest v956 checkpoint
+
+- Added short-name module `randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_check`.
+- Added CLI `scripts/check_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet.py`.
+- Consumed the real v955 downstream consumer ack bundle publication receipt packet.
+- Rebuilt the packet from its recorded v954 receipt review.
+- Compared status, decision, failed count, stable summary fields, stable packet body fields, and packet rows.
+- Confirmed `contract_check_ready=True`, original/rebuilt `packet_status=downstream_publication_receipt_packet_ready`, original/rebuilt `granted_use=downstream_governance_lookup_only`, and original/rebuilt `promotion_ready=False`.
+- Routed the next action to `index_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet`.
+- Verified with focused downstream consumer ack bundle publication receipt packet check tests and Playwright MCP screenshot evidence.
+- Archived v956 evidence in `e/956` and added the code explanation in `代码讲解记录_模型能力阶段/970-v956-randomized-holdout-publication-registry-downstream-consumer-ack-bundle-publication-receipt-packet-check.md`.
 
 ## Latest v955 checkpoint
 
