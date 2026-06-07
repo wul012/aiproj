@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+985-v971-randomized-holdout-publication-registry-downstream-consumer-ack-bundle-publication-receipt-packet-index-publication-receipt-packet-index-publication-index.md
+ -> v971 code explanation: index the v969 publication and v970 contract check into a lookup-only downstream publication index.
+
 984-v970-randomized-holdout-publication-registry-downstream-consumer-ack-bundle-publication-receipt-packet-index-publication-receipt-packet-index-publication-check.md
  -> v970 code explanation: rebuild the v969 lookup-only publication from its v968 review and verify the contract before downstream indexing.
 

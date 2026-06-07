@@ -4,7 +4,19 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v970.0.0` checks the randomized holdout publication registry downstream consumer acknowledgement bundle publication receipt packet index publication receipt packet index publication contract.
+Version `v971.0.0` indexes the randomized holdout publication registry downstream consumer acknowledgement bundle publication receipt packet index publication receipt packet index publication after its contract check.
+
+## Latest v971 checkpoint
+
+- Added short-name module `randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_index`.
+- Added CLI `scripts/build_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_index.py`.
+- Consumed the real v969 publication and v970 publication contract check.
+- Built one lookup-only publication index row and preserved publication/check/source paths for downstream review.
+- Confirmed `randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_index_ready=True`, `publication_index_row_count=1`, `lookup_scope=downstream_governance_lookup_only`, `lookup_ready=True`, and `contract_check_ready=True`.
+- Kept `promotion_ready=False` and `approved_for_promotion=False`.
+- Routed the next action to `review_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_index`.
+- Verified with focused publication index tests, source encoding hygiene, full pytest, and Playwright MCP screenshot evidence.
+- Archived v971 evidence in `e/971` and added the code explanation in `代码讲解记录_模型能力阶段/985-v971-randomized-holdout-publication-registry-downstream-consumer-ack-bundle-publication-receipt-packet-index-publication-receipt-packet-index-publication-index.md`.
 
 ## Latest v970 checkpoint
 
