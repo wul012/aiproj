@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v964.0.0` reviews the randomized holdout publication registry downstream consumer acknowledgement bundle publication receipt packet index publication receipt before packet construction.
+Version `v965.0.0` builds the randomized holdout publication registry downstream consumer acknowledgement bundle publication receipt packet index publication receipt packet.
+
+## Latest v965 checkpoint
+
+- Added short-name module `randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet`.
+- Added CLI `scripts/build_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet.py`.
+- Consumed the real v964 downstream consumer ack bundle publication receipt packet index publication receipt review.
+- Built one packet row and two source evidence rows covering the v964 review and v963 receipt.
+- Checked review readiness, packet-ready status, granted-use scope, blocked-use completeness, publication index row count, consumer receipt count, lookup-key namespace, source artifact existence, digest shapes, source next-step routing, and no-promotion fields.
+- Confirmed `randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_ready=True`, `packet_status=downstream_receipt_packet_index_publication_receipt_packet_ready`, `lookup_ready=True`, `source_evidence_count=2`, and `consumer_receipt_count=1`.
+- Kept `promotion_ready=False` and `approved_for_promotion=False`.
+- Routed the next action to `check_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet`.
+- Verified with focused downstream consumer ack bundle publication receipt packet index publication receipt packet tests and Playwright MCP screenshot evidence.
+- Archived v965 evidence in `e/965` and added the code explanation in `代码讲解记录_模型能力阶段/979-v965-randomized-holdout-publication-registry-downstream-consumer-ack-bundle-publication-receipt-packet-index-publication-receipt-packet.md`.
 
 ## Latest v964 checkpoint
 

@@ -77,6 +77,9 @@
 978-v964-randomized-holdout-publication-registry-downstream-consumer-ack-bundle-publication-receipt-packet-index-publication-receipt-review.md
  -> v964 code explanation: review the digest-backed receipt before receipt-packet construction while keeping promotion blocked.
 
+979-v965-randomized-holdout-publication-registry-downstream-consumer-ack-bundle-publication-receipt-packet-index-publication-receipt-packet.md
+ -> v965 code explanation: build a digest-backed receipt packet with packet rows and source evidence rows for contract checking.
+
 832-v818-route-promotion-bounded-real-replay-prompt-aligned-training-run.md
  -> v818 code explanation: train the v817 prompt-aligned bounded replay corpus into a real checkpoint while keeping quality claims gated behind replay.
 
