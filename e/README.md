@@ -40,6 +40,10 @@ e/947/图片
 e/947/解释/说明.md
  -> v947 randomized holdout publication registry downstream consumer ack bundle 的运行截图和解释
 
+e/948/图片
+e/948/解释/说明.md
+ -> v948 randomized holdout publication registry downstream consumer ack bundle review 的运行截图和解释
+
 e/818/图片
 e/818/解释/说明.md
  -> v818 prompt-aligned bounded replay training run 的运行截图和解释
