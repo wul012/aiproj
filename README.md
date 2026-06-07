@@ -4,7 +4,19 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v967.0.0` indexes the randomized holdout publication registry downstream consumer acknowledgement bundle publication receipt packet index publication receipt packet.
+Version `v968.0.0` reviews the randomized holdout publication registry downstream consumer acknowledgement bundle publication receipt packet index publication receipt packet index.
+
+## Latest v968 checkpoint
+
+- Added short-name module `randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_review`.
+- Added CLI `scripts/build_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_review.py`.
+- Consumed the real v967 receipt packet index.
+- Checked index readiness, lookup-only scope, granted-use scope, lookup readiness, contract-check readiness, receipt packet index row count, source packet row count, source evidence count/status/file existence, source packet/check file existence, source next-step routing, and no-promotion fields.
+- Confirmed `randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_review_ready=True`, `review_status=approved_for_downstream_receipt_packet_index_publication_receipt_packet_index_publication`, `downstream_ready=True`, `lookup_ready=True`, `contract_check_ready=True`, and `publish_ready=True`.
+- Kept `promotion_ready=False` and `approved_for_promotion=False`.
+- Routed the next action to `publish_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index`.
+- Verified with focused receipt packet index review tests, source encoding hygiene, full pytest, and Playwright MCP screenshot evidence.
+- Archived v968 evidence in `e/968` and added the code explanation in `代码讲解记录_模型能力阶段/982-v968-randomized-holdout-publication-registry-downstream-consumer-ack-bundle-publication-receipt-packet-index-publication-receipt-packet-index-review.md`.
 
 ## Latest v967 checkpoint
 
