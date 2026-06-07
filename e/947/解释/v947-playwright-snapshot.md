@@ -1,0 +1,44 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "MiniGPT randomized holdout publication registry downstream consumer ack bundle" [level=1] [ref=e4]
+    - paragraph [ref=e5]: The downstream consumer acknowledgement and its contract check are bundled for lookup-only review while promotion remains blocked.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - strong [ref=e9]: pass
+    - generic [ref=e10]:
+      - generic [ref=e11]: Bundle ready
+      - strong [ref=e12]: "True"
+    - generic [ref=e13]:
+      - generic [ref=e14]: Evidence
+      - strong [ref=e15]: "2"
+    - generic [ref=e16]:
+      - generic [ref=e17]: Lookup
+      - strong [ref=e18]: "True"
+    - generic [ref=e19]:
+      - generic [ref=e20]: Promotion
+      - strong [ref=e21]: "False"
+    - generic [ref=e22]:
+      - generic [ref=e23]: Failed
+      - strong [ref=e24]: "0"
+  - generic [ref=e25]:
+    - heading "Bundle Boundary" [level=2] [ref=e26]
+    - generic [ref=e27]:
+      - term [ref=e28]: Bundle status
+      - definition [ref=e29]: ready_for_downstream_consumer_ack_review
+      - term [ref=e30]: Consumer
+      - definition [ref=e31]: publication_registry_governance_lookup_reader
+      - term [ref=e32]: Acked use
+      - definition [ref=e33]: downstream_governance_lookup_only
+      - term [ref=e34]: Next step
+      - definition [ref=e35]: review_randomized_holdout_publication_registry_downstream_consumer_ack_bundle
+  - generic [ref=e36]:
+    - heading "Evidence" [level=2] [ref=e37]
+    - table [ref=e39]:
+      - rowgroup [ref=e40]
+      - rowgroup [ref=e48]
+  - generic [ref=e63]:
+    - heading "Checks" [level=2] [ref=e64]
+    - table [ref=e66]:
+      - rowgroup [ref=e67]
+      - rowgroup [ref=e73]

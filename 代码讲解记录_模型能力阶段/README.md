@@ -23,6 +23,9 @@
 960-v946-randomized-holdout-publication-registry-downstream-consumer-ack-check.md
  -> v946 code explanation: rebuild the downstream consumer ack from its source review and verify the acknowledgement contract.
 
+961-v947-randomized-holdout-publication-registry-downstream-consumer-ack-bundle.md
+ -> v947 code explanation: bundle the downstream consumer ack and contract check with digest-backed evidence rows.
+
 832-v818-route-promotion-bounded-real-replay-prompt-aligned-training-run.md
  -> v818 code explanation: train the v817 prompt-aligned bounded replay corpus into a real checkpoint while keeping quality claims gated behind replay.
 

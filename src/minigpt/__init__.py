@@ -561,6 +561,14 @@ _EXPORTS = {
         "randomized_holdout_publication_registry_downstream_consumer_ack_check_artifacts",
         "write_randomized_holdout_publication_registry_downstream_consumer_ack_check_outputs",
     ),
+    "build_randomized_holdout_publication_registry_downstream_consumer_ack_bundle": (
+        "randomized_holdout_publication_registry_downstream_consumer_ack_bundle",
+        "build_randomized_holdout_publication_registry_downstream_consumer_ack_bundle",
+    ),
+    "write_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_outputs": (
+        "randomized_holdout_publication_registry_downstream_consumer_ack_bundle_artifacts",
+        "write_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_outputs",
+    ),
     "build_model_capability_route_promotion_review_decision": (
         "model_capability_route_promotion_review_decision",
         "build_model_capability_route_promotion_review_decision",

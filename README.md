@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v946.0.0` checks the randomized holdout publication registry downstream consumer acknowledgement by rebuilding it from the source review.
+Version `v947.0.0` bundles the randomized holdout publication registry downstream consumer acknowledgement with its contract check.
+
+## Latest v947 checkpoint
+
+- Added short-name module `randomized_holdout_publication_registry_downstream_consumer_ack_bundle`.
+- Added CLI `scripts/build_randomized_holdout_publication_registry_downstream_consumer_ack_bundle.py`.
+- Consumed the real v945 downstream consumer ack and v946 ack contract check.
+- Checked ack readiness, contract-check readiness, lookup-only acked use, blocked-use completeness, lookup rows, source next steps, source check cleanliness, and no-promotion fields.
+- Packaged two digest-backed evidence rows for the ack and ack contract check.
+- Confirmed `randomized_holdout_publication_registry_downstream_consumer_ack_bundle_ready=True`, `bundle_status=ready_for_downstream_consumer_ack_review`, `evidence_count=2`, and `acked_use=downstream_governance_lookup_only`.
+- Kept `promotion_ready=False` and `approved_for_promotion=False`.
+- Routed the next action to `review_randomized_holdout_publication_registry_downstream_consumer_ack_bundle`.
+- Verified with focused downstream consumer ack bundle tests and Playwright MCP screenshot evidence.
+- Archived v947 evidence in `e/947` and added the code explanation in `代码讲解记录_模型能力阶段/961-v947-randomized-holdout-publication-registry-downstream-consumer-ack-bundle.md`.
 
 ## Latest v946 checkpoint
 
