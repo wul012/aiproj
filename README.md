@@ -4,7 +4,19 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v958.0.0` reviews the randomized holdout publication registry downstream consumer acknowledgement bundle publication receipt packet index before lookup-only publication.
+Version `v959.0.0` publishes the reviewed randomized holdout publication registry downstream consumer acknowledgement bundle publication receipt packet index for lookup-only consumption.
+
+## Latest v959 checkpoint
+
+- Added short-name module `randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication`.
+- Added CLI `scripts/build_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication.py`.
+- Consumed the real v958 downstream consumer ack bundle publication receipt packet index review.
+- Checked review readiness, publish readiness, lookup readiness, contract-check readiness, publication status, source index/source packet/source packet check file existence, packet index row count, source packet row count, source evidence count, allowed-use scope, source next-step routing, and no-promotion fields.
+- Confirmed `randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_ready=True`, `publication_status=published_for_downstream_receipt_packet_index_lookup_only`, `published_use=downstream_governance_lookup_only`, `lookup_ready=True`, and `contract_check_ready=True`.
+- Kept `promotion_ready=False` and `approved_for_promotion=False`.
+- Routed the next action to `check_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication`.
+- Verified with focused downstream consumer ack bundle publication receipt packet index publication tests and Playwright MCP screenshot evidence.
+- Archived v959 evidence in `e/959` and added the code explanation in `代码讲解记录_模型能力阶段/973-v959-randomized-holdout-publication-registry-downstream-consumer-ack-bundle-publication-receipt-packet-index-publication.md`.
 
 ## Latest v958 checkpoint
 
