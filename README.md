@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v950.0.0` verifies the randomized holdout publication registry downstream consumer acknowledgement bundle publication contract by rebuilding it from the source review.
+Version `v951.0.0` indexes the randomized holdout publication registry downstream consumer acknowledgement bundle publication and its contract check for lookup-only downstream review.
+
+## Latest v951 checkpoint
+
+- Added short-name module `randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_index`.
+- Added CLI `scripts/build_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_index.py`.
+- Consumed the real v949 downstream consumer ack bundle publication and v950 publication contract check.
+- Checked source file existence, publication readiness, publication contract readiness, status/use/evidence-count alignment, source evidence existence, source evidence pass status, source check cleanliness, source next-step routing, and no-promotion fields.
+- Built one publication lookup row and preserved two source evidence rows.
+- Confirmed `randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_index_ready=True`, `publication_row_count=1`, `source_evidence_count=2`, `lookup_ready=True`, and `contract_check_ready=True`.
+- Kept `promotion_ready=False` and `approved_for_promotion=False`.
+- Routed the next action to `review_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_index`.
+- Verified with focused downstream consumer ack bundle publication index tests and Playwright MCP screenshot evidence.
+- Archived v951 evidence in `e/951` and added the code explanation in `代码讲解记录_模型能力阶段/965-v951-randomized-holdout-publication-registry-downstream-consumer-ack-bundle-publication-index.md`.
 
 ## Latest v950 checkpoint
 

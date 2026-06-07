@@ -1,0 +1,2 @@
+publication_index_id,lookup_key,publication_id,publication_status,consumer_name,published_use,source_evidence_count,contract_check_ready,promotion_ready
+randomized-holdout-publication-registry-downstream-consumer-ack-bundle-publication-index-v951,publication:randomized-holdout-publication-registry-downstream-consumer-ack-bundle-publication-v949,randomized-holdout-publication-registry-downstream-consumer-ack-bundle-publication-v949,published_for_downstream_consumer_lookup_only,publication_registry_governance_lookup_reader,downstream_governance_lookup_only,2,True,False
