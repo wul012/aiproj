@@ -1,0 +1,50 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "MiniGPT randomized holdout publication registry downstream consumer ack" [level=1] [ref=e4]
+    - paragraph [ref=e5]: The downstream consumer has acknowledged lookup-only consumption while promotion remains blocked.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - strong [ref=e9]: pass
+    - generic [ref=e10]:
+      - generic [ref=e11]: Ack ready
+      - strong [ref=e12]: "True"
+    - generic [ref=e13]:
+      - generic [ref=e14]: Lookup
+      - strong [ref=e15]: "True"
+    - generic [ref=e16]:
+      - generic [ref=e17]: Contract
+      - strong [ref=e18]: "True"
+    - generic [ref=e19]:
+      - generic [ref=e20]: Promotion
+      - strong [ref=e21]: "False"
+    - generic [ref=e22]:
+      - generic [ref=e23]: Failed
+      - strong [ref=e24]: "0"
+  - generic [ref=e25]:
+    - heading "Ack Boundary" [level=2] [ref=e26]
+    - generic [ref=e27]:
+      - term [ref=e28]: Ack status
+      - definition [ref=e29]: downstream_consumer_acknowledged
+      - term [ref=e30]: Consumer
+      - definition [ref=e31]: publication_registry_governance_lookup_reader
+      - term [ref=e32]: Acked use
+      - definition [ref=e33]: downstream_governance_lookup_only
+      - term [ref=e34]: Blocked uses
+      - definition [ref=e35]: "['production_promotion', 'model_quality_expansion', 'training_data_claim_expansion']"
+      - term [ref=e36]: Consumer index review
+      - definition [ref=e37]: e\944\解释\randomized-holdout-publication-registry-downstream-consumer-index-review\randomized_holdout_publication_registry_downstream_consumer_index_review.json
+      - term [ref=e38]: Consumer index
+      - definition [ref=e39]: e\943\解释\randomized-holdout-publication-registry-downstream-consumer-index\randomized_holdout_publication_registry_downstream_consumer_index.json
+      - term [ref=e40]: Next step
+      - definition [ref=e41]: check_randomized_holdout_publication_registry_downstream_consumer_ack
+  - generic [ref=e42]:
+    - heading "Lookup Rows" [level=2] [ref=e43]
+    - table [ref=e45]:
+      - rowgroup [ref=e46]
+      - rowgroup [ref=e54]
+  - generic [ref=e62]:
+    - heading "Checks" [level=2] [ref=e63]
+    - table [ref=e65]:
+      - rowgroup [ref=e66]
+      - rowgroup [ref=e72]

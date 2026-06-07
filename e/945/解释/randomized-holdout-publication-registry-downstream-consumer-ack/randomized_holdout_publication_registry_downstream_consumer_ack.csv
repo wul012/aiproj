@@ -1,0 +1,2 @@
+ack_id,consumer_name,lookup_key,entry_id,acked_use,promotion_ready,ack_status
+randomized-holdout-publication-registry-downstream-consumer-ack-v945,publication_registry_governance_lookup_reader,publication:randomized-holdout-publication-v928,randomized-holdout-publication-v928,downstream_governance_lookup_only,False,downstream_consumer_acknowledged

@@ -17,6 +17,9 @@
 958-v944-randomized-holdout-publication-registry-downstream-consumer-index-review.md
  -> v944 code explanation: review the downstream consumer index, confirm source evidence still exists, and keep consumption lookup-only.
 
+959-v945-randomized-holdout-publication-registry-downstream-consumer-ack.md
+ -> v945 code explanation: acknowledge lookup-only downstream consumer receipt of the reviewed index while keeping promotion blocked.
+
 832-v818-route-promotion-bounded-real-replay-prompt-aligned-training-run.md
  -> v818 code explanation: train the v817 prompt-aligned bounded replay corpus into a real checkpoint while keeping quality claims gated behind replay.
 

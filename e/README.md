@@ -28,6 +28,10 @@ e/944/图片
 e/944/解释/说明.md
  -> v944 randomized holdout publication registry downstream consumer index review 的运行截图和解释
 
+e/945/图片
+e/945/解释/说明.md
+ -> v945 randomized holdout publication registry downstream consumer ack 的运行截图和解释
+
 e/818/图片
 e/818/解释/说明.md
  -> v818 prompt-aligned bounded replay training run 的运行截图和解释
