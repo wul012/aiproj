@@ -4,7 +4,18 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v941.0.0` packages the reviewed randomized holdout publication registry downstream receipt into a lookup-only consumer packet while extracting shared downstream boundary helpers.
+Version `v942.0.0` adds a contract check for the randomized holdout publication registry downstream consumer packet by rebuilding it from the source receipt review.
+
+## Latest v942 checkpoint
+
+- Added short-name module `randomized_holdout_publication_registry_downstream_consumer_packet_check`.
+- Added CLI `scripts/check_randomized_holdout_publication_registry_downstream_consumer_packet.py`.
+- Consumed the real v941 downstream consumer packet.
+- Rebuilt the packet from its recorded v940 receipt review and compared stable summary, packet body, lookup keys, packet rows, and no-promotion fields.
+- Confirmed `contract_check_ready=True`, original/rebuilt `granted_use=downstream_governance_lookup_only`, and original/rebuilt `promotion_ready=False`.
+- Routed the next action to `index_randomized_holdout_publication_registry_downstream_consumer_packet`.
+- Verified with focused downstream packet-check tests and Playwright MCP screenshot evidence.
+- Archived v942 evidence in `e/942` and added the code explanation in `代码讲解记录_模型能力阶段/956-v942-randomized-holdout-publication-registry-downstream-consumer-packet-check.md`.
 
 ## Latest v941 checkpoint
 
@@ -9558,6 +9569,8 @@ The randomized holdout publication registry downstream receipt layer records the
 The randomized holdout publication registry downstream receipt review layer verifies that receipt, checks the referenced source guard digest, and approves only downstream consumer-packet construction while preserving the no-promotion boundary.
 
 The randomized holdout publication registry downstream consumer packet layer packages the reviewed receipt into a stable lookup-only consumer packet and extracts shared downstream boundary helpers for blocked uses, lookup-only scope, and SHA-256 checks.
+
+The randomized holdout publication registry downstream consumer packet contract-check layer rebuilds that packet from its source receipt review and compares stable lookup-only fields before any downstream index is created.
 
 The run registry layer indexes multiple run directories so experiments can be scanned by commit, data fingerprint, quality status, eval suite coverage, metrics, artifact count, notes, tags, best-val rank, loss delta, a leaderboard, an interactive local HTML table, shareable URL state, and visible-row CSV export.
 

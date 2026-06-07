@@ -2191,3 +2191,8 @@ e/663/解释/说明.md
 - `e/941/图片`
 - `e/941/解释/说明.md`
 - v941 randomized holdout publication registry downstream consumer packet screenshots and explanation.
+## v942 supplemental index
+
+- `e/942/图片`
+- `e/942/解释/说明.md`
+- v942 randomized holdout publication registry downstream consumer packet contract check screenshots and explanation.
