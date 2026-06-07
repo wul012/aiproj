@@ -4,7 +4,18 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v969.0.0` publishes the randomized holdout publication registry downstream consumer acknowledgement bundle publication receipt packet index publication receipt packet index for lookup-only use.
+Version `v970.0.0` checks the randomized holdout publication registry downstream consumer acknowledgement bundle publication receipt packet index publication receipt packet index publication contract.
+
+## Latest v970 checkpoint
+
+- Added short-name module `randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_check`.
+- Added CLI `scripts/check_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication.py`.
+- Rebuilt the real v969 publication from its recorded v968 receipt packet index review and compared status, decision, failed count, check rows, summary fields, and publication fields.
+- Confirmed `contract_check_ready=True`, `failed_count=0`, `passed_check_count=40`, `original_published_use=downstream_governance_lookup_only`, `rebuilt_published_use=downstream_governance_lookup_only`, and matching receipt packet index/source packet row counts.
+- Kept `original_promotion_ready=False` and `rebuilt_promotion_ready=False`.
+- Routed the next action to `index_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication`.
+- Verified with focused publication/check tests, source encoding hygiene, full pytest, and Playwright MCP screenshot evidence.
+- Archived v970 evidence in `e/970` and added the code explanation in `代码讲解记录_模型能力阶段/984-v970-randomized-holdout-publication-registry-downstream-consumer-ack-bundle-publication-receipt-packet-index-publication-receipt-packet-index-publication-check.md`.
 
 ## Latest v969 checkpoint
 
