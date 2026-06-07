@@ -20,6 +20,9 @@
 959-v945-randomized-holdout-publication-registry-downstream-consumer-ack.md
  -> v945 code explanation: acknowledge lookup-only downstream consumer receipt of the reviewed index while keeping promotion blocked.
 
+960-v946-randomized-holdout-publication-registry-downstream-consumer-ack-check.md
+ -> v946 code explanation: rebuild the downstream consumer ack from its source review and verify the acknowledgement contract.
+
 832-v818-route-promotion-bounded-real-replay-prompt-aligned-training-run.md
  -> v818 code explanation: train the v817 prompt-aligned bounded replay corpus into a real checkpoint while keeping quality claims gated behind replay.
 

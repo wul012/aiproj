@@ -32,6 +32,10 @@ e/945/图片
 e/945/解释/说明.md
  -> v945 randomized holdout publication registry downstream consumer ack 的运行截图和解释
 
+e/946/图片
+e/946/解释/说明.md
+ -> v946 randomized holdout publication registry downstream consumer ack check 的运行截图和解释
+
 e/818/图片
 e/818/解释/说明.md
  -> v818 prompt-aligned bounded replay training run 的运行截图和解释

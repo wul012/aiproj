@@ -1,0 +1,39 @@
+id,status,actual,detail
+source_consumer_index_review_exists,pass,e\944\解释\randomized-holdout-publication-registry-downstream-consumer-index-review\randomized_holdout_publication_registry_downstream_consumer_index_review.json,source consumer index review must exist
+status,pass,"{""original"": ""pass"", ""rebuilt"": ""pass""}",status must rebuild exactly
+decision,pass,"{""original"": ""randomized_holdout_publication_registry_downstream_consumer_ack_ready"", ""rebuilt"": ""randomized_holdout_publication_registry_downstream_consumer_ack_ready""}",decision must rebuild exactly
+failed_count,pass,"{""original"": 0, ""rebuilt"": 0}",failed count must rebuild exactly
+lookup_rows,pass,lookup_rows,lookup rows must rebuild exactly
+check_rows,pass,check_rows,check rows must rebuild exactly
+summary.randomized_holdout_publication_registry_downstream_consumer_ack_ready,pass,"{""original"": true, ""rebuilt"": true}",summary.randomized_holdout_publication_registry_downstream_consumer_ack_ready must rebuild exactly
+summary.ack_id,pass,"{""original"": ""randomized-holdout-publication-registry-downstream-consumer-ack-v945"", ""rebuilt"": ""randomized-holdout-publication-registry-downstream-consumer-ack-v945""}",summary.ack_id must rebuild exactly
+summary.ack_status,pass,"{""original"": ""downstream_consumer_acknowledged"", ""rebuilt"": ""downstream_consumer_acknowledged""}",summary.ack_status must rebuild exactly
+summary.consumer_name,pass,"{""original"": ""publication_registry_governance_lookup_reader"", ""rebuilt"": ""publication_registry_governance_lookup_reader""}",summary.consumer_name must rebuild exactly
+summary.entry_count,pass,"{""original"": 1, ""rebuilt"": 1}",summary.entry_count must rebuild exactly
+summary.lookup_key_count,pass,"{""original"": 1, ""rebuilt"": 1}",summary.lookup_key_count must rebuild exactly
+summary.lookup_ready,pass,"{""original"": true, ""rebuilt"": true}",summary.lookup_ready must rebuild exactly
+summary.downstream_ready,pass,"{""original"": true, ""rebuilt"": true}",summary.downstream_ready must rebuild exactly
+summary.contract_check_ready,pass,"{""original"": true, ""rebuilt"": true}",summary.contract_check_ready must rebuild exactly
+summary.acked_use,pass,"{""original"": ""downstream_governance_lookup_only"", ""rebuilt"": ""downstream_governance_lookup_only""}",summary.acked_use must rebuild exactly
+summary.blocked_uses,pass,"{""original"": [""production_promotion"", ""model_quality_expansion"", ""training_data_claim_expansion""], ""rebuilt"": [""production_promotion"", ""model_quality_expansion"", ""training_data_claim_expansion""]}",summary.blocked_uses must rebuild exactly
+summary.promotion_ready,pass,"{""original"": false, ""rebuilt"": false}",summary.promotion_ready must rebuild exactly
+summary.approved_for_promotion,pass,"{""original"": false, ""rebuilt"": false}",summary.approved_for_promotion must rebuild exactly
+summary.consumer_boundary,pass,"{""original"": ""governance_lookup_only"", ""rebuilt"": ""governance_lookup_only""}",summary.consumer_boundary must rebuild exactly
+summary.model_quality_claim,pass,"{""original"": ""bounded_randomized_target_hidden_holdout_claim_only"", ""rebuilt"": ""bounded_randomized_target_hidden_holdout_claim_only""}",summary.model_quality_claim must rebuild exactly
+ack.ack_ready,pass,"{""original"": true, ""rebuilt"": true}",ack.ack_ready must rebuild exactly
+ack.ack_id,pass,"{""original"": ""randomized-holdout-publication-registry-downstream-consumer-ack-v945"", ""rebuilt"": ""randomized-holdout-publication-registry-downstream-consumer-ack-v945""}",ack.ack_id must rebuild exactly
+ack.ack_status,pass,"{""original"": ""downstream_consumer_acknowledged"", ""rebuilt"": ""downstream_consumer_acknowledged""}",ack.ack_status must rebuild exactly
+ack.consumer_index_review_path,pass,"{""original"": ""e\\944\\解释\\randomized-holdout-publication-registry-downstream-consumer-index-review\\randomized_holdout_publication_registry_downstream_consumer_index_review.json"", ""rebuilt"": ""e\\944\\解释\\randomized-holdout-publication-registry-downstream-consumer-index-review\\randomized_holdout_publication_registry_downstream_consumer_index_review.json""}",ack.consumer_index_review_path must rebuild exactly
+ack.consumer_index_path,pass,"{""original"": ""e\\943\\解释\\randomized-holdout-publication-registry-downstream-consumer-index\\randomized_holdout_publication_registry_downstream_consumer_index.json"", ""rebuilt"": ""e\\943\\解释\\randomized-holdout-publication-registry-downstream-consumer-index\\randomized_holdout_publication_registry_downstream_consumer_index.json""}",ack.consumer_index_path must rebuild exactly
+ack.consumer_name,pass,"{""original"": ""publication_registry_governance_lookup_reader"", ""rebuilt"": ""publication_registry_governance_lookup_reader""}",ack.consumer_name must rebuild exactly
+ack.entry_count,pass,"{""original"": 1, ""rebuilt"": 1}",ack.entry_count must rebuild exactly
+ack.lookup_keys,pass,"{""original"": [""publication:randomized-holdout-publication-v928""], ""rebuilt"": [""publication:randomized-holdout-publication-v928""]}",ack.lookup_keys must rebuild exactly
+ack.lookup_ready,pass,"{""original"": true, ""rebuilt"": true}",ack.lookup_ready must rebuild exactly
+ack.downstream_ready,pass,"{""original"": true, ""rebuilt"": true}",ack.downstream_ready must rebuild exactly
+ack.contract_check_ready,pass,"{""original"": true, ""rebuilt"": true}",ack.contract_check_ready must rebuild exactly
+ack.acked_use,pass,"{""original"": ""downstream_governance_lookup_only"", ""rebuilt"": ""downstream_governance_lookup_only""}",ack.acked_use must rebuild exactly
+ack.blocked_uses,pass,"{""original"": [""production_promotion"", ""model_quality_expansion"", ""training_data_claim_expansion""], ""rebuilt"": [""production_promotion"", ""model_quality_expansion"", ""training_data_claim_expansion""]}",ack.blocked_uses must rebuild exactly
+ack.promotion_ready,pass,"{""original"": false, ""rebuilt"": false}",ack.promotion_ready must rebuild exactly
+ack.approved_for_promotion,pass,"{""original"": false, ""rebuilt"": false}",ack.approved_for_promotion must rebuild exactly
+ack.consumer_boundary,pass,"{""original"": ""governance_lookup_only"", ""rebuilt"": ""governance_lookup_only""}",ack.consumer_boundary must rebuild exactly
+ack.model_quality_claim,pass,"{""original"": ""bounded_randomized_target_hidden_holdout_claim_only"", ""rebuilt"": ""bounded_randomized_target_hidden_holdout_claim_only""}",ack.model_quality_claim must rebuild exactly

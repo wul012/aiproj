@@ -1,0 +1,39 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "MiniGPT randomized holdout publication registry downstream consumer ack contract check" [level=1] [ref=e4]
+    - paragraph [ref=e5]: The downstream consumer acknowledgement rebuilds from the source review and remains lookup-only.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - strong [ref=e9]: pass
+    - generic [ref=e10]:
+      - generic [ref=e11]: Contract
+      - strong [ref=e12]: "True"
+    - generic [ref=e13]:
+      - generic [ref=e14]: Original use
+      - strong [ref=e15]: downstream_governance_lookup_only
+    - generic [ref=e16]:
+      - generic [ref=e17]: Rebuilt use
+      - strong [ref=e18]: downstream_governance_lookup_only
+    - generic [ref=e19]:
+      - generic [ref=e20]: Promotion
+      - strong [ref=e21]: "False"
+    - generic [ref=e22]:
+      - generic [ref=e23]: Failed
+      - strong [ref=e24]: "0"
+  - generic [ref=e25]:
+    - heading "Contract Summary" [level=2] [ref=e26]
+    - generic [ref=e27]:
+      - term [ref=e28]: Source review
+      - definition [ref=e29]: e\944\解释\randomized-holdout-publication-registry-downstream-consumer-index-review\randomized_holdout_publication_registry_downstream_consumer_index_review.json
+      - term [ref=e30]: Original ack status
+      - definition [ref=e31]: downstream_consumer_acknowledged
+      - term [ref=e32]: Rebuilt ack status
+      - definition [ref=e33]: downstream_consumer_acknowledged
+      - term [ref=e34]: Next step
+      - definition [ref=e35]: bundle_randomized_holdout_publication_registry_downstream_consumer_ack
+  - generic [ref=e36]:
+    - heading "Checks" [level=2] [ref=e37]
+    - table [ref=e39]:
+      - rowgroup [ref=e40]
+      - rowgroup [ref=e46]
