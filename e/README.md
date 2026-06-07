@@ -2265,3 +2265,8 @@ e/663/解释/说明.md
 - `e/951/图片`
 - `e/951/解释/说明.md`
 - v951 randomized holdout publication registry downstream consumer ack bundle publication index screenshots and explanation.
+## v952 supplemental index
+
+- `e/952/图片`
+- `e/952/解释/说明.md`
+- v952 randomized holdout publication registry downstream consumer ack bundle publication index review screenshots and explanation.

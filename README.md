@@ -4,7 +4,19 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v951.0.0` indexes the randomized holdout publication registry downstream consumer acknowledgement bundle publication and its contract check for lookup-only downstream review.
+Version `v952.0.0` reviews the randomized holdout publication registry downstream consumer acknowledgement bundle publication index for lookup-only downstream receipt.
+
+## Latest v952 checkpoint
+
+- Added short-name module `randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_index_review`.
+- Added CLI `scripts/build_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_index_review.py`.
+- Consumed the real v951 downstream consumer ack bundle publication index.
+- Checked index readiness, lookup-only scope, published-use scope, lookup readiness, contract-check readiness, publication row count, lookup-key namespace, source evidence count/status/file existence, source publication/check existence, source next-step routing, and no-promotion fields.
+- Confirmed `randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_index_review_ready=True`, `review_status=approved_for_downstream_publication_lookup_only`, `publication_row_count=1`, `source_evidence_count=2`, and `downstream_ready=True`.
+- Kept `promotion_ready=False` and `approved_for_promotion=False`.
+- Routed the next action to `record_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt`.
+- Verified with focused downstream consumer ack bundle publication index review tests and Playwright MCP screenshot evidence.
+- Archived v952 evidence in `e/952` and added the code explanation in `代码讲解记录_模型能力阶段/966-v952-randomized-holdout-publication-registry-downstream-consumer-ack-bundle-publication-index-review.md`.
 
 ## Latest v951 checkpoint
 
