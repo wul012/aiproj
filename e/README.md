@@ -2305,3 +2305,8 @@ e/663/解释/说明.md
 - `e/959/图片`
 - `e/959/解释/说明.md`
 - v959 randomized holdout publication registry downstream consumer ack bundle publication receipt packet index publication screenshots and explanation.
+## v960 supplemental index
+
+- `e/960/图片`
+- `e/960/解释/说明.md`
+- v960 randomized holdout publication registry downstream consumer ack bundle publication receipt packet index publication contract check screenshots and explanation.

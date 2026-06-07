@@ -1,0 +1,473 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT randomized holdout publication registry downstream consumer ack bundle publication receipt packet index publication contract check",
+  "generated_at": "2026-06-07T09:28:53Z",
+  "status": "pass",
+  "decision": "randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_contract_check_passed",
+  "failed_count": 0,
+  "issues": [],
+  "publication_path": "e\\959\\解释\\randomized-holdout-publication-registry-downstream-consumer-ack-bundle-publication-receipt-packet-index-publication\\randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication.json",
+  "source_receipt_packet_index_review": "e\\958\\解释\\randomized-holdout-publication-registry-downstream-consumer-ack-bundle-publication-receipt-packet-index-review\\randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_review.json",
+  "original_summary": {
+    "randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_ready": true,
+    "publication_id": "randomized-holdout-publication-registry-downstream-consumer-ack-bundle-publication-receipt-packet-index-publication-v959",
+    "publication_status": "published_for_downstream_receipt_packet_index_lookup_only",
+    "consumer_name": "publication_registry_governance_lookup_reader",
+    "published_use": "downstream_governance_lookup_only",
+    "publish_ready": true,
+    "lookup_ready": true,
+    "contract_check_ready": true,
+    "packet_index_row_count": 1,
+    "source_packet_row_count": 1,
+    "source_evidence_count": 2,
+    "promotion_ready": false,
+    "approved_for_promotion": false,
+    "consumer_boundary": "governance_lookup_only",
+    "model_quality_claim": "bounded_randomized_target_hidden_holdout_claim_only",
+    "next_step": "check_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication",
+    "passed_check_count": 21,
+    "failed_check_count": 0
+  },
+  "rebuilt_summary": {
+    "randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_ready": true,
+    "publication_id": "randomized-holdout-publication-registry-downstream-consumer-ack-bundle-publication-receipt-packet-index-publication-v959",
+    "publication_status": "published_for_downstream_receipt_packet_index_lookup_only",
+    "consumer_name": "publication_registry_governance_lookup_reader",
+    "published_use": "downstream_governance_lookup_only",
+    "publish_ready": true,
+    "lookup_ready": true,
+    "contract_check_ready": true,
+    "packet_index_row_count": 1,
+    "source_packet_row_count": 1,
+    "source_evidence_count": 2,
+    "promotion_ready": false,
+    "approved_for_promotion": false,
+    "consumer_boundary": "governance_lookup_only",
+    "model_quality_claim": "bounded_randomized_target_hidden_holdout_claim_only",
+    "next_step": "check_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication",
+    "passed_check_count": 21,
+    "failed_check_count": 0
+  },
+  "original_publication": {
+    "publication_ready": true,
+    "publication_id": "randomized-holdout-publication-registry-downstream-consumer-ack-bundle-publication-receipt-packet-index-publication-v959",
+    "publication_status": "published_for_downstream_receipt_packet_index_lookup_only",
+    "receipt_packet_index_review_path": "e\\958\\解释\\randomized-holdout-publication-registry-downstream-consumer-ack-bundle-publication-receipt-packet-index-review\\randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_review.json",
+    "receipt_packet_index_path": "e\\957\\解释\\randomized-holdout-publication-registry-downstream-consumer-ack-bundle-publication-receipt-packet-index\\randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index.json",
+    "source_packet_path": "e\\955\\解释\\randomized-holdout-publication-registry-downstream-consumer-ack-bundle-publication-receipt-packet\\randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet.json",
+    "source_packet_check_path": "e\\956\\解释\\randomized-holdout-publication-registry-downstream-consumer-ack-bundle-publication-receipt-packet-check\\randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_check.json",
+    "consumer_name": "publication_registry_governance_lookup_reader",
+    "published_use": "downstream_governance_lookup_only",
+    "publish_ready": true,
+    "lookup_ready": true,
+    "contract_check_ready": true,
+    "packet_index_row_count": 1,
+    "source_packet_row_count": 1,
+    "source_evidence_count": 2,
+    "promotion_ready": false,
+    "approved_for_promotion": false,
+    "consumer_boundary": "governance_lookup_only",
+    "model_quality_claim": "bounded_randomized_target_hidden_holdout_claim_only",
+    "next_step": "check_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication"
+  },
+  "rebuilt_publication": {
+    "publication_ready": true,
+    "publication_id": "randomized-holdout-publication-registry-downstream-consumer-ack-bundle-publication-receipt-packet-index-publication-v959",
+    "publication_status": "published_for_downstream_receipt_packet_index_lookup_only",
+    "receipt_packet_index_review_path": "e\\958\\解释\\randomized-holdout-publication-registry-downstream-consumer-ack-bundle-publication-receipt-packet-index-review\\randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_review.json",
+    "receipt_packet_index_path": "e\\957\\解释\\randomized-holdout-publication-registry-downstream-consumer-ack-bundle-publication-receipt-packet-index\\randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index.json",
+    "source_packet_path": "e\\955\\解释\\randomized-holdout-publication-registry-downstream-consumer-ack-bundle-publication-receipt-packet\\randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet.json",
+    "source_packet_check_path": "e\\956\\解释\\randomized-holdout-publication-registry-downstream-consumer-ack-bundle-publication-receipt-packet-check\\randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_check.json",
+    "consumer_name": "publication_registry_governance_lookup_reader",
+    "published_use": "downstream_governance_lookup_only",
+    "publish_ready": true,
+    "lookup_ready": true,
+    "contract_check_ready": true,
+    "packet_index_row_count": 1,
+    "source_packet_row_count": 1,
+    "source_evidence_count": 2,
+    "promotion_ready": false,
+    "approved_for_promotion": false,
+    "consumer_boundary": "governance_lookup_only",
+    "model_quality_claim": "bounded_randomized_target_hidden_holdout_claim_only",
+    "next_step": "check_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication"
+  },
+  "check_rows": [
+    {
+      "id": "source_receipt_packet_index_review_exists",
+      "status": "pass",
+      "actual": "e\\958\\解释\\randomized-holdout-publication-registry-downstream-consumer-ack-bundle-publication-receipt-packet-index-review\\randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_review.json",
+      "detail": "source receipt packet index review must exist"
+    },
+    {
+      "id": "status",
+      "status": "pass",
+      "actual": {
+        "original": "pass",
+        "rebuilt": "pass"
+      },
+      "detail": "status must rebuild exactly"
+    },
+    {
+      "id": "decision",
+      "status": "pass",
+      "actual": {
+        "original": "randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_ready",
+        "rebuilt": "randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_ready"
+      },
+      "detail": "decision must rebuild exactly"
+    },
+    {
+      "id": "failed_count",
+      "status": "pass",
+      "actual": {
+        "original": 0,
+        "rebuilt": 0
+      },
+      "detail": "failed count must rebuild exactly"
+    },
+    {
+      "id": "check_rows",
+      "status": "pass",
+      "actual": "check_rows",
+      "detail": "publication check rows must rebuild exactly"
+    },
+    {
+      "id": "summary.randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_ready",
+      "status": "pass",
+      "actual": {
+        "original": true,
+        "rebuilt": true
+      },
+      "detail": "summary.randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_ready must rebuild exactly"
+    },
+    {
+      "id": "summary.publication_id",
+      "status": "pass",
+      "actual": {
+        "original": "randomized-holdout-publication-registry-downstream-consumer-ack-bundle-publication-receipt-packet-index-publication-v959",
+        "rebuilt": "randomized-holdout-publication-registry-downstream-consumer-ack-bundle-publication-receipt-packet-index-publication-v959"
+      },
+      "detail": "summary.publication_id must rebuild exactly"
+    },
+    {
+      "id": "summary.publication_status",
+      "status": "pass",
+      "actual": {
+        "original": "published_for_downstream_receipt_packet_index_lookup_only",
+        "rebuilt": "published_for_downstream_receipt_packet_index_lookup_only"
+      },
+      "detail": "summary.publication_status must rebuild exactly"
+    },
+    {
+      "id": "summary.consumer_name",
+      "status": "pass",
+      "actual": {
+        "original": "publication_registry_governance_lookup_reader",
+        "rebuilt": "publication_registry_governance_lookup_reader"
+      },
+      "detail": "summary.consumer_name must rebuild exactly"
+    },
+    {
+      "id": "summary.published_use",
+      "status": "pass",
+      "actual": {
+        "original": "downstream_governance_lookup_only",
+        "rebuilt": "downstream_governance_lookup_only"
+      },
+      "detail": "summary.published_use must rebuild exactly"
+    },
+    {
+      "id": "summary.publish_ready",
+      "status": "pass",
+      "actual": {
+        "original": true,
+        "rebuilt": true
+      },
+      "detail": "summary.publish_ready must rebuild exactly"
+    },
+    {
+      "id": "summary.lookup_ready",
+      "status": "pass",
+      "actual": {
+        "original": true,
+        "rebuilt": true
+      },
+      "detail": "summary.lookup_ready must rebuild exactly"
+    },
+    {
+      "id": "summary.contract_check_ready",
+      "status": "pass",
+      "actual": {
+        "original": true,
+        "rebuilt": true
+      },
+      "detail": "summary.contract_check_ready must rebuild exactly"
+    },
+    {
+      "id": "summary.packet_index_row_count",
+      "status": "pass",
+      "actual": {
+        "original": 1,
+        "rebuilt": 1
+      },
+      "detail": "summary.packet_index_row_count must rebuild exactly"
+    },
+    {
+      "id": "summary.source_packet_row_count",
+      "status": "pass",
+      "actual": {
+        "original": 1,
+        "rebuilt": 1
+      },
+      "detail": "summary.source_packet_row_count must rebuild exactly"
+    },
+    {
+      "id": "summary.source_evidence_count",
+      "status": "pass",
+      "actual": {
+        "original": 2,
+        "rebuilt": 2
+      },
+      "detail": "summary.source_evidence_count must rebuild exactly"
+    },
+    {
+      "id": "summary.promotion_ready",
+      "status": "pass",
+      "actual": {
+        "original": false,
+        "rebuilt": false
+      },
+      "detail": "summary.promotion_ready must rebuild exactly"
+    },
+    {
+      "id": "summary.approved_for_promotion",
+      "status": "pass",
+      "actual": {
+        "original": false,
+        "rebuilt": false
+      },
+      "detail": "summary.approved_for_promotion must rebuild exactly"
+    },
+    {
+      "id": "summary.consumer_boundary",
+      "status": "pass",
+      "actual": {
+        "original": "governance_lookup_only",
+        "rebuilt": "governance_lookup_only"
+      },
+      "detail": "summary.consumer_boundary must rebuild exactly"
+    },
+    {
+      "id": "summary.model_quality_claim",
+      "status": "pass",
+      "actual": {
+        "original": "bounded_randomized_target_hidden_holdout_claim_only",
+        "rebuilt": "bounded_randomized_target_hidden_holdout_claim_only"
+      },
+      "detail": "summary.model_quality_claim must rebuild exactly"
+    },
+    {
+      "id": "publication.publication_ready",
+      "status": "pass",
+      "actual": {
+        "original": true,
+        "rebuilt": true
+      },
+      "detail": "publication.publication_ready must rebuild exactly"
+    },
+    {
+      "id": "publication.publication_id",
+      "status": "pass",
+      "actual": {
+        "original": "randomized-holdout-publication-registry-downstream-consumer-ack-bundle-publication-receipt-packet-index-publication-v959",
+        "rebuilt": "randomized-holdout-publication-registry-downstream-consumer-ack-bundle-publication-receipt-packet-index-publication-v959"
+      },
+      "detail": "publication.publication_id must rebuild exactly"
+    },
+    {
+      "id": "publication.publication_status",
+      "status": "pass",
+      "actual": {
+        "original": "published_for_downstream_receipt_packet_index_lookup_only",
+        "rebuilt": "published_for_downstream_receipt_packet_index_lookup_only"
+      },
+      "detail": "publication.publication_status must rebuild exactly"
+    },
+    {
+      "id": "publication.receipt_packet_index_review_path",
+      "status": "pass",
+      "actual": {
+        "original": "e\\958\\解释\\randomized-holdout-publication-registry-downstream-consumer-ack-bundle-publication-receipt-packet-index-review\\randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_review.json",
+        "rebuilt": "e\\958\\解释\\randomized-holdout-publication-registry-downstream-consumer-ack-bundle-publication-receipt-packet-index-review\\randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_review.json"
+      },
+      "detail": "publication.receipt_packet_index_review_path must rebuild exactly"
+    },
+    {
+      "id": "publication.receipt_packet_index_path",
+      "status": "pass",
+      "actual": {
+        "original": "e\\957\\解释\\randomized-holdout-publication-registry-downstream-consumer-ack-bundle-publication-receipt-packet-index\\randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index.json",
+        "rebuilt": "e\\957\\解释\\randomized-holdout-publication-registry-downstream-consumer-ack-bundle-publication-receipt-packet-index\\randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index.json"
+      },
+      "detail": "publication.receipt_packet_index_path must rebuild exactly"
+    },
+    {
+      "id": "publication.source_packet_path",
+      "status": "pass",
+      "actual": {
+        "original": "e\\955\\解释\\randomized-holdout-publication-registry-downstream-consumer-ack-bundle-publication-receipt-packet\\randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet.json",
+        "rebuilt": "e\\955\\解释\\randomized-holdout-publication-registry-downstream-consumer-ack-bundle-publication-receipt-packet\\randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet.json"
+      },
+      "detail": "publication.source_packet_path must rebuild exactly"
+    },
+    {
+      "id": "publication.source_packet_check_path",
+      "status": "pass",
+      "actual": {
+        "original": "e\\956\\解释\\randomized-holdout-publication-registry-downstream-consumer-ack-bundle-publication-receipt-packet-check\\randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_check.json",
+        "rebuilt": "e\\956\\解释\\randomized-holdout-publication-registry-downstream-consumer-ack-bundle-publication-receipt-packet-check\\randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_check.json"
+      },
+      "detail": "publication.source_packet_check_path must rebuild exactly"
+    },
+    {
+      "id": "publication.consumer_name",
+      "status": "pass",
+      "actual": {
+        "original": "publication_registry_governance_lookup_reader",
+        "rebuilt": "publication_registry_governance_lookup_reader"
+      },
+      "detail": "publication.consumer_name must rebuild exactly"
+    },
+    {
+      "id": "publication.published_use",
+      "status": "pass",
+      "actual": {
+        "original": "downstream_governance_lookup_only",
+        "rebuilt": "downstream_governance_lookup_only"
+      },
+      "detail": "publication.published_use must rebuild exactly"
+    },
+    {
+      "id": "publication.publish_ready",
+      "status": "pass",
+      "actual": {
+        "original": true,
+        "rebuilt": true
+      },
+      "detail": "publication.publish_ready must rebuild exactly"
+    },
+    {
+      "id": "publication.lookup_ready",
+      "status": "pass",
+      "actual": {
+        "original": true,
+        "rebuilt": true
+      },
+      "detail": "publication.lookup_ready must rebuild exactly"
+    },
+    {
+      "id": "publication.contract_check_ready",
+      "status": "pass",
+      "actual": {
+        "original": true,
+        "rebuilt": true
+      },
+      "detail": "publication.contract_check_ready must rebuild exactly"
+    },
+    {
+      "id": "publication.packet_index_row_count",
+      "status": "pass",
+      "actual": {
+        "original": 1,
+        "rebuilt": 1
+      },
+      "detail": "publication.packet_index_row_count must rebuild exactly"
+    },
+    {
+      "id": "publication.source_packet_row_count",
+      "status": "pass",
+      "actual": {
+        "original": 1,
+        "rebuilt": 1
+      },
+      "detail": "publication.source_packet_row_count must rebuild exactly"
+    },
+    {
+      "id": "publication.source_evidence_count",
+      "status": "pass",
+      "actual": {
+        "original": 2,
+        "rebuilt": 2
+      },
+      "detail": "publication.source_evidence_count must rebuild exactly"
+    },
+    {
+      "id": "publication.promotion_ready",
+      "status": "pass",
+      "actual": {
+        "original": false,
+        "rebuilt": false
+      },
+      "detail": "publication.promotion_ready must rebuild exactly"
+    },
+    {
+      "id": "publication.approved_for_promotion",
+      "status": "pass",
+      "actual": {
+        "original": false,
+        "rebuilt": false
+      },
+      "detail": "publication.approved_for_promotion must rebuild exactly"
+    },
+    {
+      "id": "publication.consumer_boundary",
+      "status": "pass",
+      "actual": {
+        "original": "governance_lookup_only",
+        "rebuilt": "governance_lookup_only"
+      },
+      "detail": "publication.consumer_boundary must rebuild exactly"
+    },
+    {
+      "id": "publication.model_quality_claim",
+      "status": "pass",
+      "actual": {
+        "original": "bounded_randomized_target_hidden_holdout_claim_only",
+        "rebuilt": "bounded_randomized_target_hidden_holdout_claim_only"
+      },
+      "detail": "publication.model_quality_claim must rebuild exactly"
+    },
+    {
+      "id": "publication.next_step",
+      "status": "pass",
+      "actual": {
+        "original": "check_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication",
+        "rebuilt": "check_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication"
+      },
+      "detail": "publication.next_step must rebuild exactly"
+    }
+  ],
+  "summary": {
+    "contract_check_ready": true,
+    "source_receipt_packet_index_review": "e\\958\\解释\\randomized-holdout-publication-registry-downstream-consumer-ack-bundle-publication-receipt-packet-index-review\\randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_review.json",
+    "original_publication_status": "published_for_downstream_receipt_packet_index_lookup_only",
+    "rebuilt_publication_status": "published_for_downstream_receipt_packet_index_lookup_only",
+    "original_published_use": "downstream_governance_lookup_only",
+    "rebuilt_published_use": "downstream_governance_lookup_only",
+    "original_packet_index_row_count": 1,
+    "rebuilt_packet_index_row_count": 1,
+    "original_source_packet_row_count": 1,
+    "rebuilt_source_packet_row_count": 1,
+    "original_promotion_ready": false,
+    "rebuilt_promotion_ready": false,
+    "next_step": "index_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication",
+    "passed_check_count": 40,
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "bounded_randomized_target_hidden_holdout_claim_only",
+    "reason": "The downstream publication receipt packet index publication rebuilds from the source review and remains lookup-only.",
+    "next_action": "index_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication"
+  }
+}
