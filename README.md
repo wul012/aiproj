@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v940.0.0` reviews the randomized holdout publication registry downstream receipt and approves only consumer-packet construction while keeping production promotion and claim expansion blocked.
+Version `v941.0.0` packages the reviewed randomized holdout publication registry downstream receipt into a lookup-only consumer packet while extracting shared downstream boundary helpers.
+
+## Latest v941 checkpoint
+
+- Added short-name module `randomized_holdout_publication_registry_downstream_consumer_packet`.
+- Added CLI `scripts/build_randomized_holdout_publication_registry_downstream_consumer_packet.py`.
+- Added shared helper module `randomized_holdout_publication_downstream_common`.
+- Consumed the real v940 downstream receipt review.
+- Checked review readiness, packet approval status, consumer readiness, granted-use scope, blocked-use completeness, source guard digest shape, lookup-key namespace, and promotion-boundary fields.
+- Confirmed `randomized_holdout_publication_registry_downstream_consumer_packet_ready=True`, `packet_status=downstream_consumer_packet_ready`, and `granted_use=downstream_governance_lookup_only`.
+- Kept `promotion_ready=False` and `approved_for_promotion=False`.
+- Routed the next action to `check_randomized_holdout_publication_registry_downstream_consumer_packet`.
+- Verified with focused downstream packet tests and Playwright MCP screenshot evidence.
+- Archived v941 evidence in `e/941` and added the code explanation in `代码讲解记录_模型能力阶段/955-v941-randomized-holdout-publication-registry-downstream-consumer-packet.md`.
 
 ## Latest v940 checkpoint
 
@@ -9543,6 +9556,8 @@ The randomized holdout publication registry downstream guard layer allows only d
 The randomized holdout publication registry downstream receipt layer records the allowed downstream consumer, granted lookup-only use, blocked-use list, and source guard digest so downstream modules can consume the registry lookup contract without expanding promotion or model-quality claims.
 
 The randomized holdout publication registry downstream receipt review layer verifies that receipt, checks the referenced source guard digest, and approves only downstream consumer-packet construction while preserving the no-promotion boundary.
+
+The randomized holdout publication registry downstream consumer packet layer packages the reviewed receipt into a stable lookup-only consumer packet and extracts shared downstream boundary helpers for blocked uses, lookup-only scope, and SHA-256 checks.
 
 The run registry layer indexes multiple run directories so experiments can be scanned by commit, data fingerprint, quality status, eval suite coverage, metrics, artifact count, notes, tags, best-val rank, loss delta, a leaderboard, an interactive local HTML table, shareable URL state, and visible-row CSV export.
 

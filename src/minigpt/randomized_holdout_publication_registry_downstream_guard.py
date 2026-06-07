@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import Any
 
 from minigpt.randomized_holdout_publication_constants import (
+    RANDOMIZED_HOLDOUT_PUBLICATION_BLOCKED_USES,
     RANDOMIZED_HOLDOUT_PUBLICATION_CONSUMER_BOUNDARY,
     RANDOMIZED_HOLDOUT_PUBLICATION_MODEL_QUALITY_CLAIM,
     RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_DOWNSTREAM_GUARD_NEXT_STEP,
@@ -23,7 +24,7 @@ RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_DOWNSTREAM_GUARD_MARKDOWN_FILENAME = "ra
 RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_DOWNSTREAM_GUARD_HTML_FILENAME = "randomized_holdout_publication_registry_downstream_guard.html"
 
 GUARD_ID = "randomized-holdout-publication-registry-downstream-guard-v938"
-BLOCKED_USES = ["production_promotion", "model_quality_expansion", "training_data_claim_expansion"]
+BLOCKED_USES = list(RANDOMIZED_HOLDOUT_PUBLICATION_BLOCKED_USES)
 
 
 def locate_randomized_holdout_publication_registry_lookup_index_review(path: str | Path) -> Path:

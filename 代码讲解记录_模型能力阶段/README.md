@@ -1415,6 +1415,9 @@
 954-v940-randomized-holdout-publication-registry-downstream-receipt-review.md
  -> v940 code explanation: review the downstream receipt, verify source guard digest consistency, and approve only consumer-packet construction.
 
+955-v941-randomized-holdout-publication-registry-downstream-consumer-packet.md
+ -> v941 code explanation: package the reviewed downstream receipt into a lookup-only consumer packet while extracting shared downstream boundary helpers.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。
