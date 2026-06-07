@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v956.0.0` contract-checks the randomized holdout publication registry downstream consumer acknowledgement bundle publication receipt packet before indexing.
+Version `v957.0.0` indexes the randomized holdout publication registry downstream consumer acknowledgement bundle publication receipt packet and its contract check.
+
+## Latest v957 checkpoint
+
+- Added short-name module `randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index`.
+- Added CLI `scripts/build_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index.py`.
+- Consumed the real v955 downstream consumer ack bundle publication receipt packet and v956 packet contract check.
+- Checked packet readiness, contract-check readiness, packet/check status alignment, granted-use scope, lookup readiness, packet row count, source evidence count/status/file existence, upstream source artifact existence, source next-step routing, and no-promotion fields.
+- Built one packet index row and preserved two source evidence rows.
+- Confirmed `randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_ready=True`, `lookup_scope=downstream_governance_lookup_only`, `granted_use=downstream_governance_lookup_only`, `lookup_ready=True`, `contract_check_ready=True`, and `packet_index_row_count=1`.
+- Kept `promotion_ready=False` and `approved_for_promotion=False`.
+- Routed the next action to `review_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index`.
+- Verified with focused downstream consumer ack bundle publication receipt packet index tests and Playwright MCP screenshot evidence.
+- Archived v957 evidence in `e/957` and added the code explanation in `代码讲解记录_模型能力阶段/971-v957-randomized-holdout-publication-registry-downstream-consumer-ack-bundle-publication-receipt-packet-index.md`.
 
 ## Latest v956 checkpoint
 
