@@ -4,7 +4,19 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v961.0.0` indexes the randomized holdout publication registry downstream consumer acknowledgement bundle publication receipt packet index publication and its contract check.
+Version `v962.0.0` reviews the randomized holdout publication registry downstream consumer acknowledgement bundle publication receipt packet index publication index before recording a lookup-only receipt.
+
+## Latest v962 checkpoint
+
+- Added short-name module `randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_index_review`.
+- Added CLI `scripts/build_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_index_review.py`.
+- Consumed the real v961 downstream consumer ack bundle publication receipt packet index publication index.
+- Checked index status, decision, summary/body readiness, lookup scope, published-use scope, lookup readiness, contract-check readiness, publication index row count, lookup-key namespace, upstream source artifact existence, source next-step routing, and no-promotion fields.
+- Confirmed `randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_index_review_ready=True`, `review_status=approved_for_downstream_receipt_packet_index_publication_receipt`, `downstream_ready=True`, `lookup_ready=True`, `contract_check_ready=True`, and `receipt_ready=True`.
+- Kept `promotion_ready=False` and `approved_for_promotion=False`.
+- Routed the next action to `record_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt`.
+- Verified with focused downstream consumer ack bundle publication receipt packet index publication index review tests and Playwright MCP screenshot evidence.
+- Archived v962 evidence in `e/962` and added the code explanation in `代码讲解记录_模型能力阶段/976-v962-randomized-holdout-publication-registry-downstream-consumer-ack-bundle-publication-receipt-packet-index-publication-index-review.md`.
 
 ## Latest v961 checkpoint
 
