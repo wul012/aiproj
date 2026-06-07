@@ -4,7 +4,21 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v965.0.0` builds the randomized holdout publication registry downstream consumer acknowledgement bundle publication receipt packet index publication receipt packet.
+Version `v966.0.0` checks the randomized holdout publication registry downstream consumer acknowledgement bundle publication receipt packet index publication receipt packet contract.
+
+## Latest v966 checkpoint
+
+- Added short-name module `randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_check`.
+- Added CLI `scripts/check_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet.py`.
+- Enhanced the v965 packet builder CLI with optional `--check-out-dir` sidecar contract-check output while preserving the default behavior.
+- Consumed the real v965 downstream consumer ack bundle publication receipt packet index publication receipt packet.
+- Rebuilt the packet from its recorded v964 publication receipt review.
+- Compared status, decision, failed count, stable summary fields, stable packet body fields, packet rows, source evidence rows, and source check rows.
+- Confirmed `contract_check_ready=True`, original/rebuilt `packet_status=downstream_receipt_packet_index_publication_receipt_packet_ready`, original/rebuilt `granted_use=downstream_governance_lookup_only`, original/rebuilt `source_evidence_count=2`, and `failed_check_count=0`.
+- Kept original/rebuilt `promotion_ready=False`.
+- Routed the next action to `index_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet`.
+- Verified with focused receipt packet contract-check tests, source encoding hygiene, full pytest, and Playwright MCP screenshot evidence.
+- Archived v966 evidence in `e/966` and added the code explanation in `代码讲解记录_模型能力阶段/980-v966-randomized-holdout-publication-registry-downstream-consumer-ack-bundle-publication-receipt-packet-index-publication-receipt-packet-check.md`.
 
 ## Latest v965 checkpoint
 

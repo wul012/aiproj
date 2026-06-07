@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+980-v966-randomized-holdout-publication-registry-downstream-consumer-ack-bundle-publication-receipt-packet-index-publication-receipt-packet-check.md
+ -> v966 code explanation: rebuild the receipt packet index publication receipt packet from its source review and verify stable lookup-only fields.
+
 957-v943-randomized-holdout-publication-registry-downstream-consumer-index.md
  -> v943 code explanation: package the downstream consumer packet and its contract check into a lookup-only consumer index while keeping promotion blocked.
 
