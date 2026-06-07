@@ -1412,6 +1412,9 @@
 953-v939-randomized-holdout-publication-registry-downstream-receipt.md
  -> v939 code explanation: record a downstream governance lookup receipt with consumer, granted-use, blocked-use, and source-digest fields.
 
+954-v940-randomized-holdout-publication-registry-downstream-receipt-review.md
+ -> v940 code explanation: review the downstream receipt, verify source guard digest consistency, and approve only consumer-packet construction.
+
 ## 一句话总览
 
 本目录把 MiniGPT 后续重心从“证明训练治理链路完整”转向“用真实 tiny 训练证据观察模型能力是否变化”。

@@ -2181,3 +2181,8 @@ e/663/解释/说明.md
 - `e/939/图片`
 - `e/939/解释/说明.md`
 - v939 randomized holdout publication registry downstream receipt screenshots and explanation.
+## v940 supplemental index
+
+- `e/940/图片`
+- `e/940/解释/说明.md`
+- v940 randomized holdout publication registry downstream receipt review screenshots and explanation.
