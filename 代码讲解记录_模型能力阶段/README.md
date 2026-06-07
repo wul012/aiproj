@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+957-v943-randomized-holdout-publication-registry-downstream-consumer-index.md
+ -> v943 code explanation: package the downstream consumer packet and its contract check into a lookup-only consumer index while keeping promotion blocked.
+
 832-v818-route-promotion-bounded-real-replay-prompt-aligned-training-run.md
  -> v818 code explanation: train the v817 prompt-aligned bounded replay corpus into a real checkpoint while keeping quality claims gated behind replay.
 

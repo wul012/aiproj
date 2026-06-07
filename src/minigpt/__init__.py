@@ -529,6 +529,14 @@ _EXPORTS = {
         "randomized_holdout_publication_registry_downstream_consumer_packet_check_artifacts",
         "write_randomized_holdout_publication_registry_downstream_consumer_packet_check_outputs",
     ),
+    "build_randomized_holdout_publication_registry_downstream_consumer_index": (
+        "randomized_holdout_publication_registry_downstream_consumer_index",
+        "build_randomized_holdout_publication_registry_downstream_consumer_index",
+    ),
+    "write_randomized_holdout_publication_registry_downstream_consumer_index_outputs": (
+        "randomized_holdout_publication_registry_downstream_consumer_index_artifacts",
+        "write_randomized_holdout_publication_registry_downstream_consumer_index_outputs",
+    ),
     "build_model_capability_route_promotion_review_decision": (
         "model_capability_route_promotion_review_decision",
         "build_model_capability_route_promotion_review_decision",

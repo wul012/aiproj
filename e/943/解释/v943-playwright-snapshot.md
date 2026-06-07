@@ -1,0 +1,50 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "MiniGPT randomized holdout publication registry downstream consumer index" [level=1] [ref=e4]
+    - paragraph [ref=e5]: The downstream consumer packet and its contract check are packaged into a lookup-only consumer index while promotion remains blocked.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - strong [ref=e9]: pass
+    - generic [ref=e10]:
+      - generic [ref=e11]: Index ready
+      - strong [ref=e12]: "True"
+    - generic [ref=e13]:
+      - generic [ref=e14]: Lookup
+      - strong [ref=e15]: "True"
+    - generic [ref=e16]:
+      - generic [ref=e17]: Contract
+      - strong [ref=e18]: "True"
+    - generic [ref=e19]:
+      - generic [ref=e20]: Promotion
+      - strong [ref=e21]: "False"
+    - generic [ref=e22]:
+      - generic [ref=e23]: Failed
+      - strong [ref=e24]: "0"
+  - generic [ref=e25]:
+    - heading "Consumer Boundary" [level=2] [ref=e26]
+    - generic [ref=e27]:
+      - term [ref=e28]: Consumer index
+      - definition [ref=e29]: randomized-holdout-publication-registry-downstream-consumer-index-v943
+      - term [ref=e30]: Lookup scope
+      - definition [ref=e31]: downstream_governance_lookup_only
+      - term [ref=e32]: Granted use
+      - definition [ref=e33]: downstream_governance_lookup_only
+      - term [ref=e34]: Blocked uses
+      - definition [ref=e35]: "['production_promotion', 'model_quality_expansion', 'training_data_claim_expansion']"
+      - term [ref=e36]: Source packet
+      - definition [ref=e37]: e\941\解释\randomized-holdout-publication-registry-downstream-consumer-packet\randomized_holdout_publication_registry_downstream_consumer_packet.json
+      - term [ref=e38]: Source packet check
+      - definition [ref=e39]: e\942\解释\randomized-holdout-publication-registry-downstream-consumer-packet-check\randomized_holdout_publication_registry_downstream_consumer_packet_check.json
+      - term [ref=e40]: Next step
+      - definition [ref=e41]: review_randomized_holdout_publication_registry_downstream_consumer_index
+  - generic [ref=e42]:
+    - heading "Lookup Rows" [level=2] [ref=e43]
+    - table [ref=e45]:
+      - rowgroup [ref=e46]
+      - rowgroup [ref=e56]
+  - generic [ref=e66]:
+    - heading "Checks" [level=2] [ref=e67]
+    - table [ref=e69]:
+      - rowgroup [ref=e70]
+      - rowgroup [ref=e76]

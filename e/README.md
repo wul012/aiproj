@@ -20,6 +20,10 @@ e/<version>/解释/说明.md
 最新条目：
 
 ```text
+e/943/图片
+e/943/解释/说明.md
+ -> v943 randomized holdout publication registry downstream consumer index 的运行截图和解释
+
 e/818/图片
 e/818/解释/说明.md
  -> v818 prompt-aligned bounded replay training run 的运行截图和解释

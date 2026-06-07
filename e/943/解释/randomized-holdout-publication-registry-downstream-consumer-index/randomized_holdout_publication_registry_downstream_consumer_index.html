@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT randomized holdout publication registry downstream consumer index</title>
+<style>
+:root{color-scheme:light;--ink:#17212b;--muted:#62717d;--line:#d7dee5;--panel:#f8fafc;--accent:#0f766e}
+*{box-sizing:border-box}
+body{margin:0;background:#eef1f5;color:var(--ink);font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1160px;margin:0 auto;padding:28px}
+h1{font-size:30px;margin:0 0 8px;letter-spacing:0}
+h2{font-size:18px;margin:0 0 12px;letter-spacing:0}
+p{color:var(--muted);line-height:1.55;overflow-wrap:anywhere}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin:18px 0}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:8px}
+.card{padding:14px}
+.card span{display:block;color:var(--muted);font-size:12px;text-transform:uppercase}
+.card strong{display:block;margin-top:6px;font-size:16px;line-height:1.25;color:var(--accent);overflow-wrap:anywhere}
+.panel{padding:16px;margin:14px 0}
+dl{display:grid;grid-template-columns:minmax(150px,220px) 1fr;gap:8px 16px;margin:0;font-size:14px}
+dt{color:#334155;font-weight:700}
+dd{margin:0;overflow-wrap:anywhere}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:#334155}
+td{overflow-wrap:anywhere}
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT randomized holdout publication registry downstream consumer index</h1><p>The downstream consumer packet and its contract check are packaged into a lookup-only consumer index while promotion remains blocked.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Index ready</span><strong>True</strong></div><div class="card"><span>Lookup</span><strong>True</strong></div><div class="card"><span>Contract</span><strong>True</strong></div><div class="card"><span>Promotion</span><strong>False</strong></div><div class="card"><span>Failed</span><strong>0</strong></div></section>
+<section class="panel"><h2>Consumer Boundary</h2><dl>
+<dt>Consumer index</dt><dd>randomized-holdout-publication-registry-downstream-consumer-index-v943</dd>
+<dt>Lookup scope</dt><dd>downstream_governance_lookup_only</dd>
+<dt>Granted use</dt><dd>downstream_governance_lookup_only</dd>
+<dt>Blocked uses</dt><dd>[&#x27;production_promotion&#x27;, &#x27;model_quality_expansion&#x27;, &#x27;training_data_claim_expansion&#x27;]</dd>
+<dt>Source packet</dt><dd>e\941\解释\randomized-holdout-publication-registry-downstream-consumer-packet\randomized_holdout_publication_registry_downstream_consumer_packet.json</dd>
+<dt>Source packet check</dt><dd>e\942\解释\randomized-holdout-publication-registry-downstream-consumer-packet-check\randomized_holdout_publication_registry_downstream_consumer_packet_check.json</dd>
+<dt>Next step</dt><dd>review_randomized_holdout_publication_registry_downstream_consumer_index</dd>
+</dl></section>
+<section class="panel"><h2>Lookup Rows</h2><div class="table-wrap"><table>
+<thead><tr><th>Index</th><th>Consumer</th><th>Lookup key</th><th>Entry</th><th>Granted use</th><th>Blocked uses</th><th>Promotion</th><th>Contract</th></tr></thead>
+<tbody><tr><td>randomized-holdout-publication-registry-downstream-consumer-index-v943</td><td>publication_registry_governance_lookup_reader</td><td>publication:randomized-holdout-publication-v928</td><td>randomized-holdout-publication-v928</td><td>downstream_governance_lookup_only</td><td>[&#x27;production_promotion&#x27;, &#x27;model_quality_expansion&#x27;, &#x27;training_data_claim_expansion&#x27;]</td><td>False</td><td>True</td></tr></tbody>
+</table></div></section>
+<section class="panel"><h2>Checks</h2><div class="table-wrap"><table>
+<thead><tr><th>Check</th><th>Status</th><th>Actual</th><th>Detail</th></tr></thead>
+<tbody><tr><td>consumer_packet_file_exists</td><td>pass</td><td>e\941\解释\randomized-holdout-publication-registry-downstream-consumer-packet\randomized_holdout_publication_registry_downstream_consumer_packet.json</td><td>consumer packet file must exist</td></tr><tr><td>consumer_packet_check_file_exists</td><td>pass</td><td>e\942\解释\randomized-holdout-publication-registry-downstream-consumer-packet-check\randomized_holdout_publication_registry_downstream_consumer_packet_check.json</td><td>consumer packet check file must exist</td></tr><tr><td>consumer_packet_passed</td><td>pass</td><td>pass</td><td>consumer packet must pass</td></tr><tr><td>consumer_packet_decision_ready</td><td>pass</td><td>randomized_holdout_publication_registry_downstream_consumer_packet_ready</td><td>consumer packet decision must be ready</td></tr><tr><td>consumer_packet_summary_ready</td><td>pass</td><td>{&#x27;summary&#x27;: True, &#x27;packet&#x27;: True}</td><td>consumer packet summary and body must be ready</td></tr><tr><td>consumer_packet_check_passed</td><td>pass</td><td>pass</td><td>consumer packet check must pass</td></tr><tr><td>consumer_packet_check_decision_ready</td><td>pass</td><td>randomized_holdout_publication_registry_downstream_consumer_packet_contract_check_passed</td><td>consumer packet check decision must pass</td></tr><tr><td>contract_check_ready</td><td>pass</td><td>True</td><td>consumer packet contract check must be ready</td></tr><tr><td>lookup_keys_match_check</td><td>pass</td><td>{&#x27;packet&#x27;: [&#x27;publication:randomized-holdout-publication-v928&#x27;], &#x27;original&#x27;: [&#x27;publication:randomized-holdout-publication-v928&#x27;], &#x27;rebuilt&#x27;: [&#x27;publication:randomized-holdout-publication-v928&#x27;]}</td><td>lookup keys must match the contract check</td></tr><tr><td>lookup_ready</td><td>pass</td><td>True</td><td>consumer index requires lookup-ready packet</td></tr><tr><td>granted_use_lookup_only</td><td>pass</td><td>{&#x27;packet&#x27;: &#x27;downstream_governance_lookup_only&#x27;, &#x27;original&#x27;: &#x27;downstream_governance_lookup_only&#x27;, &#x27;rebuilt&#x27;: &#x27;downstream_governance_lookup_only&#x27;}</td><td>granted use must stay downstream lookup only</td></tr><tr><td>blocked_uses_complete</td><td>pass</td><td>[&#x27;production_promotion&#x27;, &#x27;model_quality_expansion&#x27;, &#x27;training_data_claim_expansion&#x27;]</td><td>consumer index must preserve all blocked uses</td></tr><tr><td>packet_rows_present</td><td>pass</td><td>{&#x27;packet_rows&#x27;: 1, &#x27;entry_count&#x27;: 1}</td><td>consumer index requires packet rows</td></tr><tr><td>packet_rows_not_promoted</td><td>pass</td><td>[False]</td><td>packet rows must not be promoted</td></tr><tr><td>consumer_boundary_governance</td><td>pass</td><td>governance_lookup_only</td><td>consumer boundary must remain governance lookup only</td></tr><tr><td>model_quality_claim_bounded</td><td>pass</td><td>bounded_randomized_target_hidden_holdout_claim_only</td><td>model quality claim must remain bounded</td></tr><tr><td>promotion_still_false</td><td>pass</td><td>{&#x27;packet&#x27;: False, &#x27;original&#x27;: False, &#x27;rebuilt&#x27;: False}</td><td>consumer index must not enable promotion</td></tr><tr><td>source_packet_checks_clean</td><td>pass</td><td>0</td><td>source consumer packet checks must be clean</td></tr><tr><td>source_contract_checks_clean</td><td>pass</td><td>0</td><td>source contract checks must be clean</td></tr></tbody>
+</table></div></section>
+</main>
+</body>
+</html>

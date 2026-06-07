@@ -1,0 +1,288 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT randomized holdout publication registry downstream consumer index",
+  "generated_at": "2026-06-07T04:28:44Z",
+  "status": "pass",
+  "decision": "randomized_holdout_publication_registry_downstream_consumer_index_ready",
+  "failed_count": 0,
+  "issues": [],
+  "consumer_packet_path": "e\\941\\解释\\randomized-holdout-publication-registry-downstream-consumer-packet\\randomized_holdout_publication_registry_downstream_consumer_packet.json",
+  "consumer_packet_check_path": "e\\942\\解释\\randomized-holdout-publication-registry-downstream-consumer-packet-check\\randomized_holdout_publication_registry_downstream_consumer_packet_check.json",
+  "source_consumer_packet_summary": {
+    "randomized_holdout_publication_registry_downstream_consumer_packet_ready": true,
+    "packet_id": "randomized-holdout-publication-registry-downstream-consumer-packet-v941",
+    "packet_status": "downstream_consumer_packet_ready",
+    "consumer_name": "publication_registry_governance_lookup_reader",
+    "lookup_ready": true,
+    "granted_use": "downstream_governance_lookup_only",
+    "blocked_uses": [
+      "production_promotion",
+      "model_quality_expansion",
+      "training_data_claim_expansion"
+    ],
+    "entry_count": 1,
+    "consumer_receipt_count": 1,
+    "lookup_key_count": 1,
+    "promotion_ready": false,
+    "approved_for_promotion": false,
+    "consumer_boundary": "governance_lookup_only",
+    "model_quality_claim": "bounded_randomized_target_hidden_holdout_claim_only",
+    "next_step": "check_randomized_holdout_publication_registry_downstream_consumer_packet",
+    "passed_check_count": 20,
+    "failed_check_count": 0
+  },
+  "source_consumer_packet_check_summary": {
+    "contract_check_ready": true,
+    "source_receipt_review": "e\\940\\解释\\randomized-holdout-publication-registry-downstream-receipt-review\\randomized_holdout_publication_registry_downstream_receipt_review.json",
+    "original_decision": "randomized_holdout_publication_registry_downstream_consumer_packet_ready",
+    "rebuilt_decision": "randomized_holdout_publication_registry_downstream_consumer_packet_ready",
+    "original_packet_status": "downstream_consumer_packet_ready",
+    "rebuilt_packet_status": "downstream_consumer_packet_ready",
+    "original_granted_use": "downstream_governance_lookup_only",
+    "rebuilt_granted_use": "downstream_governance_lookup_only",
+    "original_lookup_keys": [
+      "publication:randomized-holdout-publication-v928"
+    ],
+    "rebuilt_lookup_keys": [
+      "publication:randomized-holdout-publication-v928"
+    ],
+    "original_promotion_ready": false,
+    "rebuilt_promotion_ready": false,
+    "next_step": "index_randomized_holdout_publication_registry_downstream_consumer_packet",
+    "passed_check_count": 37,
+    "failed_check_count": 0
+  },
+  "packet_rows": [
+    {
+      "packet_id": "randomized-holdout-publication-registry-downstream-consumer-packet-v941",
+      "consumer_name": "publication_registry_governance_lookup_reader",
+      "lookup_key": "publication:randomized-holdout-publication-v928",
+      "entry_id": "randomized-holdout-publication-v928",
+      "granted_use": "downstream_governance_lookup_only",
+      "blocked_uses": [
+        "production_promotion",
+        "model_quality_expansion",
+        "training_data_claim_expansion"
+      ],
+      "promotion_ready": false,
+      "packet_status": "downstream_consumer_packet_ready"
+    }
+  ],
+  "check_rows": [
+    {
+      "id": "consumer_packet_file_exists",
+      "status": "pass",
+      "actual": "e\\941\\解释\\randomized-holdout-publication-registry-downstream-consumer-packet\\randomized_holdout_publication_registry_downstream_consumer_packet.json",
+      "detail": "consumer packet file must exist"
+    },
+    {
+      "id": "consumer_packet_check_file_exists",
+      "status": "pass",
+      "actual": "e\\942\\解释\\randomized-holdout-publication-registry-downstream-consumer-packet-check\\randomized_holdout_publication_registry_downstream_consumer_packet_check.json",
+      "detail": "consumer packet check file must exist"
+    },
+    {
+      "id": "consumer_packet_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "consumer packet must pass"
+    },
+    {
+      "id": "consumer_packet_decision_ready",
+      "status": "pass",
+      "actual": "randomized_holdout_publication_registry_downstream_consumer_packet_ready",
+      "detail": "consumer packet decision must be ready"
+    },
+    {
+      "id": "consumer_packet_summary_ready",
+      "status": "pass",
+      "actual": {
+        "summary": true,
+        "packet": true
+      },
+      "detail": "consumer packet summary and body must be ready"
+    },
+    {
+      "id": "consumer_packet_check_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "consumer packet check must pass"
+    },
+    {
+      "id": "consumer_packet_check_decision_ready",
+      "status": "pass",
+      "actual": "randomized_holdout_publication_registry_downstream_consumer_packet_contract_check_passed",
+      "detail": "consumer packet check decision must pass"
+    },
+    {
+      "id": "contract_check_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "consumer packet contract check must be ready"
+    },
+    {
+      "id": "lookup_keys_match_check",
+      "status": "pass",
+      "actual": {
+        "packet": [
+          "publication:randomized-holdout-publication-v928"
+        ],
+        "original": [
+          "publication:randomized-holdout-publication-v928"
+        ],
+        "rebuilt": [
+          "publication:randomized-holdout-publication-v928"
+        ]
+      },
+      "detail": "lookup keys must match the contract check"
+    },
+    {
+      "id": "lookup_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "consumer index requires lookup-ready packet"
+    },
+    {
+      "id": "granted_use_lookup_only",
+      "status": "pass",
+      "actual": {
+        "packet": "downstream_governance_lookup_only",
+        "original": "downstream_governance_lookup_only",
+        "rebuilt": "downstream_governance_lookup_only"
+      },
+      "detail": "granted use must stay downstream lookup only"
+    },
+    {
+      "id": "blocked_uses_complete",
+      "status": "pass",
+      "actual": [
+        "production_promotion",
+        "model_quality_expansion",
+        "training_data_claim_expansion"
+      ],
+      "detail": "consumer index must preserve all blocked uses"
+    },
+    {
+      "id": "packet_rows_present",
+      "status": "pass",
+      "actual": {
+        "packet_rows": 1,
+        "entry_count": 1
+      },
+      "detail": "consumer index requires packet rows"
+    },
+    {
+      "id": "packet_rows_not_promoted",
+      "status": "pass",
+      "actual": [
+        false
+      ],
+      "detail": "packet rows must not be promoted"
+    },
+    {
+      "id": "consumer_boundary_governance",
+      "status": "pass",
+      "actual": "governance_lookup_only",
+      "detail": "consumer boundary must remain governance lookup only"
+    },
+    {
+      "id": "model_quality_claim_bounded",
+      "status": "pass",
+      "actual": "bounded_randomized_target_hidden_holdout_claim_only",
+      "detail": "model quality claim must remain bounded"
+    },
+    {
+      "id": "promotion_still_false",
+      "status": "pass",
+      "actual": {
+        "packet": false,
+        "original": false,
+        "rebuilt": false
+      },
+      "detail": "consumer index must not enable promotion"
+    },
+    {
+      "id": "source_packet_checks_clean",
+      "status": "pass",
+      "actual": 0,
+      "detail": "source consumer packet checks must be clean"
+    },
+    {
+      "id": "source_contract_checks_clean",
+      "status": "pass",
+      "actual": 0,
+      "detail": "source contract checks must be clean"
+    }
+  ],
+  "consumer_index": {
+    "index_ready": true,
+    "consumer_index_id": "randomized-holdout-publication-registry-downstream-consumer-index-v943",
+    "lookup_scope": "downstream_governance_lookup_only",
+    "consumer_packet_path": "e\\941\\解释\\randomized-holdout-publication-registry-downstream-consumer-packet\\randomized_holdout_publication_registry_downstream_consumer_packet.json",
+    "consumer_packet_check_path": "e\\942\\解释\\randomized-holdout-publication-registry-downstream-consumer-packet-check\\randomized_holdout_publication_registry_downstream_consumer_packet_check.json",
+    "consumer_name": "publication_registry_governance_lookup_reader",
+    "entry_count": 1,
+    "packet_rows": [
+      {
+        "packet_id": "randomized-holdout-publication-registry-downstream-consumer-packet-v941",
+        "consumer_name": "publication_registry_governance_lookup_reader",
+        "lookup_key": "publication:randomized-holdout-publication-v928",
+        "entry_id": "randomized-holdout-publication-v928",
+        "granted_use": "downstream_governance_lookup_only",
+        "blocked_uses": [
+          "production_promotion",
+          "model_quality_expansion",
+          "training_data_claim_expansion"
+        ],
+        "promotion_ready": false,
+        "packet_status": "downstream_consumer_packet_ready"
+      }
+    ],
+    "lookup_keys": [
+      "publication:randomized-holdout-publication-v928"
+    ],
+    "lookup_ready": true,
+    "contract_check_ready": true,
+    "granted_use": "downstream_governance_lookup_only",
+    "blocked_uses": [
+      "production_promotion",
+      "model_quality_expansion",
+      "training_data_claim_expansion"
+    ],
+    "promotion_ready": false,
+    "approved_for_promotion": false,
+    "consumer_boundary": "governance_lookup_only",
+    "model_quality_claim": "bounded_randomized_target_hidden_holdout_claim_only",
+    "evidence_count": 2,
+    "next_step": "review_randomized_holdout_publication_registry_downstream_consumer_index"
+  },
+  "summary": {
+    "randomized_holdout_publication_registry_downstream_consumer_index_ready": true,
+    "consumer_index_id": "randomized-holdout-publication-registry-downstream-consumer-index-v943",
+    "lookup_scope": "downstream_governance_lookup_only",
+    "consumer_name": "publication_registry_governance_lookup_reader",
+    "entry_count": 1,
+    "lookup_key_count": 1,
+    "lookup_ready": true,
+    "contract_check_ready": true,
+    "granted_use": "downstream_governance_lookup_only",
+    "blocked_uses": [
+      "production_promotion",
+      "model_quality_expansion",
+      "training_data_claim_expansion"
+    ],
+    "promotion_ready": false,
+    "approved_for_promotion": false,
+    "consumer_boundary": "governance_lookup_only",
+    "model_quality_claim": "bounded_randomized_target_hidden_holdout_claim_only",
+    "evidence_count": 2,
+    "next_step": "review_randomized_holdout_publication_registry_downstream_consumer_index",
+    "passed_check_count": 19,
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "bounded_randomized_target_hidden_holdout_claim_only",
+    "reason": "The downstream consumer packet and its contract check are packaged into a lookup-only consumer index while promotion remains blocked.",
+    "next_action": "review_randomized_holdout_publication_registry_downstream_consumer_index"
+  }
+}
