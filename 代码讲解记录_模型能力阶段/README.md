@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+983-v969-randomized-holdout-publication-registry-downstream-consumer-ack-bundle-publication-receipt-packet-index-publication-receipt-packet-index-publication.md
+ -> v969 code explanation: publish the reviewed receipt packet index for lookup-only consumption while preserving contract-check routing.
+
 982-v968-randomized-holdout-publication-registry-downstream-consumer-ack-bundle-publication-receipt-packet-index-publication-receipt-packet-index-review.md
  -> v968 code explanation: review the receipt packet index before lookup-only publication while keeping promotion blocked.
 
