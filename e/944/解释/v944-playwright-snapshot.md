@@ -1,0 +1,48 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "MiniGPT randomized holdout publication registry downstream consumer index review" [level=1] [ref=e4]
+    - paragraph [ref=e5]: The downstream consumer index is approved only for lookup-only consumption; production promotion remains blocked.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - strong [ref=e9]: pass
+    - generic [ref=e10]:
+      - generic [ref=e11]: Review ready
+      - strong [ref=e12]: "True"
+    - generic [ref=e13]:
+      - generic [ref=e14]: Downstream
+      - strong [ref=e15]: "True"
+    - generic [ref=e16]:
+      - generic [ref=e17]: Lookup
+      - strong [ref=e18]: "True"
+    - generic [ref=e19]:
+      - generic [ref=e20]: Promotion
+      - strong [ref=e21]: "False"
+    - generic [ref=e22]:
+      - generic [ref=e23]: Failed
+      - strong [ref=e24]: "0"
+  - generic [ref=e25]:
+    - heading "Review Boundary" [level=2] [ref=e26]
+    - generic [ref=e27]:
+      - term [ref=e28]: Review status
+      - definition [ref=e29]: approved_for_downstream_consumer_lookup_only
+      - term [ref=e30]: Consumer
+      - definition [ref=e31]: publication_registry_governance_lookup_reader
+      - term [ref=e32]: Allowed use
+      - definition [ref=e33]: downstream_governance_lookup_only
+      - term [ref=e34]: Blocked uses
+      - definition [ref=e35]: "['production_promotion', 'model_quality_expansion', 'training_data_claim_expansion']"
+      - term [ref=e36]: Consumer index
+      - definition [ref=e37]: e\943\解释\randomized-holdout-publication-registry-downstream-consumer-index\randomized_holdout_publication_registry_downstream_consumer_index.json
+      - term [ref=e38]: Next step
+      - definition [ref=e39]: record_randomized_holdout_publication_registry_downstream_consumer_ack
+  - generic [ref=e40]:
+    - heading "Lookup Rows" [level=2] [ref=e41]
+    - table [ref=e43]:
+      - rowgroup [ref=e44]
+      - rowgroup [ref=e52]
+  - generic [ref=e60]:
+    - heading "Checks" [level=2] [ref=e61]
+    - table [ref=e63]:
+      - rowgroup [ref=e64]
+      - rowgroup [ref=e70]

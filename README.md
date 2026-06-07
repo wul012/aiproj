@@ -4,7 +4,19 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v943.0.0` adds a lookup-only downstream consumer index for the randomized holdout publication registry consumer packet and its contract check.
+Version `v944.0.0` reviews the randomized holdout publication registry downstream consumer index and confirms it remains lookup-only.
+
+## Latest v944 checkpoint
+
+- Added short-name module `randomized_holdout_publication_registry_downstream_consumer_index_review`.
+- Added CLI `scripts/build_randomized_holdout_publication_registry_downstream_consumer_index_review.py`.
+- Consumed the real v943 downstream consumer index.
+- Checked index readiness, source packet/check paths, downstream lookup scope, lookup-key namespace, blocked-use completeness, source check cleanliness, and promotion-boundary fields.
+- Confirmed `randomized_holdout_publication_registry_downstream_consumer_index_review_ready=True`, `review_status=approved_for_downstream_consumer_lookup_only`, and `allowed_use=downstream_governance_lookup_only`.
+- Kept `promotion_ready=False` and `approved_for_promotion=False`.
+- Routed the next action to `record_randomized_holdout_publication_registry_downstream_consumer_ack`.
+- Verified with focused downstream consumer index review tests and Playwright MCP screenshot evidence.
+- Archived v944 evidence in `e/944` and added the code explanation in `代码讲解记录_模型能力阶段/958-v944-randomized-holdout-publication-registry-downstream-consumer-index-review.md`.
 
 ## Latest v943 checkpoint
 

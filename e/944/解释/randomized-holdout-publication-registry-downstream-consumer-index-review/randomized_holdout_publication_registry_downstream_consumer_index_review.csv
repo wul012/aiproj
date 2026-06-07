@@ -1,0 +1,2 @@
+consumer_name,lookup_key,entry_id,granted_use,blocked_uses,promotion_ready,review_status
+publication_registry_governance_lookup_reader,publication:randomized-holdout-publication-v928,randomized-holdout-publication-v928,downstream_governance_lookup_only,"[""production_promotion"", ""model_quality_expansion"", ""training_data_claim_expansion""]",False,approved_for_downstream_consumer_lookup_only
