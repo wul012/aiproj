@@ -4,7 +4,18 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1003.0.0` records the v1002-reviewed receipt-index-receipt index as a lookup-only downstream receipt.
+Version `v1004.0.0` contract-checks the v1003 receipt by rebuilding it from the source v1002 review.
+
+## Latest v1004 checkpoint
+
+- Added short-name module `randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_check_v1004`.
+- Added CLI `scripts/check_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_v1004.py`.
+- Consumed the real v1003 receipt and rebuilt it from the recorded v1002 review.
+- Compared status, decision, failed count, source review digest, consumer receipts, summary fields, receipt fields, lookup key count, granted use, promotion flags, source paths, consumer name, and next-step routing.
+- Confirmed `contract_check_ready=True`, original/rebuilt receipt status both `publication_index_receipt_index_receipt_index_lookup_receipted`, original/rebuilt granted use both `downstream_governance_lookup_only`, original/rebuilt promotion both `False`, `failed_check_count=0`, and `passed_check_count=44`.
+- Routed the next action to `index_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_v1004`.
+- Verified with focused v1004 tests, source-encoding hygiene, Playwright MCP screenshot evidence, and full-suite pytest.
+- Archived v1004 evidence in `e/1004` and added the code explanation in `代码讲解记录_模型能力阶段/1018-v1004-publication-receipt-index-receipt-index-publication-index-receipt-index-receipt-index-receipt-check.md`.
 
 ## Latest v1003 checkpoint
 
