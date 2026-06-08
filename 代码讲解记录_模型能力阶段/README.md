@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1015-v1001-publication-receipt-index-receipt-index-publication-index-receipt-index-receipt-index.md
+ -> v1001 code explanation: index the v999 publication index receipt index receipt and v1000 contract check into a lookup-only receipt index.
+
 1014-v1000-publication-receipt-index-receipt-index-publication-index-receipt-index-receipt-check.md
  -> v1000 code explanation: contract-check the v999 publication index receipt index receipt by rebuilding it from v998 review and comparing stable lookup-only fields.
 
