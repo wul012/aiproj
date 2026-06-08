@@ -4,7 +4,19 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1005.0.0` indexes the v1003 receipt and v1004 contract check into the next lookup-only receipt index.
+Version `v1006.0.0` reviews the v1005 receipt index before the next lookup-only receipt recording step.
+
+## Latest v1006 checkpoint
+
+- Added short-name module `randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_review_v1006`.
+- Added CLI `scripts/review_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_v1006.py`.
+- Consumed the real v1005 receipt index and reviewed it before recording the next downstream lookup-only receipt.
+- Checked index readiness, lookup scope, granted use, lookup key namespace, source evidence digests, source evidence files, source receipt/check path consistency, source review/index paths, consumer boundary, bounded model-quality claim, no-promotion flags, clean source checks, and next-step routing.
+- Confirmed `review_ready=True`, `review_status=approved_for_publication_index_receipt_index_receipt_index_receipt_index_receipt_lookup_only`, `receipt_index_row_count=1`, `lookup_key_count=1`, `source_evidence_count=2`, `contract_check_ready=True`, `failed_check_count=0`, and `passed_check_count=25`.
+- Kept `promotion_ready=False` and `approved_for_promotion=False`.
+- Routed the next action to `record_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_v1006`.
+- Verified with focused v1006 tests, source-encoding hygiene, full-suite pytest, and Playwright MCP screenshot evidence.
+- Archived v1006 evidence in `e/1006` and added the code explanation in `代码讲解记录_模型能力阶段/1020-v1006-publication-receipt-index-receipt-index-publication-index-receipt-index-receipt-index-receipt-index-review.md`.
 
 ## Latest v1005 checkpoint
 
