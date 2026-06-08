@@ -4,7 +4,18 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v999.0.0` records the v998-reviewed publication index receipt index as a lookup-only receipt.
+Version `v1000.0.0` contract-checks the v999 publication index receipt index receipt by rebuilding it from the v998 review.
+
+## Latest v1000 checkpoint
+
+- Added short-name module `randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_check_v1000`.
+- Added CLI `scripts/check_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_v1000.py`.
+- Consumed the real v999 receipt and rebuilt it from the recorded v998 receipt index review.
+- Compared status, decision, failed count, source review digest, consumer receipts, summary fields, receipt fields, lookup key count, granted use, and no-promotion fields.
+- Confirmed `contract_check_ready=True`, original/rebuilt receipt status both `publication_index_receipt_index_lookup_receipted`, original/rebuilt granted use both `downstream_governance_lookup_only`, original/rebuilt promotion both `False`, `failed_check_count=0`, and `passed_check_count=44`.
+- Routed the next action to `index_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_v1000`.
+- Verified with focused v999/v1000 tests and Playwright MCP screenshot evidence; full-suite and source-encoding gates are listed in the v1000 archive explanation.
+- Archived v1000 evidence in `e/1000` and added the code explanation in `代码讲解记录_模型能力阶段/1014-v1000-publication-receipt-index-receipt-index-publication-index-receipt-index-receipt-check.md`.
 
 ## Latest v999 checkpoint
 
