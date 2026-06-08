@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1002-v988-publication-receipt-index-receipt-check.md
+ -> v988 code explanation: check the v987 publication receipt index receipt by rebuilding it from the source v986 review and comparing stable lookup-only fields.
+
 1001-v987-publication-receipt-index-receipt.md
  -> v987 code explanation: record a lookup-only downstream receipt for the v986-reviewed publication receipt index.
 

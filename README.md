@@ -4,7 +4,19 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v987.0.0` records a lookup-only downstream receipt for the v986-reviewed publication receipt index.
+Version `v988.0.0` checks the v987 publication receipt index receipt by rebuilding it from the source v986 review.
+
+## Latest v988 checkpoint
+
+- Added short-name module `randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_check_v988`.
+- Added CLI `scripts/check_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_v988.py`.
+- Consumed the real v987 receipt and rebuilt it from the recorded v986 receipt index review.
+- Compared status, decision, failed count, consumer receipts, summary fields, receipt fields, granted use, lookup key count, source review path, no-promotion fields, and next-step routing.
+- Confirmed `contract_check_ready=True`, `failed_check_count=0`, `passed_check_count=42`, `original_granted_use=downstream_governance_lookup_only`, and `rebuilt_granted_use=downstream_governance_lookup_only`.
+- Kept `promotion_ready=False` for original and rebuilt receipt.
+- Routed the next action to `index_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_v988`.
+- Verified with focused v987/v988 tests and Playwright MCP screenshot evidence; full-suite and source-encoding gates are listed in the v988 archive explanation.
+- Archived v988 evidence in `e/988` and added the code explanation in `代码讲解记录_模型能力阶段/1002-v988-publication-receipt-index-receipt-check.md`.
 
 ## Latest v987 checkpoint
 
