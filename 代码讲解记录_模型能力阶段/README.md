@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1033-v1019-publication-receipt-index-receipt-index-receipt.md
+ -> v1019 code explanation: record the v1018-reviewed short-name receipt index as a downstream lookup-only receipt.
+
 1032-v1018-publication-receipt-index-receipt-index-review.md
  -> v1018 code explanation: review the v1017 short-name receipt index before recording the next lookup-only downstream receipt.
 
