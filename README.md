@@ -4,7 +4,19 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v973.0.0` records the randomized holdout publication registry downstream consumer acknowledgement bundle publication receipt packet index publication receipt packet index publication receipt.
+Version `v974.0.0` reviews the randomized holdout publication registry downstream consumer acknowledgement bundle publication receipt packet index publication receipt packet index publication receipt before downstream receipt-packet construction.
+
+## Latest v974 checkpoint
+
+- Added short-name module `randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_review`.
+- Added CLI `scripts/review_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt.py`.
+- Consumed the real v973 downstream consumer receipt.
+- Rechecked receipt readiness, lookup-only granted use, complete blocked uses, one publication index row, one consumer receipt row, source index review digest shape/match, source evidence path existence, clean source checks, and next-step routing.
+- Confirmed `randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_review_ready=True`, `review_status=approved_for_downstream_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet`, `packet_ready=True`, `failed_check_count=0`, and `passed_check_count=25`.
+- Kept `promotion_ready=False` and `approved_for_promotion=False`.
+- Routed the next action to `build_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet`.
+- Verified with focused receipt/review tests and Playwright MCP screenshot evidence; full-suite and source-encoding gates are listed in the v974 archive explanation.
+- Archived v974 evidence in `e/974` and added the code explanation in `代码讲解记录_模型能力阶段/988-v974-randomized-holdout-publication-registry-downstream-consumer-ack-bundle-publication-receipt-packet-index-publication-receipt-packet-index-publication-receipt-review.md`.
 
 ## Latest v973 checkpoint
 
