@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+994-v980-publication-check.md
+ -> v980 code explanation: check the v979 lookup-only publication by rebuilding it from the v978 review, while switching new Python/script/test filenames to maintainable short names.
+
 993-v979-randomized-holdout-publication-registry-downstream-consumer-ack-bundle-publication-receipt-packet-index-publication-receipt-packet-index-publication-receipt-packet-index-publication.md
  -> v979 code explanation: publish the v978-reviewed receipt packet index for lookup-only consumption while preserving no-promotion controls and short artifact filenames.
 
