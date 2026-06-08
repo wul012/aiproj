@@ -4,7 +4,18 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1008.0.0` contract-checks the v1007 lookup-only receipt by rebuilding it from the source v1006 receipt-index review.
+Version `v1009.0.0` indexes the v1007 lookup-only receipt and v1008 receipt contract check into the next downstream receipt index.
+
+## Latest v1009 checkpoint
+
+- Added module `randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_v1009`.
+- Added CLI `scripts/build_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_v1009.py`.
+- Combined the real v1007 receipt and v1008 receipt contract check into one lookup-only receipt index with source evidence digests.
+- Confirmed `index_ready=True`, `lookup_ready=True`, `contract_check_ready=True`, `lookup_key_count=1`, `source_evidence_count=2`, `passed_check_count=24`, and `failed_check_count=0`.
+- Kept `promotion_ready=False` and `approved_for_promotion=False`.
+- Routed the next action to `review_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_v1009`.
+- Verified with focused v1009 tests, source-encoding hygiene, full-suite pytest, and Playwright MCP screenshot evidence.
+- Archived v1009 evidence in `e/1009` and added the code explanation in `代码讲解记录_模型能力阶段/1023-v1009-publication-receipt-index-receipt-index-publication-index-receipt-index-receipt-index-receipt-index-receipt-index.md`.
 
 ## Latest v1008 checkpoint
 

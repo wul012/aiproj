@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1023-v1009-publication-receipt-index-receipt-index-publication-index-receipt-index-receipt-index-receipt-index-receipt-index.md
+ -> v1009 code explanation: index the v1007 lookup-only receipt and v1008 receipt contract check into a digest-backed receipt index.
+
 1022-v1008-publication-receipt-index-receipt-index-publication-index-receipt-index-receipt-index-receipt-index-receipt-check.md
  -> v1008 code explanation: contract-check the v1007 lookup-only receipt by rebuilding it from the recorded v1006 receipt-index review.
 
