@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1032-v1018-publication-receipt-index-receipt-index-review.md
+ -> v1018 code explanation: review the v1017 short-name receipt index before recording the next lookup-only downstream receipt.
+
 1031-v1017-publication-receipt-index-receipt-index.md
  -> v1017 code explanation: index the v1015 short-name receipt and v1016 contract check into a digest-backed lookup-only receipt index.
 

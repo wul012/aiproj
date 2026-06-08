@@ -4,7 +4,18 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1017.0.0` indexes the v1015 short-name receipt and v1016 contract check into a digest-backed lookup-only receipt index.
+Version `v1018.0.0` reviews the v1017 short-name receipt index before recording the next lookup-only downstream receipt.
+
+## Latest v1018 checkpoint
+
+- Added short-name module `randomized_holdout_publication_receipt_index_receipt_index_review_v1018`.
+- Added CLI `scripts/review_randomized_holdout_publication_receipt_index_receipt_index_v1018.py`.
+- Consumed the real v1017 receipt index and verified lookup scope, granted use, lookup row count, source evidence digests, source file existence, bounded model-quality claim, no-promotion flags, and next-step routing.
+- Confirmed `review_ready=True`, `review_status=approved_for_publication_receipt_index_receipt_index_lookup_only`, `receipt_index_row_count=1`, `lookup_key_count=1`, `source_evidence_count=2`, `lookup_ready=True`, `contract_check_ready=True`, `passed_check_count=22`, and `failed_check_count=0`.
+- Preserved `promotion_ready=False` and `approved_for_promotion=False`; this remains lookup-only governance evidence, not a model promotion.
+- Routed the next action to `record_randomized_holdout_publication_receipt_index_receipt_index_receipt_v1018`.
+- Verified with focused v1018 tests, py_compile, source-encoding hygiene (`1934` clean Python sources), full-suite pytest (`2465 passed in 442.07s`), real CLI evidence, and Playwright MCP screenshot evidence.
+- Archived v1018 evidence in `e/1018` and added the code explanation in `代码讲解记录_模型能力阶段/1032-v1018-publication-receipt-index-receipt-index-review.md`.
 
 ## Latest v1017 checkpoint
 
