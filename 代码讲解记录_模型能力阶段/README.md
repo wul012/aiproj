@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+999-v985-publication-receipt-index.md
+ -> v985 code explanation: index the v983 lookup-only receipt and v984 receipt contract check into a receipt index while preserving no-promotion boundaries.
+
 998-v984-publication-receipt-check.md
  -> v984 code explanation: check the v983 publication receipt by rebuilding it from the source v982 review and comparing receipt fields.
 
