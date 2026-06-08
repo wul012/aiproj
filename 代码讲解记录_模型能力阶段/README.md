@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1001-v987-publication-receipt-index-receipt.md
+ -> v987 code explanation: record a lookup-only downstream receipt for the v986-reviewed publication receipt index.
+
 1000-v986-publication-receipt-index-review.md
  -> v986 code explanation: review the v985 receipt index before a lookup-only receipt flow while preserving source evidence and no-promotion boundaries.
 

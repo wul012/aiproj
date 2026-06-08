@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v986.0.0` reviews the v985 publication receipt index before the next lookup-only receipt flow.
+Version `v987.0.0` records a lookup-only downstream receipt for the v986-reviewed publication receipt index.
+
+## Latest v987 checkpoint
+
+- Added short-name module `randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_v987`.
+- Added CLI `scripts/record_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_v987.py`.
+- Consumed the real v986 receipt index review.
+- Recorded one consumer receipt for `publication_receipt_index_governance_lookup_reader` with `granted_use=downstream_governance_lookup_only`.
+- Checked review readiness, review status, requested use, blocked uses, receipt/lookup/contract readiness, one receipt index row, two source evidence rows, `receipt-index:` lookup namespace, source receipt/check paths, bounded claim, no-promotion fields, clean source checks, and next-step routing.
+- Confirmed `receipt_ready=True`, `receipt_status=publication_receipt_index_lookup_receipted`, `lookup_key_count=1`, `source_evidence_count=2`, `failed_check_count=0`, and `passed_check_count=20`.
+- Kept `promotion_ready=False` and `approved_for_promotion=False`.
+- Routed the next action to `check_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_v987`.
+- Verified with focused v986/v987 tests and Playwright MCP screenshot evidence; full-suite and source-encoding gates are listed in the v987 archive explanation.
+- Archived v987 evidence in `e/987` and added the code explanation in `代码讲解记录_模型能力阶段/1001-v987-publication-receipt-index-receipt.md`.
 
 ## Latest v986 checkpoint
 
