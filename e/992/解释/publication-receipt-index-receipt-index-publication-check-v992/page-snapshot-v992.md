@@ -1,0 +1,43 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "MiniGPT randomized holdout publication receipt packet index publication receipt index receipt index publication contract check v992" [level=1] [ref=e4]
+    - paragraph [ref=e5]: The receipt index receipt index publication rebuilds from its source review and remains lookup-only.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - strong [ref=e9]: pass
+    - generic [ref=e10]:
+      - generic [ref=e11]: Contract
+      - strong [ref=e12]: "True"
+    - generic [ref=e13]:
+      - generic [ref=e14]: Original use
+      - strong [ref=e15]: downstream_governance_lookup_only
+    - generic [ref=e16]:
+      - generic [ref=e17]: Rebuilt use
+      - strong [ref=e18]: downstream_governance_lookup_only
+    - generic [ref=e19]:
+      - generic [ref=e20]: Lookup keys
+      - strong [ref=e21]: "1"
+    - generic [ref=e22]:
+      - generic [ref=e23]: Failed
+      - strong [ref=e24]: "0"
+  - generic [ref=e25]:
+    - heading "Contract Summary" [level=2] [ref=e26]
+    - generic [ref=e27]:
+      - term [ref=e28]: Source review
+      - definition [ref=e29]: e\990\解释\publication-receipt-index-receipt-index-review-v990\randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_review_v990.json
+      - term [ref=e30]: Original publication status
+      - definition [ref=e31]: published_for_publication_receipt_index_receipt_index_lookup_only
+      - term [ref=e32]: Rebuilt publication status
+      - definition [ref=e33]: published_for_publication_receipt_index_receipt_index_lookup_only
+      - term [ref=e34]: Original published use
+      - definition [ref=e35]: downstream_governance_lookup_only
+      - term [ref=e36]: Rebuilt published use
+      - definition [ref=e37]: downstream_governance_lookup_only
+      - term [ref=e38]: Next step
+      - definition [ref=e39]: index_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_v992
+  - generic [ref=e40]:
+    - heading "Checks" [level=2] [ref=e41]
+    - table [ref=e43]:
+      - rowgroup [ref=e44]
+      - rowgroup [ref=e50]

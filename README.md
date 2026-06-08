@@ -4,7 +4,19 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v991.0.0` publishes the v990-reviewed receipt index as a lookup-only publication.
+Version `v992.0.0` checks the v991 lookup-only publication by rebuilding it from the v990 review.
+
+## Latest v992 checkpoint
+
+- Added short-name module `randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_check_v992`.
+- Added CLI `scripts/check_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_v992.py`.
+- Consumed the real v991 publication and rebuilt it from the recorded v990 review.
+- Compared status, decision, failed count, check rows, summary fields, publication body fields, lookup key count, blocked uses, source paths, and no-promotion fields.
+- Confirmed `contract_check_ready=True`, `original_published_use=downstream_governance_lookup_only`, `rebuilt_published_use=downstream_governance_lookup_only`, `original_lookup_key_count=1`, `rebuilt_lookup_key_count=1`, `failed_check_count=0`, and `passed_check_count=43`.
+- Kept original and rebuilt `promotion_ready=False`.
+- Routed the next action to `index_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_v992`.
+- Verified with focused v991/v992 tests and Playwright MCP screenshot evidence; full-suite and source-encoding gates are listed in the v992 archive explanation.
+- Archived v992 evidence in `e/992` and added the code explanation in `代码讲解记录_模型能力阶段/1006-v992-publication-receipt-index-receipt-index-publication-check.md`.
 
 ## Latest v991 checkpoint
 

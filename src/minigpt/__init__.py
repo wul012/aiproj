@@ -230,6 +230,8 @@ __all__ = [
     "write_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_review_v990_outputs",
     "build_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_v991",
     "write_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_v991_outputs",
+    "build_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_check_v992",
+    "write_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_check_v992_outputs",
     "build_model_capability_route_promotion_review_decision",
     "write_model_capability_route_promotion_review_decision_outputs",
     "build_model_capability_route_promotion_decision_index",
@@ -988,6 +990,14 @@ _EXPORTS = {
     "write_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_v991_outputs": (
         "randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_v991_artifacts",
         "write_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_v991_outputs",
+    ),
+    "build_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_check_v992": (
+        "randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_check_v992",
+        "build_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_check_v992",
+    ),
+    "write_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_check_v992_outputs": (
+        "randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_check_v992_artifacts",
+        "write_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_check_v992_outputs",
     ),
     "build_model_capability_route_promotion_review_decision": (
         "model_capability_route_promotion_review_decision",

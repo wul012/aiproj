@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1006-v992-publication-receipt-index-receipt-index-publication-check.md
+ -> v992 code explanation: check the v991 publication by rebuilding it from the v990 review and comparing stable lookup-only fields.
+
 1005-v991-publication-receipt-index-receipt-index-publication.md
  -> v991 code explanation: publish the v990-reviewed receipt index as lookup-only publication while preserving source evidence, blocked uses, and no-promotion controls.
 
