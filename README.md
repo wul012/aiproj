@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1002.0.0` reviews the v1001 receipt-index-receipt index before lookup-only receipt recording.
+Version `v1003.0.0` records the v1002-reviewed receipt-index-receipt index as a lookup-only downstream receipt.
+
+## Latest v1003 checkpoint
+
+- Added short-name module `randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_v1003`.
+- Added CLI `scripts/record_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_v1003.py`.
+- Consumed the real v1002 review and recorded one downstream consumer receipt for the v1001 receipt-index-receipt index.
+- Checked v1002 review readiness, allowed review status, requested use, blocked uses, index lookup readiness, contract check readiness, lookup key namespace, source receipt/index/check file existence, source check cleanliness, bounded claim fields, and no-promotion flags.
+- Confirmed `receipt_ready=True`, `receipt_status=publication_index_receipt_index_receipt_index_lookup_receipted`, `consumer_name=publication_index_receipt_index_receipt_index_governance_lookup_reader`, `lookup_key_count=1`, `source_evidence_count=2`, `failed_check_count=0`, and `passed_check_count=21`.
+- Kept `promotion_ready=False` and `approved_for_promotion=False`.
+- Routed the next action to `check_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_v1003`.
+- Tightened the v1003 CLI default `--consumer-name` and added a unit assertion so CLI-generated evidence stays aligned with the core builder default.
+- Verified with focused v1003 tests, source-encoding hygiene, full-suite pytest, and Playwright MCP screenshot evidence.
+- Archived v1003 evidence in `e/1003` and added the code explanation in `代码讲解记录_模型能力阶段/1017-v1003-publication-receipt-index-receipt-index-publication-index-receipt-index-receipt-index-receipt.md`.
 
 ## Latest v1002 checkpoint
 

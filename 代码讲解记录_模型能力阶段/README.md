@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1017-v1003-publication-receipt-index-receipt-index-publication-index-receipt-index-receipt-index-receipt.md
+ -> v1003 code explanation: record the v1002-reviewed receipt-index-receipt index as a lookup-only downstream receipt.
+
 1016-v1002-publication-receipt-index-receipt-index-publication-index-receipt-index-receipt-index-review.md
  -> v1002 code explanation: review the v1001 receipt-index-receipt index before lookup-only receipt recording.
 
