@@ -4,7 +4,19 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1004.0.0` contract-checks the v1003 receipt by rebuilding it from the source v1002 review.
+Version `v1005.0.0` indexes the v1003 receipt and v1004 contract check into the next lookup-only receipt index.
+
+## Latest v1005 checkpoint
+
+- Added short-name module `randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_v1005`.
+- Added CLI `scripts/build_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_v1005.py`.
+- Consumed the real v1003 receipt and v1004 contract check.
+- Built one `publication-index-receipt-index-receipt-index-receipt:` lookup row and two digest-backed source evidence rows.
+- Checked receipt readiness, v1004 check readiness, receipt/check status alignment, granted use, lookup key count, source paths, consumer boundary, bounded model-quality claim, no-promotion flags, clean source checks, and next-step routing.
+- Confirmed `index_ready=True`, `lookup_key_count=1`, `receipt_status=publication_index_receipt_index_receipt_index_lookup_receipted`, `granted_use=downstream_governance_lookup_only`, `source_evidence_count=2`, `contract_check_ready=True`, `failed_check_count=0`, and `passed_check_count=24`.
+- Routed the next action to `review_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_v1005`.
+- Verified with focused v1005 tests, source-encoding hygiene, and Playwright MCP screenshot evidence; full-suite validation is recorded in the v1005 archive explanation.
+- Archived v1005 evidence in `e/1005` and added the code explanation in `代码讲解记录_模型能力阶段/1019-v1005-publication-receipt-index-receipt-index-publication-index-receipt-index-receipt-index-receipt-index.md`.
 
 ## Latest v1004 checkpoint
 

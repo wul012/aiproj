@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1019-v1005-publication-receipt-index-receipt-index-publication-index-receipt-index-receipt-index-receipt-index.md
+ -> v1005 code explanation: index the v1003 receipt and v1004 contract check into a lookup-only receipt index with digest-backed evidence.
+
 1018-v1004-publication-receipt-index-receipt-index-publication-index-receipt-index-receipt-index-receipt-check.md
  -> v1004 code explanation: contract-check the v1003 receipt by rebuilding it from the recorded v1002 review and comparing stable lookup-only fields.
 
