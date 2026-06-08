@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1013-v999-publication-receipt-index-receipt-index-publication-index-receipt-index-receipt.md
+ -> v999 code explanation: record the v998-reviewed publication index receipt index as a lookup-only downstream receipt while preserving blocked uses and no-promotion controls.
+
 1012-v998-publication-receipt-index-receipt-index-publication-index-receipt-index-review.md
  -> v998 code explanation: review the v997 publication index receipt index before receipt recording while preserving lookup-only scope, digest evidence, and no-promotion controls.
 
