@@ -4,7 +4,18 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1015.0.0` records the v1014-reviewed receipt index as a short-name lookup-only receipt and stops the filename-growth pattern that triggered Windows pycache/path-length risk.
+Version `v1016.0.0` contract-checks the v1015 short-name receipt by rebuilding it from the v1014 source review and comparing stable lookup-only fields.
+
+## Latest v1016 checkpoint
+
+- Added short-name module `randomized_holdout_publication_receipt_index_receipt_check_v1016`.
+- Added CLI `scripts/check_randomized_holdout_publication_receipt_index_receipt_v1016.py`.
+- Rebuilt the real v1015 receipt from the v1014 source review and compared `status`, `decision`, `failed_count`, source review digest, `consumer_receipts`, stable summary fields, and stable receipt fields.
+- Confirmed `contract_check_ready=True`, `original_receipt_status=rebuilt_receipt_status=publication_receipt_index_receipt_v1015_lookup_receipted`, `original_granted_use=rebuilt_granted_use=downstream_governance_lookup_only`, `original_lookup_key_count=rebuilt_lookup_key_count=1`, `passed_check_count=44`, and `failed_check_count=0`.
+- Kept `original_promotion_ready=False` and `rebuilt_promotion_ready=False`; this remains lookup-only evidence, not production model promotion.
+- Routed the next action to `index_randomized_holdout_publication_receipt_index_receipt_v1016`.
+- Verified with focused v1016 tests, py_compile, real CLI evidence, and Playwright MCP screenshot evidence; full-suite validation is part of the v1016 closeout.
+- Archived v1016 evidence in `e/1016` and added the code explanation in `代码讲解记录_模型能力阶段/1030-v1016-publication-receipt-index-receipt-check.md`.
 
 ## Latest v1015 checkpoint
 

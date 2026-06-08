@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1030-v1016-publication-receipt-index-receipt-check.md
+ -> v1016 code explanation: rebuild-check the v1015 short-name lookup-only receipt from its v1014 source review.
+
 1029-v1015-publication-receipt-index-receipt.md
  -> v1015 code explanation: record the v1014-reviewed receipt index as a short-name lookup-only receipt and stop the filename-growth pattern.
 
