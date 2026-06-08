@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1016-v1002-publication-receipt-index-receipt-index-publication-index-receipt-index-receipt-index-review.md
+ -> v1002 code explanation: review the v1001 receipt-index-receipt index before lookup-only receipt recording.
+
 1015-v1001-publication-receipt-index-receipt-index-publication-index-receipt-index-receipt-index.md
  -> v1001 code explanation: index the v999 publication index receipt index receipt and v1000 contract check into a lookup-only receipt index.
 
