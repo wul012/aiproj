@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+997-v983-publication-receipt.md
+ -> v983 code explanation: record the v982-reviewed publication index as a lookup-only consumer receipt with no-promotion boundaries.
+
 996-v982-publication-index-review.md
  -> v982 code explanation: review the v981 publication index for lookup-only receipt readiness, source evidence digests, and no-promotion boundaries.
 
