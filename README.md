@@ -4,7 +4,18 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1012.0.0` contract-checks the v1011 lookup-only receipt by rebuilding it from the v1010 review.
+Version `v1013.0.0` indexes the v1011 lookup-only receipt and v1012 receipt contract check into a digest-backed receipt index.
+
+## Latest v1013 checkpoint
+
+- Added module `randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1013`.
+- Added CLI `scripts/build_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1013.py`.
+- Consumed the real v1011 receipt and v1012 contract check, verified both source files still exist, and recorded two digest-backed source evidence rows.
+- Confirmed `index_ready=True`, `lookup_ready=True`, `contract_check_ready=True`, `lookup_key_count=1`, `source_evidence_count=2`, `passed_check_count=24`, and `failed_check_count=0`.
+- Preserved `promotion_ready=False` and `approved_for_promotion=False`; this remains governance lookup-only evidence, not a production model promotion.
+- Routed the next action to `review_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1013`.
+- Verified with focused v1013 tests, py_compile, and real CLI evidence; full-suite and hygiene gates are part of the v1013 closeout.
+- Archived v1013 evidence in `e/1013` and added the code explanation in `代码讲解记录_模型能力阶段/1027-v1013-publication-receipt-index-receipt-index-publication-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index.md`.
 
 ## Latest v1012 checkpoint
 
