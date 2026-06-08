@@ -20,6 +20,10 @@ e/<version>/解释/说明.md
 最新条目：
 
 ```text
+e/981/图片
+e/981/解释/说明.md
+ -> v981 randomized holdout publication receipt packet index publication index 的运行截图和解释
+
 e/980/图片
 e/980/解释/说明.md
  -> v980 randomized holdout publication receipt packet index publication check 的运行截图和解释

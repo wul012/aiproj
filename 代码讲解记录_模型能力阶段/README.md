@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+995-v981-publication-index.md
+ -> v981 code explanation: index the v979 lookup-only publication and v980 contract check with short module/script/test/artifact names.
+
 994-v980-publication-check.md
  -> v980 code explanation: check the v979 lookup-only publication by rebuilding it from the v978 review, while switching new Python/script/test filenames to maintainable short names.
 
