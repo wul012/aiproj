@@ -1,0 +1,45 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "MiniGPT randomized holdout publication receipt packet index publication receipt index receipt index publication v991" [level=1] [ref=e4]
+    - paragraph [ref=e5]: The receipt index receipt index is published only for lookup-only consumption; production promotion remains blocked.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - strong [ref=e9]: pass
+    - generic [ref=e10]:
+      - generic [ref=e11]: Publication ready
+      - strong [ref=e12]: "True"
+    - generic [ref=e13]:
+      - generic [ref=e14]: Lookup keys
+      - strong [ref=e15]: "1"
+    - generic [ref=e16]:
+      - generic [ref=e17]: Evidence
+      - strong [ref=e18]: "2"
+    - generic [ref=e19]:
+      - generic [ref=e20]: Promotion
+      - strong [ref=e21]: "False"
+    - generic [ref=e22]:
+      - generic [ref=e23]: Failed
+      - strong [ref=e24]: "0"
+  - generic [ref=e25]:
+    - heading "Publication Boundary" [level=2] [ref=e26]
+    - generic [ref=e27]:
+      - term [ref=e28]: Publication status
+      - definition [ref=e29]: published_for_publication_receipt_index_receipt_index_lookup_only
+      - term [ref=e30]: Published use
+      - definition [ref=e31]: downstream_governance_lookup_only
+      - term [ref=e32]: Receipt index review
+      - definition [ref=e33]: e\990\解释\publication-receipt-index-receipt-index-review-v990\randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_review_v990.json
+      - term [ref=e34]: Receipt index
+      - definition [ref=e35]: e\989\解释\publication-receipt-index-receipt-index-v989\randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_v989.json
+      - term [ref=e36]: Source receipt
+      - definition [ref=e37]: e\987\解释\publication-receipt-index-receipt-v987\randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_v987.json
+      - term [ref=e38]: Source check
+      - definition [ref=e39]: e\988\解释\publication-receipt-index-receipt-check-v988\randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_check_v988.json
+      - term [ref=e40]: Next step
+      - definition [ref=e41]: check_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_v991
+  - generic [ref=e42]:
+    - heading "Checks" [level=2] [ref=e43]
+    - table [ref=e45]:
+      - rowgroup [ref=e46]
+      - rowgroup [ref=e52]

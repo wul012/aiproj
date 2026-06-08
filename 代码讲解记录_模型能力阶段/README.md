@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1005-v991-publication-receipt-index-receipt-index-publication.md
+ -> v991 code explanation: publish the v990-reviewed receipt index as lookup-only publication while preserving source evidence, blocked uses, and no-promotion controls.
+
 1004-v990-publication-receipt-index-receipt-index-review.md
  -> v990 code explanation: review the v989 receipt index before lookup-only publication while preserving digest-backed source evidence and no-promotion controls.
 
