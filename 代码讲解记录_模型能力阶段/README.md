@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1028-v1014-publication-receipt-index-receipt-index-publication-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-review.md
+ -> v1014 code explanation: review the v1013 digest-backed receipt index before recording the next lookup-only receipt.
+
 1027-v1013-publication-receipt-index-receipt-index-publication-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index.md
  -> v1013 code explanation: index the v1011 lookup-only receipt and v1012 contract check into a digest-backed receipt index.
 
