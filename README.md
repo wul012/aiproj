@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v974.0.0` reviews the randomized holdout publication registry downstream consumer acknowledgement bundle publication receipt packet index publication receipt packet index publication receipt before downstream receipt-packet construction.
+Version `v975.0.0` builds the randomized holdout publication registry downstream consumer acknowledgement bundle publication receipt packet index publication receipt packet index publication receipt packet.
+
+## Latest v975 checkpoint
+
+- Added short-name module `randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet`.
+- Added CLI `scripts/build_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet.py`.
+- Consumed the real v974 receipt review.
+- Built a digest-backed receipt packet with two source evidence rows: the v974 receipt review and the v973 publication receipt.
+- Checked receipt review readiness, packet-ready review status, lookup-only granted use, complete blocked uses, one publication index row, one consumer receipt row, publication lookup namespace, source evidence path existence, no-promotion fields, bounded model-quality claim, clean source checks, and next-step routing.
+- Confirmed `randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet_ready=True`, `packet_status=downstream_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet_ready`, `lookup_ready=True`, `source_evidence_count=2`, `failed_check_count=0`, and `passed_check_count=28`.
+- Kept `promotion_ready=False` and `approved_for_promotion=False`.
+- Routed the next action to `check_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet`.
+- Verified with focused receipt review/packet tests and Playwright MCP screenshot evidence; full-suite and source-encoding gates are listed in the v975 archive explanation.
+- Archived v975 evidence in `e/975` and added the code explanation in `代码讲解记录_模型能力阶段/989-v975-randomized-holdout-publication-registry-downstream-consumer-ack-bundle-publication-receipt-packet-index-publication-receipt-packet-index-publication-receipt-packet.md`.
 
 ## Latest v974 checkpoint
 
