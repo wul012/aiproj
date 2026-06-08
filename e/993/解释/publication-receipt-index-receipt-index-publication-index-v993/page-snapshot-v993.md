@@ -1,0 +1,53 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "MiniGPT randomized holdout publication receipt packet index publication receipt index receipt index publication index v993" [level=1] [ref=e4]
+    - paragraph [ref=e5]: The lookup-only publication and contract check are packaged into a publication index while production promotion remains blocked.
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Status
+      - strong [ref=e9]: pass
+    - generic [ref=e10]:
+      - generic [ref=e11]: Index ready
+      - strong [ref=e12]: "True"
+    - generic [ref=e13]:
+      - generic [ref=e14]: Lookup keys
+      - strong [ref=e15]: "1"
+    - generic [ref=e16]:
+      - generic [ref=e17]: Contract
+      - strong [ref=e18]: "True"
+    - generic [ref=e19]:
+      - generic [ref=e20]: Evidence
+      - strong [ref=e21]: "2"
+    - generic [ref=e22]:
+      - generic [ref=e23]: Failed
+      - strong [ref=e24]: "0"
+  - generic [ref=e25]:
+    - heading "Lookup Boundary" [level=2] [ref=e26]
+    - generic [ref=e27]:
+      - term [ref=e28]: Publication index
+      - definition [ref=e29]: randomized-holdout-publication-receipt-packet-index-publication-receipt-index-receipt-index-publication-index-v993
+      - term [ref=e30]: Lookup scope
+      - definition [ref=e31]: downstream_governance_lookup_only
+      - term [ref=e32]: Published use
+      - definition [ref=e33]: downstream_governance_lookup_only
+      - term [ref=e34]: Source publication
+      - definition [ref=e35]: e\991\解释\publication-receipt-index-receipt-index-publication-v991\randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_v991.json
+      - term [ref=e36]: Source check
+      - definition [ref=e37]: e\992\解释\publication-receipt-index-receipt-index-publication-check-v992\randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_check_v992.json
+      - term [ref=e38]: Next step
+      - definition [ref=e39]: review_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_v993
+  - generic [ref=e40]:
+    - heading "Publication Index Rows" [level=2] [ref=e41]
+    - table [ref=e43]:
+      - rowgroup [ref=e44]
+      - rowgroup [ref=e53]
+  - generic [ref=e62]:
+    - heading "Source Evidence" [level=2] [ref=e63]
+    - table [ref=e65]:
+      - rowgroup [ref=e66]
+      - rowgroup [ref=e72]
+  - generic [ref=e83]:
+    - heading "Checks" [level=2] [ref=e84]
+    - table [ref=e86]:
+      - rowgroup [ref=e87]
+      - rowgroup [ref=e93]

@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1007-v993-publication-receipt-index-receipt-index-publication-index.md
+ -> v993 code explanation: index the v991 publication and v992 contract check into a lookup-only publication index with digest-backed evidence.
+
 1006-v992-publication-receipt-index-receipt-index-publication-check.md
  -> v992 code explanation: check the v991 publication by rebuilding it from the v990 review and comparing stable lookup-only fields.
 
