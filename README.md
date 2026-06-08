@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v978.0.0` reviews the randomized holdout publication registry downstream consumer acknowledgement bundle publication receipt packet index publication receipt packet index publication receipt packet index before lookup-only publication.
+Version `v979.0.0` publishes the randomized holdout publication registry downstream consumer acknowledgement bundle publication receipt packet index publication receipt packet index publication receipt packet index for lookup-only consumption.
+
+## Latest v979 checkpoint
+
+- Added short-name module `randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet_index_publication`.
+- Added CLI `scripts/build_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet_index_publication.py`.
+- Consumed the real v978 receipt packet index review.
+- Published the reviewed index for lookup-only downstream consumption using short artifact filenames `randomized_holdout_publication_receipt_packet_index_publication_v979.*`.
+- Checked review readiness, publish readiness, lookup readiness, contract readiness, source index/packet/check path existence, row counts, bounded claim, allowed use, clean source checks, no-promotion fields, and next-step routing.
+- Confirmed `randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet_index_publication_ready=True`, `publication_status=published_for_downstream_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet_index_lookup_only`, `published_use=downstream_governance_lookup_only`, `lookup_ready=True`, `contract_check_ready=True`, `failed_check_count=0`, and `passed_check_count=21`.
+- Kept `promotion_ready=False` and `approved_for_promotion=False`.
+- Routed the next action to `check_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet_index_publication`.
+- Verified with focused review/publication tests and Playwright MCP screenshot evidence; full-suite and source-encoding gates are listed in the v979 archive explanation.
+- Archived v979 evidence in `e/979` and added the code explanation in `代码讲解记录_模型能力阶段/993-v979-randomized-holdout-publication-registry-downstream-consumer-ack-bundle-publication-receipt-packet-index-publication-receipt-packet-index-publication-receipt-packet-index-publication.md`.
 
 ## Latest v978 checkpoint
 

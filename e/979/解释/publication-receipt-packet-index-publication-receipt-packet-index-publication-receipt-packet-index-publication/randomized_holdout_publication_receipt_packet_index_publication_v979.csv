@@ -1,0 +1,22 @@
+id,status,actual,detail
+receipt_packet_index_review_file_exists,pass,e\978\解释\publication-receipt-packet-index-publication-receipt-packet-index-publication-receipt-packet-index-review\randomized_holdout_publication_receipt_packet_index_review_v978.json,receipt packet index review file must exist
+receipt_packet_index_review_passed,pass,pass,receipt packet index review must pass
+receipt_packet_index_review_decision_ready,pass,randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet_index_review_ready,receipt packet index review decision must be ready
+receipt_packet_index_review_summary_ready,pass,"{""review"": true, ""summary"": true}",review summary and body must be ready
+review_status_publishable,pass,"{""review"": ""approved_for_downstream_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet_index_publication"", ""summary"": ""approved_for_downstream_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet_index_publication""}",review must approve lookup-only publication
+receipt_packet_index_file_exists,pass,e\977\解释\publication-receipt-packet-index-publication-receipt-packet-index\randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet_index.json,reviewed receipt packet index must still exist
+source_packet_file_exists,pass,e\975\解释\publication-receipt-packet-index-publication-receipt-packet\randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet.json,source receipt packet must still exist
+source_packet_check_file_exists,pass,e\976\解释\publication-receipt-packet-index-publication-receipt-packet-check\randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet_check.json,source receipt packet check must still exist
+downstream_ready,pass,"{""review"": true, ""summary"": true}",publication requires downstream-ready review
+publish_ready,pass,"{""review"": true, ""summary"": true}",publication requires publish-ready review
+lookup_ready,pass,"{""review"": true, ""summary"": true}",publication requires lookup-ready review
+contract_check_ready,pass,"{""review"": true, ""summary"": true}",publication requires contract-ready review
+receipt_packet_index_row_count,pass,"{""review"": 1, ""summary"": 1}",publication requires one receipt packet index row
+source_packet_row_count,pass,"{""review"": 1, ""summary"": 1}",publication requires one source packet row
+source_evidence_count,pass,"{""review"": 2, ""summary"": 2}",publication requires two source evidence rows
+allowed_use_lookup_only,pass,"{""review"": ""downstream_governance_lookup_only"", ""summary"": ""downstream_governance_lookup_only""}",publication must remain downstream lookup only
+consumer_boundary_governance,pass,"{""review"": ""governance_lookup_only"", ""summary"": ""governance_lookup_only""}",consumer boundary must remain governance lookup only
+model_quality_claim_bounded,pass,"{""review"": ""bounded_randomized_target_hidden_holdout_claim_only"", ""summary"": ""bounded_randomized_target_hidden_holdout_claim_only""}",model quality claim must remain bounded
+promotion_still_false,pass,"{""approved"": false, ""review"": false, ""summary"": false}",publication must not enable promotion
+source_checks_clean,pass,0,source review checks must be clean
+source_next_step_matches,pass,publish_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet_index,source review must route to publication

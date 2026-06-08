@@ -20,6 +20,10 @@ e/<version>/解释/说明.md
 最新条目：
 
 ```text
+e/979/图片
+e/979/解释/说明.md
+ -> v979 randomized holdout publication registry downstream consumer ack bundle publication receipt packet index publication receipt packet index publication receipt packet index publication 的运行截图和解释
+
 e/978/图片
 e/978/解释/说明.md
  -> v978 randomized holdout publication registry downstream consumer ack bundle publication receipt packet index publication receipt packet index publication receipt packet index review 的运行截图和解释
