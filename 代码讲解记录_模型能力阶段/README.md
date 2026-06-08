@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+992-v978-randomized-holdout-publication-registry-downstream-consumer-ack-bundle-publication-receipt-packet-index-publication-receipt-packet-index-publication-receipt-packet-index-review.md
+ -> v978 code explanation: review the v977 receipt packet index before lookup-only publication and shorten artifact filenames to avoid Windows path length risk.
+
 991-v977-randomized-holdout-publication-registry-downstream-consumer-ack-bundle-publication-receipt-packet-index-publication-receipt-packet-index-publication-receipt-packet-index.md
  -> v977 code explanation: index the v975 receipt packet and v976 contract check into a lookup-only receipt packet index while keeping promotion blocked.
 

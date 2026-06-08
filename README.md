@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v977.0.0` indexes the randomized holdout publication registry downstream consumer acknowledgement bundle publication receipt packet index publication receipt packet index publication receipt packet after its contract check.
+Version `v978.0.0` reviews the randomized holdout publication registry downstream consumer acknowledgement bundle publication receipt packet index publication receipt packet index publication receipt packet index before lookup-only publication.
+
+## Latest v978 checkpoint
+
+- Added short-name module `randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet_index_review`.
+- Added CLI `scripts/build_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet_index_review.py`.
+- Consumed the real v977 receipt packet index.
+- Reviewed index readiness, lookup-only scope, granted use, lookup readiness, contract-check readiness, index rows, source packet rows, source evidence rows, source packet/check path existence, bounded claim, no-promotion fields, clean source checks, and next-step routing.
+- Confirmed `randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet_index_review_ready=True`, `review_status=approved_for_downstream_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet_index_publication`, `publish_ready=True`, `lookup_ready=True`, `contract_check_ready=True`, `source_evidence_count=2`, `failed_check_count=0`, and `passed_check_count=23`.
+- Kept `promotion_ready=False` and `approved_for_promotion=False`.
+- Shortened v978 artifact filenames to `randomized_holdout_publication_receipt_packet_index_review_v978.*` after real evidence generation exposed Windows path length risk.
+- Routed the next action to `publish_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet_index`.
+- Verified with focused index/review tests and Playwright MCP screenshot evidence; full-suite and source-encoding gates are listed in the v978 archive explanation.
+- Archived v978 evidence in `e/978` and added the code explanation in `代码讲解记录_模型能力阶段/992-v978-randomized-holdout-publication-registry-downstream-consumer-ack-bundle-publication-receipt-packet-index-publication-receipt-packet-index-publication-receipt-packet-index-review.md`.
 
 ## Latest v977 checkpoint
 
