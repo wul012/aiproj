@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1011-v997-publication-receipt-index-receipt-index-publication-index-receipt-index.md
+ -> v997 code explanation: index the v995 publication index receipt and v996 contract check into a lookup-only receipt index.
+
 1010-v996-publication-receipt-index-receipt-index-publication-index-receipt-check.md
  -> v996 code explanation: contract-check the v995 publication index receipt by rebuilding it from the v994 review and comparing stable fields.
 

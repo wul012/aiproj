@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v996.0.0` checks the v995 publication index receipt by rebuilding it from the v994 review.
+Version `v997.0.0` indexes the v995 publication index receipt and v996 receipt contract check.
+
+## Latest v997 checkpoint
+
+- Added short-name module `randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_v997`.
+- Added CLI `scripts/build_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_v997.py`.
+- Consumed the real v995 receipt and v996 receipt contract check.
+- Built one `publication-index-receipt:` lookup row and two digest-backed source evidence rows.
+- Checked receipt readiness, receipt/check status alignment, granted use, lookup key count, source evidence count, source review/publication/check paths, bounded claim fields, clean source checks, and next-step routing.
+- Confirmed `index_ready=True`, `lookup_key_count=1`, `granted_use=downstream_governance_lookup_only`, `source_evidence_count=2`, `contract_check_ready=True`, `failed_check_count=0`, and `passed_check_count=22`.
+- Kept `promotion_ready=False` and `approved_for_promotion=False`.
+- Routed the next action to `review_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_v997`.
+- Verified with focused v996/v997 tests and Playwright MCP screenshot evidence; full-suite and source-encoding gates are listed in the v997 archive explanation.
+- Archived v997 evidence in `e/997` and added the code explanation in `代码讲解记录_模型能力阶段/1011-v997-publication-receipt-index-receipt-index-publication-index-receipt-index.md`.
 
 ## Latest v996 checkpoint
 
