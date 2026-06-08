@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1004-v990-publication-receipt-index-receipt-index-review.md
+ -> v990 code explanation: review the v989 receipt index before lookup-only publication while preserving digest-backed source evidence and no-promotion controls.
+
 1003-v989-publication-receipt-index-receipt-index.md
  -> v989 code explanation: index the v987 receipt and v988 contract check into a lookup-only receipt index with digest-backed source evidence.
 
