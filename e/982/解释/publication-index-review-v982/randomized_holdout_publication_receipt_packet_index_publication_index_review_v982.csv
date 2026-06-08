@@ -1,0 +1,23 @@
+id,status,actual,detail
+publication_index_file_exists,pass,e\981\解释\publication-index-v981\randomized_holdout_publication_receipt_packet_index_publication_index_v981.json,publication index file must exist
+publication_index_passed,pass,pass,publication index must pass
+publication_index_decision_ready,pass,randomized_holdout_publication_receipt_packet_index_publication_index_v981_ready,publication index decision must be ready
+publication_index_summary_ready,pass,"{""index"": true, ""summary"": true}",publication index summary and body must be ready
+lookup_scope_downstream,pass,"{""index"": ""downstream_governance_lookup_only"", ""summary"": ""downstream_governance_lookup_only""}",lookup scope must remain downstream governance lookup only
+published_use_lookup_only,pass,"{""index"": ""downstream_governance_lookup_only"", ""summary"": ""downstream_governance_lookup_only""}",published use must stay downstream lookup only
+lookup_ready,pass,"{""index"": true, ""summary"": true}",publication index must be lookup-ready
+contract_check_ready,pass,"{""index"": true, ""summary"": true}",publication index must include a ready contract check
+publication_index_rows_present,pass,"{""rows"": 1, ""summary"": 1}",review requires one publication index row
+lookup_keys_present,pass,"[""publication-index:randomized-holdout-publication-registry-downstream-consumer-ack-bundle-publication-receipt-packet-index-publication-receipt-packet-index-publication-receipt-packet-index-publication-v979""]",lookup keys must use the publication-index namespace
+index_rows_not_promoted,pass,[false],publication index review must not promote rows
+source_evidence_count,pass,"{""rows"": 2, ""summary"": 2}",review requires two source evidence rows
+source_evidence_passed,pass,"[""pass"", ""pass""]",source evidence rows must pass
+source_evidence_digests,pass,"[""d3090ee99402c69e45c7bcbc91410c6d57db3c8c6676adc7d41ec3ce89cdb180"", ""3ef37eee2165c5d61f61b10b3081e8ba357d4af0599708a0fe68f1980793ad6a""]",source evidence rows must carry SHA-256 digests
+source_evidence_files_exist,pass,"[""e\\979\\解释\\publication-receipt-packet-index-publication-receipt-packet-index-publication-receipt-packet-index-publication\\randomized_holdout_publication_receipt_packet_index_publication_v979.json"", ""e\\980\\解释\\publication-receipt-packet-index-publication-check\\randomized_holdout_publication_receipt_packet_index_publication_check_v980.json""]",source evidence files must exist
+source_publication_file_exists,pass,e\979\解释\publication-receipt-packet-index-publication-receipt-packet-index-publication-receipt-packet-index-publication\randomized_holdout_publication_receipt_packet_index_publication_v979.json,source publication must still exist
+source_publication_check_file_exists,pass,e\980\解释\publication-receipt-packet-index-publication-check\randomized_holdout_publication_receipt_packet_index_publication_check_v980.json,source publication contract check must still exist
+consumer_boundary_governance,pass,"{""index"": ""governance_lookup_only"", ""summary"": ""governance_lookup_only""}",consumer boundary must remain governance lookup only
+model_quality_claim_bounded,pass,"{""index"": ""bounded_randomized_target_hidden_holdout_claim_only"", ""summary"": ""bounded_randomized_target_hidden_holdout_claim_only""}",model quality claim must remain bounded
+promotion_still_false,pass,"{""approved"": false, ""index"": false, ""summary"": false}",publication index review must not enable promotion
+source_checks_clean,pass,0,source publication index checks must be clean
+source_next_step_matches,pass,review_randomized_holdout_publication_receipt_packet_index_publication_index_v981,source publication index must route to review

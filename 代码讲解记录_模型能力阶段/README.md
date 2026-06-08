@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+996-v982-publication-index-review.md
+ -> v982 code explanation: review the v981 publication index for lookup-only receipt readiness, source evidence digests, and no-promotion boundaries.
+
 995-v981-publication-index.md
  -> v981 code explanation: index the v979 lookup-only publication and v980 contract check with short module/script/test/artifact names.
 

@@ -210,6 +210,8 @@ __all__ = [
     "write_randomized_holdout_publication_receipt_packet_index_publication_check_v980_outputs",
     "build_randomized_holdout_publication_receipt_packet_index_publication_index_v981",
     "write_randomized_holdout_publication_receipt_packet_index_publication_index_v981_outputs",
+    "build_randomized_holdout_publication_receipt_packet_index_publication_index_review_v982",
+    "write_randomized_holdout_publication_receipt_packet_index_publication_index_review_v982_outputs",
     "build_model_capability_route_promotion_review_decision",
     "write_model_capability_route_promotion_review_decision_outputs",
     "build_model_capability_route_promotion_decision_index",
@@ -888,6 +890,14 @@ _EXPORTS = {
     "write_randomized_holdout_publication_receipt_packet_index_publication_index_v981_outputs": (
         "randomized_holdout_publication_receipt_packet_index_publication_index_v981_artifacts",
         "write_randomized_holdout_publication_receipt_packet_index_publication_index_v981_outputs",
+    ),
+    "build_randomized_holdout_publication_receipt_packet_index_publication_index_review_v982": (
+        "randomized_holdout_publication_receipt_packet_index_publication_index_review_v982",
+        "build_randomized_holdout_publication_receipt_packet_index_publication_index_review_v982",
+    ),
+    "write_randomized_holdout_publication_receipt_packet_index_publication_index_review_v982_outputs": (
+        "randomized_holdout_publication_receipt_packet_index_publication_index_review_v982_artifacts",
+        "write_randomized_holdout_publication_receipt_packet_index_publication_index_review_v982_outputs",
     ),
     "build_model_capability_route_promotion_review_decision": (
         "model_capability_route_promotion_review_decision",
