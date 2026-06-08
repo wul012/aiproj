@@ -4,7 +4,19 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v985.0.0` indexes the v983 publication receipt and v984 receipt contract check into a lookup-only receipt index.
+Version `v986.0.0` reviews the v985 publication receipt index before the next lookup-only receipt flow.
+
+## Latest v986 checkpoint
+
+- Added short-name module `randomized_holdout_publication_receipt_packet_index_publication_receipt_index_review_v986`.
+- Added CLI `scripts/review_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_v986.py`.
+- Consumed the real v985 receipt index.
+- Reviewed index readiness, lookup scope, granted use, one receipt index row, two source evidence rows, SHA-256 digests, source receipt/check/review/publication/check paths, bounded claim, no-promotion fields, clean source checks, and next-step routing.
+- Confirmed `review_ready=True`, `receipt_ready=True`, `lookup_key_count=1`, `source_evidence_count=2`, `contract_check_ready=True`, `failed_check_count=0`, and `passed_check_count=25`.
+- Kept `promotion_ready=False` and `approved_for_promotion=False`.
+- Routed the next action to `record_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_v986`.
+- Verified with focused v985/v986 tests and Playwright MCP screenshot evidence; full-suite and source-encoding gates are listed in the v986 archive explanation.
+- Archived v986 evidence in `e/986` and added the code explanation in `代码讲解记录_模型能力阶段/1000-v986-publication-receipt-index-review.md`.
 
 ## Latest v985 checkpoint
 

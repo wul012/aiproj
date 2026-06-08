@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1000-v986-publication-receipt-index-review.md
+ -> v986 code explanation: review the v985 receipt index before a lookup-only receipt flow while preserving source evidence and no-promotion boundaries.
+
 999-v985-publication-receipt-index.md
  -> v985 code explanation: index the v983 lookup-only receipt and v984 receipt contract check into a receipt index while preserving no-promotion boundaries.
 
