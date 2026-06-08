@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1012-v998-publication-receipt-index-receipt-index-publication-index-receipt-index-review.md
+ -> v998 code explanation: review the v997 publication index receipt index before receipt recording while preserving lookup-only scope, digest evidence, and no-promotion controls.
+
 1011-v997-publication-receipt-index-receipt-index-publication-index-receipt-index.md
  -> v997 code explanation: index the v995 publication index receipt and v996 contract check into a lookup-only receipt index.
 

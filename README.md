@@ -4,7 +4,19 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v997.0.0` indexes the v995 publication index receipt and v996 receipt contract check.
+Version `v998.0.0` reviews the v997 publication index receipt index before receipt recording.
+
+## Latest v998 checkpoint
+
+- Added short-name module `randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_review_v998`.
+- Added CLI `scripts/review_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_v998.py`.
+- Consumed the real v997 receipt index and reviewed it as a lookup-only governance input.
+- Checked receipt index readiness, lookup scope, granted use, lookup key namespace, source evidence digests, source receipt/check paths, source review path, body/row path consistency, bounded claim fields, clean source checks, and next-step routing.
+- Confirmed `review_ready=True`, `review_status=approved_for_publication_index_receipt_index_receipt_lookup_only`, `receipt_index_ready=True`, `lookup_key_count=1`, `source_evidence_count=2`, `contract_check_ready=True`, `failed_check_count=0`, and `passed_check_count=24`.
+- Kept `promotion_ready=False` and `approved_for_promotion=False`.
+- Routed the next action to `record_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_v998`.
+- Verified with focused v997/v998 tests and Playwright MCP screenshot evidence; full-suite and source-encoding gates are listed in the v998 archive explanation.
+- Archived v998 evidence in `e/998` and added the code explanation in `代码讲解记录_模型能力阶段/1012-v998-publication-receipt-index-receipt-index-publication-index-receipt-index-review.md`.
 
 ## Latest v997 checkpoint
 
