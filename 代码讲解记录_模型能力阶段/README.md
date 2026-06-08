@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1026-v1012-publication-receipt-index-receipt-index-publication-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-check.md
+ -> v1012 code explanation: contract-check the v1011 lookup-only receipt by rebuilding it from the v1010 review.
+
 1025-v1011-publication-receipt-index-receipt-index-publication-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt.md
  -> v1011 code explanation: record the v1010 reviewed receipt index as the next lookup-only downstream receipt.
 

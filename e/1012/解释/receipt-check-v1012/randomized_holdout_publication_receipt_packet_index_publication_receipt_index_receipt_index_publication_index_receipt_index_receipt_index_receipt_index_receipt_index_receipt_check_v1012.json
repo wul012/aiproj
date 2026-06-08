@@ -1,0 +1,547 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT randomized holdout publication receipt packet index publication receipt index receipt index publication index receipt index receipt index receipt index receipt check v1012",
+  "generated_at": "2026-06-08T12:29:21Z",
+  "status": "pass",
+  "decision": "randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_contract_check_v1012_passed",
+  "failed_count": 0,
+  "issues": [],
+  "receipt_path": "e\\1011\\解释\\receipt-v1011\\randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1011.json",
+  "source_receipt_index_review": "e\\1010\\解释\\review-v1010\\randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1010.json",
+  "original_summary": {
+    "randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1011_ready": true,
+    "receipt_id": "randomized-holdout-publication-receipt-packet-index-publication-receipt-index-receipt-index-publication-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-v1011",
+    "receipt_type": "randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index",
+    "receipt_status": "publication_index_receipt_index_receipt_index_receipt_index_receipt_index_lookup_receipted",
+    "consumer_name": "publication_index_receipt_index_receipt_index_receipt_index_receipt_index_governance_lookup_reader",
+    "granted_use": "downstream_governance_lookup_only",
+    "receipt_index_row_count": 1,
+    "source_evidence_count": 2,
+    "lookup_key_count": 1,
+    "promotion_ready": false,
+    "approved_for_promotion": false,
+    "consumer_boundary": "governance_lookup_only",
+    "blocked_uses": [
+      "production_promotion",
+      "model_quality_expansion",
+      "training_data_claim_expansion"
+    ],
+    "next_step": "check_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1011",
+    "passed_check_count": 21,
+    "failed_check_count": 0
+  },
+  "rebuilt_summary": {
+    "randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1011_ready": true,
+    "receipt_id": "randomized-holdout-publication-receipt-packet-index-publication-receipt-index-receipt-index-publication-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-v1011",
+    "receipt_type": "randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index",
+    "receipt_status": "publication_index_receipt_index_receipt_index_receipt_index_receipt_index_lookup_receipted",
+    "consumer_name": "publication_index_receipt_index_receipt_index_receipt_index_receipt_index_governance_lookup_reader",
+    "granted_use": "downstream_governance_lookup_only",
+    "receipt_index_row_count": 1,
+    "source_evidence_count": 2,
+    "lookup_key_count": 1,
+    "promotion_ready": false,
+    "approved_for_promotion": false,
+    "consumer_boundary": "governance_lookup_only",
+    "blocked_uses": [
+      "production_promotion",
+      "model_quality_expansion",
+      "training_data_claim_expansion"
+    ],
+    "next_step": "check_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1011",
+    "passed_check_count": 21,
+    "failed_check_count": 0
+  },
+  "original_receipt": {
+    "receipt_ready": true,
+    "receipt_id": "randomized-holdout-publication-receipt-packet-index-publication-receipt-index-receipt-index-publication-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-v1011",
+    "receipt_type": "randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index",
+    "receipt_status": "publication_index_receipt_index_receipt_index_receipt_index_receipt_index_lookup_receipted",
+    "consumer_name": "publication_index_receipt_index_receipt_index_receipt_index_receipt_index_governance_lookup_reader",
+    "requested_use": "downstream_governance_lookup_only",
+    "granted_use": "downstream_governance_lookup_only",
+    "receipt_index_review_path": "e\\1010\\解释\\review-v1010\\randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1010.json",
+    "receipt_index_row_count": 1,
+    "source_evidence_count": 2,
+    "lookup_keys": [
+      "publication-index-receipt-index-receipt-index-receipt-index-receipt:randomized-holdout-publication-receipt-packet-index-publication-receipt-index-receipt-index-publication-index-receipt-index-receipt-index-receipt-index-receipt-v1007"
+    ],
+    "review_id": "randomized-holdout-publication-receipt-packet-index-publication-receipt-index-receipt-index-publication-index-receipt-index-receipt-index-receipt-index-receipt-index-review-v1010",
+    "review_status": "approved_for_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_lookup_only",
+    "blocked_uses": [
+      "production_promotion",
+      "model_quality_expansion",
+      "training_data_claim_expansion"
+    ],
+    "promotion_ready": false,
+    "approved_for_promotion": false,
+    "consumer_boundary": "governance_lookup_only",
+    "model_quality_claim": "bounded_randomized_target_hidden_holdout_claim_only",
+    "source_receipt_index_path": "e\\1009\\解释\\receipt-index-v1009\\randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_v1009.json",
+    "source_receipt_path": "e\\1007\\解释\\receipt-v1007\\randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_v1007.json",
+    "source_receipt_check_path": "e\\1008\\解释\\receipt-check-v1008\\randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_check_v1008.json",
+    "next_step": "check_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1011"
+  },
+  "rebuilt_receipt": {
+    "receipt_ready": true,
+    "receipt_id": "randomized-holdout-publication-receipt-packet-index-publication-receipt-index-receipt-index-publication-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-v1011",
+    "receipt_type": "randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index",
+    "receipt_status": "publication_index_receipt_index_receipt_index_receipt_index_receipt_index_lookup_receipted",
+    "consumer_name": "publication_index_receipt_index_receipt_index_receipt_index_receipt_index_governance_lookup_reader",
+    "requested_use": "downstream_governance_lookup_only",
+    "granted_use": "downstream_governance_lookup_only",
+    "receipt_index_review_path": "e\\1010\\解释\\review-v1010\\randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1010.json",
+    "receipt_index_row_count": 1,
+    "source_evidence_count": 2,
+    "lookup_keys": [
+      "publication-index-receipt-index-receipt-index-receipt-index-receipt:randomized-holdout-publication-receipt-packet-index-publication-receipt-index-receipt-index-publication-index-receipt-index-receipt-index-receipt-index-receipt-v1007"
+    ],
+    "review_id": "randomized-holdout-publication-receipt-packet-index-publication-receipt-index-receipt-index-publication-index-receipt-index-receipt-index-receipt-index-receipt-index-review-v1010",
+    "review_status": "approved_for_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_lookup_only",
+    "blocked_uses": [
+      "production_promotion",
+      "model_quality_expansion",
+      "training_data_claim_expansion"
+    ],
+    "promotion_ready": false,
+    "approved_for_promotion": false,
+    "consumer_boundary": "governance_lookup_only",
+    "model_quality_claim": "bounded_randomized_target_hidden_holdout_claim_only",
+    "source_receipt_index_path": "e\\1009\\解释\\receipt-index-v1009\\randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_v1009.json",
+    "source_receipt_path": "e\\1007\\解释\\receipt-v1007\\randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_v1007.json",
+    "source_receipt_check_path": "e\\1008\\解释\\receipt-check-v1008\\randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_check_v1008.json",
+    "next_step": "check_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1011"
+  },
+  "check_rows": [
+    {
+      "id": "source_receipt_index_review_exists",
+      "status": "pass",
+      "actual": "e\\1010\\解释\\review-v1010\\randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1010.json",
+      "detail": "source receipt index review must exist"
+    },
+    {
+      "id": "status",
+      "status": "pass",
+      "actual": {
+        "original": "pass",
+        "rebuilt": "pass"
+      },
+      "detail": "status must rebuild exactly"
+    },
+    {
+      "id": "decision",
+      "status": "pass",
+      "actual": {
+        "original": "randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1011_ready",
+        "rebuilt": "randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1011_ready"
+      },
+      "detail": "decision must rebuild exactly"
+    },
+    {
+      "id": "failed_count",
+      "status": "pass",
+      "actual": {
+        "original": 0,
+        "rebuilt": 0
+      },
+      "detail": "failed count must rebuild exactly"
+    },
+    {
+      "id": "receipt_index_review_sha256",
+      "status": "pass",
+      "actual": {
+        "original": "082c6eaee57ab9fdc8f9e08189df24641c689d6b656f6863bf0dab48c6413b24",
+        "rebuilt": "082c6eaee57ab9fdc8f9e08189df24641c689d6b656f6863bf0dab48c6413b24"
+      },
+      "detail": "source review digest must rebuild exactly"
+    },
+    {
+      "id": "consumer_receipts",
+      "status": "pass",
+      "actual": "consumer_receipts",
+      "detail": "consumer receipts must rebuild exactly"
+    },
+    {
+      "id": "summary.randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1011_ready",
+      "status": "pass",
+      "actual": {
+        "original": true,
+        "rebuilt": true
+      },
+      "detail": "summary.randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1011_ready must rebuild exactly"
+    },
+    {
+      "id": "summary.receipt_id",
+      "status": "pass",
+      "actual": {
+        "original": "randomized-holdout-publication-receipt-packet-index-publication-receipt-index-receipt-index-publication-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-v1011",
+        "rebuilt": "randomized-holdout-publication-receipt-packet-index-publication-receipt-index-receipt-index-publication-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-v1011"
+      },
+      "detail": "summary.receipt_id must rebuild exactly"
+    },
+    {
+      "id": "summary.receipt_type",
+      "status": "pass",
+      "actual": {
+        "original": "randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index",
+        "rebuilt": "randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index"
+      },
+      "detail": "summary.receipt_type must rebuild exactly"
+    },
+    {
+      "id": "summary.receipt_status",
+      "status": "pass",
+      "actual": {
+        "original": "publication_index_receipt_index_receipt_index_receipt_index_receipt_index_lookup_receipted",
+        "rebuilt": "publication_index_receipt_index_receipt_index_receipt_index_receipt_index_lookup_receipted"
+      },
+      "detail": "summary.receipt_status must rebuild exactly"
+    },
+    {
+      "id": "summary.consumer_name",
+      "status": "pass",
+      "actual": {
+        "original": "publication_index_receipt_index_receipt_index_receipt_index_receipt_index_governance_lookup_reader",
+        "rebuilt": "publication_index_receipt_index_receipt_index_receipt_index_receipt_index_governance_lookup_reader"
+      },
+      "detail": "summary.consumer_name must rebuild exactly"
+    },
+    {
+      "id": "summary.granted_use",
+      "status": "pass",
+      "actual": {
+        "original": "downstream_governance_lookup_only",
+        "rebuilt": "downstream_governance_lookup_only"
+      },
+      "detail": "summary.granted_use must rebuild exactly"
+    },
+    {
+      "id": "summary.receipt_index_row_count",
+      "status": "pass",
+      "actual": {
+        "original": 1,
+        "rebuilt": 1
+      },
+      "detail": "summary.receipt_index_row_count must rebuild exactly"
+    },
+    {
+      "id": "summary.source_evidence_count",
+      "status": "pass",
+      "actual": {
+        "original": 2,
+        "rebuilt": 2
+      },
+      "detail": "summary.source_evidence_count must rebuild exactly"
+    },
+    {
+      "id": "summary.lookup_key_count",
+      "status": "pass",
+      "actual": {
+        "original": 1,
+        "rebuilt": 1
+      },
+      "detail": "summary.lookup_key_count must rebuild exactly"
+    },
+    {
+      "id": "summary.promotion_ready",
+      "status": "pass",
+      "actual": {
+        "original": false,
+        "rebuilt": false
+      },
+      "detail": "summary.promotion_ready must rebuild exactly"
+    },
+    {
+      "id": "summary.approved_for_promotion",
+      "status": "pass",
+      "actual": {
+        "original": false,
+        "rebuilt": false
+      },
+      "detail": "summary.approved_for_promotion must rebuild exactly"
+    },
+    {
+      "id": "summary.consumer_boundary",
+      "status": "pass",
+      "actual": {
+        "original": "governance_lookup_only",
+        "rebuilt": "governance_lookup_only"
+      },
+      "detail": "summary.consumer_boundary must rebuild exactly"
+    },
+    {
+      "id": "summary.blocked_uses",
+      "status": "pass",
+      "actual": {
+        "original": [
+          "production_promotion",
+          "model_quality_expansion",
+          "training_data_claim_expansion"
+        ],
+        "rebuilt": [
+          "production_promotion",
+          "model_quality_expansion",
+          "training_data_claim_expansion"
+        ]
+      },
+      "detail": "summary.blocked_uses must rebuild exactly"
+    },
+    {
+      "id": "summary.next_step",
+      "status": "pass",
+      "actual": {
+        "original": "check_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1011",
+        "rebuilt": "check_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1011"
+      },
+      "detail": "summary.next_step must rebuild exactly"
+    },
+    {
+      "id": "summary.passed_check_count",
+      "status": "pass",
+      "actual": {
+        "original": 21,
+        "rebuilt": 21
+      },
+      "detail": "summary.passed_check_count must rebuild exactly"
+    },
+    {
+      "id": "summary.failed_check_count",
+      "status": "pass",
+      "actual": {
+        "original": 0,
+        "rebuilt": 0
+      },
+      "detail": "summary.failed_check_count must rebuild exactly"
+    },
+    {
+      "id": "receipt.receipt_ready",
+      "status": "pass",
+      "actual": {
+        "original": true,
+        "rebuilt": true
+      },
+      "detail": "receipt.receipt_ready must rebuild exactly"
+    },
+    {
+      "id": "receipt.receipt_id",
+      "status": "pass",
+      "actual": {
+        "original": "randomized-holdout-publication-receipt-packet-index-publication-receipt-index-receipt-index-publication-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-v1011",
+        "rebuilt": "randomized-holdout-publication-receipt-packet-index-publication-receipt-index-receipt-index-publication-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-v1011"
+      },
+      "detail": "receipt.receipt_id must rebuild exactly"
+    },
+    {
+      "id": "receipt.receipt_type",
+      "status": "pass",
+      "actual": {
+        "original": "randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index",
+        "rebuilt": "randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index"
+      },
+      "detail": "receipt.receipt_type must rebuild exactly"
+    },
+    {
+      "id": "receipt.receipt_status",
+      "status": "pass",
+      "actual": {
+        "original": "publication_index_receipt_index_receipt_index_receipt_index_receipt_index_lookup_receipted",
+        "rebuilt": "publication_index_receipt_index_receipt_index_receipt_index_receipt_index_lookup_receipted"
+      },
+      "detail": "receipt.receipt_status must rebuild exactly"
+    },
+    {
+      "id": "receipt.consumer_name",
+      "status": "pass",
+      "actual": {
+        "original": "publication_index_receipt_index_receipt_index_receipt_index_receipt_index_governance_lookup_reader",
+        "rebuilt": "publication_index_receipt_index_receipt_index_receipt_index_receipt_index_governance_lookup_reader"
+      },
+      "detail": "receipt.consumer_name must rebuild exactly"
+    },
+    {
+      "id": "receipt.requested_use",
+      "status": "pass",
+      "actual": {
+        "original": "downstream_governance_lookup_only",
+        "rebuilt": "downstream_governance_lookup_only"
+      },
+      "detail": "receipt.requested_use must rebuild exactly"
+    },
+    {
+      "id": "receipt.granted_use",
+      "status": "pass",
+      "actual": {
+        "original": "downstream_governance_lookup_only",
+        "rebuilt": "downstream_governance_lookup_only"
+      },
+      "detail": "receipt.granted_use must rebuild exactly"
+    },
+    {
+      "id": "receipt.receipt_index_review_path",
+      "status": "pass",
+      "actual": {
+        "original": "e\\1010\\解释\\review-v1010\\randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1010.json",
+        "rebuilt": "e\\1010\\解释\\review-v1010\\randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1010.json"
+      },
+      "detail": "receipt.receipt_index_review_path must rebuild exactly"
+    },
+    {
+      "id": "receipt.receipt_index_row_count",
+      "status": "pass",
+      "actual": {
+        "original": 1,
+        "rebuilt": 1
+      },
+      "detail": "receipt.receipt_index_row_count must rebuild exactly"
+    },
+    {
+      "id": "receipt.source_evidence_count",
+      "status": "pass",
+      "actual": {
+        "original": 2,
+        "rebuilt": 2
+      },
+      "detail": "receipt.source_evidence_count must rebuild exactly"
+    },
+    {
+      "id": "receipt.lookup_keys",
+      "status": "pass",
+      "actual": {
+        "original": [
+          "publication-index-receipt-index-receipt-index-receipt-index-receipt:randomized-holdout-publication-receipt-packet-index-publication-receipt-index-receipt-index-publication-index-receipt-index-receipt-index-receipt-index-receipt-v1007"
+        ],
+        "rebuilt": [
+          "publication-index-receipt-index-receipt-index-receipt-index-receipt:randomized-holdout-publication-receipt-packet-index-publication-receipt-index-receipt-index-publication-index-receipt-index-receipt-index-receipt-index-receipt-v1007"
+        ]
+      },
+      "detail": "receipt.lookup_keys must rebuild exactly"
+    },
+    {
+      "id": "receipt.review_id",
+      "status": "pass",
+      "actual": {
+        "original": "randomized-holdout-publication-receipt-packet-index-publication-receipt-index-receipt-index-publication-index-receipt-index-receipt-index-receipt-index-receipt-index-review-v1010",
+        "rebuilt": "randomized-holdout-publication-receipt-packet-index-publication-receipt-index-receipt-index-publication-index-receipt-index-receipt-index-receipt-index-receipt-index-review-v1010"
+      },
+      "detail": "receipt.review_id must rebuild exactly"
+    },
+    {
+      "id": "receipt.review_status",
+      "status": "pass",
+      "actual": {
+        "original": "approved_for_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_lookup_only",
+        "rebuilt": "approved_for_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_lookup_only"
+      },
+      "detail": "receipt.review_status must rebuild exactly"
+    },
+    {
+      "id": "receipt.blocked_uses",
+      "status": "pass",
+      "actual": {
+        "original": [
+          "production_promotion",
+          "model_quality_expansion",
+          "training_data_claim_expansion"
+        ],
+        "rebuilt": [
+          "production_promotion",
+          "model_quality_expansion",
+          "training_data_claim_expansion"
+        ]
+      },
+      "detail": "receipt.blocked_uses must rebuild exactly"
+    },
+    {
+      "id": "receipt.promotion_ready",
+      "status": "pass",
+      "actual": {
+        "original": false,
+        "rebuilt": false
+      },
+      "detail": "receipt.promotion_ready must rebuild exactly"
+    },
+    {
+      "id": "receipt.approved_for_promotion",
+      "status": "pass",
+      "actual": {
+        "original": false,
+        "rebuilt": false
+      },
+      "detail": "receipt.approved_for_promotion must rebuild exactly"
+    },
+    {
+      "id": "receipt.consumer_boundary",
+      "status": "pass",
+      "actual": {
+        "original": "governance_lookup_only",
+        "rebuilt": "governance_lookup_only"
+      },
+      "detail": "receipt.consumer_boundary must rebuild exactly"
+    },
+    {
+      "id": "receipt.model_quality_claim",
+      "status": "pass",
+      "actual": {
+        "original": "bounded_randomized_target_hidden_holdout_claim_only",
+        "rebuilt": "bounded_randomized_target_hidden_holdout_claim_only"
+      },
+      "detail": "receipt.model_quality_claim must rebuild exactly"
+    },
+    {
+      "id": "receipt.source_receipt_index_path",
+      "status": "pass",
+      "actual": {
+        "original": "e\\1009\\解释\\receipt-index-v1009\\randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_v1009.json",
+        "rebuilt": "e\\1009\\解释\\receipt-index-v1009\\randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_v1009.json"
+      },
+      "detail": "receipt.source_receipt_index_path must rebuild exactly"
+    },
+    {
+      "id": "receipt.source_receipt_path",
+      "status": "pass",
+      "actual": {
+        "original": "e\\1007\\解释\\receipt-v1007\\randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_v1007.json",
+        "rebuilt": "e\\1007\\解释\\receipt-v1007\\randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_v1007.json"
+      },
+      "detail": "receipt.source_receipt_path must rebuild exactly"
+    },
+    {
+      "id": "receipt.source_receipt_check_path",
+      "status": "pass",
+      "actual": {
+        "original": "e\\1008\\解释\\receipt-check-v1008\\randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_check_v1008.json",
+        "rebuilt": "e\\1008\\解释\\receipt-check-v1008\\randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_check_v1008.json"
+      },
+      "detail": "receipt.source_receipt_check_path must rebuild exactly"
+    },
+    {
+      "id": "receipt.next_step",
+      "status": "pass",
+      "actual": {
+        "original": "check_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1011",
+        "rebuilt": "check_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1011"
+      },
+      "detail": "receipt.next_step must rebuild exactly"
+    }
+  ],
+  "summary": {
+    "contract_check_ready": true,
+    "source_receipt_index_review": "e\\1010\\解释\\review-v1010\\randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1010.json",
+    "original_receipt_status": "publication_index_receipt_index_receipt_index_receipt_index_receipt_index_lookup_receipted",
+    "rebuilt_receipt_status": "publication_index_receipt_index_receipt_index_receipt_index_receipt_index_lookup_receipted",
+    "original_granted_use": "downstream_governance_lookup_only",
+    "rebuilt_granted_use": "downstream_governance_lookup_only",
+    "original_lookup_key_count": 1,
+    "rebuilt_lookup_key_count": 1,
+    "original_promotion_ready": false,
+    "rebuilt_promotion_ready": false,
+    "next_step": "index_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1012",
+    "passed_check_count": 44,
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "bounded_randomized_target_hidden_holdout_claim_only",
+    "reason": "The publication receipt index receipt index receipt index receipt rebuilds from the source review and remains lookup-only.",
+    "next_action": "index_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1012"
+  }
+}
