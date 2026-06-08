@@ -4,7 +4,18 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1010.0.0` reviews the v1009 lookup-only receipt index before recording the next downstream receipt.
+Version `v1011.0.0` records the v1010 reviewed receipt index as the next lookup-only downstream receipt.
+
+## Latest v1011 checkpoint
+
+- Added module `randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1011`.
+- Added CLI `scripts/record_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1011.py`.
+- Consumed the real v1010 review artifact and recorded a downstream governance lookup-only receipt over one receipt-index row and two source evidence rows.
+- Confirmed `receipt_ready=True`, `granted_use=downstream_governance_lookup_only`, `lookup_key_count=1`, `source_evidence_count=2`, `passed_check_count=21`, and `failed_check_count=0`.
+- Preserved blocked-use and no-promotion boundaries with `promotion_ready=False` and `approved_for_promotion=False`.
+- Routed the next action to `check_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1011`.
+- Verified with focused v1011 tests, source-encoding hygiene, full-suite pytest, and Playwright MCP screenshot evidence.
+- Archived v1011 evidence in `e/1011` and added the code explanation in `代码讲解记录_模型能力阶段/1025-v1011-publication-receipt-index-receipt-index-publication-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt.md`.
 
 ## Latest v1010 checkpoint
 
