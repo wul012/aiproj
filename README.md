@@ -4,7 +4,19 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1006.0.0` reviews the v1005 receipt index before the next lookup-only receipt recording step.
+Version `v1007.0.0` records the v1006-reviewed receipt index as a downstream lookup-only receipt.
+
+## Latest v1007 checkpoint
+
+- Added short-name module `randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_v1007`.
+- Added CLI `scripts/record_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_v1007.py`.
+- Consumed the real v1006 receipt-index review and recorded one downstream consumer receipt.
+- Checked v1006 review readiness, allowed review status, requested use, blocked uses, lookup readiness, contract check readiness, index row count, source evidence count, lookup key namespace, source files, clean source checks, bounded claim fields, and next-step routing.
+- Confirmed `receipt_ready=True`, `receipt_status=publication_index_receipt_index_receipt_index_receipt_index_lookup_receipted`, `consumer_name=publication_index_receipt_index_receipt_index_receipt_index_governance_lookup_reader`, `granted_use=downstream_governance_lookup_only`, `lookup_key_count=1`, `source_evidence_count=2`, `failed_check_count=0`, and `passed_check_count=21`.
+- Kept `promotion_ready=False` and `approved_for_promotion=False`.
+- Routed the next action to `check_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_v1007`.
+- Verified with focused v1007 tests, source-encoding hygiene, full-suite pytest, and Playwright MCP screenshot evidence.
+- Archived v1007 evidence in `e/1007` and added the code explanation in `代码讲解记录_模型能力阶段/1021-v1007-publication-receipt-index-receipt-index-publication-index-receipt-index-receipt-index-receipt-index-receipt.md`.
 
 ## Latest v1006 checkpoint
 
