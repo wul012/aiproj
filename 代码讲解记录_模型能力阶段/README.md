@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+998-v984-publication-receipt-check.md
+ -> v984 code explanation: check the v983 publication receipt by rebuilding it from the source v982 review and comparing receipt fields.
+
 997-v983-publication-receipt.md
  -> v983 code explanation: record the v982-reviewed publication index as a lookup-only consumer receipt with no-promotion boundaries.
 

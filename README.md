@@ -4,7 +4,19 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v983.0.0` records a lookup-only receipt for the v982-reviewed publication index.
+Version `v984.0.0` checks the v983 publication receipt by rebuilding it from the source v982 review.
+
+## Latest v984 checkpoint
+
+- Added short-name module `randomized_holdout_publication_receipt_packet_index_publication_receipt_check_v984`.
+- Added CLI `scripts/check_randomized_holdout_publication_receipt_packet_index_publication_receipt_v984.py`.
+- Consumed the real v983 receipt and rebuilt it from the recorded v982 review.
+- Compared status, decision, failed count, consumer receipts, summary fields, receipt fields, granted use, lookup key count, source review path, no-promotion fields, and next-step routing.
+- Confirmed `contract_check_ready=True`, `failed_check_count=0`, `passed_check_count=39`, `original_granted_use=downstream_governance_lookup_only`, and `rebuilt_granted_use=downstream_governance_lookup_only`.
+- Kept `promotion_ready=False` for original and rebuilt receipt.
+- Routed the next action to `index_randomized_holdout_publication_receipt_packet_index_publication_receipt_v984`.
+- Verified with focused v983/v984 tests and Playwright MCP screenshot evidence; full-suite and source-encoding gates are listed in the v984 archive explanation.
+- Archived v984 evidence in `e/984` and added the code explanation in `代码讲解记录_模型能力阶段/998-v984-publication-receipt-check.md`.
 
 ## Latest v983 checkpoint
 
