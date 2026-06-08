@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+991-v977-randomized-holdout-publication-registry-downstream-consumer-ack-bundle-publication-receipt-packet-index-publication-receipt-packet-index-publication-receipt-packet-index.md
+ -> v977 code explanation: index the v975 receipt packet and v976 contract check into a lookup-only receipt packet index while keeping promotion blocked.
+
 990-v976-randomized-holdout-publication-registry-downstream-consumer-ack-bundle-publication-receipt-packet-index-publication-receipt-packet-index-publication-receipt-packet-check.md
  -> v976 code explanation: rebuild the v975 receipt packet from the v974 review and verify stable lookup-only contract fields.
 

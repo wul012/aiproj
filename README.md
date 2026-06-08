@@ -4,7 +4,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v976.0.0` checks the randomized holdout publication registry downstream consumer acknowledgement bundle publication receipt packet index publication receipt packet index publication receipt packet contract.
+Version `v977.0.0` indexes the randomized holdout publication registry downstream consumer acknowledgement bundle publication receipt packet index publication receipt packet index publication receipt packet after its contract check.
+
+## Latest v977 checkpoint
+
+- Added short-name module `randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet_index`.
+- Added CLI `scripts/build_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet_index.py`.
+- Consumed the real v975 receipt packet and v976 receipt packet contract check.
+- Built one lookup-only receipt packet index row with source packet/check paths, one lookup key, two source evidence rows, and contract-check readiness.
+- Checked packet readiness, contract-check readiness, lookup-only granted use, source evidence existence, lookup namespace, bounded model-quality claim, no-promotion fields, clean source checks, and next-step routing.
+- Confirmed `randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet_index_ready=True`, `receipt_packet_index_row_count=1`, `lookup_ready=True`, `contract_check_ready=True`, `source_evidence_count=2`, `failed_check_count=0`, and `passed_check_count=29`.
+- Kept `promotion_ready=False` and `approved_for_promotion=False`.
+- Routed the next action to `review_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet_index`.
+- Verified with focused packet/check/index tests and Playwright MCP screenshot evidence; full-suite and source-encoding gates are listed in the v977 archive explanation.
+- Archived v977 evidence in `e/977` and added the code explanation in `代码讲解记录_模型能力阶段/991-v977-randomized-holdout-publication-registry-downstream-consumer-ack-bundle-publication-receipt-packet-index-publication-receipt-packet-index-publication-receipt-packet-index.md`.
 
 ## Latest v976 checkpoint
 
