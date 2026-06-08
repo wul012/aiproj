@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1009-v995-publication-receipt-index-receipt-index-publication-index-receipt.md
+ -> v995 code explanation: record a lookup-only downstream receipt for the v994-reviewed publication index while keeping promotion blocked.
+
 1008-v994-publication-receipt-index-receipt-index-publication-index-review.md
  -> v994 code explanation: review the v993 lookup-only publication index before receipt recording while preserving digest-backed source evidence and no-promotion controls.
 
