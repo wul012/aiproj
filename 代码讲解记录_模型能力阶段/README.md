@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1008-v994-publication-receipt-index-receipt-index-publication-index-review.md
+ -> v994 code explanation: review the v993 lookup-only publication index before receipt recording while preserving digest-backed source evidence and no-promotion controls.
+
 1007-v993-publication-receipt-index-receipt-index-publication-index.md
  -> v993 code explanation: index the v991 publication and v992 contract check into a lookup-only publication index with digest-backed evidence.
 

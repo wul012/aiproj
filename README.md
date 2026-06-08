@@ -4,7 +4,19 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v993.0.0` indexes the v991 lookup-only publication and v992 contract check.
+Version `v994.0.0` reviews the v993 lookup-only publication index before a receipt can be recorded.
+
+## Latest v994 checkpoint
+
+- Added short-name module `randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_review_v994`.
+- Added CLI `scripts/review_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_v994.py`.
+- Consumed the real v993 publication index and checked that it is still a lookup-only governance artifact.
+- Reviewed one `publication-index:` row, two digest-backed source evidence rows, source publication/check/review/receipt-index paths, bounded claim fields, clean source checks, and next-step routing.
+- Confirmed `review_ready=True`, `review_status=approved_for_publication_index_receipt_lookup_only`, `publication_ready=True`, `lookup_key_count=1`, `source_evidence_count=2`, `failed_check_count=0`, and `passed_check_count=24`.
+- Kept `promotion_ready=False` and `approved_for_promotion=False`.
+- Routed the next action to `record_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_v994`.
+- Verified with focused v993/v994 tests and Playwright MCP screenshot evidence; full-suite and source-encoding gates are listed in the v994 archive explanation.
+- Archived v994 evidence in `e/994` and added the code explanation in `代码讲解记录_模型能力阶段/1008-v994-publication-receipt-index-receipt-index-publication-index-review.md`.
 
 ## Latest v993 checkpoint
 
