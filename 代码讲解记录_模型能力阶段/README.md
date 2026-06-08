@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1003-v989-publication-receipt-index-receipt-index.md
+ -> v989 code explanation: index the v987 receipt and v988 contract check into a lookup-only receipt index with digest-backed source evidence.
+
 1002-v988-publication-receipt-index-receipt-check.md
  -> v988 code explanation: check the v987 publication receipt index receipt by rebuilding it from the source v986 review and comparing stable lookup-only fields.
 
