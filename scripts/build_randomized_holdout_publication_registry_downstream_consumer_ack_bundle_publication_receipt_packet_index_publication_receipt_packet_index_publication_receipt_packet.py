@@ -20,12 +20,19 @@ from minigpt.randomized_holdout_publication_registry_downstream_consumer_ack_bun
     render_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet_text,
     write_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet_outputs,
 )
+from minigpt.randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet_check import (  # noqa: E402
+    build_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet_check,
+)
+from minigpt.randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet_check_artifacts import (  # noqa: E402
+    write_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet_check_outputs,
+)
 
 
 def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Build a randomized holdout publication receipt packet index publication receipt packet index publication receipt packet.")
     parser.add_argument("--receipt-review", type=Path, required=True, help="Publication receipt review JSON or output directory.")
     parser.add_argument("--out-dir", type=Path, required=True, help="Directory for receipt packet outputs.")
+    parser.add_argument("--check-out-dir", type=Path, help="Optional directory for a sidecar receipt packet contract check.")
     parser.add_argument("--require-packet-ready", action="store_true")
     parser.add_argument("--require-lookup-ready", action="store_true")
     parser.add_argument("--require-promotion-ready", action="store_true")
@@ -42,6 +49,13 @@ def main(argv: Sequence[str] | None = None) -> None:
         receipt_review_path=review_path,
     )
     outputs = write_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet_outputs(report, args.out_dir)
+    if args.check_out_dir:
+        prepare_output_dir(args.check_out_dir, force=args.force)
+        check_report = build_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet_check(
+            report,
+            receipt_packet_path=outputs["json"],
+        )
+        outputs["check"] = write_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet_check_outputs(check_report, args.check_out_dir)["json"]
     print(render_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet_text(report), end="")
     print("outputs=" + json.dumps(outputs, ensure_ascii=True))
     code = resolve_exit_code(
