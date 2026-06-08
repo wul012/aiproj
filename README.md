@@ -4,7 +4,18 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1016.0.0` contract-checks the v1015 short-name receipt by rebuilding it from the v1014 source review and comparing stable lookup-only fields.
+Version `v1017.0.0` indexes the v1015 short-name receipt and v1016 contract check into a digest-backed lookup-only receipt index.
+
+## Latest v1017 checkpoint
+
+- Added short-name module `randomized_holdout_publication_receipt_index_receipt_index_v1017`.
+- Added CLI `scripts/build_randomized_holdout_publication_receipt_index_receipt_index_v1017.py`.
+- Consumed the real v1015 receipt and v1016 contract check, verified both files exist, and recorded SHA-256 source evidence rows for both.
+- Confirmed `index_ready=True`, `lookup_ready=True`, `contract_check_ready=True`, `lookup_key_count=1`, `source_evidence_count=2`, `passed_check_count=23`, and `failed_check_count=0`.
+- Preserved `granted_use=downstream_governance_lookup_only`, `promotion_ready=False`, and `approved_for_promotion=False`.
+- Routed the next action to `review_randomized_holdout_publication_receipt_index_receipt_index_v1017`.
+- Verified with focused v1017 tests, py_compile, real CLI evidence, and Playwright MCP screenshot evidence; full-suite validation is part of the v1017 closeout.
+- Archived v1017 evidence in `e/1017` and added the code explanation in `代码讲解记录_模型能力阶段/1031-v1017-publication-receipt-index-receipt-index.md`.
 
 ## Latest v1016 checkpoint
 
