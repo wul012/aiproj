@@ -4,7 +4,19 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1014.0.0` reviews the v1013 digest-backed receipt index before the next lookup-only receipt recording.
+Version `v1015.0.0` records the v1014-reviewed receipt index as a short-name lookup-only receipt and stops the filename-growth pattern that triggered Windows pycache/path-length risk.
+
+## Latest v1015 checkpoint
+
+- Added short-name module `randomized_holdout_publication_receipt_index_receipt_v1015`.
+- Added CLI `scripts/record_randomized_holdout_publication_receipt_index_receipt_v1015.py`.
+- Consumed the real v1014 receipt-index review while preserving its long historical source identity only as traceable source evidence.
+- Recorded `receipt_ready=True`, `receipt_status=publication_receipt_index_receipt_v1015_lookup_receipted`, `consumer_name=publication_receipt_index_receipt_v1015_lookup_reader`, `granted_use=downstream_governance_lookup_only`, `lookup_key_count=1`, `source_evidence_count=2`, `passed_check_count=21`, and `failed_check_count=0`.
+- Kept `promotion_ready=False` and `approved_for_promotion=False`; this is still governance lookup-only evidence, not production model promotion.
+- Added short module/script/test/artifact names for the new receipt path so `python -m py_compile` no longer hits the v1014 long-filename pycache failure.
+- Routed the next action to `check_randomized_holdout_publication_receipt_index_receipt_v1015`.
+- Verified with focused v1015 tests, py_compile, real CLI evidence, and Playwright MCP screenshot evidence; full-suite validation is part of the v1015 closeout.
+- Archived v1015 evidence in `e/1015` and added the code explanation in `代码讲解记录_模型能力阶段/1029-v1015-publication-receipt-index-receipt.md`.
 
 ## Latest v1014 checkpoint
 
