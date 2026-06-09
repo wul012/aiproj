@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1038-v1024-publication-receipt-index-receipt-index-receipt-index-receipt-check.md
+ -> v1024 code explanation: contract-check the v1023 lookup-only receipt by rebuilding it from the v1022 review.
+
 1037-v1023-publication-receipt-index-receipt-index-receipt-index-receipt.md
  -> v1023 code explanation: record the v1022-reviewed receipt index as a downstream lookup-only receipt.
 

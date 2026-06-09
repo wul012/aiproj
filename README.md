@@ -4,7 +4,18 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1023.0.0` records the v1022-reviewed receipt index as a downstream lookup-only receipt.
+Version `v1024.0.0` contract-checks the v1023 lookup-only receipt by rebuilding it from the v1022 review.
+
+## Latest v1024 checkpoint
+
+- Added short-name module `randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_check_v1024`.
+- Added CLI `scripts/check_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_v1024.py`.
+- Rebuilt the real v1023 receipt from its v1022 source review and compared status, decision, failed count, source review digest, consumer receipts, stable summary fields, and stable receipt fields.
+- Confirmed `contract_check_ready=True`, `original_receipt_status=rebuilt_receipt_status=publication_receipt_index_receipt_index_receipt_index_receipt_v1023_lookup_receipted`, `original_granted_use=rebuilt_granted_use=downstream_governance_lookup_only`, `original_lookup_key_count=rebuilt_lookup_key_count=1`, `passed_check_count=46`, and `failed_check_count=0`.
+- Kept `original_promotion_ready=False` and `rebuilt_promotion_ready=False`.
+- Routed the next action to `index_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_v1024`.
+- Verified with focused v1024 tests, py_compile, source-encoding hygiene (`1958` clean Python sources), full-suite pytest (`2498 passed in 494.32s`), real CLI evidence, and Playwright MCP screenshot evidence.
+- Archived v1024 evidence in `e/1024` and added the code explanation in `代码讲解记录_模型能力阶段/1038-v1024-publication-receipt-index-receipt-index-receipt-index-receipt-check.md`.
 
 ## Latest v1023 checkpoint
 
