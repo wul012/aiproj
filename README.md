@@ -4,7 +4,18 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1034.0.0` reviews the v1033 digest-backed receipt index before the next downstream lookup-only receipt recording.
+Version `v1035.0.0` records the v1034-reviewed digest-backed receipt index as a downstream lookup-only receipt.
+
+## Latest v1035 checkpoint
+
+- Added short-name module `randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1035`.
+- Added CLI `scripts/record_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1035.py`.
+- Consumed the real v1034 receipt-index review and verified review readiness, lookup-only granted use, source evidence digest/status, source path stability, bounded model-quality claim, no-promotion fields, and receipt next-step routing.
+- Confirmed `receipt_ready=True`, `receipt_status=publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1035_lookup_receipted`, `consumer_name=publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1035_lookup_reader`, `receipt_index_row_count=1`, `source_evidence_count=2`, `lookup_key_count=1`, `passed_check_count=25`, and `failed_check_count=0`.
+- Preserved `granted_use=downstream_governance_lookup_only`, `promotion_ready=False`, and `approved_for_promotion=False`.
+- Routed the next action to `check_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1035`.
+- Verified with focused v1035 tests (`6 passed in 10.75s`), py_compile, source-encoding hygiene (`2002` clean Python sources), full-suite pytest (`2555 passed in 472.54s`), real CLI evidence, and Playwright MCP screenshot evidence.
+- Archived v1035 evidence in `e/1035` and added the code explanation in `代码讲解记录_模型能力阶段/1049-v1035-publication-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt.md`.
 
 ## Latest v1034 checkpoint
 
