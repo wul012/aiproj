@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1063-v1049-publication-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index.md
+ -> v1049 code explanation: index the v1047 lookup-only receipt and v1048 contract check into digest-backed lookup evidence.
+
 1062-v1048-publication-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-check.md
  -> v1048 code explanation: rebuild the v1047 receipt from the v1046 source review and verify stable lookup-only fields.
 
