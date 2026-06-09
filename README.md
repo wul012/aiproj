@@ -4,7 +4,18 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1020.0.0` contract-checks the v1019 lookup-only receipt by rebuilding it from the v1018 review.
+Version `v1021.0.0` indexes the v1019 lookup-only receipt and v1020 contract check into a digest-backed receipt index.
+
+## Latest v1021 checkpoint
+
+- Added short-name module `randomized_holdout_publication_receipt_index_receipt_index_receipt_index_v1021`.
+- Added CLI `scripts/build_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_v1021.py`.
+- Consumed the real v1019 receipt and v1020 contract check, verified both files exist, and recorded SHA-256 source evidence rows for both.
+- Confirmed `index_ready=True`, `lookup_ready=True`, `contract_check_ready=True`, `lookup_key_count=1`, `source_evidence_count=2`, `passed_check_count=25`, and `failed_check_count=0`.
+- Preserved `granted_use=downstream_governance_lookup_only`, `promotion_ready=False`, and `approved_for_promotion=False`.
+- Routed the next action to `review_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_v1021`.
+- Verified with focused v1021 tests, py_compile, source-encoding hygiene (`1946` clean Python sources), full-suite pytest (`2481 passed in 471.76s`), real CLI evidence, and Playwright MCP screenshot evidence.
+- Archived v1021 evidence in `e/1021` and added the code explanation in `代码讲解记录_模型能力阶段/1035-v1021-publication-receipt-index-receipt-index-receipt-index.md`.
 
 ## Latest v1020 checkpoint
 
