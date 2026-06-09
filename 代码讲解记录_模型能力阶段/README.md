@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1041-v1027-publication-receipt-index-receipt-index-receipt-index-receipt-index-receipt.md
+ -> v1027 code explanation: record the v1026-reviewed receipt index as a downstream lookup-only receipt.
+
 1040-v1026-publication-receipt-index-receipt-index-receipt-index-receipt-index-review.md
  -> v1026 code explanation: review the v1025 digest-backed receipt index before downstream lookup-only receipt recording.
 
