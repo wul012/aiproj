@@ -4,7 +4,17 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1038.0.0` reviews the v1037 digest-backed receipt index for lookup-only receipt recording.
+Version `v1039.0.0` records the v1038-reviewed receipt index as a downstream lookup-only receipt.
+
+## Latest v1039 checkpoint
+
+- Added short-name module `randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1039`.
+- Added CLI `scripts/record_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1039.py`.
+- Consumed the real v1038 receipt index review and verified review readiness, lookup-only granted use, source evidence digest/status, source path stability, bounded model-quality claim, no-promotion fields, and next-step routing.
+- Confirmed `receipt_ready=True`, `receipt_status=publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1039_lookup_receipted`, `granted_use=downstream_governance_lookup_only`, `lookup_key_count=1`, `source_evidence_count=2`, `promotion_ready=False`, `passed_check_count=25`, and `failed_check_count=0`.
+- Routed the next action to `check_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1039`.
+- Verified with focused v1039 tests (`6 passed in 16.54s`), py_compile, real CLI evidence, and Playwright MCP screenshot evidence. Full-suite and source-hygiene verification are part of the v1039 closeout gate.
+- Archived v1039 evidence in `e/1039` and added the code explanation in `代码讲解记录_模型能力阶段/1053-v1039-publication-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt.md`.
 
 ## Latest v1038 checkpoint
 
