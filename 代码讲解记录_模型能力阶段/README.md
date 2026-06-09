@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1054-v1040-publication-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-check.md
+ -> v1040 code explanation: contract-check the v1039 lookup-only receipt by rebuilding it from the v1038 review.
+
 1053-v1039-publication-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt.md
  -> v1039 code explanation: record the v1038-reviewed receipt index as a downstream lookup-only receipt while preserving no-promotion boundaries.
 

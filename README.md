@@ -4,7 +4,17 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1039.0.0` records the v1038-reviewed receipt index as a downstream lookup-only receipt.
+Version `v1040.0.0` contract-checks the v1039 downstream lookup-only receipt by rebuilding it from the v1038 review.
+
+## Latest v1040 checkpoint
+
+- Added short-name module `randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_check_v1040`.
+- Added CLI `scripts/check_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1040.py`.
+- Rebuilt the real v1039 receipt from its v1038 source review and compared top-level fields, summary fields, receipt fields, source digest, and consumer receipt rows.
+- Confirmed `contract_check_ready=True`, original/rebuilt `granted_use=downstream_governance_lookup_only`, original/rebuilt `promotion_ready=False`, `passed_check_count=46`, and `failed_check_count=0`.
+- Routed the next action to `index_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1040`.
+- Verified with focused v1040 tests (`6 passed in 13.30s`), py_compile, real CLI evidence, and Playwright MCP screenshot evidence. Full-suite and source-hygiene verification are part of the v1040 closeout gate.
+- Archived v1040 evidence in `e/1040` and added the code explanation in `代码讲解记录_模型能力阶段/1054-v1040-publication-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-check.md`.
 
 ## Latest v1039 checkpoint
 
