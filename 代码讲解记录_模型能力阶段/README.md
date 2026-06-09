@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1040-v1026-publication-receipt-index-receipt-index-receipt-index-receipt-index-review.md
+ -> v1026 code explanation: review the v1025 digest-backed receipt index before downstream lookup-only receipt recording.
+
 1039-v1025-publication-receipt-index-receipt-index-receipt-index-receipt-index.md
  -> v1025 code explanation: index the v1023 lookup-only receipt and v1024 receipt contract check into digest-backed lookup evidence.
 

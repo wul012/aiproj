@@ -4,7 +4,18 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1025.0.0` indexes the v1023 lookup-only receipt and v1024 receipt contract check into a digest-backed receipt index.
+Version `v1026.0.0` reviews the v1025 digest-backed receipt index for downstream lookup-only receipt recording.
+
+## Latest v1026 checkpoint
+
+- Added short-name module `randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_review_v1026`.
+- Added CLI `scripts/review_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_v1026.py`.
+- Consumed the real v1025 receipt index and verified index readiness, lookup-only scope, digest-backed source evidence, source path stability, bounded model-quality claim, and no-promotion fields.
+- Confirmed `review_ready=True`, `review_status=approved_for_publication_receipt_index_receipt_index_receipt_index_receipt_index_lookup_only`, `receipt_index_row_count=1`, `lookup_key_count=1`, `source_evidence_count=2`, `lookup_ready=True`, `contract_check_ready=True`, `passed_check_count=22`, and `failed_check_count=0`.
+- Preserved `promotion_ready=False` and `approved_for_promotion=False`.
+- Routed the next action to `record_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1026`.
+- Verified with focused v1026 tests, py_compile, source-encoding hygiene (`1966` clean Python sources), full-suite pytest (`2507 passed in 509.51s`), real CLI evidence, and Playwright MCP screenshot evidence.
+- Archived v1026 evidence in `e/1026` and added the code explanation in `代码讲解记录_模型能力阶段/1040-v1026-publication-receipt-index-receipt-index-receipt-index-receipt-index-review.md`.
 
 ## Latest v1025 checkpoint
 
