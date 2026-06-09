@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1061-v1047-publication-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt.md
+ -> v1047 code explanation: record the v1046 receipt index review as a downstream lookup-only receipt while keeping production promotion blocked.
+
 1060-v1046-publication-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-review.md
  -> v1046 code explanation: review the v1045 digest-backed receipt index for lookup-only receipt recording while keeping production promotion blocked.
 
