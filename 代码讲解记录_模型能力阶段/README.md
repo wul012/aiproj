@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1055-v1041-publication-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index.md
+ -> v1041 code explanation: index the v1039 lookup-only receipt and v1040 contract check into digest-backed lookup evidence.
+
 1054-v1040-publication-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-check.md
  -> v1040 code explanation: contract-check the v1039 lookup-only receipt by rebuilding it from the v1038 review.
 

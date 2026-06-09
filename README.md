@@ -4,7 +4,17 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1040.0.0` contract-checks the v1039 downstream lookup-only receipt by rebuilding it from the v1038 review.
+Version `v1041.0.0` indexes the v1039 downstream lookup-only receipt and v1040 contract check into digest-backed lookup evidence.
+
+## Latest v1041 checkpoint
+
+- Added short-name module `randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1041`.
+- Added CLI `scripts/build_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1041.py`.
+- Consumed the real v1039 receipt and v1040 contract check, verified both source files still exist, and recorded SHA-256 source evidence rows for both.
+- Confirmed `index_ready=True`, `lookup_scope=downstream_governance_lookup_only`, `lookup_key_count=1`, `source_evidence_count=2`, `lookup_ready=True`, `contract_check_ready=True`, `promotion_ready=False`, `passed_check_count=25`, and `failed_check_count=0`.
+- Routed the next action to `review_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1041`.
+- Verified with focused v1041 tests (`4 passed in 8.95s`), py_compile, real CLI evidence, and Playwright MCP screenshot evidence. Full-suite and source-hygiene verification are part of the v1041 closeout gate.
+- Archived v1041 evidence in `e/1041` and added the code explanation in `代码讲解记录_模型能力阶段/1055-v1041-publication-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index.md`.
 
 ## Latest v1040 checkpoint
 
