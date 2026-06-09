@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1052-v1038-publication-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-review.md
+ -> v1038 code explanation: review the v1037 digest-backed receipt index before the next lookup-only receipt recording.
+
 1051-v1037-publication-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index.md
  -> v1037 code explanation: index the v1035 downstream lookup-only receipt and v1036 contract check into digest-backed lookup evidence.
 

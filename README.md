@@ -4,7 +4,18 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1037.0.0` indexes the v1035 downstream lookup-only receipt and v1036 contract check into a digest-backed lookup-only receipt index.
+Version `v1038.0.0` reviews the v1037 digest-backed receipt index for lookup-only receipt recording.
+
+## Latest v1038 checkpoint
+
+- Added short-name module `randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1038`.
+- Added CLI `scripts/review_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1038.py`.
+- Consumed the real v1037 receipt index and verified index readiness, lookup-only scope, source evidence digest/status, source path stability, bounded model-quality claim, no-promotion fields, and next-step routing.
+- Confirmed `review_ready=True`, `review_status=approved_for_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_lookup_only`, `receipt_index_row_count=1`, `lookup_key_count=1`, `source_evidence_count=2`, `lookup_ready=True`, `contract_check_ready=True`, `passed_check_count=22`, and `failed_check_count=0`.
+- Preserved `granted_use=downstream_governance_lookup_only`, `promotion_ready=False`, and `approved_for_promotion=False`.
+- Routed the next action to `record_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1038`.
+- Verified with focused v1038 tests (`5 passed in 8.00s`), py_compile, source-encoding hygiene (`2014` clean Python sources), full-suite pytest (`2570 passed in 564.73s`), real CLI evidence, and Playwright MCP screenshot evidence.
+- Archived v1038 evidence in `e/1038` and added the code explanation in `代码讲解记录_模型能力阶段/1052-v1038-publication-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-review.md`.
 
 ## Latest v1037 checkpoint
 
