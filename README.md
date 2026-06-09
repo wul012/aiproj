@@ -4,7 +4,18 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1036.0.0` contract-checks the v1035 downstream lookup-only receipt by rebuilding it from the v1034 review.
+Version `v1037.0.0` indexes the v1035 downstream lookup-only receipt and v1036 contract check into a digest-backed lookup-only receipt index.
+
+## Latest v1037 checkpoint
+
+- Added short-name module `randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1037`.
+- Added CLI `scripts/build_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1037.py`.
+- Consumed the real v1035 receipt and v1036 contract check, verified both source files still exist, and recorded SHA-256 source evidence rows for both.
+- Confirmed `index_ready=True`, `receipt_index_id=randomized-holdout-publication-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-v1037`, `lookup_scope=downstream_governance_lookup_only`, `lookup_key_count=1`, `source_evidence_count=2`, `lookup_ready=True`, `contract_check_ready=True`, `passed_check_count=25`, and `failed_check_count=0`.
+- Preserved `granted_use=downstream_governance_lookup_only`, `promotion_ready=False`, and `approved_for_promotion=False`.
+- Routed the next action to `review_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1037`.
+- Verified with focused v1037 tests (`4 passed in 6.40s`), py_compile, source-encoding hygiene (`2010` clean Python sources), full-suite pytest (`2565 passed in 693.69s`), real CLI evidence, and Playwright MCP screenshot evidence.
+- Archived v1037 evidence in `e/1037` and added the code explanation in `代码讲解记录_模型能力阶段/1051-v1037-publication-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index.md`.
 
 ## Latest v1036 checkpoint
 
