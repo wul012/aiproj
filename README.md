@@ -4,7 +4,18 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1019.0.0` records the v1018-reviewed short-name receipt index as a downstream lookup-only receipt.
+Version `v1020.0.0` contract-checks the v1019 lookup-only receipt by rebuilding it from the v1018 review.
+
+## Latest v1020 checkpoint
+
+- Added short-name module `randomized_holdout_publication_receipt_index_receipt_index_receipt_check_v1020`.
+- Added CLI `scripts/check_randomized_holdout_publication_receipt_index_receipt_index_receipt_v1020.py`.
+- Rebuilt the real v1019 receipt from its v1018 source review and compared status, decision, failed count, source review digest, consumer receipts, stable summary fields, and stable receipt fields.
+- Confirmed `contract_check_ready=True`, `original_receipt_status=rebuilt_receipt_status=publication_receipt_index_receipt_index_receipt_v1019_lookup_receipted`, `original_granted_use=rebuilt_granted_use=downstream_governance_lookup_only`, `original_lookup_key_count=rebuilt_lookup_key_count=1`, `passed_check_count=46`, and `failed_check_count=0`.
+- Kept `original_promotion_ready=False` and `rebuilt_promotion_ready=False`.
+- Routed the next action to `index_randomized_holdout_publication_receipt_index_receipt_index_receipt_v1020`.
+- Verified with focused v1020 tests, py_compile, source-encoding hygiene (`1942` clean Python sources), full-suite pytest (`2477 passed in 531.30s`), real CLI evidence, and Playwright MCP screenshot evidence.
+- Archived v1020 evidence in `e/1020` and added the code explanation in `代码讲解记录_模型能力阶段/1034-v1020-publication-receipt-index-receipt-index-receipt-check.md`.
 
 ## Latest v1019 checkpoint
 

@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1034-v1020-publication-receipt-index-receipt-index-receipt-check.md
+ -> v1020 code explanation: contract-check the v1019 lookup-only receipt by rebuilding it from the v1018 review.
+
 1033-v1019-publication-receipt-index-receipt-index-receipt.md
  -> v1019 code explanation: record the v1018-reviewed short-name receipt index as a downstream lookup-only receipt.
 
