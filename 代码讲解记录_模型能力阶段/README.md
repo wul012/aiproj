@@ -11,6 +11,11 @@
 
 ## 当前索引
 
+1057-v1043-publication-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt.md
+ -> v1043 code explanation: record the v1042-reviewed receipt index as a downstream lookup-only receipt and localize stable source contract constants.
+
+1056-v1042-publication-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-review.md
+ -> v1042 code explanation: review the v1041 digest-backed receipt index before the next lookup-only receipt recording.
 1055-v1041-publication-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index.md
  -> v1041 code explanation: index the v1039 lookup-only receipt and v1040 contract check into digest-backed lookup evidence.
 

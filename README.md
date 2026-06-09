@@ -4,8 +4,18 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1042.0.0` reviews the v1041 digest-backed receipt index for lookup-only downstream receipt readiness.
+Version `v1043.0.0` records the v1042-reviewed receipt index as a downstream lookup-only receipt.
 
+## Latest v1043 checkpoint
+
+- Added receipt module `randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1043`.
+- Added CLI `scripts/record_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1043.py`.
+- Consumed the real v1042 receipt index review and recorded a downstream lookup-only consumer receipt.
+- Confirmed `receipt_ready=True`, `granted_use=downstream_governance_lookup_only`, `receipt_index_row_count=1`, `lookup_key_count=1`, `source_evidence_count=2`, `promotion_ready=False`, `passed_check_count=25`, and `failed_check_count=0`.
+- Reduced import-chain risk by localizing stable source contract constants in v1043 instead of importing the full v1042/v1041 history chain.
+- Routed the next action to `check_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1043`.
+- Verified with focused v1043 tests (`6 passed in 9.74s`), py_compile, real CLI evidence, and Playwright MCP screenshot evidence. Full-suite and source-hygiene verification are part of the v1043 closeout gate.
+- Archived v1043 evidence in `e/1043` and added the code explanation in `代码讲解记录_模型能力阶段/1057-v1043-publication-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt.md`.
 ## Latest v1042 checkpoint
 
 - Added review module `randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1042`.
