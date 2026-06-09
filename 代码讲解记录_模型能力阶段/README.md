@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1045-v1031-publication-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt.md
+ -> v1031 code explanation: record the v1030-reviewed receipt index as a downstream lookup-only receipt.
+
 1044-v1030-publication-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-review.md
  -> v1030 code explanation: review the v1029 digest-backed receipt index before the next lookup-only receipt recording.
 

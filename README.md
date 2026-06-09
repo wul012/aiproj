@@ -4,7 +4,18 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1030.0.0` reviews the v1029 digest-backed receipt index before the next downstream lookup-only receipt recording.
+Version `v1031.0.0` records the v1030-reviewed receipt index as the next downstream lookup-only receipt.
+
+## Latest v1031 checkpoint
+
+- Added short-name module `randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1031`.
+- Added CLI `scripts/record_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1031.py`.
+- Consumed the real v1030 receipt-index review and verified review readiness, lookup-only requested/granted use, source evidence digest/status, source path stability, bounded model-quality claim, no-promotion fields, and next-step routing.
+- Confirmed `receipt_ready=True`, `receipt_status=publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1031_lookup_receipted`, `consumer_name=publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1031_lookup_reader`, `receipt_index_row_count=1`, `lookup_key_count=1`, `source_evidence_count=2`, `passed_check_count=25`, and `failed_check_count=0`.
+- Preserved `granted_use=downstream_governance_lookup_only`, `promotion_ready=False`, and `approved_for_promotion=False`.
+- Routed the next action to `check_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1031`.
+- Verified with focused v1031 tests (`6 passed in 7.48s`), py_compile, source-encoding hygiene (`1986` clean Python sources), full-suite pytest (`2534 passed in 408.50s`), real CLI evidence, and Playwright MCP screenshot evidence.
+- Archived v1031 evidence in `e/1031` and added the code explanation in `代码讲解记录_模型能力阶段/1045-v1031-publication-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt.md`.
 
 ## Latest v1030 checkpoint
 
