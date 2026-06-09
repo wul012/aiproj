@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1048-v1034-publication-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-review.md
+ -> v1034 code explanation: review the v1033 digest-backed receipt index before the next lookup-only receipt recording.
+
 1047-v1033-publication-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index.md
  -> v1033 code explanation: index the v1031 lookup-only receipt and v1032 contract check into digest-backed lookup evidence.
 
