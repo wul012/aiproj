@@ -4,7 +4,18 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1021.0.0` indexes the v1019 lookup-only receipt and v1020 contract check into a digest-backed receipt index.
+Version `v1022.0.0` reviews the v1021 digest-backed receipt index before the next lookup-only receipt can be recorded.
+
+## Latest v1022 checkpoint
+
+- Added short-name module `randomized_holdout_publication_receipt_index_receipt_index_receipt_index_review_v1022`.
+- Added CLI `scripts/review_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_v1022.py`.
+- Consumed the real v1021 receipt index and verified index pass status, ready decision, lookup-only scope, lookup key namespace, source evidence digests/status, source file existence, bounded model-quality claim, no-promotion flags, clean source checks, and next-step routing.
+- Confirmed `review_ready=True`, `review_status=approved_for_publication_receipt_index_receipt_index_receipt_index_lookup_only`, `receipt_index_row_count=1`, `lookup_key_count=1`, `source_evidence_count=2`, `lookup_ready=True`, `contract_check_ready=True`, `passed_check_count=22`, and `failed_check_count=0`.
+- Preserved `promotion_ready=False` and `approved_for_promotion=False`; this remains lookup-only governance evidence, not a model promotion.
+- Routed the next action to `record_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_v1022`.
+- Verified with focused v1022 tests, py_compile, source-encoding hygiene (`1950` clean Python sources), full-suite pytest (`2486 passed in 511.28s`), real CLI evidence, and Playwright MCP screenshot evidence.
+- Archived v1022 evidence in `e/1022` and added the code explanation in `代码讲解记录_模型能力阶段/1036-v1022-publication-receipt-index-receipt-index-receipt-index-review.md`.
 
 ## Latest v1021 checkpoint
 

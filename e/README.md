@@ -20,6 +20,10 @@ e/<version>/解释/说明.md
 最新条目：
 
 ```text
+e/1022/图片
+e/1022/解释/说明.md
+ -> v1022 randomized holdout publication receipt index receipt index receipt index review 的运行截图和解释
+
 e/1021/图片
 e/1021/解释/说明.md
  -> v1021 randomized holdout publication receipt index receipt index receipt index 的运行截图和解释
