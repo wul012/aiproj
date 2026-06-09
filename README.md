@@ -4,7 +4,18 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1035.0.0` records the v1034-reviewed digest-backed receipt index as a downstream lookup-only receipt.
+Version `v1036.0.0` contract-checks the v1035 downstream lookup-only receipt by rebuilding it from the v1034 review.
+
+## Latest v1036 checkpoint
+
+- Added short-name module `randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_check_v1036`.
+- Added CLI `scripts/check_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1036.py`.
+- Consumed the real v1035 receipt, resolved its `receipt_index_review_path`, rebuilt the receipt from the real v1034 review, and compared original/rebuilt status, decision, failed count, source review digest, consumer receipts, summary fields, and receipt fields.
+- Confirmed `contract_check_ready=True`, `original_receipt_status=rebuilt_receipt_status=publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1035_lookup_receipted`, `original_granted_use=rebuilt_granted_use=downstream_governance_lookup_only`, `original_lookup_key_count=rebuilt_lookup_key_count=1`, `passed_check_count=46`, and `failed_check_count=0`.
+- Preserved `original_promotion_ready=False` and `rebuilt_promotion_ready=False`.
+- Routed the next action to `index_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1036`.
+- Verified with focused v1036 tests (`6 passed in 11.73s`), py_compile, source-encoding hygiene (`2006` clean Python sources), full-suite pytest (`2561 passed in 530.81s`), real CLI evidence, and Playwright MCP screenshot evidence.
+- Archived v1036 evidence in `e/1036` and added the code explanation in `代码讲解记录_模型能力阶段/1050-v1036-publication-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-check.md`.
 
 ## Latest v1035 checkpoint
 

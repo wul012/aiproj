@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1050-v1036-publication-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-check.md
+ -> v1036 code explanation: contract-check the v1035 downstream lookup-only receipt by rebuilding it from the v1034 review.
+
 1049-v1035-publication-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt.md
  -> v1035 code explanation: record the v1034-reviewed digest-backed receipt index as a downstream lookup-only receipt.
 
