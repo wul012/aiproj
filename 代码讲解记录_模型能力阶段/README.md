@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1067-v1053-publication-receipt-index.md
+ -> v1053 code explanation: index the v1051 lookup-only receipt and v1052 contract check as digest-backed lookup evidence.
+
 1066-v1052-publication-receipt-contract-check.md
  -> v1052 code explanation: rebuild the v1051 lookup-only receipt from the v1050 review and verify the contract remains stable.
 
