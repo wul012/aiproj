@@ -4,7 +4,18 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1045.0.0` indexes the v1043 downstream lookup-only receipt and v1044 receipt contract check into digest-backed lookup evidence.
+Version `v1046.0.0` reviews the v1045 digest-backed receipt index and approves it only for the next lookup-only receipt recording step.
+
+## Latest v1046 checkpoint
+
+- Added receipt index review module `randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1046`.
+- Added CLI `scripts/review_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1046.py`.
+- Consumed the real v1045 receipt index and verified index readiness, downstream lookup-only scope/use, source evidence digests, source path stability, bounded model-quality claim, no-promotion fields, and next-step routing.
+- Confirmed `review_ready=True`, `receipt_index_row_count=1`, `lookup_key_count=1`, `source_evidence_count=2`, `lookup_ready=True`, `contract_check_ready=True`, `promotion_ready=False`, `passed_check_count=22`, and `failed_check_count=0`.
+- Fixed a generation-time long-name case issue before committing: PowerShell variable names are case-insensitive, so the v1046 files were regenerated with lowercase filenames and verified by focused tests.
+- Routed the next action to `record_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1046`.
+- Verified with focused v1046 tests (`5 passed in 0.56s`), py_compile, real CLI evidence, and Playwright MCP screenshot evidence. Full-suite and source-hygiene verification are part of the v1046 closeout gate.
+- Archived v1046 evidence in `e/1046` and added the code explanation in `代码讲解记录_模型能力阶段/1060-v1046-publication-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-review.md`.
 
 ## Latest v1045 checkpoint
 
