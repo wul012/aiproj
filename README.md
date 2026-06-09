@@ -4,7 +4,18 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1028.0.0` contract-checks the v1027 downstream lookup-only receipt by rebuilding it from the v1026 review.
+Version `v1029.0.0` indexes the v1027 downstream lookup-only receipt and v1028 contract check into digest-backed lookup evidence.
+
+## Latest v1029 checkpoint
+
+- Added short-name module `randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1029`.
+- Added CLI `scripts/build_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1029.py`.
+- Consumed the real v1027 receipt and v1028 contract check, verified both files exist, and recorded SHA-256 source evidence rows for both.
+- Confirmed `index_ready=True`, `lookup_ready=True`, `contract_check_ready=True`, `receipt_index_id=randomized-holdout-publication-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-v1029`, `lookup_key_count=1`, `source_evidence_count=2`, `passed_check_count=25`, and `failed_check_count=0`.
+- Preserved `granted_use=downstream_governance_lookup_only`, `promotion_ready=False`, and `approved_for_promotion=False`.
+- Routed the next action to `review_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1029`.
+- Verified with focused v1029 tests (`4 passed in 6.43s`), py_compile, source-encoding hygiene (`1978` clean Python sources), full-suite pytest (`2523 passed in 449.99s`), real CLI evidence, and Playwright MCP screenshot evidence.
+- Archived v1029 evidence in `e/1029` and added the code explanation in `代码讲解记录_模型能力阶段/1043-v1029-publication-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index.md`.
 
 ## Latest v1028 checkpoint
 
