@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1065-v1051-publication-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt.md
+ -> v1051 code explanation: record the v1050-reviewed receipt index as a downstream lookup-only receipt.
+
 1064-v1050-publication-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-review.md
  -> v1050 code explanation: review the v1049 digest-backed receipt index before the next lookup-only receipt recording.
 
