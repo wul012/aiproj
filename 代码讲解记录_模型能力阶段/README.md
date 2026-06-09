@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1039-v1025-publication-receipt-index-receipt-index-receipt-index-receipt-index.md
+ -> v1025 code explanation: index the v1023 lookup-only receipt and v1024 receipt contract check into digest-backed lookup evidence.
+
 1038-v1024-publication-receipt-index-receipt-index-receipt-index-receipt-check.md
  -> v1024 code explanation: contract-check the v1023 lookup-only receipt by rebuilding it from the v1022 review.
 
