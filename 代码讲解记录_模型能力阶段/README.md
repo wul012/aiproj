@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1059-v1045-publication-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index.md
+ -> v1045 code explanation: index the v1043 downstream lookup-only receipt and v1044 receipt contract check into digest-backed lookup evidence.
+
 1058-v1044-publication-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-check.md
  -> v1044 code explanation: contract-check the v1043 downstream lookup-only receipt by rebuilding it from the v1042 review.
 

@@ -4,7 +4,18 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1044.0.0` contract-checks the v1043 downstream lookup-only receipt by rebuilding it from the v1042 review.
+Version `v1045.0.0` indexes the v1043 downstream lookup-only receipt and v1044 receipt contract check into digest-backed lookup evidence.
+
+## Latest v1045 checkpoint
+
+- Added receipt index module `randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1045`.
+- Added CLI `scripts/build_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1045.py`.
+- Consumed the real v1043 receipt and v1044 contract check, verified both source files still exist, and wrote digest-backed source evidence for both.
+- Confirmed `index_ready=True`, `lookup_scope=downstream_governance_lookup_only`, `lookup_key_count=1`, `source_evidence_count=2`, `lookup_ready=True`, `contract_check_ready=True`, `promotion_ready=False`, `passed_check_count=25`, and `failed_check_count=0`.
+- Kept the test fixture on the short v1044 helper path so v1045 tests do not import the older v1043/v1042 historical chain.
+- Routed the next action to `review_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1045`.
+- Verified with focused v1045 tests (`4 passed in 0.38s`), py_compile, real CLI evidence, and Playwright MCP screenshot evidence. Full-suite and source-hygiene verification are part of the v1045 closeout gate.
+- Archived v1045 evidence in `e/1045` and added the code explanation in `代码讲解记录_模型能力阶段/1059-v1045-publication-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index.md`.
 
 ## Latest v1044 checkpoint
 

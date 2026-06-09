@@ -11,6 +11,9 @@
 目录结构继续沿用旧格式：
 
 ```text
+e/1045/图片
+e/1045/解释/说明.md
+ -> v1045 randomized holdout publication receipt index receipt index receipt index receipt index receipt index receipt index receipt index receipt index receipt index screenshots and explanation.
 e/1044/图片
 e/1044/解释/说明.md
  -> v1044 randomized holdout publication receipt index receipt index receipt index receipt index receipt index receipt index receipt index receipt index receipt contract check screenshots and explanation.
@@ -29,6 +32,10 @@ e/<version>/解释/说明.md
 最新条目：
 
 ```text
+e/1045/图片
+e/1045/解释/说明.md
+ -> v1045 randomized holdout publication receipt index receipt index receipt index receipt index receipt index receipt index receipt index receipt index receipt index 的运行截图和解释
+
 e/1044/图片
 e/1044/解释/说明.md
  -> v1044 randomized holdout publication receipt index receipt index receipt index receipt index receipt index receipt index receipt index receipt index receipt contract check 的运行截图和解释
