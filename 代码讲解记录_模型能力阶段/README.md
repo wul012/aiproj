@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1042-v1028-publication-receipt-index-receipt-index-receipt-index-receipt-index-receipt-check.md
+ -> v1028 code explanation: contract-check the v1027 downstream lookup-only receipt by rebuilding it from the v1026 review.
+
 1041-v1027-publication-receipt-index-receipt-index-receipt-index-receipt-index-receipt.md
  -> v1027 code explanation: record the v1026-reviewed receipt index as a downstream lookup-only receipt.
 
