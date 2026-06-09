@@ -4,7 +4,18 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1043.0.0` records the v1042-reviewed receipt index as a downstream lookup-only receipt.
+Version `v1044.0.0` contract-checks the v1043 downstream lookup-only receipt by rebuilding it from the v1042 review.
+
+## Latest v1044 checkpoint
+
+- Added receipt contract-check module `randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_check_v1044`.
+- Added CLI `scripts/check_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1044.py`.
+- Rebuilt the real v1043 receipt from its v1042 source review and compared top-level status/decision, source review digest, consumer receipts, summary fields, and receipt fields.
+- Confirmed `contract_check_ready=True`, original/rebuilt `receipt_status=publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1043_lookup_receipted`, original/rebuilt `granted_use=downstream_governance_lookup_only`, original/rebuilt `lookup_key_count=1`, original/rebuilt `promotion_ready=False`, `passed_check_count=46`, and `failed_check_count=0`.
+- Avoided historical import-chain recursion by reading the v1042 review JSON locally and by making the v1044 test fixture self-contained instead of importing older test helpers.
+- Routed the next action to `index_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1044`.
+- Verified with focused v1044 tests (`6 passed in 0.43s`), py_compile, real CLI evidence, and Playwright MCP screenshot evidence. Full-suite and source-hygiene verification are part of the v1044 closeout gate.
+- Archived v1044 evidence in `e/1044` and added the code explanation in `代码讲解记录_模型能力阶段/1058-v1044-publication-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-check.md`.
 
 ## Latest v1043 checkpoint
 

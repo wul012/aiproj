@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1058-v1044-publication-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-check.md
+ -> v1044 code explanation: contract-check the v1043 downstream lookup-only receipt by rebuilding it from the v1042 review.
+
 1057-v1043-publication-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt.md
  -> v1043 code explanation: record the v1042-reviewed receipt index as a downstream lookup-only receipt and localize stable source contract constants.
 
