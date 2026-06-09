@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1066-v1052-publication-receipt-contract-check.md
+ -> v1052 code explanation: rebuild the v1051 lookup-only receipt from the v1050 review and verify the contract remains stable.
+
 1065-v1051-publication-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt.md
  -> v1051 code explanation: record the v1050-reviewed receipt index as a downstream lookup-only receipt.
 

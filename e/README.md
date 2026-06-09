@@ -11,6 +11,9 @@
 目录结构继续沿用旧格式：
 
 ```text
+e/1052/图片
+e/1052/解释/说明.md
+ -> v1052 randomized holdout publication receipt contract check screenshots and explanation.
 e/1051/图片
 e/1051/解释/说明.md
  -> v1051 randomized holdout publication receipt index receipt index receipt index receipt index receipt index receipt index receipt index receipt index receipt index receipt screenshots and explanation.
@@ -50,6 +53,10 @@ e/<version>/解释/说明.md
 最新条目：
 
 ```text
+e/1052/图片
+e/1052/解释/说明.md
+ -> v1052 randomized holdout publication receipt contract check 的运行截图和解释
+
 e/1051/图片
 e/1051/解释/说明.md
  -> v1051 randomized holdout publication receipt index receipt index receipt index receipt index receipt index receipt index receipt index receipt index receipt index receipt 的运行截图和解释
