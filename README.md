@@ -4,8 +4,17 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1041.0.0` indexes the v1039 downstream lookup-only receipt and v1040 contract check into digest-backed lookup evidence.
+Version `v1042.0.0` reviews the v1041 digest-backed receipt index for lookup-only downstream receipt readiness.
 
+## Latest v1042 checkpoint
+
+- Added review module `randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1042`.
+- Added CLI `scripts/review_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1042.py`.
+- Consumed the real v1041 receipt index and verified index readiness, lookup-only scope/use, source evidence digests, source path stability, bounded model-quality claim, no-promotion fields, and next-step routing.
+- Confirmed `review_ready=True`, `review_status=approved_for_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_lookup_only`, `receipt_index_row_count=1`, `lookup_key_count=1`, `source_evidence_count=2`, `lookup_ready=True`, `contract_check_ready=True`, `passed_check_count=22`, and `failed_check_count=0`.
+- Preserved `promotion_ready=False` and routed the next action to `record_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1042`.
+- Verified with focused v1042 tests (`5 passed in 10.32s`), py_compile, real CLI evidence, and Playwright MCP screenshot evidence. Full-suite and source-hygiene verification are part of the v1042 closeout gate.
+- Archived v1042 evidence in `e/1042` and added the code explanation in `代码讲解记录_模型能力阶段/1056-v1042-publication-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-review.md`.
 ## Latest v1041 checkpoint
 
 - Added short-name module `randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1041`.

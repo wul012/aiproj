@@ -1,4 +1,4 @@
-﻿# MiniGPT 代码讲解记录_模型能力阶段
+# MiniGPT 代码讲解记录_模型能力阶段
 
 本目录从 v473 开始承接 MiniGPT 的模型能力、真实 tiny 训练对比、baseline/candidate 能力评估和后续能力提升讲解。前一阶段 `代码讲解记录_训练治理阶段/` 保留 v303-v472 的训练治理、promoted seed、receipt contract 和 CI 回归治理讲解。
 
