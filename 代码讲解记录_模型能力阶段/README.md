@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1064-v1050-publication-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-review.md
+ -> v1050 code explanation: review the v1049 digest-backed receipt index before the next lookup-only receipt recording.
+
 1063-v1049-publication-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index.md
  -> v1049 code explanation: index the v1047 lookup-only receipt and v1048 contract check into digest-backed lookup evidence.
 
