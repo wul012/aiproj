@@ -4,7 +4,17 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1047.0.0` records a downstream lookup-only receipt from the v1046 receipt index review.
+Version `v1048.0.0` contract-checks the v1047 downstream lookup-only receipt by rebuilding it from the v1046 review.
+
+## Latest v1048 checkpoint
+
+- Added receipt contract-check module `randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_check_v1048`.
+- Added CLI `scripts/check_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1048.py`.
+- Rebuilt the real v1047 receipt from its v1046 source review and compared status, decision, source review digest, consumer receipts, summary fields, and receipt fields.
+- Confirmed `contract_check_ready=True`, original/rebuilt `granted_use=downstream_governance_lookup_only`, original/rebuilt `lookup_key_count=1`, original/rebuilt `promotion_ready=False`, `passed_check_count=46`, and `failed_check_count=0`.
+- Routed the next action to `index_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1048`.
+- Verified with focused v1048 tests (`6 passed in 0.27s`), py_compile, real CLI evidence, and Playwright MCP screenshot evidence. Full-suite and source-hygiene verification are part of the v1048 closeout gate.
+- Archived v1048 evidence in `e/1048` and added the code explanation in `代码讲解记录_模型能力阶段/1062-v1048-publication-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-check.md`.
 
 ## Latest v1047 checkpoint
 
