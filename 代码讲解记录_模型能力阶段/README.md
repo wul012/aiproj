@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1079-v1065-publication-receipt-index.md
+ -> v1065 code explanation: index the v1063 receipt and v1064 contract check as digest-backed lookup evidence.
+
 1078-v1064-publication-receipt-check.md
  -> v1064 code explanation: contract-check the v1063 receipt against the v1062 review.
 
