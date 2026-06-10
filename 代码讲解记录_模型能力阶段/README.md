@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1088-v1074-publication-receipt-index-review.md
+ -> v1074 code explanation: review the v1073 receipt index before lookup-only receipt recording.
+
 1087-v1073-publication-receipt-index.md
  -> v1073 code explanation: index the v1071 receipt and v1072 contract check as digest-backed lookup evidence.
 
