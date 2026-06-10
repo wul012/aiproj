@@ -4,7 +4,17 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1067.0.0` records the v1066 receipt index review as downstream governance lookup-only receipt evidence.
+Version `v1068.0.0` contract-checks the v1067 receipt against the v1066 review before indexing it.
+
+## Latest v1068 checkpoint
+
+- Added receipt contract-check module `randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_check_v1068`.
+- Added CLI `scripts/check_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1068.py`.
+- Rebuilt the real v1067 receipt from its source v1066 review and compared status, decision, failed count, source digest, consumer receipts, summary fields, receipt fields, source paths, lookup-only use, no-promotion fields, and next-step routing.
+- Confirmed `status=pass`, `contract_check_ready=True`, `original_granted_use=downstream_governance_lookup_only`, `rebuilt_granted_use=downstream_governance_lookup_only`, `original_lookup_key_count=1`, `rebuilt_lookup_key_count=1`, `original_promotion_ready=False`, `rebuilt_promotion_ready=False`, `passed_check_count=46`, and `failed_check_count=0`.
+- Routed the next action to `index_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1068`.
+- Verified with focused v1068 tests (`6 passed in 0.28s`), full pytest (`2729 passed in 684.80s`), source hygiene (`2134/2134 clean`), py_compile, real CLI evidence, and Playwright MCP screenshot evidence.
+- Archived v1068 evidence in `e/1068` and added the code explanation in `代码讲解记录_模型能力阶段/1082-v1068-publication-receipt-check.md`.
 
 ## Latest v1067 checkpoint
 

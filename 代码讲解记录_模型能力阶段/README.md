@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1082-v1068-publication-receipt-check.md
+ -> v1068 code explanation: contract-check the v1067 receipt against the v1066 review.
+
 1081-v1067-publication-receipt.md
  -> v1067 code explanation: record the v1066 receipt index review as downstream lookup-only receipt evidence.
 
