@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1078-v1064-publication-receipt-check.md
+ -> v1064 code explanation: contract-check the v1063 receipt against the v1062 review.
+
 1077-v1063-publication-receipt.md
  -> v1063 code explanation: record the v1062-reviewed receipt index as a downstream lookup-only receipt.
 
