@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1090-v1076-publication-receipt-contract-check.md
+ -> v1076 code explanation: contract-check the v1075 receipt against the v1074 receipt-index review.
+
 1089-v1075-publication-receipt.md
  -> v1075 code explanation: record the v1074 receipt-index review as downstream lookup-only receipt evidence before contract check.
 
