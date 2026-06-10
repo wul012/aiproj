@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1086-v1072-publication-receipt-check.md
+ -> v1072 code explanation: contract-check the v1071 receipt against the v1070 review.
+
 1085-v1071-publication-receipt.md
  -> v1071 code explanation: record the v1070 receipt-index review as downstream lookup receipt evidence before contract check.
 
