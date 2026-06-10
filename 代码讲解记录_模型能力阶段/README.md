@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1085-v1071-publication-receipt.md
+ -> v1071 code explanation: record the v1070 receipt-index review as downstream lookup receipt evidence before contract check.
+
 1084-v1070-publication-receipt-index-review.md
  -> v1070 code explanation: review the v1069 receipt index as lookup-only handoff evidence before receipt recording.
 
