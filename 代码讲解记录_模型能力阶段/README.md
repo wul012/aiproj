@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1083-v1069-publication-receipt-index.md
+ -> v1069 code explanation: index the v1067 receipt and v1068 contract check as digest-backed lookup evidence.
+
 1082-v1068-publication-receipt-check.md
  -> v1068 code explanation: contract-check the v1067 receipt against the v1066 review.
 
