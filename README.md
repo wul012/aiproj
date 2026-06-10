@@ -4,7 +4,18 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1077.0.0` indexes the v1075 lookup-only receipt and the v1076 contract check as digest-backed downstream governance evidence.
+Version `v1078.0.0` reviews the v1077 receipt index before the next lookup-only receipt recording step.
+
+## Latest v1078 checkpoint
+
+- Added receipt index review module `randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1078`.
+- Added CLI `scripts/review_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1078.py`.
+- Consumed the real v1077 receipt index, verified all source paths still exist, and preserved the digest-backed evidence chain back to v1075 receipt and v1076 contract check.
+- Confirmed `status=pass`, `review_ready=True`, `review_status=approved_for_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_lookup_only`, `lookup_key_count=1`, `source_evidence_count=2`, `lookup_ready=True`, `contract_check_ready=True`, `promotion_ready=False`, `passed_check_count=22`, and `failed_check_count=0`.
+- Routed the next action to `record_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1078`.
+- Added `tests/__init__.py` to make local cross-test helper imports deterministic in the presence of an external `tests` package shadow.
+- Verified with focused v1078 tests (`5 passed in 0.50s`), full pytest (`2780 passed in 922.89s`), source hygiene (`2175/2175 clean`), py_compile, real CLI evidence, and Playwright MCP screenshot evidence.
+- Archived v1078 evidence in `e/1078` and added the code explanation in `代码讲解记录_模型能力阶段/1092-v1078-publication-receipt-index-review.md`.
 
 ## Latest v1077 checkpoint
 
