@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1091-v1077-publication-receipt-index.md
+ -> v1077 code explanation: index the v1075 lookup-only receipt and v1076 contract check as digest-backed downstream governance evidence.
+
 1090-v1076-publication-receipt-contract-check.md
  -> v1076 code explanation: contract-check the v1075 receipt against the v1074 receipt-index review.
 

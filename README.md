@@ -4,7 +4,18 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1076.0.0` contract-checks the v1075 receipt by rebuilding it from the v1074 receipt-index review.
+Version `v1077.0.0` indexes the v1075 lookup-only receipt and the v1076 contract check as digest-backed downstream governance evidence.
+
+## Latest v1077 checkpoint
+
+- Added receipt index module `randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1077`.
+- Added CLI `scripts/build_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1077.py`.
+- Consumed the real v1075 receipt and v1076 contract check, verified both source files still exist, and wrote SHA-256 backed evidence rows for both artifacts.
+- Confirmed `status=pass`, `index_ready=True`, `lookup_scope=downstream_governance_lookup_only`, `lookup_key_count=1`, `receipt_status=publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1075_lookup_receipted`, `contract_check_ready=True`, `promotion_ready=False`, `passed_check_count=25`, and `failed_check_count=0`.
+- Routed the next action to `review_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1077`.
+- Hardened the test package boundary by adding `tests/__init__.py`, fixing full-suite collection in environments where an external `tests` package shadows local helper imports.
+- Verified with focused v1077 tests (`4 passed in 0.41s`), full pytest (`2775 passed in 520.69s`), source hygiene (`2171/2171 clean`), py_compile, real CLI evidence, and Playwright MCP screenshot evidence.
+- Archived v1077 evidence in `e/1077` and added the code explanation in `代码讲解记录_模型能力阶段/1091-v1077-publication-receipt-index.md`.
 
 ## Latest v1076 checkpoint
 
