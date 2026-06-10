@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1084-v1070-publication-receipt-index-review.md
+ -> v1070 code explanation: review the v1069 receipt index as lookup-only handoff evidence before receipt recording.
+
 1083-v1069-publication-receipt-index.md
  -> v1069 code explanation: index the v1067 receipt and v1068 contract check as digest-backed lookup evidence.
 

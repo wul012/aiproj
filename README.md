@@ -4,7 +4,17 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1069.0.0` indexes the v1067 receipt and v1068 contract check as digest-backed lookup evidence.
+Version `v1070.0.0` reviews the v1069 receipt index as lookup-only handoff evidence before the next receipt recording step.
+
+## Latest v1070 checkpoint
+
+- Added receipt index review module `randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1070`.
+- Added CLI `scripts/review_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1070.py`.
+- Consumed the real v1069 receipt index, checked source evidence digests, source paths, lookup-only use, contract-check readiness, next-step routing, and no-promotion boundaries.
+- Confirmed `status=pass`, `review_ready=True`, `lookup_key_count=1`, `source_evidence_count=2`, `lookup_ready=True`, `contract_check_ready=True`, `promotion_ready=False`, `passed_check_count=22`, and `failed_check_count=0`.
+- Routed the next action to `record_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1070`.
+- Verified with focused v1070 tests (`5 passed in 0.48s`), full pytest (`2738 passed in 502.11s`), source hygiene (`2142/2142 clean`), py_compile, real CLI evidence, and Playwright MCP screenshot evidence.
+- Archived v1070 evidence in `e/1070` and added the code explanation in `代码讲解记录_模型能力阶段/1084-v1070-publication-receipt-index-review.md`.
 
 ## Latest v1069 checkpoint
 
