@@ -4,7 +4,17 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1074.0.0` reviews the v1073 receipt index as lookup-only handoff evidence before the next receipt recording step.
+Version `v1075.0.0` records the v1074 receipt-index review as a downstream lookup-only receipt before the next contract-check step.
+
+## Latest v1075 checkpoint
+
+- Added receipt module `randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1075`.
+- Added CLI `scripts/record_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1075.py`.
+- Consumed the real v1074 receipt-index review, checked review readiness, lookup-only use, source evidence status, source paths, source next-step routing, and no-promotion boundaries.
+- Confirmed `status=pass`, `receipt_ready=True`, `receipt_index_row_count=1`, `lookup_key_count=1`, `source_evidence_count=2`, `promotion_ready=False`, `passed_check_count=25`, and `failed_check_count=0`.
+- Routed the next action to `check_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1075`.
+- Verified with focused v1075 tests (`6 passed in 1.06s`), v1075 + encoding focused tests (`12 passed in 1.38s`), full pytest (`2765 passed in 754.12s`), source hygiene (`2162/2162 clean`), py_compile, real CLI evidence, and Playwright MCP screenshot evidence.
+- Archived v1075 evidence in `e/1075` and added the code explanation in `代码讲解记录_模型能力阶段/1089-v1075-publication-receipt.md`.
 
 ## Latest v1074 checkpoint
 

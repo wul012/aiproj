@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1089-v1075-publication-receipt.md
+ -> v1075 code explanation: record the v1074 receipt-index review as downstream lookup-only receipt evidence before contract check.
+
 1088-v1074-publication-receipt-index-review.md
  -> v1074 code explanation: review the v1073 receipt index before lookup-only receipt recording.
 
