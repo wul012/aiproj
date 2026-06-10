@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1076-v1062-publication-receipt-index-review.md
+ -> v1062 code explanation: review the v1061 digest-backed receipt index before lookup-only receipt recording.
+
 1075-v1061-publication-receipt-index.md
  -> v1061 code explanation: index the v1059 lookup-only receipt and v1060 contract check as digest-backed lookup evidence.
 
