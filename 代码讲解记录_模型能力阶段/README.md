@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1069-v1055-publication-receipt.md
+ -> v1055 code explanation: record the v1054-reviewed receipt index as a downstream lookup-only receipt.
+
 1068-v1054-publication-receipt-index-review.md
  -> v1054 code explanation: review the v1053 digest-backed receipt index before lookup-only receipt recording.
 
