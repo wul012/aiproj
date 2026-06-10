@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1093-v1079-publication-receipt.md
+ -> v1079 code explanation: record the v1078-reviewed receipt as the next downstream lookup-only receipt.
+
 1092-v1078-publication-receipt-index-review.md
  -> v1078 code explanation: review the v1077 receipt index before the next lookup-only receipt recording step.
 
