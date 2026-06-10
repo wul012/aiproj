@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1081-v1067-publication-receipt.md
+ -> v1067 code explanation: record the v1066 receipt index review as downstream lookup-only receipt evidence.
+
 1080-v1066-publication-receipt-index-review.md
  -> v1066 code explanation: review the v1065 receipt index as lookup-only handoff evidence before receipt recording.
 

@@ -4,7 +4,17 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1066.0.0` reviews the v1065 receipt index as lookup-only handoff evidence before the next receipt recording step.
+Version `v1067.0.0` records the v1066 receipt index review as downstream governance lookup-only receipt evidence.
+
+## Latest v1067 checkpoint
+
+- Added receipt module `randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1067`.
+- Added CLI `scripts/record_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1067.py`.
+- Consumed the real v1066 receipt index review, recorded a lookup-only consumer receipt, and preserved the source review/index/receipt/check path chain.
+- Confirmed `status=pass`, `receipt_ready=True`, `granted_use=downstream_governance_lookup_only`, `lookup_key_count=1`, `source_evidence_count=2`, `promotion_ready=False`, `passed_check_count=25`, and `failed_check_count=0`.
+- Routed the next action to `check_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1067`.
+- Verified with focused v1067 tests (`6 passed in 0.53s`), full pytest (`2723 passed in 656.04s`), source hygiene (`2130/2130 clean`), py_compile, real CLI evidence, and Playwright MCP screenshot evidence.
+- Archived v1067 evidence in `e/1067` and added the code explanation in `代码讲解记录_模型能力阶段/1081-v1067-publication-receipt.md`.
 
 ## Latest v1066 checkpoint
 
