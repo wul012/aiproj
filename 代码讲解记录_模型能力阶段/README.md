@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1094-v1080-publication-receipt-check.md
+ -> v1080 code explanation: rebuild the v1079 receipt as a contract check and keep the lookup-only boundary intact.
+
 1093-v1079-publication-receipt.md
  -> v1079 code explanation: record the v1078-reviewed receipt as the next downstream lookup-only receipt.
 
