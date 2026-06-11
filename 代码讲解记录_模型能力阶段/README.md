@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1099-v1085-publication-receipt-index.md
+ -> v1085 code explanation: index the v1083 receipt and v1084 contract check as digest-backed lookup evidence.
+
 1098-v1084-publication-receipt-check.md
  -> v1084 code explanation: rebuild the v1083 lookup-only receipt from the v1082 review and verify contract consistency.
 
