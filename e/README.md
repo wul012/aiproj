@@ -11,6 +11,9 @@
 目录结构继续沿用旧格式：
 
 ```text
+e/1086/图片
+e/1086/解释/说明.md
+ -> v1086 randomized holdout publication receipt index review screenshots and explanation.
 e/1085/图片
 e/1085/解释/说明.md
  -> v1085 randomized holdout publication receipt index screenshots and explanation.
