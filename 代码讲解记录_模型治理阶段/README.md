@@ -14,6 +14,9 @@
 
 ## 当前索引
 
+1119-v1107-publication-receipt-index.md
+ -> v1107 code explanation: index the v1105 receipt and v1106 contract check for downstream lookup.
+
 1118-v1106-publication-receipt-check.md
  -> v1106 code explanation: rebuild and contract-check the v1105 lookup-only receipt.
 
