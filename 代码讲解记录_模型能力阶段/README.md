@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1110-v1096-publication-receipt-check.md
+ -> v1096 code explanation: contract-check the v1095 receipt against the v1094 review.
+
 1109-v1095-publication-receipt.md
  -> v1095 code explanation: record the v1094-reviewed receipt index as downstream lookup-only receipt evidence.
 
