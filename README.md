@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1098.0.0` starts the documentation cleanup batches by freezing overcrowded explanation/evidence directories and routing future model-governance docs into new sibling directories.
+Version `v1099.0.0` hardens the new documentation split with a reusable explanation template and fixes the v1098 staged whitespace issue.
+
+## Latest v1099 checkpoint
+
+- Added `代码讲解记录_模型治理阶段/TEMPLATE.md` so future explanations have a concrete Node-style structure to copy.
+- Updated `代码讲解记录_模型治理阶段/README.md` to require the template for new detailed explanations.
+- Fixed trailing blank-line issues in the new v1098 documentation directories.
+- Verified with source hygiene (`2251/2251 clean`) and `git diff --check`; no Python behavior changed in this documentation-only batch.
+
+## Latest v1098 checkpoint
 
 ## Latest v1098 checkpoint
 

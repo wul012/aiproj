@@ -50,9 +50,9 @@ For specific training, evaluation, dashboard, or report commands, use the matchi
 
 ## Latest version summary
 
-Current README focus: **v1098 documentation routing cleanup**.
+Current README focus: **v1099 documentation template hardening**.
 
-v1098 freezes overcrowded historical documentation directories and starts new sibling directories for model-governance explanations and runtime evidence. The goal is to keep future versions reviewable instead of continuing to pack hundreds of files into one folder.
+v1098 freezes overcrowded historical documentation directories and starts new sibling directories for model-governance explanations and runtime evidence. v1099 adds a reusable explanation template so future docs follow the same goal, boundary, entrypoint, output model, upstream evidence, checks, and test-evidence pattern.
 
 ## Where to look next
 
