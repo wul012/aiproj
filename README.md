@@ -4,7 +4,17 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1089.0.0` indexes the v1087 lookup-only receipt and the v1088 contract check as digest-backed downstream governance evidence.
+Version `v1090.0.0` reviews the v1089 digest-backed receipt index before the next lookup-only receipt recording step.
+
+## Latest v1090 checkpoint
+
+- Added receipt-index review module `randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1090`.
+- Added CLI `scripts/review_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1090.py`.
+- Consumed the real v1089 index, verified its single lookup row, two digest-backed source evidence rows, source receipt/check paths, lookup-only use, contract-check readiness, and no-promotion boundary.
+- Confirmed `status=pass`, `review_ready=True`, `review_status=approved_for_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_lookup_only`, `receipt_index_row_count=1`, `lookup_key_count=1`, `source_evidence_count=2`, `lookup_ready=True`, `contract_check_ready=True`, `promotion_ready=False`, `passed_check_count=22`, and `failed_check_count=0`.
+- Routed the next action to `record_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1090`.
+- Verified with focused v1090 tests (`5 passed in 0.35s`), full pytest (`2843 passed in 482.23s`), source hygiene (`2223/2223 clean`), py_compile, real CLI evidence, and Playwright MCP screenshot evidence.
+- Archived v1090 evidence in `e/1090` and added the code explanation in `代码讲解记录_模型能力阶段/1104-v1090-publication-receipt-index-review.md`.
 
 ## Latest v1089 checkpoint
 
