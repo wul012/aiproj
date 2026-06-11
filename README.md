@@ -4,7 +4,17 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1090.0.0` reviews the v1089 digest-backed receipt index before the next lookup-only receipt recording step.
+Version `v1091.0.0` records the v1090-reviewed receipt index as downstream lookup-only receipt evidence.
+
+## Latest v1091 checkpoint
+
+- Added receipt module `randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1091`.
+- Added CLI `scripts/record_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1091.py`.
+- Consumed the real v1090 review, verified review readiness, lookup-only use, source evidence status, source paths, source next-step routing, and no-promotion boundaries.
+- Confirmed `status=pass`, `receipt_ready=True`, `receipt_status=publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1091_lookup_receipted`, `consumer_name=publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1091_lookup_reader`, `granted_use=downstream_governance_lookup_only`, `receipt_index_row_count=1`, `source_evidence_count=2`, `lookup_key_count=1`, `promotion_ready=False`, `passed_check_count=25`, and `failed_check_count=0`.
+- Routed the next action to `check_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1091`.
+- Verified with focused v1091 tests (`6 passed in 0.60s`), full pytest (`2849 passed in 493.04s`), source hygiene (`2227/2227 clean`), py_compile, real CLI evidence, and Playwright MCP screenshot evidence.
+- Archived v1091 evidence in `e/1091` and added the code explanation in `代码讲解记录_模型能力阶段/1105-v1091-publication-receipt.md`.
 
 ## Latest v1090 checkpoint
 

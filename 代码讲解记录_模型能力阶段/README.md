@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1105-v1091-publication-receipt.md
+ -> v1091 code explanation: record the v1090-reviewed receipt index as downstream lookup-only receipt evidence.
+
 1104-v1090-publication-receipt-index-review.md
  -> v1090 code explanation: review the v1089 digest-backed receipt index before lookup-only receipt recording.
 
