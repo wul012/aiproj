@@ -4,7 +4,17 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1088.0.0` contract-checks the v1087 lookup-only receipt by rebuilding it from the v1086 review.
+Version `v1089.0.0` indexes the v1087 lookup-only receipt and the v1088 contract check as digest-backed downstream governance evidence.
+
+## Latest v1089 checkpoint
+
+- Added receipt-index module `randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1089`.
+- Added CLI `scripts/build_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1089.py`.
+- Consumed the real v1087 receipt and v1088 contract check, verified both source files still exist, and wrote SHA-256 backed source evidence rows for both artifacts.
+- Confirmed `status=pass`, `index_ready=True`, `receipt_index_id=randomized-holdout-publication-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-v1089`, `lookup_scope=downstream_governance_lookup_only`, `lookup_key_count=1`, `receipt_status=publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1087_lookup_receipted`, `granted_use=downstream_governance_lookup_only`, `source_evidence_count=2`, `lookup_ready=True`, `contract_check_ready=True`, `promotion_ready=False`, `passed_check_count=25`, and `failed_check_count=0`.
+- Routed the next action to `review_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1089`.
+- Verified with focused v1089 tests (`4 passed in 0.50s`), full pytest (`2838 passed in 716.66s`), source hygiene (`2219/2219 clean`), py_compile, real CLI evidence, and Playwright MCP screenshot evidence.
+- Archived v1089 evidence in `e/1089` and added the code explanation in `代码讲解记录_模型能力阶段/1103-v1089-publication-receipt-index.md`.
 
 ## Latest v1088 checkpoint
 

@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1103-v1089-publication-receipt-index.md
+ -> v1089 code explanation: index the v1087 lookup-only receipt and v1088 contract check as digest-backed downstream governance evidence.
+
 1102-v1088-publication-receipt-check.md
  -> v1088 code explanation: contract-check the v1087 receipt against the v1086 review.
 
