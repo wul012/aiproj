@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1108-v1094-publication-receipt-index-review.md
+ -> v1094 code explanation: review the v1093 receipt index before recording the next lookup-only receipt.
+
 1107-v1093-publication-receipt-index.md
  -> v1093 code explanation: index the v1091 lookup-only receipt and v1092 contract check as digest-backed downstream governance evidence.
 
