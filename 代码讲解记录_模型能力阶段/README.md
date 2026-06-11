@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1095-v1081-publication-receipt-index.md
+ -> v1081 code explanation: index the v1079 lookup-only receipt and v1080 contract check as digest-backed evidence.
+
 1094-v1080-publication-receipt-check.md
  -> v1080 code explanation: rebuild the v1079 receipt as a contract check and keep the lookup-only boundary intact.
 
