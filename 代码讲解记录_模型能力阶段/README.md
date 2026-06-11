@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1109-v1095-publication-receipt.md
+ -> v1095 code explanation: record the v1094-reviewed receipt index as downstream lookup-only receipt evidence.
+
 1108-v1094-publication-receipt-index-review.md
  -> v1094 code explanation: review the v1093 receipt index before recording the next lookup-only receipt.
 

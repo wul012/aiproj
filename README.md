@@ -4,7 +4,17 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1094.0.0` reviews the v1093 digest-backed receipt index before recording the next lookup-only receipt.
+Version `v1095.0.0` records the v1094-reviewed receipt index as downstream lookup-only receipt evidence.
+
+## Latest v1095 checkpoint
+
+- Added receipt module `randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1095`.
+- Added CLI `scripts/record_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1095.py`.
+- Consumed the real v1094 review, verified review readiness, lookup-only use, source evidence status, source paths, source next-step routing, and no-promotion boundaries.
+- Confirmed `status=pass`, `receipt_ready=True`, `receipt_status=publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1095_lookup_receipted`, `consumer_name=publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1095_lookup_reader`, `granted_use=downstream_governance_lookup_only`, `receipt_index_row_count=1`, `source_evidence_count=2`, `lookup_key_count=1`, `promotion_ready=False`, `passed_check_count=25`, and `failed_check_count=0`.
+- Routed the next action to `check_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1095`.
+- Verified with focused v1095 tests (`6 passed in 0.69s`), full pytest (`2870 passed in 571.77s`), source hygiene (`2243/2243 clean`), py_compile, real CLI evidence, and Playwright MCP screenshot evidence.
+- Archived v1095 evidence in `e/1095` and added the code explanation in `代码讲解记录_模型能力阶段/1109-v1095-publication-receipt.md`.
 
 ## Latest v1094 checkpoint
 
