@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1098-v1084-publication-receipt-check.md
+ -> v1084 code explanation: rebuild the v1083 lookup-only receipt from the v1082 review and verify contract consistency.
+
 1097-v1083-publication-receipt.md
  -> v1083 code explanation: record the v1082-reviewed receipt index as a lookup-only receipt.
 

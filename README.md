@@ -4,7 +4,17 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1083.0.0` records the v1082-reviewed receipt index as the next downstream lookup-only receipt.
+Version `v1084.0.0` contract-checks the v1083 receipt by rebuilding it from the v1082 review.
+
+## Latest v1084 checkpoint
+
+- Added receipt contract-check module `randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_check_v1084`.
+- Added CLI `scripts/check_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1084.py`.
+- Rebuilt the real v1083 receipt from the v1082 review and compared status, decision, failed count, source review digest, lookup-only consumer fields, source paths, summary fields, no-promotion fields, and next-step routing.
+- Confirmed `status=pass`, `contract_check_ready=True`, `original_receipt_status=publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1083_lookup_receipted`, `rebuilt_receipt_status=publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1083_lookup_receipted`, `original_granted_use=downstream_governance_lookup_only`, `rebuilt_granted_use=downstream_governance_lookup_only`, `lookup_key_count=1`, `source_evidence_count=2`, `promotion_ready=False`, `passed_check_count=46`, and `failed_check_count=0`.
+- Routed the next action to `index_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1084`.
+- Verified with focused v1084 tests (`6 passed in 0.26s`), full pytest (`2813 passed in 502.09s`), source hygiene (`2199/2199 clean`), py_compile, real CLI evidence, and Playwright MCP screenshot evidence.
+- Archived v1084 evidence in `e/1084` and added the code explanation in `代码讲解记录_模型能力阶段/1098-v1084-publication-receipt-check.md`.
 
 ## Latest v1083 checkpoint
 
