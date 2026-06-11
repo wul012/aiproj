@@ -14,6 +14,9 @@
 
 ## 当前索引
 
+1124-v1112-publication-receipt-index-review.md
+ -> v1112 code explanation: review the v1111 receipt index before the next lookup-only receipt recording.
+
 1123-v1111-publication-receipt-index.md
  -> v1111 code explanation: index the v1109 receipt and v1110 contract check for downstream lookup.
 
