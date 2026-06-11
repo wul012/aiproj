@@ -1,21 +1,26 @@
 [MODE: RESEARCH]
 
-这个项目的代码讲解采用和 `D:\C\mini-kv` 相近的风格：
+这个项目的代码讲解不追求每版都写。轻量文档整理、索引维护、规则分流可以没有单篇讲解。
+
+一旦写讲解，就必须写成“读者能复查链路”的说明，而不是文件清单。参考顺序：
 
 ```text
-先说明文件、类或脚本的角色
-再给核心流程
-然后逐段解释关键代码
-最后做一句话总结
+1. 本版目标：解决什么问题，不做什么。
+2. 入口：CLI、脚本、函数或报告入口在哪里。
+3. 输出模型：JSON/HTML/Markdown/CSV 或 summary 的核心字段是什么。
+4. 上游证据：输入来自哪个版本、哪个目录、哪个 artifact。
+5. 核心流程：数据如何从输入进入检查、构建、输出。
+6. 关键检查：哪些断言保护 lookup-only、no-promotion、digest、路径、ready 状态。
+7. 测试与运行证据：测试覆盖什么，截图/说明承担什么证明作用。
+8. 一句话总结：这一版把项目能力推进到哪一层。
 ```
 
-讲解目标不是把每一行代码机械翻译成中文，而是帮助读者建立“从文本到 token、从 token 到 logits、从 logits 到 loss、从 loss 到参数更新、从 prompt 到生成结果”的完整 mental model。
-
-每一篇讲解尽量回答四个问题：
+参考文档：
 
 ```text
-这个文件负责什么
-数据从哪里来、到哪里去
-最容易误解的代码点是什么
-它和 GPT 原理的哪一部分对应
+D:\C\mini-kv\代码讲解记录\111-restart-recovery-evidence-v55.md
+D:\javaproj\advanced-order-platform\代码讲解记录_生产雏形阶段\58-version-54-release-verification-manifest.md
+D:\nodeproj\orderops-node\代码讲解记录\107-production-readiness-summary-v3-v103.md
 ```
+
+其中 Node 的参考文档尤其适合 production readiness、只读报告、上游证据聚合和治理 summary：目标与边界先行，再讲入口、响应模型、上游证据、核心流程、检查逻辑和链路角色。

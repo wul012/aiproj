@@ -50,16 +50,17 @@ For specific training, evaluation, dashboard, or report commands, use the matchi
 
 ## Latest version summary
 
-Current README focus: **v226 eval-suite coverage readiness**.
+Current README focus: **v1098 documentation routing cleanup**.
 
-v226 adds coverage evidence to fixed-prompt eval-suite reports. It separates small ad hoc suites from broader benchmark suites before making checkpoint-quality claims.
-
-In simple terms: the project now asks not only “did the eval run?” but also “is this prompt suite representative enough for model comparison?”
+v1098 freezes overcrowded historical documentation directories and starts new sibling directories for model-governance explanations and runtime evidence. The goal is to keep future versions reviewable instead of continuing to pack hundreds of files into one folder.
 
 ## Where to look next
 
 - `README.md` — full project overview and version map.
+- `文档分流说明.md` — current documentation routing map.
 - `src/minigpt/` — model, evaluation, reporting, and workflow code.
 - `tests/` — behavior and report-shape tests.
-- `c/` — later-stage screenshots and evidence archives.
-- `代码讲解记录_项目成熟度阶段/` — detailed version explanations.
+- `e/` — v473-v1097 runtime screenshots and explanations.
+- `f/` — v1098+ runtime screenshots and explanations.
+- `代码讲解记录_模型能力阶段/` — v473-v1097 historical explanations.
+- `代码讲解记录_模型治理阶段/` — v1098+ explanation home when a version needs a detailed explanation.

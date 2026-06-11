@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1097.0.0` indexes the v1095 lookup-only receipt and v1096 contract check as digest-backed downstream governance lookup evidence.
+Version `v1098.0.0` starts the documentation cleanup batches by freezing overcrowded explanation/evidence directories and routing future model-governance docs into new sibling directories.
+
+## Latest v1098 checkpoint
+
+- Updated `AGENTS.md` so future code explanations also reference the Node production readiness summary pattern from `D:\nodeproj\orderops-node\代码讲解记录\107-production-readiness-summary-v3-v103.md`.
+- Clarified that not every version needs a code explanation; if a code explanation is written, it must cover goal, non-goals, entrypoint/CLI, response or output model, upstream evidence, core flow, checks, tests, and chain role.
+- Froze `代码讲解记录_模型能力阶段/` at v473-v1097 and created `代码讲解记录_模型治理阶段/` for v1098+ model governance and receipt-chain explanations.
+- Froze `e/` at v473-v1097 and created `f/` for v1098+ runtime screenshots and explanations.
+- Added `文档分流说明.md` and refreshed `解释代码格式说明` to make the documentation routing easier to find.
+- Verified with source hygiene (`2251/2251 clean`) and `git diff --check`; no Python behavior changed in this documentation-only batch.
 
 ## Latest v1097 checkpoint
 
