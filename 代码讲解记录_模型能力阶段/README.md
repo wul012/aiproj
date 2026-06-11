@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1102-v1088-publication-receipt-check.md
+ -> v1088 code explanation: contract-check the v1087 receipt against the v1086 review.
+
 1101-v1087-publication-receipt.md
  -> v1087 code explanation: record the v1086-reviewed receipt index as downstream lookup-only receipt evidence.
 

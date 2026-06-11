@@ -4,7 +4,17 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1087.0.0` records the v1086-reviewed receipt index as the next lookup-only receipt.
+Version `v1088.0.0` contract-checks the v1087 lookup-only receipt by rebuilding it from the v1086 review.
+
+## Latest v1088 checkpoint
+
+- Added receipt contract-check module `randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_check_v1088`.
+- Added CLI `scripts/check_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1088.py`.
+- Rebuilt the real v1087 receipt from the v1086 review and compared status, decision, failed count, source review digest, consumer receipts, summary fields, receipt fields, lookup-only use, source paths, no-promotion fields, and next-step routing.
+- Confirmed `status=pass`, `contract_check_ready=True`, `original_receipt_status=publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1087_lookup_receipted`, `rebuilt_receipt_status=publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1087_lookup_receipted`, `original_granted_use=downstream_governance_lookup_only`, `rebuilt_granted_use=downstream_governance_lookup_only`, `original_lookup_key_count=1`, `rebuilt_lookup_key_count=1`, `promotion_ready=False`, `passed_check_count=46`, and `failed_check_count=0`.
+- Routed the next action to `index_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1088`.
+- Verified with focused v1088 tests (`6 passed in 0.27s`), full pytest (`2834 passed in 634.03s`), source hygiene (`2215/2215 clean`), py_compile, real CLI evidence, and Playwright MCP screenshot evidence.
+- Archived v1088 evidence in `e/1088` and added the code explanation in `代码讲解记录_模型能力阶段/1102-v1088-publication-receipt-check.md`.
 
 ## Latest v1087 checkpoint
 
