@@ -18,6 +18,10 @@ f/<version>/解释/说明.md
 
 ## 当前索引
 
+f/1102/图片
+f/1102/解释/说明.md
+ -> v1102 randomized holdout publication receipt contract-check screenshots and explanation.
+
 f/1101/图片
 f/1101/解释/说明.md
  -> v1101 randomized holdout publication receipt screenshots and explanation.
