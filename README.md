@@ -4,7 +4,17 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1086.0.0` reviews the v1085 receipt index before the next lookup-only receipt recording step.
+Version `v1087.0.0` records the v1086-reviewed receipt index as the next lookup-only receipt.
+
+## Latest v1087 checkpoint
+
+- Added receipt module `randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1087`.
+- Added CLI `scripts/record_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1087.py`.
+- Consumed the real v1086 review, verified review readiness, lookup-only use, source evidence status, source paths, source next-step routing, and no-promotion boundaries.
+- Confirmed `status=pass`, `receipt_ready=True`, `receipt_status=publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1087_lookup_receipted`, `consumer_name=publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1087_lookup_reader`, `lookup_key_count=1`, `source_evidence_count=2`, `promotion_ready=False`, `passed_check_count=25`, and `failed_check_count=0`.
+- Routed the next action to `check_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1087`.
+- Verified with focused v1087 tests (`6 passed in 0.66s`), full pytest (`2828 passed in 643.54s`), source hygiene (`2211/2211 clean`), py_compile, real CLI evidence, and Playwright MCP screenshot evidence.
+- Archived v1087 evidence in `e/1087` and added the code explanation in `代码讲解记录_模型能力阶段/1101-v1087-publication-receipt.md`.
 
 ## Latest v1086 checkpoint
 

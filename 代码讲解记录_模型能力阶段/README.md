@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1101-v1087-publication-receipt.md
+ -> v1087 code explanation: record the v1086-reviewed receipt index as downstream lookup-only receipt evidence.
+
 1100-v1086-publication-receipt-index-review.md
  -> v1086 code explanation: review the v1085 receipt index before recording the next lookup-only receipt.
 
