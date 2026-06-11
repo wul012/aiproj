@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1097-v1083-publication-receipt.md
+ -> v1083 code explanation: record the v1082-reviewed receipt index as a lookup-only receipt.
+
 1096-v1082-publication-receipt-index-review.md
  -> v1082 code explanation: review the v1081 receipt index before recording the next lookup-only receipt.
 
