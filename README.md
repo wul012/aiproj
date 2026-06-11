@@ -4,7 +4,17 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1091.0.0` records the v1090-reviewed receipt index as downstream lookup-only receipt evidence.
+Version `v1092.0.0` contract-checks the v1091 lookup-only receipt by rebuilding it from the v1090 receipt-index review.
+
+## Latest v1092 checkpoint
+
+- Added receipt contract-check module `randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_check_v1092`.
+- Added CLI `scripts/check_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1092.py`.
+- Rebuilt the real v1091 receipt from the v1090 review and compared status, decision, failed count, source review digest, consumer receipts, summary fields, receipt fields, lookup-only use, source paths, no-promotion fields, and next-step routing.
+- Confirmed `status=pass`, `contract_check_ready=True`, `original_receipt_status=publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1091_lookup_receipted`, `rebuilt_receipt_status=publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1091_lookup_receipted`, `original_granted_use=downstream_governance_lookup_only`, `rebuilt_granted_use=downstream_governance_lookup_only`, `original_lookup_key_count=1`, `rebuilt_lookup_key_count=1`, `original_promotion_ready=False`, `rebuilt_promotion_ready=False`, `passed_check_count=46`, and `failed_check_count=0`.
+- Routed the next action to `index_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1092`.
+- Verified with focused v1092 tests (`6 passed in 0.43s`), full pytest (`2855 passed in 703.95s`), source hygiene (`2231/2231 clean`), py_compile, real CLI evidence, and Playwright MCP screenshot evidence.
+- Archived v1092 evidence in `e/1092` and added the code explanation in `代码讲解记录_模型能力阶段/1106-v1092-publication-receipt-check.md`.
 
 ## Latest v1091 checkpoint
 

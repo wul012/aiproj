@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1106-v1092-publication-receipt-check.md
+ -> v1092 code explanation: contract-check the v1091 receipt against the v1090 review.
+
 1105-v1091-publication-receipt.md
  -> v1091 code explanation: record the v1090-reviewed receipt index as downstream lookup-only receipt evidence.
 
