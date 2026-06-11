@@ -4,7 +4,17 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1096.0.0` contract-checks the v1095 lookup-only receipt by rebuilding it from the v1094 receipt-index review.
+Version `v1097.0.0` indexes the v1095 lookup-only receipt and v1096 contract check as digest-backed downstream governance lookup evidence.
+
+## Latest v1097 checkpoint
+
+- Added receipt-index module `randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1097`.
+- Added CLI `scripts/build_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1097.py`.
+- Consumed the real v1095 receipt and v1096 receipt contract check, verified both source files still exist, and wrote SHA-256 backed source evidence rows for both artifacts.
+- Confirmed `status=pass`, `index_ready=True`, `receipt_index_id=randomized-holdout-publication-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-v1097`, `lookup_scope=downstream_governance_lookup_only`, `lookup_key_count=1`, `receipt_status=publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1095_lookup_receipted`, `granted_use=downstream_governance_lookup_only`, `source_evidence_count=2`, `lookup_ready=True`, `contract_check_ready=True`, `promotion_ready=False`, `passed_check_count=25`, and `failed_check_count=0`.
+- Routed the next action to `review_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1097`.
+- Verified with focused v1097 tests (`4 passed in 0.29s`), full pytest (`2880 passed in 651.35s`), source hygiene (`2251/2251 clean`), py_compile, real CLI evidence, and Playwright MCP screenshot evidence.
+- Archived v1097 evidence in `e/1097` and added the code explanation in `代码讲解记录_模型能力阶段/1111-v1097-publication-receipt-index.md`.
 
 ## Latest v1096 checkpoint
 

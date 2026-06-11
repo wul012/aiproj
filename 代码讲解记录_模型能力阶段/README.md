@@ -11,6 +11,9 @@
 
 ## 当前索引
 
+1111-v1097-publication-receipt-index.md
+ -> v1097 code explanation: index the v1095 lookup-only receipt and v1096 contract check as digest-backed downstream governance evidence.
+
 1110-v1096-publication-receipt-check.md
  -> v1096 code explanation: contract-check the v1095 receipt against the v1094 review.
 
