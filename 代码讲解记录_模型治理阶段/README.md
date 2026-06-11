@@ -14,4 +14,7 @@
 
 ## 当前索引
 
+1112-v1100-publication-receipt-index-review.md
+ -> v1100 code explanation: review the v1097 receipt index before recording the next lookup-only receipt.
+
 本目录从 v1098 起启用；v1098-v1099 为文档分流批次，不单独新增版本讲解。

@@ -18,4 +18,8 @@ f/<version>/解释/说明.md
 
 ## 当前索引
 
+f/1100/图片
+f/1100/解释/说明.md
+ -> v1100 randomized holdout publication receipt index review screenshots and explanation.
+
 v1098 是文档分流批次，没有运行截图；后续有运行证据时从 `f/<version>` 开始记录。

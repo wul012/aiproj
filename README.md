@@ -4,7 +4,17 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1099.0.0` hardens the new documentation split with a reusable explanation template and fixes the v1098 staged whitespace issue.
+Version `v1100.0.0` reviews the v1097 digest-backed receipt index before recording the next lookup-only receipt.
+
+## Latest v1100 checkpoint
+
+- Added receipt-index review module `randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1100`.
+- Added CLI `scripts/review_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1100.py`.
+- Consumed the real v1097 index, verified its single lookup row, two digest-backed source evidence rows, source receipt/check paths, lookup-only use, contract-check readiness, and no-promotion boundary.
+- Confirmed `status=pass`, `review_ready=True`, `review_status=approved_for_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_lookup_only`, `receipt_index_row_count=1`, `lookup_key_count=1`, `source_evidence_count=2`, `lookup_ready=True`, `contract_check_ready=True`, `promotion_ready=False`, `passed_check_count=22`, and `failed_check_count=0`.
+- Routed the next action to `record_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1100`.
+- Verified with focused v1100 tests (`5 passed in 0.58s`), py_compile, real CLI evidence, source hygiene (`2255/2255 clean`), `git diff --check`, and Playwright MCP screenshot evidence.
+- Archived v1100 evidence in `f/1100` and added the code explanation in `代码讲解记录_模型治理阶段/1112-v1100-publication-receipt-index-review.md`.
 
 ## Latest v1099 checkpoint
 
