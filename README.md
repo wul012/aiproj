@@ -4,7 +4,17 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1119.0.0` indexes the v1117 lookup-only receipt and v1118 contract check for downstream lookup.
+Version `v1120.0.0` reviews the v1119 receipt index before the next lookup-only receipt recording.
+
+## Latest v1120 checkpoint
+
+- Added receipt-index review module `randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1120`.
+- Added CLI `scripts/review_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1120.py`.
+- Consumed the real v1119 index, verified its single lookup row, two source evidence rows, source receipt/check/review/index paths, lookup-only scope, contract-check readiness, clean source checks, and no-promotion boundary.
+- Confirmed `status=pass`, `review_ready=True`, `receipt_index_row_count=1`, `lookup_key_count=1`, `source_evidence_count=2`, `lookup_ready=True`, `contract_check_ready=True`, `promotion_ready=False`, `passed_check_count=22`, and `failed_check_count=0`.
+- Routed the next action to `record_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1120`.
+- Verified with focused v1120 tests (`5 passed in 0.63s`), py_compile, real CLI evidence, source hygiene (`2335/2335 clean`), `git diff --check`, and Playwright MCP screenshot evidence.
+- Archived v1120 evidence in `f/1120` and added the code explanation in `代码讲解记录_模型治理阶段/1132-v1120-publication-receipt-index-review.md`.
 
 ## Latest v1119 checkpoint
 
