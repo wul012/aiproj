@@ -14,6 +14,9 @@
 
 ## 当前索引
 
+1133-v1121-publication-receipt.md
+ -> v1121 code explanation: record the v1120 review as a lookup-only downstream receipt.
+
 1132-v1120-publication-receipt-index-review.md
  -> v1120 code explanation: review the v1119 receipt index before the next lookup-only receipt recording.
 
