@@ -14,6 +14,9 @@
 
 ## 当前索引
 
+1130-v1118-publication-receipt-check.md
+ -> v1118 code explanation: rebuild and contract-check the v1117 lookup-only receipt.
+
 1129-v1117-publication-receipt.md
  -> v1117 code explanation: record the v1116 review as a lookup-only downstream receipt.
 
