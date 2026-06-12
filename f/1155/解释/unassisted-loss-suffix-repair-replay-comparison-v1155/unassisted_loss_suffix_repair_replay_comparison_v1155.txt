@@ -1,0 +1,15 @@
+status=pass
+decision=unassisted_loss_suffix_repair_replay_partial_signal
+unassisted_loss_suffix_repair_replay_comparison_ready=True
+case_count=5
+fixed_hit_case_count=5
+loss_hit_case_count=0
+full_pair_case_count=0
+any_hit_case_count=5
+full_pair_rate=0.0
+all_full_pair_hit=False
+partial_signal_visible=True
+model_quality_claim=bounded_holdout_replay_partial_signal
+promotion_ready=False
+next_step=diagnose_unassisted_loss_suffix_repair_partial_signal
+failed_check_count=0

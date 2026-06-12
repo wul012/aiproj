@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1167-v1155-unassisted-loss-suffix-repair-replay-comparison.md
+ -> v1155 code explanation: replay the v1154 checkpoint against v1153 target-free holdout prompts and preserve the partial-signal boundary.
+
 1166-v1154-unassisted-loss-suffix-repair-training-run.md
  -> v1154 code explanation: train the repaired corpus into a bounded checkpoint while keeping the result in the training-artifact-only lane.
 

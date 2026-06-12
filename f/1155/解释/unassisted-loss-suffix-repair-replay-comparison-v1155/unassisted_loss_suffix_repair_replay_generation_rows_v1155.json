@@ -1,0 +1,92 @@
+[
+  {
+    "case_id": "unassisted-holdout-01",
+    "prompt": "answer:",
+    "generated": "answer: fixed l",
+    "continuation": " fixed l",
+    "expected_terms": [
+      "fixed",
+      "loss"
+    ],
+    "term_hits": {
+      "fixed": true,
+      "loss": false
+    },
+    "fixed_hit": true,
+    "loss_hit": false,
+    "full_pair_hit": false,
+    "status": "partial"
+  },
+  {
+    "case_id": "unassisted-holdout-02",
+    "prompt": "completion:",
+    "generated": "completion: fixed l",
+    "continuation": " fixed l",
+    "expected_terms": [
+      "fixed",
+      "loss"
+    ],
+    "term_hits": {
+      "fixed": true,
+      "loss": false
+    },
+    "fixed_hit": true,
+    "loss_hit": false,
+    "full_pair_hit": false,
+    "status": "partial"
+  },
+  {
+    "case_id": "unassisted-holdout-03",
+    "prompt": "finish:",
+    "generated": "finish: fixed l",
+    "continuation": " fixed l",
+    "expected_terms": [
+      "fixed",
+      "loss"
+    ],
+    "term_hits": {
+      "fixed": true,
+      "loss": false
+    },
+    "fixed_hit": true,
+    "loss_hit": false,
+    "full_pair_hit": false,
+    "status": "partial"
+  },
+  {
+    "case_id": "unassisted-holdout-04",
+    "prompt": "state compact signal\nanswer:",
+    "generated": "e compact signal\nanswer: fixed l",
+    "continuation": "e compact signal\nanswer: fixed l",
+    "expected_terms": [
+      "fixed",
+      "loss"
+    ],
+    "term_hits": {
+      "fixed": true,
+      "loss": false
+    },
+    "fixed_hit": true,
+    "loss_hit": false,
+    "full_pair_hit": false,
+    "status": "partial"
+  },
+  {
+    "case_id": "unassisted-holdout-05",
+    "prompt": "signal:",
+    "generated": "signal: fixed l",
+    "continuation": " fixed l",
+    "expected_terms": [
+      "fixed",
+      "loss"
+    ],
+    "term_hits": {
+      "fixed": true,
+      "loss": false
+    },
+    "fixed_hit": true,
+    "loss_hit": false,
+    "full_pair_hit": false,
+    "status": "partial"
+  }
+]

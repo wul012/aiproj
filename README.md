@@ -15,7 +15,17 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1154.0.0` trains the repaired v1153 corpus into a bounded checkpoint and still keeps the result in the training-artifact-only lane.
+Version `v1155.0.0` replays the v1154 checkpoint against the v1153 target-free holdout prompts and records a bounded partial-signal result.
+
+## Latest v1155 checkpoint
+
+- Added `unassisted_loss_suffix_repair_replay_comparison_v1155.py` to consume the v1154 training handoff, resolve checkpoint/tokenizer artifacts, run the v1153 target-free holdout prompts, and score `fixed` / `loss` / full-pair hits.
+- Added CLI `scripts/run_unassisted_loss_suffix_repair_replay_comparison_v1155.py`, defaulting to the archived `f/1154` training handoff evidence and supporting precomputed generation rows for contract tests.
+- Real v1155 replay produced `status=pass`, `decision=unassisted_loss_suffix_repair_replay_partial_signal`, `case_count=5`, `fixed_hit_case_count=5`, `loss_hit_case_count=0`, and `full_pair_case_count=0`.
+- Kept `model_quality_claim=bounded_holdout_replay_partial_signal` and `promotion_ready=False`; next step is `diagnose_unassisted_loss_suffix_repair_partial_signal`.
+- Added tests for partial-signal replay, full-pair candidate simulation, contaminated prompt failure, archived handoff fallback, output generation, and CLI precomputed rows.
+- Verified with focused v1155 tests, py_compile, real generator replay, Playwright MCP screenshot evidence, and local cleanup.
+- Archived v1155 evidence in `f/1155` and added the engineering-maintenance code explanation in `代码讲解记录_工程保养阶段/1167-v1155-unassisted-loss-suffix-repair-replay-comparison.md`.
 
 ## Latest v1154 checkpoint
 
