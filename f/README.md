@@ -18,6 +18,10 @@ f/<version>/解释/说明.md
 
 ## 当前索引
 
+f/1148/图片
+f/1148/解释/说明.md
+ -> v1148 unassisted holdout repair plan screenshots and explanation.
+
 f/1147/图片
 f/1147/解释/说明.md
  -> v1147 decoder-anchor versus unassisted holdout comparison screenshots and explanation.

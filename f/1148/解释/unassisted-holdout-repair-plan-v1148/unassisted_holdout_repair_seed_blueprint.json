@@ -1,0 +1,112 @@
+[
+  {
+    "id": "pair-repair-01",
+    "kind": "full_pair",
+    "prompt": "answer:",
+    "completion": " fixed loss",
+    "target_terms": [
+      "fixed",
+      "loss"
+    ],
+    "decoder_anchor": false,
+    "source": "v1147_unassisted_prompt"
+  },
+  {
+    "id": "pair-repair-02",
+    "kind": "full_pair",
+    "prompt": "answer:",
+    "completion": " fixed loss",
+    "target_terms": [
+      "fixed",
+      "loss"
+    ],
+    "decoder_anchor": false,
+    "source": "v1147_unassisted_prompt"
+  },
+  {
+    "id": "pair-repair-03",
+    "kind": "full_pair",
+    "prompt": "completion:",
+    "completion": " fixed loss",
+    "target_terms": [
+      "fixed",
+      "loss"
+    ],
+    "decoder_anchor": false,
+    "source": "v1147_unassisted_prompt"
+  },
+  {
+    "id": "pair-repair-04",
+    "kind": "full_pair",
+    "prompt": "finish:",
+    "completion": " fixed loss",
+    "target_terms": [
+      "fixed",
+      "loss"
+    ],
+    "decoder_anchor": false,
+    "source": "v1147_unassisted_prompt"
+  },
+  {
+    "id": "pair-repair-05",
+    "kind": "full_pair",
+    "prompt": "state compact signal\nanswer:",
+    "completion": " fixed loss",
+    "target_terms": [
+      "fixed",
+      "loss"
+    ],
+    "decoder_anchor": false,
+    "source": "v1147_unassisted_prompt"
+  },
+  {
+    "id": "fixed-first-01",
+    "kind": "fixed_first",
+    "prompt": "answer:",
+    "completion": " fixed",
+    "target_terms": [
+      "fixed"
+    ],
+    "decoder_anchor": false,
+    "decoder_anchor_boundary": "none",
+    "source": "v1148_repair_blueprint"
+  },
+  {
+    "id": "fixed-first-02",
+    "kind": "fixed_first",
+    "prompt": "completion:",
+    "completion": " fixed",
+    "target_terms": [
+      "fixed"
+    ],
+    "decoder_anchor": false,
+    "decoder_anchor_boundary": "none",
+    "source": "v1148_repair_blueprint"
+  },
+  {
+    "id": "loss-after-fixed-01",
+    "kind": "loss_after_model_fixed",
+    "prompt": "answer: fixed",
+    "completion": " loss",
+    "target_terms": [
+      "fixed",
+      "loss"
+    ],
+    "decoder_anchor": false,
+    "decoder_anchor_boundary": "training_only_context_not_eval",
+    "source": "v1148_repair_blueprint"
+  },
+  {
+    "id": "pair-short-01",
+    "kind": "short_pair",
+    "prompt": "signal:",
+    "completion": " fixed loss",
+    "target_terms": [
+      "fixed",
+      "loss"
+    ],
+    "decoder_anchor": false,
+    "decoder_anchor_boundary": "none",
+    "source": "v1148_repair_blueprint"
+  }
+]

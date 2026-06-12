@@ -15,7 +15,18 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1147.0.0` compares the v1146 decoder-anchor fragment signal against unassisted holdout-style replay on the same v1145 checkpoint.
+Version `v1148.0.0` turns the v1147 unassisted holdout gap into a concrete repair plan and seed blueprint.
+
+## Latest v1148 checkpoint
+
+- Added `unassisted_holdout_repair_plan_v1148.py` to consume the v1147 comparison report and produce repair work items, acceptance gates, blocked actions, and a concrete seed blueprint.
+- Added CLI `scripts/build_unassisted_holdout_repair_plan_v1148.py`, defaulting to the archived v1147 comparison report.
+- Real v1148 run produced `status=pass`, `decision=unassisted_holdout_repair_plan_ready`, `work_item_count=6`, `acceptance_gate_count=5`, `blocked_action_count=4`, and `seed_blueprint_count=9`.
+- Wrote sidecars `unassisted_holdout_repair_seed_blueprint.json` and `unassisted_holdout_repair_seed_blueprint.txt` for the next bounded repair-training version.
+- Kept `model_quality_claim=plan_only`, `new_training_allowed=True`, and `promotion_ready=False`; next step is `materialize_unassisted_holdout_repair_seed_corpus`.
+- Added tests for ready planning, wrong next-step failure, already-recovered full-pair failure, output generation, sidecar writing, and CLI directory input.
+- Verified with focused v1148 tests, py_compile, real CLI evidence, Playwright MCP screenshot evidence, and local cleanup.
+- Archived v1148 evidence in `f/1148` and added the engineering-maintenance code explanation in `代码讲解记录_工程保养阶段/1160-v1148-unassisted-holdout-repair-plan.md`.
 
 ## Latest v1147 checkpoint
 

@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1160-v1148-unassisted-holdout-repair-plan.md
+ -> v1148 code explanation: turn the v1147 unassisted fixed/loss gap into a repair plan and seed blueprint without claiming promotion.
+
 1159-v1147-decoder-anchor-holdout-comparison.md
  -> v1147 code explanation: compare decoder-anchor fragment evidence against unassisted holdout replay on the same v1145 checkpoint.
 

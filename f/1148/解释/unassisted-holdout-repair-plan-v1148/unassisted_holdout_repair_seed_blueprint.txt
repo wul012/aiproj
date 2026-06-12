@@ -1,0 +1,36 @@
+# pair-repair-01 [full_pair]
+prompt: answer:
+completion:  fixed loss
+
+# pair-repair-02 [full_pair]
+prompt: answer:
+completion:  fixed loss
+
+# pair-repair-03 [full_pair]
+prompt: completion:
+completion:  fixed loss
+
+# pair-repair-04 [full_pair]
+prompt: finish:
+completion:  fixed loss
+
+# pair-repair-05 [full_pair]
+prompt: state compact signal
+answer:
+completion:  fixed loss
+
+# fixed-first-01 [fixed_first]
+prompt: answer:
+completion:  fixed
+
+# fixed-first-02 [fixed_first]
+prompt: completion:
+completion:  fixed
+
+# loss-after-fixed-01 [loss_after_model_fixed]
+prompt: answer: fixed
+completion:  loss
+
+# pair-short-01 [short_pair]
+prompt: signal:
+completion:  fixed loss

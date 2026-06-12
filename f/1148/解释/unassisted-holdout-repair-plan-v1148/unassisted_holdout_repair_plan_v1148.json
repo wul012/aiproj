@@ -1,0 +1,404 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT unassisted holdout repair plan v1148",
+  "generated_at": "2026-06-12T12:45:17Z",
+  "status": "pass",
+  "decision": "unassisted_holdout_repair_plan_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_decoder_anchor_holdout_comparison": "D:\\aiproj\\f\\1147\\解释\\decoder-anchor-holdout-comparison-v1147\\decoder_anchor_holdout_comparison_v1147.json",
+  "source_summary": {
+    "decoder_anchor_holdout_comparison_ready": true,
+    "anchor_probe_case_count": 5,
+    "anchor_fragment_hit_count": 5,
+    "anchor_loss_hit_count": 4,
+    "unassisted_case_count": 5,
+    "unassisted_any_term_hit_count": 3,
+    "unassisted_fixed_hit_count": 0,
+    "unassisted_loss_hit_count": 3,
+    "unassisted_full_pair_count": 0,
+    "anchor_fragment_hit_rate": 1.0,
+    "unassisted_any_term_hit_rate": 0.6,
+    "anchor_over_unassisted_hit_delta": 2,
+    "model_quality_claim": "anchor_assisted_signal_exceeds_unassisted_holdout_replay",
+    "promotion_ready": false,
+    "unassisted_success_claim": false,
+    "next_step": "build_unassisted_holdout_repair_plan",
+    "failed_check_count": 0
+  },
+  "source_rows": [
+    {
+      "case_id": "answer-colon-pair",
+      "anchor_case_id": "fixed-space-loss",
+      "anchor_prompt": "fixed ",
+      "anchor_combined": "fixed lossssss",
+      "anchor_fragment_hit": true,
+      "anchor_loss_hit": true,
+      "unassisted_prompt": "answer:",
+      "unassisted_generated": "answer: the tos",
+      "unassisted_continuation": " the tos",
+      "unassisted_hit_terms": [],
+      "unassisted_full_pair_hit": false,
+      "fragment_lift": 1
+    },
+    {
+      "case_id": "answer-space-pair",
+      "anchor_case_id": "lo-to-loss",
+      "anchor_prompt": "lo",
+      "anchor_combined": "losssss\nnn",
+      "anchor_fragment_hit": true,
+      "anchor_loss_hit": true,
+      "unassisted_prompt": "answer: ",
+      "unassisted_generated": "answer: lossssss",
+      "unassisted_continuation": "lossssss",
+      "unassisted_hit_terms": [
+        "loss"
+      ],
+      "unassisted_full_pair_hit": false,
+      "fragment_lift": 0
+    },
+    {
+      "case_id": "completion-colon-pair",
+      "anchor_case_id": "los-to-loss",
+      "anchor_prompt": "los",
+      "anchor_combined": "losssss\nnnn",
+      "anchor_fragment_hit": true,
+      "anchor_loss_hit": true,
+      "unassisted_prompt": "completion:",
+      "unassisted_generated": "completion: tosssss",
+      "unassisted_continuation": " tosssss",
+      "unassisted_hit_terms": [],
+      "unassisted_full_pair_hit": false,
+      "fragment_lift": 1
+    },
+    {
+      "case_id": "finish-space-pair",
+      "anchor_case_id": "fixed-retention",
+      "anchor_prompt": "fixed",
+      "anchor_combined": "fixed fixe fi",
+      "anchor_fragment_hit": true,
+      "anchor_loss_hit": false,
+      "unassisted_prompt": "finish: ",
+      "unassisted_generated": "finish: ter loss",
+      "unassisted_continuation": "ter loss",
+      "unassisted_hit_terms": [
+        "loss"
+      ],
+      "unassisted_full_pair_hit": false,
+      "fragment_lift": 0
+    },
+    {
+      "case_id": "compact-signal-answer-pair",
+      "anchor_case_id": "fi-to-loss-association",
+      "anchor_prompt": "fi",
+      "anchor_combined": "fier losss",
+      "anchor_fragment_hit": true,
+      "anchor_loss_hit": true,
+      "unassisted_prompt": "state compact signal\nanswer:",
+      "unassisted_generated": "t signal\nanswer: losssss",
+      "unassisted_continuation": "t signal\nanswer: losssss",
+      "unassisted_hit_terms": [
+        "loss"
+      ],
+      "unassisted_full_pair_hit": false,
+      "fragment_lift": 0
+    }
+  ],
+  "work_items": [
+    {
+      "id": "materialize_unassisted_seed_blueprint",
+      "priority": "high",
+      "stage": "seed",
+      "description": "Write a compact seed corpus whose prompts do not contain fixed/loss but completions require the pair.",
+      "expected_output": "unassisted_holdout_repair_seed_corpus"
+    },
+    {
+      "id": "recover_fixed_first_token",
+      "priority": "high",
+      "stage": "training",
+      "description": "Bias the next repair run toward generating fixed as new text, because v1147 had zero unassisted fixed hits.",
+      "expected_output": "fixed_first_token_uptake_report"
+    },
+    {
+      "id": "preserve_loss_suffix_signal",
+      "priority": "medium",
+      "stage": "training",
+      "description": "Keep the partial loss signal observed in v1147 while adding fixed/loss coexistence examples.",
+      "expected_output": "loss_suffix_retention_report"
+    },
+    {
+      "id": "run_bounded_repair_checkpoint",
+      "priority": "high",
+      "stage": "execution",
+      "description": "Train one small CPU repair checkpoint from the unassisted seed blueprint without changing the evaluation prompts.",
+      "expected_output": "unassisted_holdout_repair_training_run"
+    },
+    {
+      "id": "replay_unchanged_unassisted_prompts",
+      "priority": "high",
+      "stage": "evaluation",
+      "description": "Rerun the exact five v1147 unassisted prompts and require fixed/loss pair recovery before any stronger claim.",
+      "expected_output": "unassisted_holdout_repair_replay"
+    },
+    {
+      "id": "compare_against_anchor_baseline",
+      "priority": "medium",
+      "stage": "evaluation",
+      "description": "Compare repaired unassisted pair hits against the v1147 anchor-assisted baseline and keep promotion gated.",
+      "expected_output": "anchor_vs_unassisted_repair_delta"
+    }
+  ],
+  "acceptance_gates": [
+    {
+      "id": "evaluation_prompt_target_free",
+      "required": true,
+      "detail": "The unchanged replay prompts must not contain fixed or loss."
+    },
+    {
+      "id": "fixed_first_token_recovered",
+      "required": true,
+      "detail": "At least three unassisted replay cases should include fixed in continuation text."
+    },
+    {
+      "id": "full_pair_recovered",
+      "required": true,
+      "detail": "At least three unchanged unassisted replay cases should include both fixed and loss."
+    },
+    {
+      "id": "loss_signal_not_regressed",
+      "required": true,
+      "detail": "Loss hits should stay at or above the v1147 baseline of 3."
+    },
+    {
+      "id": "promotion_still_gated",
+      "required": true,
+      "detail": "Even a repaired replay needs holdout scorecard evidence before promotion."
+    }
+  ],
+  "blocked_actions": [
+    {
+      "id": "do_not_count_loss_only_as_recovery",
+      "detail": "v1147 already had loss-only hits; recovery requires fixed/loss coexistence."
+    },
+    {
+      "id": "do_not_add_decoder_anchors_to_eval",
+      "detail": "Evaluation prompts must remain unassisted and target-free."
+    },
+    {
+      "id": "do_not_rewrite_v1145_v1147_archives",
+      "detail": "Repair work must consume archived evidence rather than editing prior releases."
+    },
+    {
+      "id": "do_not_claim_promotion_from_plan",
+      "detail": "This report is a plan and seed blueprint, not model-quality proof."
+    }
+  ],
+  "repair_seed_blueprint_rows": [
+    {
+      "id": "pair-repair-01",
+      "kind": "full_pair",
+      "prompt": "answer:",
+      "completion": " fixed loss",
+      "target_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "source": "v1147_unassisted_prompt"
+    },
+    {
+      "id": "pair-repair-02",
+      "kind": "full_pair",
+      "prompt": "answer:",
+      "completion": " fixed loss",
+      "target_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "source": "v1147_unassisted_prompt"
+    },
+    {
+      "id": "pair-repair-03",
+      "kind": "full_pair",
+      "prompt": "completion:",
+      "completion": " fixed loss",
+      "target_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "source": "v1147_unassisted_prompt"
+    },
+    {
+      "id": "pair-repair-04",
+      "kind": "full_pair",
+      "prompt": "finish:",
+      "completion": " fixed loss",
+      "target_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "source": "v1147_unassisted_prompt"
+    },
+    {
+      "id": "pair-repair-05",
+      "kind": "full_pair",
+      "prompt": "state compact signal\nanswer:",
+      "completion": " fixed loss",
+      "target_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "source": "v1147_unassisted_prompt"
+    },
+    {
+      "id": "fixed-first-01",
+      "kind": "fixed_first",
+      "prompt": "answer:",
+      "completion": " fixed",
+      "target_terms": [
+        "fixed"
+      ],
+      "decoder_anchor": false,
+      "decoder_anchor_boundary": "none",
+      "source": "v1148_repair_blueprint"
+    },
+    {
+      "id": "fixed-first-02",
+      "kind": "fixed_first",
+      "prompt": "completion:",
+      "completion": " fixed",
+      "target_terms": [
+        "fixed"
+      ],
+      "decoder_anchor": false,
+      "decoder_anchor_boundary": "none",
+      "source": "v1148_repair_blueprint"
+    },
+    {
+      "id": "loss-after-fixed-01",
+      "kind": "loss_after_model_fixed",
+      "prompt": "answer: fixed",
+      "completion": " loss",
+      "target_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "decoder_anchor_boundary": "training_only_context_not_eval",
+      "source": "v1148_repair_blueprint"
+    },
+    {
+      "id": "pair-short-01",
+      "kind": "short_pair",
+      "prompt": "signal:",
+      "completion": " fixed loss",
+      "target_terms": [
+        "fixed",
+        "loss"
+      ],
+      "decoder_anchor": false,
+      "decoder_anchor_boundary": "none",
+      "source": "v1148_repair_blueprint"
+    }
+  ],
+  "check_rows": [
+    {
+      "id": "v1147_comparison_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "v1147 comparison must pass"
+    },
+    {
+      "id": "v1147_comparison_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "v1147 comparison ready flag must be true"
+    },
+    {
+      "id": "v1147_next_step_matches_plan",
+      "status": "pass",
+      "actual": "build_unassisted_holdout_repair_plan",
+      "detail": "v1147 must point to this repair plan"
+    },
+    {
+      "id": "unassisted_pair_absent",
+      "status": "pass",
+      "actual": 0,
+      "detail": "plan is needed only while unassisted fixed/loss pair is absent"
+    },
+    {
+      "id": "fixed_missing_is_explicit",
+      "status": "pass",
+      "actual": 0,
+      "detail": "v1148 should target the fixed-first-token gap"
+    },
+    {
+      "id": "partial_loss_signal_present",
+      "status": "pass",
+      "actual": 3,
+      "detail": "repair plan should preserve the partial loss signal"
+    },
+    {
+      "id": "seed_blueprint_present",
+      "status": "pass",
+      "actual": 9,
+      "detail": "plan must include a concrete seed blueprint"
+    },
+    {
+      "id": "seed_eval_prompts_target_free",
+      "status": "pass",
+      "actual": false,
+      "detail": "evaluation-derived seed prompts must stay target-free"
+    },
+    {
+      "id": "promotion_boundary_kept",
+      "status": "pass",
+      "actual": false,
+      "detail": "v1147 must not already be a promotion report"
+    }
+  ],
+  "plan": {
+    "ready": true,
+    "route": "unassisted_holdout_repair",
+    "work_item_count": 6,
+    "acceptance_gate_count": 5,
+    "blocked_action_count": 4,
+    "seed_blueprint_count": 9,
+    "new_training_allowed": true,
+    "promotion_ready": false,
+    "proposed_next_artifact": "unassisted_holdout_repair_seed_corpus_v1149",
+    "next_step": "materialize_unassisted_holdout_repair_seed_corpus"
+  },
+  "summary": {
+    "unassisted_holdout_repair_plan_ready": true,
+    "route": "unassisted_holdout_repair",
+    "work_item_count": 6,
+    "acceptance_gate_count": 5,
+    "blocked_action_count": 4,
+    "seed_blueprint_count": 9,
+    "new_training_allowed": true,
+    "promotion_ready": false,
+    "model_quality_claim": "plan_only",
+    "proposed_next_artifact": "unassisted_holdout_repair_seed_corpus_v1149",
+    "next_step": "materialize_unassisted_holdout_repair_seed_corpus",
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "plan_only",
+    "reason": "v1147 shows loss-only partial signal but zero unassisted fixed/full-pair recovery; the next useful step is a small target-free repair seed.",
+    "next_action": "materialize_unassisted_holdout_repair_seed_corpus",
+    "source_unassisted_loss_hit_count": 3,
+    "source_unassisted_fixed_hit_count": 0
+  },
+  "csv_fieldnames": [
+    "id",
+    "priority",
+    "stage",
+    "description",
+    "expected_output"
+  ]
+}

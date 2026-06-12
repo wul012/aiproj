@@ -1,0 +1,14 @@
+status=pass
+decision=unassisted_holdout_repair_plan_ready
+unassisted_holdout_repair_plan_ready=True
+route=unassisted_holdout_repair
+work_item_count=6
+acceptance_gate_count=5
+blocked_action_count=4
+seed_blueprint_count=9
+new_training_allowed=True
+promotion_ready=False
+model_quality_claim=plan_only
+proposed_next_artifact=unassisted_holdout_repair_seed_corpus_v1149
+next_step=materialize_unassisted_holdout_repair_seed_corpus
+failed_check_count=0
