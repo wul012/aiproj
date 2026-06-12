@@ -14,6 +14,9 @@
 
 ## 当前索引
 
+1141-v1129-publication-receipt.md
+ -> v1129 code explanation: record the v1128 review as a lookup-only downstream receipt.
+
 1140-v1128-publication-receipt-index-review.md
  -> v1128 code explanation: review the v1127 receipt index before the next lookup-only receipt recording.
 
