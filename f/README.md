@@ -18,6 +18,10 @@ f/<version>/解释/说明.md
 
 ## 当前索引
 
+f/1127/鍥剧墖
+f/1127/瑙ｉ噴/璇存槑.md
+ -> v1127 randomized holdout publication receipt index screenshots and explanation.
+
 f/1126/鍥剧墖
 f/1126/瑙ｉ噴/璇存槑.md
  -> v1126 randomized holdout publication receipt contract-check screenshots and explanation.
