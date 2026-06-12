@@ -15,7 +15,17 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1141.0.0` verifies the v1135-v1139 model capability regression loop end to end.
+Version `v1142.0.0` publishes the model capability cadence watch and stops for roadmap review.
+
+## Latest v1142 checkpoint
+
+- Extended `model_capability_cadence.py` with refactor/explanation/evidence freshness counters and a concrete `due` list.
+- Added v1142 writer and CLI `scripts/generate_model_capability_cadence_watch_v1142.py`.
+- The cadence watch now reports versions since last refactor, explanation doc, and `f/` evidence folder, while preserving the old v1133 cadence API.
+- Real run produced `status=watch`, `leading_non_capability_run=6`, `max_non_capability_run=4`, `latest_refactor_version=v1140`, `versions_since_last_refactor=2`, `latest_explanation_version=v1142`, `latest_evidence_version=v1142`, `due_count=2`, and `next_action=run_selected_model_capability_regression_execution`.
+- Due list: `run_selected_model_capability_regression_execution`, `schedule_model_capability_regression`.
+- Verified with focused cadence tests, py_compile, real CLI evidence, Playwright MCP screenshot evidence, and local cleanup.
+- Archived v1142 evidence in `f/1142` and added the engineering-maintenance code explanation in `代码讲解记录_工程保养阶段/1154-v1142-model-capability-cadence-watch.md`.
 
 ## Latest v1141 checkpoint
 

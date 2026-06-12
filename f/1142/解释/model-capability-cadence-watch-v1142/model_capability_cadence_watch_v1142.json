@@ -1,0 +1,173 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability cadence watch v1142",
+  "generated_at": "2026-06-12T05:39:21Z",
+  "status": "watch",
+  "decision": "model_capability_cadence_ready",
+  "summary": {
+    "status": "watch",
+    "decision": "model_capability_cadence_ready",
+    "scanned_version_count": 12,
+    "leading_non_capability_run": 6,
+    "max_non_capability_run": 4,
+    "latest_model_capability_version": "v1136",
+    "latest_refactor_version": "v1140",
+    "versions_since_last_refactor": 2,
+    "latest_explanation_version": "v1142",
+    "versions_since_last_explanation": 0,
+    "latest_evidence_version": "v1142",
+    "versions_since_last_evidence": 0,
+    "due_count": 2,
+    "due_list": "run_selected_model_capability_regression_execution, schedule_model_capability_regression",
+    "next_action": "run_selected_model_capability_regression_execution",
+    "cadence_ready": true
+  },
+  "rows": [
+    {
+      "version": "v1142",
+      "category": "maintenance",
+      "model_signal": "",
+      "governance_signal": "",
+      "maintenance_signal": "maintenance",
+      "refactor_signal": "",
+      "status": "pass",
+      "recommendation": "batch with readability care and schedule model capability follow-up"
+    },
+    {
+      "version": "v1141",
+      "category": "maintenance",
+      "model_signal": "",
+      "governance_signal": "",
+      "maintenance_signal": "maintenance",
+      "refactor_signal": "",
+      "status": "pass",
+      "recommendation": "batch with readability care and schedule model capability follow-up"
+    },
+    {
+      "version": "v1140",
+      "category": "refactor",
+      "model_signal": "",
+      "governance_signal": "",
+      "maintenance_signal": "maintenance",
+      "refactor_signal": "dedup",
+      "status": "pass",
+      "recommendation": "counts as the latest contract-preserving maintenance slot"
+    },
+    {
+      "version": "v1139",
+      "category": "maintenance",
+      "model_signal": "",
+      "governance_signal": "",
+      "maintenance_signal": "maintenance",
+      "refactor_signal": "",
+      "status": "pass",
+      "recommendation": "batch with readability care and schedule model capability follow-up"
+    },
+    {
+      "version": "v1138",
+      "category": "maintenance",
+      "model_signal": "",
+      "governance_signal": "",
+      "maintenance_signal": "maintenance",
+      "refactor_signal": "",
+      "status": "pass",
+      "recommendation": "batch with readability care and schedule model capability follow-up"
+    },
+    {
+      "version": "v1137",
+      "category": "maintenance",
+      "model_signal": "",
+      "governance_signal": "",
+      "maintenance_signal": "maintenance",
+      "refactor_signal": "",
+      "status": "pass",
+      "recommendation": "batch with readability care and schedule model capability follow-up"
+    },
+    {
+      "version": "v1136",
+      "category": "model-capability",
+      "model_signal": "required term, loss signal, decoder",
+      "governance_signal": "",
+      "maintenance_signal": "maintenance",
+      "refactor_signal": "",
+      "status": "pass",
+      "recommendation": "keep as cadence anchor"
+    },
+    {
+      "version": "v1135",
+      "category": "model-capability",
+      "model_signal": "required term, loss signal, decoder",
+      "governance_signal": "",
+      "maintenance_signal": "maintenance",
+      "refactor_signal": "",
+      "status": "pass",
+      "recommendation": "keep as cadence anchor"
+    },
+    {
+      "version": "v1134",
+      "category": "maintenance",
+      "model_signal": "",
+      "governance_signal": "",
+      "maintenance_signal": "docs, maintenance",
+      "refactor_signal": "",
+      "status": "pass",
+      "recommendation": "batch with readability care and schedule model capability follow-up"
+    },
+    {
+      "version": "v1133",
+      "category": "maintenance",
+      "model_signal": "",
+      "governance_signal": "",
+      "maintenance_signal": "docs, maintenance",
+      "refactor_signal": "",
+      "status": "pass",
+      "recommendation": "batch with readability care and schedule model capability follow-up"
+    },
+    {
+      "version": "v1132",
+      "category": "maintenance",
+      "model_signal": "",
+      "governance_signal": "receipt, publication",
+      "maintenance_signal": "docs, template, maintenance, script layer",
+      "refactor_signal": "",
+      "status": "pass",
+      "recommendation": "batch with readability care and schedule model capability follow-up"
+    },
+    {
+      "version": "v1131",
+      "category": "maintenance",
+      "model_signal": "required term",
+      "governance_signal": "receipt, publication",
+      "maintenance_signal": "readability, docs, maintenance",
+      "refactor_signal": "",
+      "status": "pass",
+      "recommendation": "batch with readability care and schedule model capability follow-up"
+    }
+  ],
+  "due": [
+    {
+      "action": "run_selected_model_capability_regression_execution",
+      "reason": "v1141 closed the v1135-v1139 preparation loop",
+      "priority": "high"
+    },
+    {
+      "action": "schedule_model_capability_regression",
+      "reason": "leading non-capability run 6 exceeds limit 4",
+      "priority": "high"
+    }
+  ],
+  "recommendations": [
+    "Leading non-capability run is 6, above the configured limit 4.",
+    "Schedule a focused model capability regression after this maintenance batch.",
+    "Candidate checks: holdout accuracy, required term coverage, loss signal bridge, unassisted repair, or decoder anchor distribution."
+  ],
+  "csv_fieldnames": [
+    "version",
+    "category",
+    "model_signal",
+    "governance_signal",
+    "maintenance_signal",
+    "status",
+    "recommendation"
+  ]
+}

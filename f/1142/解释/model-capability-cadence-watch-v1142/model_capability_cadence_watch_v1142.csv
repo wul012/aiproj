@@ -1,0 +1,13 @@
+version,category,model_signal,governance_signal,maintenance_signal,status,recommendation
+v1142,maintenance,,,maintenance,pass,batch with readability care and schedule model capability follow-up
+v1141,maintenance,,,maintenance,pass,batch with readability care and schedule model capability follow-up
+v1140,refactor,,,maintenance,pass,counts as the latest contract-preserving maintenance slot
+v1139,maintenance,,,maintenance,pass,batch with readability care and schedule model capability follow-up
+v1138,maintenance,,,maintenance,pass,batch with readability care and schedule model capability follow-up
+v1137,maintenance,,,maintenance,pass,batch with readability care and schedule model capability follow-up
+v1136,model-capability,"required term, loss signal, decoder",,maintenance,pass,keep as cadence anchor
+v1135,model-capability,"required term, loss signal, decoder",,maintenance,pass,keep as cadence anchor
+v1134,maintenance,,,"docs, maintenance",pass,batch with readability care and schedule model capability follow-up
+v1133,maintenance,,,"docs, maintenance",pass,batch with readability care and schedule model capability follow-up
+v1132,maintenance,,"receipt, publication","docs, template, maintenance, script layer",pass,batch with readability care and schedule model capability follow-up
+v1131,maintenance,required term,"receipt, publication","readability, docs, maintenance",pass,batch with readability care and schedule model capability follow-up

@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1154-v1142-model-capability-cadence-watch.md
+ -> v1142 code explanation: publish cadence watch due list after v1141 loop closure and stop for roadmap review.
+
 1153-v1141-model-capability-regression-loop-trend.md
  -> v1141 code explanation: verify the v1135-v1139 model capability regression loop as closed read-only evidence.
 
