@@ -1,28 +1,21 @@
 from __future__ import annotations
 
-import json
 from pathlib import Path
 from typing import Any
 
 from minigpt.readability_report_artifacts import write_readability_outputs
-from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_utils import as_dict, list_of_dicts, locate_upstream_report, read_json_object, utc_now
 
 READINESS_JSON = "model_capability_regression_suite_readiness_v1138.json"
 CLOSEOUT_STEM = "model_capability_regression_followup_closeout_v1139"
 
 
 def locate_readiness_report(path: str | Path) -> Path:
-    source = Path(path)
-    if source.is_dir():
-        source = source / READINESS_JSON
-    return source
+    return locate_upstream_report(path, READINESS_JSON)
 
 
 def read_json_report(path: str | Path) -> dict[str, Any]:
-    payload = json.loads(Path(path).read_text(encoding="utf-8-sig"))
-    if not isinstance(payload, dict):
-        raise ValueError("model capability regression readiness report must be a JSON object")
-    return dict(payload)
+    return read_json_object(path, description="model capability regression readiness report")
 
 
 def build_model_capability_regression_followup_closeout(

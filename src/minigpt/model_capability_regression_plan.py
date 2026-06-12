@@ -1,11 +1,10 @@
 from __future__ import annotations
 
-import json
 from pathlib import Path
 from typing import Any
 
 from minigpt.readability_report_artifacts import write_readability_outputs
-from minigpt.report_utils import as_dict, utc_now
+from minigpt.report_utils import as_dict, locate_upstream_report, read_json_object, utc_now
 
 CADENCE_JSON = "model_capability_cadence_v1133.json"
 PLAN_STEM = "model_capability_regression_plan_v1135"
@@ -39,17 +38,11 @@ REGRESSION_ITEMS = [
 
 
 def locate_cadence_report(path: str | Path) -> Path:
-    source = Path(path)
-    if source.is_dir():
-        source = source / CADENCE_JSON
-    return source
+    return locate_upstream_report(path, CADENCE_JSON)
 
 
 def read_json_report(path: str | Path) -> dict[str, Any]:
-    payload = json.loads(Path(path).read_text(encoding="utf-8-sig"))
-    if not isinstance(payload, dict):
-        raise ValueError("model capability cadence report must be a JSON object")
-    return dict(payload)
+    return read_json_object(path, description="model capability cadence report")
 
 
 def build_model_capability_regression_plan(

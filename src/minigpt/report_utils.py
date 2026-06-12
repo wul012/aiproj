@@ -29,6 +29,20 @@ def write_json_payload(payload: Any, path: str | Path) -> None:
     out_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
 
 
+def locate_upstream_report(path: str | Path, default_name: str) -> Path:
+    source = Path(path)
+    if source.is_dir():
+        return source / default_name
+    return source
+
+
+def read_json_object(path: str | Path, *, description: str) -> dict[str, Any]:
+    payload = json.loads(Path(path).read_text(encoding="utf-8-sig"))
+    if not isinstance(payload, dict):
+        raise ValueError(f"{description} must be a JSON object")
+    return dict(payload)
+
+
 def write_csv_row(row: dict[str, Any], path: str | Path, fieldnames: list[str]) -> None:
     out_path = Path(path)
     out_path.parent.mkdir(parents=True, exist_ok=True)

@@ -1,11 +1,10 @@
 from __future__ import annotations
 
-import json
 from pathlib import Path
 from typing import Any
 
 from minigpt.readability_report_artifacts import write_readability_outputs
-from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_utils import as_dict, list_of_dicts, locate_upstream_report, read_json_object, utc_now
 
 PLAN_JSON = "model_capability_regression_plan_v1135.json"
 INVENTORY_STEM = "model_capability_regression_inventory_v1136"
@@ -19,17 +18,11 @@ KEYWORD_MAP = {
 
 
 def locate_regression_plan(path: str | Path) -> Path:
-    source = Path(path)
-    if source.is_dir():
-        source = source / PLAN_JSON
-    return source
+    return locate_upstream_report(path, PLAN_JSON)
 
 
 def read_json_report(path: str | Path) -> dict[str, Any]:
-    payload = json.loads(Path(path).read_text(encoding="utf-8-sig"))
-    if not isinstance(payload, dict):
-        raise ValueError("model capability regression plan must be a JSON object")
-    return dict(payload)
+    return read_json_object(path, description="model capability regression plan")
 
 
 def build_model_capability_regression_inventory(

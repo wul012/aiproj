@@ -1,0 +1,10 @@
+status=pass
+decision=report_loader_dedup_ready
+dedup_ready=True
+read_json_report_definition_count=431
+private_loader_copy_count=439
+migrated_module_count=5
+migrated_private_loader_copy_count=0
+left_for_future_count=439
+boundary=contract_preserving_thin_wrappers_only
+next_step=build_model_capability_regression_trend_report_v1141

@@ -15,7 +15,17 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1139.0.0` closes the pre-execution model capability regression follow-up chain.
+Version `v1140.0.0` deduplicates the model capability regression report loader boilerplate.
+
+## Latest v1140 checkpoint
+
+- Added shared `report_utils.locate_upstream_report` and `report_utils.read_json_object` helpers.
+- Migrated the v1135-v1139 regression modules to thin compatibility wrappers while preserving their public `locate_*` and `read_json_report` functions.
+- Added `report_loader_dedup.py` and CLI `scripts/generate_report_loader_dedup_v1140.py` to emit a read-only dedup evidence report.
+- Added tests for directory/file resolution, BOM-prefixed JSON, exact non-dict error messages, dedup report checks, and CLI output wiring.
+- Real run produced `status=pass`, `decision=report_loader_dedup_ready`, `dedup_ready=True`, `migrated_module_count=5`, and `next_step=build_model_capability_regression_trend_report_v1141`.
+- Verified with focused v1140 tests, the existing v1135-v1139 contract tests, py_compile, real CLI evidence, Playwright MCP screenshot evidence, and local cleanup.
+- Archived v1140 evidence in `f/1140` and added the engineering-maintenance code explanation in `代码讲解记录_工程保养阶段/1152-v1140-report-loader-dedup.md`.
 
 ## Latest v1139 checkpoint
 

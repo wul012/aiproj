@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1152-v1140-report-loader-dedup.md
+ -> v1140 code explanation: deduplicate report loader helpers for v1135-v1139 regression modules without changing public contracts.
+
 1151-v1139-model-capability-regression-followup-closeout.md
  -> v1139 code explanation: close the pre-execution model capability regression follow-up chain without claiming model promotion.
 

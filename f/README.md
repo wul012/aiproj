@@ -18,6 +18,10 @@ f/<version>/解释/说明.md
 
 ## 当前索引
 
+f/1140/图片
+f/1140/解释/说明.md
+ -> v1140 report loader dedup screenshots and explanation.
+
 f/1139/图片
 f/1139/解释/说明.md
  -> v1139 model capability regression follow-up closeout screenshots and explanation.
