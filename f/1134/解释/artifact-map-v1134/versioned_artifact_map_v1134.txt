@@ -1,0 +1,11 @@
+status=pass
+decision=versioned_artifact_map_ready
+status=pass
+decision=versioned_artifact_map_ready
+evidence_root=f
+scanned_version_count=12
+ready_version_count=12
+missing_summary_count=0
+missing_screenshot_count=0
+limit=12
+artifact_map_ready=True

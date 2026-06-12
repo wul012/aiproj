@@ -18,6 +18,10 @@ f/<version>/解释/说明.md
 
 ## 当前索引
 
+f/1134/图片
+f/1134/解释/说明.md
+ -> v1134 versioned artifact map screenshots and explanation.
+
 f/1133/图片
 f/1133/解释/说明.md
  -> v1133 model capability cadence screenshots and explanation.

@@ -11,10 +11,20 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 - [Publication receipt template](docs/publication-receipt-template.md)
 - [No-promotion boundary](docs/no-promotion-boundary.md)
 - [Versioned artifacts](docs/versioned-artifacts.md)
+- [Artifact map](docs/artifact-map.md)
 
 ## Current version
 
-Version `v1133.0.0` adds a model capability cadence check after governance and maintenance runs.
+Version `v1134.0.0` adds a versioned artifact map for recent `f/<version>` evidence folders.
+
+## Latest v1134 checkpoint
+
+- Added `artifact_map.py` to scan recent `f/` evidence directories and summarize summary files, screenshots, report folders, and JSON/CSV/Markdown/HTML counts.
+- Added layered devtools CLI `scripts/devtools/build_artifact_map_v1134.py`.
+- Added `docs/artifact-map.md` and linked it from versioned artifact docs plus the README documentation map.
+- Real map produced a ready artifact table over recent evidence folders and writes JSON/CSV/text/Markdown/HTML outputs.
+- Verified with focused v1134 tests, py_compile, real CLI evidence, Playwright MCP screenshot evidence, source hygiene, and local cleanup.
+- Archived v1134 evidence in `f/1134` and added the engineering-maintenance code explanation in `代码讲解记录_工程保养阶段/1146-v1134-artifact-map.md`.
 
 ## Latest v1133 checkpoint
 

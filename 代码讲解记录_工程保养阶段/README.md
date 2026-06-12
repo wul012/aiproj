@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1146-v1134-artifact-map.md
+ -> v1134 code explanation: build an artifact map for recent f/ version evidence folders.
+
 1145-v1133-model-capability-cadence.md
  -> v1133 code explanation: add a cadence check that schedules model capability regression after long governance or maintenance runs.
 
