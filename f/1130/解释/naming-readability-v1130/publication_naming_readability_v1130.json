@@ -1,0 +1,693 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT publication naming readability stopgap v1130",
+  "generated_at": "2026-06-12T01:53:38Z",
+  "status": "watch",
+  "decision": "publication_short_alias_policy_ready",
+  "summary": {
+    "status": "watch",
+    "decision": "publication_short_alias_policy_ready",
+    "scanned_file_count": 837,
+    "repeated_receipt_index_file_count": 548,
+    "long_name_file_count": 808,
+    "max_name_length": 205,
+    "new_file_repeat_limit": 1,
+    "new_file_name_length_limit": 96,
+    "short_alias_count": 4,
+    "policy_ready": true
+  },
+  "policy": {
+    "scope": [
+      "scripts",
+      "src/minigpt",
+      "tests"
+    ],
+    "legacy_files_are_watch_items": true,
+    "new_publication_files_must_use_short_alias": true,
+    "repeated_token": "receipt_index",
+    "repeat_limit": 1,
+    "name_length_limit": 96,
+    "aliases": {
+      "publication receipt index": "pub_receipt_index",
+      "publication receipt review": "pub_receipt_review",
+      "receipt contract check": "receipt_contract_check",
+      "randomized holdout publication": "holdout_pub"
+    }
+  },
+  "rows": [
+    {
+      "path": "src/minigpt/randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1050_artifacts.py",
+      "kind": "src/minigpt",
+      "name_length": 196,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "src/minigpt/randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1054_artifacts.py",
+      "kind": "src/minigpt",
+      "name_length": 196,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "src/minigpt/randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1058_artifacts.py",
+      "kind": "src/minigpt",
+      "name_length": 196,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "src/minigpt/randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1062_artifacts.py",
+      "kind": "src/minigpt",
+      "name_length": 196,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "src/minigpt/randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1066_artifacts.py",
+      "kind": "src/minigpt",
+      "name_length": 196,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "src/minigpt/randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1070_artifacts.py",
+      "kind": "src/minigpt",
+      "name_length": 196,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "src/minigpt/randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1074_artifacts.py",
+      "kind": "src/minigpt",
+      "name_length": 196,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "src/minigpt/randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1078_artifacts.py",
+      "kind": "src/minigpt",
+      "name_length": 196,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "src/minigpt/randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1082_artifacts.py",
+      "kind": "src/minigpt",
+      "name_length": 196,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "src/minigpt/randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1086_artifacts.py",
+      "kind": "src/minigpt",
+      "name_length": 196,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "src/minigpt/randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1090_artifacts.py",
+      "kind": "src/minigpt",
+      "name_length": 196,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "src/minigpt/randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1094_artifacts.py",
+      "kind": "src/minigpt",
+      "name_length": 196,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "src/minigpt/randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1100_artifacts.py",
+      "kind": "src/minigpt",
+      "name_length": 196,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "src/minigpt/randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1104_artifacts.py",
+      "kind": "src/minigpt",
+      "name_length": 196,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "src/minigpt/randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1108_artifacts.py",
+      "kind": "src/minigpt",
+      "name_length": 196,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "src/minigpt/randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1112_artifacts.py",
+      "kind": "src/minigpt",
+      "name_length": 196,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "src/minigpt/randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1116_artifacts.py",
+      "kind": "src/minigpt",
+      "name_length": 196,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "src/minigpt/randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1120_artifacts.py",
+      "kind": "src/minigpt",
+      "name_length": 196,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "src/minigpt/randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1124_artifacts.py",
+      "kind": "src/minigpt",
+      "name_length": 196,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "src/minigpt/randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1128_artifacts.py",
+      "kind": "src/minigpt",
+      "name_length": 196,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "tests/test_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1050.py",
+      "kind": "tests",
+      "name_length": 191,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "tests/test_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1054.py",
+      "kind": "tests",
+      "name_length": 191,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "tests/test_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1058.py",
+      "kind": "tests",
+      "name_length": 191,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "tests/test_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1062.py",
+      "kind": "tests",
+      "name_length": 191,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "tests/test_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1066.py",
+      "kind": "tests",
+      "name_length": 191,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "tests/test_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1070.py",
+      "kind": "tests",
+      "name_length": 191,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "tests/test_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1074.py",
+      "kind": "tests",
+      "name_length": 191,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "tests/test_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1078.py",
+      "kind": "tests",
+      "name_length": 191,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "tests/test_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1082.py",
+      "kind": "tests",
+      "name_length": 191,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "tests/test_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1086.py",
+      "kind": "tests",
+      "name_length": 191,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "tests/test_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1090.py",
+      "kind": "tests",
+      "name_length": 191,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "tests/test_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1094.py",
+      "kind": "tests",
+      "name_length": 191,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "tests/test_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1100.py",
+      "kind": "tests",
+      "name_length": 191,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "tests/test_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1104.py",
+      "kind": "tests",
+      "name_length": 191,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "tests/test_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1108.py",
+      "kind": "tests",
+      "name_length": 191,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "tests/test_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1112.py",
+      "kind": "tests",
+      "name_length": 191,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "tests/test_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1116.py",
+      "kind": "tests",
+      "name_length": 191,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "tests/test_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1120.py",
+      "kind": "tests",
+      "name_length": 191,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "tests/test_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1124.py",
+      "kind": "tests",
+      "name_length": 191,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "tests/test_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1128.py",
+      "kind": "tests",
+      "name_length": 191,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "src/minigpt/randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1049_artifacts.py",
+      "kind": "src/minigpt",
+      "name_length": 189,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "src/minigpt/randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1053_artifacts.py",
+      "kind": "src/minigpt",
+      "name_length": 189,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "src/minigpt/randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1057_artifacts.py",
+      "kind": "src/minigpt",
+      "name_length": 189,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "src/minigpt/randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1061_artifacts.py",
+      "kind": "src/minigpt",
+      "name_length": 189,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "src/minigpt/randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1065_artifacts.py",
+      "kind": "src/minigpt",
+      "name_length": 189,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "src/minigpt/randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1069_artifacts.py",
+      "kind": "src/minigpt",
+      "name_length": 189,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "src/minigpt/randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1073_artifacts.py",
+      "kind": "src/minigpt",
+      "name_length": 189,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "src/minigpt/randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1077_artifacts.py",
+      "kind": "src/minigpt",
+      "name_length": 189,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "src/minigpt/randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1081_artifacts.py",
+      "kind": "src/minigpt",
+      "name_length": 189,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "src/minigpt/randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1085_artifacts.py",
+      "kind": "src/minigpt",
+      "name_length": 189,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "src/minigpt/randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1089_artifacts.py",
+      "kind": "src/minigpt",
+      "name_length": 189,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "src/minigpt/randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1093_artifacts.py",
+      "kind": "src/minigpt",
+      "name_length": 189,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "src/minigpt/randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1097_artifacts.py",
+      "kind": "src/minigpt",
+      "name_length": 189,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "src/minigpt/randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1103_artifacts.py",
+      "kind": "src/minigpt",
+      "name_length": 189,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "src/minigpt/randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1107_artifacts.py",
+      "kind": "src/minigpt",
+      "name_length": 189,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "src/minigpt/randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1111_artifacts.py",
+      "kind": "src/minigpt",
+      "name_length": 189,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "src/minigpt/randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1115_artifacts.py",
+      "kind": "src/minigpt",
+      "name_length": 189,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "src/minigpt/randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1119_artifacts.py",
+      "kind": "src/minigpt",
+      "name_length": 189,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "src/minigpt/randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1123_artifacts.py",
+      "kind": "src/minigpt",
+      "name_length": 189,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "src/minigpt/randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1127_artifacts.py",
+      "kind": "src/minigpt",
+      "name_length": 189,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "scripts/review_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1050.py",
+      "kind": "scripts",
+      "name_length": 186,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "scripts/review_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1054.py",
+      "kind": "scripts",
+      "name_length": 186,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "scripts/review_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1058.py",
+      "kind": "scripts",
+      "name_length": 186,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "scripts/review_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1062.py",
+      "kind": "scripts",
+      "name_length": 186,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "scripts/review_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1066.py",
+      "kind": "scripts",
+      "name_length": 186,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "scripts/review_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1070.py",
+      "kind": "scripts",
+      "name_length": 186,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "scripts/review_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1074.py",
+      "kind": "scripts",
+      "name_length": 186,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "scripts/review_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1078.py",
+      "kind": "scripts",
+      "name_length": 186,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "scripts/review_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1082.py",
+      "kind": "scripts",
+      "name_length": 186,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "scripts/review_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1086.py",
+      "kind": "scripts",
+      "name_length": 186,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "scripts/review_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1090.py",
+      "kind": "scripts",
+      "name_length": 186,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "scripts/review_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1094.py",
+      "kind": "scripts",
+      "name_length": 186,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "scripts/review_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1100.py",
+      "kind": "scripts",
+      "name_length": 186,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "scripts/review_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1104.py",
+      "kind": "scripts",
+      "name_length": 186,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "scripts/review_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1108.py",
+      "kind": "scripts",
+      "name_length": 186,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "scripts/review_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1112.py",
+      "kind": "scripts",
+      "name_length": 186,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "scripts/review_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1116.py",
+      "kind": "scripts",
+      "name_length": 186,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "scripts/review_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1120.py",
+      "kind": "scripts",
+      "name_length": 186,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "scripts/review_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1124.py",
+      "kind": "scripts",
+      "name_length": 186,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    },
+    {
+      "path": "scripts/review_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1128.py",
+      "kind": "scripts",
+      "name_length": 186,
+      "repeat_count": 10,
+      "status": "legacy-watch",
+      "recommendation": "Use a short publication alias for the next file in this family."
+    }
+  ],
+  "recommendations": [
+    "Keep legacy receipt_index chains stable unless a dedicated compatibility migration exists.",
+    "Put new publication scripts under scripts/publication/ with short names.",
+    "Prefer pub_receipt_index, pub_receipt_review, receipt_contract_check, and holdout_pub aliases for new files.",
+    "Treat this report as a stopgap policy, not a mass rename request."
+  ],
+  "csv_fieldnames": [
+    "path",
+    "kind",
+    "name_length",
+    "repeat_count",
+    "status",
+    "recommendation"
+  ]
+}

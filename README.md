@@ -4,7 +4,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1129.0.0` records the v1128-reviewed receipt index as a lookup-only downstream receipt.
+Version `v1130.0.0` starts late-stage readability maintenance with a publication naming stopgap policy.
+
+## Latest v1130 checkpoint
+
+- Added shared readability artifact helper `readability_report_artifacts.py` for JSON/CSV/text/Markdown/HTML maintenance reports.
+- Added publication naming scanner `publication_naming_readability.py` to identify legacy repeated `receipt_index` names without forcing a risky mass rename.
+- Added new layered script entry `scripts/publication/check_publication_naming_readability_v1130.py`, so new publication tooling starts under `scripts/publication/` instead of expanding the flat scripts directory.
+- Real scan produced `status=watch`, `decision=publication_short_alias_policy_ready`, `scanned_file_count=837`, `repeated_receipt_index_file_count=548`, `long_name_file_count=808`, and `policy_ready=True`.
+- Verified with focused v1130 tests (`3 passed in 0.21s`), py_compile, real CLI evidence, Playwright MCP screenshot evidence, and local cleanup.
+- Archived v1130 evidence in `f/1130` and started the engineering-maintenance explanation stage in `代码讲解记录_工程保养阶段/1142-v1130-publication-naming-readability.md`.
 
 ## Latest v1129 checkpoint
 

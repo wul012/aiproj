@@ -1,0 +1,12 @@
+status=watch
+decision=publication_short_alias_policy_ready
+status=watch
+decision=publication_short_alias_policy_ready
+scanned_file_count=837
+repeated_receipt_index_file_count=548
+long_name_file_count=808
+max_name_length=205
+new_file_repeat_limit=1
+new_file_name_length_limit=96
+short_alias_count=4
+policy_ready=True
