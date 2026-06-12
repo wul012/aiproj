@@ -1,0 +1,10 @@
+key,path,exists,size
+checkpoint,output\unassisted-holdout-repair-training-run-v1150\run\checkpoint.pt,True,70690
+tokenizer,output\unassisted-holdout-repair-training-run-v1150\run\tokenizer.json,True,290
+metrics,output\unassisted-holdout-repair-training-run-v1150\run\metrics.jsonl,True,673
+train_config,output\unassisted-holdout-repair-training-run-v1150\run\train_config.json,True,983
+run_manifest,output\unassisted-holdout-repair-training-run-v1150\run\run_manifest.json,True,10895
+history_summary,output\unassisted-holdout-repair-training-run-v1150\run\history_summary.json,True,209
+loss_curve,output\unassisted-holdout-repair-training-run-v1150\run\loss_curve.svg,True,1425
+sample,output\unassisted-holdout-repair-training-run-v1150\run\sample.txt,True,90
+prepared_corpus,output\unassisted-holdout-repair-training-run-v1150\run\prepared_corpus.txt,True,216

@@ -15,7 +15,18 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1149.0.0` materializes the v1148 repair blueprint into trainable corpus files and target-free holdout prompts.
+Version `v1150.0.0` runs the v1149 repair seed corpus through bounded CPU training and archives the resulting checkpoint evidence.
+
+## Latest v1150 checkpoint
+
+- Added `unassisted_holdout_repair_training_run_v1150.py` to verify a bounded training run against the v1149 seed corpus, including checkpoint, tokenizer, metrics, manifest, prepared corpus, sample, and loss evidence.
+- Added CLI `scripts/run_unassisted_holdout_repair_training_v1150.py`; real evidence used `--run-training` to call `scripts/train.py` with the archived v1149 corpus.
+- Real v1150 run produced `status=pass`, `decision=unassisted_holdout_repair_training_run_ready`, `final_step=50`, `train_loss_delta=-1.802382`, `val_loss_delta=-1.49502`, and `failed_check_count=0`.
+- Wrote `unassisted_holdout_repair_training_handoff_v1150.json` with checkpoint, tokenizer, v1149 holdout prompts, and `next_step=run_unassisted_holdout_repair_replay_comparison`.
+- Kept `model_quality_claim=training_artifact_only` and `promotion_ready=False`; sample hit `fixed` but not `loss`, so v1151 must replay unchanged target-free holdout prompts before any capability claim.
+- Added tests for ready training evidence, missing checkpoint failure, wrong-corpus failure, output generation, handoff writing, and CLI directory input.
+- Verified with focused v1150 tests, py_compile, real CPU training evidence, Playwright MCP screenshot evidence, and local cleanup.
+- Archived v1150 evidence in `f/1150` and added the engineering-maintenance code explanation in `代码讲解记录_工程保养阶段/1162-v1150-unassisted-holdout-repair-training-run.md`.
 
 ## Latest v1149 checkpoint
 

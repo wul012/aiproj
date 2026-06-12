@@ -1,0 +1,665 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT unassisted holdout repair training run v1150",
+  "generated_at": "2026-06-12T13:40:14Z",
+  "status": "pass",
+  "decision": "unassisted_holdout_repair_training_run_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_unassisted_holdout_repair_seed_corpus": "D:\\aiproj\\f\\1149\\解释\\unassisted-holdout-repair-seed-corpus-v1149\\unassisted_holdout_repair_seed_corpus_v1149.json",
+  "run_dir": "output\\unassisted-holdout-repair-training-run-v1150\\run",
+  "seed_summary": {
+    "unassisted_holdout_repair_seed_corpus_ready": true,
+    "example_count": 9,
+    "unique_prompt_count": 6,
+    "pair_example_count": 7,
+    "target_free_holdout_prompt_count": 5,
+    "training_only_context_count": 1,
+    "decoder_anchor_example_count": 0,
+    "corpus_char_count": 198,
+    "model_quality_claim": "seed_corpus_only",
+    "promotion_ready": false,
+    "proposed_next_artifact": "unassisted_holdout_repair_training_run_v1150",
+    "next_step": "run_unassisted_holdout_repair_training",
+    "failed_check_count": 0
+  },
+  "artifact_rows": [
+    {
+      "key": "checkpoint",
+      "path": "output\\unassisted-holdout-repair-training-run-v1150\\run\\checkpoint.pt",
+      "exists": true,
+      "size": 70690
+    },
+    {
+      "key": "tokenizer",
+      "path": "output\\unassisted-holdout-repair-training-run-v1150\\run\\tokenizer.json",
+      "exists": true,
+      "size": 290
+    },
+    {
+      "key": "metrics",
+      "path": "output\\unassisted-holdout-repair-training-run-v1150\\run\\metrics.jsonl",
+      "exists": true,
+      "size": 673
+    },
+    {
+      "key": "train_config",
+      "path": "output\\unassisted-holdout-repair-training-run-v1150\\run\\train_config.json",
+      "exists": true,
+      "size": 983
+    },
+    {
+      "key": "run_manifest",
+      "path": "output\\unassisted-holdout-repair-training-run-v1150\\run\\run_manifest.json",
+      "exists": true,
+      "size": 10895
+    },
+    {
+      "key": "history_summary",
+      "path": "output\\unassisted-holdout-repair-training-run-v1150\\run\\history_summary.json",
+      "exists": true,
+      "size": 209
+    },
+    {
+      "key": "loss_curve",
+      "path": "output\\unassisted-holdout-repair-training-run-v1150\\run\\loss_curve.svg",
+      "exists": true,
+      "size": 1425
+    },
+    {
+      "key": "sample",
+      "path": "output\\unassisted-holdout-repair-training-run-v1150\\run\\sample.txt",
+      "exists": true,
+      "size": 90
+    },
+    {
+      "key": "prepared_corpus",
+      "path": "output\\unassisted-holdout-repair-training-run-v1150\\run\\prepared_corpus.txt",
+      "exists": true,
+      "size": 216
+    }
+  ],
+  "metrics": {
+    "record_count": 6,
+    "first": {
+      "last_loss": 3.110372543334961,
+      "step": 1,
+      "train_loss": 3.0307888984680176,
+      "val_loss": 2.9943225383758545
+    },
+    "last": {
+      "last_loss": 1.2787667512893677,
+      "step": 50,
+      "train_loss": 1.2284066677093506,
+      "val_loss": 1.499302864074707
+    },
+    "train_loss_delta": -1.802382,
+    "val_loss_delta": -1.49502
+  },
+  "train_config": {
+    "data": "D:\\aiproj\\data\\sample_zh.txt",
+    "data_dir": null,
+    "prepared_data": "D:\\aiproj\\f\\1149\\解释\\unassisted-holdout-repair-seed-corpus-v1149\\unassisted_holdout_repair_seed_corpus.txt",
+    "out_dir": "output\\unassisted-holdout-repair-training-run-v1150\\run",
+    "resume": null,
+    "tokenizer": "char",
+    "bpe_vocab_size": 256,
+    "bpe_min_frequency": 2,
+    "batch_size": 8,
+    "block_size": 24,
+    "max_iters": 50,
+    "eval_interval": 10,
+    "eval_iters": 2,
+    "learning_rate": 0.01,
+    "train_ratio": 0.85,
+    "n_layer": 1,
+    "n_head": 1,
+    "n_embd": 16,
+    "dropout": 0.0,
+    "seed": 1150,
+    "device": "cpu",
+    "sample_prompt": "answer:",
+    "sample_tokens": 12,
+    "sample_temperature": 0.2,
+    "sample_top_k": 5,
+    "no_sample": false,
+    "device_used": "cpu",
+    "data_source": {
+      "kind": "prepared_data",
+      "path": "D:\\aiproj\\f\\1149\\解释\\unassisted-holdout-repair-seed-corpus-v1149\\unassisted_holdout_repair_seed_corpus.txt"
+    }
+  },
+  "manifest": {
+    "schema_version": 1,
+    "run_dir": "output\\unassisted-holdout-repair-training-run-v1150\\run",
+    "created_at": "2026-06-12T13:40:13Z",
+    "started_at": "2026-06-12T13:40:10Z",
+    "finished_at": "2026-06-12T13:40:13Z",
+    "duration_seconds": 3.0,
+    "command": [
+      "python.exe",
+      "D:\\aiproj\\scripts\\train.py",
+      "--prepared-data",
+      "D:\\aiproj\\f\\1149\\解释\\unassisted-holdout-repair-seed-corpus-v1149\\unassisted_holdout_repair_seed_corpus.txt",
+      "--out-dir",
+      "output\\unassisted-holdout-repair-training-run-v1150\\run",
+      "--tokenizer",
+      "char",
+      "--batch-size",
+      "8",
+      "--block-size",
+      "24",
+      "--max-iters",
+      "50",
+      "--eval-interval",
+      "10",
+      "--eval-iters",
+      "2",
+      "--learning-rate",
+      "0.01",
+      "--train-ratio",
+      "0.85",
+      "--n-layer",
+      "1",
+      "--n-head",
+      "1",
+      "--n-embd",
+      "16",
+      "--dropout",
+      "0.0",
+      "--seed",
+      "1150",
+      "--device",
+      "cpu",
+      "--sample-prompt",
+      "answer:",
+      "--sample-tokens",
+      "12",
+      "--sample-temperature",
+      "0.2",
+      "--sample-top-k",
+      "5"
+    ],
+    "git": {
+      "commit": "a5c815677336a5197cce4a7a79b2521e930c68f1",
+      "short_commit": "a5c8156",
+      "branch": "main",
+      "tag": "v1149.0.0",
+      "dirty": true
+    },
+    "environment": {
+      "python": "3.13.3",
+      "platform": "Windows-11-10.0.26100-SP0",
+      "executable": "D:\\python\\python.exe",
+      "torch": "2.6.0+cu124",
+      "numpy": "2.2.1"
+    },
+    "data": {
+      "source": {
+        "kind": "prepared_data",
+        "path": "D:\\aiproj\\f\\1149\\解释\\unassisted-holdout-repair-seed-corpus-v1149\\unassisted_holdout_repair_seed_corpus.txt"
+      },
+      "token_count": 198,
+      "train_token_count": 168,
+      "val_token_count": 30,
+      "dataset_report": null,
+      "dataset_quality": null,
+      "dataset_version": null
+    },
+    "model": {
+      "config": {
+        "vocab_size": 22,
+        "block_size": 24,
+        "n_layer": 1,
+        "n_head": 1,
+        "n_embd": 16,
+        "dropout": 0.0,
+        "bias": true
+      },
+      "parameter_count": 4048
+    },
+    "training": {
+      "args": {
+        "data": "D:\\aiproj\\data\\sample_zh.txt",
+        "data_dir": null,
+        "prepared_data": "D:\\aiproj\\f\\1149\\解释\\unassisted-holdout-repair-seed-corpus-v1149\\unassisted_holdout_repair_seed_corpus.txt",
+        "out_dir": "output\\unassisted-holdout-repair-training-run-v1150\\run",
+        "resume": null,
+        "tokenizer": "char",
+        "bpe_vocab_size": 256,
+        "bpe_min_frequency": 2,
+        "batch_size": 8,
+        "block_size": 24,
+        "max_iters": 50,
+        "eval_interval": 10,
+        "eval_iters": 2,
+        "learning_rate": 0.01,
+        "train_ratio": 0.85,
+        "n_layer": 1,
+        "n_head": 1,
+        "n_embd": 16,
+        "dropout": 0.0,
+        "seed": 1150,
+        "device": "cpu",
+        "sample_prompt": "answer:",
+        "sample_tokens": 12,
+        "sample_temperature": 0.2,
+        "sample_top_k": 5,
+        "no_sample": false,
+        "device_used": "cpu",
+        "data_source": {
+          "kind": "prepared_data",
+          "path": "D:\\aiproj\\f\\1149\\解释\\unassisted-holdout-repair-seed-corpus-v1149\\unassisted_holdout_repair_seed_corpus.txt"
+        }
+      },
+      "tokenizer": "char",
+      "device_used": "cpu",
+      "start_step": 1,
+      "end_step": 50
+    },
+    "results": {
+      "last_loss": 1.2787667512893677,
+      "history_summary": {
+        "record_count": 6,
+        "first_step": 1,
+        "last_step": 50,
+        "best_val_step": 50,
+        "best_val_loss": 1.499302864074707,
+        "last_train_loss": 1.2284066677093506,
+        "last_val_loss": 1.499302864074707
+      }
+    },
+    "artifacts": [
+      {
+        "key": "checkpoint",
+        "path": "checkpoint.pt",
+        "description": "model and optimizer state",
+        "exists": true,
+        "size_bytes": 70690,
+        "sha256": "0659329786d264a371f46020de5fb0393d7371cdaee754b9093cfa42cfa303a9"
+      },
+      {
+        "key": "tokenizer",
+        "path": "tokenizer.json",
+        "description": "tokenizer vocabulary and metadata",
+        "exists": true,
+        "size_bytes": 290,
+        "sha256": "15cdbbbebfd5d6c161612b29943000c10ad922186a114571a55086fb60c233e2"
+      },
+      {
+        "key": "train_config",
+        "path": "train_config.json",
+        "description": "training command configuration",
+        "exists": true,
+        "size_bytes": 983,
+        "sha256": "f8f2976820f2b60f8bc6a0124a6320138a689fe5d0a5758673292450c63934ed"
+      },
+      {
+        "key": "metrics",
+        "path": "metrics.jsonl",
+        "description": "step-by-step training metrics",
+        "exists": true,
+        "size_bytes": 673,
+        "sha256": "c34ee7a1eab303957a4a33e15f427b20a6b4b5d028aa63484bfbcc4d1b8bd0b2"
+      },
+      {
+        "key": "history_summary",
+        "path": "history_summary.json",
+        "description": "best/latest loss summary",
+        "exists": true,
+        "size_bytes": 209,
+        "sha256": "2101af7b9a99fb992727fa8db7120b29de81afe8b452f73939ef6b11436a4471"
+      },
+      {
+        "key": "loss_curve",
+        "path": "loss_curve.svg",
+        "description": "loss curve chart",
+        "exists": true,
+        "size_bytes": 1425,
+        "sha256": "fb794c943151ea0b22f9f7d09063e546df61c17cc746e2b4f2781cb7dda8ded2"
+      },
+      {
+        "key": "prepared_corpus",
+        "path": "prepared_corpus.txt",
+        "description": "merged training corpus",
+        "exists": true,
+        "size_bytes": 216,
+        "sha256": "aa11afeb01204796b4eed0108dee2e9dea9f3d7551ed32e4ed7c53558e79f571"
+      },
+      {
+        "key": "dataset_report",
+        "path": "dataset_report.json",
+        "description": "dataset source statistics",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "dataset_chart",
+        "path": "dataset_report.svg",
+        "description": "dataset source chart",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "dataset_quality",
+        "path": "dataset_quality.json",
+        "description": "dataset quality report",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "dataset_quality_chart",
+        "path": "dataset_quality.svg",
+        "description": "dataset quality chart",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "dataset_version",
+        "path": "dataset_version.json",
+        "description": "dataset version manifest",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "dataset_version_html",
+        "path": "dataset_version.html",
+        "description": "browser dataset version report",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "sample",
+        "path": "sample.txt",
+        "description": "post-training sample",
+        "exists": true,
+        "size_bytes": 90,
+        "sha256": "83bd7262bd48c5c60a9eca1481c6d53a9ac1f202b4196ea70a9648fd04c66f08"
+      },
+      {
+        "key": "eval_report",
+        "path": "eval_report.json",
+        "description": "checkpoint evaluation report",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "eval_suite",
+        "path": "eval_suite/eval_suite.json",
+        "description": "fixed prompt evaluation suite",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "eval_suite_csv",
+        "path": "eval_suite/eval_suite.csv",
+        "description": "fixed prompt evaluation table",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "eval_suite_chart",
+        "path": "eval_suite/eval_suite.svg",
+        "description": "fixed prompt evaluation chart",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "eval_suite_html",
+        "path": "eval_suite/eval_suite.html",
+        "description": "browser benchmark evaluation report",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "model_report",
+        "path": "model_report/model_report.json",
+        "description": "model architecture report",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "model_chart",
+        "path": "model_report/model_architecture.svg",
+        "description": "model architecture chart",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "prediction_report",
+        "path": "predictions/predictions.json",
+        "description": "next-token prediction report",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "prediction_chart",
+        "path": "predictions/predictions.svg",
+        "description": "next-token prediction chart",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "attention_report",
+        "path": "attention/attention.json",
+        "description": "attention inspection report",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "attention_chart",
+        "path": "attention/attention.svg",
+        "description": "attention heatmap",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "transcript",
+        "path": "transcript.json",
+        "description": "chat transcript",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "generated",
+        "path": "generated.txt",
+        "description": "standalone generation output",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "experiment_card_json",
+        "path": "experiment_card.json",
+        "description": "machine-readable experiment card",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "experiment_card_md",
+        "path": "experiment_card.md",
+        "description": "markdown experiment card",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "experiment_card_html",
+        "path": "experiment_card.html",
+        "description": "browser experiment card",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "dashboard",
+        "path": "dashboard.html",
+        "description": "static dashboard",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "playground",
+        "path": "playground.html",
+        "description": "static playground",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      }
+    ]
+  },
+  "sample_preview": "prompt: answer:\nmax_new_tokens: 12\ntemperature: 0.2\ntop_k: 5\n\nanswer: fixed\n\n\n\naa",
+  "check_rows": [
+    {
+      "id": "seed_corpus_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "v1149 seed corpus must pass"
+    },
+    {
+      "id": "seed_corpus_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "v1149 seed corpus ready flag must be true"
+    },
+    {
+      "id": "seed_corpus_next_step_matches_training",
+      "status": "pass",
+      "actual": "run_unassisted_holdout_repair_training",
+      "detail": "v1149 must point to bounded training"
+    },
+    {
+      "id": "checkpoint_exists",
+      "status": "pass",
+      "actual": "output\\unassisted-holdout-repair-training-run-v1150\\run\\checkpoint.pt",
+      "detail": "training must produce checkpoint.pt"
+    },
+    {
+      "id": "tokenizer_exists",
+      "status": "pass",
+      "actual": "output\\unassisted-holdout-repair-training-run-v1150\\run\\tokenizer.json",
+      "detail": "training must produce tokenizer.json"
+    },
+    {
+      "id": "metrics_exists",
+      "status": "pass",
+      "actual": "output\\unassisted-holdout-repair-training-run-v1150\\run\\metrics.jsonl",
+      "detail": "training must produce metrics.jsonl"
+    },
+    {
+      "id": "manifest_exists",
+      "status": "pass",
+      "actual": "output\\unassisted-holdout-repair-training-run-v1150\\run\\run_manifest.json",
+      "detail": "training must produce run_manifest.json"
+    },
+    {
+      "id": "prepared_corpus_matches_seed",
+      "status": "pass",
+      "actual": "output\\unassisted-holdout-repair-training-run-v1150\\run\\prepared_corpus.txt",
+      "detail": "training must consume the exact v1149 seed corpus text"
+    },
+    {
+      "id": "metrics_records_present",
+      "status": "pass",
+      "actual": 6,
+      "detail": "training should record first and last metrics"
+    },
+    {
+      "id": "max_iters_reached",
+      "status": "pass",
+      "actual": {
+        "last_step": 50,
+        "max_iters": 50
+      },
+      "detail": "metrics must reach train_config.max_iters"
+    },
+    {
+      "id": "train_loss_decreased",
+      "status": "pass",
+      "actual": -1.802382,
+      "detail": "bounded training should reduce train loss"
+    },
+    {
+      "id": "val_loss_decreased",
+      "status": "pass",
+      "actual": -1.49502,
+      "detail": "bounded training should reduce validation loss on the small holdout split"
+    },
+    {
+      "id": "promotion_boundary_kept",
+      "status": "pass",
+      "actual": false,
+      "detail": "training artifact is not promotion evidence before replay comparison"
+    }
+  ],
+  "training_run": {
+    "ready": true,
+    "artifact_count": 9,
+    "metric_record_count": 6,
+    "final_step": 50,
+    "final_train_loss": 1.2284066677093506,
+    "final_val_loss": 1.499302864074707,
+    "train_loss_delta": -1.802382,
+    "val_loss_delta": -1.49502,
+    "max_iters": 50,
+    "seed": 1150,
+    "checkpoint": "output\\unassisted-holdout-repair-training-run-v1150\\run\\checkpoint.pt",
+    "tokenizer": "output\\unassisted-holdout-repair-training-run-v1150\\run\\tokenizer.json",
+    "prepared_data": "D:\\aiproj\\f\\1149\\解释\\unassisted-holdout-repair-seed-corpus-v1149\\unassisted_holdout_repair_seed_corpus.txt",
+    "source_seed_corpus": "D:\\aiproj\\f\\1149\\解释\\unassisted-holdout-repair-seed-corpus-v1149\\unassisted_holdout_repair_seed_corpus_v1149.json",
+    "sample_fixed_hit": true,
+    "sample_loss_hit": false,
+    "promotion_ready": false,
+    "model_quality_claim": "training_artifact_only",
+    "proposed_next_artifact": "unassisted_holdout_repair_replay_comparison_v1151",
+    "next_step": "run_unassisted_holdout_repair_replay_comparison"
+  },
+  "summary": {
+    "unassisted_holdout_repair_training_ready": true,
+    "artifact_count": 9,
+    "metric_record_count": 6,
+    "final_step": 50,
+    "final_train_loss": 1.2284066677093506,
+    "final_val_loss": 1.499302864074707,
+    "train_loss_delta": -1.802382,
+    "val_loss_delta": -1.49502,
+    "sample_fixed_hit": true,
+    "sample_loss_hit": false,
+    "model_quality_claim": "training_artifact_only",
+    "promotion_ready": false,
+    "proposed_next_artifact": "unassisted_holdout_repair_replay_comparison_v1151",
+    "next_step": "run_unassisted_holdout_repair_replay_comparison",
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "training_artifact_only",
+    "reason": "A bounded checkpoint was trained from the v1149 seed corpus, but capability improvement must be proven by replaying the unchanged target-free holdout prompts.",
+    "next_action": "run_unassisted_holdout_repair_replay_comparison"
+  },
+  "csv_fieldnames": [
+    "key",
+    "path",
+    "exists",
+    "size"
+  ]
+}

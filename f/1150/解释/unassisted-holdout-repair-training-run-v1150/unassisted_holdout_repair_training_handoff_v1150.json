@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "status": "pass",
+  "decision": "unassisted_holdout_repair_training_run_ready",
+  "source_unassisted_holdout_repair_seed_corpus": "D:\\aiproj\\f\\1149\\解释\\unassisted-holdout-repair-seed-corpus-v1149\\unassisted_holdout_repair_seed_corpus_v1149.json",
+  "run_dir": "output\\unassisted-holdout-repair-training-run-v1150\\run",
+  "checkpoint": "output\\unassisted-holdout-repair-training-run-v1150\\run\\checkpoint.pt",
+  "tokenizer": "output\\unassisted-holdout-repair-training-run-v1150\\run\\tokenizer.json",
+  "holdout_prompts": "D:\\aiproj\\f\\1149\\解释\\unassisted-holdout-repair-seed-corpus-v1149\\unassisted_holdout_repair_holdout_prompts.json",
+  "model_quality_claim": "training_artifact_only",
+  "promotion_ready": false,
+  "next_step": "run_unassisted_holdout_repair_replay_comparison"
+}

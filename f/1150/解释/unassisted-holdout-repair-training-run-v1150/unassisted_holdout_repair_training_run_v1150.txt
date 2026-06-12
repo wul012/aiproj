@@ -1,0 +1,17 @@
+status=pass
+decision=unassisted_holdout_repair_training_run_ready
+unassisted_holdout_repair_training_ready=True
+artifact_count=9
+metric_record_count=6
+final_step=50
+final_train_loss=1.2284066677093506
+final_val_loss=1.499302864074707
+train_loss_delta=-1.802382
+val_loss_delta=-1.49502
+sample_fixed_hit=True
+sample_loss_hit=False
+model_quality_claim=training_artifact_only
+promotion_ready=False
+proposed_next_artifact=unassisted_holdout_repair_replay_comparison_v1151
+next_step=run_unassisted_holdout_repair_replay_comparison
+failed_check_count=0

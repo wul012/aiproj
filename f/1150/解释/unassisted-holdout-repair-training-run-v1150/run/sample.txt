@@ -1,0 +1,10 @@
+prompt: answer:
+max_new_tokens: 12
+temperature: 0.2
+top_k: 5
+
+answer: fixed
+
+
+
+aa
