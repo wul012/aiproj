@@ -1,0 +1,148 @@
+{
+  "schema_version": 1,
+  "case_count": 5,
+  "coverage": {
+    "status": "pass",
+    "comparison_status": "pass",
+    "decision": "holdout_scorecard_smoke_has_minimum_case_coverage",
+    "comparison_decision": "single_checkpoint_smoke_not_candidate_comparison",
+    "case_count": 5,
+    "task_type_count": 3,
+    "difficulty_count": 3,
+    "tag_count": 3,
+    "blockers": [],
+    "comparison_blockers": []
+  },
+  "results": [
+    {
+      "name": "holdout-scorecard-qa-easy",
+      "task_type": "qa",
+      "difficulty": "easy",
+      "prompt": "answer the holdout signal using fixed loss\nanswer:",
+      "generated": "answer the holdout signal using fixed loss\nanswer: fixed loss",
+      "continuation": " fixed loss",
+      "expected_behavior": "Continuation contains fixed and loss for a bounded holdout scorecard smoke.",
+      "tags": [
+        "holdout-scorecard-smoke",
+        "real-generation",
+        "required-terms"
+      ],
+      "rubric": {
+        "must_include": [
+          "fixed",
+          "loss"
+        ],
+        "must_avoid": [],
+        "min_chars": 6,
+        "max_chars": 64
+      },
+      "max_new_tokens": 1,
+      "char_count": 11,
+      "unique_char_count": 9
+    },
+    {
+      "name": "holdout-scorecard-summary-medium",
+      "task_type": "summary",
+      "difficulty": "medium",
+      "prompt": "summarize the holdout signal with fixed loss\nsummary:",
+      "generated": "summarize the holdout signal with fixed loss\nsummary: fixed loss",
+      "continuation": " fixed loss",
+      "expected_behavior": "Continuation contains fixed and loss for a bounded holdout scorecard smoke.",
+      "tags": [
+        "holdout-scorecard-smoke",
+        "real-generation",
+        "required-terms"
+      ],
+      "rubric": {
+        "must_include": [
+          "fixed",
+          "loss"
+        ],
+        "must_avoid": [],
+        "min_chars": 6,
+        "max_chars": 64
+      },
+      "max_new_tokens": 1,
+      "char_count": 11,
+      "unique_char_count": 9
+    },
+    {
+      "name": "holdout-scorecard-continuation-hard",
+      "task_type": "continuation",
+      "difficulty": "hard",
+      "prompt": "continue the calibration phrase fixed loss\ncontinuation:",
+      "generated": "continue the calibration phrase fixed loss\ncontinuation: fixed loss",
+      "continuation": " fixed loss",
+      "expected_behavior": "Continuation contains fixed and loss for a bounded holdout scorecard smoke.",
+      "tags": [
+        "holdout-scorecard-smoke",
+        "real-generation",
+        "required-terms"
+      ],
+      "rubric": {
+        "must_include": [
+          "fixed",
+          "loss"
+        ],
+        "must_avoid": [],
+        "min_chars": 6,
+        "max_chars": 64
+      },
+      "max_new_tokens": 1,
+      "char_count": 11,
+      "unique_char_count": 9
+    },
+    {
+      "name": "holdout-scorecard-qa-hard",
+      "task_type": "qa",
+      "difficulty": "hard",
+      "prompt": "state the required scorecard terms fixed loss\nanswer:",
+      "generated": "state the required scorecard terms fixed loss\nanswer: fixed loss",
+      "continuation": " fixed loss",
+      "expected_behavior": "Continuation contains fixed and loss for a bounded holdout scorecard smoke.",
+      "tags": [
+        "holdout-scorecard-smoke",
+        "real-generation",
+        "required-terms"
+      ],
+      "rubric": {
+        "must_include": [
+          "fixed",
+          "loss"
+        ],
+        "must_avoid": [],
+        "min_chars": 6,
+        "max_chars": 64
+      },
+      "max_new_tokens": 1,
+      "char_count": 11,
+      "unique_char_count": 9
+    },
+    {
+      "name": "holdout-scorecard-summary-easy",
+      "task_type": "summary",
+      "difficulty": "easy",
+      "prompt": "brief summary must include fixed loss\nsummary:",
+      "generated": "brief summary must include fixed loss\nsummary: fixed loss",
+      "continuation": " fixed loss",
+      "expected_behavior": "Continuation contains fixed and loss for a bounded holdout scorecard smoke.",
+      "tags": [
+        "holdout-scorecard-smoke",
+        "real-generation",
+        "required-terms"
+      ],
+      "rubric": {
+        "must_include": [
+          "fixed",
+          "loss"
+        ],
+        "must_avoid": [],
+        "min_chars": 6,
+        "max_chars": 64
+      },
+      "max_new_tokens": 1,
+      "char_count": 11,
+      "unique_char_count": 9
+    }
+  ]
+}

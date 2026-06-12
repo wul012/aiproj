@@ -1,0 +1,308 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT holdout scorecard smoke v1144",
+  "generated_at": "2026-06-12T10:48:11Z",
+  "status": "pass",
+  "decision": "model_capability_holdout_scorecard_smoke_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_suite_manifest": "D:\\aiproj\\f\\1137\\解释\\model-capability-regression-suite-manifest-v1137\\model_capability_regression_suite_manifest_v1137.json",
+  "source_required_term_real_execution": "D:\\aiproj\\f\\1143\\解释\\model-capability-required-term-real-execution-v1143\\model_capability_required_term_real_execution_v1143.json",
+  "source_suite_row": {
+    "suite_id": "capability-regression-04",
+    "check_id": "holdout_scorecard_smoke",
+    "primary_source": "D:/aiproj/src/minigpt/benchmark_scorecard.py",
+    "primary_test": "D:/aiproj/tests/test_benchmark_scorecard.py",
+    "artifact_hint": "D:/aiproj/f/1100/解释/receipt-index-review-v1100/randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1100.json",
+    "status": "manifested",
+    "boundary": "evidence_lookup_not_model_promotion"
+  },
+  "checkpoint": "f\\1144\\解释\\model-capability-holdout-scorecard-smoke-v1144\\tiny-holdout-scorecard-checkpoint\\checkpoint.pt",
+  "tokenizer": "f\\1144\\解释\\model-capability-holdout-scorecard-smoke-v1144\\tiny-holdout-scorecard-checkpoint\\tokenizer.json",
+  "run_dir": "f\\1144\\解释\\model-capability-holdout-scorecard-smoke-v1144\\real-holdout-scorecard-run",
+  "scorecard_outputs": {
+    "json": "f\\1144\\解释\\model-capability-holdout-scorecard-smoke-v1144\\real-holdout-scorecard-run\\scorecard\\benchmark_scorecard.json",
+    "csv": "f\\1144\\解释\\model-capability-holdout-scorecard-smoke-v1144\\real-holdout-scorecard-run\\scorecard\\benchmark_scorecard.csv",
+    "drilldowns_csv": "f\\1144\\解释\\model-capability-holdout-scorecard-smoke-v1144\\real-holdout-scorecard-run\\scorecard\\benchmark_scorecard_drilldowns.csv",
+    "rubric_csv": "f\\1144\\解释\\model-capability-holdout-scorecard-smoke-v1144\\real-holdout-scorecard-run\\scorecard\\benchmark_scorecard_rubric.csv",
+    "markdown": "f\\1144\\解释\\model-capability-holdout-scorecard-smoke-v1144\\real-holdout-scorecard-run\\scorecard\\benchmark_scorecard.md",
+    "html": "f\\1144\\解释\\model-capability-holdout-scorecard-smoke-v1144\\real-holdout-scorecard-run\\scorecard\\benchmark_scorecard.html"
+  },
+  "scorecard_summary": {
+    "overall_score": 97.0,
+    "overall_status": "pass",
+    "component_count": 6,
+    "eval_suite_cases": 5,
+    "eval_suite_coverage_status": "pass",
+    "eval_suite_comparison_status": "pass",
+    "eval_suite_design_coverage_status": null,
+    "eval_suite_design_comparison_status": null,
+    "eval_suite_design_duplicate_seed_count": null,
+    "eval_suite_design_expected_behavior_complete": null,
+    "generation_quality_status": "pass",
+    "generation_quality_cases": 5,
+    "generation_quality_total_flags": 0,
+    "generation_quality_dominant_flag": null,
+    "generation_quality_worst_case": null,
+    "generation_quality_worst_case_status": null,
+    "rubric_status": "pass",
+    "rubric_avg_score": 100.0,
+    "rubric_pass_count": 5,
+    "rubric_warn_count": 0,
+    "rubric_fail_count": 0,
+    "weakest_rubric_case": "holdout-scorecard-continuation-hard",
+    "weakest_rubric_score": 100.0,
+    "pair_batch_cases": 5,
+    "pair_generated_differences": 0,
+    "max_abs_generated_delta": 0,
+    "pair_same_checkpoint_baseline": true,
+    "pair_comparison_mode": "same_checkpoint_baseline",
+    "task_type_group_count": 3,
+    "difficulty_group_count": 3,
+    "weakest_task_type": "continuation",
+    "weakest_task_type_score": 95.0,
+    "weakest_difficulty": "medium",
+    "weakest_difficulty_score": 95.0
+  },
+  "rows": [
+    {
+      "case_id": "holdout-scorecard-qa-easy",
+      "task_type": "qa",
+      "difficulty": "easy",
+      "prompt": "answer the holdout signal using fixed loss\nanswer:",
+      "generated": "answer the holdout signal using fixed loss\nanswer: fixed loss",
+      "continuation": " fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "missed_terms": [],
+      "case_pass": true,
+      "rubric_score": 100.0,
+      "seed": 1145,
+      "max_new_tokens": 1,
+      "temperature": 0.2,
+      "top_k": 1,
+      "generation_error": ""
+    },
+    {
+      "case_id": "holdout-scorecard-summary-medium",
+      "task_type": "summary",
+      "difficulty": "medium",
+      "prompt": "summarize the holdout signal with fixed loss\nsummary:",
+      "generated": "summarize the holdout signal with fixed loss\nsummary: fixed loss",
+      "continuation": " fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "missed_terms": [],
+      "case_pass": true,
+      "rubric_score": 100.0,
+      "seed": 1146,
+      "max_new_tokens": 1,
+      "temperature": 0.2,
+      "top_k": 1,
+      "generation_error": ""
+    },
+    {
+      "case_id": "holdout-scorecard-continuation-hard",
+      "task_type": "continuation",
+      "difficulty": "hard",
+      "prompt": "continue the calibration phrase fixed loss\ncontinuation:",
+      "generated": "continue the calibration phrase fixed loss\ncontinuation: fixed loss",
+      "continuation": " fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "missed_terms": [],
+      "case_pass": true,
+      "rubric_score": 100.0,
+      "seed": 1147,
+      "max_new_tokens": 1,
+      "temperature": 0.2,
+      "top_k": 1,
+      "generation_error": ""
+    },
+    {
+      "case_id": "holdout-scorecard-qa-hard",
+      "task_type": "qa",
+      "difficulty": "hard",
+      "prompt": "state the required scorecard terms fixed loss\nanswer:",
+      "generated": "state the required scorecard terms fixed loss\nanswer: fixed loss",
+      "continuation": " fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "missed_terms": [],
+      "case_pass": true,
+      "rubric_score": 100.0,
+      "seed": 1148,
+      "max_new_tokens": 1,
+      "temperature": 0.2,
+      "top_k": 1,
+      "generation_error": ""
+    },
+    {
+      "case_id": "holdout-scorecard-summary-easy",
+      "task_type": "summary",
+      "difficulty": "easy",
+      "prompt": "brief summary must include fixed loss\nsummary:",
+      "generated": "brief summary must include fixed loss\nsummary: fixed loss",
+      "continuation": " fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "missed_terms": [],
+      "case_pass": true,
+      "rubric_score": 100.0,
+      "seed": 1149,
+      "max_new_tokens": 1,
+      "temperature": 0.2,
+      "top_k": 1,
+      "generation_error": ""
+    }
+  ],
+  "check_rows": [
+    {
+      "id": "suite_manifest_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "v1137 suite manifest must pass"
+    },
+    {
+      "id": "selected_suite_row_present",
+      "status": "pass",
+      "actual": "capability-regression-04",
+      "detail": "capability-regression-04 must be present"
+    },
+    {
+      "id": "selected_check_is_holdout_scorecard_smoke",
+      "status": "pass",
+      "actual": "holdout_scorecard_smoke",
+      "detail": "v1144 must run holdout_scorecard_smoke"
+    },
+    {
+      "id": "artifact_hint_not_used_as_result",
+      "status": "pass",
+      "actual": "D:/aiproj/f/1100/解释/receipt-index-review-v1100/randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1100.json",
+      "detail": "stale artifact hint is retained only as upstream context"
+    },
+    {
+      "id": "required_term_real_execution_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "v1143 real required-term execution must pass first"
+    },
+    {
+      "id": "checkpoint_exists",
+      "status": "pass",
+      "actual": "f\\1144\\解释\\model-capability-holdout-scorecard-smoke-v1144\\tiny-holdout-scorecard-checkpoint\\checkpoint.pt",
+      "detail": "checkpoint must exist"
+    },
+    {
+      "id": "tokenizer_exists",
+      "status": "pass",
+      "actual": "f\\1144\\解释\\model-capability-holdout-scorecard-smoke-v1144\\tiny-holdout-scorecard-checkpoint\\tokenizer.json",
+      "detail": "tokenizer must exist"
+    },
+    {
+      "id": "all_cases_executed",
+      "status": "pass",
+      "actual": 5,
+      "detail": "smoke scorecard must execute five real holdout cases"
+    },
+    {
+      "id": "no_generation_errors",
+      "status": "pass",
+      "actual": 0,
+      "detail": "generation should not raise errors"
+    },
+    {
+      "id": "all_cases_pass_required_terms",
+      "status": "pass",
+      "actual": 5,
+      "detail": "each generated continuation must hit fixed and loss"
+    },
+    {
+      "id": "scorecard_overall_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "benchmark scorecard must pass as a smoke scorecard"
+    },
+    {
+      "id": "scorecard_outputs_written",
+      "status": "pass",
+      "actual": [
+        "csv",
+        "drilldowns_csv",
+        "html",
+        "json",
+        "markdown",
+        "rubric_csv"
+      ],
+      "detail": "nested benchmark scorecard outputs must exist"
+    },
+    {
+      "id": "promotion_boundary_kept",
+      "status": "pass",
+      "actual": false,
+      "detail": "holdout scorecard smoke must not set promotion_ready true"
+    }
+  ],
+  "summary": {
+    "holdout_scorecard_smoke_ready": true,
+    "case_count": 5,
+    "executed_case_count": 5,
+    "passed_case_count": 5,
+    "failed_case_count": 0,
+    "scorecard_overall_status": "pass",
+    "scorecard_overall_score": 97.0,
+    "rubric_avg_score": 100.0,
+    "generation_quality_status": "pass",
+    "pair_same_checkpoint_baseline": true,
+    "model_quality_claim": "holdout_scorecard_smoke_real_execution",
+    "promotion_ready": false,
+    "next_step": "run_loss_signal_bridge_and_decoder_anchor_distribution_v1145",
+    "failed_check_count": 0
+  },
+  "recommendations": [
+    "Treat v1144 as a real holdout scorecard smoke, not as a promotion decision.",
+    "Use v1145 to add loss_signal_bridge and decoder_anchor_distribution real evidence."
+  ],
+  "csv_fieldnames": [
+    "case_id",
+    "task_type",
+    "difficulty",
+    "prompt",
+    "continuation",
+    "hit_terms",
+    "missed_terms",
+    "case_pass",
+    "rubric_score",
+    "generation_error"
+  ]
+}

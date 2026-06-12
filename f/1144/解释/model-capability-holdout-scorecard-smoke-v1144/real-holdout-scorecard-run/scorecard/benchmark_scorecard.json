@@ -1,0 +1,838 @@
+{
+  "schema_version": 3,
+  "title": "MiniGPT benchmark scorecard",
+  "generated_at": "2026-06-12T10:48:11Z",
+  "run_dir": "f\\1144\\解释\\model-capability-holdout-scorecard-smoke-v1144\\real-holdout-scorecard-run",
+  "registry_path": null,
+  "summary": {
+    "overall_score": 97.0,
+    "overall_status": "pass",
+    "component_count": 6,
+    "eval_suite_cases": 5,
+    "eval_suite_coverage_status": "pass",
+    "eval_suite_comparison_status": "pass",
+    "eval_suite_design_coverage_status": null,
+    "eval_suite_design_comparison_status": null,
+    "eval_suite_design_duplicate_seed_count": null,
+    "eval_suite_design_expected_behavior_complete": null,
+    "generation_quality_status": "pass",
+    "generation_quality_cases": 5,
+    "generation_quality_total_flags": 0,
+    "generation_quality_dominant_flag": null,
+    "generation_quality_worst_case": null,
+    "generation_quality_worst_case_status": null,
+    "rubric_status": "pass",
+    "rubric_avg_score": 100.0,
+    "rubric_pass_count": 5,
+    "rubric_warn_count": 0,
+    "rubric_fail_count": 0,
+    "weakest_rubric_case": "holdout-scorecard-continuation-hard",
+    "weakest_rubric_score": 100.0,
+    "pair_batch_cases": 5,
+    "pair_generated_differences": 0,
+    "max_abs_generated_delta": 0,
+    "pair_same_checkpoint_baseline": true,
+    "pair_comparison_mode": "same_checkpoint_baseline",
+    "task_type_group_count": 3,
+    "difficulty_group_count": 3,
+    "weakest_task_type": "continuation",
+    "weakest_task_type_score": 95.0,
+    "weakest_difficulty": "medium",
+    "weakest_difficulty_score": 95.0
+  },
+  "components": [
+    {
+      "key": "eval_coverage",
+      "title": "Eval Suite Coverage",
+      "status": "pass",
+      "score": 100.0,
+      "weight": 0.15,
+      "weighted_score": 15.0,
+      "evidence_path": "f\\1144\\解释\\model-capability-holdout-scorecard-smoke-v1144\\real-holdout-scorecard-run\\eval_suite\\eval_suite.json",
+      "detail": "5 fixed prompt case(s). coverage=pass, comparison=pass.",
+      "metrics": {
+        "case_count": 5,
+        "coverage_available": true,
+        "design_summary_available": false,
+        "coverage_status": "pass",
+        "comparison_status": "pass",
+        "decision": "holdout_scorecard_smoke_has_minimum_case_coverage",
+        "comparison_decision": "single_checkpoint_smoke_not_candidate_comparison",
+        "task_type_count": 3,
+        "difficulty_count": 3,
+        "tag_count": 3,
+        "blockers": [],
+        "comparison_blockers": []
+      }
+    },
+    {
+      "key": "generation_quality",
+      "title": "Generation Quality",
+      "status": "pass",
+      "score": 100.0,
+      "weight": 0.2,
+      "weighted_score": 20.0,
+      "evidence_path": "f\\1144\\解释\\model-capability-holdout-scorecard-smoke-v1144\\real-holdout-scorecard-run\\generation_quality\\generation_quality.json",
+      "detail": "5 pass / 0 warn / 0 fail.",
+      "metrics": {
+        "case_count": 5,
+        "pass_count": 5,
+        "warn_count": 0,
+        "fail_count": 0,
+        "overall_status": "pass",
+        "total_flags": 0,
+        "dominant_flag": null,
+        "flag_id_counts": {},
+        "worst_generation_case": null,
+        "worst_generation_case_status": null,
+        "worst_generation_case_flags": [],
+        "raw_score": 100.0,
+        "flag_penalty": 0.0
+      }
+    },
+    {
+      "key": "rubric_correctness",
+      "title": "Rubric Correctness",
+      "status": "pass",
+      "score": 100.0,
+      "weight": 0.25,
+      "weighted_score": 25.0,
+      "evidence_path": "benchmark_scorecard.rubric_scores",
+      "detail": "5 pass / 0 warn / 0 fail.",
+      "metrics": {
+        "case_count": 5,
+        "avg_score": 100.0,
+        "weakest_case": "holdout-scorecard-continuation-hard"
+      }
+    },
+    {
+      "key": "pair_consistency",
+      "title": "Pair Consistency",
+      "status": "pass",
+      "score": 90.0,
+      "weight": 0.15,
+      "weighted_score": 13.5,
+      "evidence_path": "f\\1144\\解释\\model-capability-holdout-scorecard-smoke-v1144\\real-holdout-scorecard-run\\pair_batch\\pair_generation_batch.json",
+      "detail": "5 / 5 pair generations matched exactly. Same-checkpoint baseline proves reproducibility, not cross-checkpoint improvement.",
+      "metrics": {
+        "case_count": 5,
+        "generated_equal_count": 5,
+        "same_checkpoint_baseline": true,
+        "comparison_mode": "same_checkpoint_baseline"
+      }
+    },
+    {
+      "key": "pair_delta_stability",
+      "title": "Pair Delta Stability",
+      "status": "pass",
+      "score": 90.0,
+      "weight": 0.15,
+      "weighted_score": 13.5,
+      "evidence_path": "f\\1144\\解释\\model-capability-holdout-scorecard-smoke-v1144\\real-holdout-scorecard-run\\pair_batch\\pair_generation_batch.json",
+      "detail": "avg abs generated delta=0, max abs generated delta=0. Same-checkpoint delta is a reproducibility baseline.",
+      "metrics": {
+        "avg_abs_generated_char_delta": 0.0,
+        "max_abs_generated_char_delta": 0,
+        "same_checkpoint_baseline": true,
+        "comparison_mode": "same_checkpoint_baseline"
+      }
+    },
+    {
+      "key": "evidence_completeness",
+      "title": "Benchmark Evidence Completeness",
+      "status": "pass",
+      "score": 100.0,
+      "weight": 0.1,
+      "weighted_score": 10.0,
+      "evidence_path": "f\\1144\\解释\\model-capability-holdout-scorecard-smoke-v1144\\real-holdout-scorecard-run",
+      "detail": "3 / 3 evidence groups present.",
+      "metrics": {
+        "eval_suite": true,
+        "generation_quality": true,
+        "pair_batch": true
+      }
+    }
+  ],
+  "rubric_scores": {
+    "schema_version": 1,
+    "summary": {
+      "case_count": 5,
+      "avg_score": 100.0,
+      "overall_status": "pass",
+      "pass_count": 5,
+      "warn_count": 0,
+      "fail_count": 0,
+      "weakest_case": "holdout-scorecard-continuation-hard",
+      "weakest_score": 100.0
+    },
+    "cases": [
+      {
+        "name": "holdout-scorecard-continuation-hard",
+        "task_type": "continuation",
+        "difficulty": "hard",
+        "status": "pass",
+        "score": 100.0,
+        "passed_checks": 5,
+        "total_checks": 5,
+        "matched_terms": [
+          "fixed",
+          "loss"
+        ],
+        "missing_terms": [],
+        "failed_checks": [],
+        "expected_behavior": "Continuation contains fixed and loss for a bounded holdout scorecard smoke.",
+        "checks": [
+          {
+            "id": "has_output",
+            "title": "Output is present",
+            "weight": 0.2,
+            "score": 1.0,
+            "passed": true,
+            "detail": "Generated text is non-empty."
+          },
+          {
+            "id": "length_bounds",
+            "title": "Length fits prompt bounds",
+            "weight": 0.2,
+            "score": 1.0,
+            "passed": true,
+            "detail": "char_count=11, min=6, max=64."
+          },
+          {
+            "id": "must_include",
+            "title": "Required terms appear",
+            "weight": 0.25,
+            "score": 1.0,
+            "passed": true,
+            "detail": "matched=2 / 2 required term(s)."
+          },
+          {
+            "id": "must_avoid",
+            "title": "Forbidden terms are absent",
+            "weight": 0.15,
+            "score": 1.0,
+            "passed": true,
+            "detail": "No forbidden terms found."
+          },
+          {
+            "id": "task_shape",
+            "title": "Task shape is plausible",
+            "weight": 0.2,
+            "score": 1.0,
+            "passed": true,
+            "detail": "Task expects enough continuation text for review."
+          }
+        ]
+      },
+      {
+        "name": "holdout-scorecard-qa-easy",
+        "task_type": "qa",
+        "difficulty": "easy",
+        "status": "pass",
+        "score": 100.0,
+        "passed_checks": 5,
+        "total_checks": 5,
+        "matched_terms": [
+          "fixed",
+          "loss"
+        ],
+        "missing_terms": [],
+        "failed_checks": [],
+        "expected_behavior": "Continuation contains fixed and loss for a bounded holdout scorecard smoke.",
+        "checks": [
+          {
+            "id": "has_output",
+            "title": "Output is present",
+            "weight": 0.2,
+            "score": 1.0,
+            "passed": true,
+            "detail": "Generated text is non-empty."
+          },
+          {
+            "id": "length_bounds",
+            "title": "Length fits prompt bounds",
+            "weight": 0.2,
+            "score": 1.0,
+            "passed": true,
+            "detail": "char_count=11, min=6, max=64."
+          },
+          {
+            "id": "must_include",
+            "title": "Required terms appear",
+            "weight": 0.25,
+            "score": 1.0,
+            "passed": true,
+            "detail": "matched=2 / 2 required term(s)."
+          },
+          {
+            "id": "must_avoid",
+            "title": "Forbidden terms are absent",
+            "weight": 0.15,
+            "score": 1.0,
+            "passed": true,
+            "detail": "No forbidden terms found."
+          },
+          {
+            "id": "task_shape",
+            "title": "Task shape is plausible",
+            "weight": 0.2,
+            "score": 1.0,
+            "passed": true,
+            "detail": "Task expects enough continuation text for review."
+          }
+        ]
+      },
+      {
+        "name": "holdout-scorecard-qa-hard",
+        "task_type": "qa",
+        "difficulty": "hard",
+        "status": "pass",
+        "score": 100.0,
+        "passed_checks": 5,
+        "total_checks": 5,
+        "matched_terms": [
+          "fixed",
+          "loss"
+        ],
+        "missing_terms": [],
+        "failed_checks": [],
+        "expected_behavior": "Continuation contains fixed and loss for a bounded holdout scorecard smoke.",
+        "checks": [
+          {
+            "id": "has_output",
+            "title": "Output is present",
+            "weight": 0.2,
+            "score": 1.0,
+            "passed": true,
+            "detail": "Generated text is non-empty."
+          },
+          {
+            "id": "length_bounds",
+            "title": "Length fits prompt bounds",
+            "weight": 0.2,
+            "score": 1.0,
+            "passed": true,
+            "detail": "char_count=11, min=6, max=64."
+          },
+          {
+            "id": "must_include",
+            "title": "Required terms appear",
+            "weight": 0.25,
+            "score": 1.0,
+            "passed": true,
+            "detail": "matched=2 / 2 required term(s)."
+          },
+          {
+            "id": "must_avoid",
+            "title": "Forbidden terms are absent",
+            "weight": 0.15,
+            "score": 1.0,
+            "passed": true,
+            "detail": "No forbidden terms found."
+          },
+          {
+            "id": "task_shape",
+            "title": "Task shape is plausible",
+            "weight": 0.2,
+            "score": 1.0,
+            "passed": true,
+            "detail": "Task expects enough continuation text for review."
+          }
+        ]
+      },
+      {
+        "name": "holdout-scorecard-summary-easy",
+        "task_type": "summary",
+        "difficulty": "easy",
+        "status": "pass",
+        "score": 100.0,
+        "passed_checks": 5,
+        "total_checks": 5,
+        "matched_terms": [
+          "fixed",
+          "loss"
+        ],
+        "missing_terms": [],
+        "failed_checks": [],
+        "expected_behavior": "Continuation contains fixed and loss for a bounded holdout scorecard smoke.",
+        "checks": [
+          {
+            "id": "has_output",
+            "title": "Output is present",
+            "weight": 0.2,
+            "score": 1.0,
+            "passed": true,
+            "detail": "Generated text is non-empty."
+          },
+          {
+            "id": "length_bounds",
+            "title": "Length fits prompt bounds",
+            "weight": 0.2,
+            "score": 1.0,
+            "passed": true,
+            "detail": "char_count=11, min=6, max=64."
+          },
+          {
+            "id": "must_include",
+            "title": "Required terms appear",
+            "weight": 0.25,
+            "score": 1.0,
+            "passed": true,
+            "detail": "matched=2 / 2 required term(s)."
+          },
+          {
+            "id": "must_avoid",
+            "title": "Forbidden terms are absent",
+            "weight": 0.15,
+            "score": 1.0,
+            "passed": true,
+            "detail": "No forbidden terms found."
+          },
+          {
+            "id": "task_shape",
+            "title": "Task shape is plausible",
+            "weight": 0.2,
+            "score": 1.0,
+            "passed": true,
+            "detail": "Summary task expects a concise non-empty continuation."
+          }
+        ]
+      },
+      {
+        "name": "holdout-scorecard-summary-medium",
+        "task_type": "summary",
+        "difficulty": "medium",
+        "status": "pass",
+        "score": 100.0,
+        "passed_checks": 5,
+        "total_checks": 5,
+        "matched_terms": [
+          "fixed",
+          "loss"
+        ],
+        "missing_terms": [],
+        "failed_checks": [],
+        "expected_behavior": "Continuation contains fixed and loss for a bounded holdout scorecard smoke.",
+        "checks": [
+          {
+            "id": "has_output",
+            "title": "Output is present",
+            "weight": 0.2,
+            "score": 1.0,
+            "passed": true,
+            "detail": "Generated text is non-empty."
+          },
+          {
+            "id": "length_bounds",
+            "title": "Length fits prompt bounds",
+            "weight": 0.2,
+            "score": 1.0,
+            "passed": true,
+            "detail": "char_count=11, min=6, max=64."
+          },
+          {
+            "id": "must_include",
+            "title": "Required terms appear",
+            "weight": 0.25,
+            "score": 1.0,
+            "passed": true,
+            "detail": "matched=2 / 2 required term(s)."
+          },
+          {
+            "id": "must_avoid",
+            "title": "Forbidden terms are absent",
+            "weight": 0.15,
+            "score": 1.0,
+            "passed": true,
+            "detail": "No forbidden terms found."
+          },
+          {
+            "id": "task_shape",
+            "title": "Task shape is plausible",
+            "weight": 0.2,
+            "score": 1.0,
+            "passed": true,
+            "detail": "Summary task expects a concise non-empty continuation."
+          }
+        ]
+      }
+    ]
+  },
+  "drilldowns": {
+    "task_type": [
+      {
+        "group_by": "task_type",
+        "key": "qa",
+        "status": "pass",
+        "score": 100.0,
+        "case_count": 2,
+        "coverage_score": 100.0,
+        "rubric_score": 100.0,
+        "rubric_pass_count": 2,
+        "rubric_warn_count": 0,
+        "rubric_fail_count": 0,
+        "generation_quality_score": 100.0,
+        "pair_consistency_score": 100.0,
+        "pair_delta_stability_score": 100.0,
+        "generation_pass_count": 2,
+        "generation_warn_count": 0,
+        "generation_fail_count": 0,
+        "pair_equal_count": 2,
+        "pair_difference_count": 0,
+        "avg_abs_generated_delta": 0,
+        "max_abs_generated_delta": 0,
+        "avg_eval_chars": 11,
+        "cases": [
+          "holdout-scorecard-qa-easy",
+          "holdout-scorecard-qa-hard"
+        ]
+      },
+      {
+        "group_by": "task_type",
+        "key": "summary",
+        "status": "pass",
+        "score": 100.0,
+        "case_count": 2,
+        "coverage_score": 100.0,
+        "rubric_score": 100.0,
+        "rubric_pass_count": 2,
+        "rubric_warn_count": 0,
+        "rubric_fail_count": 0,
+        "generation_quality_score": 100.0,
+        "pair_consistency_score": 100.0,
+        "pair_delta_stability_score": 100.0,
+        "generation_pass_count": 2,
+        "generation_warn_count": 0,
+        "generation_fail_count": 0,
+        "pair_equal_count": 2,
+        "pair_difference_count": 0,
+        "avg_abs_generated_delta": 0,
+        "max_abs_generated_delta": 0,
+        "avg_eval_chars": 11,
+        "cases": [
+          "holdout-scorecard-summary-easy",
+          "holdout-scorecard-summary-medium"
+        ]
+      },
+      {
+        "group_by": "task_type",
+        "key": "continuation",
+        "status": "pass",
+        "score": 95.0,
+        "case_count": 1,
+        "coverage_score": 50.0,
+        "rubric_score": 100.0,
+        "rubric_pass_count": 1,
+        "rubric_warn_count": 0,
+        "rubric_fail_count": 0,
+        "generation_quality_score": 100.0,
+        "pair_consistency_score": 100.0,
+        "pair_delta_stability_score": 100.0,
+        "generation_pass_count": 1,
+        "generation_warn_count": 0,
+        "generation_fail_count": 0,
+        "pair_equal_count": 1,
+        "pair_difference_count": 0,
+        "avg_abs_generated_delta": 0,
+        "max_abs_generated_delta": 0,
+        "avg_eval_chars": 11,
+        "cases": [
+          "holdout-scorecard-continuation-hard"
+        ]
+      }
+    ],
+    "difficulty": [
+      {
+        "group_by": "difficulty",
+        "key": "easy",
+        "status": "pass",
+        "score": 100.0,
+        "case_count": 2,
+        "coverage_score": 100.0,
+        "rubric_score": 100.0,
+        "rubric_pass_count": 2,
+        "rubric_warn_count": 0,
+        "rubric_fail_count": 0,
+        "generation_quality_score": 100.0,
+        "pair_consistency_score": 100.0,
+        "pair_delta_stability_score": 100.0,
+        "generation_pass_count": 2,
+        "generation_warn_count": 0,
+        "generation_fail_count": 0,
+        "pair_equal_count": 2,
+        "pair_difference_count": 0,
+        "avg_abs_generated_delta": 0,
+        "max_abs_generated_delta": 0,
+        "avg_eval_chars": 11,
+        "cases": [
+          "holdout-scorecard-qa-easy",
+          "holdout-scorecard-summary-easy"
+        ]
+      },
+      {
+        "group_by": "difficulty",
+        "key": "hard",
+        "status": "pass",
+        "score": 100.0,
+        "case_count": 2,
+        "coverage_score": 100.0,
+        "rubric_score": 100.0,
+        "rubric_pass_count": 2,
+        "rubric_warn_count": 0,
+        "rubric_fail_count": 0,
+        "generation_quality_score": 100.0,
+        "pair_consistency_score": 100.0,
+        "pair_delta_stability_score": 100.0,
+        "generation_pass_count": 2,
+        "generation_warn_count": 0,
+        "generation_fail_count": 0,
+        "pair_equal_count": 2,
+        "pair_difference_count": 0,
+        "avg_abs_generated_delta": 0,
+        "max_abs_generated_delta": 0,
+        "avg_eval_chars": 11,
+        "cases": [
+          "holdout-scorecard-continuation-hard",
+          "holdout-scorecard-qa-hard"
+        ]
+      },
+      {
+        "group_by": "difficulty",
+        "key": "medium",
+        "status": "pass",
+        "score": 95.0,
+        "case_count": 1,
+        "coverage_score": 50.0,
+        "rubric_score": 100.0,
+        "rubric_pass_count": 1,
+        "rubric_warn_count": 0,
+        "rubric_fail_count": 0,
+        "generation_quality_score": 100.0,
+        "pair_consistency_score": 100.0,
+        "pair_delta_stability_score": 100.0,
+        "generation_pass_count": 1,
+        "generation_warn_count": 0,
+        "generation_fail_count": 0,
+        "pair_equal_count": 1,
+        "pair_difference_count": 0,
+        "avg_abs_generated_delta": 0,
+        "max_abs_generated_delta": 0,
+        "avg_eval_chars": 11,
+        "cases": [
+          "holdout-scorecard-summary-medium"
+        ]
+      }
+    ],
+    "weakest_task_type": {
+      "key": "continuation",
+      "status": "pass",
+      "score": 95.0,
+      "case_count": 1
+    },
+    "weakest_difficulty": {
+      "key": "medium",
+      "status": "pass",
+      "score": 95.0,
+      "case_count": 1
+    }
+  },
+  "case_scores": [
+    {
+      "name": "holdout-scorecard-continuation-hard",
+      "task_type": "continuation",
+      "difficulty": "hard",
+      "prompt": "continue the calibration phrase fixed loss\ncontinuation:",
+      "generated": "continue the calibration phrase fixed loss\ncontinuation: fixed loss",
+      "continuation": " fixed loss",
+      "expected_behavior": "Continuation contains fixed and loss for a bounded holdout scorecard smoke.",
+      "tags": [
+        "holdout-scorecard-smoke",
+        "real-generation",
+        "required-terms"
+      ],
+      "rubric": {
+        "must_include": [
+          "fixed",
+          "loss"
+        ],
+        "must_avoid": [],
+        "min_chars": 6,
+        "max_chars": 64
+      },
+      "max_new_tokens": 1,
+      "eval_char_count": 11,
+      "eval_unique_char_count": 9,
+      "generation_quality_status": "pass",
+      "generation_unique_ratio": 0.8182,
+      "generation_flag_count": 0,
+      "pair_generated_equal": true,
+      "pair_continuation_equal": true,
+      "pair_generated_char_delta": 0,
+      "pair_continuation_char_delta": 0,
+      "rubric_score": 100.0,
+      "rubric_status": "pass",
+      "rubric_failed_checks": [],
+      "rubric_missing_terms": []
+    },
+    {
+      "name": "holdout-scorecard-qa-easy",
+      "task_type": "qa",
+      "difficulty": "easy",
+      "prompt": "answer the holdout signal using fixed loss\nanswer:",
+      "generated": "answer the holdout signal using fixed loss\nanswer: fixed loss",
+      "continuation": " fixed loss",
+      "expected_behavior": "Continuation contains fixed and loss for a bounded holdout scorecard smoke.",
+      "tags": [
+        "holdout-scorecard-smoke",
+        "real-generation",
+        "required-terms"
+      ],
+      "rubric": {
+        "must_include": [
+          "fixed",
+          "loss"
+        ],
+        "must_avoid": [],
+        "min_chars": 6,
+        "max_chars": 64
+      },
+      "max_new_tokens": 1,
+      "eval_char_count": 11,
+      "eval_unique_char_count": 9,
+      "generation_quality_status": "pass",
+      "generation_unique_ratio": 0.8182,
+      "generation_flag_count": 0,
+      "pair_generated_equal": true,
+      "pair_continuation_equal": true,
+      "pair_generated_char_delta": 0,
+      "pair_continuation_char_delta": 0,
+      "rubric_score": 100.0,
+      "rubric_status": "pass",
+      "rubric_failed_checks": [],
+      "rubric_missing_terms": []
+    },
+    {
+      "name": "holdout-scorecard-qa-hard",
+      "task_type": "qa",
+      "difficulty": "hard",
+      "prompt": "state the required scorecard terms fixed loss\nanswer:",
+      "generated": "state the required scorecard terms fixed loss\nanswer: fixed loss",
+      "continuation": " fixed loss",
+      "expected_behavior": "Continuation contains fixed and loss for a bounded holdout scorecard smoke.",
+      "tags": [
+        "holdout-scorecard-smoke",
+        "real-generation",
+        "required-terms"
+      ],
+      "rubric": {
+        "must_include": [
+          "fixed",
+          "loss"
+        ],
+        "must_avoid": [],
+        "min_chars": 6,
+        "max_chars": 64
+      },
+      "max_new_tokens": 1,
+      "eval_char_count": 11,
+      "eval_unique_char_count": 9,
+      "generation_quality_status": "pass",
+      "generation_unique_ratio": 0.8182,
+      "generation_flag_count": 0,
+      "pair_generated_equal": true,
+      "pair_continuation_equal": true,
+      "pair_generated_char_delta": 0,
+      "pair_continuation_char_delta": 0,
+      "rubric_score": 100.0,
+      "rubric_status": "pass",
+      "rubric_failed_checks": [],
+      "rubric_missing_terms": []
+    },
+    {
+      "name": "holdout-scorecard-summary-easy",
+      "task_type": "summary",
+      "difficulty": "easy",
+      "prompt": "brief summary must include fixed loss\nsummary:",
+      "generated": "brief summary must include fixed loss\nsummary: fixed loss",
+      "continuation": " fixed loss",
+      "expected_behavior": "Continuation contains fixed and loss for a bounded holdout scorecard smoke.",
+      "tags": [
+        "holdout-scorecard-smoke",
+        "real-generation",
+        "required-terms"
+      ],
+      "rubric": {
+        "must_include": [
+          "fixed",
+          "loss"
+        ],
+        "must_avoid": [],
+        "min_chars": 6,
+        "max_chars": 64
+      },
+      "max_new_tokens": 1,
+      "eval_char_count": 11,
+      "eval_unique_char_count": 9,
+      "generation_quality_status": "pass",
+      "generation_unique_ratio": 0.8182,
+      "generation_flag_count": 0,
+      "pair_generated_equal": true,
+      "pair_continuation_equal": true,
+      "pair_generated_char_delta": 0,
+      "pair_continuation_char_delta": 0,
+      "rubric_score": 100.0,
+      "rubric_status": "pass",
+      "rubric_failed_checks": [],
+      "rubric_missing_terms": []
+    },
+    {
+      "name": "holdout-scorecard-summary-medium",
+      "task_type": "summary",
+      "difficulty": "medium",
+      "prompt": "summarize the holdout signal with fixed loss\nsummary:",
+      "generated": "summarize the holdout signal with fixed loss\nsummary: fixed loss",
+      "continuation": " fixed loss",
+      "expected_behavior": "Continuation contains fixed and loss for a bounded holdout scorecard smoke.",
+      "tags": [
+        "holdout-scorecard-smoke",
+        "real-generation",
+        "required-terms"
+      ],
+      "rubric": {
+        "must_include": [
+          "fixed",
+          "loss"
+        ],
+        "must_avoid": [],
+        "min_chars": 6,
+        "max_chars": 64
+      },
+      "max_new_tokens": 1,
+      "eval_char_count": 11,
+      "eval_unique_char_count": 9,
+      "generation_quality_status": "pass",
+      "generation_unique_ratio": 0.8182,
+      "generation_flag_count": 0,
+      "pair_generated_equal": true,
+      "pair_continuation_equal": true,
+      "pair_generated_char_delta": 0,
+      "pair_continuation_char_delta": 0,
+      "rubric_score": 100.0,
+      "rubric_status": "pass",
+      "rubric_failed_checks": [],
+      "rubric_missing_terms": []
+    }
+  ],
+  "registry_context": {
+    "available": false
+  },
+  "recommendations": [
+    "Use this scorecard as the single benchmark entry point for the current run.",
+    "Review weakest rubric case `holdout-scorecard-continuation-hard` at score 100.0 before trusting benchmark gains.",
+    "Run a different candidate checkpoint pair before using pair metrics as model improvement evidence.",
+    "Review weakest task type `continuation` at score 95.0 before expanding the suite.",
+    "Review weakest difficulty `medium` at score 95.0 before comparing runs.",
+    "Next step: compare rubric score changes across runs so correctness regressions are visible in the registry."
+  ],
+  "warnings": []
+}

@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1156-v1144-holdout-scorecard-smoke.md
+ -> v1144 code explanation: run five real MiniGPT holdout smoke generations and feed them into the existing benchmark scorecard.
+
 1155-v1143-required-term-real-execution.md
  -> v1143 code explanation: run the first bounded real required-term coverage execution for capability-regression-01 without claiming promotion.
 

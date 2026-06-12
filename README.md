@@ -15,7 +15,17 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1143.0.0` runs the first bounded real required-term coverage execution for `capability-regression-01`.
+Version `v1144.0.0` runs a real holdout scorecard smoke over five MiniGPT generation cases.
+
+## Latest v1144 checkpoint
+
+- Added `model_capability_holdout_scorecard_smoke.py` to run v1137 `capability-regression-04 / holdout_scorecard_smoke` as real generated evidence instead of reusing the stale artifact hint.
+- Added CLI `scripts/run_model_capability_holdout_scorecard_smoke_v1144.py`, reading the v1137 suite manifest and the v1143 required-term real execution prerequisite.
+- The smoke run generates five holdout cases through `MiniGPTGenerator`, writes scorecard-compatible `eval_suite`, `generation_quality`, and `pair_batch` inputs, then calls the existing `benchmark_scorecard.py` builder.
+- Real run produced `status=pass`, `decision=model_capability_holdout_scorecard_smoke_ready`, `case_count=5`, `passed_case_count=5`, `scorecard_overall_status=pass`, `scorecard_overall_score=97.0`, and `promotion_ready=False`.
+- Added tests for real generation scorecard construction, wrong-check manifest failure, missing v1143 prerequisite failure, output generation, CLI wiring, and nested scorecard artifacts.
+- Verified with focused v1144 tests, py_compile, real CLI evidence, Playwright MCP screenshot evidence, and local cleanup.
+- Archived v1144 evidence in `f/1144` and added the engineering-maintenance code explanation in `代码讲解记录_工程保养阶段/1156-v1144-holdout-scorecard-smoke.md`.
 
 ## Latest v1143 checkpoint
 

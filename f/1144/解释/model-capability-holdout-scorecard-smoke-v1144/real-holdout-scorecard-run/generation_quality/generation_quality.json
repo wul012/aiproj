@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "summary": {
+    "overall_status": "pass",
+    "case_count": 5,
+    "pass_count": 5,
+    "warn_count": 0,
+    "fail_count": 0,
+    "flag_summary": {
+      "total_flags": 0,
+      "flag_id_counts": {},
+      "flag_level_counts": {
+        "warn": 0,
+        "fail": 0
+      },
+      "worst_cases": []
+    }
+  },
+  "cases": [
+    {
+      "name": "holdout-scorecard-qa-easy",
+      "status": "pass",
+      "unique_ratio": 0.8182,
+      "flag_count": 0
+    },
+    {
+      "name": "holdout-scorecard-summary-medium",
+      "status": "pass",
+      "unique_ratio": 0.8182,
+      "flag_count": 0
+    },
+    {
+      "name": "holdout-scorecard-continuation-hard",
+      "status": "pass",
+      "unique_ratio": 0.8182,
+      "flag_count": 0
+    },
+    {
+      "name": "holdout-scorecard-qa-hard",
+      "status": "pass",
+      "unique_ratio": 0.8182,
+      "flag_count": 0
+    },
+    {
+      "name": "holdout-scorecard-summary-easy",
+      "status": "pass",
+      "unique_ratio": 0.8182,
+      "flag_count": 0
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+case_id,task_type,difficulty,prompt,continuation,hit_terms,missed_terms,case_pass,rubric_score,generation_error
+holdout-scorecard-qa-easy,qa,easy,"answer the holdout signal using fixed loss
+answer:", fixed loss,"[""fixed"", ""loss""]",[],True,100.0,
+holdout-scorecard-summary-medium,summary,medium,"summarize the holdout signal with fixed loss
+summary:", fixed loss,"[""fixed"", ""loss""]",[],True,100.0,
+holdout-scorecard-continuation-hard,continuation,hard,"continue the calibration phrase fixed loss
+continuation:", fixed loss,"[""fixed"", ""loss""]",[],True,100.0,
+holdout-scorecard-qa-hard,qa,hard,"state the required scorecard terms fixed loss
+answer:", fixed loss,"[""fixed"", ""loss""]",[],True,100.0,
+holdout-scorecard-summary-easy,summary,easy,"brief summary must include fixed loss
+summary:", fixed loss,"[""fixed"", ""loss""]",[],True,100.0,

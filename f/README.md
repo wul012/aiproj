@@ -18,6 +18,10 @@ f/<version>/解释/说明.md
 
 ## 当前索引
 
+f/1144/图片
+f/1144/解释/说明.md
+ -> v1144 real holdout scorecard smoke screenshots and explanation.
+
 f/1143/图片
 f/1143/解释/说明.md
  -> v1143 required term coverage real execution screenshots and explanation.

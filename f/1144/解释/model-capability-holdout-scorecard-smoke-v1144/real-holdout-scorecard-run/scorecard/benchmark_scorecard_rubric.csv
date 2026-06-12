@@ -1,0 +1,6 @@
+name,task_type,difficulty,status,score,passed_checks,total_checks,matched_terms,missing_terms,failed_checks,expected_behavior
+holdout-scorecard-continuation-hard,continuation,hard,pass,100.0000,5,5,"['fixed', 'loss']",[],[],Continuation contains fixed and loss for a bounded holdout scorecard smoke.
+holdout-scorecard-qa-easy,qa,easy,pass,100.0000,5,5,"['fixed', 'loss']",[],[],Continuation contains fixed and loss for a bounded holdout scorecard smoke.
+holdout-scorecard-qa-hard,qa,hard,pass,100.0000,5,5,"['fixed', 'loss']",[],[],Continuation contains fixed and loss for a bounded holdout scorecard smoke.
+holdout-scorecard-summary-easy,summary,easy,pass,100.0000,5,5,"['fixed', 'loss']",[],[],Continuation contains fixed and loss for a bounded holdout scorecard smoke.
+holdout-scorecard-summary-medium,summary,medium,pass,100.0000,5,5,"['fixed', 'loss']",[],[],Continuation contains fixed and loss for a bounded holdout scorecard smoke.

@@ -1,0 +1,7 @@
+key,title,status,score,weight,weighted_score,evidence_path,detail
+eval_coverage,Eval Suite Coverage,pass,100.0000,0.1500,15.0000,f\1144\解释\model-capability-holdout-scorecard-smoke-v1144\real-holdout-scorecard-run\eval_suite\eval_suite.json,"5 fixed prompt case(s). coverage=pass, comparison=pass."
+generation_quality,Generation Quality,pass,100.0000,0.2000,20.0000,f\1144\解释\model-capability-holdout-scorecard-smoke-v1144\real-holdout-scorecard-run\generation_quality\generation_quality.json,5 pass / 0 warn / 0 fail.
+rubric_correctness,Rubric Correctness,pass,100.0000,0.2500,25.0000,benchmark_scorecard.rubric_scores,5 pass / 0 warn / 0 fail.
+pair_consistency,Pair Consistency,pass,90.0000,0.1500,13.5000,f\1144\解释\model-capability-holdout-scorecard-smoke-v1144\real-holdout-scorecard-run\pair_batch\pair_generation_batch.json,"5 / 5 pair generations matched exactly. Same-checkpoint baseline proves reproducibility, not cross-checkpoint improvement."
+pair_delta_stability,Pair Delta Stability,pass,90.0000,0.1500,13.5000,f\1144\解释\model-capability-holdout-scorecard-smoke-v1144\real-holdout-scorecard-run\pair_batch\pair_generation_batch.json,"avg abs generated delta=0, max abs generated delta=0. Same-checkpoint delta is a reproducibility baseline."
+evidence_completeness,Benchmark Evidence Completeness,pass,100.0000,0.1000,10.0000,f\1144\解释\model-capability-holdout-scorecard-smoke-v1144\real-holdout-scorecard-run,3 / 3 evidence groups present.

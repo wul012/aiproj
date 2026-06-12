@@ -1,0 +1,7 @@
+group_by,key,status,score,case_count,coverage_score,rubric_score,rubric_pass_count,rubric_warn_count,rubric_fail_count,generation_quality_score,pair_consistency_score,pair_delta_stability_score,generation_pass_count,generation_warn_count,generation_fail_count,pair_equal_count,pair_difference_count,avg_abs_generated_delta,max_abs_generated_delta,avg_eval_chars,cases
+task_type,qa,pass,100.0000,2,100.0000,100.0000,2,0,0,100.0000,100.0000,100.0000,2,0,0,2,0,0,0,11,"['holdout-scorecard-qa-easy', 'holdout-scorecard-qa-hard']"
+task_type,summary,pass,100.0000,2,100.0000,100.0000,2,0,0,100.0000,100.0000,100.0000,2,0,0,2,0,0,0,11,"['holdout-scorecard-summary-easy', 'holdout-scorecard-summary-medium']"
+task_type,continuation,pass,95.0000,1,50.0000,100.0000,1,0,0,100.0000,100.0000,100.0000,1,0,0,1,0,0,0,11,['holdout-scorecard-continuation-hard']
+difficulty,easy,pass,100.0000,2,100.0000,100.0000,2,0,0,100.0000,100.0000,100.0000,2,0,0,2,0,0,0,11,"['holdout-scorecard-qa-easy', 'holdout-scorecard-summary-easy']"
+difficulty,hard,pass,100.0000,2,100.0000,100.0000,2,0,0,100.0000,100.0000,100.0000,2,0,0,2,0,0,0,11,"['holdout-scorecard-continuation-hard', 'holdout-scorecard-qa-hard']"
+difficulty,medium,pass,95.0000,1,50.0000,100.0000,1,0,0,100.0000,100.0000,100.0000,1,0,0,1,0,0,0,11,['holdout-scorecard-summary-medium']

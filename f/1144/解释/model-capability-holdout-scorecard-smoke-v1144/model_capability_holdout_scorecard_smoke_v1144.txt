@@ -1,0 +1,16 @@
+status=pass
+decision=model_capability_holdout_scorecard_smoke_ready
+holdout_scorecard_smoke_ready=True
+case_count=5
+executed_case_count=5
+passed_case_count=5
+failed_case_count=0
+scorecard_overall_status=pass
+scorecard_overall_score=97.0
+rubric_avg_score=100.0
+generation_quality_status=pass
+pair_same_checkpoint_baseline=True
+model_quality_claim=holdout_scorecard_smoke_real_execution
+promotion_ready=False
+next_step=run_loss_signal_bridge_and_decoder_anchor_distribution_v1145
+failed_check_count=0

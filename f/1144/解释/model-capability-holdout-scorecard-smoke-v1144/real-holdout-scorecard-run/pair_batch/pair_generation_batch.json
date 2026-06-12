@@ -1,0 +1,79 @@
+{
+  "kind": "minigpt_pair_generation_batch",
+  "case_count": 5,
+  "generated_equal_count": 5,
+  "generated_difference_count": 0,
+  "avg_abs_generated_char_delta": 0.0,
+  "left": {
+    "checkpoint_id": "holdout-scorecard-smoke",
+    "checkpoint": "f\\1144\\解释\\model-capability-holdout-scorecard-smoke-v1144\\tiny-holdout-scorecard-checkpoint\\checkpoint.pt",
+    "tokenizer": "f\\1144\\解释\\model-capability-holdout-scorecard-smoke-v1144\\tiny-holdout-scorecard-checkpoint\\tokenizer.json"
+  },
+  "right": {
+    "checkpoint_id": "holdout-scorecard-smoke",
+    "checkpoint": "f\\1144\\解释\\model-capability-holdout-scorecard-smoke-v1144\\tiny-holdout-scorecard-checkpoint\\checkpoint.pt",
+    "tokenizer": "f\\1144\\解释\\model-capability-holdout-scorecard-smoke-v1144\\tiny-holdout-scorecard-checkpoint\\tokenizer.json"
+  },
+  "results": [
+    {
+      "name": "holdout-scorecard-qa-easy",
+      "task_type": "qa",
+      "difficulty": "easy",
+      "comparison": {
+        "same_checkpoint": true,
+        "generated_equal": true,
+        "continuation_equal": true,
+        "generated_char_delta": 0,
+        "continuation_char_delta": 0
+      }
+    },
+    {
+      "name": "holdout-scorecard-summary-medium",
+      "task_type": "summary",
+      "difficulty": "medium",
+      "comparison": {
+        "same_checkpoint": true,
+        "generated_equal": true,
+        "continuation_equal": true,
+        "generated_char_delta": 0,
+        "continuation_char_delta": 0
+      }
+    },
+    {
+      "name": "holdout-scorecard-continuation-hard",
+      "task_type": "continuation",
+      "difficulty": "hard",
+      "comparison": {
+        "same_checkpoint": true,
+        "generated_equal": true,
+        "continuation_equal": true,
+        "generated_char_delta": 0,
+        "continuation_char_delta": 0
+      }
+    },
+    {
+      "name": "holdout-scorecard-qa-hard",
+      "task_type": "qa",
+      "difficulty": "hard",
+      "comparison": {
+        "same_checkpoint": true,
+        "generated_equal": true,
+        "continuation_equal": true,
+        "generated_char_delta": 0,
+        "continuation_char_delta": 0
+      }
+    },
+    {
+      "name": "holdout-scorecard-summary-easy",
+      "task_type": "summary",
+      "difficulty": "easy",
+      "comparison": {
+        "same_checkpoint": true,
+        "generated_equal": true,
+        "continuation_equal": true,
+        "generated_char_delta": 0,
+        "continuation_char_delta": 0
+      }
+    }
+  ]
+}
