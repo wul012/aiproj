@@ -1,0 +1,10 @@
+status=pass
+decision=model_capability_regression_suite_manifest_ready
+suite_ready=True
+suite_item_count=4
+source_inventory_ready=True
+promotion_ready=False
+model_quality_claim=manifest_only
+next_step=check_model_capability_regression_suite_readiness_v1138
+passed_check_count=7
+failed_check_count=0

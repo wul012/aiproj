@@ -15,7 +15,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1136.0.0` inventories existing evidence for the bounded model capability regression plan.
+Version `v1137.0.0` builds a bounded suite manifest from the model capability regression inventory.
+
+## Latest v1137 checkpoint
+
+- Added `model_capability_regression_suite_manifest.py` to turn v1136 ready inventory rows into a bounded suite manifest.
+- Added layered evaluation CLI `scripts/evaluation/build_model_capability_regression_suite_manifest_v1137.py`.
+- The manifest keeps each suite row tied to an existing source/test/artifact hint and the boundary `evidence_lookup_not_model_promotion`.
+- Real run produced `status=pass`, `decision=model_capability_regression_suite_manifest_ready`, `suite_ready=True`, `suite_item_count=4`, and `next_step=check_model_capability_regression_suite_readiness_v1138`.
+- Verified with focused v1137 tests, py_compile, real CLI evidence, Playwright MCP screenshot evidence, and local cleanup.
+- Archived v1137 evidence in `f/1137` and added the engineering-maintenance code explanation in `代码讲解记录_工程保养阶段/1149-v1137-model-capability-regression-suite-manifest.md`.
 
 ## Latest v1136 checkpoint
 

@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1149-v1137-model-capability-regression-suite-manifest.md
+ -> v1137 code explanation: build a bounded suite manifest from model capability regression inventory rows.
+
 1148-v1136-model-capability-regression-inventory.md
  -> v1136 code explanation: inventory existing evidence for the bounded model capability regression plan.
 

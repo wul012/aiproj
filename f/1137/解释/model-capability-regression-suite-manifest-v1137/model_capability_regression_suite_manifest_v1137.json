@@ -1,0 +1,141 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability regression suite manifest v1137",
+  "generated_at": "2026-06-12T02:51:18Z",
+  "status": "pass",
+  "decision": "model_capability_regression_suite_manifest_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_inventory_path": "f\\1136\\解释\\model-capability-regression-inventory-v1136\\model_capability_regression_inventory_v1136.json",
+  "source_inventory_summary": {
+    "inventory_ready": true,
+    "planned_item_count": 4,
+    "ready_item_count": 4,
+    "source_plan_ready": true,
+    "promotion_ready": false,
+    "model_quality_claim": "inventory_only",
+    "next_step": "build_model_capability_regression_suite_manifest_v1137",
+    "passed_check_count": 6,
+    "failed_check_count": 0
+  },
+  "rows": [
+    {
+      "suite_id": "capability-regression-01",
+      "check_id": "required_term_coverage",
+      "primary_source": "D:/aiproj/src/minigpt/bounded_objective_loss_signal_bridge_target_only_memory_tokenizer_coverage_aware_holdout_dry_run.py",
+      "primary_test": "D:/aiproj/tests/test_bounded_objective_loss_signal_bridge_target_only_memory_tokenizer_coverage_aware_holdout_dry_run.py",
+      "artifact_hint": "",
+      "status": "manifested",
+      "boundary": "evidence_lookup_not_model_promotion"
+    },
+    {
+      "suite_id": "capability-regression-02",
+      "check_id": "loss_signal_bridge",
+      "primary_source": "D:/aiproj/src/minigpt/bounded_objective_loss_signal_bridge.py",
+      "primary_test": "D:/aiproj/tests/test_bounded_objective_loss_signal_bridge.py",
+      "artifact_hint": "",
+      "status": "manifested",
+      "boundary": "evidence_lookup_not_model_promotion"
+    },
+    {
+      "suite_id": "capability-regression-03",
+      "check_id": "decoder_anchor_distribution",
+      "primary_source": "D:/aiproj/src/minigpt/model_capability_route_promotion_bounded_objective_decoder_anchor_policy.py",
+      "primary_test": "D:/aiproj/tests/test_model_capability_route_promotion_bounded_objective_decoder_anchor_policy.py",
+      "artifact_hint": "",
+      "status": "manifested",
+      "boundary": "evidence_lookup_not_model_promotion"
+    },
+    {
+      "suite_id": "capability-regression-04",
+      "check_id": "holdout_scorecard_smoke",
+      "primary_source": "D:/aiproj/src/minigpt/benchmark_scorecard.py",
+      "primary_test": "D:/aiproj/tests/test_benchmark_scorecard.py",
+      "artifact_hint": "D:/aiproj/f/1100/解释/receipt-index-review-v1100/randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1100.json",
+      "status": "manifested",
+      "boundary": "evidence_lookup_not_model_promotion"
+    }
+  ],
+  "check_rows": [
+    {
+      "id": "inventory_file_exists",
+      "status": "pass",
+      "actual": "f\\1136\\解释\\model-capability-regression-inventory-v1136\\model_capability_regression_inventory_v1136.json"
+    },
+    {
+      "id": "inventory_status_passed",
+      "status": "pass",
+      "actual": "pass"
+    },
+    {
+      "id": "inventory_ready",
+      "status": "pass",
+      "actual": true
+    },
+    {
+      "id": "inventory_rows_present",
+      "status": "pass",
+      "actual": 4
+    },
+    {
+      "id": "suite_rows_match_ready_inventory",
+      "status": "pass",
+      "actual": {
+        "suite": 4,
+        "ready": 4
+      }
+    },
+    {
+      "id": "suite_rows_have_tests",
+      "status": "pass",
+      "actual": [
+        "D:/aiproj/tests/test_bounded_objective_loss_signal_bridge_target_only_memory_tokenizer_coverage_aware_holdout_dry_run.py",
+        "D:/aiproj/tests/test_bounded_objective_loss_signal_bridge.py",
+        "D:/aiproj/tests/test_model_capability_route_promotion_bounded_objective_decoder_anchor_policy.py",
+        "D:/aiproj/tests/test_benchmark_scorecard.py"
+      ]
+    },
+    {
+      "id": "suite_rows_keep_boundary",
+      "status": "pass",
+      "actual": [
+        "evidence_lookup_not_model_promotion",
+        "evidence_lookup_not_model_promotion",
+        "evidence_lookup_not_model_promotion",
+        "evidence_lookup_not_model_promotion"
+      ]
+    }
+  ],
+  "suite": {
+    "suite_ready": true,
+    "suite_item_count": 4,
+    "execution_mode": "reuse_existing_evidence_paths",
+    "next_step": "check_model_capability_regression_suite_readiness_v1138",
+    "promotion_ready": false,
+    "model_quality_claim": "manifest_only"
+  },
+  "summary": {
+    "suite_ready": true,
+    "suite_item_count": 4,
+    "source_inventory_ready": true,
+    "promotion_ready": false,
+    "model_quality_claim": "manifest_only",
+    "next_step": "check_model_capability_regression_suite_readiness_v1138",
+    "passed_check_count": 7,
+    "failed_check_count": 0
+  },
+  "recommendations": [
+    "Use the manifest to run a bounded regression readiness check before claiming capability evidence.",
+    "Keep suite rows tied to existing files so the regression is maintainable.",
+    "Treat this manifest as an execution map, not a model result."
+  ],
+  "csv_fieldnames": [
+    "suite_id",
+    "check_id",
+    "primary_source",
+    "primary_test",
+    "artifact_hint",
+    "status",
+    "boundary"
+  ]
+}
