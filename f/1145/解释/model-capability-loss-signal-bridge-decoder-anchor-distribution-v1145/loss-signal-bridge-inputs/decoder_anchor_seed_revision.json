@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT v1145 decoder anchor seed revision",
+  "generated_at": "2026-06-12T11:17:49Z",
+  "status": "pass",
+  "summary": {
+    "decoder_anchor_seed_revision_ready": true,
+    "example_count": 9,
+    "bridge_example_count": 3,
+    "direct_example_count": 3,
+    "carry_forward_example_count": 3,
+    "source_corpus": "output\\model-capability-loss-signal-bridge-decoder-anchor-distribution-v1145\\loss-signal-bridge-inputs\\loss_signal_bridge_decoder_anchor_corpus.txt"
+  },
+  "seed_examples": [
+    {
+      "case_id": "loss-bridge-carry-forward-01",
+      "revision_type": "carry_forward_loss_signal",
+      "prompt": "loss signal handoff keeps the fixed loss answer\nanswer:",
+      "completion": " fixed loss",
+      "decoder_anchor": false,
+      "target_terms": [
+        "fixed",
+        "loss"
+      ]
+    },
+    {
+      "case_id": "loss-bridge-carry-forward-02",
+      "revision_type": "carry_forward_loss_signal",
+      "prompt": "carry the bridge phrase for fixed loss\ncompletion:",
+      "completion": " fixed loss",
+      "decoder_anchor": false,
+      "target_terms": [
+        "fixed",
+        "loss"
+      ]
+    },
+    {
+      "case_id": "loss-bridge-carry-forward-03",
+      "revision_type": "carry_forward_fixed_signal",
+      "prompt": "previous smoke result says fixed loss\nnext:",
+      "completion": " fixed loss",
+      "decoder_anchor": false,
+      "target_terms": [
+        "fixed",
+        "loss"
+      ]
+    },
+    {
+      "case_id": "loss-bridge-direct-01",
+      "revision_type": "unanchored_direct_answer",
+      "prompt": "answer directly with the two required words\nanswer:",
+      "completion": " fixed loss",
+      "decoder_anchor": false,
+      "target_terms": [
+        "fixed",
+        "loss"
+      ]
+    },
+    {
+      "case_id": "loss-bridge-direct-02",
+      "revision_type": "unanchored_direct_answer",
+      "prompt": "what terms prove the loss bridge?\nanswer:",
+      "completion": " fixed loss",
+      "decoder_anchor": false,
+      "target_terms": [
+        "fixed",
+        "loss"
+      ]
+    },
+    {
+      "case_id": "loss-bridge-direct-03",
+      "revision_type": "unanchored_direct_answer",
+      "prompt": "state the compact model signal\nanswer:",
+      "completion": " fixed loss",
+      "decoder_anchor": false,
+      "target_terms": [
+        "fixed",
+        "loss"
+      ]
+    },
+    {
+      "case_id": "loss-bridge-prefix-01",
+      "revision_type": "prefix_decoder_bridge",
+      "prompt": "decoder anchor prefix: fixed\ncontinuation:",
+      "completion": " loss",
+      "decoder_anchor": true,
+      "target_terms": [
+        "fixed",
+        "loss"
+      ]
+    },
+    {
+      "case_id": "loss-bridge-prefix-02",
+      "revision_type": "prefix_decoder_bridge",
+      "prompt": "decoder bridge starts with fixed\nfinish:",
+      "completion": " loss",
+      "decoder_anchor": true,
+      "target_terms": [
+        "fixed",
+        "loss"
+      ]
+    },
+    {
+      "case_id": "loss-bridge-prefix-03",
+      "revision_type": "prefix_decoder_bridge",
+      "prompt": "complete this anchor phrase fixed\ncompletion:",
+      "completion": " loss",
+      "decoder_anchor": true,
+      "target_terms": [
+        "fixed",
+        "loss"
+      ]
+    }
+  ]
+}

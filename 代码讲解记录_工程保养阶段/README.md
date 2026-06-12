@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1157-v1145-loss-signal-bridge-decoder-anchor-distribution.md
+ -> v1145 code explanation: run bounded loss-signal training and decoder-anchor distribution evidence after the v1144 holdout scorecard smoke.
+
 1156-v1144-holdout-scorecard-smoke.md
  -> v1144 code explanation: run five real MiniGPT holdout smoke generations and feed them into the existing benchmark scorecard.
 

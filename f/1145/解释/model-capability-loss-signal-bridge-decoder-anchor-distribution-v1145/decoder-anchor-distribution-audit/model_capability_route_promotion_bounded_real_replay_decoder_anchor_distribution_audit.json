@@ -1,0 +1,218 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability route promotion bounded real replay decoder anchor distribution audit",
+  "generated_at": "2026-06-12T11:18:00Z",
+  "status": "pass",
+  "decision": "model_capability_route_promotion_bounded_real_replay_decoder_anchor_distribution_balanced",
+  "failed_count": 0,
+  "issues": [],
+  "source_decoder_anchor_seed_revision": "output\\model-capability-loss-signal-bridge-decoder-anchor-distribution-v1145\\loss-signal-bridge-inputs\\decoder_anchor_seed_revision.json",
+  "source_decoder_anchor_failure_diagnostic": "output\\model-capability-loss-signal-bridge-decoder-anchor-distribution-v1145\\loss-signal-bridge-inputs\\decoder_anchor_failure_diagnostic.json",
+  "source_corpus": "output\\model-capability-loss-signal-bridge-decoder-anchor-distribution-v1145\\loss-signal-bridge-inputs\\loss_signal_bridge_decoder_anchor_corpus.txt",
+  "source_summaries": {
+    "seed_revision": {
+      "decoder_anchor_seed_revision_ready": true,
+      "example_count": 9,
+      "bridge_example_count": 3,
+      "direct_example_count": 3,
+      "carry_forward_example_count": 3,
+      "source_corpus": "output\\model-capability-loss-signal-bridge-decoder-anchor-distribution-v1145\\loss-signal-bridge-inputs\\loss_signal_bridge_decoder_anchor_corpus.txt"
+    },
+    "failure_diagnostic": {
+      "decoder_anchor_failure_diagnostic_ready": true,
+      "case_count": 3,
+      "zero_hit_case_count": 0,
+      "reason": "v1145 balances the seed distribution before the next decoder probe."
+    }
+  },
+  "bucket_rows": [
+    {
+      "bucket": "carry_forward",
+      "count": 3,
+      "share": 0.3333,
+      "avg_prompt_chars": 49.33,
+      "avg_completion_chars": 11.0
+    },
+    {
+      "bucket": "direct_answer",
+      "count": 3,
+      "share": 0.3333,
+      "avg_prompt_chars": 43.33,
+      "avg_completion_chars": 11.0
+    },
+    {
+      "bucket": "decoder_bridge",
+      "count": 3,
+      "share": 0.3333,
+      "avg_prompt_chars": 42.33,
+      "avg_completion_chars": 5.0
+    },
+    {
+      "bucket": "other",
+      "count": 0,
+      "share": 0.0,
+      "avg_prompt_chars": 0.0,
+      "avg_completion_chars": 0.0
+    }
+  ],
+  "revision_rows": [
+    {
+      "revision_type": "carry_forward_fixed_signal",
+      "bucket": "carry_forward",
+      "count": 1,
+      "share": 0.1111
+    },
+    {
+      "revision_type": "carry_forward_loss_signal",
+      "bucket": "carry_forward",
+      "count": 2,
+      "share": 0.2222
+    },
+    {
+      "revision_type": "prefix_decoder_bridge",
+      "bucket": "decoder_bridge",
+      "count": 3,
+      "share": 0.3333
+    },
+    {
+      "revision_type": "unanchored_direct_answer",
+      "bucket": "direct_answer",
+      "count": 3,
+      "share": 0.3333
+    }
+  ],
+  "case_rows": [
+    {
+      "case_id": "loss-bridge-carry-forward-01",
+      "example_count": 1,
+      "carry_forward_count": 1,
+      "direct_answer_count": 0,
+      "decoder_bridge_count": 0
+    },
+    {
+      "case_id": "loss-bridge-carry-forward-02",
+      "example_count": 1,
+      "carry_forward_count": 1,
+      "direct_answer_count": 0,
+      "decoder_bridge_count": 0
+    },
+    {
+      "case_id": "loss-bridge-carry-forward-03",
+      "example_count": 1,
+      "carry_forward_count": 1,
+      "direct_answer_count": 0,
+      "decoder_bridge_count": 0
+    },
+    {
+      "case_id": "loss-bridge-direct-01",
+      "example_count": 1,
+      "carry_forward_count": 0,
+      "direct_answer_count": 1,
+      "decoder_bridge_count": 0
+    },
+    {
+      "case_id": "loss-bridge-direct-02",
+      "example_count": 1,
+      "carry_forward_count": 0,
+      "direct_answer_count": 1,
+      "decoder_bridge_count": 0
+    },
+    {
+      "case_id": "loss-bridge-direct-03",
+      "example_count": 1,
+      "carry_forward_count": 0,
+      "direct_answer_count": 1,
+      "decoder_bridge_count": 0
+    },
+    {
+      "case_id": "loss-bridge-prefix-01",
+      "example_count": 1,
+      "carry_forward_count": 0,
+      "direct_answer_count": 0,
+      "decoder_bridge_count": 1
+    },
+    {
+      "case_id": "loss-bridge-prefix-02",
+      "example_count": 1,
+      "carry_forward_count": 0,
+      "direct_answer_count": 0,
+      "decoder_bridge_count": 1
+    },
+    {
+      "case_id": "loss-bridge-prefix-03",
+      "example_count": 1,
+      "carry_forward_count": 0,
+      "direct_answer_count": 0,
+      "decoder_bridge_count": 1
+    }
+  ],
+  "risk_rows": [],
+  "check_rows": [
+    {
+      "id": "decoder_anchor_seed_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "decoder anchor seed revision must pass"
+    },
+    {
+      "id": "decoder_anchor_failure_diagnostic_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "decoder anchor failure diagnostic must pass"
+    },
+    {
+      "id": "seed_examples_present",
+      "status": "pass",
+      "actual": 9,
+      "detail": "seed examples must be present"
+    },
+    {
+      "id": "bucket_rows_present",
+      "status": "pass",
+      "actual": 4,
+      "detail": "bucket rows must be computed"
+    },
+    {
+      "id": "corpus_present",
+      "status": "pass",
+      "actual": 495,
+      "detail": "corpus must be readable"
+    }
+  ],
+  "distribution_audit": {
+    "ready": true,
+    "example_count": 9,
+    "corpus_chars": 495,
+    "case_count": 9,
+    "revision_type_count": 4,
+    "carry_forward_share": 0.3333,
+    "direct_answer_share": 0.3333,
+    "decoder_bridge_share": 0.3333,
+    "zero_hit_case_count": 0,
+    "risk_count": 0,
+    "rebalanced_seed_needed": false,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_real_replay_decoder_anchor_rebalanced_seed_revision",
+    "next_step": "build_decoder_anchor_rebalanced_seed_revision"
+  },
+  "summary": {
+    "decoder_anchor_distribution_audit_ready": true,
+    "example_count": 9,
+    "corpus_chars": 495,
+    "case_count": 9,
+    "revision_type_count": 4,
+    "carry_forward_share": 0.3333,
+    "direct_answer_share": 0.3333,
+    "decoder_bridge_share": 0.3333,
+    "zero_hit_case_count": 0,
+    "risk_count": 0,
+    "rebalanced_seed_needed": false,
+    "proposed_next_artifact": "model_capability_route_promotion_bounded_real_replay_decoder_anchor_rebalanced_seed_revision",
+    "next_step": "build_decoder_anchor_rebalanced_seed_revision",
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "not_claimed",
+    "reason": "Distribution looks balanced; inspect decoding or capacity next.",
+    "next_action": "build_decoder_anchor_rebalanced_seed_revision"
+  }
+}

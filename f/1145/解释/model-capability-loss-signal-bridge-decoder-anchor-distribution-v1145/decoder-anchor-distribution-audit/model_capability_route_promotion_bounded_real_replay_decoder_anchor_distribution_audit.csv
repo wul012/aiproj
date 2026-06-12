@@ -1,0 +1,5 @@
+bucket,count,share,avg_prompt_chars,avg_completion_chars
+carry_forward,3,0.3333,49.33,11.0
+direct_answer,3,0.3333,43.33,11.0
+decoder_bridge,3,0.3333,42.33,5.0
+other,0,0.0,0.0,0.0

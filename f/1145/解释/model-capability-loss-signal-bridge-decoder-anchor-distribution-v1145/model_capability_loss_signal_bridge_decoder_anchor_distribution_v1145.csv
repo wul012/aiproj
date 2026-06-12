@@ -1,0 +1,3 @@
+row_id,area,status,metric,actual,expected,detail
+loss_signal_bridge,training,pass,train_loss_delta,-0.999899,< 0,Bounded CPU training should reduce train loss on the v1145 bridge corpus.
+decoder_anchor_distribution,seed_distribution,pass,bridge/direct/carry shares,"{""bridge"": 0.3333, ""carry"": 0.3333, ""direct"": 0.3333}",balanced enough to avoid rebalanced_seed_needed,Distribution audit reuses the existing decoder-anchor bucket rules.

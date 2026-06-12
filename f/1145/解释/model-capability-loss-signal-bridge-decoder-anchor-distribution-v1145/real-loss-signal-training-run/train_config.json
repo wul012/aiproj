@@ -1,0 +1,33 @@
+{
+  "data": "D:\\aiproj\\data\\sample_zh.txt",
+  "data_dir": null,
+  "prepared_data": "output\\model-capability-loss-signal-bridge-decoder-anchor-distribution-v1145\\loss-signal-bridge-inputs\\loss_signal_bridge_decoder_anchor_corpus.txt",
+  "out_dir": "output\\model-capability-loss-signal-bridge-decoder-anchor-distribution-v1145\\real-loss-signal-training-run",
+  "resume": null,
+  "tokenizer": "char",
+  "bpe_vocab_size": 256,
+  "bpe_min_frequency": 2,
+  "batch_size": 8,
+  "block_size": 16,
+  "max_iters": 40,
+  "eval_interval": 10,
+  "eval_iters": 2,
+  "learning_rate": 0.01,
+  "train_ratio": 0.85,
+  "n_layer": 1,
+  "n_head": 1,
+  "n_embd": 16,
+  "dropout": 0.0,
+  "seed": 1145,
+  "device": "cpu",
+  "sample_prompt": "人工智能",
+  "sample_tokens": 80,
+  "sample_temperature": 0.8,
+  "sample_top_k": 30,
+  "no_sample": true,
+  "device_used": "cpu",
+  "data_source": {
+    "kind": "prepared_data",
+    "path": "output\\model-capability-loss-signal-bridge-decoder-anchor-distribution-v1145\\loss-signal-bridge-inputs\\loss_signal_bridge_decoder_anchor_corpus.txt"
+  }
+}

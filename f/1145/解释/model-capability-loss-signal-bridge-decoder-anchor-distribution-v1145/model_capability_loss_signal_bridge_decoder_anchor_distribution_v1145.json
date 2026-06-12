@@ -1,0 +1,450 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT loss signal bridge and decoder anchor distribution v1145",
+  "generated_at": "2026-06-12T11:18:00Z",
+  "status": "pass",
+  "decision": "model_capability_loss_signal_bridge_decoder_anchor_distribution_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_holdout_scorecard_smoke": "D:\\aiproj\\f\\1144\\解释\\model-capability-holdout-scorecard-smoke-v1144\\model_capability_holdout_scorecard_smoke_v1144.json",
+  "source_decoder_anchor_seed_revision": "output\\model-capability-loss-signal-bridge-decoder-anchor-distribution-v1145\\loss-signal-bridge-inputs\\decoder_anchor_seed_revision.json",
+  "source_decoder_anchor_failure_diagnostic": "output\\model-capability-loss-signal-bridge-decoder-anchor-distribution-v1145\\loss-signal-bridge-inputs\\decoder_anchor_failure_diagnostic.json",
+  "source_corpus": "output\\model-capability-loss-signal-bridge-decoder-anchor-distribution-v1145\\loss-signal-bridge-inputs\\loss_signal_bridge_decoder_anchor_corpus.txt",
+  "training_run_dir": "output\\model-capability-loss-signal-bridge-decoder-anchor-distribution-v1145\\real-loss-signal-training-run",
+  "training_command": {
+    "mode": "real_training_subprocess",
+    "command": [
+      "D:\\python\\python.exe",
+      "D:\\aiproj\\scripts\\train.py",
+      "--prepared-data",
+      "output\\model-capability-loss-signal-bridge-decoder-anchor-distribution-v1145\\loss-signal-bridge-inputs\\loss_signal_bridge_decoder_anchor_corpus.txt",
+      "--out-dir",
+      "output\\model-capability-loss-signal-bridge-decoder-anchor-distribution-v1145\\real-loss-signal-training-run",
+      "--tokenizer",
+      "char",
+      "--batch-size",
+      "8",
+      "--block-size",
+      "16",
+      "--max-iters",
+      "40",
+      "--eval-interval",
+      "10",
+      "--eval-iters",
+      "2",
+      "--learning-rate",
+      "0.01",
+      "--train-ratio",
+      "0.85",
+      "--n-layer",
+      "1",
+      "--n-head",
+      "1",
+      "--n-embd",
+      "16",
+      "--dropout",
+      "0.0",
+      "--seed",
+      "1145",
+      "--device",
+      "cpu",
+      "--no-sample"
+    ],
+    "returncode": 0,
+    "stdout_tail": "tokenizer=char\ntokens=495 vocab_size=29\nparameters=4,032\ndata_source=prepared_data:output\\model-capability-loss-signal-bridge-decoder-anchor-distribution-v1145\\loss-signal-bridge-inputs\\loss_signal_bridge_decoder_anchor_corpus.txt\nstep=    1 train_loss=3.3073 val_loss=3.3201\nstep=   10 train_loss=2.8651 val_loss=3.0409\nstep=   20 train_loss=2.6680 val_loss=2.9579\nstep=   30 train_loss=2.4679 val_loss=2.8913\nstep=   40 train_loss=2.3074 val_loss=2.8252\nsaved=output\\model-capability-loss-signal-bridge-decoder-anchor-distribution-v1145\\real-loss-signal-training-run\nhistory=output\\model-capability-loss-signal-bridge-decoder-anchor-distribution-v1145\\real-loss-signal-training-run\\metrics.jsonl\nmanifest=output\\model-capability-loss-signal-bridge-decoder-anchor-distribution-v1145\\real-loss-signal-training-run\\run_manifest.json",
+    "stderr_tail": "",
+    "run_dir": "output\\model-capability-loss-signal-bridge-decoder-anchor-distribution-v1145\\real-loss-signal-training-run"
+  },
+  "training_signal": {
+    "ready": true,
+    "record_count": 5,
+    "first_step": 1,
+    "last_step": 40,
+    "first_train_loss": 3.307331,
+    "last_train_loss": 2.307431,
+    "train_loss_delta": -0.999899,
+    "first_val_loss": 3.320089,
+    "last_val_loss": 2.825226,
+    "val_loss_delta": -0.494864,
+    "metrics_path": "output\\model-capability-loss-signal-bridge-decoder-anchor-distribution-v1145\\real-loss-signal-training-run\\metrics.jsonl",
+    "checkpoint_path": "output\\model-capability-loss-signal-bridge-decoder-anchor-distribution-v1145\\real-loss-signal-training-run\\checkpoint.pt",
+    "tokenizer_path": "output\\model-capability-loss-signal-bridge-decoder-anchor-distribution-v1145\\real-loss-signal-training-run\\tokenizer.json",
+    "manifest_path": "output\\model-capability-loss-signal-bridge-decoder-anchor-distribution-v1145\\real-loss-signal-training-run\\run_manifest.json",
+    "train_config_path": "output\\model-capability-loss-signal-bridge-decoder-anchor-distribution-v1145\\real-loss-signal-training-run\\train_config.json"
+  },
+  "decoder_anchor_distribution": {
+    "schema_version": 1,
+    "title": "MiniGPT model capability route promotion bounded real replay decoder anchor distribution audit",
+    "generated_at": "2026-06-12T11:18:00Z",
+    "status": "pass",
+    "decision": "model_capability_route_promotion_bounded_real_replay_decoder_anchor_distribution_balanced",
+    "failed_count": 0,
+    "issues": [],
+    "source_decoder_anchor_seed_revision": "output\\model-capability-loss-signal-bridge-decoder-anchor-distribution-v1145\\loss-signal-bridge-inputs\\decoder_anchor_seed_revision.json",
+    "source_decoder_anchor_failure_diagnostic": "output\\model-capability-loss-signal-bridge-decoder-anchor-distribution-v1145\\loss-signal-bridge-inputs\\decoder_anchor_failure_diagnostic.json",
+    "source_corpus": "output\\model-capability-loss-signal-bridge-decoder-anchor-distribution-v1145\\loss-signal-bridge-inputs\\loss_signal_bridge_decoder_anchor_corpus.txt",
+    "source_summaries": {
+      "seed_revision": {
+        "decoder_anchor_seed_revision_ready": true,
+        "example_count": 9,
+        "bridge_example_count": 3,
+        "direct_example_count": 3,
+        "carry_forward_example_count": 3,
+        "source_corpus": "output\\model-capability-loss-signal-bridge-decoder-anchor-distribution-v1145\\loss-signal-bridge-inputs\\loss_signal_bridge_decoder_anchor_corpus.txt"
+      },
+      "failure_diagnostic": {
+        "decoder_anchor_failure_diagnostic_ready": true,
+        "case_count": 3,
+        "zero_hit_case_count": 0,
+        "reason": "v1145 balances the seed distribution before the next decoder probe."
+      }
+    },
+    "bucket_rows": [
+      {
+        "bucket": "carry_forward",
+        "count": 3,
+        "share": 0.3333,
+        "avg_prompt_chars": 49.33,
+        "avg_completion_chars": 11.0
+      },
+      {
+        "bucket": "direct_answer",
+        "count": 3,
+        "share": 0.3333,
+        "avg_prompt_chars": 43.33,
+        "avg_completion_chars": 11.0
+      },
+      {
+        "bucket": "decoder_bridge",
+        "count": 3,
+        "share": 0.3333,
+        "avg_prompt_chars": 42.33,
+        "avg_completion_chars": 5.0
+      },
+      {
+        "bucket": "other",
+        "count": 0,
+        "share": 0.0,
+        "avg_prompt_chars": 0.0,
+        "avg_completion_chars": 0.0
+      }
+    ],
+    "revision_rows": [
+      {
+        "revision_type": "carry_forward_fixed_signal",
+        "bucket": "carry_forward",
+        "count": 1,
+        "share": 0.1111
+      },
+      {
+        "revision_type": "carry_forward_loss_signal",
+        "bucket": "carry_forward",
+        "count": 2,
+        "share": 0.2222
+      },
+      {
+        "revision_type": "prefix_decoder_bridge",
+        "bucket": "decoder_bridge",
+        "count": 3,
+        "share": 0.3333
+      },
+      {
+        "revision_type": "unanchored_direct_answer",
+        "bucket": "direct_answer",
+        "count": 3,
+        "share": 0.3333
+      }
+    ],
+    "case_rows": [
+      {
+        "case_id": "loss-bridge-carry-forward-01",
+        "example_count": 1,
+        "carry_forward_count": 1,
+        "direct_answer_count": 0,
+        "decoder_bridge_count": 0
+      },
+      {
+        "case_id": "loss-bridge-carry-forward-02",
+        "example_count": 1,
+        "carry_forward_count": 1,
+        "direct_answer_count": 0,
+        "decoder_bridge_count": 0
+      },
+      {
+        "case_id": "loss-bridge-carry-forward-03",
+        "example_count": 1,
+        "carry_forward_count": 1,
+        "direct_answer_count": 0,
+        "decoder_bridge_count": 0
+      },
+      {
+        "case_id": "loss-bridge-direct-01",
+        "example_count": 1,
+        "carry_forward_count": 0,
+        "direct_answer_count": 1,
+        "decoder_bridge_count": 0
+      },
+      {
+        "case_id": "loss-bridge-direct-02",
+        "example_count": 1,
+        "carry_forward_count": 0,
+        "direct_answer_count": 1,
+        "decoder_bridge_count": 0
+      },
+      {
+        "case_id": "loss-bridge-direct-03",
+        "example_count": 1,
+        "carry_forward_count": 0,
+        "direct_answer_count": 1,
+        "decoder_bridge_count": 0
+      },
+      {
+        "case_id": "loss-bridge-prefix-01",
+        "example_count": 1,
+        "carry_forward_count": 0,
+        "direct_answer_count": 0,
+        "decoder_bridge_count": 1
+      },
+      {
+        "case_id": "loss-bridge-prefix-02",
+        "example_count": 1,
+        "carry_forward_count": 0,
+        "direct_answer_count": 0,
+        "decoder_bridge_count": 1
+      },
+      {
+        "case_id": "loss-bridge-prefix-03",
+        "example_count": 1,
+        "carry_forward_count": 0,
+        "direct_answer_count": 0,
+        "decoder_bridge_count": 1
+      }
+    ],
+    "risk_rows": [],
+    "check_rows": [
+      {
+        "id": "decoder_anchor_seed_passed",
+        "status": "pass",
+        "actual": "pass",
+        "detail": "decoder anchor seed revision must pass"
+      },
+      {
+        "id": "decoder_anchor_failure_diagnostic_passed",
+        "status": "pass",
+        "actual": "pass",
+        "detail": "decoder anchor failure diagnostic must pass"
+      },
+      {
+        "id": "seed_examples_present",
+        "status": "pass",
+        "actual": 9,
+        "detail": "seed examples must be present"
+      },
+      {
+        "id": "bucket_rows_present",
+        "status": "pass",
+        "actual": 4,
+        "detail": "bucket rows must be computed"
+      },
+      {
+        "id": "corpus_present",
+        "status": "pass",
+        "actual": 495,
+        "detail": "corpus must be readable"
+      }
+    ],
+    "distribution_audit": {
+      "ready": true,
+      "example_count": 9,
+      "corpus_chars": 495,
+      "case_count": 9,
+      "revision_type_count": 4,
+      "carry_forward_share": 0.3333,
+      "direct_answer_share": 0.3333,
+      "decoder_bridge_share": 0.3333,
+      "zero_hit_case_count": 0,
+      "risk_count": 0,
+      "rebalanced_seed_needed": false,
+      "proposed_next_artifact": "model_capability_route_promotion_bounded_real_replay_decoder_anchor_rebalanced_seed_revision",
+      "next_step": "build_decoder_anchor_rebalanced_seed_revision"
+    },
+    "summary": {
+      "decoder_anchor_distribution_audit_ready": true,
+      "example_count": 9,
+      "corpus_chars": 495,
+      "case_count": 9,
+      "revision_type_count": 4,
+      "carry_forward_share": 0.3333,
+      "direct_answer_share": 0.3333,
+      "decoder_bridge_share": 0.3333,
+      "zero_hit_case_count": 0,
+      "risk_count": 0,
+      "rebalanced_seed_needed": false,
+      "proposed_next_artifact": "model_capability_route_promotion_bounded_real_replay_decoder_anchor_rebalanced_seed_revision",
+      "next_step": "build_decoder_anchor_rebalanced_seed_revision",
+      "failed_check_count": 0
+    },
+    "interpretation": {
+      "model_quality_claim": "not_claimed",
+      "reason": "Distribution looks balanced; inspect decoding or capacity next.",
+      "next_action": "build_decoder_anchor_rebalanced_seed_revision"
+    }
+  },
+  "decoder_anchor_distribution_outputs": {
+    "json": "output\\model-capability-loss-signal-bridge-decoder-anchor-distribution-v1145\\decoder-anchor-distribution-audit\\model_capability_route_promotion_bounded_real_replay_decoder_anchor_distribution_audit.json",
+    "csv": "output\\model-capability-loss-signal-bridge-decoder-anchor-distribution-v1145\\decoder-anchor-distribution-audit\\model_capability_route_promotion_bounded_real_replay_decoder_anchor_distribution_audit.csv",
+    "text": "output\\model-capability-loss-signal-bridge-decoder-anchor-distribution-v1145\\decoder-anchor-distribution-audit\\model_capability_route_promotion_bounded_real_replay_decoder_anchor_distribution_audit.txt",
+    "markdown": "output\\model-capability-loss-signal-bridge-decoder-anchor-distribution-v1145\\decoder-anchor-distribution-audit\\model_capability_route_promotion_bounded_real_replay_decoder_anchor_distribution_audit.md",
+    "html": "output\\model-capability-loss-signal-bridge-decoder-anchor-distribution-v1145\\decoder-anchor-distribution-audit\\model_capability_route_promotion_bounded_real_replay_decoder_anchor_distribution_audit.html"
+  },
+  "rows": [
+    {
+      "row_id": "loss_signal_bridge",
+      "area": "training",
+      "status": "pass",
+      "metric": "train_loss_delta",
+      "actual": -0.999899,
+      "expected": "< 0",
+      "detail": "Bounded CPU training should reduce train loss on the v1145 bridge corpus."
+    },
+    {
+      "row_id": "decoder_anchor_distribution",
+      "area": "seed_distribution",
+      "status": "pass",
+      "metric": "bridge/direct/carry shares",
+      "actual": {
+        "carry": 0.3333,
+        "direct": 0.3333,
+        "bridge": 0.3333
+      },
+      "expected": "balanced enough to avoid rebalanced_seed_needed",
+      "detail": "Distribution audit reuses the existing decoder-anchor bucket rules."
+    }
+  ],
+  "check_rows": [
+    {
+      "id": "v1144_holdout_scorecard_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "v1144 holdout scorecard smoke must pass first"
+    },
+    {
+      "id": "v1144_holdout_scorecard_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "v1144 summary must be ready"
+    },
+    {
+      "id": "seed_revision_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "decoder anchor seed revision must pass"
+    },
+    {
+      "id": "seed_examples_present",
+      "status": "pass",
+      "actual": 9,
+      "detail": "v1145 expects the balanced nine-row bridge corpus"
+    },
+    {
+      "id": "corpus_exists",
+      "status": "pass",
+      "actual": "output\\model-capability-loss-signal-bridge-decoder-anchor-distribution-v1145\\loss-signal-bridge-inputs\\loss_signal_bridge_decoder_anchor_corpus.txt",
+      "detail": "materialized corpus must exist"
+    },
+    {
+      "id": "training_command_success_or_reused",
+      "status": "pass",
+      "actual": 0,
+      "detail": "real training subprocess must succeed when invoked"
+    },
+    {
+      "id": "training_metrics_present",
+      "status": "pass",
+      "actual": 5,
+      "detail": "training run must write at least two metric records"
+    },
+    {
+      "id": "train_loss_decreased",
+      "status": "pass",
+      "actual": -0.999899,
+      "detail": "train loss should decrease across the bounded run"
+    },
+    {
+      "id": "checkpoint_exists",
+      "status": "pass",
+      "actual": "output\\model-capability-loss-signal-bridge-decoder-anchor-distribution-v1145\\real-loss-signal-training-run\\checkpoint.pt",
+      "detail": "training run must produce checkpoint.pt"
+    },
+    {
+      "id": "tokenizer_exists",
+      "status": "pass",
+      "actual": "output\\model-capability-loss-signal-bridge-decoder-anchor-distribution-v1145\\real-loss-signal-training-run\\tokenizer.json",
+      "detail": "training run must produce tokenizer.json"
+    },
+    {
+      "id": "distribution_audit_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "decoder anchor distribution audit must pass"
+    },
+    {
+      "id": "distribution_balanced",
+      "status": "pass",
+      "actual": false,
+      "detail": "balanced seed should not request another rebalanced seed"
+    },
+    {
+      "id": "distribution_outputs_written",
+      "status": "pass",
+      "actual": [
+        "csv",
+        "html",
+        "json",
+        "markdown",
+        "text"
+      ],
+      "detail": "nested distribution outputs must be written"
+    },
+    {
+      "id": "promotion_boundary_kept",
+      "status": "pass",
+      "actual": false,
+      "detail": "v1145 is a bounded capability evidence run, not a model promotion"
+    }
+  ],
+  "summary": {
+    "loss_signal_bridge_decoder_anchor_distribution_ready": true,
+    "loss_signal_ready": true,
+    "training_record_count": 5,
+    "first_train_loss": 3.307331,
+    "last_train_loss": 2.307431,
+    "train_loss_delta": -0.999899,
+    "first_val_loss": 3.320089,
+    "last_val_loss": 2.825226,
+    "val_loss_delta": -0.494864,
+    "decoder_anchor_distribution_ready": true,
+    "decoder_anchor_example_count": 9,
+    "carry_forward_share": 0.3333,
+    "direct_answer_share": 0.3333,
+    "decoder_bridge_share": 0.3333,
+    "rebalanced_seed_needed": false,
+    "model_quality_claim": "loss_signal_bridge_and_decoder_anchor_distribution_real_execution",
+    "promotion_ready": false,
+    "next_step": "run_decoder_anchor_probe_against_v1145_checkpoint",
+    "failed_check_count": 0
+  },
+  "recommendations": [
+    "Treat v1145 as bounded real training evidence plus a balanced decoder-anchor corpus check.",
+    "Use the produced checkpoint for the next decoder-anchor probe before making any promotion claim."
+  ],
+  "csv_fieldnames": [
+    "row_id",
+    "area",
+    "status",
+    "metric",
+    "actual",
+    "expected",
+    "detail"
+  ]
+}

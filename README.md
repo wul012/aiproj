@@ -15,7 +15,18 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1144.0.0` runs a real holdout scorecard smoke over five MiniGPT generation cases.
+Version `v1145.0.0` runs bounded loss-signal training and decoder-anchor distribution evidence after the v1144 holdout scorecard smoke.
+
+## Latest v1145 checkpoint
+
+- Added `model_capability_loss_signal_bridge_decoder_anchor_distribution.py` to materialize a balanced loss-signal bridge corpus, inspect real training metrics, and reuse the existing decoder-anchor distribution audit.
+- Added CLI `scripts/run_model_capability_loss_signal_bridge_decoder_anchor_distribution_v1145.py`, defaulting to the v1144 holdout scorecard smoke report and running `scripts/train.py` unless an existing training run is supplied.
+- Real v1145 run trained a tiny CPU checkpoint for `40` iterations and produced `training_record_count=5`, `train_loss_delta=-0.999899`, `val_loss_delta=-0.494864`, and `loss_signal_ready=True`.
+- Decoder-anchor distribution audit reported `decoder_anchor_example_count=9`, `carry_forward_share=0.3333`, `direct_answer_share=0.3333`, `decoder_bridge_share=0.3333`, and `rebalanced_seed_needed=False`.
+- Kept `model_quality_claim=loss_signal_bridge_and_decoder_anchor_distribution_real_execution` and `promotion_ready=False`; next step is `run_decoder_anchor_probe_against_v1145_checkpoint`.
+- Added tests for the ready path, train-loss non-decrease failure, v1144 prerequisite failure, output generation, and CLI reuse of a fixture training run.
+- Verified with focused v1145 tests, py_compile, real CLI training evidence, Playwright MCP screenshot evidence, and local cleanup.
+- Archived v1145 evidence in `f/1145` and added the engineering-maintenance code explanation in `代码讲解记录_工程保养阶段/1157-v1145-loss-signal-bridge-decoder-anchor-distribution.md`.
 
 ## Latest v1144 checkpoint
 

@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT v1145 decoder anchor failure diagnostic placeholder",
+  "generated_at": "2026-06-12T11:17:49Z",
+  "status": "pass",
+  "summary": {
+    "decoder_anchor_failure_diagnostic_ready": true,
+    "case_count": 3,
+    "zero_hit_case_count": 0,
+    "reason": "v1145 balances the seed distribution before the next decoder probe."
+  }
+}
