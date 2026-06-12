@@ -15,7 +15,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1134.0.0` adds a versioned artifact map for recent `f/<version>` evidence folders.
+Version `v1135.0.0` turns the model capability cadence watch into a bounded regression plan.
+
+## Latest v1135 checkpoint
+
+- Added `model_capability_regression_plan.py` to consume the real v1133 cadence watch report and schedule a bounded model capability regression.
+- Added layered evaluation CLI `scripts/evaluation/plan_model_capability_regression_v1135.py`.
+- The plan includes required term coverage, loss signal bridge, decoder anchor distribution, and holdout scorecard smoke items.
+- Real run produced `status=pass`, `decision=model_capability_regression_plan_ready`, `plan_ready=True`, `regression_item_count=4`, and `next_step=inventory_model_capability_regression_evidence_v1136`.
+- Verified with focused v1135 tests, py_compile, real CLI evidence, Playwright MCP screenshot evidence, and local cleanup.
+- Archived v1135 evidence in `f/1135` and added the engineering-maintenance code explanation in `代码讲解记录_工程保养阶段/1147-v1135-model-capability-regression-plan.md`.
 
 ## Latest v1134 checkpoint
 

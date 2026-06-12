@@ -1,0 +1,5 @@
+check_id,scope,evidence_kind,status,reason
+required_term_coverage,surface,coverage,planned,Verify required terms are still visible in bounded prompts.
+loss_signal_bridge,training-signal,diagnostic,planned,Reconnect governance cadence to a measurable loss or score signal.
+decoder_anchor_distribution,decoder,distribution,planned,Inspect whether generated anchors remain bounded instead of echoing templates.
+holdout_scorecard_smoke,holdout,scorecard,planned,Keep a small holdout scorecard in the loop after receipt-heavy runs.

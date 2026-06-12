@@ -1,0 +1,13 @@
+status=pass
+decision=model_capability_regression_plan_ready
+plan_ready=True
+regression_item_count=4
+source_status=watch
+source_next_action=schedule_model_capability_regression
+leading_non_capability_run=12
+max_non_capability_run=4
+promotion_ready=False
+model_quality_claim=plan_only
+next_step=inventory_model_capability_regression_evidence_v1136
+passed_check_count=5
+failed_check_count=0

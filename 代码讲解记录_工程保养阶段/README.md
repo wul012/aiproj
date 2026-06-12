@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1147-v1135-model-capability-regression-plan.md
+ -> v1135 code explanation: turn the v1133 cadence watch into a bounded model capability regression plan.
+
 1146-v1134-artifact-map.md
  -> v1134 code explanation: build an artifact map for recent f/ version evidence folders.
 

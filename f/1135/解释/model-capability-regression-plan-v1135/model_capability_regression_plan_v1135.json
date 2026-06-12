@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability regression plan v1135",
+  "generated_at": "2026-06-12T02:42:06Z",
+  "status": "pass",
+  "decision": "model_capability_regression_plan_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_cadence_path": "f\\1133\\解释\\model-capability-cadence-v1133\\model_capability_cadence_v1133.json",
+  "source_cadence_summary": {
+    "status": "watch",
+    "decision": "model_capability_cadence_ready",
+    "scanned_version_count": 12,
+    "leading_non_capability_run": 12,
+    "max_non_capability_run": 4,
+    "latest_model_capability_version": "not_found_in_recent_window",
+    "next_action": "schedule_model_capability_regression",
+    "cadence_ready": true
+  },
+  "plan": {
+    "plan_ready": true,
+    "plan_status": "scheduled",
+    "source_watch_reason": "cadence_run_exceeded_limit",
+    "regression_item_count": 4,
+    "next_step": "inventory_model_capability_regression_evidence_v1136",
+    "promotion_ready": false,
+    "model_quality_claim": "plan_only"
+  },
+  "rows": [
+    {
+      "check_id": "required_term_coverage",
+      "scope": "surface",
+      "evidence_kind": "coverage",
+      "reason": "Verify required terms are still visible in bounded prompts.",
+      "status": "planned"
+    },
+    {
+      "check_id": "loss_signal_bridge",
+      "scope": "training-signal",
+      "evidence_kind": "diagnostic",
+      "reason": "Reconnect governance cadence to a measurable loss or score signal.",
+      "status": "planned"
+    },
+    {
+      "check_id": "decoder_anchor_distribution",
+      "scope": "decoder",
+      "evidence_kind": "distribution",
+      "reason": "Inspect whether generated anchors remain bounded instead of echoing templates.",
+      "status": "planned"
+    },
+    {
+      "check_id": "holdout_scorecard_smoke",
+      "scope": "holdout",
+      "evidence_kind": "scorecard",
+      "reason": "Keep a small holdout scorecard in the loop after receipt-heavy runs.",
+      "status": "planned"
+    }
+  ],
+  "check_rows": [
+    {
+      "id": "cadence_file_exists",
+      "status": "pass",
+      "actual": "f\\1133\\解释\\model-capability-cadence-v1133\\model_capability_cadence_v1133.json"
+    },
+    {
+      "id": "cadence_tool_ready",
+      "status": "pass",
+      "actual": true
+    },
+    {
+      "id": "cadence_watch_detected",
+      "status": "pass",
+      "actual": "watch"
+    },
+    {
+      "id": "model_regression_requested",
+      "status": "pass",
+      "actual": "schedule_model_capability_regression"
+    },
+    {
+      "id": "non_capability_run_exceeds_limit",
+      "status": "pass",
+      "actual": {
+        "run": 12,
+        "limit": 4
+      }
+    }
+  ],
+  "summary": {
+    "plan_ready": true,
+    "regression_item_count": 4,
+    "source_status": "watch",
+    "source_next_action": "schedule_model_capability_regression",
+    "leading_non_capability_run": 12,
+    "max_non_capability_run": 4,
+    "promotion_ready": false,
+    "model_quality_claim": "plan_only",
+    "next_step": "inventory_model_capability_regression_evidence_v1136",
+    "passed_check_count": 5,
+    "failed_check_count": 0
+  },
+  "recommendations": [
+    "Run a small model capability regression before adding more receipt-only versions.",
+    "Keep the regression bounded: required terms, loss signal, decoder anchor, and holdout scorecard.",
+    "Do not treat this plan as model improvement evidence; it only schedules the checks."
+  ],
+  "csv_fieldnames": [
+    "check_id",
+    "scope",
+    "evidence_kind",
+    "status",
+    "reason"
+  ]
+}
