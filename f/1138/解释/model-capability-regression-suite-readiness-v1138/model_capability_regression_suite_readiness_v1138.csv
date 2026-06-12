@@ -1,0 +1,5 @@
+suite_id,check_id,source_exists,test_exists,boundary_ok,status,recommendation
+capability-regression-01,required_term_coverage,True,True,True,ready,ready for bounded regression follow-up
+capability-regression-02,loss_signal_bridge,True,True,True,ready,ready for bounded regression follow-up
+capability-regression-03,decoder_anchor_distribution,True,True,True,ready,ready for bounded regression follow-up
+capability-regression-04,holdout_scorecard_smoke,True,True,True,ready,ready for bounded regression follow-up

@@ -15,7 +15,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1137.0.0` builds a bounded suite manifest from the model capability regression inventory.
+Version `v1138.0.0` checks readiness for the bounded model capability regression suite manifest.
+
+## Latest v1138 checkpoint
+
+- Added `model_capability_regression_suite_readiness.py` to verify the v1137 suite manifest before closeout.
+- Added layered evaluation CLI `scripts/evaluation/check_model_capability_regression_suite_readiness_v1138.py`.
+- The checker verifies manifest status, suite readiness, source/test path existence, row count alignment, and the non-promotion boundary.
+- Real run produced `status=pass`, `decision=model_capability_regression_suite_readiness_ready`, `readiness_ready=True`, `ready_item_count=4`, `suite_item_count=4`, and `next_step=close_model_capability_regression_followup_v1139`.
+- Verified with focused v1138 tests, py_compile, real CLI evidence, Playwright MCP screenshot evidence, and local cleanup.
+- Archived v1138 evidence in `f/1138` and added the engineering-maintenance code explanation in `代码讲解记录_工程保养阶段/1150-v1138-model-capability-regression-suite-readiness.md`.
 
 ## Latest v1137 checkpoint
 

@@ -1,0 +1,11 @@
+status=pass
+decision=model_capability_regression_suite_readiness_ready
+readiness_ready=True
+ready_item_count=4
+suite_item_count=4
+source_suite_ready=True
+promotion_ready=False
+model_quality_claim=readiness_only
+next_step=close_model_capability_regression_followup_v1139
+passed_check_count=6
+failed_check_count=0

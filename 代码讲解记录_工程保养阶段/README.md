@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1150-v1138-model-capability-regression-suite-readiness.md
+ -> v1138 code explanation: check source/test path readiness for the bounded regression suite manifest.
+
 1149-v1137-model-capability-regression-suite-manifest.md
  -> v1137 code explanation: build a bounded suite manifest from model capability regression inventory rows.
 

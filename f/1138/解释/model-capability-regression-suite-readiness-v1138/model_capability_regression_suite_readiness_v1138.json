@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability regression suite readiness v1138",
+  "generated_at": "2026-06-12T02:55:45Z",
+  "status": "pass",
+  "decision": "model_capability_regression_suite_readiness_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_suite_manifest_path": "f\\1137\\解释\\model-capability-regression-suite-manifest-v1137\\model_capability_regression_suite_manifest_v1137.json",
+  "source_suite_summary": {
+    "suite_ready": true,
+    "suite_item_count": 4,
+    "source_inventory_ready": true,
+    "promotion_ready": false,
+    "model_quality_claim": "manifest_only",
+    "next_step": "check_model_capability_regression_suite_readiness_v1138",
+    "passed_check_count": 7,
+    "failed_check_count": 0
+  },
+  "rows": [
+    {
+      "suite_id": "capability-regression-01",
+      "check_id": "required_term_coverage",
+      "source_exists": true,
+      "test_exists": true,
+      "boundary_ok": true,
+      "primary_source": "D:/aiproj/src/minigpt/bounded_objective_loss_signal_bridge_target_only_memory_tokenizer_coverage_aware_holdout_dry_run.py",
+      "primary_test": "D:/aiproj/tests/test_bounded_objective_loss_signal_bridge_target_only_memory_tokenizer_coverage_aware_holdout_dry_run.py",
+      "status": "ready",
+      "recommendation": "ready for bounded regression follow-up"
+    },
+    {
+      "suite_id": "capability-regression-02",
+      "check_id": "loss_signal_bridge",
+      "source_exists": true,
+      "test_exists": true,
+      "boundary_ok": true,
+      "primary_source": "D:/aiproj/src/minigpt/bounded_objective_loss_signal_bridge.py",
+      "primary_test": "D:/aiproj/tests/test_bounded_objective_loss_signal_bridge.py",
+      "status": "ready",
+      "recommendation": "ready for bounded regression follow-up"
+    },
+    {
+      "suite_id": "capability-regression-03",
+      "check_id": "decoder_anchor_distribution",
+      "source_exists": true,
+      "test_exists": true,
+      "boundary_ok": true,
+      "primary_source": "D:/aiproj/src/minigpt/model_capability_route_promotion_bounded_objective_decoder_anchor_policy.py",
+      "primary_test": "D:/aiproj/tests/test_model_capability_route_promotion_bounded_objective_decoder_anchor_policy.py",
+      "status": "ready",
+      "recommendation": "ready for bounded regression follow-up"
+    },
+    {
+      "suite_id": "capability-regression-04",
+      "check_id": "holdout_scorecard_smoke",
+      "source_exists": true,
+      "test_exists": true,
+      "boundary_ok": true,
+      "primary_source": "D:/aiproj/src/minigpt/benchmark_scorecard.py",
+      "primary_test": "D:/aiproj/tests/test_benchmark_scorecard.py",
+      "status": "ready",
+      "recommendation": "ready for bounded regression follow-up"
+    }
+  ],
+  "check_rows": [
+    {
+      "id": "suite_file_exists",
+      "status": "pass",
+      "actual": "f\\1137\\解释\\model-capability-regression-suite-manifest-v1137\\model_capability_regression_suite_manifest_v1137.json"
+    },
+    {
+      "id": "suite_status_passed",
+      "status": "pass",
+      "actual": "pass"
+    },
+    {
+      "id": "suite_ready",
+      "status": "pass",
+      "actual": true
+    },
+    {
+      "id": "suite_rows_present",
+      "status": "pass",
+      "actual": 4
+    },
+    {
+      "id": "readiness_rows_match_suite",
+      "status": "pass",
+      "actual": {
+        "rows": 4,
+        "suite": 4
+      }
+    },
+    {
+      "id": "all_readiness_rows_ready",
+      "status": "pass",
+      "actual": [
+        "ready",
+        "ready",
+        "ready",
+        "ready"
+      ]
+    }
+  ],
+  "readiness": {
+    "readiness_ready": true,
+    "ready_item_count": 4,
+    "suite_item_count": 4,
+    "next_step": "close_model_capability_regression_followup_v1139",
+    "promotion_ready": false,
+    "model_quality_claim": "readiness_only"
+  },
+  "summary": {
+    "readiness_ready": true,
+    "ready_item_count": 4,
+    "suite_item_count": 4,
+    "source_suite_ready": true,
+    "promotion_ready": false,
+    "model_quality_claim": "readiness_only",
+    "next_step": "close_model_capability_regression_followup_v1139",
+    "passed_check_count": 6,
+    "failed_check_count": 0
+  },
+  "recommendations": [
+    "Use readiness output to close the follow-up loop before adding more governance-only work.",
+    "Keep the next closeout honest: readiness is not a model quality score.",
+    "If any source/test path drifts, repair the manifest before execution."
+  ],
+  "csv_fieldnames": [
+    "suite_id",
+    "check_id",
+    "source_exists",
+    "test_exists",
+    "boundary_ok",
+    "status",
+    "recommendation"
+  ]
+}
