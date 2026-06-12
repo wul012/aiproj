@@ -18,6 +18,10 @@ f/<version>/解释/说明.md
 
 ## 当前索引
 
+f/1152/图片
+f/1152/解释/说明.md
+ -> v1152 unassisted holdout repair partial signal diagnostic screenshots and explanation.
+
 f/1151/图片
 f/1151/解释/说明.md
  -> v1151 unassisted holdout repair replay comparison screenshots and explanation.

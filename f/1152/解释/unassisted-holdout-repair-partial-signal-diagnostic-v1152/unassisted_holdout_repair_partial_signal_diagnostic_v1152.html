@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT unassisted holdout repair partial signal diagnostic v1152</title>
+<style>
+:root { color-scheme: light; font-family: Arial, "Microsoft YaHei", sans-serif; color: #172026; background: #f6f8fa; }
+body { margin: 0; padding: 24px; }
+header, section, footer { max-width: 1120px; margin: 0 auto 18px; }
+header { padding: 18px 0 8px; border-bottom: 3px solid #2f6f8f; }
+h1 { margin: 0 0 8px; font-size: 28px; letter-spacing: 0; }
+h2 { margin: 0 0 10px; font-size: 18px; letter-spacing: 0; }
+p { margin: 0 0 10px; line-height: 1.5; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; background: transparent; border: 0; padding: 0; }
+.stat { background: #fff; border: 1px solid #d7dee5; border-radius: 8px; padding: 12px; min-height: 64px; }
+.stat span { display: block; color: #5c6b73; font-size: 12px; margin-bottom: 8px; }
+.stat strong { display: block; font-size: 18px; overflow-wrap: anywhere; }
+section { background: #fff; border: 1px solid #d7dee5; border-radius: 8px; padding: 16px; }
+table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+th, td { padding: 9px; border-bottom: 1px solid #e5e9ef; text-align: left; vertical-align: top; overflow-wrap: anywhere; }
+th { background: #eef3f6; }
+ul { margin: 0; padding-left: 20px; }
+li { margin: 6px 0; }
+.muted { color: #687782; }
+footer { color: #687782; font-size: 12px; }
+</style>
+</head>
+<body>
+<header><h1>MiniGPT unassisted holdout repair partial signal diagnostic v1152</h1><p>Late-stage maintenance report for keeping AI governance artifacts readable.</p></header>
+<section class="stats"><article class="stat"><span>unassisted_holdout_repair_partial_signal_diagnostic_ready</span><strong>True</strong></article><article class="stat"><span>case_count</span><strong>5</strong></article><article class="stat"><span>fixed_hit_case_count</span><strong>4</strong></article><article class="stat"><span>loss_hit_case_count</span><strong>0</strong></article><article class="stat"><span>full_pair_case_count</span><strong>0</strong></article><article class="stat"><span>fixed_only_case_count</span><strong>4</strong></article><article class="stat"><span>zero_hit_case_count</span><strong>1</strong></article><article class="stat"><span>target_free_pair_example_count</span><strong>6</strong></article><article class="stat"><span>loss_after_fixed_training_context_count</span><strong>1</strong></article><article class="stat"><span>fixed_first_example_count</span><strong>2</strong></article><article class="stat"><span>root_cause_hypothesis</span><strong>loss_suffix_context_tied_and_underlearned_after_fixed</strong></article><article class="stat"><span>model_quality_claim</span><strong>partial_signal_diagnostic_only</strong></article><article class="stat"><span>promotion_ready</span><strong>False</strong></article><article class="stat"><span>next_step</span><strong>build_unassisted_loss_suffix_repair_seed</strong></article><article class="stat"><span>failed_check_count</span><strong>0</strong></article></section>
+<section><h2>Diagnostic Findings</h2><table><thead><tr><th>finding_id</th><th>severity</th><th>status</th><th>actual</th><th>inference</th><th>recommended_action</th></tr></thead><tbody><tr><td>fixed_signal_visible</td><td>info</td><td>observed</td><td>4</td><td>v1151 generated `fixed` in target-free holdout continuations</td><td>preserve fixed-oriented examples while repairing loss suffix</td></tr><tr><td>loss_absent_in_all_replay_cases</td><td>blocker</td><td>requires_repair</td><td>0</td><td>v1151 did not generate `loss` in any holdout continuation</td><td>add target-free loss-suffix reinforcement before another replay</td></tr><tr><td>full_pair_absent</td><td>blocker</td><td>requires_repair</td><td>0</td><td>`fixed loss` full-pair recovery is still zero</td><td>do not promote; run a repair seed revision focused on loss after fixed</td></tr><tr><td>zero_hit_prompt_cluster</td><td>warn</td><td>observed</td><td>unassisted-holdout-02</td><td>some prompts produce neither fixed nor loss</td><td>keep prompt-level diagnostics in the next replay</td></tr><tr><td>loss_suffix_context_tied</td><td>warn</td><td>observed</td><td>1</td><td>loss-after-fixed evidence exists mainly as a training-only context where prompt already contains fixed</td><td>create target-free prompts that require the model to continue from fixed to loss without prompt contamination</td></tr><tr><td>fixed_first_bias</td><td>warn</td><td>observed</td><td>2</td><td>fixed-only examples likely help the first token but can leave loss undertrained</td><td>rebalance corpus so fixed-first support does not stop at fixed</td></tr><tr><td>context_window_drift_visible</td><td>warn</td><td>observed</td><td>unassisted-holdout-04</td><td>at least one generated string no longer starts with the full prompt, suggesting tiny block-size truncation</td><td>keep short and long prompts separate in the next replay report</td></tr><tr><td>next_repair_action</td><td>action</td><td>ready</td><td>build_unassisted_loss_suffix_repair_seed</td><td>the next version should alter evidence inputs, not reinterpret v1151 as success</td><td>materialize a loss-suffix repair seed and rerun bounded CPU training/replay</td></tr></tbody></table></section>
+
+<footer>Generated by MiniGPT readability maintenance tooling.</footer>
+</body>
+</html>

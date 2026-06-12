@@ -1,0 +1,17 @@
+status=pass
+decision=unassisted_holdout_repair_partial_signal_diagnostic_ready
+unassisted_holdout_repair_partial_signal_diagnostic_ready=True
+case_count=5
+fixed_hit_case_count=4
+loss_hit_case_count=0
+full_pair_case_count=0
+fixed_only_case_count=4
+zero_hit_case_count=1
+target_free_pair_example_count=6
+loss_after_fixed_training_context_count=1
+fixed_first_example_count=2
+root_cause_hypothesis=loss_suffix_context_tied_and_underlearned_after_fixed
+model_quality_claim=partial_signal_diagnostic_only
+promotion_ready=False
+next_step=build_unassisted_loss_suffix_repair_seed
+failed_check_count=0

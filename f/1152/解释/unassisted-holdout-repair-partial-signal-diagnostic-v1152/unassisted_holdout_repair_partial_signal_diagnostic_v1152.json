@@ -1,0 +1,207 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT unassisted holdout repair partial signal diagnostic v1152",
+  "generated_at": "2026-06-12T14:35:24Z",
+  "status": "pass",
+  "decision": "unassisted_holdout_repair_partial_signal_diagnostic_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_replay_comparison": "D:\\aiproj\\f\\1151\\解释\\unassisted-holdout-repair-replay-comparison-v1151\\unassisted_holdout_repair_replay_comparison_v1151.json",
+  "source_seed_corpus": "D:\\aiproj\\f\\1149\\解释\\unassisted-holdout-repair-seed-corpus-v1149\\unassisted_holdout_repair_seed_corpus_v1149.json",
+  "rows": [
+    {
+      "finding_id": "fixed_signal_visible",
+      "severity": "info",
+      "status": "observed",
+      "actual": 4,
+      "inference": "v1151 generated `fixed` in target-free holdout continuations",
+      "recommended_action": "preserve fixed-oriented examples while repairing loss suffix"
+    },
+    {
+      "finding_id": "loss_absent_in_all_replay_cases",
+      "severity": "blocker",
+      "status": "requires_repair",
+      "actual": 0,
+      "inference": "v1151 did not generate `loss` in any holdout continuation",
+      "recommended_action": "add target-free loss-suffix reinforcement before another replay"
+    },
+    {
+      "finding_id": "full_pair_absent",
+      "severity": "blocker",
+      "status": "requires_repair",
+      "actual": 0,
+      "inference": "`fixed loss` full-pair recovery is still zero",
+      "recommended_action": "do not promote; run a repair seed revision focused on loss after fixed"
+    },
+    {
+      "finding_id": "zero_hit_prompt_cluster",
+      "severity": "warn",
+      "status": "observed",
+      "actual": [
+        "unassisted-holdout-02"
+      ],
+      "inference": "some prompts produce neither fixed nor loss",
+      "recommended_action": "keep prompt-level diagnostics in the next replay"
+    },
+    {
+      "finding_id": "loss_suffix_context_tied",
+      "severity": "warn",
+      "status": "observed",
+      "actual": 1,
+      "inference": "loss-after-fixed evidence exists mainly as a training-only context where prompt already contains fixed",
+      "recommended_action": "create target-free prompts that require the model to continue from fixed to loss without prompt contamination"
+    },
+    {
+      "finding_id": "fixed_first_bias",
+      "severity": "warn",
+      "status": "observed",
+      "actual": 2,
+      "inference": "fixed-only examples likely help the first token but can leave loss undertrained",
+      "recommended_action": "rebalance corpus so fixed-first support does not stop at fixed"
+    },
+    {
+      "finding_id": "context_window_drift_visible",
+      "severity": "warn",
+      "status": "observed",
+      "actual": [
+        "unassisted-holdout-04"
+      ],
+      "inference": "at least one generated string no longer starts with the full prompt, suggesting tiny block-size truncation",
+      "recommended_action": "keep short and long prompts separate in the next replay report"
+    },
+    {
+      "finding_id": "next_repair_action",
+      "severity": "action",
+      "status": "ready",
+      "actual": "build_unassisted_loss_suffix_repair_seed",
+      "inference": "the next version should alter evidence inputs, not reinterpret v1151 as success",
+      "recommended_action": "materialize a loss-suffix repair seed and rerun bounded CPU training/replay"
+    }
+  ],
+  "check_rows": [
+    {
+      "id": "v1151_replay_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "v1151 replay comparison must be structurally valid"
+    },
+    {
+      "id": "v1151_replay_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "v1151 must have completed replay generation"
+    },
+    {
+      "id": "v1151_next_step_matches_diagnostic",
+      "status": "pass",
+      "actual": "diagnose_unassisted_holdout_repair_partial_signal",
+      "detail": "v1151 partial signal should point to this diagnostic"
+    },
+    {
+      "id": "v1149_seed_corpus_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "v1149 seed corpus must be structurally valid"
+    },
+    {
+      "id": "v1149_seed_corpus_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "v1149 seed corpus ready flag must be true"
+    },
+    {
+      "id": "replay_rows_present",
+      "status": "pass",
+      "actual": 5,
+      "detail": "diagnostic needs replay generation rows"
+    },
+    {
+      "id": "promotion_boundary_kept",
+      "status": "pass",
+      "actual": {
+        "replay": false,
+        "seed": false
+      },
+      "detail": "diagnostic is evidence, not automatic promotion"
+    }
+  ],
+  "replay_profile": {
+    "case_count": 5,
+    "fixed_hit_case_count": 4,
+    "loss_hit_case_count": 0,
+    "full_pair_case_count": 0,
+    "zero_hit_case_count": 1,
+    "fixed_only_case_count": 4,
+    "partial_signal_visible": true,
+    "loss_missing": true,
+    "full_pair_missing": true,
+    "zero_hit_case_ids": [
+      "unassisted-holdout-02"
+    ],
+    "fixed_only_case_ids": [
+      "unassisted-holdout-01",
+      "unassisted-holdout-03",
+      "unassisted-holdout-04",
+      "unassisted-holdout-05"
+    ],
+    "context_window_drift_case_ids": [
+      "unassisted-holdout-04"
+    ]
+  },
+  "seed_profile": {
+    "example_count": 9,
+    "target_free_pair_example_count": 6,
+    "loss_after_fixed_training_context_count": 1,
+    "fixed_first_example_count": 2,
+    "unique_prompt_count": 6,
+    "repeated_prompt_count": 2,
+    "loss_suffix_context_tied": true
+  },
+  "diagnosis": {
+    "ready": true,
+    "root_cause_hypothesis": "loss_suffix_context_tied_and_underlearned_after_fixed",
+    "evidence_basis": [
+      "fixed hits 4/5",
+      "loss hits 0/5",
+      "target-free pair examples 6",
+      "loss-after-fixed training-only examples 1"
+    ],
+    "blocking_findings": [
+      "loss_absent_in_all_replay_cases",
+      "full_pair_absent"
+    ],
+    "model_quality_claim": "partial_signal_diagnostic_only",
+    "promotion_ready": false,
+    "next_step": "build_unassisted_loss_suffix_repair_seed"
+  },
+  "summary": {
+    "unassisted_holdout_repair_partial_signal_diagnostic_ready": true,
+    "case_count": 5,
+    "fixed_hit_case_count": 4,
+    "loss_hit_case_count": 0,
+    "full_pair_case_count": 0,
+    "fixed_only_case_count": 4,
+    "zero_hit_case_count": 1,
+    "target_free_pair_example_count": 6,
+    "loss_after_fixed_training_context_count": 1,
+    "fixed_first_example_count": 2,
+    "root_cause_hypothesis": "loss_suffix_context_tied_and_underlearned_after_fixed",
+    "model_quality_claim": "partial_signal_diagnostic_only",
+    "promotion_ready": false,
+    "next_step": "build_unassisted_loss_suffix_repair_seed",
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "partial_signal_diagnostic_only",
+    "reason": "The real v1151 replay shows fixed-only partial signal, but loss and full-pair recovery are absent.",
+    "next_action": "build_unassisted_loss_suffix_repair_seed"
+  },
+  "csv_fieldnames": [
+    "finding_id",
+    "severity",
+    "status",
+    "actual",
+    "inference",
+    "recommended_action"
+  ]
+}

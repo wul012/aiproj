@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1164-v1152-unassisted-holdout-repair-partial-signal-diagnostic.md
+ -> v1152 code explanation: diagnose the v1151 fixed-only partial signal and route the missing loss suffix into the next bounded repair action.
+
 1163-v1151-unassisted-holdout-repair-replay-comparison.md
  -> v1151 code explanation: replay the v1149 target-free holdout prompts against the v1150 checkpoint and classify the result as partial fixed-only signal.
 

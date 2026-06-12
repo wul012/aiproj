@@ -15,7 +15,18 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1151.0.0` replays the fixed v1149 target-free holdout prompts against the v1150 repair checkpoint and records a partial unassisted signal.
+Version `v1152.0.0` diagnoses the v1151 fixed-only partial signal and turns the missing `loss` suffix into the next bounded repair action.
+
+## Latest v1152 checkpoint
+
+- Added `unassisted_holdout_repair_partial_signal_diagnostic_v1152.py` to consume the real v1151 replay comparison and v1149 seed corpus reports without rerunning training or generation.
+- Added CLI `scripts/diagnose_unassisted_holdout_repair_partial_signal_v1152.py`, defaulting to the archived `f/1151` replay and `f/1149` seed corpus evidence.
+- Real v1152 diagnostic produced `status=pass`, `decision=unassisted_holdout_repair_partial_signal_diagnostic_ready`, `fixed_hit_case_count=4`, `loss_hit_case_count=0`, `full_pair_case_count=0`, and `zero_hit_case_count=1`.
+- The seed profile found `target_free_pair_example_count=6`, `loss_after_fixed_training_context_count=1`, and `fixed_first_example_count=2`, yielding `root_cause_hypothesis=loss_suffix_context_tied_and_underlearned_after_fixed`.
+- Kept `model_quality_claim=partial_signal_diagnostic_only` and `promotion_ready=False`; next step is `build_unassisted_loss_suffix_repair_seed`.
+- Added tests for fixed-only diagnostic readiness, failed replay source blocking, alternate loss-suffix hypothesis, output generation, and CLI directory input.
+- Verified with focused v1152 tests, py_compile, real diagnostic evidence, Playwright MCP screenshot evidence, and local cleanup.
+- Archived v1152 evidence in `f/1152` and added the engineering-maintenance code explanation in `代码讲解记录_工程保养阶段/1164-v1152-unassisted-holdout-repair-partial-signal-diagnostic.md`.
 
 ## Latest v1151 checkpoint
 
