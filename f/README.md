@@ -18,6 +18,10 @@ f/<version>/解释/说明.md
 
 ## 当前索引
 
+f/1146/图片
+f/1146/解释/说明.md
+ -> v1146 decoder anchor local fragment probe screenshots and explanation.
+
 f/1145/图片
 f/1145/解释/说明.md
  -> v1145 loss signal bridge and decoder anchor distribution screenshots and explanation.

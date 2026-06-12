@@ -1,0 +1,10 @@
+case_id,prompt,continuation,combined,expected_fragment,fragment_hit,anchor_assisted_loss_hit,generation_error
+fixed-space-loss,fixed ,lossssss,fixed lossssss,loss,True,True,
+lo-to-loss,lo,"sssss
+nn","losssss
+nn",loss,True,True,
+los-to-loss,los,"ssss
+nnn","losssss
+nnn",loss,True,True,
+fixed-retention,fixed, fixe fi,fixed fixe fi,fixed,True,False,
+fi-to-loss-association,fi,er losss,fier losss,loss,True,True,

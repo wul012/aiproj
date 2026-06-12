@@ -1,0 +1,13 @@
+status=pass
+decision=model_capability_decoder_anchor_probe_found_fragment_signal
+decoder_anchor_probe_ready=True
+probe_case_count=5
+fragment_hit_count=5
+anchor_assisted_loss_hit_count=4
+fragment_hit_rate=1.0
+anchor_assisted_loss_hit_rate=0.8
+model_quality_claim=decoder_anchor_fragment_signal_only
+promotion_ready=False
+unassisted_success_claim=False
+next_step=compare_decoder_anchor_probe_with_unassisted_holdout_replay
+failed_check_count=0

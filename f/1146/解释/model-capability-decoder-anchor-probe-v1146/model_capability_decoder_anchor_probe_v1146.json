@@ -1,0 +1,186 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT decoder anchor probe v1146",
+  "generated_at": "2026-06-12T11:45:12Z",
+  "status": "pass",
+  "decision": "model_capability_decoder_anchor_probe_found_fragment_signal",
+  "failed_count": 0,
+  "issues": [],
+  "source_loss_signal_bridge_decoder_anchor_distribution": "D:\\aiproj\\f\\1145\\解释\\model-capability-loss-signal-bridge-decoder-anchor-distribution-v1145\\model_capability_loss_signal_bridge_decoder_anchor_distribution_v1145.json",
+  "path_resolution": {
+    "reported_checkpoint": "output\\model-capability-loss-signal-bridge-decoder-anchor-distribution-v1145\\real-loss-signal-training-run\\checkpoint.pt",
+    "reported_tokenizer": "output\\model-capability-loss-signal-bridge-decoder-anchor-distribution-v1145\\real-loss-signal-training-run\\tokenizer.json",
+    "reported_checkpoint_exists": false,
+    "reported_tokenizer_exists": false,
+    "checkpoint": "D:\\aiproj\\f\\1145\\解释\\model-capability-loss-signal-bridge-decoder-anchor-distribution-v1145\\real-loss-signal-training-run\\checkpoint.pt",
+    "tokenizer": "D:\\aiproj\\f\\1145\\解释\\model-capability-loss-signal-bridge-decoder-anchor-distribution-v1145\\real-loss-signal-training-run\\tokenizer.json",
+    "checkpoint_exists": true,
+    "tokenizer_exists": true,
+    "used_archive_relative_fallback": true
+  },
+  "checkpoint": "D:\\aiproj\\f\\1145\\解释\\model-capability-loss-signal-bridge-decoder-anchor-distribution-v1145\\real-loss-signal-training-run\\checkpoint.pt",
+  "tokenizer": "D:\\aiproj\\f\\1145\\解释\\model-capability-loss-signal-bridge-decoder-anchor-distribution-v1145\\real-loss-signal-training-run\\tokenizer.json",
+  "device": "cpu",
+  "rows": [
+    {
+      "case_id": "fixed-space-loss",
+      "prompt": "fixed ",
+      "generated": "fixed lossssss",
+      "continuation": "lossssss",
+      "combined": "fixed lossssss",
+      "expected_fragment": "loss",
+      "fragment_hit": true,
+      "anchor_assisted_loss_hit": true,
+      "generation_error": "",
+      "seed": 2004,
+      "max_new_tokens": 8,
+      "top_k": 5
+    },
+    {
+      "case_id": "lo-to-loss",
+      "prompt": "lo",
+      "generated": "losssss\nnn",
+      "continuation": "sssss\nnn",
+      "combined": "losssss\nnn",
+      "expected_fragment": "loss",
+      "fragment_hit": true,
+      "anchor_assisted_loss_hit": true,
+      "generation_error": "",
+      "seed": 2005,
+      "max_new_tokens": 8,
+      "top_k": 5
+    },
+    {
+      "case_id": "los-to-loss",
+      "prompt": "los",
+      "generated": "losssss\nnnn",
+      "continuation": "ssss\nnnn",
+      "combined": "losssss\nnnn",
+      "expected_fragment": "loss",
+      "fragment_hit": true,
+      "anchor_assisted_loss_hit": true,
+      "generation_error": "",
+      "seed": 2006,
+      "max_new_tokens": 8,
+      "top_k": 5
+    },
+    {
+      "case_id": "fixed-retention",
+      "prompt": "fixed",
+      "generated": "fixed fixe fi",
+      "continuation": " fixe fi",
+      "combined": "fixed fixe fi",
+      "expected_fragment": "fixed",
+      "fragment_hit": true,
+      "anchor_assisted_loss_hit": false,
+      "generation_error": "",
+      "seed": 2003,
+      "max_new_tokens": 8,
+      "top_k": 5
+    },
+    {
+      "case_id": "fi-to-loss-association",
+      "prompt": "fi",
+      "generated": "fier losss",
+      "continuation": "er losss",
+      "combined": "fier losss",
+      "expected_fragment": "loss",
+      "fragment_hit": true,
+      "anchor_assisted_loss_hit": true,
+      "generation_error": "",
+      "seed": 2001,
+      "max_new_tokens": 8,
+      "top_k": 5
+    }
+  ],
+  "probe_errors": [],
+  "check_rows": [
+    {
+      "id": "v1145_report_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "v1145 loss signal bridge report must pass"
+    },
+    {
+      "id": "v1145_report_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "v1145 ready flag must be true"
+    },
+    {
+      "id": "v1145_next_step_matches_probe",
+      "status": "pass",
+      "actual": "run_decoder_anchor_probe_against_v1145_checkpoint",
+      "detail": "v1145 must point to this probe"
+    },
+    {
+      "id": "checkpoint_exists",
+      "status": "pass",
+      "actual": "D:\\aiproj\\f\\1145\\解释\\model-capability-loss-signal-bridge-decoder-anchor-distribution-v1145\\real-loss-signal-training-run\\checkpoint.pt",
+      "detail": "resolved checkpoint must exist"
+    },
+    {
+      "id": "tokenizer_exists",
+      "status": "pass",
+      "actual": "D:\\aiproj\\f\\1145\\解释\\model-capability-loss-signal-bridge-decoder-anchor-distribution-v1145\\real-loss-signal-training-run\\tokenizer.json",
+      "detail": "resolved tokenizer must exist"
+    },
+    {
+      "id": "all_probe_cases_executed",
+      "status": "pass",
+      "actual": 5,
+      "detail": "v1146 must execute five local anchor cases"
+    },
+    {
+      "id": "no_generation_errors",
+      "status": "pass",
+      "actual": 0,
+      "detail": "probe generation should not raise errors"
+    },
+    {
+      "id": "fragment_hit_threshold",
+      "status": "pass",
+      "actual": 5,
+      "detail": "at least four local anchor fragments should be recovered"
+    },
+    {
+      "id": "loss_anchor_hit_threshold",
+      "status": "pass",
+      "actual": 4,
+      "detail": "at least three probes should recover a loss fragment with anchor assistance"
+    },
+    {
+      "id": "promotion_boundary_kept",
+      "status": "pass",
+      "actual": false,
+      "detail": "decoder anchor fragment signal is not promotion evidence"
+    }
+  ],
+  "summary": {
+    "decoder_anchor_probe_ready": true,
+    "probe_case_count": 5,
+    "fragment_hit_count": 5,
+    "anchor_assisted_loss_hit_count": 4,
+    "fragment_hit_rate": 1.0,
+    "anchor_assisted_loss_hit_rate": 0.8,
+    "model_quality_claim": "decoder_anchor_fragment_signal_only",
+    "promotion_ready": false,
+    "unassisted_success_claim": false,
+    "next_step": "compare_decoder_anchor_probe_with_unassisted_holdout_replay",
+    "failed_check_count": 0
+  },
+  "recommendations": [
+    "Treat v1146 as anchor-assisted fragment evidence only.",
+    "Compare this checkpoint against unassisted holdout replay before claiming broader model improvement."
+  ],
+  "csv_fieldnames": [
+    "case_id",
+    "prompt",
+    "continuation",
+    "combined",
+    "expected_fragment",
+    "fragment_hit",
+    "anchor_assisted_loss_hit",
+    "generation_error"
+  ]
+}

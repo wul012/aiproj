@@ -15,7 +15,18 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1145.0.0` runs bounded loss-signal training and decoder-anchor distribution evidence after the v1144 holdout scorecard smoke.
+Version `v1146.0.0` runs a decoder-anchor local fragment probe against the v1145 real training checkpoint.
+
+## Latest v1146 checkpoint
+
+- Added `model_capability_decoder_anchor_probe_v1146.py` to resolve the v1145 checkpoint from archived evidence and run five local decoder-anchor probe prompts.
+- Added CLI `scripts/run_model_capability_decoder_anchor_probe_v1146.py`, defaulting to the v1145 loss-signal/distribution report.
+- Added archive-relative checkpoint resolution because the v1145 JSON records the original `output/...` training paths while the committed checkpoint lives under `f/1145`.
+- Real v1146 run produced `status=pass`, `decision=model_capability_decoder_anchor_probe_found_fragment_signal`, `fragment_hit_count=5`, `anchor_assisted_loss_hit_count=4`, and `anchor_assisted_loss_hit_rate=0.8`.
+- Kept `model_quality_claim=decoder_anchor_fragment_signal_only`, `promotion_ready=False`, and `unassisted_success_claim=False`.
+- Added tests for fragment-signal success, archive-relative fallback, v1145 prerequisite failure, output generation, and CLI wiring with a real tiny checkpoint.
+- Verified with focused v1146 tests, py_compile, real CLI evidence, Playwright MCP screenshot evidence, and local cleanup.
+- Archived v1146 evidence in `f/1146` and added the engineering-maintenance code explanation in `代码讲解记录_工程保养阶段/1158-v1146-decoder-anchor-probe.md`.
 
 ## Latest v1145 checkpoint
 

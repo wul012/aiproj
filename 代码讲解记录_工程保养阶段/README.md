@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1158-v1146-decoder-anchor-probe.md
+ -> v1146 code explanation: run a decoder-anchor local fragment probe against the v1145 checkpoint without claiming promotion.
+
 1157-v1145-loss-signal-bridge-decoder-anchor-distribution.md
  -> v1145 code explanation: run bounded loss-signal training and decoder-anchor distribution evidence after the v1144 holdout scorecard smoke.
 
