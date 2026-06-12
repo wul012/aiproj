@@ -4,6 +4,7 @@ This directory keeps stable reader-facing documentation outside the long version
 
 - [Project overview](overview.md)
 - [Model training and evaluation](model-training.md)
+- [Model capability cadence](model-capability-cadence.md)
 - [Publication receipts](publication-receipts.md)
 - [Publication receipt template](publication-receipt-template.md)
 - [No-promotion boundary](no-promotion-boundary.md)

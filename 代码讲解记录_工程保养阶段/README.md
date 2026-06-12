@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1145-v1133-model-capability-cadence.md
+ -> v1133 code explanation: add a cadence check that schedules model capability regression after long governance or maintenance runs.
+
 1144-v1132-publication-receipt-template.md
  -> v1132 code explanation: add a publication receipt template and verify script layer readiness.
 

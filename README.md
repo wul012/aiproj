@@ -6,6 +6,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 - [Project overview](docs/overview.md)
 - [Model training and evaluation](docs/model-training.md)
+- [Model capability cadence](docs/model-capability-cadence.md)
 - [Publication receipts](docs/publication-receipts.md)
 - [Publication receipt template](docs/publication-receipt-template.md)
 - [No-promotion boundary](docs/no-promotion-boundary.md)
@@ -13,7 +14,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1132.0.0` adds a publication receipt template and checks the new script layers.
+Version `v1133.0.0` adds a model capability cadence check after governance and maintenance runs.
+
+## Latest v1133 checkpoint
+
+- Added `model_capability_cadence.py` to classify recent README version sections and watch long runs without model-capability evidence.
+- Added layered evaluation CLI `scripts/evaluation/check_model_capability_cadence_v1133.py`.
+- Added `docs/model-capability-cadence.md` and linked it from model training docs and the README documentation map.
+- Real check produced `status=watch`, `decision=model_capability_cadence_ready`, a leading non-capability run above the configured limit, and `next_action=schedule_model_capability_regression`.
+- Verified with focused v1133 tests, py_compile, real CLI evidence, Playwright MCP screenshot evidence, and local cleanup.
+- Archived v1133 evidence in `f/1133` and added the engineering-maintenance code explanation in `代码讲解记录_工程保养阶段/1145-v1133-model-capability-cadence.md`.
 
 ## Latest v1132 checkpoint
 

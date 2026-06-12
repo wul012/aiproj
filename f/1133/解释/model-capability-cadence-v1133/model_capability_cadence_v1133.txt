@@ -1,0 +1,10 @@
+status=watch
+decision=model_capability_cadence_ready
+status=watch
+decision=model_capability_cadence_ready
+scanned_version_count=12
+leading_non_capability_run=12
+max_non_capability_run=4
+latest_model_capability_version=not_found_in_recent_window
+next_action=schedule_model_capability_regression
+cadence_ready=True
