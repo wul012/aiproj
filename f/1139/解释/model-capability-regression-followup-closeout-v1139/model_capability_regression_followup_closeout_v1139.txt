@@ -1,0 +1,11 @@
+status=pass
+decision=model_capability_regression_followup_closeout_ready
+closeout_ready=True
+closed_stage=plan_inventory_manifest_readiness
+ready_item_count=4
+source_readiness_ready=True
+promotion_ready=False
+model_quality_claim=pre_execution_closeout_only
+next_step=run_selected_model_capability_regression_execution
+passed_check_count=6
+failed_check_count=0

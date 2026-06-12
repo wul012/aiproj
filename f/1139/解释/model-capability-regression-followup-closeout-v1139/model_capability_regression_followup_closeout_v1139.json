@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability regression follow-up closeout v1139",
+  "generated_at": "2026-06-12T03:04:39Z",
+  "status": "pass",
+  "decision": "model_capability_regression_followup_closeout_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_readiness_path": "f\\1138\\解释\\model-capability-regression-suite-readiness-v1138\\model_capability_regression_suite_readiness_v1138.json",
+  "source_readiness_summary": {
+    "readiness_ready": true,
+    "ready_item_count": 4,
+    "suite_item_count": 4,
+    "source_suite_ready": true,
+    "promotion_ready": false,
+    "model_quality_claim": "readiness_only",
+    "next_step": "close_model_capability_regression_followup_v1139",
+    "passed_check_count": 6,
+    "failed_check_count": 0
+  },
+  "rows": [
+    {
+      "suite_id": "capability-regression-01",
+      "check_id": "required_term_coverage",
+      "readiness_status": "ready",
+      "closeout_scope": "pre_execution_readiness",
+      "status": "closed",
+      "next_action": "eligible_for_selected_execution"
+    },
+    {
+      "suite_id": "capability-regression-02",
+      "check_id": "loss_signal_bridge",
+      "readiness_status": "ready",
+      "closeout_scope": "pre_execution_readiness",
+      "status": "closed",
+      "next_action": "eligible_for_selected_execution"
+    },
+    {
+      "suite_id": "capability-regression-03",
+      "check_id": "decoder_anchor_distribution",
+      "readiness_status": "ready",
+      "closeout_scope": "pre_execution_readiness",
+      "status": "closed",
+      "next_action": "eligible_for_selected_execution"
+    },
+    {
+      "suite_id": "capability-regression-04",
+      "check_id": "holdout_scorecard_smoke",
+      "readiness_status": "ready",
+      "closeout_scope": "pre_execution_readiness",
+      "status": "closed",
+      "next_action": "eligible_for_selected_execution"
+    }
+  ],
+  "check_rows": [
+    {
+      "id": "readiness_file_exists",
+      "status": "pass",
+      "actual": "f\\1138\\解释\\model-capability-regression-suite-readiness-v1138\\model_capability_regression_suite_readiness_v1138.json"
+    },
+    {
+      "id": "readiness_status_passed",
+      "status": "pass",
+      "actual": "pass"
+    },
+    {
+      "id": "readiness_ready",
+      "status": "pass",
+      "actual": true
+    },
+    {
+      "id": "readiness_rows_present",
+      "status": "pass",
+      "actual": 4
+    },
+    {
+      "id": "closeout_rows_match_readiness",
+      "status": "pass",
+      "actual": {
+        "closeout": 4,
+        "readiness": 4
+      }
+    },
+    {
+      "id": "all_rows_closed",
+      "status": "pass",
+      "actual": [
+        "closed",
+        "closed",
+        "closed",
+        "closed"
+      ]
+    }
+  ],
+  "closeout": {
+    "closeout_ready": true,
+    "closed_stage": "plan_inventory_manifest_readiness",
+    "ready_item_count": 4,
+    "next_step": "run_selected_model_capability_regression_execution",
+    "promotion_ready": false,
+    "model_quality_claim": "pre_execution_closeout_only"
+  },
+  "summary": {
+    "closeout_ready": true,
+    "closed_stage": "plan_inventory_manifest_readiness",
+    "ready_item_count": 4,
+    "source_readiness_ready": true,
+    "promotion_ready": false,
+    "model_quality_claim": "pre_execution_closeout_only",
+    "next_step": "run_selected_model_capability_regression_execution",
+    "passed_check_count": 6,
+    "failed_check_count": 0
+  },
+  "recommendations": [
+    "Treat v1135-v1139 as preparation closeout, not model-quality improvement.",
+    "Run one selected regression item next, preferably required term coverage or holdout scorecard smoke.",
+    "Keep execution evidence separate from this closeout so capability claims stay honest."
+  ],
+  "csv_fieldnames": [
+    "suite_id",
+    "check_id",
+    "readiness_status",
+    "closeout_scope",
+    "status",
+    "next_action"
+  ]
+}

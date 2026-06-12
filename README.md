@@ -15,7 +15,17 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1138.0.0` checks readiness for the bounded model capability regression suite manifest.
+Version `v1139.0.0` closes the pre-execution model capability regression follow-up chain.
+
+## Latest v1139 checkpoint
+
+- Added `model_capability_regression_followup_closeout.py` to close the v1135-v1138 bounded regression preparation chain.
+- Added layered evaluation CLI `scripts/evaluation/close_model_capability_regression_followup_v1139.py`.
+- The closeout verifies v1138 readiness status, row presence, row count alignment, all-row closure, and the non-promotion boundary.
+- Real run produced `status=pass`, `decision=model_capability_regression_followup_closeout_ready`, `closeout_ready=True`, `ready_item_count=4`, and `next_step=run_selected_model_capability_regression_execution`.
+- The report keeps `promotion_ready=False` and `model_quality_claim=pre_execution_closeout_only`, so it is not presented as model-quality improvement evidence.
+- Verified with focused v1139 tests, py_compile, real CLI evidence, Playwright MCP screenshot evidence, and local cleanup.
+- Archived v1139 evidence in `f/1139` and added the engineering-maintenance code explanation in `代码讲解记录_工程保养阶段/1151-v1139-model-capability-regression-followup-closeout.md`.
 
 ## Latest v1138 checkpoint
 

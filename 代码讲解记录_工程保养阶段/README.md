@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1151-v1139-model-capability-regression-followup-closeout.md
+ -> v1139 code explanation: close the pre-execution model capability regression follow-up chain without claiming model promotion.
+
 1150-v1138-model-capability-regression-suite-readiness.md
  -> v1138 code explanation: check source/test path readiness for the bounded regression suite manifest.
 
