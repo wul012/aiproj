@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1153-v1141-model-capability-regression-loop-trend.md
+ -> v1141 code explanation: verify the v1135-v1139 model capability regression loop as closed read-only evidence.
+
 1152-v1140-report-loader-dedup.md
  -> v1140 code explanation: deduplicate report loader helpers for v1135-v1139 regression modules without changing public contracts.
 

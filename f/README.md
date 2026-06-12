@@ -18,6 +18,10 @@ f/<version>/解释/说明.md
 
 ## 当前索引
 
+f/1141/图片
+f/1141/解释/说明.md
+ -> v1141 model capability regression loop trend screenshots and explanation.
+
 f/1140/图片
 f/1140/解释/说明.md
  -> v1140 report loader dedup screenshots and explanation.

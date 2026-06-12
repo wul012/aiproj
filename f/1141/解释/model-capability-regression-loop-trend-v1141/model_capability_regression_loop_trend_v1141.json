@@ -1,0 +1,225 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability regression loop trend v1141",
+  "generated_at": "2026-06-12T05:26:55Z",
+  "status": "pass",
+  "decision": "model_capability_regression_loop_closed",
+  "failed_count": 0,
+  "issues": [],
+  "rows": [
+    {
+      "version": "v1135",
+      "stage": "plan",
+      "artifact_exists": true,
+      "status": "pass",
+      "decision": "model_capability_regression_plan_ready",
+      "ready_key": "plan_ready",
+      "ready": true,
+      "next_step": "inventory_model_capability_regression_evidence_v1136",
+      "source_path": "f\\1133\\解释\\model-capability-cadence-v1133\\model_capability_cadence_v1133.json",
+      "artifact_path": "f/1135/解释/model-capability-regression-plan-v1135/model_capability_regression_plan_v1135.json",
+      "promotion_ready": false,
+      "model_quality_claim": "plan_only"
+    },
+    {
+      "version": "v1136",
+      "stage": "inventory",
+      "artifact_exists": true,
+      "status": "pass",
+      "decision": "model_capability_regression_inventory_ready",
+      "ready_key": "inventory_ready",
+      "ready": true,
+      "next_step": "build_model_capability_regression_suite_manifest_v1137",
+      "source_path": "f\\1135\\解释\\model-capability-regression-plan-v1135\\model_capability_regression_plan_v1135.json",
+      "artifact_path": "f/1136/解释/model-capability-regression-inventory-v1136/model_capability_regression_inventory_v1136.json",
+      "promotion_ready": false,
+      "model_quality_claim": "inventory_only"
+    },
+    {
+      "version": "v1137",
+      "stage": "suite_manifest",
+      "artifact_exists": true,
+      "status": "pass",
+      "decision": "model_capability_regression_suite_manifest_ready",
+      "ready_key": "suite_ready",
+      "ready": true,
+      "next_step": "check_model_capability_regression_suite_readiness_v1138",
+      "source_path": "f\\1136\\解释\\model-capability-regression-inventory-v1136\\model_capability_regression_inventory_v1136.json",
+      "artifact_path": "f/1137/解释/model-capability-regression-suite-manifest-v1137/model_capability_regression_suite_manifest_v1137.json",
+      "promotion_ready": false,
+      "model_quality_claim": "manifest_only"
+    },
+    {
+      "version": "v1138",
+      "stage": "suite_readiness",
+      "artifact_exists": true,
+      "status": "pass",
+      "decision": "model_capability_regression_suite_readiness_ready",
+      "ready_key": "readiness_ready",
+      "ready": true,
+      "next_step": "close_model_capability_regression_followup_v1139",
+      "source_path": "f\\1137\\解释\\model-capability-regression-suite-manifest-v1137\\model_capability_regression_suite_manifest_v1137.json",
+      "artifact_path": "f/1138/解释/model-capability-regression-suite-readiness-v1138/model_capability_regression_suite_readiness_v1138.json",
+      "promotion_ready": false,
+      "model_quality_claim": "readiness_only"
+    },
+    {
+      "version": "v1139",
+      "stage": "followup_closeout",
+      "artifact_exists": true,
+      "status": "pass",
+      "decision": "model_capability_regression_followup_closeout_ready",
+      "ready_key": "closeout_ready",
+      "ready": true,
+      "next_step": "run_selected_model_capability_regression_execution",
+      "source_path": "f\\1138\\解释\\model-capability-regression-suite-readiness-v1138\\model_capability_regression_suite_readiness_v1138.json",
+      "artifact_path": "f/1139/解释/model-capability-regression-followup-closeout-v1139/model_capability_regression_followup_closeout_v1139.json",
+      "promotion_ready": false,
+      "model_quality_claim": "pre_execution_closeout_only"
+    }
+  ],
+  "check_rows": [
+    {
+      "id": "all_five_artifacts_present",
+      "status": "pass",
+      "actual": []
+    },
+    {
+      "id": "version_order_strict",
+      "status": "pass",
+      "actual": [
+        "v1135",
+        "v1136",
+        "v1137",
+        "v1138",
+        "v1139"
+      ]
+    },
+    {
+      "id": "all_stage_status_pass",
+      "status": "pass",
+      "actual": [
+        "pass",
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ]
+    },
+    {
+      "id": "all_stage_ready_flags_true",
+      "status": "pass",
+      "actual": [
+        {
+          "v1135": true
+        },
+        {
+          "v1136": true
+        },
+        {
+          "v1137": true
+        },
+        {
+          "v1138": true
+        },
+        {
+          "v1139": true
+        }
+      ]
+    },
+    {
+      "id": "closeout_ready_true",
+      "status": "pass",
+      "actual": true
+    },
+    {
+      "id": "next_steps_align",
+      "status": "pass",
+      "actual": [
+        "inventory_model_capability_regression_evidence_v1136",
+        "build_model_capability_regression_suite_manifest_v1137",
+        "check_model_capability_regression_suite_readiness_v1138",
+        "close_model_capability_regression_followup_v1139",
+        "run_selected_model_capability_regression_execution"
+      ]
+    },
+    {
+      "id": "source_paths_chain_back",
+      "status": "pass",
+      "actual": [
+        "f\\1135\\解释\\model-capability-regression-plan-v1135\\model_capability_regression_plan_v1135.json",
+        "f\\1136\\解释\\model-capability-regression-inventory-v1136\\model_capability_regression_inventory_v1136.json",
+        "f\\1137\\解释\\model-capability-regression-suite-manifest-v1137\\model_capability_regression_suite_manifest_v1137.json",
+        "f\\1138\\解释\\model-capability-regression-suite-readiness-v1138\\model_capability_regression_suite_readiness_v1138.json"
+      ]
+    },
+    {
+      "id": "non_promotion_boundary_preserved",
+      "status": "pass",
+      "actual": [
+        {
+          "v1135": false
+        },
+        {
+          "v1136": false
+        },
+        {
+          "v1137": false
+        },
+        {
+          "v1138": false
+        },
+        {
+          "v1139": false
+        }
+      ]
+    },
+    {
+      "id": "reports_are_parseable_objects",
+      "status": "pass",
+      "actual": []
+    }
+  ],
+  "loop": {
+    "closed": true,
+    "stage_count": 5,
+    "ready_stage_count": 5,
+    "first_version": "v1135",
+    "last_version": "v1139",
+    "closeout_ready": true,
+    "promotion_ready": false,
+    "model_quality_claim": "loop_trend_read_only",
+    "next_step": "publish_model_capability_cadence_watch_v1142"
+  },
+  "summary": {
+    "loop_closed": true,
+    "stage_count": 5,
+    "ready_stage_count": 5,
+    "artifact_present_count": 5,
+    "first_version": "v1135",
+    "last_version": "v1139",
+    "closeout_ready": true,
+    "promotion_ready": false,
+    "model_quality_claim": "loop_trend_read_only",
+    "passed_check_count": 9,
+    "failed_check_count": 0,
+    "next_step": "publish_model_capability_cadence_watch_v1142"
+  },
+  "recommendations": [
+    "Cite this report as the read-only closure evidence for v1135-v1139.",
+    "Do not treat loop closure as model quality improvement.",
+    "Use the cadence watch next to choose the next concrete model-capability execution item."
+  ],
+  "csv_fieldnames": [
+    "version",
+    "stage",
+    "artifact_exists",
+    "status",
+    "decision",
+    "ready_key",
+    "ready",
+    "next_step",
+    "source_path",
+    "artifact_path"
+  ]
+}

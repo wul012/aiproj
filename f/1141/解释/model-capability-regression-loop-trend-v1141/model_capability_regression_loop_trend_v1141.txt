@@ -1,0 +1,14 @@
+status=pass
+decision=model_capability_regression_loop_closed
+loop_closed=True
+stage_count=5
+ready_stage_count=5
+artifact_present_count=5
+first_version=v1135
+last_version=v1139
+closeout_ready=True
+promotion_ready=False
+model_quality_claim=loop_trend_read_only
+passed_check_count=9
+failed_check_count=0
+next_step=publish_model_capability_cadence_watch_v1142

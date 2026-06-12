@@ -15,7 +15,17 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1140.0.0` deduplicates the model capability regression report loader boilerplate.
+Version `v1141.0.0` verifies the v1135-v1139 model capability regression loop end to end.
+
+## Latest v1141 checkpoint
+
+- Added `model_capability_regression_loop_trend.py` to read the real v1135-v1139 artifacts as a closed loop.
+- Added layered CLI `scripts/generate_model_capability_regression_loop_trend_v1141.py`.
+- The trend report checks artifact presence, strict version order, each stage ready flag, closeout readiness, next-step alignment, source-path back references, and non-promotion boundaries.
+- Real run produced `status=pass`, `decision=model_capability_regression_loop_closed`, `loop_closed=True`, `stage_count=5`, `ready_stage_count=5`, `artifact_present_count=5`, and `next_step=publish_model_capability_cadence_watch_v1142`.
+- Added tests for the complete loop, a deliberately broken chain reference, version-order violation, loader wiring, and output generation.
+- Verified with focused v1141 tests, py_compile, real CLI evidence, Playwright MCP screenshot evidence, and local cleanup.
+- Archived v1141 evidence in `f/1141` and added the engineering-maintenance code explanation in `代码讲解记录_工程保养阶段/1153-v1141-model-capability-regression-loop-trend.md`.
 
 ## Latest v1140 checkpoint
 
