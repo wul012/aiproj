@@ -1,0 +1,205 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT decoder anchor vs unassisted holdout comparison v1147",
+  "generated_at": "2026-06-12T12:15:48Z",
+  "status": "pass",
+  "decision": "decoder_anchor_signal_exceeds_unassisted_holdout_replay",
+  "failed_count": 0,
+  "issues": [],
+  "source_decoder_anchor_probe": "D:\\aiproj\\f\\1146\\解释\\model-capability-decoder-anchor-probe-v1146\\model_capability_decoder_anchor_probe_v1146.json",
+  "path_resolution": {
+    "source_loss_signal_report": "D:\\aiproj\\f\\1145\\解释\\model-capability-loss-signal-bridge-decoder-anchor-distribution-v1145\\model_capability_loss_signal_bridge_decoder_anchor_distribution_v1145.json",
+    "reported_checkpoint": "D:\\aiproj\\f\\1145\\解释\\model-capability-loss-signal-bridge-decoder-anchor-distribution-v1145\\real-loss-signal-training-run\\checkpoint.pt",
+    "reported_tokenizer": "D:\\aiproj\\f\\1145\\解释\\model-capability-loss-signal-bridge-decoder-anchor-distribution-v1145\\real-loss-signal-training-run\\tokenizer.json",
+    "reported_checkpoint_exists": true,
+    "reported_tokenizer_exists": true,
+    "checkpoint": "D:\\aiproj\\f\\1145\\解释\\model-capability-loss-signal-bridge-decoder-anchor-distribution-v1145\\real-loss-signal-training-run\\checkpoint.pt",
+    "tokenizer": "D:\\aiproj\\f\\1145\\解释\\model-capability-loss-signal-bridge-decoder-anchor-distribution-v1145\\real-loss-signal-training-run\\tokenizer.json",
+    "checkpoint_exists": true,
+    "tokenizer_exists": true,
+    "used_v1145_archive_resolution": false
+  },
+  "checkpoint": "D:\\aiproj\\f\\1145\\解释\\model-capability-loss-signal-bridge-decoder-anchor-distribution-v1145\\real-loss-signal-training-run\\checkpoint.pt",
+  "tokenizer": "D:\\aiproj\\f\\1145\\解释\\model-capability-loss-signal-bridge-decoder-anchor-distribution-v1145\\real-loss-signal-training-run\\tokenizer.json",
+  "device": "cpu",
+  "rows": [
+    {
+      "case_id": "answer-colon-pair",
+      "anchor_case_id": "fixed-space-loss",
+      "anchor_prompt": "fixed ",
+      "anchor_combined": "fixed lossssss",
+      "anchor_fragment_hit": true,
+      "anchor_loss_hit": true,
+      "unassisted_prompt": "answer:",
+      "unassisted_generated": "answer: the tos",
+      "unassisted_continuation": " the tos",
+      "unassisted_hit_terms": [],
+      "unassisted_full_pair_hit": false,
+      "fragment_lift": 1
+    },
+    {
+      "case_id": "answer-space-pair",
+      "anchor_case_id": "lo-to-loss",
+      "anchor_prompt": "lo",
+      "anchor_combined": "losssss\nnn",
+      "anchor_fragment_hit": true,
+      "anchor_loss_hit": true,
+      "unassisted_prompt": "answer: ",
+      "unassisted_generated": "answer: lossssss",
+      "unassisted_continuation": "lossssss",
+      "unassisted_hit_terms": [
+        "loss"
+      ],
+      "unassisted_full_pair_hit": false,
+      "fragment_lift": 0
+    },
+    {
+      "case_id": "completion-colon-pair",
+      "anchor_case_id": "los-to-loss",
+      "anchor_prompt": "los",
+      "anchor_combined": "losssss\nnnn",
+      "anchor_fragment_hit": true,
+      "anchor_loss_hit": true,
+      "unassisted_prompt": "completion:",
+      "unassisted_generated": "completion: tosssss",
+      "unassisted_continuation": " tosssss",
+      "unassisted_hit_terms": [],
+      "unassisted_full_pair_hit": false,
+      "fragment_lift": 1
+    },
+    {
+      "case_id": "finish-space-pair",
+      "anchor_case_id": "fixed-retention",
+      "anchor_prompt": "fixed",
+      "anchor_combined": "fixed fixe fi",
+      "anchor_fragment_hit": true,
+      "anchor_loss_hit": false,
+      "unassisted_prompt": "finish: ",
+      "unassisted_generated": "finish: ter loss",
+      "unassisted_continuation": "ter loss",
+      "unassisted_hit_terms": [
+        "loss"
+      ],
+      "unassisted_full_pair_hit": false,
+      "fragment_lift": 0
+    },
+    {
+      "case_id": "compact-signal-answer-pair",
+      "anchor_case_id": "fi-to-loss-association",
+      "anchor_prompt": "fi",
+      "anchor_combined": "fier losss",
+      "anchor_fragment_hit": true,
+      "anchor_loss_hit": true,
+      "unassisted_prompt": "state compact signal\nanswer:",
+      "unassisted_generated": "t signal\nanswer: losssss",
+      "unassisted_continuation": "t signal\nanswer: losssss",
+      "unassisted_hit_terms": [
+        "loss"
+      ],
+      "unassisted_full_pair_hit": false,
+      "fragment_lift": 0
+    }
+  ],
+  "unassisted_errors": [],
+  "check_rows": [
+    {
+      "id": "v1146_probe_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "v1146 decoder-anchor probe must pass first"
+    },
+    {
+      "id": "v1146_next_step_matches_comparison",
+      "status": "pass",
+      "actual": "compare_decoder_anchor_probe_with_unassisted_holdout_replay",
+      "detail": "v1146 must point to this comparison"
+    },
+    {
+      "id": "checkpoint_exists",
+      "status": "pass",
+      "actual": "D:\\aiproj\\f\\1145\\解释\\model-capability-loss-signal-bridge-decoder-anchor-distribution-v1145\\real-loss-signal-training-run\\checkpoint.pt",
+      "detail": "resolved checkpoint must exist"
+    },
+    {
+      "id": "tokenizer_exists",
+      "status": "pass",
+      "actual": "D:\\aiproj\\f\\1145\\解释\\model-capability-loss-signal-bridge-decoder-anchor-distribution-v1145\\real-loss-signal-training-run\\tokenizer.json",
+      "detail": "resolved tokenizer must exist"
+    },
+    {
+      "id": "anchor_rows_present",
+      "status": "pass",
+      "actual": 5,
+      "detail": "comparison expects the five v1146 anchor rows"
+    },
+    {
+      "id": "unassisted_rows_executed",
+      "status": "pass",
+      "actual": 5,
+      "detail": "comparison must run five unassisted holdout prompts"
+    },
+    {
+      "id": "no_unassisted_generation_errors",
+      "status": "pass",
+      "actual": 0,
+      "detail": "unassisted replay should not raise generation errors"
+    },
+    {
+      "id": "anchor_outpaces_unassisted_any_hits",
+      "status": "pass",
+      "actual": {
+        "anchor": 5,
+        "unassisted": 3
+      },
+      "detail": "anchor-assisted fragment hits should exceed unassisted term hits"
+    },
+    {
+      "id": "unassisted_pair_not_recovered",
+      "status": "pass",
+      "actual": 0,
+      "detail": "unassisted prompts should not yet recover the full fixed/loss pair"
+    },
+    {
+      "id": "promotion_boundary_kept",
+      "status": "pass",
+      "actual": false,
+      "detail": "comparison is a bounded diagnostic, not a promotion gate"
+    }
+  ],
+  "summary": {
+    "decoder_anchor_holdout_comparison_ready": true,
+    "anchor_probe_case_count": 5,
+    "anchor_fragment_hit_count": 5,
+    "anchor_loss_hit_count": 4,
+    "unassisted_case_count": 5,
+    "unassisted_any_term_hit_count": 3,
+    "unassisted_fixed_hit_count": 0,
+    "unassisted_loss_hit_count": 3,
+    "unassisted_full_pair_count": 0,
+    "anchor_fragment_hit_rate": 1.0,
+    "unassisted_any_term_hit_rate": 0.6,
+    "anchor_over_unassisted_hit_delta": 2,
+    "model_quality_claim": "anchor_assisted_signal_exceeds_unassisted_holdout_replay",
+    "promotion_ready": false,
+    "unassisted_success_claim": false,
+    "next_step": "build_unassisted_holdout_repair_plan",
+    "failed_check_count": 0
+  },
+  "recommendations": [
+    "Keep v1147 as a contrastive diagnostic: anchor-assisted fragments are stronger than unassisted holdout responses.",
+    "Do not promote the checkpoint until an unassisted fixed/loss pair replay passes.",
+    "Use the next version to plan or train a small unassisted holdout repair rather than adding another governance wrapper."
+  ],
+  "csv_fieldnames": [
+    "case_id",
+    "anchor_prompt",
+    "anchor_combined",
+    "anchor_fragment_hit",
+    "anchor_loss_hit",
+    "unassisted_prompt",
+    "unassisted_continuation",
+    "unassisted_hit_terms",
+    "unassisted_full_pair_hit",
+    "fragment_lift"
+  ]
+}

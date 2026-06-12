@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT decoder anchor vs unassisted holdout comparison v1147</title>
+<style>
+:root { color-scheme: light; font-family: Arial, "Microsoft YaHei", sans-serif; color: #172026; background: #f6f8fa; }
+body { margin: 0; padding: 24px; }
+header, section, footer { max-width: 1120px; margin: 0 auto 18px; }
+header { padding: 18px 0 8px; border-bottom: 3px solid #2f6f8f; }
+h1 { margin: 0 0 8px; font-size: 28px; letter-spacing: 0; }
+h2 { margin: 0 0 10px; font-size: 18px; letter-spacing: 0; }
+p { margin: 0 0 10px; line-height: 1.5; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; background: transparent; border: 0; padding: 0; }
+.stat { background: #fff; border: 1px solid #d7dee5; border-radius: 8px; padding: 12px; min-height: 64px; }
+.stat span { display: block; color: #5c6b73; font-size: 12px; margin-bottom: 8px; }
+.stat strong { display: block; font-size: 18px; overflow-wrap: anywhere; }
+section { background: #fff; border: 1px solid #d7dee5; border-radius: 8px; padding: 16px; }
+table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+th, td { padding: 9px; border-bottom: 1px solid #e5e9ef; text-align: left; vertical-align: top; overflow-wrap: anywhere; }
+th { background: #eef3f6; }
+ul { margin: 0; padding-left: 20px; }
+li { margin: 6px 0; }
+.muted { color: #687782; }
+footer { color: #687782; font-size: 12px; }
+</style>
+</head>
+<body>
+<header><h1>MiniGPT decoder anchor vs unassisted holdout comparison v1147</h1><p>Late-stage maintenance report for keeping AI governance artifacts readable.</p></header>
+<section class="stats"><article class="stat"><span>decoder_anchor_holdout_comparison_ready</span><strong>True</strong></article><article class="stat"><span>anchor_probe_case_count</span><strong>5</strong></article><article class="stat"><span>anchor_fragment_hit_count</span><strong>5</strong></article><article class="stat"><span>anchor_loss_hit_count</span><strong>4</strong></article><article class="stat"><span>unassisted_case_count</span><strong>5</strong></article><article class="stat"><span>unassisted_any_term_hit_count</span><strong>3</strong></article><article class="stat"><span>unassisted_fixed_hit_count</span><strong>0</strong></article><article class="stat"><span>unassisted_loss_hit_count</span><strong>3</strong></article><article class="stat"><span>unassisted_full_pair_count</span><strong>0</strong></article><article class="stat"><span>anchor_fragment_hit_rate</span><strong>1.0</strong></article><article class="stat"><span>unassisted_any_term_hit_rate</span><strong>0.6</strong></article><article class="stat"><span>anchor_over_unassisted_hit_delta</span><strong>2</strong></article><article class="stat"><span>model_quality_claim</span><strong>anchor_assisted_signal_exceeds_unassisted_holdout_replay</strong></article><article class="stat"><span>promotion_ready</span><strong>False</strong></article><article class="stat"><span>unassisted_success_claim</span><strong>False</strong></article><article class="stat"><span>next_step</span><strong>build_unassisted_holdout_repair_plan</strong></article><article class="stat"><span>failed_check_count</span><strong>0</strong></article></section>
+<section><h2>Anchor vs Unassisted Comparison Rows</h2><table><thead><tr><th>case_id</th><th>anchor_prompt</th><th>anchor_combined</th><th>anchor_fragment_hit</th><th>anchor_loss_hit</th><th>unassisted_prompt</th><th>unassisted_continuation</th><th>unassisted_hit_terms</th><th>unassisted_full_pair_hit</th><th>fragment_lift</th></tr></thead><tbody><tr><td>answer-colon-pair</td><td>fixed </td><td>fixed lossssss</td><td>True</td><td>True</td><td>answer:</td><td> the tos</td><td></td><td>False</td><td>1</td></tr><tr><td>answer-space-pair</td><td>lo</td><td>losssss
+nn</td><td>True</td><td>True</td><td>answer: </td><td>lossssss</td><td>loss</td><td>False</td><td>0</td></tr><tr><td>completion-colon-pair</td><td>los</td><td>losssss
+nnn</td><td>True</td><td>True</td><td>completion:</td><td> tosssss</td><td></td><td>False</td><td>1</td></tr><tr><td>finish-space-pair</td><td>fixed</td><td>fixed fixe fi</td><td>True</td><td>False</td><td>finish: </td><td>ter loss</td><td>loss</td><td>False</td><td>0</td></tr><tr><td>compact-signal-answer-pair</td><td>fi</td><td>fier losss</td><td>True</td><td>True</td><td>state compact signal
+answer:</td><td>t signal
+answer: losssss</td><td>loss</td><td>False</td><td>0</td></tr></tbody></table></section>
+<section><h2>Recommendations</h2><ul><li>Keep v1147 as a contrastive diagnostic: anchor-assisted fragments are stronger than unassisted holdout responses.</li><li>Do not promote the checkpoint until an unassisted fixed/loss pair replay passes.</li><li>Use the next version to plan or train a small unassisted holdout repair rather than adding another governance wrapper.</li></ul></section>
+<footer>Generated by MiniGPT readability maintenance tooling.</footer>
+</body>
+</html>

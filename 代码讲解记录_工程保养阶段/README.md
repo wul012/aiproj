@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1159-v1147-decoder-anchor-holdout-comparison.md
+ -> v1147 code explanation: compare decoder-anchor fragment evidence against unassisted holdout replay on the same v1145 checkpoint.
+
 1158-v1146-decoder-anchor-probe.md
  -> v1146 code explanation: run a decoder-anchor local fragment probe against the v1145 checkpoint without claiming promotion.
 

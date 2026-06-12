@@ -1,0 +1,10 @@
+case_id,anchor_prompt,anchor_combined,anchor_fragment_hit,anchor_loss_hit,unassisted_prompt,unassisted_continuation,unassisted_hit_terms,unassisted_full_pair_hit,fragment_lift
+answer-colon-pair,fixed ,fixed lossssss,True,True,answer:, the tos,[],False,1
+answer-space-pair,lo,"losssss
+nn",True,True,answer: ,lossssss,"[""loss""]",False,0
+completion-colon-pair,los,"losssss
+nnn",True,True,completion:, tosssss,[],False,1
+finish-space-pair,fixed,fixed fixe fi,True,False,finish: ,ter loss,"[""loss""]",False,0
+compact-signal-answer-pair,fi,fier losss,True,True,"state compact signal
+answer:","t signal
+answer: losssss","[""loss""]",False,0

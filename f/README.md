@@ -18,6 +18,10 @@ f/<version>/解释/说明.md
 
 ## 当前索引
 
+f/1147/图片
+f/1147/解释/说明.md
+ -> v1147 decoder-anchor versus unassisted holdout comparison screenshots and explanation.
+
 f/1146/图片
 f/1146/解释/说明.md
  -> v1146 decoder anchor local fragment probe screenshots and explanation.

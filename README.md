@@ -15,7 +15,17 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1146.0.0` runs a decoder-anchor local fragment probe against the v1145 real training checkpoint.
+Version `v1147.0.0` compares the v1146 decoder-anchor fragment signal against unassisted holdout-style replay on the same v1145 checkpoint.
+
+## Latest v1147 checkpoint
+
+- Added `decoder_anchor_holdout_comparison_v1147.py` to resolve the archived v1146/v1145 evidence, rerun five unassisted prompts, and compare them against the v1146 anchor-assisted rows.
+- Added CLI `scripts/run_decoder_anchor_holdout_comparison_v1147.py`, accepting either a v1146 JSON report or its output directory plus optional checkpoint/tokenizer overrides.
+- Real v1147 run reused the v1145 checkpoint and produced `status=pass`, `decision=decoder_anchor_signal_exceeds_unassisted_holdout_replay`, `anchor_fragment_hit_count=5`, `unassisted_any_term_hit_count=3`, and `unassisted_full_pair_count=0`.
+- Kept `model_quality_claim=anchor_assisted_signal_exceeds_unassisted_holdout_replay`, `promotion_ready=False`, and `unassisted_success_claim=False`.
+- Added tests for the passing contrastive path, v1146 next-step failure, missing checkpoint failure, v1145 archive fallback, output generation, and CLI directory input.
+- Verified with focused v1147 tests, py_compile, real CLI evidence, Playwright MCP screenshot evidence, and local cleanup.
+- Archived v1147 evidence in `f/1147` and added the engineering-maintenance code explanation in `代码讲解记录_工程保养阶段/1159-v1147-decoder-anchor-holdout-comparison.md`.
 
 ## Latest v1146 checkpoint
 
