@@ -1,0 +1,20 @@
+{
+  "script": "scripts/train.py",
+  "prepared_data": "unassisted_loss_suffix_repair_seed_corpus_v1153.txt",
+  "suggested_args": {
+    "tokenizer": "char",
+    "batch_size": 8,
+    "block_size": 24,
+    "max_iters": 80,
+    "eval_interval": 10,
+    "eval_iters": 2,
+    "learning_rate": 0.01,
+    "train_ratio": 0.85,
+    "n_layer": 1,
+    "n_head": 1,
+    "n_embd": 16,
+    "dropout": 0.0,
+    "seed": 1153,
+    "device": "cpu"
+  }
+}

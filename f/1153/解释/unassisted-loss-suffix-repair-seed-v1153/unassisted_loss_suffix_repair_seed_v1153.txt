@@ -1,0 +1,16 @@
+status=pass
+decision=unassisted_loss_suffix_repair_seed_ready
+unassisted_loss_suffix_repair_seed_ready=True
+base_example_count=9
+repair_example_count=6
+revised_example_count=15
+loss_suffix_repair_example_count=5
+zero_hit_full_pair_repair_example_count=1
+target_free_holdout_prompt_count=5
+training_only_context_count=6
+corpus_char_count=347
+model_quality_claim=seed_revision_only
+promotion_ready=False
+proposed_next_artifact=unassisted_loss_suffix_repair_training_run_v1154
+next_step=run_unassisted_loss_suffix_repair_training
+failed_check_count=0

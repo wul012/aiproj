@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1165-v1153-unassisted-loss-suffix-repair-seed.md
+ -> v1153 code explanation: materialize the loss-suffix repair seed from the v1152 diagnostic while keeping holdout prompts target-free.
+
 1164-v1152-unassisted-holdout-repair-partial-signal-diagnostic.md
  -> v1152 code explanation: diagnose the v1151 fixed-only partial signal and route the missing loss suffix into the next bounded repair action.
 

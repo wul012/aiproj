@@ -15,7 +15,18 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1152.0.0` diagnoses the v1151 fixed-only partial signal and turns the missing `loss` suffix into the next bounded repair action.
+Version `v1153.0.0` materializes the loss-suffix repair seed that v1152 asked for and keeps the target-free holdout boundary intact.
+
+## Latest v1153 checkpoint
+
+- Added `unassisted_loss_suffix_repair_seed_v1153.py` to consume the v1152 diagnostic and v1149 seed corpus, then materialize a revised training corpus plus target-free holdout prompts.
+- Added CLI `scripts/build_unassisted_loss_suffix_repair_seed_v1153.py`, defaulting to the archived `f/1152` diagnostic and `f/1149` seed corpus evidence.
+- Real v1153 run produced `status=pass`, `decision=unassisted_loss_suffix_repair_seed_ready`, `base_example_count=9`, `repair_example_count=6`, `revised_example_count=15`, and `loss_suffix_repair_example_count=5`.
+- The revised corpus kept `target_free_holdout_prompt_count=5` and added `training_only_context_count=6`, with `model_quality_claim=seed_revision_only` and `promotion_ready=False`.
+- Kept `proposed_next_artifact=unassisted_loss_suffix_repair_training_run_v1154`; next step is `run_unassisted_loss_suffix_repair_training`.
+- Added tests for seed revision readiness, diagnostic failure blocking, target-free holdout preservation, output generation, and CLI directory input.
+- Verified with focused v1153 tests, py_compile, real seed revision evidence, Playwright MCP screenshot evidence, and local cleanup.
+- Archived v1153 evidence in `f/1153` and added the engineering-maintenance code explanation in `代码讲解记录_工程保养阶段/1165-v1153-unassisted-loss-suffix-repair-seed.md`.
 
 ## Latest v1152 checkpoint
 

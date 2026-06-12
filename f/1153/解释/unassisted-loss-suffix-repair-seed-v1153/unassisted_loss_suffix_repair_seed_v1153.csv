@@ -1,0 +1,18 @@
+example_id,kind,prompt,completion,repair_source_case_id,training_only_context,prompt_contains_target_terms
+pair-repair-01,full_pair,answer:, fixed loss,,False,False
+pair-repair-02,full_pair,answer:, fixed loss,,False,False
+pair-repair-03,full_pair,completion:, fixed loss,,False,False
+pair-repair-04,full_pair,finish:, fixed loss,,False,False
+pair-repair-05,full_pair,"state compact signal
+answer:", fixed loss,,False,False
+fixed-first-01,fixed_first,answer:, fixed,,False,False
+fixed-first-02,fixed_first,completion:, fixed,,False,False
+loss-after-fixed-01,loss_after_model_fixed,answer: fixed, loss,,True,True
+pair-short-01,short_pair,signal:, fixed loss,,False,False
+loss-suffix-repair-01,loss_suffix_after_fixed,answer: fixed, loss,unassisted-holdout-01,True,True
+loss-suffix-repair-02,loss_suffix_after_fixed,finish: fixed, loss,unassisted-holdout-03,True,True
+loss-suffix-repair-03,loss_suffix_after_fixed,"state compact signal
+answer: fixed", loss,unassisted-holdout-04,True,True
+loss-suffix-repair-04,loss_suffix_after_fixed,signal: fixed, loss,unassisted-holdout-05,True,True
+zero-hit-full-pair-repair-05,zero_hit_full_pair_reinforcement,completion:, fixed loss,unassisted-holdout-02,False,False
+loss-suffix-repair-06,loss_suffix_after_fixed,completion: fixed, loss,unassisted-holdout-02,True,True
