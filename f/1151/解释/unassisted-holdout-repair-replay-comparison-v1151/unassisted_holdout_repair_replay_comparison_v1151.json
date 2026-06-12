@@ -1,0 +1,207 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT unassisted holdout repair replay comparison v1151",
+  "generated_at": "2026-06-12T14:09:57Z",
+  "status": "pass",
+  "decision": "unassisted_holdout_repair_replay_partial_signal",
+  "failed_count": 0,
+  "issues": [],
+  "source_training_handoff": "D:\\aiproj\\f\\1150\\解释\\unassisted-holdout-repair-training-run-v1150\\unassisted_holdout_repair_training_handoff_v1150.json",
+  "checkpoint": "D:\\aiproj\\f\\1150\\解释\\unassisted-holdout-repair-training-run-v1150\\run\\checkpoint.pt",
+  "tokenizer": "D:\\aiproj\\f\\1150\\解释\\unassisted-holdout-repair-training-run-v1150\\run\\tokenizer.json",
+  "source_holdout_prompts": "D:\\aiproj\\f\\1149\\解释\\unassisted-holdout-repair-seed-corpus-v1149\\unassisted_holdout_repair_holdout_prompts.json",
+  "rows": [
+    {
+      "case_id": "unassisted-holdout-01",
+      "prompt": "answer:",
+      "generated": "answer: fixed\n\n",
+      "continuation": " fixed\n\n",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "term_hits": {
+        "fixed": true,
+        "loss": false
+      },
+      "fixed_hit": true,
+      "loss_hit": false,
+      "full_pair_hit": false,
+      "status": "partial"
+    },
+    {
+      "case_id": "unassisted-holdout-02",
+      "prompt": "completion:",
+      "generated": "completion: fios\n\n\n",
+      "continuation": " fios\n\n\n",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "term_hits": {
+        "fixed": false,
+        "loss": false
+      },
+      "fixed_hit": false,
+      "loss_hit": false,
+      "full_pair_hit": false,
+      "status": "fail"
+    },
+    {
+      "case_id": "unassisted-holdout-03",
+      "prompt": "finish:",
+      "generated": "finish: fixed\n\n",
+      "continuation": " fixed\n\n",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "term_hits": {
+        "fixed": true,
+        "loss": false
+      },
+      "fixed_hit": true,
+      "loss_hit": false,
+      "full_pair_hit": false,
+      "status": "partial"
+    },
+    {
+      "case_id": "unassisted-holdout-04",
+      "prompt": "state compact signal\nanswer:",
+      "generated": "e compact signal\nanswer: fixed\n\n",
+      "continuation": "e compact signal\nanswer: fixed\n\n",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "term_hits": {
+        "fixed": true,
+        "loss": false
+      },
+      "fixed_hit": true,
+      "loss_hit": false,
+      "full_pair_hit": false,
+      "status": "partial"
+    },
+    {
+      "case_id": "unassisted-holdout-05",
+      "prompt": "signal:",
+      "generated": "signal: fixed\n\n",
+      "continuation": " fixed\n\n",
+      "expected_terms": [
+        "fixed",
+        "loss"
+      ],
+      "term_hits": {
+        "fixed": true,
+        "loss": false
+      },
+      "fixed_hit": true,
+      "loss_hit": false,
+      "full_pair_hit": false,
+      "status": "partial"
+    }
+  ],
+  "check_rows": [
+    {
+      "id": "training_handoff_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "v1150 training handoff must pass"
+    },
+    {
+      "id": "handoff_next_step_matches_replay",
+      "status": "pass",
+      "actual": "run_unassisted_holdout_repair_replay_comparison",
+      "detail": "v1150 handoff must point to replay comparison"
+    },
+    {
+      "id": "checkpoint_exists",
+      "status": "pass",
+      "actual": "D:\\aiproj\\f\\1150\\解释\\unassisted-holdout-repair-training-run-v1150\\run\\checkpoint.pt",
+      "detail": "v1150 checkpoint.pt must exist"
+    },
+    {
+      "id": "tokenizer_exists",
+      "status": "pass",
+      "actual": "D:\\aiproj\\f\\1150\\解释\\unassisted-holdout-repair-training-run-v1150\\run\\tokenizer.json",
+      "detail": "v1150 tokenizer.json must exist"
+    },
+    {
+      "id": "holdout_prompts_exist",
+      "status": "pass",
+      "actual": "D:\\aiproj\\f\\1149\\解释\\unassisted-holdout-repair-seed-corpus-v1149\\unassisted_holdout_repair_holdout_prompts.json",
+      "detail": "v1149 holdout prompts must be available"
+    },
+    {
+      "id": "holdout_prompt_count",
+      "status": "pass",
+      "actual": 5,
+      "detail": "replay should cover the target-free v1149 holdout prompts"
+    },
+    {
+      "id": "holdout_prompts_target_free",
+      "status": "pass",
+      "actual": [],
+      "detail": "holdout prompts must not contain expected terms before generation"
+    },
+    {
+      "id": "promotion_boundary_kept",
+      "status": "pass",
+      "actual": false,
+      "detail": "v1151 replay is evidence, not automatic promotion"
+    },
+    {
+      "id": "generation_count_matches_holdout",
+      "status": "pass",
+      "actual": {
+        "generations": 5,
+        "prompts": 5
+      },
+      "detail": "each v1149 holdout prompt must produce one generation row"
+    }
+  ],
+  "comparison": {
+    "case_count": 5,
+    "fixed_hit_case_count": 4,
+    "loss_hit_case_count": 0,
+    "full_pair_case_count": 0,
+    "any_hit_case_count": 4,
+    "full_pair_rate": 0.0,
+    "all_full_pair_hit": false,
+    "partial_signal_visible": true,
+    "promotion_ready": false,
+    "model_quality_claim": "bounded_holdout_replay_partial_signal",
+    "next_step": "diagnose_unassisted_holdout_repair_partial_signal"
+  },
+  "summary": {
+    "unassisted_holdout_repair_replay_ready": true,
+    "case_count": 5,
+    "fixed_hit_case_count": 4,
+    "loss_hit_case_count": 0,
+    "full_pair_case_count": 0,
+    "any_hit_case_count": 4,
+    "full_pair_rate": 0.0,
+    "all_full_pair_hit": false,
+    "partial_signal_visible": true,
+    "model_quality_claim": "bounded_holdout_replay_partial_signal",
+    "promotion_ready": false,
+    "next_step": "diagnose_unassisted_holdout_repair_partial_signal",
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "bounded_holdout_replay_partial_signal",
+    "reason": "This replay used the unchanged v1149 target-free holdout prompts against the v1150 checkpoint.",
+    "next_action": "diagnose_unassisted_holdout_repair_partial_signal"
+  },
+  "csv_fieldnames": [
+    "case_id",
+    "prompt",
+    "continuation",
+    "expected_terms",
+    "fixed_hit",
+    "loss_hit",
+    "full_pair_hit",
+    "status"
+  ]
+}

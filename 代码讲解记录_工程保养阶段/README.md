@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1163-v1151-unassisted-holdout-repair-replay-comparison.md
+ -> v1151 code explanation: replay the v1149 target-free holdout prompts against the v1150 checkpoint and classify the result as partial fixed-only signal.
+
 1162-v1150-unassisted-holdout-repair-training-run.md
  -> v1150 code explanation: run bounded CPU training from the v1149 repair seed corpus and hand off the checkpoint for replay comparison without claiming promotion.
 

@@ -18,6 +18,10 @@ f/<version>/解释/说明.md
 
 ## 当前索引
 
+f/1151/图片
+f/1151/解释/说明.md
+ -> v1151 unassisted holdout repair replay comparison screenshots and explanation.
+
 f/1150/图片
 f/1150/解释/说明.md
  -> v1150 unassisted holdout repair training run screenshots and explanation.

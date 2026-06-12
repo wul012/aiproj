@@ -15,7 +15,18 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1150.0.0` runs the v1149 repair seed corpus through bounded CPU training and archives the resulting checkpoint evidence.
+Version `v1151.0.0` replays the fixed v1149 target-free holdout prompts against the v1150 repair checkpoint and records a partial unassisted signal.
+
+## Latest v1151 checkpoint
+
+- Added `unassisted_holdout_repair_replay_comparison_v1151.py` to consume the v1150 training handoff, resolve archived checkpoint/tokenizer artifacts, run v1149 target-free holdout prompts, and score `fixed`/`loss`/full-pair hits.
+- Added CLI `scripts/run_unassisted_holdout_repair_replay_comparison_v1151.py`, with real replay using the archived v1150 checkpoint and optional precomputed rows for offline contract tests.
+- Real v1151 run produced `status=pass`, `decision=unassisted_holdout_repair_replay_partial_signal`, `case_count=5`, `fixed_hit_case_count=4`, `loss_hit_case_count=0`, and `full_pair_case_count=0`.
+- Added archived handoff fallback so stale `output/.../run` paths from v1150 can resolve to the sibling archived `run/` directory in `f/1150`.
+- Kept `model_quality_claim=bounded_holdout_replay_partial_signal` and `promotion_ready=False`; next step is `diagnose_unassisted_holdout_repair_partial_signal`.
+- Added tests for partial replay, full-pair candidate replay, target-contaminated prompt failure, archived handoff fallback, output writing, and CLI precomputed generation rows.
+- Verified with focused v1151 tests, py_compile, real generator replay, Playwright MCP screenshot evidence, and local cleanup.
+- Archived v1151 evidence in `f/1151` and added the engineering-maintenance code explanation in `代码讲解记录_工程保养阶段/1163-v1151-unassisted-holdout-repair-replay-comparison.md`.
 
 ## Latest v1150 checkpoint
 

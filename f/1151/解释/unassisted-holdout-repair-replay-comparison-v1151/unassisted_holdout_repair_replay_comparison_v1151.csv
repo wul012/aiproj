@@ -1,0 +1,19 @@
+case_id,prompt,continuation,expected_terms,fixed_hit,loss_hit,full_pair_hit,status
+unassisted-holdout-01,answer:," fixed
+
+","[""fixed"", ""loss""]",True,False,False,partial
+unassisted-holdout-02,completion:," fios
+
+
+","[""fixed"", ""loss""]",False,False,False,fail
+unassisted-holdout-03,finish:," fixed
+
+","[""fixed"", ""loss""]",True,False,False,partial
+unassisted-holdout-04,"state compact signal
+answer:","e compact signal
+answer: fixed
+
+","[""fixed"", ""loss""]",True,False,False,partial
+unassisted-holdout-05,signal:," fixed
+
+","[""fixed"", ""loss""]",True,False,False,partial
