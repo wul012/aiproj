@@ -1,0 +1,3 @@
+suite_id,check_id,case_id,prompt,continuation,required_terms,hit_terms,missed_terms,case_pass,checkpoint,tokenizer,generation_error
+capability-regression-01,required_term_coverage,capability-regression-01-required-term-coverage-real-execution,"answer with exactly two words: fixed loss
+answer:", fixed loss,"[""fixed"", ""loss""]","[""fixed"", ""loss""]",[],True,f\1143\解释\model-capability-required-term-real-execution-v1143\tiny-required-term-checkpoint\checkpoint.pt,f\1143\解释\model-capability-required-term-real-execution-v1143\tiny-required-term-checkpoint\tokenizer.json,

@@ -15,7 +15,17 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1142.0.0` publishes the model capability cadence watch and stops for roadmap review.
+Version `v1143.0.0` runs the first bounded real required-term coverage execution for `capability-regression-01`.
+
+## Latest v1143 checkpoint
+
+- Added `model_capability_required_term_real_execution.py` to turn v1137 `capability-regression-01` from a lookup-only manifest row into one real MiniGPT generation check.
+- Added CLI `scripts/run_model_capability_required_term_real_execution.py`, which reads the v1137 suite manifest and creates a deterministic tiny checkpoint when no external checkpoint is supplied.
+- The real CPU generation produced `continuation= fixed loss`, hit required terms `fixed, loss`, and wrote `model_quality_claim=single_check_real_execution` while keeping `promotion_ready=False`.
+- Real run produced `status=pass`, `decision=model_capability_required_term_real_execution_ready`, `required_term_real_execution_ready=True`, `executed_case_count=1`, `passed_case_count=1`, `failed_case_count=0`, and `next_step=run_real_holdout_scorecard_smoke_v1144`.
+- Added tests for the real generator path, wrong-check manifest failure, missing checkpoint failure, output generation, and CLI wiring.
+- Verified with focused v1143 tests, py_compile, real CLI evidence, Playwright MCP screenshot evidence, and local cleanup.
+- Archived v1143 evidence in `f/1143` and added the engineering-maintenance code explanation in `代码讲解记录_工程保养阶段/1155-v1143-required-term-real-execution.md`.
 
 ## Latest v1142 checkpoint
 

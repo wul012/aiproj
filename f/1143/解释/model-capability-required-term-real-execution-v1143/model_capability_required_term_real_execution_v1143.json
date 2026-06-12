@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT required term coverage real execution v1143",
+  "generated_at": "2026-06-12T09:09:08Z",
+  "status": "pass",
+  "decision": "model_capability_required_term_real_execution_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_suite_manifest": "D:\\aiproj\\f\\1137\\解释\\model-capability-regression-suite-manifest-v1137\\model_capability_regression_suite_manifest_v1137.json",
+  "source_suite_row": {
+    "suite_id": "capability-regression-01",
+    "check_id": "required_term_coverage",
+    "primary_source": "D:/aiproj/src/minigpt/bounded_objective_loss_signal_bridge_target_only_memory_tokenizer_coverage_aware_holdout_dry_run.py",
+    "primary_test": "D:/aiproj/tests/test_bounded_objective_loss_signal_bridge_target_only_memory_tokenizer_coverage_aware_holdout_dry_run.py",
+    "artifact_hint": "",
+    "status": "manifested",
+    "boundary": "evidence_lookup_not_model_promotion"
+  },
+  "execution": {
+    "suite_id": "capability-regression-01",
+    "check_id": "required_term_coverage",
+    "execution_kind": "real_minigpt_generator_cpu",
+    "required_terms": [
+      "fixed",
+      "loss"
+    ],
+    "model_quality_claim": "single_check_real_execution",
+    "promotion_ready": false
+  },
+  "rows": [
+    {
+      "suite_id": "capability-regression-01",
+      "check_id": "required_term_coverage",
+      "case_id": "capability-regression-01-required-term-coverage-real-execution",
+      "prompt": "answer with exactly two words: fixed loss\nanswer:",
+      "continuation": " fixed loss",
+      "required_terms": [
+        "fixed",
+        "loss"
+      ],
+      "hit_terms": [
+        "fixed",
+        "loss"
+      ],
+      "missed_terms": [],
+      "case_pass": true,
+      "checkpoint": "f\\1143\\解释\\model-capability-required-term-real-execution-v1143\\tiny-required-term-checkpoint\\checkpoint.pt",
+      "tokenizer": "f\\1143\\解释\\model-capability-required-term-real-execution-v1143\\tiny-required-term-checkpoint\\tokenizer.json",
+      "generation_error": ""
+    }
+  ],
+  "check_rows": [
+    {
+      "id": "suite_manifest_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "v1137 suite manifest must pass before real execution"
+    },
+    {
+      "id": "source_manifest_is_lookup_only",
+      "status": "pass",
+      "actual": "reuse_existing_evidence_paths",
+      "detail": "v1143 intentionally converts the first lookup-only row into one bounded real execution"
+    },
+    {
+      "id": "selected_suite_row_present",
+      "status": "pass",
+      "actual": "capability-regression-01",
+      "detail": "capability-regression-01 must be present"
+    },
+    {
+      "id": "selected_check_is_required_term_coverage",
+      "status": "pass",
+      "actual": "required_term_coverage",
+      "detail": "first execution check must be required_term_coverage"
+    },
+    {
+      "id": "selected_source_is_holdout_dry_run",
+      "status": "pass",
+      "actual": "D:/aiproj/src/minigpt/bounded_objective_loss_signal_bridge_target_only_memory_tokenizer_coverage_aware_holdout_dry_run.py",
+      "detail": "primary source must stay tied to the dry-run-to-real path"
+    },
+    {
+      "id": "checkpoint_exists",
+      "status": "pass",
+      "actual": "f\\1143\\解释\\model-capability-required-term-real-execution-v1143\\tiny-required-term-checkpoint\\checkpoint.pt",
+      "detail": "tiny checkpoint must exist"
+    },
+    {
+      "id": "tokenizer_exists",
+      "status": "pass",
+      "actual": "f\\1143\\解释\\model-capability-required-term-real-execution-v1143\\tiny-required-term-checkpoint\\tokenizer.json",
+      "detail": "tokenizer must exist"
+    },
+    {
+      "id": "generation_executed",
+      "status": "pass",
+      "actual": " fixed loss",
+      "detail": "MiniGPTGenerator must produce a continuation"
+    },
+    {
+      "id": "required_terms_hit",
+      "status": "pass",
+      "actual": {
+        "hit": [
+          "fixed",
+          "loss"
+        ],
+        "missed": []
+      },
+      "detail": "continuation must contain fixed and loss"
+    },
+    {
+      "id": "promotion_boundary_kept",
+      "status": "pass",
+      "actual": false,
+      "detail": "single-check evidence must not set promotion_ready true"
+    }
+  ],
+  "summary": {
+    "required_term_real_execution_ready": true,
+    "suite_id": "capability-regression-01",
+    "check_id": "required_term_coverage",
+    "source_execution_mode": "reuse_existing_evidence_paths",
+    "case_count": 1,
+    "executed_case_count": 1,
+    "passed_case_count": 1,
+    "failed_case_count": 0,
+    "required_terms": "fixed, loss",
+    "hit_terms": "fixed, loss",
+    "missed_terms": "",
+    "model_quality_claim": "single_check_real_execution",
+    "promotion_ready": false,
+    "next_step": "run_real_holdout_scorecard_smoke_v1144",
+    "failed_check_count": 0
+  },
+  "recommendations": [
+    "Treat v1143 as one bounded real generation check, not as a promotion decision.",
+    "Use v1144 to stand up the real holdout scorecard smoke after this first generation anchor."
+  ],
+  "csv_fieldnames": [
+    "suite_id",
+    "check_id",
+    "case_id",
+    "prompt",
+    "continuation",
+    "required_terms",
+    "hit_terms",
+    "missed_terms",
+    "case_pass",
+    "checkpoint",
+    "tokenizer",
+    "generation_error"
+  ]
+}

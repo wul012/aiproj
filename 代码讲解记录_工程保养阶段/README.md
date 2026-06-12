@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1155-v1143-required-term-real-execution.md
+ -> v1143 code explanation: run the first bounded real required-term coverage execution for capability-regression-01 without claiming promotion.
+
 1154-v1142-model-capability-cadence-watch.md
  -> v1142 code explanation: publish cadence watch due list after v1141 loop closure and stop for roadmap review.
 

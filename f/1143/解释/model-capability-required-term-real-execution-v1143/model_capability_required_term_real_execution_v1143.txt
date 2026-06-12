@@ -1,0 +1,17 @@
+status=pass
+decision=model_capability_required_term_real_execution_ready
+required_term_real_execution_ready=True
+suite_id=capability-regression-01
+check_id=required_term_coverage
+source_execution_mode=reuse_existing_evidence_paths
+case_count=1
+executed_case_count=1
+passed_case_count=1
+failed_case_count=0
+required_terms=fixed, loss
+hit_terms=fixed, loss
+missed_terms=
+model_quality_claim=single_check_real_execution
+promotion_ready=False
+next_step=run_real_holdout_scorecard_smoke_v1144
+failed_check_count=0
