@@ -18,6 +18,10 @@ f/<version>/解释/说明.md
 
 ## 当前索引
 
+f/1154/图片
+f/1154/解释/说明.md
+ -> v1154 unassisted loss suffix repair training run screenshots and explanation.
+
 f/1153/图片
 f/1153/解释/说明.md
  -> v1153 unassisted loss suffix repair seed screenshots and explanation.

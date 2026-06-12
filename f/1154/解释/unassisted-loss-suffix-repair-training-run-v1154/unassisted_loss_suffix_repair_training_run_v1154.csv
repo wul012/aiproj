@@ -1,0 +1,10 @@
+key,path,exists,size
+checkpoint,output\unassisted-loss-suffix-repair-training-run-v1154\run\checkpoint.pt,True,70690
+tokenizer,output\unassisted-loss-suffix-repair-training-run-v1154\run\tokenizer.json,True,290
+metrics,output\unassisted-loss-suffix-repair-training-run-v1154\run\metrics.jsonl,True,787
+train_config,output\unassisted-loss-suffix-repair-training-run-v1154\run\train_config.json,True,1001
+run_manifest,output\unassisted-loss-suffix-repair-training-run-v1154\run\run_manifest.json,True,10938
+history_summary,output\unassisted-loss-suffix-repair-training-run-v1154\run\history_summary.json,True,211
+loss_curve,output\unassisted-loss-suffix-repair-training-run-v1154\run\loss_curve.svg,True,1449
+sample,output\unassisted-loss-suffix-repair-training-run-v1154\run\sample.txt,True,87
+prepared_corpus,output\unassisted-loss-suffix-repair-training-run-v1154\run\prepared_corpus.txt,True,378

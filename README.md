@@ -15,7 +15,17 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1153.0.0` materializes the loss-suffix repair seed that v1152 asked for and keeps the target-free holdout boundary intact.
+Version `v1154.0.0` trains the repaired v1153 corpus into a bounded checkpoint and still keeps the result in the training-artifact-only lane.
+
+## Latest v1154 checkpoint
+
+- Added `unassisted_loss_suffix_repair_training_run_v1154.py` to run bounded CPU training from the v1153 repaired corpus and verify the produced checkpoint/metrics/manifest/sample.
+- Added CLI `scripts/run_unassisted_loss_suffix_repair_training_v1154.py`, defaulting to the archived `f/1153` repaired corpus evidence.
+- Real v1154 run produced `status=pass`, `decision=unassisted_loss_suffix_repair_training_run_ready`, `final_step=60`, `train_loss_delta=-2.198969`, `val_loss_delta=-2.093508`, and `sample_loss_hit=True`.
+- Kept `model_quality_claim=training_artifact_only` and `promotion_ready=False`; next step is `run_unassisted_loss_suffix_repair_replay_comparison`.
+- Added tests for training readiness, missing checkpoint failure, wrong-corpus failure, output generation, and CLI directory input.
+- Verified with focused v1154 tests, py_compile, real CPU training evidence, Playwright MCP screenshot evidence, and local cleanup.
+- Archived v1154 evidence in `f/1154` and added the engineering-maintenance code explanation in `代码讲解记录_工程保养阶段/1166-v1154-unassisted-loss-suffix-repair-training-run.md`.
 
 ## Latest v1153 checkpoint
 

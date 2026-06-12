@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "status": "pass",
+  "decision": "unassisted_loss_suffix_repair_training_run_ready",
+  "source_unassisted_loss_suffix_repair_seed_corpus": "D:\\aiproj\\f\\1153\\解释\\unassisted-loss-suffix-repair-seed-v1153\\unassisted_loss_suffix_repair_seed_v1153.json",
+  "run_dir": "output\\unassisted-loss-suffix-repair-training-run-v1154\\run",
+  "checkpoint": "output\\unassisted-loss-suffix-repair-training-run-v1154\\run\\checkpoint.pt",
+  "tokenizer": "output\\unassisted-loss-suffix-repair-training-run-v1154\\run\\tokenizer.json",
+  "holdout_prompts": "D:\\aiproj\\f\\1153\\解释\\unassisted-loss-suffix-repair-seed-v1153\\unassisted_loss_suffix_repair_holdout_prompts_v1153.json",
+  "model_quality_claim": "training_artifact_only",
+  "promotion_ready": false,
+  "next_step": "run_unassisted_loss_suffix_repair_replay_comparison"
+}

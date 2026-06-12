@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1166-v1154-unassisted-loss-suffix-repair-training-run.md
+ -> v1154 code explanation: train the repaired corpus into a bounded checkpoint while keeping the result in the training-artifact-only lane.
+
 1165-v1153-unassisted-loss-suffix-repair-seed.md
  -> v1153 code explanation: materialize the loss-suffix repair seed from the v1152 diagnostic while keeping holdout prompts target-free.
 

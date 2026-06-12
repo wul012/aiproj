@@ -1,0 +1,666 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT unassisted loss suffix repair training run v1154",
+  "generated_at": "2026-06-12T15:22:02Z",
+  "status": "pass",
+  "decision": "unassisted_loss_suffix_repair_training_run_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_unassisted_loss_suffix_repair_seed_corpus": "D:\\aiproj\\f\\1153\\解释\\unassisted-loss-suffix-repair-seed-v1153\\unassisted_loss_suffix_repair_seed_v1153.json",
+  "run_dir": "output\\unassisted-loss-suffix-repair-training-run-v1154\\run",
+  "seed_summary": {
+    "unassisted_loss_suffix_repair_seed_ready": true,
+    "base_example_count": 9,
+    "repair_example_count": 6,
+    "revised_example_count": 15,
+    "loss_suffix_repair_example_count": 5,
+    "zero_hit_full_pair_repair_example_count": 1,
+    "target_free_holdout_prompt_count": 5,
+    "training_only_context_count": 6,
+    "corpus_char_count": 347,
+    "model_quality_claim": "seed_revision_only",
+    "promotion_ready": false,
+    "proposed_next_artifact": "unassisted_loss_suffix_repair_training_run_v1154",
+    "next_step": "run_unassisted_loss_suffix_repair_training",
+    "failed_check_count": 0
+  },
+  "artifact_rows": [
+    {
+      "key": "checkpoint",
+      "path": "output\\unassisted-loss-suffix-repair-training-run-v1154\\run\\checkpoint.pt",
+      "exists": true,
+      "size": 70690
+    },
+    {
+      "key": "tokenizer",
+      "path": "output\\unassisted-loss-suffix-repair-training-run-v1154\\run\\tokenizer.json",
+      "exists": true,
+      "size": 290
+    },
+    {
+      "key": "metrics",
+      "path": "output\\unassisted-loss-suffix-repair-training-run-v1154\\run\\metrics.jsonl",
+      "exists": true,
+      "size": 787
+    },
+    {
+      "key": "train_config",
+      "path": "output\\unassisted-loss-suffix-repair-training-run-v1154\\run\\train_config.json",
+      "exists": true,
+      "size": 1001
+    },
+    {
+      "key": "run_manifest",
+      "path": "output\\unassisted-loss-suffix-repair-training-run-v1154\\run\\run_manifest.json",
+      "exists": true,
+      "size": 10938
+    },
+    {
+      "key": "history_summary",
+      "path": "output\\unassisted-loss-suffix-repair-training-run-v1154\\run\\history_summary.json",
+      "exists": true,
+      "size": 211
+    },
+    {
+      "key": "loss_curve",
+      "path": "output\\unassisted-loss-suffix-repair-training-run-v1154\\run\\loss_curve.svg",
+      "exists": true,
+      "size": 1449
+    },
+    {
+      "key": "sample",
+      "path": "output\\unassisted-loss-suffix-repair-training-run-v1154\\run\\sample.txt",
+      "exists": true,
+      "size": 87
+    },
+    {
+      "key": "prepared_corpus",
+      "path": "output\\unassisted-loss-suffix-repair-training-run-v1154\\run\\prepared_corpus.txt",
+      "exists": true,
+      "size": 378
+    }
+  ],
+  "metrics": {
+    "record_count": 7,
+    "first": {
+      "last_loss": 3.0851452350616455,
+      "step": 1,
+      "train_loss": 3.021066188812256,
+      "val_loss": 3.0106558799743652
+    },
+    "last": {
+      "last_loss": 0.9161426424980164,
+      "step": 60,
+      "train_loss": 0.8220971822738647,
+      "val_loss": 0.9171473979949951
+    },
+    "train_loss_delta": -2.198969,
+    "val_loss_delta": -2.093508
+  },
+  "train_config": {
+    "data": "D:\\aiproj\\data\\sample_zh.txt",
+    "data_dir": null,
+    "prepared_data": "D:\\aiproj\\f\\1153\\解释\\unassisted-loss-suffix-repair-seed-v1153\\unassisted_loss_suffix_repair_seed_corpus_v1153.txt",
+    "out_dir": "output\\unassisted-loss-suffix-repair-training-run-v1154\\run",
+    "resume": null,
+    "tokenizer": "char",
+    "bpe_vocab_size": 256,
+    "bpe_min_frequency": 2,
+    "batch_size": 8,
+    "block_size": 24,
+    "max_iters": 60,
+    "eval_interval": 10,
+    "eval_iters": 2,
+    "learning_rate": 0.01,
+    "train_ratio": 0.85,
+    "n_layer": 1,
+    "n_head": 1,
+    "n_embd": 16,
+    "dropout": 0.0,
+    "seed": 1154,
+    "device": "cpu",
+    "sample_prompt": "answer:",
+    "sample_tokens": 12,
+    "sample_temperature": 0.2,
+    "sample_top_k": 5,
+    "no_sample": false,
+    "device_used": "cpu",
+    "data_source": {
+      "kind": "prepared_data",
+      "path": "D:\\aiproj\\f\\1153\\解释\\unassisted-loss-suffix-repair-seed-v1153\\unassisted_loss_suffix_repair_seed_corpus_v1153.txt"
+    }
+  },
+  "manifest": {
+    "schema_version": 1,
+    "run_dir": "output\\unassisted-loss-suffix-repair-training-run-v1154\\run",
+    "created_at": "2026-06-12T15:22:01Z",
+    "started_at": "2026-06-12T15:21:57Z",
+    "finished_at": "2026-06-12T15:22:01Z",
+    "duration_seconds": 4.0,
+    "command": [
+      "python.exe",
+      "D:\\aiproj\\scripts\\train.py",
+      "--prepared-data",
+      "D:\\aiproj\\f\\1153\\解释\\unassisted-loss-suffix-repair-seed-v1153\\unassisted_loss_suffix_repair_seed_corpus_v1153.txt",
+      "--out-dir",
+      "output\\unassisted-loss-suffix-repair-training-run-v1154\\run",
+      "--tokenizer",
+      "char",
+      "--batch-size",
+      "8",
+      "--block-size",
+      "24",
+      "--max-iters",
+      "60",
+      "--eval-interval",
+      "10",
+      "--eval-iters",
+      "2",
+      "--learning-rate",
+      "0.01",
+      "--train-ratio",
+      "0.85",
+      "--n-layer",
+      "1",
+      "--n-head",
+      "1",
+      "--n-embd",
+      "16",
+      "--dropout",
+      "0.0",
+      "--seed",
+      "1154",
+      "--device",
+      "cpu",
+      "--sample-prompt",
+      "answer:",
+      "--sample-tokens",
+      "12",
+      "--sample-temperature",
+      "0.2",
+      "--sample-top-k",
+      "5"
+    ],
+    "git": {
+      "commit": "5d6f8cdc1b168eb7f484baf9dd1e5ea3a4093844",
+      "short_commit": "5d6f8cd",
+      "branch": "main",
+      "tag": "v1153.0.0",
+      "dirty": true
+    },
+    "environment": {
+      "python": "3.13.3",
+      "platform": "Windows-11-10.0.26100-SP0",
+      "executable": "D:\\python\\python.exe",
+      "torch": "2.6.0+cu124",
+      "numpy": "2.2.1"
+    },
+    "data": {
+      "source": {
+        "kind": "prepared_data",
+        "path": "D:\\aiproj\\f\\1153\\解释\\unassisted-loss-suffix-repair-seed-v1153\\unassisted_loss_suffix_repair_seed_corpus_v1153.txt"
+      },
+      "token_count": 347,
+      "train_token_count": 294,
+      "val_token_count": 53,
+      "dataset_report": null,
+      "dataset_quality": null,
+      "dataset_version": null
+    },
+    "model": {
+      "config": {
+        "vocab_size": 22,
+        "block_size": 24,
+        "n_layer": 1,
+        "n_head": 1,
+        "n_embd": 16,
+        "dropout": 0.0,
+        "bias": true
+      },
+      "parameter_count": 4048
+    },
+    "training": {
+      "args": {
+        "data": "D:\\aiproj\\data\\sample_zh.txt",
+        "data_dir": null,
+        "prepared_data": "D:\\aiproj\\f\\1153\\解释\\unassisted-loss-suffix-repair-seed-v1153\\unassisted_loss_suffix_repair_seed_corpus_v1153.txt",
+        "out_dir": "output\\unassisted-loss-suffix-repair-training-run-v1154\\run",
+        "resume": null,
+        "tokenizer": "char",
+        "bpe_vocab_size": 256,
+        "bpe_min_frequency": 2,
+        "batch_size": 8,
+        "block_size": 24,
+        "max_iters": 60,
+        "eval_interval": 10,
+        "eval_iters": 2,
+        "learning_rate": 0.01,
+        "train_ratio": 0.85,
+        "n_layer": 1,
+        "n_head": 1,
+        "n_embd": 16,
+        "dropout": 0.0,
+        "seed": 1154,
+        "device": "cpu",
+        "sample_prompt": "answer:",
+        "sample_tokens": 12,
+        "sample_temperature": 0.2,
+        "sample_top_k": 5,
+        "no_sample": false,
+        "device_used": "cpu",
+        "data_source": {
+          "kind": "prepared_data",
+          "path": "D:\\aiproj\\f\\1153\\解释\\unassisted-loss-suffix-repair-seed-v1153\\unassisted_loss_suffix_repair_seed_corpus_v1153.txt"
+        }
+      },
+      "tokenizer": "char",
+      "device_used": "cpu",
+      "start_step": 1,
+      "end_step": 60
+    },
+    "results": {
+      "last_loss": 0.9161426424980164,
+      "history_summary": {
+        "record_count": 7,
+        "first_step": 1,
+        "last_step": 60,
+        "best_val_step": 60,
+        "best_val_loss": 0.9171473979949951,
+        "last_train_loss": 0.8220971822738647,
+        "last_val_loss": 0.9171473979949951
+      }
+    },
+    "artifacts": [
+      {
+        "key": "checkpoint",
+        "path": "checkpoint.pt",
+        "description": "model and optimizer state",
+        "exists": true,
+        "size_bytes": 70690,
+        "sha256": "a1a776382d1a67853af419d333431fa1f6eaf873dbdb8558ffbf1905436434d2"
+      },
+      {
+        "key": "tokenizer",
+        "path": "tokenizer.json",
+        "description": "tokenizer vocabulary and metadata",
+        "exists": true,
+        "size_bytes": 290,
+        "sha256": "15cdbbbebfd5d6c161612b29943000c10ad922186a114571a55086fb60c233e2"
+      },
+      {
+        "key": "train_config",
+        "path": "train_config.json",
+        "description": "training command configuration",
+        "exists": true,
+        "size_bytes": 1001,
+        "sha256": "536717daefb5ff801fec00d3e8d350cd55b33ef59d7dccb8fd8bf23941e32036"
+      },
+      {
+        "key": "metrics",
+        "path": "metrics.jsonl",
+        "description": "step-by-step training metrics",
+        "exists": true,
+        "size_bytes": 787,
+        "sha256": "04ab27a7b0302f5cc2708415ade511c8bac8fca06daa286e53b9b6cf9c0f8372"
+      },
+      {
+        "key": "history_summary",
+        "path": "history_summary.json",
+        "description": "best/latest loss summary",
+        "exists": true,
+        "size_bytes": 211,
+        "sha256": "b689dffd96673bc4cadd83f8daa5ab51fb1179a3e166ff2f338cc0c0a520a4f4"
+      },
+      {
+        "key": "loss_curve",
+        "path": "loss_curve.svg",
+        "description": "loss curve chart",
+        "exists": true,
+        "size_bytes": 1449,
+        "sha256": "5dedc5599869c671ae51c6501467fac9a3c7f84b0d972c64bbbe731a76139ad3"
+      },
+      {
+        "key": "prepared_corpus",
+        "path": "prepared_corpus.txt",
+        "description": "merged training corpus",
+        "exists": true,
+        "size_bytes": 378,
+        "sha256": "641bbb47bcbdf43336696e7af18418a28cdf43a0f1eed0c45e37b3989a1f1118"
+      },
+      {
+        "key": "dataset_report",
+        "path": "dataset_report.json",
+        "description": "dataset source statistics",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "dataset_chart",
+        "path": "dataset_report.svg",
+        "description": "dataset source chart",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "dataset_quality",
+        "path": "dataset_quality.json",
+        "description": "dataset quality report",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "dataset_quality_chart",
+        "path": "dataset_quality.svg",
+        "description": "dataset quality chart",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "dataset_version",
+        "path": "dataset_version.json",
+        "description": "dataset version manifest",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "dataset_version_html",
+        "path": "dataset_version.html",
+        "description": "browser dataset version report",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "sample",
+        "path": "sample.txt",
+        "description": "post-training sample",
+        "exists": true,
+        "size_bytes": 87,
+        "sha256": "9ce4053ae8cd22769bf4a709ac38029ac05ecfc43a441e69a3ee9d911093343e"
+      },
+      {
+        "key": "eval_report",
+        "path": "eval_report.json",
+        "description": "checkpoint evaluation report",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "eval_suite",
+        "path": "eval_suite/eval_suite.json",
+        "description": "fixed prompt evaluation suite",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "eval_suite_csv",
+        "path": "eval_suite/eval_suite.csv",
+        "description": "fixed prompt evaluation table",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "eval_suite_chart",
+        "path": "eval_suite/eval_suite.svg",
+        "description": "fixed prompt evaluation chart",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "eval_suite_html",
+        "path": "eval_suite/eval_suite.html",
+        "description": "browser benchmark evaluation report",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "model_report",
+        "path": "model_report/model_report.json",
+        "description": "model architecture report",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "model_chart",
+        "path": "model_report/model_architecture.svg",
+        "description": "model architecture chart",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "prediction_report",
+        "path": "predictions/predictions.json",
+        "description": "next-token prediction report",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "prediction_chart",
+        "path": "predictions/predictions.svg",
+        "description": "next-token prediction chart",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "attention_report",
+        "path": "attention/attention.json",
+        "description": "attention inspection report",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "attention_chart",
+        "path": "attention/attention.svg",
+        "description": "attention heatmap",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "transcript",
+        "path": "transcript.json",
+        "description": "chat transcript",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "generated",
+        "path": "generated.txt",
+        "description": "standalone generation output",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "experiment_card_json",
+        "path": "experiment_card.json",
+        "description": "machine-readable experiment card",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "experiment_card_md",
+        "path": "experiment_card.md",
+        "description": "markdown experiment card",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "experiment_card_html",
+        "path": "experiment_card.html",
+        "description": "browser experiment card",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "dashboard",
+        "path": "dashboard.html",
+        "description": "static dashboard",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      },
+      {
+        "key": "playground",
+        "path": "playground.html",
+        "description": "static playground",
+        "exists": false,
+        "size_bytes": null,
+        "sha256": null
+      }
+    ]
+  },
+  "sample_preview": "prompt: answer:\nmax_new_tokens: 12\ntemperature: 0.2\ntop_k: 5\n\nanswer: fixed loss\n",
+  "check_rows": [
+    {
+      "id": "seed_corpus_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "v1153 seed corpus must pass"
+    },
+    {
+      "id": "seed_corpus_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "v1153 seed corpus ready flag must be true"
+    },
+    {
+      "id": "seed_corpus_next_step_matches_training",
+      "status": "pass",
+      "actual": "run_unassisted_loss_suffix_repair_training",
+      "detail": "v1153 must point to bounded training"
+    },
+    {
+      "id": "checkpoint_exists",
+      "status": "pass",
+      "actual": "output\\unassisted-loss-suffix-repair-training-run-v1154\\run\\checkpoint.pt",
+      "detail": "training must produce checkpoint.pt"
+    },
+    {
+      "id": "tokenizer_exists",
+      "status": "pass",
+      "actual": "output\\unassisted-loss-suffix-repair-training-run-v1154\\run\\tokenizer.json",
+      "detail": "training must produce tokenizer.json"
+    },
+    {
+      "id": "metrics_exists",
+      "status": "pass",
+      "actual": "output\\unassisted-loss-suffix-repair-training-run-v1154\\run\\metrics.jsonl",
+      "detail": "training must produce metrics.jsonl"
+    },
+    {
+      "id": "manifest_exists",
+      "status": "pass",
+      "actual": "output\\unassisted-loss-suffix-repair-training-run-v1154\\run\\run_manifest.json",
+      "detail": "training must produce run_manifest.json"
+    },
+    {
+      "id": "prepared_corpus_matches_seed",
+      "status": "pass",
+      "actual": "output\\unassisted-loss-suffix-repair-training-run-v1154\\run\\prepared_corpus.txt",
+      "detail": "training must consume the exact v1153 seed corpus text"
+    },
+    {
+      "id": "metrics_records_present",
+      "status": "pass",
+      "actual": 7,
+      "detail": "training should record first and last metrics"
+    },
+    {
+      "id": "max_iters_reached",
+      "status": "pass",
+      "actual": {
+        "last_step": 60,
+        "max_iters": 60
+      },
+      "detail": "metrics must reach train_config.max_iters"
+    },
+    {
+      "id": "train_loss_decreased",
+      "status": "pass",
+      "actual": -2.198969,
+      "detail": "bounded training should reduce train loss"
+    },
+    {
+      "id": "val_loss_decreased",
+      "status": "pass",
+      "actual": -2.093508,
+      "detail": "bounded training should reduce validation loss on the small holdout split"
+    },
+    {
+      "id": "promotion_boundary_kept",
+      "status": "pass",
+      "actual": false,
+      "detail": "training artifact is not promotion evidence before replay comparison"
+    }
+  ],
+  "training_run": {
+    "ready": true,
+    "artifact_count": 9,
+    "metric_record_count": 7,
+    "final_step": 60,
+    "final_train_loss": 0.8220971822738647,
+    "final_val_loss": 0.9171473979949951,
+    "train_loss_delta": -2.198969,
+    "val_loss_delta": -2.093508,
+    "max_iters": 60,
+    "seed": 1154,
+    "checkpoint": "output\\unassisted-loss-suffix-repair-training-run-v1154\\run\\checkpoint.pt",
+    "tokenizer": "output\\unassisted-loss-suffix-repair-training-run-v1154\\run\\tokenizer.json",
+    "prepared_data": "D:\\aiproj\\f\\1153\\解释\\unassisted-loss-suffix-repair-seed-v1153\\unassisted_loss_suffix_repair_seed_corpus_v1153.txt",
+    "source_seed_corpus": "D:\\aiproj\\f\\1153\\解释\\unassisted-loss-suffix-repair-seed-v1153\\unassisted_loss_suffix_repair_seed_v1153.json",
+    "sample_fixed_hit": true,
+    "sample_loss_hit": true,
+    "promotion_ready": false,
+    "model_quality_claim": "training_artifact_only",
+    "proposed_next_artifact": "unassisted_loss_suffix_repair_replay_comparison_v1155",
+    "next_step": "run_unassisted_loss_suffix_repair_replay_comparison"
+  },
+  "summary": {
+    "unassisted_loss_suffix_repair_training_ready": true,
+    "artifact_count": 9,
+    "metric_record_count": 7,
+    "final_step": 60,
+    "final_train_loss": 0.8220971822738647,
+    "final_val_loss": 0.9171473979949951,
+    "train_loss_delta": -2.198969,
+    "val_loss_delta": -2.093508,
+    "sample_fixed_hit": true,
+    "sample_loss_hit": true,
+    "model_quality_claim": "training_artifact_only",
+    "promotion_ready": false,
+    "proposed_next_artifact": "unassisted_loss_suffix_repair_replay_comparison_v1155",
+    "next_step": "run_unassisted_loss_suffix_repair_replay_comparison",
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "training_artifact_only",
+    "reason": "A bounded checkpoint was trained from the v1153 repaired corpus, but capability improvement must be proven by replaying the unchanged target-free holdout prompts.",
+    "next_action": "run_unassisted_loss_suffix_repair_replay_comparison"
+  },
+  "csv_fieldnames": [
+    "key",
+    "path",
+    "exists",
+    "size"
+  ]
+}
