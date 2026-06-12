@@ -1,0 +1,11 @@
+status=pass
+decision=model_capability_regression_inventory_ready
+inventory_ready=True
+planned_item_count=4
+ready_item_count=4
+source_plan_ready=True
+promotion_ready=False
+model_quality_claim=inventory_only
+next_step=build_model_capability_regression_suite_manifest_v1137
+passed_check_count=6
+failed_check_count=0

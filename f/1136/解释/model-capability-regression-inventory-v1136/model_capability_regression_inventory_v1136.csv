@@ -1,0 +1,5 @@
+check_id,script_count,source_count,test_count,artifact_count,status,recommendation
+required_term_coverage,155,321,160,0,ready,reuse existing evidence path
+loss_signal_bridge,46,92,46,0,ready,reuse existing evidence path
+decoder_anchor_distribution,17,34,17,0,ready,reuse existing evidence path
+holdout_scorecard_smoke,240,480,244,30,ready,reuse existing evidence path

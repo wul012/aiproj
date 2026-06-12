@@ -1,0 +1,150 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability regression evidence inventory v1136",
+  "generated_at": "2026-06-12T02:47:05Z",
+  "status": "pass",
+  "decision": "model_capability_regression_inventory_ready",
+  "failed_count": 0,
+  "issues": [],
+  "source_plan_path": "f\\1135\\解释\\model-capability-regression-plan-v1135\\model_capability_regression_plan_v1135.json",
+  "source_plan_summary": {
+    "plan_ready": true,
+    "regression_item_count": 4,
+    "source_status": "watch",
+    "source_next_action": "schedule_model_capability_regression",
+    "leading_non_capability_run": 12,
+    "max_non_capability_run": 4,
+    "promotion_ready": false,
+    "model_quality_claim": "plan_only",
+    "next_step": "inventory_model_capability_regression_evidence_v1136",
+    "passed_check_count": 5,
+    "failed_check_count": 0
+  },
+  "rows": [
+    {
+      "check_id": "required_term_coverage",
+      "script_count": 155,
+      "source_count": 321,
+      "test_count": 160,
+      "artifact_count": 0,
+      "sample_script": "D:/aiproj/scripts/audit_model_capability_required_term_coverage.py",
+      "sample_source": "D:/aiproj/src/minigpt/bounded_objective_loss_signal_bridge_target_only_memory_tokenizer_coverage_aware_holdout_dry_run.py",
+      "sample_test": "D:/aiproj/tests/test_bounded_objective_loss_signal_bridge_target_only_memory_tokenizer_coverage_aware_holdout_dry_run.py",
+      "sample_artifact": "",
+      "status": "ready",
+      "recommendation": "reuse existing evidence path"
+    },
+    {
+      "check_id": "loss_signal_bridge",
+      "script_count": 46,
+      "source_count": 92,
+      "test_count": 46,
+      "artifact_count": 0,
+      "sample_script": "D:/aiproj/scripts/audit_bounded_objective_loss_signal_bridge_target_only_memory_decoder_budget.py",
+      "sample_source": "D:/aiproj/src/minigpt/bounded_objective_loss_signal_bridge.py",
+      "sample_test": "D:/aiproj/tests/test_bounded_objective_loss_signal_bridge.py",
+      "sample_artifact": "",
+      "status": "ready",
+      "recommendation": "reuse existing evidence path"
+    },
+    {
+      "check_id": "decoder_anchor_distribution",
+      "script_count": 17,
+      "source_count": 34,
+      "test_count": 17,
+      "artifact_count": 0,
+      "sample_script": "D:/aiproj/scripts/audit_model_capability_route_promotion_bounded_real_replay_decoder_anchor_distribution.py",
+      "sample_source": "D:/aiproj/src/minigpt/model_capability_route_promotion_bounded_objective_decoder_anchor_policy.py",
+      "sample_test": "D:/aiproj/tests/test_model_capability_route_promotion_bounded_objective_decoder_anchor_policy.py",
+      "sample_artifact": "",
+      "status": "ready",
+      "recommendation": "reuse existing evidence path"
+    },
+    {
+      "check_id": "holdout_scorecard_smoke",
+      "script_count": 240,
+      "source_count": 480,
+      "test_count": 244,
+      "artifact_count": 30,
+      "sample_script": "D:/aiproj/scripts/build_benchmark_scorecard.py",
+      "sample_source": "D:/aiproj/src/minigpt/benchmark_scorecard.py",
+      "sample_test": "D:/aiproj/tests/test_benchmark_scorecard.py",
+      "sample_artifact": "D:/aiproj/f/1100/解释/receipt-index-review-v1100/randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1100.json",
+      "status": "ready",
+      "recommendation": "reuse existing evidence path"
+    }
+  ],
+  "check_rows": [
+    {
+      "id": "plan_file_exists",
+      "status": "pass",
+      "actual": "f\\1135\\解释\\model-capability-regression-plan-v1135\\model_capability_regression_plan_v1135.json"
+    },
+    {
+      "id": "plan_status_passed",
+      "status": "pass",
+      "actual": "pass"
+    },
+    {
+      "id": "plan_ready",
+      "status": "pass",
+      "actual": true
+    },
+    {
+      "id": "plan_rows_present",
+      "status": "pass",
+      "actual": 4
+    },
+    {
+      "id": "inventory_rows_match_plan",
+      "status": "pass",
+      "actual": {
+        "rows": 4,
+        "plan": 4
+      }
+    },
+    {
+      "id": "all_inventory_items_ready",
+      "status": "pass",
+      "actual": [
+        "ready",
+        "ready",
+        "ready",
+        "ready"
+      ]
+    }
+  ],
+  "inventory": {
+    "inventory_ready": true,
+    "planned_item_count": 4,
+    "ready_item_count": 4,
+    "next_step": "build_model_capability_regression_suite_manifest_v1137",
+    "promotion_ready": false,
+    "model_quality_claim": "inventory_only"
+  },
+  "summary": {
+    "inventory_ready": true,
+    "planned_item_count": 4,
+    "ready_item_count": 4,
+    "source_plan_ready": true,
+    "promotion_ready": false,
+    "model_quality_claim": "inventory_only",
+    "next_step": "build_model_capability_regression_suite_manifest_v1137",
+    "passed_check_count": 6,
+    "failed_check_count": 0
+  },
+  "recommendations": [
+    "Use ready inventory rows to build a small regression suite manifest.",
+    "Prefer existing scripts and tests before adding new capability machinery.",
+    "Keep this as evidence availability, not a model quality result."
+  ],
+  "csv_fieldnames": [
+    "check_id",
+    "script_count",
+    "source_count",
+    "test_count",
+    "artifact_count",
+    "status",
+    "recommendation"
+  ]
+}

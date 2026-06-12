@@ -18,6 +18,10 @@ f/<version>/解释/说明.md
 
 ## 当前索引
 
+f/1136/图片
+f/1136/解释/说明.md
+ -> v1136 model capability regression evidence inventory screenshots and explanation.
+
 f/1135/图片
 f/1135/解释/说明.md
  -> v1135 model capability regression plan screenshots and explanation.

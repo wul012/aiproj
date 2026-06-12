@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1148-v1136-model-capability-regression-inventory.md
+ -> v1136 code explanation: inventory existing evidence for the bounded model capability regression plan.
+
 1147-v1135-model-capability-regression-plan.md
  -> v1135 code explanation: turn the v1133 cadence watch into a bounded model capability regression plan.
 
