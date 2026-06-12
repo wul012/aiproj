@@ -1,0 +1,6 @@
+path,exists,readme_link_present,heading_present,required_terms_present,status,recommendation
+docs/overview.md,True,True,True,True,pass,ready
+docs/model-training.md,True,True,True,True,pass,ready
+docs/publication-receipts.md,True,True,True,True,pass,ready
+docs/no-promotion-boundary.md,True,True,True,True,pass,ready
+docs/versioned-artifacts.md,True,True,True,True,pass,ready

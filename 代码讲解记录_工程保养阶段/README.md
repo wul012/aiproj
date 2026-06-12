@@ -13,5 +13,8 @@
 
 ## 当前索引
 
+1143-v1131-project-docs-readability.md
+ -> v1131 code explanation: split stable reader docs and verify README navigation links.
+
 1142-v1130-publication-naming-readability.md
  -> v1130 code explanation: stop new publication naming sprawl with a readable scanner and short-alias policy.

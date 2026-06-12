@@ -2,9 +2,26 @@
 
 A PyTorch practice project for building and inspecting a tiny GPT language model.
 
+## Documentation Map
+
+- [Project overview](docs/overview.md)
+- [Model training and evaluation](docs/model-training.md)
+- [Publication receipts](docs/publication-receipts.md)
+- [No-promotion boundary](docs/no-promotion-boundary.md)
+- [Versioned artifacts](docs/versioned-artifacts.md)
+
 ## Current version
 
-Version `v1130.0.0` starts late-stage readability maintenance with a publication naming stopgap policy.
+Version `v1131.0.0` splits stable reader-facing docs out of the root README and checks the links.
+
+## Latest v1131 checkpoint
+
+- Added `docs/` as a stable reader map for overview, model training/evaluation, publication receipts, no-promotion boundary, and versioned artifacts.
+- Added docs readability checker `project_docs_readability.py` and layered CLI `scripts/devtools/check_project_docs_readability_v1131.py`.
+- The checker verifies required docs exist, headings are present, required terms are present, and the root README links to each split document.
+- Real check produced `status=pass`, `decision=project_docs_readability_split_ready`, `doc_target_count=5`, `ready_doc_count=5`, `missing_readme_link_count=0`, and `failed_count=0`.
+- Verified with focused v1131 tests, py_compile, real CLI evidence, Playwright MCP screenshot evidence, and local cleanup.
+- Archived v1131 evidence in `f/1131` and added the engineering-maintenance code explanation in `代码讲解记录_工程保养阶段/1143-v1131-project-docs-readability.md`.
 
 ## Latest v1130 checkpoint
 

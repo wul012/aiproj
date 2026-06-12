@@ -18,6 +18,10 @@ f/<version>/解释/说明.md
 
 ## 当前索引
 
+f/1131/图片
+f/1131/解释/说明.md
+ -> v1131 project docs readability split screenshots and explanation.
+
 f/1130/图片
 f/1130/解释/说明.md
  -> v1130 publication naming readability stopgap screenshots and explanation.
