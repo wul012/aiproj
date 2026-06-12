@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1161-v1149-unassisted-holdout-repair-seed-corpus.md
+ -> v1149 code explanation: materialize the v1148 repair blueprint into corpus/jsonl/holdout prompt files for the next bounded training run.
+
 1160-v1148-unassisted-holdout-repair-plan.md
  -> v1148 code explanation: turn the v1147 unassisted fixed/loss gap into a repair plan and seed blueprint without claiming promotion.
 

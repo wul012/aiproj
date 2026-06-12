@@ -1,0 +1,57 @@
+[
+  {
+    "case_id": "unassisted-holdout-01",
+    "prompt": "answer:",
+    "expected_terms": [
+      "fixed",
+      "loss"
+    ],
+    "max_new_tokens": 8,
+    "temperature": 0.2,
+    "top_k": 5
+  },
+  {
+    "case_id": "unassisted-holdout-02",
+    "prompt": "completion:",
+    "expected_terms": [
+      "fixed",
+      "loss"
+    ],
+    "max_new_tokens": 8,
+    "temperature": 0.2,
+    "top_k": 5
+  },
+  {
+    "case_id": "unassisted-holdout-03",
+    "prompt": "finish:",
+    "expected_terms": [
+      "fixed",
+      "loss"
+    ],
+    "max_new_tokens": 8,
+    "temperature": 0.2,
+    "top_k": 5
+  },
+  {
+    "case_id": "unassisted-holdout-04",
+    "prompt": "state compact signal\nanswer:",
+    "expected_terms": [
+      "fixed",
+      "loss"
+    ],
+    "max_new_tokens": 8,
+    "temperature": 0.2,
+    "top_k": 5
+  },
+  {
+    "case_id": "unassisted-holdout-05",
+    "prompt": "signal:",
+    "expected_terms": [
+      "fixed",
+      "loss"
+    ],
+    "max_new_tokens": 8,
+    "temperature": 0.2,
+    "top_k": 5
+  }
+]

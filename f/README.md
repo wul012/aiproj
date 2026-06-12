@@ -18,6 +18,10 @@ f/<version>/解释/说明.md
 
 ## 当前索引
 
+f/1149/图片
+f/1149/解释/说明.md
+ -> v1149 unassisted holdout repair seed corpus screenshots and explanation.
+
 f/1148/图片
 f/1148/解释/说明.md
  -> v1148 unassisted holdout repair plan screenshots and explanation.

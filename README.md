@@ -15,7 +15,18 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1148.0.0` turns the v1147 unassisted holdout gap into a concrete repair plan and seed blueprint.
+Version `v1149.0.0` materializes the v1148 repair blueprint into trainable corpus files and target-free holdout prompts.
+
+## Latest v1149 checkpoint
+
+- Added `unassisted_holdout_repair_seed_corpus_v1149.py` to consume the v1148 plan/seed blueprint and materialize examples, corpus text, JSONL rows, holdout prompts, and a train-command hint.
+- Added CLI `scripts/materialize_unassisted_holdout_repair_seed_corpus_v1149.py`, defaulting to the archived v1148 plan and its seed-blueprint sidecar.
+- Real v1149 run produced `status=pass`, `decision=unassisted_holdout_repair_seed_corpus_ready`, `example_count=9`, `target_free_holdout_prompt_count=5`, `decoder_anchor_example_count=0`, and `corpus_char_count=198`.
+- Wrote sidecars `unassisted_holdout_repair_seed_corpus.txt`, `unassisted_holdout_repair_seed_corpus.jsonl`, `unassisted_holdout_repair_holdout_prompts.json`, and `unassisted_holdout_repair_train_command_hint.json`.
+- Kept `model_quality_claim=seed_corpus_only` and `promotion_ready=False`; next step is `run_unassisted_holdout_repair_training`.
+- Added tests for ready materialization, plan-not-ready failure, decoder-anchor contamination failure, output generation, sidecar writing, and CLI directory input.
+- Verified with focused v1149 tests, py_compile, real CLI evidence, Playwright MCP screenshot evidence, and local cleanup.
+- Archived v1149 evidence in `f/1149` and added the engineering-maintenance code explanation in `代码讲解记录_工程保养阶段/1161-v1149-unassisted-holdout-repair-seed-corpus.md`.
 
 ## Latest v1148 checkpoint
 

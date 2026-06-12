@@ -1,0 +1,12 @@
+example_id,kind,prompt,completion,text,decoder_anchor,training_only_context,prompt_contains_target_terms
+pair-repair-01,full_pair,answer:, fixed loss,answer: fixed loss,False,False,False
+pair-repair-02,full_pair,answer:, fixed loss,answer: fixed loss,False,False,False
+pair-repair-03,full_pair,completion:, fixed loss,completion: fixed loss,False,False,False
+pair-repair-04,full_pair,finish:, fixed loss,finish: fixed loss,False,False,False
+pair-repair-05,full_pair,"state compact signal
+answer:", fixed loss,"state compact signal
+answer: fixed loss",False,False,False
+fixed-first-01,fixed_first,answer:, fixed,answer: fixed,False,False,False
+fixed-first-02,fixed_first,completion:, fixed,completion: fixed,False,False,False
+loss-after-fixed-01,loss_after_model_fixed,answer: fixed, loss,answer: fixed loss,False,True,True
+pair-short-01,short_pair,signal:, fixed loss,signal: fixed loss,False,False,False

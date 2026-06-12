@@ -1,0 +1,15 @@
+status=pass
+decision=unassisted_holdout_repair_seed_corpus_ready
+unassisted_holdout_repair_seed_corpus_ready=True
+example_count=9
+unique_prompt_count=6
+pair_example_count=7
+target_free_holdout_prompt_count=5
+training_only_context_count=1
+decoder_anchor_example_count=0
+corpus_char_count=198
+model_quality_claim=seed_corpus_only
+promotion_ready=False
+proposed_next_artifact=unassisted_holdout_repair_training_run_v1150
+next_step=run_unassisted_holdout_repair_training
+failed_check_count=0
