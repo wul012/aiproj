@@ -19,3 +19,5 @@ The receipt chain normally includes:
 - a code explanation when the version changes code or governance behavior
 
 From v1130 onward, new publication receipt tooling should prefer shorter aliases such as `pub_receipt_index`, `pub_receipt_review`, and `receipt_contract_check`.
+
+Before adding a new receipt-style version, use [the publication receipt template](publication-receipt-template.md) to check required files, boundary statements, verification steps, and evidence archive expectations.

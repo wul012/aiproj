@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT publication receipt template and script layers v1132",
+  "generated_at": "2026-06-12T02:04:02Z",
+  "status": "pass",
+  "decision": "publication_receipt_template_ready",
+  "summary": {
+    "status": "pass",
+    "decision": "publication_receipt_template_ready",
+    "template_path": "docs/publication-receipt-template.md",
+    "required_section_count": 6,
+    "ready_section_count": 6,
+    "script_layer_count": 2,
+    "ready_script_layer_count": 2,
+    "failed_count": 0,
+    "template_ready": true
+  },
+  "rows": [
+    {
+      "kind": "template-section",
+      "target": "# Publication Receipt Version Template",
+      "exists": true,
+      "status": "pass",
+      "recommendation": "ready"
+    },
+    {
+      "kind": "template-section",
+      "target": "## Version Scope",
+      "exists": true,
+      "status": "pass",
+      "recommendation": "ready"
+    },
+    {
+      "kind": "template-section",
+      "target": "## Required Files",
+      "exists": true,
+      "status": "pass",
+      "recommendation": "ready"
+    },
+    {
+      "kind": "template-section",
+      "target": "## Boundary Statements",
+      "exists": true,
+      "status": "pass",
+      "recommendation": "ready"
+    },
+    {
+      "kind": "template-section",
+      "target": "## Verification",
+      "exists": true,
+      "status": "pass",
+      "recommendation": "ready"
+    },
+    {
+      "kind": "template-section",
+      "target": "## Evidence Archive",
+      "exists": true,
+      "status": "pass",
+      "recommendation": "ready"
+    },
+    {
+      "kind": "script-layer",
+      "target": "publication:scripts/publication",
+      "exists": true,
+      "status": "pass",
+      "recommendation": "ready"
+    },
+    {
+      "kind": "script-layer",
+      "target": "devtools:scripts/devtools",
+      "exists": true,
+      "status": "pass",
+      "recommendation": "ready"
+    }
+  ],
+  "recommendations": [
+    "Use the template before adding a new receipt, check, index, or review version.",
+    "Keep new publication scripts under scripts/publication/ and developer checks under scripts/devtools/.",
+    "Keep no-promotion and lookup-only statements in the template so new versions do not invent fresh wording."
+  ],
+  "csv_fieldnames": [
+    "kind",
+    "target",
+    "exists",
+    "status",
+    "recommendation"
+  ]
+}

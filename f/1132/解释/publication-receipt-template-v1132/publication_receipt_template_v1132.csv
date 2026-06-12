@@ -1,0 +1,9 @@
+kind,target,exists,status,recommendation
+template-section,# Publication Receipt Version Template,True,pass,ready
+template-section,## Version Scope,True,pass,ready
+template-section,## Required Files,True,pass,ready
+template-section,## Boundary Statements,True,pass,ready
+template-section,## Verification,True,pass,ready
+template-section,## Evidence Archive,True,pass,ready
+script-layer,publication:scripts/publication,True,pass,ready
+script-layer,devtools:scripts/devtools,True,pass,ready

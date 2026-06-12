@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1144-v1132-publication-receipt-template.md
+ -> v1132 code explanation: add a publication receipt template and verify script layer readiness.
+
 1143-v1131-project-docs-readability.md
  -> v1131 code explanation: split stable reader docs and verify README navigation links.
 

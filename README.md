@@ -7,12 +7,22 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 - [Project overview](docs/overview.md)
 - [Model training and evaluation](docs/model-training.md)
 - [Publication receipts](docs/publication-receipts.md)
+- [Publication receipt template](docs/publication-receipt-template.md)
 - [No-promotion boundary](docs/no-promotion-boundary.md)
 - [Versioned artifacts](docs/versioned-artifacts.md)
 
 ## Current version
 
-Version `v1131.0.0` splits stable reader-facing docs out of the root README and checks the links.
+Version `v1132.0.0` adds a publication receipt template and checks the new script layers.
+
+## Latest v1132 checkpoint
+
+- Added `docs/publication-receipt-template.md` to standardize receipt-style version scope, required files, boundary statements, verification, and evidence archive expectations.
+- Added `publication_receipt_template.py` and CLI `scripts/publication/check_pub_receipt_template_v1132.py`.
+- The checker verifies required template sections and the new script layers `scripts/publication/` and `scripts/devtools/`.
+- Real check produced `status=pass`, `decision=publication_receipt_template_ready`, `ready_section_count=6`, `ready_script_layer_count=2`, `template_ready=True`, and `failed_count=0`.
+- Verified with focused v1132 tests, py_compile, real CLI evidence, Playwright MCP screenshot evidence, and local cleanup.
+- Archived v1132 evidence in `f/1132` and added the engineering-maintenance code explanation in `代码讲解记录_工程保养阶段/1144-v1132-publication-receipt-template.md`.
 
 ## Latest v1131 checkpoint
 

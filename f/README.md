@@ -18,6 +18,10 @@ f/<version>/解释/说明.md
 
 ## 当前索引
 
+f/1132/图片
+f/1132/解释/说明.md
+ -> v1132 publication receipt template and script layer screenshots and explanation.
+
 f/1131/图片
 f/1131/解释/说明.md
  -> v1131 project docs readability split screenshots and explanation.

@@ -1,0 +1,11 @@
+status=pass
+decision=publication_receipt_template_ready
+status=pass
+decision=publication_receipt_template_ready
+template_path=docs/publication-receipt-template.md
+required_section_count=6
+ready_section_count=6
+script_layer_count=2
+ready_script_layer_count=2
+failed_count=0
+template_ready=True
