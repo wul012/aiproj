@@ -15,7 +15,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1160.0.0` adds RoPE (rotary position embeddings) to MiniGPT behind a backward-compatible `use_rope` flag, with a real GPU held-out comparison against the existing learned positions.
+Version `v1161.0.0` adds a KV-cache incremental-generation path to MiniGPT (RoPE-aware), verified numerically identical to the uncached path and measured faster on a real GPU run.
+
+## Latest v1161 checkpoint
+
+- Added `MiniGPT.forward_cached` / `generate_cached` and `CausalSelfAttention.forward_cached` / `Block.forward_cached` in `src/minigpt/model.py`: each new token costs one single-token forward reusing cached (k, v) instead of recomputing the whole sequence; RoPE is applied at the correct absolute position and the causal mask is built over absolute positions.
+- Extracted `select_next_token` so the cached and uncached sampling paths are identical; refactored `sample_next` to use it. Existing `forward`/`generate` behavior is unchanged.
+- Added `src/minigpt/kv_cache_eval_v1161.py` + CLI `scripts/run_kv_cache_eval_v1161.py`: verifies correctness and benchmarks tokens/sec.
+- Real v1161 run on an RTX 4060 (n_embd=512, n_layer=8, ctx=1024, 700 tokens): `status=pass`, `decision=kv_cache_correct_and_faster`, `max_logit_diff=1.07e-06` (numerically identical), `speedup≈1.58x`. Honest scaling note: at tiny scale per-step overhead can make the cache neutral (~0.96x); the O(n²)→O(n) win grows with model size and sequence length.
+- Correctness is gated on logit identity (not greedy-sequence equality, which is argmax-near-tie sensitive). Added `tests/test_kv_cache.py` (cached==full logits for RoPE on/off, greedy equality under top_k=1, cache growth) and `tests/test_kv_cache_eval_v1161.py`.
+- Archived v1161 evidence in `f/1161` and added the code explanation in `代码讲解记录_工程保养阶段/1173-v1161-minigpt-kv-cache.md`.
 
 ## Latest v1160 checkpoint
 

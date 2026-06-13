@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1173-v1161-minigpt-kv-cache.md
+ -> v1161 code explanation: add a KV-cache incremental-generation path (forward_cached/generate_cached, RoPE-aware) verified numerically identical to the uncached forward (max logit diff ~1e-6) and ~1.6x faster at scale; correctness gated on logit identity, not argmax-sensitive greedy equality.
+
 1172-v1160-minigpt-rope.md
  -> v1160 code explanation: add RoPE rotary position embeddings to MiniGPT behind a backward-compatible use_rope flag (default off, byte-for-byte old behavior); rope.py primitives, model.py wiring, and an honest held-out comparison where learned positions edge RoPE on short fixed-length sequences (length extrapolation left to a later version).
 

@@ -18,6 +18,10 @@ f/<version>/解释/说明.md
 
 ## 当前索引
 
+f/1161/图片
+f/1161/解释/说明.md
+ -> v1161 KV-cache: incremental-generation path verified numerically identical to uncached (max logit diff ~1e-6) and ~1.6x faster generating 700 tokens on a real RTX 4060 run.
+
 f/1160/图片
 f/1160/解释/说明.md
  -> v1160 RoPE: rotary position embeddings behind a backward-compatible use_rope flag; real RTX 4060 held-out comparison vs learned positions (capability validated, learned slightly ahead at fixed short length).
