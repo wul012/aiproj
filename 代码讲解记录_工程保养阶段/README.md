@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1174-v1162-minigpt-rope-length-extrapolation.md
+ -> v1162 code explanation: honestly measure learned-absolute vs RoPE positions beyond the trained length (5 seeds, length sweep, per-position curves, sliding-window + zeroed-tail diagnostic arms). The true difference is "learned has untrained position rows / RoPE has zero position params and is defined at any index", NOT "RoPE extrapolates longer dependencies" or "learned crashes" — both schemes raise identically beyond block_size, and the realistic sliding-window learned baseline ties RoPE on this no-long-range corpus.
+
 1173-v1161-minigpt-kv-cache.md
  -> v1161 code explanation: add a KV-cache incremental-generation path (forward_cached/generate_cached, RoPE-aware) verified numerically identical to the uncached forward (max logit diff ~1e-6) and ~1.6x faster at scale; correctness gated on logit identity, not argmax-sensitive greedy equality.
 

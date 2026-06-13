@@ -42,6 +42,32 @@ class TrainLmTests(unittest.TestCase):
                         log_every=2, label="smoke")
         self.assertIsInstance(loss, float)
 
+    def test_weight_decay_zero_leaves_ungradiented_rows_at_init(self) -> None:
+        # v1162 contract: with weight_decay=0.0, position rows beyond the training
+        # window length (block_size=8 here, table=16) get exactly zero gradient and
+        # zero decay, so they stay BITWISE at their init. This is what makes the
+        # "untrained tail = at init" claim literally true.
+        torch.manual_seed(0)
+        model = MiniGPT(GPTConfig(vocab_size=12, block_size=16, n_layer=1, n_head=2, n_embd=16, dropout=0.0))
+        tail_before = model.position_embedding.weight[8:16].detach().clone()
+        train_lm(model, list(model.parameters()), self.data, steps=30, lr=1e-2,
+                 batch_size=8, block_size=8, device=torch.device("cpu"), weight_decay=0.0)
+        tail_after = model.position_embedding.weight[8:16].detach()
+        self.assertTrue(torch.equal(tail_before, tail_after))
+
+    def test_default_weight_decay_shrinks_ungradiented_rows(self) -> None:
+        # Documents WHY v1162 must pass weight_decay=0.0: under AdamW's default
+        # weight_decay=0.01 the unused tail rows are decoupled-decayed toward zero
+        # every step despite zero gradient, so they would NOT be "at init".
+        torch.manual_seed(0)
+        model = MiniGPT(GPTConfig(vocab_size=12, block_size=16, n_layer=1, n_head=2, n_embd=16, dropout=0.0))
+        tail_before = model.position_embedding.weight[8:16].detach().clone()
+        train_lm(model, list(model.parameters()), self.data, steps=30, lr=1e-2,
+                 batch_size=8, block_size=8, device=torch.device("cpu"))  # weight_decay=None -> AdamW default 0.01
+        tail_after = model.position_embedding.weight[8:16].detach()
+        self.assertFalse(torch.equal(tail_before, tail_after))
+        self.assertLess(tail_after.norm().item(), tail_before.norm().item())
+
 
 if __name__ == "__main__":
     unittest.main()

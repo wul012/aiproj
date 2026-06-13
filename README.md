@@ -15,7 +15,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1161.0.0` adds a KV-cache incremental-generation path to MiniGPT (RoPE-aware), verified numerically identical to the uncached path and measured faster on a real GPU run.
+Version `v1162.0.0` honestly measures what learned-absolute vs RoPE positions do beyond the trained length — delivering the length-extrapolation test v1160 had queued, with a precise, multi-seed answer (and several intuitive-but-false framings retired after an adversarial design review).
+
+## Latest v1162 checkpoint
+
+- Question: trained at a short `train_block_size=32` and evaluated on longer windows `{32,48,64,96,128}`, how do learned-absolute positions and RoPE differ? Built both at `block_size=128`, trained with length-32 windows over 5 seeds, and reported held-out cross-entropy as a per-position curve with within-/beyond-range buckets.
+- Added `evaluate_heldout_per_position`, `bucket_per_position`, and `evaluate_sliding_window` to `src/minigpt/heldout_eval.py`; extended `train_lm` with an optional `weight_decay` (default `None` keeps every existing caller byte-for-byte; v1162 passes `0.0` so untrained position rows stay exactly at init). New module `src/minigpt/rope_length_extrapolation_v1162.py` + CLI `scripts/run_rope_length_extrapolation_v1162.py`.
+- Real RTX 4060 run (5 seeds): `status=pass`, `verdict=absolute_index_definedness_gap_confirmed`. At length 128 the learned beyond-range loss rises `+0.122±0.019` nats above its within-range loss while RoPE moves `+0.004±0.001` (flat). In-distribution (L=32) the two tie (0.778 vs 0.778), consistent with v1160.
+- Honest scope (retired framings): the `seq_len>block_size` ValueError fires **identically** for both schemes (gated on `block_size` + mask buffer), so "learned crashes, RoPE survives" is false — both raise, both are finite when rebuilt. The real difference is parameter provisioning: learned needs `block_size` trainable rows (untrained beyond T), RoPE needs **zero** position params. This is **not** relative-distance extrapolation (every signal-bearing offset ≤~11 was seen in training) and does **not** show longer context helps (no cross-sentence dependency).
+- Diagnostic arms: the realistic **sliding-window-32** learned baseline ties RoPE (0.777 vs 0.778), so the naive-long-forward gap is an inference-mode artifact, not an inherent deficiency; a **zeroed-tail** diagnostic decomposes the learned degradation into mostly random-noise injection (+0.105) vs a small missing-signal residual (+0.014). ~39% of RoPE attention mass at length 128 lands beyond the trained relative distance, but those distances carry no signal here (naive RoPE without NTK/YaRN would still degrade on real long-range text).
+- Added `tests/test_heldout_eval_per_position.py`, `tests/test_rope_length_extrapolation_v1162.py`, and two `train_lm` weight-decay tests. Archived v1162 evidence in `f/1162` and added the code explanation in `代码讲解记录_工程保养阶段/1174-v1162-minigpt-rope-length-extrapolation.md`.
 
 ## Latest v1161 checkpoint
 

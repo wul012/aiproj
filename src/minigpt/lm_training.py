@@ -33,13 +33,23 @@ def train_lm(
     device: torch.device,
     log_every: int | None = None,
     label: str = "train",
+    weight_decay: float | None = None,
 ) -> float:
     """Train ``params`` on ``data`` for ``steps`` AdamW steps; return the last batch loss.
 
     When ``log_every`` is set, prints ``[label] step= loss=`` on the first/last step
     and every ``log_every`` steps (used by the v1156 CLI for progress).
+
+    ``weight_decay`` defaults to ``None``, which keeps AdamW's own default (0.01) so
+    every pre-existing caller is byte-for-byte unchanged. Pass ``0.0`` to disable
+    decay — v1162 needs this so that parameters which never receive a gradient
+    (e.g. position rows beyond the trained length) stay *exactly* at their init.
     """
-    optimizer = torch.optim.AdamW(params, lr=lr)
+    optimizer = (
+        torch.optim.AdamW(params, lr=lr)
+        if weight_decay is None
+        else torch.optim.AdamW(params, lr=lr, weight_decay=weight_decay)
+    )
     model.train()
     last = float("nan")
     for step in range(1, steps + 1):
