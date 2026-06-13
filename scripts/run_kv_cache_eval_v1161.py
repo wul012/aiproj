@@ -19,6 +19,7 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from minigpt.kv_cache_eval_v1161 import KvCacheBenchConfig, run_kv_cache_benchmark  # noqa: E402
 from minigpt.readability_report_artifacts import render_readability_text, write_readability_outputs  # noqa: E402
+from minigpt.script_runtime import choose_device  # noqa: E402
 
 STEM = "kv_cache_eval_v1161"
 
@@ -37,14 +38,6 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--max-new-tokens", type=int, default=200)
     parser.add_argument("--no-rope", action="store_true")
     return parser.parse_args(argv)
-
-
-def choose_device(name: str) -> torch.device:
-    if name == "auto":
-        return torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    if name == "cuda" and not torch.cuda.is_available():
-        raise SystemExit("CUDA requested but torch.cuda.is_available() is False")
-    return torch.device(name)
 
 
 def main(argv: Sequence[str] | None = None) -> None:

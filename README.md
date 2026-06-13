@@ -15,7 +15,14 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1162.0.0` honestly measures what learned-absolute vs RoPE positions do beyond the trained length — delivering the length-extrapolation test v1160 had queued, with a precise, multi-seed answer (and several intuitive-but-false framings retired after an adversarial design review).
+Version `v1163.0.0` is a contract-preserving maintenance dedup: the `choose_device` helper (duplicated 14×) and the seed triple are extracted into a shared `minigpt.script_runtime`, with the 6 capability-pivot scripts migrated. Full suite green; behavior unchanged.
+
+## Latest v1163 checkpoint
+
+- Per the project's cadence (3–4 feature versions → 1 maintenance), after v1160/v1161/v1162 a dedup pass was due. Added `src/minigpt/script_runtime.py` with `choose_device(name)` (raises `SystemExit` on `--device cuda` when CUDA is absent — matches the v1156–v1162 behavior exactly) and `seed_everything(seed)` (torch + numpy + random).
+- Migrated the 6 capability-pivot scripts (`run_*_v1156/57/58/60/61/62`) to the shared helpers, removing now-unused `numpy`/`random` imports. `run_kv_cache_eval_v1161` keeps its single `torch.manual_seed` (it never used numpy/random) and only shares `choose_device`.
+- Scope is deliberate: the 8 pre-pivot legacy scripts (`train.py`, `evaluate.py`, `chat.py`, …) keep their own `choose_device` (a different `RuntimeError` contract) and are left untouched — migrating them would change 8 stable entry points' failure mode, which doesn't belong in a contract-preserving pass.
+- Added `tests/test_script_runtime.py`. Contract evidence: all v1156–v1162 module tests unchanged and green, full suite **3209 passed**; all 6 migrated scripts `--help` exit 0 and a `run_rope_eval_v1160` CPU smoke run is `status=pass`, exit 0. Evidence in `f/1163`, code explanation in `代码讲解记录_工程保养阶段/1175-v1163-minigpt-script-runtime-dedup.md`.
 
 ## Latest v1162 checkpoint
 

@@ -18,6 +18,10 @@ f/<version>/解释/说明.md
 
 ## 当前索引
 
+f/1163/图片
+f/1163/解释/说明.md
+ -> v1163 script_runtime dedup: extract the choose_device helper (14 copies) and the seed triple into one shared module; migrate the 6 capability-pivot scripts. Contract-preserving, full suite 3209 passed. Evidence is a before/after structure diagram + the green test suite.
+
 f/1162/图片
 f/1162/解释/说明.md
  -> v1162 learned-vs-RoPE positions beyond trained length: real RTX 4060 5-seed length sweep. Learned beyond-range loss rises +0.12 nats while RoPE stays flat (+0.004); sliding-window learned ties RoPE; both schemes raise identically beyond block_size. Honest scope: tests definedness at longer length, not use of longer context.

@@ -12,13 +12,11 @@ from __future__ import annotations
 
 import argparse
 import json
-import random
 import sys
 from dataclasses import asdict
 from pathlib import Path
 from typing import Sequence
 
-import numpy as np
 import torch
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -28,6 +26,7 @@ from minigpt.lora_finetune import LoRAFinetuneConfig  # noqa: E402
 from minigpt.lora_heldout_eval_v1157 import HeldoutEvalConfig, run_lora_heldout_eval  # noqa: E402
 from minigpt.model import GPTConfig, MiniGPT  # noqa: E402
 from minigpt.readability_report_artifacts import render_readability_text, write_readability_outputs  # noqa: E402
+from minigpt.script_runtime import choose_device, seed_everything  # noqa: E402
 from minigpt.templated_corpus import build_templated_corpus  # noqa: E402
 from minigpt.tokenizer import CharTokenizer  # noqa: E402
 
@@ -57,19 +56,9 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     return parser.parse_args(argv)
 
 
-def choose_device(name: str) -> torch.device:
-    if name == "auto":
-        return torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    if name == "cuda" and not torch.cuda.is_available():
-        raise SystemExit("CUDA requested but torch.cuda.is_available() is False")
-    return torch.device(name)
-
-
 def main(argv: Sequence[str] | None = None) -> None:
     args = parse_args(argv)
-    torch.manual_seed(args.seed)
-    np.random.seed(args.seed)
-    random.seed(args.seed)
+    seed_everything(args.seed)
     device = choose_device(args.device)
 
     corpus = build_templated_corpus(seed=args.seed, heldout_ratio=args.heldout_ratio, max_sentences=args.max_sentences)
