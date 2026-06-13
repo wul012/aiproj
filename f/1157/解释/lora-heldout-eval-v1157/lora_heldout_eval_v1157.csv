@@ -1,0 +1,4 @@
+stage,heldout_loss,heldout_token_accuracy,trainable_parameters
+base,2.058854,0.67191,807680
+full_finetune,1.228402,0.68427,807680
+lora,2.016049,0.682022,65536

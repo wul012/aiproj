@@ -27,12 +27,21 @@ import torch.nn as nn
 
 @dataclass
 class LoRAConfig:
-    """Configuration for applying LoRA to a model."""
+    """Configuration for applying LoRA to a model.
+
+    Either name specific ``target_modules`` (e.g. attention projections) or set
+    ``target_all_linear=True`` to adapt every ``nn.Linear`` except those in
+    ``exclude_modules``. Targeting all linears (attention + MLP) is the realistic
+    LoRA setup and matters a lot on small models, where attention-only adaptation
+    leaves most of the signal in the untouched MLP/embedding layers.
+    """
 
     r: int = 8
     alpha: float = 16.0
     dropout: float = 0.0
     target_modules: tuple[str, ...] = ("c_attn", "c_proj")
+    target_all_linear: bool = False
+    exclude_modules: tuple[str, ...] = ("lm_head",)
 
     def __post_init__(self) -> None:
         if self.r <= 0:
@@ -41,8 +50,15 @@ class LoRAConfig:
             raise ValueError("LoRA alpha must be positive")
         if not 0.0 <= self.dropout < 1.0:
             raise ValueError("LoRA dropout must be in [0, 1)")
-        if not self.target_modules:
-            raise ValueError("target_modules must name at least one Linear submodule")
+        if not self.target_all_linear and not self.target_modules:
+            raise ValueError("name at least one target module or set target_all_linear=True")
+
+    def matches(self, child_name: str) -> bool:
+        if child_name in self.exclude_modules:
+            return False
+        if self.target_all_linear:
+            return True
+        return child_name in self.target_modules
 
 
 class LoRALinear(nn.Module):
@@ -118,15 +134,16 @@ def apply_lora(model: nn.Module, config: LoRAConfig) -> list[str]:
     """
     replaced: list[str] = []
     for module_name, module in list(model.named_modules()):
+        if isinstance(module, LoRALinear):
+            continue  # never wrap the frozen base inside an existing adapter
         for child_name, child in list(module.named_children()):
-            if child_name in config.target_modules and isinstance(child, nn.Linear):
+            if isinstance(child, nn.Linear) and config.matches(child_name):
                 wrapped = LoRALinear(child, r=config.r, alpha=config.alpha, dropout=config.dropout)
                 setattr(module, child_name, wrapped)
                 replaced.append(f"{module_name}.{child_name}" if module_name else child_name)
     if not replaced:
-        raise ValueError(
-            f"apply_lora found no Linear submodules named {config.target_modules!r}; nothing to fine-tune"
-        )
+        target = "all linear" if config.target_all_linear else repr(config.target_modules)
+        raise ValueError(f"apply_lora found no matching Linear submodules ({target}); nothing to fine-tune")
     return replaced
 
 

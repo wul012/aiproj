@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1169-v1157-minigpt-lora-heldout-eval.md
+ -> v1157 code explanation: a templated corpus with a true held-out split plus a validated held-out generalization eval; three-arm base/full-finetune/LoRA comparison shows all-linear LoRA captures ~5% of full-finetune's held-out gain on the tied-embedding model.
+
 1168-v1156-minigpt-lora-finetune.md
  -> v1156 code explanation: from-scratch LoRA fine-tuning for MiniGPT, freezing the base and training ~2.9% of params to reduce training loss on a real GPU run; starts the real-model-capability direction.
 

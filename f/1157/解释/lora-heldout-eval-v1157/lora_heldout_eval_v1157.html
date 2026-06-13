@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT LoRA held-out generalization report v1157</title>
+<style>
+:root { color-scheme: light; font-family: Arial, "Microsoft YaHei", sans-serif; color: #172026; background: #f6f8fa; }
+body { margin: 0; padding: 24px; }
+header, section, footer { max-width: 1120px; margin: 0 auto 18px; }
+header { padding: 18px 0 8px; border-bottom: 3px solid #2f6f8f; }
+h1 { margin: 0 0 8px; font-size: 28px; letter-spacing: 0; }
+h2 { margin: 0 0 10px; font-size: 18px; letter-spacing: 0; }
+p { margin: 0 0 10px; line-height: 1.5; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; background: transparent; border: 0; padding: 0; }
+.stat { background: #fff; border: 1px solid #d7dee5; border-radius: 8px; padding: 12px; min-height: 64px; }
+.stat span { display: block; color: #5c6b73; font-size: 12px; margin-bottom: 8px; }
+.stat strong { display: block; font-size: 18px; overflow-wrap: anywhere; }
+section { background: #fff; border: 1px solid #d7dee5; border-radius: 8px; padding: 16px; }
+table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+th, td { padding: 9px; border-bottom: 1px solid #e5e9ef; text-align: left; vertical-align: top; overflow-wrap: anywhere; }
+th { background: #eef3f6; }
+ul { margin: 0; padding-left: 20px; }
+li { margin: 6px 0; }
+.muted { color: #687782; }
+footer { color: #687782; font-size: 12px; }
+</style>
+</head>
+<body>
+<header><h1>MiniGPT LoRA held-out generalization report v1157</h1><p>Late-stage maintenance report for keeping AI governance artifacts readable.</p></header>
+<section class="stats"><article class="stat"><span>status</span><strong>pass</strong></article><article class="stat"><span>decision</span><strong>heldout_eval_harness_validated</strong></article><article class="stat"><span>device</span><strong>cuda</strong></article><article class="stat"><span>lora_r</span><strong>8</strong></article><article class="stat"><span>lora_alpha</span><strong>16.0</strong></article><article class="stat"><span>adapted_module_count</span><strong>16</strong></article><article class="stat"><span>base_steps</span><strong>30</strong></article><article class="stat"><span>continued_steps</span><strong>600</strong></article><article class="stat"><span>block_size</span><strong>48</strong></article><article class="stat"><span>train_char_count</span><strong>3562</strong></article><article class="stat"><span>heldout_char_count</span><strong>891</strong></article><article class="stat"><span>heldout_token_count</span><strong>890</strong></article><article class="stat"><span>lora_trainable_parameters</span><strong>65536</strong></article><article class="stat"><span>total_parameters</span><strong>873216</strong></article><article class="stat"><span>trainable_ratio_percent</span><strong>7.5051</strong></article><article class="stat"><span>base_heldout_loss</span><strong>2.058854</strong></article><article class="stat"><span>full_finetune_heldout_loss</span><strong>1.228402</strong></article><article class="stat"><span>lora_heldout_loss</span><strong>2.016049</strong></article><article class="stat"><span>heldout_loss_delta</span><strong>-0.042805</strong></article><article class="stat"><span>full_finetune_loss_delta</span><strong>-0.830452</strong></article><article class="stat"><span>lora_vs_full_capture_ratio</span><strong>0.0515</strong></article><article class="stat"><span>lora_verdict</span><strong>lora_partial_gain</strong></article><article class="stat"><span>base_heldout_accuracy</span><strong>0.67191</strong></article><article class="stat"><span>full_finetune_heldout_accuracy</span><strong>0.68427</strong></article><article class="stat"><span>lora_heldout_accuracy</span><strong>0.682022</strong></article><article class="stat"><span>heldout_accuracy_delta</span><strong>0.010112</strong></article><article class="stat"><span>harness_valid</span><strong>True</strong></article></section>
+<section><h2>Rows</h2><table><thead><tr><th>stage</th><th>heldout_loss</th><th>heldout_token_accuracy</th><th>trainable_parameters</th></tr></thead><tbody><tr><td>base</td><td>2.058854</td><td>0.67191</td><td>807680</td></tr><tr><td>full_finetune</td><td>1.228402</td><td>0.68427</td><td>807680</td></tr><tr><td>lora</td><td>2.016049</td><td>0.682022</td><td>65536</td></tr></tbody></table></section>
+<section><h2>Recommendations</h2><ul><li>Held-out eval is valid: full fine-tuning lowered held-out loss by 0.8305 (well beyond noise), so the metric measures real generalization — fixing v1156&#x27;s overfit-dominated signal.</li><li>LoRA verdict: lora_partial_gain. Adapting all attention+MLP linears (7.5051% of params) captured 5% of full fine-tuning&#x27;s held-out gain. On this tiny model the token embedding is TIED to the output head and LoRA leaves it frozen, so most char-level signal is unreachable — a real lesson in LoRA target selection.</li><li>v1158 should test LoRA where it is expected to win: domain adaptation (pretrain on A, adapt to B) or adapting the embedding/output head.</li><li>Held-out sentences share the grammar/vocabulary of training but are disjoint combinations, so these are real generalization metrics on a synthetic corpus; natural-text scale is a later step.</li></ul></section>
+<footer>Generated by MiniGPT readability maintenance tooling.</footer>
+</body>
+</html>

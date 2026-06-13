@@ -18,6 +18,10 @@ f/<version>/解释/说明.md
 
 ## 当前索引
 
+f/1157/图片
+f/1157/解释/说明.md
+ -> v1157 MiniGPT LoRA held-out generalization eval: validated held-out harness + base/full-finetune/LoRA three-arm comparison on a real RTX 4060 run.
+
 f/1156/图片
 f/1156/解释/说明.md
  -> v1156 MiniGPT LoRA fine-tune screenshots and explanation (real RTX 4060 before/after training-loss run).

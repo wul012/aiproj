@@ -36,6 +36,7 @@ class LoRAFinetuneConfig:
     alpha: float = 16.0
     dropout: float = 0.0
     target_modules: tuple[str, ...] = ("c_attn", "c_proj")
+    target_all_linear: bool = False
     steps: int = 200
     batch_size: int = 16
     learning_rate: float = 1e-3
@@ -44,7 +45,13 @@ class LoRAFinetuneConfig:
     seed: int = 1337
 
     def lora_config(self) -> LoRAConfig:
-        return LoRAConfig(r=self.r, alpha=self.alpha, dropout=self.dropout, target_modules=self.target_modules)
+        return LoRAConfig(
+            r=self.r,
+            alpha=self.alpha,
+            dropout=self.dropout,
+            target_modules=self.target_modules,
+            target_all_linear=self.target_all_linear,
+        )
 
 
 @torch.no_grad()

@@ -15,7 +15,17 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1156.0.0` adds a from-scratch LoRA fine-tuning capability to MiniGPT and records a real GPU before/after training-loss result, starting the real-model-capability direction.
+Version `v1157.0.0` builds a templated corpus with a true held-out split and a validated held-out generalization eval, comparing base vs full fine-tune vs LoRA on a real GPU run.
+
+## Latest v1157 checkpoint
+
+- Added `src/minigpt/templated_corpus.py` (deterministic train/held-out split, disjoint sentence combinations) and `src/minigpt/heldout_eval.py` (held-out loss + next-token accuracy) — fixing v1156's overfit-dominated validation signal.
+- Added `src/minigpt/lora_heldout_eval_v1157.py`: a three-arm comparison (base / full fine-tune / LoRA) from one undertrained base via `copy.deepcopy`, with CLI `scripts/run_lora_heldout_eval_v1157.py`.
+- Extended `src/minigpt/lora.py` with `target_all_linear` / `exclude_modules` (adapt all attention+MLP linears, exclude the tied `lm_head`).
+- Real v1157 run on an RTX 4060: `status=pass`, `decision=heldout_eval_harness_validated` — full fine-tune lowered held-out loss `2.0589 → 1.2284` (−0.83, well beyond noise), proving the metric measures real generalization.
+- Honest finding: all-linear LoRA (7.5% of params) captured only ~5% of full fine-tuning's held-out gain (`lora_verdict=lora_partial_gain`), because MiniGPT's token embedding is tied to the output head and LoRA leaves it frozen — a real lesson in LoRA target selection. v1158 should test domain adaptation or embedding-level adaptation.
+- Added `tests/test_templated_corpus.py`, `tests/test_heldout_eval.py`, `tests/test_lora_heldout_eval_v1157.py`, and `target_all_linear` coverage in `tests/test_lora.py`.
+- Archived v1157 evidence in `f/1157` and added the code explanation in `代码讲解记录_工程保养阶段/1169-v1157-minigpt-lora-heldout-eval.md`.
 
 ## Latest v1156 checkpoint
 

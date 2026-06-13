@@ -84,6 +84,18 @@ class ApplyLoraTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             apply_lora(model, LoRAConfig(target_modules=("does_not_exist",)))
 
+    def test_target_all_linear_covers_more_than_attention(self) -> None:
+        attn_only = apply_lora(_tiny_model(), LoRAConfig(r=4, alpha=8.0, target_modules=("c_attn", "c_proj")))
+        all_linear = apply_lora(_tiny_model(), LoRAConfig(r=4, alpha=8.0, target_all_linear=True))
+        # all-linear adapts the MLP linears too, so it must cover strictly more modules.
+        self.assertGreater(len(all_linear), len(attn_only))
+
+    def test_target_all_linear_excludes_lm_head(self) -> None:
+        model = _tiny_model()
+        apply_lora(model, LoRAConfig(r=4, alpha=8.0, target_all_linear=True))
+        # lm_head is tied to the token embedding and must stay a plain (frozen) Linear.
+        self.assertNotIsInstance(model.lm_head, LoRALinear)
+
     def test_only_lora_is_trainable(self) -> None:
         model = _tiny_model()
         apply_lora(model, LoRAConfig(r=4, alpha=8.0))
