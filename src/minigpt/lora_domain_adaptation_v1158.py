@@ -24,8 +24,8 @@ from dataclasses import dataclass
 import torch
 import torch.nn as nn
 
-from minigpt.dataset import get_batch
 from minigpt.heldout_eval import evaluate_heldout
+from minigpt.lm_training import train_lm
 from minigpt.lora import LoRAConfig, apply_lora, count_parameters, lora_parameters, mark_only_lora_as_trainable
 from minigpt.report_utils import utc_now
 
@@ -47,20 +47,6 @@ class DomainAdaptationConfig:
     seed: int = 1337
 
 
-def _train(model, params, data, *, steps, lr, batch_size, block_size, device) -> float:
-    optimizer = torch.optim.AdamW(params, lr=lr)
-    model.train()
-    last = float("nan")
-    for _ in range(steps):
-        x, y = get_batch(data, block_size, batch_size, device)
-        _, loss = model(x, y)
-        optimizer.zero_grad(set_to_none=True)
-        loss.backward()
-        optimizer.step()
-        last = float(loss.item())
-    return last
-
-
 def run_lora_domain_adaptation(
     model: nn.Module,
     source_train: torch.Tensor,
@@ -79,15 +65,15 @@ def run_lora_domain_adaptation(
     base_total = sum(p.numel() for p in model.parameters())
 
     # 1) train base on the SOURCE domain (A)
-    _train(model, list(model.parameters()), source_train, steps=config.base_steps, lr=config.base_lr,
-           batch_size=config.batch_size, block_size=bs, device=device)
+    train_lm(model, list(model.parameters()), source_train, steps=config.base_steps, lr=config.base_lr,
+             batch_size=config.batch_size, block_size=bs, device=device)
     base_source = evaluate_heldout(model, source_heldout, block_size=bs, device=device)
     base_target = evaluate_heldout(model, target_heldout, block_size=bs, device=device)
 
     # 2) reference: full fine-tune all params on the TARGET domain (B)
     model_full = copy.deepcopy(model)
-    _train(model_full, list(model_full.parameters()), target_train, steps=config.adapt_steps, lr=config.full_adapt_lr,
-           batch_size=config.batch_size, block_size=bs, device=device)
+    train_lm(model_full, list(model_full.parameters()), target_train, steps=config.adapt_steps, lr=config.full_adapt_lr,
+             batch_size=config.batch_size, block_size=bs, device=device)
     full_target = evaluate_heldout(model_full, target_heldout, block_size=bs, device=device)
 
     # 3) LoRA-adapt the frozen base on the TARGET domain (B)
@@ -99,8 +85,8 @@ def run_lora_domain_adaptation(
     mark_only_lora_as_trainable(model_lora)
     model_lora.to(device)
     counts = count_parameters(model_lora)
-    _train(model_lora, lora_parameters(model_lora), target_train, steps=config.adapt_steps, lr=config.adapt_lr,
-           batch_size=config.batch_size, block_size=bs, device=device)
+    train_lm(model_lora, lora_parameters(model_lora), target_train, steps=config.adapt_steps, lr=config.adapt_lr,
+             batch_size=config.batch_size, block_size=bs, device=device)
     lora_target = evaluate_heldout(model_lora, target_heldout, block_size=bs, device=device)
     lora_source = evaluate_heldout(model_lora, source_heldout, block_size=bs, device=device)
 

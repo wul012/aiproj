@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1171-v1159-minigpt-train-lm-dedup.md
+ -> v1159 code explanation: contract-preserving maintenance refactor extracting the training loop duplicated across v1156/v1157/v1158 into a shared minigpt.lm_training.train_lm; existing tests unchanged and green, full suite 3173 passed.
+
 1170-v1158-minigpt-lora-domain-adaptation.md
  -> v1158 code explanation: LoRA domain adaptation across two sentence structures sharing one vocabulary; with the embedding transferable and the gap purely structural, LoRA adapts a frozen base to the target at 7.5% params, matching full fine-tuning and staying reversible — the win v1157 predicted.
 

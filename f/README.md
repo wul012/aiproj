@@ -18,6 +18,10 @@ f/<version>/解释/说明.md
 
 ## 当前索引
 
+f/1159/图片
+f/1159/解释/说明.md
+ -> v1159 train_lm dedup: extract the duplicated training loop from v1156/v1157/v1158 into one shared helper; contract preserved, full suite 3173 passed.
+
 f/1158/图片
 f/1158/解释/说明.md
  -> v1158 MiniGPT LoRA domain adaptation: adapt a frozen base to a new sentence structure (shared vocab) on a real RTX 4060 run; LoRA matches full fine-tuning at 7.5% params and stays reversible.

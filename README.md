@@ -15,7 +15,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1158.0.0` demonstrates LoRA domain adaptation: adapting a frozen base to a new sentence structure (shared vocabulary) on a real GPU run — the LoRA win v1157 predicted.
+Version `v1159.0.0` is a contract-preserving maintenance refactor: it extracts the training loop duplicated across v1156/v1157/v1158 into a single shared `minigpt.lm_training.train_lm`.
+
+## Latest v1159 checkpoint
+
+- Added `src/minigpt/lm_training.py` with `train_lm(model, params, data, ...)` — one implementation of the AdamW LM training loop, with optional `log_every`/`label` progress logging.
+- Migrated `scripts/run_lora_finetune_v1156.py` (`train_base`), `src/minigpt/lora_heldout_eval_v1157.py` (`_train`), and `src/minigpt/lora_domain_adaptation_v1158.py` (`_train`) to the shared helper, removing three near-identical copies.
+- Contract preserved: all pre-existing v1156/v1157/v1158 tests are unchanged and green; full suite `3173 passed`; the v1156 CLI still logs `[base] step=` progress and saves its adapter.
+- Added `tests/test_lm_training.py` (loss decreases, only the passed params are updated, logging path runs).
+- Archived v1159 evidence in `f/1159` and added the code explanation in `代码讲解记录_工程保养阶段/1171-v1159-minigpt-train-lm-dedup.md`.
 
 ## Latest v1158 checkpoint
 

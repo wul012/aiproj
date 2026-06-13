@@ -23,8 +23,8 @@ from dataclasses import dataclass
 import torch
 import torch.nn as nn
 
-from minigpt.dataset import get_batch
 from minigpt.heldout_eval import evaluate_heldout
+from minigpt.lm_training import train_lm
 from minigpt.lora import apply_lora, count_parameters, lora_parameters, mark_only_lora_as_trainable
 from minigpt.lora_finetune import LoRAFinetuneConfig
 from minigpt.report_utils import utc_now
@@ -46,30 +46,6 @@ class HeldoutEvalConfig:
             self.lora = LoRAFinetuneConfig(r=8, alpha=16.0, steps=300, batch_size=32, learning_rate=1e-3, seed=1337)
 
 
-def _train(
-    model: nn.Module,
-    params,
-    train_data: torch.Tensor,
-    *,
-    steps: int,
-    lr: float,
-    batch_size: int,
-    block_size: int,
-    device: torch.device,
-) -> float:
-    optimizer = torch.optim.AdamW(params, lr=lr)
-    model.train()
-    last = float("nan")
-    for _ in range(steps):
-        x, y = get_batch(train_data, block_size, batch_size, device)
-        _, loss = model(x, y)
-        optimizer.zero_grad(set_to_none=True)
-        loss.backward()
-        optimizer.step()
-        last = float(loss.item())
-    return last
-
-
 def run_lora_heldout_eval(
     model: nn.Module,
     train_ids: torch.Tensor,
@@ -88,29 +64,19 @@ def run_lora_heldout_eval(
     base_total = sum(param.numel() for param in model.parameters())
 
     # 1) train an undertrained base on the train split
-    _train(
-        model,
-        list(model.parameters()),
-        train_ids,
-        steps=config.base_steps,
-        lr=config.base_lr,
-        batch_size=config.base_batch_size,
-        block_size=block_size,
-        device=device,
+    train_lm(
+        model, list(model.parameters()), train_ids,
+        steps=config.base_steps, lr=config.base_lr, batch_size=config.base_batch_size,
+        block_size=block_size, device=device,
     )
     base_eval = evaluate_heldout(model, heldout_ids, block_size=block_size, device=device)
 
     # 2) reference arm: full continued fine-tuning (all params) from an identical copy
     model_full = copy.deepcopy(model)
-    _train(
-        model_full,
-        list(model_full.parameters()),
-        train_ids,
-        steps=config.lora.steps,
-        lr=config.full_finetune_lr,
-        batch_size=config.lora.batch_size,
-        block_size=block_size,
-        device=device,
+    train_lm(
+        model_full, list(model_full.parameters()), train_ids,
+        steps=config.lora.steps, lr=config.full_finetune_lr, batch_size=config.lora.batch_size,
+        block_size=block_size, device=device,
     )
     full_eval = evaluate_heldout(model_full, heldout_ids, block_size=block_size, device=device)
 
@@ -120,15 +86,10 @@ def run_lora_heldout_eval(
     mark_only_lora_as_trainable(model_lora)
     model_lora.to(device)
     counts = count_parameters(model_lora)
-    _train(
-        model_lora,
-        lora_parameters(model_lora),
-        train_ids,
-        steps=config.lora.steps,
-        lr=config.lora.learning_rate,
-        batch_size=config.lora.batch_size,
-        block_size=block_size,
-        device=device,
+    train_lm(
+        model_lora, lora_parameters(model_lora), train_ids,
+        steps=config.lora.steps, lr=config.lora.learning_rate, batch_size=config.lora.batch_size,
+        block_size=block_size, device=device,
     )
     lora_eval = evaluate_heldout(model_lora, heldout_ids, block_size=block_size, device=device)
 

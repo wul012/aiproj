@@ -25,7 +25,8 @@ import torch
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from minigpt.dataset import get_batch, load_text, split_token_ids  # noqa: E402
+from minigpt.dataset import load_text, split_token_ids  # noqa: E402
+from minigpt.lm_training import train_lm  # noqa: E402
 from minigpt.lora import lora_state_dict, merge_lora  # noqa: E402
 from minigpt.lora_finetune import LoRAFinetuneConfig, run_lora_finetune  # noqa: E402
 from minigpt.model import GPTConfig, MiniGPT  # noqa: E402
@@ -67,31 +68,6 @@ def choose_device(name: str) -> torch.device:
     return torch.device(name)
 
 
-def train_base(
-    model: MiniGPT,
-    train_data: torch.Tensor,
-    *,
-    steps: int,
-    batch_size: int,
-    lr: float,
-    block_size: int,
-    device: torch.device,
-) -> float:
-    optimizer = torch.optim.AdamW(model.parameters(), lr=lr)
-    model.train()
-    last = float("nan")
-    for step in range(1, steps + 1):
-        x, y = get_batch(train_data, block_size, batch_size, device)
-        _, loss = model(x, y)
-        optimizer.zero_grad(set_to_none=True)
-        loss.backward()
-        optimizer.step()
-        last = float(loss.item())
-        if step == 1 or step % max(1, steps // 5) == 0 or step == steps:
-            print(f"[base] step={step:5d} loss={last:.4f}")
-    return last
-
-
 def main(argv: Sequence[str] | None = None) -> None:
     args = parse_args(argv)
     torch.manual_seed(args.seed)
@@ -116,14 +92,17 @@ def main(argv: Sequence[str] | None = None) -> None:
     print(f"device={device} tokens={len(token_ids)} vocab={tokenizer.vocab_size} params={model.parameter_count():,}")
 
     print("== training frozen base ==")
-    train_base(
+    train_lm(
         model,
+        list(model.parameters()),
         train_data,
         steps=args.base_steps,
-        batch_size=args.base_batch_size,
         lr=args.base_lr,
+        batch_size=args.base_batch_size,
         block_size=config.block_size,
         device=device,
+        log_every=max(1, args.base_steps // 5),
+        label="base",
     )
 
     print("== LoRA fine-tuning adapters only ==")
