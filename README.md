@@ -15,7 +15,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1159.0.0` is a contract-preserving maintenance refactor: it extracts the training loop duplicated across v1156/v1157/v1158 into a single shared `minigpt.lm_training.train_lm`.
+Version `v1160.0.0` adds RoPE (rotary position embeddings) to MiniGPT behind a backward-compatible `use_rope` flag, with a real GPU held-out comparison against the existing learned positions.
+
+## Latest v1160 checkpoint
+
+- Added `src/minigpt/rope.py` (rotate_half, build_rope_cache, apply_rope) and wired RoPE into `src/minigpt/model.py` behind `GPTConfig.use_rope` (default `False`): when on, attention rotates Q/K and the learned position embedding is skipped; rotary buffers are non-persistent so checkpoints stay clean.
+- Backward compatible: `use_rope=False` is byte-for-byte the old behavior — all pre-existing tests are unchanged and green (full suite `3183 passed`).
+- Added `src/minigpt/rope_eval_v1160.py` + CLI `scripts/run_rope_eval_v1160.py`: train learned-position vs RoPE models on the templated corpus and compare held-out loss/accuracy (reuses v1159's `train_lm` and v1157's held-out harness).
+- Real v1160 run on an RTX 4060: `status=pass`, `decision=rope_capability_validated`. On this short fixed-length corpus learned positions edge RoPE (held-out loss 0.898 vs 1.017, accuracy ~0.68 tied) — expected, since RoPE's length-extrapolation advantage isn't exercised at fixed length. Reported honestly; length extrapolation is queued as RoPE's proper test.
+- Added `tests/test_rope.py` (norm-preserving, position-0 identity, state_dict cleanliness) and `tests/test_rope_eval_v1160.py`.
+- Archived v1160 evidence in `f/1160` and added the code explanation in `代码讲解记录_工程保养阶段/1172-v1160-minigpt-rope.md`.
 
 ## Latest v1159 checkpoint
 

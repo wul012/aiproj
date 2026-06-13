@@ -6,6 +6,8 @@ import torch
 import torch.nn as nn
 from torch.nn import functional as F
 
+from minigpt.rope import apply_rope, build_rope_cache
+
 
 @dataclass
 class GPTConfig:
@@ -16,6 +18,8 @@ class GPTConfig:
     n_embd: int = 128
     dropout: float = 0.1
     bias: bool = True
+    use_rope: bool = False
+    rope_base: float = 10000.0
 
 
 class CausalSelfAttention(nn.Module):
@@ -35,6 +39,15 @@ class CausalSelfAttention(nn.Module):
         mask = torch.tril(torch.ones(config.block_size, config.block_size))
         self.register_buffer("causal_mask", mask.view(1, 1, config.block_size, config.block_size))
 
+        self.use_rope = config.use_rope
+        if self.use_rope:
+            if self.head_size % 2 != 0:
+                raise ValueError("RoPE requires n_embd / n_head to be even")
+            cos, sin = build_rope_cache(config.block_size, self.head_size, base=config.rope_base)
+            # Derived, non-persistent: kept out of state_dict so checkpoints stay clean.
+            self.register_buffer("rope_cos", cos, persistent=False)
+            self.register_buffer("rope_sin", sin, persistent=False)
+
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         batch_size, seq_len, embd_size = x.shape
         q, k, v = self.c_attn(x).split(embd_size, dim=2)
@@ -42,6 +55,10 @@ class CausalSelfAttention(nn.Module):
         q = q.view(batch_size, seq_len, self.n_head, self.head_size).transpose(1, 2)
         k = k.view(batch_size, seq_len, self.n_head, self.head_size).transpose(1, 2)
         v = v.view(batch_size, seq_len, self.n_head, self.head_size).transpose(1, 2)
+
+        if self.use_rope:
+            q = apply_rope(q, self.rope_cos, self.rope_sin)
+            k = apply_rope(k, self.rope_cos, self.rope_sin)
 
         att = (q @ k.transpose(-2, -1)) * (self.head_size**-0.5)
         att = att.masked_fill(self.causal_mask[:, :, :seq_len, :seq_len] == 0, float("-inf"))
@@ -115,8 +132,10 @@ class MiniGPT(nn.Module):
         if seq_len > self.config.block_size:
             raise ValueError(f"Sequence length {seq_len} exceeds block_size {self.config.block_size}")
 
-        positions = torch.arange(0, seq_len, dtype=torch.long, device=idx.device)
-        x = self.token_embedding(idx) + self.position_embedding(positions)
+        x = self.token_embedding(idx)
+        if not self.config.use_rope:
+            positions = torch.arange(0, seq_len, dtype=torch.long, device=idx.device)
+            x = x + self.position_embedding(positions)
         x = self.drop(x)
         for block in self.blocks:
             x = block(x)

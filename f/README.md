@@ -18,6 +18,10 @@ f/<version>/解释/说明.md
 
 ## 当前索引
 
+f/1160/图片
+f/1160/解释/说明.md
+ -> v1160 RoPE: rotary position embeddings behind a backward-compatible use_rope flag; real RTX 4060 held-out comparison vs learned positions (capability validated, learned slightly ahead at fixed short length).
+
 f/1159/图片
 f/1159/解释/说明.md
  -> v1159 train_lm dedup: extract the duplicated training loop from v1156/v1157/v1158 into one shared helper; contract preserved, full suite 3173 passed.
