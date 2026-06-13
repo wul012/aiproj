@@ -15,7 +15,17 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1157.0.0` builds a templated corpus with a true held-out split and a validated held-out generalization eval, comparing base vs full fine-tune vs LoRA on a real GPU run.
+Version `v1158.0.0` demonstrates LoRA domain adaptation: adapting a frozen base to a new sentence structure (shared vocabulary) on a real GPU run — the LoRA win v1157 predicted.
+
+## Latest v1158 checkpoint
+
+- Added `src/minigpt/lora_domain_adaptation_v1158.py` + CLI `scripts/run_lora_domain_adaptation_v1158.py`: train a base on source structure A, confirm a structural domain gap on target B's held-out, then adapt frozen copies with full fine-tuning and LoRA to B.
+- Extended `src/minigpt/templated_corpus.py` with a `STRUCTURES` table and a `structure` argument (`declarative` unchanged, new `reordered`); both share the identical character vocabulary, isolating a purely structural domain gap.
+- Real v1158 run on an RTX 4060: `status=pass`, `decision=lora_domain_adaptation_succeeded`. Base trained on A scores held-out loss 0.88 on A but 3.99 on B (`domain_gap=3.10`); LoRA (7.5% of params) adapts B held-out loss to 0.89 (accuracy 0.46 → 0.70), capturing 110% of the full-fine-tune reference (1.18).
+- LoRA stays reversible: the adapter specializes to B, but because the base is frozen, dropping it restores the exact A model — unlike full fine-tuning.
+- Added `tests/test_lora_domain_adaptation_v1158.py` (shared-vocab structures, real domain gap, LoRA adaptation, report shape).
+- Note: the `_train` loop is now duplicated across v1156/v1157/v1158 — a small `train_lm` dedup is queued for v1159 per the maintenance cadence.
+- Archived v1158 evidence in `f/1158` and added the code explanation in `代码讲解记录_工程保养阶段/1170-v1158-minigpt-lora-domain-adaptation.md`.
 
 ## Latest v1157 checkpoint
 

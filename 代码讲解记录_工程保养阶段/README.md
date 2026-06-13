@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1170-v1158-minigpt-lora-domain-adaptation.md
+ -> v1158 code explanation: LoRA domain adaptation across two sentence structures sharing one vocabulary; with the embedding transferable and the gap purely structural, LoRA adapts a frozen base to the target at 7.5% params, matching full fine-tuning and staying reversible — the win v1157 predicted.
+
 1169-v1157-minigpt-lora-heldout-eval.md
  -> v1157 code explanation: a templated corpus with a true held-out split plus a validated held-out generalization eval; three-arm base/full-finetune/LoRA comparison shows all-linear LoRA captures ~5% of full-finetune's held-out gain on the tied-embedding model.
 

@@ -1,0 +1,6 @@
+arm,domain,heldout_loss,heldout_token_accuracy
+base,source(A),0.883377,0.679775
+base,target(B),3.988282,0.461798
+full_finetune,target(B),1.18218,0.683146
+lora,target(B),0.891918,0.7
+lora,source(A),3.755852,0.461798

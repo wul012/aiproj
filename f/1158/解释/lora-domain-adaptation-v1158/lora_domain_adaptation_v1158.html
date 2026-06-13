@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT LoRA domain adaptation report v1158</title>
+<style>
+:root { color-scheme: light; font-family: Arial, "Microsoft YaHei", sans-serif; color: #172026; background: #f6f8fa; }
+body { margin: 0; padding: 24px; }
+header, section, footer { max-width: 1120px; margin: 0 auto 18px; }
+header { padding: 18px 0 8px; border-bottom: 3px solid #2f6f8f; }
+h1 { margin: 0 0 8px; font-size: 28px; letter-spacing: 0; }
+h2 { margin: 0 0 10px; font-size: 18px; letter-spacing: 0; }
+p { margin: 0 0 10px; line-height: 1.5; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; background: transparent; border: 0; padding: 0; }
+.stat { background: #fff; border: 1px solid #d7dee5; border-radius: 8px; padding: 12px; min-height: 64px; }
+.stat span { display: block; color: #5c6b73; font-size: 12px; margin-bottom: 8px; }
+.stat strong { display: block; font-size: 18px; overflow-wrap: anywhere; }
+section { background: #fff; border: 1px solid #d7dee5; border-radius: 8px; padding: 16px; }
+table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+th, td { padding: 9px; border-bottom: 1px solid #e5e9ef; text-align: left; vertical-align: top; overflow-wrap: anywhere; }
+th { background: #eef3f6; }
+ul { margin: 0; padding-left: 20px; }
+li { margin: 6px 0; }
+.muted { color: #687782; }
+footer { color: #687782; font-size: 12px; }
+</style>
+</head>
+<body>
+<header><h1>MiniGPT LoRA domain adaptation report v1158</h1><p>Late-stage maintenance report for keeping AI governance artifacts readable.</p></header>
+<section class="stats"><article class="stat"><span>status</span><strong>pass</strong></article><article class="stat"><span>decision</span><strong>lora_domain_adaptation_succeeded</strong></article><article class="stat"><span>device</span><strong>cuda</strong></article><article class="stat"><span>source_structure</span><strong>declarative</strong></article><article class="stat"><span>target_structure</span><strong>reordered</strong></article><article class="stat"><span>lora_r</span><strong>8</strong></article><article class="stat"><span>adapted_module_count</span><strong>16</strong></article><article class="stat"><span>base_steps</span><strong>400</strong></article><article class="stat"><span>adapt_steps</span><strong>400</strong></article><article class="stat"><span>lora_trainable_parameters</span><strong>65536</strong></article><article class="stat"><span>total_parameters</span><strong>873216</strong></article><article class="stat"><span>trainable_ratio_percent</span><strong>7.5051</strong></article><article class="stat"><span>base_source_heldout_loss</span><strong>0.883377</strong></article><article class="stat"><span>base_target_heldout_loss</span><strong>3.988282</strong></article><article class="stat"><span>domain_gap</span><strong>3.104905</strong></article><article class="stat"><span>full_finetune_target_heldout_loss</span><strong>1.18218</strong></article><article class="stat"><span>lora_target_heldout_loss</span><strong>0.891918</strong></article><article class="stat"><span>lora_target_loss_delta</span><strong>-3.096364</strong></article><article class="stat"><span>full_target_loss_delta</span><strong>-2.806101</strong></article><article class="stat"><span>lora_vs_full_capture_ratio</span><strong>1.1034</strong></article><article class="stat"><span>lora_target_accuracy</span><strong>0.7</strong></article><article class="stat"><span>base_target_accuracy</span><strong>0.461798</strong></article><article class="stat"><span>lora_source_heldout_loss_after</span><strong>3.755852</strong></article><article class="stat"><span>adapter_forgetting_on_source</span><strong>2.872475</strong></article><article class="stat"><span>domain_adaptation_succeeded</span><strong>True</strong></article></section>
+<section><h2>Rows</h2><table><thead><tr><th>arm</th><th>domain</th><th>heldout_loss</th><th>heldout_token_accuracy</th></tr></thead><tbody><tr><td>base</td><td>source(A)</td><td>0.883377</td><td>0.679775</td></tr><tr><td>base</td><td>target(B)</td><td>3.988282</td><td>0.461798</td></tr><tr><td>full_finetune</td><td>target(B)</td><td>1.18218</td><td>0.683146</td></tr><tr><td>lora</td><td>target(B)</td><td>0.891918</td><td>0.7</td></tr><tr><td>lora</td><td>source(A)</td><td>3.755852</td><td>0.461798</td></tr></tbody></table></section>
+<section><h2>Recommendations</h2><ul><li>LoRA adapted the frozen base to the target structure, cutting target held-out loss by 3.0964 (capturing 110% of full fine-tuning) while training only 7.5051% of parameters — the LoRA win v1157 predicted.</li><li>Because the base is frozen, the adapter is removable: with it applied, source(A) held-out loss moved by +2.8725, but dropping the adapter restores the original A model exactly — unlike full fine-tuning, which overwrites it.</li><li>Source and target share the identical character vocabulary, so this isolates structural adaptation; the embedding/output head transfers for free.</li></ul></section>
+<footer>Generated by MiniGPT readability maintenance tooling.</footer>
+</body>
+</html>

@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT LoRA domain adaptation report v1158",
+  "generated_at": "2026-06-13T13:08:58Z",
+  "status": "pass",
+  "decision": "lora_domain_adaptation_succeeded",
+  "summary": {
+    "status": "pass",
+    "decision": "lora_domain_adaptation_succeeded",
+    "device": "cuda",
+    "source_structure": "declarative",
+    "target_structure": "reordered",
+    "lora_r": 8,
+    "adapted_module_count": 16,
+    "base_steps": 400,
+    "adapt_steps": 400,
+    "lora_trainable_parameters": 65536,
+    "total_parameters": 873216,
+    "trainable_ratio_percent": 7.5051,
+    "base_source_heldout_loss": 0.883377,
+    "base_target_heldout_loss": 3.988282,
+    "domain_gap": 3.104905,
+    "full_finetune_target_heldout_loss": 1.18218,
+    "lora_target_heldout_loss": 0.891918,
+    "lora_target_loss_delta": -3.096364,
+    "full_target_loss_delta": -2.806101,
+    "lora_vs_full_capture_ratio": 1.1034,
+    "lora_target_accuracy": 0.7,
+    "base_target_accuracy": 0.461798,
+    "lora_source_heldout_loss_after": 3.755852,
+    "adapter_forgetting_on_source": 2.872475,
+    "domain_adaptation_succeeded": true
+  },
+  "rows": [
+    {
+      "arm": "base",
+      "domain": "source(A)",
+      "heldout_loss": 0.883377,
+      "heldout_token_accuracy": 0.679775
+    },
+    {
+      "arm": "base",
+      "domain": "target(B)",
+      "heldout_loss": 3.988282,
+      "heldout_token_accuracy": 0.461798
+    },
+    {
+      "arm": "full_finetune",
+      "domain": "target(B)",
+      "heldout_loss": 1.18218,
+      "heldout_token_accuracy": 0.683146
+    },
+    {
+      "arm": "lora",
+      "domain": "target(B)",
+      "heldout_loss": 0.891918,
+      "heldout_token_accuracy": 0.7
+    },
+    {
+      "arm": "lora",
+      "domain": "source(A)",
+      "heldout_loss": 3.755852,
+      "heldout_token_accuracy": 0.461798
+    }
+  ],
+  "recommendations": [
+    "LoRA adapted the frozen base to the target structure, cutting target held-out loss by 3.0964 (capturing 110% of full fine-tuning) while training only 7.5051% of parameters — the LoRA win v1157 predicted.",
+    "Because the base is frozen, the adapter is removable: with it applied, source(A) held-out loss moved by +2.8725, but dropping the adapter restores the original A model exactly — unlike full fine-tuning, which overwrites it.",
+    "Source and target share the identical character vocabulary, so this isolates structural adaptation; the embedding/output head transfers for free."
+  ],
+  "csv_fieldnames": [
+    "arm",
+    "domain",
+    "heldout_loss",
+    "heldout_token_accuracy"
+  ]
+}

@@ -25,6 +25,16 @@ SUBJECTS = ["工程师", "学生", "老师", "画家", "医生", "船长", "农�
 VERBS = ["修好了", "记录了", "讲解了", "测量了", "整理了", "发现了", "保存了", "比较了"]
 OBJECTS = ["模型", "数据", "地图", "故事", "图纸", "样本", "账本", "信号"]
 
+# Sentence structures over the SAME term pools and punctuation. Both use only
+# "，" and "。", so every structure has the identical character vocabulary — only
+# the word order differs. That lets a model trained on one structure transfer its
+# (tied) token embedding perfectly to another, isolating a purely *structural*
+# domain gap that LoRA on attention/MLP can close. Used for v1158 domain adaptation.
+STRUCTURES = {
+    "declarative": "{time}，{subject}{verb}{object}。",
+    "reordered": "{subject}{object}，{time}{verb}。",
+}
+
 
 @dataclass
 class TemplatedCorpus:
@@ -36,6 +46,7 @@ class TemplatedCorpus:
     heldout_sentences: list[str] = field(default_factory=list)
     seed: int = 0
     heldout_ratio: float = 0.2
+    structure: str = "declarative"
 
     @property
     def full_text(self) -> str:
@@ -51,13 +62,14 @@ class TemplatedCorpus:
         }
 
 
-def _all_sentences() -> list[str]:
+def _all_sentences(structure: str = "declarative") -> list[str]:
+    template = STRUCTURES[structure]
     sentences: list[str] = []
     for time in TIMES:
         for subject in SUBJECTS:
             for verb in VERBS:
                 for obj in OBJECTS:
-                    sentences.append(f"{time}，{subject}{verb}{obj}。")
+                    sentences.append(template.format(time=time, subject=subject, verb=verb, object=obj))
     return sentences
 
 
@@ -66,16 +78,21 @@ def build_templated_corpus(
     seed: int = 1337,
     heldout_ratio: float = 0.2,
     max_sentences: int | None = 400,
+    structure: str = "declarative",
 ) -> TemplatedCorpus:
     """Build a deterministic templated corpus split by sentence.
 
     The same ``seed`` always yields the same train/held-out split, so the corpus
-    is reproducible across runs and tests.
+    is reproducible across runs and tests. ``structure`` selects a sentence
+    template from :data:`STRUCTURES`; all structures share the same character
+    vocabulary, differing only in word order.
     """
     if not 0.0 < heldout_ratio < 1.0:
         raise ValueError("heldout_ratio must be between 0 and 1")
+    if structure not in STRUCTURES:
+        raise ValueError(f"unknown structure {structure!r}; choose from {sorted(STRUCTURES)}")
 
-    sentences = _all_sentences()
+    sentences = _all_sentences(structure)
     rng = random.Random(seed)
     rng.shuffle(sentences)
     if max_sentences is not None:
@@ -96,6 +113,7 @@ def build_templated_corpus(
         heldout_sentences=heldout_sentences,
         seed=seed,
         heldout_ratio=heldout_ratio,
+        structure=structure,
     )
 
 

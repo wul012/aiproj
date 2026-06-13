@@ -18,6 +18,10 @@ f/<version>/解释/说明.md
 
 ## 当前索引
 
+f/1158/图片
+f/1158/解释/说明.md
+ -> v1158 MiniGPT LoRA domain adaptation: adapt a frozen base to a new sentence structure (shared vocab) on a real RTX 4060 run; LoRA matches full fine-tuning at 7.5% params and stays reversible.
+
 f/1157/图片
 f/1157/解释/说明.md
  -> v1157 MiniGPT LoRA held-out generalization eval: validated held-out harness + base/full-finetune/LoRA three-arm comparison on a real RTX 4060 run.
