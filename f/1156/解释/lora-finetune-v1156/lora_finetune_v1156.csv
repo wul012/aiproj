@@ -1,0 +1,9 @@
+module,kind,r,alpha
+blocks.0.attn.c_attn,lora_adapter,8,16.0
+blocks.0.attn.c_proj,lora_adapter,8,16.0
+blocks.1.attn.c_attn,lora_adapter,8,16.0
+blocks.1.attn.c_proj,lora_adapter,8,16.0
+blocks.2.attn.c_attn,lora_adapter,8,16.0
+blocks.2.attn.c_proj,lora_adapter,8,16.0
+blocks.3.attn.c_attn,lora_adapter,8,16.0
+blocks.3.attn.c_proj,lora_adapter,8,16.0

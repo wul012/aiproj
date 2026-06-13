@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1168-v1156-minigpt-lora-finetune.md
+ -> v1156 code explanation: from-scratch LoRA fine-tuning for MiniGPT, freezing the base and training ~2.9% of params to reduce training loss on a real GPU run; starts the real-model-capability direction.
+
 1167-v1155-unassisted-loss-suffix-repair-replay-comparison.md
  -> v1155 code explanation: replay the v1154 checkpoint against v1153 target-free holdout prompts and preserve the partial-signal boundary.
 

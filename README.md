@@ -15,7 +15,17 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1155.0.0` replays the v1154 checkpoint against the v1153 target-free holdout prompts and records a bounded partial-signal result.
+Version `v1156.0.0` adds a from-scratch LoRA fine-tuning capability to MiniGPT and records a real GPU before/after training-loss result, starting the real-model-capability direction.
+
+## Latest v1156 checkpoint
+
+- Added `src/minigpt/lora.py`: a from-scratch LoRA implementation (`LoRAConfig`, `LoRALinear`, `apply_lora`, `mark_only_lora_as_trainable`, `count_parameters`, `lora_state_dict`, `merge_lora`) targeting the attention `c_attn` / `c_proj` linears, with zero-initialised `lora_B` so the adapter is identity at init and a `merge()` path for parameter-free serving.
+- Added `src/minigpt/lora_finetune.py`: orchestration (`run_lora_finetune`) that freezes the base, trains adapters only, and emits a before/after loss report in the readability artifact shape.
+- Added CLI `scripts/run_lora_finetune_v1156.py`: trains a tiny base, LoRA-fine-tunes on GPU, writes the 5-format artifact set, and saves a compact `adapter.pt` plus a merged checkpoint.
+- Real v1156 run on an RTX 4060 (CUDA, torch 2.6.0+cu124) produced `status=pass`, `decision=lora_finetune_reduced_train_loss`, `trainable_ratio_percent=2.8859` (24,576 / 851,584 params), and training loss `0.455033 → 0.416174`.
+- Honest boundary: the bundled 507-char corpus makes validation loss overfit-dominated, so the criterion is training-loss reduction; v1157 should introduce a larger real dataset and a held-out eval suite.
+- Added `tests/test_lora.py` and `tests/test_lora_finetune.py` covering the LoRA math contract (identity-at-init, frozen base byte-for-byte, merge equivalence) and the real loss-reduction claim.
+- Archived v1156 evidence in `f/1156` and added the code explanation in `代码讲解记录_工程保养阶段/1168-v1156-minigpt-lora-finetune.md`.
 
 ## Latest v1155 checkpoint
 

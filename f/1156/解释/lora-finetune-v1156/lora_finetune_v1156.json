@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT LoRA fine-tune before/after report v1156",
+  "generated_at": "2026-06-13T11:47:50Z",
+  "status": "pass",
+  "decision": "lora_finetune_reduced_train_loss",
+  "summary": {
+    "status": "pass",
+    "decision": "lora_finetune_reduced_train_loss",
+    "device": "cuda",
+    "lora_r": 8,
+    "lora_alpha": 16.0,
+    "lora_dropout": 0.0,
+    "target_modules": "c_attn, c_proj",
+    "adapted_module_count": 8,
+    "steps": 400,
+    "learning_rate": 0.001,
+    "base_parameters": 827008,
+    "trainable_parameters": 24576,
+    "total_parameters": 851584,
+    "trainable_ratio_percent": 2.8859,
+    "before_train_loss": 0.455033,
+    "after_train_loss": 0.416174,
+    "train_loss_delta": -0.03886,
+    "before_val_loss": 5.308659,
+    "after_val_loss": 5.284511,
+    "val_loss_delta": -0.024148,
+    "last_step_loss": 0.407525,
+    "train_loss_improved": true,
+    "val_loss_improved": true
+  },
+  "rows": [
+    {
+      "module": "blocks.0.attn.c_attn",
+      "kind": "lora_adapter",
+      "r": 8,
+      "alpha": 16.0
+    },
+    {
+      "module": "blocks.0.attn.c_proj",
+      "kind": "lora_adapter",
+      "r": 8,
+      "alpha": 16.0
+    },
+    {
+      "module": "blocks.1.attn.c_attn",
+      "kind": "lora_adapter",
+      "r": 8,
+      "alpha": 16.0
+    },
+    {
+      "module": "blocks.1.attn.c_proj",
+      "kind": "lora_adapter",
+      "r": 8,
+      "alpha": 16.0
+    },
+    {
+      "module": "blocks.2.attn.c_attn",
+      "kind": "lora_adapter",
+      "r": 8,
+      "alpha": 16.0
+    },
+    {
+      "module": "blocks.2.attn.c_proj",
+      "kind": "lora_adapter",
+      "r": 8,
+      "alpha": 16.0
+    },
+    {
+      "module": "blocks.3.attn.c_attn",
+      "kind": "lora_adapter",
+      "r": 8,
+      "alpha": 16.0
+    },
+    {
+      "module": "blocks.3.attn.c_proj",
+      "kind": "lora_adapter",
+      "r": 8,
+      "alpha": 16.0
+    }
+  ],
+  "history": [
+    {
+      "step": 1,
+      "train_loss": 0.4516666531562805,
+      "val_loss": 5.317709922790527
+    },
+    {
+      "step": 50,
+      "train_loss": 0.4388677477836609,
+      "val_loss": 5.301830291748047
+    },
+    {
+      "step": 100,
+      "train_loss": 0.4342470169067383,
+      "val_loss": 5.286839962005615
+    },
+    {
+      "step": 150,
+      "train_loss": 0.42603355646133423,
+      "val_loss": 5.293830394744873
+    },
+    {
+      "step": 200,
+      "train_loss": 0.4288226068019867,
+      "val_loss": 5.305637359619141
+    },
+    {
+      "step": 250,
+      "train_loss": 0.43151864409446716,
+      "val_loss": 5.285090446472168
+    },
+    {
+      "step": 300,
+      "train_loss": 0.42826491594314575,
+      "val_loss": 5.289968967437744
+    },
+    {
+      "step": 350,
+      "train_loss": 0.4233942925930023,
+      "val_loss": 5.291451454162598
+    },
+    {
+      "step": 400,
+      "train_loss": 0.42201194167137146,
+      "val_loss": 5.288316249847412
+    }
+  ],
+  "recommendations": [
+    "LoRA reduced training loss by 0.0389 while training only 2.8859% of parameters; the adapter demonstrably learns.",
+    "Caveat: the bundled corpus is tiny, so validation loss is overfit-dominated and not a reliable generalization signal. v1157 should introduce a larger real dataset and a held-out eval suite.",
+    "Merge the adapter with minigpt.lora.merge_lora to serve without extra parameters."
+  ],
+  "csv_fieldnames": [
+    "module",
+    "kind",
+    "r",
+    "alpha"
+  ]
+}
