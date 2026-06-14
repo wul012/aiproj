@@ -29,6 +29,14 @@ class SftCorpusTests(unittest.TestCase):
             self.assertTrue(train_inputs.isdisjoint(heldout_inputs))
             self.assertGreater(len(heldout_inputs), 0)
 
+    def test_shift_left_op(self) -> None:
+        self.assertEqual(OPS["L"]("abcd"), "bcda")
+        self.assertEqual(OPS["L"]("xy"), "yx")
+        corpus = build_sft_corpus(seed=5, ops=("L",), lengths=(4,), inputs_per_op_length=30)
+        for e in corpus.train + corpus.heldout:
+            self.assertEqual(e.op, "L")
+            self.assertEqual(e.expected_output, OPS["L"](e.prompt[1:-1]))
+
     def test_rejects_unknown_op(self) -> None:
         with self.assertRaises(ValueError):
             build_sft_corpus(seed=0, ops=("Z",))

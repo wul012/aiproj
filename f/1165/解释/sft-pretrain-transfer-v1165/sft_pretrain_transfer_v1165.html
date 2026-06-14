@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT base-&gt;SFT transfer to a held-out op v1165</title>
+<style>
+:root { color-scheme: light; font-family: Arial, "Microsoft YaHei", sans-serif; color: #172026; background: #f6f8fa; }
+body { margin: 0; padding: 24px; }
+header, section, footer { max-width: 1120px; margin: 0 auto 18px; }
+header { padding: 18px 0 8px; border-bottom: 3px solid #2f6f8f; }
+h1 { margin: 0 0 8px; font-size: 28px; letter-spacing: 0; }
+h2 { margin: 0 0 10px; font-size: 18px; letter-spacing: 0; }
+p { margin: 0 0 10px; line-height: 1.5; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; background: transparent; border: 0; padding: 0; }
+.stat { background: #fff; border: 1px solid #d7dee5; border-radius: 8px; padding: 12px; min-height: 64px; }
+.stat span { display: block; color: #5c6b73; font-size: 12px; margin-bottom: 8px; }
+.stat strong { display: block; font-size: 18px; overflow-wrap: anywhere; }
+section { background: #fff; border: 1px solid #d7dee5; border-radius: 8px; padding: 16px; }
+table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+th, td { padding: 9px; border-bottom: 1px solid #e5e9ef; text-align: left; vertical-align: top; overflow-wrap: anywhere; }
+th { background: #eef3f6; }
+ul { margin: 0; padding-left: 20px; }
+li { margin: 6px 0; }
+.muted { color: #687782; }
+footer { color: #687782; font-size: 12px; }
+</style>
+</head>
+<body>
+<header><h1>MiniGPT base-&gt;SFT transfer to a held-out op v1165</h1><p>Late-stage maintenance report for keeping AI governance artifacts readable.</p></header>
+<section class="stats"><article class="stat"><span>status</span><strong>pass</strong></article><article class="stat"><span>decision</span><strong>sft_transfer_measured</strong></article><article class="stat"><span>verdict</span><strong>pretraining_improves_downstream_sft</strong></article><article class="stat"><span>device</span><strong>cuda</strong></article><article class="stat"><span>seeds</span><strong>3</strong></article><article class="stat"><span>downstream_op</span><strong>L</strong></article><article class="stat"><span>base_ops</span><strong>C,R,S</strong></article><article class="stat"><span>base_steps</span><strong>1200</strong></article><article class="stat"><span>sft_schedule</span><strong>50,150,400,1000</strong></article><article class="stat"><span>n_layer</span><strong>4</strong></article><article class="stat"><span>n_head</span><strong>4</strong></article><article class="stat"><span>n_embd</span><strong>128</strong></article><article class="stat"><span>use_rope</span><strong>True</strong></article><article class="stat"><span>base_train_char_count</span><strong>15498</strong></article><article class="stat"><span>downstream_train_count</span><strong>454</strong></article><article class="stat"><span>downstream_heldout_count</span><strong>151</strong></article><article class="stat"><span>learnability_gate</span><strong>0.5</strong></article><article class="stat"><span>pretrained_at_max_budget</span><strong>0.971302</strong></article><article class="stat"><span>task_learned</span><strong>True</strong></article><article class="stat"><span>min_sft_steps</span><strong>50</strong></article><article class="stat"><span>max_sft_steps</span><strong>1000</strong></article><article class="stat"><span>pretrained_at_min</span><strong>0.313466</strong></article><article class="stat"><span>scratch_at_min</span><strong>0.022075</strong></article><article class="stat"><span>transfer_gap_at_min</span><strong>0.291391</strong></article><article class="stat"><span>scratch_at_max</span><strong>0.825607</strong></article><article class="stat"><span>transfer_gap_at_max</span><strong>0.145695</strong></article></section>
+<section><h2>Rows</h2><table><thead><tr><th>arm</th><th>sft_steps</th><th>exact_match_mean</th><th>exact_match_std</th></tr></thead><tbody><tr><td>pretrained</td><td>50</td><td>0.313466</td><td>0.193002</td></tr><tr><td>pretrained</td><td>150</td><td>0.556291</td><td>0.423996</td></tr><tr><td>pretrained</td><td>400</td><td>0.856512</td><td>0.225976</td></tr><tr><td>pretrained</td><td>1000</td><td>0.971302</td><td>0.029863</td></tr><tr><td>scratch</td><td>50</td><td>0.022075</td><td>0.016666</td></tr><tr><td>scratch</td><td>150</td><td>0.284768</td><td>0.046358</td></tr><tr><td>scratch</td><td>400</td><td>0.487859</td><td>0.109689</td></tr><tr><td>scratch</td><td>1000</td><td>0.825607</td><td>0.080928</td></tr></tbody></table></section>
+<section><h2>Recommendations</h2><ul><li>VERDICT (pretraining_improves_downstream_sft): on the held-out op &#x27;L&#x27;, pretrained-vs-scratch SFT exact-match gap is +0.291 at 50 SFT steps and +0.146 at 1000 SFT steps (3 seeds). Pretraining on {copy,reverse,sort} is expected to help most when downstream SFT data/compute is small.</li><li>DATA EFFICIENCY: at 50 SFT steps the pretrained base reaches 0.313 exact-match on the new op vs 0.022 from scratch; by 1000 steps they are 0.971 vs 0.826. The new op (shift-left) was NEVER in base pretraining, so any gap is transfer of shared primitives + the instruction format, not leakage.</li><li>Learnability gate: the pretrained arm reaches 0.971 exact-match on the new op at 1000 steps (gate 0.5); task_learned=True.</li><li>RECIPE: this is the real two-stage SFT pipeline — pretrain a base with full next-token loss, then fine-tune with completion-only loss on a downstream task. The base and downstream share one char vocabulary so embeddings transfer.</li><li>SCOPE: tiny from-scratch base and a synthetic op family; transfer magnitude is scale-dependent and the new op deliberately shares positional-copy primitives with the pretrained ops, so this shows the MECHANISM of transfer, not a generic claim.</li></ul></section>
+<footer>Generated by MiniGPT readability maintenance tooling.</footer>
+</body>
+</html>

@@ -15,7 +15,14 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1164.0.0` opens a new capability arc: supervised fine-tuning (SFT) for instruction-following. A tiny MiniGPT learns to follow copy/reverse/sort instructions on unseen inputs via completion-only loss masking, and a training-budget sweep honestly shows that masking is a low-compute accelerant whose advantage shrinks with training.
+Version `v1165.0.0` runs the real two-stage SFT recipe: pretrain a base LM, then fine-tune. It measures pretraining transfer — a base pretrained on {copy,reverse,sort} learns a held-out new op (shift-left) far more data-efficiently than from scratch.
+
+## Latest v1165 checkpoint
+
+- Closes the gap v1164 flagged (SFT-from-scratch). Pretrains a base LM with full next-token loss on ops {copy,reverse,sort}, then SFT (completion-only) on a **held-out new op** — shift-left (`abcd→bcda`), a positional op that shares "attend-to-a-position-and-copy" primitives with the pretrained ops but was never in pretraining (so any gain is transfer, not leakage).
+- Added `src/minigpt/sft_pretrain_transfer_v1165.py` (`run_sft_transfer`: pretrain base once per seed, snapshot, then SFT pretrained-vs-scratch across an SFT-budget sweep; reuses `train_lm`, `train_sft`, `evaluate_instructions`) and a `shift-left` op in `sft_corpus.py`. CLI dogfoods `script_runtime`.
+- Real RTX 4060 run (3 seeds): `status=pass`, `verdict=pretraining_improves_downstream_sft`. The pretrained base learns the new op far more **data-efficiently**: at 50 SFT steps it reaches **0.31** exact-match vs **0.02** from scratch (~14×); at 1000 steps **0.97** vs **0.83**. Pretraining shifts the SFT curve left — the pretrained base at 150 steps matches from-scratch at 400. The transfer gain (+0.29 → +0.15) shrinks as both converge but stays positive throughout. Fair: both arms share the SFT batch sampling per (seed, budget), so the only difference is the initial weights.
+- Added `tests/test_sft_pretrain_transfer_v1165.py` and a shift-left op test. Evidence in `f/1165`; code explanation in `代码讲解记录_工程保养阶段/1177-v1165-minigpt-sft-pretrain-transfer.md`.
 
 ## Latest v1164 checkpoint
 

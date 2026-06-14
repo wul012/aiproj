@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1177-v1165-minigpt-sft-pretrain-transfer.md
+ -> v1165 code explanation: the real two-stage SFT recipe. Pretrain a base LM on {copy,reverse,sort}, then SFT on a HELD-OUT new op (shift-left) — comparing pretrained-base vs from-scratch across an SFT-budget sweep. Pretraining shifts the SFT curve left (data efficiency): 0.31 vs 0.02 at 50 SFT steps, 0.97 vs 0.83 at 1000. Transfer of shared positional-copy primitives + instruction format, not leakage (the new op was never in pretraining).
+
 1176-v1164-minigpt-sft-instruction.md
  -> v1164 code explanation: supervised fine-tuning (SFT) for instruction-following on copy/reverse/sort over UNSEEN inputs, with completion-only loss masking. A training-budget sweep honestly shows the masking advantage is large in the low-compute regime (+0.24 at 150 steps) and shrinks to ~0 by 1500 steps — a low-compute accelerant, not a free lunch. Pivot from the dead-ended RoPE-base recall probe (which honestly hit the predicted learnability risk).
 

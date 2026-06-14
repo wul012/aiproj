@@ -18,6 +18,10 @@ f/<version>/解释/说明.md
 
 ## 当前索引
 
+f/1165/图片
+f/1165/解释/说明.md
+ -> v1165 base->SFT transfer: real RTX 4060 run. Pretraining on {copy,reverse,sort} transfers to a held-out new op (shift-left): at 50 SFT steps pretrained reaches 0.31 vs 0.02 from scratch (~14x), 0.97 vs 0.83 at 1000 — pretraining shifts the SFT curve left (data efficiency). The two-stage recipe, measured.
+
 f/1164/图片
 f/1164/解释/说明.md
  -> v1164 SFT instruction-following: real RTX 4060 run. The model follows copy/reverse/sort instructions on unseen inputs (0.79 exact-match, chance ~0.0016) via completion-only loss masking; a step sweep shows the masking advantage is a low-compute accelerant (+0.24 at 150 steps → +0.02 at 1500).

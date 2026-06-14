@@ -1,0 +1,9 @@
+arm,sft_steps,exact_match_mean,exact_match_std
+pretrained,50,0.313466,0.193002
+pretrained,150,0.556291,0.423996
+pretrained,400,0.856512,0.225976
+pretrained,1000,0.971302,0.029863
+scratch,50,0.022075,0.016666
+scratch,150,0.284768,0.046358
+scratch,400,0.487859,0.109689
+scratch,1000,0.825607,0.080928

@@ -32,6 +32,7 @@ OPS = {
     "C": lambda s: s,                       # copy
     "R": lambda s: s[::-1],                 # reverse
     "S": lambda s: "".join(sorted(s)),      # sort
+    "L": lambda s: s[1:] + s[:1],           # shift left by one (abcd -> bcda)
 }
 ALPHABET = INPUT_ALPHABET + "".join(OPS) + SEP + EOS + PAD
 
