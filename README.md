@@ -15,7 +15,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1168.0.0` tests the standard fix for DPO's destructiveness (NLL-regularized DPO / DPO+SFT): adding a chosen-NLL term recovers the generation vanilla DPO destroys, but only matches — never beats — plain SFT-on-chosen at this scale. The preference term adds no capability over SFT (margin ≠ capability).
+Version `v1169.0.0` builds the classic RLHF reward model that DPO skips (MiniGPT backbone + scalar head, Bradley-Terry loss) and honestly measures its limits: it ranks held-out preference pairs well (in-dist 0.82, off-dist 0.64) but cannot rank a policy's own samples in best-of-N — the oracle reaches 0.54 while RM rerank stays ≈ a random pick. Reward models are reliable only on-distribution.
+
+## Latest v1169 checkpoint
+
+- The RLHF component DPO is *free* of. (Anthropic HH-RLHF was considered but is infeasible for a from-scratch **char-level** MiniGPT — long natural-English dialogue, no capable base, the gate fails by construction — so the same controllable synthetic setting is reused.)
+- Added `src/minigpt/reward_model_v1169.py`: `RewardModel` (backbone + scalar head pooled at the last real token), `train_reward_model` (Bradley-Terry `-logσ(r(chosen)−r(rejected))`), `rank_accuracy`, `best_of_n_sweep` (generate max-N once, slice per N; reports RM-rerank / random-pick / oracle), `run_reward_model`. Exposes a new `MiniGPT.features()` (forward refactored to `lm_head(features(idx))`, byte-identical). CLI `scripts/run_reward_model_v1169.py`.
+- The design panel was again session-limited; the feasibility probe ran on the main thread (it showed a pure shortcut + best-of-N degrading at tiny scale, which motivated the oracle baseline).
+- Real RTX 4060 (3 seeds): `status=pass`, `verdict=reward_model_learns_best_of_n_no_clear_gain`. The RM ranks held-out **in-distribution** pairs at **0.82** and even **off-distribution** (random-reject) at **0.64** (> chance). But in best-of-N the **oracle** (any-of-N correct) climbs 0.13→**0.54** while **RM rerank** stays ≈**0.10** — no better than a **random pick** (0.12), far below the oracle. The correct answer is in the sample pool; the RM can't find it among a policy's *own* (off-distribution) samples. This is the real RLHF lesson: reward models are reliable only on their training distribution, and a policy's generations are off it.
+- Added `tests/test_reward_model_v1169.py` (the `features` refactor verified byte-identical to `forward`; RM pooling; Bradley-Terry separates a trivial pair; report shape with `oracle ≥ rerank`; `pass` iff `task_learned`). Existing `model` tests unchanged. Evidence in `f/1169`; code explanation in `代码讲解记录_工程保养阶段/1181-v1169-minigpt-reward-model.md`.
 
 ## Latest v1168 checkpoint
 

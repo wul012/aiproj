@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT reward modeling + best-of-N v1169",
+  "generated_at": "2026-06-14T15:29:05Z",
+  "status": "pass",
+  "decision": "reward_model_measured",
+  "summary": {
+    "status": "pass",
+    "decision": "reward_model_measured",
+    "verdict": "reward_model_learns_best_of_n_no_clear_gain",
+    "rm_verdict": "reward_model_generalizes_to_off_distribution",
+    "best_of_n_verdict": "best_of_n_reranking_neutral",
+    "device": "cuda",
+    "seeds": 3,
+    "ops": "C,R,S,L",
+    "rm_steps": 600,
+    "base_steps": 700,
+    "n_values": "1,4,8,16",
+    "temperature": 1.0,
+    "n_layer": 4,
+    "n_head": 4,
+    "n_embd": 128,
+    "use_rope": true,
+    "rm_train_pairs": 1439,
+    "rm_eval_pairs": 482,
+    "rm_ood_pairs": 524,
+    "learnability_margin": 0.0,
+    "rm_indistribution_rank_acc": 0.815353,
+    "rm_indistribution_rank_acc_std": 0.029046,
+    "rm_ood_rank_acc": 0.639949,
+    "rm_ood_rank_acc_std": 0.023708,
+    "rm_learnable": true,
+    "generalizes_off_distribution": true,
+    "task_learned": true,
+    "base_greedy_exact_match": 0.187023,
+    "max_n": 16,
+    "best_of_n_rerank_at_max": 0.099237,
+    "best_of_n_random_at_max": 0.115299,
+    "best_of_n_oracle_at_max": 0.537532,
+    "best_of_n_helps": false,
+    "best_of_n_degrades": false
+  },
+  "rows": [
+    {
+      "n": 1,
+      "rerank_em_mean": 0.130407,
+      "rerank_em_std": 0.029214,
+      "random_em_mean": 0.130407,
+      "oracle_em_mean": 0.130407
+    },
+    {
+      "n": 4,
+      "rerank_em_mean": 0.132316,
+      "rerank_em_std": 0.032461,
+      "random_em_mean": 0.116571,
+      "oracle_em_mean": 0.295802
+    },
+    {
+      "n": 8,
+      "rerank_em_mean": 0.116412,
+      "rerank_em_std": 0.018205,
+      "random_em_mean": 0.115299,
+      "oracle_em_mean": 0.414758
+    },
+    {
+      "n": 16,
+      "rerank_em_mean": 0.099237,
+      "rerank_em_std": 0.026512,
+      "random_em_mean": 0.115299,
+      "oracle_em_mean": 0.537532
+    }
+  ],
+  "recommendations": [
+    "VERDICT (reward_model_learns_best_of_n_no_clear_gain): the reward model ranks held-out IN-DISTRIBUTION pairs (chosen vs confusable-reject) at 0.815 but OFF-DISTRIBUTION (chosen vs random corruption) at 0.640 (chance=0.5; generalizes_off_distribution=True). 3 seeds, gap-minus-combined-std significance.",
+    "REWARD MODEL (reward_model_generalizes_to_off_distribution): Bradley-Terry loss -logσ(r(chosen)-r(rejected)) on a MiniGPT backbone + scalar head. High in-distribution ranking with chance-level OOD ranking means the RM learned the narrow training-reject boundary, NOT general correctness — a shortcut.",
+    "BEST-OF-N (best_of_n_reranking_neutral): reranking a weak base's own samples (greedy exact-match 0.187) by the RM gives exact-match 0.099 at N=16 vs a random pick 0.115 and an oracle (any-of-N correct) 0.538. If rerank < random, the brittle RM is actively harmful on the policy's OWN (off-distribution) samples — the distributional brittleness behind reward hacking / over-optimization.",
+    "SCOPE: classic RLHF reward modeling on a synthetic deterministic correctness signal with confusable hard-negatives, from-scratch char-level MiniGPT; NOT human preferences / RLHF-at-scale. The oracle column separates 'RM is a bad ranker' from 'the base's samples lack any correct answer'.",
+    "GATE: status='pass' means the RM was LEARNABLE in-distribution (rank acc 0.815 > 0.5; rm_learnable=True) so the comparison is valid — NOT that the RM is good. The honest finding is whichever data-driven verdict the numbers select."
+  ],
+  "csv_fieldnames": [
+    "n",
+    "rerank_em_mean",
+    "rerank_em_std",
+    "random_em_mean",
+    "oracle_em_mean"
+  ],
+  "best_of_n_curves": {
+    "rerank_em": {
+      "1": 0.130407,
+      "4": 0.132316,
+      "8": 0.116412,
+      "16": 0.099237
+    },
+    "random_em": {
+      "1": 0.130407,
+      "4": 0.116571,
+      "8": 0.115299,
+      "16": 0.115299
+    },
+    "oracle_em": {
+      "1": 0.130407,
+      "4": 0.295802,
+      "8": 0.414758,
+      "16": 0.537532
+    }
+  },
+  "seeds": [
+    1337,
+    1338,
+    1339
+  ]
+}

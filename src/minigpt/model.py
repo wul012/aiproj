@@ -205,11 +205,10 @@ class MiniGPT(nn.Module):
         elif isinstance(module, nn.Embedding):
             nn.init.normal_(module.weight, mean=0.0, std=0.02)
 
-    def forward(
-        self,
-        idx: torch.Tensor,
-        targets: torch.Tensor | None = None,
-    ) -> tuple[torch.Tensor, torch.Tensor | None]:
+    def features(self, idx: torch.Tensor) -> torch.Tensor:
+        """Final hidden states (post-``ln_f``, pre-``lm_head``), shape
+        ``(B, T, n_embd)``. Exposed for heads that read representations rather
+        than token logits — e.g. the v1169 reward model's scalar head."""
         _, seq_len = idx.shape
         if seq_len > self.config.block_size:
             raise ValueError(f"Sequence length {seq_len} exceeds block_size {self.config.block_size}")
@@ -221,8 +220,14 @@ class MiniGPT(nn.Module):
         x = self.drop(x)
         for block in self.blocks:
             x = block(x)
-        x = self.ln_f(x)
-        logits = self.lm_head(x)
+        return self.ln_f(x)
+
+    def forward(
+        self,
+        idx: torch.Tensor,
+        targets: torch.Tensor | None = None,
+    ) -> tuple[torch.Tensor, torch.Tensor | None]:
+        logits = self.lm_head(self.features(idx))
 
         loss = None
         if targets is not None:

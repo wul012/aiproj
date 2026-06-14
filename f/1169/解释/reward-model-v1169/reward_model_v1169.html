@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT reward modeling + best-of-N v1169</title>
+<style>
+:root { color-scheme: light; font-family: Arial, "Microsoft YaHei", sans-serif; color: #172026; background: #f6f8fa; }
+body { margin: 0; padding: 24px; }
+header, section, footer { max-width: 1120px; margin: 0 auto 18px; }
+header { padding: 18px 0 8px; border-bottom: 3px solid #2f6f8f; }
+h1 { margin: 0 0 8px; font-size: 28px; letter-spacing: 0; }
+h2 { margin: 0 0 10px; font-size: 18px; letter-spacing: 0; }
+p { margin: 0 0 10px; line-height: 1.5; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; background: transparent; border: 0; padding: 0; }
+.stat { background: #fff; border: 1px solid #d7dee5; border-radius: 8px; padding: 12px; min-height: 64px; }
+.stat span { display: block; color: #5c6b73; font-size: 12px; margin-bottom: 8px; }
+.stat strong { display: block; font-size: 18px; overflow-wrap: anywhere; }
+section { background: #fff; border: 1px solid #d7dee5; border-radius: 8px; padding: 16px; }
+table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+th, td { padding: 9px; border-bottom: 1px solid #e5e9ef; text-align: left; vertical-align: top; overflow-wrap: anywhere; }
+th { background: #eef3f6; }
+ul { margin: 0; padding-left: 20px; }
+li { margin: 6px 0; }
+.muted { color: #687782; }
+footer { color: #687782; font-size: 12px; }
+</style>
+</head>
+<body>
+<header><h1>MiniGPT reward modeling + best-of-N v1169</h1><p>Late-stage maintenance report for keeping AI governance artifacts readable.</p></header>
+<section class="stats"><article class="stat"><span>status</span><strong>pass</strong></article><article class="stat"><span>decision</span><strong>reward_model_measured</strong></article><article class="stat"><span>verdict</span><strong>reward_model_learns_best_of_n_no_clear_gain</strong></article><article class="stat"><span>rm_verdict</span><strong>reward_model_generalizes_to_off_distribution</strong></article><article class="stat"><span>best_of_n_verdict</span><strong>best_of_n_reranking_neutral</strong></article><article class="stat"><span>device</span><strong>cuda</strong></article><article class="stat"><span>seeds</span><strong>3</strong></article><article class="stat"><span>ops</span><strong>C,R,S,L</strong></article><article class="stat"><span>rm_steps</span><strong>600</strong></article><article class="stat"><span>base_steps</span><strong>700</strong></article><article class="stat"><span>n_values</span><strong>1,4,8,16</strong></article><article class="stat"><span>temperature</span><strong>1.0</strong></article><article class="stat"><span>n_layer</span><strong>4</strong></article><article class="stat"><span>n_head</span><strong>4</strong></article><article class="stat"><span>n_embd</span><strong>128</strong></article><article class="stat"><span>use_rope</span><strong>True</strong></article><article class="stat"><span>rm_train_pairs</span><strong>1439</strong></article><article class="stat"><span>rm_eval_pairs</span><strong>482</strong></article><article class="stat"><span>rm_ood_pairs</span><strong>524</strong></article><article class="stat"><span>learnability_margin</span><strong>0.0</strong></article><article class="stat"><span>rm_indistribution_rank_acc</span><strong>0.815353</strong></article><article class="stat"><span>rm_indistribution_rank_acc_std</span><strong>0.029046</strong></article><article class="stat"><span>rm_ood_rank_acc</span><strong>0.639949</strong></article><article class="stat"><span>rm_ood_rank_acc_std</span><strong>0.023708</strong></article><article class="stat"><span>rm_learnable</span><strong>True</strong></article><article class="stat"><span>generalizes_off_distribution</span><strong>True</strong></article><article class="stat"><span>task_learned</span><strong>True</strong></article><article class="stat"><span>base_greedy_exact_match</span><strong>0.187023</strong></article><article class="stat"><span>max_n</span><strong>16</strong></article><article class="stat"><span>best_of_n_rerank_at_max</span><strong>0.099237</strong></article><article class="stat"><span>best_of_n_random_at_max</span><strong>0.115299</strong></article><article class="stat"><span>best_of_n_oracle_at_max</span><strong>0.537532</strong></article><article class="stat"><span>best_of_n_helps</span><strong>False</strong></article><article class="stat"><span>best_of_n_degrades</span><strong>False</strong></article></section>
+<section><h2>Rows</h2><table><thead><tr><th>n</th><th>rerank_em_mean</th><th>rerank_em_std</th><th>random_em_mean</th><th>oracle_em_mean</th></tr></thead><tbody><tr><td>1</td><td>0.130407</td><td>0.029214</td><td>0.130407</td><td>0.130407</td></tr><tr><td>4</td><td>0.132316</td><td>0.032461</td><td>0.116571</td><td>0.295802</td></tr><tr><td>8</td><td>0.116412</td><td>0.018205</td><td>0.115299</td><td>0.414758</td></tr><tr><td>16</td><td>0.099237</td><td>0.026512</td><td>0.115299</td><td>0.537532</td></tr></tbody></table></section>
+<section><h2>Recommendations</h2><ul><li>VERDICT (reward_model_learns_best_of_n_no_clear_gain): the reward model ranks held-out IN-DISTRIBUTION pairs (chosen vs confusable-reject) at 0.815 but OFF-DISTRIBUTION (chosen vs random corruption) at 0.640 (chance=0.5; generalizes_off_distribution=True). 3 seeds, gap-minus-combined-std significance.</li><li>REWARD MODEL (reward_model_generalizes_to_off_distribution): Bradley-Terry loss -logσ(r(chosen)-r(rejected)) on a MiniGPT backbone + scalar head. High in-distribution ranking with chance-level OOD ranking means the RM learned the narrow training-reject boundary, NOT general correctness — a shortcut.</li><li>BEST-OF-N (best_of_n_reranking_neutral): reranking a weak base&#x27;s own samples (greedy exact-match 0.187) by the RM gives exact-match 0.099 at N=16 vs a random pick 0.115 and an oracle (any-of-N correct) 0.538. If rerank &lt; random, the brittle RM is actively harmful on the policy&#x27;s OWN (off-distribution) samples — the distributional brittleness behind reward hacking / over-optimization.</li><li>SCOPE: classic RLHF reward modeling on a synthetic deterministic correctness signal with confusable hard-negatives, from-scratch char-level MiniGPT; NOT human preferences / RLHF-at-scale. The oracle column separates &#x27;RM is a bad ranker&#x27; from &#x27;the base&#x27;s samples lack any correct answer&#x27;.</li><li>GATE: status=&#x27;pass&#x27; means the RM was LEARNABLE in-distribution (rank acc 0.815 &gt; 0.5; rm_learnable=True) so the comparison is valid — NOT that the RM is good. The honest finding is whichever data-driven verdict the numbers select.</li></ul></section>
+<footer>Generated by MiniGPT readability maintenance tooling.</footer>
+</body>
+</html>

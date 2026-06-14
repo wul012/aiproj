@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1181-v1169-minigpt-reward-model.md
+ -> v1169 code explanation: reward modeling + best-of-N (the RLHF component DPO skips). MiniGPT backbone + scalar head, Bradley-Terry loss; exposes a new MiniGPT.features(). HH-RLHF is infeasible on a char-level model, so the same controllable synthetic setting is used. Real RTX 4060 (3 seeds): the RM ranks held-out pairs (in-dist 0.82, off-dist random-reject 0.64 > chance) but in best-of-N the oracle climbs to 0.54 while RM rerank ≈ 0.10 ≈ a random pick — it can't rank a policy's own off-distribution samples. The oracle baseline separates "RM is a bad ranker" from "no correct answer in the pool". Reward models are reliable only on-distribution.
+
 1180-v1168-minigpt-dpo-sft-aux.md
  -> v1168 code explanation: NLL-regularized DPO (DPO+SFT-aux), the upside follow-up to v1166. L = L_DPO + λ·SFT_CE_mean(chosen), with the aux computed as train_sft's token-mean CE fused into the SAME single chosen forward as the DPO summed-logp (so λ=0 reproduces vanilla DPO bit-for-bit and λ→∞ converges to SFT-on-chosen). Design panel was session-limited; the feasibility probe was run on the main thread instead. Real RTX 4060 (3 seeds): the aux RECOVERS the generation vanilla DPO destroys (0.14→0.68, Δlogp(chosen) −23→0) but only MATCHES plain SFT-on-chosen — no capability gain from the preference term at this scale. Promotes `significant` into experiment_utils (its second user).
 

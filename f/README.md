@@ -18,6 +18,10 @@ f/<version>/解释/说明.md
 
 ## 当前索引
 
+f/1169/图片
+f/1169/解释/说明.md
+ -> v1169 reward modeling + best-of-N: real RTX 4060 run (3 seeds). The classic RLHF reward model DPO skips — MiniGPT backbone + scalar head, Bradley-Terry loss. It ranks held-out pairs well (in-dist 0.82, off-dist random-reject 0.64 > chance) but in best-of-N the oracle (any-of-N correct) climbs to 0.54 while RM rerank stays ≈0.10 (≈ a random pick) — the answer is in the pool, the RM can't find it among a policy's own (off-distribution) samples. Reward models are reliable only on-distribution. (HH-RLHF is infeasible at char scale; chose RM instead. Adds MiniGPT.features().)
+
 f/1168/图片
 f/1168/解释/说明.md
  -> v1168 DPO+SFT-auxiliary (NLL-regularized DPO): real RTX 4060 run (3 seeds). Adding a chosen-NLL term L = L_DPO + λ·SFT_CE_mean(chosen) RECOVERS the generation vanilla DPO destroys (λ=0 exact-match 0.14 → best λ=1.0 0.68, Δlogp(chosen) −23 → ~0), but only MATCHES plain SFT-on-chosen (0.74) — it does not beat it, and the confusable-suppression edge seen in the tiny probe vanishes at scale. The aux fixes DPO's destructiveness; the preference term adds no capability over plain SFT here (margin ≠ capability). A design panel (session-limited; probe run on the main thread) framed it first.
