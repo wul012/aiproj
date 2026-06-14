@@ -18,6 +18,10 @@ f/<version>/解释/说明.md
 
 ## 当前索引
 
+f/1166/图片
+f/1166/解释/说明.md
+ -> v1166 DPO-lite preference tuning: real RTX 4060 run (3 seeds). From a weak SFT init, the DPO loss grows the chosen-vs-rejected margin ~6x (14->86) but, because it optimizes a RELATIVE margin, log p(chosen) falls (-26.7) and held-out exact-match REGRESSES 0.59->0.10 — while a matched-compute SFT-on-chosen control rises to 0.76 and the reference/KL term shows no measurable effect at this scale. An adversarial design panel falsified the flattering framings before the GPU run. Preference accuracy up != capability up.
+
 f/1165/图片
 f/1165/解释/说明.md
  -> v1165 base->SFT transfer: real RTX 4060 run. Pretraining on {copy,reverse,sort} transfers to a held-out new op (shift-left): at 50 SFT steps pretrained reaches 0.31 vs 0.02 from scratch (~14x), 0.97 vs 0.83 at 1000 — pretraining shifts the SFT curve left (data efficiency). The two-stage recipe, measured.

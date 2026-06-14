@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1178-v1166-minigpt-dpo-preference.md
+ -> v1166 code explanation: DPO-lite preference tuning (the loss), on a synthetic correctness signal with confusable hard-negatives. An adversarial design panel (with a real CPU probe) ran before the GPU experiment and falsified the flattering framings. Real RTX 4060 (3 seeds): from a weak SFT init, DPO grows the chosen-vs-rejected margin ~6x but, because it optimizes a RELATIVE margin, log p(chosen) falls and held-out exact-match REGRESSES 0.59->0.10; a matched-compute (forward-pass axis) SFT-on-chosen control rises to 0.76, and the reference/KL term shows no measurable effect at this scale. The margin (not the near-ceiling preference accuracy) is the faithful "did the objective move" gate. Preference accuracy up != capability up.
+
 1177-v1165-minigpt-sft-pretrain-transfer.md
  -> v1165 code explanation: the real two-stage SFT recipe. Pretrain a base LM on {copy,reverse,sort}, then SFT on a HELD-OUT new op (shift-left) — comparing pretrained-base vs from-scratch across an SFT-budget sweep. Pretraining shifts the SFT curve left (data efficiency): 0.31 vs 0.02 at 50 SFT steps, 0.97 vs 0.83 at 1000. Transfer of shared positional-copy primitives + instruction format, not leakage (the new op was never in pretraining).
 

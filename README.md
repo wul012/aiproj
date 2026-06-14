@@ -15,7 +15,16 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1165.0.0` runs the real two-stage SFT recipe: pretrain a base LM, then fine-tune. It measures pretraining transfer — a base pretrained on {copy,reverse,sort} learns a held-out new op (shift-left) far more data-efficiently than from scratch.
+Version `v1166.0.0` adds DPO-lite preference tuning (the DPO loss) and measures it honestly: from a weak SFT init, DPO grows the chosen-vs-rejected margin but, because it optimizes a *relative* margin, held-out generation regresses — and a matched-compute SFT-on-chosen control wins. An adversarial design panel (with a real CPU probe) falsified the flattering framings before the GPU run.
+
+## Latest v1166 checkpoint
+
+- New alignment-pipeline step after SFT: **DPO-lite preference tuning** — the DPO loss `L = -E[log σ(β·((logp_w−logp_l) − (logp_w^ref − logp_l^ref)))]` on preference triples `(prompt, chosen, rejected)`, where `rejected` is a **confusable** other-op output on the same input. This is DPO-the-loss on a synthetic deterministic *correctness* signal — **not** human preferences / RLHF.
+- Added `src/minigpt/dpo_preference_v1166.py` (`logp_completion` reusing the exact `train_sft` completion mask; `dpo_loss` with a `use_reference` ablation switch; `train_dpo` with a frozen deep-copied reference; `build_confusable_preferences` with a degenerate-pair audit; `run_dpo_preference` comparing **dpo_with_ref / dpo_no_ref / sft_on_chosen / sft_init** across a forward-pass budget sweep). CLI `scripts/run_dpo_preference_v1166.py` dogfoods `script_runtime`.
+- An adversarial design panel (3 skeptic lenses + a real CPU DPO probe, run *before* GPU time, reusing the v1162 pattern) falsified all three naive framings (DPO-improves-generation, DPO-beats-SFT-on-the-negative, reference-term-stabilizes) and located the real phenomenon.
+- Real RTX 4060 run (3 seeds): `status=pass`, `verdict=dpo_raises_margin_but_generation_regresses`. From a weak SFT init (exact-match **0.59**, in the [0.40,0.85] headroom band) DPO grows the held-out margin **14→86** (~6×, pref-acc 0.97→1.00, already near-ceiling) but held-out exact-match **falls 0.59→0.10** with Δlog p(chosen) **−26.7** — DPO optimizes a *relative* margin, so it pushes both log-probs down (rejected faster). The matched-compute (forward-pass axis) **SFT-on-chosen control rises to 0.76**, beating DPO on generation; the **reference/KL term shows no measurable effect at this scale**; severity scales with lr and 1/β. `pass` means the comparison was valid and measurable — **not** that DPO is good.
+- The gate uses **margin-improvability** (robust) rather than the near-ceiling preference accuracy (ranking is far easier than generating, so pref-acc saturates and is nondeterminism-flaky) — preference accuracy up ≠ capability up.
+- Added `tests/test_dpo_preference_v1166.py` (logp == −CE_sum under the same mask; step-0 loss == log 2 and zero relative margin when ref==policy; frozen reference; degenerate-pair drop; report shape; the `pass` iff `task_learned` invariant). Evidence in `f/1166`; code explanation in `代码讲解记录_工程保养阶段/1178-v1166-minigpt-dpo-preference.md`.
 
 ## Latest v1165 checkpoint
 
