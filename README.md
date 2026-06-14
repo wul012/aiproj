@@ -15,7 +15,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1167.0.0` is a contract-preserving maintenance pass (refactor cadence after v1164/v1165/v1166): it extracts the three primitives the multi-seed experiment drivers repeated — `mean_std`, `build_minigpt`, `clone_state` — into a shared `minigpt.experiment_utils`. No capability or report change; existing module tests unchanged and green.
+Version `v1168.0.0` tests the standard fix for DPO's destructiveness (NLL-regularized DPO / DPO+SFT): adding a chosen-NLL term recovers the generation vanilla DPO destroys, but only matches — never beats — plain SFT-on-chosen at this scale. The preference term adds no capability over SFT (margin ≠ capability).
+
+## Latest v1168 checkpoint
+
+- The "upside" follow-up to v1166. Loss `L = L_DPO + λ·SFT_CE_mean(chosen)` (NLL-regularized DPO, a.k.a. DPO+SFT / RPO), on the same synthetic correctness signal with confusable hard-negatives — **not** human preferences / RLHF.
+- Added `src/minigpt/dpo_sft_aux_v1168.py`: `chosen_logp_and_ce` (ONE chosen forward → both the DPO summed-logp and the SFT token-mean CE, same mask — so λ=0 reproduces vanilla DPO bit-for-bit and λ→∞ converges to SFT-on-chosen), `train_dpo_sft(..., sft_aux_lambda)`, `run_dpo_sft_aux` (arms: `sft_init`, `dpo_aux_l{λ}` incl. λ=0, `sft_on_chosen`; λ-sweep at a fixed forward-pass budget). CLI `scripts/run_dpo_sft_aux_v1168.py`. Promoted `significant` into `experiment_utils` (its second user, per the v1167 "extract on the second caller" rule).
+- Design panel hit a session limit mid-run (only the loss-correctness lens finished); the feasibility probe was run **on the main thread** instead — the panel's value is "run code to falsify/calibrate first," not which agent runs it.
+- Real RTX 4060 (3 seeds): `status=pass`, `verdict=dpo_sft_aux_recovers_generation_matches_plain_sft`. Vanilla DPO (λ=0) crashes held-out exact-match 0.51→0.14 (Δlogp(chosen) −23); the chosen-NLL aux **recovers** it — even λ=0.25 rescues to 0.62, best λ=1.0 reaches **0.68** (Δlogp(chosen) healed to ~0) — but it only **matches** the matched-compute SFT-on-chosen control (**0.74**, within combined std) and the probe's confusable-suppression edge **vanishes at scale** (the real init already errs rarely). The aux fixes DPO's destructiveness; the preference term buys no capability over plain SFT here.
+- Added `tests/test_dpo_sft_aux_v1168.py` (fused-forward correctness; the λ=0 ≡ vanilla-DPO bit-for-bit anchor; report shape; `pass` iff `task_learned`). v1166 tests unchanged after the `significant` migration. Evidence in `f/1168`; code explanation in `代码讲解记录_工程保养阶段/1180-v1168-minigpt-dpo-sft-aux.md`.
 
 ## Latest v1167 checkpoint
 

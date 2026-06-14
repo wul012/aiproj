@@ -49,7 +49,7 @@ from dataclasses import dataclass, field
 import torch
 import torch.nn.functional as F
 
-from minigpt.experiment_utils import build_minigpt, clone_state, mean_std
+from minigpt.experiment_utils import build_minigpt, clone_state, mean_std, significant
 from minigpt.model import MiniGPT
 from minigpt.report_utils import utc_now
 from minigpt.sft_corpus import EOS, OPS, SEP
@@ -392,12 +392,6 @@ def _param_l2_delta(state_a: dict, state_b: dict) -> float:
     return total ** 0.5
 
 
-def _significant(mean_a: float, std_a: float, mean_b: float, std_b: float) -> bool:
-    """True iff mean_a exceeds mean_b by more than the combined std (the same
-    conservative gap-minus-combined-std test used in v1164/v1165)."""
-    return (mean_a - mean_b) - (std_a ** 2 + std_b ** 2) ** 0.5 > 0
-
-
 def run_dpo_preference(
     *,
     vocab_size: int,
@@ -591,7 +585,7 @@ def run_dpo_preference(
     wr_pa_max, wr_pa_max_std = ms("dpo_with_ref", max_b, "pref_acc")
     wr_margin_max, wr_margin_max_std = ms("dpo_with_ref", max_b, "mean_margin")
     loss_optimized = (not math.isnan(wr_loss_max)) and (wr_loss_max < LOG2 - 0.05) and (wr_loss_max <= wr_loss_min + 1e-9)
-    margin_improvable = _significant(wr_margin_max, wr_margin_max_std, init_margin_mean, init_margin_std)
+    margin_improvable = significant(wr_margin_max, wr_margin_max_std, init_margin_mean, init_margin_std)
     in_band = config.gate_lower <= init_em_mean <= config.gate_upper
 
     task_learned = bool(in_band and loss_optimized and margin_improvable)
@@ -617,11 +611,11 @@ def run_dpo_preference(
     init_em_std = mean_std(init_metric.get("exact_match", []))[1]
 
     margin_up = margin_improvable
-    em_dpo_up = _significant(wr_em_max, wr_em_max_std, init_em_mean, init_em_std)
-    em_dpo_down = _significant(init_em_mean, init_em_std, wr_em_max, wr_em_max_std)
+    em_dpo_up = significant(wr_em_max, wr_em_max_std, init_em_mean, init_em_std)
+    em_dpo_down = significant(init_em_mean, init_em_std, wr_em_max, wr_em_max_std)
     logp_c_down = wr_dlc_max < -1e-4
-    sft_beats_dpo = _significant(sft_em_max, sft_em_max_std, wr_em_max, wr_em_max_std)
-    dpo_beats_sft = _significant(wr_em_max, wr_em_max_std, sft_em_max, sft_em_max_std)
+    sft_beats_dpo = significant(sft_em_max, sft_em_max_std, wr_em_max, wr_em_max_std)
+    dpo_beats_sft = significant(wr_em_max, wr_em_max_std, sft_em_max, sft_em_max_std)
 
     if status == "pass":
         if not margin_up:
@@ -636,9 +630,9 @@ def run_dpo_preference(
             verdict = "dpo_raises_margin_without_generation_gain"
 
     # secondary: reference term (with-ref vs no-ref at max budget)
-    if _significant(wr_em_max, wr_em_max_std, nr_em_max, nr_em_max_std):
+    if significant(wr_em_max, wr_em_max_std, nr_em_max, nr_em_max_std):
         reference_verdict = "reference_term_stabilizes_dpo"
-    elif _significant(nr_em_max, nr_em_max_std, wr_em_max, wr_em_max_std):
+    elif significant(nr_em_max, nr_em_max_std, wr_em_max, wr_em_max_std):
         reference_verdict = "reference_term_unnecessary_or_harmful_at_this_scale"
     else:
         reference_verdict = "reference_term_no_measurable_effect_at_this_scale"

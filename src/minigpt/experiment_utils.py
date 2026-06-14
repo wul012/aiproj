@@ -56,4 +56,11 @@ def clone_state(model: torch.nn.Module) -> dict[str, torch.Tensor]:
     return {k: v.detach().clone() for k, v in model.state_dict().items()}
 
 
-__all__ = ["mean_std", "build_minigpt", "clone_state"]
+def significant(mean_a: float, std_a: float, mean_b: float, std_b: float) -> bool:
+    """True iff ``mean_a`` exceeds ``mean_b`` by more than the combined std --
+    the conservative gap-minus-combined-std test used across v1164/v1165/v1166
+    (and v1168). Promoted here once it had a second caller."""
+    return (mean_a - mean_b) - (std_a ** 2 + std_b ** 2) ** 0.5 > 0
+
+
+__all__ = ["mean_std", "build_minigpt", "clone_state", "significant"]

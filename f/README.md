@@ -18,6 +18,10 @@ f/<version>/解释/说明.md
 
 ## 当前索引
 
+f/1168/图片
+f/1168/解释/说明.md
+ -> v1168 DPO+SFT-auxiliary (NLL-regularized DPO): real RTX 4060 run (3 seeds). Adding a chosen-NLL term L = L_DPO + λ·SFT_CE_mean(chosen) RECOVERS the generation vanilla DPO destroys (λ=0 exact-match 0.14 → best λ=1.0 0.68, Δlogp(chosen) −23 → ~0), but only MATCHES plain SFT-on-chosen (0.74) — it does not beat it, and the confusable-suppression edge seen in the tiny probe vanishes at scale. The aux fixes DPO's destructiveness; the preference term adds no capability over plain SFT here (margin ≠ capability). A design panel (session-limited; probe run on the main thread) framed it first.
+
 f/1167/图片
 f/1167/解释/说明.md
  -> v1167 experiment_utils dedup: contract-preserving maintenance. Extract the three primitives the SFT/transfer/DPO drivers repeated — mean_std (×3), build_minigpt (×3, incl. inline), clone_state (×2) — into one shared module; migrate v1164/v1165/v1166. _significant stays local to v1166 (single user). Existing module tests unchanged and green = behavior preserved. Evidence is a before/after structure diagram + the green suite.

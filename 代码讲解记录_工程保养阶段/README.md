@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1180-v1168-minigpt-dpo-sft-aux.md
+ -> v1168 code explanation: NLL-regularized DPO (DPO+SFT-aux), the upside follow-up to v1166. L = L_DPO + λ·SFT_CE_mean(chosen), with the aux computed as train_sft's token-mean CE fused into the SAME single chosen forward as the DPO summed-logp (so λ=0 reproduces vanilla DPO bit-for-bit and λ→∞ converges to SFT-on-chosen). Design panel was session-limited; the feasibility probe was run on the main thread instead. Real RTX 4060 (3 seeds): the aux RECOVERS the generation vanilla DPO destroys (0.14→0.68, Δlogp(chosen) −23→0) but only MATCHES plain SFT-on-chosen — no capability gain from the preference term at this scale. Promotes `significant` into experiment_utils (its second user).
+
 1179-v1167-minigpt-experiment-utils-dedup.md
  -> v1167 code explanation: contract-preserving maintenance dedup (refactor cadence after v1164/v1165/v1166). Extract the three primitives the multi-seed experiment drivers repeated — mean_std, build_minigpt, clone_state — into a shared minigpt.experiment_utils; migrate v1164/v1165/v1166. Deliberately leaves _significant local to v1166 (single user) and argues build_minigpt's RNG-identity (same constructor wrapped = identical init weights). Existing module tests unchanged and green = behavior preserved.
 

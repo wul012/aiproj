@@ -6,7 +6,7 @@ from dataclasses import dataclass
 
 import torch
 
-from minigpt.experiment_utils import build_minigpt, clone_state, mean_std
+from minigpt.experiment_utils import build_minigpt, clone_state, mean_std, significant
 from minigpt.model import MiniGPT
 
 
@@ -38,6 +38,19 @@ class MeanStdTests(unittest.TestCase):
         m, s = mean_std([1.0, None, float("nan"), 3.0])
         self.assertAlmostEqual(m, 2.0)  # only 1.0 and 3.0 survive
         self.assertAlmostEqual(s, math.sqrt(2.0))
+
+
+class SignificantTests(unittest.TestCase):
+    def test_clear_gap_is_significant(self) -> None:
+        # gap 0.4 exceeds combined std sqrt(0.01^2+0.02^2)~0.022
+        self.assertTrue(significant(0.9, 0.01, 0.5, 0.02))
+
+    def test_overlapping_within_combined_std_not_significant(self) -> None:
+        self.assertFalse(significant(0.70, 0.10, 0.68, 0.10))
+
+    def test_directional_not_symmetric(self) -> None:
+        self.assertTrue(significant(0.9, 0.01, 0.5, 0.01))
+        self.assertFalse(significant(0.5, 0.01, 0.9, 0.01))
 
 
 class BuildMiniGptTests(unittest.TestCase):
