@@ -1,0 +1,129 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT SFT instruction-following (completion-only loss) v1164",
+  "generated_at": "2026-06-14T00:05:25Z",
+  "status": "pass",
+  "decision": "sft_instruction_following_measured",
+  "summary": {
+    "status": "pass",
+    "decision": "sft_instruction_following_measured",
+    "verdict": "completion_only_helps_early_benefit_shrinks_with_training",
+    "device": "cuda",
+    "seeds": 3,
+    "arms": "completion_only,full_loss",
+    "ops": "C,R,S",
+    "step_schedule": "150,400,800,1500",
+    "n_layer": 4,
+    "n_head": 4,
+    "n_embd": 128,
+    "use_rope": true,
+    "train_example_count": 1362,
+    "heldout_example_count": 453,
+    "learnability_gate": 0.5,
+    "completion_only_copy_accuracy_at_max": 0.754967,
+    "task_learned": true,
+    "min_steps": 150,
+    "max_steps": 1500,
+    "completion_only_overall_at_min": 0.266372,
+    "full_loss_overall_at_min": 0.028698,
+    "masking_gap_at_min": 0.237675,
+    "completion_only_overall_at_max": 0.794702,
+    "completion_only_overall_at_max_std": 0.083097,
+    "full_loss_overall_at_max": 0.77557,
+    "masking_gap_at_max": 0.019132
+  },
+  "rows": [
+    {
+      "arm": "completion_only",
+      "steps": 150,
+      "overall_accuracy_mean": 0.266372,
+      "overall_accuracy_std": 0.100492
+    },
+    {
+      "arm": "completion_only",
+      "steps": 400,
+      "overall_accuracy_mean": 0.514349,
+      "overall_accuracy_std": 0.209469
+    },
+    {
+      "arm": "completion_only",
+      "steps": 800,
+      "overall_accuracy_mean": 0.748344,
+      "overall_accuracy_std": 0.035526
+    },
+    {
+      "arm": "completion_only",
+      "steps": 1500,
+      "overall_accuracy_mean": 0.794702,
+      "overall_accuracy_std": 0.083097
+    },
+    {
+      "arm": "full_loss",
+      "steps": 150,
+      "overall_accuracy_mean": 0.028698,
+      "overall_accuracy_std": 0.023878
+    },
+    {
+      "arm": "full_loss",
+      "steps": 400,
+      "overall_accuracy_mean": 0.278882,
+      "overall_accuracy_std": 0.231002
+    },
+    {
+      "arm": "full_loss",
+      "steps": 800,
+      "overall_accuracy_mean": 0.549669,
+      "overall_accuracy_std": 0.378128
+    },
+    {
+      "arm": "full_loss",
+      "steps": 1500,
+      "overall_accuracy_mean": 0.77557,
+      "overall_accuracy_std": 0.190273
+    }
+  ],
+  "recommendations": [
+    "VERDICT (completion_only_helps_early_benefit_shrinks_with_training): completion-only vs full-sequence-loss exact-match gap is +0.238 at 150 steps and +0.019 at 1500 steps (3 seeds, greedy decode). The masking benefit is largest with little training and shrinks as both arms train longer.",
+    "CAPABILITY: at 1500 steps the completion-only model follows instructions on UNSEEN inputs at 0.795 exact-match (held-out inputs disjoint from training; chance for a length-4 string over 5 symbols is ~0.0016). Per-op at max budget: C=0.75, R=0.80, S=0.83.",
+    "Learnability gate: completion-only SFT reaches 0.755 exact-match on the trivial copy op at 1500 steps (gate 0.5); task_learned=True.",
+    "SFT MECHANIC: loss is computed only over completion tokens (prompt + padding masked with ignore_index=-100). The full_loss arm removes that mask; the masking effect — and its dependence on training budget — is measured across the step sweep, not assumed.",
+    "SCOPE: this isolates the SFT supervision mechanic (instruction formatting + completion-only loss + held-out instruction generalization). It trains from scratch on the instruction data rather than fine-tuning a separately-pretrained base — the right scope to demonstrate the mechanic at this scale."
+  ],
+  "csv_fieldnames": [
+    "arm",
+    "steps",
+    "overall_accuracy_mean",
+    "overall_accuracy_std"
+  ],
+  "accuracy_curves": {
+    "completion_only": {
+      "150": 0.266372,
+      "400": 0.514349,
+      "800": 0.748344,
+      "1500": 0.794702
+    },
+    "full_loss": {
+      "150": 0.028698,
+      "400": 0.278882,
+      "800": 0.549669,
+      "1500": 0.77557
+    }
+  },
+  "per_op_at_max_steps": {
+    "completion_only": {
+      "C": 0.754967,
+      "R": 0.803532,
+      "S": 0.825607
+    },
+    "full_loss": {
+      "C": 0.746137,
+      "R": 0.788079,
+      "S": 0.792494
+    }
+  },
+  "seeds": [
+    1337,
+    1338,
+    1339
+  ]
+}

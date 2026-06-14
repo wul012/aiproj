@@ -15,7 +15,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1163.0.0` is a contract-preserving maintenance dedup: the `choose_device` helper (duplicated 14×) and the seed triple are extracted into a shared `minigpt.script_runtime`, with the 6 capability-pivot scripts migrated. Full suite green; behavior unchanged.
+Version `v1164.0.0` opens a new capability arc: supervised fine-tuning (SFT) for instruction-following. A tiny MiniGPT learns to follow copy/reverse/sort instructions on unseen inputs via completion-only loss masking, and a training-budget sweep honestly shows that masking is a low-compute accelerant whose advantage shrinks with training.
+
+## Latest v1164 checkpoint
+
+- New capability: SFT / instruction-tuning. The model is trained on an instruction dataset (`<op><input>=<output>`) where the op marker (C copy / R reverse / S sort) is the instruction, and must produce the right output for **unseen** inputs. The core SFT mechanic is completion-only loss: prompt + padding are masked with `ignore_index=-100` so the model is supervised to produce the response, not reproduce the instruction.
+- Added `src/minigpt/sft_corpus.py` (instruction dataset, held-out inputs disjoint per op), `src/minigpt/sft_training.py` (`train_sft` — reusable completion-only-masked loop), and `src/minigpt/sft_instruction_v1164.py` (`evaluate_instructions` greedy exact-match per op + the run). CLI `scripts/run_sft_instruction_v1164.py` dogfoods the v1163 `script_runtime` helpers.
+- Real RTX 4060 run (3 seeds): `status=pass`, `verdict=completion_only_helps_early_benefit_shrinks_with_training`. At 1500 steps the model follows instructions on unseen inputs at **0.79** exact-match (chance ~0.0016; per-op C=0.75, R=0.80, S=0.83). The key honest finding comes from a **step sweep**: the completion-only-vs-full-loss advantage is **+0.24 at 150 steps** (0.27 vs 0.03 — a ~9× head start) and **+0.02 by 1500 steps** (0.79 vs 0.78, converged). A single step count would mislead either way; masking is a low-compute accelerant, not a free lunch.
+- Honest process note: this version is a pivot. The queued RoPE-base recall probe honestly hit the feasibility-predicted learnability risk (a tiny from-scratch model couldn't learn the trigger-matching task; the learnability gate caught it and reported `task_not_learned` rather than a misleading null), so it was dropped — no dead code committed — and replaced with SFT.
+- Added `tests/test_sft_corpus.py`, `tests/test_sft_training.py`, `tests/test_sft_instruction_v1164.py` (incl. the `pass` iff `task_learned` invariant). Evidence in `f/1164`; code explanation in `代码讲解记录_工程保养阶段/1176-v1164-minigpt-sft-instruction.md`.
 
 ## Latest v1163 checkpoint
 

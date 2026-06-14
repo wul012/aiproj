@@ -18,6 +18,10 @@ f/<version>/解释/说明.md
 
 ## 当前索引
 
+f/1164/图片
+f/1164/解释/说明.md
+ -> v1164 SFT instruction-following: real RTX 4060 run. The model follows copy/reverse/sort instructions on unseen inputs (0.79 exact-match, chance ~0.0016) via completion-only loss masking; a step sweep shows the masking advantage is a low-compute accelerant (+0.24 at 150 steps → +0.02 at 1500).
+
 f/1163/图片
 f/1163/解释/说明.md
  -> v1163 script_runtime dedup: extract the choose_device helper (14 copies) and the seed triple into one shared module; migrate the 6 capability-pivot scripts. Contract-preserving, full suite 3209 passed. Evidence is a before/after structure diagram + the green test suite.

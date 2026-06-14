@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT SFT instruction-following (completion-only loss) v1164</title>
+<style>
+:root { color-scheme: light; font-family: Arial, "Microsoft YaHei", sans-serif; color: #172026; background: #f6f8fa; }
+body { margin: 0; padding: 24px; }
+header, section, footer { max-width: 1120px; margin: 0 auto 18px; }
+header { padding: 18px 0 8px; border-bottom: 3px solid #2f6f8f; }
+h1 { margin: 0 0 8px; font-size: 28px; letter-spacing: 0; }
+h2 { margin: 0 0 10px; font-size: 18px; letter-spacing: 0; }
+p { margin: 0 0 10px; line-height: 1.5; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; background: transparent; border: 0; padding: 0; }
+.stat { background: #fff; border: 1px solid #d7dee5; border-radius: 8px; padding: 12px; min-height: 64px; }
+.stat span { display: block; color: #5c6b73; font-size: 12px; margin-bottom: 8px; }
+.stat strong { display: block; font-size: 18px; overflow-wrap: anywhere; }
+section { background: #fff; border: 1px solid #d7dee5; border-radius: 8px; padding: 16px; }
+table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+th, td { padding: 9px; border-bottom: 1px solid #e5e9ef; text-align: left; vertical-align: top; overflow-wrap: anywhere; }
+th { background: #eef3f6; }
+ul { margin: 0; padding-left: 20px; }
+li { margin: 6px 0; }
+.muted { color: #687782; }
+footer { color: #687782; font-size: 12px; }
+</style>
+</head>
+<body>
+<header><h1>MiniGPT SFT instruction-following (completion-only loss) v1164</h1><p>Late-stage maintenance report for keeping AI governance artifacts readable.</p></header>
+<section class="stats"><article class="stat"><span>status</span><strong>pass</strong></article><article class="stat"><span>decision</span><strong>sft_instruction_following_measured</strong></article><article class="stat"><span>verdict</span><strong>completion_only_helps_early_benefit_shrinks_with_training</strong></article><article class="stat"><span>device</span><strong>cuda</strong></article><article class="stat"><span>seeds</span><strong>3</strong></article><article class="stat"><span>arms</span><strong>completion_only,full_loss</strong></article><article class="stat"><span>ops</span><strong>C,R,S</strong></article><article class="stat"><span>step_schedule</span><strong>150,400,800,1500</strong></article><article class="stat"><span>n_layer</span><strong>4</strong></article><article class="stat"><span>n_head</span><strong>4</strong></article><article class="stat"><span>n_embd</span><strong>128</strong></article><article class="stat"><span>use_rope</span><strong>True</strong></article><article class="stat"><span>train_example_count</span><strong>1362</strong></article><article class="stat"><span>heldout_example_count</span><strong>453</strong></article><article class="stat"><span>learnability_gate</span><strong>0.5</strong></article><article class="stat"><span>completion_only_copy_accuracy_at_max</span><strong>0.754967</strong></article><article class="stat"><span>task_learned</span><strong>True</strong></article><article class="stat"><span>min_steps</span><strong>150</strong></article><article class="stat"><span>max_steps</span><strong>1500</strong></article><article class="stat"><span>completion_only_overall_at_min</span><strong>0.266372</strong></article><article class="stat"><span>full_loss_overall_at_min</span><strong>0.028698</strong></article><article class="stat"><span>masking_gap_at_min</span><strong>0.237675</strong></article><article class="stat"><span>completion_only_overall_at_max</span><strong>0.794702</strong></article><article class="stat"><span>completion_only_overall_at_max_std</span><strong>0.083097</strong></article><article class="stat"><span>full_loss_overall_at_max</span><strong>0.77557</strong></article><article class="stat"><span>masking_gap_at_max</span><strong>0.019132</strong></article></section>
+<section><h2>Rows</h2><table><thead><tr><th>arm</th><th>steps</th><th>overall_accuracy_mean</th><th>overall_accuracy_std</th></tr></thead><tbody><tr><td>completion_only</td><td>150</td><td>0.266372</td><td>0.100492</td></tr><tr><td>completion_only</td><td>400</td><td>0.514349</td><td>0.209469</td></tr><tr><td>completion_only</td><td>800</td><td>0.748344</td><td>0.035526</td></tr><tr><td>completion_only</td><td>1500</td><td>0.794702</td><td>0.083097</td></tr><tr><td>full_loss</td><td>150</td><td>0.028698</td><td>0.023878</td></tr><tr><td>full_loss</td><td>400</td><td>0.278882</td><td>0.231002</td></tr><tr><td>full_loss</td><td>800</td><td>0.549669</td><td>0.378128</td></tr><tr><td>full_loss</td><td>1500</td><td>0.77557</td><td>0.190273</td></tr></tbody></table></section>
+<section><h2>Recommendations</h2><ul><li>VERDICT (completion_only_helps_early_benefit_shrinks_with_training): completion-only vs full-sequence-loss exact-match gap is +0.238 at 150 steps and +0.019 at 1500 steps (3 seeds, greedy decode). The masking benefit is largest with little training and shrinks as both arms train longer.</li><li>CAPABILITY: at 1500 steps the completion-only model follows instructions on UNSEEN inputs at 0.795 exact-match (held-out inputs disjoint from training; chance for a length-4 string over 5 symbols is ~0.0016). Per-op at max budget: C=0.75, R=0.80, S=0.83.</li><li>Learnability gate: completion-only SFT reaches 0.755 exact-match on the trivial copy op at 1500 steps (gate 0.5); task_learned=True.</li><li>SFT MECHANIC: loss is computed only over completion tokens (prompt + padding masked with ignore_index=-100). The full_loss arm removes that mask; the masking effect — and its dependence on training budget — is measured across the step sweep, not assumed.</li><li>SCOPE: this isolates the SFT supervision mechanic (instruction formatting + completion-only loss + held-out instruction generalization). It trains from scratch on the instruction data rather than fine-tuning a separately-pretrained base — the right scope to demonstrate the mechanic at this scale.</li></ul></section>
+<footer>Generated by MiniGPT readability maintenance tooling.</footer>
+</body>
+</html>

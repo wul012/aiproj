@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1176-v1164-minigpt-sft-instruction.md
+ -> v1164 code explanation: supervised fine-tuning (SFT) for instruction-following on copy/reverse/sort over UNSEEN inputs, with completion-only loss masking. A training-budget sweep honestly shows the masking advantage is large in the low-compute regime (+0.24 at 150 steps) and shrinks to ~0 by 1500 steps — a low-compute accelerant, not a free lunch. Pivot from the dead-ended RoPE-base recall probe (which honestly hit the predicted learnability risk).
+
 1175-v1163-minigpt-script-runtime-dedup.md
  -> v1163 code explanation: contract-preserving maintenance dedup. Extract the choose_device helper (duplicated 14x) and the torch/numpy/random seed triple into a shared minigpt.script_runtime; migrate the 6 capability-pivot scripts (v1156-v1162), leaving the 8 pre-pivot legacy scripts intentionally out of scope. Existing tests unchanged, full suite 3209 passed.
 

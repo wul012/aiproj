@@ -1,0 +1,9 @@
+arm,steps,overall_accuracy_mean,overall_accuracy_std
+completion_only,150,0.266372,0.100492
+completion_only,400,0.514349,0.209469
+completion_only,800,0.748344,0.035526
+completion_only,1500,0.794702,0.083097
+full_loss,150,0.028698,0.023878
+full_loss,400,0.278882,0.231002
+full_loss,800,0.549669,0.378128
+full_loss,1500,0.77557,0.190273
