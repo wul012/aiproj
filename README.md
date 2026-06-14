@@ -15,7 +15,14 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1166.0.0` adds DPO-lite preference tuning (the DPO loss) and measures it honestly: from a weak SFT init, DPO grows the chosen-vs-rejected margin but, because it optimizes a *relative* margin, held-out generation regresses — and a matched-compute SFT-on-chosen control wins. An adversarial design panel (with a real CPU probe) falsified the flattering framings before the GPU run.
+Version `v1167.0.0` is a contract-preserving maintenance pass (refactor cadence after v1164/v1165/v1166): it extracts the three primitives the multi-seed experiment drivers repeated — `mean_std`, `build_minigpt`, `clone_state` — into a shared `minigpt.experiment_utils`. No capability or report change; existing module tests unchanged and green.
+
+## Latest v1167 checkpoint
+
+- Maintenance/dedup (the v1159/v1163 cadence). The SFT (`v1164`), base→SFT transfer (`v1165`), and DPO (`v1166`) experiment drivers each repeated three primitives: aggregate a per-seed list into `(mean, std)`, build a fresh `MiniGPT` from a config, and snapshot weights for a later `load_state_dict`.
+- Added `src/minigpt/experiment_utils.py` (`mean_std` — None/NaN-safe; `build_minigpt(vocab_size, config)` — duck-typed on the shared config fields, returns a CPU model so the RNG stream and init weights are identical to the prior inline construction; `clone_state`). Migrated `sft_instruction_v1164.py`, `sft_pretrain_transfer_v1165.py`, `dpo_preference_v1166.py` to import them; removed the now-unused `statistics`/`GPTConfig` imports.
+- Scope discipline: `_significant` stays local to `dpo_preference_v1166` (single user; v1164/v1165 implement the same gap-minus-combined-std test inline where the gap value is also needed), mirroring v1163's choice to leave ill-fitting code alone.
+- Added `tests/test_experiment_utils.py` (mean_std incl. None/NaN/empty; build_minigpt config + same-seed determinism; clone_state independent copy). Contract preserved — the v1164/v1165/v1166 module tests are unchanged and still pass. Evidence in `f/1167` (before/after structure diagram); code explanation in `代码讲解记录_工程保养阶段/1179-v1167-minigpt-experiment-utils-dedup.md`.
 
 ## Latest v1166 checkpoint
 

@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1179-v1167-minigpt-experiment-utils-dedup.md
+ -> v1167 code explanation: contract-preserving maintenance dedup (refactor cadence after v1164/v1165/v1166). Extract the three primitives the multi-seed experiment drivers repeated — mean_std, build_minigpt, clone_state — into a shared minigpt.experiment_utils; migrate v1164/v1165/v1166. Deliberately leaves _significant local to v1166 (single user) and argues build_minigpt's RNG-identity (same constructor wrapped = identical init weights). Existing module tests unchanged and green = behavior preserved.
+
 1178-v1166-minigpt-dpo-preference.md
  -> v1166 code explanation: DPO-lite preference tuning (the loss), on a synthetic correctness signal with confusable hard-negatives. An adversarial design panel (with a real CPU probe) ran before the GPU experiment and falsified the flattering framings. Real RTX 4060 (3 seeds): from a weak SFT init, DPO grows the chosen-vs-rejected margin ~6x but, because it optimizes a RELATIVE margin, log p(chosen) falls and held-out exact-match REGRESSES 0.59->0.10; a matched-compute (forward-pass axis) SFT-on-chosen control rises to 0.76, and the reference/KL term shows no measurable effect at this scale. The margin (not the near-ceiling preference accuracy) is the faithful "did the objective move" gate. Preference accuracy up != capability up.
 

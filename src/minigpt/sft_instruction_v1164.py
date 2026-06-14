@@ -22,12 +22,12 @@ under real SFT at the largest budget, the run is reported as
 
 from __future__ import annotations
 
-import statistics
 from dataclasses import dataclass
 
 import torch
 
-from minigpt.model import GPTConfig, MiniGPT
+from minigpt.experiment_utils import build_minigpt, mean_std
+from minigpt.model import MiniGPT
 from minigpt.report_utils import utc_now
 from minigpt.sft_training import train_sft
 
@@ -93,13 +93,6 @@ def evaluate_instructions(
     }
 
 
-def _mean_std(values: list[float]) -> tuple[float, float]:
-    clean = [v for v in values if v is not None]
-    if not clean:
-        return float("nan"), 0.0
-    return sum(clean) / len(clean), (statistics.stdev(clean) if len(clean) > 1 else 0.0)
-
-
 def run_sft_instruction(
     *,
     vocab_size: int,
@@ -124,12 +117,7 @@ def run_sft_instruction(
         for steps_n in schedule:
             for seed in config.seeds:
                 torch.manual_seed(seed)
-                model = MiniGPT(
-                    GPTConfig(
-                        vocab_size=vocab_size, block_size=config.block_size, n_layer=config.n_layer,
-                        n_head=config.n_head, n_embd=config.n_embd, dropout=0.0, use_rope=config.use_rope,
-                    )
-                ).to(device)
+                model = build_minigpt(vocab_size, config).to(device)
                 train_sft(model, train_examples, steps=steps_n, lr=config.lr,
                           batch_size=config.batch_size, block_size=config.block_size, device=device,
                           pad_id=pad_id, mask_prompt=mask_prompt)
@@ -145,19 +133,19 @@ def run_sft_instruction(
     for arm in config.arms:
         curves[arm] = {}
         for n in schedule:
-            m, s = _mean_std(overall[arm][n])
+            m, s = mean_std(overall[arm][n])
             rows.append({"arm": arm, "steps": n, "overall_accuracy_mean": round(m, 6), "overall_accuracy_std": round(s, 6)})
             curves[arm][str(n)] = round(m, 6)
-    per_op_at_max = {arm: {op: round(_mean_std(per_op_max[arm][op])[0], 6) for op in ops} for arm in config.arms}
+    per_op_at_max = {arm: {op: round(mean_std(per_op_max[arm][op])[0], 6) for op in ops} for arm in config.arms}
 
     co = "completion_only"
     has_fl = "full_loss" in config.arms
-    copy_mean, _ = _mean_std(per_op_max.get(co, {}).get("C", [])) if "C" in ops else (float("nan"), 0.0)
+    copy_mean, _ = mean_std(per_op_max.get(co, {}).get("C", [])) if "C" in ops else (float("nan"), 0.0)
     task_learned = ("C" in ops) and (copy_mean >= config.learnability_gate)
 
     def _gap(n: int) -> tuple[float, float]:
-        cm, cs = _mean_std(overall[co][n])
-        fm, fs = _mean_std(overall.get("full_loss", {}).get(n, []))
+        cm, cs = mean_std(overall[co][n])
+        fm, fs = mean_std(overall.get("full_loss", {}).get(n, []))
         return cm - fm, (cs ** 2 + fs ** 2) ** 0.5
 
     gap_lo, cstd_lo = _gap(min_steps) if has_fl else (0.0, 0.0)
@@ -179,10 +167,10 @@ def run_sft_instruction(
         else:
             verdict = "masking_no_measurable_effect_at_this_scale"
 
-    co_max_mean, co_max_std = _mean_std(overall[co][max_steps])
-    fl_max_mean, _ = _mean_std(overall.get("full_loss", {}).get(max_steps, []))
-    co_min_mean, _ = _mean_std(overall[co][min_steps])
-    fl_min_mean, _ = _mean_std(overall.get("full_loss", {}).get(min_steps, []))
+    co_max_mean, co_max_std = mean_std(overall[co][max_steps])
+    fl_max_mean, _ = mean_std(overall.get("full_loss", {}).get(max_steps, []))
+    co_min_mean, _ = mean_std(overall[co][min_steps])
+    fl_min_mean, _ = mean_std(overall.get("full_loss", {}).get(min_steps, []))
 
     summary = {
         "status": status,

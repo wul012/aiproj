@@ -44,13 +44,13 @@ So three honest disciplines are baked in here:
 from __future__ import annotations
 
 import math
-import statistics
 from dataclasses import dataclass, field
 
 import torch
 import torch.nn.functional as F
 
-from minigpt.model import GPTConfig, MiniGPT
+from minigpt.experiment_utils import build_minigpt, clone_state, mean_std
+from minigpt.model import MiniGPT
 from minigpt.report_utils import utc_now
 from minigpt.sft_corpus import EOS, OPS, SEP
 from minigpt.sft_instruction_v1164 import evaluate_instructions
@@ -384,32 +384,12 @@ SFT_CONTROL_VERDICTS = {
 }
 
 
-def _build(vocab_size: int, config: DpoPreferenceConfig) -> MiniGPT:
-    return MiniGPT(
-        GPTConfig(
-            vocab_size=vocab_size, block_size=config.block_size, n_layer=config.n_layer,
-            n_head=config.n_head, n_embd=config.n_embd, dropout=0.0, use_rope=config.use_rope,
-        )
-    )
-
-
-def _clone_state(model: MiniGPT) -> dict:
-    return {k: v.detach().clone() for k, v in model.state_dict().items()}
-
-
 def _param_l2_delta(state_a: dict, state_b: dict) -> float:
     total = 0.0
     for key, value in state_a.items():
         diff = value.float() - state_b[key].float()
         total += float((diff * diff).sum().item())
     return total ** 0.5
-
-
-def _mean_std(values: list[float]) -> tuple[float, float]:
-    clean = [v for v in values if v is not None and not (isinstance(v, float) and math.isnan(v))]
-    if not clean:
-        return float("nan"), 0.0
-    return sum(clean) / len(clean), (statistics.stdev(clean) if len(clean) > 1 else 0.0)
 
 
 def _significant(mean_a: float, std_a: float, mean_b: float, std_b: float) -> bool:
@@ -464,17 +444,17 @@ def run_dpo_preference(
             "delta_logp_chosen": pref["mean_logp_chosen"] - init_pref["mean_logp_chosen"],
             "delta_logp_rejected": pref["mean_logp_rejected"] - init_pref["mean_logp_rejected"],
             "confusable_error_rate": conf,
-            "param_l2_delta": _param_l2_delta(_clone_state(model), init_state),
+            "param_l2_delta": _param_l2_delta(clone_state(model), init_state),
             "logp_drift": drift,
         }
 
     for seed in config.seeds:
         torch.manual_seed(seed)
-        init_model = _build(vocab_size, config).to(device)
+        init_model = build_minigpt(vocab_size, config).to(device)
         train_sft(init_model, sft_init_train, steps=config.sft_init_steps, lr=config.sft_init_lr,
                   batch_size=config.batch_size, block_size=config.block_size, device=device,
                   pad_id=pad_id, mask_prompt=True)
-        init_state = _clone_state(init_model)
+        init_state = clone_state(init_model)
         init_pref = evaluate_preference(init_model, eval_triples, pad_id, device=device)
         init_em = evaluate_instructions(init_model, eval_heldout_instructions, eos_id=eos_id,
                                         max_new_tokens=config.max_new_tokens, device=device)["overall_accuracy"]
@@ -493,9 +473,9 @@ def run_dpo_preference(
             dpo_seed = 20_000 + seed * 13 + budget
 
             # dpo_with_ref
-            policy = _build(vocab_size, config).to(device)
+            policy = build_minigpt(vocab_size, config).to(device)
             policy.load_state_dict(init_state)
-            ref = _build(vocab_size, config).to(device)
+            ref = build_minigpt(vocab_size, config).to(device)
             ref.load_state_dict(init_state)
             ref.eval()
             ref.requires_grad_(False)
@@ -508,7 +488,7 @@ def run_dpo_preference(
             _record("dpo_with_ref", budget, "last_loss", last_wr)
 
             # dpo_no_ref (same init, same seeded batch stream; only the loss term differs)
-            policy_nr = _build(vocab_size, config).to(device)
+            policy_nr = build_minigpt(vocab_size, config).to(device)
             policy_nr.load_state_dict(init_state)
             torch.manual_seed(dpo_seed)
             last_nr = train_dpo(policy_nr, None, pref_train_triples, steps=dpo_steps, lr=config.lr,
@@ -519,7 +499,7 @@ def run_dpo_preference(
             _record("dpo_no_ref", budget, "last_loss", last_nr)
 
             # sft_on_chosen (the killer control): more SFT on the positives, matched on forward passes
-            model_s = _build(vocab_size, config).to(device)
+            model_s = build_minigpt(vocab_size, config).to(device)
             model_s.load_state_dict(init_state)
             torch.manual_seed(dpo_seed)
             train_sft(model_s, chosen_only, steps=sft_steps, lr=config.lr,
@@ -534,9 +514,9 @@ def run_dpo_preference(
             grid_steps = max(1, max_b // 2)
             for grid_beta in config.scaling_betas:
                 for grid_lr in config.scaling_lrs:
-                    gp = _build(vocab_size, config).to(device)
+                    gp = build_minigpt(vocab_size, config).to(device)
                     gp.load_state_dict(init_state)
-                    gref = _build(vocab_size, config).to(device)
+                    gref = build_minigpt(vocab_size, config).to(device)
                     gref.load_state_dict(init_state)
                     gref.eval()
                     gref.requires_grad_(False)
@@ -555,25 +535,25 @@ def run_dpo_preference(
 
     # ---- aggregate ----
     def ms(arm: str, budget: int, name: str) -> tuple[float, float]:
-        return _mean_std(metric[arm][budget].get(name, []))
+        return mean_std(metric[arm][budget].get(name, []))
 
     rows: list[dict] = []
     accuracy_curves: dict[str, dict[str, float]] = {a: {} for a in ARMS}
     pref_acc_curves: dict[str, dict[str, float]] = {a: {} for a in ARMS}
 
-    init_em_mean, _ = _mean_std(init_metric.get("exact_match", []))
-    init_pa_mean, init_pa_std = _mean_std(init_metric.get("pref_acc", []))
-    init_lc_mean, _ = _mean_std(init_metric.get("mean_logp_chosen", []))
-    init_lr_mean, _ = _mean_std(init_metric.get("mean_logp_rejected", []))
-    init_margin_mean, init_margin_std = _mean_std(init_metric.get("mean_margin", []))
-    init_conf_mean, _ = _mean_std(init_metric.get("confusable_error_rate", []))
+    init_em_mean, _ = mean_std(init_metric.get("exact_match", []))
+    init_pa_mean, init_pa_std = mean_std(init_metric.get("pref_acc", []))
+    init_lc_mean, _ = mean_std(init_metric.get("mean_logp_chosen", []))
+    init_lr_mean, _ = mean_std(init_metric.get("mean_logp_rejected", []))
+    init_margin_mean, init_margin_std = mean_std(init_metric.get("mean_margin", []))
+    init_conf_mean, _ = mean_std(init_metric.get("confusable_error_rate", []))
     rows.append({
         "arm": "sft_init", "budget_forward_passes": 0, "opt_steps": 0,
         "pref_acc_mean": round(init_pa_mean, 6), "pref_acc_std": round(init_pa_std, 6),
-        "exact_match_mean": round(init_em_mean, 6), "exact_match_std": round(_mean_std(init_metric.get("exact_match", []))[1], 6),
+        "exact_match_mean": round(init_em_mean, 6), "exact_match_std": round(mean_std(init_metric.get("exact_match", []))[1], 6),
         "mean_logp_chosen": round(init_lc_mean, 6), "mean_logp_rejected": round(init_lr_mean, 6),
         "delta_logp_chosen": 0.0, "delta_logp_rejected": 0.0,
-        "mean_margin": round(_mean_std(init_metric.get("mean_margin", []))[0], 6),
+        "mean_margin": round(mean_std(init_metric.get("mean_margin", []))[0], 6),
         "confusable_error_rate": round(init_conf_mean, 6),
         "param_l2_delta": 0.0, "logp_drift": 0.0, "dpo_last_loss": "",
     })
@@ -634,7 +614,7 @@ def run_dpo_preference(
     nr_em_max, nr_em_max_std = ms("dpo_no_ref", max_b, "exact_match")
     sft_em_max, sft_em_max_std = ms("sft_on_chosen", max_b, "exact_match")
     wr_dlc_max, _ = ms("dpo_with_ref", max_b, "delta_logp_chosen")
-    init_em_std = _mean_std(init_metric.get("exact_match", []))[1]
+    init_em_std = mean_std(init_metric.get("exact_match", []))[1]
 
     margin_up = margin_improvable
     em_dpo_up = _significant(wr_em_max, wr_em_max_std, init_em_mean, init_em_std)

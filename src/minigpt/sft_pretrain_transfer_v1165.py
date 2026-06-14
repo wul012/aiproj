@@ -21,13 +21,12 @@ learned rather than as a transfer comparison.
 
 from __future__ import annotations
 
-import statistics
 from dataclasses import dataclass
 
 import torch
 
+from minigpt.experiment_utils import build_minigpt, clone_state, mean_std
 from minigpt.lm_training import train_lm
-from minigpt.model import GPTConfig, MiniGPT
 from minigpt.report_utils import utc_now
 from minigpt.sft_instruction_v1164 import evaluate_instructions
 from minigpt.sft_training import train_sft
@@ -49,22 +48,6 @@ class SftTransferConfig:
     use_rope: bool = True
     max_new_tokens: int = 8
     learnability_gate: float = 0.5  # pretrained arm at max SFT budget must exceed this
-
-
-def _build(vocab_size: int, config: SftTransferConfig) -> MiniGPT:
-    return MiniGPT(
-        GPTConfig(
-            vocab_size=vocab_size, block_size=config.block_size, n_layer=config.n_layer,
-            n_head=config.n_head, n_embd=config.n_embd, dropout=0.0, use_rope=config.use_rope,
-        )
-    )
-
-
-def _mean_std(values: list[float]) -> tuple[float, float]:
-    clean = [v for v in values if v is not None]
-    if not clean:
-        return float("nan"), 0.0
-    return sum(clean) / len(clean), (statistics.stdev(clean) if len(clean) > 1 else 0.0)
 
 
 def run_sft_transfer(
@@ -89,17 +72,17 @@ def run_sft_transfer(
     for seed in config.seeds:
         # Pretrain the base once per seed (full next-token LM on {C,R,S}).
         torch.manual_seed(seed)
-        base = _build(vocab_size, config).to(device)
+        base = build_minigpt(vocab_size, config).to(device)
         train_lm(base, list(base.parameters()), base_train_ids, steps=config.base_steps,
                  lr=config.base_lr, batch_size=config.base_batch_size, block_size=config.block_size, device=device)
-        base_state = {k: v.detach().clone() for k, v in base.state_dict().items()}
+        base_state = clone_state(base)
 
         for budget in schedule:
             # Same SFT-batch sampling stream for both arms at this (seed, budget):
             # the ONLY difference is the initial weights (pretrained vs random).
             sft_seed = 10_000 + seed * 13 + budget
 
-            model_p = _build(vocab_size, config).to(device)
+            model_p = build_minigpt(vocab_size, config).to(device)
             model_p.load_state_dict(base_state)
             torch.manual_seed(sft_seed)
             train_sft(model_p, downstream_train, steps=budget, lr=config.sft_lr,
@@ -111,7 +94,7 @@ def run_sft_transfer(
             )
 
             torch.manual_seed(seed * 7 + 1)
-            model_s = _build(vocab_size, config).to(device)
+            model_s = build_minigpt(vocab_size, config).to(device)
             torch.manual_seed(sft_seed)
             train_sft(model_s, downstream_train, steps=budget, lr=config.sft_lr,
                       batch_size=config.sft_batch_size, block_size=config.block_size, device=device,
@@ -125,17 +108,17 @@ def run_sft_transfer(
     curves: dict[str, dict[str, float]] = {a: {} for a in arms}
     for arm in arms:
         for b in schedule:
-            m, s = _mean_std(acc[arm][b])
+            m, s = mean_std(acc[arm][b])
             rows.append({"arm": arm, "sft_steps": b, "exact_match_mean": round(m, 6), "exact_match_std": round(s, 6)})
             curves[arm][str(b)] = round(m, 6)
 
     min_b, max_b = min(schedule), max(schedule)
-    pre_max_mean, _ = _mean_std(acc["pretrained"][max_b])
+    pre_max_mean, _ = mean_std(acc["pretrained"][max_b])
     task_learned = pre_max_mean >= config.learnability_gate
 
     def _gap(b: int) -> tuple[float, float]:
-        pm, ps = _mean_std(acc["pretrained"][b])
-        sm, ss = _mean_std(acc["scratch"][b])
+        pm, ps = mean_std(acc["pretrained"][b])
+        sm, ss = mean_std(acc["scratch"][b])
         return pm - sm, (ps ** 2 + ss ** 2) ** 0.5
 
     gap_lo, cstd_lo = _gap(min_b)
@@ -155,9 +138,9 @@ def run_sft_transfer(
         else:
             verdict = "no_measurable_transfer_at_this_scale"
 
-    pre_min_mean, _ = _mean_std(acc["pretrained"][min_b])
-    scr_min_mean, _ = _mean_std(acc["scratch"][min_b])
-    scr_max_mean, _ = _mean_std(acc["scratch"][max_b])
+    pre_min_mean, _ = mean_std(acc["pretrained"][min_b])
+    scr_min_mean, _ = mean_std(acc["scratch"][min_b])
+    scr_max_mean, _ = mean_std(acc["scratch"][max_b])
 
     summary = {
         "status": status,

@@ -18,6 +18,10 @@ f/<version>/解释/说明.md
 
 ## 当前索引
 
+f/1167/图片
+f/1167/解释/说明.md
+ -> v1167 experiment_utils dedup: contract-preserving maintenance. Extract the three primitives the SFT/transfer/DPO drivers repeated — mean_std (×3), build_minigpt (×3, incl. inline), clone_state (×2) — into one shared module; migrate v1164/v1165/v1166. _significant stays local to v1166 (single user). Existing module tests unchanged and green = behavior preserved. Evidence is a before/after structure diagram + the green suite.
+
 f/1166/图片
 f/1166/解释/说明.md
  -> v1166 DPO-lite preference tuning: real RTX 4060 run (3 seeds). From a weak SFT init, the DPO loss grows the chosen-vs-rejected margin ~6x (14->86) but, because it optimizes a RELATIVE margin, log p(chosen) falls (-26.7) and held-out exact-match REGRESSES 0.59->0.10 — while a matched-compute SFT-on-chosen control rises to 0.76 and the reference/KL term shows no measurable effect at this scale. An adversarial design panel falsified the flattering framings before the GPU run. Preference accuracy up != capability up.
