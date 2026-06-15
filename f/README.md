@@ -18,6 +18,10 @@ f/<version>/解释/说明.md
 
 ## 当前索引
 
+f/1170/图片
+f/1170/解释/说明.md
+ -> v1170 speculative decoding: real RTX 4060 run (3 seeds). Resumes the v1161 inference-efficiency thread — a small draft proposes K tokens, the target verifies them in ONE (K+1)-wide forward, an accept/reject rule keeps the output distributed exactly as target-only decoding. Correctness is VERIFIED on four clauses (verify logits == full forward 1.96e-05 < 1e-4; greedy completions 3600/3600 identical; sampling TV within the noise floor; accept-rule consistent), and acceptance α is graded by draft quality (0.58→0.88→1.0). But the PRIMARY FLOPs-honest metric shows spec processes 1.28× the target positions (a (K+1)-wide verify pays K+1 positions/block regardless of acceptance), total forwards/token ≈2.1 (a tiny draft is NOT free), and wall-clock is 0.55× — SLOWER. At char-toy scale, far below GPU saturation, no wall-clock win is the expected honest result. A design panel re-keyed the gate off greedy-bitwise-identity (unsound: argmax ties) onto the logit invariant before the GPU run.
+
 f/1169/图片
 f/1169/解释/说明.md
  -> v1169 reward modeling + best-of-N: real RTX 4060 run (3 seeds). The classic RLHF reward model DPO skips — MiniGPT backbone + scalar head, Bradley-Terry loss. It ranks held-out pairs well (in-dist 0.82, off-dist random-reject 0.64 > chance) but in best-of-N the oracle (any-of-N correct) climbs to 0.54 while RM rerank stays ≈0.10 (≈ a random pick) — the answer is in the pool, the RM can't find it among a policy's own (off-distribution) samples. Reward models are reliable only on-distribution. (HH-RLHF is infeasible at char scale; chose RM instead. Adds MiniGPT.features().)
