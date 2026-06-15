@@ -1,0 +1,323 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT knowledge distillation v1172",
+  "generated_at": "2026-06-15T09:39:55Z",
+  "status": "pass",
+  "decision": "distillation_measured",
+  "summary": {
+    "status": "pass",
+    "decision": "distillation_measured",
+    "verdict": "no_distill_benefit",
+    "device": "cuda",
+    "seeds": 5,
+    "ops": "C,R,S,L",
+    "teacher_size": "4L/64",
+    "teacher_params": 201920,
+    "teacher_exact_match": 0.858333,
+    "teacher_mean_maxprob": 0.989019,
+    "teacher_mean_entropy_nats": 0.03663,
+    "dark_knowledge_absent": true,
+    "label_smoothing_eps": 0.011896,
+    "capable_size": "2L/32",
+    "scratch_train_em_floored_size": 0.05,
+    "task_learned": true,
+    "heldout_prompts": 360,
+    "scratch_hard_em": 0.772778,
+    "label_smooth_em": 0.782778,
+    "shuffled_teacher_em": 0.761111,
+    "distill_tau1_hw0_em": 0.756667,
+    "distill_tau2_hw0_em": 0.803333,
+    "scratch_long_em": 0.948889,
+    "scratch_long_steps": 2485,
+    "distill_gap_fraction_vs_scratch": -0.1883,
+    "flag_beats_scratch": false,
+    "flag_beats_label_smooth": false,
+    "flag_beats_shuffled_teacher": false,
+    "flag_dark_knowledge_absent": false,
+    "flag_scratch_long_catches_up": true
+  },
+  "rows": [
+    {
+      "size": "1L/16",
+      "n_layer": 1,
+      "n_embd": 16,
+      "params": 3776,
+      "arm": "scratch_hard",
+      "steps": 700,
+      "em_mean": 0.122222,
+      "em_std": 0.040158,
+      "delta_vs_scratch": 0.0
+    },
+    {
+      "size": "1L/16",
+      "n_layer": 1,
+      "n_embd": 16,
+      "params": 3776,
+      "arm": "label_smooth",
+      "steps": 700,
+      "em_mean": 0.100556,
+      "em_std": 0.054659,
+      "delta_vs_scratch": -0.021667
+    },
+    {
+      "size": "1L/16",
+      "n_layer": 1,
+      "n_embd": 16,
+      "params": 3776,
+      "arm": "distill_tau1_hw0",
+      "steps": 700,
+      "em_mean": 0.116111,
+      "em_std": 0.049355,
+      "delta_vs_scratch": -0.006111
+    },
+    {
+      "size": "2L/24",
+      "n_layer": 2,
+      "n_embd": 24,
+      "params": 15192,
+      "arm": "scratch_hard",
+      "steps": 700,
+      "em_mean": 0.806111,
+      "em_std": 0.073372,
+      "delta_vs_scratch": 0.0
+    },
+    {
+      "size": "2L/24",
+      "n_layer": 2,
+      "n_embd": 24,
+      "params": 15192,
+      "arm": "label_smooth",
+      "steps": 700,
+      "em_mean": 0.831667,
+      "em_std": 0.030149,
+      "delta_vs_scratch": 0.025556
+    },
+    {
+      "size": "2L/24",
+      "n_layer": 2,
+      "n_embd": 24,
+      "params": 15192,
+      "arm": "distill_tau1_hw0",
+      "steps": 700,
+      "em_mean": 0.730556,
+      "em_std": 0.086736,
+      "delta_vs_scratch": -0.075556
+    },
+    {
+      "size": "2L/32",
+      "n_layer": 2,
+      "n_embd": 32,
+      "params": 26400,
+      "arm": "scratch_hard",
+      "steps": 700,
+      "em_mean": 0.772778,
+      "em_std": 0.111118,
+      "delta_vs_scratch": 0.0
+    },
+    {
+      "size": "2L/32",
+      "n_layer": 2,
+      "n_embd": 32,
+      "params": 26400,
+      "arm": "label_smooth",
+      "steps": 700,
+      "em_mean": 0.782778,
+      "em_std": 0.077912,
+      "delta_vs_scratch": 0.01
+    },
+    {
+      "size": "2L/32",
+      "n_layer": 2,
+      "n_embd": 32,
+      "params": 26400,
+      "arm": "shuffled_teacher",
+      "steps": 700,
+      "em_mean": 0.761111,
+      "em_std": 0.032691,
+      "delta_vs_scratch": -0.011667
+    },
+    {
+      "size": "2L/32",
+      "n_layer": 2,
+      "n_embd": 32,
+      "params": 26400,
+      "arm": "distill_tau1_hw0",
+      "steps": 700,
+      "em_mean": 0.756667,
+      "em_std": 0.101162,
+      "delta_vs_scratch": -0.016111
+    },
+    {
+      "size": "2L/32",
+      "n_layer": 2,
+      "n_embd": 32,
+      "params": 26400,
+      "arm": "distill_tau1_hw05",
+      "steps": 700,
+      "em_mean": 0.836111,
+      "em_std": 0.043033,
+      "delta_vs_scratch": 0.063333
+    },
+    {
+      "size": "2L/32",
+      "n_layer": 2,
+      "n_embd": 32,
+      "params": 26400,
+      "arm": "distill_tau2_hw0",
+      "steps": 700,
+      "em_mean": 0.803333,
+      "em_std": 0.056465,
+      "delta_vs_scratch": 0.030556
+    },
+    {
+      "size": "2L/32",
+      "n_layer": 2,
+      "n_embd": 32,
+      "params": 26400,
+      "arm": "distill_tau2_hw05",
+      "steps": 700,
+      "em_mean": 0.787778,
+      "em_std": 0.142571,
+      "delta_vs_scratch": 0.015
+    },
+    {
+      "size": "2L/32",
+      "n_layer": 2,
+      "n_embd": 32,
+      "params": 26400,
+      "arm": "scratch_long",
+      "steps": 2485,
+      "em_mean": 0.948889,
+      "em_std": 0.033483,
+      "delta_vs_scratch": 0.176111
+    },
+    {
+      "size": "3L/48",
+      "n_layer": 3,
+      "n_embd": 48,
+      "params": 86304,
+      "arm": "scratch_hard",
+      "steps": 700,
+      "em_mean": 0.876667,
+      "em_std": 0.063422,
+      "delta_vs_scratch": 0.0
+    },
+    {
+      "size": "3L/48",
+      "n_layer": 3,
+      "n_embd": 48,
+      "params": 86304,
+      "arm": "label_smooth",
+      "steps": 700,
+      "em_mean": 0.872778,
+      "em_std": 0.095104,
+      "delta_vs_scratch": -0.003889
+    },
+    {
+      "size": "3L/48",
+      "n_layer": 3,
+      "n_embd": 48,
+      "params": 86304,
+      "arm": "distill_tau1_hw0",
+      "steps": 700,
+      "em_mean": 0.792222,
+      "em_std": 0.073922,
+      "delta_vs_scratch": -0.084444
+    },
+    {
+      "size": "4L/64",
+      "n_layer": 4,
+      "n_embd": 64,
+      "params": 201920,
+      "arm": "scratch_hard",
+      "steps": 700,
+      "em_mean": 0.867222,
+      "em_std": 0.039645,
+      "delta_vs_scratch": 0.0
+    },
+    {
+      "size": "4L/64",
+      "n_layer": 4,
+      "n_embd": 64,
+      "params": 201920,
+      "arm": "label_smooth",
+      "steps": 700,
+      "em_mean": 0.822222,
+      "em_std": 0.052374,
+      "delta_vs_scratch": -0.045
+    },
+    {
+      "size": "4L/64",
+      "n_layer": 4,
+      "n_embd": 64,
+      "params": 201920,
+      "arm": "distill_tau1_hw0",
+      "steps": 700,
+      "em_mean": 0.811111,
+      "em_std": 0.084277,
+      "delta_vs_scratch": -0.056111
+    }
+  ],
+  "recommendations": [
+    "VERDICT (no_distill_benefit): on a DETERMINISTIC task the teacher (4L/64, held-out EM 0.858) is near-one-hot (mean max-prob 0.989, entropy 0.037 nats), so dark knowledge cannot exist by construction — this measures the LOGIT-MATCHING face of distillation. status='pass' certifies the comparison was validly measured (teacher learnable, scratch off the floor, real headroom, controls ran), NOT that distillation is good.",
+    "PRIMARY CONTRAST at 2L/32 (5 independent-init seeds): distill_tau1_hw0 0.757 vs scratch_hard 0.773 (beats=False), vs label_smooth 0.783 (beats=False), vs shuffled_teacher 0.761 (beats=False). The teacher-specific verdict requires beating BOTH controls; otherwise the gain is generic soft-target regularization.",
+    "DARK KNOWLEDGE: absent by construction (teacher max-prob 0.989); tau=1 (no softening) is the faithful target. tau is a COUPLED knob (temperature x effective step size via the tau^2 KL scaling), NOT an isolated cause — do not read 'higher tau worse' as clean causation.",
+    "COMPUTE FRAMING: results at matched STUDENT STEPS (700) treat the teacher forward as free amortized supervision; scratch_long re-runs scratch at matched-FLOPs (2485 steps). A capability claim is honest only if it survives matched-FLOPs OR is explicitly scoped to the teacher-amortized regime.",
+    "CAPACITY: the Δ(distill−scratch) curve tracks the scratch→teacher headroom (peaks at intermediate capacity). The smallest size is an OPTIMIZATION/learnability FLOOR (train-EM 0.05) — below it neither arm clears chance, so its negative deltas are NOT 'distillation hurts'. SCOPE: dark-knowledge transfer needs an ambiguous/multi-answer task, out of scope at char-toy scale."
+  ],
+  "csv_fieldnames": [
+    "size",
+    "n_layer",
+    "n_embd",
+    "params",
+    "arm",
+    "steps",
+    "em_mean",
+    "em_std",
+    "delta_vs_scratch"
+  ],
+  "capacity_curve": {
+    "1L/16": {
+      "scratch_em": 0.1222,
+      "distill_tau1_em": 0.1161,
+      "scratch_to_teacher_gap": 0.7361,
+      "delta_distill_minus_scratch": -0.0061,
+      "descriptor": "valid"
+    },
+    "2L/24": {
+      "scratch_em": 0.8061,
+      "distill_tau1_em": 0.7306,
+      "scratch_to_teacher_gap": 0.0522,
+      "delta_distill_minus_scratch": -0.0756,
+      "descriptor": "valid"
+    },
+    "2L/32": {
+      "scratch_em": 0.7728,
+      "distill_tau1_em": 0.7567,
+      "scratch_to_teacher_gap": 0.0856,
+      "delta_distill_minus_scratch": -0.0161,
+      "descriptor": "valid"
+    },
+    "3L/48": {
+      "scratch_em": 0.8767,
+      "distill_tau1_em": 0.7922,
+      "scratch_to_teacher_gap": -0.0183,
+      "delta_distill_minus_scratch": -0.0844,
+      "descriptor": "saturated"
+    },
+    "4L/64": {
+      "scratch_em": 0.8672,
+      "distill_tau1_em": 0.8111,
+      "scratch_to_teacher_gap": -0.0089,
+      "delta_distill_minus_scratch": -0.0561,
+      "descriptor": "saturated"
+    }
+  },
+  "seeds": [
+    1337,
+    1338,
+    1339,
+    1340,
+    1341
+  ]
+}
