@@ -120,6 +120,7 @@ def train_student(
     hard_weight: float = 1.0,
     label_smoothing: float = 0.0,
     shuffle_perm: torch.Tensor | None = None,
+    teacher_probs_fn=None,
 ) -> float:
     """Train ``student`` under one arm's objective; returns the last batch loss.
     ``loss_mode="ce"`` is hard-label SFT (optionally label-smoothed) — identical
@@ -142,10 +143,13 @@ def train_student(
                                    ignore_index=IGNORE_INDEX, label_smoothing=label_smoothing)
         else:
             with torch.no_grad():
-                zT, _ = teacher(x)
-                p_T = F.softmax(zT / tau, dim=-1)
-                if shuffle_perm is not None:
-                    p_T = shuffle_residual_mass(p_T, shuffle_perm)
+                if teacher_probs_fn is not None:        # v1173 oracle: inject an arbitrary soft target
+                    p_T = teacher_probs_fn(x)
+                else:
+                    zT, _ = teacher(x)
+                    p_T = F.softmax(zT / tau, dim=-1)
+                    if shuffle_perm is not None:
+                        p_T = shuffle_residual_mass(p_T, shuffle_perm)
             mask = (y != IGNORE_INDEX)
             kl = kl_term(zS, p_T, mask, tau)
             ce = F.cross_entropy(zS.reshape(-1, V), y.reshape(-1), ignore_index=IGNORE_INDEX)
