@@ -18,6 +18,10 @@ f/<version>/解释/说明.md
 
 ## 当前索引
 
+f/1171/图片
+f/1171/解释/说明.md
+ -> v1171 maintenance dedup: extract the single-corpus script setup (build corpus → train tokenizer → pad/eos → block-size floor), repeated byte-identically in 5 of 6 run-scripts, into minigpt.script_setup.setup_single_corpus; migrate v1164/v1166/v1168/v1169/v1170 (v1165 dual-corpus left in place). Contract-preserving (RNG-free helper, module signatures untouched → existing tests unchanged & green); adds a regression guard test. Evidence is a before/after structure diagram + the declined-priorities verdict. Crucially, the user's proposed "large" relocations were JUDGED and DECLINED on verified facts (src/minigpt=1226 .py not 2467; tests=665 not 1336; model.py=346 lines; a sampled legacy module is imported by 237 files): archiving/renaming/re-layering 1000+ legacy files would break imports at collection, violate the freeze rule, and erase git/forensic history. The "large" maintenance is in the judgment, not the churn.
+
 f/1170/图片
 f/1170/解释/说明.md
  -> v1170 speculative decoding: real RTX 4060 run (3 seeds). Resumes the v1161 inference-efficiency thread — a small draft proposes K tokens, the target verifies them in ONE (K+1)-wide forward, an accept/reject rule keeps the output distributed exactly as target-only decoding. Correctness is VERIFIED on four clauses (verify logits == full forward 1.96e-05 < 1e-4; greedy completions 3600/3600 identical; sampling TV within the noise floor; accept-rule consistent), and acceptance α is graded by draft quality (0.58→0.88→1.0). But the PRIMARY FLOPs-honest metric shows spec processes 1.28× the target positions (a (K+1)-wide verify pays K+1 positions/block regardless of acceptance), total forwards/token ≈2.1 (a tiny draft is NOT free), and wall-clock is 0.55× — SLOWER. At char-toy scale, far below GPU saturation, no wall-clock win is the expected honest result. A design panel re-keyed the gate off greedy-bitwise-identity (unsound: argmax ties) onto the logit invariant before the GPU run.

@@ -23,9 +23,8 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from minigpt.readability_report_artifacts import render_readability_text, write_readability_outputs  # noqa: E402
 from minigpt.script_runtime import choose_device, seed_everything  # noqa: E402
-from minigpt.sft_corpus import EOS, PAD, build_sft_corpus  # noqa: E402
+from minigpt.script_setup import setup_single_corpus  # noqa: E402
 from minigpt.sft_instruction_v1164 import SftInstructionConfig, run_sft_instruction  # noqa: E402
-from minigpt.tokenizer import CharTokenizer  # noqa: E402
 
 STEM = "sft_instruction_v1164"
 
@@ -56,18 +55,13 @@ def main(argv: Sequence[str] | None = None) -> None:
     seed_everything(args.corpus_seed)
     device = choose_device(args.device)
 
-    corpus = build_sft_corpus(
+    corpus, tokenizer, pad_id, eos_id, block_size = setup_single_corpus(
         seed=args.corpus_seed, ops=tuple(args.ops), lengths=tuple(args.lengths),
         inputs_per_op_length=args.inputs_per_op_length, heldout_ratio=args.heldout_ratio,
     )
-    tokenizer = CharTokenizer.train("".join(e.text for e in corpus.train + corpus.heldout) + corpus.alphabet)
-    pad_id = tokenizer.encode(PAD)[0]
-    eos_id = tokenizer.encode(EOS)[0]
-
     train_examples = [(tokenizer.encode(e.text), len(e.prompt)) for e in corpus.train]
     heldout = [(tokenizer.encode(e.prompt), tokenizer.encode(e.expected_output), e.op) for e in corpus.heldout]
     stats = corpus.stats()
-    block_size = max(16, corpus.max_text_len)
     max_new_tokens = max(args.lengths) + 2
     print(
         f"device={device} vocab={tokenizer.vocab_size} train={len(train_examples)} "

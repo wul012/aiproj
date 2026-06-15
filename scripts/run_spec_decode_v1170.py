@@ -23,9 +23,8 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from minigpt.readability_report_artifacts import render_readability_text, write_readability_outputs  # noqa: E402
 from minigpt.script_runtime import choose_device, seed_everything  # noqa: E402
-from minigpt.sft_corpus import EOS, PAD, build_sft_corpus  # noqa: E402
+from minigpt.script_setup import setup_single_corpus  # noqa: E402
 from minigpt.spec_decode_v1170 import SpecDecodeConfig, run_spec_decode  # noqa: E402
-from minigpt.tokenizer import CharTokenizer  # noqa: E402
 
 STEM = "spec_decode_v1170"
 
@@ -60,15 +59,11 @@ def main(argv: Sequence[str] | None = None) -> None:
     device = choose_device(args.device)
 
     ops = tuple(args.ops)
-    corpus = build_sft_corpus(seed=args.corpus_seed, ops=ops, lengths=tuple(args.lengths),
-                              inputs_per_op_length=args.inputs_per_op_length, heldout_ratio=args.heldout_ratio)
-    tokenizer = CharTokenizer.train("".join(e.text for e in corpus.train + corpus.heldout) + corpus.alphabet)
-    pad_id = tokenizer.encode(PAD)[0]
-    eos_id = tokenizer.encode(EOS)[0]
-
+    corpus, tokenizer, pad_id, eos_id, block_size = setup_single_corpus(
+        seed=args.corpus_seed, ops=ops, lengths=tuple(args.lengths),
+        inputs_per_op_length=args.inputs_per_op_length, heldout_ratio=args.heldout_ratio)
     base_train = [(tokenizer.encode(e.text), len(e.prompt)) for e in corpus.train]
     heldout_instructions = [(tokenizer.encode(e.prompt), tokenizer.encode(e.expected_output), e.op) for e in corpus.heldout]
-    block_size = max(16, corpus.max_text_len)
     max_new_tokens = max(args.lengths) + 2
 
     print(

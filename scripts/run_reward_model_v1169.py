@@ -23,8 +23,8 @@ from minigpt.dpo_preference_v1166 import build_confusable_preferences  # noqa: E
 from minigpt.readability_report_artifacts import render_readability_text, write_readability_outputs  # noqa: E402
 from minigpt.reward_model_v1169 import RewardModelConfig, run_reward_model  # noqa: E402
 from minigpt.script_runtime import choose_device, seed_everything  # noqa: E402
-from minigpt.sft_corpus import EOS, INPUT_ALPHABET, PAD, build_sft_corpus  # noqa: E402
-from minigpt.tokenizer import CharTokenizer  # noqa: E402
+from minigpt.script_setup import setup_single_corpus  # noqa: E402
+from minigpt.sft_corpus import EOS, INPUT_ALPHABET  # noqa: E402
 
 STEM = "reward_model_v1169"
 
@@ -56,14 +56,11 @@ def main(argv: Sequence[str] | None = None) -> None:
     device = choose_device(args.device)
 
     ops = tuple(args.ops)
-    corpus = build_sft_corpus(seed=args.corpus_seed, ops=ops, lengths=tuple(args.lengths),
-                              inputs_per_op_length=args.inputs_per_op_length, heldout_ratio=args.heldout_ratio)
+    corpus, tokenizer, pad_id, eos_id, block_size = setup_single_corpus(
+        seed=args.corpus_seed, ops=ops, lengths=tuple(args.lengths),
+        inputs_per_op_length=args.inputs_per_op_length, heldout_ratio=args.heldout_ratio)
     tr_pairs, _ = build_confusable_preferences(corpus.train, ops)
     ev_pairs, _ = build_confusable_preferences(corpus.heldout, ops)
-
-    tokenizer = CharTokenizer.train("".join(e.text for e in corpus.train + corpus.heldout) + corpus.alphabet)
-    pad_id = tokenizer.encode(PAD)[0]
-    eos_id = tokenizer.encode(EOS)[0]
 
     rm_train_pairs = [(tokenizer.encode(p.chosen_text), tokenizer.encode(p.rejected_text)) for p in tr_pairs]
     rm_eval_pairs = [(tokenizer.encode(p.chosen_text), tokenizer.encode(p.rejected_text)) for p in ev_pairs]
@@ -81,7 +78,6 @@ def main(argv: Sequence[str] | None = None) -> None:
     base_train = [(tokenizer.encode(e.text), len(e.prompt)) for e in corpus.train]
     heldout_instructions = [(tokenizer.encode(e.prompt), tokenizer.encode(e.expected_output), e.op) for e in corpus.heldout]
 
-    block_size = max(16, corpus.max_text_len)
     corpus_stats = {
         "rm_train_pairs": len(rm_train_pairs),
         "rm_eval_pairs": len(rm_eval_pairs),

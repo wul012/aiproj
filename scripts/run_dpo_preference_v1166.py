@@ -26,8 +26,7 @@ from minigpt.dpo_preference_v1166 import (  # noqa: E402
 )
 from minigpt.readability_report_artifacts import render_readability_text, write_readability_outputs  # noqa: E402
 from minigpt.script_runtime import choose_device, seed_everything  # noqa: E402
-from minigpt.sft_corpus import EOS, PAD, build_sft_corpus  # noqa: E402
-from minigpt.tokenizer import CharTokenizer  # noqa: E402
+from minigpt.script_setup import setup_single_corpus  # noqa: E402
 
 STEM = "dpo_preference_v1166"
 
@@ -61,15 +60,12 @@ def main(argv: Sequence[str] | None = None) -> None:
     device = choose_device(args.device)
 
     ops = tuple(args.ops)
-    corpus = build_sft_corpus(seed=args.corpus_seed, ops=ops, lengths=tuple(args.lengths),
-                              inputs_per_op_length=args.inputs_per_op_length, heldout_ratio=args.heldout_ratio)
+    corpus, tokenizer, pad_id, eos_id, block_size = setup_single_corpus(
+        seed=args.corpus_seed, ops=ops, lengths=tuple(args.lengths),
+        inputs_per_op_length=args.inputs_per_op_length, heldout_ratio=args.heldout_ratio)
 
     train_pairs, dropped_train = build_confusable_preferences(corpus.train, ops)
     eval_pairs, dropped_eval = build_confusable_preferences(corpus.heldout, ops)
-
-    tokenizer = CharTokenizer.train("".join(e.text for e in corpus.train + corpus.heldout) + corpus.alphabet)
-    pad_id = tokenizer.encode(PAD)[0]
-    eos_id = tokenizer.encode(EOS)[0]
 
     def triple(pair):
         return (tokenizer.encode(pair.chosen_text), pair.n_prompt, tokenizer.encode(pair.rejected_text), pair.n_prompt)
@@ -83,7 +79,6 @@ def main(argv: Sequence[str] | None = None) -> None:
     ]
     sft_init_train = [(tokenizer.encode(e.text), len(e.prompt)) for e in corpus.train]
 
-    block_size = max(16, corpus.max_text_len)
     corpus_stats = {
         "pref_train_pairs": len(pref_train_triples),
         "pref_eval_pairs": len(eval_triples),
