@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <title>v1174 distillation common helper dedup</title>
+  <style>
+    body { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; margin: 40px; color: #17202a; background: #f7f7f5; }
+    main { max-width: 980px; margin: 0 auto; background: #fff; border: 1px solid #d8d5cc; padding: 32px; border-radius: 8px; }
+    h1 { margin-top: 0; font-size: 30px; }
+    h2 { margin-top: 28px; font-size: 20px; }
+    code { background: #f0eee7; padding: 2px 5px; border-radius: 4px; }
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 18px 0; }
+    .card { border: 1px solid #ddd8cc; border-radius: 6px; padding: 14px; background: #faf9f5; }
+    .status { color: #0f7a3a; font-weight: 700; }
+    ul { line-height: 1.65; }
+  </style>
+</head>
+<body>
+<main>
+  <h1>v1174 distillation common helper dedup</h1>
+  <p><span class="status">status=pass</span> · contract-preserving maintenance · no model-quality claim changed</p>
+  <div class="grid">
+    <section class="card"><strong>新增</strong><br><code>src/minigpt/distill_common.py</code></section>
+    <section class="card"><strong>迁移</strong><br><code>distill_v1172</code> / <code>distill_v1173</code></section>
+    <section class="card"><strong>测试</strong><br><code>35 passed</code></section>
+  </div>
+  <h2>为什么做</h2>
+  <p>v1173 原先从 v1172 直接复用 KD loss、completion mask、residual shuffle 和 student training helper。这样虽然能跑，但会让后续蒸馏实验依赖一个历史实验模块，容易在新增功能时回改旧版本文件。</p>
+  <h2>做了什么</h2>
+  <ul>
+    <li><code>distill_common</code> 统一承载 <code>_build_xy</code>、<code>kl_term</code>、<code>shuffle_residual_mass</code>、<code>train_student</code>、<code>teacher_logit_stats</code>、<code>make_distill_model</code>。</li>
+    <li>v1172 保留旧导出，已有显式导入合同不变。</li>
+    <li>v1173 改为直接依赖 common，后续 v1175+ 蒸馏实验有稳定复用层。</li>
+  </ul>
+  <h2>验证</h2>
+  <p><code>py_compile</code> 覆盖新增/修改模块与测试；蒸馏 focused suite 返回 <code>35 passed</code>。</p>
+</main>
+</body>
+</html>

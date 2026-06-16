@@ -15,7 +15,13 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1173.0.0` is the mirror of v1172: distillation under **aleatoric uncertainty**, where dark knowledge is made *real*. Each context maps to a known multi-modal `P_true` (Dirichlet, entropy swept), so the teacher's distribution is genuinely soft (entropy 1.16 ≈ true 1.13) — unlike v1172's near-one-hot deterministic teacher. Metric = exact `KL(P_true‖P_student)` at the single stochastic position. Real RTX 4060 (5 seeds, K=32): `verdict=dark_knowledge_is_data_efficiency_under_uncertainty`. Soft distillation reaches the teacher ceiling (KL **0.050** ≈ teacher 0.041) while hard-label from one sample is **4.48**; the **dark-knowledge term** (teacher-argmax-hard 3.52 − soft 0.05 = **3.47**) dwarfs the data-efficiency term (0.96) and **grows with entropy** (slope lb 3.05 > 0). But it's not magic: `scratch_many` at the teacher's own 400 samples/ctx recovers P (KL 0.047 ≈ soft) — the benefit is data-efficiency under uncertainty. shuffled_teacher HURTS (2.42), the mirror of v1172 where it was inert.
+Version `v1174.0.0` is a contract-preserving distillation maintenance release. It extracts the shared KD primitives used by v1172 deterministic distillation and v1173 stochastic dark-knowledge distillation into `src/minigpt/distill_common.py`: completion-token mask construction, Hinton `tau^2` KL, shuffled residual-mass control, shared student training, teacher logit stats, and the RoPE MiniGPT factory. v1172 keeps its old exports, so existing callers/tests still work; v1173 now imports the shared helpers directly instead of reaching through a versioned experiment module. This does not change the v1172/v1173 findings; it makes the distillation branch safer for v1175+ variants.
+
+## Latest v1174 checkpoint
+
+- Maintenance after the v1172↔v1173 distillation pair. Added `src/minigpt/distill_common.py` and migrated `src/minigpt/distill_v1172.py` / `src/minigpt/distill_v1173.py` onto it. The important boundary: this version moves reusable mechanics only; it does not rerun or reinterpret the distillation conclusions.
+- The refactor removes the awkward dependency where v1173 imported training helpers from v1172. v1172 still re-exports `kl_term`, `shuffle_residual_mass`, `train_student`, `teacher_logit_stats`, and `_build_xy`, preserving old import contracts. v1173 depends on the common helper directly.
+- Added `tests/test_distill_common_v1174.py` plus migrated the v1173 mask/shuffle tests to import from common. Focused validation: `py_compile` passed for the changed modules and tests; `pytest tests/test_distill_common_v1174.py tests/test_distill_v1172.py tests/test_distill_v1173.py -q` returned `35 passed`. Evidence in `f/1174`; code explanation in `代码讲解记录_工程保养阶段/1186-v1174-minigpt-distill-common-dedup.md`.
 
 ## Latest v1173 checkpoint
 

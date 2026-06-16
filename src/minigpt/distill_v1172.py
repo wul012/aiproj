@@ -32,13 +32,19 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 
 import torch
-import torch.nn.functional as F
 
+from minigpt.distill_common import (
+    _build_xy,
+    kl_term,
+    make_distill_model as _make_model,
+    shuffle_residual_mass,
+    teacher_logit_stats,
+    train_student,
+)
 from minigpt.experiment_utils import mean_std, significant
-from minigpt.model import GPTConfig, MiniGPT
 from minigpt.report_utils import utc_now
 from minigpt.sft_instruction_v1164 import evaluate_instructions
-from minigpt.sft_training import IGNORE_INDEX, train_sft
+from minigpt.sft_training import train_sft
 
 CHANCE = 0.0016  # ~ per-op random exact-match floor on this corpus
 
@@ -61,125 +67,6 @@ ARM_SPECS = {
 }
 CURVE_ARMS = ("scratch_hard", "label_smooth", "distill_tau1_hw0")  # run at every size
 CONTROL_ARMS = ("label_smooth", "shuffled_teacher")
-
-
-def _build_xy(examples, block_size, pad_id):
-    """train_sft's padded X / completion-masked Y (Y!=IGNORE marks completion)."""
-    n = len(examples)
-    X = torch.full((n, block_size), pad_id, dtype=torch.long)
-    Y = torch.full((n, block_size), IGNORE_INDEX, dtype=torch.long)
-    for i, (full, n_prompt) in enumerate(examples):
-        inp, tgt = full[:-1], full[1:]
-        X[i, : len(inp)] = torch.tensor(inp, dtype=torch.long)
-        for t, tok in enumerate(tgt):
-            if (t + 1) < n_prompt:
-                continue
-            Y[i, t] = tok
-    return X, Y
-
-
-def kl_term(student_logits: torch.Tensor, teacher_probs: torch.Tensor, mask: torch.Tensor, tau: float) -> torch.Tensor:
-    """Hinton KD KL averaged over masked completion tokens, with the ``tau^2``
-    gradient-matching correction. ``teacher_probs`` is already ``softmax(zT/tau)``
-    (optionally shuffled). Zero when the student matches the teacher exactly."""
-    logp_S = F.log_softmax(student_logits / tau, dim=-1)
-    kl_tok = (teacher_probs * (teacher_probs.clamp_min(1e-9).log() - logp_S)).sum(-1)
-    return (kl_tok * mask).sum() / mask.sum().clamp_min(1) * (tau * tau)
-
-
-def shuffle_residual_mass(probs: torch.Tensor, perm: torch.Tensor) -> torch.Tensor:
-    """Permute each token's NON-argmax probabilities by ``perm`` (a fixed
-    permutation of ``range(V-1)``), leaving the argmax slot and its prob in place.
-
-    Preserves per-token argmax index, max-prob and entropy (the residual multiset
-    is unchanged); destroys which non-argmax CLASS carries which residual mass."""
-    B, T, V = probs.shape
-    a = probs.argmax(dim=-1)                                   # (B,T)
-    order = torch.arange(V, device=probs.device).view(1, 1, V)
-    noncol = order != a.unsqueeze(-1)                          # (B,T,V), V-1 True per token
-    res = probs[noncol].view(B, T, V - 1)                     # non-argmax probs in vocab order
-    res = res[..., perm]                                       # permute among themselves
-    out = probs.clone()
-    out[noncol] = res.reshape(-1)
-    return out
-
-
-def train_student(
-    student: MiniGPT,
-    examples,
-    *,
-    steps: int,
-    lr: float,
-    batch_size: int,
-    block_size: int,
-    pad_id: int,
-    device,
-    loss_mode: str,                 # "ce" | "distill"
-    teacher: MiniGPT | None = None,
-    tau: float = 1.0,
-    hard_weight: float = 1.0,
-    label_smoothing: float = 0.0,
-    shuffle_perm: torch.Tensor | None = None,
-    teacher_probs_fn=None,
-) -> float:
-    """Train ``student`` under one arm's objective; returns the last batch loss.
-    ``loss_mode="ce"`` is hard-label SFT (optionally label-smoothed) — identical
-    to ``train_sft`` when ``label_smoothing=0``. ``loss_mode="distill"`` is the
-    KL objective (optionally to a shuffled teacher)."""
-    X, Y = _build_xy(examples, block_size, pad_id)
-    X, Y = X.to(device), Y.to(device)
-    n, V = X.shape[0], student.config.vocab_size
-    if teacher is not None:
-        teacher.eval()
-    opt = torch.optim.AdamW(student.parameters(), lr=lr)
-    student.train()
-    last = float("nan")
-    for _ in range(steps):
-        sel = torch.randint(0, n, (batch_size,), device=device)
-        x, y = X[sel], Y[sel]
-        zS, _ = student(x)
-        if loss_mode == "ce":
-            loss = F.cross_entropy(zS.reshape(-1, V), y.reshape(-1),
-                                   ignore_index=IGNORE_INDEX, label_smoothing=label_smoothing)
-        else:
-            with torch.no_grad():
-                if teacher_probs_fn is not None:        # v1173 oracle: inject an arbitrary soft target
-                    p_T = teacher_probs_fn(x)
-                else:
-                    zT, _ = teacher(x)
-                    p_T = F.softmax(zT / tau, dim=-1)
-                    if shuffle_perm is not None:
-                        p_T = shuffle_residual_mass(p_T, shuffle_perm)
-            mask = (y != IGNORE_INDEX)
-            kl = kl_term(zS, p_T, mask, tau)
-            ce = F.cross_entropy(zS.reshape(-1, V), y.reshape(-1), ignore_index=IGNORE_INDEX)
-            loss = hard_weight * ce + (1.0 - hard_weight) * kl
-        opt.zero_grad(set_to_none=True)
-        loss.backward()
-        opt.step()
-        last = float(loss.item())
-    return last
-
-
-@torch.no_grad()
-def teacher_logit_stats(teacher: MiniGPT, examples, block_size, pad_id):
-    """Mean softmax max-prob and entropy (nats) at completion-token positions —
-    the dark-knowledge measurement (near-one-hot => no dark knowledge)."""
-    X, Y = _build_xy(examples, block_size, pad_id)
-    device = next(teacher.parameters()).device
-    X, Y = X.to(device), Y.to(device)
-    teacher.eval()
-    z, _ = teacher(X)
-    p = F.softmax(z, dim=-1)
-    mask = (Y != IGNORE_INDEX)
-    maxp = p.max(dim=-1).values[mask]
-    ent = (-(p.clamp_min(1e-9).log() * p).sum(-1))[mask]
-    return float(maxp.mean().item()), float(ent.mean().item())
-
-
-def _make_model(vocab_size, block_size, n_layer, n_head, n_embd):
-    return MiniGPT(GPTConfig(vocab_size=vocab_size, block_size=block_size, n_layer=n_layer,
-                             n_head=n_head, n_embd=n_embd, dropout=0.0, use_rope=True))
 
 
 @dataclass

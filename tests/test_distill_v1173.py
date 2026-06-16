@@ -8,7 +8,7 @@ import unittest
 import numpy as np
 import torch
 
-from minigpt.distill_v1172 import _build_xy
+from minigpt.distill_common import _build_xy, shuffle_residual_mass
 from minigpt.distill_v1173 import (
     ARM_ORDER,
     PRIMARY_VERDICTS,
@@ -139,7 +139,6 @@ class DecideTests(unittest.TestCase):
 
 class ShuffleOnSoftTests(unittest.TestCase):
     def test_shuffling_soft_target_increases_kl_to_true(self):
-        from minigpt.distill_v1172 import shuffle_residual_mass
         torch.manual_seed(0)
         # a soft per-context distribution; shuffling residual mass should move it AWAY from P_true
         P = torch.softmax(torch.randn(8, 1, 7), dim=-1)         # (K,1,V)

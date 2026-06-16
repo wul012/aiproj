@@ -38,9 +38,8 @@ import numpy as np
 import torch
 import torch.nn.functional as F
 
-from minigpt.distill_v1172 import kl_term, shuffle_residual_mass, train_student  # noqa: F401  (kl_term/shuffle reused + re-exported)
+from minigpt.distill_common import make_distill_model as _make_model, shuffle_residual_mass, train_student
 from minigpt.experiment_utils import mean_std, significant
-from minigpt.model import GPTConfig, MiniGPT
 from minigpt.report_utils import utc_now
 
 OUT_ALPHA = "abcde"
@@ -140,11 +139,6 @@ def eps_for_entropy(target_H, m, lo=0.0, hi=0.999, iters=60):
         else:
             hi = mid
     return 0.5 * (lo + hi)
-
-
-def _make_model(vocab_size, block_size, n_layer, n_head, n_embd):
-    return MiniGPT(GPTConfig(vocab_size=vocab_size, block_size=block_size, n_layer=n_layer,
-                             n_head=n_head, n_embd=n_embd, dropout=0.0, use_rope=True))
 
 
 @dataclass
