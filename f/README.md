@@ -18,6 +18,10 @@ f/<version>/解释/说明.md
 
 ## 当前索引
 
+f/1175/图片
+f/1175/解释/说明.md
+ -> v1175 post-training weight quantization (PTQ): real RTX 4060 run (5 seeds, 4L/64). Inference-efficiency thread — fake-quantize a trained model's weights (fp32 inference, no int kernels) and measure the held-out CE degradation curve. verdict=per_channel_advantage_not_separable: a sharp cliff exists (lossless ≥6b, usable 3–4b, collapse at 2b) and per-channel/group extend the NOMINAL cliff (per-tensor collapses at 3b CE 0.540, per-channel holds at 0.168) — but the CPU probe's three flattering single-seed claims all dissolve under 5-seed rigor: "per-channel buys a bit" is a wash at matched EFFECTIVE bits (pc 3b CE 0.168 vs pt 4b 0.097, 3.19 vs 4.0 eff-bits), and "attention most sensitive / embedding lossless" vanish (every component ΔCE at 4b is within the fp32 seed-std 0.027; c_attn weight-error ≈ embedding's, KL ~0 = no amplification). The tied embedding is quantized by parameter identity (guarded by a test) so it can't be silently reverted. Weight-only RTN measures the QUALITY cost only — no memory/speed claim at toy scale. The 4th honest-null this session where multi-seed rigor kills a single-seed probe result.
+
 f/1174/图片
 f/1174/解释/说明.md
  -> v1174 distillation common helper dedup: contract-preserving maintenance after the v1172 deterministic distillation and v1173 stochastic dark-knowledge pair. New `src/minigpt/distill_common.py` owns completion-token `_build_xy`, Hinton `tau^2` `kl_term`, `shuffle_residual_mass`, `train_student`, `teacher_logit_stats`, and `make_distill_model`. v1172 keeps backward-compatible re-exports; v1173 now imports shared helpers directly instead of depending on a versioned experiment module. Focused evidence: py_compile passed; distillation tests `35 passed`. This version changes the maintenance boundary, not the model-quality claims.

@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1187-v1175-minigpt-ptq.md
+ -> v1175 code explanation: post-training weight quantization (PTQ; the inference-efficiency thread). New ptq_v1175.py: quantize_tensor (per-tensor/per-channel-row/-col/group32 × absmax_sym/percentile_clip/mse_clip/affine_asym RTN), quantized_model (quantizes by PARAMETER IDENTITY so the tied token_embedding/lm_head is quantized once, not silently reverted via state_dict round-trip — guarded by a test), component_param_names, effective_bits_per_weight (charges fp16 scales), ce_and_kl + weight_rel_error metrics, decide, run_ptq. Primary metric = held-out CE (continuous; EM mislocates the cliff). Three sweeps: S1 quality-vs-bits, S2 per-component sensitivity (attention DECOMPOSED into c_attn/c_proj), S3 attention axis+scheme robustness. 5 seeds (the only variance source is the training seed); two headline claims significance-gated via beats_lower. Real RTX 4060 (5 seeds, 4L/64): status=pass, verdict=per_channel_advantage_not_separable — a sharp cliff (lossless ≥6b, usable 3–4b, collapse at 2b); per-channel/group extend the nominal cliff (per-tensor collapses at 3b CE 0.540, per-channel holds 0.168) but it's a wash at matched effective bits (pc 3b 3.19-eff CE 0.168 vs pt 4b 4.0-eff 0.097); no component separably most-sensitive at 4b (all ΔCE < fp32 std 0.027). The probe's "per-channel buys a bit / attention most sensitive / embedding lossless" are single-seed artifacts. Fixed a latent unreachable-verdict bug (per_channel_advantage_not_separable). Tests: tests/test_ptq_v1175.py (19, incl. the tied-embedding revert guard). Weight-only RTN measures the quality cost only — no memory/speed claim at toy scale.
+
 1186-v1174-minigpt-distill-common-dedup.md
  -> v1174 code explanation: extract shared distillation primitives from v1172/v1173 into distill_common while preserving old imports and focused test contracts.
 
