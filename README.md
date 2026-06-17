@@ -16,7 +16,13 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1182.0.0` adds a paired seed contrast report for the v1179/v1181 grokking evidence chain. It consumes the v1181 phase rows and collapses each seed's weight-decay arm and no-decay arm into one counterfactual row: both arms memorize at the same step, only the weight-decay arm delayed-groks, and the no-decay arm remains censored. This does not rerun training; it turns the v1179 result into the shortest honest weight-decay counterfactual table.
+Version `v1183.0.0` advances the grokking line from audits back to new science: it sweeps weight-decay *strength* on `a + b = c (mod 97)` and measures how the generalization step depends on it, turning v1179's binary "weight decay drives grokking" into a dose-response. The honest result is an **interior optimum**, not monotone acceleration: grokking is fastest at `wd≈1.0` (t_gen 14,920 ± 5,944), and *both* too-little (`wd≤0.1`) and too-much (`wd=3.0`, which still memorizes 5/5 but groks 0/5 even at 100k steps) weight decay fail to grok within budget. A first-pass verdict that mislabeled this `monotone_acceleration` (by only inspecting the grokking sub-range) was caught and the `decide` logic fixed to detect the high-end censoring. Reuses the v1179 training primitive; paired init+split per seed across all wd arms.
+
+## Latest v1183 checkpoint
+
+- Added `src/minigpt/grok_wd_law_v1183.py`: `WdLawConfig`, a weight-decay sweep that reuses `grok_v1179.train_arm` (paired init+split per seed), censoring-aware per-wd aggregation, `assemble_report` (split from training so the verdict can be re-derived without retraining), and `decide_wd_law` with an interior-optimum-aware dose-response verdict ladder.
+- Added CLI `scripts/run_grok_wd_law_v1183.py`. Real RTX 4060 run (5 seeds, wds 0/0.1/0.3/1.0/3.0): `status=pass`, `verdict=wd_dose_response_interior_optimum`; grok_rate 0/0.2/1.0/1.0/0.0, fastest grok at wd=1.0, threshold wd=0.3, high-end censored at wd=3.0 (confirmed non-budget by a 100k-step probe).
+- Added `tests/test_grok_wd_law_v1183.py` (10, incl. the interior-optimum verdict that earlier over-claiming missed). Evidence in `f/1183`; code explanation in `代码讲解记录_工程保养阶段/1195-v1183-minigpt-grokking-wd-dose-response.md`.
 
 ## Latest v1182 checkpoint
 

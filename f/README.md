@@ -18,6 +18,10 @@ f/<version>/解释/说明.md
 
 ## 当前索引
 
+f/1183/图片
+f/1183/解释/说明.md
+ -> v1183 grokking weight-decay dose-response: sweeps weight decay {0,0.1,0.3,1.0,3.0} on `a + b = c (mod 97)` (5 seeds, paired init+split, reuses the v1179 training primitive) to turn the binary "weight decay drives grokking" into a dose-response. Real RTX 4060 result: `verdict=wd_dose_response_interior_optimum` — grok_rate 0/0.2/1.0/1.0/0.0, fastest grok at wd=1.0 (t_gen 14920±5944), threshold wd=0.3; the strongest decay wd=3.0 still memorizes 5/5 but groks 0/5 even at 100k steps (over-regularization, not budget). A first-pass `monotone_acceleration` over-claim was caught and `decide` fixed to detect the high-end censoring. The figure is a dual-axis t_gen-vs-wd plot. Boundary: toy-scale single-task dose-response, not a scaling claim.
+
 f/1182/图片
 f/1182/解释/说明.md
  -> v1182 grokking paired contrast: consumes the real v1181 phase report and collapses each seed's weight-decay/no-decay rows into one counterfactual row. Result: `status=pass`, `decision=grokking_weight_decay_pair_contrast_consistent`, `pair_count=5`, `matched_memorization_count=5`, `on_delayed_grok_count=5`, `off_memorized_censored_count=5`, `no_decay_censored_count=5`, `mean_final_val_gain=0.8003984`, `min_final_val_gain=0.753687`, `mean_steps_saved_by_grok_stop=24760.0`, `longest_delay_seed=1341`, `largest_final_val_gain_seed=1339`. Boundary: paired phase contrast only, no training rerun. Evidence includes generated JSON/CSV/text/Markdown/HTML plus Playwright screenshot.
