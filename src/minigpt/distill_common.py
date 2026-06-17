@@ -14,23 +14,9 @@ from collections.abc import Callable
 import torch
 import torch.nn.functional as F
 
+from minigpt.completion_masking import build_completion_xy as _build_xy
 from minigpt.model import GPTConfig, MiniGPT
 from minigpt.sft_training import IGNORE_INDEX
-
-
-def _build_xy(examples, block_size: int, pad_id: int) -> tuple[torch.Tensor, torch.Tensor]:
-    """Return padded ``X`` and completion-masked ``Y`` for SFT/KD training."""
-    n = len(examples)
-    X = torch.full((n, block_size), pad_id, dtype=torch.long)
-    Y = torch.full((n, block_size), IGNORE_INDEX, dtype=torch.long)
-    for i, (full, n_prompt) in enumerate(examples):
-        inp, tgt = full[:-1], full[1:]
-        X[i, : len(inp)] = torch.tensor(inp, dtype=torch.long)
-        for t, tok in enumerate(tgt):
-            if (t + 1) < n_prompt:
-                continue
-            Y[i, t] = tok
-    return X, Y
 
 
 def kl_term(student_logits: torch.Tensor, teacher_probs: torch.Tensor, mask: torch.Tensor, tau: float) -> torch.Tensor:

@@ -34,6 +34,7 @@ from dataclasses import dataclass
 import torch
 import torch.nn.functional as F
 
+from minigpt.completion_masking import build_completion_xy
 from minigpt.experiment_utils import build_minigpt, mean_std, significant
 from minigpt.report_utils import utc_now
 from minigpt.sft_instruction_v1164 import evaluate_instructions
@@ -189,23 +190,6 @@ def effective_bits_per_weight(model, component, bits, granularity, scale_bits=16
         tot_w += nw
         tot_bits += bits * nw + scale_bits * ns
     return tot_bits / max(tot_w, 1)
-
-
-# --------------------------------------------------------------------------
-# metrics: held-out completion-token CE (primary), KL(fp32||quant), EM, rel-error
-# --------------------------------------------------------------------------
-def _padded_xy(examples, block_size, pad_id):
-    n = len(examples)
-    X = torch.full((n, block_size), pad_id, dtype=torch.long)
-    Y = torch.full((n, block_size), IGNORE_INDEX, dtype=torch.long)
-    for i, (full, n_prompt) in enumerate(examples):
-        inp, tgt = full[:-1], full[1:]
-        X[i, : len(inp)] = torch.tensor(inp, dtype=torch.long)
-        for t, tok in enumerate(tgt):
-            if (t + 1) < n_prompt:
-                continue
-            Y[i, t] = tok
-    return X, Y
 
 
 @torch.no_grad()
@@ -370,7 +354,7 @@ def run_ptq(*, vocab_size, train_examples, heldout_instructions, ops, pad_id, eo
             config, device, corpus_stats=None, generated_at=None):
     bs = config.block_size
     held_full = [(p + e + [eos_id], len(p)) for p, e, _ in heldout_instructions]
-    X, Y = _padded_xy(held_full, bs, pad_id)
+    X, Y = build_completion_xy(held_full, bs, pad_id)
     X, Y = X.to(device), Y.to(device)
 
     # per-seed: train fp32 baseline, then quantize across the grid (reuse the same baseline)

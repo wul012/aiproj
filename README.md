@@ -12,10 +12,17 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 - [No-promotion boundary](docs/no-promotion-boundary.md)
 - [Versioned artifacts](docs/versioned-artifacts.md)
 - [Artifact map](docs/artifact-map.md)
+- [Plain-language project guide](项目通俗说明/README.md)
 
 ## Current version
 
-Version `v1175.0.0` measures post-training weight quantization (PTQ) — the inference-efficiency thread (v1161 KV-cache, v1170 speculative decoding). A trained MiniGPT's weights are fake-quantized (`W→dequantize(quantize(W))`, fp32 inference, no int kernels) and the held-out cross-entropy degradation curve is measured. Real RTX 4060 (5 seeds): `verdict=per_channel_advantage_not_separable`. There is a sharp cliff (lossless ≥6b, usable 3–4b, collapse at 2b) and per-channel/group quantization extends the *nominal*-bit cliff (per-tensor collapses at 3b, per-channel holds) — **but the CPU probe's three flattering single-seed claims all dissolve under rigor**: "per-channel buys a bit" is a wash at matched effective bits (pc 3b CE 0.168 ≈ pt 4b 0.097, charged 3.19 vs 4.0 eff-bits), and "attention most sensitive / embedding lossless" vanish (every component's ΔCE at 4b is within the fp32 seed-std). Weight-only PTQ measures the quality cost, not a memory/speed win at toy scale.
+Version `v1176.0.0` is a contract-preserving cleanup after Claude's v1175 PTQ feature. It extracts the shared completion-token X/Y builder into `src/minigpt/completion_masking.py`, keeps `distill_common._build_xy` as a compatibility alias, and migrates PTQ away from its duplicate `_padded_xy`. It also routes the plain-language project guide into the README documentation map. This does not change v1175's quantization verdict; it keeps the completion-mask contract single-sourced for PTQ, distillation, and future completion-only experiments.
+
+## Latest v1176 checkpoint
+
+- Maintenance after v1175 PTQ. Added `src/minigpt/completion_masking.py` with `build_completion_xy(examples, block_size, pad_id)` for `(full_token_ids, prompt_length)` examples. The helper produces padded `X` and completion-masked `Y`, where prompt/pad positions are `IGNORE_INDEX` and only completion tokens carry loss.
+- Migrated `src/minigpt/distill_common.py` to re-export the shared helper as `_build_xy`, preserving the v1174/v1172 compatibility path. Migrated `src/minigpt/ptq_v1175.py` to use `build_completion_xy` and removed its local `_padded_xy` duplicate.
+- Added `tests/test_completion_masking_v1176.py`; focused validation with `tests/test_completion_masking_v1176.py`, `tests/test_distill_common_v1174.py`, and `tests/test_ptq_v1175.py` returned `26 passed`. The user-facing `项目通俗说明/README.md` is now linked from the README documentation map. Evidence in `f/1176`; code explanation in `代码讲解记录_工程保养阶段/1188-v1176-minigpt-completion-mask-dedup.md`.
 
 ## Latest v1175 checkpoint
 
@@ -23,10 +30,6 @@ Version `v1175.0.0` measures post-training weight quantization (PTQ) — the inf
 - A design panel found the probe's claims unmeasured (single-seed, EM-only, axis-uncontrolled). The design uses **5 seeds**, **held-out CE as the continuous primary metric** (EM mislocates the cliff), attention **decomposed** into c_attn/c_proj, and three sweeps: S1 quality-vs-bits curve, S2 per-component sensitivity, S3 attention axis+scheme robustness. The two headline claims are significance-gated; the effective-bits-including-scales accounting charges the per-channel metadata.
 - Real RTX 4060 (5 seeds, 4L/64, fp32 CE 0.081±0.027, EM 0.883): `status=pass` (valid measurement — roundtrip correct, baseline learnable, degradation resolvable, grid complete), `verdict=per_channel_advantage_not_separable`. S1 CE: per-tensor 8b 0.081 → 4b 0.097 → **3b 0.540 (collapse)** → 2b 5.04; per-channel-row 3b **0.168 (holds)**; group32 3b **0.145 (holds)**. Cliff: per-tensor 4b, per-channel/group 3b — but `per_channel_buys_bit=False` (pc 3b CE 0.168 > pt 4b 0.097 at matched eff-bits). S2: every component's ΔCE at 4b is ~0 (embedding +0.006 ≈ c_attn +0.006, both < fp32 std 0.027), so `attn_most_sensitive=False`; c_attn weight-error 0.106 ≈ embedding 0.108 with KL 0.004 (no amplification). The probe's "attention most sensitive / embedding lossless / per-channel buys a bit" are single-seed artifacts.
 - Added `tests/test_ptq_v1175.py` (19, incl. the tied-embedding guard: quantizing the embedding must change the lm_head output, not revert via the tie). Evidence in `f/1175`; code explanation in `代码讲解记录_工程保养阶段/1187-v1175-minigpt-ptq.md`. The fourth honest-null this session where multi-seed rigor kills a flattering single-seed probe result.
-
-## Latest v1174 checkpoint
-
-- Maintenance after the v1172↔v1173 distillation pair. Added `src/minigpt/distill_common.py` and migrated `src/minigpt/distill_v1172.py` / `src/minigpt/distill_v1173.py` onto it. The important boundary: this version moves reusable mechanics only; it does not rerun or reinterpret the distillation conclusions.
 
 ## Latest v1174 checkpoint
 

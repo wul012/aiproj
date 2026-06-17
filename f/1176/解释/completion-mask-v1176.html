@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <title>v1176 completion mask helper dedup</title>
+  <style>
+    body { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; margin: 40px; background: #f7f7f5; color: #17202a; }
+    main { max-width: 980px; margin: 0 auto; background: #fff; border: 1px solid #d8d5cc; border-radius: 8px; padding: 32px; }
+    h1 { margin: 0 0 10px; font-size: 30px; }
+    h2 { margin-top: 28px; font-size: 20px; }
+    code { background: #f0eee7; border-radius: 4px; padding: 2px 5px; }
+    .status { color: #0f7a3a; font-weight: 700; }
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 18px 0; }
+    .card { border: 1px solid #ddd8cc; background: #faf9f5; border-radius: 6px; padding: 14px; }
+    ul { line-height: 1.65; }
+  </style>
+</head>
+<body>
+<main>
+  <h1>v1176 completion mask helper dedup</h1>
+  <p><span class="status">status=pass</span> · contract-preserving maintenance · no PTQ verdict changed</p>
+  <div class="grid">
+    <section class="card"><strong>新增</strong><br><code>completion_masking.py</code></section>
+    <section class="card"><strong>迁移</strong><br><code>distill_common</code> / <code>ptq_v1175</code></section>
+    <section class="card"><strong>测试</strong><br><code>26 passed</code></section>
+  </div>
+  <h2>为什么做</h2>
+  <p>v1175 PTQ 新增了本地 <code>_padded_xy</code>，和 v1174 distillation common 的 completion-mask helper 属于同一合同。v1176 把它抽到中性模块，避免不同实验家族维护不同 mask 副本。</p>
+  <h2>做了什么</h2>
+  <ul>
+    <li><code>build_completion_xy</code> 统一构造 padded <code>X</code> 和 completion-masked <code>Y</code>。</li>
+    <li><code>distill_common._build_xy</code> 保持兼容 alias。</li>
+    <li><code>ptq_v1175</code> 删除局部副本，使用同一 helper。</li>
+    <li>README 文档地图加入 <code>项目通俗说明/README.md</code>。</li>
+  </ul>
+  <h2>验证</h2>
+  <p><code>py_compile</code> 通过；focused suite 返回 <code>26 passed</code>。</p>
+</main>
+</body>
+</html>
