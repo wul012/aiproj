@@ -18,6 +18,10 @@ f/<version>/解释/说明.md
 
 ## 当前索引
 
+f/1182/图片
+f/1182/解释/说明.md
+ -> v1182 grokking paired contrast: consumes the real v1181 phase report and collapses each seed's weight-decay/no-decay rows into one counterfactual row. Result: `status=pass`, `decision=grokking_weight_decay_pair_contrast_consistent`, `pair_count=5`, `matched_memorization_count=5`, `on_delayed_grok_count=5`, `off_memorized_censored_count=5`, `no_decay_censored_count=5`, `mean_final_val_gain=0.8003984`, `min_final_val_gain=0.753687`, `mean_steps_saved_by_grok_stop=24760.0`, `longest_delay_seed=1341`, `largest_final_val_gain_seed=1339`. Boundary: paired phase contrast only, no training rerun. Evidence includes generated JSON/CSV/text/Markdown/HTML plus Playwright screenshot.
+
 f/1181/图片
 f/1181/解释/说明.md
  -> v1181 grokking trajectory phases: consumes the real v1179 `grok_v1179.json` curves and compresses each seed/arm into a phase row. Result: `status=pass`, `decision=grokking_phase_profile_consistent`, `curve_count=10`, `wd_on_delayed_grok_count=5`, `wd_off_memorized_censored_count=5`, `paired_phase_separation_count=5`, `wd_on_low_plateau_rate_mean=0.8321336571672611`, `wd_on_min_gap=10400.0`, `wd_on_max_gap=25100.0`, `longest_delay_seed=1341`. Boundary: curve phase compression only, no training rerun and no broader model-quality claim. Evidence includes generated JSON/CSV/text/Markdown/HTML plus Playwright screenshot.

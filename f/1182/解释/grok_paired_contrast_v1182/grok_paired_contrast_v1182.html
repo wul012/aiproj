@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT grokking paired contrast v1182</title>
+<style>
+:root { color-scheme: light; font-family: Arial, "Microsoft YaHei", sans-serif; color: #172026; background: #f6f8fa; }
+body { margin: 0; padding: 24px; }
+header, section, footer { max-width: 1120px; margin: 0 auto 18px; }
+header { padding: 18px 0 8px; border-bottom: 3px solid #2f6f8f; }
+h1 { margin: 0 0 8px; font-size: 28px; letter-spacing: 0; }
+h2 { margin: 0 0 10px; font-size: 18px; letter-spacing: 0; }
+p { margin: 0 0 10px; line-height: 1.5; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; background: transparent; border: 0; padding: 0; }
+.stat { background: #fff; border: 1px solid #d7dee5; border-radius: 8px; padding: 12px; min-height: 64px; }
+.stat span { display: block; color: #5c6b73; font-size: 12px; margin-bottom: 8px; }
+.stat strong { display: block; font-size: 18px; overflow-wrap: anywhere; }
+section { background: #fff; border: 1px solid #d7dee5; border-radius: 8px; padding: 16px; }
+table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+th, td { padding: 9px; border-bottom: 1px solid #e5e9ef; text-align: left; vertical-align: top; overflow-wrap: anywhere; }
+th { background: #eef3f6; }
+ul { margin: 0; padding-left: 20px; }
+li { margin: 6px 0; }
+.muted { color: #687782; }
+footer { color: #687782; font-size: 12px; }
+</style>
+</head>
+<body>
+<header><h1>MiniGPT grokking paired contrast v1182</h1><p>Late-stage maintenance report for keeping AI governance artifacts readable.</p></header>
+<section class="stats"><article class="stat"><span>paired_contrast_ready</span><strong>True</strong></article><article class="stat"><span>source_status</span><strong>pass</strong></article><article class="stat"><span>source_decision</span><strong>grokking_phase_profile_consistent</strong></article><article class="stat"><span>source_phase_report</span><strong>f\1181\解释\grok_trajectory_phases_v1181\grok_trajectory_phases_v1181.json</strong></article><article class="stat"><span>seed_count</span><strong>5</strong></article><article class="stat"><span>phase_row_count</span><strong>10</strong></article><article class="stat"><span>pair_count</span><strong>5</strong></article><article class="stat"><span>matched_memorization_count</span><strong>5</strong></article><article class="stat"><span>on_delayed_grok_count</span><strong>5</strong></article><article class="stat"><span>off_memorized_censored_count</span><strong>5</strong></article><article class="stat"><span>no_decay_censored_count</span><strong>5</strong></article><article class="stat"><span>mean_final_val_gain</span><strong>0.8003984</strong></article><article class="stat"><span>min_final_val_gain</span><strong>0.753687</strong></article><article class="stat"><span>mean_steps_saved_by_grok_stop</span><strong>24760.0</strong></article><article class="stat"><span>longest_delay_seed</span><strong>1341</strong></article><article class="stat"><span>largest_final_val_gain_seed</span><strong>1339</strong></article><article class="stat"><span>required_min_final_val_gain</span><strong>0.7</strong></article><article class="stat"><span>boundary</span><strong>paired_phase_contrast_only_no_training_rerun</strong></article><article class="stat"><span>next_step</span><strong>use_pair_rows_as_the_plainest_weight_decay_counterfactual_for_v1179_grokking</strong></article></section>
+<section><h2>Grokking Paired Contrasts</h2><table><thead><tr><th>seed</th><th>pair_status</th><th>on_phase</th><th>off_phase</th><th>on_t_mem</th><th>off_t_mem</th><th>t_mem_delta</th><th>on_t_gen</th><th>off_t_gen</th><th>on_grok_gap</th><th>on_steps_run</th><th>off_steps_run</th><th>steps_saved_by_grok_stop</th><th>on_final_val_acc</th><th>off_final_val_acc</th><th>final_val_gain</th><th>on_low_val_plateau_rate</th><th>off_low_val_plateau_rate</th></tr></thead><tbody><tr><td>1337</td><td>weight_decay_counterfactual</td><td>delayed_grok</td><td>memorized_only_censored</td><td>100</td><td>100</td><td>0.0</td><td>11400</td><td></td><td>11300</td><td>11600</td><td>40000</td><td>28400.0</td><td>0.965989</td><td>0.139099</td><td>0.82689</td><td>0.8407079646017699</td><td>1.0</td></tr><tr><td>1338</td><td>weight_decay_counterfactual</td><td>delayed_grok</td><td>memorized_only_censored</td><td>100</td><td>100</td><td>0.0</td><td>12700</td><td></td><td>12600</td><td>12900</td><td>40000</td><td>27100.0</td><td>0.951907</td><td>0.19822</td><td>0.753687</td><td>0.9603174603174603</td><td>1.0</td></tr><tr><td>1339</td><td>weight_decay_counterfactual</td><td>delayed_grok</td><td>memorized_only_censored</td><td>100</td><td>100</td><td>0.0</td><td>10500</td><td></td><td>10400</td><td>11600</td><td>40000</td><td>28400.0</td><td>0.970772</td><td>0.139631</td><td>0.8311409999999999</td><td>0.7596153846153846</td><td>1.0</td></tr><tr><td>1340</td><td>weight_decay_counterfactual</td><td>delayed_grok</td><td>memorized_only_censored</td><td>100</td><td>100</td><td>0.0</td><td>14600</td><td></td><td>14500</td><td>14700</td><td>40000</td><td>25300.0</td><td>0.957885</td><td>0.155175</td><td>0.80271</td><td>0.7793103448275862</td><td>1.0</td></tr><tr><td>1341</td><td>weight_decay_counterfactual</td><td>delayed_grok</td><td>memorized_only_censored</td><td>100</td><td>100</td><td>0.0</td><td>25200</td><td></td><td>25100</td><td>25400</td><td>40000</td><td>14600.0</td><td>0.952836</td><td>0.165272</td><td>0.787564</td><td>0.8207171314741036</td><td>1.0</td></tr></tbody></table></section>
+<section><h2>Recommendations</h2><ul><li>Use the paired rows as the shortest honest explanation of v1179: the same seed memorizes in both arms, but only the weight-decay arm generalizes.</li><li>Seed 1339 is the clearest final-accuracy contrast; seed 1341 is the clearest delayed-grokking story.</li></ul></section>
+<footer>Generated by MiniGPT readability maintenance tooling.</footer>
+</body>
+</html>

@@ -1,0 +1,6 @@
+seed,pair_status,on_phase,off_phase,on_t_mem,off_t_mem,t_mem_delta,on_t_gen,off_t_gen,on_grok_gap,on_steps_run,off_steps_run,steps_saved_by_grok_stop,on_final_val_acc,off_final_val_acc,final_val_gain,on_low_val_plateau_rate,off_low_val_plateau_rate
+1337,weight_decay_counterfactual,delayed_grok,memorized_only_censored,100,100,0.0,11400,,11300,11600,40000,28400.0,0.965989,0.139099,0.82689,0.8407079646017699,1.0
+1338,weight_decay_counterfactual,delayed_grok,memorized_only_censored,100,100,0.0,12700,,12600,12900,40000,27100.0,0.951907,0.19822,0.753687,0.9603174603174603,1.0
+1339,weight_decay_counterfactual,delayed_grok,memorized_only_censored,100,100,0.0,10500,,10400,11600,40000,28400.0,0.970772,0.139631,0.8311409999999999,0.7596153846153846,1.0
+1340,weight_decay_counterfactual,delayed_grok,memorized_only_censored,100,100,0.0,14600,,14500,14700,40000,25300.0,0.957885,0.155175,0.80271,0.7793103448275862,1.0
+1341,weight_decay_counterfactual,delayed_grok,memorized_only_censored,100,100,0.0,25200,,25100,25400,40000,14600.0,0.952836,0.165272,0.787564,0.8207171314741036,1.0

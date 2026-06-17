@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1194-v1182-minigpt-grokking-paired-contrast.md
+ -> v1182 code explanation: paired seed counterfactual report over the v1181 phase rows. Adds `grok_paired_contrast_v1182.py` and `scripts/analyze_grok_paired_contrast_v1182.py` to collapse each seed's `weight_decay_on` / `weight_decay_off` rows into one contrast row, checking matched memorization, delayed grok only in the weight-decay arm, no-decay censoring, large final validation gain, and the no-rerun boundary. Evidence lives under `f/1182`.
+
 1193-v1181-minigpt-grokking-trajectory-phases.md
  -> v1181 code explanation: grokking trajectory phase report over the v1179 real experiment curves. Adds `grok_trajectory_phases_v1181.py` and `scripts/analyze_grok_trajectory_v1181.py` to align rows with curves, classify each seed/arm as `delayed_grok` or `memorized_only_censored`, compute plateau low-validation rates, max validation jumps, curve endpoint/mempoint consistency, and paired phase separation. It explains the curve process behind v1179 rather than rerunning training or expanding the model-quality claim. Evidence lives under `f/1181`.
 

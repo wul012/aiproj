@@ -16,7 +16,13 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1181.0.0` adds a grokking trajectory phase report for the v1179 positive result. It consumes the archived `grok_v1179.json` curves and compresses every seed/arm into phase rows: with weight decay all 5 seeds are `delayed_grok`; without weight decay all 5 seeds are `memorized_only_censored`; paired phase separation is 5/5. This does not rerun training; it explains which part of the curve makes the v1179 result grokking rather than ordinary learning.
+Version `v1182.0.0` adds a paired seed contrast report for the v1179/v1181 grokking evidence chain. It consumes the v1181 phase rows and collapses each seed's weight-decay arm and no-decay arm into one counterfactual row: both arms memorize at the same step, only the weight-decay arm delayed-groks, and the no-decay arm remains censored. This does not rerun training; it turns the v1179 result into the shortest honest weight-decay counterfactual table.
+
+## Latest v1182 checkpoint
+
+- Added `src/minigpt/grok_paired_contrast_v1182.py`: v1181 phase-report loading, seed-wise on/off pairing, matched-memorization checks, no-decay censoring checks, final validation gain metrics, step-budget contrast metrics, and readability outputs.
+- Added CLI `scripts/analyze_grok_paired_contrast_v1182.py`, supporting `--min-final-val-gain`, `--require-pass`, and `--force`.
+- Real v1181 artifact result: `status=pass`, `decision=grokking_weight_decay_pair_contrast_consistent`, `pair_count=5`, `matched_memorization_count=5`, `no_decay_censored_count=5`, `mean_final_val_gain=0.8003984`, `min_final_val_gain=0.753687`, `mean_steps_saved_by_grok_stop=24760.0`, `longest_delay_seed=1341`, `largest_final_val_gain_seed=1339`. Added `tests/test_grok_paired_contrast_v1182.py` (`6 passed`). Evidence in `f/1182`; code explanation in `代码讲解记录_工程保养阶段/1194-v1182-minigpt-grokking-paired-contrast.md`.
 
 ## Latest v1181 checkpoint
 
