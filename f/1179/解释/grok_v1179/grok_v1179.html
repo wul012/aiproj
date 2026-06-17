@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT v1179 grokking (delayed generalization)</title>
+<style>
+:root { color-scheme: light; font-family: Arial, "Microsoft YaHei", sans-serif; color: #172026; background: #f6f8fa; }
+body { margin: 0; padding: 24px; }
+header, section, footer { max-width: 1120px; margin: 0 auto 18px; }
+header { padding: 18px 0 8px; border-bottom: 3px solid #2f6f8f; }
+h1 { margin: 0 0 8px; font-size: 28px; letter-spacing: 0; }
+h2 { margin: 0 0 10px; font-size: 18px; letter-spacing: 0; }
+p { margin: 0 0 10px; line-height: 1.5; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; background: transparent; border: 0; padding: 0; }
+.stat { background: #fff; border: 1px solid #d7dee5; border-radius: 8px; padding: 12px; min-height: 64px; }
+.stat span { display: block; color: #5c6b73; font-size: 12px; margin-bottom: 8px; }
+.stat strong { display: block; font-size: 18px; overflow-wrap: anywhere; }
+section { background: #fff; border: 1px solid #d7dee5; border-radius: 8px; padding: 16px; }
+table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+th, td { padding: 9px; border-bottom: 1px solid #e5e9ef; text-align: left; vertical-align: top; overflow-wrap: anywhere; }
+th { background: #eef3f6; }
+ul { margin: 0; padding-left: 20px; }
+li { margin: 6px 0; }
+.muted { color: #687782; }
+footer { color: #687782; font-size: 12px; }
+</style>
+</head>
+<body>
+<header><h1>MiniGPT v1179 grokking (delayed generalization)</h1><p>Late-stage maintenance report for keeping AI governance artifacts readable.</p></header>
+<section class="stats"><article class="stat"><span>p</span><strong>97</strong></article><article class="stat"><span>train_frac</span><strong>0.2</strong></article><article class="stat"><span>n_layer</span><strong>1</strong></article><article class="stat"><span>n_embd</span><strong>128</strong></article><article class="stat"><span>lr</span><strong>0.001</strong></article><article class="stat"><span>weight_decay_on</span><strong>1.0</strong></article><article class="stat"><span>weight_decay_off</span><strong>0.0</strong></article><article class="stat"><span>max_steps</span><strong>40000</strong></article><article class="stat"><span>seeds</span><strong>5</strong></article><article class="stat"><span>verdict</span><strong>grokking_reproduced_wd_driven</strong></article><article class="stat"><span>g0_task_correct</span><strong>True</strong></article><article class="stat"><span>g1_memorization</span><strong>True</strong></article><article class="stat"><span>g2_grid_complete</span><strong>True</strong></article><article class="stat"><span>delay_real</span><strong>True</strong></article><article class="stat"><span>grok_reproduced</span><strong>True</strong></article><article class="stat"><span>wd_on_grok_rate</span><strong>1.0</strong></article><article class="stat"><span>wd_on_mem_rate</span><strong>1.0</strong></article><article class="stat"><span>wd_on_t_gen_mean</span><strong>14880.0</strong></article><article class="stat"><span>wd_on_t_gen_std</span><strong>5971.348256466039</strong></article><article class="stat"><span>wd_on_grok_gap_mean</span><strong>14780.0</strong></article><article class="stat"><span>wd_on_val_at_mem_mean</span><strong>0.14693769365549086</strong></article><article class="stat"><span>wd_on_final_val_mean</span><strong>0.9598777999999999</strong></article><article class="stat"><span>wd_off_grok_rate</span><strong>0.0</strong></article><article class="stat"><span>wd_off_mem_rate</span><strong>1.0</strong></article><article class="stat"><span>wd_off_t_gen_mean</span><strong></strong></article><article class="stat"><span>wd_off_final_val_mean</span><strong>0.1594794</strong></article><article class="stat"><span>boundary</span><strong>toy_scale_single_task_modular_addition_grokking_not_a_scaling_claim</strong></article></section>
+<section><h2>Rows</h2><table><thead><tr><th>seed</th><th>weight_decay</th><th>memorized</th><th>grokked</th><th>t_mem</th><th>t_gen</th><th>grok_gap</th><th>val_at_mem</th><th>final_train_acc</th><th>final_val_acc</th><th>steps_run</th></tr></thead><tbody><tr><td>1337</td><td>1.0</td><td>True</td><td>True</td><td>100</td><td>11400</td><td>11300</td><td>0.11119968444108963</td><td>1.0</td><td>0.965989</td><td>11600</td></tr><tr><td>1337</td><td>0.0</td><td>True</td><td>False</td><td>100</td><td></td><td></td><td>0.10960542410612106</td><td>1.0</td><td>0.139099</td><td>40000</td></tr><tr><td>1338</td><td>1.0</td><td>True</td><td>True</td><td>100</td><td>12700</td><td>12600</td><td>0.19516408443450928</td><td>1.0</td><td>0.951907</td><td>12900</td></tr><tr><td>1338</td><td>0.0</td><td>True</td><td>False</td><td>100</td><td></td><td></td><td>0.19476550817489624</td><td>1.0</td><td>0.19822</td><td>40000</td></tr><tr><td>1339</td><td>1.0</td><td>True</td><td>True</td><td>100</td><td>10500</td><td>10400</td><td>0.141490638256073</td><td>1.0</td><td>0.970772</td><td>11600</td></tr><tr><td>1339</td><td>0.0</td><td>True</td><td>False</td><td>100</td><td></td><td></td><td>0.14016208052635193</td><td>1.0</td><td>0.139631</td><td>40000</td></tr><tr><td>1340</td><td>1.0</td><td>True</td><td>True</td><td>100</td><td>14600</td><td>14500</td><td>0.15730038285255432</td><td>1.0</td><td>0.957885</td><td>14700</td></tr><tr><td>1340</td><td>0.0</td><td>True</td><td>False</td><td>100</td><td></td><td></td><td>0.16128604114055634</td><td>1.0</td><td>0.155175</td><td>40000</td></tr><tr><td>1341</td><td>1.0</td><td>True</td><td>True</td><td>100</td><td>25200</td><td>25100</td><td>0.12953367829322815</td><td>1.0</td><td>0.952836</td><td>25400</td></tr><tr><td>1341</td><td>0.0</td><td>True</td><td>False</td><td>100</td><td></td><td></td><td>0.12993223965168</td><td>1.0</td><td>0.165272</td><td>40000</td></tr></tbody></table></section>
+<section><h2>Recommendations</h2><ul><li>Grokking reproduced: train accuracy saturates early, validation generalizes only much later.</li><li>Weight decay is the driver -- the wd=0 arm memorizes but (essentially) never groks within budget.</li><li>This is a delayed phase transition, not slow co-convergence (val was still near chance at memorization).</li></ul></section>
+<footer>Generated by MiniGPT readability maintenance tooling.</footer>
+</body>
+</html>

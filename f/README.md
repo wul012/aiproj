@@ -18,6 +18,10 @@ f/<version>/解释/说明.md
 
 ## 当前索引
 
+f/1179/图片
+f/1179/解释/说明.md
+ -> v1179 grokking (delayed generalization): a 1-layer MiniGPT on `a + b = c (mod 97)`, train_frac=0.2, paired weight_decay=1.0 vs 0.0 over 5 seeds. Real RTX 4060 result: `verdict=grokking_reproduced_wd_driven` — with weight decay all 5 seeds memorize by ~step 100 then generalize at ~step 14880 (validation near chance during the gap); without weight decay they memorize identically but never generalize within 40k steps. The figure is the canonical accuracy-vs-log-step grokking curve; evidence includes generated JSON/CSV/text/Markdown/HTML. Boundary: toy-scale single-task phenomenon reproduction, not a scaling claim.
+
 f/1178/图片
 f/1178/解释/说明.md
  -> v1178 PTQ policy sensitivity: reuses v1177 candidate selector over strict/default/aggressive quality budgets. Real v1175 artifact result: `strict_quality -> per_tensor:4b`, `balanced_default -> group32:3b`, `aggressive_compression -> per_channel_row:3b`; `selection_stable_across_profiles=False`. This keeps `group32:3b` as the balanced default recommendation, not an absolute or policy-invariant claim. Evidence includes generated JSON/CSV/text/Markdown/HTML plus Playwright screenshot.

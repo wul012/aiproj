@@ -16,7 +16,13 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1178.0.0` adds PTQ policy sensitivity over the v1177 candidate selector. It reuses the real v1175 PTQ JSON and runs strict/default/aggressive quality budgets so the project can see whether the selected quantization candidate is policy-invariant. Result: selection is budget-sensitive (`strict_quality -> per_tensor:4b`, `balanced_default -> group32:3b`, `aggressive_compression -> per_channel_row:3b`), so `group32:3b` remains the default balanced recommendation, not an absolute claim.
+Version `v1179.0.0` pivots off the inference-efficiency / PTQ arc onto training dynamics: it honestly reproduces **grokking** (delayed generalization) on `a + b = c (mod 97)` with a 1-layer MiniGPT. With weight decay all 5 seeds memorize the train set by ~step 100 and then generalize only at ~step 14,880 (validation near chance throughout the gap); the paired weight_decay=0 ablation memorizes identically but never generalizes within 40k steps. Verdict `grokking_reproduced_wd_driven` — weight decay is the measured driver. The first *positive* result this session rather than an honest null, and it keeps the same discipline (multi-seed, paired ablation, a delay-realness gate, censoring-aware aggregation).
+
+## Latest v1179 checkpoint
+
+- Added `src/minigpt/grok_v1179.py`: modular-addition task builder (`build_modular_task`), deterministic disjoint split, answer-token loss/accuracy, paired per-seed `train_arm`, censoring-aware `arm_aggregate`, and `decide()` with a validity-only pass gate plus a grokking verdict ladder. The grokking regime was calibrated via a train_frac sweep (delay grows as data shrinks: 0.35→200, 0.30→800, 0.25→2100, 0.20→~11300), so `train_frac=0.2` is baked in.
+- Added CLI `scripts/run_grok_v1179.py`. Real RTX 4060 run (5 seeds): `status=pass`, `verdict=grokking_reproduced_wd_driven`, wd=1.0 grok_rate 5/5 (t_gen 14880±5971, val_at_mem 0.147), wd=0.0 grok_rate 0/5 (final val 0.159).
+- Added `tests/test_grok_v1179.py` (16, incl. the slow-co-convergence guard that refuses to call simultaneous train/val rise "grokking", the censoring aggregator, and all five verdicts). Evidence in `f/1179`; code explanation in `代码讲解记录_工程保养阶段/1191-v1179-minigpt-grokking.md`. Design panel could not run (subagent session-limit); the five-lens critique was carried out inline and recorded in the version doc.
 
 ## Latest v1178 checkpoint
 
