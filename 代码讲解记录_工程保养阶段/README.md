@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1190-v1178-minigpt-ptq-policy-sensitivity.md
+ -> v1178 code explanation: PTQ policy sensitivity over the v1177 candidate selector. Defines strict/default/aggressive `PtqPolicyProfile` values, reuses the v1177 candidate builder rather than duplicating selection logic, and proves the chosen candidate changes with quality tolerance (`per_tensor:4b` / `group32:3b` / `per_channel_row:3b`). Emphasizes that `group32:3b` is the balanced default, not a policy-invariant deployment truth.
+
 1189-v1177-minigpt-ptq-candidate-selector.md
  -> v1177 code explanation: PTQ deployment candidate selector. Consumes the real v1175 PTQ JSON, applies an explicit quality budget (`dCE <= 0.08`, exact-match drop `<= 0.10`, KL `<= 0.10`), records budget pass/fail and reject reasons for each S1 full-model candidate, and selects `group32:3b` as the lowest effective-bits candidate inside the budget. Emphasizes the boundary: quality-cost selection only, not int-kernel runtime speed or memory proof.
 

@@ -16,7 +16,13 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1177.0.0` turns the v1175 post-training quantization curve into a bounded deployment-candidate selector. It consumes the real v1175 PTQ JSON, applies an explicit quality budget (`dCE <= 0.08`, exact-match drop `<= 0.10`, KL `<= 0.10`), and selects the lowest effective-bits candidate inside that budget. On the archived v1175 evidence the selected candidate is `group32:3b` (`eff_bits=3.5`, `dCE=0.064286`, `EM drop=0.090555`). This is still a quality-cost decision only: no int-kernel speed or memory claim is made.
+Version `v1178.0.0` adds PTQ policy sensitivity over the v1177 candidate selector. It reuses the real v1175 PTQ JSON and runs strict/default/aggressive quality budgets so the project can see whether the selected quantization candidate is policy-invariant. Result: selection is budget-sensitive (`strict_quality -> per_tensor:4b`, `balanced_default -> group32:3b`, `aggressive_compression -> per_channel_row:3b`), so `group32:3b` remains the default balanced recommendation, not an absolute claim.
+
+## Latest v1178 checkpoint
+
+- Added `src/minigpt/ptq_policy_sensitivity_v1178.py`: `PtqPolicyProfile`, three default policy profiles, repeated calls into the v1177 candidate selector, stability summary, profile rows, and readability outputs.
+- Added CLI `scripts/run_ptq_policy_sensitivity_v1178.py`, consuming a `ptq_v1175.json` file or directory and writing JSON/CSV/text/Markdown/HTML outputs.
+- Real v1175 artifact run shows `selection_stable_across_profiles=False`; the chosen candidate changes with quality tolerance. Added `tests/test_ptq_policy_sensitivity_v1178.py`; focused validation with the v1177 selector tests returned `8 passed`. Evidence in `f/1178`; code explanation in `代码讲解记录_工程保养阶段/1190-v1178-minigpt-ptq-policy-sensitivity.md`.
 
 ## Latest v1177 checkpoint
 

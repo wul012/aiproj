@@ -1,0 +1,4 @@
+profile_id,status,selected_candidate_id,selected_eff_bits,selected_dce_mean,selected_kl_mean,selected_em_drop,viable_candidate_count,max_dce_nats,max_exact_match_drop,max_kl_nats
+strict_quality,pass,per_tensor:4b,4.0014,0.016405,0.030221,0.030555,9,0.02,0.04,0.04
+balanced_default,pass,group32:3b,3.5,0.064286,0.07137,0.090555,10,0.08,0.1,0.1
+aggressive_compression,pass,per_channel_row:3b,3.1878,0.086742,0.089207,0.123333,11,0.1,0.14,0.11

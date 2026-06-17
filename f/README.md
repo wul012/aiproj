@@ -18,6 +18,10 @@ f/<version>/解释/说明.md
 
 ## 当前索引
 
+f/1178/图片
+f/1178/解释/说明.md
+ -> v1178 PTQ policy sensitivity: reuses v1177 candidate selector over strict/default/aggressive quality budgets. Real v1175 artifact result: `strict_quality -> per_tensor:4b`, `balanced_default -> group32:3b`, `aggressive_compression -> per_channel_row:3b`; `selection_stable_across_profiles=False`. This keeps `group32:3b` as the balanced default recommendation, not an absolute or policy-invariant claim. Evidence includes generated JSON/CSV/text/Markdown/HTML plus Playwright screenshot.
+
 f/1177/图片
 f/1177/解释/说明.md
  -> v1177 PTQ deployment candidate selector: consumes the real v1175 PTQ JSON and applies an explicit bounded quality budget (`dCE <= 0.08`, exact-match drop `<= 0.10`, KL `<= 0.10`) to choose the lowest effective-bits candidate. Result: `group32:3b` (`eff_bits=3.5`, `dCE=0.064286`, `KL=0.07137`, `EM drop=0.090555`) is selected; `per_channel_row:3b` is rejected because its exact-match drop exceeds the budget. Boundary remains quality-cost selection only, with no int-kernel speed or memory claim. Evidence includes generated JSON/CSV/text/Markdown/HTML plus Playwright screenshot.

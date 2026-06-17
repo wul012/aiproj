@@ -1,0 +1,17 @@
+status=pass
+decision=ptq_policy_sensitivity_measured
+policy_sensitivity_ready=True
+source_status=pass
+source_verdict=per_channel_advantage_not_separable
+source_ptq_report=f\1175\解释\ptq_v1175\ptq_v1175.json
+profile_count=3
+passing_profile_count=3
+unique_selected_candidate_count=3
+selection_stable_across_profiles=False
+default_profile_candidate=group32:3b
+default_profile_eff_bits=3.5
+default_profile_dce_mean=0.064286
+default_profile_em_drop=0.090555
+sensitivity_verdict=candidate_choice_changes_with_quality_budget
+boundary=policy_sensitivity_only_reuses_v1175_quality_cost_evidence
+next_step=use_balanced_default_unless_product_tolerance_explicitly_prefers_strict_or_aggressive
