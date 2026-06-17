@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1189-v1177-minigpt-ptq-candidate-selector.md
+ -> v1177 code explanation: PTQ deployment candidate selector. Consumes the real v1175 PTQ JSON, applies an explicit quality budget (`dCE <= 0.08`, exact-match drop `<= 0.10`, KL `<= 0.10`), records budget pass/fail and reject reasons for each S1 full-model candidate, and selects `group32:3b` as the lowest effective-bits candidate inside the budget. Emphasizes the boundary: quality-cost selection only, not int-kernel runtime speed or memory proof.
+
 1188-v1176-minigpt-completion-mask-dedup.md
  -> v1176 code explanation: extract completion-token X/Y masking into a neutral helper shared by distillation and PTQ, preserve distill_common compatibility, and link the plain-language project guide.
 

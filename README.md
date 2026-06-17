@@ -16,7 +16,13 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1176.0.0` is a contract-preserving cleanup after Claude's v1175 PTQ feature. It extracts the shared completion-token X/Y builder into `src/minigpt/completion_masking.py`, keeps `distill_common._build_xy` as a compatibility alias, and migrates PTQ away from its duplicate `_padded_xy`. It also routes the plain-language project guide into the README documentation map. This does not change v1175's quantization verdict; it keeps the completion-mask contract single-sourced for PTQ, distillation, and future completion-only experiments.
+Version `v1177.0.0` turns the v1175 post-training quantization curve into a bounded deployment-candidate selector. It consumes the real v1175 PTQ JSON, applies an explicit quality budget (`dCE <= 0.08`, exact-match drop `<= 0.10`, KL `<= 0.10`), and selects the lowest effective-bits candidate inside that budget. On the archived v1175 evidence the selected candidate is `group32:3b` (`eff_bits=3.5`, `dCE=0.064286`, `EM drop=0.090555`). This is still a quality-cost decision only: no int-kernel speed or memory claim is made.
+
+## Latest v1177 checkpoint
+
+- Added `src/minigpt/ptq_candidate_v1177.py`: path/directory PTQ report loading, `PtqCandidatePolicy`, candidate row construction, budget-based reject reasons, effective-bits sorting, selected/rejected candidate sections, and readability output writer.
+- Added CLI `scripts/select_ptq_candidate_v1177.py`, supporting directory or JSON input, configurable `--max-dce-nats`, `--max-exact-match-drop`, `--max-kl-nats`, `--require-pass`, and `--force`.
+- Real v1175 artifact run selected `group32:3b`; `per_channel_row:3b` is rejected because exact-match drop exceeds the default `0.10` budget. Added `tests/test_ptq_candidate_v1177.py` (`5 passed`). Evidence in `f/1177`; code explanation in `代码讲解记录_工程保养阶段/1189-v1177-minigpt-ptq-candidate-selector.md`.
 
 ## Latest v1176 checkpoint
 

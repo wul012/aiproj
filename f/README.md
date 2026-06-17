@@ -18,6 +18,10 @@ f/<version>/解释/说明.md
 
 ## 当前索引
 
+f/1177/图片
+f/1177/解释/说明.md
+ -> v1177 PTQ deployment candidate selector: consumes the real v1175 PTQ JSON and applies an explicit bounded quality budget (`dCE <= 0.08`, exact-match drop `<= 0.10`, KL `<= 0.10`) to choose the lowest effective-bits candidate. Result: `group32:3b` (`eff_bits=3.5`, `dCE=0.064286`, `KL=0.07137`, `EM drop=0.090555`) is selected; `per_channel_row:3b` is rejected because its exact-match drop exceeds the budget. Boundary remains quality-cost selection only, with no int-kernel speed or memory claim. Evidence includes generated JSON/CSV/text/Markdown/HTML plus Playwright screenshot.
+
 f/1176/图片
 f/1176/解释/说明.md
  -> v1176 completion-mask helper dedup: contract-preserving maintenance after v1175 PTQ. New `src/minigpt/completion_masking.py` owns `build_completion_xy` for tokenized `(full, prompt_length)` examples. `distill_common._build_xy` remains a compatibility alias; PTQ v1175 now uses the same helper instead of its local `_padded_xy`. Focused evidence: py_compile passed; completion-mask/distill-common/PTQ tests `26 passed`. Also links `项目通俗说明/README.md` from the root README documentation map.
