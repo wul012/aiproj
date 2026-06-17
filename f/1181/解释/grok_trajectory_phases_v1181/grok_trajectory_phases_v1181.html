@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT grokking trajectory phases v1181</title>
+<style>
+:root { color-scheme: light; font-family: Arial, "Microsoft YaHei", sans-serif; color: #172026; background: #f6f8fa; }
+body { margin: 0; padding: 24px; }
+header, section, footer { max-width: 1120px; margin: 0 auto 18px; }
+header { padding: 18px 0 8px; border-bottom: 3px solid #2f6f8f; }
+h1 { margin: 0 0 8px; font-size: 28px; letter-spacing: 0; }
+h2 { margin: 0 0 10px; font-size: 18px; letter-spacing: 0; }
+p { margin: 0 0 10px; line-height: 1.5; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; background: transparent; border: 0; padding: 0; }
+.stat { background: #fff; border: 1px solid #d7dee5; border-radius: 8px; padding: 12px; min-height: 64px; }
+.stat span { display: block; color: #5c6b73; font-size: 12px; margin-bottom: 8px; }
+.stat strong { display: block; font-size: 18px; overflow-wrap: anywhere; }
+section { background: #fff; border: 1px solid #d7dee5; border-radius: 8px; padding: 16px; }
+table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+th, td { padding: 9px; border-bottom: 1px solid #e5e9ef; text-align: left; vertical-align: top; overflow-wrap: anywhere; }
+th { background: #eef3f6; }
+ul { margin: 0; padding-left: 20px; }
+li { margin: 6px 0; }
+.muted { color: #687782; }
+footer { color: #687782; font-size: 12px; }
+</style>
+</head>
+<body>
+<header><h1>MiniGPT grokking trajectory phases v1181</h1><p>Late-stage maintenance report for keeping AI governance artifacts readable.</p></header>
+<section class="stats"><article class="stat"><span>phase_report_ready</span><strong>True</strong></article><article class="stat"><span>source_status</span><strong>pass</strong></article><article class="stat"><span>source_decision</span><strong>grokking_reproduced_wd_driven</strong></article><article class="stat"><span>source_verdict</span><strong>grokking_reproduced_wd_driven</strong></article><article class="stat"><span>source_grok_report</span><strong>f\1179\解释\grok_v1179\grok_v1179.json</strong></article><article class="stat"><span>seed_count</span><strong>5</strong></article><article class="stat"><span>row_count</span><strong>10</strong></article><article class="stat"><span>curve_count</span><strong>10</strong></article><article class="stat"><span>weight_decay_on</span><strong>1.0</strong></article><article class="stat"><span>weight_decay_off</span><strong>0.0</strong></article><article class="stat"><span>wd_on_delayed_grok_count</span><strong>5</strong></article><article class="stat"><span>wd_off_memorized_censored_count</span><strong>5</strong></article><article class="stat"><span>paired_phase_separation_count</span><strong>5</strong></article><article class="stat"><span>wd_on_low_plateau_rate_mean</span><strong>0.8321336571672611</strong></article><article class="stat"><span>wd_on_min_gap</span><strong>10400.0</strong></article><article class="stat"><span>wd_on_max_gap</span><strong>25100.0</strong></article><article class="stat"><span>longest_delay_seed</span><strong>1341</strong></article><article class="stat"><span>min_gap_steps</span><strong>1000</strong></article><article class="stat"><span>low_val_threshold</span><strong>0.5</strong></article><article class="stat"><span>min_wd_on_low_plateau_rate</span><strong>0.7</strong></article><article class="stat"><span>boundary</span><strong>curve_phase_compression_only_no_training_rerun</strong></article><article class="stat"><span>next_step</span><strong>use_phase_rows_to_explain_which_part_of_the_curve_makes_v1179_grokking</strong></article></section>
+<section><h2>Grokking Phase Rows</h2><table><thead><tr><th>seed</th><th>arm</th><th>weight_decay</th><th>phase</th><th>t_mem</th><th>t_gen</th><th>grok_gap</th><th>plateau_eval_count</th><th>low_val_plateau_rate</th><th>val_at_mem</th><th>final_val_acc</th><th>max_val_jump</th><th>max_val_jump_step</th><th>curve_endpoint_matches_row</th></tr></thead><tbody><tr><td>1337</td><td>weight_decay_on</td><td>1.0</td><td>delayed_grok</td><td>100</td><td>11400</td><td>11300</td><td>113</td><td>0.8407079646017699</td><td>0.11119968444108963</td><td>0.965989</td><td>0.15902799999999995</td><td>11300</td><td>True</td></tr><tr><td>1337</td><td>weight_decay_off</td><td>0.0</td><td>memorized_only_censored</td><td>100</td><td></td><td></td><td>400</td><td>1.0</td><td>0.10960542410612106</td><td>0.139099</td><td>0.108011</td><td>100</td><td>True</td></tr><tr><td>1338</td><td>weight_decay_on</td><td>1.0</td><td>delayed_grok</td><td>100</td><td>12700</td><td>12600</td><td>126</td><td>0.9603174603174603</td><td>0.19516408443450928</td><td>0.951907</td><td>0.195164</td><td>100</td><td>True</td></tr><tr><td>1338</td><td>weight_decay_off</td><td>0.0</td><td>memorized_only_censored</td><td>100</td><td></td><td></td><td>400</td><td>1.0</td><td>0.19476550817489624</td><td>0.19822</td><td>0.194766</td><td>100</td><td>True</td></tr><tr><td>1339</td><td>weight_decay_on</td><td>1.0</td><td>delayed_grok</td><td>100</td><td>10500</td><td>10400</td><td>104</td><td>0.7596153846153846</td><td>0.141490638256073</td><td>0.970772</td><td>0.435499</td><td>11500</td><td>True</td></tr><tr><td>1339</td><td>weight_decay_off</td><td>0.0</td><td>memorized_only_censored</td><td>100</td><td></td><td></td><td>400</td><td>1.0</td><td>0.14016208052635193</td><td>0.139631</td><td>0.13816900000000001</td><td>100</td><td>True</td></tr><tr><td>1340</td><td>weight_decay_on</td><td>1.0</td><td>delayed_grok</td><td>100</td><td>14600</td><td>14500</td><td>145</td><td>0.7793103448275862</td><td>0.15730038285255432</td><td>0.957885</td><td>0.30795799999999995</td><td>11100</td><td>True</td></tr><tr><td>1340</td><td>weight_decay_off</td><td>0.0</td><td>memorized_only_censored</td><td>100</td><td></td><td></td><td>400</td><td>1.0</td><td>0.16128604114055634</td><td>0.155175</td><td>0.161286</td><td>100</td><td>True</td></tr><tr><td>1341</td><td>weight_decay_on</td><td>1.0</td><td>delayed_grok</td><td>100</td><td>25200</td><td>25100</td><td>251</td><td>0.8207171314741036</td><td>0.12953367829322815</td><td>0.952836</td><td>0.41344500000000006</td><td>22700</td><td>True</td></tr><tr><td>1341</td><td>weight_decay_off</td><td>0.0</td><td>memorized_only_censored</td><td>100</td><td></td><td></td><td>400</td><td>1.0</td><td>0.12993223965168</td><td>0.165272</td><td>0.11996799999999999</td><td>100</td><td>True</td></tr></tbody></table></section>
+<section><h2>Recommendations</h2><ul><li>The v1179 curves compress into the expected phases: early train memorization, a long low-validation plateau, then late generalization only with weight decay.</li><li>The longest delayed seed is 1341, useful as the clearest example when explaining grokking to readers.</li></ul></section>
+<footer>Generated by MiniGPT readability maintenance tooling.</footer>
+</body>
+</html>

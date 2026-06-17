@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1193-v1181-minigpt-grokking-trajectory-phases.md
+ -> v1181 code explanation: grokking trajectory phase report over the v1179 real experiment curves. Adds `grok_trajectory_phases_v1181.py` and `scripts/analyze_grok_trajectory_v1181.py` to align rows with curves, classify each seed/arm as `delayed_grok` or `memorized_only_censored`, compute plateau low-validation rates, max validation jumps, curve endpoint/mempoint consistency, and paired phase separation. It explains the curve process behind v1179 rather than rerunning training or expanding the model-quality claim. Evidence lives under `f/1181`.
+
 1192-v1180-minigpt-grokking-evidence-check.md
  -> v1180 code explanation: grokking evidence check over the v1179 real experiment artifact. Adds `grok_evidence_check_v1180.py` and `scripts/check_grok_evidence_v1180.py` to rebuild the headline evidence from `grok_v1179.json` rows: paired seed/arm grid, weight-decay memorization and delayed generalization, no-decay non-grokking ablation, low validation accuracy at memorization, summary-rate agreement, and toy-scale boundary. It is artifact reconstruction only, not a training rerun or stronger model-quality claim. Tests cover pass/fail mutations and CLI output wiring; evidence lives under `f/1180`.
 

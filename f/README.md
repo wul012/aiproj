@@ -18,6 +18,10 @@ f/<version>/解释/说明.md
 
 ## 当前索引
 
+f/1181/图片
+f/1181/解释/说明.md
+ -> v1181 grokking trajectory phases: consumes the real v1179 `grok_v1179.json` curves and compresses each seed/arm into a phase row. Result: `status=pass`, `decision=grokking_phase_profile_consistent`, `curve_count=10`, `wd_on_delayed_grok_count=5`, `wd_off_memorized_censored_count=5`, `paired_phase_separation_count=5`, `wd_on_low_plateau_rate_mean=0.8321336571672611`, `wd_on_min_gap=10400.0`, `wd_on_max_gap=25100.0`, `longest_delay_seed=1341`. Boundary: curve phase compression only, no training rerun and no broader model-quality claim. Evidence includes generated JSON/CSV/text/Markdown/HTML plus Playwright screenshot.
+
 f/1180/图片
 f/1180/解释/说明.md
  -> v1180 grokking evidence check: consumes the real v1179 `grok_v1179.json` and reconstructs the claim from rows instead of trusting the summary text. The check verifies paired seed/arm grid completeness, weight-decay arm memorization + delayed generalization, no-decay ablation non-grokking, mean delay gap, low validation accuracy at memorization, summary/row rate agreement, and the toy-scale boundary. Result: `status=pass`, `decision=grokking_evidence_claim_reconstructed`, `failed_count=0`, `wd_on_mean_gap=14780.0`, `wd_on_mean_val_at_mem=0.14693769365549086`. Evidence includes generated JSON/CSV/text/Markdown/HTML plus Playwright screenshot.

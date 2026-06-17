@@ -16,7 +16,13 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1180.0.0` adds a grokking evidence check for the v1179 positive result. It consumes `grok_v1179.json` and reconstructs the headline claim from rows: with weight decay 5/5 seeds memorize and grok, without weight decay 5/5 seeds memorize but 0/5 grok, and the with-decay arm has a real delayed gap (`mean_gap=14780`, `mean_val_at_mem=0.147`). This does not rerun training; it turns the v1179 result into an auditable artifact.
+Version `v1181.0.0` adds a grokking trajectory phase report for the v1179 positive result. It consumes the archived `grok_v1179.json` curves and compresses every seed/arm into phase rows: with weight decay all 5 seeds are `delayed_grok`; without weight decay all 5 seeds are `memorized_only_censored`; paired phase separation is 5/5. This does not rerun training; it explains which part of the curve makes the v1179 result grokking rather than ordinary learning.
+
+## Latest v1181 checkpoint
+
+- Added `src/minigpt/grok_trajectory_phases_v1181.py`: curve parsing, row/curve alignment by weight decay arm, per-row phase classification, plateau metrics, max validation-jump metrics, curve endpoint/memorization-point consistency checks, paired phase separation checks, and readability outputs.
+- Added CLI `scripts/analyze_grok_trajectory_v1181.py`, supporting `--min-gap-steps`, `--low-val-threshold`, `--min-wd-on-low-plateau-rate`, `--require-pass`, and `--force`.
+- Real v1179 artifact result: `status=pass`, `decision=grokking_phase_profile_consistent`, `curve_count=10`, `wd_on_delayed_grok_count=5`, `wd_off_memorized_censored_count=5`, `paired_phase_separation_count=5`, `wd_on_low_plateau_rate_mean=0.8321`, `wd_on_min_gap=10400`, `wd_on_max_gap=25100`, `longest_delay_seed=1341`. Added `tests/test_grok_trajectory_phases_v1181.py` (`5 passed`). Evidence in `f/1181`; code explanation in `代码讲解记录_工程保养阶段/1193-v1181-minigpt-grokking-trajectory-phases.md`.
 
 ## Latest v1180 checkpoint
 
