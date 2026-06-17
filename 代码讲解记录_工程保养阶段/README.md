@@ -13,6 +13,12 @@
 
 ## 当前索引
 
+1192-v1180-minigpt-grokking-evidence-check.md
+ -> v1180 code explanation: grokking evidence check over the v1179 real experiment artifact. Adds `grok_evidence_check_v1180.py` and `scripts/check_grok_evidence_v1180.py` to rebuild the headline evidence from `grok_v1179.json` rows: paired seed/arm grid, weight-decay memorization and delayed generalization, no-decay non-grokking ablation, low validation accuracy at memorization, summary-rate agreement, and toy-scale boundary. It is artifact reconstruction only, not a training rerun or stronger model-quality claim. Tests cover pass/fail mutations and CLI output wiring; evidence lives under `f/1180`.
+
+1191-v1179-minigpt-grokking.md
+ -> v1179 code explanation: the first positive grokking reproduction in this MiniGPT line. Uses modular addition `a + b = c (mod 97)` with a small train split, paired weight-decay vs no-decay arms, five seeds, delayed-generalization metrics, and censoring-aware aggregation. The version proves a toy-scale mechanism claim only: with weight decay, all seeds memorize early and generalize much later; without weight decay, the same memorization does not become grokking within the run budget.
+
 1190-v1178-minigpt-ptq-policy-sensitivity.md
  -> v1178 code explanation: PTQ policy sensitivity over the v1177 candidate selector. Defines strict/default/aggressive `PtqPolicyProfile` values, reuses the v1177 candidate builder rather than duplicating selection logic, and proves the chosen candidate changes with quality tolerance (`per_tensor:4b` / `group32:3b` / `per_channel_row:3b`). Emphasizes that `group32:3b` is the balanced default, not a policy-invariant deployment truth.
 

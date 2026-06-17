@@ -1,0 +1,219 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT grokking evidence check v1180",
+  "generated_at": "2026-06-17T08:47:17Z",
+  "status": "pass",
+  "decision": "grokking_evidence_claim_reconstructed",
+  "failed_count": 0,
+  "issues": [],
+  "summary": {
+    "evidence_check_ready": true,
+    "source_status": "pass",
+    "source_decision": "grokking_reproduced_wd_driven",
+    "source_verdict": "grokking_reproduced_wd_driven",
+    "source_grok_report": "f\\1179\\解释\\grok_v1179\\grok_v1179.json",
+    "seed_count": 5,
+    "row_count": 10,
+    "weight_decay_on": 1.0,
+    "weight_decay_off": 0.0,
+    "wd_on_mem_count": 5,
+    "wd_on_grok_count": 5,
+    "wd_off_mem_count": 5,
+    "wd_off_grok_count": 0,
+    "wd_on_mean_gap": 14780.0,
+    "wd_on_mean_val_at_mem": 0.14693769365549086,
+    "summary_wd_on_grok_rate": 1.0,
+    "summary_wd_off_grok_rate": 0.0,
+    "min_delay_steps": 1000,
+    "max_val_at_mem": 0.5,
+    "boundary": "artifact_reconstruction_only_no_training_rerun",
+    "next_step": "use_v1179_as_positive_training_dynamics_anchor_if_check_passes"
+  },
+  "rows": [
+    {
+      "id": "source_status_pass",
+      "status": "pass",
+      "expected": "pass",
+      "actual": "pass",
+      "detail": "source report must be a valid measurement"
+    },
+    {
+      "id": "source_verdict_wd_driven",
+      "status": "pass",
+      "expected": "grokking_reproduced_wd_driven",
+      "actual": "grokking_reproduced_wd_driven",
+      "detail": "v1179 headline claim is specifically weight-decay-driven grokking"
+    },
+    {
+      "id": "seed_arm_grid_complete",
+      "status": "pass",
+      "expected": "5 rows per arm; total 10",
+      "actual": {
+        "wd_on": 5,
+        "wd_off": 5,
+        "total": 10
+      },
+      "detail": "each seed must have paired weight_decay on/off rows"
+    },
+    {
+      "id": "wd_on_memorized_all",
+      "status": "pass",
+      "expected": 5,
+      "actual": 5,
+      "detail": "with-decay arm must memorize all seeds before claiming delayed generalization"
+    },
+    {
+      "id": "wd_on_grokked_all",
+      "status": "pass",
+      "expected": 5,
+      "actual": 5,
+      "detail": "with-decay arm must grok all seeds for the v1179 strong positive claim"
+    },
+    {
+      "id": "wd_off_memorized_all",
+      "status": "pass",
+      "expected": 5,
+      "actual": 5,
+      "detail": "no-decay ablation should still memorize, separating optimization from generalization"
+    },
+    {
+      "id": "wd_off_did_not_grok",
+      "status": "pass",
+      "expected": 0,
+      "actual": 0,
+      "detail": "weight-decay-driven verdict requires the no-decay ablation not to grok within budget"
+    },
+    {
+      "id": "delay_real",
+      "status": "pass",
+      "expected": {
+        "mean_gap_at_least": 1000,
+        "mean_val_at_mem_below": 0.5
+      },
+      "actual": {
+        "mean_gap": 14780.0,
+        "mean_val_at_mem": 0.14693769365549086
+      },
+      "detail": "validation must remain low at memorization and generalize much later"
+    },
+    {
+      "id": "summary_rates_match_rows",
+      "status": "pass",
+      "expected": {
+        "wd_on_grok_rate": 1.0,
+        "wd_off_grok_rate": 0.0
+      },
+      "actual": {
+        "wd_on_grok_rate": 1.0,
+        "wd_off_grok_rate": 0.0
+      },
+      "detail": "summary grok rates must reconstruct from rows"
+    },
+    {
+      "id": "boundary_present",
+      "status": "pass",
+      "expected": "toy_scale_single_task_modular_addition_grokking_not_a_scaling_claim",
+      "actual": "toy_scale_single_task_modular_addition_grokking_not_a_scaling_claim",
+      "detail": "positive grokking result must keep its toy-scale boundary"
+    }
+  ],
+  "check_rows": [
+    {
+      "id": "source_status_pass",
+      "status": "pass",
+      "expected": "pass",
+      "actual": "pass",
+      "detail": "source report must be a valid measurement"
+    },
+    {
+      "id": "source_verdict_wd_driven",
+      "status": "pass",
+      "expected": "grokking_reproduced_wd_driven",
+      "actual": "grokking_reproduced_wd_driven",
+      "detail": "v1179 headline claim is specifically weight-decay-driven grokking"
+    },
+    {
+      "id": "seed_arm_grid_complete",
+      "status": "pass",
+      "expected": "5 rows per arm; total 10",
+      "actual": {
+        "wd_on": 5,
+        "wd_off": 5,
+        "total": 10
+      },
+      "detail": "each seed must have paired weight_decay on/off rows"
+    },
+    {
+      "id": "wd_on_memorized_all",
+      "status": "pass",
+      "expected": 5,
+      "actual": 5,
+      "detail": "with-decay arm must memorize all seeds before claiming delayed generalization"
+    },
+    {
+      "id": "wd_on_grokked_all",
+      "status": "pass",
+      "expected": 5,
+      "actual": 5,
+      "detail": "with-decay arm must grok all seeds for the v1179 strong positive claim"
+    },
+    {
+      "id": "wd_off_memorized_all",
+      "status": "pass",
+      "expected": 5,
+      "actual": 5,
+      "detail": "no-decay ablation should still memorize, separating optimization from generalization"
+    },
+    {
+      "id": "wd_off_did_not_grok",
+      "status": "pass",
+      "expected": 0,
+      "actual": 0,
+      "detail": "weight-decay-driven verdict requires the no-decay ablation not to grok within budget"
+    },
+    {
+      "id": "delay_real",
+      "status": "pass",
+      "expected": {
+        "mean_gap_at_least": 1000,
+        "mean_val_at_mem_below": 0.5
+      },
+      "actual": {
+        "mean_gap": 14780.0,
+        "mean_val_at_mem": 0.14693769365549086
+      },
+      "detail": "validation must remain low at memorization and generalize much later"
+    },
+    {
+      "id": "summary_rates_match_rows",
+      "status": "pass",
+      "expected": {
+        "wd_on_grok_rate": 1.0,
+        "wd_off_grok_rate": 0.0
+      },
+      "actual": {
+        "wd_on_grok_rate": 1.0,
+        "wd_off_grok_rate": 0.0
+      },
+      "detail": "summary grok rates must reconstruct from rows"
+    },
+    {
+      "id": "boundary_present",
+      "status": "pass",
+      "expected": "toy_scale_single_task_modular_addition_grokking_not_a_scaling_claim",
+      "actual": "toy_scale_single_task_modular_addition_grokking_not_a_scaling_claim",
+      "detail": "positive grokking result must keep its toy-scale boundary"
+    }
+  ],
+  "recommendations": [
+    "The v1179 grokking claim reconstructs from the archived rows: memorization is early, generalization is delayed, and the no-decay ablation stays ungrokked.",
+    "Use v1179 as a positive training-dynamics anchor, while keeping the toy-scale modular-addition boundary explicit."
+  ],
+  "csv_fieldnames": [
+    "id",
+    "status",
+    "expected",
+    "actual",
+    "detail"
+  ]
+}

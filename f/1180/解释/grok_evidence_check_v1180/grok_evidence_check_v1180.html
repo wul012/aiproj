@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT grokking evidence check v1180</title>
+<style>
+:root { color-scheme: light; font-family: Arial, "Microsoft YaHei", sans-serif; color: #172026; background: #f6f8fa; }
+body { margin: 0; padding: 24px; }
+header, section, footer { max-width: 1120px; margin: 0 auto 18px; }
+header { padding: 18px 0 8px; border-bottom: 3px solid #2f6f8f; }
+h1 { margin: 0 0 8px; font-size: 28px; letter-spacing: 0; }
+h2 { margin: 0 0 10px; font-size: 18px; letter-spacing: 0; }
+p { margin: 0 0 10px; line-height: 1.5; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; background: transparent; border: 0; padding: 0; }
+.stat { background: #fff; border: 1px solid #d7dee5; border-radius: 8px; padding: 12px; min-height: 64px; }
+.stat span { display: block; color: #5c6b73; font-size: 12px; margin-bottom: 8px; }
+.stat strong { display: block; font-size: 18px; overflow-wrap: anywhere; }
+section { background: #fff; border: 1px solid #d7dee5; border-radius: 8px; padding: 16px; }
+table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+th, td { padding: 9px; border-bottom: 1px solid #e5e9ef; text-align: left; vertical-align: top; overflow-wrap: anywhere; }
+th { background: #eef3f6; }
+ul { margin: 0; padding-left: 20px; }
+li { margin: 6px 0; }
+.muted { color: #687782; }
+footer { color: #687782; font-size: 12px; }
+</style>
+</head>
+<body>
+<header><h1>MiniGPT grokking evidence check v1180</h1><p>Late-stage maintenance report for keeping AI governance artifacts readable.</p></header>
+<section class="stats"><article class="stat"><span>evidence_check_ready</span><strong>True</strong></article><article class="stat"><span>source_status</span><strong>pass</strong></article><article class="stat"><span>source_decision</span><strong>grokking_reproduced_wd_driven</strong></article><article class="stat"><span>source_verdict</span><strong>grokking_reproduced_wd_driven</strong></article><article class="stat"><span>source_grok_report</span><strong>f\1179\解释\grok_v1179\grok_v1179.json</strong></article><article class="stat"><span>seed_count</span><strong>5</strong></article><article class="stat"><span>row_count</span><strong>10</strong></article><article class="stat"><span>weight_decay_on</span><strong>1.0</strong></article><article class="stat"><span>weight_decay_off</span><strong>0.0</strong></article><article class="stat"><span>wd_on_mem_count</span><strong>5</strong></article><article class="stat"><span>wd_on_grok_count</span><strong>5</strong></article><article class="stat"><span>wd_off_mem_count</span><strong>5</strong></article><article class="stat"><span>wd_off_grok_count</span><strong>0</strong></article><article class="stat"><span>wd_on_mean_gap</span><strong>14780.0</strong></article><article class="stat"><span>wd_on_mean_val_at_mem</span><strong>0.14693769365549086</strong></article><article class="stat"><span>summary_wd_on_grok_rate</span><strong>1.0</strong></article><article class="stat"><span>summary_wd_off_grok_rate</span><strong>0.0</strong></article><article class="stat"><span>min_delay_steps</span><strong>1000</strong></article><article class="stat"><span>max_val_at_mem</span><strong>0.5</strong></article><article class="stat"><span>boundary</span><strong>artifact_reconstruction_only_no_training_rerun</strong></article><article class="stat"><span>next_step</span><strong>use_v1179_as_positive_training_dynamics_anchor_if_check_passes</strong></article></section>
+<section><h2>Grok Evidence Checks</h2><table><thead><tr><th>id</th><th>status</th><th>expected</th><th>actual</th><th>detail</th></tr></thead><tbody><tr><td>source_status_pass</td><td>pass</td><td>pass</td><td>pass</td><td>source report must be a valid measurement</td></tr><tr><td>source_verdict_wd_driven</td><td>pass</td><td>grokking_reproduced_wd_driven</td><td>grokking_reproduced_wd_driven</td><td>v1179 headline claim is specifically weight-decay-driven grokking</td></tr><tr><td>seed_arm_grid_complete</td><td>pass</td><td>5 rows per arm; total 10</td><td>wd_on=5, wd_off=5, total=10</td><td>each seed must have paired weight_decay on/off rows</td></tr><tr><td>wd_on_memorized_all</td><td>pass</td><td>5</td><td>5</td><td>with-decay arm must memorize all seeds before claiming delayed generalization</td></tr><tr><td>wd_on_grokked_all</td><td>pass</td><td>5</td><td>5</td><td>with-decay arm must grok all seeds for the v1179 strong positive claim</td></tr><tr><td>wd_off_memorized_all</td><td>pass</td><td>5</td><td>5</td><td>no-decay ablation should still memorize, separating optimization from generalization</td></tr><tr><td>wd_off_did_not_grok</td><td>pass</td><td>0</td><td>0</td><td>weight-decay-driven verdict requires the no-decay ablation not to grok within budget</td></tr><tr><td>delay_real</td><td>pass</td><td>mean_gap_at_least=1000, mean_val_at_mem_below=0.5</td><td>mean_gap=14780.0, mean_val_at_mem=0.14693769365549086</td><td>validation must remain low at memorization and generalize much later</td></tr><tr><td>summary_rates_match_rows</td><td>pass</td><td>wd_on_grok_rate=1.0, wd_off_grok_rate=0.0</td><td>wd_on_grok_rate=1.0, wd_off_grok_rate=0.0</td><td>summary grok rates must reconstruct from rows</td></tr><tr><td>boundary_present</td><td>pass</td><td>toy_scale_single_task_modular_addition_grokking_not_a_scaling_claim</td><td>toy_scale_single_task_modular_addition_grokking_not_a_scaling_claim</td><td>positive grokking result must keep its toy-scale boundary</td></tr></tbody></table></section>
+<section><h2>Recommendations</h2><ul><li>The v1179 grokking claim reconstructs from the archived rows: memorization is early, generalization is delayed, and the no-decay ablation stays ungrokked.</li><li>Use v1179 as a positive training-dynamics anchor, while keeping the toy-scale modular-addition boundary explicit.</li></ul></section>
+<footer>Generated by MiniGPT readability maintenance tooling.</footer>
+</body>
+</html>

@@ -1,0 +1,11 @@
+id,status,expected,actual,detail
+source_status_pass,pass,pass,pass,source report must be a valid measurement
+source_verdict_wd_driven,pass,grokking_reproduced_wd_driven,grokking_reproduced_wd_driven,v1179 headline claim is specifically weight-decay-driven grokking
+seed_arm_grid_complete,pass,5 rows per arm; total 10,"{""total"": 10, ""wd_off"": 5, ""wd_on"": 5}",each seed must have paired weight_decay on/off rows
+wd_on_memorized_all,pass,5,5,with-decay arm must memorize all seeds before claiming delayed generalization
+wd_on_grokked_all,pass,5,5,with-decay arm must grok all seeds for the v1179 strong positive claim
+wd_off_memorized_all,pass,5,5,"no-decay ablation should still memorize, separating optimization from generalization"
+wd_off_did_not_grok,pass,0,0,weight-decay-driven verdict requires the no-decay ablation not to grok within budget
+delay_real,pass,"{""mean_gap_at_least"": 1000, ""mean_val_at_mem_below"": 0.5}","{""mean_gap"": 14780.0, ""mean_val_at_mem"": 0.14693769365549086}",validation must remain low at memorization and generalize much later
+summary_rates_match_rows,pass,"{""wd_off_grok_rate"": 0.0, ""wd_on_grok_rate"": 1.0}","{""wd_off_grok_rate"": 0.0, ""wd_on_grok_rate"": 1.0}",summary grok rates must reconstruct from rows
+boundary_present,pass,toy_scale_single_task_modular_addition_grokking_not_a_scaling_claim,toy_scale_single_task_modular_addition_grokking_not_a_scaling_claim,positive grokking result must keep its toy-scale boundary

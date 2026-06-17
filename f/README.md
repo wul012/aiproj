@@ -18,6 +18,10 @@ f/<version>/解释/说明.md
 
 ## 当前索引
 
+f/1180/图片
+f/1180/解释/说明.md
+ -> v1180 grokking evidence check: consumes the real v1179 `grok_v1179.json` and reconstructs the claim from rows instead of trusting the summary text. The check verifies paired seed/arm grid completeness, weight-decay arm memorization + delayed generalization, no-decay ablation non-grokking, mean delay gap, low validation accuracy at memorization, summary/row rate agreement, and the toy-scale boundary. Result: `status=pass`, `decision=grokking_evidence_claim_reconstructed`, `failed_count=0`, `wd_on_mean_gap=14780.0`, `wd_on_mean_val_at_mem=0.14693769365549086`. Evidence includes generated JSON/CSV/text/Markdown/HTML plus Playwright screenshot.
+
 f/1179/图片
 f/1179/解释/说明.md
  -> v1179 grokking (delayed generalization): a 1-layer MiniGPT on `a + b = c (mod 97)`, train_frac=0.2, paired weight_decay=1.0 vs 0.0 over 5 seeds. Real RTX 4060 result: `verdict=grokking_reproduced_wd_driven` — with weight decay all 5 seeds memorize by ~step 100 then generalize at ~step 14880 (validation near chance during the gap); without weight decay they memorize identically but never generalize within 40k steps. The figure is the canonical accuracy-vs-log-step grokking curve; evidence includes generated JSON/CSV/text/Markdown/HTML. Boundary: toy-scale single-task phenomenon reproduction, not a scaling claim.

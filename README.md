@@ -16,7 +16,13 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1179.0.0` pivots off the inference-efficiency / PTQ arc onto training dynamics: it honestly reproduces **grokking** (delayed generalization) on `a + b = c (mod 97)` with a 1-layer MiniGPT. With weight decay all 5 seeds memorize the train set by ~step 100 and then generalize only at ~step 14,880 (validation near chance throughout the gap); the paired weight_decay=0 ablation memorizes identically but never generalizes within 40k steps. Verdict `grokking_reproduced_wd_driven` — weight decay is the measured driver. The first *positive* result this session rather than an honest null, and it keeps the same discipline (multi-seed, paired ablation, a delay-realness gate, censoring-aware aggregation).
+Version `v1180.0.0` adds a grokking evidence check for the v1179 positive result. It consumes `grok_v1179.json` and reconstructs the headline claim from rows: with weight decay 5/5 seeds memorize and grok, without weight decay 5/5 seeds memorize but 0/5 grok, and the with-decay arm has a real delayed gap (`mean_gap=14780`, `mean_val_at_mem=0.147`). This does not rerun training; it turns the v1179 result into an auditable artifact.
+
+## Latest v1180 checkpoint
+
+- Added `src/minigpt/grok_evidence_check_v1180.py`: directory/file source loading, row grouping by weight decay, recomputed grok/memorization counts, real-delay checks, summary-vs-row rate checks, boundary verification, and readability outputs.
+- Added CLI `scripts/check_grok_evidence_v1180.py`, supporting `--min-delay-steps`, `--max-val-at-mem`, `--require-pass`, and `--force`.
+- Real v1179 artifact check passed: `wd_on_grok_count=5`, `wd_off_grok_count=0`, `wd_on_mean_gap=14780.0`, `wd_on_mean_val_at_mem=0.1469`. Added `tests/test_grok_evidence_check_v1180.py`; focused validation with v1179 tests returned `20 passed`. Evidence in `f/1180`; code explanation in `代码讲解记录_工程保养阶段/1192-v1180-minigpt-grokking-evidence-check.md`.
 
 ## Latest v1179 checkpoint
 
