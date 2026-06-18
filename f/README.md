@@ -18,6 +18,10 @@ f/<version>/解释/说明.md
 
 ## 当前索引
 
+f/1185/图片
+f/1185/解释/说明.md
+ -> v1185 canonical grokking checkpoint (productize, not sweep): freezes the default recipe (`a + b = c (mod 97)`, 1-layer MiniGPT, AdamW lr=1e-3 wd=1.0 — the v1183 interior optimum — train_frac=0.2, seed=1337), trains one model to grok, and saves a self-contained checkpoint (`grok_checkpoint_v1185.pt`, ~835KB: weights + meta). Real RTX 4060 result: memorize @ step 100, generalize @ step 11400, held-out accuracy 0.966 on 7527 unseen pairs, `roundtrip_logits_identical=True`, `verdict=canonical_grokking_checkpoint_ready`. The figure is the single train/val curve (memorize-first-then-generalize); a demo reloads the checkpoint standalone and proves generalization. Boundary: toy-scale single-task canonical checkpoint, not a scaling claim.
+
 f/1184/图片
 f/1184/解释/说明.md
  -> v1184 grokking weight-decay law contract check: consumes the real v1183 `grok_wd_law_v1183.json` and reconstructs the interior-optimum claim from dose rows and seed rows. Result: `status=pass`, `decision=wd_law_interior_optimum_reconstructed`, `failed_count=0`, threshold wd=0.3, fastest interior wd=1.0, fastest gap=11640 steps, low-end and high-end censoring both true. The strongest dose wd=3.0 still memorizes 5/5 but groks 0/5, preventing the old monotone-acceleration over-claim from reappearing. Boundary: artifact reconstruction only, no training rerun and no broader scaling claim.

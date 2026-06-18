@@ -16,7 +16,13 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1184.0.0` adds a contract check over the v1183 grokking weight-decay dose-response artifact. It reads `grok_wd_law_v1183.json`, re-derives the threshold wd, fastest interior wd, low-end censoring, high-end censoring, and strongest-dose seed behavior from the dose/seed rows, and fails if the report drifts back toward the earlier monotone-acceleration over-claim. The real v1183 artifact reconstructs cleanly: `status=pass`, `decision=wd_law_interior_optimum_reconstructed`, `computed_threshold_wd=0.3`, `computed_fastest_wd=1.0`, `fastest_gap_steps=11640`, strongest dose `wd=3.0` memorizes 5/5 but groks 0/5. This is artifact reconstruction only, not a training rerun or broader model-quality claim.
+Version `v1185.0.0` productizes the grokking line instead of sweeping further: it freezes the default recipe (`a + b = c (mod 97)`, 1-layer MiniGPT, AdamW lr=1e-3 **wd=1.0** — the v1183 interior optimum — train_frac=0.2, single seed), trains one canonical model to grok, and saves a self-contained checkpoint (weights + config + vocab scheme + split seed + metrics + curve). A demo reloads the checkpoint standalone and proves generalization on held-out pairs. Real RTX 4060 run: memorize @ step 100, generalize @ step 11,400, held-out accuracy **0.966 on 7,527 unseen pairs**, `roundtrip_logits_identical=True`, `verdict=canonical_grokking_checkpoint_ready`.
+
+## Latest v1185 checkpoint
+
+- Added `src/minigpt/grok_checkpoint_v1185.py`: `CANONICAL_CONFIG` (frozen recipe), `train_to_grok` (reuses v1179 primitives, returns the trained model), self-contained `save_checkpoint`/`load_checkpoint` (`.pt` carrying weights + meta), `evaluate_generalization` (held-out demo), `logits_match` (save/load round-trip guard), and `build_report` with a checkpoint-readiness verdict ladder.
+- Added CLI `scripts/train_grok_checkpoint_v1185.py`: trains, saves, RELOADS, verifies bit-identical logits, and demos generalization via the reloaded model. The `.pt` (~835KB) is committed under `f/1185`.
+- Added `tests/test_grok_checkpoint_v1185.py` (9, incl. the save/load round-trip to identical logits and the verdict ladder). Fixed a CUDA device bug in `logits_match` (CPU-built task vs GPU model) caught only on the real GPU run. Evidence in `f/1185`; code explanation in `代码讲解记录_工程保养阶段/1197-v1185-minigpt-grokking-checkpoint.md`.
 
 ## Latest v1184 checkpoint
 

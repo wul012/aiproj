@@ -1,0 +1,19 @@
+status=pass
+decision=canonical_grokking_checkpoint_ready
+recipe=a+b mod 97, 1-layer MiniGPT n_embd=128, AdamW lr=1e-3 wd=1.0, train_frac=0.2
+p=97
+weight_decay=1.0
+train_frac=0.2
+seed=1337
+vocab_size=99
+memorize_step=100
+generalize_step=11400
+grok_delay_steps=11300
+final_train_acc=1.0
+final_val_acc=0.965989
+heldout_acc=0.965989
+n_heldout=7527
+roundtrip_logits_identical=True
+verdict=canonical_grokking_checkpoint_ready
+story=train accuracy saturates at the memorize step; validation stays near chance until the much-later generalize step (grokking).
+boundary=toy_scale_single_task_modular_addition_canonical_checkpoint_not_a_scaling_claim

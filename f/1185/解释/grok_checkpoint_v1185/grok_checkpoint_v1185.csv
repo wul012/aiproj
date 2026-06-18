@@ -1,0 +1,9 @@
+a,b,predicted,truth,correct
+52,64,19,19,True
+56,74,33,33,True
+79,83,65,65,True
+2,80,82,82,True
+36,37,73,73,True
+4,1,5,5,True
+25,52,77,77,True
+77,32,28,12,False
