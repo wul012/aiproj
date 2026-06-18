@@ -4,6 +4,7 @@ from pathlib import Path
 from typing import Any
 
 from minigpt.readability_report_artifacts import write_readability_outputs
+from minigpt.report_check_common import check_row as _check, collect_failures, resolve_exit_code
 from minigpt.report_utils import as_dict, list_of_dicts, locate_upstream_report, number_or_default, read_json_object, utc_now
 
 GROK_EVIDENCE_CHECK_STEM = "grok_evidence_check_v1180"
@@ -54,7 +55,7 @@ def build_grok_evidence_check(
         min_delay_steps=min_delay_steps,
         max_val_at_mem=max_val_at_mem,
     )
-    failures = [check for check in checks if check["status"] != "pass"]
+    failures = collect_failures(checks)
     ready = not failures
 
     return {
@@ -97,12 +98,6 @@ def build_grok_evidence_check(
 
 def write_grok_evidence_check_outputs(report: dict[str, Any], out_dir: str | Path) -> dict[str, str]:
     return write_readability_outputs(report, out_dir, stem=GROK_EVIDENCE_CHECK_STEM, row_title="Grok Evidence Checks")
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool = False) -> int:
-    if require_pass and report.get("status") != "pass":
-        return 1
-    return 0
 
 
 def _group_rows(rows: list[dict[str, Any]], *, wd_on: float, wd_off: float) -> dict[str, list[dict[str, Any]]]:
@@ -209,10 +204,6 @@ def _checks(
             "positive grokking result must keep its toy-scale boundary",
         ),
     ]
-
-
-def _check(check_id: str, passed: bool, expected: Any, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "expected": expected, "actual": actual, "detail": detail}
 
 
 def _mean(values: list[float]) -> float | None:

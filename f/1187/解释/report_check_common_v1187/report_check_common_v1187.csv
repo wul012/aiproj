@@ -1,0 +1,5 @@
+module,removed_check_builder,removed_exit_code,removed_failures_comp,now_imports_from
+grok_evidence_check_v1180,_check,resolve_exit_code,True,report_check_common
+grok_trajectory_phases_v1181,_check,resolve_exit_code,True,report_check_common
+grok_paired_contrast_v1182,_check,resolve_exit_code,True,report_check_common
+grok_wd_law_check_v1184,_check,resolve_exit_code,True,report_check_common

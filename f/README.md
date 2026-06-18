@@ -18,6 +18,10 @@ f/<version>/解释/说明.md
 
 ## 当前索引
 
+f/1187/图片
+f/1187/解释/说明.md
+ -> v1187 report-check scaffolding dedup (maintenance, no behavior change): the four grokking-audit modules (v1180/81/82/84) each re-implemented three byte-identical pieces — the check-row builder `_check`, the `failures` collector, and `resolve_exit_code`. Extracted into `src/minigpt/report_check_common.py` (`check_row`/`collect_failures`/`resolve_exit_code`); each module imports them, keeping public names. Contract-preserving: the four audit test files are unchanged and still green (`25 passed` focused) plus single-source identity guards. PTQ checks (v1177/78) deliberately left untouched. The figure is the shared-module → four-callers schematic.
+
 f/1186/图片
 f/1186/解释/说明.md
  -> v1186 grokking checkpoint inference demo (use, not just save): a minimal `load_checkpoint + predict` API that computes `a + b (mod 97)` from the shipped v1185 `.pt`. Loaded from disk (CPU): `train_acc=1.0`, `heldout_acc=0.966` over 7527 unseen pairs (re-derived independently of the v1185 training run), demo pairs all correct (`36+37=73`, `96+96=95`, `40+80=23`), `verdict=grokking_checkpoint_usable`. The figure is a 97×97 correctness map of the learned modular-addition table (train cells light, held-out-correct green, 256 errors red). Boundary: toy-scale single-task inference demo, not a scaling claim.

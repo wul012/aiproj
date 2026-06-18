@@ -4,6 +4,7 @@ from pathlib import Path
 from typing import Any
 
 from minigpt.readability_report_artifacts import write_readability_outputs
+from minigpt.report_check_common import check_row as _check, collect_failures, resolve_exit_code
 from minigpt.report_utils import (
     as_dict,
     list_of_dicts,
@@ -71,7 +72,7 @@ def build_grok_trajectory_phase_report(
         wd_off=wd_off,
         min_wd_on_low_plateau_rate=min_wd_on_low_plateau_rate,
     )
-    failures = [check for check in checks if check["status"] != "pass"]
+    failures = collect_failures(checks)
     ready = not failures
 
     return {
@@ -131,12 +132,6 @@ def build_grok_trajectory_phase_report(
 
 def write_grok_trajectory_phase_outputs(report: dict[str, Any], out_dir: str | Path) -> dict[str, str]:
     return write_readability_outputs(report, out_dir, stem=GROK_TRAJECTORY_PHASE_STEM, row_title="Grokking Phase Rows")
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool = False) -> int:
-    if require_pass and report.get("status") != "pass":
-        return 1
-    return 0
 
 
 def _curves_by_weight_decay(value: Any) -> dict[float, list[list[dict[str, float | int]]]]:
@@ -435,10 +430,6 @@ def _checks(
             "phase profile must keep the toy-scale boundary explicit",
         ),
     ]
-
-
-def _check(check_id: str, passed: bool, expected: Any, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "expected": expected, "actual": actual, "detail": detail}
 
 
 def _recommendations(ready: bool, phase_summary: dict[str, Any]) -> list[str]:

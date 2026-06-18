@@ -4,6 +4,7 @@ from pathlib import Path
 from typing import Any
 
 from minigpt.readability_report_artifacts import write_readability_outputs
+from minigpt.report_check_common import check_row as _check, collect_failures, resolve_exit_code
 from minigpt.report_utils import as_dict, list_of_dicts, locate_upstream_report, number_or_default, number_or_none, read_json_object, utc_now
 
 GROK_PAIRED_CONTRAST_STEM = "grok_paired_contrast_v1182"
@@ -48,7 +49,7 @@ def build_grok_paired_contrast_report(
         seed_count=seed_count,
         min_final_val_gain=min_final_val_gain,
     )
-    failures = [check for check in checks if check["status"] != "pass"]
+    failures = collect_failures(checks)
     ready = not failures
 
     return {
@@ -109,12 +110,6 @@ def build_grok_paired_contrast_report(
 
 def write_grok_paired_contrast_outputs(report: dict[str, Any], out_dir: str | Path) -> dict[str, str]:
     return write_readability_outputs(report, out_dir, stem=GROK_PAIRED_CONTRAST_STEM, row_title="Grokking Paired Contrasts")
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool = False) -> int:
-    if require_pass and report.get("status") != "pass":
-        return 1
-    return 0
 
 
 def _pair_rows(phase_rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -270,10 +265,6 @@ def _checks(
             "paired contrast must stay tied to v1181's no-rerun boundary",
         ),
     ]
-
-
-def _check(check_id: str, passed: bool, expected: Any, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "expected": expected, "actual": actual, "detail": detail}
 
 
 def _recommendations(ready: bool, paired_summary: dict[str, Any]) -> list[str]:

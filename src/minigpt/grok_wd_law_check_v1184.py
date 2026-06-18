@@ -4,6 +4,7 @@ from pathlib import Path
 from typing import Any
 
 from minigpt.readability_report_artifacts import write_readability_outputs
+from minigpt.report_check_common import check_row as _check, collect_failures, resolve_exit_code
 from minigpt.report_utils import as_dict, list_of_dicts, locate_upstream_report, number_or_default, read_json_object, utc_now
 
 GROK_WD_LAW_CHECK_STEM = "grok_wd_law_check_v1184"
@@ -50,7 +51,7 @@ def build_grok_wd_law_check(
         grok_rate_threshold=grok_rate_threshold,
         min_fastest_gap_steps=min_fastest_gap_steps,
     )
-    failures = [check for check in checks if check["status"] != "pass"]
+    failures = collect_failures(checks)
     ready = not failures
 
     return {
@@ -96,12 +97,6 @@ def build_grok_wd_law_check(
 
 def write_grok_wd_law_check_outputs(report: dict[str, Any], out_dir: str | Path) -> dict[str, str]:
     return write_readability_outputs(report, out_dir, stem=GROK_WD_LAW_CHECK_STEM, row_title="Weight-Decay Law Checks")
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool = False) -> int:
-    if require_pass and report.get("status") != "pass":
-        return 1
-    return 0
 
 
 def _row_metrics(rows: list[dict[str, Any]], *, grok_rate_threshold: float) -> dict[str, Any]:
@@ -242,10 +237,6 @@ def _checks(
             "positive dose-response result must keep its toy-scale boundary",
         ),
     ]
-
-
-def _check(check_id: str, passed: bool, expected: Any, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "expected": expected, "actual": actual, "detail": detail}
 
 
 def _close(actual: Any, expected: Any, *, eps: float = 1e-9) -> bool:

@@ -16,7 +16,12 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1186.0.0` closes the productize loop: a minimal API to LOAD the v1185 grokking checkpoint and actually compute `a + b (mod 97)` with it. `load_checkpoint(path)` + `predict(model, a, b, p)` decode any pair; a demo re-derives the held-out accuracy **directly from the shipped `.pt`** (independent of the v1185 training run) and visualizes the learned modular-addition table. CPU-only, no training. Real run: loaded from disk, `train_acc=1.0`, `heldout_acc=0.966` on 7,527 unseen pairs, all demo pairs correct (`36+37=73`, `96+96=95`, `40+80=23` mod 97), `verdict=grokking_checkpoint_usable`.
+Version `v1187.0.0` is a maintenance dedup (the v1159/v1163/v1167/v1171/v1174/v1176 cadence): the four grokking-audit modules (v1180/81/82/84) each re-implemented three byte-identical pieces — the check-row builder `_check`, the `failures` collector, and `resolve_exit_code`. These move into `src/minigpt/report_check_common.py` (`check_row`, `collect_failures`, `resolve_exit_code`); each module imports them, keeping its public names. Contract-preserving: the four audit test files are unchanged and still green, plus single-source identity guards (`module.resolve_exit_code is resolve_exit_code`, etc.). No behavior change, no new science. The PTQ check family (v1177/78) is deliberately left untouched.
+
+## Latest v1187 checkpoint
+
+- Added `src/minigpt/report_check_common.py` (`check_row`, `collect_failures`, `resolve_exit_code`) and migrated the four grokking-audit modules to it (removed 3 duplicated pieces each; `resolve_exit_code` re-exported, `_check` aliased).
+- Added `tests/test_report_check_common.py` (4, incl. the single-source identity guard that each audit module references the shared functions, not a re-pasted copy). Focused validation with the four audit test files: `25 passed`. Evidence in `f/1187`; code explanation in `代码讲解记录_工程保养阶段/1199-v1187-minigpt-report-check-common-dedup.md`.
 
 ## Latest v1186 checkpoint
 

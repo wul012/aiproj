@@ -1,0 +1,9 @@
+status=pass
+decision=report_check_scaffolding_deduplicated
+new_module=src/minigpt/report_check_common.py
+extracted=check_row, collect_failures, resolve_exit_code
+callers_migrated=4
+duplicated_pieces_removed_per_module=3
+focused_tests=25 passed (4 audit modules unchanged + report_check_common, incl. single-source identity guards)
+contract_preserving=True
+boundary=behavior_identical_no_new_science_pure_maintenance
