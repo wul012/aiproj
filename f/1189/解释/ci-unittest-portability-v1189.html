@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <title>v1189 CI unittest portability fix</title>
+  <style>
+    body { font-family: "Segoe UI", Arial, sans-serif; margin: 40px; color: #1f2937; line-height: 1.55; }
+    h1 { font-size: 30px; margin-bottom: 8px; }
+    h2 { margin-top: 28px; font-size: 20px; }
+    code, pre { background: #f3f4f6; border-radius: 6px; }
+    code { padding: 2px 5px; }
+    pre { padding: 14px; overflow-x: auto; }
+    .status { display: inline-block; padding: 4px 10px; border-radius: 999px; background: #dcfce7; color: #166534; font-weight: 700; }
+    .grid { display: grid; grid-template-columns: 180px 1fr; gap: 8px 18px; max-width: 900px; }
+    .label { color: #6b7280; }
+  </style>
+</head>
+<body>
+  <h1>v1189 CI unittest portability fix</h1>
+  <p><span class="status">local import gate fixed</span></p>
+  <p>This version repairs the GitHub Actions failure introduced by <code>tests/test_grok_predict_v1186.py</code>: the CI runner uses stdlib <code>unittest discover</code>, but the test imported <code>pytest</code> only for a skip marker.</p>
+  <h2>Root Cause</h2>
+  <pre>ModuleNotFoundError: No module named 'pytest'
+File: tests/test_grok_predict_v1186.py</pre>
+  <h2>Fix</h2>
+  <div class="grid">
+    <div class="label">Removed dependency</div><div><code>import pytest</code></div>
+    <div class="label">Replacement</div><div><code>@unittest.skipIf(...)</code></div>
+    <div class="label">Path guard</div><div>the test now injects <code>src/</code> before importing <code>minigpt</code></div>
+    <div class="label">Scope</div><div>CI/test portability only; no model behavior, checkpoint, or interpretability claim changes</div>
+  </div>
+  <h2>Validation</h2>
+  <pre>python -m py_compile tests\test_grok_predict_v1186.py
+python -B -c "import sys, importlib; sys.path.insert(0, 'tests'); importlib.import_module('test_grok_predict_v1186')"
+python -B scripts\check_source_encoding.py --out-dir runs\source-encoding-hygiene-v1189
+git diff --check</pre>
+</body>
+</html>

@@ -13,6 +13,21 @@
 
 ## 当前索引
 
+1201-v1189-ci-unittest-portability.md
+ -> v1189 code explanation: CI portability repair for the v1186 checkpoint inference test. GitHub Actions uses stdlib `unittest discover`, but `tests/test_grok_predict_v1186.py` imported `pytest` only for a skip marker, causing `ModuleNotFoundError` in CI from v1186 through v1188. v1189 replaces it with `unittest.skipIf`, adds local `src/` path injection, and keeps the boundary to test portability plus index repair only. Evidence lives under `f/1189`.
+
+1200-v1188-minigpt-grokking-interpretability.md
+ -> v1188 code explanation: mechanistic interpretability for grokking. Reads learned number embeddings, applies FFT over the number axis, and compares grokked wd=1, memorized-not-grokked wd=0, and random-init arms. The real result links generalization to modest Fourier concentration, while explicitly avoiding the stronger attention-only ultra-sparse claim. Evidence lives under `f/1188`.
+
+1199-v1187-minigpt-report-check-common-dedup.md
+ -> v1187 code explanation: contract-preserving maintenance dedup for grokking audit modules. Extracts shared check-row construction, failure collection, and exit-code resolution into `report_check_common.py`, then migrates v1180/v1181/v1182/v1184 audit modules without changing their public behavior. Evidence lives under `f/1187`.
+
+1198-v1186-minigpt-grokking-checkpoint-inference.md
+ -> v1186 code explanation: turns the v1185 canonical checkpoint into a usable inference/demo artifact. Adds load/predict APIs, table evaluation over train/held-out modular-addition pairs, and a demo report proving the shipped checkpoint computes `a+b mod 97` on held-out pairs. Evidence lives under `f/1186`.
+
+1197-v1185-minigpt-grokking-checkpoint.md
+ -> v1185 code explanation: productizes the chosen grokking recipe into a self-contained checkpoint. Freezes `weight_decay=1.0`, trains one canonical model, saves weights plus metadata, verifies save/load logits, and archives the reusable checkpoint under `f/1185`. Evidence lives under `f/1185`.
+
 1196-v1184-minigpt-grokking-wd-law-check.md
  -> v1184 code explanation: contract check over the v1183 grokking weight-decay dose-response artifact. Adds `grok_wd_law_check_v1184.py` and `scripts/check_grok_wd_law_v1184.py` to reload `grok_wd_law_v1183.json`, re-derive threshold wd, fastest interior wd, low/high-end censoring, strongest-dose memorization-vs-grok behavior, and the toy-scale boundary from the rows. It is artifact reconstruction only, not a training rerun; the purpose is to prevent the earlier monotone-acceleration over-claim from returning. Evidence lives under `f/1184`.
 

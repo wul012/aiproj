@@ -18,6 +18,10 @@ f/<version>/解释/说明.md
 
 ## 当前索引
 
+f/1189/图片
+f/1189/解释/说明.md
+ -> v1189 CI unittest portability fix: repairs the v1186-v1188 GitHub Actions failure where `tests/test_grok_predict_v1186.py` imported `pytest` for a skip marker even though CI runs stdlib `unittest discover` without pytest. Replaced the marker with `unittest.skipIf`, added local `src/` path injection, and repaired the engineering-stage code-explanation README index for v1185-v1188. Boundary: CI/test portability and documentation index repair only; no checkpoint, model behavior, or interpretability-claim changes.
+
 f/1188/图片
 f/1188/解释/说明.md
  -> v1188 grokking mechanistic interpretability (NEW axis): FFT of the learned number-embeddings to test the Fourier-structure hypothesis for HOW the grokked model computes `a + b mod 97`. Paired grokked (wd=1) vs memorized-not-grokked (wd=0) vs random-init, 3 seeds. Real RTX 4060 result: `verdict=fourier_structure_explains_generalization` — top-5 frequency power fraction `0.307±0.004` (grokked) > `0.150±0.002` (memorized) > `0.120±0.001` (random); only the generalizing model develops the structure. Honestly qualified: significant + generalization-linked but MODEST (top-5 ≈ 31%, 34/48 freqs for 90%), not the ultra-sparse attention-only basis. Shipped v1185 checkpoint carries it (top-5 0.305, dom freq 43). Figure: three-arm spectra + concentration bar. Boundary: toy-scale embedding-Fourier-structure interpretability only.

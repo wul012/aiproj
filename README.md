@@ -16,7 +16,15 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1188.0.0` opens a new axis — **mechanistic interpretability**: instead of measuring *that* the model groks (v1179) or shipping it (v1185), it reverse-engineers *how* the grokked model computes `a + b (mod 97)`. FFT of the learned number-embeddings, comparing a grokked (wd=1) model against a paired memorized-not-grokked (wd=0) model and a random-init null. Real RTX 4060 run (3 seeds): `verdict=fourier_structure_explains_generalization` — top-5 frequency power fraction is `0.307±0.004` (grokked) vs `0.150±0.002` (memorized) vs `0.120±0.001` (random); only the *generalizing* model develops the Fourier structure, the weight-level mechanism behind grokking. Honestly qualified: the concentration is significant and generalization-linked but **modest/partial** (top-5 ≈ 31%, 34/48 freqs for 90% power) — not the ultra-sparse few-frequency basis of attention-only models, since this 1-layer model has LayerNorm + MLP. Almost free (reads structure off weights).
+Version `v1189.0.0` is a CI portability repair after the v1186-v1188 capability line: GitHub Actions runs `coverage run -m unittest discover`, but `tests/test_grok_predict_v1186.py` imported `pytest` only for a skip marker, causing `ModuleNotFoundError: No module named 'pytest'` in CI. v1189 removes that dependency, replaces it with `unittest.skipIf`, adds the test module's own `src/` path injection, and repairs the engineering-stage code-explanation index that had fallen behind v1185-v1188. No model behavior, checkpoint, or interpretability claim changes.
+
+## Latest v1189 checkpoint
+
+- Fixed `tests/test_grok_predict_v1186.py` for stdlib `unittest` discovery: removed `pytest`, replaced `@pytest.mark.skipif` with `@unittest.skipIf`, and added local `src/` path injection so direct unittest import succeeds in clean CI.
+- Added v1189 evidence in `f/1189` and code explanation `代码讲解记录_工程保养阶段/1201-v1189-ci-unittest-portability.md`.
+- Repaired `代码讲解记录_工程保养阶段/README.md` by adding the missing v1185-v1188 entries above v1184, so the current capability/checkpoint/interpretability line is indexed correctly.
+
+## Latest v1188 checkpoint
 
 ## Latest v1188 checkpoint
 

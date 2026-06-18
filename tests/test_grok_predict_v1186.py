@@ -7,8 +7,16 @@ loads the SHIPPED v1185 checkpoint from disk and confirms it computes a+b mod 97
 
 from __future__ import annotations
 
-import pytest
+import sys
+import unittest
+from pathlib import Path
+
 import torch
+
+ROOT = Path(__file__).resolve().parents[1]
+SRC = ROOT / "src"
+if str(SRC) not in sys.path:
+    sys.path.insert(0, str(SRC))
 
 from minigpt.grok_checkpoint_v1185 import CheckpointMeta
 from minigpt.grok_predict_v1186 import (
@@ -84,7 +92,7 @@ def test_verdict_demo_pair_wrong():
 # --------------------------------------------------------------------------
 # integration: the SHIPPED checkpoint loads and computes a+b mod 97
 # --------------------------------------------------------------------------
-@pytest.mark.skipif(not DEFAULT_CHECKPOINT.exists(), reason="canonical v1185 checkpoint not present")
+@unittest.skipIf(not DEFAULT_CHECKPOINT.exists(), "canonical v1185 checkpoint not present")
 def test_shipped_checkpoint_loads_and_predicts():
     model, meta = load_default(device=torch.device("cpu"))
     assert meta.p == 97
