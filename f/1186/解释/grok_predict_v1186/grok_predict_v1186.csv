@@ -1,0 +1,7 @@
+a,b,predicted,truth,correct
+36,37,73,73,True
+4,1,5,5,True
+50,50,3,3,True
+96,96,95,95,True
+0,0,0,0,True
+40,80,23,23,True

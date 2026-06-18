@@ -16,7 +16,13 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1185.0.0` productizes the grokking line instead of sweeping further: it freezes the default recipe (`a + b = c (mod 97)`, 1-layer MiniGPT, AdamW lr=1e-3 **wd=1.0** — the v1183 interior optimum — train_frac=0.2, single seed), trains one canonical model to grok, and saves a self-contained checkpoint (weights + config + vocab scheme + split seed + metrics + curve). A demo reloads the checkpoint standalone and proves generalization on held-out pairs. Real RTX 4060 run: memorize @ step 100, generalize @ step 11,400, held-out accuracy **0.966 on 7,527 unseen pairs**, `roundtrip_logits_identical=True`, `verdict=canonical_grokking_checkpoint_ready`.
+Version `v1186.0.0` closes the productize loop: a minimal API to LOAD the v1185 grokking checkpoint and actually compute `a + b (mod 97)` with it. `load_checkpoint(path)` + `predict(model, a, b, p)` decode any pair; a demo re-derives the held-out accuracy **directly from the shipped `.pt`** (independent of the v1185 training run) and visualizes the learned modular-addition table. CPU-only, no training. Real run: loaded from disk, `train_acc=1.0`, `heldout_acc=0.966` on 7,527 unseen pairs, all demo pairs correct (`36+37=73`, `96+96=95`, `40+80=23` mod 97), `verdict=grokking_checkpoint_usable`.
+
+## Latest v1186 checkpoint
+
+- Added `src/minigpt/grok_predict_v1186.py`: `encode_problem`/`predict`/`predict_pairs` (4-token-prompt autoregressive decoding of `a+b mod p`), `evaluate_table` (re-derives train vs held-out accuracy from the checkpoint's own seed/train_frac), `build_report`, and `load_default`.
+- Added CLI `scripts/use_grok_checkpoint_v1186.py` (answer `--pairs a b a b …` or run the demo). The figure is a 97×97 correctness map of the learned table (train cells, held-out-correct, errors).
+- Added `tests/test_grok_predict_v1186.py` (7, incl. an integration test that loads the **shipped** v1185 `.pt` from disk and confirms it computes `a+b mod 97` with held-out accuracy ≥0.90). Evidence in `f/1186`; code explanation in `代码讲解记录_工程保养阶段/1198-v1186-minigpt-grokking-checkpoint-inference.md`.
 
 ## Latest v1185 checkpoint
 

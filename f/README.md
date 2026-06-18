@@ -18,6 +18,10 @@ f/<version>/解释/说明.md
 
 ## 当前索引
 
+f/1186/图片
+f/1186/解释/说明.md
+ -> v1186 grokking checkpoint inference demo (use, not just save): a minimal `load_checkpoint + predict` API that computes `a + b (mod 97)` from the shipped v1185 `.pt`. Loaded from disk (CPU): `train_acc=1.0`, `heldout_acc=0.966` over 7527 unseen pairs (re-derived independently of the v1185 training run), demo pairs all correct (`36+37=73`, `96+96=95`, `40+80=23`), `verdict=grokking_checkpoint_usable`. The figure is a 97×97 correctness map of the learned modular-addition table (train cells light, held-out-correct green, 256 errors red). Boundary: toy-scale single-task inference demo, not a scaling claim.
+
 f/1185/图片
 f/1185/解释/说明.md
  -> v1185 canonical grokking checkpoint (productize, not sweep): freezes the default recipe (`a + b = c (mod 97)`, 1-layer MiniGPT, AdamW lr=1e-3 wd=1.0 — the v1183 interior optimum — train_frac=0.2, seed=1337), trains one model to grok, and saves a self-contained checkpoint (`grok_checkpoint_v1185.pt`, ~835KB: weights + meta). Real RTX 4060 result: memorize @ step 100, generalize @ step 11400, held-out accuracy 0.966 on 7527 unseen pairs, `roundtrip_logits_identical=True`, `verdict=canonical_grokking_checkpoint_ready`. The figure is the single train/val curve (memorize-first-then-generalize); a demo reloads the checkpoint standalone and proves generalization. Boundary: toy-scale single-task canonical checkpoint, not a scaling claim.

@@ -1,0 +1,16 @@
+status=pass
+decision=grokking_checkpoint_usable
+checkpoint=D:\aiproj\f\1185\解释\grok_checkpoint_v1185\grok_checkpoint_v1185.pt
+p=97
+recipe_weight_decay=1.0
+train_frac=0.2
+seed=1337
+overall_acc=0.972792
+train_acc=1.0
+heldout_acc=0.965989
+n_heldout=7527
+demo_pairs=6
+demo_all_correct=True
+verdict=grokking_checkpoint_usable
+usage=load_checkpoint(path) -> model; predict(model, a, b, p) -> (a+b) mod p
+boundary=toy_scale_single_task_inference_demo_not_a_scaling_claim
