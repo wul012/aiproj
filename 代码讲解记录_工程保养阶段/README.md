@@ -13,6 +13,12 @@
 
 ## 当前索引
 
+1196-v1184-minigpt-grokking-wd-law-check.md
+ -> v1184 code explanation: contract check over the v1183 grokking weight-decay dose-response artifact. Adds `grok_wd_law_check_v1184.py` and `scripts/check_grok_wd_law_v1184.py` to reload `grok_wd_law_v1183.json`, re-derive threshold wd, fastest interior wd, low/high-end censoring, strongest-dose memorization-vs-grok behavior, and the toy-scale boundary from the rows. It is artifact reconstruction only, not a training rerun; the purpose is to prevent the earlier monotone-acceleration over-claim from returning. Evidence lives under `f/1184`.
+
+1195-v1183-minigpt-grokking-wd-dose-response.md
+ -> v1183 code explanation: real weight-decay dose-response sweep over the v1179 modular-addition grokking primitive. It scans `weight_decay ∈ {0.0,0.1,0.3,1.0,3.0}` across paired init+split seeds, catches and repairs an initial monotone-acceleration over-claim, and records the honest verdict `wd_dose_response_interior_optimum`: fastest grokking at wd=1.0, threshold wd=0.3, and high-end wd=3.0 memorizing without grokking. Evidence lives under `f/1183`.
+
 1194-v1182-minigpt-grokking-paired-contrast.md
  -> v1182 code explanation: paired seed counterfactual report over the v1181 phase rows. Adds `grok_paired_contrast_v1182.py` and `scripts/analyze_grok_paired_contrast_v1182.py` to collapse each seed's `weight_decay_on` / `weight_decay_off` rows into one contrast row, checking matched memorization, delayed grok only in the weight-decay arm, no-decay censoring, large final validation gain, and the no-rerun boundary. Evidence lives under `f/1182`.
 

@@ -16,7 +16,13 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1183.0.0` advances the grokking line from audits back to new science: it sweeps weight-decay *strength* on `a + b = c (mod 97)` and measures how the generalization step depends on it, turning v1179's binary "weight decay drives grokking" into a dose-response. The honest result is an **interior optimum**, not monotone acceleration: grokking is fastest at `wd≈1.0` (t_gen 14,920 ± 5,944), and *both* too-little (`wd≤0.1`) and too-much (`wd=3.0`, which still memorizes 5/5 but groks 0/5 even at 100k steps) weight decay fail to grok within budget. A first-pass verdict that mislabeled this `monotone_acceleration` (by only inspecting the grokking sub-range) was caught and the `decide` logic fixed to detect the high-end censoring. Reuses the v1179 training primitive; paired init+split per seed across all wd arms.
+Version `v1184.0.0` adds a contract check over the v1183 grokking weight-decay dose-response artifact. It reads `grok_wd_law_v1183.json`, re-derives the threshold wd, fastest interior wd, low-end censoring, high-end censoring, and strongest-dose seed behavior from the dose/seed rows, and fails if the report drifts back toward the earlier monotone-acceleration over-claim. The real v1183 artifact reconstructs cleanly: `status=pass`, `decision=wd_law_interior_optimum_reconstructed`, `computed_threshold_wd=0.3`, `computed_fastest_wd=1.0`, `fastest_gap_steps=11640`, strongest dose `wd=3.0` memorizes 5/5 but groks 0/5. This is artifact reconstruction only, not a training rerun or broader model-quality claim.
+
+## Latest v1184 checkpoint
+
+- Added `src/minigpt/grok_wd_law_check_v1184.py`: directory/file source loading for the v1183 report, row-derived dose metrics, strongest-dose seed metrics, and 13 check rows protecting the exact interior-optimum claim (`threshold=0.3`, fastest interior `wd=1.0`, high-end censored while memorization remains intact).
+- Added CLI `scripts/check_grok_wd_law_v1184.py`, supporting `--grok-rate-threshold`, `--min-fastest-gap-steps`, `--require-pass`, and `--force`.
+- Real v1183 artifact result: `status=pass`, `decision=wd_law_interior_optimum_reconstructed`, `failed_count=0`, `computed_fastest_t_gen=14920.0`, `computed_second_fastest_t_gen=26560.0`, `fastest_gap_steps=11640.0`, `strongest_seed_mem_count=5`, `strongest_seed_grok_count=0`. Added `tests/test_grok_wd_law_check_v1184.py`. Evidence in `f/1184`; code explanation in `代码讲解记录_工程保养阶段/1196-v1184-minigpt-grokking-wd-law-check.md`.
 
 ## Latest v1183 checkpoint
 

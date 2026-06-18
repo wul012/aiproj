@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT grokking weight-decay law check v1184</title>
+<style>
+:root { color-scheme: light; font-family: Arial, "Microsoft YaHei", sans-serif; color: #172026; background: #f6f8fa; }
+body { margin: 0; padding: 24px; }
+header, section, footer { max-width: 1120px; margin: 0 auto 18px; }
+header { padding: 18px 0 8px; border-bottom: 3px solid #2f6f8f; }
+h1 { margin: 0 0 8px; font-size: 28px; letter-spacing: 0; }
+h2 { margin: 0 0 10px; font-size: 18px; letter-spacing: 0; }
+p { margin: 0 0 10px; line-height: 1.5; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; background: transparent; border: 0; padding: 0; }
+.stat { background: #fff; border: 1px solid #d7dee5; border-radius: 8px; padding: 12px; min-height: 64px; }
+.stat span { display: block; color: #5c6b73; font-size: 12px; margin-bottom: 8px; }
+.stat strong { display: block; font-size: 18px; overflow-wrap: anywhere; }
+section { background: #fff; border: 1px solid #d7dee5; border-radius: 8px; padding: 16px; }
+table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+th, td { padding: 9px; border-bottom: 1px solid #e5e9ef; text-align: left; vertical-align: top; overflow-wrap: anywhere; }
+th { background: #eef3f6; }
+ul { margin: 0; padding-left: 20px; }
+li { margin: 6px 0; }
+.muted { color: #687782; }
+footer { color: #687782; font-size: 12px; }
+</style>
+</head>
+<body>
+<header><h1>MiniGPT grokking weight-decay law check v1184</h1><p>Late-stage maintenance report for keeping AI governance artifacts readable.</p></header>
+<section class="stats"><article class="stat"><span>wd_law_check_ready</span><strong>True</strong></article><article class="stat"><span>source_status</span><strong>pass</strong></article><article class="stat"><span>source_decision</span><strong>wd_dose_response_interior_optimum</strong></article><article class="stat"><span>source_verdict</span><strong>wd_dose_response_interior_optimum</strong></article><article class="stat"><span>source_wd_law_report</span><strong>f\1183\解释\grok_wd_law_v1183\grok_wd_law_v1183.json</strong></article><article class="stat"><span>seed_count</span><strong>5</strong></article><article class="stat"><span>wd_count</span><strong>5</strong></article><article class="stat"><span>seed_row_count</span><strong>25</strong></article><article class="stat"><span>grokking_wds</span><strong>0.3, 1.0</strong></article><article class="stat"><span>computed_threshold_wd</span><strong>0.3</strong></article><article class="stat"><span>computed_fastest_wd</span><strong>1.0</strong></article><article class="stat"><span>computed_fastest_t_gen</span><strong>14920.0</strong></article><article class="stat"><span>computed_second_fastest_t_gen</span><strong>26560.0</strong></article><article class="stat"><span>fastest_gap_steps</span><strong>11640.0</strong></article><article class="stat"><span>low_end_censored</span><strong>True</strong></article><article class="stat"><span>high_end_censored</span><strong>True</strong></article><article class="stat"><span>strongest_mem_rate</span><strong>1.0</strong></article><article class="stat"><span>strongest_grok_rate</span><strong>0.0</strong></article><article class="stat"><span>strongest_seed_mem_count</span><strong>5</strong></article><article class="stat"><span>strongest_seed_grok_count</span><strong>0</strong></article><article class="stat"><span>grok_rate_threshold</span><strong>0.6</strong></article><article class="stat"><span>min_fastest_gap_steps</span><strong>1000</strong></article><article class="stat"><span>boundary</span><strong>artifact_reconstruction_only_no_training_rerun</strong></article><article class="stat"><span>next_step</span><strong>use_v1183_as_weight_decay_dose_response_anchor_if_check_passes</strong></article></section>
+<section><h2>Weight-Decay Law Checks</h2><table><thead><tr><th>id</th><th>status</th><th>expected</th><th>actual</th><th>detail</th></tr></thead><tbody><tr><td>source_status_pass</td><td>pass</td><td>pass</td><td>pass</td><td>source report must be a valid measurement</td></tr><tr><td>source_verdict_interior_optimum</td><td>pass</td><td>wd_dose_response_interior_optimum</td><td>decision=wd_dose_response_interior_optimum, verdict=wd_dose_response_interior_optimum</td><td>v1183 headline claim is an interior optimum, not a monotone acceleration claim</td></tr><tr><td>grid_complete_rows</td><td>pass</td><td>dose_rows=5, seed_rows=25</td><td>dose_rows=5, seed_rows=25</td><td>dose rows and seed rows must cover every configured weight decay</td></tr><tr><td>all_doses_memorize</td><td>pass</td><td>mem_rate&gt;=0.999 for every dose</td><td>1.0, 1.0, 1.0, 1.0, 1.0</td><td>dose-response should separate memorization from generalization, not training failure</td></tr><tr><td>grok_threshold_matches_summary</td><td>pass</td><td>0.3</td><td>0.3</td><td>first dose with grok_rate&gt;=0.6 must match the summary threshold</td></tr><tr><td>fastest_wd_matches_summary</td><td>pass</td><td>1.0</td><td>1.0</td><td>fastest grokking dose must be re-derived from dose rows</td></tr><tr><td>fastest_is_interior</td><td>pass</td><td>fastest wd is not the minimum or maximum dose</td><td>1.0</td><td>interior optimum requires the fastest dose to be inside the sweep range</td></tr><tr><td>fastest_gap_material</td><td>pass</td><td>&gt;= 1000</td><td>11640.0</td><td>fastest dose should be materially faster than the next grokking dose</td></tr><tr><td>low_end_censored</td><td>pass</td><td>True</td><td>computed=True, summary=True</td><td>too-little weight decay should be censored below the grok threshold</td></tr><tr><td>high_end_censored_not_broken</td><td>pass</td><td>high_end_censored=True, too_much_wd_breaks_memorization=False</td><td>computed_high_end_censored=True, summary_high_end=True, too_much_breaks_mem=False</td><td>strongest dose should memorize but fail to grok, proving the high-end side of the interior optimum</td></tr><tr><td>strongest_seed_rows_memorize_not_grok</td><td>pass</td><td>memorized=5, grokked=0</td><td>strongest_seed_mem_count=5, strongest_seed_grok_count=0</td><td>every strongest-dose seed should memorize but none should grok</td></tr><tr><td>not_monotone_acceleration_claim</td><td>pass</td><td>interior optimum overrides monotone acceleration</td><td>decision=wd_dose_response_interior_optimum, interior_optimum=True, monotone_t_gen_decrease=True</td><td>the check must guard the exact over-claim v1183 fixed</td></tr><tr><td>boundary_present</td><td>pass</td><td>toy_scale_single_task_modular_addition_grokking_dose_response_not_a_scaling_claim</td><td>toy_scale_single_task_modular_addition_grokking_dose_response_not_a_scaling_claim</td><td>positive dose-response result must keep its toy-scale boundary</td></tr></tbody></table></section>
+<section><h2>Recommendations</h2><ul><li>The v1183 dose-response claim reconstructs from the dose rows: grokking appears only above a threshold, is fastest at an interior dose, and disappears again at the strongest dose.</li><li>Use weight_decay=1.0 as the fastest toy-scale grokking dose, while keeping the high-end censoring boundary explicit.</li></ul></section>
+<footer>Generated by MiniGPT readability maintenance tooling.</footer>
+</body>
+</html>

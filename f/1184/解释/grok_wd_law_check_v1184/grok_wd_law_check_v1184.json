@@ -1,0 +1,305 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT grokking weight-decay law check v1184",
+  "generated_at": "2026-06-18T03:30:35Z",
+  "status": "pass",
+  "decision": "wd_law_interior_optimum_reconstructed",
+  "failed_count": 0,
+  "issues": [],
+  "summary": {
+    "wd_law_check_ready": true,
+    "source_status": "pass",
+    "source_decision": "wd_dose_response_interior_optimum",
+    "source_verdict": "wd_dose_response_interior_optimum",
+    "source_wd_law_report": "f\\1183\\解释\\grok_wd_law_v1183\\grok_wd_law_v1183.json",
+    "seed_count": 5,
+    "wd_count": 5,
+    "seed_row_count": 25,
+    "grokking_wds": [
+      0.3,
+      1.0
+    ],
+    "computed_threshold_wd": 0.3,
+    "computed_fastest_wd": 1.0,
+    "computed_fastest_t_gen": 14920.0,
+    "computed_second_fastest_t_gen": 26560.0,
+    "fastest_gap_steps": 11640.0,
+    "low_end_censored": true,
+    "high_end_censored": true,
+    "strongest_mem_rate": 1.0,
+    "strongest_grok_rate": 0.0,
+    "strongest_seed_mem_count": 5,
+    "strongest_seed_grok_count": 0,
+    "grok_rate_threshold": 0.6,
+    "min_fastest_gap_steps": 1000,
+    "boundary": "artifact_reconstruction_only_no_training_rerun",
+    "next_step": "use_v1183_as_weight_decay_dose_response_anchor_if_check_passes"
+  },
+  "rows": [
+    {
+      "id": "source_status_pass",
+      "status": "pass",
+      "expected": "pass",
+      "actual": "pass",
+      "detail": "source report must be a valid measurement"
+    },
+    {
+      "id": "source_verdict_interior_optimum",
+      "status": "pass",
+      "expected": "wd_dose_response_interior_optimum",
+      "actual": {
+        "decision": "wd_dose_response_interior_optimum",
+        "verdict": "wd_dose_response_interior_optimum"
+      },
+      "detail": "v1183 headline claim is an interior optimum, not a monotone acceleration claim"
+    },
+    {
+      "id": "grid_complete_rows",
+      "status": "pass",
+      "expected": {
+        "dose_rows": 5,
+        "seed_rows": 25
+      },
+      "actual": {
+        "dose_rows": 5,
+        "seed_rows": 25
+      },
+      "detail": "dose rows and seed rows must cover every configured weight decay"
+    },
+    {
+      "id": "all_doses_memorize",
+      "status": "pass",
+      "expected": "mem_rate>=0.999 for every dose",
+      "actual": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "detail": "dose-response should separate memorization from generalization, not training failure"
+    },
+    {
+      "id": "grok_threshold_matches_summary",
+      "status": "pass",
+      "expected": 0.3,
+      "actual": 0.3,
+      "detail": "first dose with grok_rate>=0.6 must match the summary threshold"
+    },
+    {
+      "id": "fastest_wd_matches_summary",
+      "status": "pass",
+      "expected": 1.0,
+      "actual": 1.0,
+      "detail": "fastest grokking dose must be re-derived from dose rows"
+    },
+    {
+      "id": "fastest_is_interior",
+      "status": "pass",
+      "expected": "fastest wd is not the minimum or maximum dose",
+      "actual": 1.0,
+      "detail": "interior optimum requires the fastest dose to be inside the sweep range"
+    },
+    {
+      "id": "fastest_gap_material",
+      "status": "pass",
+      "expected": ">= 1000",
+      "actual": 11640.0,
+      "detail": "fastest dose should be materially faster than the next grokking dose"
+    },
+    {
+      "id": "low_end_censored",
+      "status": "pass",
+      "expected": true,
+      "actual": {
+        "computed": true,
+        "summary": true
+      },
+      "detail": "too-little weight decay should be censored below the grok threshold"
+    },
+    {
+      "id": "high_end_censored_not_broken",
+      "status": "pass",
+      "expected": {
+        "high_end_censored": true,
+        "too_much_wd_breaks_memorization": false
+      },
+      "actual": {
+        "computed_high_end_censored": true,
+        "summary_high_end": true,
+        "too_much_breaks_mem": false
+      },
+      "detail": "strongest dose should memorize but fail to grok, proving the high-end side of the interior optimum"
+    },
+    {
+      "id": "strongest_seed_rows_memorize_not_grok",
+      "status": "pass",
+      "expected": {
+        "memorized": 5,
+        "grokked": 0
+      },
+      "actual": {
+        "strongest_seed_mem_count": 5,
+        "strongest_seed_grok_count": 0
+      },
+      "detail": "every strongest-dose seed should memorize but none should grok"
+    },
+    {
+      "id": "not_monotone_acceleration_claim",
+      "status": "pass",
+      "expected": "interior optimum overrides monotone acceleration",
+      "actual": {
+        "decision": "wd_dose_response_interior_optimum",
+        "interior_optimum": true,
+        "monotone_t_gen_decrease": true
+      },
+      "detail": "the check must guard the exact over-claim v1183 fixed"
+    },
+    {
+      "id": "boundary_present",
+      "status": "pass",
+      "expected": "toy_scale_single_task_modular_addition_grokking_dose_response_not_a_scaling_claim",
+      "actual": "toy_scale_single_task_modular_addition_grokking_dose_response_not_a_scaling_claim",
+      "detail": "positive dose-response result must keep its toy-scale boundary"
+    }
+  ],
+  "check_rows": [
+    {
+      "id": "source_status_pass",
+      "status": "pass",
+      "expected": "pass",
+      "actual": "pass",
+      "detail": "source report must be a valid measurement"
+    },
+    {
+      "id": "source_verdict_interior_optimum",
+      "status": "pass",
+      "expected": "wd_dose_response_interior_optimum",
+      "actual": {
+        "decision": "wd_dose_response_interior_optimum",
+        "verdict": "wd_dose_response_interior_optimum"
+      },
+      "detail": "v1183 headline claim is an interior optimum, not a monotone acceleration claim"
+    },
+    {
+      "id": "grid_complete_rows",
+      "status": "pass",
+      "expected": {
+        "dose_rows": 5,
+        "seed_rows": 25
+      },
+      "actual": {
+        "dose_rows": 5,
+        "seed_rows": 25
+      },
+      "detail": "dose rows and seed rows must cover every configured weight decay"
+    },
+    {
+      "id": "all_doses_memorize",
+      "status": "pass",
+      "expected": "mem_rate>=0.999 for every dose",
+      "actual": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "detail": "dose-response should separate memorization from generalization, not training failure"
+    },
+    {
+      "id": "grok_threshold_matches_summary",
+      "status": "pass",
+      "expected": 0.3,
+      "actual": 0.3,
+      "detail": "first dose with grok_rate>=0.6 must match the summary threshold"
+    },
+    {
+      "id": "fastest_wd_matches_summary",
+      "status": "pass",
+      "expected": 1.0,
+      "actual": 1.0,
+      "detail": "fastest grokking dose must be re-derived from dose rows"
+    },
+    {
+      "id": "fastest_is_interior",
+      "status": "pass",
+      "expected": "fastest wd is not the minimum or maximum dose",
+      "actual": 1.0,
+      "detail": "interior optimum requires the fastest dose to be inside the sweep range"
+    },
+    {
+      "id": "fastest_gap_material",
+      "status": "pass",
+      "expected": ">= 1000",
+      "actual": 11640.0,
+      "detail": "fastest dose should be materially faster than the next grokking dose"
+    },
+    {
+      "id": "low_end_censored",
+      "status": "pass",
+      "expected": true,
+      "actual": {
+        "computed": true,
+        "summary": true
+      },
+      "detail": "too-little weight decay should be censored below the grok threshold"
+    },
+    {
+      "id": "high_end_censored_not_broken",
+      "status": "pass",
+      "expected": {
+        "high_end_censored": true,
+        "too_much_wd_breaks_memorization": false
+      },
+      "actual": {
+        "computed_high_end_censored": true,
+        "summary_high_end": true,
+        "too_much_breaks_mem": false
+      },
+      "detail": "strongest dose should memorize but fail to grok, proving the high-end side of the interior optimum"
+    },
+    {
+      "id": "strongest_seed_rows_memorize_not_grok",
+      "status": "pass",
+      "expected": {
+        "memorized": 5,
+        "grokked": 0
+      },
+      "actual": {
+        "strongest_seed_mem_count": 5,
+        "strongest_seed_grok_count": 0
+      },
+      "detail": "every strongest-dose seed should memorize but none should grok"
+    },
+    {
+      "id": "not_monotone_acceleration_claim",
+      "status": "pass",
+      "expected": "interior optimum overrides monotone acceleration",
+      "actual": {
+        "decision": "wd_dose_response_interior_optimum",
+        "interior_optimum": true,
+        "monotone_t_gen_decrease": true
+      },
+      "detail": "the check must guard the exact over-claim v1183 fixed"
+    },
+    {
+      "id": "boundary_present",
+      "status": "pass",
+      "expected": "toy_scale_single_task_modular_addition_grokking_dose_response_not_a_scaling_claim",
+      "actual": "toy_scale_single_task_modular_addition_grokking_dose_response_not_a_scaling_claim",
+      "detail": "positive dose-response result must keep its toy-scale boundary"
+    }
+  ],
+  "recommendations": [
+    "The v1183 dose-response claim reconstructs from the dose rows: grokking appears only above a threshold, is fastest at an interior dose, and disappears again at the strongest dose.",
+    "Use weight_decay=1.0 as the fastest toy-scale grokking dose, while keeping the high-end censoring boundary explicit."
+  ],
+  "csv_fieldnames": [
+    "id",
+    "status",
+    "expected",
+    "actual",
+    "detail"
+  ]
+}

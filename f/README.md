@@ -18,6 +18,10 @@ f/<version>/解释/说明.md
 
 ## 当前索引
 
+f/1184/图片
+f/1184/解释/说明.md
+ -> v1184 grokking weight-decay law contract check: consumes the real v1183 `grok_wd_law_v1183.json` and reconstructs the interior-optimum claim from dose rows and seed rows. Result: `status=pass`, `decision=wd_law_interior_optimum_reconstructed`, `failed_count=0`, threshold wd=0.3, fastest interior wd=1.0, fastest gap=11640 steps, low-end and high-end censoring both true. The strongest dose wd=3.0 still memorizes 5/5 but groks 0/5, preventing the old monotone-acceleration over-claim from reappearing. Boundary: artifact reconstruction only, no training rerun and no broader scaling claim.
+
 f/1183/图片
 f/1183/解释/说明.md
  -> v1183 grokking weight-decay dose-response: sweeps weight decay {0,0.1,0.3,1.0,3.0} on `a + b = c (mod 97)` (5 seeds, paired init+split, reuses the v1179 training primitive) to turn the binary "weight decay drives grokking" into a dose-response. Real RTX 4060 result: `verdict=wd_dose_response_interior_optimum` — grok_rate 0/0.2/1.0/1.0/0.0, fastest grok at wd=1.0 (t_gen 14920±5944), threshold wd=0.3; the strongest decay wd=3.0 still memorizes 5/5 but groks 0/5 even at 100k steps (over-regularization, not budget). A first-pass `monotone_acceleration` over-claim was caught and `decide` fixed to detect the high-end censoring. The figure is a dual-axis t_gen-vs-wd plot. Boundary: toy-scale single-task dose-response, not a scaling claim.

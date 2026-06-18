@@ -1,0 +1,14 @@
+id,status,expected,actual,detail
+source_status_pass,pass,pass,pass,source report must be a valid measurement
+source_verdict_interior_optimum,pass,wd_dose_response_interior_optimum,"{""decision"": ""wd_dose_response_interior_optimum"", ""verdict"": ""wd_dose_response_interior_optimum""}","v1183 headline claim is an interior optimum, not a monotone acceleration claim"
+grid_complete_rows,pass,"{""dose_rows"": 5, ""seed_rows"": 25}","{""dose_rows"": 5, ""seed_rows"": 25}",dose rows and seed rows must cover every configured weight decay
+all_doses_memorize,pass,mem_rate>=0.999 for every dose,"[1.0, 1.0, 1.0, 1.0, 1.0]","dose-response should separate memorization from generalization, not training failure"
+grok_threshold_matches_summary,pass,0.3,0.3,first dose with grok_rate>=0.6 must match the summary threshold
+fastest_wd_matches_summary,pass,1.0,1.0,fastest grokking dose must be re-derived from dose rows
+fastest_is_interior,pass,fastest wd is not the minimum or maximum dose,1.0,interior optimum requires the fastest dose to be inside the sweep range
+fastest_gap_material,pass,>= 1000,11640.0,fastest dose should be materially faster than the next grokking dose
+low_end_censored,pass,True,"{""computed"": true, ""summary"": true}",too-little weight decay should be censored below the grok threshold
+high_end_censored_not_broken,pass,"{""high_end_censored"": true, ""too_much_wd_breaks_memorization"": false}","{""computed_high_end_censored"": true, ""summary_high_end"": true, ""too_much_breaks_mem"": false}","strongest dose should memorize but fail to grok, proving the high-end side of the interior optimum"
+strongest_seed_rows_memorize_not_grok,pass,"{""grokked"": 0, ""memorized"": 5}","{""strongest_seed_grok_count"": 0, ""strongest_seed_mem_count"": 5}",every strongest-dose seed should memorize but none should grok
+not_monotone_acceleration_claim,pass,interior optimum overrides monotone acceleration,"{""decision"": ""wd_dose_response_interior_optimum"", ""interior_optimum"": true, ""monotone_t_gen_decrease"": true}",the check must guard the exact over-claim v1183 fixed
+boundary_present,pass,toy_scale_single_task_modular_addition_grokking_dose_response_not_a_scaling_claim,toy_scale_single_task_modular_addition_grokking_dose_response_not_a_scaling_claim,positive dose-response result must keep its toy-scale boundary
