@@ -16,7 +16,12 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1190.0.0` follows the image's interpretability advice: align the grokked checkpoint's **embedding dominant frequencies** with its **output-logit frequencies**. It loads the shipped v1185 checkpoint, evaluates every `[a,+,b,=]` prompt, builds the logit cube `L[a,b,y]`, and runs a 2D FFT over `(a,b)`. Ideal modular addition `a+b=y` has power on the diagonal frequencies `k_a == k_b`; the shipped checkpoint shows the same structure (`logit_diagonal_fraction=0.718712` vs random-init `0.000122`) and its top-5 logit diagonal frequencies exactly match the v1188 embedding top-5: `[43, 3, 48, 26, 44]`. This supports the trig-identity mechanism, with the same toy-scale boundary as v1188.
+Version `v1191.0.0` is the interpretability **causal capstone**: it makes the v1188/v1190 *correlational* Fourier evidence causal by ablating frequencies in the shipped checkpoint's (tied) number-embedding and re-measuring held-out accuracy. Because `lm_head` is tied to `token_embedding`, filtering the number rows hits input and readout at once. Result (`verdict=dominant_frequencies_sufficient_and_specific_partial_necessity`): **keeping ONLY the top-5 frequencies `[43,3,48,26,44]` retains accuracy 0.972** (sufficient); removing them is specifically damaging (0.966→0.578) while removing 5 random frequencies barely hurts (0.973); but removal does not collapse to chance, so it's *partially* necessary (the model has redundancy). CPU-only, no training. A first-pass `decide()` threshold under-claimed this as "no dependence" (the 0.388 drop sat just under the 0.40 collapse cutoff) — caught from the raw numbers and fixed, the mirror of the v1183 over-claim.
+
+## Latest v1191 checkpoint
+
+- Added `src/minigpt/grok_freq_ablation_v1191.py`: `filter_embedding` (rFFT remove/keep), `ablated_model` (deep-copy, tied-head aware), `dominant_folded_freqs`, `run_ablation` (baseline + remove-dominant + remove-random control + keep-only), and a three-signal `decide` (specific / sufficient / necessity) verdict ladder.
+- Added CLI `scripts/analyze_grok_freq_ablation_v1191.py` and `tests/test_grok_freq_ablation_v1191.py` (11). The figure bars held-out accuracy across the four interventions. Evidence in `f/1191`; code explanation in `代码讲解记录_工程保养阶段/1203-v1191-minigpt-grokking-causal-frequency-ablation.md`. This closes the grokking/interpretability arc; next is a fresh axis.
 
 ## Latest v1190 checkpoint
 

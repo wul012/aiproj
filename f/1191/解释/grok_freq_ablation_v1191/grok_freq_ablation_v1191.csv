@@ -1,0 +1,5 @@
+intervention,heldout_acc,note
+baseline,0.965989,no ablation
+remove_dominant,0.578185,"removed top-5 freqs [43, 3, 48, 26, 44]"
+remove_random,0.973402,mean over 5 random non-dominant 5-freq removals (std 0.009114)
+keep_only_dominant,0.971835,kept only top-5 freqs (+DC)

@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT v1191 grokking causal frequency ablation",
+  "generated_at": "2026-06-18T10:24:18Z",
+  "status": "pass",
+  "decision": "dominant_frequencies_sufficient_and_specific_partial_necessity",
+  "summary": {
+    "checkpoint": "D:\\aiproj\\f\\1185\\解释\\grok_checkpoint_v1185\\grok_checkpoint_v1185.pt",
+    "p": 97,
+    "k": 5,
+    "dominant_freqs": [
+      43,
+      3,
+      48,
+      26,
+      44
+    ],
+    "baseline_acc": 0.965989,
+    "acc_remove_dominant": 0.578185,
+    "acc_remove_random_mean": 0.973402,
+    "acc_keep_dominant": 0.971835,
+    "chance": 0.010309,
+    "drop_dominant": 0.387804,
+    "drop_random": -0.007413,
+    "specific": true,
+    "sufficient": true,
+    "full_collapse": false,
+    "partial_necessity": true,
+    "verdict": "dominant_frequencies_sufficient_and_specific_partial_necessity",
+    "boundary": "toy_scale_single_checkpoint_causal_frequency_ablation_not_a_general_interpretability_claim"
+  },
+  "rows": [
+    {
+      "intervention": "baseline",
+      "heldout_acc": 0.965989,
+      "note": "no ablation"
+    },
+    {
+      "intervention": "remove_dominant",
+      "heldout_acc": 0.578185,
+      "note": "removed top-5 freqs [43, 3, 48, 26, 44]"
+    },
+    {
+      "intervention": "remove_random",
+      "heldout_acc": 0.973402,
+      "note": "mean over 5 random non-dominant 5-freq removals (std 0.009114)"
+    },
+    {
+      "intervention": "keep_only_dominant",
+      "heldout_acc": 0.971835,
+      "note": "kept only top-5 freqs (+DC)"
+    }
+  ],
+  "recommendations": [
+    "Strongly causal but redundant: keeping ONLY the top-5 frequencies [43, 3, 48, 26, 44] retains held-out accuracy 0.972 (SUFFICIENT), and removing them is specifically damaging (0.966 -> 0.578) vs removing random frequencies (0.973).",
+    "Removal does not collapse to chance (0.578), so the dominant frequencies carry the addition algorithm but the model has redundancy — honest partial necessity, not total necessity.",
+    "This still upgrades v1188/v1190 from correlation to causation: the dominant Fourier frequencies are where the algorithm lives."
+  ],
+  "csv_fieldnames": [
+    "intervention",
+    "heldout_acc",
+    "note"
+  ]
+}
