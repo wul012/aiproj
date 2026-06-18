@@ -1,0 +1,715 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT v1190 grokking logit-frequency alignment",
+  "generated_at": "2026-06-18T08:01:34Z",
+  "status": "pass",
+  "decision": "embedding_logit_frequency_alignment_supports_trig_addition",
+  "summary": {
+    "checkpoint": "D:\\aiproj\\f\\1185\\解释\\grok_checkpoint_v1185\\grok_checkpoint_v1185.pt",
+    "p": 97,
+    "heldout_acc": 0.965989,
+    "embedding_top_freqs": [
+      43,
+      3,
+      48,
+      26,
+      44
+    ],
+    "embedding_top_k_fraction": 0.305171,
+    "embedding_dominant_freq": 43,
+    "logit_top_freqs": [
+      43,
+      3,
+      48,
+      26,
+      44
+    ],
+    "logit_top_k_diagonal_fraction": 0.610591,
+    "logit_diagonal_fraction": 0.718712,
+    "random_logit_diagonal_fraction": 0.000122,
+    "ideal_logit_diagonal_fraction": 1.0,
+    "embedding_logit_top_freq_overlap_count": 5,
+    "embedding_logit_top_freq_overlap_fraction": 1.0,
+    "embedding_logit_top_freq_overlap": [
+      3,
+      26,
+      43,
+      44,
+      48
+    ],
+    "boundary": "toy_scale_single_checkpoint_embedding_logit_frequency_alignment_not_a_scaling_claim"
+  },
+  "rows": [
+    {
+      "arm": "shipped_checkpoint_logits",
+      "diagonal_fraction": 0.718712,
+      "top_k_diagonal_fraction": 0.610591,
+      "dominant_freq": 43,
+      "top_freqs": "43, 3, 48, 26, 44"
+    },
+    {
+      "arm": "random_init_logits",
+      "diagonal_fraction": 0.000122,
+      "top_k_diagonal_fraction": 0.20703,
+      "dominant_freq": 19,
+      "top_freqs": "19, 21, 14, 31, 33"
+    },
+    {
+      "arm": "ideal_addition_target",
+      "diagonal_fraction": 1.0,
+      "top_k_diagonal_fraction": 0.104167,
+      "dominant_freq": 2,
+      "top_freqs": "2, 1, 15, 22, 27"
+    }
+  ],
+  "check_rows": [
+    {
+      "id": "checkpoint_generalizes",
+      "status": "pass",
+      "expected": ">= 0.9",
+      "actual": 0.965989
+    },
+    {
+      "id": "ideal_addition_is_diagonal",
+      "status": "pass",
+      "expected": ">= 0.999",
+      "actual": 1.0
+    },
+    {
+      "id": "shipped_logits_have_diagonal_frequency_structure",
+      "status": "pass",
+      "expected": ">= 0.5",
+      "actual": 0.718712
+    },
+    {
+      "id": "random_logits_are_not_diagonal",
+      "status": "pass",
+      "expected": "<= 0.05",
+      "actual": 0.000122
+    },
+    {
+      "id": "diagonal_gap_is_large",
+      "status": "pass",
+      "expected": ">= 0.25",
+      "actual": 0.71859
+    },
+    {
+      "id": "embedding_logit_top_freqs_overlap",
+      "status": "pass",
+      "expected": ">= 4",
+      "actual": {
+        "count": 5,
+        "fraction": 1.0,
+        "freqs": [
+          3,
+          26,
+          43,
+          44,
+          48
+        ]
+      }
+    },
+    {
+      "id": "dominant_frequency_matches",
+      "status": "pass",
+      "expected": 43,
+      "actual": 43
+    }
+  ],
+  "issues": [],
+  "distributions": {
+    "shipped_checkpoint_logits": [
+      {
+        "freq": 1,
+        "fraction": 0.000148
+      },
+      {
+        "freq": 2,
+        "fraction": 2.9e-05
+      },
+      {
+        "freq": 3,
+        "fraction": 0.136388
+      },
+      {
+        "freq": 4,
+        "fraction": 0.051874
+      },
+      {
+        "freq": 5,
+        "fraction": 7.8e-05
+      },
+      {
+        "freq": 6,
+        "fraction": 0.00027
+      },
+      {
+        "freq": 7,
+        "fraction": 0.051378
+      },
+      {
+        "freq": 8,
+        "fraction": 0.000554
+      },
+      {
+        "freq": 9,
+        "fraction": 0.000153
+      },
+      {
+        "freq": 10,
+        "fraction": 4.2e-05
+      },
+      {
+        "freq": 11,
+        "fraction": 0.000845
+      },
+      {
+        "freq": 12,
+        "fraction": 0.085569
+      },
+      {
+        "freq": 13,
+        "fraction": 0.046118
+      },
+      {
+        "freq": 14,
+        "fraction": 0.07645
+      },
+      {
+        "freq": 15,
+        "fraction": 0.000542
+      },
+      {
+        "freq": 16,
+        "fraction": 0.000317
+      },
+      {
+        "freq": 17,
+        "fraction": 6.7e-05
+      },
+      {
+        "freq": 18,
+        "fraction": 2.4e-05
+      },
+      {
+        "freq": 19,
+        "fraction": 0.004546
+      },
+      {
+        "freq": 20,
+        "fraction": 0.009642
+      },
+      {
+        "freq": 21,
+        "fraction": 0.00011
+      },
+      {
+        "freq": 22,
+        "fraction": 0.006728
+      },
+      {
+        "freq": 23,
+        "fraction": 1.9e-05
+      },
+      {
+        "freq": 24,
+        "fraction": 0.034923
+      },
+      {
+        "freq": 25,
+        "fraction": 9.7e-05
+      },
+      {
+        "freq": 26,
+        "fraction": 0.105488
+      },
+      {
+        "freq": 27,
+        "fraction": 3.8e-05
+      },
+      {
+        "freq": 28,
+        "fraction": 8.8e-05
+      },
+      {
+        "freq": 29,
+        "fraction": 0.000349
+      },
+      {
+        "freq": 30,
+        "fraction": 4.3e-05
+      },
+      {
+        "freq": 31,
+        "fraction": 0.000114
+      },
+      {
+        "freq": 32,
+        "fraction": 5.8e-05
+      },
+      {
+        "freq": 33,
+        "fraction": 0.01287
+      },
+      {
+        "freq": 34,
+        "fraction": 0.000105
+      },
+      {
+        "freq": 35,
+        "fraction": 0.00013
+      },
+      {
+        "freq": 36,
+        "fraction": 5.5e-05
+      },
+      {
+        "freq": 37,
+        "fraction": 0.000258
+      },
+      {
+        "freq": 38,
+        "fraction": 3.4e-05
+      },
+      {
+        "freq": 39,
+        "fraction": 4.9e-05
+      },
+      {
+        "freq": 40,
+        "fraction": 3.3e-05
+      },
+      {
+        "freq": 41,
+        "fraction": 0.004474
+      },
+      {
+        "freq": 42,
+        "fraction": 4.9e-05
+      },
+      {
+        "freq": 43,
+        "fraction": 0.161623
+      },
+      {
+        "freq": 44,
+        "fraction": 0.087971
+      },
+      {
+        "freq": 45,
+        "fraction": 6.3e-05
+      },
+      {
+        "freq": 46,
+        "fraction": 3.7e-05
+      },
+      {
+        "freq": 47,
+        "fraction": 3.8e-05
+      },
+      {
+        "freq": 48,
+        "fraction": 0.119121
+      }
+    ],
+    "random_init_logits": [
+      {
+        "freq": 1,
+        "fraction": 0.031279
+      },
+      {
+        "freq": 2,
+        "fraction": 0.015259
+      },
+      {
+        "freq": 3,
+        "fraction": 0.031587
+      },
+      {
+        "freq": 4,
+        "fraction": 0.024893
+      },
+      {
+        "freq": 5,
+        "fraction": 0.016968
+      },
+      {
+        "freq": 6,
+        "fraction": 0.022078
+      },
+      {
+        "freq": 7,
+        "fraction": 0.011968
+      },
+      {
+        "freq": 8,
+        "fraction": 0.008261
+      },
+      {
+        "freq": 9,
+        "fraction": 0.01532
+      },
+      {
+        "freq": 10,
+        "fraction": 0.013709
+      },
+      {
+        "freq": 11,
+        "fraction": 0.015404
+      },
+      {
+        "freq": 12,
+        "fraction": 0.024585
+      },
+      {
+        "freq": 13,
+        "fraction": 0.01537
+      },
+      {
+        "freq": 14,
+        "fraction": 0.033753
+      },
+      {
+        "freq": 15,
+        "fraction": 0.03132
+      },
+      {
+        "freq": 16,
+        "fraction": 0.017434
+      },
+      {
+        "freq": 17,
+        "fraction": 0.018099
+      },
+      {
+        "freq": 18,
+        "fraction": 0.012117
+      },
+      {
+        "freq": 19,
+        "fraction": 0.055443
+      },
+      {
+        "freq": 20,
+        "fraction": 0.026122
+      },
+      {
+        "freq": 21,
+        "fraction": 0.052431
+      },
+      {
+        "freq": 22,
+        "fraction": 0.023445
+      },
+      {
+        "freq": 23,
+        "fraction": 0.01063
+      },
+      {
+        "freq": 24,
+        "fraction": 0.005987
+      },
+      {
+        "freq": 25,
+        "fraction": 0.008814
+      },
+      {
+        "freq": 26,
+        "fraction": 0.025064
+      },
+      {
+        "freq": 27,
+        "fraction": 0.013813
+      },
+      {
+        "freq": 28,
+        "fraction": 0.011516
+      },
+      {
+        "freq": 29,
+        "fraction": 0.032407
+      },
+      {
+        "freq": 30,
+        "fraction": 0.026296
+      },
+      {
+        "freq": 31,
+        "fraction": 0.032756
+      },
+      {
+        "freq": 32,
+        "fraction": 0.021792
+      },
+      {
+        "freq": 33,
+        "fraction": 0.032647
+      },
+      {
+        "freq": 34,
+        "fraction": 0.016462
+      },
+      {
+        "freq": 35,
+        "fraction": 0.010022
+      },
+      {
+        "freq": 36,
+        "fraction": 0.013017
+      },
+      {
+        "freq": 37,
+        "fraction": 0.024701
+      },
+      {
+        "freq": 38,
+        "fraction": 0.014526
+      },
+      {
+        "freq": 39,
+        "fraction": 0.024022
+      },
+      {
+        "freq": 40,
+        "fraction": 0.009012
+      },
+      {
+        "freq": 41,
+        "fraction": 0.014513
+      },
+      {
+        "freq": 42,
+        "fraction": 0.013204
+      },
+      {
+        "freq": 43,
+        "fraction": 0.016099
+      },
+      {
+        "freq": 44,
+        "fraction": 0.01318
+      },
+      {
+        "freq": 45,
+        "fraction": 0.028029
+      },
+      {
+        "freq": 46,
+        "fraction": 0.017186
+      },
+      {
+        "freq": 47,
+        "fraction": 0.025382
+      },
+      {
+        "freq": 48,
+        "fraction": 0.022078
+      }
+    ],
+    "ideal_addition_target": [
+      {
+        "freq": 1,
+        "fraction": 0.020833
+      },
+      {
+        "freq": 2,
+        "fraction": 0.020833
+      },
+      {
+        "freq": 3,
+        "fraction": 0.020833
+      },
+      {
+        "freq": 4,
+        "fraction": 0.020833
+      },
+      {
+        "freq": 5,
+        "fraction": 0.020833
+      },
+      {
+        "freq": 6,
+        "fraction": 0.020833
+      },
+      {
+        "freq": 7,
+        "fraction": 0.020833
+      },
+      {
+        "freq": 8,
+        "fraction": 0.020833
+      },
+      {
+        "freq": 9,
+        "fraction": 0.020833
+      },
+      {
+        "freq": 10,
+        "fraction": 0.020833
+      },
+      {
+        "freq": 11,
+        "fraction": 0.020833
+      },
+      {
+        "freq": 12,
+        "fraction": 0.020833
+      },
+      {
+        "freq": 13,
+        "fraction": 0.020833
+      },
+      {
+        "freq": 14,
+        "fraction": 0.020833
+      },
+      {
+        "freq": 15,
+        "fraction": 0.020833
+      },
+      {
+        "freq": 16,
+        "fraction": 0.020833
+      },
+      {
+        "freq": 17,
+        "fraction": 0.020833
+      },
+      {
+        "freq": 18,
+        "fraction": 0.020833
+      },
+      {
+        "freq": 19,
+        "fraction": 0.020833
+      },
+      {
+        "freq": 20,
+        "fraction": 0.020833
+      },
+      {
+        "freq": 21,
+        "fraction": 0.020833
+      },
+      {
+        "freq": 22,
+        "fraction": 0.020833
+      },
+      {
+        "freq": 23,
+        "fraction": 0.020833
+      },
+      {
+        "freq": 24,
+        "fraction": 0.020833
+      },
+      {
+        "freq": 25,
+        "fraction": 0.020833
+      },
+      {
+        "freq": 26,
+        "fraction": 0.020833
+      },
+      {
+        "freq": 27,
+        "fraction": 0.020833
+      },
+      {
+        "freq": 28,
+        "fraction": 0.020833
+      },
+      {
+        "freq": 29,
+        "fraction": 0.020833
+      },
+      {
+        "freq": 30,
+        "fraction": 0.020833
+      },
+      {
+        "freq": 31,
+        "fraction": 0.020833
+      },
+      {
+        "freq": 32,
+        "fraction": 0.020833
+      },
+      {
+        "freq": 33,
+        "fraction": 0.020833
+      },
+      {
+        "freq": 34,
+        "fraction": 0.020833
+      },
+      {
+        "freq": 35,
+        "fraction": 0.020833
+      },
+      {
+        "freq": 36,
+        "fraction": 0.020833
+      },
+      {
+        "freq": 37,
+        "fraction": 0.020833
+      },
+      {
+        "freq": 38,
+        "fraction": 0.020833
+      },
+      {
+        "freq": 39,
+        "fraction": 0.020833
+      },
+      {
+        "freq": 40,
+        "fraction": 0.020833
+      },
+      {
+        "freq": 41,
+        "fraction": 0.020833
+      },
+      {
+        "freq": 42,
+        "fraction": 0.020833
+      },
+      {
+        "freq": 43,
+        "fraction": 0.020833
+      },
+      {
+        "freq": 44,
+        "fraction": 0.020833
+      },
+      {
+        "freq": 45,
+        "fraction": 0.020833
+      },
+      {
+        "freq": 46,
+        "fraction": 0.020833
+      },
+      {
+        "freq": 47,
+        "fraction": 0.020833
+      },
+      {
+        "freq": 48,
+        "fraction": 0.020833
+      }
+    ]
+  },
+  "recommendations": [
+    "The shipped grokking checkpoint's output logits are concentrated on the diagonal 2D FFT frequencies expected for a+b=y modular addition surfaces.",
+    "The logit dominant frequencies [43, 3, 48, 26, 44] align with the embedding dominant frequencies [43, 3, 48, 26, 44], supporting the trig-identity mechanism behind v1188."
+  ],
+  "csv_fieldnames": [
+    "arm",
+    "diagonal_fraction",
+    "top_k_diagonal_fraction",
+    "dominant_freq",
+    "top_freqs"
+  ]
+}

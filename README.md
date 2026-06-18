@@ -16,7 +16,13 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1189.0.0` is a CI portability repair after the v1186-v1188 capability line: GitHub Actions runs `coverage run -m unittest discover`, but `tests/test_grok_predict_v1186.py` imported `pytest` only for a skip marker, causing `ModuleNotFoundError: No module named 'pytest'` in CI. v1189 removes that dependency, replaces it with `unittest.skipIf`, adds the test module's own `src/` path injection, and repairs the engineering-stage code-explanation index that had fallen behind v1185-v1188. No model behavior, checkpoint, or interpretability claim changes.
+Version `v1190.0.0` follows the image's interpretability advice: align the grokked checkpoint's **embedding dominant frequencies** with its **output-logit frequencies**. It loads the shipped v1185 checkpoint, evaluates every `[a,+,b,=]` prompt, builds the logit cube `L[a,b,y]`, and runs a 2D FFT over `(a,b)`. Ideal modular addition `a+b=y` has power on the diagonal frequencies `k_a == k_b`; the shipped checkpoint shows the same structure (`logit_diagonal_fraction=0.718712` vs random-init `0.000122`) and its top-5 logit diagonal frequencies exactly match the v1188 embedding top-5: `[43, 3, 48, 26, 44]`. This supports the trig-identity mechanism, with the same toy-scale boundary as v1188.
+
+## Latest v1190 checkpoint
+
+- Added `src/minigpt/grok_logit_freq_v1190.py`: prompt-grid construction, output-logit cube extraction, ideal-addition cube, 2D FFT diagonal-power metrics, folded frequency alignment, random-init control, and a pass/review verdict ladder.
+- Added CLI `scripts/analyze_grok_logit_freq_v1190.py` plus `tests/test_grok_logit_freq_v1190.py` (`7 passed` focused).
+- Real shipped-checkpoint result: `status=pass`, `decision=embedding_logit_frequency_alignment_supports_trig_addition`, heldout accuracy `0.965989`, logit diagonal fraction `0.718712`, random diagonal fraction `0.000122`, ideal diagonal fraction `1.0`, embedding/logit top-5 overlap `5/5`. Evidence in `f/1190`; code explanation in `代码讲解记录_工程保养阶段/1202-v1190-minigpt-grokking-logit-frequency-alignment.md`.
 
 ## Latest v1189 checkpoint
 

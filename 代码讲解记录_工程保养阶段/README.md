@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1202-v1190-minigpt-grokking-logit-frequency-alignment.md
+ -> v1190 code explanation: output-logit frequency alignment for the shipped grokking checkpoint. Builds the full `L[a,b,y]` logit cube, uses 2D FFT over `(a,b)` to measure diagonal frequency power expected by `a+b=y`, compares against random-init and ideal addition controls, and verifies the logit top frequencies match the v1188 embedding dominant frequencies. Evidence lives under `f/1190`.
+
 1201-v1189-ci-unittest-portability.md
  -> v1189 code explanation: CI portability repair for the v1186 checkpoint inference test. GitHub Actions uses stdlib `unittest discover`, but `tests/test_grok_predict_v1186.py` imported `pytest` only for a skip marker, causing `ModuleNotFoundError` in CI from v1186 through v1188. v1189 replaces it with `unittest.skipIf`, adds local `src/` path injection, and keeps the boundary to test portability plus index repair only. Evidence lives under `f/1189`.
 

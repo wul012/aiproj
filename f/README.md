@@ -18,6 +18,10 @@ f/<version>/解释/说明.md
 
 ## 当前索引
 
+f/1190/图片
+f/1190/解释/说明.md
+ -> v1190 grokking logit-frequency alignment: follows the v1188 interpretability axis by aligning embedding dominant frequencies with output-logit frequencies. It loads the shipped v1185 checkpoint, evaluates all `[a,+,b,=]` prompts, builds `L[a,b,y]`, and runs a 2D FFT over `(a,b)`. Ideal addition has diagonal frequency power (`k_a == k_b`); shipped checkpoint result: `status=pass`, `decision=embedding_logit_frequency_alignment_supports_trig_addition`, `logit_diagonal_fraction=0.718712` vs random `0.000122`, ideal `1.0`; logit top-5 frequencies exactly match embedding top-5 `[43,3,48,26,44]`. Boundary: toy-scale single-checkpoint mechanism evidence, not causal ablation or scaling claim.
+
 f/1189/图片
 f/1189/解释/说明.md
  -> v1189 CI unittest portability fix: repairs the v1186-v1188 GitHub Actions failure where `tests/test_grok_predict_v1186.py` imported `pytest` for a skip marker even though CI runs stdlib `unittest discover` without pytest. Replaced the marker with `unittest.skipIf`, added local `src/` path injection, and repaired the engineering-stage code-explanation README index for v1185-v1188. Boundary: CI/test portability and documentation index repair only; no checkpoint, model behavior, or interpretability-claim changes.

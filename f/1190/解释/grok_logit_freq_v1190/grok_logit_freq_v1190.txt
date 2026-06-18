@@ -1,0 +1,14 @@
+status=pass
+decision=embedding_logit_frequency_alignment_supports_trig_addition
+checkpoint=D:\aiproj\f\1185\解释\grok_checkpoint_v1185\grok_checkpoint_v1185.pt
+p=97
+heldout_acc=0.965989
+embedding_top_k_fraction=0.305171
+embedding_dominant_freq=43
+logit_top_k_diagonal_fraction=0.610591
+logit_diagonal_fraction=0.718712
+random_logit_diagonal_fraction=0.000122
+ideal_logit_diagonal_fraction=1.0
+embedding_logit_top_freq_overlap_count=5
+embedding_logit_top_freq_overlap_fraction=1.0
+boundary=toy_scale_single_checkpoint_embedding_logit_frequency_alignment_not_a_scaling_claim
