@@ -16,7 +16,13 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1187.0.0` is a maintenance dedup (the v1159/v1163/v1167/v1171/v1174/v1176 cadence): the four grokking-audit modules (v1180/81/82/84) each re-implemented three byte-identical pieces — the check-row builder `_check`, the `failures` collector, and `resolve_exit_code`. These move into `src/minigpt/report_check_common.py` (`check_row`, `collect_failures`, `resolve_exit_code`); each module imports them, keeping its public names. Contract-preserving: the four audit test files are unchanged and still green, plus single-source identity guards (`module.resolve_exit_code is resolve_exit_code`, etc.). No behavior change, no new science. The PTQ check family (v1177/78) is deliberately left untouched.
+Version `v1188.0.0` opens a new axis — **mechanistic interpretability**: instead of measuring *that* the model groks (v1179) or shipping it (v1185), it reverse-engineers *how* the grokked model computes `a + b (mod 97)`. FFT of the learned number-embeddings, comparing a grokked (wd=1) model against a paired memorized-not-grokked (wd=0) model and a random-init null. Real RTX 4060 run (3 seeds): `verdict=fourier_structure_explains_generalization` — top-5 frequency power fraction is `0.307±0.004` (grokked) vs `0.150±0.002` (memorized) vs `0.120±0.001` (random); only the *generalizing* model develops the Fourier structure, the weight-level mechanism behind grokking. Honestly qualified: the concentration is significant and generalization-linked but **modest/partial** (top-5 ≈ 31%, 34/48 freqs for 90% power) — not the ultra-sparse few-frequency basis of attention-only models, since this 1-layer model has LayerNorm + MLP. Almost free (reads structure off weights).
+
+## Latest v1188 checkpoint
+
+- Added `src/minigpt/grok_interp_v1188.py`: `number_embedding`, `embedding_spectrum` (rFFT over the number axis), `concentration_metrics` (top-k power fraction, spectral entropy), `collect_arms` (paired grokked/memorized + random null, reusing `train_to_grok`), `decide` (Fourier-structure verdict ladder), and `analyze_shipped_checkpoint` (the committed v1185 model carries the structure: top-5 0.305, dom freq 43).
+- Added CLI `scripts/analyze_grok_interp_v1188.py`. The figure overlays the three arms' embedding spectra (grokked peaks vs flat) plus a concentration bar.
+- Added `tests/test_grok_interp_v1188.py` (8, incl. a pure-cosine embedding giving one dominant frequency and the verdict ladder). Evidence in `f/1188`; code explanation in `代码讲解记录_工程保养阶段/1200-v1188-minigpt-grokking-interpretability.md`.
 
 ## Latest v1187 checkpoint
 

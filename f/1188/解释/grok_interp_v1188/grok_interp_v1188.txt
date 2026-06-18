@@ -1,0 +1,16 @@
+status=pass
+decision=fourier_structure_explains_generalization
+p=97
+top_k=5
+seeds=3
+verdict=fourier_structure_explains_generalization
+g0_arms_behaved=True
+g1_grid_complete=True
+grokked_entropy_mean=0.914238
+memorized_entropy_mean=0.994882
+random_entropy_mean=0.998878
+beats_random=True
+beats_memorized=True
+shipped_checkpoint_top_k_fraction=0.305171
+shipped_checkpoint_dominant_freq=43
+boundary=toy_scale_single_task_interpretability_embedding_fourier_structure_only
