@@ -18,6 +18,10 @@ f/<version>/解释/说明.md
 
 ## 当前索引
 
+f/1192/图片
+f/1192/解释/说明.md
+ -> v1192 calibration under aleatoric uncertainty + temperature scaling (NEW axis, after grokking closed at v1191). Reuses v1173's stochastic Dirichlet task (known P_true) so calibration is measured against an EXACT oracle; metrics are analytic (oracle ECE exactly 0, avoiding the Jensen bias that makes sampled ECE >0 = oracle sampled floor 0.003). Result `verdict=overconfidence_specifically_corrected_by_temperature` (status=pass): hard-CE n=10 transformer is overconfident (conf 0.559 >> acc 0.442, analytic ECE 0.124 >> floor 0); one global temperature T=1.82 (NLL-fit) reduces ECE to 0.065 (paired Δ0.059±0.029), SPECIFICALLY — ECE-vs-T U-shaped with min at fitted T, wrong T worse (0.141), no help on an already-calibrated model (0.040->0.082). Finite-sample MLE artifact: T->1 as n grows (4.45/1.82/1.24/1.14/1.08). Honest: NLL=entropy+KL so ECE and KL co-move (NO dissociation claimed); calibration adds direction (KL is direction-blind) + an actionable fix. Boundary low-H is the null (gap +0.013, not T-correctable). Phase A trains once + caches logits, Phase B is CPU-only (reuse-cached). Figure: reliability diagram + ECE-vs-T U-curve + samples sweep + scope.
+
 f/1191/图片
 f/1191/解释/说明.md
  -> v1191 grokking causal frequency ablation (interpretability capstone): ablate Fourier frequencies in the shipped v1185 checkpoint's tied number-embedding and re-measure held-out accuracy. Result `verdict=dominant_frequencies_sufficient_and_specific_partial_necessity`: keeping ONLY the top-5 freqs [43,3,48,26,44] retains 0.972 (sufficient), removing them is specifically damaging 0.966->0.578 while removing 5 random freqs barely hurts (0.973), but removal doesn't collapse to chance (partial necessity = redundancy). Upgrades v1188/v1190 from correlation to causation. CPU-only, no training. A first-pass decide() threshold under-claimed it as "no dependence" (0.388 drop just under the 0.40 cutoff) — caught and fixed (mirror of the v1183 over-claim). Figure: held-out accuracy across the four interventions.

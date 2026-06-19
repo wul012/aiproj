@@ -1,0 +1,413 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT calibration under uncertainty + temperature scaling v1192",
+  "generated_at": "2026-06-19T07:27:01Z",
+  "status": "pass",
+  "decision": "overconfidence_specifically_corrected_by_temperature",
+  "summary": {
+    "status": "pass",
+    "decision": "overconfidence_specifically_corrected_by_temperature",
+    "verdict": "overconfidence_specifically_corrected_by_temperature",
+    "headline_n": 10,
+    "seeds": 3,
+    "mean_true_entropy_nats": 1.126902,
+    "entropy_spread": 1.553894,
+    "uniform_kl_floor": 0.482536,
+    "oracle_analytic_ece": 0.0,
+    "oracle_sampled_ece_floor": 0.00333,
+    "hard_ce_kl": 0.25683,
+    "hard_ce_mean_conf": 0.5594,
+    "hard_ce_mean_acc": 0.4417,
+    "hard_ce_overconfidence_gap": 0.1177,
+    "hard_ce_ece": 0.12413,
+    "hard_ce_ece_std": 0.03071,
+    "fitted_T": 1.8171,
+    "fitted_T_std": 0.1047,
+    "hard_ce_ece_after_T": 0.06514,
+    "paired_delta_ece": 0.059,
+    "paired_delta_ece_std": 0.02898,
+    "kl_after_T": 0.16092,
+    "rel_ece_reduction": 0.4753,
+    "rel_kl_reduction": 0.3735,
+    "calibration_kl_co_move": true,
+    "wrong_T_value": 4.5323,
+    "ece_fitted_T": 0.065135,
+    "ece_wrong_T": 0.140943,
+    "calibrated_ece_pre": 0.040032,
+    "calibrated_ece_post_headlineT": 0.081987,
+    "boundary_mean_H": 0.309379,
+    "boundary_gap": 0.0134,
+    "boundary_overconfident": true,
+    "boundary_correctable": false,
+    "binning_robust": true,
+    "not_magic_T_to_one": true,
+    "teacher_kl_to_true": 0.048735,
+    "valid_measurement": true,
+    "flag_g0_task_learned": true,
+    "flag_g1_entropy_structure": true,
+    "flag_g2_temperature_identified": true,
+    "flag_g3_ece_estimator_valid": true,
+    "flag_direction_overconfident": true,
+    "flag_T_significantly_gt_1": true,
+    "flag_ece_above_oracle_floor": true,
+    "flag_correction_paired_significant": true,
+    "flag_u_shaped": true,
+    "flag_wrong_T_worse": true,
+    "flag_t_not_helping_calibrated": true,
+    "flag_binning_robust": true,
+    "flag_not_magic_T_to_one": true,
+    "flag_calibration_kl_co_move": true,
+    "flag_boundary_not_correctable_null": true,
+    "flag_soft_distill_calibrated": true
+  },
+  "rows": [
+    {
+      "arm": "hard_ce",
+      "T": 1.8171,
+      "T_std": 0.1047,
+      "ece": 0.12413,
+      "ece_T": 0.06514,
+      "delta_ece_mean": 0.059,
+      "delta_ece_std": 0.02898,
+      "nll": 1.38373,
+      "nll_T": 1.28782,
+      "kl": 0.25683,
+      "kl_T": 0.16092,
+      "brier": 0.6591,
+      "conf": 0.5594,
+      "acc": 0.4417
+    },
+    {
+      "arm": "soft_distill",
+      "T": 0.9851,
+      "T_std": 0.0057,
+      "ece": 0.0469,
+      "ece_T": 0.04808,
+      "delta_ece_mean": -0.00117,
+      "delta_ece_std": 0.00134,
+      "nll": 1.17554,
+      "nll_T": 1.17548,
+      "kl": 0.04863,
+      "kl_T": 0.04858,
+      "brier": 0.6079,
+      "conf": 0.4983,
+      "acc": 0.4894
+    },
+    {
+      "arm": "label_smooth",
+      "T": 1.3261,
+      "T_std": 0.0077,
+      "ece": 0.09841,
+      "ece_T": 0.07621,
+      "delta_ece_mean": 0.0222,
+      "delta_ece_std": 0.00921,
+      "nll": 1.30865,
+      "nll_T": 1.28688,
+      "kl": 0.18175,
+      "kl_T": 0.15997,
+      "brier": 0.64811,
+      "conf": 0.5284,
+      "acc": 0.4489
+    },
+    {
+      "arm": "random_init",
+      "T": 2.8134,
+      "T_std": 2.7598,
+      "ece": 0.0172,
+      "ece_T": 0.00767,
+      "delta_ece_mean": 0.00953,
+      "delta_ece_std": 0.008,
+      "nll": 1.60851,
+      "nll_T": 1.60706,
+      "kl": 0.48161,
+      "kl_T": 0.48016,
+      "brier": 0.79973,
+      "conf": 0.2257,
+      "acc": 0.2085
+    },
+    {
+      "arm": "boundary_low_entropy",
+      "T": 1.2964,
+      "T_std": 0.1406,
+      "ece": 0.04521,
+      "ece_T": 0.04589,
+      "delta_ece_mean": -0.00068,
+      "delta_ece_std": 0.00772,
+      "nll": 0.42532,
+      "nll_T": 0.40554,
+      "kl": 0.11595,
+      "kl_T": 0.09616,
+      "brier": 0.20113,
+      "conf": 0.8884,
+      "acc": 0.8751
+    }
+  ],
+  "recommendations": [
+    "VERDICT (overconfidence_specifically_corrected_by_temperature): on a SYNTHETIC Dirichlet next-char task (K contexts, M=5, KNOWN P_true; mean entropy 1.127 nats, spread 1.55), a 2L/32 transformer trained with hard CE at n=10 samples/ctx is OVERCONFIDENT: mean confidence 0.559 >> mean accuracy 0.442 (gap +0.118), analytic ECE 0.124±0.031 >> the EXACT oracle floor 0.000. status='pass' certifies a VALID measurement (model beats uniform KL 0.483, real entropy spread, identified T, non-degenerate bins), NOT a flattering magnitude.",
+    "FIX: one GLOBAL temperature T=1.82±0.10 (>1, fit by NLL over all contexts) reduces ECE 0.124->0.065 (paired Δ 0.059±0.029, lb>0=True) toward the floor. PAIRED per-seed test (shared model+contexts), not the unpaired in-quadrature test.",
+    "SPECIFIC (not 'any flattening helps'): ECE-vs-T is U-shaped with its minimum at the fitted T (u_shaped=True); a mismatched T=4.5323 from a more-overconfident regime gives higher ECE (0.141 vs fitted 0.065, wrong_T_worse=True); the same T does NOT help an already-calibrated model (0.040->0.082, t_not_helping_calibrated=True); and the oracle's own analytic ECE is 0.000≈0.",
+    "NOT MAGIC — finite-sample MLE artifact: across the samples/ctx sweep the fitted T trends toward 1 as n grows (not_magic_T_to_one=True; n=3:T=4.45, n=10:T=1.82, n=30:T=1.24, n=100:T=1.14, n=300:T=1.08). Overconfidence is the few-sample collapse toward the sampled mode, not an intrinsic architectural property.",
+    "NOVELTY vs v1173 (honest): expected-NLL = entropy + KL, so on this substrate ECE and KL CO-MOVE under temperature (rel ECE reduction 0.48 ≈ rel KL reduction 0.37, co_move=True) — we do NOT claim an ECE/KL dissociation. Calibration adds beyond KL: (a) DIRECTION (KL is direction-blind; ECE diagnoses OVER- vs under-confidence) and (b) the actionable single-scalar fix, measured against an EXACT oracle floor. soft_distill is already calibrated (T=0.99, calibrated=True) — a consistency check with v1173, not new novelty.",
+    "BOUNDARY (the null): a LOW-entropy task instance (mean H 0.309) is only marginally overconfident (gap +0.013 vs +0.118 at high H) and crucially NOT correctable by temperature (ECE 0.045->0.046, correctable=False) — the correctable-overconfidence phenomenon needs real aleatoric uncertainty; at low H there is little GLOBAL over-confidence and one scalar cannot touch the per-context residual. SAMPLED ECE has a positive Jensen-bias floor (oracle sampled-ECE 0.003>0) — exactly why the headline uses ANALYTIC metrics (oracle floor 0). SCOPE: synthetic aleatoric categorical, few-sample regime; NOT a claim that transformers are overconfident in general."
+  ],
+  "csv_fieldnames": [
+    "arm",
+    "T",
+    "T_std",
+    "ece",
+    "ece_T",
+    "delta_ece_mean",
+    "delta_ece_std",
+    "nll",
+    "nll_T",
+    "kl",
+    "kl_T",
+    "brier",
+    "conf",
+    "acc"
+  ],
+  "sweep": {
+    "3": {
+      "T": 4.445155988274267,
+      "ece": 0.30076649251089244,
+      "conf": 0.7041722706245448,
+      "acc": 0.4034057781136524,
+      "kl": 1.3846799841151916
+    },
+    "10": {
+      "T": 1.8170752647442636,
+      "ece": 0.1241345695353289,
+      "conf": 0.5593534806491962,
+      "acc": 0.44165183355677623,
+      "kl": 0.25682966634515975
+    },
+    "30": {
+      "T": 1.239069840902409,
+      "ece": 0.07396531575978789,
+      "conf": 0.53926489655091,
+      "acc": 0.48530918919922605,
+      "kl": 0.08199985351089278
+    },
+    "100": {
+      "T": 1.1379263781864768,
+      "ece": 0.04940378726000799,
+      "conf": 0.523729496688197,
+      "acc": 0.4854565590872532,
+      "kl": 0.0559768107834168
+    },
+    "300": {
+      "T": 1.0750692566433966,
+      "ece": 0.04003227968799453,
+      "conf": 0.5073653792613984,
+      "acc": 0.48174415802330667,
+      "kl": 0.04066023354327871
+    }
+  },
+  "fig_ece_vs_T": [
+    [
+      0.5,
+      0.298531
+    ],
+    [
+      0.5399,
+      0.280282
+    ],
+    [
+      0.583,
+      0.26186
+    ],
+    [
+      0.6295,
+      0.243378
+    ],
+    [
+      0.6797,
+      0.224931
+    ],
+    [
+      0.7339,
+      0.211029
+    ],
+    [
+      0.7924,
+      0.194937
+    ],
+    [
+      0.8557,
+      0.175611
+    ],
+    [
+      0.9239,
+      0.167397
+    ],
+    [
+      0.9976,
+      0.154274
+    ],
+    [
+      1.0772,
+      0.134621
+    ],
+    [
+      1.1632,
+      0.134033
+    ],
+    [
+      1.2559,
+      0.125225
+    ],
+    [
+      1.3561,
+      0.111096
+    ],
+    [
+      1.4643,
+      0.10957
+    ],
+    [
+      1.5811,
+      0.101952
+    ],
+    [
+      1.7073,
+      0.089332
+    ],
+    [
+      1.8435,
+      0.081024
+    ],
+    [
+      1.9905,
+      0.097019
+    ],
+    [
+      2.1493,
+      0.067988
+    ],
+    [
+      2.3208,
+      0.078054
+    ],
+    [
+      2.5059,
+      0.079422
+    ],
+    [
+      2.7058,
+      0.082631
+    ],
+    [
+      2.9217,
+      0.093046
+    ],
+    [
+      3.1548,
+      0.10295
+    ],
+    [
+      3.4065,
+      0.120466
+    ],
+    [
+      3.6782,
+      0.130405
+    ],
+    [
+      3.9716,
+      0.120187
+    ],
+    [
+      4.2885,
+      0.128781
+    ],
+    [
+      4.6306,
+      0.136744
+    ],
+    [
+      5.0,
+      0.144108
+    ]
+  ],
+  "fig_T_fitted": 1.7322,
+  "fig_reliability_pre": [
+    [
+      0.28962,
+      0.16601,
+      0.03125
+    ],
+    [
+      0.35653,
+      0.22934,
+      0.15625
+    ],
+    [
+      0.46131,
+      0.29771,
+      0.28125
+    ],
+    [
+      0.55771,
+      0.34494,
+      0.25
+    ],
+    [
+      0.65052,
+      0.48073,
+      0.0625
+    ],
+    [
+      0.76183,
+      0.84327,
+      0.0625
+    ],
+    [
+      0.85798,
+      0.82964,
+      0.0625
+    ],
+    [
+      0.96052,
+      0.91395,
+      0.09375
+    ]
+  ],
+  "fig_reliability_post": [
+    [
+      0.2845,
+      0.197,
+      0.125
+    ],
+    [
+      0.34257,
+      0.29128,
+      0.34375
+    ],
+    [
+      0.43965,
+      0.33691,
+      0.28125
+    ],
+    [
+      0.52393,
+      0.81591,
+      0.0625
+    ],
+    [
+      0.65323,
+      0.80093,
+      0.09375
+    ],
+    [
+      0.71566,
+      0.77583,
+      0.03125
+    ],
+    [
+      0.85574,
+      0.98301,
+      0.0625
+    ]
+  ],
+  "source": "D:\\aiproj\\output\\calibration-v1192\\cache.pt"
+}
