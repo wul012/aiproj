@@ -1,0 +1,331 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT task-similarity -> catastrophic forgetting v1195",
+  "generated_at": "2026-06-19T14:52:08Z",
+  "status": "pass",
+  "decision": "forgetting_governed_by_output_overlap",
+  "summary": {
+    "status": "pass",
+    "decision": "forgetting_governed_by_output_overlap",
+    "verdict": "forgetting_governed_by_output_overlap",
+    "p": 23,
+    "seeds": 5,
+    "train_frac": 0.8,
+    "b_budget": 1500,
+    "chance": 0.04348,
+    "leak_free": true,
+    "accA_plateau": 0.9906,
+    "per_seed_plateau_ok": true,
+    "continue_on_A_forgetting": -0.0038,
+    "joint_accA": 0.8547,
+    "joint_accB": 0.8189,
+    "spearman_overlap_forgetting": -1.0,
+    "spearman_perm_p": 0.0167,
+    "slope_span": 0.7962,
+    "overlap_survives_accB_and_drift": true,
+    "superlinear_vs_overwrite_null": false,
+    "mean_superlinear_excess": 0.0764,
+    "c2_family_does_not_protect": true,
+    "family_protects": false,
+    "c3_type_points_on_curve": true,
+    "structure_at_fixed_overlap": false,
+    "n_mix_curve": 5,
+    "n_indep_type_learned": 3,
+    "valid_measurement": true,
+    "flag_g_a_consolidated": true,
+    "flag_g_floor_clean": true,
+    "flag_g_no_operand_leak": true,
+    "flag_g_jointly_learnable": true,
+    "flag_g_enough_curve_points": true,
+    "flag_degenerate_zero_variance": false,
+    "flag_c1_monotone_slope": true,
+    "flag_spearman_overlap_forget": -1.0,
+    "flag_spearman_perm_p": 0.0167,
+    "flag_slope_span": 0.7962,
+    "flag_overlap_survives_accB_and_drift": true,
+    "flag_beta_overlap_given_accB": -0.983,
+    "flag_beta_accB": 0.0,
+    "flag_beta_overlap_given_drift": -0.998,
+    "flag_beta_drift": -0.019,
+    "flag_superlinear_vs_overwrite_null": false,
+    "flag_mean_superlinear_excess": 0.0764,
+    "flag_c2_family_does_not_protect": true,
+    "flag_family_protects": false,
+    "flag_underpowered_type_contrast": false,
+    "flag_c3_type_points_on_curve": true,
+    "flag_structure_at_fixed_overlap": false,
+    "flag_lowov_forget_spread": 0.0528,
+    "flag_n_mix_learned": 6,
+    "flag_n_mix_curve": 5,
+    "flag_n_indep_type_learned": 3
+  },
+  "rows": [
+    {
+      "arm": "mix:1.000",
+      "overlap": 1.0,
+      "forgetting": -0.0019,
+      "forgetting_std": 0.014,
+      "accB_conflict_test": null,
+      "accB_conflict_train": null,
+      "emb_drift": 2.817,
+      "learned": true
+    },
+    {
+      "arm": "mix:0.875",
+      "overlap": 0.8849,
+      "forgetting": 0.1415,
+      "forgetting_std": 0.0411,
+      "accB_conflict_test": 0.1169,
+      "accB_conflict_train": 1.0,
+      "emb_drift": 2.1846,
+      "learned": true
+    },
+    {
+      "arm": "mix:0.750",
+      "overlap": 0.7604,
+      "forgetting": 0.3208,
+      "forgetting_std": 0.0298,
+      "accB_conflict_test": 0.1259,
+      "accB_conflict_train": 1.0,
+      "emb_drift": 2.5221,
+      "learned": true
+    },
+    {
+      "arm": "mix:0.500",
+      "overlap": 0.5321,
+      "forgetting": 0.6566,
+      "forgetting_std": 0.0739,
+      "accB_conflict_test": 0.2977,
+      "accB_conflict_train": 1.0,
+      "emb_drift": 2.5617,
+      "learned": true
+    },
+    {
+      "arm": "mix:0.250",
+      "overlap": 0.2792,
+      "forgetting": 0.8019,
+      "forgetting_std": 0.0371,
+      "accB_conflict_test": 0.5446,
+      "accB_conflict_train": 1.0,
+      "emb_drift": 2.51,
+      "learned": true
+    },
+    {
+      "arm": "mix:0.000",
+      "overlap": 0.0434,
+      "forgetting": 0.9377,
+      "forgetting_std": 0.0084,
+      "accB_conflict_test": 0.7903,
+      "accB_conflict_train": 1.0,
+      "emb_drift": 2.6058,
+      "learned": true
+    },
+    {
+      "arm": "type:add_same",
+      "overlap": 1.0,
+      "forgetting": -0.0019,
+      "forgetting_std": 0.014,
+      "accB_conflict_test": null,
+      "accB_conflict_train": null,
+      "emb_drift": 2.817,
+      "learned": true
+    },
+    {
+      "arm": "type:add_offset",
+      "overlap": 0.0,
+      "forgetting": 0.9906,
+      "forgetting_std": 0.0094,
+      "accB_conflict_test": 1.0,
+      "accB_conflict_train": 1.0,
+      "emb_drift": 3.2397,
+      "learned": true
+    },
+    {
+      "arm": "type:linear",
+      "overlap": 0.0396,
+      "forgetting": 0.9491,
+      "forgetting_std": 0.0227,
+      "accB_conflict_test": 0.9287,
+      "accB_conflict_train": 1.0,
+      "emb_drift": 3.2646,
+      "learned": true
+    },
+    {
+      "arm": "type:mul",
+      "overlap": 0.0434,
+      "forgetting": 0.9377,
+      "forgetting_std": 0.0084,
+      "accB_conflict_test": 0.7903,
+      "accB_conflict_train": 1.0,
+      "emb_drift": 2.6058,
+      "learned": true
+    },
+    {
+      "arm": "type:rand",
+      "overlap": 0.0434,
+      "forgetting": 0.9566,
+      "forgetting_std": 0.0196,
+      "accB_conflict_test": 0.0433,
+      "accB_conflict_train": 1.0,
+      "emb_drift": 2.971,
+      "learned": true
+    }
+  ],
+  "recommendations": [
+    "VERDICT (forgetting_governed_by_output_overlap, status=pass): x-axis is the ANALYTIC output-table overlap of B with A=(a+b) mod 23 -- model-INDEPENDENT, |{(a,b):f_B==f_A}|/p^2. Forgetting = A's held-out accuracy drop from its consolidated plateau 0.991 after a fixed 1500-step B phase. status='pass' certifies a VALID measurement (A consolidated per-seed, clean continue-on-A floor -0.004, no operand leak, add+mul jointly learnable A0.85/B0.82, >=5 learnable interior curve points), NOT a clean collapse.",
+    "C1 SLOPE (interior, overlap<1): forgetting is monotone-graded in overlap -- Spearman(overlap,forgetting)=-1.0 (perm p=0.0167), spanning 0.796 from high-overlap to low-overlap (>= 0.3); slope_certified=True. The overlap=1 endpoint is EXCLUDED (forgetting-free by construction = v1193's continue-on-A floor + op-token-confounded); the claim is the INTERIOR only.",
+    "NOT A B-LEARNEDNESS / DRIFT ARTIFACT: controlling for accB and shared-embedding drift, the overlap coefficient stays negative and dominant (std beta overlap|accB=-0.983 vs accB=0.0; overlap|drift=-0.998 vs drift=-0.019); overlap_survives=True. accB is read on CONFLICT cells only (where the retained A-circuit cannot answer for B).",
+    "FAMILY IS A RED HERRING (re-confirms v1193's distribution-shift null via a 2nd manipulation): at overlap~0, add_offset (SAME '+' operation, just +7) forgets 0.991 vs mul 0.938 -- equivalent (|Δ|<= 0.15), both >> add_same -0.002; family_does_not_protect=True, structure_at_fixed_overlap=False. UNIFICATION residual test (type points on the mixture curve)=True.",
+    "SHAPE vs the overwrite null: the trivial 'overwrite only the conflicting cells' null predicts forgetting ~= (1-overlap)*plateau. Observed mean excess over the null is 0.0764 (< margin) -> forgetting is APPROXIMATELY the local-overwrite null (mild mid-overlap excess only). So the overlap law is largely the overwrite-fraction made quantitative, NOT a special global collapse; v1193's 'catastrophic' forgetting is the overlap=0 endpoint of this graded, ~proportional overwrite. SCOPE: toy modular arithmetic, 1-layer transformer, p=23; overlap = 1 - conflict-fraction on shared inputs; the random-partition mixture is fit on train cells but does NOT generalize the per-cell split to held-out cells; NOT a claim about instruction-tuned LLM forgetting."
+  ],
+  "csv_fieldnames": [
+    "arm",
+    "overlap",
+    "forgetting",
+    "forgetting_std",
+    "accB_conflict_test",
+    "accB_conflict_train",
+    "emb_drift",
+    "learned"
+  ],
+  "curve_points": [
+    {
+      "key": "mix:1.000",
+      "kind": "mix",
+      "overlap": 1.0,
+      "forgetting": -0.00189,
+      "forgetting_std": 0.01399,
+      "learned": true,
+      "accB_conflict_train": null,
+      "accB_conflict_test": null
+    },
+    {
+      "key": "mix:0.875",
+      "kind": "mix",
+      "overlap": 0.88491,
+      "forgetting": 0.14151,
+      "forgetting_std": 0.04112,
+      "learned": true,
+      "accB_conflict_train": 1.0,
+      "accB_conflict_test": 0.1169
+    },
+    {
+      "key": "mix:0.750",
+      "kind": "mix",
+      "overlap": 0.76038,
+      "forgetting": 0.32075,
+      "forgetting_std": 0.02983,
+      "learned": true,
+      "accB_conflict_train": 1.0,
+      "accB_conflict_test": 0.1259
+    },
+    {
+      "key": "mix:0.500",
+      "kind": "mix",
+      "overlap": 0.53208,
+      "forgetting": 0.6566,
+      "forgetting_std": 0.07386,
+      "learned": true,
+      "accB_conflict_train": 1.0,
+      "accB_conflict_test": 0.2977
+    },
+    {
+      "key": "mix:0.250",
+      "kind": "mix",
+      "overlap": 0.27925,
+      "forgetting": 0.80189,
+      "forgetting_std": 0.03714,
+      "learned": true,
+      "accB_conflict_train": 1.0,
+      "accB_conflict_test": 0.5446
+    },
+    {
+      "key": "mix:0.000",
+      "kind": "mix",
+      "overlap": 0.0434,
+      "forgetting": 0.93774,
+      "forgetting_std": 0.00844,
+      "learned": true,
+      "accB_conflict_train": 1.0,
+      "accB_conflict_test": 0.7903
+    },
+    {
+      "key": "type:add_same",
+      "kind": "type",
+      "overlap": 1.0,
+      "forgetting": -0.00189,
+      "forgetting_std": 0.01399,
+      "learned": true,
+      "accB_conflict_train": null,
+      "accB_conflict_test": null
+    },
+    {
+      "key": "type:add_offset",
+      "kind": "type",
+      "overlap": 0.0,
+      "forgetting": 0.99057,
+      "forgetting_std": 0.00943,
+      "learned": true,
+      "accB_conflict_train": 1.0,
+      "accB_conflict_test": 1.0
+    },
+    {
+      "key": "type:linear",
+      "kind": "type",
+      "overlap": 0.03962,
+      "forgetting": 0.94906,
+      "forgetting_std": 0.02272,
+      "learned": true,
+      "accB_conflict_train": 1.0,
+      "accB_conflict_test": 0.9287
+    },
+    {
+      "key": "type:mul",
+      "kind": "type",
+      "overlap": 0.0434,
+      "forgetting": 0.93774,
+      "forgetting_std": 0.00844,
+      "learned": true,
+      "accB_conflict_train": 1.0,
+      "accB_conflict_test": 0.7903
+    },
+    {
+      "key": "type:rand",
+      "kind": "type",
+      "overlap": 0.0434,
+      "forgetting": 0.9566,
+      "forgetting_std": 0.01956,
+      "learned": true,
+      "accB_conflict_train": 1.0,
+      "accB_conflict_test": 0.0433
+    }
+  ],
+  "residuals": {
+    "type:add_offset": {
+      "overlap": 0.0,
+      "forget": 0.9906,
+      "pred": 0.9377,
+      "residual": 0.0528,
+      "tol": 0.15,
+      "within": true
+    },
+    "type:linear": {
+      "overlap": 0.0396,
+      "forget": 0.9491,
+      "pred": 0.9377,
+      "residual": 0.0113,
+      "tol": 0.15,
+      "within": true
+    },
+    "type:rand": {
+      "overlap": 0.0434,
+      "forget": 0.9566,
+      "pred": 0.9377,
+      "residual": 0.0189,
+      "tol": 0.15,
+      "within": true
+    }
+  },
+  "plateau": 0.99057,
+  "source": "D:\\aiproj\\output\\similarity-v1195\\cache.pt"
+}
