@@ -1,0 +1,400 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT in-context induction requires depth v1196",
+  "generated_at": "2026-06-20T09:02:08Z",
+  "status": "pass",
+  "decision": "induction_requires_depth",
+  "summary": {
+    "status": "pass",
+    "decision": "induction_requires_depth",
+    "verdict": "induction_requires_depth",
+    "K": 20,
+    "T": 64,
+    "seeds": 5,
+    "chance": 0.05,
+    "ceiling": 0.95,
+    "S_success_bar": 0.57,
+    "widths": "[8, 16, 24, 32, 48, 64, 96, 128]",
+    "unigram_acc": 0.1421,
+    "max_marginal": 0.1411,
+    "random_init_acc": 0.0629,
+    "wstar_1L": null,
+    "wstar_2L": 17.27,
+    "wstar_1L_finite_frac": 0.0,
+    "wstar_2L_finite_frac": 1.0,
+    "verdict_max_width": 64,
+    "gap_at_converged_widest": 0.7887,
+    "one_layer_caught_up": false,
+    "one_layer_extended_max_acc": 0.4283,
+    "two_layer_undertrains_large_width": true,
+    "shortcut_1L_max_acc": 1.0,
+    "shortcut_control_ok": true,
+    "attn_only_2L_max_acc": 0.9941,
+    "attn_only_1L_max_acc": 0.1796,
+    "attn_only_2L_inducts": true,
+    "valid_measurement": true,
+    "flag_task_learnable": true,
+    "flag_in_context_ok": true,
+    "flag_random_init_ok": true,
+    "flag_random_init_acc": 0.0629,
+    "flag_shortcut_control_ok": true,
+    "flag_shortcut_1L_max_acc": 1.0,
+    "flag_unigram_acc": 0.1421,
+    "flag_max_marginal": 0.1411,
+    "flag_verdict_max_width": 64,
+    "flag_wstar_1L": null,
+    "flag_wstar_2L": 17.27,
+    "flag_wstar_1L_finite_frac": 0.0,
+    "flag_wstar_2L_finite_frac": 1.0,
+    "flag_one_layer_extended_max_acc": 0.4283,
+    "flag_two_layer_undertrains_large_width": true,
+    "flag_ordering_holds_paired": true,
+    "flag_ordering_seed_frac": 1.0,
+    "flag_gap_at_widest": 0.7887,
+    "flag_one_layer_caught_up_at_widest": false,
+    "flag_attn_only_2L_max_acc": 0.9941,
+    "flag_attn_only_1L_max_acc": 0.1796,
+    "flag_attn_only_2L_inducts": true,
+    "flag_degenerate_zero_variance": false,
+    "flag_grid_step": 8
+  },
+  "rows": [
+    {
+      "arm": "clean_depth1_width8",
+      "depth": 1,
+      "width": 8,
+      "acc": 0.1062,
+      "acc_std": 0.0037,
+      "swap_follow": 0.0969,
+      "succ_attn_mass": 0.1411,
+      "layer0_prev_token": 0.3413
+    },
+    {
+      "arm": "clean_depth1_width16",
+      "depth": 1,
+      "width": 16,
+      "acc": 0.1491,
+      "acc_std": 0.0017,
+      "swap_follow": 0.1031,
+      "succ_attn_mass": 0.1588,
+      "layer0_prev_token": 0.3826
+    },
+    {
+      "arm": "clean_depth1_width24",
+      "depth": 1,
+      "width": 24,
+      "acc": 0.1601,
+      "acc_std": 0.0007,
+      "swap_follow": 0.1125,
+      "succ_attn_mass": 0.1562,
+      "layer0_prev_token": 0.3743
+    },
+    {
+      "arm": "clean_depth1_width32",
+      "depth": 1,
+      "width": 32,
+      "acc": 0.1719,
+      "acc_std": 0.0061,
+      "swap_follow": 0.0813,
+      "succ_attn_mass": 0.1722,
+      "layer0_prev_token": 0.4819
+    },
+    {
+      "arm": "clean_depth1_width48",
+      "depth": 1,
+      "width": 48,
+      "acc": 0.2,
+      "acc_std": 0.0016,
+      "swap_follow": 0.1281,
+      "succ_attn_mass": 0.1842,
+      "layer0_prev_token": 0.6027
+    },
+    {
+      "arm": "clean_depth1_width64",
+      "depth": 1,
+      "width": 64,
+      "acc": 0.2107,
+      "acc_std": 0.0028,
+      "swap_follow": 0.1094,
+      "succ_attn_mass": 0.1791,
+      "layer0_prev_token": 0.6666
+    },
+    {
+      "arm": "clean_depth1_width96",
+      "depth": 1,
+      "width": 96,
+      "acc": 0.2963,
+      "acc_std": 0.0205,
+      "swap_follow": 0.1375,
+      "succ_attn_mass": 0.1587,
+      "layer0_prev_token": 0.712
+    },
+    {
+      "arm": "clean_depth1_width128",
+      "depth": 1,
+      "width": 128,
+      "acc": 0.4283,
+      "acc_std": 0.0053,
+      "swap_follow": 0.2531,
+      "succ_attn_mass": 0.1157,
+      "layer0_prev_token": 0.8189
+    },
+    {
+      "arm": "clean_depth2_width8",
+      "depth": 2,
+      "width": 8,
+      "acc": 0.1086,
+      "acc_std": 0.008,
+      "swap_follow": 0.0781,
+      "succ_attn_mass": 0.1259,
+      "layer0_prev_token": 0.2431
+    },
+    {
+      "arm": "clean_depth2_width16",
+      "depth": 2,
+      "width": 16,
+      "acc": 0.4895,
+      "acc_std": 0.2488,
+      "swap_follow": 0.2625,
+      "succ_attn_mass": 1.0447,
+      "layer0_prev_token": 0.644
+    },
+    {
+      "arm": "clean_depth2_width24",
+      "depth": 2,
+      "width": 24,
+      "acc": 0.9975,
+      "acc_std": 0.0016,
+      "swap_follow": 0.9125,
+      "succ_attn_mass": 2.7077,
+      "layer0_prev_token": 1.2201
+    },
+    {
+      "arm": "clean_depth2_width32",
+      "depth": 2,
+      "width": 32,
+      "acc": 0.9991,
+      "acc_std": 0.0007,
+      "swap_follow": 0.9125,
+      "succ_attn_mass": 3.2166,
+      "layer0_prev_token": 1.537
+    },
+    {
+      "arm": "clean_depth2_width48",
+      "depth": 2,
+      "width": 48,
+      "acc": 0.9993,
+      "acc_std": 0.0003,
+      "swap_follow": 0.9156,
+      "succ_attn_mass": 2.786,
+      "layer0_prev_token": 1.3577
+    },
+    {
+      "arm": "clean_depth2_width64",
+      "depth": 2,
+      "width": 64,
+      "acc": 0.9994,
+      "acc_std": 0.0001,
+      "swap_follow": 0.9125,
+      "succ_attn_mass": 2.3331,
+      "layer0_prev_token": 1.4876
+    },
+    {
+      "arm": "clean_depth2_width96",
+      "depth": 2,
+      "width": 96,
+      "acc": 0.5449,
+      "acc_std": 0.0117,
+      "swap_follow": 0.3187,
+      "succ_attn_mass": 0.1278,
+      "layer0_prev_token": 0.2717
+    },
+    {
+      "arm": "clean_depth2_width128",
+      "depth": 2,
+      "width": 128,
+      "acc": 0.606,
+      "acc_std": 0.0169,
+      "swap_follow": 0.425,
+      "succ_attn_mass": 0.1243,
+      "layer0_prev_token": 0.2689
+    },
+    {
+      "arm": "shortcut_1L_fixedoffset_width16",
+      "depth": 1,
+      "width": 16,
+      "acc": 1.0,
+      "acc_std": 0.0,
+      "swap_follow": null,
+      "succ_attn_mass": null,
+      "layer0_prev_token": null
+    },
+    {
+      "arm": "shortcut_1L_fixedoffset_width32",
+      "depth": 1,
+      "width": 32,
+      "acc": 1.0,
+      "acc_std": 0.0,
+      "swap_follow": null,
+      "succ_attn_mass": null,
+      "layer0_prev_token": null
+    },
+    {
+      "arm": "shortcut_1L_fixedoffset_width64",
+      "depth": 1,
+      "width": 64,
+      "acc": 1.0,
+      "acc_std": 0.0,
+      "swap_follow": null,
+      "succ_attn_mass": null,
+      "layer0_prev_token": null
+    },
+    {
+      "arm": "attn_only_depth1_width24",
+      "depth": 1,
+      "width": 24,
+      "acc": 0.1644,
+      "acc_std": 0.0009,
+      "swap_follow": null,
+      "succ_attn_mass": null,
+      "layer0_prev_token": null
+    },
+    {
+      "arm": "attn_only_depth1_width48",
+      "depth": 1,
+      "width": 48,
+      "acc": 0.1668,
+      "acc_std": 0.0011,
+      "swap_follow": null,
+      "succ_attn_mass": null,
+      "layer0_prev_token": null
+    },
+    {
+      "arm": "attn_only_depth1_width96",
+      "depth": 1,
+      "width": 96,
+      "acc": 0.1796,
+      "acc_std": 0.0012,
+      "swap_follow": null,
+      "succ_attn_mass": null,
+      "layer0_prev_token": null
+    },
+    {
+      "arm": "attn_only_depth2_width24",
+      "depth": 2,
+      "width": 24,
+      "acc": 0.9366,
+      "acc_std": 0.0343,
+      "swap_follow": null,
+      "succ_attn_mass": null,
+      "layer0_prev_token": null
+    },
+    {
+      "arm": "attn_only_depth2_width48",
+      "depth": 2,
+      "width": 48,
+      "acc": 0.9872,
+      "acc_std": 0.002,
+      "swap_follow": null,
+      "succ_attn_mass": null,
+      "layer0_prev_token": null
+    },
+    {
+      "arm": "attn_only_depth2_width96",
+      "depth": 2,
+      "width": 96,
+      "acc": 0.9941,
+      "acc_std": 0.0048,
+      "swap_follow": null,
+      "succ_attn_mass": null,
+      "layer0_prev_token": null
+    }
+  ],
+  "recommendations": [
+    "VERDICT (induction_requires_depth, status=pass): clean content-based INDUCTION on a high-diversity random sequence (target = the token that MOST-RECENTLY followed the current one; variable distance; first occurrences masked). Headline metric = inductable accuracy vs chance 0.050 and the in-context UNIGRAM floor 0.142. status='pass' certifies a VALID, genuinely in-context measurement (every succeeding arm beats the unigram floor by >= 0.15 and a swap follows; 2-layer succeeds so the task is learnable; the 1-layer shortcut-control succeeds so a 1-layer clean-task failure is a content-induction limit, not incapacity).",
+    "DEPTH (pre-registered W*-ordering at success bar S=0.570, over the converged width range <= 64): W*(1-layer)=None (finite in 0.0 of seeds) vs W*(2-layer)=17.27 (finite in 1.0). At width 64: 1-layer acc 0.211 vs 2-layer 0.999 (gap +0.789, 1L_caught_up=False). With the shortcuts blocked, induction needs depth: 1 layer (even with its MLP) does not learn it while 2 layers do. EXTENDED bound: 1-layer's best across ALL swept widths (to 128) is only 0.4283 (< S) -- still failing at 128 (7x the 2-layer threshold). HONEST: 2-layer UNDER-TRAINS at width>64 within the fixed 1500-step budget (two_layer_undertrains_large_width=True) -- an optimization effect (fresh data rules out overfitting), so the verdict uses the converged range and 1L's extended widths only as a one-sided failure bound.",
+    "SHORTCUT CONTROL (why the task design matters): the SAME 1-layer model TRAINED on the fixed-offset (positional repeat) task reaches acc 1.0 (>= S) -> 1-layer IS capable of in-context copying when a POSITIONAL shortcut exists. Earlier probes showed a free-running forced-successor task collapses into cycles so a FREQUENCY heuristic also fakes it (unigram floor 0.142). The clean task blocks both, exposing the genuine depth requirement.",
+    "ATTENTION-ONLY (the textbook regime; MLP zeroed): 2-layer attention-only max acc 0.9941 (inducts=True), 1-layer attention-only 0.1796. The canonical 'induction needs 2 layers' is an ATTENTION-ONLY theorem; our 1-layer has an MLP yet still fails, so we report CONSISTENCY with the theorem, not a refutation.",
+    "CAUSAL + MECHANISM: swap-probe follow-rate 0.91 at depth2/width64 -> the model uses in-context CONTENT, not frequency/recency. Induction-attention (mass on the most-recent successor position, summed over heads) best-layer 2.333, layer-0 prev-token 1.488 -- the composed prev-token -> induction circuit. SCOPE: toy synthetic induction, 1-2 layer MiniGPT WITH MLP + learned abs positions, tied embeddings, fixed budget, single (K=20,T=64); a within-swept-width statement, NOT a claim about LLM ICL."
+  ],
+  "csv_fieldnames": [
+    "arm",
+    "depth",
+    "width",
+    "acc",
+    "acc_std",
+    "swap_follow",
+    "succ_attn_mass",
+    "layer0_prev_token"
+  ],
+  "acc_curve": {
+    "depth1": [
+      0.10623,
+      0.14911,
+      0.16008,
+      0.17194,
+      0.20002,
+      0.21073,
+      0.29631,
+      0.42831
+    ],
+    "depth2": [
+      0.10864,
+      0.48948,
+      0.99749,
+      0.99911,
+      0.99933,
+      0.99944,
+      0.54487,
+      0.60602
+    ]
+  },
+  "acc_curve_std": {
+    "depth1": [
+      0.0037,
+      0.00167,
+      0.00074,
+      0.0061,
+      0.00163,
+      0.00282,
+      0.02046,
+      0.00528
+    ],
+    "depth2": [
+      0.00799,
+      0.24879,
+      0.00163,
+      0.00069,
+      0.00028,
+      0.00012,
+      0.01169,
+      0.01691
+    ]
+  },
+  "attn_only_curve": {
+    "depth1": {
+      "24": 0.16436,
+      "48": 0.16679,
+      "96": 0.17958
+    },
+    "depth2": {
+      "24": 0.93659,
+      "48": 0.98716,
+      "96": 0.9941
+    }
+  },
+  "widths": [
+    8,
+    16,
+    24,
+    32,
+    48,
+    64,
+    96,
+    128
+  ],
+  "S": 0.57,
+  "chance": 0.05,
+  "unigram_acc": 0.14213,
+  "source": "D:\\aiproj\\output\\induction-v1196\\cache.pt"
+}
