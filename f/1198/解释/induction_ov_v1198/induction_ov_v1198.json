@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT induction OV copying circuit v1198",
+  "generated_at": "2026-06-20T14:33:52Z",
+  "status": "pass",
+  "decision": "induction_ov_is_copying_circuit",
+  "summary": {
+    "status": "pass",
+    "decision": "induction_ov_is_copying_circuit",
+    "verdict": "induction_ov_is_copying_circuit",
+    "K": 20,
+    "T": 64,
+    "width": 64,
+    "n_head": 4,
+    "seeds": 8,
+    "base_acc": 0.9995,
+    "unigram_acc": 0.1421,
+    "chance": 0.05,
+    "ind_copy_z": 2.516,
+    "ctrl_copy_z": -1.6599,
+    "prev_copy_z": -0.45,
+    "gram_copy_z": 3.8321,
+    "ind_diag_is_max": 0.8891,
+    "ind_dla_gap": 0.5663,
+    "ctrl_dla_gap": -0.043,
+    "prev_dla_gap": -0.0055,
+    "copy_ok": true,
+    "dla_ok": true,
+    "classifiable_frac": 0.875,
+    "tau_grid_agree_frac": 1.0,
+    "valid_measurement": true,
+    "flag_base_acc": 0.9995,
+    "flag_unigram_acc": 0.1421,
+    "flag_n_trained": 8,
+    "flag_n_all": 8,
+    "flag_classifiable_frac": 0.875,
+    "flag_ind_copy_z": 2.516,
+    "flag_ctrl_copy_z": -1.6599,
+    "flag_prev_copy_z": -0.45,
+    "flag_gram_copy_z": 3.8321,
+    "flag_ind_diag_is_max": 0.8891,
+    "flag_ind_dla_gap": 0.5663,
+    "flag_ctrl_dla_gap": -0.043,
+    "flag_prev_dla_gap": -0.0055,
+    "flag_copy_ok": true,
+    "flag_dla_ok": true,
+    "flag_tau_grid_agree_frac": 1.0
+  },
+  "rows": [
+    {
+      "head_class": "induction (L1)",
+      "copy_z": 2.516,
+      "diag_is_max": 0.8891,
+      "dla_gap": 0.5663,
+      "note": "the OV copying class"
+    },
+    {
+      "head_class": "non-induction L1 control",
+      "copy_z": -1.6599,
+      "diag_is_max": null,
+      "dla_gap": -0.043,
+      "note": "same W_E, different W_V/W_O"
+    },
+    {
+      "head_class": "prev-token (L0) control",
+      "copy_z": -0.45,
+      "diag_is_max": null,
+      "dla_gap": -0.0055,
+      "note": "writes for L1 to read"
+    },
+    {
+      "head_class": "raw Gram W_E@W_E.T",
+      "copy_z": 3.8321,
+      "diag_is_max": null,
+      "dla_gap": null,
+      "note": "tied-embedding baseline (lens-1)"
+    }
+  ],
+  "recommendations": [
+    "VERDICT (induction_ov_is_copying_circuit, status=pass): the OV (value->output) half of the induction-head mechanism in a 2-layer width-64 MiniGPT (n_head=4) on v1196's clean induction task. v1197 verified the QK / prefix-matching half causally; v1198 asks whether the OV circuit COPIES the attended token. status='pass' certifies a VALID measurement -- base inducts 1.000 (>> unigram 0.142), the circuit is classifiable in 88% of trained seeds, the two prongs AGREE, and the verdict is invariant across 100% of the tau grid.",
+    "PRONG 1 -- WEIGHT-LEVEL OV COPYING (paired, Gram-confound-aware): the OV map M = W_E W_V W_O W_E^T is diagonal-dominant for induction heads (copy_z 2.52, diag_is_max 0.89) but NOT for the count-matched non-induction L1 control (copy_z -1.66) or prev-token heads (copy_z -0.45). copy_ok=True.",
+    "LENS-1 (the tied-embedding Gram confound): the model TIES the unembed to the embedding, so the raw Gram W_E W_E^T is itself diagonal-dominant (copy_z 3.83). The verdict is therefore PAIRED: the controls share the SAME W_E and differ only in W_V/W_O, yet do NOT copy -- so the induction OV's diagonal is learned by W_V/W_O, not inherited from the embedding Gram.",
+    "PRONG 2 -- ACTIVATION DIRECT LOGIT ATTRIBUTION (LN-honest): folding each head's residual contribution through the ACTUAL ln_f scale + tied unembed, induction heads add positive logit to the CORRECT answer at inductable positions (DLA_gap 0.566) while the L1 control (-0.043) and prev-token heads (-0.005) do not. dla_ok=True. The two prongs must AGREE (else review).",
+    "SCOPE: 2-layer width-64 MiniGPT, n_head=4 (head size 16 -- the substrate v1196 showed RELIABLY learns induction; n_head=8 trains it unreliably), K=20/T=64. The OV-copying mechanism is textbook (Elhage 2021); the NEW bit is the controlled, multi-seed, Gram-confound-aware (paired) + DLA-corroborated demonstration on this model. NOT a claim about LLM induction heads. Together with v1197 (QK) this completes the two-part induction-head mechanism on our own MiniGPT."
+  ],
+  "csv_fieldnames": [
+    "head_class",
+    "copy_z",
+    "diag_is_max",
+    "dla_gap",
+    "note"
+  ],
+  "source": "D:\\aiproj\\output\\induction-ov-v1198\\cache.pt"
+}

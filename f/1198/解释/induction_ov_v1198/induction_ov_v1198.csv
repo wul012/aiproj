@@ -1,0 +1,5 @@
+head_class,copy_z,diag_is_max,dla_gap,note
+induction (L1),2.516,0.8891,0.5663,the OV copying class
+non-induction L1 control,-1.6599,,-0.043,"same W_E, different W_V/W_O"
+prev-token (L0) control,-0.45,,-0.0055,writes for L1 to read
+raw Gram W_E@W_E.T,3.8321,,,tied-embedding baseline (lens-1)
