@@ -13,6 +13,36 @@
 
 ## 当前索引
 
+1212-v1200-minigpt-weight-decay-rescues-under-label-noise.md
+ -> v1200 code explanation: weight decay on v1199's noisy halfspace. It shows wd improves converged generalization by selectively rejecting flipped labels (`fit_to_noise` drops while clean-row accuracy stays high), but does not significantly beat the wd=0 early-stopping optimum, so the honest verdict is `wd_equals_early_stopping`. Evidence lives under `f/1200`.
+
+1211-v1199-minigpt-double-descent-absent-at-toy-scale.md
+ -> v1199 code explanation: double descent check at toy MiniGPT scale. It uses noisy halfspace model-size and epoch-wise arms with eta=0 controls, finds no second descent, and records the conservative `no_double_descent_monotone` verdict. Evidence lives under `f/1199`.
+
+1210-v1198-minigpt-induction-ov-copying-circuit.md
+ -> v1198 code explanation: induction head OV copying mechanism. It pairs weight-level OV copying scores with activation Direct Logit Attribution while defending against the tied-embedding Gram confound. Evidence lives under `f/1198`.
+
+1209-v1197-minigpt-induction-circuit-dissection.md
+ -> v1197 code explanation: causal dissection of the induction circuit. It classifies prev-token and induction heads, then uses mean ablation, count-matched controls, composition checks, and tau robustness to show the two-part circuit is necessary and specific. Evidence lives under `f/1197`.
+
+1208-v1196-minigpt-induction-requires-depth.md
+ -> v1196 code explanation: in-context induction depth experiment. It blocks positional and frequency shortcuts, shows a 2-layer model learns the most-recent-successor task while a 1-layer model fails, and includes shortcut plus attention-only controls. Evidence lives under `f/1196`.
+
+1207-v1195-minigpt-similarity-forgetting.md
+ -> v1195 code explanation: task-similarity grading of catastrophic forgetting. It uses analytic output-table overlap to show forgetting is monotone-graded by overlap and that operation family is a red herring. Evidence lives under `f/1195`.
+
+1206-v1194-minigpt-ewc-vs-replay.md
+ -> v1194 code explanation: EWC versus replay on the v1193 continual-learning substrate. It compares stability-plasticity frontiers and finds replay dominates EWC under the toy modular tasks. Evidence lives under `f/1194`.
+
+1205-v1193-minigpt-continual-learning-catastrophic-forgetting.md
+ -> v1193 code explanation: continual-learning and catastrophic forgetting axis. It trains task A then task B, shows A collapses toward chance, and demonstrates replay mitigation with held-out operand-pair quarantine. Evidence lives under `f/1193`.
+
+1204-v1192-minigpt-calibration-temperature-scaling.md
+ -> v1192 code explanation: calibration under aleatoric uncertainty. It uses the known-P_true stochastic task to measure overconfidence analytically and shows temperature scaling reduces ECE. Evidence lives under `f/1192`.
+
+1203-v1191-minigpt-grokking-causal-frequency-ablation.md
+ -> v1191 code explanation: causal frequency ablation for the grokking Fourier mechanism. It keeps or removes top embedding frequencies to move v1188/v1190 from correlation toward causal evidence. Evidence lives under `f/1191`.
+
 1202-v1190-minigpt-grokking-logit-frequency-alignment.md
  -> v1190 code explanation: output-logit frequency alignment for the shipped grokking checkpoint. Builds the full `L[a,b,y]` logit cube, uses 2D FFT over `(a,b)` to measure diagonal frequency power expected by `a+b=y`, compares against random-init and ideal addition controls, and verifies the logit top frequencies match the v1188 embedding dominant frequencies. Evidence lives under `f/1190`.
 
