@@ -11,6 +11,7 @@ if str(SRC) not in sys.path:
     sys.path.insert(0, str(SRC))
 
 from minigpt.project_docs_readability import (  # noqa: E402
+    LEGACY_V1131_OUTPUT_STEM,
     build_project_docs_readability_report,
     resolve_exit_code,
     write_project_docs_readability_outputs,
@@ -31,12 +32,18 @@ def main(argv: list[str] | None = None) -> int:
         shutil.rmtree(args.out_dir)
 
     report = build_project_docs_readability_report(args.root)
-    outputs = write_project_docs_readability_outputs(report, args.out_dir)
+    outputs = write_project_docs_readability_outputs(report, args.out_dir, stem=LEGACY_V1131_OUTPUT_STEM)
     summary = report["summary"]
     print(f"status={report['status']}")
     print(f"decision={report['decision']}")
+    print(f"row_count={summary['row_count']}")
+    print(f"ready_row_count={summary['ready_row_count']}")
     print(f"doc_target_count={summary['doc_target_count']}")
     print(f"ready_doc_count={summary['ready_doc_count']}")
+    print(f"front_door_target_count={summary['front_door_target_count']}")
+    print(f"front_door_ready_count={summary['front_door_ready_count']}")
+    print(f"front_door_failed_count={summary['front_door_failed_count']}")
+    print(f"forbidden_term_hit_count={summary['forbidden_term_hit_count']}")
     print(f"missing_readme_link_count={summary['missing_readme_link_count']}")
     print(f"failed_count={summary['failed_count']}")
     print(f"outputs={outputs}")

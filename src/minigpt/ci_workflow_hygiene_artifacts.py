@@ -4,7 +4,14 @@ import csv
 from pathlib import Path
 from typing import Any
 
-from minigpt.report_utils import csv_cell, html_escape as _e, markdown_cell as _md, string_list as _string_list, write_json_payload
+from minigpt.reports.utils import (
+    csv_cell,
+    html_escape as _e,
+    markdown_cell as _md,
+    string_list as _string_list,
+    write_json_payload,
+    write_output_bundle,
+)
 
 
 def write_ci_workflow_hygiene_json(report: dict[str, Any], path: str | Path) -> None:
@@ -68,6 +75,12 @@ def render_ci_workflow_hygiene_markdown(report: dict[str, Any]) -> str:
         "release_readiness_drift_contract_smoke_present",
         "release_readiness_drift_contract_smoke_order_ready",
         "release_readiness_drift_contract_smoke_ready",
+        "project_docs_readability_present",
+        "project_docs_readability_order_ready",
+        "project_docs_readability_ready",
+        "normalization_guard_present",
+        "normalization_guard_order_ready",
+        "normalization_guard_ready",
         "python_version",
     ]:
         lines.append(f"| {_md(key)} | {_md(summary.get(key))} |")
@@ -122,6 +135,8 @@ def render_ci_workflow_hygiene_html(report: dict[str, Any]) -> str:
         ("Receipt failure smoke", summary.get("promoted_seed_receipt_contract_failure_smoke_ready")),
         ("Receipt plan check", summary.get("promoted_seed_receipt_contract_failure_smoke_plan_check_ready")),
         ("Drift smoke gate", summary.get("release_readiness_drift_contract_smoke_ready")),
+        ("Docs readability", summary.get("project_docs_readability_ready")),
+        ("Normalization guard", summary.get("normalization_guard_ready")),
         ("Python", summary.get("python_version")),
     ]
     return "\n".join(
@@ -157,19 +172,21 @@ def write_ci_workflow_hygiene_html(report: dict[str, Any], path: str | Path) -> 
 
 
 def write_ci_workflow_hygiene_outputs(report: dict[str, Any], out_dir: str | Path) -> dict[str, str]:
-    root = Path(out_dir)
-    root.mkdir(parents=True, exist_ok=True)
-    paths = {
-        "json": root / "ci_workflow_hygiene.json",
-        "csv": root / "ci_workflow_hygiene.csv",
-        "markdown": root / "ci_workflow_hygiene.md",
-        "html": root / "ci_workflow_hygiene.html",
-    }
-    write_ci_workflow_hygiene_json(report, paths["json"])
-    write_ci_workflow_hygiene_csv(report, paths["csv"])
-    write_ci_workflow_hygiene_markdown(report, paths["markdown"])
-    write_ci_workflow_hygiene_html(report, paths["html"])
-    return {key: str(value) for key, value in paths.items()}
+    return write_output_bundle(
+        out_dir,
+        {
+            "json": "ci_workflow_hygiene.json",
+            "csv": "ci_workflow_hygiene.csv",
+            "markdown": "ci_workflow_hygiene.md",
+            "html": "ci_workflow_hygiene.html",
+        },
+        {
+            "json": lambda path: write_ci_workflow_hygiene_json(report, path),
+            "csv": lambda path: write_ci_workflow_hygiene_csv(report, path),
+            "markdown": lambda path: write_ci_workflow_hygiene_markdown(report, path),
+            "html": lambda path: write_ci_workflow_hygiene_html(report, path),
+        },
+    )
 
 
 def _summary(report: dict[str, Any]) -> dict[str, Any]:

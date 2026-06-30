@@ -2,16 +2,21 @@ from __future__ import annotations
 
 import argparse
 import json
-import sys
+from collections.abc import Sequence
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "src"))
+try:
+    from scripts._bootstrap import PROJECT_ROOT, ensure_src_path
+except ModuleNotFoundError:  # pragma: no cover - direct script execution path
+    from _bootstrap import PROJECT_ROOT, ensure_src_path
 
-from minigpt.maturity_narrative import build_maturity_narrative, write_maturity_narrative_outputs
+ROOT = PROJECT_ROOT
+ensure_src_path()
+
+from minigpt.governance.maturity import build_maturity_narrative, write_maturity_narrative_outputs
 
 
-def parse_args() -> argparse.Namespace:
+def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Build a MiniGPT release-quality maturity narrative.")
     parser.add_argument("--project-root", type=Path, default=ROOT)
     parser.add_argument("--maturity", type=Path, default=None, help="Optional maturity_summary.json path")
@@ -52,11 +57,11 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--out-dir", type=Path, default=ROOT / "runs" / "maturity-narrative")
     parser.add_argument("--title", type=str, default="MiniGPT release-quality maturity narrative")
-    return parser.parse_args()
+    return parser.parse_args(argv)
 
 
-def main() -> None:
-    args = parse_args()
+def main(argv: Sequence[str] | None = None) -> int:
+    args = parse_args(argv)
     narrative = build_maturity_narrative(
         args.project_root,
         maturity_path=args.maturity,
@@ -167,7 +172,8 @@ def main() -> None:
     print(f"dataset_cards={summary.get('dataset_card_count')}")
     print("warnings=" + json.dumps(narrative.get("warnings", []), ensure_ascii=False))
     print("outputs=" + json.dumps(outputs, ensure_ascii=False))
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

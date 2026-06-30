@@ -13,90 +13,15 @@ from minigpt.ci_workflow_hygiene_artifacts import (
     write_ci_workflow_hygiene_markdown,
     write_ci_workflow_hygiene_outputs,
 )
+from minigpt.ci_workflow_hygiene_policy import (
+    DEFAULT_WORKFLOW_PATH,
+    FORBIDDEN_ENV_VARS,
+    REQUIRED_ACTIONS,
+    REQUIRED_COMMAND_FRAGMENTS,
+    REQUIRED_COMMAND_ORDER,
+    REQUIRED_PYTHON_VERSION,
+)
 from minigpt.report_utils import utc_now
-
-DEFAULT_WORKFLOW_PATH = Path(".github") / "workflows" / "ci.yml"
-REQUIRED_ACTIONS = {"actions/checkout": "v6", "actions/setup-python": "v6"}
-FORBIDDEN_ENV_VARS = ("FORCE_JAVASCRIPT_ACTIONS_TO_NODE24",)
-REQUIRED_COMMAND_FRAGMENTS = {
-    "source_encoding_gate": "scripts/check_source_encoding.py",
-    "ci_workflow_hygiene_gate": "scripts/check_ci_workflow_hygiene.py",
-    "archived_path_portability_check": "scripts/check_archived_path_portability.py",
-    "promoted_seed_handoff_assurance_smoke": "scripts/check_promoted_seed_handoff_assurance_smoke.py",
-    "promoted_seed_receipt_contract_failure_smoke": "scripts/run_ci_promoted_seed_receipt_contract_failure_smoke.py",
-    "promoted_seed_receipt_contract_failure_smoke_plan_check": "scripts/check_ci_promoted_seed_receipt_contract_failure_smoke_plan.py",
-    "tiny_scorecard_comparison_inline_check_smoke": "scripts/run_ci_tiny_scorecard_comparison_smoke.py",
-    "tiny_scorecard_summary_check_sidecar": "--summary-check-out-dir",
-    "ci_tiny_scorecard_plan_digest_check": "scripts/check_ci_tiny_scorecard_plan.py",
-    "baseline_candidate_threshold_boundary_gate_check": "scripts/run_ci_baseline_candidate_threshold_boundary_gate_check.py",
-    "baseline_candidate_threshold_boundary_gate_plan_check": "scripts/check_ci_baseline_candidate_threshold_boundary_gate_plan.py",
-    "release_readiness_drift_contract_smoke": "scripts/check_release_readiness_drift_contract_smoke.py",
-    "test_coverage_report": "scripts/run_test_coverage.py",
-    "coverage_fail_under_gate": "--fail-under 80",
-}
-REQUIRED_COMMAND_ORDER = {
-    "promoted_seed_handoff_assurance_smoke_before_coverage": (
-        "scripts/check_promoted_seed_handoff_assurance_smoke.py",
-        "scripts/run_test_coverage.py",
-    ),
-    "tiny_scorecard_inline_check_smoke_before_coverage": (
-        "scripts/run_ci_tiny_scorecard_comparison_smoke.py",
-        "scripts/run_test_coverage.py",
-    ),
-    "archived_path_portability_check_before_receipt_smoke": (
-        "scripts/check_archived_path_portability.py",
-        "scripts/run_ci_promoted_seed_receipt_contract_failure_smoke.py",
-    ),
-    "archived_path_portability_check_before_coverage": (
-        "scripts/check_archived_path_portability.py",
-        "scripts/run_test_coverage.py",
-    ),
-    "promoted_seed_receipt_contract_failure_smoke_after_assurance": (
-        "scripts/check_promoted_seed_handoff_assurance_smoke.py",
-        "scripts/run_ci_promoted_seed_receipt_contract_failure_smoke.py",
-    ),
-    "promoted_seed_receipt_contract_failure_smoke_before_coverage": (
-        "scripts/run_ci_promoted_seed_receipt_contract_failure_smoke.py",
-        "scripts/run_test_coverage.py",
-    ),
-    "promoted_seed_receipt_contract_failure_smoke_plan_check_after_smoke": (
-        "scripts/run_ci_promoted_seed_receipt_contract_failure_smoke.py",
-        "scripts/check_ci_promoted_seed_receipt_contract_failure_smoke_plan.py",
-    ),
-    "promoted_seed_receipt_contract_failure_smoke_plan_check_before_coverage": (
-        "scripts/check_ci_promoted_seed_receipt_contract_failure_smoke_plan.py",
-        "scripts/run_test_coverage.py",
-    ),
-    "ci_tiny_scorecard_plan_check_after_smoke": (
-        "scripts/run_ci_tiny_scorecard_comparison_smoke.py",
-        "scripts/check_ci_tiny_scorecard_plan.py",
-    ),
-    "ci_tiny_scorecard_plan_check_before_coverage": (
-        "scripts/check_ci_tiny_scorecard_plan.py",
-        "scripts/run_test_coverage.py",
-    ),
-    "baseline_candidate_threshold_boundary_gate_check_after_plan_digest": (
-        "scripts/check_ci_tiny_scorecard_plan.py",
-        "scripts/run_ci_baseline_candidate_threshold_boundary_gate_check.py",
-    ),
-    "baseline_candidate_threshold_boundary_gate_check_before_coverage": (
-        "scripts/run_ci_baseline_candidate_threshold_boundary_gate_check.py",
-        "scripts/run_test_coverage.py",
-    ),
-    "baseline_candidate_threshold_boundary_gate_plan_check_after_gate_check": (
-        "scripts/run_ci_baseline_candidate_threshold_boundary_gate_check.py",
-        "scripts/check_ci_baseline_candidate_threshold_boundary_gate_plan.py",
-    ),
-    "baseline_candidate_threshold_boundary_gate_plan_check_before_coverage": (
-        "scripts/check_ci_baseline_candidate_threshold_boundary_gate_plan.py",
-        "scripts/run_test_coverage.py",
-    ),
-    "release_readiness_drift_contract_smoke_before_coverage": (
-        "scripts/check_release_readiness_drift_contract_smoke.py",
-        "scripts/run_test_coverage.py",
-    ),
-}
-REQUIRED_PYTHON_VERSION = "3.11"
 
 _USES_RE = re.compile(r"^\s*-\s+uses:\s*(?P<repo>[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)@(?P<version>[A-Za-z0-9_.-]+)\s*$")
 _PYTHON_VERSION_RE = re.compile(r"python-version:\s*[\"']?(?P<version>[0-9.]+)[\"']?")
@@ -159,6 +84,12 @@ class CiWorkflowSummary(TypedDict):
     release_readiness_drift_contract_smoke_present: bool
     release_readiness_drift_contract_smoke_order_ready: bool
     release_readiness_drift_contract_smoke_ready: bool
+    project_docs_readability_present: bool
+    project_docs_readability_order_ready: bool
+    project_docs_readability_ready: bool
+    normalization_guard_present: bool
+    normalization_guard_order_ready: bool
+    normalization_guard_ready: bool
     python_version: str
 
 
@@ -224,6 +155,14 @@ def build_ci_workflow_hygiene_report(
     )
     drift_contract_smoke_present = _check_passed(checks, "command:release_readiness_drift_contract_smoke")
     drift_contract_smoke_order_ready = _check_passed(checks, "order:release_readiness_drift_contract_smoke_before_coverage")
+    project_docs_readability_present = _check_passed(checks, "command:project_docs_readability_gate")
+    project_docs_readability_order_ready = (
+        _check_passed(checks, "order:project_docs_readability_after_source_encoding")
+        and _check_passed(checks, "order:project_docs_readability_before_ci_hygiene")
+        and _check_passed(checks, "order:project_docs_readability_before_coverage")
+    )
+    normalization_guard_present = _check_passed(checks, "command:normalization_guard")
+    normalization_guard_order_ready = _check_passed(checks, "order:normalization_guard_before_coverage")
     summary: CiWorkflowSummary = {
         "status": "pass" if not failed_checks else "fail",
         "decision": "continue_with_node24_native_ci" if not failed_checks else "fix_ci_workflow_hygiene",
@@ -264,6 +203,12 @@ def build_ci_workflow_hygiene_report(
         "release_readiness_drift_contract_smoke_present": drift_contract_smoke_present,
         "release_readiness_drift_contract_smoke_order_ready": drift_contract_smoke_order_ready,
         "release_readiness_drift_contract_smoke_ready": drift_contract_smoke_present and drift_contract_smoke_order_ready,
+        "project_docs_readability_present": project_docs_readability_present,
+        "project_docs_readability_order_ready": project_docs_readability_order_ready,
+        "project_docs_readability_ready": project_docs_readability_present and project_docs_readability_order_ready,
+        "normalization_guard_present": normalization_guard_present,
+        "normalization_guard_order_ready": normalization_guard_order_ready,
+        "normalization_guard_ready": normalization_guard_present and normalization_guard_order_ready,
         "python_version": _python_version(text),
     }
     return {
@@ -441,6 +386,8 @@ def _recommendations(summary: dict[str, Any]) -> list[str]:
         recommendations.append("Restore required source hygiene and unittest commands in the CI workflow.")
     if summary.get("order_violation_count", 0):
         recommendations.append("Keep assurance and tiny-scorecard evidence checks before coverage so CI fails fast on evidence drift.")
+    if not summary.get("project_docs_readability_ready"):
+        recommendations.append("Restore the project docs readability gate after source encoding and before CI hygiene and coverage.")
     if not summary.get("promoted_seed_receipt_contract_failure_smoke_ready"):
         recommendations.append("Restore the receipt contract failure smoke after assurance and before coverage.")
     if not summary.get("archived_path_portability_check_ready"):
@@ -449,6 +396,8 @@ def _recommendations(summary: dict[str, Any]) -> list[str]:
         recommendations.append("Restore the receipt contract failure smoke plan check after the wrapper and before coverage.")
     if summary.get("python_version") != REQUIRED_PYTHON_VERSION:
         recommendations.append("Align actions/setup-python with the source compatibility target.")
+    if not summary.get("normalization_guard_ready"):
+        recommendations.append("Restore the normalization guard before coverage so architecture and public API drift fail fast.")
     return recommendations
 
 

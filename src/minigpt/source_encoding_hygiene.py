@@ -8,7 +8,15 @@ import tokenize
 from pathlib import Path
 from typing import Any, Iterable
 
-from minigpt.report_utils import csv_cell, html_escape as _e, markdown_cell as _md, string_list as _string_list, utc_now, write_json_payload
+from minigpt.reports.utils import (
+    csv_cell,
+    html_escape as _e,
+    markdown_cell as _md,
+    string_list as _string_list,
+    utc_now,
+    write_json_payload,
+    write_output_bundle,
+)
 
 BOM = b"\xef\xbb\xbf"
 DEFAULT_SCAN_ROOTS = (Path("src"), Path("scripts"), Path("tests"))
@@ -168,19 +176,21 @@ def write_source_encoding_html(report: dict[str, Any], path: str | Path) -> None
 
 
 def write_source_encoding_outputs(report: dict[str, Any], out_dir: str | Path) -> dict[str, str]:
-    root = Path(out_dir)
-    root.mkdir(parents=True, exist_ok=True)
-    paths = {
-        "json": root / "source_encoding_hygiene.json",
-        "csv": root / "source_encoding_hygiene.csv",
-        "markdown": root / "source_encoding_hygiene.md",
-        "html": root / "source_encoding_hygiene.html",
-    }
-    write_source_encoding_json(report, paths["json"])
-    write_source_encoding_csv(report, paths["csv"])
-    write_source_encoding_markdown(report, paths["markdown"])
-    write_source_encoding_html(report, paths["html"])
-    return {key: str(value) for key, value in paths.items()}
+    return write_output_bundle(
+        out_dir,
+        {
+            "json": "source_encoding_hygiene.json",
+            "csv": "source_encoding_hygiene.csv",
+            "markdown": "source_encoding_hygiene.md",
+            "html": "source_encoding_hygiene.html",
+        },
+        {
+            "json": lambda path: write_source_encoding_json(report, path),
+            "csv": lambda path: write_source_encoding_csv(report, path),
+            "markdown": lambda path: write_source_encoding_markdown(report, path),
+            "html": lambda path: write_source_encoding_html(report, path),
+        },
+    )
 
 
 def _scan_source_file(path: Path, project_root: Path | None, target_python: str) -> dict[str, Any]:

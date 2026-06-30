@@ -2,21 +2,26 @@ from __future__ import annotations
 
 import argparse
 import json
-import sys
+from collections.abc import Sequence
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "src"))
+try:
+    from scripts._bootstrap import PROJECT_ROOT, ensure_src_path
+except ModuleNotFoundError:  # pragma: no cover - direct script execution path
+    from _bootstrap import PROJECT_ROOT, ensure_src_path
 
-from minigpt.release_gate import release_gate_policy_profiles
-from minigpt.release_gate_comparison import (
+ROOT = PROJECT_ROOT
+ensure_src_path()
+
+from minigpt.governance.release import (
     DEFAULT_COMPARISON_PROFILES,
     build_release_gate_profile_comparison,
+    release_gate_policy_profiles,
     write_release_gate_profile_comparison_outputs,
 )
 
 
-def parse_args() -> argparse.Namespace:
+def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Compare MiniGPT release gate policy profiles.")
     parser.add_argument(
         "--bundle",
@@ -63,11 +68,11 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--title", type=str, default="MiniGPT release gate profile comparison")
     parser.add_argument("--fail-on-blocked", action="store_true", help="Exit non-zero if any compared profile blocks")
-    return parser.parse_args()
+    return parser.parse_args(argv)
 
 
-def main() -> None:
-    args = parse_args()
+def main(argv: Sequence[str] | None = None) -> int:
+    args = parse_args(argv)
     bundles = args.bundle or [ROOT / "runs" / "release-bundle" / "release_bundle.json"]
     out_dir = args.out_dir or ROOT / "runs" / "release-gate-profiles"
     require_generation_quality = False if args.allow_missing_generation_quality else None
@@ -102,8 +107,9 @@ def main() -> None:
     print(f"check_deltas={summary['check_delta_count']}")
     print("outputs=" + json.dumps(outputs, ensure_ascii=False))
     if args.fail_on_blocked and summary["blocked_count"]:
-        raise SystemExit(1)
+        return 1
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

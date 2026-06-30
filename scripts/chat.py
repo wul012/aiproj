@@ -2,26 +2,31 @@ from __future__ import annotations
 
 import argparse
 import json
-import sys
+from collections.abc import Sequence
 from pathlib import Path
 
 import torch
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "src"))
+try:
+    from scripts._bootstrap import PROJECT_ROOT, ensure_src_path
+except ModuleNotFoundError:  # pragma: no cover - direct script execution path
+    from _bootstrap import PROJECT_ROOT, ensure_src_path
 
-from minigpt.chat import (
+ROOT = PROJECT_ROOT
+ensure_src_path()
+
+from minigpt.serving.chat import (
     ChatTurn,
     assistant_reply_from_generation,
     build_chat_prompt,
     prepare_chat_prompt,
     turns_to_dicts,
 )
-from minigpt.model import GPTConfig, MiniGPT
-from minigpt.tokenizer import Tokenizer, load_tokenizer
+from minigpt.core.model import GPTConfig, MiniGPT
+from minigpt.core.tokenizer import Tokenizer, load_tokenizer
 
 
-def parse_args() -> argparse.Namespace:
+def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Run a tiny chat wrapper around a MiniGPT checkpoint.")
     parser.add_argument("--checkpoint", type=Path, default=ROOT / "runs" / "minigpt" / "checkpoint.pt")
     parser.add_argument("--tokenizer", type=Path, default=None)
@@ -32,7 +37,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--top-k", type=int, default=30, help="Use 0 to disable top-k filtering")
     parser.add_argument("--device", choices=["auto", "cpu", "cuda"], default="auto")
     parser.add_argument("--out", type=Path, default=None, help="Optional transcript JSON path")
-    return parser.parse_args()
+    return parser.parse_args(argv)
 
 
 def choose_device(name: str) -> torch.device:
@@ -192,8 +197,8 @@ def run_interactive(args: argparse.Namespace, model: MiniGPT, tokenizer: Tokeniz
         print(f"saved={args.out}")
 
 
-def main() -> None:
-    args = parse_args()
+def main(argv: Sequence[str] | None = None) -> int:
+    args = parse_args(argv)
     if args.max_new_tokens < 1:
         raise ValueError("--max-new-tokens must be at least 1")
     if args.temperature <= 0:
@@ -207,7 +212,8 @@ def main() -> None:
         run_one_shot(args, model, tokenizer, device)
     else:
         run_interactive(args, model, tokenizer, device)
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

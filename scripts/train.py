@@ -5,17 +5,25 @@ import json
 import random
 import shutil
 import sys
+from collections.abc import Sequence
 from dataclasses import asdict
 from pathlib import Path
 
 import numpy as np
 import torch
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "src"))
+try:
+    from scripts._bootstrap import PROJECT_ROOT, ensure_src_path
+except ModuleNotFoundError:  # pragma: no cover - direct script execution path
+    from _bootstrap import PROJECT_ROOT, ensure_src_path
 
-from minigpt.dataset import get_batch, load_text, split_token_ids
-from minigpt.data_prep import (
+ROOT = PROJECT_ROOT
+ensure_src_path()
+
+from minigpt.core.dataset import get_batch, load_text, split_token_ids
+from minigpt.core.model import GPTConfig, MiniGPT
+from minigpt.core.tokenizer import BPETokenizer, CharTokenizer, Tokenizer, load_tokenizer
+from minigpt.training.data_prep import (
     build_dataset_report,
     build_dataset_version_manifest,
     build_prepared_dataset,
@@ -24,14 +32,18 @@ from minigpt.data_prep import (
     write_dataset_version_html,
     write_dataset_version_json,
 )
-from minigpt.data_quality import build_dataset_quality_report, write_dataset_quality_json, write_dataset_quality_svg
-from minigpt.history import TrainingRecord, append_record, load_records, summarize_records, write_loss_curve_svg
-from minigpt.manifest import build_environment_metadata, build_run_manifest, utc_now, write_run_manifest_json, write_run_manifest_svg
-from minigpt.model import GPTConfig, MiniGPT
-from minigpt.tokenizer import BPETokenizer, CharTokenizer, Tokenizer, load_tokenizer
+from minigpt.training.data_quality import build_dataset_quality_report, write_dataset_quality_json, write_dataset_quality_svg
+from minigpt.training.history import TrainingRecord, append_record, load_records, summarize_records, write_loss_curve_svg
+from minigpt.reports.manifest import (
+    build_environment_metadata,
+    build_run_manifest,
+    utc_now,
+    write_run_manifest_json,
+    write_run_manifest_svg,
+)
 
 
-def parse_args() -> argparse.Namespace:
+def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Train a tiny GPT language model.")
     parser.add_argument("--data", type=Path, default=ROOT / "data" / "sample_zh.txt")
     parser.add_argument("--data-dir", type=Path, default=None, help="Directory of .txt files to merge for training")
@@ -59,7 +71,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--sample-temperature", type=float, default=0.8)
     parser.add_argument("--sample-top-k", type=int, default=30)
     parser.add_argument("--no-sample", action="store_true")
-    return parser.parse_args()
+    return parser.parse_args(argv)
 
 
 def choose_device(name: str) -> torch.device:
@@ -197,8 +209,9 @@ def write_sample(
     )
 
 
-def main() -> None:
-    args = parse_args()
+def main(argv: Sequence[str] | None = None) -> int:
+    args = parse_args(argv)
+    command_args = sys.argv if argv is None else ["scripts/train.py", *argv]
     started_at = utc_now()
     default_out_dir = ROOT / "runs" / "minigpt"
     if args.resume is not None and args.out_dir == default_out_dir:
@@ -380,7 +393,7 @@ def main() -> None:
         end_step=args.max_iters,
         last_loss=last_loss,
         history_summary=history_summary,
-        command=[Path(sys.executable).name, *sys.argv],
+        command=[Path(sys.executable).name, *command_args],
         repo_root=ROOT,
         environment=build_environment_metadata({"torch": torch.__version__, "numpy": np.__version__}),
     )
@@ -391,7 +404,8 @@ def main() -> None:
     print(f"manifest={args.out_dir / 'run_manifest.json'}")
     if not args.no_sample:
         print(f"sample={args.out_dir / 'sample.txt'}")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

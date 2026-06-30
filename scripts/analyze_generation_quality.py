@@ -2,16 +2,21 @@ from __future__ import annotations
 
 import argparse
 import json
-import sys
+from collections.abc import Sequence
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "src"))
+try:
+    from scripts._bootstrap import PROJECT_ROOT, ensure_src_path
+except ModuleNotFoundError:  # pragma: no cover - direct script execution path
+    from _bootstrap import PROJECT_ROOT, ensure_src_path
 
-from minigpt.generation_quality import build_generation_quality_report, write_generation_quality_outputs
+ROOT = PROJECT_ROOT
+ensure_src_path()
+
+from minigpt.evaluation.generation_quality import build_generation_quality_report, write_generation_quality_outputs
 
 
-def parse_args() -> argparse.Namespace:
+def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Analyze MiniGPT generation quality from eval suite or sampling outputs.")
     parser.add_argument("--input", type=Path, default=ROOT / "runs" / "minigpt" / "eval_suite" / "eval_suite.json")
     parser.add_argument("--source-type", choices=["auto", "eval_suite", "sample_lab", "generic_results"], default="auto")
@@ -22,11 +27,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--max-repeated-ngram-ratio", type=float, default=0.65)
     parser.add_argument("--ngram-size", type=int, default=2)
     parser.add_argument("--title", type=str, default="MiniGPT generation quality report")
-    return parser.parse_args()
+    return parser.parse_args(argv)
 
 
-def main() -> None:
-    args = parse_args()
+def main(argv: Sequence[str] | None = None) -> int:
+    args = parse_args(argv)
     out_dir = args.out_dir or args.input.parent / "generation-quality"
     report = build_generation_quality_report(
         args.input,
@@ -54,7 +59,8 @@ def main() -> None:
     if dominant_flag:
         print(f"dominant_flag={dominant_flag[0]}:{dominant_flag[1]}")
     print("outputs=" + json.dumps(outputs, ensure_ascii=False))
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

@@ -1,13 +1,15 @@
 from __future__ import annotations
 
+import contextlib
+import io
 import unittest
 from pathlib import Path
 from tempfile import TemporaryDirectory
-import sys
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "src"))
+from tests._bootstrap import ROOT
 
+import minigpt.ci_workflow_hygiene as ci_workflow_hygiene
+import minigpt.ci_workflow_hygiene_policy as ci_workflow_hygiene_policy
 from minigpt.ci_workflow_hygiene import (
     build_ci_workflow_hygiene_report,
     render_ci_workflow_hygiene_html,
@@ -18,8 +20,70 @@ from minigpt.ci_workflow_hygiene_artifacts import (
     render_ci_workflow_hygiene_html as artifact_render_ci_workflow_hygiene_html,
     write_ci_workflow_hygiene_outputs as artifact_write_ci_workflow_hygiene_outputs,
 )
+from scripts.check_ci_workflow_hygiene import main as cli_main
 
 CI_WORKFLOW = ROOT / ".github" / "workflows" / "ci.yml"
+
+REQUIRED_SUMMARY_GATES = (
+    "tiny_scorecard_plan_digest_gate",
+    "baseline_candidate_threshold_boundary_gate_check",
+    "baseline_candidate_threshold_boundary_gate_plan_check",
+    "archived_path_portability_check",
+    "promoted_seed_receipt_contract_failure_smoke",
+    "promoted_seed_receipt_contract_failure_smoke_plan_check",
+    "release_readiness_drift_contract_smoke",
+    "project_docs_readability",
+    "normalization_guard",
+)
+
+COVERAGE_ORDER_SENSITIVE_GATES = tuple(
+    gate for gate in REQUIRED_SUMMARY_GATES if gate != "project_docs_readability"
+)
+
+CURRENT_WORKFLOW_REQUIRED_CHECK_IDS = (
+    "order:promoted_seed_handoff_assurance_smoke_before_coverage",
+    "order:tiny_scorecard_inline_check_smoke_before_coverage",
+    "command:tiny_scorecard_summary_check_sidecar",
+    "command:ci_tiny_scorecard_plan_digest_check",
+    "command:baseline_candidate_threshold_boundary_gate_check",
+    "command:baseline_candidate_threshold_boundary_gate_plan_check",
+    "command:archived_path_portability_check",
+    "command:promoted_seed_receipt_contract_failure_smoke",
+    "command:promoted_seed_receipt_contract_failure_smoke_plan_check",
+    "command:release_readiness_drift_contract_smoke",
+    "command:project_docs_readability_gate",
+    "command:normalization_guard",
+    "order:ci_tiny_scorecard_plan_check_after_smoke",
+    "order:ci_tiny_scorecard_plan_check_before_coverage",
+    "order:baseline_candidate_threshold_boundary_gate_check_after_plan_digest",
+    "order:baseline_candidate_threshold_boundary_gate_check_before_coverage",
+    "order:baseline_candidate_threshold_boundary_gate_plan_check_after_gate_check",
+    "order:baseline_candidate_threshold_boundary_gate_plan_check_before_coverage",
+    "order:archived_path_portability_check_before_receipt_smoke",
+    "order:archived_path_portability_check_before_coverage",
+    "order:promoted_seed_receipt_contract_failure_smoke_after_assurance",
+    "order:promoted_seed_receipt_contract_failure_smoke_before_coverage",
+    "order:promoted_seed_receipt_contract_failure_smoke_plan_check_after_smoke",
+    "order:promoted_seed_receipt_contract_failure_smoke_plan_check_before_coverage",
+    "order:release_readiness_drift_contract_smoke_before_coverage",
+    "order:project_docs_readability_after_source_encoding",
+    "order:project_docs_readability_before_ci_hygiene",
+    "order:project_docs_readability_before_coverage",
+    "order:normalization_guard_before_coverage",
+)
+
+COVERAGE_ORDER_FAILURE_IDS = {
+    "order:promoted_seed_handoff_assurance_smoke_before_coverage",
+    "order:tiny_scorecard_inline_check_smoke_before_coverage",
+    "order:ci_tiny_scorecard_plan_check_before_coverage",
+    "order:baseline_candidate_threshold_boundary_gate_check_before_coverage",
+    "order:baseline_candidate_threshold_boundary_gate_plan_check_before_coverage",
+    "order:archived_path_portability_check_before_coverage",
+    "order:promoted_seed_receipt_contract_failure_smoke_before_coverage",
+    "order:promoted_seed_receipt_contract_failure_smoke_plan_check_before_coverage",
+    "order:release_readiness_drift_contract_smoke_before_coverage",
+    "order:normalization_guard_before_coverage",
+}
 
 
 class CIWorkflowTests(unittest.TestCase):
@@ -41,122 +105,15 @@ class CIWorkflowTests(unittest.TestCase):
         self.assertEqual(report["summary"]["forbidden_env_count"], 0)
         self.assertEqual(report["summary"]["missing_step_count"], 0)
         self.assertEqual(report["summary"]["order_violation_count"], 0)
-        self.assertTrue(report["summary"]["tiny_scorecard_plan_digest_gate_present"])
-        self.assertTrue(report["summary"]["tiny_scorecard_plan_digest_gate_order_ready"])
-        self.assertTrue(report["summary"]["tiny_scorecard_plan_digest_gate_ready"])
-        self.assertTrue(report["summary"]["baseline_candidate_threshold_boundary_gate_check_present"])
-        self.assertTrue(report["summary"]["baseline_candidate_threshold_boundary_gate_check_order_ready"])
-        self.assertTrue(report["summary"]["baseline_candidate_threshold_boundary_gate_check_ready"])
-        self.assertTrue(report["summary"]["baseline_candidate_threshold_boundary_gate_plan_check_present"])
-        self.assertTrue(report["summary"]["baseline_candidate_threshold_boundary_gate_plan_check_order_ready"])
-        self.assertTrue(report["summary"]["baseline_candidate_threshold_boundary_gate_plan_check_ready"])
-        self.assertTrue(report["summary"]["archived_path_portability_check_present"])
-        self.assertTrue(report["summary"]["archived_path_portability_check_order_ready"])
-        self.assertTrue(report["summary"]["archived_path_portability_check_ready"])
-        self.assertTrue(report["summary"]["promoted_seed_receipt_contract_failure_smoke_present"])
-        self.assertTrue(report["summary"]["promoted_seed_receipt_contract_failure_smoke_order_ready"])
-        self.assertTrue(report["summary"]["promoted_seed_receipt_contract_failure_smoke_ready"])
-        self.assertTrue(report["summary"]["promoted_seed_receipt_contract_failure_smoke_plan_check_present"])
-        self.assertTrue(report["summary"]["promoted_seed_receipt_contract_failure_smoke_plan_check_order_ready"])
-        self.assertTrue(report["summary"]["promoted_seed_receipt_contract_failure_smoke_plan_check_ready"])
-        self.assertTrue(report["summary"]["release_readiness_drift_contract_smoke_present"])
-        self.assertTrue(report["summary"]["release_readiness_drift_contract_smoke_order_ready"])
-        self.assertTrue(report["summary"]["release_readiness_drift_contract_smoke_ready"])
+        for gate in REQUIRED_SUMMARY_GATES:
+            _assert_summary_gate_state(self, report["summary"], gate)
         self.assertEqual(report["summary"]["python_version"], "3.11")
         self.assertIn("actions/checkout", {item["repository"] for item in report["actions"]})
         self.assertTrue(all(item["status"] == "pass" for item in report["checks"]))
-        self.assertIn(
-            "order:promoted_seed_handoff_assurance_smoke_before_coverage",
-            {item["id"] for item in report["checks"]},
-        )
-        self.assertIn(
-            "order:tiny_scorecard_inline_check_smoke_before_coverage",
-            {item["id"] for item in report["checks"]},
-        )
-        self.assertIn(
-            "command:tiny_scorecard_summary_check_sidecar",
-            {item["id"] for item in report["checks"]},
-        )
-        self.assertIn(
-            "command:ci_tiny_scorecard_plan_digest_check",
-            {item["id"] for item in report["checks"]},
-        )
-        self.assertIn(
-            "command:baseline_candidate_threshold_boundary_gate_check",
-            {item["id"] for item in report["checks"]},
-        )
-        self.assertIn(
-            "command:baseline_candidate_threshold_boundary_gate_plan_check",
-            {item["id"] for item in report["checks"]},
-        )
-        self.assertIn(
-            "command:archived_path_portability_check",
-            {item["id"] for item in report["checks"]},
-        )
-        self.assertIn(
-            "command:promoted_seed_receipt_contract_failure_smoke",
-            {item["id"] for item in report["checks"]},
-        )
-        self.assertIn(
-            "command:promoted_seed_receipt_contract_failure_smoke_plan_check",
-            {item["id"] for item in report["checks"]},
-        )
-        self.assertIn(
-            "command:release_readiness_drift_contract_smoke",
-            {item["id"] for item in report["checks"]},
-        )
-        self.assertIn(
-            "order:ci_tiny_scorecard_plan_check_after_smoke",
-            {item["id"] for item in report["checks"]},
-        )
-        self.assertIn(
-            "order:ci_tiny_scorecard_plan_check_before_coverage",
-            {item["id"] for item in report["checks"]},
-        )
-        self.assertIn(
-            "order:baseline_candidate_threshold_boundary_gate_check_after_plan_digest",
-            {item["id"] for item in report["checks"]},
-        )
-        self.assertIn(
-            "order:baseline_candidate_threshold_boundary_gate_check_before_coverage",
-            {item["id"] for item in report["checks"]},
-        )
-        self.assertIn(
-            "order:baseline_candidate_threshold_boundary_gate_plan_check_after_gate_check",
-            {item["id"] for item in report["checks"]},
-        )
-        self.assertIn(
-            "order:baseline_candidate_threshold_boundary_gate_plan_check_before_coverage",
-            {item["id"] for item in report["checks"]},
-        )
-        self.assertIn(
-            "order:archived_path_portability_check_before_receipt_smoke",
-            {item["id"] for item in report["checks"]},
-        )
-        self.assertIn(
-            "order:archived_path_portability_check_before_coverage",
-            {item["id"] for item in report["checks"]},
-        )
-        self.assertIn(
-            "order:promoted_seed_receipt_contract_failure_smoke_after_assurance",
-            {item["id"] for item in report["checks"]},
-        )
-        self.assertIn(
-            "order:promoted_seed_receipt_contract_failure_smoke_before_coverage",
-            {item["id"] for item in report["checks"]},
-        )
-        self.assertIn(
-            "order:promoted_seed_receipt_contract_failure_smoke_plan_check_after_smoke",
-            {item["id"] for item in report["checks"]},
-        )
-        self.assertIn(
-            "order:promoted_seed_receipt_contract_failure_smoke_plan_check_before_coverage",
-            {item["id"] for item in report["checks"]},
-        )
-        self.assertIn(
-            "order:release_readiness_drift_contract_smoke_before_coverage",
-            {item["id"] for item in report["checks"]},
-        )
+        check_ids = _check_ids(report)
+        for check_id in CURRENT_WORKFLOW_REQUIRED_CHECK_IDS:
+            with self.subTest(check_id=check_id):
+                self.assertIn(check_id, check_ids)
         for order_check in (item for item in report["checks"] if item["category"] == "required_order"):
             self.assertIn("before_line=", order_check["actual"])
             self.assertIn("after_line=", order_check["actual"])
@@ -192,15 +149,11 @@ class CIWorkflowTests(unittest.TestCase):
             self.assertGreaterEqual(report["summary"]["failed_check_count"], 4)
             self.assertEqual(report["summary"]["node24_native_action_count"], 0)
             self.assertEqual(report["summary"]["forbidden_env_count"], 1)
-            self.assertEqual(report["summary"]["missing_step_count"], 12)
-            self.assertEqual(report["summary"]["required_step_count"], 14)
-            self.assertFalse(report["summary"]["tiny_scorecard_plan_digest_gate_ready"])
-            self.assertFalse(report["summary"]["baseline_candidate_threshold_boundary_gate_check_ready"])
-            self.assertFalse(report["summary"]["baseline_candidate_threshold_boundary_gate_plan_check_ready"])
-            self.assertFalse(report["summary"]["archived_path_portability_check_ready"])
-            self.assertFalse(report["summary"]["promoted_seed_receipt_contract_failure_smoke_ready"])
-            self.assertFalse(report["summary"]["promoted_seed_receipt_contract_failure_smoke_plan_check_ready"])
-            self.assertFalse(report["summary"]["release_readiness_drift_contract_smoke_ready"])
+            self.assertEqual(report["summary"]["missing_step_count"], 14)
+            self.assertEqual(report["summary"]["required_step_count"], 16)
+            for gate in REQUIRED_SUMMARY_GATES:
+                with self.subTest(gate=gate):
+                    self.assertFalse(report["summary"][f"{gate}_ready"])
             self.assertIn("Upgrade required GitHub actions", " ".join(report["recommendations"]))
 
     def test_ci_workflow_hygiene_accepts_semver_and_bare_major_action_tags(self) -> None:
@@ -219,6 +172,8 @@ class CIWorkflowTests(unittest.TestCase):
                         '          python-version: "3.11"',
                         "      - name: Source encoding and syntax check",
                         "        run: python -B scripts/check_source_encoding.py --out-dir runs/source-encoding-hygiene-ci",
+                        "      - name: Project docs readability check",
+                        "        run: python -B scripts/check_project_docs_readability.py --out-dir runs/project-docs-readability-ci --require-pass --force",
                         "      - name: CI workflow hygiene check",
                         "        run: python -B scripts/check_ci_workflow_hygiene.py --out-dir runs/ci-workflow-hygiene-ci",
                         "      - name: Archived path portability check",
@@ -239,6 +194,8 @@ class CIWorkflowTests(unittest.TestCase):
                         "        run: python -B scripts/check_ci_baseline_candidate_threshold_boundary_gate_plan.py runs/baseline-candidate-threshold-boundary-gate-check-ci --out-dir runs/ci-baseline-candidate-threshold-boundary-gate-plan-check-ci",
                         "      - name: Release readiness drift contract smoke",
                         "        run: python -B scripts/check_release_readiness_drift_contract_smoke.py --out-dir runs/release-readiness-drift-contract-smoke-ci",
+                        "      - name: Normalization guard",
+                        "        run: python -B scripts/check_normalization_guard.py",
                         "      - name: Unit tests",
                         "        run: python -B scripts/run_test_coverage.py --out-dir runs/test-coverage-ci --fail-under 80",
                     ]
@@ -272,6 +229,8 @@ class CIWorkflowTests(unittest.TestCase):
                         '          python-version: "3.11"',
                         "      - name: Source encoding and syntax check",
                         "        run: python -B scripts/check_source_encoding.py --out-dir runs/source-encoding-hygiene-ci",
+                        "      - name: Project docs readability check",
+                        "        run: python -B scripts/check_project_docs_readability.py --out-dir runs/project-docs-readability-ci --require-pass --force",
                         "      - name: CI workflow hygiene check",
                         "        run: python -B scripts/check_ci_workflow_hygiene.py --out-dir runs/ci-workflow-hygiene-ci",
                         "      - name: Unit tests",
@@ -294,6 +253,8 @@ class CIWorkflowTests(unittest.TestCase):
                         "        run: python -B scripts/check_ci_baseline_candidate_threshold_boundary_gate_plan.py runs/baseline-candidate-threshold-boundary-gate-check-ci --out-dir runs/ci-baseline-candidate-threshold-boundary-gate-plan-check-ci",
                         "      - name: Release readiness drift contract smoke",
                         "        run: python -B scripts/check_release_readiness_drift_contract_smoke.py --out-dir runs/release-readiness-drift-contract-smoke-ci",
+                        "      - name: Normalization guard",
+                        "        run: python -B scripts/check_normalization_guard.py",
                     ]
                 ),
                 encoding="utf-8",
@@ -303,39 +264,11 @@ class CIWorkflowTests(unittest.TestCase):
 
             self.assertEqual(report["summary"]["status"], "fail")
             self.assertEqual(report["summary"]["missing_step_count"], 0)
-            self.assertEqual(report["summary"]["order_violation_count"], 9)
-            self.assertTrue(report["summary"]["tiny_scorecard_plan_digest_gate_present"])
-            self.assertFalse(report["summary"]["tiny_scorecard_plan_digest_gate_order_ready"])
-            self.assertFalse(report["summary"]["tiny_scorecard_plan_digest_gate_ready"])
-            self.assertTrue(report["summary"]["baseline_candidate_threshold_boundary_gate_check_present"])
-            self.assertFalse(report["summary"]["baseline_candidate_threshold_boundary_gate_check_order_ready"])
-            self.assertFalse(report["summary"]["baseline_candidate_threshold_boundary_gate_check_ready"])
-            self.assertTrue(report["summary"]["baseline_candidate_threshold_boundary_gate_plan_check_present"])
-            self.assertFalse(report["summary"]["baseline_candidate_threshold_boundary_gate_plan_check_order_ready"])
-            self.assertFalse(report["summary"]["baseline_candidate_threshold_boundary_gate_plan_check_ready"])
-            self.assertTrue(report["summary"]["archived_path_portability_check_present"])
-            self.assertFalse(report["summary"]["archived_path_portability_check_order_ready"])
-            self.assertFalse(report["summary"]["archived_path_portability_check_ready"])
-            self.assertTrue(report["summary"]["promoted_seed_receipt_contract_failure_smoke_present"])
-            self.assertFalse(report["summary"]["promoted_seed_receipt_contract_failure_smoke_order_ready"])
-            self.assertFalse(report["summary"]["promoted_seed_receipt_contract_failure_smoke_ready"])
-            self.assertTrue(report["summary"]["promoted_seed_receipt_contract_failure_smoke_plan_check_present"])
-            self.assertFalse(report["summary"]["promoted_seed_receipt_contract_failure_smoke_plan_check_order_ready"])
-            self.assertFalse(report["summary"]["promoted_seed_receipt_contract_failure_smoke_plan_check_ready"])
-            self.assertTrue(report["summary"]["release_readiness_drift_contract_smoke_present"])
-            self.assertFalse(report["summary"]["release_readiness_drift_contract_smoke_order_ready"])
-            self.assertFalse(report["summary"]["release_readiness_drift_contract_smoke_ready"])
-            failed_order_ids = {item["id"] for item in report["checks"] if item["category"] == "required_order" and item["status"] == "fail"}
-            self.assertIn("order:promoted_seed_handoff_assurance_smoke_before_coverage", failed_order_ids)
-            self.assertIn("order:tiny_scorecard_inline_check_smoke_before_coverage", failed_order_ids)
-            self.assertIn("order:ci_tiny_scorecard_plan_check_before_coverage", failed_order_ids)
-            self.assertIn("order:baseline_candidate_threshold_boundary_gate_check_before_coverage", failed_order_ids)
-            self.assertIn("order:baseline_candidate_threshold_boundary_gate_plan_check_before_coverage", failed_order_ids)
-            self.assertIn("order:archived_path_portability_check_before_coverage", failed_order_ids)
-            self.assertIn("order:promoted_seed_receipt_contract_failure_smoke_before_coverage", failed_order_ids)
-            self.assertIn("order:promoted_seed_receipt_contract_failure_smoke_plan_check_before_coverage", failed_order_ids)
-            self.assertIn("order:release_readiness_drift_contract_smoke_before_coverage", failed_order_ids)
-            self.assertNotIn("order:ci_tiny_scorecard_plan_check_after_smoke", failed_order_ids)
+            self.assertEqual(report["summary"]["order_violation_count"], 10)
+            for gate in COVERAGE_ORDER_SENSITIVE_GATES:
+                _assert_summary_gate_state(self, report["summary"], gate, order_ready=False, ready=False)
+            _assert_summary_gate_state(self, report["summary"], "project_docs_readability")
+            self.assertEqual(COVERAGE_ORDER_FAILURE_IDS, _failed_required_order_ids(report))
 
     def test_ci_workflow_hygiene_requires_plan_check_after_tiny_smoke(self) -> None:
         with TemporaryDirectory() as tmp:
@@ -353,6 +286,8 @@ class CIWorkflowTests(unittest.TestCase):
                         '          python-version: "3.11"',
                         "      - name: Source encoding and syntax check",
                         "        run: python -B scripts/check_source_encoding.py --out-dir runs/source-encoding-hygiene-ci",
+                        "      - name: Project docs readability check",
+                        "        run: python -B scripts/check_project_docs_readability.py --out-dir runs/project-docs-readability-ci --require-pass --force",
                         "      - name: CI workflow hygiene check",
                         "        run: python -B scripts/check_ci_workflow_hygiene.py --out-dir runs/ci-workflow-hygiene-ci",
                         "      - name: Archived path portability check",
@@ -373,6 +308,8 @@ class CIWorkflowTests(unittest.TestCase):
                         "        run: python -B scripts/run_ci_tiny_scorecard_comparison_smoke.py --out-dir runs/tiny-scorecard-comparison-smoke-ci --summary-check-out-dir runs/tiny-scorecard-comparison-smoke-check-ci",
                         "      - name: Release readiness drift contract smoke",
                         "        run: python -B scripts/check_release_readiness_drift_contract_smoke.py --out-dir runs/release-readiness-drift-contract-smoke-ci",
+                        "      - name: Normalization guard",
+                        "        run: python -B scripts/check_normalization_guard.py",
                         "      - name: Unit tests",
                         "        run: python -B scripts/run_test_coverage.py --out-dir runs/test-coverage-ci --fail-under 80",
                     ]
@@ -382,16 +319,25 @@ class CIWorkflowTests(unittest.TestCase):
 
             report = build_ci_workflow_hygiene_report(workflow, project_root=Path(tmp), generated_at="2026-01-01T00:00:00Z")
 
-            failed_order_ids = {item["id"] for item in report["checks"] if item["category"] == "required_order" and item["status"] == "fail"}
+            failed_order_ids = _failed_required_order_ids(report)
             self.assertEqual(report["summary"]["status"], "fail")
             self.assertEqual(report["summary"]["missing_step_count"], 0)
-            self.assertTrue(report["summary"]["tiny_scorecard_plan_digest_gate_present"])
-            self.assertFalse(report["summary"]["tiny_scorecard_plan_digest_gate_order_ready"])
-            self.assertFalse(report["summary"]["tiny_scorecard_plan_digest_gate_ready"])
-            self.assertTrue(report["summary"]["baseline_candidate_threshold_boundary_gate_check_ready"])
-            self.assertTrue(report["summary"]["baseline_candidate_threshold_boundary_gate_plan_check_ready"])
-            self.assertTrue(report["summary"]["archived_path_portability_check_ready"])
-            self.assertTrue(report["summary"]["promoted_seed_receipt_contract_failure_smoke_plan_check_ready"])
+            _assert_summary_gate_state(
+                self,
+                report["summary"],
+                "tiny_scorecard_plan_digest_gate",
+                order_ready=False,
+                ready=False,
+            )
+            for gate in (
+                "baseline_candidate_threshold_boundary_gate_check",
+                "baseline_candidate_threshold_boundary_gate_plan_check",
+                "archived_path_portability_check",
+                "promoted_seed_receipt_contract_failure_smoke_plan_check",
+                "project_docs_readability",
+                "normalization_guard",
+            ):
+                _assert_summary_gate_state(self, report["summary"], gate)
             self.assertIn("order:ci_tiny_scorecard_plan_check_after_smoke", failed_order_ids)
 
     def test_ci_workflow_hygiene_outputs_json_csv_markdown_and_html(self) -> None:
@@ -405,18 +351,72 @@ class CIWorkflowTests(unittest.TestCase):
             self.assertIn("actions/setup-python", Path(outputs["csv"]).read_text(encoding="utf-8"))
             self.assertIn("CI &lt;workflow&gt;", render_ci_workflow_hygiene_html(report))
             self.assertIn("continue_with_node24_native_ci", render_ci_workflow_hygiene_markdown(report))
-            self.assertIn("tiny_scorecard_plan_digest_gate_ready", Path(outputs["markdown"]).read_text(encoding="utf-8"))
-            self.assertIn("baseline_candidate_threshold_boundary_gate_check_ready", Path(outputs["markdown"]).read_text(encoding="utf-8"))
-            self.assertIn("baseline_candidate_threshold_boundary_gate_plan_check_ready", Path(outputs["markdown"]).read_text(encoding="utf-8"))
-            self.assertIn("archived_path_portability_check_ready", Path(outputs["markdown"]).read_text(encoding="utf-8"))
-            self.assertIn("promoted_seed_receipt_contract_failure_smoke_ready", Path(outputs["markdown"]).read_text(encoding="utf-8"))
-            self.assertIn("promoted_seed_receipt_contract_failure_smoke_plan_check_ready", Path(outputs["markdown"]).read_text(encoding="utf-8"))
-            self.assertIn("release_readiness_drift_contract_smoke_ready", Path(outputs["markdown"]).read_text(encoding="utf-8"))
-            self.assertIn("order_violation_count", Path(outputs["markdown"]).read_text(encoding="utf-8"))
+            markdown = Path(outputs["markdown"]).read_text(encoding="utf-8")
+            for gate in REQUIRED_SUMMARY_GATES:
+                with self.subTest(gate=gate):
+                    self.assertIn(f"{gate}_ready", markdown)
+            self.assertIn("order_violation_count", markdown)
+
+    def test_ci_workflow_hygiene_cli_accepts_argv_and_returns_status(self) -> None:
+        with TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            out_dir = root / "out"
+            bad_workflow = root / "ci.yml"
+            bad_workflow.write_text(
+                "\n".join(
+                    [
+                        "name: ci",
+                        "jobs:",
+                        "  test:",
+                        "    steps:",
+                        "      - uses: actions/checkout@v4",
+                        "      - uses: actions/setup-python@v5",
+                    ]
+                ),
+                encoding="utf-8",
+            )
+
+            with contextlib.redirect_stdout(io.StringIO()):
+                fail_code = cli_main(["--workflow", str(bad_workflow), "--out-dir", str(out_dir)])
+                no_fail_code = cli_main(["--workflow", str(bad_workflow), "--out-dir", str(root / "no-fail"), "--no-fail"])
+
+            self.assertEqual(fail_code, 1)
+            self.assertEqual(no_fail_code, 0)
+            self.assertTrue((out_dir / "ci_workflow_hygiene.json").is_file())
 
     def test_ci_workflow_module_reexports_artifact_writers(self) -> None:
         self.assertIs(render_ci_workflow_hygiene_html, artifact_render_ci_workflow_hygiene_html)
         self.assertIs(write_ci_workflow_hygiene_outputs, artifact_write_ci_workflow_hygiene_outputs)
+        self.assertIs(ci_workflow_hygiene.REQUIRED_ACTIONS, ci_workflow_hygiene_policy.REQUIRED_ACTIONS)
+        self.assertIs(ci_workflow_hygiene.REQUIRED_COMMAND_FRAGMENTS, ci_workflow_hygiene_policy.REQUIRED_COMMAND_FRAGMENTS)
+        self.assertIs(ci_workflow_hygiene.REQUIRED_COMMAND_ORDER, ci_workflow_hygiene_policy.REQUIRED_COMMAND_ORDER)
+
+
+def _assert_summary_gate_state(
+    testcase: unittest.TestCase,
+    summary: dict[str, object],
+    gate: str,
+    *,
+    present: bool = True,
+    order_ready: bool = True,
+    ready: bool = True,
+) -> None:
+    with testcase.subTest(gate=gate):
+        testcase.assertEqual(summary[f"{gate}_present"], present)
+        testcase.assertEqual(summary[f"{gate}_order_ready"], order_ready)
+        testcase.assertEqual(summary[f"{gate}_ready"], ready)
+
+
+def _check_ids(report: dict[str, object]) -> set[str]:
+    return {str(item["id"]) for item in report["checks"]}
+
+
+def _failed_required_order_ids(report: dict[str, object]) -> set[str]:
+    return {
+        str(item["id"])
+        for item in report["checks"]
+        if item["category"] == "required_order" and item["status"] == "fail"
+    }
 
 
 if __name__ == "__main__":

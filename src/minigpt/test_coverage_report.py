@@ -5,7 +5,7 @@ import json
 from pathlib import Path
 from typing import Any
 
-from minigpt.report_utils import (
+from minigpt.reports.utils import (
     as_dict,
     csv_cell,
     html_escape,
@@ -15,6 +15,7 @@ from minigpt.report_utils import (
     string_list,
     utc_now,
     write_json_payload,
+    write_output_bundle,
 )
 
 
@@ -173,19 +174,21 @@ def write_test_coverage_html(report: dict[str, Any], path: str | Path) -> None:
 
 
 def write_test_coverage_outputs(report: dict[str, Any], out_dir: str | Path) -> dict[str, str]:
-    root = Path(out_dir)
-    root.mkdir(parents=True, exist_ok=True)
-    paths = {
-        "json": root / "test_coverage_report.json",
-        "csv": root / "test_coverage_report.csv",
-        "markdown": root / "test_coverage_report.md",
-        "html": root / "test_coverage_report.html",
-    }
-    write_test_coverage_json(report, paths["json"])
-    write_test_coverage_csv(report, paths["csv"])
-    write_test_coverage_markdown(report, paths["markdown"])
-    write_test_coverage_html(report, paths["html"])
-    return {key: str(value) for key, value in paths.items()}
+    return write_output_bundle(
+        out_dir,
+        {
+            "json": "test_coverage_report.json",
+            "csv": "test_coverage_report.csv",
+            "markdown": "test_coverage_report.md",
+            "html": "test_coverage_report.html",
+        },
+        {
+            "json": lambda path: write_test_coverage_json(report, path),
+            "csv": lambda path: write_test_coverage_csv(report, path),
+            "markdown": lambda path: write_test_coverage_markdown(report, path),
+            "html": lambda path: write_test_coverage_html(report, path),
+        },
+    )
 
 
 def _file_rows(payload: dict[str, Any], root: Path | None) -> list[dict[str, Any]]:

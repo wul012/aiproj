@@ -2,16 +2,21 @@ from __future__ import annotations
 
 import argparse
 import json
-import sys
+from collections.abc import Sequence
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "src"))
+try:
+    from scripts._bootstrap import PROJECT_ROOT, ensure_src_path
+except ModuleNotFoundError:  # pragma: no cover - direct script execution path
+    from _bootstrap import PROJECT_ROOT, ensure_src_path
 
-from minigpt.release_bundle import build_release_bundle, write_release_bundle_outputs
+ROOT = PROJECT_ROOT
+ensure_src_path()
+
+from minigpt.governance.release import build_release_bundle, write_release_bundle_outputs
 
 
-def parse_args() -> argparse.Namespace:
+def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Build a MiniGPT release evidence bundle.")
     parser.add_argument("--registry", type=Path, default=ROOT / "runs" / "registry" / "registry.json")
     parser.add_argument("--model-card", type=Path, default=None, help="Optional model_card.json path")
@@ -23,11 +28,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--out-dir", type=Path, default=None, help="Output directory, defaults to runs/release-bundle")
     parser.add_argument("--release-name", type=str, default=None)
     parser.add_argument("--title", type=str, default="MiniGPT release bundle")
-    return parser.parse_args()
+    return parser.parse_args(argv)
 
 
-def main() -> None:
-    args = parse_args()
+def main(argv: Sequence[str] | None = None) -> int:
+    args = parse_args(argv)
     out_dir = args.out_dir or args.registry.parent.parent / "release-bundle"
     bundle = build_release_bundle(
         args.registry,
@@ -85,7 +90,8 @@ def main() -> None:
     print("outputs=" + json.dumps(outputs, ensure_ascii=False))
     if bundle["warnings"]:
         print("warnings=" + json.dumps(bundle["warnings"], ensure_ascii=False))
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

@@ -7,8 +7,11 @@ __pycache__/
 .coverage
 htmlcov/
 .idea/
+.vscode/
+ignoreit.py
 tmp/
 .tmp/
+output/
 test-output/
 playwright-report/
 runs/

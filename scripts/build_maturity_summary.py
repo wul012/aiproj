@@ -2,27 +2,32 @@ from __future__ import annotations
 
 import argparse
 import json
-import sys
+from collections.abc import Sequence
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "src"))
+try:
+    from scripts._bootstrap import PROJECT_ROOT, ensure_src_path
+except ModuleNotFoundError:  # pragma: no cover - direct script execution path
+    from _bootstrap import PROJECT_ROOT, ensure_src_path
 
-from minigpt.maturity import build_maturity_summary, write_maturity_summary_outputs
+ROOT = PROJECT_ROOT
+ensure_src_path()
+
+from minigpt.governance.maturity import build_maturity_summary, write_maturity_summary_outputs
 
 
-def parse_args() -> argparse.Namespace:
+def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Build a MiniGPT project maturity summary.")
     parser.add_argument("--project-root", type=Path, default=ROOT)
     parser.add_argument("--registry", type=Path, default=None, help="Optional registry.json path")
     parser.add_argument("--request-history-summary", type=Path, default=None, help="Optional request_history_summary.json path")
     parser.add_argument("--out-dir", type=Path, default=ROOT / "runs" / "maturity-summary")
     parser.add_argument("--title", type=str, default="MiniGPT project maturity summary")
-    return parser.parse_args()
+    return parser.parse_args(argv)
 
 
-def main() -> None:
-    args = parse_args()
+def main(argv: Sequence[str] | None = None) -> int:
+    args = parse_args(argv)
     summary = build_maturity_summary(
         args.project_root,
         registry_path=args.registry,
@@ -109,7 +114,8 @@ def main() -> None:
     print(f"request_history_status={overview.get('request_history_status')}")
     print(f"request_history_records={overview.get('request_history_records')}")
     print("outputs=" + json.dumps(outputs, ensure_ascii=False))
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

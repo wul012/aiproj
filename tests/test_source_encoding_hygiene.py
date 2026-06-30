@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import contextlib
+import io
 import json
 import subprocess
 import sys
@@ -7,10 +9,10 @@ import tempfile
 import unittest
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "src"))
+from tests._bootstrap import ROOT
 
 from minigpt.source_encoding_hygiene import build_source_encoding_report, render_source_encoding_html, write_source_encoding_outputs
+from scripts.check_source_encoding import main as cli_main
 
 
 SOURCE_ROOTS = [ROOT / "src", ROOT / "scripts", ROOT / "tests"]
@@ -107,6 +109,22 @@ class SourceEncodingHygieneTests(unittest.TestCase):
             self.assertIn("bom_count=1", result.stdout)
             self.assertIn("target_python=3.11", result.stdout)
             self.assertTrue((root / "out" / "source_encoding_hygiene.json").exists())
+
+    def test_cli_accepts_argv_and_returns_status(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            source = root / "bom.py"
+            out_dir = root / "out"
+            source.write_bytes(BOM + b"print('x')\n")
+
+            with contextlib.redirect_stdout(io.StringIO()) as stdout:
+                fail_code = cli_main([str(source), "--out-dir", str(out_dir)])
+                no_fail_code = cli_main([str(source), "--out-dir", str(root / "no-fail"), "--no-fail"])
+
+            self.assertEqual(fail_code, 1)
+            self.assertEqual(no_fail_code, 0)
+            self.assertIn("bom_count=1", stdout.getvalue())
+            self.assertTrue((out_dir / "source_encoding_hygiene.json").is_file())
 
 
 if __name__ == "__main__":

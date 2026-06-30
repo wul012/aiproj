@@ -1,0 +1,400 @@
+"""Core and compatibility lazy exports for the root facade."""
+
+from __future__ import annotations
+
+ROOT_FACADE_CORE_LAZY_EXPORTS = {
+    'GPTConfig': (
+        'model',
+        'GPTConfig',
+    ),
+    'MiniGPT': (
+        'model',
+        'MiniGPT',
+    ),
+    'CharTokenizer': (
+        'tokenizer',
+        'CharTokenizer',
+    ),
+    'BPETokenizer': (
+        'tokenizer',
+        'BPETokenizer',
+    ),
+    'load_tokenizer': (
+        'tokenizer',
+        'load_tokenizer',
+    ),
+    'TrainingRecord': (
+        'history',
+        'TrainingRecord',
+    ),
+    'TokenPrediction': (
+        'prediction',
+        'TokenPrediction',
+    ),
+    'ChatTurn': (
+        'chat',
+        'ChatTurn',
+    ),
+    'PreparedChatPrompt': (
+        'chat',
+        'PreparedChatPrompt',
+    ),
+    'build_chat_prompt': (
+        'chat',
+        'build_chat_prompt',
+    ),
+    'RunComparison': (
+        'comparison',
+        'RunComparison',
+    ),
+    'build_comparison_report': (
+        'comparison',
+        'build_comparison_report',
+    ),
+    'render_comparison_html': (
+        'comparison',
+        'render_comparison_html',
+    ),
+    'render_comparison_markdown': (
+        'comparison',
+        'render_comparison_markdown',
+    ),
+    'DashboardArtifact': (
+        'dashboard',
+        'DashboardArtifact',
+    ),
+    'PreparedDataset': (
+        'data_prep',
+        'PreparedDataset',
+    ),
+    'SourceFileSummary': (
+        'data_prep',
+        'SourceFileSummary',
+    ),
+    'build_prepared_dataset': (
+        'data_prep',
+        'build_prepared_dataset',
+    ),
+    'write_prepared_dataset': (
+        'data_prep',
+        'write_prepared_dataset',
+    ),
+    'build_dataset_version_manifest': (
+        'data_prep',
+        'build_dataset_version_manifest',
+    ),
+    'DatasetVersionSummary': (
+        'dataset_version_comparison',
+        'DatasetVersionSummary',
+    ),
+    'build_dataset_version_comparison': (
+        'dataset_version_comparison',
+        'build_dataset_version_comparison',
+    ),
+    'render_dataset_version_comparison_html': (
+        'dataset_version_comparison',
+        'render_dataset_version_comparison_html',
+    ),
+    'render_dataset_version_comparison_markdown': (
+        'dataset_version_comparison',
+        'render_dataset_version_comparison_markdown',
+    ),
+    'write_dataset_version_comparison_outputs': (
+        'dataset_version_comparison',
+        'write_dataset_version_comparison_outputs',
+    ),
+    'build_dataset_quality_report': (
+        'data_quality',
+        'build_dataset_quality_report',
+    ),
+    'write_dataset_quality_json': (
+        'data_quality',
+        'write_dataset_quality_json',
+    ),
+    'PromptCase': (
+        'eval_suite',
+        'PromptCase',
+    ),
+    'PromptSuite': (
+        'eval_suite',
+        'PromptSuite',
+    ),
+    'build_eval_suite_report': (
+        'eval_suite',
+        'build_eval_suite_report',
+    ),
+    'summarize_prompt_suite_design': (
+        'eval_suite_design',
+        'summarize_prompt_suite_design',
+    ),
+    'load_builtin_prompt_suite': (
+        'eval_suite',
+        'load_builtin_prompt_suite',
+    ),
+    'load_prompt_suite': (
+        'eval_suite',
+        'load_prompt_suite',
+    ),
+    'standard_zh_prompt_suite': (
+        'eval_suites',
+        'standard_zh_prompt_suite',
+    ),
+    'RegisteredRun': (
+        'registry',
+        'RegisteredRun',
+    ),
+    'build_run_registry': (
+        'registry',
+        'build_run_registry',
+    ),
+    'render_registry_html': (
+        'registry',
+        'render_registry_html',
+    ),
+    'write_registry_html': (
+        'registry',
+        'write_registry_html',
+    ),
+    'build_run_manifest': (
+        'manifest',
+        'build_run_manifest',
+    ),
+    'write_run_manifest_json': (
+        'manifest',
+        'write_run_manifest_json',
+    ),
+    'build_dashboard_payload': (
+        'dashboard',
+        'build_dashboard_payload',
+    ),
+    'write_dashboard': (
+        'dashboard',
+        'write_dashboard',
+    ),
+    'ParameterGroup': (
+        'model_report',
+        'ParameterGroup',
+    ),
+    'build_model_report': (
+        'model_report',
+        'build_model_report',
+    ),
+    'PlaygroundLink': (
+        'playground',
+        'PlaygroundLink',
+    ),
+    'build_playground_payload': (
+        'playground',
+        'build_playground_payload',
+    ),
+    'write_playground': (
+        'playground',
+        'write_playground',
+    ),
+    'SamplingCase': (
+        'sampling',
+        'SamplingCase',
+    ),
+    'SamplingResult': (
+        'sampling',
+        'SamplingResult',
+    ),
+    'default_sampling_cases': (
+        'sampling',
+        'default_sampling_cases',
+    ),
+    'CheckpointOption': (
+        'server',
+        'CheckpointOption',
+    ),
+    'InferenceSafetyProfile': (
+        'server',
+        'InferenceSafetyProfile',
+    ),
+    'GenerationRequest': (
+        'server',
+        'GenerationRequest',
+    ),
+    'GenerationPairRequest': (
+        'server',
+        'GenerationPairRequest',
+    ),
+    'GenerationResponse': (
+        'server',
+        'GenerationResponse',
+    ),
+    'build_checkpoint_compare_payload': (
+        'server',
+        'build_checkpoint_compare_payload',
+    ),
+    'build_checkpoints_payload': (
+        'server',
+        'build_checkpoints_payload',
+    ),
+    'build_health_payload': (
+        'server',
+        'build_health_payload',
+    ),
+    'build_model_info_payload': (
+        'server',
+        'build_model_info_payload',
+    ),
+    'discover_checkpoint_options': (
+        'server',
+        'discover_checkpoint_options',
+    ),
+    'parse_generation_request': (
+        'server',
+        'parse_generation_request',
+    ),
+    'parse_generation_pair_request': (
+        'server',
+        'parse_generation_pair_request',
+    ),
+    'build_pair_batch_case_result': (
+        'pair_batch',
+        'build_pair_batch_case_result',
+    ),
+    'build_pair_batch_report': (
+        'pair_batch',
+        'build_pair_batch_report',
+    ),
+    'build_pair_batch_trend_report': (
+        'pair_trend',
+        'build_pair_batch_trend_report',
+    ),
+    'write_pair_batch_outputs': (
+        'pair_batch',
+        'write_pair_batch_outputs',
+    ),
+    'write_pair_batch_trend_outputs': (
+        'pair_trend',
+        'write_pair_batch_trend_outputs',
+    ),
+    'render_pair_generation_html': (
+        'server',
+        'render_pair_generation_html',
+    ),
+    'write_pair_generation_artifacts': (
+        'server',
+        'write_pair_generation_artifacts',
+    ),
+    'build_maintenance_batching_report': (
+        'maintenance_policy',
+        'build_maintenance_batching_report',
+    ),
+    'build_maintenance_proposal_decision': (
+        'maintenance_policy',
+        'build_maintenance_proposal_decision',
+    ),
+    'write_maintenance_batching_outputs': (
+        'maintenance_policy',
+        'write_maintenance_batching_outputs',
+    ),
+    'build_module_pressure_report': (
+        'maintenance_policy',
+        'build_module_pressure_report',
+    ),
+    'write_module_pressure_outputs': (
+        'maintenance_policy',
+        'write_module_pressure_outputs',
+    ),
+    'build_source_encoding_report': (
+        'source_encoding_hygiene',
+        'build_source_encoding_report',
+    ),
+    'render_source_encoding_html': (
+        'source_encoding_hygiene',
+        'render_source_encoding_html',
+    ),
+    'render_source_encoding_markdown': (
+        'source_encoding_hygiene',
+        'render_source_encoding_markdown',
+    ),
+    'write_source_encoding_csv': (
+        'source_encoding_hygiene',
+        'write_source_encoding_csv',
+    ),
+    'write_source_encoding_html': (
+        'source_encoding_hygiene',
+        'write_source_encoding_html',
+    ),
+    'write_source_encoding_json': (
+        'source_encoding_hygiene',
+        'write_source_encoding_json',
+    ),
+    'write_source_encoding_markdown': (
+        'source_encoding_hygiene',
+        'write_source_encoding_markdown',
+    ),
+    'write_source_encoding_outputs': (
+        'source_encoding_hygiene',
+        'write_source_encoding_outputs',
+    ),
+    'build_ci_workflow_hygiene_report': (
+        'ci_workflow_hygiene',
+        'build_ci_workflow_hygiene_report',
+    ),
+    'render_ci_workflow_hygiene_html': (
+        'ci_workflow_hygiene',
+        'render_ci_workflow_hygiene_html',
+    ),
+    'render_ci_workflow_hygiene_markdown': (
+        'ci_workflow_hygiene',
+        'render_ci_workflow_hygiene_markdown',
+    ),
+    'write_ci_workflow_hygiene_csv': (
+        'ci_workflow_hygiene',
+        'write_ci_workflow_hygiene_csv',
+    ),
+    'write_ci_workflow_hygiene_html': (
+        'ci_workflow_hygiene',
+        'write_ci_workflow_hygiene_html',
+    ),
+    'write_ci_workflow_hygiene_json': (
+        'ci_workflow_hygiene',
+        'write_ci_workflow_hygiene_json',
+    ),
+    'write_ci_workflow_hygiene_markdown': (
+        'ci_workflow_hygiene',
+        'write_ci_workflow_hygiene_markdown',
+    ),
+    'write_ci_workflow_hygiene_outputs': (
+        'ci_workflow_hygiene',
+        'write_ci_workflow_hygiene_outputs',
+    ),
+    'build_benchmark_scorecard_decision': (
+        'benchmark_scorecard_decision',
+        'build_benchmark_scorecard_decision',
+    ),
+    'write_benchmark_scorecard_decision_outputs': (
+        'benchmark_scorecard_decision',
+        'write_benchmark_scorecard_decision_outputs',
+    ),
+    'build_benchmark_history': (
+        'benchmark_history',
+        'build_benchmark_history',
+    ),
+    'write_benchmark_history_outputs': (
+        'benchmark_history',
+        'write_benchmark_history_outputs',
+    ),
+    'build_promoted_training_scale_seed_handoff_receipt_contract_summary': (
+        'promoted_training_scale_seed_handoff_receipt_contract',
+        'build_promoted_training_scale_seed_handoff_receipt_contract_summary',
+    ),
+    'write_promoted_training_scale_seed_handoff_receipt_contract_summary_outputs': (
+        'promoted_training_scale_seed_handoff_receipt_contract',
+        'write_promoted_training_scale_seed_handoff_receipt_contract_summary_outputs',
+    ),
+    'check_promoted_training_scale_seed_handoff_receipt_contract_summary': (
+        'promoted_training_scale_seed_handoff_receipt_contract_check',
+        'check_promoted_training_scale_seed_handoff_receipt_contract_summary',
+    ),
+    'write_promoted_training_scale_seed_handoff_receipt_contract_summary_check_outputs': (
+        'promoted_training_scale_seed_handoff_receipt_contract_check',
+        'write_promoted_training_scale_seed_handoff_receipt_contract_summary_check_outputs',
+    ),
+}
+
+__all__ = ["ROOT_FACADE_CORE_LAZY_EXPORTS"]

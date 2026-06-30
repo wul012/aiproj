@@ -1,18 +1,23 @@
 from __future__ import annotations
 
 import argparse
-import sys
+from collections.abc import Sequence
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "src"))
+try:
+    from scripts._bootstrap import PROJECT_ROOT, ensure_src_path
+except ModuleNotFoundError:  # pragma: no cover - direct script execution path
+    from _bootstrap import PROJECT_ROOT, ensure_src_path
 
-from minigpt.generation_profiles import generation_profile_ids
-from minigpt.server_contracts import GenerationRequest, parse_generation_request
-from minigpt.server_generator import MiniGPTGenerator
+ROOT = PROJECT_ROOT
+ensure_src_path()
+
+from minigpt.serving.contracts import GenerationRequest, parse_generation_request
+from minigpt.serving.generator import MiniGPTGenerator
+from minigpt.serving.profiles import generation_profile_ids
 
 
-def parse_args() -> argparse.Namespace:
+def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Generate text with a trained MiniGPT checkpoint.")
     parser.add_argument("--checkpoint", type=Path, default=ROOT / "runs" / "minigpt" / "checkpoint.pt")
     parser.add_argument("--tokenizer", type=Path, default=None)
@@ -25,11 +30,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--generation-profile", choices=generation_profile_ids(), default="default")
     parser.add_argument("--blocked-token-text", action="append", default=[], help="Additional token text substring to block during decoding.")
     parser.add_argument("--out", type=Path, default=None, help="Optional file path for generated text")
-    return parser.parse_args()
+    return parser.parse_args(argv)
 
 
-def main() -> None:
-    args = parse_args()
+def main(argv: Sequence[str] | None = None) -> int:
+    args = parse_args(argv)
     tokenizer_path = args.tokenizer or args.checkpoint.parent / "tokenizer.json"
     request = parse_generation_request(
         {
@@ -49,6 +54,7 @@ def main() -> None:
         print(f"saved={args.out}")
     else:
         print(generated)
+    return 0
 
 
 def _generate(checkpoint: Path, tokenizer: Path, device: str, request: GenerationRequest) -> str:
@@ -56,4 +62,4 @@ def _generate(checkpoint: Path, tokenizer: Path, device: str, request: Generatio
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

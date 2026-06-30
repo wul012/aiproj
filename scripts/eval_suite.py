@@ -2,20 +2,31 @@ from __future__ import annotations
 
 import argparse
 import json
-import sys
+from collections.abc import Sequence
 from pathlib import Path
 
 import torch
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "src"))
+try:
+    from scripts._bootstrap import PROJECT_ROOT, ensure_src_path
+except ModuleNotFoundError:  # pragma: no cover - direct script execution path
+    from _bootstrap import PROJECT_ROOT, ensure_src_path
 
-from minigpt.eval_suite import build_eval_suite_report, build_prompt_result, load_builtin_prompt_suite, load_prompt_suite, write_eval_suite_outputs
-from minigpt.model import GPTConfig, MiniGPT
-from minigpt.tokenizer import load_tokenizer
+ROOT = PROJECT_ROOT
+ensure_src_path()
+
+from minigpt.core.model import GPTConfig, MiniGPT
+from minigpt.core.tokenizer import load_tokenizer
+from minigpt.evaluation.suite import (
+    build_eval_suite_report,
+    build_prompt_result,
+    load_builtin_prompt_suite,
+    load_prompt_suite,
+    write_eval_suite_outputs,
+)
 
 
-def parse_args() -> argparse.Namespace:
+def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Run a fixed prompt evaluation suite for a MiniGPT checkpoint.")
     parser.add_argument("--checkpoint", type=Path, default=ROOT / "runs" / "minigpt" / "checkpoint.pt")
     parser.add_argument("--tokenizer", type=Path, default=None)
@@ -23,7 +34,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--suite-name", choices=["default", "standard-zh"], default=None, help="Use a built-in prompt suite instead of --suite.")
     parser.add_argument("--out-dir", type=Path, default=None)
     parser.add_argument("--device", choices=["auto", "cpu", "cuda"], default="auto")
-    return parser.parse_args()
+    return parser.parse_args(argv)
 
 
 def choose_device(name: str) -> torch.device:
@@ -35,8 +46,8 @@ def choose_device(name: str) -> torch.device:
 
 
 @torch.no_grad()
-def main() -> None:
-    args = parse_args()
+def main(argv: Sequence[str] | None = None) -> int:
+    args = parse_args(argv)
     device = choose_device(args.device)
     tokenizer_path = args.tokenizer or args.checkpoint.parent / "tokenizer.json"
     out_dir = args.out_dir or args.checkpoint.parent / "eval_suite"
@@ -81,7 +92,8 @@ def main() -> None:
     print("task_types=" + ",".join(report["task_type_counts"]))
     print(f"out_dir={out_dir}")
     print("outputs=" + json.dumps(outputs, ensure_ascii=False))
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

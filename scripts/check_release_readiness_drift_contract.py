@@ -2,13 +2,18 @@ from __future__ import annotations
 
 import argparse
 import json
-import sys
+from collections.abc import Sequence
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "src"))
+try:
+    from scripts._bootstrap import PROJECT_ROOT, ensure_src_path
+except ModuleNotFoundError:  # pragma: no cover - direct script execution path
+    from _bootstrap import PROJECT_ROOT, ensure_src_path
 
-from minigpt.release_readiness_drift_contract import (  # noqa: E402
+ROOT = PROJECT_ROOT
+ensure_src_path()
+
+from minigpt.governance.release import (  # noqa: E402
     check_release_readiness_drift_contract,
     load_release_readiness_comparison,
     render_release_readiness_drift_contract_check,
@@ -17,7 +22,7 @@ from minigpt.release_readiness_drift_contract import (  # noqa: E402
 )
 
 
-def parse_args() -> argparse.Namespace:
+def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="Validate release readiness comparison failed-reason drift fields against their source reason lists."
     )
@@ -30,11 +35,11 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--out-dir", type=Path, default=ROOT / "runs" / "release-readiness-drift-contract-check")
     parser.add_argument("--no-fail", action="store_true", help="Write check outputs but do not exit non-zero on fail.")
-    return parser.parse_args()
+    return parser.parse_args(argv)
 
 
-def main() -> None:
-    args = parse_args()
+def main(argv: Sequence[str] | None = None) -> int:
+    args = parse_args(argv)
     comparison_path = resolve_release_readiness_comparison_path(args.comparison)
     comparison = load_release_readiness_comparison(comparison_path)
     report = check_release_readiness_drift_contract(comparison, comparison_path=comparison_path)
@@ -42,8 +47,9 @@ def main() -> None:
     print(render_release_readiness_drift_contract_check(report), end="")
     print("outputs=" + json.dumps(outputs, ensure_ascii=False))
     if report["status"] == "fail" and not args.no_fail:
-        raise SystemExit(1)
+        return 1
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

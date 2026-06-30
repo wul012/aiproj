@@ -2,25 +2,30 @@ from __future__ import annotations
 
 import argparse
 import json
-import sys
+from collections.abc import Sequence
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "src"))
+try:
+    from scripts._bootstrap import PROJECT_ROOT, ensure_src_path
+except ModuleNotFoundError:  # pragma: no cover - direct script execution path
+    from _bootstrap import PROJECT_ROOT, ensure_src_path
 
-from minigpt.dashboard import write_dashboard
+ROOT = PROJECT_ROOT
+ensure_src_path()
+
+from minigpt.reports.dashboard import write_dashboard
 
 
-def parse_args() -> argparse.Namespace:
+def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Build a static HTML dashboard for a MiniGPT run directory.")
     parser.add_argument("--run-dir", type=Path, default=ROOT / "runs" / "minigpt")
     parser.add_argument("--out", type=Path, default=None)
     parser.add_argument("--title", type=str, default="MiniGPT experiment dashboard")
-    return parser.parse_args()
+    return parser.parse_args(argv)
 
 
-def main() -> None:
-    args = parse_args()
+def main(argv: Sequence[str] | None = None) -> int:
+    args = parse_args(argv)
     out_path = args.out or args.run_dir / "dashboard.html"
     payload = write_dashboard(args.run_dir, output_path=out_path, title=args.title)
     available = [artifact for artifact in payload["artifacts"] if artifact["exists"]]
@@ -30,7 +35,8 @@ def main() -> None:
     print("summary=" + json.dumps(payload["summary"], ensure_ascii=False))
     if payload["warnings"]:
         print("warnings=" + json.dumps(payload["warnings"], ensure_ascii=False))
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

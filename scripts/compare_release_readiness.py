@@ -2,19 +2,24 @@ from __future__ import annotations
 
 import argparse
 import json
-import sys
+from collections.abc import Sequence
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "src"))
+try:
+    from scripts._bootstrap import PROJECT_ROOT, ensure_src_path
+except ModuleNotFoundError:  # pragma: no cover - direct script execution path
+    from _bootstrap import PROJECT_ROOT, ensure_src_path
 
-from minigpt.release_readiness_comparison import (
+ROOT = PROJECT_ROOT
+ensure_src_path()
+
+from minigpt.governance.release import (
     build_release_readiness_comparison,
     write_release_readiness_comparison_outputs,
 )
 
 
-def parse_args() -> argparse.Namespace:
+def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Compare MiniGPT release readiness dashboards.")
     parser.add_argument(
         "--readiness",
@@ -26,11 +31,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--baseline", type=Path, default=None, help="Optional baseline release_readiness.json path")
     parser.add_argument("--out-dir", type=Path, default=ROOT / "runs" / "release-readiness-comparison")
     parser.add_argument("--title", type=str, default="MiniGPT release readiness comparison")
-    return parser.parse_args()
+    return parser.parse_args(argv)
 
 
-def main() -> None:
-    args = parse_args()
+def main(argv: Sequence[str] | None = None) -> int:
+    args = parse_args(argv)
     readiness_paths = args.readiness or [ROOT / "runs" / "release-readiness" / "release_readiness.json"]
     report = build_release_readiness_comparison(
         readiness_paths,
@@ -132,7 +137,8 @@ def main() -> None:
                 + f"{row.get('benchmark_history_design_comparison_changed_entries')}"
             )
     print("outputs=" + json.dumps(outputs, ensure_ascii=False))
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

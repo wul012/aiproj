@@ -1,0 +1,339 @@
+from __future__ import annotations
+
+from pathlib import Path
+from typing import Any
+
+from minigpt.project_audit_contexts import (
+    build_benchmark_history_check,
+    build_benchmark_history_context,
+    build_ci_workflow_hygiene_check,
+    build_request_history_summary_check,
+    build_test_coverage_check,
+)
+from minigpt.report_utils import as_dict as _dict
+
+
+CHECK_WEIGHTS = {
+    "pass": 1.0,
+    "warn": 0.5,
+    "fail": 0.0,
+}
+
+
+def build_project_audit_run_rows(registry: dict[str, Any], model_card: dict[str, Any] | None) -> list[dict[str, Any]]:
+    model_runs = {}
+    if isinstance(model_card, dict):
+        for run in model_card.get("runs", []):
+            if isinstance(run, dict) and run.get("path"):
+                model_runs[str(run["path"])] = run
+    rows = []
+    for run in registry.get("runs", []):
+        if not isinstance(run, dict):
+            continue
+        model_run = model_runs.get(str(run.get("path")), {})
+        status = model_run.get("status") or _derive_status(run)
+        row = {
+            "name": run.get("name"),
+            "path": run.get("path"),
+            "status": status,
+            "best_val_loss_rank": run.get("best_val_loss_rank"),
+            "best_val_loss": run.get("best_val_loss"),
+            "best_val_loss_delta": run.get("best_val_loss_delta"),
+            "dataset_quality": run.get("dataset_quality"),
+            "eval_suite_cases": run.get("eval_suite_cases"),
+            "generation_quality_status": run.get("generation_quality_status"),
+            "generation_quality_cases": run.get("generation_quality_cases"),
+            "generation_quality_pass_count": run.get("generation_quality_pass_count"),
+            "generation_quality_warn_count": run.get("generation_quality_warn_count"),
+            "generation_quality_fail_count": run.get("generation_quality_fail_count"),
+            "artifact_count": run.get("artifact_count"),
+            "checkpoint_exists": bool(run.get("checkpoint_exists")),
+            "dashboard_exists": bool(run.get("dashboard_exists")),
+            "experiment_card_exists": bool(model_run.get("experiment_card_exists")),
+            "tags": model_run.get("tags") or run.get("tags") or [],
+            "note": model_run.get("note") or run.get("note"),
+        }
+        rows.append(row)
+    rows.sort(key=lambda item: (_rank_sort(item.get("best_val_loss_rank")), str(item.get("name") or "")))
+    return rows
+
+
+def build_project_audit_checks(
+    registry: dict[str, Any],
+    model_card: dict[str, Any] | None,
+    request_history_summary: dict[str, Any] | None,
+    request_history_summary_path: Path | None,
+    benchmark_history: dict[str, Any] | None,
+    benchmark_history_path: Path | None,
+    ci_workflow_hygiene: dict[str, Any] | None,
+    ci_workflow_hygiene_path: Path | None,
+    test_coverage_report: dict[str, Any] | None,
+    test_coverage_report_path: Path | None,
+    runs: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    total = len(runs)
+    checks = [
+        _check("registry_runs", "Registry has runs", "pass" if total > 0 else "fail", f"{total} registered run(s)."),
+        _check(
+            "best_run",
+            "Best run is identified",
+            "pass" if isinstance(registry.get("best_by_best_val_loss"), dict) else "fail",
+            f"best={_pick(_dict(registry.get('best_by_best_val_loss')), 'name') or 'missing'}",
+        ),
+        _coverage_check("Comparable loss coverage", "comparable_loss", sum(1 for run in runs if run.get("best_val_loss") is not None), total),
+        _coverage_check("Experiment card coverage", "experiment_cards", sum(1 for run in runs if run.get("experiment_card_exists")), total),
+        _coverage_check("Dataset quality coverage", "dataset_quality", sum(1 for run in runs if run.get("dataset_quality") not in {None, "missing"}), total),
+        _coverage_check("Eval suite coverage", "eval_suite", sum(1 for run in runs if run.get("eval_suite_cases") not in {None, 0}), total),
+        _coverage_check("Generation quality coverage", "generation_quality", sum(1 for run in runs if run.get("generation_quality_status") not in {None, "missing"}), total),
+        _coverage_check("Checkpoint coverage", "checkpoints", sum(1 for run in runs if run.get("checkpoint_exists")), total),
+        _coverage_check("Dashboard coverage", "dashboards", sum(1 for run in runs if run.get("dashboard_exists")), total),
+        _check(
+            "model_card",
+            "Model card is available",
+            "pass" if isinstance(model_card, dict) else "warn",
+            "model_card.json loaded" if isinstance(model_card, dict) else "model_card.json missing or unreadable",
+        ),
+        _check(
+            "ready_run",
+            "At least one ready run",
+            "pass" if any(run.get("status") == "ready" for run in runs) else "warn",
+            f"{sum(1 for run in runs if run.get('status') == 'ready')} ready run(s).",
+        ),
+        build_request_history_summary_check(request_history_summary, request_history_summary_path),
+        build_benchmark_history_check(benchmark_history, benchmark_history_path),
+        build_ci_workflow_hygiene_check(ci_workflow_hygiene, ci_workflow_hygiene_path),
+        build_test_coverage_check(test_coverage_report, test_coverage_report_path),
+    ]
+    non_pass_quality = [run.get("name") for run in runs if run.get("dataset_quality") not in {"pass", None, "missing"}]
+    checks.append(
+        _check(
+            "non_pass_quality",
+            "No non-pass dataset quality runs",
+            "pass" if not non_pass_quality else "warn",
+            "all checked runs pass" if not non_pass_quality else "review: " + ", ".join(str(name) for name in non_pass_quality),
+        )
+    )
+    non_pass_generation = [
+        run.get("name")
+        for run in runs
+        if run.get("generation_quality_status") not in {"pass", None, "missing"}
+    ]
+    checks.append(
+        _check(
+            "non_pass_generation_quality",
+            "No non-pass generation quality runs",
+            "pass" if not non_pass_generation else "warn",
+            "all analyzed runs pass" if not non_pass_generation else "review: " + ", ".join(str(name) for name in non_pass_generation),
+        )
+    )
+    return checks
+
+
+def summarize_project_audit_checks(
+    checks: list[dict[str, Any]],
+    registry: dict[str, Any],
+    model_card: dict[str, Any] | None,
+    request_history_summary: dict[str, Any] | None,
+    benchmark_history: dict[str, Any] | None,
+    ci_workflow_hygiene: dict[str, Any] | None,
+    test_coverage_report: dict[str, Any] | None,
+    runs: list[dict[str, Any]],
+) -> dict[str, Any]:
+    pass_count = sum(1 for check in checks if check["status"] == "pass")
+    warn_count = sum(1 for check in checks if check["status"] == "warn")
+    fail_count = sum(1 for check in checks if check["status"] == "fail")
+    score = round(100 * sum(CHECK_WEIGHTS[check["status"]] for check in checks) / max(1, len(checks)), 1)
+    if fail_count:
+        overall = "fail"
+    elif warn_count:
+        overall = "warn"
+    else:
+        overall = "pass"
+    model_summary = _dict(model_card.get("summary")) if isinstance(model_card, dict) else {}
+    request_summary = _dict(request_history_summary.get("summary")) if isinstance(request_history_summary, dict) else {}
+    ci_summary = _dict(ci_workflow_hygiene.get("summary")) if isinstance(ci_workflow_hygiene, dict) else {}
+    coverage_summary = _dict(test_coverage_report.get("summary")) if isinstance(test_coverage_report, dict) else {}
+    best = _dict(registry.get("best_by_best_val_loss"))
+    history_context = build_benchmark_history_context(benchmark_history)
+    return {
+        "overall_status": overall,
+        "score_percent": score,
+        "check_count": len(checks),
+        "pass_count": pass_count,
+        "warn_count": warn_count,
+        "fail_count": fail_count,
+        "run_count": len(runs),
+        "best_run_name": best.get("name"),
+        "best_val_loss": best.get("best_val_loss"),
+        "ready_runs": model_summary.get("ready_runs") if model_summary else sum(1 for run in runs if run.get("status") == "ready"),
+        "review_runs": model_summary.get("review_runs") if model_summary else sum(1 for run in runs if run.get("status") == "review"),
+        "request_history_status": request_summary.get("status"),
+        "request_history_records": request_summary.get("total_log_records"),
+        "request_history_timeout_rate": request_summary.get("timeout_rate"),
+        "request_history_error_rate": request_summary.get("error_rate"),
+        "benchmark_history_status": _benchmark_history_status(history_context),
+        "benchmark_history_entries": history_context.get("entry_count"),
+        "benchmark_history_ready": history_context.get("ready_count"),
+        "benchmark_history_review": history_context.get("review_count"),
+        "benchmark_history_blocked": history_context.get("blocked_count"),
+        "benchmark_history_case_regressions": history_context.get("case_regression_entry_count"),
+        "benchmark_history_generation_flag_regressions": history_context.get("generation_quality_flag_regression_entry_count"),
+        "benchmark_history_suite_design_non_comparison_ready_entries": history_context.get("suite_design_non_comparison_ready_entry_count"),
+        "benchmark_history_design_comparison_changed_entries": history_context.get("design_comparison_changed_entry_count"),
+        "benchmark_history_readiness_requirement_status": history_context.get("readiness_requirement_status"),
+        "benchmark_history_readiness_requirement_exit_code": history_context.get("readiness_requirement_exit_code"),
+        "benchmark_history_readiness_requirement_failed_reasons": history_context.get("readiness_requirement_failed_reasons"),
+        "benchmark_history_model_quality_claim": history_context.get("model_quality_claim"),
+        "benchmark_history_latest_boundary": history_context.get("latest_boundary"),
+        "ci_workflow_status": ci_summary.get("status"),
+        "ci_workflow_decision": ci_summary.get("decision"),
+        "ci_workflow_failed_checks": ci_summary.get("failed_check_count"),
+        "ci_workflow_node24_actions": ci_summary.get("node24_native_action_count"),
+        "ci_tiny_scorecard_plan_digest_gate_ready": ci_summary.get("tiny_scorecard_plan_digest_gate_ready"),
+        "ci_baseline_candidate_threshold_boundary_gate_check_ready": ci_summary.get(
+            "baseline_candidate_threshold_boundary_gate_check_ready"
+        ),
+        "ci_baseline_candidate_threshold_boundary_gate_plan_check_ready": ci_summary.get(
+            "baseline_candidate_threshold_boundary_gate_plan_check_ready"
+        ),
+        "ci_archived_path_portability_check_ready": ci_summary.get("archived_path_portability_check_ready"),
+        "ci_promoted_seed_receipt_contract_failure_smoke_plan_check_ready": ci_summary.get(
+            "promoted_seed_receipt_contract_failure_smoke_plan_check_ready"
+        ),
+        "ci_release_readiness_drift_contract_smoke_ready": ci_summary.get("release_readiness_drift_contract_smoke_ready"),
+        "test_coverage_status": coverage_summary.get("status"),
+        "test_coverage_decision": coverage_summary.get("decision"),
+        "test_coverage_percent": coverage_summary.get("line_coverage_percent"),
+        "test_coverage_fail_under": coverage_summary.get("fail_under"),
+        "test_coverage_gap": coverage_summary.get("coverage_gap"),
+    }
+
+
+def build_project_audit_recommendations(checks: list[dict[str, Any]], summary: dict[str, Any]) -> list[str]:
+    items = []
+    for check in checks:
+        if check["status"] == "pass":
+            continue
+        if check["id"] == "experiment_cards":
+            items.append("Generate experiment cards for every registered run before presenting the project.")
+        elif check["id"] == "dataset_quality":
+            items.append("Run dataset quality checks for all registered runs.")
+        elif check["id"] == "eval_suite":
+            items.append("Run the fixed prompt eval suite for all registered checkpoints.")
+        elif check["id"] == "generation_quality":
+            items.append("Run generation quality analysis for all registered eval suite or sampling outputs.")
+        elif check["id"] == "model_card":
+            items.append("Build model_card.json so the audit can include project-level context.")
+        elif check["id"] == "non_pass_quality":
+            items.append("Review runs with non-pass dataset quality before using them as baselines.")
+        elif check["id"] == "non_pass_generation_quality":
+            items.append("Review runs with non-pass generation quality before release-style handoff.")
+        elif check["id"] == "ready_run":
+            items.append("Promote at least one run to ready status by completing checkpoint, data quality, and eval artifacts.")
+        elif check["id"] == "request_history_summary":
+            items.append("Generate or review request_history_summary.json before using local playground activity as release evidence.")
+        elif check["id"] == "benchmark_history":
+            items.append("Generate or review benchmark_history.json before using repeated benchmark evidence as audit proof.")
+        elif check["id"] == "ci_workflow_hygiene":
+            items.append("Generate or review ci_workflow_hygiene.json before using CI workflow policy as release evidence.")
+        elif check["id"] == "test_coverage_report":
+            items.append("Generate or review test_coverage_report.json before using coverage gate status as audit evidence.")
+        elif check["id"] == "dashboards":
+            items.append("Build dashboards for missing runs to improve reviewability.")
+        elif check["id"] == "checkpoints":
+            items.append("Restore or create missing checkpoints for registered runs.")
+    if not items:
+        items.append("All audit checks passed; keep the audit with the model card as release evidence.")
+    elif summary.get("overall_status") == "fail":
+        items.insert(0, "Fix failed audit checks before treating this MiniGPT state as release-ready.")
+    return items
+
+
+def _coverage_check(title: str, check_id: str, count: int, total: int) -> dict[str, Any]:
+    if total == 0:
+        status = "fail"
+    elif count == total:
+        status = "pass"
+    elif count > 0:
+        status = "warn"
+    else:
+        status = "fail"
+    return _check(check_id, title, status, f"{count}/{total} run(s).", {"count": count, "total": total, "ratio": _ratio(count, total)})
+
+
+def _check(check_id: str, title: str, status: str, detail: str, evidence: dict[str, Any] | None = None) -> dict[str, Any]:
+    return {
+        "id": check_id,
+        "title": title,
+        "status": status,
+        "detail": detail,
+        "evidence": evidence or {},
+    }
+
+
+def _benchmark_history_status(context: dict[str, Any]) -> str:
+    if not context.get("available"):
+        return "warn"
+    regression_keys = (
+        "review_count",
+        "blocked_count",
+        "case_regression_entry_count",
+        "generation_quality_flag_regression_entry_count",
+        "suite_design_non_comparison_ready_entry_count",
+    )
+    if any(_int(context.get(key)) > 0 for key in regression_keys):
+        return "warn"
+    if context.get("readiness_requirement_status") == "fail" or _int(context.get("readiness_requirement_exit_code")) > 0:
+        return "warn"
+    if _int(context.get("entry_count")) == 0 or _int(context.get("ready_count")) == 0:
+        return "warn"
+    if context.get("model_quality_claim") == "not_claimed":
+        return "warn"
+    return "pass"
+
+
+def _derive_status(run: dict[str, Any]) -> str:
+    if not run.get("checkpoint_exists") or run.get("best_val_loss") is None:
+        return "incomplete"
+    if run.get("dataset_quality") in {None, "missing"}:
+        return "needs-data-quality"
+    if run.get("dataset_quality") != "pass":
+        return "review"
+    if run.get("eval_suite_cases") in {None, 0}:
+        return "needs-eval"
+    if run.get("generation_quality_status") in {None, "missing"}:
+        return "needs-generation-quality"
+    if run.get("generation_quality_status") != "pass":
+        return "review"
+    return "ready"
+
+
+def _ratio(count: int, total: int) -> float:
+    if total == 0:
+        return 0.0
+    return round(count / total, 4)
+
+
+def _rank_sort(value: Any) -> int:
+    if value is None or value == "":
+        return 1_000_000
+    return int(value)
+
+
+def _pick(payload: dict[str, Any], key: str) -> Any:
+    return payload.get(key) if isinstance(payload, dict) else None
+
+
+def _int(value: Any) -> int:
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        return 0
+
+
+__all__ = [
+    "build_project_audit_checks",
+    "build_project_audit_recommendations",
+    "build_project_audit_run_rows",
+    "summarize_project_audit_checks",
+]

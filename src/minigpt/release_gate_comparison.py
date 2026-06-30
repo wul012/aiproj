@@ -6,9 +6,11 @@ from typing import Any
 from minigpt.report_utils import (
     as_dict as _dict,
     list_of_dicts as _list_of_dicts,
+    utc_now,
 )
+from minigpt.release_gate_policy import release_gate_policy_profiles
 
-from .release_gate import build_release_gate, release_gate_policy_profiles, utc_now
+from .release_gate import build_release_gate
 from .release_gate_comparison_artifacts import (
     render_release_gate_profile_comparison_html,
     render_release_gate_profile_comparison_markdown,

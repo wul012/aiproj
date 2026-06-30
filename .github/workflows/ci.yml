@@ -23,6 +23,9 @@ jobs:
       - name: Source encoding and syntax check
         run: python -B scripts/check_source_encoding.py --out-dir runs/source-encoding-hygiene-ci
 
+      - name: Project docs readability check
+        run: python -B scripts/check_project_docs_readability.py --out-dir runs/project-docs-readability-ci --require-pass --force
+
       - name: CI workflow hygiene check
         run: python -B scripts/check_ci_workflow_hygiene.py --out-dir runs/ci-workflow-hygiene-ci
 
@@ -52,6 +55,9 @@ jobs:
 
       - name: Release readiness drift contract smoke
         run: python -B scripts/check_release_readiness_drift_contract_smoke.py --out-dir runs/release-readiness-drift-contract-smoke-ci
+
+      - name: Normalization guard
+        run: python -B scripts/check_normalization_guard.py
 
       - name: Unit tests
         run: python -B scripts/run_test_coverage.py --out-dir runs/test-coverage-ci --fail-under 80

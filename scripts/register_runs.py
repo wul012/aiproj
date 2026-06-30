@@ -2,27 +2,32 @@ from __future__ import annotations
 
 import argparse
 import json
-import sys
+from collections.abc import Sequence
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "src"))
+try:
+    from scripts._bootstrap import PROJECT_ROOT, ensure_src_path
+except ModuleNotFoundError:  # pragma: no cover - direct script execution path
+    from _bootstrap import PROJECT_ROOT, ensure_src_path
 
-from minigpt.registry import build_run_registry, discover_run_dirs, write_registry_outputs
+ROOT = PROJECT_ROOT
+ensure_src_path()
+
+from minigpt.governance.registry import build_run_registry, discover_run_dirs, write_registry_outputs
 
 
-def parse_args() -> argparse.Namespace:
+def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Build a registry index from MiniGPT run directories.")
     parser.add_argument("run_dirs", type=Path, nargs="*", help="Run directories to register")
     parser.add_argument("--discover", type=Path, default=None, help="Discover run directories under this parent")
     parser.add_argument("--no-recursive", action="store_true", help="Only discover direct child run directories")
     parser.add_argument("--name", action="append", default=[], help="Optional display name, repeat once per run")
     parser.add_argument("--out-dir", type=Path, default=ROOT / "runs" / "registry")
-    return parser.parse_args()
+    return parser.parse_args(argv)
 
 
-def main() -> None:
-    args = parse_args()
+def main(argv: Sequence[str] | None = None) -> int:
+    args = parse_args(argv)
     run_dirs = list(args.run_dirs)
     if args.discover is not None:
         run_dirs.extend(discover_run_dirs(args.discover, recursive=not args.no_recursive))
@@ -182,7 +187,8 @@ def main() -> None:
     )
     print("tag_counts=" + json.dumps(registry.get("tag_counts", {}), ensure_ascii=False))
     print("outputs=" + json.dumps(outputs, ensure_ascii=False))
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

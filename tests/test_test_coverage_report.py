@@ -1,13 +1,15 @@
 from __future__ import annotations
 
+import contextlib
+import io
 import json
+import subprocess
 import sys
 import tempfile
 import unittest
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "src"))
+from tests._bootstrap import ROOT
 
 from minigpt.test_coverage_report import (  # noqa: E402
     build_test_coverage_report,
@@ -15,6 +17,7 @@ from minigpt.test_coverage_report import (  # noqa: E402
     render_test_coverage_markdown,
     write_test_coverage_outputs,
 )
+from scripts.run_test_coverage import main as cli_main
 
 
 class TestCoverageReportTests(unittest.TestCase):
@@ -92,6 +95,58 @@ class TestCoverageReportTests(unittest.TestCase):
             self.assertIn("Coverage gap", markdown)
             self.assertIn("Coverage &lt;report&gt;", html)
             self.assertNotIn("Coverage <report>", html)
+
+    def test_cli_accepts_argv_runner_and_returns_status(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            out_dir = root / "coverage-out"
+            calls: list[list[str]] = []
+
+            def fake_runner(command: list[str], **_: object) -> subprocess.CompletedProcess[list[str]]:
+                calls.append(command)
+                if command[:4] == [sys.executable, "-B", "-m", "coverage"] and "json" in command:
+                    coverage_json = Path(command[command.index("-o") + 1])
+                    coverage_json.write_text(json.dumps(_coverage_payload(root), ensure_ascii=False), encoding="utf-8")
+                return subprocess.CompletedProcess(command, 0)
+
+            with contextlib.redirect_stdout(io.StringIO()) as stdout:
+                exit_code = cli_main(
+                    [
+                        "--out-dir",
+                        str(out_dir),
+                        "--source",
+                        "src/minigpt",
+                        "--tests",
+                        str(ROOT / "tests"),
+                        "--fail-under",
+                        "75",
+                    ],
+                    runner=fake_runner,
+                )
+
+            self.assertEqual(exit_code, 0)
+            self.assertEqual(len(calls), 2)
+            self.assertIn("coverage", calls[0])
+            self.assertIn("run", calls[0])
+            self.assertIn("json", calls[1])
+            self.assertTrue((out_dir / "test_coverage_report.json").is_file())
+            self.assertIn("threshold_enabled=True", stdout.getvalue())
+
+    def test_cli_returns_two_when_coverage_is_below_threshold(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            out_dir = root / "coverage-out"
+
+            def fake_runner(command: list[str], **_: object) -> subprocess.CompletedProcess[list[str]]:
+                if "json" in command:
+                    coverage_json = Path(command[command.index("-o") + 1])
+                    coverage_json.write_text(json.dumps(_coverage_payload(root), ensure_ascii=False), encoding="utf-8")
+                return subprocess.CompletedProcess(command, 0)
+
+            with contextlib.redirect_stdout(io.StringIO()):
+                exit_code = cli_main(["--out-dir", str(out_dir), "--fail-under", "90"], runner=fake_runner)
+
+            self.assertEqual(exit_code, 2)
 
 
 def _coverage_payload(root: Path) -> dict:

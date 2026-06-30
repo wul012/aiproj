@@ -5,7 +5,7 @@ from datetime import datetime, timezone
 import html
 import json
 from pathlib import Path
-from typing import Any, Iterable
+from typing import Any, Callable, Iterable
 
 
 CI_ARCHIVED_PATH_PORTABILITY_CHECK_READY_REGRESSION_REASON = "archived_path_portability_check_not_ready"
@@ -27,6 +27,33 @@ def write_json_payload(payload: Any, path: str | Path) -> None:
     out_path = Path(path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+
+
+def write_output_bundle(
+    out_dir: str | Path,
+    filenames: dict[str, str],
+    writers: dict[str, Callable[[Path], None]],
+) -> dict[str, str]:
+    filename_keys = set(filenames)
+    writer_keys = set(writers)
+    if filename_keys != writer_keys:
+        missing_writers = sorted(filename_keys - writer_keys)
+        missing_filenames = sorted(writer_keys - filename_keys)
+        details = []
+        if missing_writers:
+            details.append("missing writers: " + ", ".join(missing_writers))
+        if missing_filenames:
+            details.append("missing filenames: " + ", ".join(missing_filenames))
+        raise ValueError("output bundle keys must match" + (f" ({'; '.join(details)})" if details else ""))
+
+    root = Path(out_dir)
+    root.mkdir(parents=True, exist_ok=True)
+    paths = {key: root / filename for key, filename in filenames.items()}
+    for path in paths.values():
+        path.parent.mkdir(parents=True, exist_ok=True)
+    for key, writer in writers.items():
+        writer(paths[key])
+    return {key: str(value) for key, value in paths.items()}
 
 
 def locate_upstream_report(path: str | Path, default_name: str) -> Path:

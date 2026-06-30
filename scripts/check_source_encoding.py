@@ -2,27 +2,31 @@ from __future__ import annotations
 
 import argparse
 import json
-import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "src"))
+try:
+    from scripts._bootstrap import PROJECT_ROOT, ensure_src_path
+except ModuleNotFoundError:  # pragma: no cover - direct script execution path
+    from _bootstrap import PROJECT_ROOT, ensure_src_path
+
+ROOT = PROJECT_ROOT
+ensure_src_path()
 
 from minigpt.source_encoding_hygiene import build_source_encoding_report, write_source_encoding_outputs
 
 
-def parse_args() -> argparse.Namespace:
+def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Check MiniGPT Python source encoding hygiene.")
     parser.add_argument("paths", nargs="*", type=Path, default=[ROOT / "src", ROOT / "scripts", ROOT / "tests"])
     parser.add_argument("--out-dir", type=Path, default=ROOT / "runs" / "source-encoding-hygiene")
     parser.add_argument("--title", type=str, default="MiniGPT source encoding hygiene")
     parser.add_argument("--target-python", type=str, default="3.11", help="Python parser target used by CI compatibility checks.")
     parser.add_argument("--no-fail", action="store_true", help="Write the report without returning a non-zero status.")
-    return parser.parse_args()
+    return parser.parse_args(argv)
 
 
-def main() -> None:
-    args = parse_args()
+def main(argv: list[str] | None = None) -> int:
+    args = parse_args(argv)
     source_paths = _collect_python_paths(args.paths)
     report = build_source_encoding_report(source_paths, project_root=ROOT, title=args.title, target_python=args.target_python)
     outputs = write_source_encoding_outputs(report, args.out_dir)
@@ -37,7 +41,8 @@ def main() -> None:
     print(f"target_python={report['policy']['target_python']}")
     print("outputs=" + json.dumps(outputs, ensure_ascii=False))
     if summary["status"] != "pass" and not args.no_fail:
-        raise SystemExit(1)
+        return 1
+    return 0
 
 
 def _collect_python_paths(paths: list[Path]) -> list[Path]:
@@ -55,4 +60,4 @@ def _collect_python_paths(paths: list[Path]) -> list[Path]:
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

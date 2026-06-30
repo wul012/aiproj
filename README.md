@@ -5,6 +5,13 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 ## Documentation Map
 
 - [Project overview](docs/overview.md)
+- [Architecture map](docs/architecture-map.md)
+- [Module inventory](docs/module-inventory.md)
+- [Public API policy](docs/public-api.md)
+- [Normalization roadmap](docs/normalization-roadmap.md)
+- [Engineering workflow](docs/engineering-workflow.md)
+- [Normalization guard](docs/normalization-guard.md)
+- [Script entrypoints](docs/script-entrypoints.md)
 - [Model training and evaluation](docs/model-training.md)
 - [Model capability cadence](docs/model-capability-cadence.md)
 - [Publication receipts](docs/publication-receipts.md)

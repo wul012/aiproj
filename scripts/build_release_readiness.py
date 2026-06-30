@@ -2,16 +2,21 @@ from __future__ import annotations
 
 import argparse
 import json
-import sys
+from collections.abc import Sequence
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "src"))
+try:
+    from scripts._bootstrap import PROJECT_ROOT, ensure_src_path
+except ModuleNotFoundError:  # pragma: no cover - direct script execution path
+    from _bootstrap import PROJECT_ROOT, ensure_src_path
 
-from minigpt.release_readiness import build_release_readiness_dashboard, write_release_readiness_outputs
+ROOT = PROJECT_ROOT
+ensure_src_path()
+
+from minigpt.governance.release import build_release_readiness_dashboard, write_release_readiness_outputs
 
 
-def parse_args() -> argparse.Namespace:
+def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Build a MiniGPT release readiness dashboard.")
     parser.add_argument("--bundle", type=Path, default=ROOT / "runs" / "release-bundle" / "release_bundle.json")
     parser.add_argument("--gate", type=Path, default=None, help="Optional gate_report.json path")
@@ -22,11 +27,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--test-coverage-report", type=Path, default=None, help="Optional test_coverage_report.json path")
     parser.add_argument("--out-dir", type=Path, default=ROOT / "runs" / "release-readiness")
     parser.add_argument("--title", type=str, default="MiniGPT release readiness dashboard")
-    return parser.parse_args()
+    return parser.parse_args(argv)
 
 
-def main() -> None:
-    args = parse_args()
+def main(argv: Sequence[str] | None = None) -> int:
+    args = parse_args(argv)
     report = build_release_readiness_dashboard(
         args.bundle,
         gate_path=args.gate,
@@ -83,7 +88,8 @@ def main() -> None:
     print("outputs=" + json.dumps(outputs, ensure_ascii=False))
     if report["warnings"]:
         print("warnings=" + json.dumps(report["warnings"], ensure_ascii=False))
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

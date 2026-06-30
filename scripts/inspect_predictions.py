@@ -2,20 +2,25 @@ from __future__ import annotations
 
 import argparse
 import json
-import sys
+from collections.abc import Sequence
 from pathlib import Path
 
 import torch
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "src"))
+try:
+    from scripts._bootstrap import PROJECT_ROOT, ensure_src_path
+except ModuleNotFoundError:  # pragma: no cover - direct script execution path
+    from _bootstrap import PROJECT_ROOT, ensure_src_path
 
-from minigpt.model import GPTConfig, MiniGPT
-from minigpt.prediction import top_k_predictions, write_predictions_svg
-from minigpt.tokenizer import load_tokenizer
+ROOT = PROJECT_ROOT
+ensure_src_path()
+
+from minigpt.core.model import GPTConfig, MiniGPT
+from minigpt.core.tokenizer import load_tokenizer
+from minigpt.evaluation.prediction import top_k_predictions, write_predictions_svg
 
 
-def parse_args() -> argparse.Namespace:
+def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Inspect next-token predictions for a MiniGPT checkpoint.")
     parser.add_argument("--checkpoint", type=Path, default=ROOT / "runs" / "minigpt" / "checkpoint.pt")
     parser.add_argument("--tokenizer", type=Path, default=None)
@@ -24,7 +29,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--temperature", type=float, default=1.0)
     parser.add_argument("--out-dir", type=Path, default=None)
     parser.add_argument("--device", choices=["auto", "cpu", "cuda"], default="auto")
-    return parser.parse_args()
+    return parser.parse_args(argv)
 
 
 def choose_device(name: str) -> torch.device:
@@ -35,8 +40,8 @@ def choose_device(name: str) -> torch.device:
     return torch.device(name)
 
 
-def main() -> None:
-    args = parse_args()
+def main(argv: Sequence[str] | None = None) -> int:
+    args = parse_args(argv)
     device = choose_device(args.device)
     tokenizer_path = args.tokenizer or args.checkpoint.parent / "tokenizer.json"
     out_dir = args.out_dir or args.checkpoint.parent / "predictions"
@@ -84,7 +89,8 @@ def main() -> None:
     print(f"saved_json={json_path}")
     print(f"saved_svg={svg_path}")
     print("predictions=" + json.dumps(payload["predictions"], ensure_ascii=False))
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

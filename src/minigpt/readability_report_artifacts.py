@@ -10,6 +10,7 @@ from minigpt.report_utils import (
     html_escape,
     markdown_cell,
     string_list,
+    write_output_bundle,
     write_json_payload,
 )
 
@@ -114,21 +115,29 @@ def write_readability_outputs(
     row_title: str = "Rows",
     row_key: str = "rows",
 ) -> dict[str, str]:
-    root = Path(out_dir)
-    root.mkdir(parents=True, exist_ok=True)
-    paths = {
-        "json": root / f"{stem}.json",
-        "csv": root / f"{stem}.csv",
-        "text": root / f"{stem}.txt",
-        "markdown": root / f"{stem}.md",
-        "html": root / f"{stem}.html",
-    }
-    write_json_payload(report, paths["json"])
-    write_readability_csv(report, paths["csv"], row_key=row_key)
-    paths["text"].write_text(render_readability_text(report), encoding="utf-8")
-    paths["markdown"].write_text(render_readability_markdown(report, row_title=row_title, row_key=row_key), encoding="utf-8")
-    paths["html"].write_text(render_readability_html(report, row_title=row_title, row_key=row_key), encoding="utf-8")
-    return {key: str(value) for key, value in paths.items()}
+    return write_output_bundle(
+        out_dir,
+        {
+            "json": f"{stem}.json",
+            "csv": f"{stem}.csv",
+            "text": f"{stem}.txt",
+            "markdown": f"{stem}.md",
+            "html": f"{stem}.html",
+        },
+        {
+            "json": lambda path: write_json_payload(report, path),
+            "csv": lambda path: write_readability_csv(report, path, row_key=row_key),
+            "text": lambda path: path.write_text(render_readability_text(report), encoding="utf-8"),
+            "markdown": lambda path: path.write_text(
+                render_readability_markdown(report, row_title=row_title, row_key=row_key),
+                encoding="utf-8",
+            ),
+            "html": lambda path: path.write_text(
+                render_readability_html(report, row_title=row_title, row_key=row_key),
+                encoding="utf-8",
+            ),
+        },
+    )
 
 
 def write_readability_csv(report: dict[str, Any], path: str | Path, *, row_key: str = "rows") -> None:

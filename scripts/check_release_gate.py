@@ -2,13 +2,18 @@ from __future__ import annotations
 
 import argparse
 import json
-import sys
+from collections.abc import Sequence
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "src"))
+try:
+    from scripts._bootstrap import PROJECT_ROOT, ensure_src_path
+except ModuleNotFoundError:  # pragma: no cover - direct script execution path
+    from _bootstrap import PROJECT_ROOT, ensure_src_path
 
-from minigpt.release_gate import (
+ROOT = PROJECT_ROOT
+ensure_src_path()
+
+from minigpt.governance.release import (
     DEFAULT_RELEASE_GATE_POLICY_PROFILE,
     build_release_gate,
     exit_code_for_gate,
@@ -17,7 +22,7 @@ from minigpt.release_gate import (
 )
 
 
-def parse_args() -> argparse.Namespace:
+def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Check a MiniGPT release bundle against release gate policy.")
     parser.add_argument("--bundle", type=Path, default=ROOT / "runs" / "release-bundle" / "release_bundle.json")
     parser.add_argument("--out-dir", type=Path, default=None, help="Output directory, defaults to runs/release-gate")
@@ -51,11 +56,11 @@ def parse_args() -> argparse.Namespace:
         help="Override the selected policy profile and do not require the test_coverage_report audit check",
     )
     parser.add_argument("--fail-on-warn", action="store_true", help="Exit non-zero for warn as well as fail")
-    return parser.parse_args()
+    return parser.parse_args(argv)
 
 
-def main() -> None:
-    args = parse_args()
+def main(argv: Sequence[str] | None = None) -> int:
+    args = parse_args(argv)
     out_dir = args.out_dir or args.bundle.parent.parent / "release-gate"
     require_generation_quality = False if args.allow_missing_generation_quality else None
     require_request_history_summary = False if args.allow_missing_request_history_summary else None
@@ -113,8 +118,8 @@ def main() -> None:
     print("outputs=" + json.dumps(outputs, ensure_ascii=False))
     if gate["warnings"]:
         print("warnings=" + json.dumps(gate["warnings"], ensure_ascii=False))
-    raise SystemExit(exit_code_for_gate(gate, fail_on_warn=args.fail_on_warn))
+    return exit_code_for_gate(gate, fail_on_warn=args.fail_on_warn)
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

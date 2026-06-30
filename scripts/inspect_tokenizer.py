@@ -1,17 +1,22 @@
 from __future__ import annotations
 
 import argparse
-import sys
+from collections.abc import Sequence
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "src"))
+try:
+    from scripts._bootstrap import PROJECT_ROOT, ensure_src_path
+except ModuleNotFoundError:  # pragma: no cover - direct script execution path
+    from _bootstrap import PROJECT_ROOT, ensure_src_path
 
-from minigpt.dataset import load_text
-from minigpt.tokenizer import BPETokenizer, CharTokenizer, load_tokenizer
+ROOT = PROJECT_ROOT
+ensure_src_path()
+
+from minigpt.core.dataset import load_text
+from minigpt.core.tokenizer import BPETokenizer, CharTokenizer, load_tokenizer
 
 
-def parse_args() -> argparse.Namespace:
+def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Inspect a MiniGPT tokenizer.")
     parser.add_argument("--data", type=Path, default=ROOT / "data" / "sample_zh.txt")
     parser.add_argument("--tokenizer-path", type=Path, default=None)
@@ -20,11 +25,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--bpe-min-frequency", type=int, default=2)
     parser.add_argument("--text", type=str, default="人工智能")
     parser.add_argument("--show-merges", type=int, default=12)
-    return parser.parse_args()
+    return parser.parse_args(argv)
 
 
-def main() -> None:
-    args = parse_args()
+def main(argv: Sequence[str] | None = None) -> int:
+    args = parse_args(argv)
     if args.tokenizer_path is not None:
         tokenizer = load_tokenizer(args.tokenizer_path)
         source = str(args.tokenizer_path)
@@ -53,7 +58,8 @@ def main() -> None:
         print(f"merges_count={len(merges)}")
         for i, (left, right) in enumerate(merges[: args.show_merges], start=1):
             print(f"merge_{i}={left!r}+{right!r}->{left + right!r}")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

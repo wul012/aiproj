@@ -4,28 +4,38 @@ import argparse
 import json
 import subprocess
 import sys
+from collections.abc import Callable
 from pathlib import Path
+from typing import Any
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "src"))
+try:
+    from scripts._bootstrap import PROJECT_ROOT, ensure_src_path
+except ModuleNotFoundError:  # pragma: no cover - direct script execution path
+    from _bootstrap import PROJECT_ROOT, ensure_src_path
+
+ROOT = PROJECT_ROOT
+ensure_src_path()
 
 from minigpt.test_coverage_report import build_test_coverage_report, write_test_coverage_outputs  # noqa: E402
 
+Runner = Callable[..., subprocess.CompletedProcess[Any]]
 
-def parse_args() -> argparse.Namespace:
+
+def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Run MiniGPT tests with coverage and write coverage evidence.")
     parser.add_argument("--out-dir", type=Path, default=ROOT / "runs" / "test-coverage")
     parser.add_argument("--title", type=str, default="MiniGPT test coverage report")
     parser.add_argument("--source", type=str, default="src/minigpt")
     parser.add_argument("--tests", type=Path, default=ROOT / "tests")
     parser.add_argument("--fail-under", type=float, default=None, help="Optional minimum line coverage percentage required for success.")
-    return parser.parse_args()
+    return parser.parse_args(argv)
 
 
-def main() -> None:
-    args = parse_args()
+def main(argv: list[str] | None = None, *, runner: Runner = subprocess.run) -> int:
+    args = parse_args(argv)
     if args.fail_under is not None and not 0 <= args.fail_under <= 100:
-        raise SystemExit("--fail-under must be between 0 and 100")
+        print("--fail-under must be between 0 and 100", file=sys.stderr)
+        return 1
     out_dir = args.out_dir
     out_dir.mkdir(parents=True, exist_ok=True)
     coverage_json = out_dir / "coverage.json"
@@ -44,8 +54,12 @@ def main() -> None:
         "-v",
     ]
     json_command = [sys.executable, "-B", "-m", "coverage", "json", "-o", str(coverage_json)]
-    _run(test_command)
-    _run(json_command)
+    test_return_code = _run(test_command, runner=runner)
+    if test_return_code:
+        return test_return_code
+    json_return_code = _run(json_command, runner=runner)
+    if json_return_code:
+        return json_return_code
     report = build_test_coverage_report(
         coverage_json,
         project_root=ROOT,
@@ -67,14 +81,14 @@ def main() -> None:
     print(f"coverage_gap={summary['coverage_gap']}")
     print("outputs=" + json.dumps(outputs, ensure_ascii=False))
     if summary["status"] != "pass":
-        raise SystemExit(2)
+        return 2
+    return 0
 
 
-def _run(command: list[str]) -> None:
-    completed = subprocess.run(command, cwd=ROOT, check=False)
-    if completed.returncode:
-        raise SystemExit(completed.returncode)
+def _run(command: list[str], *, runner: Runner = subprocess.run) -> int:
+    completed = runner(command, cwd=ROOT, check=False)
+    return int(completed.returncode)
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())
