@@ -65,7 +65,7 @@ High-volume governance prefixes:
 | `training_scale*` | 19 | Training governance, not model core; keep promotion guards, run-decision summary fields, and artifact rendering split by role. |
 | `release*` | 17 | Release/readiness governance. |
 | `target_hidden*` | 16 | Holdout/governance experiments. |
-| `registry*` | 9 | Registry/report surface. |
+| `registry*` | 14 | Registry/report surface with data, ranking, render row, and format helpers split by role. |
 
 ## Core Owner
 
@@ -173,7 +173,7 @@ decide whether evidence can be consumed downstream.
 | `bounded_objective_*` | Loss-signal and bounded-objective route work. | Capability-governance. |
 | `baseline_candidate_*` | Baseline/candidate comparisons, eval loops, artifacts, and handoff gates. | Evaluation-to-governance boundary; keep report construction, rendering/writing, threshold matrices, and handoff checks split by role. |
 | `release_*` | Release gates, bundles, readiness, drift contracts. | `release_gate_policy.py` owns named gate profiles; `minigpt.governance.release` compatibility path exists for active release governance facades. |
-| `registry_*` | Registry render, ranking, release-readiness. | `minigpt.governance.registry` compatibility path exists for the active registry facade; run summary extraction, data aggregation, render helpers, rankings, release-readiness delta collection, and delta summary stats stay separate. |
+| `registry_*` | Registry render, ranking, release-readiness. | `minigpt.governance.registry` compatibility path exists for the active registry facade; run summary extraction, data aggregation, render helpers, row/cell formatting, rankings, release-readiness delta collection, and delta summary stats stay separate. |
 | `maintenance_*` | Maintenance policy, batching, pressure, governance. | Engineering governance. |
 
 ## Research Owner
