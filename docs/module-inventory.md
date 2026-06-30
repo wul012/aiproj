@@ -61,7 +61,7 @@ High-volume governance prefixes:
 | `model_capability_required_term_pair*` | 284 | Candidate for future package-level grouping and shared helpers. |
 | `model_capability_route_promotion*` | 134 | Keep as governance; shorten future module names. |
 | `bounded_objective_loss_signal_bridge*` | 92 | Keep as capability-governance until active flow is isolated. |
-| `promoted_training*` | 33 | Governance/training handoff boundary; keep decision review facade, summary aggregation, and artifact rendering split by role. |
+| `promoted_training*` | 34 | Governance/training handoff boundary; keep decision review facade, summary aggregation, receipt sections, and artifact rendering split by role. |
 | `training_scale*` | 19 | Training governance, not model core; keep promotion guards, run-decision summary fields, and artifact rendering split by role. |
 | `release*` | 17 | Release/readiness governance. |
 | `target_hidden*` | 16 | Holdout/governance experiments. |
