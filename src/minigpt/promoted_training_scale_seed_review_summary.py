@@ -1,0 +1,88 @@
+from __future__ import annotations
+
+from typing import Any
+
+from minigpt.report_utils import as_dict as _dict
+
+_CLEAN_BATCH_SUMMARY_FIELDS = (
+    "selected_handoff_require_clean_batch_review",
+    "selected_handoff_clean_batch_review_status",
+    "selected_handoff_batch_maturity_ci_regression_count",
+    "selected_handoff_batch_maturity_ci_regression_reason_counts",
+    "selected_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count",
+    "selected_handoff_batch_maturity_ci_regression_names",
+    "selected_handoff_batch_maturity_suite_design_regression_count",
+    "selected_handoff_batch_maturity_suite_design_regression_names",
+    "selected_handoff_selected_batch_maturity_ci_regression_count",
+    "selected_handoff_selected_batch_maturity_ci_regression_reason_counts",
+    "selected_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_count",
+    "selected_handoff_selected_batch_maturity_suite_design_regression_count",
+    "selected_handoff_selected_batch_maturity_suite_design_regression_names",
+    "selected_comparison_exclusion_reasons",
+    "handoff_require_clean_batch_review_count",
+    "handoff_clean_batch_review_count",
+    "handoff_unclean_batch_review_count",
+    "handoff_batch_maturity_ci_regression_count",
+    "handoff_batch_maturity_ci_regression_reason_counts",
+    "handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count",
+    "handoff_selected_batch_maturity_ci_regression_total",
+    "handoff_selected_batch_maturity_ci_regression_reason_counts",
+    "handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total",
+    "handoff_batch_maturity_ci_regression_names",
+    "handoff_batch_maturity_suite_design_regression_count",
+    "handoff_selected_batch_maturity_suite_design_regression_total",
+    "handoff_batch_maturity_suite_design_regression_names",
+    "handoff_selected_batch_maturity_suite_design_regression_names",
+    "comparison_exclusion_reasons",
+    "comparison_ready_handoff_require_clean_batch_review_count",
+    "comparison_ready_handoff_clean_batch_review_count",
+    "comparison_ready_handoff_unclean_batch_review_count",
+    "comparison_ready_handoff_batch_maturity_ci_regression_count",
+    "comparison_ready_handoff_batch_maturity_ci_regression_reason_counts",
+    "comparison_ready_handoff_batch_maturity_ci_boundary_plan_check_ready_regression_count",
+    "comparison_ready_handoff_selected_batch_maturity_ci_regression_total",
+    "comparison_ready_handoff_selected_batch_maturity_ci_regression_reason_counts",
+    "comparison_ready_handoff_selected_batch_maturity_ci_boundary_plan_check_ready_regression_total",
+    "comparison_ready_handoff_batch_maturity_ci_regression_names",
+    "comparison_ready_handoff_batch_maturity_suite_design_regression_count",
+    "comparison_ready_handoff_selected_batch_maturity_suite_design_regression_total",
+    "comparison_ready_handoff_batch_maturity_suite_design_regression_names",
+    "comparison_ready_handoff_selected_batch_maturity_suite_design_regression_names",
+)
+
+_BATCH_SUMMARY_FIELDS = (
+    "selected_handoff_selected_batch_review_status",
+    "selected_handoff_selected_batch_comparison_review_action_count",
+    "selected_handoff_selected_batch_comparison_blocker_action_count",
+    "selected_handoff_selected_batch_maturity_coverage_regression_count",
+    "selected_handoff_batch_comparison_review_action_count",
+    "selected_handoff_batch_comparison_blocker_action_count",
+    "selected_handoff_batch_comparison_blocker_reasons",
+    "comparison_ready_handoff_selected_batch_review_count",
+    "comparison_ready_handoff_selected_batch_blocker_count",
+    "comparison_ready_handoff_selected_batch_comparison_review_action_total",
+    "comparison_ready_handoff_selected_batch_comparison_blocker_action_total",
+    "comparison_ready_handoff_batch_comparison_review_action_total",
+    "comparison_ready_handoff_batch_comparison_blocker_action_total",
+    "comparison_ready_handoff_batch_comparison_blocker_reasons",
+)
+
+
+def build_seed_handoff_clean_batch_review_summary(seed: dict[str, Any]) -> dict[str, Any]:
+    review = _dict(seed.get("handoff_clean_batch_review"))
+    return _review_field_summary(review, _CLEAN_BATCH_SUMMARY_FIELDS)
+
+
+def build_seed_handoff_batch_review_summary(seed: dict[str, Any]) -> dict[str, Any]:
+    review = _dict(seed.get("handoff_batch_review"))
+    return _review_field_summary(review, _BATCH_SUMMARY_FIELDS)
+
+
+def _review_field_summary(review: dict[str, Any], fields: tuple[str, ...]) -> dict[str, Any]:
+    return {key: review.get(key) for key in fields}
+
+
+__all__ = [
+    "build_seed_handoff_batch_review_summary",
+    "build_seed_handoff_clean_batch_review_summary",
+]
