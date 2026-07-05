@@ -1,15 +1,14 @@
 from __future__ import annotations
 
-import sys
 import tempfile
 import unittest
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "src"))
-sys.path.insert(0, str(ROOT / "tests"))
+from tests._bootstrap import ensure_src_path
 
-from promoted_training_scale_comparison_fixtures import entry, make_index_tree  # noqa: E402
+ensure_src_path()
+
+from tests.promoted_training_scale_comparison_fixtures import entry, make_index_tree  # noqa: E402
 
 from minigpt.promoted_training_scale_comparison import build_promoted_training_scale_comparison  # noqa: E402
 from minigpt.promoted_training_scale_comparison_csv_rows import (  # noqa: E402

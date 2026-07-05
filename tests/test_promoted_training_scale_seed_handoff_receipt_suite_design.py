@@ -8,9 +8,7 @@ import unittest
 from pathlib import Path
 from typing import TypedDict
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "src"))
-sys.path.insert(0, str(ROOT / "tests"))
+from tests._bootstrap import ROOT
 
 from minigpt.promoted_training_scale_seed_handoff_receipt import (  # noqa: E402
     RECEIPT_TYPE,
@@ -18,7 +16,7 @@ from minigpt.promoted_training_scale_seed_handoff_receipt import (  # noqa: E402
     check_promoted_training_scale_seed_handoff_automation_receipt,
     render_promoted_training_scale_seed_handoff_automation_receipt_check,
 )
-from test_promoted_training_scale_seed_handoff_suite_design import write_suite_design_seed_tree  # noqa: E402
+from tests.test_promoted_training_scale_seed_handoff_suite_design import write_suite_design_seed_tree  # noqa: E402
 
 
 class SuiteDesignHandoffSidecars(TypedDict):

@@ -7,11 +7,9 @@ import tempfile
 import unittest
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "src"))
-sys.path.insert(0, str(ROOT / "tests"))
+from tests._bootstrap import ROOT
 
-from promoted_training_scale_comparison_fixtures import entry, make_index_tree  # noqa: E402
+from tests.promoted_training_scale_comparison_fixtures import entry, make_index_tree  # noqa: E402
 
 from minigpt import promoted_training_scale_comparison  # noqa: E402
 from minigpt import promoted_training_scale_comparison_artifacts  # noqa: E402

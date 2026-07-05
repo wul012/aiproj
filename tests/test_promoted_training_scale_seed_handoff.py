@@ -7,8 +7,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "src"))
+from tests._bootstrap import ROOT
 
 from minigpt import promoted_training_scale_seed_handoff as handoff_module  # noqa: E402
 from minigpt import promoted_training_scale_seed_handoff_artifacts as artifact_module  # noqa: E402

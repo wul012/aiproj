@@ -7,9 +7,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "src"))
-sys.path.insert(0, str(ROOT / "tests"))
+from tests._bootstrap import ROOT
 
 from minigpt.promoted_training_scale_seed_handoff_receipt_contract_check_failure_smoke import (  # noqa: E402
     render_failure_smoke_html,
@@ -18,8 +16,8 @@ from minigpt.promoted_training_scale_seed_handoff_receipt_contract_check_failure
     run_promoted_training_scale_seed_handoff_receipt_contract_check_failure_smoke,
     write_failure_smoke_outputs,
 )
-from test_promoted_training_scale_seed_handoff_receipt_contract_check import write_summary  # noqa: E402
-from test_promoted_training_scale_seed_handoff_receipt_suite_design import (  # noqa: E402
+from tests.test_promoted_training_scale_seed_handoff_receipt_contract_check import write_summary  # noqa: E402
+from tests.test_promoted_training_scale_seed_handoff_receipt_suite_design import (  # noqa: E402
     write_suite_design_handoff_with_sidecars,
 )
 

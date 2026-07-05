@@ -86,6 +86,21 @@ NORMALIZED_TEST_BOOTSTRAP_PATHS = (
     "tests/test_playground_request_history_script.py",
     "tests/test_prediction.py",
     "tests/test_project_audit.py",
+    "tests/test_promoted_training_scale_comparison.py",
+    "tests/test_promoted_training_scale_comparison_csv_rows.py",
+    "tests/test_promoted_training_scale_decision.py",
+    "tests/test_promoted_training_scale_decision_review.py",
+    "tests/test_promoted_training_scale_seed.py",
+    "tests/test_promoted_training_scale_seed_handoff.py",
+    "tests/test_promoted_training_scale_seed_handoff_receipt.py",
+    "tests/test_promoted_training_scale_seed_handoff_receipt_contract.py",
+    "tests/test_promoted_training_scale_seed_handoff_receipt_contract_check.py",
+    "tests/test_promoted_training_scale_seed_handoff_receipt_contract_check_failure_smoke.py",
+    "tests/test_promoted_training_scale_seed_handoff_receipt_suite_design.py",
+    "tests/test_promoted_training_scale_seed_handoff_review.py",
+    "tests/test_promoted_training_scale_seed_handoff_suite_design.py",
+    "tests/test_promoted_training_scale_seed_plan.py",
+    "tests/test_promoted_training_scale_seed_review.py",
     "tests/test_request_history.py",
     "tests/test_request_history_summary.py",
     "tests/test_sampling.py",
@@ -125,6 +140,7 @@ MANUAL_TEST_BOOTSTRAP_FRAGMENTS = (
 UNQUALIFIED_TEST_IMPORT_FRAGMENTS = (
     "from test_",
     "import test_",
+    "from promoted_training_scale_comparison_fixtures",
 )
 
 

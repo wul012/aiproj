@@ -8,8 +8,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "src"))
+from tests._bootstrap import ROOT
 
 from minigpt.promoted_training_scale_comparison import build_promoted_training_scale_comparison  # noqa: E402
 from minigpt.promoted_training_scale_decision import (  # noqa: E402

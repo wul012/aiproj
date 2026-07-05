@@ -1,11 +1,10 @@
 from __future__ import annotations
 
-import sys
 import unittest
-from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "src"))
+from tests._bootstrap import ensure_src_path
+
+ensure_src_path()
 
 from minigpt.promoted_training_scale_decision_review import (  # noqa: E402
     append_decision_handoff_batch_recommendations,

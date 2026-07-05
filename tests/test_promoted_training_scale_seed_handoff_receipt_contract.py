@@ -7,9 +7,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "src"))
-sys.path.insert(0, str(ROOT / "tests"))
+from tests._bootstrap import ROOT
 
 from minigpt.promoted_training_scale_seed_handoff_receipt_contract import (  # noqa: E402
     build_promoted_training_scale_seed_handoff_receipt_contract_summary,
@@ -20,11 +18,11 @@ from minigpt.promoted_training_scale_seed_handoff_receipt_contract import (  # n
 from minigpt.promoted_training_scale_seed_handoff_receipt_contract_context import (  # noqa: E402
     contract_issues,
 )
-from test_promoted_training_scale_seed_handoff_receipt_suite_design import (  # noqa: E402
+from tests.test_promoted_training_scale_seed_handoff_receipt_suite_design import (  # noqa: E402
     SuiteDesignHandoffSidecars,
     write_suite_design_handoff_with_sidecars,
 )
-from test_promoted_training_scale_seed_handoff import (  # noqa: E402
+from tests.test_promoted_training_scale_seed_handoff import (  # noqa: E402
     HANDOFF_CI_REASON_COUNTS,
     SELECTED_CI_REASON_COUNTS,
     write_seed_tree,
