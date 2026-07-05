@@ -7,13 +7,14 @@ import tempfile
 import unittest
 from pathlib import Path
 
+from tests._bootstrap import ROOT
+
 from minigpt.release_readiness_drift_contract import (
     check_release_readiness_drift_contract,
     resolve_release_readiness_comparison_path,
 )
 
 
-ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = ROOT / "scripts" / "check_release_readiness_drift_contract.py"
 
 

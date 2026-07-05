@@ -7,8 +7,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "src"))
+from tests._bootstrap import ROOT
 
 from minigpt import release_readiness_comparison as comparison_module  # noqa: E402
 from minigpt import release_readiness_comparison_artifacts as artifact_module  # noqa: E402

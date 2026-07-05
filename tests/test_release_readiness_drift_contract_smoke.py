@@ -7,8 +7,8 @@ import tempfile
 import unittest
 from pathlib import Path
 
+from tests._bootstrap import ROOT
 
-ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = ROOT / "scripts" / "check_release_readiness_drift_contract_smoke.py"
 
 

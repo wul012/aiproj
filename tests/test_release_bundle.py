@@ -7,8 +7,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "src"))
+from tests._bootstrap import ROOT
 
 from minigpt import release_bundle_artifacts
 from minigpt import release_bundle as release_bundle_facade
