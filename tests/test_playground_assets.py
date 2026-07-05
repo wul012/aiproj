@@ -1,11 +1,10 @@
 from __future__ import annotations
 
-import sys
 import unittest
-from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "src"))
+from tests._bootstrap import ensure_src_path
+
+ensure_src_path()
 
 from minigpt.playground import render_playground_html  # noqa: E402
 from minigpt.playground_assets import playground_script, playground_style  # noqa: E402
