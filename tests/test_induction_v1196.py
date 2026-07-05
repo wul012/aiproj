@@ -20,6 +20,7 @@ import torch  # noqa: E402
 from minigpt.induction_v1196 import (  # noqa: E402
     IGNORE, InductionConfig, build_report, decide, make_batch, run_phase_a, summarize, unigram_acc,
 )
+from minigpt.induction_v1196_report import build_induction_report  # noqa: E402
 
 SEEDS = (1, 2, 3, 4, 5)
 WIDTHS = (8, 16, 24, 32, 48, 64, 96, 128)
@@ -171,6 +172,19 @@ class ReportShape(unittest.TestCase):
         self.assertGreaterEqual(len(report["recommendations"]), 5)
         self.assertIn("acc_curve", report)
         self.assertEqual(report["summary"]["verdict"], "induction_requires_depth")
+
+    def test_extracted_report_matches_public_facade(self):
+        result = summarize(synth_cache(ACC1_FAIL, ACC2_GOOD), InductionConfig(seeds=SEEDS))
+        info = decide(result, InductionConfig(seeds=SEEDS))
+        expected = build_report(result, info, "synthetic", generated_at="2026-01-01T00:00:00Z")
+        actual = build_induction_report(
+            result,
+            info,
+            "synthetic",
+            generated_at="2026-01-01T00:00:00Z",
+            unigram_margin=InductionConfig().unigram_margin,
+        )
+        self.assertEqual(actual, expected)
 
 
 class PhaseASmoke(unittest.TestCase):

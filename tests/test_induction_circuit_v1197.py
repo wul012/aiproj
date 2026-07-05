@@ -20,6 +20,7 @@ import torch  # noqa: E402
 from minigpt.induction_circuit_v1197 import (  # noqa: E402
     CircuitConfig, build_report, decide, run_phase_a, summarize,
 )
+from minigpt.induction_circuit_v1197_report import build_report as extracted_build_report  # noqa: E402
 
 SEEDS = (1, 2, 3, 4, 5)
 NH = 8
@@ -135,6 +136,9 @@ class DecideLadder(unittest.TestCase):
             self.assertIn(fld, report["rows"][0])
         self.assertGreaterEqual(len(report["recommendations"]), 5)
         self.assertEqual(report["summary"]["verdict"], "circuit_necessary_specific_composed_and_redundant")
+
+    def test_public_module_reexports_report_builder(self):
+        self.assertIs(build_report, extracted_build_report)
 
 
 class PhaseASmoke(unittest.TestCase):
