@@ -5,6 +5,8 @@ from pathlib import Path
 import tempfile
 import unittest
 
+import minigpt.model_capability_required_term_pair_decoding_sweep as facade
+import minigpt.model_capability_required_term_pair_decoding_sweep_core as core
 from minigpt.model_capability_required_term_pair_decoding_sweep import (
     build_model_capability_required_term_pair_decoding_sweep,
     default_pair_decoding_profiles,
@@ -26,6 +28,18 @@ from minigpt.model_capability_required_term_pair_decoding_sweep_artifacts import
 
 
 class ModelCapabilityRequiredTermPairDecodingSweepTests(unittest.TestCase):
+    def test_facade_reexports_decoding_sweep_core_contract(self) -> None:
+        names = (
+            "normalize_decoding_profiles",
+            "resolve_exit_code",
+            "select_pair_decoding_sweep_targets",
+            "summarize_decoding_profile_probe_rows",
+            "summarize_pair_decoding_targets",
+            "summarize_required_term_pair_decoding_sweep",
+        )
+        for name in names:
+            self.assertIs(getattr(facade, name), getattr(core, name))
+
     def test_decoding_sweep_reports_recovered_full_hit_and_outputs(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
