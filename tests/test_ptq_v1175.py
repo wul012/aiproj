@@ -7,6 +7,8 @@ import unittest
 
 import torch
 
+import minigpt.ptq_v1175 as facade
+import minigpt.ptq_v1175_core as core
 from minigpt.model import GPTConfig, MiniGPT
 from minigpt.ptq_v1175 import (
     PRIMARY_VERDICTS,
@@ -27,6 +29,22 @@ from minigpt.sft_corpus import EOS, PAD, build_sft_corpus
 from minigpt.tokenizer import CharTokenizer
 
 DEVICE = torch.device("cpu")
+
+
+class CoreFacadeContractTests(unittest.TestCase):
+    def test_public_module_reexports_quantization_core(self) -> None:
+        names = (
+            "beats_lower",
+            "ce_and_kl",
+            "component_param_names",
+            "effective_bits_per_weight",
+            "n_scale_groups",
+            "quantize_tensor",
+            "quantized_model",
+            "weight_rel_error",
+        )
+        for name in names:
+            self.assertIs(getattr(facade, name), getattr(core, name))
 
 
 def _model(vocab=20, nl=2, ne=16):
