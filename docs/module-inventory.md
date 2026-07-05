@@ -45,7 +45,7 @@ Approximate counts from `src/minigpt`:
 
 | Owner class | Count | Current interpretation |
 |---|---:|---|
-| `governance` / capability chains | 1075 | Main source of package sprawl; mostly outer-layer evidence and decision flows. |
+| `governance` / capability chains | 1076 | Main source of package sprawl; mostly outer-layer evidence and decision flows. |
 | `reports-governance` | 48 | Stable reports, cards, dashboards, registries, release summaries. |
 | `research` | 48 | Versioned experiments around adaptation, decoding, interpretability, and training behavior. |
 | `evaluation` | 21 | Prompt suites, comparisons, benchmark summaries, generation quality. |

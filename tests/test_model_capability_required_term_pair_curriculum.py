@@ -5,6 +5,8 @@ from pathlib import Path
 import tempfile
 import unittest
 
+import minigpt.model_capability_required_term_pair_curriculum as facade
+import minigpt.model_capability_required_term_pair_curriculum_core as core
 from minigpt.model_capability_required_term_pair_curriculum import (
     build_model_capability_required_term_pair_curriculum,
     build_pair_curriculum_pairs,
@@ -25,6 +27,18 @@ from minigpt.model_capability_required_term_pair_curriculum_artifacts import (
 
 
 class ModelCapabilityRequiredTermPairCurriculumCoverageTests(unittest.TestCase):
+    def test_facade_reexports_curriculum_core_contract(self) -> None:
+        names = (
+            "build_pair_curriculum_pairs",
+            "build_required_term_pair_curriculum_corpus",
+            "resolve_exit_code",
+            "select_pair_curriculum_terms",
+            "summarize_pair_probe_rows",
+            "summarize_required_term_pair_curriculum",
+        )
+        for name in names:
+            self.assertIs(getattr(facade, name), getattr(core, name))
+
     def test_unittest_discover_covers_full_partial_and_artifacts(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             tmp_path = Path(tmp)
