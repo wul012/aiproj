@@ -67,10 +67,10 @@ of truth for this focused guard.
 - `tests.test_script_bootstrap` protects shared script/test bootstrap behavior,
   tests-package import bootstrapping for direct unittest module runs, CI
   engineering entrypoint partitioning, the already-normalized registry/release/
-  benchmark/ci/comparison-eval-maintenance/data/history-request/pair/playground/
-  reporting-maturity/training-portfolio/training-scale/server test bootstrap
-  families, rejects unqualified sibling `from test_...` imports inside those
-  normalized families, and protects the normalization wrapper CLI.
+  benchmark/ci/core-model-smoke/comparison-eval-maintenance/data/history-request/
+  pair/playground/reporting-maturity/training-portfolio/training-scale/server
+  test bootstrap families, rejects unqualified sibling `from test_...` imports
+  inside those normalized families, and protects the normalization wrapper CLI.
 - `tests.test_script_bootstrap_helpers` protects the small AST and path helper
   functions used by the script bootstrap tests, including function lookup,
   argument-name extraction, `SystemExit(main(...))` detection,

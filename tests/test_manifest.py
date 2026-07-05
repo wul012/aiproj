@@ -1,13 +1,13 @@
 from __future__ import annotations
 
 import json
-import sys
 import tempfile
 import unittest
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "src"))
+from tests._bootstrap import ensure_src_path
+
+ensure_src_path()
 
 from minigpt.manifest import build_run_manifest, collect_run_artifacts, sha256_file, write_run_manifest_json, write_run_manifest_svg
 
