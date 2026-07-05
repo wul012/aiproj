@@ -1,11 +1,10 @@
 from __future__ import annotations
 
-import sys
 import unittest
-from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "src"))
+from tests._bootstrap import ensure_src_path
+
+ensure_src_path()
 
 from minigpt.registry import render_registry_html  # noqa: E402
 from minigpt.registry_assets import registry_script, registry_style  # noqa: E402

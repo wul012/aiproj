@@ -7,8 +7,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "src"))
+from tests._bootstrap import ROOT
 
 from minigpt.registry import REGISTRY_ARTIFACT_PATHS, build_run_registry, discover_run_dirs, render_registry_html, summarize_registered_run, write_registry_outputs
 
