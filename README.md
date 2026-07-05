@@ -23,6 +23,17 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
+Version `v1259.0.0` adds a **review layer for the v1258 route-promotion release readiness receipt index**. It consumes the real `f/1258` index, verifies index readiness, lookup row consistency, bounded scope, receipt digest closure against the real `f/1257` receipt, source digest rows, complete blocked uses, clean source checks, and keeps promotion disabled. The ready run produced `status=pass`, `decision=model_capability_route_promotion_release_readiness_receipt_index_review_ready`, `receipt_index_review_ready=True`, `lookup_key_count=1`, `lookup_ready=True`, `promotion_ready=False`, and `source_digest_count=3`.
+
+## Latest v1259 checkpoint
+
+- Added `src/minigpt/model_capability_route_promotion_release_readiness_receipt_index_review.py`: a pure review builder that approves the v1258 receipt index only for bounded lookup after digest and boundary checks pass.
+- Added `src/minigpt/model_capability_route_promotion_release_readiness_receipt_index_review_artifacts.py` and CLI `scripts/review_model_capability_route_promotion_release_readiness_receipt_index.py` for JSON/CSV/TXT/Markdown/HTML outputs.
+- Added `tests/test_model_capability_route_promotion_release_readiness_receipt_index_review.py` with root facade export, ready review, missing-index failure, promoted-row failure, output, and CLI coverage.
+- Produced real evidence in `f/1259` from the `f/1258` receipt index; code explanation is in `代码讲解记录_模型治理阶段/1217-v1259-route-promotion-release-readiness-receipt-index-review.md`.
+
+## Historical v1258 context
+
 Version `v1258.0.0` adds a **lookup index for the v1257 route-promotion release readiness downstream receipt**. It consumes the real `f/1257` receipt, verifies that the receipt is granted, bounded, digest-backed, source-clean, and still routed to indexing, then emits one lookup row for `objective_level_contrast` without enabling promotion. The ready run produced `status=pass`, `decision=model_capability_route_promotion_release_readiness_receipt_index_ready`, `receipt_index_ready=True`, `lookup_key_count=1`, `lookup_ready=True`, `promotion_ready=False`, and `source_digest_count=3`.
 
 ## Latest v1258 checkpoint

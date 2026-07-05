@@ -272,3 +272,10 @@ For new code:
   as the stable lookup index API for checked route-promotion release readiness
   downstream receipts, raising the root facade all-export budget from 284 to
   286 and the lazy-export budget from 314 to 316.
+- v1259 intentionally promotes
+  `build_model_capability_route_promotion_release_readiness_receipt_index_review`
+  and
+  `write_model_capability_route_promotion_release_readiness_receipt_index_review_outputs`
+  as the stable review API for checked route-promotion release readiness
+  receipt indexes, raising the root facade all-export budget from 286 to 288
+  and the lazy-export budget from 316 to 318.

@@ -275,6 +275,8 @@ ROOT_FACADE_ALL_EXPORTS = [
     'write_model_capability_route_promotion_release_readiness_downstream_receipt_outputs',
     'build_model_capability_route_promotion_release_readiness_receipt_index',
     'write_model_capability_route_promotion_release_readiness_receipt_index_outputs',
+    'build_model_capability_route_promotion_release_readiness_receipt_index_review',
+    'write_model_capability_route_promotion_release_readiness_receipt_index_review_outputs',
     'build_model_capability_route_promotion_downstream_guard',
     'write_model_capability_route_promotion_downstream_guard_outputs',
     'build_model_capability_route_promotion_consumer_plan',

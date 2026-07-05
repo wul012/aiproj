@@ -14,6 +14,9 @@
 
 ## 当前索引
 
+1217-v1259-route-promotion-release-readiness-receipt-index-review.md
+ -> v1259 code explanation: review the indexed route-promotion release readiness receipt before downstream lookup consumption.
+
 1216-v1258-route-promotion-release-readiness-receipt-index.md
  -> v1258 code explanation: index the granted route-promotion release readiness downstream receipt for bounded lookup.
 
