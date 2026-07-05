@@ -37,6 +37,16 @@ NORMALIZED_TEST_BOOTSTRAP_PATHS = (
     "tests/test_release_readiness_comparison.py",
     "tests/test_release_readiness_drift_contract.py",
     "tests/test_release_readiness_drift_contract_smoke.py",
+    "tests/test_server.py",
+    "tests/test_server_checkpoints.py",
+    "tests/test_server_contracts.py",
+    "tests/test_server_generator.py",
+    "tests/test_server_http.py",
+    "tests/test_server_logging.py",
+    "tests/test_server_post_routes.py",
+    "tests/test_server_request_history.py",
+    "tests/test_server_routes.py",
+    "tests/test_serving_cli_behavior.py",
 )
 
 MANUAL_TEST_BOOTSTRAP_FRAGMENTS = (

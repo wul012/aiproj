@@ -1,12 +1,12 @@
 from __future__ import annotations
 
-import sys
 import unittest
 from pathlib import Path
 from inspect import signature
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "src"))
+from tests._bootstrap import ensure_src_path
+
+ensure_src_path()
 
 from minigpt import server  # noqa: E402
 from minigpt.server_generator import MiniGPTGenerator  # noqa: E402

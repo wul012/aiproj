@@ -2,14 +2,14 @@ from __future__ import annotations
 
 import io
 import json
-import sys
 import tempfile
 import unittest
 from http import HTTPStatus
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "src"))
+from tests._bootstrap import ensure_src_path
+
+ensure_src_path()
 
 from minigpt import server
 from minigpt import server_post_routes
