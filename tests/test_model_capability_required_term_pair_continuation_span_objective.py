@@ -5,6 +5,8 @@ from pathlib import Path
 import tempfile
 import unittest
 
+import minigpt.model_capability_required_term_pair_continuation_span_objective as facade
+import minigpt.model_capability_required_term_pair_continuation_span_objective_core as core
 from minigpt.model_capability_required_term_pair_continuation_span_objective import (
     build_continuation_span_corpus,
     build_model_capability_required_term_pair_continuation_span_objective,
@@ -21,6 +23,19 @@ from minigpt.model_capability_required_term_pair_continuation_span_objective_art
 
 
 class ModelCapabilityRequiredTermPairContinuationSpanObjectiveTests(unittest.TestCase):
+    def test_facade_reexports_continuation_span_core_contract(self) -> None:
+        names = (
+            "build_continuation_span_corpus",
+            "compare_span_prefix_summaries",
+            "refresh_training_artifact_status",
+            "resolve_exit_code",
+            "select_continuation_span_examples",
+            "summarize_continuation_span_objective",
+            "summarize_source_prefix_completion",
+        )
+        for name in names:
+            self.assertIs(getattr(facade, name), getattr(core, name))
+
     def test_continuation_span_objective_reports_full_generation_and_prefix_outputs(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
