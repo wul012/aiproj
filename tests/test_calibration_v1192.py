@@ -22,6 +22,7 @@ from minigpt.calibration_v1192 import (  # noqa: E402
     confidence_spread, decide, entropy_floor, expected_nll, fit_temperature, kl_to_true,
     oracle_logits, paired_beats, pmodel, reliability_curve, run_analysis, sampled_ece,
 )
+from minigpt.calibration_v1192_report import build_calibration_report  # noqa: E402
 
 
 def make_P(K=16, M=5, alpha=0.5, seed=0):
@@ -159,6 +160,19 @@ class ReportShape(unittest.TestCase):
         self.assertGreaterEqual(len(report["recommendations"]), 5)
         self.assertIn("fig_ece_vs_T", report)
         self.assertEqual(report["summary"]["headline_n"], 10)
+
+    def test_extracted_report_matches_public_facade(self):
+        result = run_analysis(make_cache(hard_scale=2.0))
+        info = decide(result)
+        expected = build_report(result, info, "synthetic", generated_at="2026-01-01T00:00:00Z")
+        actual = build_calibration_report(
+            result,
+            info,
+            "synthetic",
+            generated_at="2026-01-01T00:00:00Z",
+            seed_count=len(CalibrationConfig().seeds),
+        )
+        self.assertEqual(actual, expected)
 
     def test_confidence_spread_nonzero(self):
         self.assertGreater(confidence_spread(oracle_logits(make_P()) * 2.0), 0.0)

@@ -47,7 +47,7 @@ Approximate counts from `src/minigpt`:
 |---|---:|---|
 | `governance` / capability chains | 1072 | Main source of package sprawl; mostly outer-layer evidence and decision flows. |
 | `reports-governance` | 48 | Stable reports, cards, dashboards, registries, release summaries. |
-| `research` | 43 | Versioned experiments around adaptation, decoding, interpretability, and training behavior. |
+| `research` | 44 | Versioned experiments around adaptation, decoding, interpretability, and training behavior. |
 | `evaluation` | 21 | Prompt suites, comparisons, benchmark summaries, generation quality. |
 | `core` | 11 | The small GPT learning path. This is the inner layer to protect. |
 | `serving` | 9 | Local generation and HTTP/API wrapper modules. |
@@ -186,7 +186,7 @@ dependencies.
 | Adaptation | `lora_*`, `sft_*`, `dpo_*`, `distill_*` | Keep isolated until promoted by tests and docs; split reusable DPO primitives from experiment orchestration. |
 | Decoding/runtime | `spec_decode*`, `kv_cache*`, `rope_eval*` | Promote only stable primitives into core; keep speculative algorithms separate from experiment orchestration. |
 | Interpretability/behavior | `grok_*`, `induction_*`, `similarity*` | Research/evaluation boundary; keep statistical, verdict, and report helpers split from long experiment modules and training paths. |
-| Training dynamics | `calibration*`, `continual*`, `ewc*`, `double_descent*`, `wd_noise*` | Research, not production proof. |
+| Training dynamics | `calibration*`, `continual*`, `ewc*`, `double_descent*`, `wd_noise*` | Research, not production proof; keep evidence reports separate from analysis kernels. |
 
 ## Scripts Inventory
 
