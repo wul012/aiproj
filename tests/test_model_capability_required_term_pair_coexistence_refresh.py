@@ -4,6 +4,14 @@ from pathlib import Path
 import tempfile
 import unittest
 
+from minigpt.model_capability_required_term_pair_coexistence_corpus import (
+    PAIR_COEXISTENCE_CORPUS_MODES,
+    source_prompts,
+)
+from minigpt.model_capability_required_term_pair_coexistence_corpus_modes import (
+    BUILTIN_PAIR_COEXISTENCE_CORPUS_MODES,
+    uses_equals_surface,
+)
 from minigpt.model_capability_required_term_pair_coexistence_refresh import (
     build_model_capability_required_term_pair_coexistence_refresh,
     build_pair_coexistence_refresh_corpus,
@@ -18,6 +26,13 @@ from minigpt.model_capability_required_term_pair_coexistence_refresh_artifacts i
 
 
 class ModelCapabilityRequiredTermPairCoexistenceRefreshTests(unittest.TestCase):
+    def test_builtin_mode_registry_drives_facade_contract(self) -> None:
+        prefix = PAIR_COEXISTENCE_CORPUS_MODES[: len(BUILTIN_PAIR_COEXISTENCE_CORPUS_MODES)]
+        self.assertEqual(prefix, BUILTIN_PAIR_COEXISTENCE_CORPUS_MODES)
+        for mode in BUILTIN_PAIR_COEXISTENCE_CORPUS_MODES:
+            expected = ("fixed=", "loss=") if uses_equals_surface(mode) else ("fixed:", "loss:")
+            self.assertEqual(source_prompts(mode), expected)
+
     def test_refresh_reports_pair_full_when_fake_generation_hits_both_terms(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             report = build_model_capability_required_term_pair_coexistence_refresh(
