@@ -1,0 +1,384 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability route promotion release readiness summary contract check",
+  "generated_at": "2026-07-05T12:49:07Z",
+  "status": "pass",
+  "decision": "model_capability_route_promotion_release_readiness_summary_contract_check_passed",
+  "failed_count": 0,
+  "issues": [],
+  "source_summary": "f\\1255\\解释\\model-capability-route-promotion-release-readiness-summary\\model_capability_route_promotion_release_readiness_summary.json",
+  "source_summary_exists": true,
+  "source_summary_digest": "0bc893d04d50eea2739f9bfd4b0c6bfcc3fd857105a9ae127a29fecfd81d104e",
+  "source_summary_summary": {
+    "release_readiness_summary_ready": true,
+    "handoff_status": "ready_for_bounded_governance_release",
+    "active_route_count": 1,
+    "active_routes": [
+      "objective_level_contrast"
+    ],
+    "boundary": "tiny_required_term_pair_probe_only",
+    "model_quality_claim": "seed_stable_pair_probe_route_accepted",
+    "evidence_count": 3,
+    "passed_check_count": 15,
+    "failed_check_count": 0,
+    "next_step": "publish_bounded_route_promotion_release_readiness_summary"
+  },
+  "route_alignment": {
+    "aligned": true,
+    "active_routes": [
+      "objective_level_contrast"
+    ],
+    "route_count": 1,
+    "packet_routes": [
+      "objective_level_contrast"
+    ],
+    "review_routes": [
+      "objective_level_contrast"
+    ],
+    "snapshot_routes": [
+      "objective_level_contrast"
+    ]
+  },
+  "boundary_claim": {
+    "required_boundary": "tiny_required_term_pair_probe_only",
+    "boundaries": [
+      "tiny_required_term_pair_probe_only",
+      "tiny_required_term_pair_probe_only",
+      "tiny_required_term_pair_probe_only"
+    ],
+    "boundary": "tiny_required_term_pair_probe_only",
+    "boundary_consistent": true,
+    "claims": [
+      "seed_stable_pair_probe_route_accepted",
+      "seed_stable_pair_probe_route_accepted",
+      "seed_stable_pair_probe_route_accepted"
+    ],
+    "model_quality_claim": "seed_stable_pair_probe_route_accepted",
+    "claim_consistent": true,
+    "claim_bounded": true
+  },
+  "downstream_policy": {
+    "allowed": true,
+    "allowed_scope": "bounded_route_promotion_release_governance_only",
+    "source_allowed_scope": "bounded_model_capability_governance_only",
+    "route_ids": [
+      "objective_level_contrast"
+    ],
+    "boundary": "tiny_required_term_pair_probe_only",
+    "model_quality_claim": "seed_stable_pair_probe_route_accepted",
+    "reason": "packet, review, and governance snapshot agree inside the bounded route-promotion scope"
+  },
+  "source_rows": [
+    {
+      "kind": "release_packet",
+      "path": "e\\795\\解释\\model-capability-route-promotion-release-packet\\model_capability_route_promotion_release_packet.json",
+      "exists": true
+    },
+    {
+      "kind": "release_packet_review",
+      "path": "e\\796\\解释\\model-capability-route-promotion-release-packet-review\\model_capability_route_promotion_release_packet_review.json",
+      "exists": true
+    },
+    {
+      "kind": "governance_snapshot",
+      "path": "e\\800\\解释\\model-capability-route-promotion-governance-snapshot\\model_capability_route_promotion_governance_snapshot.json",
+      "exists": true
+    }
+  ],
+  "source_digest_rows": [
+    {
+      "kind": "release_packet",
+      "path": "e\\795\\解释\\model-capability-route-promotion-release-packet\\model_capability_route_promotion_release_packet.json",
+      "exists": true,
+      "sha256": "4b32d56640811e3dda52bba0e2f952227a6b9d7fb841ebaffa4ef301f4d82104"
+    },
+    {
+      "kind": "release_packet_review",
+      "path": "e\\796\\解释\\model-capability-route-promotion-release-packet-review\\model_capability_route_promotion_release_packet_review.json",
+      "exists": true,
+      "sha256": "7259663a4798d7a7470aacc776d429346d4fb881c149d200141d995fa428164c"
+    },
+    {
+      "kind": "governance_snapshot",
+      "path": "e\\800\\解释\\model-capability-route-promotion-governance-snapshot\\model_capability_route_promotion_governance_snapshot.json",
+      "exists": true,
+      "sha256": "f4be5170a62da02225816f8f7820f281e128928b23e89ccec85ca6aeed77e089"
+    }
+  ],
+  "check_rows": [
+    {
+      "id": "summary_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "release readiness summary must pass"
+    },
+    {
+      "id": "summary_decision_ready",
+      "status": "pass",
+      "actual": "model_capability_route_promotion_release_readiness_summary_ready",
+      "detail": "summary decision must be ready"
+    },
+    {
+      "id": "summary_ready_flag",
+      "status": "pass",
+      "actual": true,
+      "detail": "summary ready flag must be true"
+    },
+    {
+      "id": "summary_failed_count_zero",
+      "status": "pass",
+      "actual": 0,
+      "detail": "summary failed_count must be zero"
+    },
+    {
+      "id": "summary_issues_empty",
+      "status": "pass",
+      "actual": 0,
+      "detail": "summary issues must be empty"
+    },
+    {
+      "id": "summary_check_rows_clean",
+      "status": "pass",
+      "actual": {
+        "pass": 15,
+        "fail": 0
+      },
+      "detail": "all summary check rows must pass"
+    },
+    {
+      "id": "summary_check_counts_match",
+      "status": "pass",
+      "actual": {
+        "summary": {
+          "passed": 15,
+          "failed": 0
+        },
+        "actual": 15
+      },
+      "detail": "summary check counts must match check_rows"
+    },
+    {
+      "id": "source_rows_present",
+      "status": "pass",
+      "actual": 3,
+      "detail": "summary must record the three upstream source rows"
+    },
+    {
+      "id": "source_kinds_match",
+      "status": "pass",
+      "actual": [
+        "governance_snapshot",
+        "release_packet",
+        "release_packet_review"
+      ],
+      "detail": "summary source kinds must match the expected packet/review/snapshot set"
+    },
+    {
+      "id": "source_rows_mark_existing",
+      "status": "pass",
+      "actual": [
+        {
+          "kind": "release_packet",
+          "path": "e\\795\\解释\\model-capability-route-promotion-release-packet\\model_capability_route_promotion_release_packet.json",
+          "exists": true
+        },
+        {
+          "kind": "release_packet_review",
+          "path": "e\\796\\解释\\model-capability-route-promotion-release-packet-review\\model_capability_route_promotion_release_packet_review.json",
+          "exists": true
+        },
+        {
+          "kind": "governance_snapshot",
+          "path": "e\\800\\解释\\model-capability-route-promotion-governance-snapshot\\model_capability_route_promotion_governance_snapshot.json",
+          "exists": true
+        }
+      ],
+      "detail": "summary source rows must mark files as existing"
+    },
+    {
+      "id": "source_files_digestible",
+      "status": "pass",
+      "actual": [
+        {
+          "kind": "release_packet",
+          "path": "e\\795\\解释\\model-capability-route-promotion-release-packet\\model_capability_route_promotion_release_packet.json",
+          "exists": true,
+          "sha256": "4b32d56640811e3dda52bba0e2f952227a6b9d7fb841ebaffa4ef301f4d82104"
+        },
+        {
+          "kind": "release_packet_review",
+          "path": "e\\796\\解释\\model-capability-route-promotion-release-packet-review\\model_capability_route_promotion_release_packet_review.json",
+          "exists": true,
+          "sha256": "7259663a4798d7a7470aacc776d429346d4fb881c149d200141d995fa428164c"
+        },
+        {
+          "kind": "governance_snapshot",
+          "path": "e\\800\\解释\\model-capability-route-promotion-governance-snapshot\\model_capability_route_promotion_governance_snapshot.json",
+          "exists": true,
+          "sha256": "f4be5170a62da02225816f8f7820f281e128928b23e89ccec85ca6aeed77e089"
+        }
+      ],
+      "detail": "source files must exist and have digests"
+    },
+    {
+      "id": "source_digest_kinds_match",
+      "status": "pass",
+      "actual": [
+        "governance_snapshot",
+        "release_packet",
+        "release_packet_review"
+      ],
+      "detail": "source digest rows must cover the expected source kinds"
+    },
+    {
+      "id": "source_evidence_count_matches",
+      "status": "pass",
+      "actual": {
+        "summary": 3,
+        "actual": 3
+      },
+      "detail": "evidence_count must match source rows"
+    },
+    {
+      "id": "active_routes_align",
+      "status": "pass",
+      "actual": {
+        "aligned": true,
+        "active_routes": [
+          "objective_level_contrast"
+        ],
+        "route_count": 1,
+        "packet_routes": [
+          "objective_level_contrast"
+        ],
+        "review_routes": [
+          "objective_level_contrast"
+        ],
+        "snapshot_routes": [
+          "objective_level_contrast"
+        ]
+      },
+      "detail": "route alignment must be true"
+    },
+    {
+      "id": "active_routes_match_summary",
+      "status": "pass",
+      "actual": {
+        "summary": [
+          "objective_level_contrast"
+        ],
+        "alignment": [
+          "objective_level_contrast"
+        ]
+      },
+      "detail": "summary routes must match route alignment"
+    },
+    {
+      "id": "active_route_count_matches",
+      "status": "pass",
+      "actual": {
+        "summary": 1,
+        "alignment": 1
+      },
+      "detail": "active route count must match route alignment"
+    },
+    {
+      "id": "boundary_consistent",
+      "status": "pass",
+      "actual": [
+        "tiny_required_term_pair_probe_only",
+        "tiny_required_term_pair_probe_only",
+        "tiny_required_term_pair_probe_only"
+      ],
+      "detail": "boundary claim must be internally consistent"
+    },
+    {
+      "id": "boundary_required",
+      "status": "pass",
+      "actual": {
+        "summary": "tiny_required_term_pair_probe_only",
+        "boundary_claim": "tiny_required_term_pair_probe_only"
+      },
+      "detail": "boundary must remain tiny_required_term_pair_probe_only"
+    },
+    {
+      "id": "claim_consistent",
+      "status": "pass",
+      "actual": [
+        "seed_stable_pair_probe_route_accepted",
+        "seed_stable_pair_probe_route_accepted",
+        "seed_stable_pair_probe_route_accepted"
+      ],
+      "detail": "model quality claim must be internally consistent"
+    },
+    {
+      "id": "claim_bounded",
+      "status": "pass",
+      "actual": "seed_stable_pair_probe_route_accepted",
+      "detail": "model quality claim must remain pair-probe scoped"
+    },
+    {
+      "id": "claim_matches_summary",
+      "status": "pass",
+      "actual": {
+        "summary": "seed_stable_pair_probe_route_accepted",
+        "boundary_claim": "seed_stable_pair_probe_route_accepted"
+      },
+      "detail": "summary claim must match boundary_claim"
+    },
+    {
+      "id": "handoff_ready",
+      "status": "pass",
+      "actual": "ready_for_bounded_governance_release",
+      "detail": "handoff status must be ready for bounded governance release"
+    },
+    {
+      "id": "downstream_policy_allowed",
+      "status": "pass",
+      "actual": {
+        "allowed": true,
+        "allowed_scope": "bounded_route_promotion_release_governance_only",
+        "source_allowed_scope": "bounded_model_capability_governance_only",
+        "route_ids": [
+          "objective_level_contrast"
+        ],
+        "boundary": "tiny_required_term_pair_probe_only",
+        "model_quality_claim": "seed_stable_pair_probe_route_accepted",
+        "reason": "packet, review, and governance snapshot agree inside the bounded route-promotion scope"
+      },
+      "detail": "downstream policy must allow bounded release governance"
+    },
+    {
+      "id": "downstream_scope_bounded",
+      "status": "pass",
+      "actual": "bounded_route_promotion_release_governance_only",
+      "detail": "downstream scope must be the release-readiness governance scope"
+    },
+    {
+      "id": "source_downstream_scope_bounded",
+      "status": "pass",
+      "actual": "bounded_model_capability_governance_only",
+      "detail": "source downstream scope must remain model-capability governance only"
+    }
+  ],
+  "summary": {
+    "contract_check_ready": true,
+    "source_summary_ready": true,
+    "active_route_count": 1,
+    "active_routes": [
+      "objective_level_contrast"
+    ],
+    "boundary": "tiny_required_term_pair_probe_only",
+    "model_quality_claim": "seed_stable_pair_probe_route_accepted",
+    "source_evidence_count": 3,
+    "source_digest_count": 3,
+    "passed_check_count": 25,
+    "failed_check_count": 0,
+    "next_step": "publish_contract_checked_route_promotion_release_readiness_summary"
+  },
+  "interpretation": {
+    "model_quality_claim": "bounded_route_promotion_release_governance_only",
+    "reason": "The release readiness summary is contract-checked and source-digestable for bounded downstream governance.",
+    "next_action": "use the checked summary as bounded route-promotion release governance evidence"
+  }
+}

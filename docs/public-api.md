@@ -253,3 +253,8 @@ For new code:
   `write_model_capability_route_promotion_release_readiness_summary_outputs`
   as stable route-promotion governance API, raising the root facade all-export
   budget from 278 to 280 and the lazy-export budget from 308 to 310.
+- v1256 intentionally promotes the matching
+  `build_model_capability_route_promotion_release_readiness_summary_check` and
+  `write_model_capability_route_promotion_release_readiness_summary_check_outputs`
+  contract-check API, raising the root facade all-export budget from 280 to 282
+  and the lazy-export budget from 310 to 312.

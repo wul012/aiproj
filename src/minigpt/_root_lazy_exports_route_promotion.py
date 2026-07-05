@@ -91,6 +91,14 @@ ROOT_FACADE_ROUTE_PROMOTION_LAZY_EXPORTS = {
         'model_capability_route_promotion_release_readiness_summary_artifacts',
         'write_model_capability_route_promotion_release_readiness_summary_outputs',
     ),
+    'build_model_capability_route_promotion_release_readiness_summary_check': (
+        'model_capability_route_promotion_release_readiness_summary_check',
+        'build_model_capability_route_promotion_release_readiness_summary_check',
+    ),
+    'write_model_capability_route_promotion_release_readiness_summary_check_outputs': (
+        'model_capability_route_promotion_release_readiness_summary_check_artifacts',
+        'write_model_capability_route_promotion_release_readiness_summary_check_outputs',
+    ),
     'build_model_capability_route_promotion_downstream_guard': (
         'model_capability_route_promotion_downstream_guard',
         'build_model_capability_route_promotion_downstream_guard',

@@ -23,6 +23,17 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
+Version `v1256.0.0` adds a **contract check for the v1255 route-promotion release readiness summary**. It consumes the real `f/1255` summary, verifies the ready decision, clean check rows, source rows, route alignment, boundary, bounded claim, downstream scope, and computes SHA-256 digests for the three upstream source evidence files. The ready run produced `status=pass`, `decision=model_capability_route_promotion_release_readiness_summary_contract_check_passed`, `contract_check_ready=True`, `active_routes=objective_level_contrast`, and `source_digest_count=3`.
+
+## Latest v1256 checkpoint
+
+- Added `src/minigpt/model_capability_route_promotion_release_readiness_summary_check.py`: a contract checker for the v1255 summary, including source digest rows, route/boundary/claim/downstream-scope checks, summary count checks, and failure-safe `not_claimed` handling.
+- Added `src/minigpt/model_capability_route_promotion_release_readiness_summary_check_artifacts.py` and CLI `scripts/check_model_capability_route_promotion_release_readiness_summary.py` for JSON/CSV/TXT/Markdown/HTML outputs.
+- Added `tests/test_model_capability_route_promotion_release_readiness_summary_check.py` with root facade export, clean pass, missing-source failure, widened-claim failure, output, and CLI coverage.
+- Produced real evidence in `f/1256` from the `f/1255` release readiness summary; code explanation is in `代码讲解记录_模型治理阶段/1214-v1256-route-promotion-release-readiness-summary-contract-check.md`.
+
+## Historical v1255 context
+
 Version `v1255.0.0` adds a **route-promotion release readiness summary** for the model-governance chain. It consumes the real upstream v795 release packet, v796 packet review, and v800 governance snapshot, then emits one bounded release-readiness verdict without widening the model-quality claim. The ready run produced `status=pass`, `decision=model_capability_route_promotion_release_readiness_summary_ready`, `active_routes=objective_level_contrast`, `boundary=tiny_required_term_pair_probe_only`, and `model_quality_claim=seed_stable_pair_probe_route_accepted`.
 
 ## Latest v1255 checkpoint
