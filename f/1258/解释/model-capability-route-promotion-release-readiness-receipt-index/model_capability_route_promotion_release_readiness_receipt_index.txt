@@ -1,0 +1,15 @@
+status=pass
+decision=model_capability_route_promotion_release_readiness_receipt_index_ready
+failed_count=0
+receipt_index_ready=True
+index_id=route-promotion-release-readiness-receipt-index-v1258
+lookup_scope=bounded_route_promotion_release_readiness_receipt_lookup_only
+entry_count=1
+lookup_key_count=1
+lookup_ready=True
+consumer_name=release-readiness-index-builder
+route_id=objective_level_contrast
+granted_scope=bounded_route_promotion_release_governance_only
+source_digest_count=3
+promotion_ready=False
+next_step=review_indexed_route_promotion_release_readiness_receipt

@@ -23,6 +23,17 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
+Version `v1258.0.0` adds a **lookup index for the v1257 route-promotion release readiness downstream receipt**. It consumes the real `f/1257` receipt, verifies that the receipt is granted, bounded, digest-backed, source-clean, and still routed to indexing, then emits one lookup row for `objective_level_contrast` without enabling promotion. The ready run produced `status=pass`, `decision=model_capability_route_promotion_release_readiness_receipt_index_ready`, `receipt_index_ready=True`, `lookup_key_count=1`, `lookup_ready=True`, `promotion_ready=False`, and `source_digest_count=3`.
+
+## Latest v1258 checkpoint
+
+- Added `src/minigpt/model_capability_route_promotion_release_readiness_receipt_index.py`: a pure receipt-index builder that turns a granted v1257 downstream receipt into a bounded lookup row while preserving source digests and blocked uses.
+- Added `src/minigpt/model_capability_route_promotion_release_readiness_receipt_index_artifacts.py` and CLI `scripts/build_model_capability_route_promotion_release_readiness_receipt_index.py` for JSON/CSV/TXT/Markdown/HTML outputs.
+- Added `tests/test_model_capability_route_promotion_release_readiness_receipt_index.py` with root facade export, ready index, ungranted-receipt failure, missing-file failure, output, and CLI coverage.
+- Produced real evidence in `f/1258` from the `f/1257` downstream receipt; code explanation is in `代码讲解记录_模型治理阶段/1216-v1258-route-promotion-release-readiness-receipt-index.md`.
+
+## Historical v1257 context
+
 Version `v1257.0.0` adds a **downstream receipt for the checked route-promotion release readiness summary**. It consumes the real `f/1256` contract-check output, records the downstream consumer, route, granted bounded scope, source-check digest, upstream source digests, blocked uses, and the next indexing step. The ready run produced `status=pass`, `decision=model_capability_route_promotion_release_readiness_downstream_receipt_granted`, `downstream_receipt_ready=True`, `receipt_status=granted`, `route_id=objective_level_contrast`, and `source_digest_count=3`.
 
 ## Latest v1257 checkpoint

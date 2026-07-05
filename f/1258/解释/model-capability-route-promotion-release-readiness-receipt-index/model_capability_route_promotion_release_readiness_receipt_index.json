@@ -1,0 +1,331 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability route promotion release readiness receipt index",
+  "generated_at": "2026-07-05T13:42:07Z",
+  "status": "pass",
+  "decision": "model_capability_route_promotion_release_readiness_receipt_index_ready",
+  "failed_count": 0,
+  "issues": [],
+  "downstream_receipt_path": "f\\1257\\解释\\model-capability-route-promotion-release-readiness-downstream-receipt\\model_capability_route_promotion_release_readiness_downstream_receipt.json",
+  "downstream_receipt_digest": "b986240b2a34261e24f3497abeb22a90a963ad334913337508eb9f85bcba5ea5",
+  "source_downstream_receipt_summary": {
+    "downstream_receipt_ready": true,
+    "receipt_status": "granted",
+    "consumer_name": "release-readiness-index-builder",
+    "route_id": "objective_level_contrast",
+    "granted_scope": "bounded_route_promotion_release_governance_only",
+    "boundary": "tiny_required_term_pair_probe_only",
+    "model_quality_claim": "seed_stable_pair_probe_route_accepted",
+    "source_digest_count": 3,
+    "blocked_uses": [
+      "production_model_quality_claim",
+      "unbounded_release_promotion",
+      "training_data_reuse_proof",
+      "model_capability_claim_beyond_pair_probe_route"
+    ],
+    "next_step": "index_checked_route_promotion_release_readiness_receipt",
+    "passed_check_count": 16,
+    "failed_check_count": 0
+  },
+  "source_downstream_receipt": {
+    "receipt_id": "route-promotion-release-readiness:objective_level_contrast:release-readiness-index-builder",
+    "receipt_status": "granted",
+    "consumer_name": "release-readiness-index-builder",
+    "route_id": "objective_level_contrast",
+    "requested_scope": "bounded_route_promotion_release_governance_only",
+    "granted_scope": "bounded_route_promotion_release_governance_only",
+    "boundary": "tiny_required_term_pair_probe_only",
+    "model_quality_claim": "seed_stable_pair_probe_route_accepted",
+    "source_check_path": "f\\1256\\解释\\model-capability-route-promotion-release-readiness-summary-check\\model_capability_route_promotion_release_readiness_summary_check.json",
+    "source_check_digest": "93e3a1fc3b43b6a09381f283d660c3cb1d49b4e6fa35522bd30f3dbc74388343",
+    "source_summary_ready": true,
+    "source_digest_count": 3,
+    "source_digest_rows": [
+      {
+        "kind": "release_packet",
+        "path": "e\\795\\解释\\model-capability-route-promotion-release-packet\\model_capability_route_promotion_release_packet.json",
+        "exists": true,
+        "sha256": "4b32d56640811e3dda52bba0e2f952227a6b9d7fb841ebaffa4ef301f4d82104"
+      },
+      {
+        "kind": "release_packet_review",
+        "path": "e\\796\\解释\\model-capability-route-promotion-release-packet-review\\model_capability_route_promotion_release_packet_review.json",
+        "exists": true,
+        "sha256": "7259663a4798d7a7470aacc776d429346d4fb881c149d200141d995fa428164c"
+      },
+      {
+        "kind": "governance_snapshot",
+        "path": "e\\800\\解释\\model-capability-route-promotion-governance-snapshot\\model_capability_route_promotion_governance_snapshot.json",
+        "exists": true,
+        "sha256": "f4be5170a62da02225816f8f7820f281e128928b23e89ccec85ca6aeed77e089"
+      }
+    ],
+    "blocked_uses": [
+      "production_model_quality_claim",
+      "unbounded_release_promotion",
+      "training_data_reuse_proof",
+      "model_capability_claim_beyond_pair_probe_route"
+    ],
+    "policy_reason": "packet, review, and governance snapshot agree inside the bounded route-promotion scope",
+    "next_step": "index_checked_route_promotion_release_readiness_receipt"
+  },
+  "source_digest_rows": [
+    {
+      "kind": "release_packet",
+      "path": "e\\795\\解释\\model-capability-route-promotion-release-packet\\model_capability_route_promotion_release_packet.json",
+      "exists": true,
+      "sha256": "4b32d56640811e3dda52bba0e2f952227a6b9d7fb841ebaffa4ef301f4d82104"
+    },
+    {
+      "kind": "release_packet_review",
+      "path": "e\\796\\解释\\model-capability-route-promotion-release-packet-review\\model_capability_route_promotion_release_packet_review.json",
+      "exists": true,
+      "sha256": "7259663a4798d7a7470aacc776d429346d4fb881c149d200141d995fa428164c"
+    },
+    {
+      "kind": "governance_snapshot",
+      "path": "e\\800\\解释\\model-capability-route-promotion-governance-snapshot\\model_capability_route_promotion_governance_snapshot.json",
+      "exists": true,
+      "sha256": "f4be5170a62da02225816f8f7820f281e128928b23e89ccec85ca6aeed77e089"
+    }
+  ],
+  "check_rows": [
+    {
+      "id": "downstream_receipt_file_exists",
+      "status": "pass",
+      "actual": "f\\1257\\解释\\model-capability-route-promotion-release-readiness-downstream-receipt\\model_capability_route_promotion_release_readiness_downstream_receipt.json",
+      "detail": "downstream receipt file must exist"
+    },
+    {
+      "id": "downstream_receipt_passed",
+      "status": "pass",
+      "actual": "pass",
+      "detail": "downstream receipt report must pass"
+    },
+    {
+      "id": "downstream_receipt_decision_granted",
+      "status": "pass",
+      "actual": "model_capability_route_promotion_release_readiness_downstream_receipt_granted",
+      "detail": "downstream receipt decision must be granted"
+    },
+    {
+      "id": "downstream_receipt_ready",
+      "status": "pass",
+      "actual": true,
+      "detail": "downstream receipt summary must be ready"
+    },
+    {
+      "id": "receipt_status_granted",
+      "status": "pass",
+      "actual": "granted",
+      "detail": "receipt body must be granted"
+    },
+    {
+      "id": "consumer_name_present",
+      "status": "pass",
+      "actual": "release-readiness-index-builder",
+      "detail": "receipt index requires a consumer name"
+    },
+    {
+      "id": "route_id_present",
+      "status": "pass",
+      "actual": "objective_level_contrast",
+      "detail": "receipt index requires a route id"
+    },
+    {
+      "id": "granted_scope_bounded",
+      "status": "pass",
+      "actual": "bounded_route_promotion_release_governance_only",
+      "detail": "receipt granted scope must remain bounded route-promotion release governance only"
+    },
+    {
+      "id": "boundary_required",
+      "status": "pass",
+      "actual": "tiny_required_term_pair_probe_only",
+      "detail": "receipt boundary must match the required boundary"
+    },
+    {
+      "id": "claim_bounded",
+      "status": "pass",
+      "actual": "seed_stable_pair_probe_route_accepted",
+      "detail": "receipt model quality claim must remain pair-probe scoped"
+    },
+    {
+      "id": "source_check_digest_present",
+      "status": "pass",
+      "actual": "93e3a1fc3b43b6a09381f283d660c3cb1d49b4e6fa35522bd30f3dbc74388343",
+      "detail": "receipt must carry the checked-summary digest"
+    },
+    {
+      "id": "downstream_receipt_digest_present",
+      "status": "pass",
+      "actual": "b986240b2a34261e24f3497abeb22a90a963ad334913337508eb9f85bcba5ea5",
+      "detail": "receipt index must digest the downstream receipt file"
+    },
+    {
+      "id": "source_digest_count_matches",
+      "status": "pass",
+      "actual": {
+        "receipt": 3,
+        "actual": 3
+      },
+      "detail": "source digest count must match digest rows"
+    },
+    {
+      "id": "source_digests_present",
+      "status": "pass",
+      "actual": [
+        {
+          "kind": "release_packet",
+          "path": "e\\795\\解释\\model-capability-route-promotion-release-packet\\model_capability_route_promotion_release_packet.json",
+          "exists": true,
+          "sha256": "4b32d56640811e3dda52bba0e2f952227a6b9d7fb841ebaffa4ef301f4d82104"
+        },
+        {
+          "kind": "release_packet_review",
+          "path": "e\\796\\解释\\model-capability-route-promotion-release-packet-review\\model_capability_route_promotion_release_packet_review.json",
+          "exists": true,
+          "sha256": "7259663a4798d7a7470aacc776d429346d4fb881c149d200141d995fa428164c"
+        },
+        {
+          "kind": "governance_snapshot",
+          "path": "e\\800\\解释\\model-capability-route-promotion-governance-snapshot\\model_capability_route_promotion_governance_snapshot.json",
+          "exists": true,
+          "sha256": "f4be5170a62da02225816f8f7820f281e128928b23e89ccec85ca6aeed77e089"
+        }
+      ],
+      "detail": "all upstream source digest rows must carry SHA-256"
+    },
+    {
+      "id": "blocked_uses_complete",
+      "status": "pass",
+      "actual": [
+        "production_model_quality_claim",
+        "unbounded_release_promotion",
+        "training_data_reuse_proof",
+        "model_capability_claim_beyond_pair_probe_route"
+      ],
+      "detail": "receipt index must preserve the complete blocked-use list"
+    },
+    {
+      "id": "source_receipt_checks_clean",
+      "status": "pass",
+      "actual": {
+        "failed_count": 0,
+        "row_failures": []
+      },
+      "detail": "source downstream receipt checks must be clean"
+    },
+    {
+      "id": "source_next_step_matches",
+      "status": "pass",
+      "actual": {
+        "receipt": "index_checked_route_promotion_release_readiness_receipt",
+        "summary": "index_checked_route_promotion_release_readiness_receipt"
+      },
+      "detail": "source receipt must route to receipt indexing"
+    }
+  ],
+  "receipt_index": {
+    "index_ready": true,
+    "index_id": "route-promotion-release-readiness-receipt-index-v1258",
+    "lookup_scope": "bounded_route_promotion_release_readiness_receipt_lookup_only",
+    "downstream_receipt_path": "f\\1257\\解释\\model-capability-route-promotion-release-readiness-downstream-receipt\\model_capability_route_promotion_release_readiness_downstream_receipt.json",
+    "downstream_receipt_digest": "b986240b2a34261e24f3497abeb22a90a963ad334913337508eb9f85bcba5ea5",
+    "entry_count": 1,
+    "index_rows": [
+      {
+        "lookup_key": "route-promotion-release-readiness:objective_level_contrast",
+        "entry_id": "route-promotion-release-readiness:objective_level_contrast:release-readiness-index-builder",
+        "consumer_name": "release-readiness-index-builder",
+        "route_id": "objective_level_contrast",
+        "granted_scope": "bounded_route_promotion_release_governance_only",
+        "boundary": "tiny_required_term_pair_probe_only",
+        "model_quality_claim": "seed_stable_pair_probe_route_accepted",
+        "source_check_digest": "93e3a1fc3b43b6a09381f283d660c3cb1d49b4e6fa35522bd30f3dbc74388343",
+        "downstream_receipt_digest": "b986240b2a34261e24f3497abeb22a90a963ad334913337508eb9f85bcba5ea5",
+        "source_digest_count": 3,
+        "blocked_uses": [
+          "production_model_quality_claim",
+          "unbounded_release_promotion",
+          "training_data_reuse_proof",
+          "model_capability_claim_beyond_pair_probe_route"
+        ],
+        "promotion_ready": false,
+        "lookup_ready": true
+      }
+    ],
+    "lookup_keys": [
+      "route-promotion-release-readiness:objective_level_contrast"
+    ],
+    "lookup_ready": true,
+    "consumer_name": "release-readiness-index-builder",
+    "route_id": "objective_level_contrast",
+    "granted_scope": "bounded_route_promotion_release_governance_only",
+    "boundary": "tiny_required_term_pair_probe_only",
+    "model_quality_claim": "seed_stable_pair_probe_route_accepted",
+    "source_check_digest": "93e3a1fc3b43b6a09381f283d660c3cb1d49b4e6fa35522bd30f3dbc74388343",
+    "source_digest_count": 3,
+    "source_digest_rows": [
+      {
+        "kind": "release_packet",
+        "path": "e\\795\\解释\\model-capability-route-promotion-release-packet\\model_capability_route_promotion_release_packet.json",
+        "exists": true,
+        "sha256": "4b32d56640811e3dda52bba0e2f952227a6b9d7fb841ebaffa4ef301f4d82104"
+      },
+      {
+        "kind": "release_packet_review",
+        "path": "e\\796\\解释\\model-capability-route-promotion-release-packet-review\\model_capability_route_promotion_release_packet_review.json",
+        "exists": true,
+        "sha256": "7259663a4798d7a7470aacc776d429346d4fb881c149d200141d995fa428164c"
+      },
+      {
+        "kind": "governance_snapshot",
+        "path": "e\\800\\解释\\model-capability-route-promotion-governance-snapshot\\model_capability_route_promotion_governance_snapshot.json",
+        "exists": true,
+        "sha256": "f4be5170a62da02225816f8f7820f281e128928b23e89ccec85ca6aeed77e089"
+      }
+    ],
+    "blocked_uses": [
+      "production_model_quality_claim",
+      "unbounded_release_promotion",
+      "training_data_reuse_proof",
+      "model_capability_claim_beyond_pair_probe_route"
+    ],
+    "promotion_ready": false,
+    "approved_for_promotion": false,
+    "evidence_count": 2,
+    "next_step": "review_indexed_route_promotion_release_readiness_receipt"
+  },
+  "summary": {
+    "receipt_index_ready": true,
+    "index_id": "route-promotion-release-readiness-receipt-index-v1258",
+    "lookup_scope": "bounded_route_promotion_release_readiness_receipt_lookup_only",
+    "entry_count": 1,
+    "lookup_key_count": 1,
+    "lookup_ready": true,
+    "consumer_name": "release-readiness-index-builder",
+    "route_id": "objective_level_contrast",
+    "granted_scope": "bounded_route_promotion_release_governance_only",
+    "boundary": "tiny_required_term_pair_probe_only",
+    "model_quality_claim": "seed_stable_pair_probe_route_accepted",
+    "source_digest_count": 3,
+    "promotion_ready": false,
+    "approved_for_promotion": false,
+    "blocked_uses": [
+      "production_model_quality_claim",
+      "unbounded_release_promotion",
+      "training_data_reuse_proof",
+      "model_capability_claim_beyond_pair_probe_route"
+    ],
+    "evidence_count": 2,
+    "next_step": "review_indexed_route_promotion_release_readiness_receipt",
+    "passed_check_count": 17,
+    "failed_check_count": 0
+  },
+  "interpretation": {
+    "model_quality_claim": "seed_stable_pair_probe_route_accepted",
+    "reason": "The granted downstream receipt is indexed for bounded route-promotion release readiness lookup only.",
+    "next_action": "review_indexed_route_promotion_release_readiness_receipt"
+  }
+}
