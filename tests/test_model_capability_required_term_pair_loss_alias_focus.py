@@ -4,6 +4,8 @@ from pathlib import Path
 import tempfile
 import unittest
 
+import minigpt.model_capability_required_term_pair_loss_alias_focus as facade
+import minigpt.model_capability_required_term_pair_loss_alias_focus_core as core
 from minigpt.model_capability_required_term_pair_loss_alias_focus import (
     build_loss_alias_focus_corpus,
     build_model_capability_required_term_pair_loss_alias_focus,
@@ -20,6 +22,18 @@ from minigpt.model_capability_required_term_pair_loss_alias_focus_artifacts impo
 
 
 class ModelCapabilityRequiredTermPairLossAliasFocusTests(unittest.TestCase):
+    def test_facade_reexports_focus_core_contract(self) -> None:
+        names = (
+            "build_loss_alias_focus_corpus",
+            "resolve_exit_code",
+            "select_loss_alias_focus_cases",
+            "select_loss_alias_support_cases",
+            "summarize_loss_alias_focus",
+            "summarize_loss_alias_focus_seed_rows",
+        )
+        for name in names:
+            self.assertIs(getattr(facade, name), getattr(core, name))
+
     def test_focus_reports_repaired_rows_and_outputs(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
