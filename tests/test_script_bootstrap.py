@@ -24,6 +24,27 @@ from scripts._normalization_guard import FOCUSED_TEST_MODULES, build_command, fo
 from scripts.check_normalization_guard import main as normalization_guard_main
 
 
+NORMALIZED_TEST_BOOTSTRAP_PATHS = (
+    "tests/test_registry.py",
+    "tests/test_registry_assets.py",
+    "tests/test_registry_leaderboards.py",
+    "tests/test_registry_rankings.py",
+    "tests/test_registry_split.py",
+    "tests/test_release_bundle.py",
+    "tests/test_release_gate.py",
+    "tests/test_release_gate_comparison.py",
+    "tests/test_release_readiness.py",
+    "tests/test_release_readiness_comparison.py",
+    "tests/test_release_readiness_drift_contract.py",
+    "tests/test_release_readiness_drift_contract_smoke.py",
+)
+
+MANUAL_TEST_BOOTSTRAP_FRAGMENTS = (
+    "ROOT = Path(__file__).resolve().parents[1]",
+    "sys.path.insert",
+)
+
+
 class ScriptBootstrapTests(unittest.TestCase):
     def test_project_paths_are_resolved_from_repository_root(self) -> None:
         self.assertEqual(PROJECT_ROOT, Path(__file__).resolve().parents[1])
@@ -69,6 +90,16 @@ class ScriptBootstrapTests(unittest.TestCase):
         stdout_lines = completed.stdout.strip().splitlines()
         self.assertEqual(stdout_lines[0], str(SRC_ROOT))
         self.assertIn("ensure_src_path", stdout_lines[1])
+
+    def test_normalized_test_families_use_shared_test_bootstrap(self) -> None:
+        for relative in NORMALIZED_TEST_BOOTSTRAP_PATHS:
+            path = PROJECT_ROOT / relative
+            text = path.read_text(encoding="utf-8")
+            with self.subTest(relative=relative):
+                self.assertTrue(path.is_file())
+                self.assertIn("tests._bootstrap", text)
+                for fragment in MANUAL_TEST_BOOTSTRAP_FRAGMENTS:
+                    self.assertNotIn(fragment, text)
 
     def test_ci_engineering_entrypoints_are_partitioned_and_required(self) -> None:
         workflow_text = (PROJECT_ROOT / ".github" / "workflows" / "ci.yml").read_text(encoding="utf-8")
