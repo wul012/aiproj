@@ -1,13 +1,13 @@
 from __future__ import annotations
 
 import json
-import sys
 import tempfile
 import unittest
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "src"))
+from tests._bootstrap import ensure_src_path
+
+ensure_src_path()
 
 from minigpt.eval_suite import PromptCase, PromptSuite
 from minigpt.pair_batch import build_pair_batch_case_result, build_pair_batch_report, write_pair_batch_outputs
