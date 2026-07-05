@@ -248,3 +248,8 @@ For new code:
   compatibility wrapper or a focused compatibility test.
 - Do not add a route-specific governance symbol to `minigpt.__init__` unless it
   is intentionally promoted to stable public API.
+- v1255 intentionally promotes
+  `build_model_capability_route_promotion_release_readiness_summary` and
+  `write_model_capability_route_promotion_release_readiness_summary_outputs`
+  as stable route-promotion governance API, raising the root facade all-export
+  budget from 278 to 280 and the lazy-export budget from 308 to 310.

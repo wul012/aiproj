@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT model capability route promotion release readiness summary</title>
+<style>
+:root{color-scheme:light;--ink:#16212a;--muted:#64717d;--line:#d8dee4;--panel:#f8fafc;--accent:#0f766e}
+*{box-sizing:border-box}
+body{margin:0;background:#eef3f1;color:var(--ink);font-family:Arial,"Microsoft YaHei",sans-serif}
+main{max-width:1180px;margin:0 auto;padding:28px}
+h1{font-size:30px;margin:0 0 8px;letter-spacing:0}
+h2{font-size:18px;margin:0 0 12px;letter-spacing:0}
+p{color:var(--muted);line-height:1.55;overflow-wrap:anywhere}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:18px 0}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:8px}
+.card{padding:14px}
+.card span{display:block;color:var(--muted);font-size:12px;text-transform:uppercase}
+.card strong{display:block;margin-top:6px;font-size:18px;line-height:1.2;color:var(--accent);overflow-wrap:anywhere}
+.panel{padding:16px;margin:14px 0}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:#334155}
+</style>
+</head>
+<body>
+<main>
+<header><h1>MiniGPT model capability route promotion release readiness summary</h1><p>The route promotion packet, review, and governance snapshot agree as bounded release-readiness evidence.</p></header>
+<section class="stats"><div class="card"><span>Status</span><strong>pass</strong></div><div class="card"><span>Decision</span><strong>model_capability_route_promotion_release_readiness_summary_ready</strong></div><div class="card"><span>Ready</span><strong>True</strong></div><div class="card"><span>Routes</span><strong>1</strong></div><div class="card"><span>Boundary</span><strong>tiny_required_term_pair_probe_only</strong></div><div class="card"><span>Claim</span><strong>seed_stable_pair_probe_route_accepted</strong></div><div class="card"><span>Downstream</span><strong>bounded_route_promotion_release_governance_only</strong></div></section>
+<section class="panel"><h2>Sources</h2><div class="table-wrap"><table>
+<thead><tr><th>Kind</th><th>Exists</th><th>Path</th></tr></thead>
+<tbody><tr><td>release_packet</td><td>True</td><td>e\795\解释\model-capability-route-promotion-release-packet\model_capability_route_promotion_release_packet.json</td></tr><tr><td>release_packet_review</td><td>True</td><td>e\796\解释\model-capability-route-promotion-release-packet-review\model_capability_route_promotion_release_packet_review.json</td></tr><tr><td>governance_snapshot</td><td>True</td><td>e\800\解释\model-capability-route-promotion-governance-snapshot\model_capability_route_promotion_governance_snapshot.json</td></tr></tbody>
+</table></div></section>
+<section class="panel"><h2>Checks</h2><div class="table-wrap"><table>
+<thead><tr><th>Check</th><th>Status</th><th>Actual</th><th>Detail</th></tr></thead>
+<tbody><tr><td>release_packet_passed</td><td>pass</td><td>pass</td><td>release packet must pass</td></tr><tr><td>release_packet_ready</td><td>pass</td><td>{&#x27;decision&#x27;: &#x27;model_capability_route_promotion_release_packet_ready&#x27;, &#x27;ready&#x27;: True}</td><td>release packet must be ready</td></tr><tr><td>release_packet_review_passed</td><td>pass</td><td>pass</td><td>release packet review must pass</td></tr><tr><td>release_packet_review_ready</td><td>pass</td><td>{&#x27;decision&#x27;: &#x27;model_capability_route_promotion_release_packet_review_ready&#x27;, &#x27;ready&#x27;: True}</td><td>release packet review must be ready</td></tr><tr><td>governance_snapshot_passed</td><td>pass</td><td>pass</td><td>governance snapshot must pass</td></tr><tr><td>governance_snapshot_ready</td><td>pass</td><td>{&#x27;decision&#x27;: &#x27;model_capability_route_promotion_governance_snapshot_ready&#x27;, &#x27;ready&#x27;: True}</td><td>governance snapshot must be ready</td></tr><tr><td>source_files_exist</td><td>pass</td><td>[{&#x27;kind&#x27;: &#x27;release_packet&#x27;, &#x27;path&#x27;: &#x27;e\\795\\解释\\model-capability-route-promotion-release-packet\\model_capability_route_promotion_release_packet.json&#x27;, &#x27;exists&#x27;: True}, {&#x27;kind&#x27;: &#x27;release_packet_review&#x27;, &#x27;path&#x27;: &#x27;e\\796\\解释\\model-capability-route-promotion-release-packet-review\\model_capability_route_promotion_release_packet_review.json&#x27;, &#x27;exists&#x27;: True}, {&#x27;kind&#x27;: &#x27;governance_snapshot&#x27;, &#x27;path&#x27;: &#x27;e\\800\\解释\\model-capability-route-promotion-governance-snapshot\\model_capability_route_promotion_governance_snapshot.json&#x27;, &#x27;exists&#x27;: True}]</td><td>release readiness source files must exist</td></tr><tr><td>active_routes_align</td><td>pass</td><td>{&#x27;aligned&#x27;: True, &#x27;active_routes&#x27;: [&#x27;objective_level_contrast&#x27;], &#x27;route_count&#x27;: 1, &#x27;packet_routes&#x27;: [&#x27;objective_level_contrast&#x27;], &#x27;review_routes&#x27;: [&#x27;objective_level_contrast&#x27;], &#x27;snapshot_routes&#x27;: [&#x27;objective_level_contrast&#x27;]}</td><td>packet, review, and snapshot routes must align</td></tr><tr><td>active_route_present</td><td>pass</td><td>1</td><td>summary requires at least one active route</td></tr><tr><td>boundary_scoped</td><td>pass</td><td>[&#x27;tiny_required_term_pair_probe_only&#x27;, &#x27;tiny_required_term_pair_probe_only&#x27;, &#x27;tiny_required_term_pair_probe_only&#x27;]</td><td>all boundaries must be tiny_required_term_pair_probe_only</td></tr><tr><td>claim_consistent</td><td>pass</td><td>[&#x27;seed_stable_pair_probe_route_accepted&#x27;, &#x27;seed_stable_pair_probe_route_accepted&#x27;, &#x27;seed_stable_pair_probe_route_accepted&#x27;]</td><td>all source claims must match</td></tr><tr><td>claim_bounded</td><td>pass</td><td>seed_stable_pair_probe_route_accepted</td><td>claim must remain pair-probe scoped</td></tr><tr><td>source_checks_clean</td><td>pass</td><td>{&#x27;packet&#x27;: 0, &#x27;review&#x27;: 0, &#x27;snapshot&#x27;: 0}</td><td>source summaries must have no failed checks</td></tr><tr><td>downstream_policy_allowed</td><td>pass</td><td>{&#x27;allowed&#x27;: True, &#x27;allowed_scope&#x27;: &#x27;bounded_model_capability_governance_only&#x27;, &#x27;route_ids&#x27;: [&#x27;objective_level_contrast&#x27;], &#x27;reason&#x27;: &#x27;all accepted route cards are contract verified and boundary scoped&#x27;}</td><td>governance snapshot must allow bounded downstream use</td></tr><tr><td>downstream_scope_bounded</td><td>pass</td><td>bounded_model_capability_governance_only</td><td>downstream scope must stay bounded to model capability governance</td></tr></tbody>
+</table></div></section>
+</main>
+</body>
+</html>
