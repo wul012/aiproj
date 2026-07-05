@@ -1,13 +1,12 @@
 from __future__ import annotations
 
-import sys
 import unittest
-from pathlib import Path
 
 import torch
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "src"))
+from tests._bootstrap import ensure_src_path
+
+ensure_src_path()
 
 from minigpt.dataset import get_batch, split_token_ids
 
