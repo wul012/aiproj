@@ -5,6 +5,8 @@ from pathlib import Path
 import tempfile
 import unittest
 
+import minigpt.model_capability_required_term_pair_rebalance as facade
+import minigpt.model_capability_required_term_pair_rebalance_core as core
 from minigpt.model_capability_required_term_pair_rebalance import (
     build_model_capability_required_term_pair_rebalance,
     build_required_term_pair_rebalance_corpus,
@@ -25,6 +27,18 @@ from minigpt.model_capability_required_term_pair_rebalance_artifacts import (
 
 
 class ModelCapabilityRequiredTermPairRebalanceTests(unittest.TestCase):
+    def test_facade_reexports_rebalance_core_contract(self) -> None:
+        names = (
+            "build_required_term_pair_rebalance_corpus",
+            "compare_rebalance_pairs",
+            "resolve_exit_code",
+            "select_rebalance_pairs",
+            "summarize_rebalance_probe_rows",
+            "summarize_required_term_pair_rebalance",
+        )
+        for name in names:
+            self.assertIs(getattr(facade, name), getattr(core, name))
+
     def test_rebalance_reports_full_hit_gain_and_writes_outputs(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
