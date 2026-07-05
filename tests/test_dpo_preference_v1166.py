@@ -6,6 +6,8 @@ import unittest
 import torch
 import torch.nn.functional as F
 
+import minigpt.dpo_preference_v1166 as facade
+import minigpt.dpo_preference_v1166_core as core
 from minigpt.dpo_preference_v1166 import (
     LOG2,
     PRIMARY_VERDICTS,
@@ -26,6 +28,22 @@ from minigpt.sft_training import IGNORE_INDEX, train_sft
 from minigpt.tokenizer import CharTokenizer
 
 DEVICE = torch.device("cpu")
+
+
+class CoreFacadeContractTests(unittest.TestCase):
+    def test_legacy_module_reexports_core_primitives(self) -> None:
+        names = (
+            "PreferencePair",
+            "build_confusable_preferences",
+            "logp_completion",
+            "dpo_loss",
+            "train_dpo",
+            "evaluate_preference",
+            "evaluate_confusable",
+        )
+        for name in names:
+            self.assertIs(getattr(facade, name), getattr(core, name))
+        self.assertEqual(facade.LOG2, core.LOG2)
 
 
 def _tiny_model(vocab_size: int = 10, block_size: int = 8) -> MiniGPT:
