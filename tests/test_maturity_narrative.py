@@ -7,8 +7,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "src"))
+from tests._bootstrap import ROOT
 
 from minigpt import maturity_narrative, maturity_narrative_artifacts
 from minigpt import maturity_narrative_sections, maturity_narrative_summary
