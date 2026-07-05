@@ -19,6 +19,8 @@ import unittest
 
 import torch
 
+import minigpt.spec_decode_v1170 as facade
+import minigpt.spec_decode_v1170_core as core
 from minigpt.model import GPTConfig, MiniGPT
 from minigpt.sft_corpus import EOS, PAD, build_sft_corpus
 from minigpt.sft_training import train_sft
@@ -41,6 +43,24 @@ from minigpt.spec_decode_v1170 import (
 
 DEVICE = torch.device("cpu")
 V, BS = 24, 24
+
+
+class CoreFacadeContractTests(unittest.TestCase):
+    def test_legacy_module_reexports_decoding_primitives(self) -> None:
+        names = (
+            "SpecStats",
+            "chunked_forward_logit_diff",
+            "classify_greedy_diff",
+            "greedy_token",
+            "is_tie",
+            "plain_generate_greedy",
+            "plain_sample",
+            "slice_caches",
+            "speculative_generate_greedy",
+            "speculative_generate_sample",
+        )
+        for name in names:
+            self.assertIs(getattr(facade, name), getattr(core, name))
 
 
 def _cfg(n_layer, n_embd, rope):
