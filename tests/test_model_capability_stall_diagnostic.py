@@ -13,7 +13,7 @@ from minigpt.model_capability_stall_diagnostic import (
 )
 from minigpt.model_capability_stall_diagnostic_artifacts import write_model_capability_stall_diagnostic_outputs
 
-ROOT = Path(__file__).resolve().parents[1]
+from tests._bootstrap import ROOT
 
 
 def test_stall_diagnostic_explains_token_budget_limit(tmp_path: Path) -> None:

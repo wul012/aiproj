@@ -7,10 +7,9 @@ import tempfile
 import unittest
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "scripts"))
+from tests._bootstrap import ROOT
 
-from check_archived_path_portability import (  # noqa: E402
+from scripts.check_archived_path_portability import (  # noqa: E402
     CHECK_CSV_FILENAME,
     CHECK_HTML_FILENAME,
     CHECK_JSON_FILENAME,

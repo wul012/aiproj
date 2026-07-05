@@ -7,7 +7,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
+from tests._bootstrap import ROOT
 
 from scripts.check_tiny_scorecard_comparison_smoke import (  # noqa: E402
     CHECK_JSON_FILENAME,

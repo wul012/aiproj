@@ -22,7 +22,7 @@ from minigpt.model_capability_required_term_pair_prompt_separation_audit_artifac
 )
 
 
-ROOT = Path(__file__).resolve().parents[1]
+from tests._bootstrap import ROOT
 
 
 class ModelCapabilityRequiredTermPairPromptSeparationAuditTests(unittest.TestCase):

@@ -7,8 +7,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "src"))
+from tests._bootstrap import ROOT
 
 from scripts.run_tiny_standard_benchmark_smoke import (  # noqa: E402
     build_capped_prompt_suite_payload,

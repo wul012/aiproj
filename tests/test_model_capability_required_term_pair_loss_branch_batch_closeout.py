@@ -21,7 +21,7 @@ from minigpt.model_capability_required_term_pair_loss_branch_batch_closeout_arti
 from minigpt.report_utils import write_json_payload
 
 
-ROOT = Path(__file__).resolve().parents[1]
+from tests._bootstrap import ROOT
 
 
 class LossBranchBatchCloseoutTests(unittest.TestCase):

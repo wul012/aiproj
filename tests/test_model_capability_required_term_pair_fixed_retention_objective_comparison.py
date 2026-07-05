@@ -20,7 +20,7 @@ from minigpt.model_capability_required_term_pair_fixed_retention_objective_compa
 from minigpt.report_utils import write_json_payload
 
 
-ROOT = Path(__file__).resolve().parents[1]
+from tests._bootstrap import ROOT
 
 
 class FixedRetentionObjectiveComparisonTests(unittest.TestCase):
