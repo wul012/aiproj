@@ -65,7 +65,8 @@ of truth for this focused guard.
   local outputs, editor state, virtual environments, and the personal
   `ignoreit.py` scratch file.
 - `tests.test_script_bootstrap` protects shared script/test bootstrap behavior,
-  CI engineering entrypoint partitioning, and the normalization wrapper CLI.
+  tests-package import bootstrapping for direct unittest module runs, CI
+  engineering entrypoint partitioning, and the normalization wrapper CLI.
 - `tests.test_script_bootstrap_helpers` protects the small AST and path helper
   functions used by the script bootstrap tests, including function lookup,
   argument-name extraction, `SystemExit(main(...))` detection,

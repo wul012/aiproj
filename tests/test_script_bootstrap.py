@@ -45,6 +45,31 @@ class ScriptBootstrapTests(unittest.TestCase):
         finally:
             sys.path[:] = original_path
 
+    def test_tests_package_import_bootstraps_src_for_direct_unittest_modules(self) -> None:
+        script = (
+            "import sys\n"
+            "from pathlib import Path\n"
+            "src = str(Path.cwd() / 'src')\n"
+            "sys.path[:] = [path for path in sys.path if path != src]\n"
+            "import tests\n"
+            "import minigpt\n"
+            "print(sys.path[0])\n"
+            "print(tests.__all__)\n"
+        )
+
+        completed = subprocess.run(
+            [sys.executable, "-B", "-c", script],
+            cwd=PROJECT_ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+
+        self.assertEqual(completed.returncode, 0, completed.stderr)
+        stdout_lines = completed.stdout.strip().splitlines()
+        self.assertEqual(stdout_lines[0], str(SRC_ROOT))
+        self.assertIn("ensure_src_path", stdout_lines[1])
+
     def test_ci_engineering_entrypoints_are_partitioned_and_required(self) -> None:
         workflow_text = (PROJECT_ROOT / ".github" / "workflows" / "ci.yml").read_text(encoding="utf-8")
         required_fragments = set(REQUIRED_COMMAND_FRAGMENTS.values())
