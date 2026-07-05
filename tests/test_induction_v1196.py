@@ -20,6 +20,7 @@ import torch  # noqa: E402
 from minigpt.induction_v1196 import (  # noqa: E402
     IGNORE, InductionConfig, build_report, decide, make_batch, run_phase_a, summarize, unigram_acc,
 )
+from minigpt.induction_v1196_decision import decide_induction  # noqa: E402
 from minigpt.induction_v1196_report import build_induction_report  # noqa: E402
 
 SEEDS = (1, 2, 3, 4, 5)
@@ -100,6 +101,11 @@ ACC2_GOOD = {8: 0.30, 16: 0.45, 24: 0.99, 32: 1.0, 48: 1.0, 64: 1.0, 96: 1.0, 12
 
 
 class DecideLadder(unittest.TestCase):
+    def test_extracted_decision_matches_public_facade(self):
+        cfg = self.cfg()
+        result = summarize(synth_cache(ACC1_FAIL, ACC2_GOOD), cfg)
+        self.assertEqual(decide(result, cfg), decide_induction(result, cfg))
+
     def cfg(self):
         return InductionConfig(seeds=SEEDS)
 

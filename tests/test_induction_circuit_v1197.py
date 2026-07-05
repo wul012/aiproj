@@ -20,6 +20,7 @@ import torch  # noqa: E402
 from minigpt.induction_circuit_v1197 import (  # noqa: E402
     CircuitConfig, build_report, decide, run_phase_a, summarize,
 )
+from minigpt.induction_circuit_v1197_decision import decide_induction_circuit  # noqa: E402
 from minigpt.induction_circuit_v1197_report import build_report as extracted_build_report  # noqa: E402
 
 SEEDS = (1, 2, 3, 4, 5)
@@ -79,6 +80,11 @@ def synth_cache(*, n_head=NH, seeds=SEEDS, K=20, prev_high=(0, 1, 2, 3), ind_hig
 
 
 class DecideLadder(unittest.TestCase):
+    def test_extracted_decision_matches_public_facade(self):
+        cfg = self.cfg()
+        result = summarize(synth_cache(), cfg)
+        self.assertEqual(decide(result, cfg), decide_induction_circuit(result, cfg))
+
     def cfg(self):
         return CircuitConfig(seeds=SEEDS)
 
