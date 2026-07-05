@@ -24,6 +24,8 @@ from minigpt.similarity_v1195 import (  # noqa: E402
     decide, f_add_table, mixture_table, run_phase_a, spearman, spearman_perm_p, summarize,
     type_table,
 )
+from minigpt.similarity_v1195_decision import decide_similarity  # noqa: E402
+from minigpt.similarity_v1195_report import build_similarity_report  # noqa: E402
 
 P = 23
 MIX_SS = (1.0, 0.875, 0.75, 0.5, 0.25, 0.0)
@@ -220,6 +222,26 @@ class DecideLadder(unittest.TestCase):
         self.assertGreaterEqual(len(report["recommendations"]), 5)
         self.assertIn("curve_points", report)
         self.assertIn("residuals", report)
+
+    def test_extracted_decision_matches_public_facade(self):
+        cfg = self.cfg()
+        result = summarize(synth_cache(GOVERNED_FORGET, GOVERNED_OVERLAP), cfg)
+        self.assertEqual(decide(result, cfg), decide_similarity(result, cfg))
+
+    def test_extracted_report_matches_public_facade(self):
+        cfg = self.cfg()
+        result = summarize(synth_cache(GOVERNED_FORGET, GOVERNED_OVERLAP), cfg)
+        info = decide(result, cfg)
+        expected = build_report(result, info, "synthetic", generated_at="2026-01-01T00:00:00Z")
+        actual = build_similarity_report(
+            result,
+            info,
+            "synthetic",
+            generated_at="2026-01-01T00:00:00Z",
+            c1_min_range=SimilarityConfig().c1_min_range,
+            equiv_delta=SimilarityConfig().equiv_delta,
+        )
+        self.assertEqual(actual, expected)
 
 
 class PhaseASmoke(unittest.TestCase):

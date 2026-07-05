@@ -67,13 +67,15 @@ from minigpt.continual_v1193 import (
     ContinualConfig, _opt, _step, consolidate, eq_token, majority_prior, make_model,
     op_token, pair_masks, vocab_size,
 )
-from minigpt.experiment_utils import mean_std, significant
+from minigpt.experiment_utils import mean_std
 from minigpt.grok_v1179 import ANSWER_TARGET_POS, answer_accuracy
-from minigpt.report_utils import utc_now
+from minigpt.similarity_v1195_decision import (
+    PRIMARY_VERDICTS,
+    REVIEW_VERDICTS,
+    decide_similarity,
+)
+from minigpt.similarity_v1195_report import build_similarity_report
 from minigpt.similarity_v1195_stats import (
-    _interp,
-    _isotonic_decreasing,
-    _ols2,
     spearman,
     spearman_perm_p,
 )
@@ -390,267 +392,23 @@ def summarize(cache: dict, cfg: SimilarityConfig | None = None) -> dict:
     }
 
 
-# verdict vocabulary
-REVIEW_VERDICTS = {"task_a_not_consolidated", "no_forgetting_floor", "operand_leak",
-                   "not_jointly_learnable", "too_few_learnable_curve_points", "underpowered_type_contrast"}
-PRIMARY_VERDICTS = {"forgetting_governed_by_output_overlap",
-                    "overlap_grades_forgetting_with_residual_structure",
-                    "forgetting_tracks_task_type", "no_overlap_dependence"}
-
-
+# verdict vocabulary and report assembly live in focused pure modules.
 def decide(result: dict, cfg: SimilarityConfig | None = None) -> dict:
-    """Pure gates + pre-registered, margin-aware verdict ladder (panel M4/M5). status=='pass'
-    certifies a VALID measurement on the model-INDEPENDENT analytic overlap, never a clean curve."""
-    cfg = cfg or SimilarityConfig()
-    st = result["stats"]
-    chance = result["chance"]
-
-    def beats(more, less):   # `more` forgetting meaningfully exceeds `less` (margin AND combined std)
-        (mm, ms), (lm, ls) = more, less
-        return (mm - lm) > cfg.min_reduction and significant(mm, ms, lm, ls)
-
-    # ---- validity gates ----
-    g_consol = result["per_seed_plateau_ok"] and result["plateau"][0] >= cfg.base.plateau_acc - 0.02
-    g_floor = result["continue_on_A_forget"][0] <= cfg.floor_tol
-    g_leak = bool(result["leak_free"])
-    prior = st["type:mul"]["prior"] if "type:mul" in st else next(iter(st.values()))["prior"]
-    g_joint = ((result["joint_accA"][0] - prior) >= cfg.b_learn_margin and
-               (result["joint_accB"][0] - prior) >= cfg.b_learn_margin)
-
-    # mixture curve = learned mixture arms; EXCLUDE the overlap==1 endpoint (definitional, M4)
-    mix = [st[k] for k in result["mix_keys"]]
-    mix_learned = [m for m in mix if m["learned"]]
-    mix_curve = [m for m in mix_learned if m["overlap"][0] < 0.999]   # interior + low end
-    g_enough = len(mix_curve) >= 4
-
-    # independent type evidence = add_offset, linear, rand (add_same==mix s=1, mul==mix s=0)
-    indep_type = [st[k] for k in ("type:add_offset", "type:linear", "type:rand") if k in st]
-    indep_learned = [t for t in indep_type if t["learned"]]
-
-    degenerate_zero_variance = any(m["forget"][1] == 0.0 for m in mix_learned)
-
-    # ---- C1: monotone graded slope over the mixture interior ----
-    ov = [m["overlap"][0] for m in mix_curve]
-    fg = [m["forget"][0] for m in mix_curve]
-    rho = spearman(ov, fg) if len(mix_curve) >= 3 else float("nan")
-    rho_p = spearman_perm_p(ov, fg) if len(mix_curve) >= 3 else float("nan")
-    if mix_curve:
-        lo = min(mix_curve, key=lambda m: m["overlap"][0])   # lowest overlap -> most forgetting
-        hi = max(mix_curve, key=lambda m: m["overlap"][0])   # highest overlap -> least forgetting
-        span = lo["forget"][0] - hi["forget"][0]
-        c1_slope = (rho <= cfg.spearman_floor) and (span >= cfg.c1_min_range) and beats(lo["forget"], hi["forget"])
-    else:
-        span, c1_slope = 0.0, False
-
-    # ---- accB / drift confound (panel M3): overlap must survive controlling for them ----
-    allp = mix_curve + indep_learned
-    if len(allp) >= 4:
-        y = [m["forget"][0] for m in allp]
-        xo = [m["overlap"][0] for m in allp]
-        xb = [m["accB_train_conflict"][0] if not math.isnan(m["accB_train_conflict"][0])
-              else m["accB_train"][0] for m in allp]   # learnedness = fitting B's conflict cells
-        xd = [m["emb_drift"][0] for m in allp]
-        b_ov_accB, b_accB, r2_b = _ols2(y, xo, xb)
-        b_ov_drift, b_drift, r2_d = _ols2(y, xo, xd)
-        overlap_survives = (b_ov_accB < 0 and abs(b_ov_accB) >= abs(b_accB) and
-                            b_ov_drift < 0 and abs(b_ov_drift) >= abs(b_drift))
-    else:
-        b_ov_accB = b_accB = b_ov_drift = b_drift = r2_b = r2_d = float("nan")
-        overlap_survives = False
-
-    # ---- super-linear test (panel S6): observed forgetting vs the (1-overlap) overwrite null ----
-    plat_m = result["plateau"][0]
-    sl_devs = [m["forget"][0] - (1.0 - m["overlap"][0]) * plat_m for m in mix_curve]
-    superlinear = (sum(sl_devs) / len(sl_devs)) >= cfg.superlinear_margin if sl_devs else False
-
-    # ---- C2: operation FAMILY does not protect (equivalence, TOST-style) ----
-    ao, mu, asame = st.get("type:add_offset"), st.get("type:mul"), st.get("type:add_same")
-    have_c2 = ao is not None and mu is not None and asame is not None
-    type_lowov = [t for t in (ao, mu, st.get("type:rand")) if t is not None
-                  and t["learned"] and t["overlap"][0] <= cfg.low_overlap_max]
-    combined_std_type = math.sqrt(ao["forget"][1] ** 2 + mu["forget"][1] ** 2) if have_c2 else float("nan")
-    underpowered_type = bool(have_c2 and combined_std_type > 0.20)
-    c2_equiv = bool(have_c2 and ao["learned"] and mu["learned"] and
-                    abs(ao["forget"][0] - mu["forget"][0]) <= cfg.equiv_delta - combined_std_type and
-                    beats(ao["forget"], asame["forget"]) and beats(mu["forget"], asame["forget"]))
-    family_protects = bool(have_c2 and ao["learned"] and mu["learned"] and beats(mu["forget"], ao["forget"]))
-
-    # ---- C3: unification residual -- each independent learned type point near the mixture curve ----
-    curve = _isotonic_decreasing([m["overlap"][0] for m in mix_curve], [m["forget"][0] for m in mix_curve]) \
-        if len(mix_curve) >= 2 else []
-    residuals = {}
-    c3_ok = bool(indep_learned) and bool(curve)
-    for t in (indep_learned if curve else []):
-        pred = _interp(curve, t["overlap"][0])
-        res = abs(t["forget"][0] - pred)
-        tol = max(cfg.residual_std_mult * t["forget"][1], cfg.residual_margin)
-        residuals[t["key"]] = {"overlap": round(t["overlap"][0], 4), "forget": round(t["forget"][0], 4),
-                               "pred": round(pred, 4), "residual": round(res, 4), "tol": round(tol, 4),
-                               "within": bool(res <= tol)}
-        c3_ok = c3_ok and (res <= tol)
-
-    # ---- structure-at-fixed-overlap (panel S4): does operation STRUCTURE add forgetting beyond
-    # what overlap predicts? The honest test is the C3 RESIDUAL (raw forgetting differences among
-    # "low overlap" tasks are confounded by their small overlap differences -- add_offset o=0.0
-    # forgets more than mul o=0.043 BECAUSE it conflicts on every cell, which is the overlap law,
-    # not residual structure). So: structure_at_fixed_overlap == some learned type point deviates
-    # from the mixture curve beyond tolerance == not c3_ok.
-    structure_at_fixed_overlap = bool(indep_learned) and (not c3_ok)
-    # raw spread among the learned overlap~0 type tasks, reported for context only (NOT a gate)
-    lowov_forget_spread = (max(t["forget"][0] for t in type_lowov) - min(t["forget"][0] for t in type_lowov)) \
-        if len(type_lowov) >= 2 else 0.0
-
-    flags = {
-        "g_a_consolidated": bool(g_consol), "g_floor_clean": bool(g_floor),
-        "g_no_operand_leak": bool(g_leak), "g_jointly_learnable": bool(g_joint),
-        "g_enough_curve_points": bool(g_enough), "degenerate_zero_variance": bool(degenerate_zero_variance),
-        "c1_monotone_slope": bool(c1_slope), "spearman_overlap_forget": round(rho, 4),
-        "spearman_perm_p": round(rho_p, 4) if not math.isnan(rho_p) else None, "slope_span": round(span, 4),
-        "overlap_survives_accB_and_drift": bool(overlap_survives),
-        "beta_overlap_given_accB": round(b_ov_accB, 3) if not math.isnan(b_ov_accB) else None,
-        "beta_accB": round(b_accB, 3) if not math.isnan(b_accB) else None,
-        "beta_overlap_given_drift": round(b_ov_drift, 3) if not math.isnan(b_ov_drift) else None,
-        "beta_drift": round(b_drift, 3) if not math.isnan(b_drift) else None,
-        "superlinear_vs_overwrite_null": bool(superlinear),
-        "mean_superlinear_excess": round(sum(sl_devs) / len(sl_devs), 4) if sl_devs else None,
-        "c2_family_does_not_protect": bool(c2_equiv), "family_protects": bool(family_protects),
-        "underpowered_type_contrast": bool(underpowered_type),
-        "c3_type_points_on_curve": bool(c3_ok), "residuals": residuals,
-        "structure_at_fixed_overlap": bool(structure_at_fixed_overlap),
-        "lowov_forget_spread": round(lowov_forget_spread, 4),
-        "n_mix_learned": len(mix_learned), "n_mix_curve": len(mix_curve),
-        "n_indep_type_learned": len(indep_learned),
-    }
-
-    # ---- ladder ----
-    if not g_consol:
-        return _v("review", "task_a_not_consolidated", flags)
-    if not g_floor:
-        return _v("review", "no_forgetting_floor", flags)
-    if not g_leak:
-        return _v("review", "operand_leak", flags)
-    if not g_joint:
-        return _v("review", "not_jointly_learnable", flags)
-    if not g_enough:
-        return _v("review", "too_few_learnable_curve_points", flags)
-    if underpowered_type and not family_protects:
-        return _v("review", "underpowered_type_contrast", flags)
-
-    if not c1_slope:
-        return _v("pass", "no_overlap_dependence", flags)
-    if family_protects:
-        return _v("pass", "forgetting_tracks_task_type", flags)
-    # clean unification: family doesn't protect (C2), every independent type point lies on the
-    # mixture curve at its own overlap (C3 == no residual structure), and overlap out-predicts
-    # accB/drift (M3). c3_ok already subsumes (not structure_at_fixed_overlap).
-    clean = c2_equiv and c3_ok and overlap_survives
-    if clean:
-        return _v("pass", "forgetting_governed_by_output_overlap", flags)
-    return _v("pass", "overlap_grades_forgetting_with_residual_structure", flags)
+    """Apply the pre-registered v1195 verdict ladder."""
+    return decide_similarity(result, cfg or SimilarityConfig())
 
 
-def _v(status: str, verdict: str, flags: dict) -> dict:
-    return {"status": status, "decision": verdict, "verdict": verdict, "flags": flags}
-
-
-# ------------------------------------------------------------------------------- report
 def build_report(result: dict, info: dict, source: str, *, generated_at: str | None = None) -> dict:
-    st = result["stats"]
-    status, verdict, flags = info["status"], info["verdict"], info["flags"]
-    chance = result["chance"]
-
-    rows = []
-    for k in result["mix_keys"] + result["type_keys"]:
-        m = st[k]
-        rows.append({
-            "arm": k, "overlap": round(m["overlap"][0], 4),
-            "forgetting": round(m["forget"][0], 4), "forgetting_std": round(m["forget"][1], 4),
-            "accB_conflict_test": (round(m["accB_conflict"][0], 4) if not math.isnan(m["accB_conflict"][0]) else None),
-            "accB_conflict_train": (round(m["accB_train_conflict"][0], 4) if not math.isnan(m["accB_train_conflict"][0]) else None),
-            "emb_drift": round(m["emb_drift"][0], 4), "learned": m["learned"],
-        })
-
-    summary = {
-        "status": status, "decision": info["decision"], "verdict": verdict,
-        "p": result["config"]["p"], "seeds": len(result["seeds"]),
-        "train_frac": result["config"]["train_frac"], "b_budget": result["config"]["b_budget"],
-        "chance": round(chance, 5), "leak_free": result["leak_free"],
-        "accA_plateau": round(result["plateau"][0], 4), "per_seed_plateau_ok": result["per_seed_plateau_ok"],
-        "continue_on_A_forgetting": round(result["continue_on_A_forget"][0], 4),
-        "joint_accA": round(result["joint_accA"][0], 4), "joint_accB": round(result["joint_accB"][0], 4),
-        "spearman_overlap_forgetting": flags["spearman_overlap_forget"],
-        "spearman_perm_p": flags["spearman_perm_p"], "slope_span": flags["slope_span"],
-        "overlap_survives_accB_and_drift": flags["overlap_survives_accB_and_drift"],
-        "superlinear_vs_overwrite_null": flags["superlinear_vs_overwrite_null"],
-        "mean_superlinear_excess": flags["mean_superlinear_excess"],
-        "c2_family_does_not_protect": flags["c2_family_does_not_protect"],
-        "family_protects": flags["family_protects"],
-        "c3_type_points_on_curve": flags["c3_type_points_on_curve"],
-        "structure_at_fixed_overlap": flags["structure_at_fixed_overlap"],
-        "n_mix_curve": flags["n_mix_curve"], "n_indep_type_learned": flags["n_indep_type_learned"],
-        "valid_measurement": status == "pass",
-    }
-    summary.update({f"flag_{k}": v for k, v in flags.items() if not isinstance(v, dict)})
-
-    ao, mu, asame = st["type:add_offset"], st["type:mul"], st["type:add_same"]
-    recs = [
-        (f"VERDICT ({verdict}, status={status}): x-axis is the ANALYTIC output-table overlap of B with "
-         f"A=(a+b) mod {result['config']['p']} -- model-INDEPENDENT, |{{(a,b):f_B==f_A}}|/p^2. "
-         f"Forgetting = A's held-out accuracy drop from its consolidated plateau {result['plateau'][0]:.3f} "
-         f"after a fixed {result['config']['b_budget']}-step B phase. status='pass' certifies a VALID "
-         f"measurement (A consolidated per-seed, clean continue-on-A floor {result['continue_on_A_forget'][0]:.3f}, "
-         f"no operand leak, add+mul jointly learnable A{result['joint_accA'][0]:.2f}/B{result['joint_accB'][0]:.2f}, "
-         f">={flags['n_mix_curve']} learnable interior curve points), NOT a clean collapse."),
-        (f"C1 SLOPE (interior, overlap<1): forgetting is monotone-graded in overlap -- "
-         f"Spearman(overlap,forgetting)={flags['spearman_overlap_forget']} (perm p={flags['spearman_perm_p']}), "
-         f"spanning {flags['slope_span']:.3f} from high-overlap to low-overlap (>= {SimilarityConfig().c1_min_range}); "
-         f"slope_certified={flags['c1_monotone_slope']}. The overlap=1 endpoint is EXCLUDED (forgetting-free "
-         f"by construction = v1193's continue-on-A floor + op-token-confounded); the claim is the INTERIOR only."),
-        (f"NOT A B-LEARNEDNESS / DRIFT ARTIFACT: controlling for accB and shared-embedding drift, the overlap "
-         f"coefficient stays negative and dominant (std beta overlap|accB={flags['beta_overlap_given_accB']} vs "
-         f"accB={flags['beta_accB']}; overlap|drift={flags['beta_overlap_given_drift']} vs drift={flags['beta_drift']}); "
-         f"overlap_survives={flags['overlap_survives_accB_and_drift']}. accB is read on CONFLICT cells only "
-         f"(where the retained A-circuit cannot answer for B)."),
-        (f"FAMILY IS A RED HERRING (re-confirms v1193's distribution-shift null via a 2nd manipulation): at "
-         f"overlap~0, add_offset (SAME '+' operation, just +{result['config']['add_offset_c0']}) forgets "
-         f"{ao['forget'][0]:.3f} vs mul {mu['forget'][0]:.3f} -- equivalent (|Δ|<= {SimilarityConfig().equiv_delta}), "
-         f"both >> add_same {asame['forget'][0]:.3f}; family_does_not_protect={flags['c2_family_does_not_protect']}, "
-         f"structure_at_fixed_overlap={flags['structure_at_fixed_overlap']}. UNIFICATION residual test "
-         f"(type points on the mixture curve)={flags['c3_type_points_on_curve']}."),
-        (f"SHAPE vs the overwrite null: the trivial 'overwrite only the conflicting cells' null predicts "
-         f"forgetting ~= (1-overlap)*plateau. Observed mean excess over the null is {flags['mean_superlinear_excess']} "
-         + ("(>= margin) -> SUPER-LINEAR: even a small target shift collapses the shared representation GLOBALLY, "
-            "beyond the conflicting cells (ties to v1193's global-shift mechanism)."
-            if flags['superlinear_vs_overwrite_null'] else
-            "(< margin) -> forgetting is APPROXIMATELY the local-overwrite null (mild mid-overlap excess only). So "
-            "the overlap law is largely the overwrite-fraction made quantitative, NOT a special global collapse; "
-            "v1193's 'catastrophic' forgetting is the overlap=0 endpoint of this graded, ~proportional overwrite.")
-         + f" SCOPE: toy modular arithmetic, 1-layer transformer, p={result['config']['p']}; overlap = 1 - "
-         f"conflict-fraction on shared inputs; the random-partition mixture is fit on train cells but does NOT "
-         f"generalize the per-cell split to held-out cells; NOT a claim about instruction-tuned LLM forgetting."),
-    ]
-
-    # curve for the figure: (overlap, forgetting, std, learned, kind)
-    curve_points = []
-    for k in result["mix_keys"] + result["type_keys"]:
-        m = st[k]
-        curve_points.append({"key": k, "kind": "mix" if k.startswith("mix") else "type",
-                             "overlap": round(m["overlap"][0], 5), "forgetting": round(m["forget"][0], 5),
-                             "forgetting_std": round(m["forget"][1], 5), "learned": m["learned"],
-                             "accB_conflict_train": (round(m["accB_train_conflict"][0], 4) if not math.isnan(m["accB_train_conflict"][0]) else None),
-                             "accB_conflict_test": (round(m["accB_conflict"][0], 4) if not math.isnan(m["accB_conflict"][0]) else None)})
-
-    return {
-        "schema_version": 1,
-        "title": "MiniGPT task-similarity -> catastrophic forgetting v1195",
-        "generated_at": generated_at or utc_now(),
-        "status": status, "decision": info["decision"],
-        "summary": summary, "rows": rows, "recommendations": recs,
-        "csv_fieldnames": ["arm", "overlap", "forgetting", "forgetting_std", "accB_conflict_test", "accB_conflict_train", "emb_drift", "learned"],
-        "curve_points": curve_points, "residuals": flags["residuals"],
-        "plateau": round(result["plateau"][0], 5),
-        "source": source,
-    }
+    """Assemble the stable v1195 report contract."""
+    defaults = SimilarityConfig()
+    return build_similarity_report(
+        result,
+        info,
+        source,
+        generated_at=generated_at,
+        c1_min_range=defaults.c1_min_range,
+        equiv_delta=defaults.equiv_delta,
+    )
 
 
 __all__ = [
