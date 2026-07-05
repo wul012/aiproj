@@ -5,6 +5,8 @@ from pathlib import Path
 import tempfile
 import unittest
 
+import minigpt.model_capability_required_term_pair_rebalance_seed_stability as facade
+import minigpt.model_capability_required_term_pair_rebalance_seed_stability_core as core
 from minigpt.model_capability_required_term_pair_rebalance_seed_stability import (
     build_model_capability_required_term_pair_rebalance_seed_stability,
     locate_model_capability_required_term_pair_rebalance_seed_stability_source,
@@ -24,6 +26,17 @@ from minigpt.model_capability_required_term_pair_rebalance_seed_stability_artifa
 
 
 class ModelCapabilityRequiredTermPairRebalanceSeedStabilityTests(unittest.TestCase):
+    def test_facade_reexports_seed_stability_core_contract(self) -> None:
+        names = (
+            "resolve_exit_code",
+            "select_rebalance_seed_stability_pairs",
+            "summarize_pair_seed_stability",
+            "summarize_required_term_pair_rebalance_seed_stability",
+            "summarize_seed_pair_probe_rows",
+        )
+        for name in names:
+            self.assertIs(getattr(facade, name), getattr(core, name))
+
     def test_seed_stability_reports_stable_full_hit_pair_and_outputs(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
