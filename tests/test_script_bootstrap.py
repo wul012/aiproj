@@ -45,6 +45,12 @@ NORMALIZED_TEST_BOOTSTRAP_PATHS = (
     "tests/test_benchmark_scorecard_comparison_deltas.py",
     "tests/test_benchmark_scorecard_decision.py",
     "tests/test_benchmark_scorecard_scoring.py",
+    "tests/test_ci_baseline_candidate_threshold_boundary_gate_check.py",
+    "tests/test_ci_baseline_candidate_threshold_boundary_gate_plan_check.py",
+    "tests/test_ci_promoted_seed_receipt_contract_failure_smoke.py",
+    "tests/test_ci_promoted_seed_receipt_contract_failure_smoke_plan_check.py",
+    "tests/test_ci_tiny_scorecard_plan_check.py",
+    "tests/test_ci_tiny_scorecard_smoke.py",
     "tests/test_comparison.py",
     "tests/test_comparison_artifacts.py",
     "tests/test_data_prep.py",
@@ -105,6 +111,11 @@ MANUAL_TEST_BOOTSTRAP_FRAGMENTS = (
     "sys.path.insert",
 )
 
+UNQUALIFIED_TEST_IMPORT_FRAGMENTS = (
+    "from test_",
+    "import test_",
+)
+
 
 class ScriptBootstrapTests(unittest.TestCase):
     def test_project_paths_are_resolved_from_repository_root(self) -> None:
@@ -160,6 +171,8 @@ class ScriptBootstrapTests(unittest.TestCase):
                 self.assertTrue(path.is_file())
                 self.assertIn("tests._bootstrap", text)
                 for fragment in MANUAL_TEST_BOOTSTRAP_FRAGMENTS:
+                    self.assertNotIn(fragment, text)
+                for fragment in UNQUALIFIED_TEST_IMPORT_FRAGMENTS:
                     self.assertNotIn(fragment, text)
 
     def test_ci_engineering_entrypoints_are_partitioned_and_required(self) -> None:

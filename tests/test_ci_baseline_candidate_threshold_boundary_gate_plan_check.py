@@ -7,8 +7,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT))
+from tests._bootstrap import ROOT
 
 from scripts.check_ci_baseline_candidate_threshold_boundary_gate_plan import (  # noqa: E402
     check_plan,

@@ -8,8 +8,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT))
+from tests._bootstrap import ROOT
 
 from scripts.run_ci_tiny_scorecard_comparison_smoke import (  # noqa: E402
     CI_TINY_SCORECARD_CONFIG,
