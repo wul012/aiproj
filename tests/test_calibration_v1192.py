@@ -6,16 +6,13 @@ overconfident model. A small SYNTHETIC cache exercises run_analysis/decide end t
 """
 from __future__ import annotations
 
-import sys
 import unittest
-from pathlib import Path
 
 import numpy as np
 
-ROOT = Path(__file__).resolve().parents[1]
-SRC = ROOT / "src"
-if str(SRC) not in sys.path:
-    sys.path.insert(0, str(SRC))
+from tests._bootstrap import ensure_src_path
+
+ensure_src_path()
 
 from minigpt.calibration_v1192 import (  # noqa: E402
     BIN_SCHEMES, CalibrationConfig, analytic_ece, beats_lower, brier, build_report,

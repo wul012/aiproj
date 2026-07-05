@@ -5,10 +5,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-SRC = ROOT / "src"
-if str(SRC) not in sys.path:
-    sys.path.insert(0, str(SRC))
+from tests._bootstrap import ROOT
 
 from minigpt.grok_paired_contrast_v1182 import (  # noqa: E402
     build_grok_paired_contrast_report,

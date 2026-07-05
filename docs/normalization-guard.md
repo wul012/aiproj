@@ -69,9 +69,9 @@ of truth for this focused guard.
   engineering entrypoint partitioning, the already-normalized registry/release/
   benchmark/ci/core-model-smoke/comparison-eval-maintenance/data/history-request/
   pair/playground/promoted-training-scale/reporting-maturity/training-portfolio/
-  training-scale/server test bootstrap families, rejects unqualified sibling
-  `from test_...` imports and known bare helper imports inside those normalized
-  families, and protects the normalization wrapper CLI.
+  training-scale/v1181-v1200-capability/server test bootstrap families, rejects
+  unqualified sibling `from test_...` imports and known bare helper imports
+  inside those normalized families, and protects the normalization wrapper CLI.
 - `tests.test_script_bootstrap_helpers` protects the small AST and path helper
   functions used by the script bootstrap tests, including function lookup,
   argument-name extraction, `SystemExit(main(...))` detection,

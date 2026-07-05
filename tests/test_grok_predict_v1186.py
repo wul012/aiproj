@@ -7,16 +7,13 @@ loads the SHIPPED v1185 checkpoint from disk and confirms it computes a+b mod 97
 
 from __future__ import annotations
 
-import sys
 import unittest
-from pathlib import Path
 
 import torch
 
-ROOT = Path(__file__).resolve().parents[1]
-SRC = ROOT / "src"
-if str(SRC) not in sys.path:
-    sys.path.insert(0, str(SRC))
+from tests._bootstrap import ensure_src_path
+
+ensure_src_path()
 
 from minigpt.grok_checkpoint_v1185 import CheckpointMeta
 from minigpt.grok_predict_v1186 import (
