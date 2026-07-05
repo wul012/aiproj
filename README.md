@@ -23,6 +23,17 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
+Version `v1257.0.0` adds a **downstream receipt for the checked route-promotion release readiness summary**. It consumes the real `f/1256` contract-check output, records the downstream consumer, route, granted bounded scope, source-check digest, upstream source digests, blocked uses, and the next indexing step. The ready run produced `status=pass`, `decision=model_capability_route_promotion_release_readiness_downstream_receipt_granted`, `downstream_receipt_ready=True`, `receipt_status=granted`, `route_id=objective_level_contrast`, and `source_digest_count=3`.
+
+## Latest v1257 checkpoint
+
+- Added `src/minigpt/model_capability_route_promotion_release_readiness_downstream_receipt.py`: a pure downstream receipt builder that grants only bounded route-promotion release governance use after the v1256 contract check has passed.
+- Added `src/minigpt/model_capability_route_promotion_release_readiness_downstream_receipt_artifacts.py` and CLI `scripts/build_model_capability_route_promotion_release_readiness_downstream_receipt.py` for JSON/CSV/TXT/Markdown/HTML outputs.
+- Added `tests/test_model_capability_route_promotion_release_readiness_downstream_receipt.py` with root facade export, granted receipt, unknown-route failure, widened-scope failure, output, and CLI coverage.
+- Produced real evidence in `f/1257` from the `f/1256` contract check; code explanation is in `代码讲解记录_模型治理阶段/1215-v1257-route-promotion-release-readiness-downstream-receipt.md`.
+
+## Historical v1256 context
+
 Version `v1256.0.0` adds a **contract check for the v1255 route-promotion release readiness summary**. It consumes the real `f/1255` summary, verifies the ready decision, clean check rows, source rows, route alignment, boundary, bounded claim, downstream scope, and computes SHA-256 digests for the three upstream source evidence files. The ready run produced `status=pass`, `decision=model_capability_route_promotion_release_readiness_summary_contract_check_passed`, `contract_check_ready=True`, `active_routes=objective_level_contrast`, and `source_digest_count=3`.
 
 ## Latest v1256 checkpoint

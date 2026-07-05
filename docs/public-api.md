@@ -258,3 +258,10 @@ For new code:
   `write_model_capability_route_promotion_release_readiness_summary_check_outputs`
   contract-check API, raising the root facade all-export budget from 280 to 282
   and the lazy-export budget from 310 to 312.
+- v1257 intentionally promotes
+  `build_model_capability_route_promotion_release_readiness_downstream_receipt`
+  and
+  `write_model_capability_route_promotion_release_readiness_downstream_receipt_outputs`
+  as the stable downstream receipt API for checked route-promotion release
+  readiness evidence, raising the root facade all-export budget from 282 to
+  284 and the lazy-export budget from 312 to 314.

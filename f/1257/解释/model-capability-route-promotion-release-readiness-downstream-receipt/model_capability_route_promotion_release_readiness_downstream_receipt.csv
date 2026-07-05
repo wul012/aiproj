@@ -1,0 +1,17 @@
+id,status,actual,detail
+consumer_name_present,pass,release-readiness-index-builder,consumer name must be recorded
+route_id_requested,pass,objective_level_contrast,requested route id must be recorded
+summary_check_passed,pass,pass,source contract check must pass
+summary_check_decision_ready,pass,model_capability_route_promotion_release_readiness_summary_contract_check_passed,source contract check decision must be ready
+contract_check_ready,pass,True,source summary check must be ready
+source_failed_count_zero,pass,0,source check failed_count must be zero
+source_check_rows_clean,pass,"{""fail"": 0, ""pass"": 25}",source check rows must all pass
+route_id_in_checked_summary,pass,"{""active_routes"": [""objective_level_contrast""], ""requested"": ""objective_level_contrast""}",requested route must be present in checked summary
+boundary_required,pass,tiny_required_term_pair_probe_only,checked summary boundary must match required boundary
+claim_bounded,pass,seed_stable_pair_probe_route_accepted,checked summary claim must remain pair-probe scoped
+source_digest_count_matches,pass,"{""actual"": 3, ""summary"": 3}",source digest count must match digest rows
+source_digests_present,pass,"[{""exists"": true, ""kind"": ""release_packet"", ""path"": ""e\\795\\解释\\model-capability-route-promotion-release-packet\\model_capability_route_promotion_release_packet.json"", ""sha256"": ""4b32d56640811e3dda52bba0e2f952227a6b9d7fb841ebaffa4ef301f4d82104""}, {""exists"": true, ""kind"": ""release_packet_review"", ""path"": ""e\\796\\解释\\model-capability-route-promotion-release-packet-review\\model_capability_route_promotion_release_packet_review.json"", ""sha256"": ""7259663a4798d7a7470aacc776d429346d4fb881c149d200141d995fa428164c""}, {""exists"": true, ""kind"": ""governance_snapshot"", ""path"": ""e\\800\\解释\\model-capability-route-promotion-governance-snapshot\\model_capability_route_promotion_governance_snapshot.json"", ""sha256"": ""f4be5170a62da02225816f8f7820f281e128928b23e89ccec85ca6aeed77e089""}]",all source digest rows must carry SHA-256
+requested_scope_allowed,pass,bounded_route_promotion_release_governance_only,requested scope must be bounded route-promotion release governance only
+downstream_scope_matches,pass,bounded_route_promotion_release_governance_only,source downstream policy scope must match requested receipt scope
+source_scope_bounded,pass,bounded_model_capability_governance_only,source governance scope must remain bounded model-capability governance only
+downstream_policy_allowed,pass,True,source downstream policy must allow bounded use

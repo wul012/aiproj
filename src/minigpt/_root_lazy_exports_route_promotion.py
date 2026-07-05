@@ -99,6 +99,14 @@ ROOT_FACADE_ROUTE_PROMOTION_LAZY_EXPORTS = {
         'model_capability_route_promotion_release_readiness_summary_check_artifacts',
         'write_model_capability_route_promotion_release_readiness_summary_check_outputs',
     ),
+    'build_model_capability_route_promotion_release_readiness_downstream_receipt': (
+        'model_capability_route_promotion_release_readiness_downstream_receipt',
+        'build_model_capability_route_promotion_release_readiness_downstream_receipt',
+    ),
+    'write_model_capability_route_promotion_release_readiness_downstream_receipt_outputs': (
+        'model_capability_route_promotion_release_readiness_downstream_receipt_artifacts',
+        'write_model_capability_route_promotion_release_readiness_downstream_receipt_outputs',
+    ),
     'build_model_capability_route_promotion_downstream_guard': (
         'model_capability_route_promotion_downstream_guard',
         'build_model_capability_route_promotion_downstream_guard',

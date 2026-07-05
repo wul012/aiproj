@@ -14,6 +14,15 @@
 
 ## 当前索引
 
+1215-v1257-route-promotion-release-readiness-downstream-receipt.md
+ -> v1257 code explanation: grant a bounded downstream receipt from the checked route-promotion release readiness summary.
+
+1214-v1256-route-promotion-release-readiness-summary-contract-check.md
+ -> v1256 code explanation: contract-check the route-promotion release readiness summary before downstream consumption.
+
+1213-v1255-route-promotion-release-readiness-summary.md
+ -> v1255 code explanation: summarize route-promotion release readiness from packet, review, and governance snapshot evidence.
+
 1141-v1129-publication-receipt.md
  -> v1129 code explanation: record the v1128 review as a lookup-only downstream receipt.
 
