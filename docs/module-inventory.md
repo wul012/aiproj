@@ -47,7 +47,7 @@ Approximate counts from `src/minigpt`:
 |---|---:|---|
 | `governance` / capability chains | 1072 | Main source of package sprawl; mostly outer-layer evidence and decision flows. |
 | `reports-governance` | 48 | Stable reports, cards, dashboards, registries, release summaries. |
-| `research` | 46 | Versioned experiments around adaptation, decoding, interpretability, and training behavior. |
+| `research` | 48 | Versioned experiments around adaptation, decoding, interpretability, and training behavior. |
 | `evaluation` | 21 | Prompt suites, comparisons, benchmark summaries, generation quality. |
 | `core` | 11 | The small GPT learning path. This is the inner layer to protect. |
 | `serving` | 9 | Local generation and HTTP/API wrapper modules. |

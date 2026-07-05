@@ -21,6 +21,8 @@ from minigpt.continual_v1193 import (  # noqa: E402
     ContinualConfig, build_op, build_report, consolidate, decide, majority_prior, pair_masks,
     run_phase_a, savings_probe, summarize, train_phase, verify_no_leak, vocab_size,
 )
+from minigpt.continual_v1193_decision import decide_continual  # noqa: E402
+from minigpt.continual_v1193_report import build_report as extracted_build_report  # noqa: E402
 
 SEEDS = (1337, 1338, 1339)
 
@@ -61,6 +63,11 @@ class Summarize(unittest.TestCase):
 
 
 class DecideLadder(unittest.TestCase):
+    def test_extracted_decision_matches_public_facade(self):
+        result = summarize(synth_cache())
+        cfg = ContinualConfig()
+        self.assertEqual(decide(result, cfg), decide_continual(result, cfg))
+
     def test_headline_catastrophic_mitigated(self):
         info = decide(summarize(synth_cache()))
         self.assertEqual(info["status"], "pass")
@@ -131,6 +138,9 @@ class DecideLadder(unittest.TestCase):
 
 
 class ReportShape(unittest.TestCase):
+    def test_public_module_reexports_report_builder(self):
+        self.assertIs(build_report, extracted_build_report)
+
     def test_build_report(self):
         r = summarize(synth_cache()); info = decide(r)
         report = build_report(r, info, "synthetic")

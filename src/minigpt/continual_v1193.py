@@ -41,10 +41,15 @@ from dataclasses import dataclass, field
 
 import torch
 
-from minigpt.experiment_utils import mean_std, significant
+from minigpt.continual_v1193_decision import (
+    PRIMARY_VERDICTS,
+    REVIEW_VERDICTS,
+    decide_continual,
+)
+from minigpt.continual_v1193_report import build_report
+from minigpt.experiment_utils import mean_std
 from minigpt.grok_v1179 import ANSWER_READ_POS, ANSWER_TARGET_POS, SEQ_LEN, answer_accuracy, answer_loss
 from minigpt.model import GPTConfig, MiniGPT
-from minigpt.report_utils import utc_now
 
 OPS = {
     "add": lambda a, b, p: (a + b) % p,
@@ -350,175 +355,10 @@ def summarize(cache: dict, cfg: ContinualConfig | None = None) -> dict:
     }
 
 
-REVIEW_VERDICTS = {"task_a_not_consolidated", "task_b_not_learned", "not_jointly_learnable",
-                   "operand_leak", "no_forgetting_floor"}
-PRIMARY_VERDICTS = {
-    "no_catastrophic_forgetting",
-    "catastrophic_forgetting_mitigated_by_replay",
-    "catastrophic_forgetting_not_mitigated_by_replay",
-    "partial_forgetting_mitigated_by_replay",
-    "partial_forgetting_not_mitigated_by_replay",
-}
-
-
+# Verdict vocabulary and report assembly live in focused pure modules.
 def decide(result: dict, cfg: ContinualConfig | None = None) -> dict:
-    """Pure gates + multi-signal verdict ladder with real null branches. No single cutoff
-    decides the headline: forgetting needs a significant drop vs the consolidated plateau
-    AND a clean continue-on-A floor; 'catastrophic' needs a drop to near chance; replay
-    mitigation needs BOTH a significant reduction AND wrong-replay failing to help."""
-    cfg = cfg or ContinualConfig()
-    s = result
-    chance = s["chance"]
-    plat_m, plat_s = s["accA_plateau"]
-    nf_m, nf_s = s["naive_forget"]
-    after_m, after_s = s["naive_accA_after_B"]
-    prior = s["b_majority_prior"]
-
-    def reduces(less, more):
-        """True iff `less` forgetting is meaningfully below `more` (margin AND combined std)."""
-        (lm, ls), (mm, ms) = less, more
-        return (mm - lm) > cfg.min_reduction and significant(mm, ms, lm, ls)
-
-    g_consol = plat_m >= cfg.plateau_acc - 0.02
-    g_b_learned = (s["naive_accB_after_B"][0] - prior) >= cfg.b_learn_margin
-    # jointly learnable = the shared weights CAN hold BOTH tasks well above the majority-class
-    # prior (so sequential loss is INTERFERENCE, not incapacity). NOT gated on hitting A's solo
-    # plateau -- multiply-mod-p has a genuinely lower ceiling than addition at this scale.
-    g_joint = ((s["joint_accA"][0] - prior) >= cfg.b_learn_margin) and \
-              ((s["joint_accB"][0] - prior) >= cfg.b_learn_margin)
-    g_leak = bool(s["leak_free"])
-    g_floor = s["continue_on_A_forget"][0] <= cfg.floor_tol
-
-    # findings (all reductions use the margin-aware `reduces`)
-    forgets = (nf_m > cfg.min_reduction) and significant(plat_m, plat_s, after_m, after_s)
-    catastrophic = after_m < cfg.catastrophic_chance_mult * chance
-    rf = s["replay_forget"]
-    replay_reduces = reduces(rf[s["replay_max_bs"]], s["naive_forget"])
-    wrong_reduces = reduces(s["wrong_replay_forget"], s["naive_forget"])
-    replay_specific = replay_reduces and (not wrong_reduces)
-    bs_sorted = sorted(rf)
-    monotone = all(rf[bs_sorted[i]][0] >= rf[bs_sorted[i + 1]][0] - 1e-9 for i in range(len(bs_sorted) - 1))
-    # structure vs drift: does real-B forget MEANINGFULLY more than random-label-B?
-    structure_specific = reduces(s["random_label_B_forget"], s["naive_forget"])
-
-    flags = {
-        "g_a_consolidated": g_consol, "g_b_learned": g_b_learned, "g_jointly_learnable": g_joint,
-        "g_no_operand_leak": g_leak, "g_floor_clean": g_floor,
-        "forgets": bool(forgets), "catastrophic": bool(catastrophic),
-        "replay_reduces_forgetting": bool(replay_reduces), "wrong_replay_reduces": bool(wrong_reduces),
-        "replay_specific": bool(replay_specific), "replay_dose_response_monotone": bool(monotone),
-        "forgetting_is_task_structure_specific": bool(structure_specific),
-        "forgetting_is_distribution_shift_not_structure": bool(not structure_specific),
-        "savings_fast_masking": bool(s["recovered_k"] is not None and s["recovered_k"] <= 50),
-    }
-
-    if not g_consol:
-        return _v("review", "task_a_not_consolidated", flags)
-    if not g_b_learned:
-        return _v("review", "task_b_not_learned", flags)
-    if not g_joint:
-        return _v("review", "not_jointly_learnable", flags)
-    if not g_leak:
-        return _v("review", "operand_leak", flags)
-    if not g_floor:
-        return _v("review", "no_forgetting_floor", flags)
-
-    if not forgets:
-        return _v("pass", "no_catastrophic_forgetting", flags)
-    cat = "catastrophic" if catastrophic else "partial"
-    if replay_specific:
-        return _v("pass", f"{cat}_forgetting_mitigated_by_replay", flags)
-    return _v("pass", f"{cat}_forgetting_not_mitigated_by_replay", flags)
-
-
-def _v(status: str, verdict: str, flags: dict) -> dict:
-    return {"status": status, "decision": verdict, "verdict": verdict, "flags": flags}
-
-
-def build_report(result: dict, info: dict, source: str, *, generated_at: str | None = None) -> dict:
-    """Assemble the 5-format readability report from summarize() result + decide() info."""
-    s = result
-    status, verdict, flags = info["status"], info["verdict"], info["flags"]
-    chance = s["chance"]
-
-    rows = [
-        {"arm": "consolidated_A", "acc_A": round(s["accA_plateau"][0], 4), "acc_A_std": round(s["accA_plateau"][1], 4),
-         "forgetting": 0.0, "note": "plateau (A learned)"},
-        {"arm": "naive_sequential", "acc_A": round(s["naive_accA_after_B"][0], 4), "acc_A_std": round(s["naive_accA_after_B"][1], 4),
-         "forgetting": round(s["naive_forget"][0], 4), "note": f"after B; acc_B={s['naive_accB_after_B'][0]:.3f}"},
-        {"arm": "continue_on_A", "acc_A": round(s["accA_plateau"][0] - s["continue_on_A_forget"][0], 4), "acc_A_std": 0.0,
-         "forgetting": round(s["continue_on_A_forget"][0], 4), "note": "floor (no shift)"},
-        {"arm": "random_label_B", "acc_A": round(s["accA_plateau"][0] - s["random_label_B_forget"][0], 4), "acc_A_std": 0.0,
-         "forgetting": round(s["random_label_B_forget"][0], 4), "note": "null: structure vs drift"},
-        {"arm": "wrong_replay_B", "acc_A": round(s["accA_plateau"][0] - s["wrong_replay_forget"][0], 4), "acc_A_std": 0.0,
-         "forgetting": round(s["wrong_replay_forget"][0], 4), "note": "replay B not A (must still forget)"},
-        {"arm": "multitask_joint", "acc_A": round(s["joint_accA"][0], 4), "acc_A_std": round(s["joint_accA"][1], 4),
-         "forgetting": 0.0, "note": f"upper bound; acc_B={s['joint_accB'][0]:.3f}"},
-    ]
-    for bs in sorted(s["replay_forget"]):
-        rows.append({"arm": f"replay_buffer_{bs}", "acc_A": round(s["accA_plateau"][0] - s["replay_forget"][bs][0], 4),
-                     "acc_A_std": round(s["replay_forget"][bs][1], 4), "forgetting": round(s["replay_forget"][bs][0], 4),
-                     "note": "A-train replay" if bs else "= naive floor"})
-
-    summary = {
-        "status": status, "decision": info["decision"], "verdict": verdict,
-        "task_a": s["config"]["task_a"], "task_b": s["config"]["task_b"], "p": s["config"]["p"],
-        "chance": round(chance, 5), "b_majority_prior": round(s["b_majority_prior"], 4), "leak_free": s["leak_free"],
-        "seeds": len(s["seeds"]), "train_frac": s["config"]["train_frac"], "b_budget": s["config"]["b_budget"],
-        "accA_plateau": round(s["accA_plateau"][0], 4),
-        "naive_accA_after_B": round(s["naive_accA_after_B"][0], 4),
-        "naive_forgetting": round(s["naive_forget"][0], 4), "naive_forgetting_std": round(s["naive_forget"][1], 4),
-        "naive_accB_after_B": round(s["naive_accB_after_B"][0], 4),
-        "continue_on_A_forgetting": round(s["continue_on_A_forget"][0], 4),
-        "random_label_B_forgetting": round(s["random_label_B_forget"][0], 4),
-        "wrong_replay_forgetting": round(s["wrong_replay_forget"][0], 4),
-        "replay_max_buffer": s["replay_max_bs"],
-        "replay_max_forgetting": round(s["replay_forget"][s["replay_max_bs"]][0], 4),
-        "joint_accA": round(s["joint_accA"][0], 4), "joint_accB": round(s["joint_accB"][0], 4),
-        "savings_recovered_k": s["recovered_k"],
-        "valid_measurement": status == "pass",
-    }
-    summary.update({f"flag_{k}": v for k, v in flags.items()})
-
-    recs = [
-        (f"VERDICT ({verdict}): task A=({s['config']['task_a']}) consolidated to test acc {s['accA_plateau'][0]:.3f}; "
-         f"after training task B=({s['config']['task_b']}) for {s['config']['b_budget']} steps A collapses to "
-         f"{s['naive_accA_after_B'][0]:.3f} (chance {chance:.3f}) -> FORGETTING {s['naive_forget'][0]:.3f}±{s['naive_forget'][1]:.3f}. "
-         f"status='{status}' certifies a VALID measurement (A consolidated to a plateau, B genuinely learned "
-         f"{s['naive_accB_after_B'][0]:.3f} >> majority-prior {s['b_majority_prior']:.3f}, jointly learnable, no operand leak), "
-         f"NOT a flattering result. 'catastrophic'={flags['catastrophic']} is gated on the drop reaching near chance."),
-        (f"FLOOR & TRAJECTORY: continue-on-A (no distribution shift) forgets only {s['continue_on_A_forget'][0]:.3f} "
-         f"(g_floor_clean={flags['g_floor_clean']}) — so forgetting needs a NEW distribution, not just more steps. "
-         f"acc_A through the B phase: {s['traj_mean']} — collapse is {'sharp/instant' if len(s['traj_mean'])>1 and s['traj_mean'][1] < 0.3 else 'gradual'}."),
-        (f"REPLAY (mitigation): replaying A-train examples during B reduces forgetting as a dose-response "
-         + ", ".join(f"buf={bs}:{s['replay_forget'][bs][0]:.3f}" for bs in sorted(s['replay_forget']))
-         + f" (monotone={flags['replay_dose_response_monotone']}); replay reduces forgetting={flags['replay_reduces_forgetting']}. "
-         f"SPECIFIC (not 'any extra gradients'): WRONG-replay (replaying B, not A) still forgets {s['wrong_replay_forget'][0]:.3f} "
-         f"(wrong_replay_reduces={flags['wrong_replay_reduces']}, replay_specific={flags['replay_specific']}). "
-         "Replay works by RE-EXPOSING A data — it is data, not magic (the v1173 discipline)."),
-        (f"HONEST MECHANISM: random-label-B (same B inputs, SHUFFLED targets) forgets {s['random_label_B_forget'][0]:.3f} "
-         f"vs real-B {s['naive_forget'][0]:.3f} — task-structure-specific={flags['forgetting_is_task_structure_specific']}. "
-         f"{'Real B forgets significantly more, so B-structure interferes.' if flags['forgetting_is_task_structure_specific'] else 'They forget about equally, so the forgetting is DISTRIBUTION-SHIFT-driven (training on a new input distribution overwrites the shared weights), NOT specific to B-task structure — reported honestly.'}"),
-        (f"SAVINGS (erasure vs masking): relearning A reaches its plateau "
-         + (f"in {s['recovered_k']} steps (fast => representational MASKING, A reused not erased)"
-            if flags['savings_fast_masking'] else
-            (f"in {s['recovered_k']} steps (slow => closer to ERASURE)" if s['recovered_k'] is not None
-             else "only beyond the probed budget (slow => closer to ERASURE)"))
-         + f". JOINT upper bound (no forgetting by construction): acc_A {s['joint_accA'][0]:.3f}, acc_B {s['joint_accB'][0]:.3f}. "
-         "SCOPE: toy modular-arithmetic generalization on a 1-layer transformer; NOT a claim about instruction-tuned LLM forgetting."),
-    ]
-
-    return {
-        "schema_version": 1,
-        "title": "MiniGPT continual learning / catastrophic forgetting v1193",
-        "generated_at": generated_at or utc_now(),
-        "status": status, "decision": info["decision"],
-        "summary": summary, "rows": rows, "recommendations": recs,
-        "csv_fieldnames": ["arm", "acc_A", "acc_A_std", "forgetting", "note"],
-        "traj_mean": s["traj_mean"],
-        "replay_curve": {str(bs): round(s["replay_forget"][bs][0], 5) for bs in sorted(s["replay_forget"])},
-        "source": source,
-    }
+    """Apply the pre-registered continual-learning verdict ladder."""
+    return decide_continual(result, cfg or ContinualConfig())
 
 
 __all__ = [
