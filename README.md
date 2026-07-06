@@ -12,6 +12,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 - [Engineering workflow](docs/engineering-workflow.md)
 - [Normalization guard](docs/normalization-guard.md)
 - [Script entrypoints](docs/script-entrypoints.md)
+- [Static analysis](docs/static-analysis.md)
 - [Model training and evaluation](docs/model-training.md)
 - [Model capability cadence](docs/model-capability-cadence.md)
 - [Publication receipts](docs/publication-receipts.md)
@@ -21,10 +22,22 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 - [Artifact map](docs/artifact-map.md)
 - [Archive and runs inventory](docs/archive-runs-inventory.md)
 - [aiproj A0 census](docs/aiproj-track-a0-census.md)
+- [aiproj A1 static analysis](docs/aiproj-track-a1-static-analysis.md)
 - [Production excellence brief](docs/production-excellence-aiproj-brief.md)
 - [Plain-language project guide](项目通俗说明/README.md)
 
 ## Current version
+
+Version `v1261.0.0` starts the **aiproj production-excellence A1 static-analysis gate**. It adopts ruff without a repo-wide mechanical sweep, commits the historical `src/` and `scripts/` baseline, keeps strict maintained paths lint-clean and format-clean, adds the static-analysis gate to CI and engineering health, and extends CI workflow hygiene so the step cannot disappear or move after coverage. The real v1261 run produced `status=pass`, `decision=continue_with_static_analysis_gate`, `current_issue_count=545`, `baseline_issue_count=545`, `new_issue_count=0`, `strict_lint_issue_count=0`, and `strict_format_status=pass`.
+
+## Latest v1261 checkpoint
+
+- Added `scripts/check_static_analysis.py`: a staged ruff gate that compares current `src/` and `scripts/` findings against `docs/static-analysis/ruff-baseline.json`, fails on new findings, and requires strict maintained paths to pass lint plus `ruff format --check`.
+- Added `tests/test_static_analysis.py` covering baseline comparison, strict lint failure, strict format failure, CLI baseline update behavior, and JSON/CSV/Markdown/HTML outputs.
+- Added ruff to `requirements.txt`, added `tool.ruff` configuration to `pyproject.toml`, and wired the gate into `.github/workflows/ci.yml`, `scripts/_bootstrap.py`, `scripts/_engineering_health.py`, and CI workflow hygiene policy/tests.
+- Added `docs/static-analysis.md` and `docs/aiproj-track-a1-static-analysis.md`, and produced evidence in `f/1261`. This is a static-analysis adoption version only: no training, no cached-artifact verdict changes, no promotion, and no model-quality claim upgrade.
+
+## Historical v1260 context
 
 Version `v1260.0.0` starts the **aiproj production-excellence A-track with A0 census and quick wins**. It records what CI actually runs, confirms the latest main CI was green at the start of the version, adds a stdlib-only warning-only archive/runs inventory, writes the A0 census docs, and refreshes the stale START_HERE version line without changing any model-capability verdicts or promotion boundaries. The real inventory run produced `status=pass`, `decision=archive_runs_inventory_recorded`, `warning_only=True`, `archive_total_mb=390.0008`, `warning_count=0`, largest archive root `e/` at `224.7105 MB`, and `runs/` at `11.349 MB`.
 

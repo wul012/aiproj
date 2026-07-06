@@ -87,6 +87,9 @@ class CiWorkflowSummary(TypedDict):
     project_docs_readability_present: bool
     project_docs_readability_order_ready: bool
     project_docs_readability_ready: bool
+    static_analysis_present: bool
+    static_analysis_order_ready: bool
+    static_analysis_ready: bool
     normalization_guard_present: bool
     normalization_guard_order_ready: bool
     normalization_guard_ready: bool
@@ -121,45 +124,63 @@ def build_ci_workflow_hygiene_report(
     required_action_repos = set(REQUIRED_ACTIONS)
     found_required_actions = [item for item in actions if item.get("repository") in required_action_repos]
     forbidden_env_hits = _forbidden_env_hits(text)
-    missing_steps = [check for check in checks if check.get("category") == "required_command" and check.get("status") != "pass"]
-    order_violations = [check for check in checks if check.get("category") == "required_order" and check.get("status") != "pass"]
+    missing_steps = [
+        check for check in checks if check.get("category") == "required_command" and check.get("status") != "pass"
+    ]
+    order_violations = [
+        check for check in checks if check.get("category") == "required_order" and check.get("status") != "pass"
+    ]
     plan_digest_gate_present = _check_passed(checks, "command:ci_tiny_scorecard_plan_digest_check")
-    plan_digest_gate_order_ready = _check_passed(checks, "order:ci_tiny_scorecard_plan_check_after_smoke") and _check_passed(
+    plan_digest_gate_order_ready = _check_passed(
+        checks, "order:ci_tiny_scorecard_plan_check_after_smoke"
+    ) and _check_passed(
         checks,
         "order:ci_tiny_scorecard_plan_check_before_coverage",
     )
     boundary_gate_check_present = _check_passed(checks, "command:baseline_candidate_threshold_boundary_gate_check")
-    boundary_gate_check_order_ready = _check_passed(checks, "order:baseline_candidate_threshold_boundary_gate_check_after_plan_digest") and _check_passed(
+    boundary_gate_check_order_ready = _check_passed(
+        checks, "order:baseline_candidate_threshold_boundary_gate_check_after_plan_digest"
+    ) and _check_passed(
         checks,
         "order:baseline_candidate_threshold_boundary_gate_check_before_coverage",
     )
-    boundary_gate_plan_check_present = _check_passed(checks, "command:baseline_candidate_threshold_boundary_gate_plan_check")
-    boundary_gate_plan_check_order_ready = _check_passed(checks, "order:baseline_candidate_threshold_boundary_gate_plan_check_after_gate_check") and _check_passed(
+    boundary_gate_plan_check_present = _check_passed(
+        checks, "command:baseline_candidate_threshold_boundary_gate_plan_check"
+    )
+    boundary_gate_plan_check_order_ready = _check_passed(
+        checks, "order:baseline_candidate_threshold_boundary_gate_plan_check_after_gate_check"
+    ) and _check_passed(
         checks,
         "order:baseline_candidate_threshold_boundary_gate_plan_check_before_coverage",
     )
     archived_path_portability_check_present = _check_passed(checks, "command:archived_path_portability_check")
-    archived_path_portability_check_order_ready = (
-        _check_passed(checks, "order:archived_path_portability_check_before_receipt_smoke")
-        and _check_passed(checks, "order:archived_path_portability_check_before_coverage")
-    )
+    archived_path_portability_check_order_ready = _check_passed(
+        checks, "order:archived_path_portability_check_before_receipt_smoke"
+    ) and _check_passed(checks, "order:archived_path_portability_check_before_coverage")
     receipt_failure_smoke_present = _check_passed(checks, "command:promoted_seed_receipt_contract_failure_smoke")
-    receipt_failure_smoke_order_ready = (
-        _check_passed(checks, "order:promoted_seed_receipt_contract_failure_smoke_after_assurance")
-        and _check_passed(checks, "order:promoted_seed_receipt_contract_failure_smoke_before_coverage")
+    receipt_failure_smoke_order_ready = _check_passed(
+        checks, "order:promoted_seed_receipt_contract_failure_smoke_after_assurance"
+    ) and _check_passed(checks, "order:promoted_seed_receipt_contract_failure_smoke_before_coverage")
+    receipt_failure_smoke_plan_check_present = _check_passed(
+        checks, "command:promoted_seed_receipt_contract_failure_smoke_plan_check"
     )
-    receipt_failure_smoke_plan_check_present = _check_passed(checks, "command:promoted_seed_receipt_contract_failure_smoke_plan_check")
-    receipt_failure_smoke_plan_check_order_ready = (
-        _check_passed(checks, "order:promoted_seed_receipt_contract_failure_smoke_plan_check_after_smoke")
-        and _check_passed(checks, "order:promoted_seed_receipt_contract_failure_smoke_plan_check_before_coverage")
-    )
+    receipt_failure_smoke_plan_check_order_ready = _check_passed(
+        checks, "order:promoted_seed_receipt_contract_failure_smoke_plan_check_after_smoke"
+    ) and _check_passed(checks, "order:promoted_seed_receipt_contract_failure_smoke_plan_check_before_coverage")
     drift_contract_smoke_present = _check_passed(checks, "command:release_readiness_drift_contract_smoke")
-    drift_contract_smoke_order_ready = _check_passed(checks, "order:release_readiness_drift_contract_smoke_before_coverage")
+    drift_contract_smoke_order_ready = _check_passed(
+        checks, "order:release_readiness_drift_contract_smoke_before_coverage"
+    )
     project_docs_readability_present = _check_passed(checks, "command:project_docs_readability_gate")
     project_docs_readability_order_ready = (
         _check_passed(checks, "order:project_docs_readability_after_source_encoding")
         and _check_passed(checks, "order:project_docs_readability_before_ci_hygiene")
         and _check_passed(checks, "order:project_docs_readability_before_coverage")
+    )
+    static_analysis_present = _check_passed(checks, "command:static_analysis_gate")
+    static_analysis_order_ready = _check_passed(checks, "order:static_analysis_after_ci_hygiene") and _check_passed(
+        checks,
+        "order:static_analysis_before_coverage",
     )
     normalization_guard_present = _check_passed(checks, "command:normalization_guard")
     normalization_guard_order_ready = _check_passed(checks, "order:normalization_guard_before_coverage")
@@ -183,10 +204,12 @@ def build_ci_workflow_hygiene_report(
         "tiny_scorecard_plan_digest_gate_ready": plan_digest_gate_present and plan_digest_gate_order_ready,
         "baseline_candidate_threshold_boundary_gate_check_present": boundary_gate_check_present,
         "baseline_candidate_threshold_boundary_gate_check_order_ready": boundary_gate_check_order_ready,
-        "baseline_candidate_threshold_boundary_gate_check_ready": boundary_gate_check_present and boundary_gate_check_order_ready,
+        "baseline_candidate_threshold_boundary_gate_check_ready": boundary_gate_check_present
+        and boundary_gate_check_order_ready,
         "baseline_candidate_threshold_boundary_gate_plan_check_present": boundary_gate_plan_check_present,
         "baseline_candidate_threshold_boundary_gate_plan_check_order_ready": boundary_gate_plan_check_order_ready,
-        "baseline_candidate_threshold_boundary_gate_plan_check_ready": boundary_gate_plan_check_present and boundary_gate_plan_check_order_ready,
+        "baseline_candidate_threshold_boundary_gate_plan_check_ready": boundary_gate_plan_check_present
+        and boundary_gate_plan_check_order_ready,
         "archived_path_portability_check_present": archived_path_portability_check_present,
         "archived_path_portability_check_order_ready": archived_path_portability_check_order_ready,
         "archived_path_portability_check_ready": (
@@ -194,7 +217,8 @@ def build_ci_workflow_hygiene_report(
         ),
         "promoted_seed_receipt_contract_failure_smoke_present": receipt_failure_smoke_present,
         "promoted_seed_receipt_contract_failure_smoke_order_ready": receipt_failure_smoke_order_ready,
-        "promoted_seed_receipt_contract_failure_smoke_ready": receipt_failure_smoke_present and receipt_failure_smoke_order_ready,
+        "promoted_seed_receipt_contract_failure_smoke_ready": receipt_failure_smoke_present
+        and receipt_failure_smoke_order_ready,
         "promoted_seed_receipt_contract_failure_smoke_plan_check_present": receipt_failure_smoke_plan_check_present,
         "promoted_seed_receipt_contract_failure_smoke_plan_check_order_ready": receipt_failure_smoke_plan_check_order_ready,
         "promoted_seed_receipt_contract_failure_smoke_plan_check_ready": (
@@ -202,10 +226,14 @@ def build_ci_workflow_hygiene_report(
         ),
         "release_readiness_drift_contract_smoke_present": drift_contract_smoke_present,
         "release_readiness_drift_contract_smoke_order_ready": drift_contract_smoke_order_ready,
-        "release_readiness_drift_contract_smoke_ready": drift_contract_smoke_present and drift_contract_smoke_order_ready,
+        "release_readiness_drift_contract_smoke_ready": drift_contract_smoke_present
+        and drift_contract_smoke_order_ready,
         "project_docs_readability_present": project_docs_readability_present,
         "project_docs_readability_order_ready": project_docs_readability_order_ready,
         "project_docs_readability_ready": project_docs_readability_present and project_docs_readability_order_ready,
+        "static_analysis_present": static_analysis_present,
+        "static_analysis_order_ready": static_analysis_order_ready,
+        "static_analysis_ready": static_analysis_present and static_analysis_order_ready,
         "normalization_guard_present": normalization_guard_present,
         "normalization_guard_order_ready": normalization_guard_order_ready,
         "normalization_guard_ready": normalization_guard_present and normalization_guard_order_ready,
@@ -221,8 +249,7 @@ def build_ci_workflow_hygiene_report(
             "forbidden_env_vars": list(FORBIDDEN_ENV_VARS),
             "required_command_fragments": dict(REQUIRED_COMMAND_FRAGMENTS),
             "required_command_order": {
-                key: {"before": before, "after": after}
-                for key, (before, after) in REQUIRED_COMMAND_ORDER.items()
+                key: {"before": before, "after": after} for key, (before, after) in REQUIRED_COMMAND_ORDER.items()
             },
             "required_python_version": REQUIRED_PYTHON_VERSION,
         },
@@ -239,8 +266,14 @@ def _build_checks(text: str, actions: list[CiWorkflowAction]) -> list[CiWorkflow
     for repository, expected in REQUIRED_ACTIONS.items():
         actual = action_versions.get(repository, "")
         status = "pass" if actual == expected else "fail"
-        detail = "Action uses the expected Node 24 native major." if status == "pass" else "Action version must be upgraded to the expected major."
-        checks.append(_check(f"action:{repository}", "action_version", repository, expected, actual or "missing", status, detail))
+        detail = (
+            "Action uses the expected Node 24 native major."
+            if status == "pass"
+            else "Action version must be upgraded to the expected major."
+        )
+        checks.append(
+            _check(f"action:{repository}", "action_version", repository, expected, actual or "missing", status, detail)
+        )
     for env_name in FORBIDDEN_ENV_VARS:
         present = env_name in text
         checks.append(
@@ -308,7 +341,9 @@ def _build_checks(text: str, actions: list[CiWorkflowAction]) -> list[CiWorkflow
     return checks
 
 
-def _check(check_id: str, category: str, target: str, expected: Any, actual: Any, status: CheckStatus, detail: str) -> CiWorkflowCheck:
+def _check(
+    check_id: str, category: str, target: str, expected: Any, actual: Any, status: CheckStatus, detail: str
+) -> CiWorkflowCheck:
     return {
         "id": check_id,
         "category": category,
@@ -385,19 +420,29 @@ def _recommendations(summary: dict[str, Any]) -> list[str]:
     if summary.get("missing_step_count", 0):
         recommendations.append("Restore required source hygiene and unittest commands in the CI workflow.")
     if summary.get("order_violation_count", 0):
-        recommendations.append("Keep assurance and tiny-scorecard evidence checks before coverage so CI fails fast on evidence drift.")
+        recommendations.append(
+            "Keep assurance and tiny-scorecard evidence checks before coverage so CI fails fast on evidence drift."
+        )
     if not summary.get("project_docs_readability_ready"):
-        recommendations.append("Restore the project docs readability gate after source encoding and before CI hygiene and coverage.")
+        recommendations.append(
+            "Restore the project docs readability gate after source encoding and before CI hygiene and coverage."
+        )
+    if not summary.get("static_analysis_ready"):
+        recommendations.append("Restore the static analysis gate after CI workflow hygiene and before coverage.")
     if not summary.get("promoted_seed_receipt_contract_failure_smoke_ready"):
         recommendations.append("Restore the receipt contract failure smoke after assurance and before coverage.")
     if not summary.get("archived_path_portability_check_ready"):
         recommendations.append("Restore archived path portability before receipt contract smoke and coverage.")
     if not summary.get("promoted_seed_receipt_contract_failure_smoke_plan_check_ready"):
-        recommendations.append("Restore the receipt contract failure smoke plan check after the wrapper and before coverage.")
+        recommendations.append(
+            "Restore the receipt contract failure smoke plan check after the wrapper and before coverage."
+        )
     if summary.get("python_version") != REQUIRED_PYTHON_VERSION:
         recommendations.append("Align actions/setup-python with the source compatibility target.")
     if not summary.get("normalization_guard_ready"):
-        recommendations.append("Restore the normalization guard before coverage so architecture and public API drift fail fast.")
+        recommendations.append(
+            "Restore the normalization guard before coverage so architecture and public API drift fail fast."
+        )
     return recommendations
 
 

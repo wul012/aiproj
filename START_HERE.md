@@ -39,19 +39,22 @@ Typical workflow:
 
 ```powershell
 python -B scripts/check_engineering_health.py
+python -B scripts/check_static_analysis.py --out-dir runs/static-analysis
 python -m unittest discover -s tests -v
 python -B scripts/run_test_coverage.py --out-dir runs/test-coverage --fail-under 80
 python -B scripts/check_normalization_guard.py
 python -B scripts/check_archive_runs_inventory.py --out-dir runs/archive-runs-inventory --force
 ```
 
-Use the first command for the current maintainer health check. Use the broad
-unittest command when you need full test discovery, and the coverage command
-when you need the same thresholded unit-test entrypoint used by CI. Use the
-normalization guard when you are changing architecture boundaries, owner-package
-imports, public API surfaces, repository hygiene, or project documentation. Use
-the archive/runs inventory when checking evidence growth; it is warning-only and
-does not move archive roots.
+Use the first command for the current maintainer health check. Use the static
+analysis command when changing Python source or scripts; it compares ruff
+findings against the committed baseline and keeps strict paths format-clean.
+Use the broad unittest command when you need full test discovery, and the
+coverage command when you need the same thresholded unit-test entrypoint used by
+CI. Use the normalization guard when you are changing architecture boundaries,
+owner-package imports, public API surfaces, repository hygiene, or project
+documentation. Use the archive/runs inventory when checking evidence growth; it
+is warning-only and does not move archive roots.
 
 For specific training, evaluation, dashboard, or report commands, use the
 matching section in `README.md` because the project has many versioned
@@ -73,13 +76,13 @@ workflows.
 
 ## Latest version summary
 
-Current README focus: **v1260 production-excellence A0 census**.
+Current README focus: **v1261 production-excellence A1 static analysis**.
 
-v1260 starts the aiproj A-track from
-`docs/production-excellence-aiproj-brief.md`. It records the current CI shape,
-adds a stdlib-only archive/runs inventory, archives the first A0 inventory
-evidence under `f/1260`, and refreshes stale front-door text. This is a
-production-excellence census, not a model-quality promotion: model capability
+v1261 starts A1 from `docs/production-excellence-aiproj-brief.md`. It adopts
+ruff as a staged CI gate, commits the historical `src/` and `scripts/` baseline,
+keeps strict maintained paths lint-clean and format-clean, and extends CI
+workflow hygiene so the static-analysis step cannot disappear silently. This is
+an engineering-maintenance gate, not a model-quality promotion: model capability
 claims remain educational unless tied to cited evidence, and governance
 `status=pass` still does not imply production model readiness.
 
@@ -92,8 +95,10 @@ claims remain educational unless tied to cited evidence, and governance
 - `docs/engineering-workflow.md` - standard local and CI checks.
 - `docs/normalization-guard.md` - focused guard modules and what each protects.
 - `docs/script-entrypoints.md` - stable maintainer scripts and historical script boundary.
+- `docs/static-analysis.md` - staged ruff baseline and strict-path gate.
 - `docs/archive-runs-inventory.md` - warning-only archive and `runs/` growth inventory.
 - `docs/aiproj-track-a0-census.md` - A0 production-excellence census evidence.
+- `docs/aiproj-track-a1-static-analysis.md` - A1 static-analysis adoption evidence.
 - `docs/production-excellence-aiproj-brief.md` - Claude-authored A-track execution brief.
 - `文档分流说明.md` - current documentation routing map.
 - `src/minigpt/` - model, evaluation, reporting, and workflow code.

@@ -18,6 +18,10 @@ f/<version>/解释/说明.md
 
 ## 当前索引
 
+f/1261/图片
+f/1261/解释/说明.md
+ -> v1261 starts A1 from the aiproj production-excellence brief by adopting a staged ruff static-analysis gate. It adds `scripts/check_static_analysis.py`, commits `docs/static-analysis/ruff-baseline.json`, wires the gate into CI and `scripts/check_engineering_health.py`, and extends CI workflow hygiene so static analysis must stay after CI hygiene and before coverage. Real run: `status=pass`, `decision=continue_with_static_analysis_gate`, `current_issue_count=545`, `baseline_issue_count=545`, `new_issue_count=0`, `strict_lint_issue_count=0`, `strict_format_status=pass`. Screenshot: `static-analysis-v1261.png`.
+
 f/1260/图片
 f/1260/解释/说明.md
  -> v1260 starts the aiproj production-excellence A-track with A0 census and quick wins. It records the actual CI shape, confirms the latest main CI was green at the start, adds a stdlib-only warning-only archive/runs inventory, writes the first A0 census docs, and refreshes stale START_HERE version text without changing model-capability verdicts or promotion boundaries. Real inventory result: `status=pass`, `decision=archive_runs_inventory_recorded`, `warning_only=True`, `archive_total_mb=390.0008`, `warning_count=0`, largest archive root `e/` at `224.7105 MB`, and `runs/` at `11.349 MB`. Screenshot: `archive-runs-inventory-v1260.png`.

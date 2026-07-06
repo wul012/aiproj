@@ -41,26 +41,55 @@ def main(argv: list[str] | None = None) -> int:
     print(f"required_order_count={summary['required_order_count']}")
     print(f"order_violation_count={summary['order_violation_count']}")
     print(f"release_readiness_drift_contract_smoke_present={summary['release_readiness_drift_contract_smoke_present']}")
-    print(f"release_readiness_drift_contract_smoke_order_ready={summary['release_readiness_drift_contract_smoke_order_ready']}")
+    print(
+        f"release_readiness_drift_contract_smoke_order_ready={summary['release_readiness_drift_contract_smoke_order_ready']}"
+    )
     print(f"release_readiness_drift_contract_smoke_ready={summary['release_readiness_drift_contract_smoke_ready']}")
-    print(f"baseline_candidate_threshold_boundary_gate_check_present={summary['baseline_candidate_threshold_boundary_gate_check_present']}")
-    print(f"baseline_candidate_threshold_boundary_gate_check_order_ready={summary['baseline_candidate_threshold_boundary_gate_check_order_ready']}")
-    print(f"baseline_candidate_threshold_boundary_gate_check_ready={summary['baseline_candidate_threshold_boundary_gate_check_ready']}")
-    print(f"baseline_candidate_threshold_boundary_gate_plan_check_present={summary['baseline_candidate_threshold_boundary_gate_plan_check_present']}")
-    print(f"baseline_candidate_threshold_boundary_gate_plan_check_order_ready={summary['baseline_candidate_threshold_boundary_gate_plan_check_order_ready']}")
-    print(f"baseline_candidate_threshold_boundary_gate_plan_check_ready={summary['baseline_candidate_threshold_boundary_gate_plan_check_ready']}")
+    print(
+        f"baseline_candidate_threshold_boundary_gate_check_present={summary['baseline_candidate_threshold_boundary_gate_check_present']}"
+    )
+    print(
+        f"baseline_candidate_threshold_boundary_gate_check_order_ready={summary['baseline_candidate_threshold_boundary_gate_check_order_ready']}"
+    )
+    print(
+        f"baseline_candidate_threshold_boundary_gate_check_ready={summary['baseline_candidate_threshold_boundary_gate_check_ready']}"
+    )
+    print(
+        f"baseline_candidate_threshold_boundary_gate_plan_check_present={summary['baseline_candidate_threshold_boundary_gate_plan_check_present']}"
+    )
+    print(
+        f"baseline_candidate_threshold_boundary_gate_plan_check_order_ready={summary['baseline_candidate_threshold_boundary_gate_plan_check_order_ready']}"
+    )
+    print(
+        f"baseline_candidate_threshold_boundary_gate_plan_check_ready={summary['baseline_candidate_threshold_boundary_gate_plan_check_ready']}"
+    )
     print(f"archived_path_portability_check_present={summary['archived_path_portability_check_present']}")
     print(f"archived_path_portability_check_order_ready={summary['archived_path_portability_check_order_ready']}")
     print(f"archived_path_portability_check_ready={summary['archived_path_portability_check_ready']}")
-    print(f"promoted_seed_receipt_contract_failure_smoke_present={summary['promoted_seed_receipt_contract_failure_smoke_present']}")
-    print(f"promoted_seed_receipt_contract_failure_smoke_order_ready={summary['promoted_seed_receipt_contract_failure_smoke_order_ready']}")
-    print(f"promoted_seed_receipt_contract_failure_smoke_ready={summary['promoted_seed_receipt_contract_failure_smoke_ready']}")
-    print(f"promoted_seed_receipt_contract_failure_smoke_plan_check_present={summary['promoted_seed_receipt_contract_failure_smoke_plan_check_present']}")
-    print(f"promoted_seed_receipt_contract_failure_smoke_plan_check_order_ready={summary['promoted_seed_receipt_contract_failure_smoke_plan_check_order_ready']}")
-    print(f"promoted_seed_receipt_contract_failure_smoke_plan_check_ready={summary['promoted_seed_receipt_contract_failure_smoke_plan_check_ready']}")
+    print(
+        f"promoted_seed_receipt_contract_failure_smoke_present={summary['promoted_seed_receipt_contract_failure_smoke_present']}"
+    )
+    print(
+        f"promoted_seed_receipt_contract_failure_smoke_order_ready={summary['promoted_seed_receipt_contract_failure_smoke_order_ready']}"
+    )
+    print(
+        f"promoted_seed_receipt_contract_failure_smoke_ready={summary['promoted_seed_receipt_contract_failure_smoke_ready']}"
+    )
+    print(
+        f"promoted_seed_receipt_contract_failure_smoke_plan_check_present={summary['promoted_seed_receipt_contract_failure_smoke_plan_check_present']}"
+    )
+    print(
+        f"promoted_seed_receipt_contract_failure_smoke_plan_check_order_ready={summary['promoted_seed_receipt_contract_failure_smoke_plan_check_order_ready']}"
+    )
+    print(
+        f"promoted_seed_receipt_contract_failure_smoke_plan_check_ready={summary['promoted_seed_receipt_contract_failure_smoke_plan_check_ready']}"
+    )
     print(f"project_docs_readability_present={summary['project_docs_readability_present']}")
     print(f"project_docs_readability_order_ready={summary['project_docs_readability_order_ready']}")
     print(f"project_docs_readability_ready={summary['project_docs_readability_ready']}")
+    print(f"static_analysis_present={summary['static_analysis_present']}")
+    print(f"static_analysis_order_ready={summary['static_analysis_order_ready']}")
+    print(f"static_analysis_ready={summary['static_analysis_ready']}")
     print(f"normalization_guard_present={summary['normalization_guard_present']}")
     print(f"normalization_guard_order_ready={summary['normalization_guard_order_ready']}")
     print(f"normalization_guard_ready={summary['normalization_guard_ready']}")

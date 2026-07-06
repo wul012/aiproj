@@ -9,6 +9,7 @@ REQUIRED_COMMAND_FRAGMENTS = {
     "source_encoding_gate": "scripts/check_source_encoding.py",
     "project_docs_readability_gate": "scripts/check_project_docs_readability.py",
     "ci_workflow_hygiene_gate": "scripts/check_ci_workflow_hygiene.py",
+    "static_analysis_gate": "scripts/check_static_analysis.py",
     "archived_path_portability_check": "scripts/check_archived_path_portability.py",
     "promoted_seed_handoff_assurance_smoke": "scripts/check_promoted_seed_handoff_assurance_smoke.py",
     "promoted_seed_receipt_contract_failure_smoke": "scripts/run_ci_promoted_seed_receipt_contract_failure_smoke.py",
@@ -34,6 +35,14 @@ REQUIRED_COMMAND_ORDER = {
     ),
     "project_docs_readability_before_coverage": (
         "scripts/check_project_docs_readability.py",
+        "scripts/run_test_coverage.py",
+    ),
+    "static_analysis_after_ci_hygiene": (
+        "scripts/check_ci_workflow_hygiene.py",
+        "scripts/check_static_analysis.py",
+    ),
+    "static_analysis_before_coverage": (
+        "scripts/check_static_analysis.py",
         "scripts/run_test_coverage.py",
     ),
     "promoted_seed_handoff_assurance_smoke_before_coverage": (

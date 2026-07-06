@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1219-v1261-production-excellence-a1-static-analysis.md
+ -> v1261 code explanation: production-excellence A1 staged static analysis. Adds ruff as a committed CI gate without a repo-wide mechanical sweep, records the 545-finding historical `src/`/`scripts/` baseline, keeps strict maintained paths lint-clean and format-clean, and extends CI workflow hygiene plus engineering health to protect the new gate. Evidence lives under `f/1261`.
+
 1218-v1260-production-excellence-a0-census.md
  -> v1260 code explanation: production-excellence A0 census for aiproj. Adds a stdlib-only warning-only archive/runs inventory, records CI/test/archive baseline facts, refreshes stale START_HERE pointers, and preserves the no-promotion/model-quality boundary. Evidence lives under `f/1260`.
 

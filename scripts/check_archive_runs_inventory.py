@@ -83,8 +83,7 @@ def build_inventory(
 ) -> dict[str, object]:
     budget = budget or InventoryBudget()
     archive_rows = [
-        measure_path(project_root / name, "archive", budget.archive_root_warning_mb)
-        for name in ARCHIVE_ROOTS
+        measure_path(project_root / name, "archive", budget.archive_root_warning_mb) for name in ARCHIVE_ROOTS
     ]
     run_rows = [measure_path(project_root / name, "run", budget.runs_warning_mb) for name in RUN_ROOTS]
     archive_total_mb = round(sum(float(row["total_mb"]) for row in archive_rows), 4)
@@ -202,7 +201,7 @@ def render_html(report: dict[str, object]) -> str:
         for row in report["rows"]
     )
     return (
-        "<!doctype html><html><head><meta charset=\"utf-8\"><title>aiproj archive inventory</title>"
+        '<!doctype html><html><head><meta charset="utf-8"><title>aiproj archive inventory</title>'
         "<style>body{font-family:system-ui,sans-serif;max-width:1100px;margin:32px auto;line-height:1.45}"
         "table{border-collapse:collapse;width:100%}td,th{border:1px solid #ccc;padding:6px;text-align:left}"
         "th{background:#eee}</style></head><body>"

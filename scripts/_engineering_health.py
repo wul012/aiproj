@@ -18,6 +18,7 @@ _HEALTH_STEP_IDS_BY_ENTRYPOINT = {
     "scripts/check_source_encoding.py": "source_encoding",
     "scripts/check_project_docs_readability.py": "project_docs_readability",
     "scripts/check_ci_workflow_hygiene.py": "ci_workflow_hygiene",
+    "scripts/check_static_analysis.py": "static_analysis",
     "scripts/check_normalization_guard.py": "normalization_guard",
 }
 
@@ -42,7 +43,10 @@ class EngineeringHealthStepResult:
 
 
 def build_steps(out_dir: Path, *, python_executable: str = sys.executable) -> tuple[EngineeringHealthStep, ...]:
-    return tuple(_build_step(entrypoint, out_dir, python_executable=python_executable) for entrypoint in HEALTH_ENGINEERING_ENTRYPOINTS)
+    return tuple(
+        _build_step(entrypoint, out_dir, python_executable=python_executable)
+        for entrypoint in HEALTH_ENGINEERING_ENTRYPOINTS
+    )
 
 
 def _build_step(entrypoint: str, out_dir: Path, *, python_executable: str) -> EngineeringHealthStep:
@@ -79,6 +83,17 @@ def _build_step(entrypoint: str, out_dir: Path, *, python_executable: str) -> En
                 entrypoint,
                 "--out-dir",
                 str(out_dir / "ci-workflow-hygiene"),
+            ),
+        )
+    if entrypoint == "scripts/check_static_analysis.py":
+        return EngineeringHealthStep(
+            _HEALTH_STEP_IDS_BY_ENTRYPOINT[entrypoint],
+            (
+                python_executable,
+                "-B",
+                entrypoint,
+                "--out-dir",
+                str(out_dir / "static-analysis"),
             ),
         )
     if entrypoint == "scripts/check_normalization_guard.py":
@@ -159,9 +174,7 @@ def render_summary_markdown(summary: dict[str, Any]) -> str:
             continue
         command = step.get("command")
         command_text = " ".join(str(item) for item in command) if isinstance(command, list) else str(command)
-        lines.append(
-            f"| {step.get('step_id')} | {step.get('status')} | {step.get('return_code')} | `{command_text}` |"
-        )
+        lines.append(f"| {step.get('step_id')} | {step.get('status')} | {step.get('return_code')} | `{command_text}` |")
     return "\n".join(lines).rstrip() + "\n"
 
 

@@ -26,12 +26,23 @@ python -B scripts/check_engineering_health.py
 
 This runs the `HEALTH_ENGINEERING_ENTRYPOINTS` subset from
 `scripts/_bootstrap.py`: source encoding hygiene, project documentation
-readability, CI workflow hygiene, and the normalization guard in one local
-command. Source encoding, docs readability, and CI workflow reports are written
-under `runs/engineering-health/`, and the aggregate command writes
+readability, CI workflow hygiene, staged static analysis, and the normalization
+guard in one local command. Source encoding, docs readability, CI workflow, and
+static-analysis reports are written under `runs/engineering-health/`, and the aggregate command writes
 `runs/engineering-health/engineering_health_summary.json` and
 `runs/engineering-health/engineering_health_summary.md` with the step commands,
 return codes, and pass/fail status.
+
+For the staged ruff gate alone:
+
+```powershell
+python -B scripts/check_static_analysis.py --out-dir runs/static-analysis
+```
+
+This compares current `src/` and `scripts/` ruff findings against
+`docs/static-analysis/ruff-baseline.json`, fails on new findings, and requires
+the strict maintained path set to pass `ruff format --check`. See
+`docs/static-analysis.md` for the baseline and update policy.
 
 For a quick full unittest run:
 
@@ -93,6 +104,9 @@ remain before coverage.
 - `tests/test_ci_workflow.py` protects CI workflow hygiene policy from
   `ci_workflow_hygiene_policy.py`, required CI commands, and pre-coverage
   ordering for documentation, evidence, and normalization gates.
+- `tests/test_static_analysis.py` protects the staged ruff baseline comparison,
+  strict-path lint behavior, strict format behavior, CLI baseline update path,
+  and JSON/CSV/Markdown/HTML report writers.
 - `tests/test_test_coverage_report.py` protects the coverage report model,
   threshold behavior, output renderers, and the coverage CLI entrypoint
   contract.
@@ -121,11 +135,11 @@ scripts untouched.
 The aggregate health steps are built in `scripts/_engineering_health.py` from
 the `HEALTH_ENGINEERING_ENTRYPOINTS` list, keeping the local health command as
 a thin runner over stable checks instead of a second implementation of those
-checks. It also runs the docs readability check as a first-class step, so
-navigation regressions produce their own report directory instead of being
-visible only through the focused unittest guard. Its top-level summary is
-intentionally small and available as JSON plus Markdown; detailed evidence
-stays in each child check's report directory.
+checks. It also runs the docs readability and static-analysis checks as
+first-class steps, so navigation and ruff regressions produce their own report
+directories instead of being visible only through broader guards. Its top-level
+summary is intentionally small and available as JSON plus Markdown; detailed
+evidence stays in each child check's report directory.
 
 The active normalization tests share `tests/_bootstrap.py` for the same reason:
 current guard tests, including the CI workflow hygiene tests, get a single

@@ -10,6 +10,7 @@ This directory keeps stable reader-facing documentation outside the long version
 - [Engineering workflow](engineering-workflow.md)
 - [Normalization guard](normalization-guard.md)
 - [Script entrypoints](script-entrypoints.md)
+- [Static analysis](static-analysis.md)
 - [Model training and evaluation](model-training.md)
 - [Model capability cadence](model-capability-cadence.md)
 - [Publication receipts](publication-receipts.md)
@@ -19,6 +20,7 @@ This directory keeps stable reader-facing documentation outside the long version
 - [Artifact map](artifact-map.md)
 - [Archive and runs inventory](archive-runs-inventory.md)
 - [aiproj A0 census](aiproj-track-a0-census.md)
+- [aiproj A1 static analysis](aiproj-track-a1-static-analysis.md)
 - [Production excellence brief](production-excellence-aiproj-brief.md)
 
 The root README remains the project landing page and historical ledger, but new readers should start here when they need the conceptual map.

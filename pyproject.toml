@@ -21,3 +21,10 @@ testpaths = ["tests"]
 python_files = ["test_*.py"]
 addopts = ["-p", "no:faker"]
 asyncio_default_fixture_loop_scope = "function"
+
+[tool.ruff]
+target-version = "py311"
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F"]

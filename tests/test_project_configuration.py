@@ -37,6 +37,7 @@ class ProjectConfigurationTests(unittest.TestCase):
         self.assertIn("numpy>=2.0", project_dependencies)
         self.assertTrue(project_dependencies.issubset(requirements))
         self.assertIn("coverage>=7.0", requirements)
+        self.assertIn("ruff>=0.8,<1.0", requirements)
 
     def test_ci_uses_the_standard_coverage_entrypoint(self) -> None:
         workflow = (ROOT / ".github" / "workflows" / "ci.yml").read_text(encoding="utf-8")
@@ -44,6 +45,7 @@ class ProjectConfigurationTests(unittest.TestCase):
         self.assertIn("pip install -r requirements.txt", workflow)
         self.assertIn("python -B scripts/check_normalization_guard.py", workflow)
         self.assertIn("python -B scripts/check_project_docs_readability.py", workflow)
+        self.assertIn("python -B scripts/check_static_analysis.py --out-dir runs/static-analysis-ci", workflow)
         self.assertIn(
             "python -B scripts/run_test_coverage.py --out-dir runs/test-coverage-ci --fail-under 80",
             workflow,
@@ -54,6 +56,7 @@ class ProjectConfigurationTests(unittest.TestCase):
         start_here = (ROOT / "START_HERE.md").read_text(encoding="utf-8")
 
         self.assertIn("python -B scripts/check_engineering_health.py", start_here)
+        self.assertIn("python -B scripts/check_static_analysis.py", start_here)
         self.assertIn("python -m unittest discover -s tests -v", start_here)
         self.assertIn("python -B scripts/check_normalization_guard.py", start_here)
         self.assertIn("docs/architecture-map.md", start_here)
@@ -72,6 +75,7 @@ class ProjectConfigurationTests(unittest.TestCase):
         self.assertIn("tests.test_project_docs_readability", FOCUSED_TEST_MODULES)
         self.assertGreaterEqual(len(BOOTSTRAPPED_ENGINEERING_ENTRYPOINTS), 6)
         self.assertIn("python -B scripts/check_normalization_guard.py", workflow)
+        self.assertIn("scripts/check_static_analysis.py", workflow)
         self.assertIn("scripts/check_normalization_guard.py", roadmap)
 
     def test_normalization_docs_are_indexed(self) -> None:

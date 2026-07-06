@@ -94,10 +94,10 @@ The same rule now applies to the active normalization test set through
 `tests/_bootstrap.py`, keeping current guard tests off repeated local
 `sys.path` snippets without rewriting the full historical test suite.
 
-CI workflow hygiene now treats `scripts/check_project_docs_readability.py` and
-`scripts/check_normalization_guard.py` as required pre-coverage gates, so the
-documentation and normalization checks cannot quietly disappear from the
-workflow.
+CI workflow hygiene now treats `scripts/check_project_docs_readability.py`,
+`scripts/check_static_analysis.py`, and `scripts/check_normalization_guard.py`
+as required pre-coverage gates, so the documentation, static-analysis, and
+normalization checks cannot quietly disappear from the workflow.
 
 The stable documentation readability entrypoint is
 `scripts/check_project_docs_readability.py`. Older versioned devtool wrappers

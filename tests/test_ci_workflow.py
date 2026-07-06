@@ -33,11 +33,12 @@ REQUIRED_SUMMARY_GATES = (
     "promoted_seed_receipt_contract_failure_smoke_plan_check",
     "release_readiness_drift_contract_smoke",
     "project_docs_readability",
+    "static_analysis",
     "normalization_guard",
 )
 
 COVERAGE_ORDER_SENSITIVE_GATES = tuple(
-    gate for gate in REQUIRED_SUMMARY_GATES if gate != "project_docs_readability"
+    gate for gate in REQUIRED_SUMMARY_GATES if gate not in {"project_docs_readability", "static_analysis"}
 )
 
 CURRENT_WORKFLOW_REQUIRED_CHECK_IDS = (
@@ -52,6 +53,7 @@ CURRENT_WORKFLOW_REQUIRED_CHECK_IDS = (
     "command:promoted_seed_receipt_contract_failure_smoke_plan_check",
     "command:release_readiness_drift_contract_smoke",
     "command:project_docs_readability_gate",
+    "command:static_analysis_gate",
     "command:normalization_guard",
     "order:ci_tiny_scorecard_plan_check_after_smoke",
     "order:ci_tiny_scorecard_plan_check_before_coverage",
@@ -69,6 +71,8 @@ CURRENT_WORKFLOW_REQUIRED_CHECK_IDS = (
     "order:project_docs_readability_after_source_encoding",
     "order:project_docs_readability_before_ci_hygiene",
     "order:project_docs_readability_before_coverage",
+    "order:static_analysis_after_ci_hygiene",
+    "order:static_analysis_before_coverage",
     "order:normalization_guard_before_coverage",
 )
 
@@ -142,15 +146,17 @@ class CIWorkflowTests(unittest.TestCase):
                 encoding="utf-8",
             )
 
-            report = build_ci_workflow_hygiene_report(workflow, project_root=Path(tmp), generated_at="2026-01-01T00:00:00Z")
+            report = build_ci_workflow_hygiene_report(
+                workflow, project_root=Path(tmp), generated_at="2026-01-01T00:00:00Z"
+            )
 
             self.assertEqual(report["summary"]["status"], "fail")
             self.assertEqual(report["summary"]["decision"], "fix_ci_workflow_hygiene")
             self.assertGreaterEqual(report["summary"]["failed_check_count"], 4)
             self.assertEqual(report["summary"]["node24_native_action_count"], 0)
             self.assertEqual(report["summary"]["forbidden_env_count"], 1)
-            self.assertEqual(report["summary"]["missing_step_count"], 14)
-            self.assertEqual(report["summary"]["required_step_count"], 16)
+            self.assertEqual(report["summary"]["missing_step_count"], 15)
+            self.assertEqual(report["summary"]["required_step_count"], 17)
             for gate in REQUIRED_SUMMARY_GATES:
                 with self.subTest(gate=gate):
                     self.assertFalse(report["summary"][f"{gate}_ready"])
@@ -176,6 +182,8 @@ class CIWorkflowTests(unittest.TestCase):
                         "        run: python -B scripts/check_project_docs_readability.py --out-dir runs/project-docs-readability-ci --require-pass --force",
                         "      - name: CI workflow hygiene check",
                         "        run: python -B scripts/check_ci_workflow_hygiene.py --out-dir runs/ci-workflow-hygiene-ci",
+                        "      - name: Static analysis gate",
+                        "        run: python -B scripts/check_static_analysis.py --out-dir runs/static-analysis-ci",
                         "      - name: Archived path portability check",
                         "        run: python -B scripts/check_archived_path_portability.py --out-dir runs/archived-path-portability-ci",
                         "      - name: Promoted seed handoff assurance smoke",
@@ -203,7 +211,9 @@ class CIWorkflowTests(unittest.TestCase):
                 encoding="utf-8",
             )
 
-            report = build_ci_workflow_hygiene_report(workflow, project_root=Path(tmp), generated_at="2026-01-01T00:00:00Z")
+            report = build_ci_workflow_hygiene_report(
+                workflow, project_root=Path(tmp), generated_at="2026-01-01T00:00:00Z"
+            )
 
             self.assertEqual(report["summary"]["status"], "fail")
             self.assertEqual(report["summary"]["node24_native_action_count"], 2)
@@ -233,6 +243,8 @@ class CIWorkflowTests(unittest.TestCase):
                         "        run: python -B scripts/check_project_docs_readability.py --out-dir runs/project-docs-readability-ci --require-pass --force",
                         "      - name: CI workflow hygiene check",
                         "        run: python -B scripts/check_ci_workflow_hygiene.py --out-dir runs/ci-workflow-hygiene-ci",
+                        "      - name: Static analysis gate",
+                        "        run: python -B scripts/check_static_analysis.py --out-dir runs/static-analysis-ci",
                         "      - name: Unit tests",
                         "        run: python -B scripts/run_test_coverage.py --out-dir runs/test-coverage-ci --fail-under 80",
                         "      - name: Archived path portability check",
@@ -260,7 +272,9 @@ class CIWorkflowTests(unittest.TestCase):
                 encoding="utf-8",
             )
 
-            report = build_ci_workflow_hygiene_report(workflow, project_root=Path(tmp), generated_at="2026-01-01T00:00:00Z")
+            report = build_ci_workflow_hygiene_report(
+                workflow, project_root=Path(tmp), generated_at="2026-01-01T00:00:00Z"
+            )
 
             self.assertEqual(report["summary"]["status"], "fail")
             self.assertEqual(report["summary"]["missing_step_count"], 0)
@@ -290,6 +304,8 @@ class CIWorkflowTests(unittest.TestCase):
                         "        run: python -B scripts/check_project_docs_readability.py --out-dir runs/project-docs-readability-ci --require-pass --force",
                         "      - name: CI workflow hygiene check",
                         "        run: python -B scripts/check_ci_workflow_hygiene.py --out-dir runs/ci-workflow-hygiene-ci",
+                        "      - name: Static analysis gate",
+                        "        run: python -B scripts/check_static_analysis.py --out-dir runs/static-analysis-ci",
                         "      - name: Archived path portability check",
                         "        run: python -B scripts/check_archived_path_portability.py --out-dir runs/archived-path-portability-ci",
                         "      - name: Promoted seed handoff assurance smoke",
@@ -317,7 +333,9 @@ class CIWorkflowTests(unittest.TestCase):
                 encoding="utf-8",
             )
 
-            report = build_ci_workflow_hygiene_report(workflow, project_root=Path(tmp), generated_at="2026-01-01T00:00:00Z")
+            report = build_ci_workflow_hygiene_report(
+                workflow, project_root=Path(tmp), generated_at="2026-01-01T00:00:00Z"
+            )
 
             failed_order_ids = _failed_required_order_ids(report)
             self.assertEqual(report["summary"]["status"], "fail")
@@ -341,7 +359,9 @@ class CIWorkflowTests(unittest.TestCase):
             self.assertIn("order:ci_tiny_scorecard_plan_check_after_smoke", failed_order_ids)
 
     def test_ci_workflow_hygiene_outputs_json_csv_markdown_and_html(self) -> None:
-        report = build_ci_workflow_hygiene_report(CI_WORKFLOW, project_root=ROOT, title="CI <workflow>", generated_at="2026-01-01T00:00:00Z")
+        report = build_ci_workflow_hygiene_report(
+            CI_WORKFLOW, project_root=ROOT, title="CI <workflow>", generated_at="2026-01-01T00:00:00Z"
+        )
 
         with TemporaryDirectory() as tmp:
             outputs = write_ci_workflow_hygiene_outputs(report, Path(tmp) / "out")
@@ -378,7 +398,9 @@ class CIWorkflowTests(unittest.TestCase):
 
             with contextlib.redirect_stdout(io.StringIO()):
                 fail_code = cli_main(["--workflow", str(bad_workflow), "--out-dir", str(out_dir)])
-                no_fail_code = cli_main(["--workflow", str(bad_workflow), "--out-dir", str(root / "no-fail"), "--no-fail"])
+                no_fail_code = cli_main(
+                    ["--workflow", str(bad_workflow), "--out-dir", str(root / "no-fail"), "--no-fail"]
+                )
 
             self.assertEqual(fail_code, 1)
             self.assertEqual(no_fail_code, 0)
@@ -388,7 +410,9 @@ class CIWorkflowTests(unittest.TestCase):
         self.assertIs(render_ci_workflow_hygiene_html, artifact_render_ci_workflow_hygiene_html)
         self.assertIs(write_ci_workflow_hygiene_outputs, artifact_write_ci_workflow_hygiene_outputs)
         self.assertIs(ci_workflow_hygiene.REQUIRED_ACTIONS, ci_workflow_hygiene_policy.REQUIRED_ACTIONS)
-        self.assertIs(ci_workflow_hygiene.REQUIRED_COMMAND_FRAGMENTS, ci_workflow_hygiene_policy.REQUIRED_COMMAND_FRAGMENTS)
+        self.assertIs(
+            ci_workflow_hygiene.REQUIRED_COMMAND_FRAGMENTS, ci_workflow_hygiene_policy.REQUIRED_COMMAND_FRAGMENTS
+        )
         self.assertIs(ci_workflow_hygiene.REQUIRED_COMMAND_ORDER, ci_workflow_hygiene_policy.REQUIRED_COMMAND_ORDER)
 
 

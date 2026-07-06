@@ -17,9 +17,10 @@ python -B scripts/check_engineering_health.py
 
 `scripts/check_engineering_health.py` is the broad local maintainer check. It
 runs the `HEALTH_ENGINEERING_ENTRYPOINTS` subset: source-encoding hygiene,
-project documentation readability, CI workflow hygiene, and the normalization
-guard, then writes a compact top-level summary. It is intentionally local-only
-because CI already runs the underlying gates as separate fail-fast steps.
+project documentation readability, CI workflow hygiene, staged static analysis,
+and the normalization guard, then writes a compact top-level summary. It is
+intentionally local-only because CI already runs the underlying gates as
+separate fail-fast steps.
 
 ### CI-Backed Gates
 
@@ -27,6 +28,7 @@ because CI already runs the underlying gates as separate fail-fast steps.
 python -B scripts/check_source_encoding.py
 python -B scripts/check_project_docs_readability.py --require-pass --force
 python -B scripts/check_ci_workflow_hygiene.py
+python -B scripts/check_static_analysis.py --out-dir runs/static-analysis
 python -B scripts/check_normalization_guard.py
 python -B scripts/run_test_coverage.py --out-dir runs/test-coverage --fail-under 80
 ```
@@ -63,8 +65,13 @@ they spread into README, docs, or generated report surfaces.
 
 `scripts/check_ci_workflow_hygiene.py` checks that CI still installs the
 declared requirements, runs the project docs readability check and
-normalization guard before coverage, and keeps the required workflow steps
-visible.
+static-analysis and normalization guards before coverage, and keeps the
+required workflow steps visible.
+
+`scripts/check_static_analysis.py` runs the staged ruff gate. It compares
+current `src/` and `scripts/` findings against
+`docs/static-analysis/ruff-baseline.json`, fails on new findings, and keeps the
+strict maintained path set lint-clean and format-clean.
 
 `scripts/run_test_coverage.py` is the coverage-producing unittest entrypoint
 used by CI. The local command above writes coverage evidence under
@@ -216,6 +223,7 @@ The default local evidence locations are:
 - `runs/engineering-health/source-encoding/`
 - `runs/engineering-health/project-docs-readability/`
 - `runs/engineering-health/ci-workflow-hygiene/`
+- `runs/engineering-health/static-analysis/`
 - `runs/test-coverage/`
 
 Use `tmp/` only for throwaway local validation while working. Final maintainer
