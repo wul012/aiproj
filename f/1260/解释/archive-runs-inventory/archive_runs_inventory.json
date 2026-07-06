@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "title": "aiproj archive and runs inventory",
+  "generated_at": "2026-07-06T11:48:01Z",
+  "status": "pass",
+  "decision": "archive_runs_inventory_recorded",
+  "warning_only": true,
+  "project_root": "D:\\aiproj",
+  "summary": {
+    "archive_root_count": 6,
+    "run_root_count": 1,
+    "archive_total_bytes": 408945468,
+    "archive_total_mb": 390.0008,
+    "archive_total_warning_mb": 512.0,
+    "archive_root_warning_mb": 300.0,
+    "runs_warning_mb": 64.0,
+    "warning_count": 0
+  },
+  "rows": [
+    {
+      "category": "archive",
+      "path": "a",
+      "exists": true,
+      "file_count": 186,
+      "directory_count": 93,
+      "total_bytes": 12828493,
+      "total_mb": 12.2342,
+      "warning_budget_mb": 300.0,
+      "over_budget": false
+    },
+    {
+      "category": "archive",
+      "path": "b",
+      "exists": true,
+      "file_count": 232,
+      "directory_count": 111,
+      "total_bytes": 16937854,
+      "total_mb": 16.1532,
+      "warning_budget_mb": 300.0,
+      "over_budget": false
+    },
+    {
+      "category": "archive",
+      "path": "c",
+      "exists": true,
+      "file_count": 1599,
+      "directory_count": 699,
+      "total_bytes": 87197775,
+      "total_mb": 83.1583,
+      "warning_budget_mb": 300.0,
+      "over_budget": false
+    },
+    {
+      "category": "archive",
+      "path": "d",
+      "exists": true,
+      "file_count": 2294,
+      "directory_count": 1008,
+      "total_bytes": 40698497,
+      "total_mb": 38.8131,
+      "warning_budget_mb": 300.0,
+      "over_budget": false
+    },
+    {
+      "category": "archive",
+      "path": "e",
+      "exists": true,
+      "file_count": 9080,
+      "directory_count": 3508,
+      "total_bytes": 235626033,
+      "total_mb": 224.7105,
+      "warning_budget_mb": 300.0,
+      "over_budget": false
+    },
+    {
+      "category": "archive",
+      "path": "f",
+      "exists": true,
+      "file_count": 778,
+      "directory_count": 429,
+      "total_bytes": 15656816,
+      "total_mb": 14.9315,
+      "warning_budget_mb": 300.0,
+      "over_budget": false
+    },
+    {
+      "category": "run",
+      "path": "runs",
+      "exists": true,
+      "file_count": 155,
+      "directory_count": 203,
+      "total_bytes": 11900277,
+      "total_mb": 11.349,
+      "warning_budget_mb": 64.0,
+      "over_budget": false
+    }
+  ],
+  "warnings": []
+}

@@ -1,0 +1,8 @@
+category,path,exists,file_count,directory_count,total_bytes,total_mb,warning_budget_mb,over_budget
+archive,a,True,186,93,12828493,12.2342,300.0,False
+archive,b,True,232,111,16937854,16.1532,300.0,False
+archive,c,True,1599,699,87197775,83.1583,300.0,False
+archive,d,True,2294,1008,40698497,38.8131,300.0,False
+archive,e,True,9080,3508,235626033,224.7105,300.0,False
+archive,f,True,778,429,15656816,14.9315,300.0,False
+run,runs,True,155,203,11900277,11.349,64.0,False

@@ -40,13 +40,18 @@ Typical workflow:
 ```powershell
 python -B scripts/check_engineering_health.py
 python -m unittest discover -s tests -v
+python -B scripts/run_test_coverage.py --out-dir runs/test-coverage --fail-under 80
 python -B scripts/check_normalization_guard.py
+python -B scripts/check_archive_runs_inventory.py --out-dir runs/archive-runs-inventory --force
 ```
 
 Use the first command for the current maintainer health check. Use the broad
-unittest command when you need full test discovery. Use the normalization guard
-when you are changing architecture boundaries, owner-package imports, public API
-surfaces, repository hygiene, or project documentation.
+unittest command when you need full test discovery, and the coverage command
+when you need the same thresholded unit-test entrypoint used by CI. Use the
+normalization guard when you are changing architecture boundaries, owner-package
+imports, public API surfaces, repository hygiene, or project documentation. Use
+the archive/runs inventory when checking evidence growth; it is warning-only and
+does not move archive roots.
 
 For specific training, evaluation, dashboard, or report commands, use the
 matching section in `README.md` because the project has many versioned
@@ -68,13 +73,15 @@ workflows.
 
 ## Latest version summary
 
-Current README focus: **v1099 documentation template hardening**.
+Current README focus: **v1260 production-excellence A0 census**.
 
-v1098 freezes overcrowded historical documentation directories and starts new
-sibling directories for model-governance explanations and runtime evidence.
-v1099 adds a reusable explanation template so future docs follow the same goal,
-boundary, entrypoint, output model, upstream evidence, checks, and test-evidence
-pattern.
+v1260 starts the aiproj A-track from
+`docs/production-excellence-aiproj-brief.md`. It records the current CI shape,
+adds a stdlib-only archive/runs inventory, archives the first A0 inventory
+evidence under `f/1260`, and refreshes stale front-door text. This is a
+production-excellence census, not a model-quality promotion: model capability
+claims remain educational unless tied to cited evidence, and governance
+`status=pass` still does not imply production model readiness.
 
 ## Where to look next
 
@@ -85,11 +92,15 @@ pattern.
 - `docs/engineering-workflow.md` - standard local and CI checks.
 - `docs/normalization-guard.md` - focused guard modules and what each protects.
 - `docs/script-entrypoints.md` - stable maintainer scripts and historical script boundary.
+- `docs/archive-runs-inventory.md` - warning-only archive and `runs/` growth inventory.
+- `docs/aiproj-track-a0-census.md` - A0 production-excellence census evidence.
+- `docs/production-excellence-aiproj-brief.md` - Claude-authored A-track execution brief.
 - `文档分流说明.md` - current documentation routing map.
 - `src/minigpt/` - model, evaluation, reporting, and workflow code.
 - `tests/` - behavior, contract, configuration, and boundary tests.
 - `e/` - v473-v1097 runtime screenshots and explanations.
 - `f/` - v1098+ runtime screenshots and explanations.
 - `代码讲解记录_模型能力阶段/` - v473-v1097 historical explanations.
-- `代码讲解记录_模型治理阶段/` - v1098+ explanation home when a version needs a
-  detailed explanation.
+- `代码讲解记录_模型治理阶段/` - v1098+ model-governance explanations.
+- `代码讲解记录_工程保养阶段/` - engineering maintenance and production-excellence
+  explanations when a version needs a detailed walkthrough.

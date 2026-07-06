@@ -19,9 +19,23 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 - [No-promotion boundary](docs/no-promotion-boundary.md)
 - [Versioned artifacts](docs/versioned-artifacts.md)
 - [Artifact map](docs/artifact-map.md)
+- [Archive and runs inventory](docs/archive-runs-inventory.md)
+- [aiproj A0 census](docs/aiproj-track-a0-census.md)
+- [Production excellence brief](docs/production-excellence-aiproj-brief.md)
 - [Plain-language project guide](项目通俗说明/README.md)
 
 ## Current version
+
+Version `v1260.0.0` starts the **aiproj production-excellence A-track with A0 census and quick wins**. It records what CI actually runs, confirms the latest main CI was green at the start of the version, adds a stdlib-only warning-only archive/runs inventory, writes the A0 census docs, and refreshes the stale START_HERE version line without changing any model-capability verdicts or promotion boundaries. The real inventory run produced `status=pass`, `decision=archive_runs_inventory_recorded`, `warning_only=True`, `archive_total_mb=390.0008`, `warning_count=0`, largest archive root `e/` at `224.7105 MB`, and `runs/` at `11.349 MB`.
+
+## Latest v1260 checkpoint
+
+- Added `scripts/check_archive_runs_inventory.py`: a stdlib-only warning-only census for path-stable archive roots `a/` through `f/` plus `runs/`, with JSON/CSV/TXT/Markdown/HTML outputs and default warning budgets.
+- Added `tests/test_archive_runs_inventory.py` covering row construction, warning-only behavior, output files, and CLI wiring.
+- Added `docs/archive-runs-inventory.md` and `docs/aiproj-track-a0-census.md`, and committed the Claude-authored `docs/production-excellence-aiproj-brief.md` as the A-track execution brief.
+- Produced A0 evidence in `f/1260`, including the inventory report and Playwright screenshot. This is a census/freshness version only: no training, no artifact relocation, no promotion, and no model-quality claim upgrade.
+
+## Historical v1259 context
 
 Version `v1259.0.0` adds a **review layer for the v1258 route-promotion release readiness receipt index**. It consumes the real `f/1258` index, verifies index readiness, lookup row consistency, bounded scope, receipt digest closure against the real `f/1257` receipt, source digest rows, complete blocked uses, clean source checks, and keeps promotion disabled. The ready run produced `status=pass`, `decision=model_capability_route_promotion_release_readiness_receipt_index_review_ready`, `receipt_index_review_ready=True`, `lookup_key_count=1`, `lookup_ready=True`, `promotion_ready=False`, and `source_digest_count=3`.
 

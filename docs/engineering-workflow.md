@@ -51,6 +51,12 @@ For architecture and public API normalization work, run the focused guard set:
 python -B scripts/check_normalization_guard.py
 ```
 
+For the warning-only archive and `runs/` inventory:
+
+```powershell
+python -B scripts/check_archive_runs_inventory.py --out-dir runs/archive-runs-inventory --force
+```
+
 For the documentation navigation/readability split alone:
 
 ```powershell
@@ -138,3 +144,7 @@ explicitly needs to preserve it elsewhere. Local caches such as `__pycache__/`,
 test output should remain untracked. Editor settings under `.vscode/` or
 `.idea/` are local workspace state. The root `ignoreit.py` file is intentionally
 ignored as a personal practice scratch file.
+
+The archive roots `a/`, `b/`, `c/`, `d/`, `e/`, and `f/` are path-stable
+historical evidence. Use `scripts/check_archive_runs_inventory.py` to measure
+their growth, but do not relocate old evidence as part of routine cleanup.

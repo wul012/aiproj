@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1218-v1260-production-excellence-a0-census.md
+ -> v1260 code explanation: production-excellence A0 census for aiproj. Adds a stdlib-only warning-only archive/runs inventory, records CI/test/archive baseline facts, refreshes stale START_HERE pointers, and preserves the no-promotion/model-quality boundary. Evidence lives under `f/1260`.
+
 1212-v1200-minigpt-weight-decay-rescues-under-label-noise.md
  -> v1200 code explanation: weight decay on v1199's noisy halfspace. It shows wd improves converged generalization by selectively rejecting flipped labels (`fit_to_noise` drops while clean-row accuracy stays high), but does not significantly beat the wd=0 early-stopping optimum, so the honest verdict is `wd_equals_early_stopping`. Evidence lives under `f/1200`.
 

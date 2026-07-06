@@ -1,0 +1,12 @@
+status=pass
+decision=archive_runs_inventory_recorded
+warning_only=True
+archive_total_mb=390.0008
+warning_count=0
+row=archive,a,12.2342MB,files=186,over_budget=False
+row=archive,b,16.1532MB,files=232,over_budget=False
+row=archive,c,83.1583MB,files=1599,over_budget=False
+row=archive,d,38.8131MB,files=2294,over_budget=False
+row=archive,e,224.7105MB,files=9080,over_budget=False
+row=archive,f,14.9315MB,files=778,over_budget=False
+row=run,runs,11.349MB,files=155,over_budget=False

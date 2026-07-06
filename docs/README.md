@@ -17,5 +17,8 @@ This directory keeps stable reader-facing documentation outside the long version
 - [No-promotion boundary](no-promotion-boundary.md)
 - [Versioned artifacts](versioned-artifacts.md)
 - [Artifact map](artifact-map.md)
+- [Archive and runs inventory](archive-runs-inventory.md)
+- [aiproj A0 census](aiproj-track-a0-census.md)
+- [Production excellence brief](production-excellence-aiproj-brief.md)
 
 The root README remains the project landing page and historical ledger, but new readers should start here when they need the conceptual map.
