@@ -1,6 +1,7 @@
-# MiniGPT Static, Type, And Coverage Gates
+# MiniGPT Static, Type, Coverage, And Code-Health Gates
 
-This page documents the staged ruff, scoped mypy, and coverage-ratchet adoption introduced by the production-excellence A-track.
+This page documents the staged ruff, scoped mypy, coverage-ratchet, and
+code-health adoption introduced by the production-excellence A-track.
 
 ## Purpose
 
@@ -43,9 +44,10 @@ This is an engineering gate, not a model-capability claim. It improves maintaina
 
 The second A1 step adds strict mypy without attempting a full-repository type
 sweep. The committed scope lives in
-`docs/static-analysis/mypy-scope.json`. It currently contains twelve
-load-bearing files in four groups: shared report contracts, CI governance,
-engineering orchestration, analysis gates, and honest measurement.
+`docs/static-analysis/mypy-scope.json`. It currently contains fourteen
+load-bearing files across shared report contracts, CI governance, engineering
+orchestration, analysis gates, artifact schema, file-size ratchet, and honest
+measurement.
 
 Run it with:
 
@@ -55,12 +57,12 @@ python -B scripts/check_type_analysis.py --out-dir runs/type-analysis
 
 The checker validates the scope before invoking mypy. Every target must exist,
 must be a Python file inside the repository, must be unique, and must belong to
-a named group. `scope_floor=12` prevents the checked surface from being reduced
+a named group. `scope_floor=14` prevents the checked surface from being reduced
 without a visible policy change. The report writes JSON, CSV, Markdown, and
 HTML with the exact target list, scope issues, and mypy diagnostics.
 
 Mypy uses strict mode with `follow_imports=skip`. That setting is deliberate:
-the gate checks the eight declared files rather than recursively turning this
+the gate checks the declared scoped files rather than recursively turning this
 incremental A1 version into a hidden full-repository migration. Future versions
 may increase `scope_floor` and add groups, but should not lower the floor.
 
@@ -114,3 +116,17 @@ The registry lives at `docs/artifact-schema-guard-registry.json`. The checker
 validates current experiment-card, dataset-card, model-card, and publication
 receipt envelopes against required fields, selected expected values, and simple
 field types. CI runs this gate after honest measurement and before coverage.
+
+## v1266 File-Size Ratchet
+
+A4 adds a code-health ratchet for Python file size:
+
+```powershell
+python -B scripts/check_file_size_ratchet.py --out-dir runs/file-size-ratchet
+```
+
+The registry lives at `docs/code-health/file-size-ratchet.json`. The checker
+scans `src/`, `scripts/`, and `tests/`, reports files above the 500-line
+warning limit, fails on unwaived files above the 800-line hard limit, and fails
+if a waived legacy oversize file grows beyond its committed baseline. CI runs
+this gate after artifact schema guard and before coverage.

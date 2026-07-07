@@ -1,0 +1,57 @@
+{
+    "schema_version": 1,
+    "policy": "aiproj_file_size_ratchet",
+    "warning_line_limit": 500,
+    "max_line_limit": 800,
+    "targets": ["src", "scripts", "tests"],
+    "waivers": [
+        {
+            "path": "tests/test_promoted_training_scale_seed_handoff.py",
+            "baseline_lines": 1398,
+            "reason": "legacy broad integration-style test; must not grow before a contract-preserving split",
+            "followup": "split by handoff input/output branch when the promoted-seed family is next touched"
+        },
+        {
+            "path": "tests/test_promoted_training_scale_seed_handoff_receipt.py",
+            "baseline_lines": 1281,
+            "reason": "legacy receipt-chain regression suite; must not grow before a contract-preserving split",
+            "followup": "split receipt rendering, replay, and negative contract cases when the receipt family is next touched"
+        },
+        {
+            "path": "tests/test_registry.py",
+            "baseline_lines": 944,
+            "reason": "legacy registry coverage hub; must not grow before a contract-preserving split",
+            "followup": "split read/write, ranking, and compatibility cases when registry tests are next modified"
+        },
+        {
+            "path": "tests/test_maturity_narrative.py",
+            "baseline_lines": 894,
+            "reason": "legacy maturity narrative fixture matrix; must not grow before a contract-preserving split",
+            "followup": "split narrative inputs, rendering, and negative assertions when maturity narrative is next modified"
+        },
+        {
+            "path": "tests/test_release_readiness_comparison.py",
+            "baseline_lines": 873,
+            "reason": "legacy release-readiness comparison regression suite; must not grow before a contract-preserving split",
+            "followup": "split comparison summary, artifact rows, and failure cases when release readiness comparison is next touched"
+        },
+        {
+            "path": "tests/test_promoted_training_scale_decision.py",
+            "baseline_lines": 838,
+            "reason": "legacy promoted training-scale decision matrix; must not grow before a contract-preserving split",
+            "followup": "split decision inputs, thresholds, and negative cases when the decision family is next touched"
+        },
+        {
+            "path": "tests/test_promoted_training_scale_seed.py",
+            "baseline_lines": 836,
+            "reason": "legacy promoted seed regression matrix; must not grow before a contract-preserving split",
+            "followup": "split seed selection, artifact rows, and failure cases when promoted seed tests are next modified"
+        },
+        {
+            "path": "tests/test_server.py",
+            "baseline_lines": 815,
+            "reason": "legacy server behavior suite; must not grow before a contract-preserving split",
+            "followup": "split request, response, and route behavior cases when server tests are next modified"
+        }
+    ]
+}

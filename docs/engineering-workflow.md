@@ -27,9 +27,10 @@ python -B scripts/check_engineering_health.py
 This runs the `HEALTH_ENGINEERING_ENTRYPOINTS` subset from
 `scripts/_bootstrap.py`: source encoding hygiene, project documentation
 readability, CI workflow hygiene, staged static analysis, scoped type analysis,
-model-capability honest measurement, and the normalization guard in one local
-command. Source encoding, docs readability, CI workflow, static-analysis,
-type-analysis, honest-measurement, and artifact-schema reports are written under
+model-capability honest measurement, artifact schema guard, file-size ratchet,
+and the normalization guard in one local command. Source encoding, docs
+readability, CI workflow, static-analysis, type-analysis, honest-measurement,
+artifact-schema, and file-size reports are written under
 `runs/engineering-health/`, and the aggregate command writes
 `runs/engineering-health/engineering_health_summary.json` and
 `runs/engineering-health/engineering_health_summary.md` with the step commands,
@@ -76,6 +77,17 @@ python -B scripts/check_artifact_schema_guard.py --out-dir runs/artifact-schema-
 This reads `docs/artifact-schema-guard-registry.json` and checks current
 experiment-card, dataset-card, model-card, and publication-receipt artifact
 envelopes for required fields, expected values, and simple field types.
+
+For the file-size ratchet alone:
+
+```powershell
+python -B scripts/check_file_size_ratchet.py --out-dir runs/file-size-ratchet
+```
+
+This reads `docs/code-health/file-size-ratchet.json` and scans Python files
+under `src/`, `scripts/`, and `tests/`. Unwaived files above the hard line
+limit fail, and waived legacy oversize tests must not grow beyond their
+committed baseline.
 
 For a quick full unittest run:
 

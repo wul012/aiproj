@@ -2,6 +2,10 @@
 
 本目录从 v1098 开始保存模型治理阶段的运行截图和解释，和历史目录 `a/`、`b/`、`c/`、`d/`、`e/` 同级。
 
+## v1266
+
+v1266 完成 production-excellence A4，新增 file-size ratchet。它扫描 `src/`、`scripts/` 和 `tests/` 下的 Python 文件，登记八个历史测试大文件为 no-growth waiver，并在未豁免文件超过 800 行或 waiver 文件继续增长时失败。运行证据见 `f/1266/解释/file-size-ratchet/`，可视化核验见 `f/1266/图片/file-size-ratchet-v1266.png`。
+
 ## v1265
 
 v1265 继续 production-excellence A3，新增 artifact schema guard。它用 registry 验证当前 experiment card、dataset card、model card 和 publication receipt 的必需字段、期望值、简单类型与 no-promotion 字段。运行证据见 `f/1265/解释/artifact-schema-guard/`，可视化核验见 `f/1265/图片/artifact-schema-guard-v1265.png`。

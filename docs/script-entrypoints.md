@@ -18,8 +18,9 @@ python -B scripts/check_engineering_health.py
 `scripts/check_engineering_health.py` is the broad local maintainer check. It
 runs the `HEALTH_ENGINEERING_ENTRYPOINTS` subset: source-encoding hygiene,
 project documentation readability, CI workflow hygiene, staged static analysis,
-scoped type analysis, model-capability honest measurement, and the normalization
-guard, then writes a compact top-level summary. It is
+scoped type analysis, model-capability honest measurement, artifact schema
+guard, file-size ratchet, and the normalization guard, then writes a compact
+top-level summary. It is
 intentionally local-only because CI already runs the underlying gates as
 separate fail-fast steps.
 
@@ -33,6 +34,7 @@ python -B scripts/check_static_analysis.py --out-dir runs/static-analysis
 python -B scripts/check_type_analysis.py --out-dir runs/type-analysis
 python -B scripts/check_model_capability_honest_measurement.py --out-dir runs/model-capability-honest-measurement
 python -B scripts/check_artifact_schema_guard.py --out-dir runs/artifact-schema-guard
+python -B scripts/check_file_size_ratchet.py --out-dir runs/file-size-ratchet
 python -B scripts/check_normalization_guard.py
 python -B scripts/run_test_coverage.py --out-dir runs/test-coverage --fail-under 88.98
 ```
@@ -90,6 +92,11 @@ and positive/negative contract-test markers.
 `scripts/check_artifact_schema_guard.py` validates the A3 artifact schema
 registry. It keeps current card and publication-receipt envelopes fail-closed
 against required fields, selected expected values, and simple field types.
+
+`scripts/check_file_size_ratchet.py` validates the A4 code-health registry. It
+scans current Python files under `src/`, `scripts/`, and `tests/`; fails on
+unwaived files above the hard line limit; and fails when a waived legacy
+oversize file grows beyond its committed baseline.
 
 `scripts/run_test_coverage.py` is the coverage-producing unittest entrypoint
 used by CI. The local command above writes coverage evidence under
@@ -245,6 +252,9 @@ The default local evidence locations are:
 - `runs/engineering-health/ci-workflow-hygiene/`
 - `runs/engineering-health/static-analysis/`
 - `runs/engineering-health/type-analysis/`
+- `runs/engineering-health/model-capability-honest-measurement/`
+- `runs/engineering-health/artifact-schema-guard/`
+- `runs/engineering-health/file-size-ratchet/`
 - `runs/test-coverage/`
 
 Use `tmp/` only for throwaway local validation while working. Final maintainer

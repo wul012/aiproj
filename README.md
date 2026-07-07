@@ -26,11 +26,23 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 - [aiproj A2 coverage ratchet](docs/aiproj-track-a2-coverage.md)
 - [aiproj A3 honest measurement](docs/aiproj-track-a3-honest-measurement.md)
 - [aiproj A3 artifact schema guard](docs/aiproj-track-a3-artifact-schema-guard.md)
+- [aiproj A4 code health](docs/aiproj-track-a4-code-health.md)
 - [Model capability honest measurement policy](docs/model-capability-honest-measurement-policy.md)
 - [Production excellence brief](docs/production-excellence-aiproj-brief.md)
 - [Plain-language project guide](项目通俗说明/README.md)
 
 ## Current version
+
+Version `v1266.0.0` completes **aiproj production-excellence A4 with a file-size ratchet**. It adds a committed code-health registry for Python file-size limits, scans `src/`, `scripts/`, and `tests/`, records eight explicit legacy test waivers above the hard 800-line limit, and fails CI if an unwaived file crosses the limit or a waived legacy file grows. This is a maintainability gate only: no training, cached experiment verdict, promotion, or model-quality upgrade changes.
+
+## Latest v1266 checkpoint
+
+- Added `docs/code-health/file-size-ratchet.json` and `scripts/check_file_size_ratchet.py`.
+- Added `src/minigpt/file_size_ratchet.py` plus tests for the passing repository census, unwaived oversize failure, waiver growth failure, output rendering, and CLI wiring.
+- Wired the file-size ratchet into CI, engineering health, CI workflow hygiene, ruff strict paths, and the scoped mypy manifest (`scope_floor=14`).
+- Preserved existing large historical tests through explicit no-growth waivers rather than hiding them or doing a risky broad split.
+
+## Historical v1265 context
 
 Version `v1265.0.0` continues **aiproj production-excellence A3 with an artifact schema guard**. It adds a committed schema registry for current experiment cards, dataset cards, model cards, and publication receipts; validates required fields, expected values, simple field types, and no-promotion receipt fields; and enforces the gate in CI after honest measurement and before coverage. This is an artifact-envelope guard only: no training, cached experiment verdict, promotion, or model-quality upgrade changes.
 

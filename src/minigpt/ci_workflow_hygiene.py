@@ -93,6 +93,9 @@ class CiWorkflowSummary(TypedDict):
     type_analysis_present: bool
     type_analysis_order_ready: bool
     type_analysis_ready: bool
+    file_size_ratchet_present: bool
+    file_size_ratchet_order_ready: bool
+    file_size_ratchet_ready: bool
     normalization_guard_present: bool
     normalization_guard_order_ready: bool
     normalization_guard_ready: bool
@@ -189,6 +192,10 @@ def build_ci_workflow_hygiene_report(
     type_analysis_order_ready = _check_passed(checks, "order:type_analysis_after_static_analysis") and _check_passed(
         checks, "order:type_analysis_before_coverage"
     )
+    file_size_ratchet_present = _check_passed(checks, "command:file_size_ratchet")
+    file_size_ratchet_order_ready = _check_passed(
+        checks, "order:file_size_ratchet_after_artifact_schema_guard"
+    ) and _check_passed(checks, "order:file_size_ratchet_before_coverage")
     normalization_guard_present = _check_passed(checks, "command:normalization_guard")
     normalization_guard_order_ready = _check_passed(checks, "order:normalization_guard_before_coverage")
     summary: CiWorkflowSummary = {
@@ -244,6 +251,9 @@ def build_ci_workflow_hygiene_report(
         "type_analysis_present": type_analysis_present,
         "type_analysis_order_ready": type_analysis_order_ready,
         "type_analysis_ready": type_analysis_present and type_analysis_order_ready,
+        "file_size_ratchet_present": file_size_ratchet_present,
+        "file_size_ratchet_order_ready": file_size_ratchet_order_ready,
+        "file_size_ratchet_ready": file_size_ratchet_present and file_size_ratchet_order_ready,
         "normalization_guard_present": normalization_guard_present,
         "normalization_guard_order_ready": normalization_guard_order_ready,
         "normalization_guard_ready": normalization_guard_present and normalization_guard_order_ready,
@@ -441,6 +451,8 @@ def _recommendations(summary: CiWorkflowSummary) -> list[str]:
         recommendations.append("Restore the static analysis gate after CI workflow hygiene and before coverage.")
     if not summary.get("type_analysis_ready"):
         recommendations.append("Restore scoped type analysis after static analysis and before coverage.")
+    if not summary.get("file_size_ratchet_ready"):
+        recommendations.append("Restore the file-size ratchet after artifact schema guard and before coverage.")
     if not summary.get("promoted_seed_receipt_contract_failure_smoke_ready"):
         recommendations.append("Restore the receipt contract failure smoke after assurance and before coverage.")
     if not summary.get("archived_path_portability_check_ready"):

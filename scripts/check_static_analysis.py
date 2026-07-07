@@ -27,6 +27,7 @@ DEFAULT_STRICT_PATHS = (
     "scripts/check_type_analysis.py",
     "scripts/check_model_capability_honest_measurement.py",
     "scripts/check_artifact_schema_guard.py",
+    "scripts/check_file_size_ratchet.py",
     "scripts/check_archive_runs_inventory.py",
     "scripts/check_engineering_health.py",
     "scripts/_bootstrap.py",
@@ -35,6 +36,7 @@ DEFAULT_STRICT_PATHS = (
     "src/minigpt/ci_workflow_hygiene_policy.py",
     "src/minigpt/model_capability_honest_measurement.py",
     "src/minigpt/artifact_schema_guard.py",
+    "src/minigpt/file_size_ratchet.py",
 )
 
 Runner = Callable[..., subprocess.CompletedProcess[str]]

@@ -14,6 +14,7 @@ REQUIRED_COMMAND_FRAGMENTS = {
     "type_analysis_gate": "scripts/check_type_analysis.py",
     "model_capability_honest_measurement_gate": "scripts/check_model_capability_honest_measurement.py",
     "artifact_schema_guard": "scripts/check_artifact_schema_guard.py",
+    "file_size_ratchet": "scripts/check_file_size_ratchet.py",
     "archived_path_portability_check": "scripts/check_archived_path_portability.py",
     "promoted_seed_handoff_assurance_smoke": "scripts/check_promoted_seed_handoff_assurance_smoke.py",
     "promoted_seed_receipt_contract_failure_smoke": "scripts/run_ci_promoted_seed_receipt_contract_failure_smoke.py",
@@ -71,6 +72,14 @@ REQUIRED_COMMAND_ORDER = {
     ),
     "artifact_schema_guard_before_coverage": (
         "scripts/check_artifact_schema_guard.py",
+        "scripts/run_test_coverage.py",
+    ),
+    "file_size_ratchet_after_artifact_schema_guard": (
+        "scripts/check_artifact_schema_guard.py",
+        "scripts/check_file_size_ratchet.py",
+    ),
+    "file_size_ratchet_before_coverage": (
+        "scripts/check_file_size_ratchet.py",
         "scripts/run_test_coverage.py",
     ),
     "promoted_seed_handoff_assurance_smoke_before_coverage": (

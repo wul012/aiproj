@@ -41,6 +41,9 @@ jobs:
       - name: Artifact schema guard
         run: python -B scripts/check_artifact_schema_guard.py --out-dir runs/artifact-schema-guard-ci
 
+      - name: File size ratchet
+        run: python -B scripts/check_file_size_ratchet.py --out-dir runs/file-size-ratchet-ci
+
       - name: Archived path portability check
         run: python -B scripts/check_archived_path_portability.py --out-dir runs/archived-path-portability-ci
 

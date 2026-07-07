@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1224-v1266-production-excellence-a4-file-size-ratchet.md
+ -> v1266 code explanation: completes production-excellence A4 with a CI-backed file-size ratchet. It scans Python files under `src`, `scripts`, and `tests`, records eight no-growth waivers for legacy oversize tests, and fails on new unwaived oversize files or waiver growth. Evidence lives under `f/1266`.
+
 1223-v1265-production-excellence-a3-artifact-schema-guard.md
  -> v1265 code explanation: continues production-excellence A3 with a fail-closed artifact schema guard for current experiment cards, dataset cards, model cards, and publication receipts. It validates required fields, expected values, simple types, and no-promotion receipt fields. Evidence lives under `f/1265`.
 

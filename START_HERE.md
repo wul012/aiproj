@@ -43,6 +43,7 @@ python -B scripts/check_static_analysis.py --out-dir runs/static-analysis
 python -B scripts/check_type_analysis.py --out-dir runs/type-analysis
 python -B scripts/check_model_capability_honest_measurement.py --out-dir runs/model-capability-honest-measurement
 python -B scripts/check_artifact_schema_guard.py --out-dir runs/artifact-schema-guard
+python -B scripts/check_file_size_ratchet.py --out-dir runs/file-size-ratchet
 python -m unittest discover -s tests -v
 python -B scripts/run_test_coverage.py --out-dir runs/test-coverage --fail-under 88.98
 python -B scripts/check_normalization_guard.py
@@ -56,6 +57,8 @@ Use the honest-measurement gate when capability-governance claims, publication
 receipts, handoffs, or route-promotion evidence boundaries are touched.
 Use the artifact schema guard when experiment cards, dataset cards, model cards,
 or publication receipt shapes are touched.
+Use the file-size ratchet when adding new Python modules or expanding legacy
+tests; unwaived files above the hard limit fail, and waived files must not grow.
 Use the broad unittest command when you need full test discovery, and the
 coverage command when you need the same thresholded unit-test entrypoint used by
 CI. Use the normalization guard when you are changing architecture boundaries,
@@ -83,16 +86,14 @@ workflows.
 
 ## Latest version summary
 
-Current README focus: **v1265 production-excellence A3 artifact schema guard**.
+Current README focus: **v1266 production-excellence A4 file-size ratchet**.
 
-v1265 continues A3 by making card and publication-receipt artifact envelopes
-mechanically checkable. The registry in
-`docs/artifact-schema-guard-registry.json` validates current experiment-card,
-dataset-card, model-card, and publication-receipt shapes, including required
-fields, expected values, and no-promotion receipt fields. This is an
-engineering-maintenance gate, not a model-quality promotion: model capability
-claims remain educational unless tied to cited evidence, and governance
-`status=pass` still does not imply production model readiness.
+v1266 completes A4 by making Python file-size drift mechanically checkable.
+The registry in `docs/code-health/file-size-ratchet.json` scans `src/`,
+`scripts/`, and `tests/`, keeps eight legacy oversize tests as explicit
+no-growth waivers, and fails when a new unwaived file crosses the hard limit or
+a waived file grows. This is an engineering-maintenance gate, not a
+model-quality promotion.
 
 ## Where to look next
 
@@ -111,6 +112,7 @@ claims remain educational unless tied to cited evidence, and governance
 - `docs/aiproj-track-a2-coverage.md` - A2 coverage-floor ratchet evidence.
 - `docs/aiproj-track-a3-honest-measurement.md` - A3 honest-measurement gate evidence.
 - `docs/aiproj-track-a3-artifact-schema-guard.md` - A3 artifact-schema guard evidence.
+- `docs/aiproj-track-a4-code-health.md` - A4 file-size ratchet evidence.
 - `docs/production-excellence-aiproj-brief.md` - Claude-authored A-track execution brief.
 - `文档分流说明.md` - current documentation routing map.
 - `src/minigpt/` - model, evaluation, reporting, and workflow code.
