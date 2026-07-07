@@ -1,23 +1,24 @@
-# Completion Cleanup Gate
+# aiproj Agent Notes
+
+## Current State (single source of truth)
+
+Update this table instead of appending relative-time rules below. Where an older section conflicts with this table, this table wins.
+
+| Item | Current |
+|---|---|
+| Active screenshot archive root | `f/<version>/图片/` + `f/<version>/解释/说明.md` (v1098+) |
+| Active walkthrough volume | `代码讲解记录_工程保养阶段/` (v1261+ production-excellence / engineering-upkeep work; `代码讲解记录_模型治理阶段/` keeps v1098-v1260 history) |
+| Active cross-project program | `D:\C\四项目理解统筹\AGENTS.md` → Current Active Program |
+| Two lanes | science lane (ML capability experiments, Claude) + engineering/governance lane (receipts/CI/gates, Codex) — see Two-Lane Boundary |
+| Session bootstrap | run `.\scripts\codex-bootstrap.ps1` at session start (git/tag/CI/pointers in one command) |
+| Frozen history (never move) | `a/`–`e/`, older walkthrough volumes |
 
 ## Four-Project Research Rules
 
 For cross-project research, quality evaluation, and planning, use `[MODE: RESEARCH]`.
 Prefer read-only inspection, evidence-backed summaries, and clear separation between facts, judgments, and recommendations.
 
-Developer capability baseline across Node/Java/mini-kv/aiproj:
-
-| Dimension | Rating |
-|---|---|
-| Architecture design | A- |
-| Multi-language engineering | A |
-| Test engineering | B+ |
-| Output speed | S |
-| Refactoring and debt management | B |
-| Security and compliance awareness | A |
-| Engineering discipline and restraint | C+ |
-
-Core judgment: high-output, strong-design, multi-stack developer with good safety awareness; main growth area is knowing when to stop, refactor, and trade about 30% speed for restraint.
+The capability baseline table lives ONLY in `D:\C\四项目理解统筹\AGENTS.md` (single source of truth) — read it there instead of keeping a copy here. One-line summary: high-output, strong-design, multi-stack developer; the growth area is restraint.
 
 Evaluation rules:
 - Praise speed, architecture, multi-language execution, and safety awareness, but do not overstate production readiness.
@@ -40,9 +41,18 @@ Refactoring rhythm:
 
 能完成的自己做；不能做的、权限不足的、或有疑惑需要用户确认的事项，明确说明原因并让用户配合。
 
-完成一个版本后，如果测试、CI、清理和工作区状态都已经收口，且下一步方向能从现有证据中明确推导出来，就自动继续推进下一个最有价值版本；不要等待用户反复发送“推进”。持续推进时，默认目标是连续推进 10 个中等或较大版本；不要把很小的文档、格式、索引、单点样板改动单独算作一版，除非它修复 CI、阻断风险或完成明确交付闭环。每版应尽量把功能增量、必要拆分、去重、测试硬化和证据归档合并成正常工作量的版本，以资深工程师的判断选择当前最优路线。上下文长度本身不作为停止推进的理由；遇到 CI 失败、需求不清、风险过高、工作区无法收口、外部工具不可用或需要用户取舍时，停止新增修改并说明原因。
+完成一个版本后，如果测试、CI、清理和工作区状态都已经收口，且下一步方向能从现有证据中明确推导出来，就自动继续推进下一个最有价值版本；不要等待用户反复发送“推进”。持续推进时，默认目标是连续推进 10 个中等或较大版本；不要把很小的文档、格式、索引、单点样板改动单独算作一版，除非它修复 CI、阻断风险或完成明确交付闭环。每版应尽量把功能增量、必要拆分、去重、测试硬化和证据归档合并成正常工作量的版本，以资深工程师的判断选择当前最优路线。例外：如果当前正在执行带检查点节奏的跨项目计划简报（例如每 5 批暂停评审），检查点优先于连续推进目标——到达检查点必须停下等待评审，不得用"连续 10 版"目标越过它。上下文长度本身不作为停止推进的理由；遇到 CI 失败、需求不清、风险过高、工作区无法收口、外部工具不可用或需要用户取舍时，停止新增修改并说明原因。
 
 Before sending the final response for any task, perform a cleanup pass for files and processes created during that task.
+
+## Two-Lane Boundary
+
+aiproj 有两条工作线：
+
+- **科学线**：ML 能力实验、缓存训练产物、decide() 判定逻辑与已冻结的实验 verdict（由 Claude 会话推进）。
+- **工程/治理线**：receipt、发布、CI、质量门、lint/coverage/ratchet（由 Codex 会话推进）。
+
+工程线不得改动科学线的实验语义、缓存产物或 decide() 逻辑；科学线不得放松工程线的 ratchet/floor/门。任何跨线改动需要用户明确授权，发现越线立即停止并说明。
 
 ## Code Explanation Rule
 
@@ -79,38 +89,18 @@ Before sending the final response for any task, perform a cleanup pass for files
 
 ## Verification Archive Rule
 
-Current update from v69 onward:
+当前活动归档根见文件顶部 Current State 表。历史归档一览（路径稳定，永不迁移）：
 
-- `a/` keeps v1-v31 runtime screenshots and explanations.
-- `b/` keeps v32-v68 runtime screenshots and explanations.
-- `c/` keeps v69-v302 runtime screenshots and explanations.
-- From v303 onward, new runtime screenshots and explanations go to `d/`.
-- `d/` keeps v303-v472 runtime screenshots and explanations.
-- From v473 onward, model-capability-stage runtime screenshots and explanations go to `e/`.
-- `e/` keeps v473-v1097 runtime screenshots and explanations.
-- From v1098 onward, model-governance-stage runtime screenshots and explanations go to `f/`.
-- The current structure is `f/<version>/图片/` and `f/<version>/解释/说明.md`.
-- README, code explanations, archive notes, and tag notes should cite `f/<version>` for v1098 and later evidence.
-- Do not migrate old `a/` or `b/` evidence unless the user explicitly asks.
+| 根目录 | 版本范围 | 阶段 |
+|---|---|---|
+| `a/` | v1-v31 | 早期 |
+| `b/` | v32-v68 | 早期 |
+| `c/` | v69-v302 | 项目成熟度 |
+| `d/` | v303-v472 | 训练治理 |
+| `e/` | v473-v1097 | 模型能力 |
+| `f/` | v1098+（当前） | 模型治理 |
 
-运行截图和解释目录按阶段拆分：
-
-- `a/` 保留 v1-v31 的历史运行截图和解释，不迁移旧版本。
-- 从 v32 开始，新的运行截图和解释写入与 `a/` 同级的 `b/`。
-- 目录结构继续使用 `b/<version>/图片/` 和 `b/<version>/解释/说明.md`。
-- README、代码讲解、归档说明、tag 说明里提到新版本证据时，后续默认引用 `b/<version>`。
-- `c/` 保留 v69-v302 的运行截图和解释，不迁移旧版本。
-- 从 v303 开始，新的运行截图和解释写入与 `a/`、`b/`、`c/` 同级的 `d/`。
-- 目录结构继续使用 `d/<version>/图片/` 和 `d/<version>/解释/说明.md`。
-- README、代码讲解、归档说明、tag 说明里提到 v303-v472 证据时，默认引用 `d/<version>`。
-- `d/` 保留 v303-v472 的历史运行截图和解释，不迁移旧版本。
-- 从 v473 开始，模型能力阶段新的运行截图和解释写入与 `a/`、`b/`、`c/`、`d/` 同级的 `e/`。
-- 目录结构继续使用 `e/<version>/图片/` 和 `e/<version>/解释/说明.md`。
-- README、代码讲解、归档说明、tag 说明里提到 v473 及后续证据时，默认引用 `e/<version>`。
-- `e/` 保留 v473-v1097 的历史运行截图和解释，不迁移旧版本。
-- 从 v1098 开始，模型治理阶段新的运行截图和解释写入与 `a/`、`b/`、`c/`、`d/`、`e/` 同级的 `f/`。
-- 目录结构继续使用 `f/<version>/图片/` 和 `f/<version>/解释/说明.md`。
-- README、代码讲解、归档说明、tag 说明里提到 v1098 及后续证据时，默认引用 `f/<version>`。
+结构统一为 `<root>/<version>/图片/` + `<root>/<version>/解释/说明.md`。README、代码讲解、tag 说明引用证据时按上表选根。不迁移任何旧根内容，除非用户明确要求。
 
 ## Temporary Files
 
@@ -142,6 +132,14 @@ Common examples to stop:
 - Node, Python, or MCP/debug subprocesses started only for this task
 
 If a process must remain running, state its name, port/PID if known, and why it was kept.
+
+## Program Discipline (promoted 2026-07-06)
+
+- Remote verification policy: after push, confirm the CI run is queued/started with a quick `gh run list` (seconds); do not block on `gh run watch` for intermediate versions of a multi-version batch. Check the previous version's run conclusion at the start of the next version; block-watch only the final version of a batch or when the user asks.
+- Evidence economy: text evidence first (logs, JSON summaries, transcripts); screenshots only where a visual actually proves something or for closeout versions. `e/` is already 245M — archive growth is budgeted, not unlimited.
+- Progress/ledger rows: at most ~3 lines per version; details go into per-version evidence or docs files, the row keeps a pointer.
+- Lesson promotion: when the same deviation or workaround is recorded twice, promote it into this file as a rule instead of recording it a third time.
+- Method kernel: apply the 12-rule kernel and task-brief skeleton from `D:\C\四项目理解统筹\模型使用手册\00-通用方法内核.md` (read once per session; also mirrored in the global `~/.codex/AGENTS.md`).
 
 ## Final Response Requirement
 

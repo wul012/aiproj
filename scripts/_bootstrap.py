@@ -13,6 +13,7 @@ HEALTH_ENGINEERING_ENTRYPOINTS = (
     "scripts/check_project_docs_readability.py",
     "scripts/check_ci_workflow_hygiene.py",
     "scripts/check_static_analysis.py",
+    "scripts/check_type_analysis.py",
     "scripts/check_normalization_guard.py",
 )
 

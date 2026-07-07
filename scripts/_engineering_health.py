@@ -5,12 +5,12 @@ import sys
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from pathlib import Path
-from typing import Any
+from typing import Any, cast
 
 try:
     from scripts._bootstrap import HEALTH_ENGINEERING_ENTRYPOINTS
 except ModuleNotFoundError:  # pragma: no cover - direct script execution path
-    from _bootstrap import HEALTH_ENGINEERING_ENTRYPOINTS
+    from _bootstrap import HEALTH_ENGINEERING_ENTRYPOINTS  # type: ignore[import-not-found,no-redef]
 
 from minigpt.reports.utils import write_output_bundle
 
@@ -19,6 +19,7 @@ _HEALTH_STEP_IDS_BY_ENTRYPOINT = {
     "scripts/check_project_docs_readability.py": "project_docs_readability",
     "scripts/check_ci_workflow_hygiene.py": "ci_workflow_hygiene",
     "scripts/check_static_analysis.py": "static_analysis",
+    "scripts/check_type_analysis.py": "type_analysis",
     "scripts/check_normalization_guard.py": "normalization_guard",
 }
 
@@ -96,6 +97,17 @@ def _build_step(entrypoint: str, out_dir: Path, *, python_executable: str) -> En
                 str(out_dir / "static-analysis"),
             ),
         )
+    if entrypoint == "scripts/check_type_analysis.py":
+        return EngineeringHealthStep(
+            _HEALTH_STEP_IDS_BY_ENTRYPOINT[entrypoint],
+            (
+                python_executable,
+                "-B",
+                entrypoint,
+                "--out-dir",
+                str(out_dir / "type-analysis"),
+            ),
+        )
     if entrypoint == "scripts/check_normalization_guard.py":
         return EngineeringHealthStep(
             _HEALTH_STEP_IDS_BY_ENTRYPOINT[entrypoint],
@@ -146,8 +158,10 @@ def write_summary(summary: dict[str, Any], out_dir: Path) -> Path:
 
 
 def render_summary_markdown(summary: dict[str, Any]) -> str:
-    summary_block = summary.get("summary") if isinstance(summary.get("summary"), dict) else {}
-    steps = summary.get("steps") if isinstance(summary.get("steps"), list) else []
+    raw_summary = summary.get("summary")
+    raw_steps = summary.get("steps")
+    summary_block = dict(raw_summary) if isinstance(raw_summary, dict) else {}
+    steps = list(raw_steps) if isinstance(raw_steps, list) else []
     lines = [
         f"# {summary.get('title', 'MiniGPT engineering health summary')}",
         "",
@@ -186,16 +200,25 @@ def write_summary_markdown(summary: dict[str, Any], out_dir: Path) -> Path:
 
 
 def write_summary_outputs(summary: dict[str, Any], out_dir: Path) -> dict[str, str]:
-    return write_output_bundle(
-        out_dir,
-        {
-            "json": "engineering_health_summary.json",
-            "markdown": "engineering_health_summary.md",
-        },
-        {
-            "json": lambda path: write_summary(summary, path.parent),
-            "markdown": lambda path: write_summary_markdown(summary, path.parent),
-        },
+    def write_json(path: Path) -> None:
+        write_summary(summary, path.parent)
+
+    def write_markdown(path: Path) -> None:
+        write_summary_markdown(summary, path.parent)
+
+    return cast(
+        dict[str, str],
+        write_output_bundle(
+            out_dir,
+            {
+                "json": "engineering_health_summary.json",
+                "markdown": "engineering_health_summary.md",
+            },
+            {
+                "json": write_json,
+                "markdown": write_markdown,
+            },
+        ),
     )
 
 

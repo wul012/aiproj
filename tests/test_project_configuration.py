@@ -38,6 +38,9 @@ class ProjectConfigurationTests(unittest.TestCase):
         self.assertTrue(project_dependencies.issubset(requirements))
         self.assertIn("coverage>=7.0", requirements)
         self.assertIn("ruff>=0.8,<1.0", requirements)
+        self.assertIn("mypy>=1.13,<2.0", requirements)
+        self.assertTrue(pyproject["tool"]["mypy"]["strict"])
+        self.assertEqual(pyproject["tool"]["mypy"]["follow_imports"], "skip")
 
     def test_ci_uses_the_standard_coverage_entrypoint(self) -> None:
         workflow = (ROOT / ".github" / "workflows" / "ci.yml").read_text(encoding="utf-8")
@@ -46,6 +49,7 @@ class ProjectConfigurationTests(unittest.TestCase):
         self.assertIn("python -B scripts/check_normalization_guard.py", workflow)
         self.assertIn("python -B scripts/check_project_docs_readability.py", workflow)
         self.assertIn("python -B scripts/check_static_analysis.py --out-dir runs/static-analysis-ci", workflow)
+        self.assertIn("python -B scripts/check_type_analysis.py --out-dir runs/type-analysis-ci", workflow)
         self.assertIn(
             "python -B scripts/run_test_coverage.py --out-dir runs/test-coverage-ci --fail-under 80",
             workflow,
@@ -57,6 +61,7 @@ class ProjectConfigurationTests(unittest.TestCase):
 
         self.assertIn("python -B scripts/check_engineering_health.py", start_here)
         self.assertIn("python -B scripts/check_static_analysis.py", start_here)
+        self.assertIn("python -B scripts/check_type_analysis.py", start_here)
         self.assertIn("python -m unittest discover -s tests -v", start_here)
         self.assertIn("python -B scripts/check_normalization_guard.py", start_here)
         self.assertIn("docs/architecture-map.md", start_here)

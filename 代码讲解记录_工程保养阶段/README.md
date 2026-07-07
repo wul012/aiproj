@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1220-v1262-production-excellence-a1-scoped-type-analysis.md
+ -> v1262 code explanation: completes production-excellence A1 with strict mypy over eight committed load-bearing targets in four groups, protects the scope with a floor and ownership validation, integrates the gate into CI/engineering health/workflow hygiene, and keeps the science lane unchanged. Evidence lives under `f/1262`.
+
 1219-v1261-production-excellence-a1-static-analysis.md
  -> v1261 code explanation: production-excellence A1 staged static analysis. Adds ruff as a committed CI gate without a repo-wide mechanical sweep, records the 545-finding historical `src/`/`scripts/` baseline, keeps strict maintained paths lint-clean and format-clean, and extends CI workflow hygiene plus engineering health to protect the new gate. Evidence lives under `f/1261`.
 

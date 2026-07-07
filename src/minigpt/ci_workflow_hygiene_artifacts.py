@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import csv
 from pathlib import Path
-from typing import Any
+from typing import Any, cast
 
 from minigpt.reports.utils import (
     csv_cell,
@@ -81,6 +81,9 @@ def render_ci_workflow_hygiene_markdown(report: dict[str, Any]) -> str:
         "static_analysis_present",
         "static_analysis_order_ready",
         "static_analysis_ready",
+        "type_analysis_present",
+        "type_analysis_order_ready",
+        "type_analysis_ready",
         "normalization_guard_present",
         "normalization_guard_order_ready",
         "normalization_guard_ready",
@@ -152,6 +155,7 @@ def render_ci_workflow_hygiene_html(report: dict[str, Any]) -> str:
         ("Drift smoke gate", summary.get("release_readiness_drift_contract_smoke_ready")),
         ("Docs readability", summary.get("project_docs_readability_ready")),
         ("Static analysis", summary.get("static_analysis_ready")),
+        ("Type analysis", summary.get("type_analysis_ready")),
         ("Normalization guard", summary.get("normalization_guard_ready")),
         ("Python", summary.get("python_version")),
     ]
@@ -190,25 +194,29 @@ def write_ci_workflow_hygiene_html(report: dict[str, Any], path: str | Path) -> 
 
 
 def write_ci_workflow_hygiene_outputs(report: dict[str, Any], out_dir: str | Path) -> dict[str, str]:
-    return write_output_bundle(
-        out_dir,
-        {
-            "json": "ci_workflow_hygiene.json",
-            "csv": "ci_workflow_hygiene.csv",
-            "markdown": "ci_workflow_hygiene.md",
-            "html": "ci_workflow_hygiene.html",
-        },
-        {
-            "json": lambda path: write_ci_workflow_hygiene_json(report, path),
-            "csv": lambda path: write_ci_workflow_hygiene_csv(report, path),
-            "markdown": lambda path: write_ci_workflow_hygiene_markdown(report, path),
-            "html": lambda path: write_ci_workflow_hygiene_html(report, path),
-        },
+    return cast(
+        dict[str, str],
+        write_output_bundle(
+            out_dir,
+            {
+                "json": "ci_workflow_hygiene.json",
+                "csv": "ci_workflow_hygiene.csv",
+                "markdown": "ci_workflow_hygiene.md",
+                "html": "ci_workflow_hygiene.html",
+            },
+            {
+                "json": lambda path: write_ci_workflow_hygiene_json(report, path),
+                "csv": lambda path: write_ci_workflow_hygiene_csv(report, path),
+                "markdown": lambda path: write_ci_workflow_hygiene_markdown(report, path),
+                "html": lambda path: write_ci_workflow_hygiene_html(report, path),
+            },
+        ),
     )
 
 
 def _summary(report: dict[str, Any]) -> dict[str, Any]:
-    return dict(report.get("summary")) if isinstance(report.get("summary"), dict) else {}
+    value = report.get("summary")
+    return dict(value) if isinstance(value, dict) else {}
 
 
 def _actions(report: dict[str, Any]) -> list[dict[str, Any]]:

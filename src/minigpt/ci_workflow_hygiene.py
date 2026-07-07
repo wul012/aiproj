@@ -90,6 +90,9 @@ class CiWorkflowSummary(TypedDict):
     static_analysis_present: bool
     static_analysis_order_ready: bool
     static_analysis_ready: bool
+    type_analysis_present: bool
+    type_analysis_order_ready: bool
+    type_analysis_ready: bool
     normalization_guard_present: bool
     normalization_guard_order_ready: bool
     normalization_guard_ready: bool
@@ -182,6 +185,10 @@ def build_ci_workflow_hygiene_report(
         checks,
         "order:static_analysis_before_coverage",
     )
+    type_analysis_present = _check_passed(checks, "command:type_analysis_gate")
+    type_analysis_order_ready = _check_passed(checks, "order:type_analysis_after_static_analysis") and _check_passed(
+        checks, "order:type_analysis_before_coverage"
+    )
     normalization_guard_present = _check_passed(checks, "command:normalization_guard")
     normalization_guard_order_ready = _check_passed(checks, "order:normalization_guard_before_coverage")
     summary: CiWorkflowSummary = {
@@ -234,6 +241,9 @@ def build_ci_workflow_hygiene_report(
         "static_analysis_present": static_analysis_present,
         "static_analysis_order_ready": static_analysis_order_ready,
         "static_analysis_ready": static_analysis_present and static_analysis_order_ready,
+        "type_analysis_present": type_analysis_present,
+        "type_analysis_order_ready": type_analysis_order_ready,
+        "type_analysis_ready": type_analysis_present and type_analysis_order_ready,
         "normalization_guard_present": normalization_guard_present,
         "normalization_guard_order_ready": normalization_guard_order_ready,
         "normalization_guard_ready": normalization_guard_present and normalization_guard_order_ready,
@@ -265,7 +275,7 @@ def _build_checks(text: str, actions: list[CiWorkflowAction]) -> list[CiWorkflow
     action_versions = {str(item.get("repository")): str(item.get("version")) for item in actions}
     for repository, expected in REQUIRED_ACTIONS.items():
         actual = action_versions.get(repository, "")
-        status = "pass" if actual == expected else "fail"
+        status: CheckStatus = "pass" if actual == expected else "fail"
         detail = (
             "Action uses the expected Node 24 native major."
             if status == "pass"
@@ -409,7 +419,7 @@ def _relative_path(path: Path, project_root: Path | None) -> str:
         return str(path)
 
 
-def _recommendations(summary: dict[str, Any]) -> list[str]:
+def _recommendations(summary: CiWorkflowSummary) -> list[str]:
     if summary.get("status") == "pass":
         return ["Keep CI workflow action versions and quality gates aligned with the Node 24 native policy."]
     recommendations: list[str] = []
@@ -429,6 +439,8 @@ def _recommendations(summary: dict[str, Any]) -> list[str]:
         )
     if not summary.get("static_analysis_ready"):
         recommendations.append("Restore the static analysis gate after CI workflow hygiene and before coverage.")
+    if not summary.get("type_analysis_ready"):
+        recommendations.append("Restore scoped type analysis after static analysis and before coverage.")
     if not summary.get("promoted_seed_receipt_contract_failure_smoke_ready"):
         recommendations.append("Restore the receipt contract failure smoke after assurance and before coverage.")
     if not summary.get("archived_path_portability_check_ready"):

@@ -16,7 +16,7 @@ from typing import Any
 try:
     from scripts._bootstrap import PROJECT_ROOT
 except ModuleNotFoundError:  # pragma: no cover - direct script execution path
-    from _bootstrap import PROJECT_ROOT
+    from _bootstrap import PROJECT_ROOT  # type: ignore[import-not-found,no-redef]
 
 ROOT = PROJECT_ROOT
 DEFAULT_TARGETS = ("src", "scripts")
@@ -24,6 +24,7 @@ DEFAULT_BASELINE = ROOT / "docs" / "static-analysis" / "ruff-baseline.json"
 DEFAULT_OUT_DIR = ROOT / "runs" / "static-analysis"
 DEFAULT_STRICT_PATHS = (
     "scripts/check_static_analysis.py",
+    "scripts/check_type_analysis.py",
     "scripts/check_archive_runs_inventory.py",
     "scripts/check_engineering_health.py",
     "scripts/_bootstrap.py",
@@ -150,7 +151,7 @@ def build_report(
             targets=targets,
             strict_paths=strict,
             issues=current_issues,
-            generated_at=report["generated_at"],
+            generated_at=str(report["generated_at"]),
         )
     return report
 
@@ -300,7 +301,8 @@ def render_html(report: dict[str, Any]) -> str:
 
 def _normalize_issue(item: dict[str, Any], *, project_root: Path) -> dict[str, Any]:
     path = _relative_path(Path(str(item.get("filename", ""))), project_root)
-    location = item.get("location") if isinstance(item.get("location"), dict) else {}
+    raw_location = item.get("location")
+    location = dict(raw_location) if isinstance(raw_location, dict) else {}
     line = int(location.get("row") or 0)
     column = int(location.get("column") or 0)
     source_line = _source_line(project_root / path, line)

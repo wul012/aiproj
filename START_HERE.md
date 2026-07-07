@@ -40,6 +40,7 @@ Typical workflow:
 ```powershell
 python -B scripts/check_engineering_health.py
 python -B scripts/check_static_analysis.py --out-dir runs/static-analysis
+python -B scripts/check_type_analysis.py --out-dir runs/type-analysis
 python -m unittest discover -s tests -v
 python -B scripts/run_test_coverage.py --out-dir runs/test-coverage --fail-under 80
 python -B scripts/check_normalization_guard.py
@@ -76,12 +77,12 @@ workflows.
 
 ## Latest version summary
 
-Current README focus: **v1261 production-excellence A1 static analysis**.
+Current README focus: **v1262 production-excellence A1 scoped type analysis**.
 
-v1261 starts A1 from `docs/production-excellence-aiproj-brief.md`. It adopts
-ruff as a staged CI gate, commits the historical `src/` and `scripts/` baseline,
-keeps strict maintained paths lint-clean and format-clean, and extends CI
-workflow hygiene so the static-analysis step cannot disappear silently. This is
+v1262 completes A1 by adding strict mypy over eight committed load-bearing
+targets in four groups. The scope manifest has a floor and group validation,
+the gate writes reviewable reports, and CI workflow hygiene prevents the step
+from disappearing or moving behind coverage. This is
 an engineering-maintenance gate, not a model-quality promotion: model capability
 claims remain educational unless tied to cited evidence, and governance
 `status=pass` still does not imply production model readiness.
@@ -95,7 +96,7 @@ claims remain educational unless tied to cited evidence, and governance
 - `docs/engineering-workflow.md` - standard local and CI checks.
 - `docs/normalization-guard.md` - focused guard modules and what each protects.
 - `docs/script-entrypoints.md` - stable maintainer scripts and historical script boundary.
-- `docs/static-analysis.md` - staged ruff baseline and strict-path gate.
+- `docs/static-analysis.md` - staged ruff baseline and scoped mypy gate.
 - `docs/archive-runs-inventory.md` - warning-only archive and `runs/` growth inventory.
 - `docs/aiproj-track-a0-census.md` - A0 production-excellence census evidence.
 - `docs/aiproj-track-a1-static-analysis.md` - A1 static-analysis adoption evidence.

@@ -26,9 +26,9 @@ python -B scripts/check_engineering_health.py
 
 This runs the `HEALTH_ENGINEERING_ENTRYPOINTS` subset from
 `scripts/_bootstrap.py`: source encoding hygiene, project documentation
-readability, CI workflow hygiene, staged static analysis, and the normalization
+readability, CI workflow hygiene, staged static analysis, scoped type analysis, and the normalization
 guard in one local command. Source encoding, docs readability, CI workflow, and
-static-analysis reports are written under `runs/engineering-health/`, and the aggregate command writes
+static-analysis and type-analysis reports are written under `runs/engineering-health/`, and the aggregate command writes
 `runs/engineering-health/engineering_health_summary.json` and
 `runs/engineering-health/engineering_health_summary.md` with the step commands,
 return codes, and pass/fail status.
@@ -43,6 +43,16 @@ This compares current `src/` and `scripts/` ruff findings against
 `docs/static-analysis/ruff-baseline.json`, fails on new findings, and requires
 the strict maintained path set to pass `ruff format --check`. See
 `docs/static-analysis.md` for the baseline and update policy.
+
+For the scoped strict mypy gate alone:
+
+```powershell
+python -B scripts/check_type_analysis.py --out-dir runs/type-analysis
+```
+
+This reads `docs/static-analysis/mypy-scope.json`, validates its scope floor and
+group assignments, then checks only the declared load-bearing files. Scope and
+type failures both return a non-zero exit code.
 
 For a quick full unittest run:
 
@@ -107,6 +117,8 @@ remain before coverage.
 - `tests/test_static_analysis.py` protects the staged ruff baseline comparison,
   strict-path lint behavior, strict format behavior, CLI baseline update path,
   and JSON/CSV/Markdown/HTML report writers.
+- `tests/test_type_analysis.py` protects the committed mypy scope floor, group
+  assignments, diagnostic parsing, strict failure behavior, and report bundle.
 - `tests/test_test_coverage_report.py` protects the coverage report model,
   threshold behavior, output renderers, and the coverage CLI entrypoint
   contract.

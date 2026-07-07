@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT scoped type analysis",
+  "generated_at": "2026-07-06T15:13:03Z",
+  "status": "pass",
+  "decision": "continue_with_typed_scope",
+  "scope_path": "D:\\aiproj\\docs\\static-analysis\\mypy-scope.json",
+  "command": [
+    "D:\\python\\python.exe",
+    "-m",
+    "mypy",
+    "--config-file",
+    "D:\\aiproj\\pyproject.toml",
+    "scripts/_bootstrap.py",
+    "scripts/_engineering_health.py",
+    "scripts/check_static_analysis.py",
+    "scripts/check_type_analysis.py",
+    "src/minigpt/ci_workflow_hygiene.py",
+    "src/minigpt/ci_workflow_hygiene_artifacts.py",
+    "src/minigpt/ci_workflow_hygiene_policy.py",
+    "src/minigpt/report_utils.py"
+  ],
+  "return_code": 0,
+  "summary": {
+    "status": "pass",
+    "decision": "continue_with_typed_scope",
+    "target_count": 8,
+    "scope_floor": 8,
+    "group_count": 4,
+    "diagnostic_count": 0,
+    "scope_issue_count": 0
+  },
+  "targets": [
+    "scripts/_bootstrap.py",
+    "scripts/_engineering_health.py",
+    "scripts/check_static_analysis.py",
+    "scripts/check_type_analysis.py",
+    "src/minigpt/ci_workflow_hygiene.py",
+    "src/minigpt/ci_workflow_hygiene_artifacts.py",
+    "src/minigpt/ci_workflow_hygiene_policy.py",
+    "src/minigpt/report_utils.py"
+  ],
+  "scope_issues": [],
+  "diagnostics": []
+}

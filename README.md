@@ -28,14 +28,14 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1261.0.0` starts the **aiproj production-excellence A1 static-analysis gate**. It adopts ruff without a repo-wide mechanical sweep, commits the historical `src/` and `scripts/` baseline, keeps strict maintained paths lint-clean and format-clean, adds the static-analysis gate to CI and engineering health, and extends CI workflow hygiene so the step cannot disappear or move after coverage. The real v1261 run produced `status=pass`, `decision=continue_with_static_analysis_gate`, `current_issue_count=545`, `baseline_issue_count=545`, `new_issue_count=0`, `strict_lint_issue_count=0`, and `strict_format_status=pass`.
+Version `v1262.0.0` completes **aiproj production-excellence A1 with scoped strict type analysis**. It adds mypy over eight committed load-bearing files in four owner groups, protects the scope with `scope_floor=8`, emits reviewable JSON/CSV/Markdown/HTML evidence, and requires the gate after ruff and before coverage in CI and engineering health. It also retains the one-command session bootstrap with ASCII-safe PowerShell output. The real v1262 run produced `status=pass`, `decision=continue_with_typed_scope`, `target_count=8`, `diagnostic_count=0`, and `scope_issue_count=0`.
 
-## Latest v1261 checkpoint
+## Latest v1262 checkpoint
 
-- Added `scripts/check_static_analysis.py`: a staged ruff gate that compares current `src/` and `scripts/` findings against `docs/static-analysis/ruff-baseline.json`, fails on new findings, and requires strict maintained paths to pass lint plus `ruff format --check`.
-- Added `tests/test_static_analysis.py` covering baseline comparison, strict lint failure, strict format failure, CLI baseline update behavior, and JSON/CSV/Markdown/HTML outputs.
-- Added ruff to `requirements.txt`, added `tool.ruff` configuration to `pyproject.toml`, and wired the gate into `.github/workflows/ci.yml`, `scripts/_bootstrap.py`, `scripts/_engineering_health.py`, and CI workflow hygiene policy/tests.
-- Added `docs/static-analysis.md` and `docs/aiproj-track-a1-static-analysis.md`, and produced evidence in `f/1261`. This is a static-analysis adoption version only: no training, no cached-artifact verdict changes, no promotion, and no model-quality claim upgrade.
+- Added `scripts/check_type_analysis.py` and `docs/static-analysis/mypy-scope.json`: strict mypy checks eight explicit targets only after validating target existence, uniqueness, owner groups, and the scope floor.
+- Added `tests/test_type_analysis.py` plus configuration, CI workflow, engineering-health, and session-bootstrap contract coverage.
+- Added mypy to `requirements.txt`, configured strict scoped checking in `pyproject.toml`, and extended CI workflow hygiene with required presence/order fields.
+- Produced evidence in `f/1262`. This is an engineering type-safety version only: no training, cached-artifact verdict changes, promotion, or model-quality claim upgrade.
 
 ## Historical v1260 context
 

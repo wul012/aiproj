@@ -73,6 +73,11 @@ current `src/` and `scripts/` findings against
 `docs/static-analysis/ruff-baseline.json`, fails on new findings, and keeps the
 strict maintained path set lint-clean and format-clean.
 
+`scripts/check_type_analysis.py` runs strict mypy over the committed scope in
+`docs/static-analysis/mypy-scope.json`. The scope floor and group assignments
+prevent the checked surface from shrinking silently, while the report bundle
+keeps diagnostics and the exact target list reviewable.
+
 `scripts/run_test_coverage.py` is the coverage-producing unittest entrypoint
 used by CI. The local command above writes coverage evidence under
 `runs/test-coverage/`.
@@ -224,6 +229,7 @@ The default local evidence locations are:
 - `runs/engineering-health/project-docs-readability/`
 - `runs/engineering-health/ci-workflow-hygiene/`
 - `runs/engineering-health/static-analysis/`
+- `runs/engineering-health/type-analysis/`
 - `runs/test-coverage/`
 
 Use `tmp/` only for throwaway local validation while working. Final maintainer

@@ -1,6 +1,6 @@
-# MiniGPT Static Analysis Gate
+# MiniGPT Static And Type Analysis Gates
 
-This page documents the staged ruff adoption introduced by the production-excellence A-track.
+This page documents the staged ruff and scoped mypy adoption introduced by the production-excellence A-track.
 
 ## Purpose
 
@@ -38,3 +38,28 @@ The report includes `current_issue_count`, `baseline_issue_count`, `new_issue_co
 The first committed baseline records 545 historical ruff findings across `src/` and `scripts/`. The strict path set is clean: `new_issue_count=0`, `strict_lint_issue_count=0`, and `strict_format_status=pass`.
 
 This is an engineering gate, not a model-capability claim. It improves maintainability and CI regression detection, but it does not change training semantics, cached experiment verdicts, or promotion boundaries.
+
+## v1262 Scoped Mypy Gate
+
+The second A1 step adds strict mypy without attempting a full-repository type
+sweep. The committed scope lives in
+`docs/static-analysis/mypy-scope.json`. It currently contains eight
+load-bearing files in four groups: shared report contracts, CI governance,
+engineering orchestration, and analysis gates.
+
+Run it with:
+
+```powershell
+python -B scripts/check_type_analysis.py --out-dir runs/type-analysis
+```
+
+The checker validates the scope before invoking mypy. Every target must exist,
+must be a Python file inside the repository, must be unique, and must belong to
+a named group. `scope_floor=8` prevents the checked surface from being reduced
+without a visible policy change. The report writes JSON, CSV, Markdown, and
+HTML with the exact target list, scope issues, and mypy diagnostics.
+
+Mypy uses strict mode with `follow_imports=skip`. That setting is deliberate:
+the gate checks the eight declared files rather than recursively turning this
+incremental A1 version into a hidden full-repository migration. Future versions
+may increase `scope_floor` and add groups, but should not lower the floor.
