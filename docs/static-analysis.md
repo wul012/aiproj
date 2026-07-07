@@ -43,9 +43,9 @@ This is an engineering gate, not a model-capability claim. It improves maintaina
 
 The second A1 step adds strict mypy without attempting a full-repository type
 sweep. The committed scope lives in
-`docs/static-analysis/mypy-scope.json`. It currently contains eight
+`docs/static-analysis/mypy-scope.json`. It currently contains ten
 load-bearing files in four groups: shared report contracts, CI governance,
-engineering orchestration, and analysis gates.
+engineering orchestration, analysis gates, and honest measurement.
 
 Run it with:
 
@@ -55,7 +55,7 @@ python -B scripts/check_type_analysis.py --out-dir runs/type-analysis
 
 The checker validates the scope before invoking mypy. Every target must exist,
 must be a Python file inside the repository, must be unique, and must belong to
-a named group. `scope_floor=8` prevents the checked surface from being reduced
+a named group. `scope_floor=10` prevents the checked surface from being reduced
 without a visible policy change. The report writes JSON, CSV, Markdown, and
 HTML with the exact target list, scope issues, and mypy diagnostics.
 
@@ -85,3 +85,18 @@ python -B scripts/run_test_coverage.py --out-dir runs/test-coverage-ci --fail-un
 coverage-floor manifest, and `ci_workflow_hygiene_policy.py` agree on the same
 floor. Future versions may raise this value with fresh evidence, but lowering
 it requires changing the manifest and tests, not just editing the workflow.
+
+## v1264 Honest Measurement Gate
+
+A3 adds a separate gate for bounded model-capability governance claims:
+
+```powershell
+python -B scripts/check_model_capability_honest_measurement.py --out-dir runs/model-capability-honest-measurement
+```
+
+The registry lives at
+`docs/model-capability-honest-measurement-registry.json`. The checker validates
+that registered families are cached-artifact-only, require no training, carry no
+promotion authority, keep single-seed stochastic evidence exploratory/no-promotion,
+point at existing source artifacts, and retain positive plus negative contract
+test markers. CI runs this gate after scoped type analysis and before coverage.

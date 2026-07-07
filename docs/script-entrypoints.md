@@ -18,7 +18,8 @@ python -B scripts/check_engineering_health.py
 `scripts/check_engineering_health.py` is the broad local maintainer check. It
 runs the `HEALTH_ENGINEERING_ENTRYPOINTS` subset: source-encoding hygiene,
 project documentation readability, CI workflow hygiene, staged static analysis,
-and the normalization guard, then writes a compact top-level summary. It is
+scoped type analysis, model-capability honest measurement, and the normalization
+guard, then writes a compact top-level summary. It is
 intentionally local-only because CI already runs the underlying gates as
 separate fail-fast steps.
 
@@ -29,6 +30,8 @@ python -B scripts/check_source_encoding.py
 python -B scripts/check_project_docs_readability.py --require-pass --force
 python -B scripts/check_ci_workflow_hygiene.py
 python -B scripts/check_static_analysis.py --out-dir runs/static-analysis
+python -B scripts/check_type_analysis.py --out-dir runs/type-analysis
+python -B scripts/check_model_capability_honest_measurement.py --out-dir runs/model-capability-honest-measurement
 python -B scripts/check_normalization_guard.py
 python -B scripts/run_test_coverage.py --out-dir runs/test-coverage --fail-under 88.98
 ```
@@ -77,6 +80,11 @@ strict maintained path set lint-clean and format-clean.
 `docs/static-analysis/mypy-scope.json`. The scope floor and group assignments
 prevent the checked surface from shrinking silently, while the report bundle
 keeps diagnostics and the exact target list reviewable.
+
+`scripts/check_model_capability_honest_measurement.py` validates the A3
+honest-measurement registry. It keeps bounded model-capability governance
+claims tied to cached artifacts, no-promotion boundaries, seed-policy labels,
+and positive/negative contract-test markers.
 
 `scripts/run_test_coverage.py` is the coverage-producing unittest entrypoint
 used by CI. The local command above writes coverage evidence under

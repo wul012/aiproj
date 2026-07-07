@@ -26,9 +26,11 @@ python -B scripts/check_engineering_health.py
 
 This runs the `HEALTH_ENGINEERING_ENTRYPOINTS` subset from
 `scripts/_bootstrap.py`: source encoding hygiene, project documentation
-readability, CI workflow hygiene, staged static analysis, scoped type analysis, and the normalization
-guard in one local command. Source encoding, docs readability, CI workflow, and
-static-analysis and type-analysis reports are written under `runs/engineering-health/`, and the aggregate command writes
+readability, CI workflow hygiene, staged static analysis, scoped type analysis,
+model-capability honest measurement, and the normalization guard in one local
+command. Source encoding, docs readability, CI workflow, static-analysis,
+type-analysis, and honest-measurement reports are written under
+`runs/engineering-health/`, and the aggregate command writes
 `runs/engineering-health/engineering_health_summary.json` and
 `runs/engineering-health/engineering_health_summary.md` with the step commands,
 return codes, and pass/fail status.
@@ -53,6 +55,17 @@ python -B scripts/check_type_analysis.py --out-dir runs/type-analysis
 This reads `docs/static-analysis/mypy-scope.json`, validates its scope floor and
 group assignments, then checks only the declared load-bearing files. Scope and
 type failures both return a non-zero exit code.
+
+For the model-capability honest-measurement gate alone:
+
+```powershell
+python -B scripts/check_model_capability_honest_measurement.py --out-dir runs/model-capability-honest-measurement
+```
+
+This reads `docs/model-capability-honest-measurement-registry.json` and checks
+that registered capability-governance families are cached-artifact-only,
+no-promotion, seed-policy bounded, backed by existing source artifacts, and
+protected by positive plus negative contract-test markers.
 
 For a quick full unittest run:
 

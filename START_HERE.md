@@ -41,6 +41,7 @@ Typical workflow:
 python -B scripts/check_engineering_health.py
 python -B scripts/check_static_analysis.py --out-dir runs/static-analysis
 python -B scripts/check_type_analysis.py --out-dir runs/type-analysis
+python -B scripts/check_model_capability_honest_measurement.py --out-dir runs/model-capability-honest-measurement
 python -m unittest discover -s tests -v
 python -B scripts/run_test_coverage.py --out-dir runs/test-coverage --fail-under 88.98
 python -B scripts/check_normalization_guard.py
@@ -50,6 +51,8 @@ python -B scripts/check_archive_runs_inventory.py --out-dir runs/archive-runs-in
 Use the first command for the current maintainer health check. Use the static
 analysis command when changing Python source or scripts; it compares ruff
 findings against the committed baseline and keeps strict paths format-clean.
+Use the honest-measurement gate when capability-governance claims, publication
+receipts, handoffs, or route-promotion evidence boundaries are touched.
 Use the broad unittest command when you need full test discovery, and the
 coverage command when you need the same thresholded unit-test entrypoint used by
 CI. Use the normalization guard when you are changing architecture boundaries,
@@ -77,15 +80,17 @@ workflows.
 
 ## Latest version summary
 
-Current README focus: **v1263 production-excellence A2 coverage ratchet**.
+Current README focus: **v1264 production-excellence A3 honest measurement gate**.
 
-v1263 completes A2 by raising the CI coverage floor to `88.98`, derived from
-the v1262 measured `90.98%` baseline minus two points. The floor is written in
-`docs/static-analysis/coverage-floor.json`, mirrored by CI workflow hygiene,
-and checked by project-configuration tests. This is an engineering-maintenance
-gate, not a model-quality promotion: model capability claims remain educational
-unless tied to cited evidence, and governance `status=pass` still does not
-imply production model readiness.
+v1264 starts A3 by making bounded model-capability claims mechanically
+checkable. The registry in
+`docs/model-capability-honest-measurement-registry.json` lists representative
+capability-governance families, their cached artifacts, the allowed claim
+boundary, seed policy, and the positive/negative contract-test markers that
+protect them. This is an engineering-maintenance gate, not a model-quality
+promotion: model capability claims remain educational unless tied to cited
+evidence, and governance `status=pass` still does not imply production model
+readiness.
 
 ## Where to look next
 
@@ -97,10 +102,12 @@ imply production model readiness.
 - `docs/normalization-guard.md` - focused guard modules and what each protects.
 - `docs/script-entrypoints.md` - stable maintainer scripts and historical script boundary.
 - `docs/static-analysis.md` - staged ruff baseline and scoped mypy gate.
+- `docs/model-capability-honest-measurement-policy.md` - A3 claim-boundary rules.
 - `docs/archive-runs-inventory.md` - warning-only archive and `runs/` growth inventory.
 - `docs/aiproj-track-a0-census.md` - A0 production-excellence census evidence.
 - `docs/aiproj-track-a1-static-analysis.md` - A1 static-analysis adoption evidence.
 - `docs/aiproj-track-a2-coverage.md` - A2 coverage-floor ratchet evidence.
+- `docs/aiproj-track-a3-honest-measurement.md` - A3 honest-measurement gate evidence.
 - `docs/production-excellence-aiproj-brief.md` - Claude-authored A-track execution brief.
 - `文档分流说明.md` - current documentation routing map.
 - `src/minigpt/` - model, evaluation, reporting, and workflow code.

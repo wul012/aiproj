@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1222-v1264-production-excellence-a3-honest-measurement-gate.md
+ -> v1264 code explanation: starts production-excellence A3 by adding a CI-backed honest-measurement registry gate for bounded model-capability governance claims. It validates source artifacts, no-training/no-promotion boundaries, seed-policy labels, and positive plus negative contract-test markers. Evidence lives under `f/1264`.
+
 1221-v1263-production-excellence-a2-coverage-ratchet.md
  -> v1263 code explanation: completes production-excellence A2 by raising the coverage gate to the measured baseline minus two points, committing a coverage-floor manifest, locking CI/workflow-hygiene/project-configuration agreement, and keeping the science lane unchanged. Evidence lives under `f/1263`.
 

@@ -25,12 +25,14 @@ DEFAULT_OUT_DIR = ROOT / "runs" / "static-analysis"
 DEFAULT_STRICT_PATHS = (
     "scripts/check_static_analysis.py",
     "scripts/check_type_analysis.py",
+    "scripts/check_model_capability_honest_measurement.py",
     "scripts/check_archive_runs_inventory.py",
     "scripts/check_engineering_health.py",
     "scripts/_bootstrap.py",
     "scripts/_engineering_health.py",
     "src/minigpt/ci_workflow_hygiene.py",
     "src/minigpt/ci_workflow_hygiene_policy.py",
+    "src/minigpt/model_capability_honest_measurement.py",
 )
 
 Runner = Callable[..., subprocess.CompletedProcess[str]]

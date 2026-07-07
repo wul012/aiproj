@@ -22,6 +22,8 @@ This directory keeps stable reader-facing documentation outside the long version
 - [aiproj A0 census](aiproj-track-a0-census.md)
 - [aiproj A1 static analysis](aiproj-track-a1-static-analysis.md)
 - [aiproj A2 coverage ratchet](aiproj-track-a2-coverage.md)
+- [aiproj A3 honest measurement](aiproj-track-a3-honest-measurement.md)
+- [Model capability honest measurement policy](model-capability-honest-measurement-policy.md)
 - [Production excellence brief](production-excellence-aiproj-brief.md)
 
 The root README remains the project landing page and historical ledger, but new readers should start here when they need the conceptual map.

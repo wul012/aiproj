@@ -60,6 +60,11 @@ class ProjectConfigurationTests(unittest.TestCase):
         self.assertIn("python -B scripts/check_project_docs_readability.py", workflow)
         self.assertIn("python -B scripts/check_static_analysis.py --out-dir runs/static-analysis-ci", workflow)
         self.assertIn("python -B scripts/check_type_analysis.py --out-dir runs/type-analysis-ci", workflow)
+        self.assertIn(
+            "python -B scripts/check_model_capability_honest_measurement.py "
+            "--out-dir runs/model-capability-honest-measurement-ci",
+            workflow,
+        )
         self.assertIn(coverage_command, workflow)
         self.assertIn("python -B scripts/check_source_encoding.py", workflow)
 
@@ -81,6 +86,7 @@ class ProjectConfigurationTests(unittest.TestCase):
         self.assertIn("python -B scripts/check_engineering_health.py", start_here)
         self.assertIn("python -B scripts/check_static_analysis.py", start_here)
         self.assertIn("python -B scripts/check_type_analysis.py", start_here)
+        self.assertIn("python -B scripts/check_model_capability_honest_measurement.py", start_here)
         self.assertIn("python -m unittest discover -s tests -v", start_here)
         self.assertIn("python -B scripts/check_normalization_guard.py", start_here)
         self.assertIn("docs/architecture-map.md", start_here)

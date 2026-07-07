@@ -44,7 +44,9 @@ class EngineeringHealthTests(unittest.TestCase):
         self.assertIn(str(out_dir / "static-analysis"), steps[3].command)
         self.assertEqual(steps[4].command[:3], ("python", "-B", "scripts/check_type_analysis.py"))
         self.assertIn(str(out_dir / "type-analysis"), steps[4].command)
-        self.assertEqual(steps[5].command, ("python", "-B", "scripts/check_normalization_guard.py"))
+        self.assertEqual(steps[5].command[:3], ("python", "-B", "scripts/check_model_capability_honest_measurement.py"))
+        self.assertIn(str(out_dir / "model-capability-honest-measurement"), steps[5].command)
+        self.assertEqual(steps[6].command, ("python", "-B", "scripts/check_normalization_guard.py"))
 
     def test_summary_records_step_statuses_and_output_path(self) -> None:
         out_dir = ROOT / "runs" / "engineering-health-test"

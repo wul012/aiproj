@@ -1,0 +1,679 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability honest measurement gate",
+  "generated_at": "2026-07-07T04:30:59Z",
+  "status": "pass",
+  "decision": "continue_with_honest_measurement_gate",
+  "registry_path": "docs/model-capability-honest-measurement-registry.json",
+  "summary": {
+    "status": "pass",
+    "decision": "continue_with_honest_measurement_gate",
+    "family_count": 2,
+    "check_count": 68,
+    "passed_check_count": 68,
+    "failed_check_count": 0,
+    "cached_artifact_only_family_count": 2,
+    "no_training_required_family_count": 2,
+    "multi_seed_family_count": 1,
+    "single_seed_family_count": 1
+  },
+  "families": [
+    {
+      "family_id": "baseline-candidate-handoff-v433-v434",
+      "capability_family": "baseline_candidate_eval_loop_to_handoff",
+      "claim_boundary": "not_claimed_no_promotion",
+      "model_quality_claim": "not_claimed",
+      "promotion_authority": "none",
+      "promotion_ready_expected": false,
+      "cached_artifact_only": true,
+      "no_training_required": true,
+      "stochastic_metric": true,
+      "seed_evidence_mode": "single_seed",
+      "single_seed_label": "exploratory_no_promotion",
+      "source_artifacts": [
+        "d/433/解释/baseline-candidate-handoff/baseline_candidate_handoff.json",
+        "d/434/解释/baseline-candidate-handoff-check/baseline_candidate_handoff_check.json"
+      ],
+      "artifact_guards": [
+        {
+          "path": "d/433/解释/baseline-candidate-handoff/baseline_candidate_handoff.json",
+          "required_fields": [
+            "status",
+            "decision",
+            "source_loop_report",
+            "boundary",
+            "next_baseline"
+          ],
+          "expected_values": {
+            "boundary.model_quality_claim": "not_claimed"
+          }
+        },
+        {
+          "path": "d/434/解释/baseline-candidate-handoff-check/baseline_candidate_handoff_check.json",
+          "required_fields": [
+            "status",
+            "decision",
+            "failed_count",
+            "source_handoff",
+            "source_loop_report"
+          ],
+          "expected_values": {
+            "status": "pass",
+            "failed_count": 0
+          }
+        }
+      ],
+      "contract_test_modules": [
+        "tests/test_baseline_candidate_handoff.py",
+        "tests/test_baseline_candidate_handoff_check.py"
+      ],
+      "positive_test_markers": [
+        "test_valid_handoff_check_passes_when_candidate_is_rejected",
+        "test_builder_check_out_dir_writes_sidecar"
+      ],
+      "negative_test_markers": [
+        "test_tampered_next_baseline_source_fails",
+        "test_missing_source_loop_report_fails",
+        "test_cli_require_pass_returns_one_on_failed_check"
+      ]
+    },
+    {
+      "family_id": "route-promotion-release-readiness-v1258-v1259",
+      "capability_family": "model_capability_route_promotion_release_readiness",
+      "claim_boundary": "bounded_governance_only_no_promotion",
+      "model_quality_claim": "seed_stable_pair_probe_route_accepted",
+      "promotion_authority": "none",
+      "promotion_ready_expected": false,
+      "cached_artifact_only": true,
+      "no_training_required": true,
+      "stochastic_metric": true,
+      "seed_evidence_mode": "multi_seed",
+      "seed_count": 3,
+      "single_seed_label": "not_applicable",
+      "source_artifacts": [
+        "f/1258/解释/model-capability-route-promotion-release-readiness-receipt-index/model_capability_route_promotion_release_readiness_receipt_index.json",
+        "f/1259/解释/model-capability-route-promotion-release-readiness-receipt-index-review/model_capability_route_promotion_release_readiness_receipt_index_review.json"
+      ],
+      "artifact_guards": [
+        {
+          "path": "f/1259/解释/model-capability-route-promotion-release-readiness-receipt-index-review/model_capability_route_promotion_release_readiness_receipt_index_review.json",
+          "required_fields": [
+            "status",
+            "decision",
+            "failed_count",
+            "source_receipt_index_summary",
+            "source_receipt_index"
+          ],
+          "expected_values": {
+            "status": "pass",
+            "failed_count": 0,
+            "source_receipt_index_summary.promotion_ready": false,
+            "source_receipt_index_summary.approved_for_promotion": false
+          }
+        }
+      ],
+      "contract_test_modules": [
+        "tests/test_model_capability_route_promotion_release_readiness_summary_check.py",
+        "tests/test_model_capability_route_promotion_decision_index_check.py"
+      ],
+      "positive_test_markers": [
+        "test_contract_check_passes_for_ready_summary",
+        "test_contract_check_passes_for_rebuildable_index"
+      ],
+      "negative_test_markers": [
+        "test_contract_check_fails_when_source_path_is_missing",
+        "test_contract_check_fails_when_claim_widens",
+        "test_contract_check_fails_when_route_entry_is_tampered"
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "family_id": "registry",
+      "check_id": "schema_version",
+      "expected": "1",
+      "actual": 1,
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    },
+    {
+      "family_id": "registry",
+      "check_id": "scope",
+      "expected": "engineering_governance_lane_only",
+      "actual": "engineering_governance_lane_only",
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    },
+    {
+      "family_id": "registry",
+      "check_id": "family_count",
+      "expected": ">=1",
+      "actual": 2,
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    },
+    {
+      "family_id": "baseline-candidate-handoff-v433-v434",
+      "check_id": "family_id_present",
+      "expected": "non-empty unique id",
+      "actual": "baseline-candidate-handoff-v433-v434",
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    },
+    {
+      "family_id": "baseline-candidate-handoff-v433-v434",
+      "check_id": "cached_artifact_only",
+      "expected": "true",
+      "actual": true,
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    },
+    {
+      "family_id": "baseline-candidate-handoff-v433-v434",
+      "check_id": "no_training_required",
+      "expected": "true",
+      "actual": true,
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    },
+    {
+      "family_id": "baseline-candidate-handoff-v433-v434",
+      "check_id": "promotion_authority",
+      "expected": "none",
+      "actual": "none",
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    },
+    {
+      "family_id": "baseline-candidate-handoff-v433-v434",
+      "check_id": "promotion_ready_expected",
+      "expected": "false",
+      "actual": false,
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    },
+    {
+      "family_id": "baseline-candidate-handoff-v433-v434",
+      "check_id": "seed_evidence_mode",
+      "expected": "single_seed|multi_seed|not_applicable",
+      "actual": "single_seed",
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    },
+    {
+      "family_id": "baseline-candidate-handoff-v433-v434",
+      "check_id": "single_seed_label",
+      "expected": "exploratory/not_claimed/no_promotion",
+      "actual": "exploratory_no_promotion",
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    },
+    {
+      "family_id": "baseline-candidate-handoff-v433-v434",
+      "check_id": "source_artifacts_present",
+      "expected": "non-empty list",
+      "actual": 2,
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    },
+    {
+      "family_id": "baseline-candidate-handoff-v433-v434",
+      "check_id": "source_artifacts[0]",
+      "expected": "exists inside project",
+      "actual": "d/433/解释/baseline-candidate-handoff/baseline_candidate_handoff.json",
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    },
+    {
+      "family_id": "baseline-candidate-handoff-v433-v434",
+      "check_id": "source_artifacts[1]",
+      "expected": "exists inside project",
+      "actual": "d/434/解释/baseline-candidate-handoff-check/baseline_candidate_handoff_check.json",
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    },
+    {
+      "family_id": "baseline-candidate-handoff-v433-v434",
+      "check_id": "contract_test_modules_present",
+      "expected": "non-empty list",
+      "actual": 2,
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    },
+    {
+      "family_id": "baseline-candidate-handoff-v433-v434",
+      "check_id": "contract_test_modules[0]",
+      "expected": "exists inside project",
+      "actual": "tests/test_baseline_candidate_handoff.py",
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    },
+    {
+      "family_id": "baseline-candidate-handoff-v433-v434",
+      "check_id": "contract_test_modules[1]",
+      "expected": "exists inside project",
+      "actual": "tests/test_baseline_candidate_handoff_check.py",
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    },
+    {
+      "family_id": "baseline-candidate-handoff-v433-v434",
+      "check_id": "positive_test_markers_present",
+      "expected": "non-empty list",
+      "actual": 2,
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    },
+    {
+      "family_id": "baseline-candidate-handoff-v433-v434",
+      "check_id": "marker:test_valid_handoff_check_passes_when_candidate_is_rejected",
+      "expected": "present in contract tests",
+      "actual": "test_valid_handoff_check_passes_when_candidate_is_rejected",
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    },
+    {
+      "family_id": "baseline-candidate-handoff-v433-v434",
+      "check_id": "marker:test_builder_check_out_dir_writes_sidecar",
+      "expected": "present in contract tests",
+      "actual": "test_builder_check_out_dir_writes_sidecar",
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    },
+    {
+      "family_id": "baseline-candidate-handoff-v433-v434",
+      "check_id": "negative_test_markers_present",
+      "expected": "non-empty list",
+      "actual": 3,
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    },
+    {
+      "family_id": "baseline-candidate-handoff-v433-v434",
+      "check_id": "marker:test_tampered_next_baseline_source_fails",
+      "expected": "present in contract tests",
+      "actual": "test_tampered_next_baseline_source_fails",
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    },
+    {
+      "family_id": "baseline-candidate-handoff-v433-v434",
+      "check_id": "marker:test_missing_source_loop_report_fails",
+      "expected": "present in contract tests",
+      "actual": "test_missing_source_loop_report_fails",
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    },
+    {
+      "family_id": "baseline-candidate-handoff-v433-v434",
+      "check_id": "marker:test_cli_require_pass_returns_one_on_failed_check",
+      "expected": "present in contract tests",
+      "actual": "test_cli_require_pass_returns_one_on_failed_check",
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    },
+    {
+      "family_id": "baseline-candidate-handoff-v433-v434",
+      "check_id": "artifact_guard[0].path",
+      "expected": "exists",
+      "actual": "d/433/解释/baseline-candidate-handoff/baseline_candidate_handoff.json",
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    },
+    {
+      "family_id": "baseline-candidate-handoff-v433-v434",
+      "check_id": "artifact_field:status",
+      "expected": "present",
+      "actual": "present",
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    },
+    {
+      "family_id": "baseline-candidate-handoff-v433-v434",
+      "check_id": "artifact_field:decision",
+      "expected": "present",
+      "actual": "present",
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    },
+    {
+      "family_id": "baseline-candidate-handoff-v433-v434",
+      "check_id": "artifact_field:source_loop_report",
+      "expected": "present",
+      "actual": "present",
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    },
+    {
+      "family_id": "baseline-candidate-handoff-v433-v434",
+      "check_id": "artifact_field:boundary",
+      "expected": "present",
+      "actual": "present",
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    },
+    {
+      "family_id": "baseline-candidate-handoff-v433-v434",
+      "check_id": "artifact_field:next_baseline",
+      "expected": "present",
+      "actual": "present",
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    },
+    {
+      "family_id": "baseline-candidate-handoff-v433-v434",
+      "check_id": "artifact_value:boundary.model_quality_claim",
+      "expected": "not_claimed",
+      "actual": "not_claimed",
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    },
+    {
+      "family_id": "baseline-candidate-handoff-v433-v434",
+      "check_id": "artifact_guard[1].path",
+      "expected": "exists",
+      "actual": "d/434/解释/baseline-candidate-handoff-check/baseline_candidate_handoff_check.json",
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    },
+    {
+      "family_id": "baseline-candidate-handoff-v433-v434",
+      "check_id": "artifact_field:status",
+      "expected": "present",
+      "actual": "present",
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    },
+    {
+      "family_id": "baseline-candidate-handoff-v433-v434",
+      "check_id": "artifact_field:decision",
+      "expected": "present",
+      "actual": "present",
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    },
+    {
+      "family_id": "baseline-candidate-handoff-v433-v434",
+      "check_id": "artifact_field:failed_count",
+      "expected": "present",
+      "actual": "present",
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    },
+    {
+      "family_id": "baseline-candidate-handoff-v433-v434",
+      "check_id": "artifact_field:source_handoff",
+      "expected": "present",
+      "actual": "present",
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    },
+    {
+      "family_id": "baseline-candidate-handoff-v433-v434",
+      "check_id": "artifact_field:source_loop_report",
+      "expected": "present",
+      "actual": "present",
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    },
+    {
+      "family_id": "baseline-candidate-handoff-v433-v434",
+      "check_id": "artifact_value:status",
+      "expected": "pass",
+      "actual": "pass",
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    },
+    {
+      "family_id": "baseline-candidate-handoff-v433-v434",
+      "check_id": "artifact_value:failed_count",
+      "expected": 0,
+      "actual": 0,
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    },
+    {
+      "family_id": "route-promotion-release-readiness-v1258-v1259",
+      "check_id": "family_id_present",
+      "expected": "non-empty unique id",
+      "actual": "route-promotion-release-readiness-v1258-v1259",
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    },
+    {
+      "family_id": "route-promotion-release-readiness-v1258-v1259",
+      "check_id": "cached_artifact_only",
+      "expected": "true",
+      "actual": true,
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    },
+    {
+      "family_id": "route-promotion-release-readiness-v1258-v1259",
+      "check_id": "no_training_required",
+      "expected": "true",
+      "actual": true,
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    },
+    {
+      "family_id": "route-promotion-release-readiness-v1258-v1259",
+      "check_id": "promotion_authority",
+      "expected": "none",
+      "actual": "none",
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    },
+    {
+      "family_id": "route-promotion-release-readiness-v1258-v1259",
+      "check_id": "promotion_ready_expected",
+      "expected": "false",
+      "actual": false,
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    },
+    {
+      "family_id": "route-promotion-release-readiness-v1258-v1259",
+      "check_id": "seed_evidence_mode",
+      "expected": "single_seed|multi_seed|not_applicable",
+      "actual": "multi_seed",
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    },
+    {
+      "family_id": "route-promotion-release-readiness-v1258-v1259",
+      "check_id": "multi_seed_count",
+      "expected": ">=2",
+      "actual": 3,
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    },
+    {
+      "family_id": "route-promotion-release-readiness-v1258-v1259",
+      "check_id": "source_artifacts_present",
+      "expected": "non-empty list",
+      "actual": 2,
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    },
+    {
+      "family_id": "route-promotion-release-readiness-v1258-v1259",
+      "check_id": "source_artifacts[0]",
+      "expected": "exists inside project",
+      "actual": "f/1258/解释/model-capability-route-promotion-release-readiness-receipt-index/model_capability_route_promotion_release_readiness_receipt_index.json",
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    },
+    {
+      "family_id": "route-promotion-release-readiness-v1258-v1259",
+      "check_id": "source_artifacts[1]",
+      "expected": "exists inside project",
+      "actual": "f/1259/解释/model-capability-route-promotion-release-readiness-receipt-index-review/model_capability_route_promotion_release_readiness_receipt_index_review.json",
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    },
+    {
+      "family_id": "route-promotion-release-readiness-v1258-v1259",
+      "check_id": "contract_test_modules_present",
+      "expected": "non-empty list",
+      "actual": 2,
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    },
+    {
+      "family_id": "route-promotion-release-readiness-v1258-v1259",
+      "check_id": "contract_test_modules[0]",
+      "expected": "exists inside project",
+      "actual": "tests/test_model_capability_route_promotion_release_readiness_summary_check.py",
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    },
+    {
+      "family_id": "route-promotion-release-readiness-v1258-v1259",
+      "check_id": "contract_test_modules[1]",
+      "expected": "exists inside project",
+      "actual": "tests/test_model_capability_route_promotion_decision_index_check.py",
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    },
+    {
+      "family_id": "route-promotion-release-readiness-v1258-v1259",
+      "check_id": "positive_test_markers_present",
+      "expected": "non-empty list",
+      "actual": 2,
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    },
+    {
+      "family_id": "route-promotion-release-readiness-v1258-v1259",
+      "check_id": "marker:test_contract_check_passes_for_ready_summary",
+      "expected": "present in contract tests",
+      "actual": "test_contract_check_passes_for_ready_summary",
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    },
+    {
+      "family_id": "route-promotion-release-readiness-v1258-v1259",
+      "check_id": "marker:test_contract_check_passes_for_rebuildable_index",
+      "expected": "present in contract tests",
+      "actual": "test_contract_check_passes_for_rebuildable_index",
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    },
+    {
+      "family_id": "route-promotion-release-readiness-v1258-v1259",
+      "check_id": "negative_test_markers_present",
+      "expected": "non-empty list",
+      "actual": 3,
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    },
+    {
+      "family_id": "route-promotion-release-readiness-v1258-v1259",
+      "check_id": "marker:test_contract_check_fails_when_source_path_is_missing",
+      "expected": "present in contract tests",
+      "actual": "test_contract_check_fails_when_source_path_is_missing",
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    },
+    {
+      "family_id": "route-promotion-release-readiness-v1258-v1259",
+      "check_id": "marker:test_contract_check_fails_when_claim_widens",
+      "expected": "present in contract tests",
+      "actual": "test_contract_check_fails_when_claim_widens",
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    },
+    {
+      "family_id": "route-promotion-release-readiness-v1258-v1259",
+      "check_id": "marker:test_contract_check_fails_when_route_entry_is_tampered",
+      "expected": "present in contract tests",
+      "actual": "test_contract_check_fails_when_route_entry_is_tampered",
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    },
+    {
+      "family_id": "route-promotion-release-readiness-v1258-v1259",
+      "check_id": "artifact_guard[0].path",
+      "expected": "exists",
+      "actual": "f/1259/解释/model-capability-route-promotion-release-readiness-receipt-index-review/model_capability_route_promotion_release_readiness_receipt_index_review.json",
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    },
+    {
+      "family_id": "route-promotion-release-readiness-v1258-v1259",
+      "check_id": "artifact_field:status",
+      "expected": "present",
+      "actual": "present",
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    },
+    {
+      "family_id": "route-promotion-release-readiness-v1258-v1259",
+      "check_id": "artifact_field:decision",
+      "expected": "present",
+      "actual": "present",
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    },
+    {
+      "family_id": "route-promotion-release-readiness-v1258-v1259",
+      "check_id": "artifact_field:failed_count",
+      "expected": "present",
+      "actual": "present",
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    },
+    {
+      "family_id": "route-promotion-release-readiness-v1258-v1259",
+      "check_id": "artifact_field:source_receipt_index_summary",
+      "expected": "present",
+      "actual": "present",
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    },
+    {
+      "family_id": "route-promotion-release-readiness-v1258-v1259",
+      "check_id": "artifact_field:source_receipt_index",
+      "expected": "present",
+      "actual": "present",
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    },
+    {
+      "family_id": "route-promotion-release-readiness-v1258-v1259",
+      "check_id": "artifact_value:status",
+      "expected": "pass",
+      "actual": "pass",
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    },
+    {
+      "family_id": "route-promotion-release-readiness-v1258-v1259",
+      "check_id": "artifact_value:failed_count",
+      "expected": 0,
+      "actual": 0,
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    },
+    {
+      "family_id": "route-promotion-release-readiness-v1258-v1259",
+      "check_id": "artifact_value:source_receipt_index_summary.promotion_ready",
+      "expected": false,
+      "actual": false,
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    },
+    {
+      "family_id": "route-promotion-release-readiness-v1258-v1259",
+      "check_id": "artifact_value:source_receipt_index_summary.approved_for_promotion",
+      "expected": false,
+      "actual": false,
+      "status": "pass",
+      "detail": "Honest measurement contract holds."
+    }
+  ],
+  "recommendations": [
+    "Keep new capability families registered before claiming bounded model capability progress."
+  ]
+}

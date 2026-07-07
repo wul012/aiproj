@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model capability honest measurement registry",
+  "policy_version": "v1264",
+  "scope": "engineering_governance_lane_only",
+  "rule": "Capability governance claims must be bounded, cached-artifact-only, and protected by contract tests with positive and negative markers.",
+  "families": [
+    {
+      "family_id": "baseline-candidate-handoff-v433-v434",
+      "capability_family": "baseline_candidate_eval_loop_to_handoff",
+      "claim_boundary": "not_claimed_no_promotion",
+      "model_quality_claim": "not_claimed",
+      "promotion_authority": "none",
+      "promotion_ready_expected": false,
+      "cached_artifact_only": true,
+      "no_training_required": true,
+      "stochastic_metric": true,
+      "seed_evidence_mode": "single_seed",
+      "single_seed_label": "exploratory_no_promotion",
+      "source_artifacts": [
+        "d/433/解释/baseline-candidate-handoff/baseline_candidate_handoff.json",
+        "d/434/解释/baseline-candidate-handoff-check/baseline_candidate_handoff_check.json"
+      ],
+      "artifact_guards": [
+        {
+          "path": "d/433/解释/baseline-candidate-handoff/baseline_candidate_handoff.json",
+          "required_fields": [
+            "status",
+            "decision",
+            "source_loop_report",
+            "boundary",
+            "next_baseline"
+          ],
+          "expected_values": {
+            "boundary.model_quality_claim": "not_claimed"
+          }
+        },
+        {
+          "path": "d/434/解释/baseline-candidate-handoff-check/baseline_candidate_handoff_check.json",
+          "required_fields": [
+            "status",
+            "decision",
+            "failed_count",
+            "source_handoff",
+            "source_loop_report"
+          ],
+          "expected_values": {
+            "status": "pass",
+            "failed_count": 0
+          }
+        }
+      ],
+      "contract_test_modules": [
+        "tests/test_baseline_candidate_handoff.py",
+        "tests/test_baseline_candidate_handoff_check.py"
+      ],
+      "positive_test_markers": [
+        "test_valid_handoff_check_passes_when_candidate_is_rejected",
+        "test_builder_check_out_dir_writes_sidecar"
+      ],
+      "negative_test_markers": [
+        "test_tampered_next_baseline_source_fails",
+        "test_missing_source_loop_report_fails",
+        "test_cli_require_pass_returns_one_on_failed_check"
+      ]
+    },
+    {
+      "family_id": "route-promotion-release-readiness-v1258-v1259",
+      "capability_family": "model_capability_route_promotion_release_readiness",
+      "claim_boundary": "bounded_governance_only_no_promotion",
+      "model_quality_claim": "seed_stable_pair_probe_route_accepted",
+      "promotion_authority": "none",
+      "promotion_ready_expected": false,
+      "cached_artifact_only": true,
+      "no_training_required": true,
+      "stochastic_metric": true,
+      "seed_evidence_mode": "multi_seed",
+      "seed_count": 3,
+      "single_seed_label": "not_applicable",
+      "source_artifacts": [
+        "f/1258/解释/model-capability-route-promotion-release-readiness-receipt-index/model_capability_route_promotion_release_readiness_receipt_index.json",
+        "f/1259/解释/model-capability-route-promotion-release-readiness-receipt-index-review/model_capability_route_promotion_release_readiness_receipt_index_review.json"
+      ],
+      "artifact_guards": [
+        {
+          "path": "f/1259/解释/model-capability-route-promotion-release-readiness-receipt-index-review/model_capability_route_promotion_release_readiness_receipt_index_review.json",
+          "required_fields": [
+            "status",
+            "decision",
+            "failed_count",
+            "source_receipt_index_summary",
+            "source_receipt_index"
+          ],
+          "expected_values": {
+            "status": "pass",
+            "failed_count": 0,
+            "source_receipt_index_summary.promotion_ready": false,
+            "source_receipt_index_summary.approved_for_promotion": false
+          }
+        }
+      ],
+      "contract_test_modules": [
+        "tests/test_model_capability_route_promotion_release_readiness_summary_check.py",
+        "tests/test_model_capability_route_promotion_decision_index_check.py"
+      ],
+      "positive_test_markers": [
+        "test_contract_check_passes_for_ready_summary",
+        "test_contract_check_passes_for_rebuildable_index"
+      ],
+      "negative_test_markers": [
+        "test_contract_check_fails_when_source_path_is_missing",
+        "test_contract_check_fails_when_claim_widens",
+        "test_contract_check_fails_when_route_entry_is_tampered"
+      ]
+    }
+  ]
+}

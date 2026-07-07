@@ -58,6 +58,7 @@ CURRENT_WORKFLOW_REQUIRED_CHECK_IDS = (
     "command:project_docs_readability_gate",
     "command:static_analysis_gate",
     "command:type_analysis_gate",
+    "command:model_capability_honest_measurement_gate",
     "command:normalization_guard",
     "order:ci_tiny_scorecard_plan_check_after_smoke",
     "order:ci_tiny_scorecard_plan_check_before_coverage",
@@ -79,6 +80,8 @@ CURRENT_WORKFLOW_REQUIRED_CHECK_IDS = (
     "order:static_analysis_before_coverage",
     "order:type_analysis_after_static_analysis",
     "order:type_analysis_before_coverage",
+    "order:model_capability_honest_measurement_after_type_analysis",
+    "order:model_capability_honest_measurement_before_coverage",
     "order:normalization_guard_before_coverage",
 )
 
@@ -161,8 +164,8 @@ class CIWorkflowTests(unittest.TestCase):
             self.assertGreaterEqual(report["summary"]["failed_check_count"], 4)
             self.assertEqual(report["summary"]["node24_native_action_count"], 0)
             self.assertEqual(report["summary"]["forbidden_env_count"], 1)
-            self.assertEqual(report["summary"]["missing_step_count"], 16)
-            self.assertEqual(report["summary"]["required_step_count"], 18)
+            self.assertEqual(report["summary"]["missing_step_count"], 17)
+            self.assertEqual(report["summary"]["required_step_count"], 19)
             for gate in REQUIRED_SUMMARY_GATES:
                 with self.subTest(gate=gate):
                     self.assertFalse(report["summary"][f"{gate}_ready"])
@@ -192,6 +195,8 @@ class CIWorkflowTests(unittest.TestCase):
                         "        run: python -B scripts/check_static_analysis.py --out-dir runs/static-analysis-ci",
                         "      - name: Scoped type analysis gate",
                         "        run: python -B scripts/check_type_analysis.py --out-dir runs/type-analysis-ci",
+                        "      - name: Model capability honest measurement gate",
+                        "        run: python -B scripts/check_model_capability_honest_measurement.py --out-dir runs/model-capability-honest-measurement-ci",
                         "      - name: Archived path portability check",
                         "        run: python -B scripts/check_archived_path_portability.py --out-dir runs/archived-path-portability-ci",
                         "      - name: Promoted seed handoff assurance smoke",
@@ -255,6 +260,8 @@ class CIWorkflowTests(unittest.TestCase):
                         "        run: python -B scripts/check_static_analysis.py --out-dir runs/static-analysis-ci",
                         "      - name: Scoped type analysis gate",
                         "        run: python -B scripts/check_type_analysis.py --out-dir runs/type-analysis-ci",
+                        "      - name: Model capability honest measurement gate",
+                        "        run: python -B scripts/check_model_capability_honest_measurement.py --out-dir runs/model-capability-honest-measurement-ci",
                         "      - name: Unit tests",
                         "        run: python -B scripts/run_test_coverage.py --out-dir runs/test-coverage-ci --fail-under 88.98",
                         "      - name: Archived path portability check",
@@ -318,6 +325,8 @@ class CIWorkflowTests(unittest.TestCase):
                         "        run: python -B scripts/check_static_analysis.py --out-dir runs/static-analysis-ci",
                         "      - name: Scoped type analysis gate",
                         "        run: python -B scripts/check_type_analysis.py --out-dir runs/type-analysis-ci",
+                        "      - name: Model capability honest measurement gate",
+                        "        run: python -B scripts/check_model_capability_honest_measurement.py --out-dir runs/model-capability-honest-measurement-ci",
                         "      - name: Archived path portability check",
                         "        run: python -B scripts/check_archived_path_portability.py --out-dir runs/archived-path-portability-ci",
                         "      - name: Promoted seed handoff assurance smoke",

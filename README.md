@@ -24,10 +24,23 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 - [aiproj A0 census](docs/aiproj-track-a0-census.md)
 - [aiproj A1 static analysis](docs/aiproj-track-a1-static-analysis.md)
 - [aiproj A2 coverage ratchet](docs/aiproj-track-a2-coverage.md)
+- [aiproj A3 honest measurement](docs/aiproj-track-a3-honest-measurement.md)
+- [Model capability honest measurement policy](docs/model-capability-honest-measurement-policy.md)
 - [Production excellence brief](docs/production-excellence-aiproj-brief.md)
 - [Plain-language project guide](项目通俗说明/README.md)
 
 ## Current version
+
+Version `v1264.0.0` starts **aiproj production-excellence A3 with a model-capability honest-measurement gate**. It adds a committed registry for bounded capability-governance families, validates source artifacts and selected fields, requires positive plus negative contract-test markers, and enforces the gate in CI after scoped type analysis and before coverage. This is a claim-boundary and reproducibility guard only: no training, cached experiment verdict, promotion, or model-quality upgrade changes.
+
+## Latest v1264 checkpoint
+
+- Added `docs/model-capability-honest-measurement-registry.json` and `docs/model-capability-honest-measurement-policy.md` as the A3 source of truth.
+- Added `src/minigpt/model_capability_honest_measurement.py` and `scripts/check_model_capability_honest_measurement.py` for JSON/CSV/Markdown/HTML reports.
+- Wired the gate into CI, engineering health, static-analysis strict paths, and the scoped mypy manifest.
+- Added tests covering the passing registry, single-seed label widening, missing negative markers, missing source artifacts, outputs, and CLI wiring.
+
+## Historical v1263 context
 
 Version `v1263.0.0` completes **aiproj production-excellence A2 with a real coverage floor ratchet**. It raises CI coverage enforcement from the earlier conservative `80` placeholder to `88.98`, derived from the v1262 observed `90.98%` full unittest baseline minus two points. The floor is committed in `docs/static-analysis/coverage-floor.json`, checked by project configuration tests, and mirrored by CI workflow hygiene. This is an engineering quality gate only: no training, cached-artifact verdict, promotion, or model-quality claim changes.
 
