@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT dataset card</title>
+<style>
+:root { --ink:#111827; --muted:#4b5563; --line:#d8dee8; --page:#f7f7f2; --panel:#fff; --green:#047857; --red:#b91c1c; }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--page); color:var(--ink); font-family:Arial, "Microsoft YaHei", sans-serif; line-height:1.45; }
+header { padding:28px 32px 18px; background:#fff; border-bottom:1px solid var(--line); }
+h1 { margin:0 0 8px; font-size:28px; letter-spacing:0; }
+h2 { margin:0 0 12px; font-size:18px; }
+p, span, .muted { color:var(--muted); }
+.stats { display:grid; grid-template-columns:repeat(auto-fit, minmax(170px, 1fr)); gap:12px; padding:18px 32px 4px; }
+.card, .panel { background:var(--panel); border:1px solid var(--line); border-radius:8px; }
+.card { padding:14px; min-height:84px; }
+.label { color:var(--muted); font-size:12px; text-transform:uppercase; }
+.value { margin-top:6px; font-size:18px; font-weight:700; overflow-wrap:anywhere; }
+.panel { margin:18px 32px; padding:16px; overflow-x:auto; }
+table { width:100%; border-collapse:collapse; min-width:860px; }
+th, td { padding:8px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top; }
+th { color:var(--muted); font-size:12px; text-transform:uppercase; }
+.pill { display:inline-block; min-width:42px; padding:3px 8px; border-radius:999px; color:#fff; text-align:center; font-size:12px; font-weight:700; }
+.pill.yes { background:var(--green); }
+.pill.no { background:var(--red); }
+footer { padding:20px 32px 34px; color:var(--muted); font-size:13px; }
+@media (max-width:760px) { header, .stats { padding-left:16px; padding-right:16px; } .panel { margin-left:16px; margin-right:16px; } }
+</style>
+</head>
+<body>
+<header><h1>MiniGPT dataset card</h1><p></p></header>
+<section class="stats"><div class="card"><div class="label">Dataset</div><div class="value">v447-boundary-plan-dataset</div></div><div class="card"><div class="label">Readiness</div><div class="value">ready</div></div><div class="card"><div class="label">Quality</div><div class="value">pass</div></div><div class="card"><div class="label">Sources</div><div class="value">missing</div></div><div class="card"><div class="label">Included</div><div class="value">2</div></div><div class="card"><div class="label">Skipped</div><div class="value">0</div></div><div class="card"><div class="label">Characters</div><div class="value">447</div></div><div class="card"><div class="label">Fingerprint</div><div class="value">v447boundary</div></div><div class="card"><div class="label">Warnings</div><div class="value">missing</div></div><div class="card"><div class="label">Generated</div><div class="value">2026-07-07T05:04:53Z</div></div></section>
+<section class="panel"><h2>Intended Use</h2><ul><li>Train and inspect tiny MiniGPT language-model experiments.</li><li>Compare dataset versions, fingerprints, and quality warnings across runs.</li><li>Support learning-oriented reproducibility reviews, not production data governance.</li></ul></section>
+<section class="panel"><h2>Limitations</h2><ul><li>Small local corpora may not represent broad language ability.</li><li>Quality checks are lightweight heuristics and do not prove factual accuracy, consent, or safety.</li><li>Source files and licenses must still be reviewed by the project owner before external sharing.</li></ul></section>
+<section class="panel"><h2>Provenance</h2><table><tr><th>output_name</th><td></td></tr><tr><th>output_text</th><td></td></tr><tr><th>recursive</th><td></td></tr><tr><th>source_roots</th><td>[]</td></tr><tr><th>sources</th><td>[]</td></tr></table></section>
+<section class="panel"><h2>Snapshot</h2><table><tr><th>dedupe_policy</th><td>none</td></tr><tr><th>included_source_count</th><td></td></tr><tr><th>skipped_source_count</th><td></td></tr><tr><th>skipped_sources</th><td>[]</td></tr><tr><th>source_order_digest</th><td>order-v447-boundary-plan</td></tr></table></section>
+<section class="panel"><h2>Quality Issues</h2><table><thead><tr><th>Severity</th><th>Code</th><th>Message</th><th>Path</th></tr></thead><tbody><tr><td colspan="4" class="muted">No quality issues recorded.</td></tr></tbody></table></section>
+<section class="panel"><h2>Artifacts</h2><table><thead><tr><th>Key</th><th>Exists</th><th>Path</th><th>Description</th></tr></thead><tbody><tr><td>dataset_version</td><td><span class="pill yes">yes</span></td><td>d\447\解释\registry-fixture\boundary-plan\dataset_version.json</td><td>dataset version manifest</td></tr><tr><td>dataset_version_html</td><td><span class="pill no">no</span></td><td>d\447\解释\registry-fixture\boundary-plan\dataset_version.html</td><td>browser dataset version report</td></tr><tr><td>dataset_report</td><td><span class="pill no">no</span></td><td>d\447\解释\registry-fixture\boundary-plan\dataset_report.json</td><td>prepared dataset source report</td></tr><tr><td>dataset_report_svg</td><td><span class="pill no">no</span></td><td>d\447\解释\registry-fixture\boundary-plan\dataset_report.svg</td><td>dataset source SVG summary</td></tr><tr><td>dataset_quality</td><td><span class="pill yes">yes</span></td><td>d\447\解释\registry-fixture\boundary-plan\dataset_quality.json</td><td>dataset quality report</td></tr><tr><td>dataset_quality_svg</td><td><span class="pill no">no</span></td><td>d\447\解释\registry-fixture\boundary-plan\dataset_quality.svg</td><td>dataset quality SVG summary</td></tr><tr><td>corpus</td><td><span class="pill no">no</span></td><td>d\447\解释\registry-fixture\boundary-plan\corpus.txt</td><td>prepared training text</td></tr><tr><td>dataset_card_json</td><td><span class="pill yes">yes</span></td><td>f\1265\解释\schema-samples\dataset-card\dataset_card.json</td><td>machine-readable dataset card</td></tr><tr><td>dataset_card_md</td><td><span class="pill yes">yes</span></td><td>f\1265\解释\schema-samples\dataset-card\dataset_card.md</td><td>markdown dataset card</td></tr><tr><td>dataset_card_html</td><td><span class="pill yes">yes</span></td><td>f\1265\解释\schema-samples\dataset-card\dataset_card.html</td><td>browser dataset card</td></tr></tbody></table></section>
+<section class="panel"><h2>Recommendations</h2><ul><li>Use this dataset card as the human-readable companion to dataset_version.json.</li><li>For larger corpus snapshots, consider --dedupe-exact-sources so exact duplicate source files are skipped with evidence.</li><li>Keep the prepared corpus path in outputs so training scripts can trace the data source.</li><li>Resolve missing or invalid dataset evidence files listed in warnings.</li></ul></section>
+<section class="panel"><h2>Warnings</h2><ul><li>missing: d\447\解释\registry-fixture\boundary-plan\dataset_report.json</li></ul></section>
+<footer>Generated by MiniGPT dataset card exporter.</footer>
+</body>
+</html>

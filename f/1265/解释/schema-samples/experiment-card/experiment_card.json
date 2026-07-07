@@ -1,0 +1,171 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT experiment card",
+  "generated_at": "2026-07-07T05:04:20Z",
+  "run_dir": "d\\447\\解释\\registry-fixture\\boundary-plan",
+  "summary": {
+    "run_name": "boundary-plan",
+    "status": "ready",
+    "checkpoint_exists": true,
+    "tokenizer": "char",
+    "max_iters": 2,
+    "best_val_loss": 1.0,
+    "best_val_loss_rank": null,
+    "best_val_loss_delta": null,
+    "is_best_val_loss": false,
+    "last_val_loss": 1.1,
+    "eval_loss": null,
+    "perplexity": null,
+    "dataset_quality": "pass",
+    "dataset_fingerprint": "v447boundary",
+    "eval_suite_cases": 3,
+    "git_commit": "v447demo",
+    "git_dirty": false,
+    "total_parameters": 1234,
+    "note": null,
+    "tags": []
+  },
+  "notes": {
+    "note": null,
+    "tags": []
+  },
+  "data": {
+    "source_kind": "fixture",
+    "source_count": null,
+    "char_count": null,
+    "line_count": null,
+    "unique_char_count": null,
+    "token_count": null,
+    "train_token_count": null,
+    "val_token_count": null,
+    "status": "pass",
+    "short_fingerprint": "v447boundary",
+    "warning_count": null,
+    "issue_count": null
+  },
+  "training": {
+    "tokenizer": "char",
+    "max_iters": 2,
+    "batch_size": null,
+    "block_size": null,
+    "learning_rate": null,
+    "device_used": null,
+    "start_step": null,
+    "end_step": null,
+    "best_val_loss": 1.0,
+    "last_val_loss": 1.1
+  },
+  "evaluation": {
+    "eval_loss": null,
+    "perplexity": null,
+    "eval_suite_cases": 3,
+    "avg_unique_chars": 8.5,
+    "best_val_loss_rank": null,
+    "best_val_loss_delta": null,
+    "is_best_val_loss": false
+  },
+  "registry": {
+    "registry_path": "d\\447\\解释\\registry-fixture\\boundary-plan\\registry.json",
+    "run_count": null,
+    "quality_counts": null,
+    "tag_counts": null,
+    "matched_run": false
+  },
+  "artifacts": [
+    {
+      "key": "checkpoint",
+      "path": "checkpoint.pt",
+      "description": "model checkpoint",
+      "exists": true,
+      "size_bytes": 29
+    },
+    {
+      "key": "tokenizer",
+      "path": "tokenizer.json",
+      "description": "tokenizer metadata",
+      "exists": false,
+      "size_bytes": null
+    },
+    {
+      "key": "train_config",
+      "path": "train_config.json",
+      "description": "training configuration",
+      "exists": true,
+      "size_bytes": 46
+    },
+    {
+      "key": "history_summary",
+      "path": "history_summary.json",
+      "description": "training loss summary",
+      "exists": true,
+      "size_bytes": 53
+    },
+    {
+      "key": "dataset_report",
+      "path": "dataset_report.json",
+      "description": "dataset source report",
+      "exists": false,
+      "size_bytes": null
+    },
+    {
+      "key": "dataset_quality",
+      "path": "dataset_quality.json",
+      "description": "dataset quality report",
+      "exists": true,
+      "size_bytes": 64
+    },
+    {
+      "key": "eval_suite",
+      "path": "eval_suite/eval_suite.json",
+      "description": "fixed prompt evaluation suite",
+      "exists": true,
+      "size_bytes": 69
+    },
+    {
+      "key": "run_manifest",
+      "path": "run_manifest.json",
+      "description": "reproducibility manifest",
+      "exists": true,
+      "size_bytes": 789
+    },
+    {
+      "key": "dashboard",
+      "path": "dashboard.html",
+      "description": "static dashboard",
+      "exists": true,
+      "size_bytes": 52
+    },
+    {
+      "key": "playground",
+      "path": "playground.html",
+      "description": "static playground",
+      "exists": false,
+      "size_bytes": null
+    },
+    {
+      "key": "experiment_card_json",
+      "path": "experiment_card.json",
+      "description": "machine-readable experiment card",
+      "exists": true,
+      "size_bytes": null
+    },
+    {
+      "key": "experiment_card_md",
+      "path": "experiment_card.md",
+      "description": "markdown experiment card",
+      "exists": true,
+      "size_bytes": null
+    },
+    {
+      "key": "experiment_card_html",
+      "path": "experiment_card.html",
+      "description": "browser experiment card",
+      "exists": true,
+      "size_bytes": null
+    }
+  ],
+  "recommendations": [
+    "This run has the core metadata needed for a first-pass experiment review."
+  ],
+  "warnings": []
+}

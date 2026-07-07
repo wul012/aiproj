@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT artifact schema guard registry",
+  "policy_version": "v1265",
+  "scope": "cards_and_publication_receipts",
+  "schemas": [
+    {
+      "schema_id": "experiment_card_v1",
+      "artifact_kind": "experiment_card",
+      "artifact_paths": [
+        "f/1265/解释/schema-samples/experiment-card/experiment_card.json"
+      ],
+      "required_fields": [
+        "schema_version",
+        "title",
+        "generated_at",
+        "run_dir",
+        "summary",
+        "notes",
+        "data",
+        "training",
+        "evaluation",
+        "registry",
+        "artifacts",
+        "recommendations",
+        "warnings"
+      ],
+      "expected_values": {
+        "schema_version": 1
+      },
+      "type_checks": {
+        "summary": "dict",
+        "artifacts": "list",
+        "recommendations": "list",
+        "warnings": "list"
+      }
+    },
+    {
+      "schema_id": "dataset_card_v1",
+      "artifact_kind": "dataset_card",
+      "artifact_paths": [
+        "f/1265/解释/schema-samples/dataset-card/dataset_card.json"
+      ],
+      "required_fields": [
+        "schema_version",
+        "title",
+        "generated_at",
+        "dataset_dir",
+        "dataset",
+        "summary",
+        "intended_use",
+        "limitations",
+        "provenance",
+        "snapshot",
+        "quality",
+        "artifacts",
+        "recommendations",
+        "warnings"
+      ],
+      "expected_values": {
+        "schema_version": 1
+      },
+      "type_checks": {
+        "dataset": "dict",
+        "summary": "dict",
+        "intended_use": "list",
+        "limitations": "list",
+        "artifacts": "list",
+        "recommendations": "list",
+        "warnings": "list"
+      }
+    },
+    {
+      "schema_id": "model_card_v1",
+      "artifact_kind": "model_card",
+      "artifact_paths": [
+        "f/1265/解释/schema-samples/model-card/model_card.json"
+      ],
+      "required_fields": [
+        "schema_version",
+        "title",
+        "generated_at",
+        "registry_path",
+        "summary",
+        "intended_use",
+        "limitations",
+        "coverage",
+        "runs",
+        "recommendations",
+        "warnings"
+      ],
+      "expected_values": {
+        "schema_version": 1
+      },
+      "type_checks": {
+        "summary": "dict",
+        "intended_use": "list",
+        "limitations": "list",
+        "coverage": "dict",
+        "runs": "list",
+        "recommendations": "list",
+        "warnings": "list"
+      }
+    },
+    {
+      "schema_id": "publication_receipt_v1",
+      "artifact_kind": "publication_receipt",
+      "artifact_paths": [
+        "e/999/解释/publication-receipt-index-receipt-index-publication-index-receipt-index-receipt-v999/randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_v999.json"
+      ],
+      "required_fields": [
+        "schema_version",
+        "title",
+        "generated_at",
+        "status",
+        "decision",
+        "receipt",
+        "summary",
+        "interpretation",
+        "check_rows"
+      ],
+      "expected_values": {
+        "schema_version": 1,
+        "status": "pass",
+        "summary.granted_use": "downstream_governance_lookup_only",
+        "summary.promotion_ready": false,
+        "summary.approved_for_promotion": false,
+        "receipt.granted_use": "downstream_governance_lookup_only",
+        "receipt.promotion_ready": false,
+        "receipt.approved_for_promotion": false
+      },
+      "type_checks": {
+        "receipt": "dict",
+        "summary": "dict",
+        "interpretation": "dict",
+        "check_rows": "list"
+      }
+    }
+  ]
+}

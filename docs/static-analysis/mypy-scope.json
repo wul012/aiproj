@@ -1,13 +1,15 @@
 {
   "schema_version": 1,
   "tool": "mypy",
-  "scope_floor": 10,
+  "scope_floor": 12,
   "targets": [
     "scripts/_bootstrap.py",
     "scripts/_engineering_health.py",
     "scripts/check_static_analysis.py",
     "scripts/check_type_analysis.py",
     "scripts/check_model_capability_honest_measurement.py",
+    "scripts/check_artifact_schema_guard.py",
+    "src/minigpt/artifact_schema_guard.py",
     "src/minigpt/ci_workflow_hygiene.py",
     "src/minigpt/ci_workflow_hygiene_artifacts.py",
     "src/minigpt/ci_workflow_hygiene_policy.py",
@@ -30,7 +32,11 @@
     "analysis_gates": [
       "scripts/check_static_analysis.py",
       "scripts/check_type_analysis.py",
-      "scripts/check_model_capability_honest_measurement.py"
+      "scripts/check_model_capability_honest_measurement.py",
+      "scripts/check_artifact_schema_guard.py"
+    ],
+    "artifact_schema_gate": [
+      "src/minigpt/artifact_schema_guard.py"
     ],
     "honest_measurement_gate": [
       "src/minigpt/model_capability_honest_measurement.py"

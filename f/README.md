@@ -2,6 +2,10 @@
 
 本目录从 v1098 开始保存模型治理阶段的运行截图和解释，和历史目录 `a/`、`b/`、`c/`、`d/`、`e/` 同级。
 
+## v1265
+
+v1265 继续 production-excellence A3，新增 artifact schema guard。它用 registry 验证当前 experiment card、dataset card、model card 和 publication receipt 的必需字段、期望值、简单类型与 no-promotion 字段。运行证据见 `f/1265/解释/artifact-schema-guard/`，可视化核验见 `f/1265/图片/artifact-schema-guard-v1265.png`。
+
 ## v1264
 
 v1264 启动 production-excellence A3 的 honest-measurement gate。新增 registry 与检查器，验证代表性模型能力治理族是否 cached-artifact-only、no-promotion、seed-policy bounded，并确认源 artifact 与正/负向 contract-test marker 仍存在。运行证据见 `f/1264/解释/model-capability-honest-measurement/`，可视化核验见 `f/1264/图片/honest-measurement-v1264.png`。

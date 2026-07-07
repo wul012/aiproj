@@ -1,0 +1,141 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT dataset card",
+  "generated_at": "2026-07-07T05:04:53Z",
+  "dataset_dir": "d\\447\\解释\\registry-fixture\\boundary-plan",
+  "dataset": {
+    "name": "boundary-plan",
+    "version": "unversioned",
+    "id": "v447-boundary-plan-dataset",
+    "description": ""
+  },
+  "summary": {
+    "dataset_id": "v447-boundary-plan-dataset",
+    "readiness_status": "ready",
+    "quality_status": "pass",
+    "source_count": null,
+    "included_source_count": 2,
+    "skipped_source_count": 0,
+    "char_count": 447,
+    "line_count": null,
+    "unique_char_count": null,
+    "unique_char_ratio": null,
+    "token_count_char_estimate": null,
+    "fingerprint": null,
+    "short_fingerprint": "v447boundary",
+    "warning_count": null,
+    "issue_count": null,
+    "duplicate_line_count": null,
+    "output_text": null,
+    "output_text_exists": false,
+    "version_manifest_exists": true,
+    "report_exists": false,
+    "quality_report_exists": true,
+    "version_html_exists": false
+  },
+  "intended_use": [
+    "Train and inspect tiny MiniGPT language-model experiments.",
+    "Compare dataset versions, fingerprints, and quality warnings across runs.",
+    "Support learning-oriented reproducibility reviews, not production data governance."
+  ],
+  "limitations": [
+    "Small local corpora may not represent broad language ability.",
+    "Quality checks are lightweight heuristics and do not prove factual accuracy, consent, or safety.",
+    "Source files and licenses must still be reviewed by the project owner before external sharing."
+  ],
+  "provenance": {
+    "source_roots": [],
+    "recursive": null,
+    "output_name": null,
+    "output_text": null,
+    "sources": []
+  },
+  "snapshot": {
+    "dedupe_policy": "none",
+    "source_order_digest": "order-v447-boundary-plan",
+    "included_source_count": null,
+    "skipped_source_count": null,
+    "skipped_sources": []
+  },
+  "quality": {
+    "status": "pass",
+    "warning_count": null,
+    "issue_count": null,
+    "duplicate_line_count": null,
+    "unique_char_ratio": null,
+    "issue_codes": [],
+    "severity_counts": {},
+    "issues": []
+  },
+  "artifacts": [
+    {
+      "key": "dataset_version",
+      "path": "d\\447\\解释\\registry-fixture\\boundary-plan\\dataset_version.json",
+      "exists": true,
+      "description": "dataset version manifest"
+    },
+    {
+      "key": "dataset_version_html",
+      "path": "d\\447\\解释\\registry-fixture\\boundary-plan\\dataset_version.html",
+      "exists": false,
+      "description": "browser dataset version report"
+    },
+    {
+      "key": "dataset_report",
+      "path": "d\\447\\解释\\registry-fixture\\boundary-plan\\dataset_report.json",
+      "exists": false,
+      "description": "prepared dataset source report"
+    },
+    {
+      "key": "dataset_report_svg",
+      "path": "d\\447\\解释\\registry-fixture\\boundary-plan\\dataset_report.svg",
+      "exists": false,
+      "description": "dataset source SVG summary"
+    },
+    {
+      "key": "dataset_quality",
+      "path": "d\\447\\解释\\registry-fixture\\boundary-plan\\dataset_quality.json",
+      "exists": true,
+      "description": "dataset quality report"
+    },
+    {
+      "key": "dataset_quality_svg",
+      "path": "d\\447\\解释\\registry-fixture\\boundary-plan\\dataset_quality.svg",
+      "exists": false,
+      "description": "dataset quality SVG summary"
+    },
+    {
+      "key": "corpus",
+      "path": "d\\447\\解释\\registry-fixture\\boundary-plan\\corpus.txt",
+      "exists": false,
+      "description": "prepared training text"
+    },
+    {
+      "key": "dataset_card_json",
+      "path": "f\\1265\\解释\\schema-samples\\dataset-card\\dataset_card.json",
+      "exists": true,
+      "description": "machine-readable dataset card"
+    },
+    {
+      "key": "dataset_card_md",
+      "path": "f\\1265\\解释\\schema-samples\\dataset-card\\dataset_card.md",
+      "exists": true,
+      "description": "markdown dataset card"
+    },
+    {
+      "key": "dataset_card_html",
+      "path": "f\\1265\\解释\\schema-samples\\dataset-card\\dataset_card.html",
+      "exists": true,
+      "description": "browser dataset card"
+    }
+  ],
+  "recommendations": [
+    "Use this dataset card as the human-readable companion to dataset_version.json.",
+    "For larger corpus snapshots, consider --dedupe-exact-sources so exact duplicate source files are skipped with evidence.",
+    "Keep the prepared corpus path in outputs so training scripts can trace the data source.",
+    "Resolve missing or invalid dataset evidence files listed in warnings."
+  ],
+  "warnings": [
+    "missing: d\\447\\解释\\registry-fixture\\boundary-plan\\dataset_report.json"
+  ]
+}

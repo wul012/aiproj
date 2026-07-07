@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT model card</title>
+<style>
+:root { --ink:#111827; --muted:#4b5563; --line:#d8dee9; --page:#f7f7f2; --panel:#fff; --blue:#2563eb; }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--page); color:var(--ink); font-family:Arial, "Microsoft YaHei", sans-serif; line-height:1.45; }
+header { padding:28px 32px 18px; background:#fff; border-bottom:1px solid var(--line); }
+h1 { margin:0 0 8px; font-size:28px; letter-spacing:0; }
+h2 { margin:0 0 12px; font-size:18px; }
+span, .muted { color:var(--muted); }
+.stats { display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); gap:12px; padding:18px 32px 4px; }
+.card, .panel { background:var(--panel); border:1px solid var(--line); border-radius:8px; }
+.card { padding:14px; min-height:82px; }
+.label { color:var(--muted); font-size:12px; text-transform:uppercase; }
+.value { margin-top:6px; font-size:20px; font-weight:700; overflow-wrap:anywhere; }
+.panel { margin:18px 32px; padding:16px; overflow-x:auto; }
+table { width:100%; border-collapse:collapse; min-width:920px; }
+th, td { padding:8px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top; }
+th { color:var(--muted); font-size:12px; text-transform:uppercase; }
+a { color:var(--blue); font-weight:700; text-decoration:none; }
+.tag { display:inline-block; margin:0 4px 4px 0; padding:2px 6px; border-radius:999px; background:#e0f2fe; color:#075985; font-size:12px; font-weight:700; }
+footer { padding:20px 32px 34px; color:var(--muted); font-size:13px; }
+@media (max-width:760px) { header, .stats { padding-left:16px; padding-right:16px; } .panel { margin-left:16px; margin-right:16px; } }
+</style>
+</head>
+<body>
+<header><h1>MiniGPT model card</h1><p>d\447\解释\portfolio-fixture\baseline\registry\registry.json</p></header>
+<section class="stats"><div class="card"><div class="label">Runs</div><div class="value">0</div></div><div class="card"><div class="label">Best run</div><div class="value">missing</div></div><div class="card"><div class="label">Best val</div><div class="value">missing</div></div><div class="card"><div class="label">Ready</div><div class="value">0</div></div><div class="card"><div class="label">Review</div><div class="value">0</div></div><div class="card"><div class="label">Cards</div><div class="value">1</div></div><div class="card"><div class="label">Datasets</div><div class="value">0</div></div><div class="card"><div class="label">Snapshots</div><div class="value">0</div></div><div class="card"><div class="label">Skipped sources</div><div class="value">0</div></div><div class="card"><div class="label">Eval suite</div><div class="value">0</div></div><div class="card"><div class="label">Gen quality</div><div class="value">0</div></div><div class="card"><div class="label">Quality</div><div class="value">0</div></div></section>
+<section class="panel"><h2>Intended Use</h2><ul><li>Educational MiniGPT-from-scratch experiments.</li><li>Local comparison of tiny language-model runs, data quality, evaluation, and artifacts.</li><li>Portfolio or review summary for a learning project.</li></ul></section>
+<section class="panel"><h2>Limitations</h2><ul><li>This is a small educational model, not a production assistant.</li><li>Best validation loss is useful for comparison but does not guarantee generation quality.</li><li>Fixed prompt evaluation is lightweight and should be expanded for serious model assessment.</li><li>Training data coverage and safety review are intentionally minimal in this project.</li></ul></section>
+<section class="panel"><h2>Top Runs</h2><table><thead><tr><th>Rank</th><th>Run</th><th>Status</th><th>Best Val</th><th>Data Snapshot</th><th>Quality</th><th>Eval</th><th>Gen Quality</th><th>Notes</th><th>Card</th></tr></thead><tbody></tbody></table></section>
+<section class="panel"><h2>Coverage</h2><table><tr><th>run_count</th><td>0</td></tr><tr><th>experiment_cards_found</th><td>1</td></tr><tr><th>experiment_card_coverage</th><td>0</td></tr><tr><th>quality_checked_runs</th><td>0</td></tr><tr><th>eval_suite_runs</th><td>0</td></tr><tr><th>generation_quality_runs</th><td>0</td></tr><tr><th>generation_quality_pass_runs</th><td>0</td></tr><tr><th>checkpoint_runs</th><td>0</td></tr><tr><th>dashboard_runs</th><td>0</td></tr><tr><th>dataset_fingerprint_count</th><td>0</td></tr><tr><th>dataset_version_count</th><td>0</td></tr><tr><th>dataset_snapshot_runs</th><td>0</td></tr><tr><th>dataset_snapshot_coverage</th><td>0</td></tr><tr><th>dataset_skipped_source_runs</th><td>0</td></tr></table></section>
+<section class="panel"><h2>Quality Counts</h2><table></table></section>
+<section class="panel"><h2>Generation Quality Counts</h2><table></table></section>
+<section class="panel"><h2>Dataset Dedupe Policies</h2><table></table></section>
+<section class="panel"><h2>Dataset Snapshot Summary</h2><table></table></section>
+<section class="panel"><h2>Tag Counts</h2><table></table></section>
+<section class="panel"><h2>Recommendations</h2><ul><li>Promote at least one run to ready status by adding checkpoint, dataset quality, and eval suite artifacts.</li></ul></section>
+<section class="panel"><h2>All Runs</h2><table><thead><tr><th>Rank</th><th>Run</th><th>Status</th><th>Best Val</th><th>Data Snapshot</th><th>Quality</th><th>Eval</th><th>Gen Quality</th><th>Notes</th><th>Card</th></tr></thead><tbody></tbody></table></section>
+
+<footer>Generated by MiniGPT model card exporter.</footer>
+</body>
+</html>

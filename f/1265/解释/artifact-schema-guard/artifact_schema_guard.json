@@ -1,0 +1,1156 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT artifact schema guard",
+  "generated_at": "2026-07-07T05:09:08Z",
+  "status": "pass",
+  "decision": "continue_with_artifact_schema_guard",
+  "registry_path": "docs/artifact-schema-guard-registry.json",
+  "summary": {
+    "status": "pass",
+    "decision": "continue_with_artifact_schema_guard",
+    "schema_count": 4,
+    "artifact_count": 4,
+    "check_count": 125,
+    "passed_check_count": 125,
+    "failed_check_count": 0
+  },
+  "schemas": [
+    {
+      "schema_id": "experiment_card_v1",
+      "artifact_kind": "experiment_card",
+      "artifact_paths": [
+        "f/1265/解释/schema-samples/experiment-card/experiment_card.json"
+      ],
+      "required_fields": [
+        "schema_version",
+        "title",
+        "generated_at",
+        "run_dir",
+        "summary",
+        "notes",
+        "data",
+        "training",
+        "evaluation",
+        "registry",
+        "artifacts",
+        "recommendations",
+        "warnings"
+      ],
+      "expected_values": {
+        "schema_version": 1
+      },
+      "type_checks": {
+        "summary": "dict",
+        "artifacts": "list",
+        "recommendations": "list",
+        "warnings": "list"
+      }
+    },
+    {
+      "schema_id": "dataset_card_v1",
+      "artifact_kind": "dataset_card",
+      "artifact_paths": [
+        "f/1265/解释/schema-samples/dataset-card/dataset_card.json"
+      ],
+      "required_fields": [
+        "schema_version",
+        "title",
+        "generated_at",
+        "dataset_dir",
+        "dataset",
+        "summary",
+        "intended_use",
+        "limitations",
+        "provenance",
+        "snapshot",
+        "quality",
+        "artifacts",
+        "recommendations",
+        "warnings"
+      ],
+      "expected_values": {
+        "schema_version": 1
+      },
+      "type_checks": {
+        "dataset": "dict",
+        "summary": "dict",
+        "intended_use": "list",
+        "limitations": "list",
+        "artifacts": "list",
+        "recommendations": "list",
+        "warnings": "list"
+      }
+    },
+    {
+      "schema_id": "model_card_v1",
+      "artifact_kind": "model_card",
+      "artifact_paths": [
+        "f/1265/解释/schema-samples/model-card/model_card.json"
+      ],
+      "required_fields": [
+        "schema_version",
+        "title",
+        "generated_at",
+        "registry_path",
+        "summary",
+        "intended_use",
+        "limitations",
+        "coverage",
+        "runs",
+        "recommendations",
+        "warnings"
+      ],
+      "expected_values": {
+        "schema_version": 1
+      },
+      "type_checks": {
+        "summary": "dict",
+        "intended_use": "list",
+        "limitations": "list",
+        "coverage": "dict",
+        "runs": "list",
+        "recommendations": "list",
+        "warnings": "list"
+      }
+    },
+    {
+      "schema_id": "publication_receipt_v1",
+      "artifact_kind": "publication_receipt",
+      "artifact_paths": [
+        "e/999/解释/publication-receipt-index-receipt-index-publication-index-receipt-index-receipt-v999/randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_v999.json"
+      ],
+      "required_fields": [
+        "schema_version",
+        "title",
+        "generated_at",
+        "status",
+        "decision",
+        "receipt",
+        "summary",
+        "interpretation",
+        "check_rows"
+      ],
+      "expected_values": {
+        "schema_version": 1,
+        "status": "pass",
+        "summary.granted_use": "downstream_governance_lookup_only",
+        "summary.promotion_ready": false,
+        "summary.approved_for_promotion": false,
+        "receipt.granted_use": "downstream_governance_lookup_only",
+        "receipt.promotion_ready": false,
+        "receipt.approved_for_promotion": false
+      },
+      "type_checks": {
+        "receipt": "dict",
+        "summary": "dict",
+        "interpretation": "dict",
+        "check_rows": "list"
+      }
+    }
+  ],
+  "checks": [
+    {
+      "schema_id": "registry",
+      "artifact_path": "",
+      "check_id": "schema_version",
+      "expected": 1,
+      "actual": 1,
+      "status": "pass"
+    },
+    {
+      "schema_id": "registry",
+      "artifact_path": "",
+      "check_id": "scope",
+      "expected": "cards_and_publication_receipts",
+      "actual": "cards_and_publication_receipts",
+      "status": "pass"
+    },
+    {
+      "schema_id": "registry",
+      "artifact_path": "",
+      "check_id": "schemas_present",
+      "expected": "non-empty list",
+      "actual": 4,
+      "status": "pass"
+    },
+    {
+      "schema_id": "experiment_card_v1",
+      "artifact_path": "",
+      "check_id": "schema_id_present",
+      "expected": "non-empty unique id",
+      "actual": "experiment_card_v1",
+      "status": "pass"
+    },
+    {
+      "schema_id": "experiment_card_v1",
+      "artifact_path": "",
+      "check_id": "artifact_kind_present",
+      "expected": "non-empty",
+      "actual": "experiment_card",
+      "status": "pass"
+    },
+    {
+      "schema_id": "experiment_card_v1",
+      "artifact_path": "",
+      "check_id": "required_fields_present",
+      "expected": "non-empty list",
+      "actual": 13,
+      "status": "pass"
+    },
+    {
+      "schema_id": "experiment_card_v1",
+      "artifact_path": "",
+      "check_id": "artifact_paths_present",
+      "expected": "non-empty list",
+      "actual": 1,
+      "status": "pass"
+    },
+    {
+      "schema_id": "experiment_card_v1",
+      "artifact_path": "",
+      "check_id": "type_rule:summary",
+      "expected": "known type",
+      "actual": "dict",
+      "status": "pass"
+    },
+    {
+      "schema_id": "experiment_card_v1",
+      "artifact_path": "",
+      "check_id": "type_rule:artifacts",
+      "expected": "known type",
+      "actual": "list",
+      "status": "pass"
+    },
+    {
+      "schema_id": "experiment_card_v1",
+      "artifact_path": "",
+      "check_id": "type_rule:recommendations",
+      "expected": "known type",
+      "actual": "list",
+      "status": "pass"
+    },
+    {
+      "schema_id": "experiment_card_v1",
+      "artifact_path": "",
+      "check_id": "type_rule:warnings",
+      "expected": "known type",
+      "actual": "list",
+      "status": "pass"
+    },
+    {
+      "schema_id": "experiment_card_v1",
+      "artifact_path": "f/1265/解释/schema-samples/experiment-card/experiment_card.json",
+      "check_id": "artifact_exists",
+      "expected": "exists inside project",
+      "actual": "f/1265/解释/schema-samples/experiment-card/experiment_card.json",
+      "status": "pass"
+    },
+    {
+      "schema_id": "experiment_card_v1",
+      "artifact_path": "f/1265/解释/schema-samples/experiment-card/experiment_card.json",
+      "check_id": "field:schema_version",
+      "expected": "present",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "schema_id": "experiment_card_v1",
+      "artifact_path": "f/1265/解释/schema-samples/experiment-card/experiment_card.json",
+      "check_id": "field:title",
+      "expected": "present",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "schema_id": "experiment_card_v1",
+      "artifact_path": "f/1265/解释/schema-samples/experiment-card/experiment_card.json",
+      "check_id": "field:generated_at",
+      "expected": "present",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "schema_id": "experiment_card_v1",
+      "artifact_path": "f/1265/解释/schema-samples/experiment-card/experiment_card.json",
+      "check_id": "field:run_dir",
+      "expected": "present",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "schema_id": "experiment_card_v1",
+      "artifact_path": "f/1265/解释/schema-samples/experiment-card/experiment_card.json",
+      "check_id": "field:summary",
+      "expected": "present",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "schema_id": "experiment_card_v1",
+      "artifact_path": "f/1265/解释/schema-samples/experiment-card/experiment_card.json",
+      "check_id": "field:notes",
+      "expected": "present",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "schema_id": "experiment_card_v1",
+      "artifact_path": "f/1265/解释/schema-samples/experiment-card/experiment_card.json",
+      "check_id": "field:data",
+      "expected": "present",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "schema_id": "experiment_card_v1",
+      "artifact_path": "f/1265/解释/schema-samples/experiment-card/experiment_card.json",
+      "check_id": "field:training",
+      "expected": "present",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "schema_id": "experiment_card_v1",
+      "artifact_path": "f/1265/解释/schema-samples/experiment-card/experiment_card.json",
+      "check_id": "field:evaluation",
+      "expected": "present",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "schema_id": "experiment_card_v1",
+      "artifact_path": "f/1265/解释/schema-samples/experiment-card/experiment_card.json",
+      "check_id": "field:registry",
+      "expected": "present",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "schema_id": "experiment_card_v1",
+      "artifact_path": "f/1265/解释/schema-samples/experiment-card/experiment_card.json",
+      "check_id": "field:artifacts",
+      "expected": "present",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "schema_id": "experiment_card_v1",
+      "artifact_path": "f/1265/解释/schema-samples/experiment-card/experiment_card.json",
+      "check_id": "field:recommendations",
+      "expected": "present",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "schema_id": "experiment_card_v1",
+      "artifact_path": "f/1265/解释/schema-samples/experiment-card/experiment_card.json",
+      "check_id": "field:warnings",
+      "expected": "present",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "schema_id": "experiment_card_v1",
+      "artifact_path": "f/1265/解释/schema-samples/experiment-card/experiment_card.json",
+      "check_id": "value:schema_version",
+      "expected": 1,
+      "actual": 1,
+      "status": "pass"
+    },
+    {
+      "schema_id": "experiment_card_v1",
+      "artifact_path": "f/1265/解释/schema-samples/experiment-card/experiment_card.json",
+      "check_id": "type:summary",
+      "expected": "dict",
+      "actual": "dict",
+      "status": "pass"
+    },
+    {
+      "schema_id": "experiment_card_v1",
+      "artifact_path": "f/1265/解释/schema-samples/experiment-card/experiment_card.json",
+      "check_id": "type:artifacts",
+      "expected": "list",
+      "actual": "list",
+      "status": "pass"
+    },
+    {
+      "schema_id": "experiment_card_v1",
+      "artifact_path": "f/1265/解释/schema-samples/experiment-card/experiment_card.json",
+      "check_id": "type:recommendations",
+      "expected": "list",
+      "actual": "list",
+      "status": "pass"
+    },
+    {
+      "schema_id": "experiment_card_v1",
+      "artifact_path": "f/1265/解释/schema-samples/experiment-card/experiment_card.json",
+      "check_id": "type:warnings",
+      "expected": "list",
+      "actual": "list",
+      "status": "pass"
+    },
+    {
+      "schema_id": "dataset_card_v1",
+      "artifact_path": "",
+      "check_id": "schema_id_present",
+      "expected": "non-empty unique id",
+      "actual": "dataset_card_v1",
+      "status": "pass"
+    },
+    {
+      "schema_id": "dataset_card_v1",
+      "artifact_path": "",
+      "check_id": "artifact_kind_present",
+      "expected": "non-empty",
+      "actual": "dataset_card",
+      "status": "pass"
+    },
+    {
+      "schema_id": "dataset_card_v1",
+      "artifact_path": "",
+      "check_id": "required_fields_present",
+      "expected": "non-empty list",
+      "actual": 14,
+      "status": "pass"
+    },
+    {
+      "schema_id": "dataset_card_v1",
+      "artifact_path": "",
+      "check_id": "artifact_paths_present",
+      "expected": "non-empty list",
+      "actual": 1,
+      "status": "pass"
+    },
+    {
+      "schema_id": "dataset_card_v1",
+      "artifact_path": "",
+      "check_id": "type_rule:dataset",
+      "expected": "known type",
+      "actual": "dict",
+      "status": "pass"
+    },
+    {
+      "schema_id": "dataset_card_v1",
+      "artifact_path": "",
+      "check_id": "type_rule:summary",
+      "expected": "known type",
+      "actual": "dict",
+      "status": "pass"
+    },
+    {
+      "schema_id": "dataset_card_v1",
+      "artifact_path": "",
+      "check_id": "type_rule:intended_use",
+      "expected": "known type",
+      "actual": "list",
+      "status": "pass"
+    },
+    {
+      "schema_id": "dataset_card_v1",
+      "artifact_path": "",
+      "check_id": "type_rule:limitations",
+      "expected": "known type",
+      "actual": "list",
+      "status": "pass"
+    },
+    {
+      "schema_id": "dataset_card_v1",
+      "artifact_path": "",
+      "check_id": "type_rule:artifacts",
+      "expected": "known type",
+      "actual": "list",
+      "status": "pass"
+    },
+    {
+      "schema_id": "dataset_card_v1",
+      "artifact_path": "",
+      "check_id": "type_rule:recommendations",
+      "expected": "known type",
+      "actual": "list",
+      "status": "pass"
+    },
+    {
+      "schema_id": "dataset_card_v1",
+      "artifact_path": "",
+      "check_id": "type_rule:warnings",
+      "expected": "known type",
+      "actual": "list",
+      "status": "pass"
+    },
+    {
+      "schema_id": "dataset_card_v1",
+      "artifact_path": "f/1265/解释/schema-samples/dataset-card/dataset_card.json",
+      "check_id": "artifact_exists",
+      "expected": "exists inside project",
+      "actual": "f/1265/解释/schema-samples/dataset-card/dataset_card.json",
+      "status": "pass"
+    },
+    {
+      "schema_id": "dataset_card_v1",
+      "artifact_path": "f/1265/解释/schema-samples/dataset-card/dataset_card.json",
+      "check_id": "field:schema_version",
+      "expected": "present",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "schema_id": "dataset_card_v1",
+      "artifact_path": "f/1265/解释/schema-samples/dataset-card/dataset_card.json",
+      "check_id": "field:title",
+      "expected": "present",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "schema_id": "dataset_card_v1",
+      "artifact_path": "f/1265/解释/schema-samples/dataset-card/dataset_card.json",
+      "check_id": "field:generated_at",
+      "expected": "present",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "schema_id": "dataset_card_v1",
+      "artifact_path": "f/1265/解释/schema-samples/dataset-card/dataset_card.json",
+      "check_id": "field:dataset_dir",
+      "expected": "present",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "schema_id": "dataset_card_v1",
+      "artifact_path": "f/1265/解释/schema-samples/dataset-card/dataset_card.json",
+      "check_id": "field:dataset",
+      "expected": "present",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "schema_id": "dataset_card_v1",
+      "artifact_path": "f/1265/解释/schema-samples/dataset-card/dataset_card.json",
+      "check_id": "field:summary",
+      "expected": "present",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "schema_id": "dataset_card_v1",
+      "artifact_path": "f/1265/解释/schema-samples/dataset-card/dataset_card.json",
+      "check_id": "field:intended_use",
+      "expected": "present",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "schema_id": "dataset_card_v1",
+      "artifact_path": "f/1265/解释/schema-samples/dataset-card/dataset_card.json",
+      "check_id": "field:limitations",
+      "expected": "present",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "schema_id": "dataset_card_v1",
+      "artifact_path": "f/1265/解释/schema-samples/dataset-card/dataset_card.json",
+      "check_id": "field:provenance",
+      "expected": "present",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "schema_id": "dataset_card_v1",
+      "artifact_path": "f/1265/解释/schema-samples/dataset-card/dataset_card.json",
+      "check_id": "field:snapshot",
+      "expected": "present",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "schema_id": "dataset_card_v1",
+      "artifact_path": "f/1265/解释/schema-samples/dataset-card/dataset_card.json",
+      "check_id": "field:quality",
+      "expected": "present",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "schema_id": "dataset_card_v1",
+      "artifact_path": "f/1265/解释/schema-samples/dataset-card/dataset_card.json",
+      "check_id": "field:artifacts",
+      "expected": "present",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "schema_id": "dataset_card_v1",
+      "artifact_path": "f/1265/解释/schema-samples/dataset-card/dataset_card.json",
+      "check_id": "field:recommendations",
+      "expected": "present",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "schema_id": "dataset_card_v1",
+      "artifact_path": "f/1265/解释/schema-samples/dataset-card/dataset_card.json",
+      "check_id": "field:warnings",
+      "expected": "present",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "schema_id": "dataset_card_v1",
+      "artifact_path": "f/1265/解释/schema-samples/dataset-card/dataset_card.json",
+      "check_id": "value:schema_version",
+      "expected": 1,
+      "actual": 1,
+      "status": "pass"
+    },
+    {
+      "schema_id": "dataset_card_v1",
+      "artifact_path": "f/1265/解释/schema-samples/dataset-card/dataset_card.json",
+      "check_id": "type:dataset",
+      "expected": "dict",
+      "actual": "dict",
+      "status": "pass"
+    },
+    {
+      "schema_id": "dataset_card_v1",
+      "artifact_path": "f/1265/解释/schema-samples/dataset-card/dataset_card.json",
+      "check_id": "type:summary",
+      "expected": "dict",
+      "actual": "dict",
+      "status": "pass"
+    },
+    {
+      "schema_id": "dataset_card_v1",
+      "artifact_path": "f/1265/解释/schema-samples/dataset-card/dataset_card.json",
+      "check_id": "type:intended_use",
+      "expected": "list",
+      "actual": "list",
+      "status": "pass"
+    },
+    {
+      "schema_id": "dataset_card_v1",
+      "artifact_path": "f/1265/解释/schema-samples/dataset-card/dataset_card.json",
+      "check_id": "type:limitations",
+      "expected": "list",
+      "actual": "list",
+      "status": "pass"
+    },
+    {
+      "schema_id": "dataset_card_v1",
+      "artifact_path": "f/1265/解释/schema-samples/dataset-card/dataset_card.json",
+      "check_id": "type:artifacts",
+      "expected": "list",
+      "actual": "list",
+      "status": "pass"
+    },
+    {
+      "schema_id": "dataset_card_v1",
+      "artifact_path": "f/1265/解释/schema-samples/dataset-card/dataset_card.json",
+      "check_id": "type:recommendations",
+      "expected": "list",
+      "actual": "list",
+      "status": "pass"
+    },
+    {
+      "schema_id": "dataset_card_v1",
+      "artifact_path": "f/1265/解释/schema-samples/dataset-card/dataset_card.json",
+      "check_id": "type:warnings",
+      "expected": "list",
+      "actual": "list",
+      "status": "pass"
+    },
+    {
+      "schema_id": "model_card_v1",
+      "artifact_path": "",
+      "check_id": "schema_id_present",
+      "expected": "non-empty unique id",
+      "actual": "model_card_v1",
+      "status": "pass"
+    },
+    {
+      "schema_id": "model_card_v1",
+      "artifact_path": "",
+      "check_id": "artifact_kind_present",
+      "expected": "non-empty",
+      "actual": "model_card",
+      "status": "pass"
+    },
+    {
+      "schema_id": "model_card_v1",
+      "artifact_path": "",
+      "check_id": "required_fields_present",
+      "expected": "non-empty list",
+      "actual": 11,
+      "status": "pass"
+    },
+    {
+      "schema_id": "model_card_v1",
+      "artifact_path": "",
+      "check_id": "artifact_paths_present",
+      "expected": "non-empty list",
+      "actual": 1,
+      "status": "pass"
+    },
+    {
+      "schema_id": "model_card_v1",
+      "artifact_path": "",
+      "check_id": "type_rule:summary",
+      "expected": "known type",
+      "actual": "dict",
+      "status": "pass"
+    },
+    {
+      "schema_id": "model_card_v1",
+      "artifact_path": "",
+      "check_id": "type_rule:intended_use",
+      "expected": "known type",
+      "actual": "list",
+      "status": "pass"
+    },
+    {
+      "schema_id": "model_card_v1",
+      "artifact_path": "",
+      "check_id": "type_rule:limitations",
+      "expected": "known type",
+      "actual": "list",
+      "status": "pass"
+    },
+    {
+      "schema_id": "model_card_v1",
+      "artifact_path": "",
+      "check_id": "type_rule:coverage",
+      "expected": "known type",
+      "actual": "dict",
+      "status": "pass"
+    },
+    {
+      "schema_id": "model_card_v1",
+      "artifact_path": "",
+      "check_id": "type_rule:runs",
+      "expected": "known type",
+      "actual": "list",
+      "status": "pass"
+    },
+    {
+      "schema_id": "model_card_v1",
+      "artifact_path": "",
+      "check_id": "type_rule:recommendations",
+      "expected": "known type",
+      "actual": "list",
+      "status": "pass"
+    },
+    {
+      "schema_id": "model_card_v1",
+      "artifact_path": "",
+      "check_id": "type_rule:warnings",
+      "expected": "known type",
+      "actual": "list",
+      "status": "pass"
+    },
+    {
+      "schema_id": "model_card_v1",
+      "artifact_path": "f/1265/解释/schema-samples/model-card/model_card.json",
+      "check_id": "artifact_exists",
+      "expected": "exists inside project",
+      "actual": "f/1265/解释/schema-samples/model-card/model_card.json",
+      "status": "pass"
+    },
+    {
+      "schema_id": "model_card_v1",
+      "artifact_path": "f/1265/解释/schema-samples/model-card/model_card.json",
+      "check_id": "field:schema_version",
+      "expected": "present",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "schema_id": "model_card_v1",
+      "artifact_path": "f/1265/解释/schema-samples/model-card/model_card.json",
+      "check_id": "field:title",
+      "expected": "present",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "schema_id": "model_card_v1",
+      "artifact_path": "f/1265/解释/schema-samples/model-card/model_card.json",
+      "check_id": "field:generated_at",
+      "expected": "present",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "schema_id": "model_card_v1",
+      "artifact_path": "f/1265/解释/schema-samples/model-card/model_card.json",
+      "check_id": "field:registry_path",
+      "expected": "present",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "schema_id": "model_card_v1",
+      "artifact_path": "f/1265/解释/schema-samples/model-card/model_card.json",
+      "check_id": "field:summary",
+      "expected": "present",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "schema_id": "model_card_v1",
+      "artifact_path": "f/1265/解释/schema-samples/model-card/model_card.json",
+      "check_id": "field:intended_use",
+      "expected": "present",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "schema_id": "model_card_v1",
+      "artifact_path": "f/1265/解释/schema-samples/model-card/model_card.json",
+      "check_id": "field:limitations",
+      "expected": "present",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "schema_id": "model_card_v1",
+      "artifact_path": "f/1265/解释/schema-samples/model-card/model_card.json",
+      "check_id": "field:coverage",
+      "expected": "present",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "schema_id": "model_card_v1",
+      "artifact_path": "f/1265/解释/schema-samples/model-card/model_card.json",
+      "check_id": "field:runs",
+      "expected": "present",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "schema_id": "model_card_v1",
+      "artifact_path": "f/1265/解释/schema-samples/model-card/model_card.json",
+      "check_id": "field:recommendations",
+      "expected": "present",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "schema_id": "model_card_v1",
+      "artifact_path": "f/1265/解释/schema-samples/model-card/model_card.json",
+      "check_id": "field:warnings",
+      "expected": "present",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "schema_id": "model_card_v1",
+      "artifact_path": "f/1265/解释/schema-samples/model-card/model_card.json",
+      "check_id": "value:schema_version",
+      "expected": 1,
+      "actual": 1,
+      "status": "pass"
+    },
+    {
+      "schema_id": "model_card_v1",
+      "artifact_path": "f/1265/解释/schema-samples/model-card/model_card.json",
+      "check_id": "type:summary",
+      "expected": "dict",
+      "actual": "dict",
+      "status": "pass"
+    },
+    {
+      "schema_id": "model_card_v1",
+      "artifact_path": "f/1265/解释/schema-samples/model-card/model_card.json",
+      "check_id": "type:intended_use",
+      "expected": "list",
+      "actual": "list",
+      "status": "pass"
+    },
+    {
+      "schema_id": "model_card_v1",
+      "artifact_path": "f/1265/解释/schema-samples/model-card/model_card.json",
+      "check_id": "type:limitations",
+      "expected": "list",
+      "actual": "list",
+      "status": "pass"
+    },
+    {
+      "schema_id": "model_card_v1",
+      "artifact_path": "f/1265/解释/schema-samples/model-card/model_card.json",
+      "check_id": "type:coverage",
+      "expected": "dict",
+      "actual": "dict",
+      "status": "pass"
+    },
+    {
+      "schema_id": "model_card_v1",
+      "artifact_path": "f/1265/解释/schema-samples/model-card/model_card.json",
+      "check_id": "type:runs",
+      "expected": "list",
+      "actual": "list",
+      "status": "pass"
+    },
+    {
+      "schema_id": "model_card_v1",
+      "artifact_path": "f/1265/解释/schema-samples/model-card/model_card.json",
+      "check_id": "type:recommendations",
+      "expected": "list",
+      "actual": "list",
+      "status": "pass"
+    },
+    {
+      "schema_id": "model_card_v1",
+      "artifact_path": "f/1265/解释/schema-samples/model-card/model_card.json",
+      "check_id": "type:warnings",
+      "expected": "list",
+      "actual": "list",
+      "status": "pass"
+    },
+    {
+      "schema_id": "publication_receipt_v1",
+      "artifact_path": "",
+      "check_id": "schema_id_present",
+      "expected": "non-empty unique id",
+      "actual": "publication_receipt_v1",
+      "status": "pass"
+    },
+    {
+      "schema_id": "publication_receipt_v1",
+      "artifact_path": "",
+      "check_id": "artifact_kind_present",
+      "expected": "non-empty",
+      "actual": "publication_receipt",
+      "status": "pass"
+    },
+    {
+      "schema_id": "publication_receipt_v1",
+      "artifact_path": "",
+      "check_id": "required_fields_present",
+      "expected": "non-empty list",
+      "actual": 9,
+      "status": "pass"
+    },
+    {
+      "schema_id": "publication_receipt_v1",
+      "artifact_path": "",
+      "check_id": "artifact_paths_present",
+      "expected": "non-empty list",
+      "actual": 1,
+      "status": "pass"
+    },
+    {
+      "schema_id": "publication_receipt_v1",
+      "artifact_path": "",
+      "check_id": "type_rule:receipt",
+      "expected": "known type",
+      "actual": "dict",
+      "status": "pass"
+    },
+    {
+      "schema_id": "publication_receipt_v1",
+      "artifact_path": "",
+      "check_id": "type_rule:summary",
+      "expected": "known type",
+      "actual": "dict",
+      "status": "pass"
+    },
+    {
+      "schema_id": "publication_receipt_v1",
+      "artifact_path": "",
+      "check_id": "type_rule:interpretation",
+      "expected": "known type",
+      "actual": "dict",
+      "status": "pass"
+    },
+    {
+      "schema_id": "publication_receipt_v1",
+      "artifact_path": "",
+      "check_id": "type_rule:check_rows",
+      "expected": "known type",
+      "actual": "list",
+      "status": "pass"
+    },
+    {
+      "schema_id": "publication_receipt_v1",
+      "artifact_path": "e/999/解释/publication-receipt-index-receipt-index-publication-index-receipt-index-receipt-v999/randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_v999.json",
+      "check_id": "artifact_exists",
+      "expected": "exists inside project",
+      "actual": "e/999/解释/publication-receipt-index-receipt-index-publication-index-receipt-index-receipt-v999/randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_v999.json",
+      "status": "pass"
+    },
+    {
+      "schema_id": "publication_receipt_v1",
+      "artifact_path": "e/999/解释/publication-receipt-index-receipt-index-publication-index-receipt-index-receipt-v999/randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_v999.json",
+      "check_id": "field:schema_version",
+      "expected": "present",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "schema_id": "publication_receipt_v1",
+      "artifact_path": "e/999/解释/publication-receipt-index-receipt-index-publication-index-receipt-index-receipt-v999/randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_v999.json",
+      "check_id": "field:title",
+      "expected": "present",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "schema_id": "publication_receipt_v1",
+      "artifact_path": "e/999/解释/publication-receipt-index-receipt-index-publication-index-receipt-index-receipt-v999/randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_v999.json",
+      "check_id": "field:generated_at",
+      "expected": "present",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "schema_id": "publication_receipt_v1",
+      "artifact_path": "e/999/解释/publication-receipt-index-receipt-index-publication-index-receipt-index-receipt-v999/randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_v999.json",
+      "check_id": "field:status",
+      "expected": "present",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "schema_id": "publication_receipt_v1",
+      "artifact_path": "e/999/解释/publication-receipt-index-receipt-index-publication-index-receipt-index-receipt-v999/randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_v999.json",
+      "check_id": "field:decision",
+      "expected": "present",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "schema_id": "publication_receipt_v1",
+      "artifact_path": "e/999/解释/publication-receipt-index-receipt-index-publication-index-receipt-index-receipt-v999/randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_v999.json",
+      "check_id": "field:receipt",
+      "expected": "present",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "schema_id": "publication_receipt_v1",
+      "artifact_path": "e/999/解释/publication-receipt-index-receipt-index-publication-index-receipt-index-receipt-v999/randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_v999.json",
+      "check_id": "field:summary",
+      "expected": "present",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "schema_id": "publication_receipt_v1",
+      "artifact_path": "e/999/解释/publication-receipt-index-receipt-index-publication-index-receipt-index-receipt-v999/randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_v999.json",
+      "check_id": "field:interpretation",
+      "expected": "present",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "schema_id": "publication_receipt_v1",
+      "artifact_path": "e/999/解释/publication-receipt-index-receipt-index-publication-index-receipt-index-receipt-v999/randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_v999.json",
+      "check_id": "field:check_rows",
+      "expected": "present",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "schema_id": "publication_receipt_v1",
+      "artifact_path": "e/999/解释/publication-receipt-index-receipt-index-publication-index-receipt-index-receipt-v999/randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_v999.json",
+      "check_id": "value:schema_version",
+      "expected": 1,
+      "actual": 1,
+      "status": "pass"
+    },
+    {
+      "schema_id": "publication_receipt_v1",
+      "artifact_path": "e/999/解释/publication-receipt-index-receipt-index-publication-index-receipt-index-receipt-v999/randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_v999.json",
+      "check_id": "value:status",
+      "expected": "pass",
+      "actual": "pass",
+      "status": "pass"
+    },
+    {
+      "schema_id": "publication_receipt_v1",
+      "artifact_path": "e/999/解释/publication-receipt-index-receipt-index-publication-index-receipt-index-receipt-v999/randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_v999.json",
+      "check_id": "value:summary.granted_use",
+      "expected": "downstream_governance_lookup_only",
+      "actual": "downstream_governance_lookup_only",
+      "status": "pass"
+    },
+    {
+      "schema_id": "publication_receipt_v1",
+      "artifact_path": "e/999/解释/publication-receipt-index-receipt-index-publication-index-receipt-index-receipt-v999/randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_v999.json",
+      "check_id": "value:summary.promotion_ready",
+      "expected": false,
+      "actual": false,
+      "status": "pass"
+    },
+    {
+      "schema_id": "publication_receipt_v1",
+      "artifact_path": "e/999/解释/publication-receipt-index-receipt-index-publication-index-receipt-index-receipt-v999/randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_v999.json",
+      "check_id": "value:summary.approved_for_promotion",
+      "expected": false,
+      "actual": false,
+      "status": "pass"
+    },
+    {
+      "schema_id": "publication_receipt_v1",
+      "artifact_path": "e/999/解释/publication-receipt-index-receipt-index-publication-index-receipt-index-receipt-v999/randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_v999.json",
+      "check_id": "value:receipt.granted_use",
+      "expected": "downstream_governance_lookup_only",
+      "actual": "downstream_governance_lookup_only",
+      "status": "pass"
+    },
+    {
+      "schema_id": "publication_receipt_v1",
+      "artifact_path": "e/999/解释/publication-receipt-index-receipt-index-publication-index-receipt-index-receipt-v999/randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_v999.json",
+      "check_id": "value:receipt.promotion_ready",
+      "expected": false,
+      "actual": false,
+      "status": "pass"
+    },
+    {
+      "schema_id": "publication_receipt_v1",
+      "artifact_path": "e/999/解释/publication-receipt-index-receipt-index-publication-index-receipt-index-receipt-v999/randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_v999.json",
+      "check_id": "value:receipt.approved_for_promotion",
+      "expected": false,
+      "actual": false,
+      "status": "pass"
+    },
+    {
+      "schema_id": "publication_receipt_v1",
+      "artifact_path": "e/999/解释/publication-receipt-index-receipt-index-publication-index-receipt-index-receipt-v999/randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_v999.json",
+      "check_id": "type:receipt",
+      "expected": "dict",
+      "actual": "dict",
+      "status": "pass"
+    },
+    {
+      "schema_id": "publication_receipt_v1",
+      "artifact_path": "e/999/解释/publication-receipt-index-receipt-index-publication-index-receipt-index-receipt-v999/randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_v999.json",
+      "check_id": "type:summary",
+      "expected": "dict",
+      "actual": "dict",
+      "status": "pass"
+    },
+    {
+      "schema_id": "publication_receipt_v1",
+      "artifact_path": "e/999/解释/publication-receipt-index-receipt-index-publication-index-receipt-index-receipt-v999/randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_v999.json",
+      "check_id": "type:interpretation",
+      "expected": "dict",
+      "actual": "dict",
+      "status": "pass"
+    },
+    {
+      "schema_id": "publication_receipt_v1",
+      "artifact_path": "e/999/解释/publication-receipt-index-receipt-index-publication-index-receipt-index-receipt-v999/randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_v999.json",
+      "check_id": "type:check_rows",
+      "expected": "list",
+      "actual": "list",
+      "status": "pass"
+    }
+  ],
+  "recommendations": [
+    "Register new card or publication receipt shapes before relying on them as stable governance artifacts."
+  ]
+}

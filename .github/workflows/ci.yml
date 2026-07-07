@@ -38,6 +38,9 @@ jobs:
       - name: Model capability honest measurement gate
         run: python -B scripts/check_model_capability_honest_measurement.py --out-dir runs/model-capability-honest-measurement-ci
 
+      - name: Artifact schema guard
+        run: python -B scripts/check_artifact_schema_guard.py --out-dir runs/artifact-schema-guard-ci
+
       - name: Archived path portability check
         run: python -B scripts/check_archived_path_portability.py --out-dir runs/archived-path-portability-ci
 

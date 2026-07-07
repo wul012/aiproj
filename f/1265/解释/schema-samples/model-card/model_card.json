@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT model card",
+  "generated_at": "2026-07-07T05:05:04Z",
+  "registry_path": "d\\447\\解释\\portfolio-fixture\\baseline\\registry\\registry.json",
+  "summary": {
+    "run_count": 0,
+    "best_run_name": null,
+    "best_run_path": null,
+    "best_val_loss": null,
+    "ready_runs": 0,
+    "review_runs": 0,
+    "experiment_cards": 1,
+    "comparable_runs": 0,
+    "dataset_snapshot_runs": 0,
+    "dataset_skipped_source_runs": 0
+  },
+  "intended_use": [
+    "Educational MiniGPT-from-scratch experiments.",
+    "Local comparison of tiny language-model runs, data quality, evaluation, and artifacts.",
+    "Portfolio or review summary for a learning project."
+  ],
+  "limitations": [
+    "This is a small educational model, not a production assistant.",
+    "Best validation loss is useful for comparison but does not guarantee generation quality.",
+    "Fixed prompt evaluation is lightweight and should be expanded for serious model assessment.",
+    "Training data coverage and safety review are intentionally minimal in this project."
+  ],
+  "coverage": {
+    "run_count": 0,
+    "experiment_cards_found": 1,
+    "experiment_card_coverage": 0.0,
+    "quality_checked_runs": 0,
+    "eval_suite_runs": 0,
+    "generation_quality_runs": 0,
+    "generation_quality_pass_runs": 0,
+    "checkpoint_runs": 0,
+    "dashboard_runs": 0,
+    "dataset_fingerprint_count": 0,
+    "dataset_version_count": 0,
+    "dataset_snapshot_runs": 0,
+    "dataset_snapshot_coverage": 0.0,
+    "dataset_skipped_source_runs": 0
+  },
+  "quality_counts": {},
+  "generation_quality_counts": {},
+  "tag_counts": {},
+  "dataset_versions": [],
+  "dataset_fingerprints": [],
+  "dataset_dedupe_policy_counts": {},
+  "dataset_snapshot_summary": {},
+  "top_runs": [],
+  "runs": [],
+  "recommendations": [
+    "Promote at least one run to ready status by adding checkpoint, dataset quality, and eval suite artifacts."
+  ],
+  "warnings": []
+}

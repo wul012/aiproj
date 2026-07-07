@@ -42,6 +42,7 @@ python -B scripts/check_engineering_health.py
 python -B scripts/check_static_analysis.py --out-dir runs/static-analysis
 python -B scripts/check_type_analysis.py --out-dir runs/type-analysis
 python -B scripts/check_model_capability_honest_measurement.py --out-dir runs/model-capability-honest-measurement
+python -B scripts/check_artifact_schema_guard.py --out-dir runs/artifact-schema-guard
 python -m unittest discover -s tests -v
 python -B scripts/run_test_coverage.py --out-dir runs/test-coverage --fail-under 88.98
 python -B scripts/check_normalization_guard.py
@@ -53,6 +54,8 @@ analysis command when changing Python source or scripts; it compares ruff
 findings against the committed baseline and keeps strict paths format-clean.
 Use the honest-measurement gate when capability-governance claims, publication
 receipts, handoffs, or route-promotion evidence boundaries are touched.
+Use the artifact schema guard when experiment cards, dataset cards, model cards,
+or publication receipt shapes are touched.
 Use the broad unittest command when you need full test discovery, and the
 coverage command when you need the same thresholded unit-test entrypoint used by
 CI. Use the normalization guard when you are changing architecture boundaries,
@@ -80,17 +83,16 @@ workflows.
 
 ## Latest version summary
 
-Current README focus: **v1264 production-excellence A3 honest measurement gate**.
+Current README focus: **v1265 production-excellence A3 artifact schema guard**.
 
-v1264 starts A3 by making bounded model-capability claims mechanically
-checkable. The registry in
-`docs/model-capability-honest-measurement-registry.json` lists representative
-capability-governance families, their cached artifacts, the allowed claim
-boundary, seed policy, and the positive/negative contract-test markers that
-protect them. This is an engineering-maintenance gate, not a model-quality
-promotion: model capability claims remain educational unless tied to cited
-evidence, and governance `status=pass` still does not imply production model
-readiness.
+v1265 continues A3 by making card and publication-receipt artifact envelopes
+mechanically checkable. The registry in
+`docs/artifact-schema-guard-registry.json` validates current experiment-card,
+dataset-card, model-card, and publication-receipt shapes, including required
+fields, expected values, and no-promotion receipt fields. This is an
+engineering-maintenance gate, not a model-quality promotion: model capability
+claims remain educational unless tied to cited evidence, and governance
+`status=pass` still does not imply production model readiness.
 
 ## Where to look next
 
@@ -108,6 +110,7 @@ readiness.
 - `docs/aiproj-track-a1-static-analysis.md` - A1 static-analysis adoption evidence.
 - `docs/aiproj-track-a2-coverage.md` - A2 coverage-floor ratchet evidence.
 - `docs/aiproj-track-a3-honest-measurement.md` - A3 honest-measurement gate evidence.
+- `docs/aiproj-track-a3-artifact-schema-guard.md` - A3 artifact-schema guard evidence.
 - `docs/production-excellence-aiproj-brief.md` - Claude-authored A-track execution brief.
 - `文档分流说明.md` - current documentation routing map.
 - `src/minigpt/` - model, evaluation, reporting, and workflow code.

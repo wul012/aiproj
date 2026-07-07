@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT experiment card</title>
+<style>
+:root { --ink:#111827; --muted:#4b5563; --line:#d8dee9; --page:#f7f7f2; --panel:#fff; --blue:#2563eb; --amber:#b45309; }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--page); color:var(--ink); font-family:Arial, "Microsoft YaHei", sans-serif; line-height:1.45; }
+header { padding:28px 32px 18px; background:#fff; border-bottom:1px solid var(--line); }
+h1 { margin:0 0 8px; font-size:28px; letter-spacing:0; }
+h2 { margin:0 0 12px; font-size:18px; }
+p, .muted { color:var(--muted); }
+.stats { display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); gap:12px; padding:18px 32px 4px; }
+.card, .panel { background:var(--panel); border:1px solid var(--line); border-radius:8px; }
+.card { padding:14px; min-height:82px; }
+.label { color:var(--muted); font-size:12px; text-transform:uppercase; }
+.value { margin-top:6px; font-size:20px; font-weight:700; overflow-wrap:anywhere; }
+.panel { margin:18px 32px; padding:16px; overflow-x:auto; }
+.warn { border-color:#f59e0b; }
+table { width:100%; border-collapse:collapse; min-width:760px; }
+th, td { padding:8px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top; }
+th { color:var(--muted); font-size:12px; text-transform:uppercase; }
+a { color:var(--blue); font-weight:700; text-decoration:none; }
+.tag { display:inline-block; margin:0 4px 4px 0; padding:2px 6px; border-radius:999px; background:#e0f2fe; color:#075985; font-size:12px; font-weight:700; }
+footer { padding:20px 32px 34px; color:var(--muted); font-size:13px; }
+@media (max-width:760px) { header, .stats { padding-left:16px; padding-right:16px; } .panel { margin-left:16px; margin-right:16px; } }
+</style>
+</head>
+<body>
+<header><h1>MiniGPT experiment card</h1><p>d\447\解释\registry-fixture\boundary-plan</p></header>
+<section class="stats"><div class="card"><div class="label">Status</div><div class="value">ready</div></div><div class="card"><div class="label">Best val</div><div class="value">1</div></div><div class="card"><div class="label">Rank</div><div class="value">unranked</div></div><div class="card"><div class="label">Delta</div><div class="value">missing</div></div><div class="card"><div class="label">Quality</div><div class="value">pass</div></div><div class="card"><div class="label">Eval cases</div><div class="value">3</div></div><div class="card"><div class="label">Git</div><div class="value">v447demo</div></div><div class="card"><div class="label">Params</div><div class="value">1,234</div></div></section>
+<section class="panel"><h2>Notes</h2><p>missing</p><p><span class="muted">missing</span></p></section>
+<section class="panel"><h2>Data</h2><table><tr><th>source_kind</th><td>fixture</td></tr><tr><th>source_count</th><td>missing</td></tr><tr><th>char_count</th><td>missing</td></tr><tr><th>line_count</th><td>missing</td></tr><tr><th>unique_char_count</th><td>missing</td></tr><tr><th>token_count</th><td>missing</td></tr><tr><th>train_token_count</th><td>missing</td></tr><tr><th>val_token_count</th><td>missing</td></tr><tr><th>status</th><td>pass</td></tr><tr><th>short_fingerprint</th><td>v447boundary</td></tr><tr><th>warning_count</th><td>missing</td></tr><tr><th>issue_count</th><td>missing</td></tr></table></section>
+<section class="panel"><h2>Training</h2><table><tr><th>tokenizer</th><td>char</td></tr><tr><th>max_iters</th><td>2</td></tr><tr><th>batch_size</th><td>missing</td></tr><tr><th>block_size</th><td>missing</td></tr><tr><th>learning_rate</th><td>missing</td></tr><tr><th>device_used</th><td>missing</td></tr><tr><th>start_step</th><td>missing</td></tr><tr><th>end_step</th><td>missing</td></tr><tr><th>best_val_loss</th><td>1</td></tr><tr><th>last_val_loss</th><td>1.1</td></tr></table></section>
+<section class="panel"><h2>Evaluation</h2><table><tr><th>eval_loss</th><td>missing</td></tr><tr><th>perplexity</th><td>missing</td></tr><tr><th>eval_suite_cases</th><td>3</td></tr><tr><th>avg_unique_chars</th><td>8.5</td></tr><tr><th>best_val_loss_rank</th><td>missing</td></tr><tr><th>best_val_loss_delta</th><td>missing</td></tr><tr><th>is_best_val_loss</th><td>False</td></tr></table></section>
+<section class="panel"><h2>Registry</h2><table><tr><th>registry_path</th><td>d\447\解释\registry-fixture\boundary-plan\registry.json</td></tr><tr><th>run_count</th><td>missing</td></tr><tr><th>quality_counts</th><td>missing</td></tr><tr><th>tag_counts</th><td>missing</td></tr><tr><th>matched_run</th><td>False</td></tr></table></section>
+<section class="panel"><h2>Recommendations</h2><ul><li>This run has the core metadata needed for a first-pass experiment review.</li></ul></section>
+<section class="panel"><h2>Artifacts</h2><table><thead><tr><th>Key</th><th>Path</th><th>Exists</th><th>Size</th></tr></thead><tbody><tr><td>checkpoint</td><td><a href="checkpoint.pt">checkpoint.pt</a></td><td>yes</td><td>29</td></tr><tr><td>tokenizer</td><td>tokenizer.json</td><td>no</td><td>missing</td></tr><tr><td>train_config</td><td><a href="train_config.json">train_config.json</a></td><td>yes</td><td>46</td></tr><tr><td>history_summary</td><td><a href="history_summary.json">history_summary.json</a></td><td>yes</td><td>53</td></tr><tr><td>dataset_report</td><td>dataset_report.json</td><td>no</td><td>missing</td></tr><tr><td>dataset_quality</td><td><a href="dataset_quality.json">dataset_quality.json</a></td><td>yes</td><td>64</td></tr><tr><td>eval_suite</td><td><a href="eval_suite/eval_suite.json">eval_suite/eval_suite.json</a></td><td>yes</td><td>69</td></tr><tr><td>run_manifest</td><td><a href="run_manifest.json">run_manifest.json</a></td><td>yes</td><td>789</td></tr><tr><td>dashboard</td><td><a href="dashboard.html">dashboard.html</a></td><td>yes</td><td>52</td></tr><tr><td>playground</td><td>playground.html</td><td>no</td><td>missing</td></tr><tr><td>experiment_card_json</td><td><a href="experiment_card.json">experiment_card.json</a></td><td>yes</td><td>missing</td></tr><tr><td>experiment_card_md</td><td><a href="experiment_card.md">experiment_card.md</a></td><td>yes</td><td>missing</td></tr><tr><td>experiment_card_html</td><td><a href="experiment_card.html">experiment_card.html</a></td><td>yes</td><td>missing</td></tr></tbody></table></section>
+
+<footer>Generated by MiniGPT experiment card exporter.</footer>
+</body>
+</html>

@@ -15,6 +15,7 @@ HEALTH_ENGINEERING_ENTRYPOINTS = (
     "scripts/check_static_analysis.py",
     "scripts/check_type_analysis.py",
     "scripts/check_model_capability_honest_measurement.py",
+    "scripts/check_artifact_schema_guard.py",
     "scripts/check_normalization_guard.py",
 )
 

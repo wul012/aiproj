@@ -32,6 +32,7 @@ python -B scripts/check_ci_workflow_hygiene.py
 python -B scripts/check_static_analysis.py --out-dir runs/static-analysis
 python -B scripts/check_type_analysis.py --out-dir runs/type-analysis
 python -B scripts/check_model_capability_honest_measurement.py --out-dir runs/model-capability-honest-measurement
+python -B scripts/check_artifact_schema_guard.py --out-dir runs/artifact-schema-guard
 python -B scripts/check_normalization_guard.py
 python -B scripts/run_test_coverage.py --out-dir runs/test-coverage --fail-under 88.98
 ```
@@ -85,6 +86,10 @@ keeps diagnostics and the exact target list reviewable.
 honest-measurement registry. It keeps bounded model-capability governance
 claims tied to cached artifacts, no-promotion boundaries, seed-policy labels,
 and positive/negative contract-test markers.
+
+`scripts/check_artifact_schema_guard.py` validates the A3 artifact schema
+registry. It keeps current card and publication-receipt envelopes fail-closed
+against required fields, selected expected values, and simple field types.
 
 `scripts/run_test_coverage.py` is the coverage-producing unittest entrypoint
 used by CI. The local command above writes coverage evidence under

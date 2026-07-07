@@ -29,7 +29,7 @@ This runs the `HEALTH_ENGINEERING_ENTRYPOINTS` subset from
 readability, CI workflow hygiene, staged static analysis, scoped type analysis,
 model-capability honest measurement, and the normalization guard in one local
 command. Source encoding, docs readability, CI workflow, static-analysis,
-type-analysis, and honest-measurement reports are written under
+type-analysis, honest-measurement, and artifact-schema reports are written under
 `runs/engineering-health/`, and the aggregate command writes
 `runs/engineering-health/engineering_health_summary.json` and
 `runs/engineering-health/engineering_health_summary.md` with the step commands,
@@ -66,6 +66,16 @@ This reads `docs/model-capability-honest-measurement-registry.json` and checks
 that registered capability-governance families are cached-artifact-only,
 no-promotion, seed-policy bounded, backed by existing source artifacts, and
 protected by positive plus negative contract-test markers.
+
+For the artifact schema guard alone:
+
+```powershell
+python -B scripts/check_artifact_schema_guard.py --out-dir runs/artifact-schema-guard
+```
+
+This reads `docs/artifact-schema-guard-registry.json` and checks current
+experiment-card, dataset-card, model-card, and publication-receipt artifact
+envelopes for required fields, expected values, and simple field types.
 
 For a quick full unittest run:
 

@@ -25,11 +25,23 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 - [aiproj A1 static analysis](docs/aiproj-track-a1-static-analysis.md)
 - [aiproj A2 coverage ratchet](docs/aiproj-track-a2-coverage.md)
 - [aiproj A3 honest measurement](docs/aiproj-track-a3-honest-measurement.md)
+- [aiproj A3 artifact schema guard](docs/aiproj-track-a3-artifact-schema-guard.md)
 - [Model capability honest measurement policy](docs/model-capability-honest-measurement-policy.md)
 - [Production excellence brief](docs/production-excellence-aiproj-brief.md)
 - [Plain-language project guide](项目通俗说明/README.md)
 
 ## Current version
+
+Version `v1265.0.0` continues **aiproj production-excellence A3 with an artifact schema guard**. It adds a committed schema registry for current experiment cards, dataset cards, model cards, and publication receipts; validates required fields, expected values, simple field types, and no-promotion receipt fields; and enforces the gate in CI after honest measurement and before coverage. This is an artifact-envelope guard only: no training, cached experiment verdict, promotion, or model-quality upgrade changes.
+
+## Latest v1265 checkpoint
+
+- Added `docs/artifact-schema-guard-registry.json` and `scripts/check_artifact_schema_guard.py`.
+- Added `src/minigpt/artifact_schema_guard.py` plus tests for passing registry, missing required fields, publication receipt promotion widening, output rendering, and CLI wiring.
+- Generated current card schema samples under `f/1265/解释/schema-samples/` and validated the real v999 publication receipt.
+- Wired the schema guard into CI, engineering health, ruff strict paths, and the scoped mypy manifest (`scope_floor=12`).
+
+## Historical v1264 context
 
 Version `v1264.0.0` starts **aiproj production-excellence A3 with a model-capability honest-measurement gate**. It adds a committed registry for bounded capability-governance families, validates source artifacts and selected fields, requires positive plus negative contract-test markers, and enforces the gate in CI after scoped type analysis and before coverage. This is a claim-boundary and reproducibility guard only: no training, cached experiment verdict, promotion, or model-quality upgrade changes.
 

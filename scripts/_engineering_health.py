@@ -21,6 +21,7 @@ _HEALTH_STEP_IDS_BY_ENTRYPOINT = {
     "scripts/check_static_analysis.py": "static_analysis",
     "scripts/check_type_analysis.py": "type_analysis",
     "scripts/check_model_capability_honest_measurement.py": "model_capability_honest_measurement",
+    "scripts/check_artifact_schema_guard.py": "artifact_schema_guard",
     "scripts/check_normalization_guard.py": "normalization_guard",
 }
 
@@ -118,6 +119,17 @@ def _build_step(entrypoint: str, out_dir: Path, *, python_executable: str) -> En
                 entrypoint,
                 "--out-dir",
                 str(out_dir / "model-capability-honest-measurement"),
+            ),
+        )
+    if entrypoint == "scripts/check_artifact_schema_guard.py":
+        return EngineeringHealthStep(
+            _HEALTH_STEP_IDS_BY_ENTRYPOINT[entrypoint],
+            (
+                python_executable,
+                "-B",
+                entrypoint,
+                "--out-dir",
+                str(out_dir / "artifact-schema-guard"),
             ),
         )
     if entrypoint == "scripts/check_normalization_guard.py":

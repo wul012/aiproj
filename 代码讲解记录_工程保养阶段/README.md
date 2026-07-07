@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1223-v1265-production-excellence-a3-artifact-schema-guard.md
+ -> v1265 code explanation: continues production-excellence A3 with a fail-closed artifact schema guard for current experiment cards, dataset cards, model cards, and publication receipts. It validates required fields, expected values, simple types, and no-promotion receipt fields. Evidence lives under `f/1265`.
+
 1222-v1264-production-excellence-a3-honest-measurement-gate.md
  -> v1264 code explanation: starts production-excellence A3 by adding a CI-backed honest-measurement registry gate for bounded model-capability governance claims. It validates source artifacts, no-training/no-promotion boundaries, seed-policy labels, and positive plus negative contract-test markers. Evidence lives under `f/1264`.
 
