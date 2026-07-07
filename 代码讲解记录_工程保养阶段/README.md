@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1221-v1263-production-excellence-a2-coverage-ratchet.md
+ -> v1263 code explanation: completes production-excellence A2 by raising the coverage gate to the measured baseline minus two points, committing a coverage-floor manifest, locking CI/workflow-hygiene/project-configuration agreement, and keeping the science lane unchanged. Evidence lives under `f/1263`.
+
 1220-v1262-production-excellence-a1-scoped-type-analysis.md
  -> v1262 code explanation: completes production-excellence A1 with strict mypy over eight committed load-bearing targets in four groups, protects the scope with a floor and ownership validation, integrates the gate into CI/engineering health/workflow hygiene, and keeps the science lane unchanged. Evidence lives under `f/1262`.
 

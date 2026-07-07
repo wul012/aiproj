@@ -25,7 +25,9 @@ class TestCoverageReportTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             coverage_json = root / "coverage.json"
-            coverage_json.write_text(json.dumps(_coverage_payload(root), ensure_ascii=False, indent=2), encoding="utf-8")
+            coverage_json.write_text(
+                json.dumps(_coverage_payload(root), ensure_ascii=False, indent=2), encoding="utf-8"
+            )
 
             report = build_test_coverage_report(coverage_json, project_root=root, generated_at="2026-05-18T00:00:00Z")
 

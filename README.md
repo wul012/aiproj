@@ -23,10 +23,22 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 - [Archive and runs inventory](docs/archive-runs-inventory.md)
 - [aiproj A0 census](docs/aiproj-track-a0-census.md)
 - [aiproj A1 static analysis](docs/aiproj-track-a1-static-analysis.md)
+- [aiproj A2 coverage ratchet](docs/aiproj-track-a2-coverage.md)
 - [Production excellence brief](docs/production-excellence-aiproj-brief.md)
 - [Plain-language project guide](项目通俗说明/README.md)
 
 ## Current version
+
+Version `v1263.0.0` completes **aiproj production-excellence A2 with a real coverage floor ratchet**. It raises CI coverage enforcement from the earlier conservative `80` placeholder to `88.98`, derived from the v1262 observed `90.98%` full unittest baseline minus two points. The floor is committed in `docs/static-analysis/coverage-floor.json`, checked by project configuration tests, and mirrored by CI workflow hygiene. This is an engineering quality gate only: no training, cached-artifact verdict, promotion, or model-quality claim changes.
+
+## Latest v1263 checkpoint
+
+- Added `docs/static-analysis/coverage-floor.json` and `docs/aiproj-track-a2-coverage.md` so the A2 floor has a reviewable source.
+- Updated CI to run `scripts/run_test_coverage.py --fail-under 88.98` and updated workflow hygiene policy to require that exact floor.
+- Added project-configuration assertions that the manifest, CI workflow, and workflow-hygiene policy agree.
+- Produced v1263 coverage evidence in `f/1263`, showing the thresholded coverage gate still passes.
+
+## Historical v1262 context
 
 Version `v1262.0.0` completes **aiproj production-excellence A1 with scoped strict type analysis**. It adds mypy over eight committed load-bearing files in four owner groups, protects the scope with `scope_floor=8`, emits reviewable JSON/CSV/Markdown/HTML evidence, and requires the gate after ruff and before coverage in CI and engineering health. It also retains the one-command session bootstrap with ASCII-safe PowerShell output. The real v1262 run produced `status=pass`, `decision=continue_with_typed_scope`, `target_count=8`, `diagnostic_count=0`, and `scope_issue_count=0`.
 

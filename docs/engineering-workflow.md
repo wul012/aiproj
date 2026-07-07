@@ -63,8 +63,12 @@ python -m unittest discover -s tests -v
 For the same coverage-producing entrypoint used by CI:
 
 ```powershell
-python -B scripts/run_test_coverage.py --out-dir runs/test-coverage --fail-under 80
+python -B scripts/run_test_coverage.py --out-dir runs/test-coverage --fail-under 88.98
 ```
+
+The `88.98` floor is the A2 ratchet recorded in
+`docs/static-analysis/coverage-floor.json`: v1262 measured `90.98%`, and A2
+starts CI enforcement at baseline minus two points.
 
 For architecture and public API normalization work, run the focused guard set:
 
@@ -122,6 +126,8 @@ remain before coverage.
 - `tests/test_test_coverage_report.py` protects the coverage report model,
   threshold behavior, output renderers, and the coverage CLI entrypoint
   contract.
+- `tests/test_project_configuration.py` also locks the committed coverage
+  floor against the CI workflow and workflow-hygiene policy.
 - `tests/test_project_configuration.py` protects `pyproject.toml`,
   `requirements.txt`, CI, and the documented unittest entrypoint.
 - `tests/test_repository_hygiene.py` protects `.gitignore` coverage for local

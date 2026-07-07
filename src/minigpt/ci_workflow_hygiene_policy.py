@@ -5,6 +5,7 @@ from pathlib import Path
 DEFAULT_WORKFLOW_PATH = Path(".github") / "workflows" / "ci.yml"
 REQUIRED_ACTIONS = {"actions/checkout": "v6", "actions/setup-python": "v6"}
 FORBIDDEN_ENV_VARS = ("FORCE_JAVASCRIPT_ACTIONS_TO_NODE24",)
+COVERAGE_FAIL_UNDER_FLOOR = 88.98
 REQUIRED_COMMAND_FRAGMENTS = {
     "source_encoding_gate": "scripts/check_source_encoding.py",
     "project_docs_readability_gate": "scripts/check_project_docs_readability.py",
@@ -23,7 +24,7 @@ REQUIRED_COMMAND_FRAGMENTS = {
     "release_readiness_drift_contract_smoke": "scripts/check_release_readiness_drift_contract_smoke.py",
     "normalization_guard": "scripts/check_normalization_guard.py",
     "test_coverage_report": "scripts/run_test_coverage.py",
-    "coverage_fail_under_gate": "--fail-under 80",
+    "coverage_fail_under_gate": f"--fail-under {COVERAGE_FAIL_UNDER_FLOOR}",
 }
 REQUIRED_COMMAND_ORDER = {
     "project_docs_readability_after_source_encoding": (
@@ -125,6 +126,7 @@ REQUIRED_PYTHON_VERSION = "3.11"
 __all__ = [
     "DEFAULT_WORKFLOW_PATH",
     "FORBIDDEN_ENV_VARS",
+    "COVERAGE_FAIL_UNDER_FLOOR",
     "REQUIRED_ACTIONS",
     "REQUIRED_COMMAND_FRAGMENTS",
     "REQUIRED_COMMAND_ORDER",

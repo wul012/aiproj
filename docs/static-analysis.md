@@ -1,6 +1,6 @@
-# MiniGPT Static And Type Analysis Gates
+# MiniGPT Static, Type, And Coverage Gates
 
-This page documents the staged ruff and scoped mypy adoption introduced by the production-excellence A-track.
+This page documents the staged ruff, scoped mypy, and coverage-ratchet adoption introduced by the production-excellence A-track.
 
 ## Purpose
 
@@ -63,3 +63,25 @@ Mypy uses strict mode with `follow_imports=skip`. That setting is deliberate:
 the gate checks the eight declared files rather than recursively turning this
 incremental A1 version into a hidden full-repository migration. Future versions
 may increase `scope_floor` and add groups, but should not lower the floor.
+
+## v1263 Coverage Floor Ratchet
+
+A2 raises the CI coverage floor from the earlier conservative placeholder to
+the measured baseline minus two points. The committed policy lives in
+`docs/static-analysis/coverage-floor.json`:
+
+```text
+observed_baseline_percent = 90.98
+fail_under = 88.98
+```
+
+CI now runs:
+
+```powershell
+python -B scripts/run_test_coverage.py --out-dir runs/test-coverage-ci --fail-under 88.98
+```
+
+`tests/test_project_configuration.py` checks that the workflow, the committed
+coverage-floor manifest, and `ci_workflow_hygiene_policy.py` agree on the same
+floor. Future versions may raise this value with fresh evidence, but lowering
+it requires changing the manifest and tests, not just editing the workflow.

@@ -42,7 +42,7 @@ python -B scripts/check_engineering_health.py
 python -B scripts/check_static_analysis.py --out-dir runs/static-analysis
 python -B scripts/check_type_analysis.py --out-dir runs/type-analysis
 python -m unittest discover -s tests -v
-python -B scripts/run_test_coverage.py --out-dir runs/test-coverage --fail-under 80
+python -B scripts/run_test_coverage.py --out-dir runs/test-coverage --fail-under 88.98
 python -B scripts/check_normalization_guard.py
 python -B scripts/check_archive_runs_inventory.py --out-dir runs/archive-runs-inventory --force
 ```
@@ -77,15 +77,15 @@ workflows.
 
 ## Latest version summary
 
-Current README focus: **v1262 production-excellence A1 scoped type analysis**.
+Current README focus: **v1263 production-excellence A2 coverage ratchet**.
 
-v1262 completes A1 by adding strict mypy over eight committed load-bearing
-targets in four groups. The scope manifest has a floor and group validation,
-the gate writes reviewable reports, and CI workflow hygiene prevents the step
-from disappearing or moving behind coverage. This is
-an engineering-maintenance gate, not a model-quality promotion: model capability
-claims remain educational unless tied to cited evidence, and governance
-`status=pass` still does not imply production model readiness.
+v1263 completes A2 by raising the CI coverage floor to `88.98`, derived from
+the v1262 measured `90.98%` baseline minus two points. The floor is written in
+`docs/static-analysis/coverage-floor.json`, mirrored by CI workflow hygiene,
+and checked by project-configuration tests. This is an engineering-maintenance
+gate, not a model-quality promotion: model capability claims remain educational
+unless tied to cited evidence, and governance `status=pass` still does not
+imply production model readiness.
 
 ## Where to look next
 
@@ -100,6 +100,7 @@ claims remain educational unless tied to cited evidence, and governance
 - `docs/archive-runs-inventory.md` - warning-only archive and `runs/` growth inventory.
 - `docs/aiproj-track-a0-census.md` - A0 production-excellence census evidence.
 - `docs/aiproj-track-a1-static-analysis.md` - A1 static-analysis adoption evidence.
+- `docs/aiproj-track-a2-coverage.md` - A2 coverage-floor ratchet evidence.
 - `docs/production-excellence-aiproj-brief.md` - Claude-authored A-track execution brief.
 - `文档分流说明.md` - current documentation routing map.
 - `src/minigpt/` - model, evaluation, reporting, and workflow code.

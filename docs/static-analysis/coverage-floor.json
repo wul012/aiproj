@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "tool": "coverage",
+  "observed_baseline_version": "v1262.0.0",
+  "observed_baseline_percent": 90.98,
+  "floor_policy": "observed_baseline_minus_two_points",
+  "fail_under": 88.98,
+  "ratchet": "may_raise_never_lower_without_new_review",
+  "source_evidence": "local v1262 run: python -B scripts/run_test_coverage.py --out-dir runs/test-coverage-v1262 --fail-under 80",
+  "notes": [
+    "A2 starts from the first measured full unittest coverage baseline after A1 static/type gates.",
+    "The CI gate must use this fail_under value until a later version raises the floor with new evidence.",
+    "Lowering the floor requires changing this manifest and the tests that lock the ratchet."
+  ]
+}

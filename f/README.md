@@ -2,6 +2,10 @@
 
 本目录从 v1098 开始保存模型治理阶段的运行截图和解释，和历史目录 `a/`、`b/`、`c/`、`d/`、`e/` 同级。
 
+## v1263
+
+v1263 完成 production-excellence A2 的覆盖率 floor ratchet。CI 覆盖率门从旧的 `80` 升到 `88.98`，该值来自 v1262 实测 `90.98%` 全量 unittest 覆盖率基线减 2 个百分点。floor 写入 `docs/static-analysis/coverage-floor.json`，并由 CI workflow hygiene 与项目配置测试共同锁定。运行证据见 `f/1263/解释/test-coverage/`，可视化核验见 `f/1263/图片/test-coverage-v1263.png`。
+
 ## v1262
 
 v1262 完成 production-excellence A1 的有限范围严格 mypy 门。清单覆盖八个承重文件、四个职责组，并以 `scope_floor=8` 防止范围静默缩小；CI 要求该门位于 ruff 之后、coverage 之前。运行证据见 `f/1262/解释/type-analysis/`，可视化核验见 `f/1262/图片/type-analysis-v1262.png`。

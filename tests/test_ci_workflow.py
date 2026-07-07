@@ -146,7 +146,7 @@ class CIWorkflowTests(unittest.TestCase):
                         "        with:",
                         '          python-version: "3.12"',
                         "      - name: Unit tests",
-                        "        run: python -B scripts/run_test_coverage.py --out-dir runs/test-coverage-ci --fail-under 80",
+                        "        run: python -B scripts/run_test_coverage.py --out-dir runs/test-coverage-ci --fail-under 88.98",
                     ]
                 ),
                 encoding="utf-8",
@@ -213,7 +213,7 @@ class CIWorkflowTests(unittest.TestCase):
                         "      - name: Normalization guard",
                         "        run: python -B scripts/check_normalization_guard.py",
                         "      - name: Unit tests",
-                        "        run: python -B scripts/run_test_coverage.py --out-dir runs/test-coverage-ci --fail-under 80",
+                        "        run: python -B scripts/run_test_coverage.py --out-dir runs/test-coverage-ci --fail-under 88.98",
                     ]
                 ),
                 encoding="utf-8",
@@ -256,7 +256,7 @@ class CIWorkflowTests(unittest.TestCase):
                         "      - name: Scoped type analysis gate",
                         "        run: python -B scripts/check_type_analysis.py --out-dir runs/type-analysis-ci",
                         "      - name: Unit tests",
-                        "        run: python -B scripts/run_test_coverage.py --out-dir runs/test-coverage-ci --fail-under 80",
+                        "        run: python -B scripts/run_test_coverage.py --out-dir runs/test-coverage-ci --fail-under 88.98",
                         "      - name: Archived path portability check",
                         "        run: python -B scripts/check_archived_path_portability.py --out-dir runs/archived-path-portability-ci",
                         "      - name: Promoted seed handoff assurance smoke",
@@ -339,7 +339,7 @@ class CIWorkflowTests(unittest.TestCase):
                         "      - name: Normalization guard",
                         "        run: python -B scripts/check_normalization_guard.py",
                         "      - name: Unit tests",
-                        "        run: python -B scripts/run_test_coverage.py --out-dir runs/test-coverage-ci --fail-under 80",
+                        "        run: python -B scripts/run_test_coverage.py --out-dir runs/test-coverage-ci --fail-under 88.98",
                     ]
                 ),
                 encoding="utf-8",
