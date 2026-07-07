@@ -27,11 +27,23 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 - [aiproj A3 honest measurement](docs/aiproj-track-a3-honest-measurement.md)
 - [aiproj A3 artifact schema guard](docs/aiproj-track-a3-artifact-schema-guard.md)
 - [aiproj A4 code health](docs/aiproj-track-a4-code-health.md)
+- [aiproj A-track final evidence](docs/aiproj-track-final-evidence.md)
 - [Model capability honest measurement policy](docs/model-capability-honest-measurement-policy.md)
 - [Production excellence brief](docs/production-excellence-aiproj-brief.md)
 - [Plain-language project guide](项目通俗说明/README.md)
 
 ## Current version
+
+Version `v1267.0.0` completes **aiproj production-excellence A5 with final evidence and docs-honesty closeout**. It adds a closeout checker that validates the A0-A4 evidence docs, the final evidence matrix, no-promotion wording, README/docs indexes, and CI wiring before coverage. This is a closeout/readiness-map gate only: no training, cached experiment verdict, promotion, or model-quality upgrade changes.
+
+## Latest v1267 checkpoint
+
+- Added `docs/aiproj-track-final-evidence.md` as the A-track gate-by-gate closeout table, waiver list, census summary, and reviewer handoff.
+- Added `src/minigpt/aiproj_track_closeout.py`, `scripts/check_aiproj_track_closeout.py`, and `tests/test_aiproj_track_closeout.py`.
+- Wired the closeout gate into CI, engineering health, CI workflow hygiene, ruff strict paths, and the scoped mypy manifest (`scope_floor=16`).
+- Reworded historical A0 evidence so "current" facts remain tied to the A0 start point, while the final A-track state lives in the closeout document.
+
+## Historical v1266 context
 
 Version `v1266.0.0` completes **aiproj production-excellence A4 with a file-size ratchet**. It adds a committed code-health registry for Python file-size limits, scans `src/`, `scripts/`, and `tests/`, records eight explicit legacy test waivers above the hard 800-line limit, and fails CI if an unwaived file crosses the limit or a waived legacy file grows. This is a maintainability gate only: no training, cached experiment verdict, promotion, or model-quality upgrade changes.
 
@@ -39,7 +51,7 @@ Version `v1266.0.0` completes **aiproj production-excellence A4 with a file-size
 
 - Added `docs/code-health/file-size-ratchet.json` and `scripts/check_file_size_ratchet.py`.
 - Added `src/minigpt/file_size_ratchet.py` plus tests for the passing repository census, unwaived oversize failure, waiver growth failure, output rendering, and CLI wiring.
-- Wired the file-size ratchet into CI, engineering health, CI workflow hygiene, ruff strict paths, and the scoped mypy manifest (`scope_floor=14`).
+- Wired the file-size ratchet into CI, engineering health, CI workflow hygiene, ruff strict paths, and the scoped mypy manifest.
 - Preserved existing large historical tests through explicit no-growth waivers rather than hiding them or doing a risky broad split.
 
 ## Historical v1265 context

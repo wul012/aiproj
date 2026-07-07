@@ -1,0 +1,480 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT aiproj production-excellence closeout",
+  "generated_at": "2026-07-07T06:57:06Z",
+  "status": "pass",
+  "decision": "aiproj_track_closeout_ready",
+  "final_evidence_path": "docs/aiproj-track-final-evidence.md",
+  "summary": {
+    "status": "pass",
+    "decision": "aiproj_track_closeout_ready",
+    "evidence_doc_count": 6,
+    "check_count": 57,
+    "passed_check_count": 57,
+    "failed_check_count": 0,
+    "no_promotion_boundary_ready": true,
+    "final_evidence_ready": true,
+    "ci_closeout_gate_ready": true
+  },
+  "evidence_docs": [
+    {
+      "track_id": "A0",
+      "path": "docs/aiproj-track-a0-census.md",
+      "expected_terms": [
+        "archive + `runs/` inventory",
+        "f/1260",
+        "no training"
+      ]
+    },
+    {
+      "track_id": "A1",
+      "path": "docs/aiproj-track-a1-static-analysis.md",
+      "expected_terms": [
+        "scripts/check_static_analysis.py",
+        "scripts/check_type_analysis.py",
+        "f/1261",
+        "f/1262"
+      ]
+    },
+    {
+      "track_id": "A2",
+      "path": "docs/aiproj-track-a2-coverage.md",
+      "expected_terms": [
+        "fail_under = 88.98",
+        "scripts/run_test_coverage.py",
+        "coverage-floor.json"
+      ]
+    },
+    {
+      "track_id": "A3-honest-measurement",
+      "path": "docs/aiproj-track-a3-honest-measurement.md",
+      "expected_terms": [
+        "scripts/check_model_capability_honest_measurement.py",
+        "no-promotion",
+        "tests/"
+      ]
+    },
+    {
+      "track_id": "A3-artifact-schema",
+      "path": "docs/aiproj-track-a3-artifact-schema-guard.md",
+      "expected_terms": [
+        "scripts/check_artifact_schema_guard.py",
+        "docs/artifact-schema-guard-registry.json",
+        "f/1265"
+      ]
+    },
+    {
+      "track_id": "A4",
+      "path": "docs/aiproj-track-a4-code-health.md",
+      "expected_terms": [
+        "scripts/check_file_size_ratchet.py",
+        "docs/code-health/file-size-ratchet.json",
+        "waiver"
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "check_id": "evidence_doc_exists:A0",
+      "target": "docs/aiproj-track-a0-census.md",
+      "expected": "file exists",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "check_id": "evidence_doc_term:A0:archive + `runs/` inventory",
+      "target": "docs/aiproj-track-a0-census.md",
+      "expected": "archive + `runs/` inventory",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "check_id": "evidence_doc_term:A0:f/1260",
+      "target": "docs/aiproj-track-a0-census.md",
+      "expected": "f/1260",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "check_id": "evidence_doc_term:A0:no training",
+      "target": "docs/aiproj-track-a0-census.md",
+      "expected": "no training",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "check_id": "evidence_doc_exists:A1",
+      "target": "docs/aiproj-track-a1-static-analysis.md",
+      "expected": "file exists",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "check_id": "evidence_doc_term:A1:scripts/check_static_analysis.py",
+      "target": "docs/aiproj-track-a1-static-analysis.md",
+      "expected": "scripts/check_static_analysis.py",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "check_id": "evidence_doc_term:A1:scripts/check_type_analysis.py",
+      "target": "docs/aiproj-track-a1-static-analysis.md",
+      "expected": "scripts/check_type_analysis.py",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "check_id": "evidence_doc_term:A1:f/1261",
+      "target": "docs/aiproj-track-a1-static-analysis.md",
+      "expected": "f/1261",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "check_id": "evidence_doc_term:A1:f/1262",
+      "target": "docs/aiproj-track-a1-static-analysis.md",
+      "expected": "f/1262",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "check_id": "evidence_doc_exists:A2",
+      "target": "docs/aiproj-track-a2-coverage.md",
+      "expected": "file exists",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "check_id": "evidence_doc_term:A2:fail_under = 88.98",
+      "target": "docs/aiproj-track-a2-coverage.md",
+      "expected": "fail_under = 88.98",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "check_id": "evidence_doc_term:A2:scripts/run_test_coverage.py",
+      "target": "docs/aiproj-track-a2-coverage.md",
+      "expected": "scripts/run_test_coverage.py",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "check_id": "evidence_doc_term:A2:coverage-floor.json",
+      "target": "docs/aiproj-track-a2-coverage.md",
+      "expected": "coverage-floor.json",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "check_id": "evidence_doc_exists:A3-honest-measurement",
+      "target": "docs/aiproj-track-a3-honest-measurement.md",
+      "expected": "file exists",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "check_id": "evidence_doc_term:A3-honest-measurement:scripts/check_model_capability_honest_measurement.py",
+      "target": "docs/aiproj-track-a3-honest-measurement.md",
+      "expected": "scripts/check_model_capability_honest_measurement.py",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "check_id": "evidence_doc_term:A3-honest-measurement:no-promotion",
+      "target": "docs/aiproj-track-a3-honest-measurement.md",
+      "expected": "no-promotion",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "check_id": "evidence_doc_term:A3-honest-measurement:tests/",
+      "target": "docs/aiproj-track-a3-honest-measurement.md",
+      "expected": "tests/",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "check_id": "evidence_doc_exists:A3-artifact-schema",
+      "target": "docs/aiproj-track-a3-artifact-schema-guard.md",
+      "expected": "file exists",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "check_id": "evidence_doc_term:A3-artifact-schema:scripts/check_artifact_schema_guard.py",
+      "target": "docs/aiproj-track-a3-artifact-schema-guard.md",
+      "expected": "scripts/check_artifact_schema_guard.py",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "check_id": "evidence_doc_term:A3-artifact-schema:docs/artifact-schema-guard-registry.json",
+      "target": "docs/aiproj-track-a3-artifact-schema-guard.md",
+      "expected": "docs/artifact-schema-guard-registry.json",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "check_id": "evidence_doc_term:A3-artifact-schema:f/1265",
+      "target": "docs/aiproj-track-a3-artifact-schema-guard.md",
+      "expected": "f/1265",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "check_id": "evidence_doc_exists:A4",
+      "target": "docs/aiproj-track-a4-code-health.md",
+      "expected": "file exists",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "check_id": "evidence_doc_term:A4:scripts/check_file_size_ratchet.py",
+      "target": "docs/aiproj-track-a4-code-health.md",
+      "expected": "scripts/check_file_size_ratchet.py",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "check_id": "evidence_doc_term:A4:docs/code-health/file-size-ratchet.json",
+      "target": "docs/aiproj-track-a4-code-health.md",
+      "expected": "docs/code-health/file-size-ratchet.json",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "check_id": "evidence_doc_term:A4:waiver",
+      "target": "docs/aiproj-track-a4-code-health.md",
+      "expected": "waiver",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "check_id": "final_evidence:exists",
+      "target": "docs/aiproj-track-final-evidence.md",
+      "expected": "file exists",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "check_id": "final_evidence:term:A0",
+      "target": "docs/aiproj-track-final-evidence.md",
+      "expected": "A0",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "check_id": "final_evidence:term:A1",
+      "target": "docs/aiproj-track-final-evidence.md",
+      "expected": "A1",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "check_id": "final_evidence:term:A2",
+      "target": "docs/aiproj-track-final-evidence.md",
+      "expected": "A2",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "check_id": "final_evidence:term:A3",
+      "target": "docs/aiproj-track-final-evidence.md",
+      "expected": "A3",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "check_id": "final_evidence:term:A4",
+      "target": "docs/aiproj-track-final-evidence.md",
+      "expected": "A4",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "check_id": "final_evidence:term:A5",
+      "target": "docs/aiproj-track-final-evidence.md",
+      "expected": "A5",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "check_id": "final_evidence:term:docs/aiproj-track-a0-census.md",
+      "target": "docs/aiproj-track-final-evidence.md",
+      "expected": "docs/aiproj-track-a0-census.md",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "check_id": "final_evidence:term:docs/aiproj-track-a1-static-analysis.md",
+      "target": "docs/aiproj-track-final-evidence.md",
+      "expected": "docs/aiproj-track-a1-static-analysis.md",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "check_id": "final_evidence:term:docs/aiproj-track-a2-coverage.md",
+      "target": "docs/aiproj-track-final-evidence.md",
+      "expected": "docs/aiproj-track-a2-coverage.md",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "check_id": "final_evidence:term:docs/aiproj-track-a3-honest-measurement.md",
+      "target": "docs/aiproj-track-final-evidence.md",
+      "expected": "docs/aiproj-track-a3-honest-measurement.md",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "check_id": "final_evidence:term:docs/aiproj-track-a3-artifact-schema-guard.md",
+      "target": "docs/aiproj-track-final-evidence.md",
+      "expected": "docs/aiproj-track-a3-artifact-schema-guard.md",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "check_id": "final_evidence:term:docs/aiproj-track-a4-code-health.md",
+      "target": "docs/aiproj-track-final-evidence.md",
+      "expected": "docs/aiproj-track-a4-code-health.md",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "check_id": "final_evidence:term:docs/no-promotion-boundary.md",
+      "target": "docs/aiproj-track-final-evidence.md",
+      "expected": "docs/no-promotion-boundary.md",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "check_id": "final_evidence:term:https://github.com/wul012/aiproj/actions/runs/28846542546",
+      "target": "docs/aiproj-track-final-evidence.md",
+      "expected": "https://github.com/wul012/aiproj/actions/runs/28846542546",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "check_id": "final_evidence:term:https://github.com/wul012/aiproj/actions/runs/28846544549",
+      "target": "docs/aiproj-track-final-evidence.md",
+      "expected": "https://github.com/wul012/aiproj/actions/runs/28846544549",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "check_id": "no_promotion:term:promotion_ready=False",
+      "target": "docs/no-promotion-boundary.md",
+      "expected": "promotion_ready=False",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "check_id": "no_promotion:term:approved_for_promotion=False",
+      "target": "docs/no-promotion-boundary.md",
+      "expected": "approved_for_promotion=False",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "check_id": "no_promotion:term:model_quality_claim",
+      "target": "docs/no-promotion-boundary.md",
+      "expected": "model_quality_claim",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "check_id": "no_promotion:term:lookup-only",
+      "target": "docs/no-promotion-boundary.md",
+      "expected": "lookup-only",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "check_id": "no_promotion:term:does not automatically mean",
+      "target": "docs/no-promotion-boundary.md",
+      "expected": "does not automatically mean",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "check_id": "doc_index:README.md:docs/aiproj-track-final-evidence.md",
+      "target": "README.md",
+      "expected": "docs/aiproj-track-final-evidence.md",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "check_id": "doc_index:docs/README.md:aiproj-track-final-evidence.md",
+      "target": "docs/README.md",
+      "expected": "aiproj-track-final-evidence.md",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "check_id": "doc_index:START_HERE.md:docs/aiproj-track-final-evidence.md",
+      "target": "START_HERE.md",
+      "expected": "docs/aiproj-track-final-evidence.md",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "check_id": "doc_index:docs/script-entrypoints.md:scripts/check_aiproj_track_closeout.py",
+      "target": "docs/script-entrypoints.md",
+      "expected": "scripts/check_aiproj_track_closeout.py",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "check_id": "ci:command:scripts/check_static_analysis.py",
+      "target": ".github/workflows/ci.yml",
+      "expected": "scripts/check_static_analysis.py",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "check_id": "ci:command:scripts/check_type_analysis.py",
+      "target": ".github/workflows/ci.yml",
+      "expected": "scripts/check_type_analysis.py",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "check_id": "ci:command:scripts/check_model_capability_honest_measurement.py",
+      "target": ".github/workflows/ci.yml",
+      "expected": "scripts/check_model_capability_honest_measurement.py",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "check_id": "ci:command:scripts/check_artifact_schema_guard.py",
+      "target": ".github/workflows/ci.yml",
+      "expected": "scripts/check_artifact_schema_guard.py",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "check_id": "ci:command:scripts/check_file_size_ratchet.py",
+      "target": ".github/workflows/ci.yml",
+      "expected": "scripts/check_file_size_ratchet.py",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "check_id": "ci:command:scripts/check_aiproj_track_closeout.py",
+      "target": ".github/workflows/ci.yml",
+      "expected": "scripts/check_aiproj_track_closeout.py",
+      "actual": "present",
+      "status": "pass"
+    },
+    {
+      "check_id": "ci:command:scripts/run_test_coverage.py --out-dir runs/test-coverage-ci --fail-under 88.98",
+      "target": ".github/workflows/ci.yml",
+      "expected": "scripts/run_test_coverage.py --out-dir runs/test-coverage-ci --fail-under 88.98",
+      "actual": "present",
+      "status": "pass"
+    }
+  ],
+  "recommendations": [
+    "Keep A-track closeout evidence cited, indexed, and enforced before starting Stage 2 work."
+  ]
+}

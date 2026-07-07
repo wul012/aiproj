@@ -142,6 +142,15 @@ DOC_TARGETS = [
         "title": "# Versioned Artifacts",
         "required_terms": ["f/", "screenshot", "artifact"],
     },
+    {
+        "path": "docs/aiproj-track-final-evidence.md",
+        "title": "# aiproj A-Track Final Evidence",
+        "required_terms": [
+            "Gate-By-Gate Evidence Matrix",
+            "No-Promotion Boundary",
+            "scripts/check_aiproj_track_closeout.py",
+        ],
+    },
 ]
 
 FRONT_DOOR_TARGETS = [
@@ -186,10 +195,14 @@ def build_project_docs_readability_report(root: str | Path = ".", *, generated_a
         "title": "MiniGPT project docs readability split v1131",
         "generated_at": generated_at or utc_now(),
         "status": status,
-        "decision": "project_docs_readability_split_ready" if status == "pass" else "repair_project_docs_readability_split",
+        "decision": "project_docs_readability_split_ready"
+        if status == "pass"
+        else "repair_project_docs_readability_split",
         "summary": {
             "status": status,
-            "decision": "project_docs_readability_split_ready" if status == "pass" else "repair_project_docs_readability_split",
+            "decision": "project_docs_readability_split_ready"
+            if status == "pass"
+            else "repair_project_docs_readability_split",
             "row_count": len(rows),
             "ready_row_count": len(rows) - len(failed_rows),
             "doc_target_count": len(DOC_TARGETS),

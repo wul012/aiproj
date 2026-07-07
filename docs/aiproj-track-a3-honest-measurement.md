@@ -40,6 +40,10 @@ promotion authority, if single-seed stochastic evidence is not labeled
 exploratory/no-promotion, if registered artifacts are missing, if guarded fields
 drift, or if the positive/negative contract-test markers disappear.
 
+The current contract coverage is in `tests/test_model_capability_honest_measurement.py`.
+It covers the passing registry, single-seed label widening, missing negative
+markers, missing source artifacts, output rendering, and CLI wiring.
+
 ## CI Role
 
 CI runs this gate after scoped type analysis and before coverage. The ordering

@@ -96,6 +96,9 @@ class CiWorkflowSummary(TypedDict):
     file_size_ratchet_present: bool
     file_size_ratchet_order_ready: bool
     file_size_ratchet_ready: bool
+    aiproj_track_closeout_present: bool
+    aiproj_track_closeout_order_ready: bool
+    aiproj_track_closeout_ready: bool
     normalization_guard_present: bool
     normalization_guard_order_ready: bool
     normalization_guard_ready: bool
@@ -196,6 +199,10 @@ def build_ci_workflow_hygiene_report(
     file_size_ratchet_order_ready = _check_passed(
         checks, "order:file_size_ratchet_after_artifact_schema_guard"
     ) and _check_passed(checks, "order:file_size_ratchet_before_coverage")
+    aiproj_track_closeout_present = _check_passed(checks, "command:aiproj_track_closeout")
+    aiproj_track_closeout_order_ready = _check_passed(
+        checks, "order:aiproj_track_closeout_after_file_size_ratchet"
+    ) and _check_passed(checks, "order:aiproj_track_closeout_before_coverage")
     normalization_guard_present = _check_passed(checks, "command:normalization_guard")
     normalization_guard_order_ready = _check_passed(checks, "order:normalization_guard_before_coverage")
     summary: CiWorkflowSummary = {
@@ -254,6 +261,9 @@ def build_ci_workflow_hygiene_report(
         "file_size_ratchet_present": file_size_ratchet_present,
         "file_size_ratchet_order_ready": file_size_ratchet_order_ready,
         "file_size_ratchet_ready": file_size_ratchet_present and file_size_ratchet_order_ready,
+        "aiproj_track_closeout_present": aiproj_track_closeout_present,
+        "aiproj_track_closeout_order_ready": aiproj_track_closeout_order_ready,
+        "aiproj_track_closeout_ready": aiproj_track_closeout_present and aiproj_track_closeout_order_ready,
         "normalization_guard_present": normalization_guard_present,
         "normalization_guard_order_ready": normalization_guard_order_ready,
         "normalization_guard_ready": normalization_guard_present and normalization_guard_order_ready,
@@ -453,6 +463,8 @@ def _recommendations(summary: CiWorkflowSummary) -> list[str]:
         recommendations.append("Restore scoped type analysis after static analysis and before coverage.")
     if not summary.get("file_size_ratchet_ready"):
         recommendations.append("Restore the file-size ratchet after artifact schema guard and before coverage.")
+    if not summary.get("aiproj_track_closeout_ready"):
+        recommendations.append("Restore the aiproj A-track closeout gate after file-size ratchet and before coverage.")
     if not summary.get("promoted_seed_receipt_contract_failure_smoke_ready"):
         recommendations.append("Restore the receipt contract failure smoke after assurance and before coverage.")
     if not summary.get("archived_path_portability_check_ready"):

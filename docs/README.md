@@ -25,6 +25,7 @@ This directory keeps stable reader-facing documentation outside the long version
 - [aiproj A3 honest measurement](aiproj-track-a3-honest-measurement.md)
 - [aiproj A3 artifact schema guard](aiproj-track-a3-artifact-schema-guard.md)
 - [aiproj A4 code health](aiproj-track-a4-code-health.md)
+- [aiproj A-track final evidence](aiproj-track-final-evidence.md)
 - [Model capability honest measurement policy](model-capability-honest-measurement-policy.md)
 - [Production excellence brief](production-excellence-aiproj-brief.md)
 

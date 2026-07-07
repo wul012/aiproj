@@ -73,7 +73,9 @@ class ProjectDocsReadabilityTests(unittest.TestCase):
             report = build_project_docs_readability_report(root)
             outputs = write_project_docs_readability_outputs(report, root / "out")
             with contextlib.redirect_stdout(io.StringIO()):
-                exit_code = cli_main(["--root", str(root), "--out-dir", str(root / "cli-out"), "--require-pass", "--force"])
+                exit_code = cli_main(
+                    ["--root", str(root), "--out-dir", str(root / "cli-out"), "--require-pass", "--force"]
+                )
             cli_outputs = sorted((root / "cli-out").glob("*"))
 
         self.assertEqual(exit_code, 0)
@@ -87,7 +89,9 @@ class ProjectDocsReadabilityTests(unittest.TestCase):
             root = Path(tmp)
             _write_docs_fixture(root)
             with contextlib.redirect_stdout(io.StringIO()):
-                exit_code = legacy_cli_main(["--root", str(root), "--out-dir", str(root / "legacy-out"), "--require-pass", "--force"])
+                exit_code = legacy_cli_main(
+                    ["--root", str(root), "--out-dir", str(root / "legacy-out"), "--require-pass", "--force"]
+                )
             legacy_outputs = sorted((root / "legacy-out").glob("*"))
 
         self.assertEqual(exit_code, 0)
@@ -130,6 +134,7 @@ def _write_docs_fixture(root: Path) -> None:
                 "tests.test_governance_extended_cli_behavior ACTIVE_CLI_BEHAVIOR_COVERAGE tests.test_test_coverage_report "
                 "transitional package files stay small facade-only package initializers hidden re-export drift "
                 "facade-only transitional submodules explicit imports aligned with `__all__` submodule `__all__` tables"
+                " Gate-By-Gate Evidence Matrix No-Promotion Boundary scripts/check_aiproj_track_closeout.py"
             ),
         ]
         path.write_text("\n".join(body), encoding="utf-8")

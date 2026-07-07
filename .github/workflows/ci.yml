@@ -44,6 +44,9 @@ jobs:
       - name: File size ratchet
         run: python -B scripts/check_file_size_ratchet.py --out-dir runs/file-size-ratchet-ci
 
+      - name: aiproj production excellence closeout
+        run: python -B scripts/check_aiproj_track_closeout.py --out-dir runs/aiproj-track-closeout-ci
+
       - name: Archived path portability check
         run: python -B scripts/check_archived_path_portability.py --out-dir runs/archived-path-portability-ci
 

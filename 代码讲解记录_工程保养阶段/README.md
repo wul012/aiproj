@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1225-v1267-production-excellence-a5-final-evidence-closeout.md
+ -> v1267 code explanation: completes production-excellence A5 with a final evidence closeout gate. It validates the A0-A4 evidence docs, final evidence matrix, no-promotion wording, README/docs indexes, and CI closeout wiring, then archives proof under `f/1267`.
+
 1224-v1266-production-excellence-a4-file-size-ratchet.md
  -> v1266 code explanation: completes production-excellence A4 with a CI-backed file-size ratchet. It scans Python files under `src`, `scripts`, and `tests`, records eight no-growth waivers for legacy oversize tests, and fails on new unwaived oversize files or waiver growth. Evidence lives under `f/1266`.
 

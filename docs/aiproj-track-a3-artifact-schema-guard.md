@@ -39,6 +39,10 @@ The checker fails when a registered artifact is missing, is not a JSON object,
 loses a required field, violates an expected value, or changes the type of a
 registered field.
 
+The v1265 evidence bundle lives under `f/1265/解释/artifact-schema-guard/`;
+schema sample artifacts used by the registry live under
+`f/1265/解释/schema-samples/`.
+
 ## CI Role
 
 CI runs this gate after `check_model_capability_honest_measurement.py` and

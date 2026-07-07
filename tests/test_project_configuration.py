@@ -69,6 +69,9 @@ class ProjectConfigurationTests(unittest.TestCase):
             "python -B scripts/check_artifact_schema_guard.py --out-dir runs/artifact-schema-guard-ci", workflow
         )
         self.assertIn("python -B scripts/check_file_size_ratchet.py --out-dir runs/file-size-ratchet-ci", workflow)
+        self.assertIn(
+            "python -B scripts/check_aiproj_track_closeout.py --out-dir runs/aiproj-track-closeout-ci", workflow
+        )
         self.assertIn(coverage_command, workflow)
         self.assertIn("python -B scripts/check_source_encoding.py", workflow)
 
@@ -93,6 +96,7 @@ class ProjectConfigurationTests(unittest.TestCase):
         self.assertIn("python -B scripts/check_model_capability_honest_measurement.py", start_here)
         self.assertIn("python -B scripts/check_artifact_schema_guard.py", start_here)
         self.assertIn("python -B scripts/check_file_size_ratchet.py", start_here)
+        self.assertIn("python -B scripts/check_aiproj_track_closeout.py", start_here)
         self.assertIn("python -m unittest discover -s tests -v", start_here)
         self.assertIn("python -B scripts/check_normalization_guard.py", start_here)
         self.assertIn("docs/architecture-map.md", start_here)

@@ -44,6 +44,7 @@ python -B scripts/check_type_analysis.py --out-dir runs/type-analysis
 python -B scripts/check_model_capability_honest_measurement.py --out-dir runs/model-capability-honest-measurement
 python -B scripts/check_artifact_schema_guard.py --out-dir runs/artifact-schema-guard
 python -B scripts/check_file_size_ratchet.py --out-dir runs/file-size-ratchet
+python -B scripts/check_aiproj_track_closeout.py --out-dir runs/aiproj-track-closeout
 python -m unittest discover -s tests -v
 python -B scripts/run_test_coverage.py --out-dir runs/test-coverage --fail-under 88.98
 python -B scripts/check_normalization_guard.py
@@ -59,6 +60,8 @@ Use the artifact schema guard when experiment cards, dataset cards, model cards,
 or publication receipt shapes are touched.
 Use the file-size ratchet when adding new Python modules or expanding legacy
 tests; unwaived files above the hard limit fail, and waived files must not grow.
+Use the A-track closeout gate when changing production-excellence evidence docs,
+README/docs indexes, no-promotion wording, or CI gate wiring.
 Use the broad unittest command when you need full test discovery, and the
 coverage command when you need the same thresholded unit-test entrypoint used by
 CI. Use the normalization guard when you are changing architecture boundaries,
@@ -86,14 +89,13 @@ workflows.
 
 ## Latest version summary
 
-Current README focus: **v1266 production-excellence A4 file-size ratchet**.
+Current README focus: **v1267 production-excellence A5 final evidence closeout**.
 
-v1266 completes A4 by making Python file-size drift mechanically checkable.
-The registry in `docs/code-health/file-size-ratchet.json` scans `src/`,
-`scripts/`, and `tests/`, keeps eight legacy oversize tests as explicit
-no-growth waivers, and fails when a new unwaived file crosses the hard limit or
-a waived file grows. This is an engineering-maintenance gate, not a
-model-quality promotion.
+v1267 completes A5 by making the A-track final evidence map mechanically
+checkable. The closeout gate validates `docs/aiproj-track-final-evidence.md`,
+the A0-A4 evidence docs, no-promotion wording, documentation indexes, and CI
+closeout wiring. This is an engineering closeout gate, not a model-quality
+promotion.
 
 ## Where to look next
 
@@ -113,6 +115,7 @@ model-quality promotion.
 - `docs/aiproj-track-a3-honest-measurement.md` - A3 honest-measurement gate evidence.
 - `docs/aiproj-track-a3-artifact-schema-guard.md` - A3 artifact-schema guard evidence.
 - `docs/aiproj-track-a4-code-health.md` - A4 file-size ratchet evidence.
+- `docs/aiproj-track-final-evidence.md` - A5 final evidence and reviewer handoff.
 - `docs/production-excellence-aiproj-brief.md` - Claude-authored A-track execution brief.
 - `文档分流说明.md` - current documentation routing map.
 - `src/minigpt/` - model, evaluation, reporting, and workflow code.

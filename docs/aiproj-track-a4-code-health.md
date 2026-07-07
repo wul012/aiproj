@@ -40,6 +40,9 @@ The checker writes JSON, CSV, Markdown, and HTML. The summary includes scanned
 file count, warning count, over-limit count, waiver count, unwaived over-limit
 count, waiver growth violations, and the largest file path.
 
+The v1266 evidence bundle lives under `f/1266/解释/file-size-ratchet/`, with
+the visual HTML check archived under `f/1266/图片/`.
+
 ## CI Role
 
 CI runs this gate after `check_artifact_schema_guard.py` and before coverage.

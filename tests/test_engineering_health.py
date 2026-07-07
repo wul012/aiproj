@@ -50,7 +50,9 @@ class EngineeringHealthTests(unittest.TestCase):
         self.assertIn(str(out_dir / "artifact-schema-guard"), steps[6].command)
         self.assertEqual(steps[7].command[:3], ("python", "-B", "scripts/check_file_size_ratchet.py"))
         self.assertIn(str(out_dir / "file-size-ratchet"), steps[7].command)
-        self.assertEqual(steps[8].command, ("python", "-B", "scripts/check_normalization_guard.py"))
+        self.assertEqual(steps[8].command[:3], ("python", "-B", "scripts/check_aiproj_track_closeout.py"))
+        self.assertIn(str(out_dir / "aiproj-track-closeout"), steps[8].command)
+        self.assertEqual(steps[9].command, ("python", "-B", "scripts/check_normalization_guard.py"))
 
     def test_summary_records_step_statuses_and_output_path(self) -> None:
         out_dir = ROOT / "runs" / "engineering-health-test"

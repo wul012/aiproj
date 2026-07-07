@@ -28,9 +28,9 @@ This runs the `HEALTH_ENGINEERING_ENTRYPOINTS` subset from
 `scripts/_bootstrap.py`: source encoding hygiene, project documentation
 readability, CI workflow hygiene, staged static analysis, scoped type analysis,
 model-capability honest measurement, artifact schema guard, file-size ratchet,
-and the normalization guard in one local command. Source encoding, docs
+the A-track closeout gate, and the normalization guard in one local command. Source encoding, docs
 readability, CI workflow, static-analysis, type-analysis, honest-measurement,
-artifact-schema, and file-size reports are written under
+artifact-schema, file-size, and A-track closeout reports are written under
 `runs/engineering-health/`, and the aggregate command writes
 `runs/engineering-health/engineering_health_summary.json` and
 `runs/engineering-health/engineering_health_summary.md` with the step commands,
@@ -88,6 +88,17 @@ This reads `docs/code-health/file-size-ratchet.json` and scans Python files
 under `src/`, `scripts/`, and `tests/`. Unwaived files above the hard line
 limit fail, and waived legacy oversize tests must not grow beyond their
 committed baseline.
+
+For the A-track final evidence closeout alone:
+
+```powershell
+python -B scripts/check_aiproj_track_closeout.py --out-dir runs/aiproj-track-closeout
+```
+
+This checks `docs/aiproj-track-final-evidence.md`, A0-A4 evidence docs,
+no-promotion wording, documentation indexes, and CI closeout gate wiring. It is
+the maintainer command to run before treating the production-excellence A-track
+as review-ready.
 
 For a quick full unittest run:
 

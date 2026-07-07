@@ -87,6 +87,9 @@ def render_ci_workflow_hygiene_markdown(report: dict[str, Any]) -> str:
         "file_size_ratchet_present",
         "file_size_ratchet_order_ready",
         "file_size_ratchet_ready",
+        "aiproj_track_closeout_present",
+        "aiproj_track_closeout_order_ready",
+        "aiproj_track_closeout_ready",
         "normalization_guard_present",
         "normalization_guard_order_ready",
         "normalization_guard_ready",
@@ -160,6 +163,7 @@ def render_ci_workflow_hygiene_html(report: dict[str, Any]) -> str:
         ("Static analysis", summary.get("static_analysis_ready")),
         ("Type analysis", summary.get("type_analysis_ready")),
         ("File size ratchet", summary.get("file_size_ratchet_ready")),
+        ("A-track closeout", summary.get("aiproj_track_closeout_ready")),
         ("Normalization guard", summary.get("normalization_guard_ready")),
         ("Python", summary.get("python_version")),
     ]

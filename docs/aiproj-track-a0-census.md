@@ -13,7 +13,7 @@ A0 asks for three things:
 3. check README/START_HERE freshness against the current version line and keep
    the educational/no-promotion boundary intact.
 
-## CI Reverification
+## CI Reverification At A0 Start
 
 Latest green main run checked at A0 start:
 
@@ -25,7 +25,7 @@ Latest green main run checked at A0 start:
 - title: `v1259 review route promotion release readiness receipt index`
 - URL: `https://github.com/wul012/aiproj/actions/runs/28743564518`
 
-The workflow currently runs these steps:
+At A0 start, the workflow ran these steps:
 
 | order | CI step |
 |---:|---|
@@ -47,8 +47,11 @@ The workflow currently runs these steps:
 | 16 | normalization guard |
 | 17 | coverage-producing unit tests with `--fail-under 80` |
 
-`pyproject.toml` still has pytest configuration but no ruff, black, or mypy
-tooling. That is expected at A0; static analysis begins in A1.
+At A0 start, `pyproject.toml` still had pytest configuration but no ruff,
+black, or mypy tooling. That was expected at A0; A1-A4 later added ruff,
+scoped mypy, the coverage floor, honest-measurement checks, artifact schema
+guarding, and file-size ratchets. The final A-track state is summarized in
+`docs/aiproj-track-final-evidence.md`.
 
 ## Test And Archive Census
 
@@ -93,6 +96,7 @@ A0 did not:
 
 - change any ML capability verdict;
 - re-run training;
+- make a no training claim beyond the census/freshness boundary;
 - move archive roots;
 - promote a checkpoint;
 - add ruff, black, mypy, or coverage ratchet changes.

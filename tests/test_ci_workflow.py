@@ -36,13 +36,21 @@ REQUIRED_SUMMARY_GATES = (
     "static_analysis",
     "type_analysis",
     "file_size_ratchet",
+    "aiproj_track_closeout",
     "normalization_guard",
 )
 
 COVERAGE_ORDER_SENSITIVE_GATES = tuple(
     gate
     for gate in REQUIRED_SUMMARY_GATES
-    if gate not in {"project_docs_readability", "static_analysis", "type_analysis", "file_size_ratchet"}
+    if gate
+    not in {
+        "project_docs_readability",
+        "static_analysis",
+        "type_analysis",
+        "file_size_ratchet",
+        "aiproj_track_closeout",
+    }
 )
 
 CURRENT_WORKFLOW_REQUIRED_CHECK_IDS = (
@@ -62,6 +70,7 @@ CURRENT_WORKFLOW_REQUIRED_CHECK_IDS = (
     "command:model_capability_honest_measurement_gate",
     "command:artifact_schema_guard",
     "command:file_size_ratchet",
+    "command:aiproj_track_closeout",
     "command:normalization_guard",
     "order:ci_tiny_scorecard_plan_check_after_smoke",
     "order:ci_tiny_scorecard_plan_check_before_coverage",
@@ -89,6 +98,8 @@ CURRENT_WORKFLOW_REQUIRED_CHECK_IDS = (
     "order:artifact_schema_guard_before_coverage",
     "order:file_size_ratchet_after_artifact_schema_guard",
     "order:file_size_ratchet_before_coverage",
+    "order:aiproj_track_closeout_after_file_size_ratchet",
+    "order:aiproj_track_closeout_before_coverage",
     "order:normalization_guard_before_coverage",
 )
 
@@ -171,8 +182,8 @@ class CIWorkflowTests(unittest.TestCase):
             self.assertGreaterEqual(report["summary"]["failed_check_count"], 4)
             self.assertEqual(report["summary"]["node24_native_action_count"], 0)
             self.assertEqual(report["summary"]["forbidden_env_count"], 1)
-            self.assertEqual(report["summary"]["missing_step_count"], 19)
-            self.assertEqual(report["summary"]["required_step_count"], 21)
+            self.assertEqual(report["summary"]["missing_step_count"], 20)
+            self.assertEqual(report["summary"]["required_step_count"], 22)
             for gate in REQUIRED_SUMMARY_GATES:
                 with self.subTest(gate=gate):
                     self.assertFalse(report["summary"][f"{gate}_ready"])
@@ -208,6 +219,8 @@ class CIWorkflowTests(unittest.TestCase):
                         "        run: python -B scripts/check_artifact_schema_guard.py --out-dir runs/artifact-schema-guard-ci",
                         "      - name: File size ratchet",
                         "        run: python -B scripts/check_file_size_ratchet.py --out-dir runs/file-size-ratchet-ci",
+                        "      - name: aiproj production excellence closeout",
+                        "        run: python -B scripts/check_aiproj_track_closeout.py --out-dir runs/aiproj-track-closeout-ci",
                         "      - name: Archived path portability check",
                         "        run: python -B scripts/check_archived_path_portability.py --out-dir runs/archived-path-portability-ci",
                         "      - name: Promoted seed handoff assurance smoke",
@@ -277,6 +290,8 @@ class CIWorkflowTests(unittest.TestCase):
                         "        run: python -B scripts/check_artifact_schema_guard.py --out-dir runs/artifact-schema-guard-ci",
                         "      - name: File size ratchet",
                         "        run: python -B scripts/check_file_size_ratchet.py --out-dir runs/file-size-ratchet-ci",
+                        "      - name: aiproj production excellence closeout",
+                        "        run: python -B scripts/check_aiproj_track_closeout.py --out-dir runs/aiproj-track-closeout-ci",
                         "      - name: Unit tests",
                         "        run: python -B scripts/run_test_coverage.py --out-dir runs/test-coverage-ci --fail-under 88.98",
                         "      - name: Archived path portability check",
@@ -346,6 +361,8 @@ class CIWorkflowTests(unittest.TestCase):
                         "        run: python -B scripts/check_artifact_schema_guard.py --out-dir runs/artifact-schema-guard-ci",
                         "      - name: File size ratchet",
                         "        run: python -B scripts/check_file_size_ratchet.py --out-dir runs/file-size-ratchet-ci",
+                        "      - name: aiproj production excellence closeout",
+                        "        run: python -B scripts/check_aiproj_track_closeout.py --out-dir runs/aiproj-track-closeout-ci",
                         "      - name: Archived path portability check",
                         "        run: python -B scripts/check_archived_path_portability.py --out-dir runs/archived-path-portability-ci",
                         "      - name: Promoted seed handoff assurance smoke",

@@ -2,6 +2,10 @@
 
 本目录从 v1098 开始保存模型治理阶段的运行截图和解释，和历史目录 `a/`、`b/`、`c/`、`d/`、`e/` 同级。
 
+## v1267
+
+v1267 完成 production-excellence A5，新增 A-track final evidence closeout gate。它检查 `docs/aiproj-track-final-evidence.md`、A0-A4 证据文档、no-promotion wording、README/docs 索引和 CI closeout step，防止 A-track 收尾证据在后续阶段静默漂移。运行证据见 `f/1267/解释/aiproj-track-closeout/`，可视化核验见 `f/1267/图片/aiproj-track-closeout-v1267.png`。
+
 ## v1266
 
 v1266 完成 production-excellence A4，新增 file-size ratchet。它扫描 `src/`、`scripts/` 和 `tests/` 下的 Python 文件，登记八个历史测试大文件为 no-growth waiver，并在未豁免文件超过 800 行或 waiver 文件继续增长时失败。运行证据见 `f/1266/解释/file-size-ratchet/`，可视化核验见 `f/1266/图片/file-size-ratchet-v1266.png`。

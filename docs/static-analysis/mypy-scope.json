@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "tool": "mypy",
-  "scope_floor": 14,
+  "scope_floor": 16,
   "targets": [
     "scripts/_bootstrap.py",
     "scripts/_engineering_health.py",
@@ -10,6 +10,8 @@
     "scripts/check_model_capability_honest_measurement.py",
     "scripts/check_artifact_schema_guard.py",
     "scripts/check_file_size_ratchet.py",
+    "scripts/check_aiproj_track_closeout.py",
+    "src/minigpt/aiproj_track_closeout.py",
     "src/minigpt/artifact_schema_guard.py",
     "src/minigpt/file_size_ratchet.py",
     "src/minigpt/ci_workflow_hygiene.py",
@@ -36,7 +38,11 @@
       "scripts/check_type_analysis.py",
       "scripts/check_model_capability_honest_measurement.py",
       "scripts/check_artifact_schema_guard.py",
-      "scripts/check_file_size_ratchet.py"
+      "scripts/check_file_size_ratchet.py",
+      "scripts/check_aiproj_track_closeout.py"
+    ],
+    "aiproj_track_closeout_gate": [
+      "src/minigpt/aiproj_track_closeout.py"
     ],
     "artifact_schema_gate": [
       "src/minigpt/artifact_schema_guard.py"
