@@ -5,6 +5,13 @@ from pathlib import Path
 DEFAULT_WORKFLOW_PATH = Path(".github") / "workflows" / "ci.yml"
 REQUIRED_ACTIONS = {"actions/checkout": "v6", "actions/setup-python": "v6"}
 FORBIDDEN_ENV_VARS = ("FORCE_JAVASCRIPT_ACTIONS_TO_NODE24",)
+REQUIRED_EXECUTION_POLICY_FRAGMENTS = {
+    "main_branch_push_scope": "branches:\n      - main",
+    "pip_dependency_cache": 'cache: "pip"',
+    "pip_cache_manifest": "cache-dependency-path: requirements.txt",
+    "same_ref_concurrency_group": "group: ci-${{ github.workflow }}-${{ github.ref }}",
+    "cancel_superseded_runs": "cancel-in-progress: true",
+}
 COVERAGE_FAIL_UNDER_FLOOR = 88.98
 REQUIRED_COMMAND_FRAGMENTS = {
     "source_encoding_gate": "scripts/check_source_encoding.py",
@@ -166,5 +173,6 @@ __all__ = [
     "REQUIRED_ACTIONS",
     "REQUIRED_COMMAND_FRAGMENTS",
     "REQUIRED_COMMAND_ORDER",
+    "REQUIRED_EXECUTION_POLICY_FRAGMENTS",
     "REQUIRED_PYTHON_VERSION",
 ]

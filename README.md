@@ -10,6 +10,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 - [Public API policy](docs/public-api.md)
 - [Normalization roadmap](docs/normalization-roadmap.md)
 - [Engineering workflow](docs/engineering-workflow.md)
+- [CI execution economy](docs/ci-execution-economy.md)
 - [Normalization guard](docs/normalization-guard.md)
 - [Script entrypoints](docs/script-entrypoints.md)
 - [Static analysis](docs/static-analysis.md)
@@ -30,13 +31,23 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 - [aiproj A-track final evidence](docs/aiproj-track-final-evidence.md)
 - [Model capability honest measurement policy](docs/model-capability-honest-measurement-policy.md)
 - [Production excellence brief](docs/production-excellence-aiproj-brief.md)
+- [Stage 2 operational brief (inactive)](docs/stage2-aiproj-operational-brief.md)
 - [Plain-language project guide](项目通俗说明/README.md)
 
 ## Current version
 
-Version `v1267.0.0` completes **aiproj production-excellence A5 with final evidence and docs-honesty closeout**. It adds a closeout checker that validates the A0-A4 evidence docs, the final evidence matrix, no-promotion wording, README/docs indexes, and CI wiring before coverage. This is a closeout/readiness-map gate only: no training, cached experiment verdict, promotion, or model-quality upgrade changes.
+Version `v1268.0.0` completes **the Stage-1 review follow-up and CI execution-economy hardening**. It keeps full CI on `main` and pull requests while suppressing duplicate tag runs, caching pip downloads, cancelling superseded runs on the same ref, and enforcing those choices through the existing CI hygiene report. The inactive Stage-2 brief is now tracked but remains gated; no science-lane or model-quality semantics change.
 
-## Latest v1267 checkpoint
+## Latest v1268 checkpoint
+
+- Restricted the primary workflow to `main` pushes and pull requests, so a release tag pointing at an already-tested commit does not rerun the same job.
+- Added setup-python pip caching with `requirements.txt` invalidation and same-ref concurrency cancellation.
+- Extended CI workflow hygiene with six execution-economy checks, composite readiness fields, negative tests, CLI output, and JSON/CSV/Markdown/HTML evidence.
+- Tracked the Stage-2 aiproj brief with `STATUS: INACTIVE`; it remains gated on the program-wide capstone.
+
+## Historical v1267 context
+
+## v1267 checkpoint
 
 - Added `docs/aiproj-track-final-evidence.md` as the A-track gate-by-gate closeout table, waiver list, census summary, and reviewer handoff.
 - Added `src/minigpt/aiproj_track_closeout.py`, `scripts/check_aiproj_track_closeout.py`, and `tests/test_aiproj_track_closeout.py`.

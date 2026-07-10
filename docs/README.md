@@ -8,6 +8,7 @@ This directory keeps stable reader-facing documentation outside the long version
 - [Public API policy](public-api.md)
 - [Normalization roadmap](normalization-roadmap.md)
 - [Engineering workflow](engineering-workflow.md)
+- [CI execution economy](ci-execution-economy.md)
 - [Normalization guard](normalization-guard.md)
 - [Script entrypoints](script-entrypoints.md)
 - [Static analysis](static-analysis.md)
@@ -28,5 +29,6 @@ This directory keeps stable reader-facing documentation outside the long version
 - [aiproj A-track final evidence](aiproj-track-final-evidence.md)
 - [Model capability honest measurement policy](model-capability-honest-measurement-policy.md)
 - [Production excellence brief](production-excellence-aiproj-brief.md)
+- [Stage 2 operational brief (inactive)](stage2-aiproj-operational-brief.md)
 
 The root README remains the project landing page and historical ledger, but new readers should start here when they need the conceptual map.

@@ -56,6 +56,12 @@ class ProjectConfigurationTests(unittest.TestCase):
         )
 
         self.assertIn("pip install -r requirements.txt", workflow)
+        self.assertIn("branches:\n      - main", workflow)
+        self.assertNotIn("    tags:", workflow)
+        self.assertIn('cache: "pip"', workflow)
+        self.assertIn("cache-dependency-path: requirements.txt", workflow)
+        self.assertIn("group: ci-${{ github.workflow }}-${{ github.ref }}", workflow)
+        self.assertIn("cancel-in-progress: true", workflow)
         self.assertIn("python -B scripts/check_normalization_guard.py", workflow)
         self.assertIn("python -B scripts/check_project_docs_readability.py", workflow)
         self.assertIn("python -B scripts/check_static_analysis.py --out-dir runs/static-analysis-ci", workflow)

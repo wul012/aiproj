@@ -16,6 +16,17 @@ The project uses a `src/` layout declared in `pyproject.toml`. Runtime package
 discovery comes from `src/minigpt`, and local pytest discovery is scoped to
 `tests/`.
 
+## CI Execution Economy
+
+The primary workflow runs for pull requests and pushes to `main`. Release tags
+pointing at an already-tested main commit do not trigger a duplicate full run.
+`actions/setup-python` caches pip downloads using `requirements.txt` as the
+invalidation source, and same-ref concurrency cancels a superseded run when a
+newer commit arrives. These settings reduce duplicate compute without skipping
+or caching test results. `scripts/check_ci_workflow_hygiene.py` fails if the
+trigger scope, cache, or cancellation contract drifts. See
+`docs/ci-execution-economy.md` for the exact policy.
+
 ## Standard Checks
 
 For the current maintainer health check:

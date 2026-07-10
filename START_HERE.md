@@ -89,13 +89,12 @@ workflows.
 
 ## Latest version summary
 
-Current README focus: **v1267 production-excellence A5 final evidence closeout**.
+Current README focus: **v1268 Stage-1 review reconciliation and CI execution economy**.
 
-v1267 completes A5 by making the A-track final evidence map mechanically
-checkable. The closeout gate validates `docs/aiproj-track-final-evidence.md`,
-the A0-A4 evidence docs, no-promotion wording, documentation indexes, and CI
-closeout wiring. This is an engineering closeout gate, not a model-quality
-promotion.
+v1268 keeps the complete quality chain while preventing duplicate tag runs,
+enabling dependency caching, and cancelling superseded same-ref CI runs. The
+same CI hygiene report now fails if any execution-economy policy disappears.
+The Stage-2 brief is tracked but remains explicitly inactive and capstone-gated.
 
 ## Where to look next
 
@@ -104,6 +103,7 @@ promotion.
 - `docs/module-inventory.md` - module ownership and compatibility inventory.
 - `docs/public-api.md` - public API tiers and migration rules.
 - `docs/engineering-workflow.md` - standard local and CI checks.
+- `docs/ci-execution-economy.md` - branch/tag, dependency-cache, and concurrency policy.
 - `docs/normalization-guard.md` - focused guard modules and what each protects.
 - `docs/script-entrypoints.md` - stable maintainer scripts and historical script boundary.
 - `docs/static-analysis.md` - staged ruff baseline and scoped mypy gate.
@@ -117,6 +117,7 @@ promotion.
 - `docs/aiproj-track-a4-code-health.md` - A4 file-size ratchet evidence.
 - `docs/aiproj-track-final-evidence.md` - A5 final evidence and reviewer handoff.
 - `docs/production-excellence-aiproj-brief.md` - Claude-authored A-track execution brief.
+- `docs/stage2-aiproj-operational-brief.md` - inactive, capstone-gated Stage-2 plan.
 - `文档分流说明.md` - current documentation routing map.
 - `src/minigpt/` - model, evaluation, reporting, and workflow code.
 - `tests/` - behavior, contract, configuration, and boundary tests.

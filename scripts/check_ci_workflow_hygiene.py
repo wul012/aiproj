@@ -40,6 +40,12 @@ def main(argv: list[str] | None = None) -> int:
     print(f"missing_step_count={summary['missing_step_count']}")
     print(f"required_order_count={summary['required_order_count']}")
     print(f"order_violation_count={summary['order_violation_count']}")
+    print(f"execution_policy_violation_count={summary['execution_policy_violation_count']}")
+    print(f"main_branch_push_scope_ready={summary['main_branch_push_scope_ready']}")
+    print(f"tag_push_suppressed={summary['tag_push_suppressed']}")
+    print(f"pip_dependency_cache_ready={summary['pip_dependency_cache_ready']}")
+    print(f"concurrency_cancel_ready={summary['concurrency_cancel_ready']}")
+    print(f"ci_execution_economy_ready={summary['ci_execution_economy_ready']}")
     print(f"release_readiness_drift_contract_smoke_present={summary['release_readiness_drift_contract_smoke_present']}")
     print(
         f"release_readiness_drift_contract_smoke_order_ready={summary['release_readiness_drift_contract_smoke_order_ready']}"

@@ -85,3 +85,17 @@ only to guarantee the artifact contract A3.2 already enforces.
 - Coverage or size ratchet loosened = revert.
 - Any doc claim upgraded (especially model quality or maturity) without cited evidence = A5 fails.
 - Touching the ML capability lane's experiment semantics, cached artifacts, or verdicts = out of scope; stop.
+
+## Claude track review — 2026-07-07 (A0–A5): PASS
+
+- Verified as CI-enforced steps on every push: static analysis gate, scoped type analysis
+  gate, honest-measurement gate, artifact schema guard, file size ratchet, the track
+  closeout gate, and unit tests with coverage `--fail-under 88.98`; the v1267 closeout
+  runs are green on both branch and tag. `docs/aiproj-track-final-evidence.md` keeps the
+  no-promotion boundary explicit — the honesty framing is correct.
+- Conditions to fully close: (1) commit the untracked
+  `docs/stage2-aiproj-operational-brief.md` — it is not part of the repo until committed
+  (it stays INACTIVE/gated regardless); (2) optional quick win: every version currently
+  triggers CI twice (branch push + tag push) — add a trigger filter to halve CI spend.
+- aiproj is the FIRST Stage-1 track complete. Stage-2 remains gated on the program-wide
+  capstone; until then the engineering lane takes maintenance-only versions.

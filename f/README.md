@@ -2,6 +2,10 @@
 
 本目录从 v1098 开始保存模型治理阶段的运行截图和解释，和历史目录 `a/`、`b/`、`c/`、`d/`、`e/` 同级。
 
+## v1268
+
+v1268 收口 Stage-1 外部评审遗留并加固 CI execution economy。主 workflow 只响应 `main` push 与 pull request，tag 不再重复执行同一 commit；setup-python 启用 pip cache，同 ref 的旧 run 可被新提交取消。CI hygiene 将这些配置提升为六条可失败检查。运行证据见 `f/1268/解释/ci-execution-economy/`，浏览器核验见 `f/1268/图片/ci-execution-economy-v1268.png`。
+
 ## v1267
 
 v1267 完成 production-excellence A5，新增 A-track final evidence closeout gate。它检查 `docs/aiproj-track-final-evidence.md`、A0-A4 证据文档、no-promotion wording、README/docs 索引和 CI closeout step，防止 A-track 收尾证据在后续阶段静默漂移。运行证据见 `f/1267/解释/aiproj-track-closeout/`，可视化核验见 `f/1267/图片/aiproj-track-closeout-v1267.png`。

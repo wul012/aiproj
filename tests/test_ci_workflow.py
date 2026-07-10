@@ -54,6 +54,12 @@ COVERAGE_ORDER_SENSITIVE_GATES = tuple(
 )
 
 CURRENT_WORKFLOW_REQUIRED_CHECK_IDS = (
+    "execution:main_branch_push_scope",
+    "execution:no_tag_push_trigger",
+    "execution:pip_dependency_cache",
+    "execution:pip_cache_manifest",
+    "execution:same_ref_concurrency_group",
+    "execution:cancel_superseded_runs",
     "order:promoted_seed_handoff_assurance_smoke_before_coverage",
     "order:tiny_scorecard_inline_check_smoke_before_coverage",
     "command:tiny_scorecard_summary_check_sidecar",
@@ -136,6 +142,12 @@ class CIWorkflowTests(unittest.TestCase):
         self.assertEqual(report["summary"]["forbidden_env_count"], 0)
         self.assertEqual(report["summary"]["missing_step_count"], 0)
         self.assertEqual(report["summary"]["order_violation_count"], 0)
+        self.assertEqual(report["summary"]["execution_policy_violation_count"], 0)
+        self.assertTrue(report["summary"]["main_branch_push_scope_ready"])
+        self.assertTrue(report["summary"]["tag_push_suppressed"])
+        self.assertTrue(report["summary"]["pip_dependency_cache_ready"])
+        self.assertTrue(report["summary"]["concurrency_cancel_ready"])
+        self.assertTrue(report["summary"]["ci_execution_economy_ready"])
         for gate in REQUIRED_SUMMARY_GATES:
             _assert_summary_gate_state(self, report["summary"], gate)
         self.assertEqual(report["summary"]["python_version"], "3.11")
@@ -188,6 +200,26 @@ class CIWorkflowTests(unittest.TestCase):
                 with self.subTest(gate=gate):
                     self.assertFalse(report["summary"][f"{gate}_ready"])
             self.assertIn("Upgrade required GitHub actions", " ".join(report["recommendations"]))
+
+    def test_ci_workflow_hygiene_rejects_duplicate_tag_runs_and_missing_cache(self) -> None:
+        workflow = CI_WORKFLOW.read_text(encoding="utf-8")
+        inefficient = workflow.replace(
+            "    branches:\n      - main\n",
+            "    branches:\n      - main\n    tags:\n      - 'v*'\n",
+        ).replace('          cache: "pip"\n          cache-dependency-path: requirements.txt\n', "")
+
+        with TemporaryDirectory() as tmp:
+            path = Path(tmp) / "ci.yml"
+            path.write_text(inefficient, encoding="utf-8")
+            report = build_ci_workflow_hygiene_report(path, project_root=Path(tmp), generated_at="2026-01-01T00:00:00Z")
+
+        self.assertEqual(report["summary"]["status"], "fail")
+        self.assertFalse(report["summary"]["tag_push_suppressed"])
+        self.assertFalse(report["summary"]["pip_dependency_cache_ready"])
+        self.assertFalse(report["summary"]["ci_execution_economy_ready"])
+        self.assertGreaterEqual(report["summary"]["execution_policy_violation_count"], 3)
+        self.assertIn("execution:no_tag_push_trigger", _check_ids(report))
+        self.assertIn("avoid duplicate CI work", " ".join(report["recommendations"]))
 
     def test_ci_workflow_hygiene_accepts_semver_and_bare_major_action_tags(self) -> None:
         with TemporaryDirectory() as tmp:
@@ -471,6 +503,10 @@ class CIWorkflowTests(unittest.TestCase):
             ci_workflow_hygiene.REQUIRED_COMMAND_FRAGMENTS, ci_workflow_hygiene_policy.REQUIRED_COMMAND_FRAGMENTS
         )
         self.assertIs(ci_workflow_hygiene.REQUIRED_COMMAND_ORDER, ci_workflow_hygiene_policy.REQUIRED_COMMAND_ORDER)
+        self.assertIs(
+            ci_workflow_hygiene.REQUIRED_EXECUTION_POLICY_FRAGMENTS,
+            ci_workflow_hygiene_policy.REQUIRED_EXECUTION_POLICY_FRAGMENTS,
+        )
 
 
 def _assert_summary_gate_state(

@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1226-v1268-ci-execution-economy-and-review-reconciliation.md
+ -> v1268 code explanation: closes the Stage-1 review follow-up, tracks the inactive Stage-2 brief, removes duplicate tag CI runs, enables pip caching and same-ref cancellation, and protects all execution-economy choices with positive and negative contract tests. Evidence lives under `f/1268`.
+
 1225-v1267-production-excellence-a5-final-evidence-closeout.md
  -> v1267 code explanation: completes production-excellence A5 with a final evidence closeout gate. It validates the A0-A4 evidence docs, final evidence matrix, no-promotion wording, README/docs indexes, and CI closeout wiring, then archives proof under `f/1267`.
 

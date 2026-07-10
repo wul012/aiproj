@@ -19,6 +19,7 @@ from minigpt.ci_workflow_hygiene_policy import (
     REQUIRED_ACTIONS,
     REQUIRED_COMMAND_FRAGMENTS,
     REQUIRED_COMMAND_ORDER,
+    REQUIRED_EXECUTION_POLICY_FRAGMENTS,
     REQUIRED_PYTHON_VERSION,
 )
 from minigpt.report_utils import utc_now
@@ -63,6 +64,13 @@ class CiWorkflowSummary(TypedDict):
     missing_step_count: int
     required_order_count: int
     order_violation_count: int
+    execution_policy_check_count: int
+    execution_policy_violation_count: int
+    main_branch_push_scope_ready: bool
+    tag_push_suppressed: bool
+    pip_dependency_cache_ready: bool
+    concurrency_cancel_ready: bool
+    ci_execution_economy_ready: bool
     tiny_scorecard_plan_digest_gate_present: bool
     tiny_scorecard_plan_digest_gate_order_ready: bool
     tiny_scorecard_plan_digest_gate_ready: bool
@@ -139,6 +147,16 @@ def build_ci_workflow_hygiene_report(
     order_violations = [
         check for check in checks if check.get("category") == "required_order" and check.get("status") != "pass"
     ]
+    execution_policy_checks = [check for check in checks if check.get("category") == "execution_policy"]
+    execution_policy_violations = [check for check in execution_policy_checks if check.get("status") != "pass"]
+    main_branch_push_scope_ready = _check_passed(checks, "execution:main_branch_push_scope")
+    tag_push_suppressed = main_branch_push_scope_ready and _check_passed(checks, "execution:no_tag_push_trigger")
+    pip_dependency_cache_ready = _check_passed(checks, "execution:pip_dependency_cache") and _check_passed(
+        checks, "execution:pip_cache_manifest"
+    )
+    concurrency_cancel_ready = _check_passed(checks, "execution:same_ref_concurrency_group") and _check_passed(
+        checks, "execution:cancel_superseded_runs"
+    )
     plan_digest_gate_present = _check_passed(checks, "command:ci_tiny_scorecard_plan_digest_check")
     plan_digest_gate_order_ready = _check_passed(
         checks, "order:ci_tiny_scorecard_plan_check_after_smoke"
@@ -220,6 +238,13 @@ def build_ci_workflow_hygiene_report(
         "missing_step_count": len(missing_steps),
         "required_order_count": len(REQUIRED_COMMAND_ORDER),
         "order_violation_count": len(order_violations),
+        "execution_policy_check_count": len(execution_policy_checks),
+        "execution_policy_violation_count": len(execution_policy_violations),
+        "main_branch_push_scope_ready": main_branch_push_scope_ready,
+        "tag_push_suppressed": tag_push_suppressed,
+        "pip_dependency_cache_ready": pip_dependency_cache_ready,
+        "concurrency_cancel_ready": concurrency_cancel_ready,
+        "ci_execution_economy_ready": (tag_push_suppressed and pip_dependency_cache_ready and concurrency_cancel_ready),
         "tiny_scorecard_plan_digest_gate_present": plan_digest_gate_present,
         "tiny_scorecard_plan_digest_gate_order_ready": plan_digest_gate_order_ready,
         "tiny_scorecard_plan_digest_gate_ready": plan_digest_gate_present and plan_digest_gate_order_ready,
@@ -281,6 +306,7 @@ def build_ci_workflow_hygiene_report(
             "required_command_order": {
                 key: {"before": before, "after": after} for key, (before, after) in REQUIRED_COMMAND_ORDER.items()
             },
+            "required_execution_policy_fragments": dict(REQUIRED_EXECUTION_POLICY_FRAGMENTS),
             "required_python_version": REQUIRED_PYTHON_VERSION,
         },
         "summary": summary,
@@ -317,6 +343,35 @@ def _build_checks(text: str, actions: list[CiWorkflowAction]) -> list[CiWorkflow
                 "Native action versions should not rely on force-runtime environment variables.",
             )
         )
+    for policy_id, fragment in REQUIRED_EXECUTION_POLICY_FRAGMENTS.items():
+        present = fragment in text
+        checks.append(
+            _check(
+                f"execution:{policy_id}",
+                "execution_policy",
+                policy_id,
+                fragment,
+                "present" if present else "missing",
+                "pass" if present else "fail",
+                (
+                    "Required CI execution-economy policy is present."
+                    if present
+                    else "Required CI execution-economy policy is missing."
+                ),
+            )
+        )
+    tags_present = re.search(r"^\s{4}tags(?:-ignore)?:", text, flags=re.MULTILINE) is not None
+    checks.append(
+        _check(
+            "execution:no_tag_push_trigger",
+            "execution_policy",
+            "push.tags",
+            "absent",
+            "present" if tags_present else "absent",
+            "fail" if tags_present else "pass",
+            "Tag pushes stay excluded so a tested main commit is not verified twice.",
+        )
+    )
     for step_id, fragment in REQUIRED_COMMAND_FRAGMENTS.items():
         present = fragment in text
         checks.append(
@@ -453,6 +508,10 @@ def _recommendations(summary: CiWorkflowSummary) -> list[str]:
         recommendations.append(
             "Keep assurance and tiny-scorecard evidence checks before coverage so CI fails fast on evidence drift."
         )
+    if not summary.get("ci_execution_economy_ready"):
+        recommendations.append(
+            "Restore main-only push scope, tag suppression, pip caching, and same-ref cancellation to avoid duplicate CI work."
+        )
     if not summary.get("project_docs_readability_ready"):
         recommendations.append(
             "Restore the project docs readability gate after source encoding and before CI hygiene and coverage."
@@ -488,6 +547,7 @@ __all__ = [
     "REQUIRED_ACTIONS",
     "REQUIRED_COMMAND_FRAGMENTS",
     "REQUIRED_COMMAND_ORDER",
+    "REQUIRED_EXECUTION_POLICY_FRAGMENTS",
     "build_ci_workflow_hygiene_report",
     "render_ci_workflow_hygiene_html",
     "render_ci_workflow_hygiene_markdown",
