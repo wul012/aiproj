@@ -36,9 +36,18 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1268.0.0` completes **the Stage-1 review follow-up and CI execution-economy hardening**. It keeps full CI on `main` and pull requests while suppressing duplicate tag runs, caching pip downloads, cancelling superseded runs on the same ref, and enforcing those choices through the existing CI hygiene report. The inactive Stage-2 brief is now tracked but remains gated; no science-lane or model-quality semantics change.
+Version `v1269.0.0` completes **the first deep static-analysis debt reduction**. It shrinks the committed ruff baseline from 545 to 271 findings, turns reviewed script-bootstrap and compatibility-facade exceptions into exact line-level annotations, removes real unused imports and duplicate bindings, and makes `--update-baseline` mechanically shrink-only. No global ignore, science-lane semantic change, or floor relaxation is introduced.
 
-## Latest v1268 checkpoint
+## Latest v1269 checkpoint
+
+- Reduced the staged ruff baseline by 274 findings (50.3%), with E402 and F811 removed from the remaining baseline.
+- Preserved compatibility facade behavior through exact annotations and 294 focused facade tests rather than deleting re-exports.
+- Added fail-closed baseline growth protection: existing baselines only accept strict issue-subset updates and remain byte-unchanged on rejection.
+- Kept the remaining 271 findings visible and categorized instead of claiming repo-wide lint cleanliness.
+
+## Historical v1268 context
+
+## v1268 checkpoint
 
 - Restricted the primary workflow to `main` pushes and pull requests, so a release tag pointing at an already-tested commit does not rerun the same job.
 - Added setup-python pip caching with `requirements.txt` invalidation and same-ref concurrency cancellation.

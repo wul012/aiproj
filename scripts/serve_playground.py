@@ -12,8 +12,8 @@ except ModuleNotFoundError:  # pragma: no cover - direct script execution path
 ROOT = PROJECT_ROOT
 ensure_src_path()
 
-from minigpt.serving import InferenceSafetyProfile, discover_checkpoint_options
-from minigpt.serving.server import run_server
+from minigpt.serving import InferenceSafetyProfile, discover_checkpoint_options  # noqa: E402
+from minigpt.serving.server import run_server  # noqa: E402
 
 
 def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:

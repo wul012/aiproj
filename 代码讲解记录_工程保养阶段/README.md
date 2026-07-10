@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1227-v1269-static-analysis-baseline-debt-reduction.md
+ -> v1269 code explanation: reduces the committed ruff baseline from 545 to 271, makes reviewed bootstrap and facade re-exports explicit at line scope, removes real unused/redefined bindings, and makes baseline updates fail-closed and shrink-only. Evidence lives under `f/1269`.
+
 1226-v1268-ci-execution-economy-and-review-reconciliation.md
  -> v1268 code explanation: closes the Stage-1 review follow-up, tracks the inactive Stage-2 brief, removes duplicate tag CI runs, enables pip caching and same-ref cancellation, and protects all execution-economy choices with positive and negative contract tests. Evidence lives under `f/1268`.
 

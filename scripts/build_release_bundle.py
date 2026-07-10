@@ -13,7 +13,7 @@ except ModuleNotFoundError:  # pragma: no cover - direct script execution path
 ROOT = PROJECT_ROOT
 ensure_src_path()
 
-from minigpt.governance.release import build_release_bundle, write_release_bundle_outputs
+from minigpt.governance.release import build_release_bundle, write_release_bundle_outputs  # noqa: E402
 
 
 def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:

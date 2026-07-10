@@ -12,9 +12,9 @@ except ModuleNotFoundError:  # pragma: no cover - direct script execution path
 ROOT = PROJECT_ROOT
 ensure_src_path()
 
-from minigpt.serving.contracts import GenerationRequest, parse_generation_request
-from minigpt.serving.generator import MiniGPTGenerator
-from minigpt.serving.profiles import generation_profile_ids
+from minigpt.serving.contracts import GenerationRequest, parse_generation_request  # noqa: E402
+from minigpt.serving.generator import MiniGPTGenerator  # noqa: E402
+from minigpt.serving.profiles import generation_profile_ids  # noqa: E402
 
 
 def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:

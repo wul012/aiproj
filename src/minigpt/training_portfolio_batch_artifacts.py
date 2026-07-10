@@ -2,15 +2,10 @@ from __future__ import annotations
 
 import csv
 import json
-from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-from minigpt.report_utils import as_dict as _dict
 from minigpt.report_utils import html_escape as _e
-from minigpt.report_utils import list_of_dicts as _list_of_dicts
-from minigpt.report_utils import list_of_strs as _string_list
-from minigpt.report_utils import markdown_cell as _md
 
 
 def write_training_portfolio_batch_json(report: dict[str, Any], path: str | Path) -> None:
@@ -124,10 +119,16 @@ def render_training_portfolio_batch_markdown(report: dict[str, Any]) -> str:
                     ("Review actions", review.get("review_action_count", 0)),
                     ("Blocker actions", review.get("blocker_action_count", 0)),
                     ("Maturity reviews", ", ".join(_string_list(review.get("maturity_review_names"))) or "none"),
-                    ("Suite-design regressions", ", ".join(_string_list(review.get("maturity_suite_design_regression_names"))) or "none"),
+                    (
+                        "Suite-design regressions",
+                        ", ".join(_string_list(review.get("maturity_suite_design_regression_names"))) or "none",
+                    ),
                     ("CI regressions", ", ".join(_string_list(review.get("maturity_ci_regression_names"))) or "none"),
                     ("CI regression reasons", _fmt_mapping(review.get("maturity_ci_regression_reason_counts"))),
-                    ("Coverage regressions", ", ".join(_string_list(review.get("maturity_coverage_regression_names"))) or "none"),
+                    (
+                        "Coverage regressions",
+                        ", ".join(_string_list(review.get("maturity_coverage_regression_names"))) or "none",
+                    ),
                     ("Blocker reasons", ", ".join(_string_list(review.get("blocker_reasons"))) or "none"),
                     ("Command", _display_command(comparison.get("command"))),
                 ]
@@ -233,7 +234,9 @@ def _planned_rows(report: dict[str, Any]) -> list[dict[str, Any]]:
     ]
 
 
-def _recommendations(execution: dict[str, Any], comparison_summary: dict[str, Any] | None, warnings: list[str]) -> list[str]:
+def _recommendations(
+    execution: dict[str, Any], comparison_summary: dict[str, Any] | None, warnings: list[str]
+) -> list[str]:
     if warnings:
         return ["Inspect batch warnings before trusting the comparison outputs."]
     if execution.get("status") == "planned":
@@ -241,7 +244,9 @@ def _recommendations(execution: dict[str, Any], comparison_summary: dict[str, An
     if execution.get("status") == "failed":
         return [f"Inspect failed variant `{execution.get('failed_variant')}` before continuing the batch."]
     if execution.get("comparison_status") == "written" and comparison_summary:
-        return ["Open the batch comparison HTML to choose the next baseline for larger-corpus or model-size experiments."]
+        return [
+            "Open the batch comparison HTML to choose the next baseline for larger-corpus or model-size experiments."
+        ]
     return ["Use the generated per-variant training_portfolio.html files to inspect each run before comparing them."]
 
 
@@ -261,7 +266,7 @@ def _variant_table(report: dict[str, Any]) -> str:
         )
     return (
         '<section class="panel"><h2>Variant Matrix</h2>'
-        '<table><thead><tr><th>Variant</th><th>Status</th><th>Pair Mode</th><th>Config</th><th>Out Root</th><th>Portfolio</th></tr></thead><tbody>'
+        "<table><thead><tr><th>Variant</th><th>Status</th><th>Pair Mode</th><th>Config</th><th>Out Root</th><th>Portfolio</th></tr></thead><tbody>"
         + "".join(rows)
         + "</tbody></table></section>"
     )
@@ -278,7 +283,10 @@ def _comparison_panel(report: dict[str, Any]) -> str:
         ("Review actions", review.get("review_action_count", 0)),
         ("Blocker actions", review.get("blocker_action_count", 0)),
         ("Maturity reviews", ", ".join(_string_list(review.get("maturity_review_names"))) or "none"),
-        ("Suite-design regressions", ", ".join(_string_list(review.get("maturity_suite_design_regression_names"))) or "none"),
+        (
+            "Suite-design regressions",
+            ", ".join(_string_list(review.get("maturity_suite_design_regression_names"))) or "none",
+        ),
         ("CI regressions", ", ".join(_string_list(review.get("maturity_ci_regression_names"))) or "none"),
         ("CI regression reasons", _fmt_mapping(review.get("maturity_ci_regression_reason_counts"))),
         ("Coverage regressions", ", ".join(_string_list(review.get("maturity_coverage_regression_names"))) or "none"),
@@ -295,7 +303,11 @@ def _list_section(title: str, values: Any) -> str:
     items = _string_list(values)
     if not items:
         return ""
-    return f'<section class="panel"><h2>{_e(title)}</h2><ul>' + "".join(f"<li>{_e(item)}</li>" for item in items) + "</ul></section>"
+    return (
+        f'<section class="panel"><h2>{_e(title)}</h2><ul>'
+        + "".join(f"<li>{_e(item)}</li>" for item in items)
+        + "</ul></section>"
+    )
 
 
 def _card(label: str, value: Any) -> str:

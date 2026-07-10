@@ -8,9 +8,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from minigpt.eval_suite import load_builtin_prompt_suite, load_prompt_suite
-from minigpt.pair_batch import build_pair_batch_case_result, build_pair_batch_report, write_pair_batch_outputs
-from minigpt.server import GenerationRequest, MiniGPTGenerator
+from minigpt.eval_suite import load_builtin_prompt_suite, load_prompt_suite  # noqa: E402
+from minigpt.pair_batch import build_pair_batch_case_result, build_pair_batch_report, write_pair_batch_outputs  # noqa: E402
+from minigpt.server import GenerationRequest, MiniGPTGenerator  # noqa: E402
 
 
 def parse_args() -> argparse.Namespace:

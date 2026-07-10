@@ -9,7 +9,7 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from minigpt.maintenance_policy import (
+from minigpt.maintenance_policy import (  # noqa: E402
     build_governance_stabilization_review,
     build_maintenance_batching_report,
     build_module_pressure_report,

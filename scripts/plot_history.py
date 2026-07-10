@@ -13,7 +13,7 @@ except ModuleNotFoundError:  # pragma: no cover - direct script execution path
 ROOT = PROJECT_ROOT
 ensure_src_path()
 
-from minigpt.core.history import load_records, summarize_records, write_loss_curve_svg
+from minigpt.core.history import load_records, summarize_records, write_loss_curve_svg  # noqa: E402
 
 
 def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:

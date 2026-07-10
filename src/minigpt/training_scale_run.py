@@ -24,8 +24,8 @@ from minigpt.training_portfolio_batch import (
     run_training_portfolio_batch_plan,
 )
 from minigpt.training_portfolio_batch_artifacts import (
-    render_training_portfolio_batch_html,
-    render_training_portfolio_batch_markdown,
+    render_training_portfolio_batch_html,  # noqa: F401
+    render_training_portfolio_batch_markdown,  # noqa: F401
     write_training_portfolio_batch_outputs,
 )
 from minigpt.training_scale_gate import build_training_scale_gate, load_training_scale_plan, write_training_scale_gate_outputs

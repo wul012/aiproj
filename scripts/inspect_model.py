@@ -15,9 +15,9 @@ except ModuleNotFoundError:  # pragma: no cover - direct script execution path
 ROOT = PROJECT_ROOT
 ensure_src_path()
 
-from minigpt.core.model import GPTConfig, MiniGPT
-from minigpt.core.tokenizer import load_tokenizer
-from minigpt.reports.model import build_model_report, write_model_report_svg
+from minigpt.core.model import GPTConfig, MiniGPT  # noqa: E402
+from minigpt.core.tokenizer import load_tokenizer  # noqa: E402
+from minigpt.reports.model import build_model_report, write_model_report_svg  # noqa: E402
 
 
 def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:

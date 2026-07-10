@@ -8,7 +8,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from minigpt.training_run_evidence import build_training_run_evidence, write_training_run_evidence_outputs
+from minigpt.training_run_evidence import build_training_run_evidence, write_training_run_evidence_outputs  # noqa: E402
 
 
 def parse_args() -> argparse.Namespace:

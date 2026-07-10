@@ -15,9 +15,9 @@ except ModuleNotFoundError:  # pragma: no cover - direct script execution path
 ROOT = PROJECT_ROOT
 ensure_src_path()
 
-from minigpt.core.model import GPTConfig, MiniGPT
-from minigpt.core.tokenizer import load_tokenizer
-from minigpt.evaluation.suite import (
+from minigpt.core.model import GPTConfig, MiniGPT  # noqa: E402
+from minigpt.core.tokenizer import load_tokenizer  # noqa: E402
+from minigpt.evaluation.suite import (  # noqa: E402
     build_eval_suite_report,
     build_prompt_result,
     load_builtin_prompt_suite,

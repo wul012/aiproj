@@ -6,8 +6,8 @@ from typing import Any
 
 from minigpt.report_utils import utc_now
 from minigpt.maturity_capabilities import (
-    CAPABILITY_SPECS,
-    CapabilitySpec,
+    CAPABILITY_SPECS,  # noqa: F401
+    CapabilitySpec,  # noqa: F401
     capability_rows,
     discover_archive_versions,
     discover_explanation_versions,
@@ -15,13 +15,13 @@ from minigpt.maturity_capabilities import (
     phase_timeline,
 )
 from minigpt.maturity_artifacts import (
-    render_maturity_summary_html,
-    render_maturity_summary_markdown,
-    write_maturity_summary_csv,
-    write_maturity_summary_html,
-    write_maturity_summary_json,
-    write_maturity_summary_markdown,
-    write_maturity_summary_outputs,
+    render_maturity_summary_html,  # noqa: F401
+    render_maturity_summary_markdown,  # noqa: F401
+    write_maturity_summary_csv,  # noqa: F401
+    write_maturity_summary_html,  # noqa: F401
+    write_maturity_summary_json,  # noqa: F401
+    write_maturity_summary_markdown,  # noqa: F401
+    write_maturity_summary_outputs,  # noqa: F401
 )
 from minigpt.maturity_release_context import build_release_readiness_context as _release_readiness_context
 

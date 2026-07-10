@@ -13,35 +13,35 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from minigpt.report_utils import as_dict  # noqa: E402
 from minigpt.tiny_scorecard_comparison_smoke_outputs import (  # noqa: E402
-    SUMMARY_JSON_FILENAME,
-    SUMMARY_TEXT_FILENAME,
-    format_counts,
+    SUMMARY_JSON_FILENAME,  # noqa: F401
+    SUMMARY_TEXT_FILENAME,  # noqa: F401
+    format_counts,  # noqa: F401
     print_summary,
-    render_summary,
+    render_summary,  # noqa: F401
     write_summary_and_optional_check,
-    write_summary_outputs,
+    write_summary_outputs,  # noqa: F401
 )
 from minigpt.tiny_scorecard_comparison_smoke_summary import (  # noqa: E402
-    artifact_status,
+    artifact_status,  # noqa: F401
     build_summary,
-    build_tiny_benchmark_history,
-    comparison_summary,
-    decision_summary,
-    first_list_item,
-    first_matching_list_item,
-    first_name,
-    first_threshold_block,
-    float_or_none,
-    history_summary,
-    read_json,
-    remediation_gate_status,
-    smoke_summary,
-    threshold_block_profile,
-    threshold_blocks,
+    build_tiny_benchmark_history,  # noqa: F401
+    comparison_summary,  # noqa: F401
+    decision_summary,  # noqa: F401
+    first_list_item,  # noqa: F401
+    first_matching_list_item,  # noqa: F401
+    first_name,  # noqa: F401
+    first_threshold_block,  # noqa: F401
+    float_or_none,  # noqa: F401
+    history_summary,  # noqa: F401
+    read_json,  # noqa: F401
+    remediation_gate_status,  # noqa: F401
+    smoke_summary,  # noqa: F401
+    threshold_block_profile,  # noqa: F401
+    threshold_blocks,  # noqa: F401
 )
 from scripts.check_tiny_scorecard_comparison_smoke import (  # noqa: E402
-    check_summary as check_smoke_summary,
-    write_check_outputs as write_smoke_check_outputs,
+    check_summary as check_smoke_summary,  # noqa: F401
+    write_check_outputs as write_smoke_check_outputs,  # noqa: F401
 )
 
 

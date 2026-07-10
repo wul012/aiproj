@@ -13,7 +13,7 @@ except ModuleNotFoundError:  # pragma: no cover - direct script execution path
 ROOT = PROJECT_ROOT
 ensure_src_path()
 
-from minigpt.training.data_prep import build_prepared_dataset, write_prepared_dataset
+from minigpt.training.data_prep import build_prepared_dataset, write_prepared_dataset  # noqa: E402
 
 
 def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:

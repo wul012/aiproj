@@ -5,16 +5,15 @@ from pathlib import Path
 from typing import Any
 
 from minigpt.model_card_artifacts import (
-    render_model_card_html,
-    render_model_card_markdown,
-    write_model_card_html,
-    write_model_card_json,
-    write_model_card_markdown,
-    write_model_card_outputs,
+    render_model_card_html,  # noqa: F401
+    render_model_card_markdown,  # noqa: F401
+    write_model_card_html,  # noqa: F401
+    write_model_card_json,  # noqa: F401
+    write_model_card_markdown,  # noqa: F401
+    write_model_card_outputs,  # noqa: F401
 )
 from minigpt.report_utils import (
     as_dict as _dict,
-    list_of_dicts as _list_of_dicts,
     utc_now,
 )
 
@@ -159,7 +158,9 @@ def _build_run_summaries(registry: dict[str, Any], cards: dict[str, dict[str, An
     return runs
 
 
-def _build_summary(registry: dict[str, Any], runs: list[dict[str, Any]], cards: dict[str, dict[str, Any]]) -> dict[str, Any]:
+def _build_summary(
+    registry: dict[str, Any], runs: list[dict[str, Any]], cards: dict[str, dict[str, Any]]
+) -> dict[str, Any]:
     best = registry.get("best_by_best_val_loss") if isinstance(registry.get("best_by_best_val_loss"), dict) else {}
     ready = sum(1 for run in runs if run.get("status") == "ready")
     review = sum(1 for run in runs if run.get("status") == "review")
@@ -173,11 +174,17 @@ def _build_summary(registry: dict[str, Any], runs: list[dict[str, Any]], cards: 
         "experiment_cards": len(cards),
         "comparable_runs": sum(1 for run in runs if run.get("best_val_loss") is not None),
         "dataset_snapshot_runs": sum(1 for run in runs if _has_dataset_snapshot(run)),
-        "dataset_skipped_source_runs": sum(1 for run in runs if _as_int(run.get("dataset_skipped_source_count")) and _as_int(run.get("dataset_skipped_source_count")) > 0),
+        "dataset_skipped_source_runs": sum(
+            1
+            for run in runs
+            if _as_int(run.get("dataset_skipped_source_count")) and _as_int(run.get("dataset_skipped_source_count")) > 0
+        ),
     }
 
 
-def _build_coverage(registry: dict[str, Any], runs: list[dict[str, Any]], cards: dict[str, dict[str, Any]]) -> dict[str, Any]:
+def _build_coverage(
+    registry: dict[str, Any], runs: list[dict[str, Any]], cards: dict[str, dict[str, Any]]
+) -> dict[str, Any]:
     total = len(runs)
     return {
         "run_count": total,
@@ -185,7 +192,9 @@ def _build_coverage(registry: dict[str, Any], runs: list[dict[str, Any]], cards:
         "experiment_card_coverage": _ratio(len(cards), total),
         "quality_checked_runs": sum(1 for run in runs if run.get("dataset_quality") not in {None, "missing"}),
         "eval_suite_runs": sum(1 for run in runs if run.get("eval_suite_cases") not in {None, 0}),
-        "generation_quality_runs": sum(1 for run in runs if run.get("generation_quality_status") not in {None, "missing"}),
+        "generation_quality_runs": sum(
+            1 for run in runs if run.get("generation_quality_status") not in {None, "missing"}
+        ),
         "generation_quality_pass_runs": sum(1 for run in runs if run.get("generation_quality_status") == "pass"),
         "checkpoint_runs": sum(1 for run in runs if run.get("checkpoint_exists")),
         "dashboard_runs": sum(1 for run in runs if run.get("dashboard_exists")),
@@ -194,7 +203,10 @@ def _build_coverage(registry: dict[str, Any], runs: list[dict[str, Any]], cards:
         "dataset_snapshot_runs": sum(1 for run in runs if _has_dataset_snapshot(run)),
         "dataset_snapshot_coverage": _ratio(sum(1 for run in runs if _has_dataset_snapshot(run)), total),
         "dataset_skipped_source_runs": sum(
-            1 for run in runs if _as_int(run.get("dataset_skipped_source_count")) is not None and (_as_int(run.get("dataset_skipped_source_count")) or 0) > 0
+            1
+            for run in runs
+            if _as_int(run.get("dataset_skipped_source_count")) is not None
+            and (_as_int(run.get("dataset_skipped_source_count")) or 0) > 0
         ),
     }
 
@@ -224,13 +236,17 @@ def _build_recommendations(
     if coverage.get("experiment_cards_found", 0) < coverage.get("run_count", 0):
         items.append("Generate missing experiment cards so every registered run has a single-run review page.")
     if summary.get("ready_runs", 0) == 0:
-        items.append("Promote at least one run to ready status by adding checkpoint, dataset quality, and eval suite artifacts.")
+        items.append(
+            "Promote at least one run to ready status by adding checkpoint, dataset quality, and eval suite artifacts."
+        )
     else:
         items.append("Use the best ready run as the current project reference and compare new runs against it.")
     if any(run.get("dataset_quality") not in {"pass", None, "missing"} for run in runs):
         items.append("Review non-pass dataset quality runs before using them as baselines.")
     if coverage.get("dataset_snapshot_runs", 0) < coverage.get("run_count", 0):
-        items.append("Regenerate registry from dataset-versioned runs so every model-card row has dataset snapshot evidence.")
+        items.append(
+            "Regenerate registry from dataset-versioned runs so every model-card row has dataset snapshot evidence."
+        )
     if coverage.get("dataset_skipped_source_runs", 0):
         items.append("Review runs with skipped dataset sources before treating loss deltas as model-only evidence.")
     if coverage.get("eval_suite_runs", 0) < coverage.get("run_count", 0):

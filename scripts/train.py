@@ -20,10 +20,10 @@ except ModuleNotFoundError:  # pragma: no cover - direct script execution path
 ROOT = PROJECT_ROOT
 ensure_src_path()
 
-from minigpt.core.dataset import get_batch, load_text, split_token_ids
-from minigpt.core.model import GPTConfig, MiniGPT
-from minigpt.core.tokenizer import BPETokenizer, CharTokenizer, Tokenizer, load_tokenizer
-from minigpt.training.data_prep import (
+from minigpt.core.dataset import get_batch, load_text, split_token_ids  # noqa: E402
+from minigpt.core.model import GPTConfig, MiniGPT  # noqa: E402
+from minigpt.core.tokenizer import BPETokenizer, CharTokenizer, Tokenizer, load_tokenizer  # noqa: E402
+from minigpt.training.data_prep import (  # noqa: E402
     build_dataset_report,
     build_dataset_version_manifest,
     build_prepared_dataset,
@@ -32,9 +32,9 @@ from minigpt.training.data_prep import (
     write_dataset_version_html,
     write_dataset_version_json,
 )
-from minigpt.training.data_quality import build_dataset_quality_report, write_dataset_quality_json, write_dataset_quality_svg
-from minigpt.training.history import TrainingRecord, append_record, load_records, summarize_records, write_loss_curve_svg
-from minigpt.reports.manifest import (
+from minigpt.training.data_quality import build_dataset_quality_report, write_dataset_quality_json, write_dataset_quality_svg  # noqa: E402
+from minigpt.training.history import TrainingRecord, append_record, load_records, summarize_records, write_loss_curve_svg  # noqa: E402
+from minigpt.reports.manifest import (  # noqa: E402
     build_environment_metadata,
     build_run_manifest,
     utc_now,

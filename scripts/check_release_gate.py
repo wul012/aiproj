@@ -13,7 +13,7 @@ except ModuleNotFoundError:  # pragma: no cover - direct script execution path
 ROOT = PROJECT_ROOT
 ensure_src_path()
 
-from minigpt.governance.release import (
+from minigpt.governance.release import (  # noqa: E402
     DEFAULT_RELEASE_GATE_POLICY_PROFILE,
     build_release_gate,
     exit_code_for_gate,

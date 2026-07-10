@@ -10,15 +10,15 @@ import torch
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from minigpt.model import GPTConfig, MiniGPT
-from minigpt.sampling import (
+from minigpt.model import GPTConfig, MiniGPT  # noqa: E402
+from minigpt.sampling import (  # noqa: E402
     build_sampling_report,
     build_sampling_result,
     default_sampling_cases,
     parse_sampling_case,
     write_sampling_outputs,
 )
-from minigpt.tokenizer import load_tokenizer
+from minigpt.tokenizer import load_tokenizer  # noqa: E402
 
 
 def parse_args() -> argparse.Namespace:

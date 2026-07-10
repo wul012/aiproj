@@ -6,12 +6,12 @@ from pathlib import Path
 from typing import Any
 
 from minigpt.eval_suite_artifacts import (
-    render_eval_suite_html,
-    write_eval_suite_csv,
-    write_eval_suite_html,
-    write_eval_suite_json,
-    write_eval_suite_outputs,
-    write_eval_suite_svg,
+    render_eval_suite_html,  # noqa: F401
+    write_eval_suite_csv,  # noqa: F401
+    write_eval_suite_html,  # noqa: F401
+    write_eval_suite_json,  # noqa: F401
+    write_eval_suite_outputs,  # noqa: F401
+    write_eval_suite_svg,  # noqa: F401
 )
 
 RECOMMENDED_TASK_TYPES = ("continuation", "qa", "summary", "structured", "factual-consistency")

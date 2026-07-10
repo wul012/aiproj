@@ -8,7 +8,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from minigpt.pair_trend import build_pair_batch_trend_report, load_pair_batch_report, write_pair_batch_trend_outputs
+from minigpt.pair_trend import build_pair_batch_trend_report, load_pair_batch_report, write_pair_batch_trend_outputs  # noqa: E402
 
 
 def parse_args() -> argparse.Namespace:

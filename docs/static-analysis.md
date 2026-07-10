@@ -21,7 +21,11 @@ To refresh the baseline after an intentional contract-preserving cleanup:
 python -B scripts/check_static_analysis.py --out-dir runs/static-analysis --update-baseline
 ```
 
-Baseline updates should only reduce or intentionally re-key known historical findings. Do not use `--update-baseline` to hide a new violation in touched code.
+Baseline updates are mechanically shrink-only. For an existing baseline, the
+current issue multiset must be a subset of the committed issue multiset; any
+new issue key makes the command fail and leaves the baseline file unchanged.
+Only first-time baseline creation may start from a non-empty current set. Do
+not use `--update-baseline` to hide a new violation in touched code.
 
 ## Outputs
 
@@ -32,11 +36,24 @@ The checker writes:
 - `static_analysis.md`
 - `static_analysis.html`
 
-The report includes `current_issue_count`, `baseline_issue_count`, `new_issue_count`, `resolved_baseline_issue_count`, `strict_lint_issue_count`, and `strict_format_status`.
+The report includes `current_issue_count`, `baseline_issue_count`,
+`new_issue_count`, `resolved_baseline_issue_count`,
+`baseline_update_allowed`, `baseline_update_blocker_count`,
+`strict_lint_issue_count`, and `strict_format_status`.
 
 ## v1261 Baseline
 
 The first committed baseline records 545 historical ruff findings across `src/` and `scripts/`. The strict path set is clean: `new_issue_count=0`, `strict_lint_issue_count=0`, and `strict_format_status=pass`.
+
+## v1269 Baseline Reduction
+
+The first maintenance reduction shrinks the committed baseline from 545 to
+271 findings, resolving 274 entries (50.3%). Exact line-level `noqa` markers
+now document reviewed direct-script bootstrap imports and compatibility-facade
+re-exports; no global or directory-wide ignore was added. Real unused imports
+and duplicate bindings were removed. The remaining distribution is 152 F401,
+92 E702, 15 E741, 6 F841, 5 F541, and 1 F821. Those findings remain visible
+until a contract-preserving repair is proven.
 
 This is an engineering gate, not a model-capability claim. It improves maintainability and CI regression detection, but it does not change training semantics, cached experiment verdicts, or promotion boundaries.
 

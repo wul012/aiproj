@@ -12,8 +12,8 @@ except ModuleNotFoundError:  # pragma: no cover - direct script execution path
 ROOT = PROJECT_ROOT
 ensure_src_path()
 
-from minigpt.core.dataset import load_text
-from minigpt.core.tokenizer import BPETokenizer, CharTokenizer, load_tokenizer
+from minigpt.core.dataset import load_text  # noqa: E402
+from minigpt.core.tokenizer import BPETokenizer, CharTokenizer, load_tokenizer  # noqa: E402
 
 
 def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:

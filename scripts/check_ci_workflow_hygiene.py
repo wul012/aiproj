@@ -12,7 +12,7 @@ except ModuleNotFoundError:  # pragma: no cover - direct script execution path
 ROOT = PROJECT_ROOT
 ensure_src_path()
 
-from minigpt.ci_workflow_hygiene import build_ci_workflow_hygiene_report, write_ci_workflow_hygiene_outputs
+from minigpt.ci_workflow_hygiene import build_ci_workflow_hygiene_report, write_ci_workflow_hygiene_outputs  # noqa: E402
 
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:

@@ -103,12 +103,16 @@ def build_report(
     runner = runner or subprocess.run
     root = project_root.resolve()
     baseline_path = _resolve_path(baseline_path, root)
+    baseline_exists = baseline_path.is_file()
     baseline = load_baseline(baseline_path)
     strict = tuple(strict_paths or baseline.get("strict_paths") or DEFAULT_STRICT_PATHS)
     check_result = run_ruff_check(targets, project_root=root, runner=runner)
     current_issues = parse_ruff_issues(check_result.stdout, project_root=root)
-    baseline_issues = current_issues if update_baseline else _baseline_issues(baseline)
+    baseline_issues = _baseline_issues(baseline)
     comparison = compare_issues(baseline_issues, current_issues)
+    baseline_update_blockers = comparison["new_issues"] if update_baseline and baseline_exists else []
+    baseline_update_allowed = not baseline_update_blockers
+    effective_new_issues = [] if update_baseline and not baseline_exists else comparison["new_issues"]
     strict_lint_issues = [issue for issue in current_issues if issue.get("path") in strict]
     format_result = None
     format_status = "skipped"
@@ -119,7 +123,8 @@ def build_report(
     status = (
         "pass"
         if command_status == "pass"
-        and not comparison["new_issues"]
+        and not effective_new_issues
+        and baseline_update_allowed
         and not strict_lint_issues
         and format_status != "fail"
         else "fail"
@@ -141,19 +146,23 @@ def build_report(
             "command_status": command_status,
             "current_issue_count": len(current_issues),
             "baseline_issue_count": len(baseline_issues),
-            "new_issue_count": len(comparison["new_issues"]),
+            "new_issue_count": len(effective_new_issues),
             "resolved_baseline_issue_count": len(comparison["resolved_issues"]),
+            "baseline_update_requested": update_baseline,
+            "baseline_update_allowed": baseline_update_allowed,
+            "baseline_update_blocker_count": len(baseline_update_blockers),
             "strict_lint_issue_count": len(strict_lint_issues),
             "strict_format_status": format_status,
             "strict_path_count": len(strict),
         },
         "commands": _command_records(check_result, format_result),
-        "new_issues": comparison["new_issues"],
+        "new_issues": effective_new_issues,
+        "baseline_update_blockers": baseline_update_blockers,
         "resolved_baseline_issues": comparison["resolved_issues"],
         "strict_lint_issues": strict_lint_issues,
         "current_issue_counts": _issue_counts(current_issues),
     }
-    if update_baseline:
+    if update_baseline and baseline_update_allowed:
         write_baseline(
             baseline_path,
             targets=targets,
@@ -299,6 +308,7 @@ def render_html(report: dict[str, Any]) -> str:
     return (
         "<!doctype html>\n"
         '<html><head><meta charset="utf-8"><title>MiniGPT static analysis</title>'
+        '<link rel="icon" href="data:,">'
         "<style>body{font-family:Arial,sans-serif;margin:24px;line-height:1.45}"
         "pre{background:#f6f8fa;padding:16px;border-radius:8px;white-space:pre-wrap}"
         ".status{font-weight:700}</style></head><body>"
@@ -425,6 +435,8 @@ def main(argv: list[str] | None = None) -> int:
     print(f"current_issue_count={summary['current_issue_count']}")
     print(f"baseline_issue_count={summary['baseline_issue_count']}")
     print(f"new_issue_count={summary['new_issue_count']}")
+    print(f"baseline_update_allowed={summary['baseline_update_allowed']}")
+    print(f"baseline_update_blocker_count={summary['baseline_update_blocker_count']}")
     print(f"strict_lint_issue_count={summary['strict_lint_issue_count']}")
     print(f"strict_format_status={summary['strict_format_status']}")
     print("outputs=" + json.dumps(outputs, ensure_ascii=False))

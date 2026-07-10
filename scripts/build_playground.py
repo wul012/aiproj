@@ -8,7 +8,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from minigpt.playground import write_playground
+from minigpt.playground import write_playground  # noqa: E402
 
 
 def parse_args() -> argparse.Namespace:

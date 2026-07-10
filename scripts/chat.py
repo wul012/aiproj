@@ -15,15 +15,15 @@ except ModuleNotFoundError:  # pragma: no cover - direct script execution path
 ROOT = PROJECT_ROOT
 ensure_src_path()
 
-from minigpt.serving.chat import (
+from minigpt.serving.chat import (  # noqa: E402
     ChatTurn,
     assistant_reply_from_generation,
     build_chat_prompt,
     prepare_chat_prompt,
     turns_to_dicts,
 )
-from minigpt.core.model import GPTConfig, MiniGPT
-from minigpt.core.tokenizer import Tokenizer, load_tokenizer
+from minigpt.core.model import GPTConfig, MiniGPT  # noqa: E402
+from minigpt.core.tokenizer import Tokenizer, load_tokenizer  # noqa: E402
 
 
 def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:

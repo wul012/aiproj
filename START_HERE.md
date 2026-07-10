@@ -89,12 +89,12 @@ workflows.
 
 ## Latest version summary
 
-Current README focus: **v1268 Stage-1 review reconciliation and CI execution economy**.
+Current README focus: **v1269 deep static-analysis baseline reduction**.
 
-v1268 keeps the complete quality chain while preventing duplicate tag runs,
-enabling dependency caching, and cancelling superseded same-ref CI runs. The
-same CI hygiene report now fails if any execution-economy policy disappears.
-The Stage-2 brief is tracked but remains explicitly inactive and capstone-gated.
+v1269 cuts the committed ruff debt from 545 to 271 findings while preserving
+direct-script and compatibility-facade contracts. Baseline updates are now
+fail-closed and shrink-only; remaining findings stay visible rather than being
+hidden by a global ignore.
 
 ## Where to look next
 

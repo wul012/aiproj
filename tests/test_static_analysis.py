@@ -166,6 +166,128 @@ class StaticAnalysisTests(unittest.TestCase):
         self.assertEqual(payload["issue_count"], 1)
         self.assertEqual(report["summary"]["current_issue_count"], 1)
 
+    def test_update_baseline_refuses_new_issue_keys_and_preserves_file(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            script = root / "scripts" / "strict.py"
+            script.parent.mkdir(parents=True)
+            script.write_text("import os\nimport sys\n", encoding="utf-8")
+            baseline = root / "baseline.json"
+            baseline_payload = {
+                "schema_version": 1,
+                "tool": "ruff",
+                "strict_paths": [],
+                "issues": [
+                    {
+                        "path": "scripts/strict.py",
+                        "line": 1,
+                        "column": 1,
+                        "code": "F401",
+                        "message": "`os` imported but unused",
+                        "source_line": "import os",
+                    }
+                ],
+            }
+            baseline.write_text(json.dumps(baseline_payload), encoding="utf-8")
+            issues = [
+                {
+                    "filename": str(script),
+                    "location": {"row": 1, "column": 1},
+                    "code": "F401",
+                    "message": "`os` imported but unused",
+                },
+                {
+                    "filename": str(script),
+                    "location": {"row": 2, "column": 1},
+                    "code": "F401",
+                    "message": "`sys` imported but unused",
+                },
+            ]
+
+            def fake_runner(command: list[str], **_: object) -> subprocess.CompletedProcess[str]:
+                return _completed(command, 1, issues)
+
+            report = build_report(
+                project_root=root,
+                baseline_path=baseline,
+                targets=("scripts",),
+                strict_paths=(),
+                update_baseline=True,
+                format_check=False,
+                runner=fake_runner,
+            )
+
+            persisted = json.loads(baseline.read_text(encoding="utf-8"))
+
+        self.assertEqual(report["status"], "fail")
+        self.assertFalse(report["summary"]["baseline_update_allowed"])
+        self.assertEqual(report["summary"]["baseline_update_blocker_count"], 1)
+        self.assertEqual(persisted, baseline_payload)
+
+    def test_update_baseline_allows_subset_and_tightens_file(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            script = root / "scripts" / "strict.py"
+            script.parent.mkdir(parents=True)
+            script.write_text("import os\n", encoding="utf-8")
+            baseline = root / "baseline.json"
+            baseline.write_text(
+                json.dumps(
+                    {
+                        "schema_version": 1,
+                        "tool": "ruff",
+                        "strict_paths": [],
+                        "issues": [
+                            {
+                                "path": "scripts/strict.py",
+                                "line": 1,
+                                "column": 1,
+                                "code": "F401",
+                                "message": "`os` imported but unused",
+                                "source_line": "import os",
+                            },
+                            {
+                                "path": "scripts/strict.py",
+                                "line": 2,
+                                "column": 1,
+                                "code": "F401",
+                                "message": "`sys` imported but unused",
+                                "source_line": "import sys",
+                            },
+                        ],
+                    }
+                ),
+                encoding="utf-8",
+            )
+            issue = {
+                "filename": str(script),
+                "location": {"row": 1, "column": 1},
+                "code": "F401",
+                "message": "`os` imported but unused",
+            }
+
+            def fake_runner(command: list[str], **_: object) -> subprocess.CompletedProcess[str]:
+                return _completed(command, 1, [issue])
+
+            report = build_report(
+                project_root=root,
+                baseline_path=baseline,
+                targets=("scripts",),
+                strict_paths=(),
+                update_baseline=True,
+                format_check=False,
+                runner=fake_runner,
+                generated_at="2026-01-01T00:00:00Z",
+            )
+
+            persisted = load_baseline(baseline)
+
+        self.assertEqual(report["status"], "pass")
+        self.assertTrue(report["summary"]["baseline_update_allowed"])
+        self.assertEqual(report["summary"]["baseline_update_blocker_count"], 0)
+        self.assertEqual(report["summary"]["resolved_baseline_issue_count"], 1)
+        self.assertEqual(persisted["issue_count"], 1)
+
     def test_write_report_outputs_creates_all_formats(self) -> None:
         report = {
             "title": "MiniGPT staged static analysis",

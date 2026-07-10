@@ -6,14 +6,14 @@ from pathlib import Path
 from typing import Any
 
 from minigpt.comparison_artifacts import (
-    render_comparison_html,
-    render_comparison_markdown,
-    write_comparison_csv,
-    write_comparison_html,
-    write_comparison_json,
-    write_comparison_markdown,
-    write_comparison_outputs,
-    write_comparison_svg,
+    render_comparison_html,  # noqa: F401
+    render_comparison_markdown,  # noqa: F401
+    write_comparison_csv,  # noqa: F401
+    write_comparison_html,  # noqa: F401
+    write_comparison_json,  # noqa: F401
+    write_comparison_markdown,  # noqa: F401
+    write_comparison_outputs,  # noqa: F401
+    write_comparison_svg,  # noqa: F401
 )
 from minigpt.report_utils import utc_now
 
