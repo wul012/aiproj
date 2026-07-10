@@ -36,7 +36,17 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1270.0.0` completes **the CI workflow hygiene responsibility split**. The 523-line high-churn module is now an 80-line public orchestrator plus typed checks, summary, and contract modules below 240 lines. A fixed-input canonical report hash is byte-identical before and after, mypy scope rises from 16 to 19, and the file-size warning count drops from 22 to 21. No CI policy or science-lane semantics change.
+Version `v1271.0.0` completes **a contract-preserving governance JSON reader consolidation**. Nine active benchmark/training-scale governance loaders now share strict UTF-8-SIG object reading, while optional sidecar evidence uses a separate empty-fallback helper. The evolved dedup checker reports 14 cumulative migrated modules and zero private copies inside the target set; 496 historical copies remain explicitly outside this batch. A guard extraction also reduces `training_scale_handoff.py` from the observed 514 lines to 413 and expands strict mypy scope from 19 to 20. No science-lane semantics or promotion decision changes.
+
+## Latest v1271 checkpoint
+
+- Consolidated nine active governance loaders into `read_json_object` without changing path resolution, `_source_path`, JSON decoding, or exact non-object error messages.
+- Added `read_json_object_or_empty` for the distinct optional-evidence contract used by handoff and promotion internals.
+- Extracted suite and clean-batch-review guard construction into a 113-line strict component, restoring the file-size warning count from 22 to 21.
+- Expanded the existing report-loader dedup checker from five to fourteen protected modules and added public-entry negative contract tests.
+- Verified `116 passed`, staged ruff `271/271` with zero new findings, mypy 20 targets with zero diagnostics, and a Playwright-rendered report with zero console errors.
+
+## Historical v1270 context
 
 ## Latest v1270 checkpoint
 

@@ -1,12 +1,13 @@
 from __future__ import annotations
 
-import json
 from pathlib import Path
 from typing import Any
 
 from minigpt.report_utils import (
     as_dict as _dict,
     list_of_dicts as _list_of_dicts,
+    read_json_object,
+    read_json_object_or_empty,
     string_list as _string_list,
     utc_now,
 )
@@ -41,10 +42,7 @@ REQUIRED_VARIANT_ARTIFACTS = [
 
 def load_training_scale_handoff(path: str | Path) -> dict[str, Any]:
     handoff_path = _resolve_handoff_path(Path(path))
-    payload = json.loads(handoff_path.read_text(encoding="utf-8-sig"))
-    if not isinstance(payload, dict):
-        raise ValueError("training scale handoff must be a JSON object")
-    payload = dict(payload)
+    payload = read_json_object(handoff_path, description="training scale handoff")
     payload["_source_path"] = str(handoff_path)
     return payload
 
@@ -62,16 +60,32 @@ def build_training_scale_promotion(
     project_root = _project_root(command, handoff_dir)
     out_root = _out_root(command, handoff, project_root, handoff_dir)
 
-    scale_run_path = _handoff_artifact_path(handoff, "training_scale_run_json", out_root / "training_scale_run.json", project_root, handoff_dir)
-    batch_path = _handoff_artifact_path(handoff, "batch_json", out_root / "batch" / "training_portfolio_batch.json", project_root, handoff_dir)
+    scale_run_path = _handoff_artifact_path(
+        handoff, "training_scale_run_json", out_root / "training_scale_run.json", project_root, handoff_dir
+    )
+    batch_path = _handoff_artifact_path(
+        handoff, "batch_json", out_root / "batch" / "training_portfolio_batch.json", project_root, handoff_dir
+    )
     scale_run = _read_json(scale_run_path)
     batch = _read_json(batch_path)
     variants = _variant_rows(batch, project_root, handoff_dir)
-    evidence_rows = _evidence_rows(handoff_file, handoff, scale_run_path, batch_path, variants, project_root, handoff_dir)
+    evidence_rows = _evidence_rows(
+        handoff_file, handoff, scale_run_path, batch_path, variants, project_root, handoff_dir
+    )
     suite_guard = _suite_guard(handoff)
     clean_batch_review_guard = _clean_batch_review_guard(handoff)
     blockers, review_items = _issues(handoff, scale_run, batch, variants, evidence_rows, clean_batch_review_guard)
-    summary = _summary(handoff, scale_run, batch, variants, evidence_rows, blockers, review_items, suite_guard, clean_batch_review_guard)
+    summary = _summary(
+        handoff,
+        scale_run,
+        batch,
+        variants,
+        evidence_rows,
+        blockers,
+        review_items,
+        suite_guard,
+        clean_batch_review_guard,
+    )
     return {
         "schema_version": 1,
         "title": title,
@@ -138,7 +152,9 @@ def _handoff_artifact_path(
 def _variant_rows(batch: dict[str, Any], project_root: Path, handoff_dir: Path) -> list[dict[str, Any]]:
     rows = []
     for item in _list_of_dicts(batch.get("variant_results")):
-        portfolio_json = _resolve_path(item.get("portfolio_json") or item.get("portfolio_path"), project_root, handoff_dir)
+        portfolio_json = _resolve_path(
+            item.get("portfolio_json") or item.get("portfolio_path"), project_root, handoff_dir
+        )
         portfolio = _read_json(portfolio_json)
         artifact_rows = _portfolio_artifact_rows(portfolio, project_root, handoff_dir)
         missing_required = [key for key in REQUIRED_VARIANT_ARTIFACTS if not _artifact_exists(artifact_rows, key)]
@@ -155,10 +171,13 @@ def _variant_rows(batch: dict[str, Any], project_root: Path, handoff_dir: Path) 
                 "dataset_name": portfolio.get("dataset_name"),
                 "dataset_version": portfolio.get("dataset_version"),
                 "portfolio_json": str(portfolio_json),
-                "portfolio_html": str(_resolve_path(item.get("portfolio_html"), project_root, handoff_dir)) if item.get("portfolio_html") else None,
+                "portfolio_html": str(_resolve_path(item.get("portfolio_html"), project_root, handoff_dir))
+                if item.get("portfolio_html")
+                else None,
                 "run_dir": artifacts.get("run_dir"),
                 "step_count": _dict(portfolio.get("execution")).get("step_count") or item.get("step_count"),
-                "completed_steps": _dict(portfolio.get("execution")).get("completed_steps") or item.get("completed_steps"),
+                "completed_steps": _dict(portfolio.get("execution")).get("completed_steps")
+                or item.get("completed_steps"),
                 "failed_step": _dict(portfolio.get("execution")).get("failed_step") or item.get("failed_step"),
                 "required_artifact_count": len(REQUIRED_VARIANT_ARTIFACTS),
                 "available_required_artifact_count": len(REQUIRED_VARIANT_ARTIFACTS) - len(missing_required),
@@ -232,7 +251,9 @@ def _issues(
         or int(clean_batch_review_guard.get("handoff_batch_maturity_ci_regression_count") or 0)
         or int(clean_batch_review_guard.get("handoff_batch_maturity_suite_design_regression_count") or 0)
     ):
-        blockers.append("handoff requires clean batch-review evidence but status is not clean or regressions are present")
+        blockers.append(
+            "handoff requires clean batch-review evidence but status is not clean or regressions are present"
+        )
     if scale_run.get("status") != "completed":
         blockers.append(f"training scale run status is {scale_run.get('status') or 'missing'}")
     batch_status = _nested(batch, "execution", "status") or _nested(scale_run, "batch_summary", "status")
@@ -272,7 +293,8 @@ def _summary(
     promotion_status = "blocked" if blockers else "review" if review_items else "promoted"
     return {
         "promotion_status": promotion_status,
-        "handoff_status": _dict(handoff.get("summary")).get("handoff_status") or _dict(handoff.get("execution")).get("status"),
+        "handoff_status": _dict(handoff.get("summary")).get("handoff_status")
+        or _dict(handoff.get("execution")).get("status"),
         "handoff_require_suite_consistency": suite_guard.get("handoff_require_suite_consistency"),
         "handoff_suite_consistency": suite_guard.get("handoff_suite_consistency"),
         "handoff_suite_mismatch_count": suite_guard.get("handoff_suite_mismatch_count"),
@@ -280,23 +302,35 @@ def _summary(
         "handoff_require_clean_batch_review": clean_batch_review_guard.get("handoff_require_clean_batch_review"),
         "handoff_clean_batch_review_status": clean_batch_review_guard.get("handoff_clean_batch_review_status"),
         "handoff_selected_batch_review_status": suite_guard.get("handoff_selected_batch_review_status"),
-        "handoff_selected_batch_comparison_review_action_count": suite_guard.get("handoff_selected_batch_comparison_review_action_count"),
-        "handoff_selected_batch_comparison_blocker_action_count": suite_guard.get("handoff_selected_batch_comparison_blocker_action_count"),
-        "handoff_selected_batch_maturity_coverage_regression_count": suite_guard.get("handoff_selected_batch_maturity_coverage_regression_count"),
+        "handoff_selected_batch_comparison_review_action_count": suite_guard.get(
+            "handoff_selected_batch_comparison_review_action_count"
+        ),
+        "handoff_selected_batch_comparison_blocker_action_count": suite_guard.get(
+            "handoff_selected_batch_comparison_blocker_action_count"
+        ),
+        "handoff_selected_batch_maturity_coverage_regression_count": suite_guard.get(
+            "handoff_selected_batch_maturity_coverage_regression_count"
+        ),
         "handoff_selected_batch_maturity_suite_design_regression_count": suite_guard.get(
             "handoff_selected_batch_maturity_suite_design_regression_count"
         ),
         "handoff_selected_batch_maturity_suite_design_regression_names": suite_guard.get(
             "handoff_selected_batch_maturity_suite_design_regression_names"
         ),
-        "handoff_selected_batch_maturity_ci_regression_count": suite_guard.get("handoff_selected_batch_maturity_ci_regression_count"),
+        "handoff_selected_batch_maturity_ci_regression_count": suite_guard.get(
+            "handoff_selected_batch_maturity_ci_regression_count"
+        ),
         "handoff_selected_batch_maturity_ci_regression_reason_counts": suite_guard.get(
             "handoff_selected_batch_maturity_ci_regression_reason_counts"
         )
         or clean_batch_review_guard.get("handoff_selected_batch_maturity_ci_regression_reason_counts"),
         "handoff_batch_comparison_review_action_count": suite_guard.get("handoff_batch_comparison_review_action_count"),
-        "handoff_batch_comparison_blocker_action_count": suite_guard.get("handoff_batch_comparison_blocker_action_count"),
-        "handoff_batch_maturity_coverage_regression_count": suite_guard.get("handoff_batch_maturity_coverage_regression_count"),
+        "handoff_batch_comparison_blocker_action_count": suite_guard.get(
+            "handoff_batch_comparison_blocker_action_count"
+        ),
+        "handoff_batch_maturity_coverage_regression_count": suite_guard.get(
+            "handoff_batch_maturity_coverage_regression_count"
+        ),
         "handoff_batch_maturity_suite_design_regression_count": suite_guard.get(
             "handoff_batch_maturity_suite_design_regression_count"
         ),
@@ -304,7 +338,9 @@ def _summary(
             "handoff_batch_maturity_suite_design_regression_names"
         ),
         "handoff_batch_maturity_ci_regression_count": suite_guard.get("handoff_batch_maturity_ci_regression_count"),
-        "handoff_batch_maturity_ci_regression_reason_counts": suite_guard.get("handoff_batch_maturity_ci_regression_reason_counts")
+        "handoff_batch_maturity_ci_regression_reason_counts": suite_guard.get(
+            "handoff_batch_maturity_ci_regression_reason_counts"
+        )
         or clean_batch_review_guard.get("handoff_batch_maturity_ci_regression_reason_counts"),
         "handoff_batch_maturity_ci_regression_names": suite_guard.get("handoff_batch_maturity_ci_regression_names"),
         "handoff_batch_comparison_blocker_reasons": suite_guard.get("handoff_batch_comparison_blocker_reasons"),
@@ -360,17 +396,28 @@ def _recommendations(summary: dict[str, Any], blockers: list[str], review_items:
         names = ", ".join(_string_list(summary.get("handoff_batch_maturity_suite_design_regression_names")))
         suffix = f" Observed CI reasons: {detail}." if detail else ""
         suffix += f" Suite-design portfolios: {names}." if names else ""
-        return ["Resolve handoff clean batch-review requirement before accepting this run as promotion-ready evidence." + suffix]
+        return [
+            "Resolve handoff clean batch-review requirement before accepting this run as promotion-ready evidence."
+            + suffix
+        ]
     if summary.get("handoff_selected_batch_review_status") == "blocker":
-        return ["Resolve selected batch comparison blocker actions before treating this handoff as promotion-ready evidence."]
+        return [
+            "Resolve selected batch comparison blocker actions before treating this handoff as promotion-ready evidence."
+        ]
     if int(summary.get("handoff_batch_maturity_ci_regression_count") or 0):
         detail = _reason_detail(summary.get("handoff_batch_maturity_ci_regression_reason_counts"))
         suffix = f" Observed reasons: {detail}." if detail else ""
-        return ["Resolve CI-regressed handoff batch evidence before treating this handoff as promotion-ready evidence." + suffix]
+        return [
+            "Resolve CI-regressed handoff batch evidence before treating this handoff as promotion-ready evidence."
+            + suffix
+        ]
     if int(summary.get("handoff_batch_maturity_suite_design_regression_count") or 0):
         names = ", ".join(_string_list(summary.get("handoff_batch_maturity_suite_design_regression_names")))
         suffix = f" Affected portfolios: {names}." if names else ""
-        return ["Resolve suite-design regressed handoff batch evidence before treating this handoff as promotion-ready evidence." + suffix]
+        return [
+            "Resolve suite-design regressed handoff batch evidence before treating this handoff as promotion-ready evidence."
+            + suffix
+        ]
     if summary.get("handoff_selected_batch_review_status") == "review":
         return ["Review selected batch comparison actions before treating this handoff as promotion-ready evidence."]
     if status == "promoted":
@@ -403,10 +450,7 @@ def _resolve_path(value: Any, project_root: Path, handoff_dir: Path) -> Path:
 
 
 def _read_json(path: Path) -> dict[str, Any]:
-    if not path.is_file():
-        return {}
-    payload = json.loads(path.read_text(encoding="utf-8-sig"))
-    return dict(payload) if isinstance(payload, dict) else {}
+    return read_json_object_or_empty(path)
 
 
 def _option_value(command: list[str], option: str) -> str | None:

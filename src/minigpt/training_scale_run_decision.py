@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-import json
+from json import JSONDecodeError
 from pathlib import Path
 from typing import Any
 
@@ -10,6 +10,7 @@ from minigpt.report_utils import (
     list_of_dicts as _list_of_dicts,
     number_or_default,
     positive_int_mapping as _int_mapping,
+    read_json_object,
     string_list as _string_list,
     utc_now,
 )
@@ -35,10 +36,7 @@ BATCH_ORDER = {"skipped": 0, None: 0, "failed": 1, "planned": 2, "completed": 3}
 
 def load_training_scale_run_comparison(path: str | Path) -> dict[str, Any]:
     comparison_path = _resolve_comparison_path(Path(path))
-    payload = json.loads(comparison_path.read_text(encoding="utf-8-sig"))
-    if not isinstance(payload, dict):
-        raise ValueError("training scale run comparison must be a JSON object")
-    payload = dict(payload)
+    payload = read_json_object(comparison_path, description="training scale run comparison")
     payload["_source_path"] = str(comparison_path)
     return payload
 
@@ -85,12 +83,16 @@ def build_training_scale_run_decision(
             "batch_comparison_review_action_count": _int(run.get("batch_comparison_review_action_count")),
             "batch_comparison_blocker_action_count": _int(run.get("batch_comparison_blocker_action_count")),
             "batch_maturity_coverage_regression_count": _int(run.get("batch_maturity_coverage_regression_count")),
-            "batch_maturity_suite_design_regression_count": _int(run.get("batch_maturity_suite_design_regression_count")),
+            "batch_maturity_suite_design_regression_count": _int(
+                run.get("batch_maturity_suite_design_regression_count")
+            ),
             "batch_maturity_suite_design_regression_names": _string_list(
                 run.get("batch_maturity_suite_design_regression_names")
             ),
             "batch_maturity_ci_regression_count": _int(run.get("batch_maturity_ci_regression_count")),
-            "batch_maturity_ci_regression_reason_counts": _int_mapping(run.get("batch_maturity_ci_regression_reason_counts")),
+            "batch_maturity_ci_regression_reason_counts": _int_mapping(
+                run.get("batch_maturity_ci_regression_reason_counts")
+            ),
             "reasons": reasons,
         }
         if reasons:
@@ -240,7 +242,7 @@ def _load_origin_run(selected: dict[str, Any] | None, base_dir: Path) -> dict[st
         return {}
     try:
         return load_training_scale_run(path)
-    except (OSError, ValueError, json.JSONDecodeError):
+    except (OSError, ValueError, JSONDecodeError):
         return {}
 
 
@@ -340,19 +342,31 @@ def _recommendations(
 ) -> list[str]:
     recommendations: list[str] = []
     if status == "blocked":
-        recommendations.append("Do not execute the scale run until a gate-allowed candidate reaches the batch dry-run layer.")
+        recommendations.append(
+            "Do not execute the scale run until a gate-allowed candidate reaches the batch dry-run layer."
+        )
     elif status == "review":
         recommendations.append("Review gate warnings and dry-run batch artifacts before running the execute command.")
     else:
-        recommendations.append("The selected scale run is ready for staged execution after reviewing the dry-run evidence.")
+        recommendations.append(
+            "The selected scale run is ready for staged execution after reviewing the dry-run evidence."
+        )
     if selected and selected.get("gate_status") == "warn":
-        recommendations.append("A warn-status gate is acceptable for smoke evidence, but it should be justified before larger training.")
+        recommendations.append(
+            "A warn-status gate is acceptable for smoke evidence, but it should be justified before larger training."
+        )
     if selected and _int(selected.get("batch_comparison_blocker_action_count")):
-        recommendations.append("Resolve selected batch comparison blocker actions before using this decision as execute evidence.")
+        recommendations.append(
+            "Resolve selected batch comparison blocker actions before using this decision as execute evidence."
+        )
     elif selected and _int(selected.get("batch_comparison_review_action_count")):
-        recommendations.append("Review selected batch comparison actions before treating this decision as clean execute evidence.")
+        recommendations.append(
+            "Review selected batch comparison actions before treating this decision as clean execute evidence."
+        )
     if _int(comparison_summary.get("batch_comparison_blocker_action_count")):
-        recommendations.append("Keep batch comparison blocker reasons with the decision record for downstream promotion review.")
+        recommendations.append(
+            "Keep batch comparison blocker reasons with the decision record for downstream promotion review."
+        )
     if _int(comparison_summary.get("batch_maturity_ci_regression_count")):
         recommendations.append("Carry batch CI regression context into follow-up promotion and automation review.")
     if _int(comparison_summary.get("batch_maturity_suite_design_regression_count")):
@@ -362,12 +376,18 @@ def _recommendations(
     if rejected:
         recommendations.append("Keep rejected runs as comparison evidence; they explain why the selected run is safer.")
     if execute_command:
-        recommendations.append("Use the execute command only after confirming dataset quality, hardware budget, and expected runtime.")
+        recommendations.append(
+            "Use the execute command only after confirming dataset quality, hardware budget, and expected runtime."
+        )
     suite_consistency = comparison_summary.get("suite_consistency")
     if require_suite_consistency and suite_consistency != "consistent":
-        recommendations.append("Fix benchmark suite consistency before selecting an executable run for clean model-quality comparison.")
+        recommendations.append(
+            "Fix benchmark suite consistency before selecting an executable run for clean model-quality comparison."
+        )
     if require_clean_batch_review and clean_batch_review_status(comparison_summary) != "clean":
-        recommendations.append("Resolve batch review, blocker, and maturity-regression evidence before allowing clean execution automation.")
+        recommendations.append(
+            "Resolve batch review, blocker, and maturity-regression evidence before allowing clean execution automation."
+        )
     if suite_consistency == "mixed":
         recommendations.append(
             "Compared runs use different benchmark suites; treat the selected run as execution triage, not a clean model-quality delta."
@@ -377,7 +397,9 @@ def _recommendations(
     if not selected_suite_path and len(suite_paths) == 1:
         selected_suite_path = suite_paths[0]
     if selected_suite_path and selected:
-        recommendations.append(f"Carry `{selected_suite_path}` into follow-up execution so later comparisons stay suite-consistent.")
+        recommendations.append(
+            f"Carry `{selected_suite_path}` into follow-up execution so later comparisons stay suite-consistent."
+        )
     return recommendations
 
 

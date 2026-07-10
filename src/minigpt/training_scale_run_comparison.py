@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import json
 from pathlib import Path
 from typing import Any
 
@@ -17,6 +16,7 @@ from minigpt.report_utils import (
     as_dict as _dict,
     number_or_default,
     positive_int_mapping as _int_mapping,
+    read_json_object,
     string_list as _string_list,
     utc_now,
 )
@@ -27,10 +27,7 @@ GATE_ORDER = {"fail": 0, "warn": 1, "pass": 2}
 
 def load_training_scale_run(path: str | Path) -> dict[str, Any]:
     run_path = _resolve_run_path(Path(path))
-    payload = json.loads(run_path.read_text(encoding="utf-8-sig"))
-    if not isinstance(payload, dict):
-        raise ValueError("training scale run must be a JSON object")
-    payload = dict(payload)
+    payload = read_json_object(run_path, description="training scale run")
     payload["_source_path"] = str(run_path)
     return payload
 
@@ -82,7 +79,11 @@ def _resolve_names(reports: list[dict[str, Any]], names: list[str] | None) -> li
         resolved = [str(name).strip() for name in names]
     else:
         resolved = [
-            str(report.get("name") or Path(str(report.get("_source_path") or f"run-{index + 1}")).parent.name or f"run-{index + 1}")
+            str(
+                report.get("name")
+                or Path(str(report.get("_source_path") or f"run-{index + 1}")).parent.name
+                or f"run-{index + 1}"
+            )
             for index, report in enumerate(reports)
         ]
     if any(not name for name in resolved):
@@ -128,7 +129,9 @@ def _run_summary(report: dict[str, Any], name: str, index: int) -> dict[str, Any
         "batch_maturity_ci_regression_count": _int(batch.get("maturity_ci_regression_count")),
         "batch_maturity_review_names": _string_list(batch.get("maturity_review_names")),
         "batch_maturity_coverage_regression_names": _string_list(batch.get("maturity_coverage_regression_names")),
-        "batch_maturity_suite_design_regression_names": _string_list(batch.get("maturity_suite_design_regression_names")),
+        "batch_maturity_suite_design_regression_names": _string_list(
+            batch.get("maturity_suite_design_regression_names")
+        ),
         "batch_maturity_ci_regression_names": _string_list(batch.get("maturity_ci_regression_names")),
         "batch_maturity_ci_regression_reason_counts": _int_mapping(batch.get("maturity_ci_regression_reason_counts")),
         "batch_comparison_blocker_reasons": _string_list(batch.get("comparison_blocker_reasons")),
@@ -187,7 +190,9 @@ def _run_delta(run: dict[str, Any], baseline: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def _comparison_summary(runs: list[dict[str, Any]], baseline: dict[str, Any], deltas: list[dict[str, Any]]) -> dict[str, Any]:
+def _comparison_summary(
+    runs: list[dict[str, Any]], baseline: dict[str, Any], deltas: list[dict[str, Any]]
+) -> dict[str, Any]:
     suite_paths = sorted({str(row.get("suite_path")) for row in runs if row.get("suite_path")})
     return {
         "baseline_name": baseline.get("name"),
@@ -204,42 +209,32 @@ def _comparison_summary(runs: list[dict[str, Any]], baseline: dict[str, Any], de
         "suite_path_count": len(suite_paths),
         "suite_paths": suite_paths,
         "suite_mismatch_count": sum(1 for row in deltas if row.get("suite_relation") == "changed"),
-        "batch_comparison_review_action_count": sum(_int(row.get("batch_comparison_review_action_count")) for row in runs),
-        "batch_comparison_blocker_action_count": sum(_int(row.get("batch_comparison_blocker_action_count")) for row in runs),
+        "batch_comparison_review_action_count": sum(
+            _int(row.get("batch_comparison_review_action_count")) for row in runs
+        ),
+        "batch_comparison_blocker_action_count": sum(
+            _int(row.get("batch_comparison_blocker_action_count")) for row in runs
+        ),
         "batch_maturity_review_count": sum(_int(row.get("batch_maturity_review_count")) for row in runs),
-        "batch_maturity_coverage_regression_count": sum(_int(row.get("batch_maturity_coverage_regression_count")) for row in runs),
+        "batch_maturity_coverage_regression_count": sum(
+            _int(row.get("batch_maturity_coverage_regression_count")) for row in runs
+        ),
         "batch_maturity_suite_design_regression_count": sum(
             _int(row.get("batch_maturity_suite_design_regression_count")) for row in runs
         ),
         "batch_maturity_ci_regression_count": sum(_int(row.get("batch_maturity_ci_regression_count")) for row in runs),
         "batch_maturity_ci_regression_reason_counts": _merge_reason_counts(runs),
         "batch_maturity_coverage_regression_names": sorted(
-            {
-                name
-                for row in runs
-                for name in _string_list(row.get("batch_maturity_coverage_regression_names"))
-            }
+            {name for row in runs for name in _string_list(row.get("batch_maturity_coverage_regression_names"))}
         ),
         "batch_maturity_ci_regression_names": sorted(
-            {
-                name
-                for row in runs
-                for name in _string_list(row.get("batch_maturity_ci_regression_names"))
-            }
+            {name for row in runs for name in _string_list(row.get("batch_maturity_ci_regression_names"))}
         ),
         "batch_maturity_suite_design_regression_names": sorted(
-            {
-                name
-                for row in runs
-                for name in _string_list(row.get("batch_maturity_suite_design_regression_names"))
-            }
+            {name for row in runs for name in _string_list(row.get("batch_maturity_suite_design_regression_names"))}
         ),
         "batch_comparison_blocker_reasons": sorted(
-            {
-                reason
-                for row in runs
-                for reason in _string_list(row.get("batch_comparison_blocker_reasons"))
-            }
+            {reason for row in runs for reason in _string_list(row.get("batch_comparison_blocker_reasons"))}
         ),
         "readiness_improvement_count": sum(1 for row in deltas if _int(row.get("readiness_delta")) > 0),
         "readiness_regression_count": sum(1 for row in deltas if _int(row.get("readiness_delta")) < 0),
@@ -259,21 +254,37 @@ def _recommendations(summary: dict[str, Any], deltas: list[dict[str, Any]]) -> l
     if _int(summary.get("gate_fail_count")):
         recommendations.append("Gate failures should be fixed or explicitly justified before using --allow-fail.")
     if _int(summary.get("gate_warn_count")):
-        recommendations.append("Gate warnings can support smoke evidence, but should not be treated as model capability proof.")
+        recommendations.append(
+            "Gate warnings can support smoke evidence, but should not be treated as model capability proof."
+        )
     if summary.get("suite_consistency") == "mixed":
-        recommendations.append("Compared runs use different benchmark suites; treat readiness deltas as governance evidence, not clean model-quality deltas.")
+        recommendations.append(
+            "Compared runs use different benchmark suites; treat readiness deltas as governance evidence, not clean model-quality deltas."
+        )
     elif summary.get("suite_consistency") == "missing":
-        recommendations.append("Some compared runs do not report a benchmark suite; review their plan summaries before selecting a promoted baseline.")
+        recommendations.append(
+            "Some compared runs do not report a benchmark suite; review their plan summaries before selecting a promoted baseline."
+        )
     if _int(summary.get("batch_started_count")) and not _int(summary.get("blocked_count")):
-        recommendations.append("All compared runs reached the batch layer; review batch comparisons before moving to --execute.")
+        recommendations.append(
+            "All compared runs reached the batch layer; review batch comparisons before moving to --execute."
+        )
     if _int(summary.get("batch_comparison_blocker_action_count")):
-        recommendations.append("Resolve batch comparison blocker actions before promoting any scale run from this comparison.")
+        recommendations.append(
+            "Resolve batch comparison blocker actions before promoting any scale run from this comparison."
+        )
     elif _int(summary.get("batch_comparison_review_action_count")):
-        recommendations.append("Review batch comparison actions before treating readiness ranking as clean baseline evidence.")
+        recommendations.append(
+            "Review batch comparison actions before treating readiness ranking as clean baseline evidence."
+        )
     if _int(summary.get("batch_maturity_ci_regression_count")):
-        recommendations.append("Review CI-regressed batch portfolios before treating scale-run readiness as clean automation evidence.")
+        recommendations.append(
+            "Review CI-regressed batch portfolios before treating scale-run readiness as clean automation evidence."
+        )
     if _int(summary.get("batch_maturity_suite_design_regression_count")):
-        recommendations.append("Review suite-design regressed batch portfolios before treating scale-run readiness as clean benchmark evidence.")
+        recommendations.append(
+            "Review suite-design regressed batch portfolios before treating scale-run readiness as clean benchmark evidence."
+        )
     if any(_int(row.get("readiness_delta")) < 0 for row in deltas):
         recommendations.append("At least one run regressed against the baseline readiness score.")
     if not recommendations:
@@ -315,7 +326,9 @@ def _suite_consistency(runs: list[dict[str, Any]], suite_paths: list[str]) -> st
     return "consistent"
 
 
-def _delta_explanation(run: dict[str, Any], baseline: dict[str, Any], readiness_delta: int, gate_delta: int, allowed_delta: int) -> str:
+def _delta_explanation(
+    run: dict[str, Any], baseline: dict[str, Any], readiness_delta: int, gate_delta: int, allowed_delta: int
+) -> str:
     if run.get("name") == baseline.get("name"):
         return "baseline"
     parts = []

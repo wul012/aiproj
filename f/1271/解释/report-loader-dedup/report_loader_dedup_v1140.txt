@@ -1,0 +1,12 @@
+status=pass
+decision=report_loader_dedup_ready
+dedup_ready=True
+read_json_report_definition_count=454
+private_loader_copy_count=496
+migrated_module_count=14
+locate_and_read_migrated_module_count=5
+governance_reader_migrated_module_count=9
+migrated_private_loader_copy_count=0
+left_for_future_count=496
+boundary=contract_preserving_thin_wrappers_only
+next_step=continue_opportunistic_loader_migration_without_bulk_rewrite

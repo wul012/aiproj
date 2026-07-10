@@ -70,6 +70,16 @@ def read_json_object(path: str | Path, *, description: str) -> dict[str, Any]:
     return dict(payload)
 
 
+def read_json_object_or_empty(path: str | Path | None) -> dict[str, Any]:
+    if path is None:
+        return {}
+    source = Path(path)
+    if not source.is_file():
+        return {}
+    payload = json.loads(source.read_text(encoding="utf-8-sig"))
+    return dict(payload) if isinstance(payload, dict) else {}
+
+
 def write_csv_row(row: dict[str, Any], path: str | Path, fieldnames: list[str]) -> None:
     out_path = Path(path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
@@ -87,7 +97,9 @@ def csv_cell(value: Any) -> Any:
     return value
 
 
-def make_artifact_row(key: str, path: str | Path, *, exists: bool | None = None, count: int | None = None) -> dict[str, Any]:
+def make_artifact_row(
+    key: str, path: str | Path, *, exists: bool | None = None, count: int | None = None
+) -> dict[str, Any]:
     item_path = Path(path)
     present = item_path.exists() if exists is None else bool(exists)
     resolved_count = (1 if present else 0) if count is None else int(count)
@@ -190,7 +202,9 @@ def number_or_none(value: Any, number_type: type[int] | type[float] = float) -> 
         return None
 
 
-def number_or_default(value: Any, default: int | float = 0, number_type: type[int] | type[float] = float) -> int | float:
+def number_or_default(
+    value: Any, default: int | float = 0, number_type: type[int] | type[float] = float
+) -> int | float:
     number = number_or_none(value, number_type)
     return default if number is None else number
 

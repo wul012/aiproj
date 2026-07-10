@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import json
 from pathlib import Path
 from typing import Any
 
@@ -23,6 +22,7 @@ from minigpt.report_utils import (
     list_of_dicts as _list_of_dicts,
     number_or_default,
     positive_int_mapping as _int_mapping,
+    read_json_object,
     string_list as _string_list,
     utc_now,
 )
@@ -34,10 +34,7 @@ BATCH_ORDER = {"skipped": 0, None: 0, "failed": 1, "planned": 2, "completed": 3}
 
 def load_promoted_training_scale_comparison(path: str | Path) -> dict[str, Any]:
     comparison_path = _resolve_comparison_path(Path(path))
-    payload = json.loads(comparison_path.read_text(encoding="utf-8-sig"))
-    if not isinstance(payload, dict):
-        raise ValueError("promoted training scale comparison must be a JSON object")
-    payload = dict(payload)
+    payload = read_json_object(comparison_path, description="promoted training scale comparison")
     payload["_source_path"] = str(comparison_path)
     return payload
 
@@ -62,11 +59,15 @@ def build_promoted_training_scale_decision(
     rejected: list[dict[str, Any]] = []
     report_compared = comparison.get("comparison_status") == "compared"
     for row in promotions:
-        reasons = ["comparison report is not compared"] if not report_compared else _rejection_reasons(
-            row,
-            min_readiness=min_readiness,
-            require_gate_pass=require_gate_pass,
-            require_batch_completed=require_batch_completed,
+        reasons = (
+            ["comparison report is not compared"]
+            if not report_compared
+            else _rejection_reasons(
+                row,
+                min_readiness=min_readiness,
+                require_gate_pass=require_gate_pass,
+                require_batch_completed=require_batch_completed,
+            )
         )
         reasons.extend(suite_reasons)
         if reasons:
@@ -208,11 +209,16 @@ def _rejection_reasons(
     reasons: list[str] = []
     if not row.get("promoted_for_comparison"):
         reasons.append("run was not promoted for comparison")
-        reasons.extend(reason for reason in _string_list(row.get("comparison_exclusion_reasons")) if reason not in reasons)
+        reasons.extend(
+            reason for reason in _string_list(row.get("comparison_exclusion_reasons")) if reason not in reasons
+        )
     if row.get("handoff_require_clean_batch_review") and row.get("handoff_clean_batch_review_status") != "clean":
         reasons.append("clean batch-review requirement is not clean")
-    if row.get("handoff_require_clean_batch_review") and _int(row.get("handoff_batch_maturity_ci_regression_count")) > 0:
-        reason = "handoff batch CI regression count is " f"{row.get('handoff_batch_maturity_ci_regression_count')}"
+    if (
+        row.get("handoff_require_clean_batch_review")
+        and _int(row.get("handoff_batch_maturity_ci_regression_count")) > 0
+    ):
+        reason = f"handoff batch CI regression count is {row.get('handoff_batch_maturity_ci_regression_count')}"
         if reason not in reasons:
             reasons.append(reason)
     if (
@@ -322,11 +328,17 @@ def _recommendations(
             "Keep the rejected promoted runs around as comparison evidence so the baseline choice stays explainable.",
         ]
         if selected and selected.get("suite_path"):
-            recommendations.append(f"Carry `{selected.get('suite_path')}` into the next promoted seed so later comparisons stay suite-consistent.")
+            recommendations.append(
+                f"Carry `{selected.get('suite_path')}` into the next promoted seed so later comparisons stay suite-consistent."
+            )
         if require_suite_consistency and comparison_summary.get("suite_consistency") != "consistent":
-            recommendations.append("Fix benchmark suite consistency before using this promoted baseline as clean model-quality evidence.")
+            recommendations.append(
+                "Fix benchmark suite consistency before using this promoted baseline as clean model-quality evidence."
+            )
         elif comparison_summary.get("suite_consistency") == "mixed":
-            recommendations.append("Promoted runs use different benchmark suites; treat this baseline as governance triage, not clean model-quality evidence.")
+            recommendations.append(
+                "Promoted runs use different benchmark suites; treat this baseline as governance triage, not clean model-quality evidence."
+            )
         append_decision_handoff_clean_batch_recommendations(recommendations, selected, comparison_summary)
         append_decision_handoff_batch_recommendations(recommendations, selected, comparison_summary)
         return recommendations
@@ -336,9 +348,13 @@ def _recommendations(
             "Gate warnings can be accepted for review, but they should be justified before larger training.",
         ]
         if require_suite_consistency and comparison_summary.get("suite_consistency") != "consistent":
-            recommendations.append("Fix benchmark suite consistency before using this promoted baseline as clean model-quality evidence.")
+            recommendations.append(
+                "Fix benchmark suite consistency before using this promoted baseline as clean model-quality evidence."
+            )
         elif comparison_summary.get("suite_consistency") == "mixed":
-            recommendations.append("Promoted runs use different benchmark suites; treat this baseline as governance triage, not clean model-quality evidence.")
+            recommendations.append(
+                "Promoted runs use different benchmark suites; treat this baseline as governance triage, not clean model-quality evidence."
+            )
         append_decision_handoff_clean_batch_recommendations(recommendations, selected, comparison_summary)
         append_decision_handoff_batch_recommendations(recommendations, selected, comparison_summary)
         return recommendations
@@ -346,9 +362,13 @@ def _recommendations(
         "Fix the promoted comparison or promote more runs before selecting a new baseline.",
     ]
     if require_suite_consistency and comparison_summary.get("suite_consistency") != "consistent":
-        recommendations.append("Fix benchmark suite consistency before using this promoted baseline as clean model-quality evidence.")
+        recommendations.append(
+            "Fix benchmark suite consistency before using this promoted baseline as clean model-quality evidence."
+        )
     elif comparison_summary.get("suite_consistency") == "mixed":
-        recommendations.append("Promoted runs use different benchmark suites; treat this baseline as governance triage, not clean model-quality evidence.")
+        recommendations.append(
+            "Promoted runs use different benchmark suites; treat this baseline as governance triage, not clean model-quality evidence."
+        )
     append_decision_handoff_clean_batch_recommendations(recommendations, selected, comparison_summary)
     append_decision_handoff_batch_recommendations(recommendations, selected, comparison_summary)
     return recommendations

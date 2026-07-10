@@ -1,0 +1,199 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT report loader dedup v1140",
+  "generated_at": "2026-07-10T01:00:45Z",
+  "status": "pass",
+  "decision": "report_loader_dedup_ready",
+  "failed_count": 0,
+  "issues": [],
+  "summary": {
+    "dedup_ready": true,
+    "read_json_report_definition_count": 454,
+    "private_loader_copy_count": 496,
+    "migrated_module_count": 14,
+    "locate_and_read_migrated_module_count": 5,
+    "governance_reader_migrated_module_count": 9,
+    "migrated_private_loader_copy_count": 0,
+    "left_for_future_count": 496,
+    "boundary": "contract_preserving_thin_wrappers_only",
+    "next_step": "continue_opportunistic_loader_migration_without_bulk_rewrite"
+  },
+  "rows": [
+    {
+      "module": "model_capability_regression_plan.py",
+      "path": "src/minigpt/model_capability_regression_plan.py",
+      "exists": true,
+      "requires_locate_helper": true,
+      "imports_locate_upstream_report": true,
+      "imports_read_json_object": true,
+      "private_loader_copy_present": false,
+      "status": "migrated"
+    },
+    {
+      "module": "model_capability_regression_inventory.py",
+      "path": "src/minigpt/model_capability_regression_inventory.py",
+      "exists": true,
+      "requires_locate_helper": true,
+      "imports_locate_upstream_report": true,
+      "imports_read_json_object": true,
+      "private_loader_copy_present": false,
+      "status": "migrated"
+    },
+    {
+      "module": "model_capability_regression_suite_manifest.py",
+      "path": "src/minigpt/model_capability_regression_suite_manifest.py",
+      "exists": true,
+      "requires_locate_helper": true,
+      "imports_locate_upstream_report": true,
+      "imports_read_json_object": true,
+      "private_loader_copy_present": false,
+      "status": "migrated"
+    },
+    {
+      "module": "model_capability_regression_suite_readiness.py",
+      "path": "src/minigpt/model_capability_regression_suite_readiness.py",
+      "exists": true,
+      "requires_locate_helper": true,
+      "imports_locate_upstream_report": true,
+      "imports_read_json_object": true,
+      "private_loader_copy_present": false,
+      "status": "migrated"
+    },
+    {
+      "module": "model_capability_regression_followup_closeout.py",
+      "path": "src/minigpt/model_capability_regression_followup_closeout.py",
+      "exists": true,
+      "requires_locate_helper": true,
+      "imports_locate_upstream_report": true,
+      "imports_read_json_object": true,
+      "private_loader_copy_present": false,
+      "status": "migrated"
+    },
+    {
+      "module": "benchmark_scorecard_comparison.py",
+      "path": "src/minigpt/benchmark_scorecard_comparison.py",
+      "exists": true,
+      "requires_locate_helper": false,
+      "imports_locate_upstream_report": false,
+      "imports_read_json_object": true,
+      "private_loader_copy_present": false,
+      "status": "migrated"
+    },
+    {
+      "module": "benchmark_scorecard_decision.py",
+      "path": "src/minigpt/benchmark_scorecard_decision.py",
+      "exists": true,
+      "requires_locate_helper": false,
+      "imports_locate_upstream_report": false,
+      "imports_read_json_object": true,
+      "private_loader_copy_present": false,
+      "status": "migrated"
+    },
+    {
+      "module": "training_scale_handoff.py",
+      "path": "src/minigpt/training_scale_handoff.py",
+      "exists": true,
+      "requires_locate_helper": false,
+      "imports_locate_upstream_report": false,
+      "imports_read_json_object": true,
+      "private_loader_copy_present": false,
+      "status": "migrated"
+    },
+    {
+      "module": "training_scale_promotion.py",
+      "path": "src/minigpt/training_scale_promotion.py",
+      "exists": true,
+      "requires_locate_helper": false,
+      "imports_locate_upstream_report": false,
+      "imports_read_json_object": true,
+      "private_loader_copy_present": false,
+      "status": "migrated"
+    },
+    {
+      "module": "training_scale_run_comparison.py",
+      "path": "src/minigpt/training_scale_run_comparison.py",
+      "exists": true,
+      "requires_locate_helper": false,
+      "imports_locate_upstream_report": false,
+      "imports_read_json_object": true,
+      "private_loader_copy_present": false,
+      "status": "migrated"
+    },
+    {
+      "module": "training_scale_run_decision.py",
+      "path": "src/minigpt/training_scale_run_decision.py",
+      "exists": true,
+      "requires_locate_helper": false,
+      "imports_locate_upstream_report": false,
+      "imports_read_json_object": true,
+      "private_loader_copy_present": false,
+      "status": "migrated"
+    },
+    {
+      "module": "training_portfolio_comparison.py",
+      "path": "src/minigpt/training_portfolio_comparison.py",
+      "exists": true,
+      "requires_locate_helper": false,
+      "imports_locate_upstream_report": false,
+      "imports_read_json_object": true,
+      "private_loader_copy_present": false,
+      "status": "migrated"
+    },
+    {
+      "module": "promoted_training_scale_comparison.py",
+      "path": "src/minigpt/promoted_training_scale_comparison.py",
+      "exists": true,
+      "requires_locate_helper": false,
+      "imports_locate_upstream_report": false,
+      "imports_read_json_object": true,
+      "private_loader_copy_present": false,
+      "status": "migrated"
+    },
+    {
+      "module": "promoted_training_scale_decision.py",
+      "path": "src/minigpt/promoted_training_scale_decision.py",
+      "exists": true,
+      "requires_locate_helper": false,
+      "imports_locate_upstream_report": false,
+      "imports_read_json_object": true,
+      "private_loader_copy_present": false,
+      "status": "migrated"
+    }
+  ],
+  "check_rows": [
+    {
+      "id": "all_target_modules_exist",
+      "status": "pass",
+      "actual": []
+    },
+    {
+      "id": "all_required_modules_import_locate_helper",
+      "status": "pass",
+      "actual": []
+    },
+    {
+      "id": "all_target_modules_import_reader_helper",
+      "status": "pass",
+      "actual": []
+    },
+    {
+      "id": "no_target_private_loader_copy",
+      "status": "pass",
+      "actual": []
+    }
+  ],
+  "recommendations": [
+    "Keep the old public locate/read_json_report names as compatibility wrappers.",
+    "Migrate older report loaders in future maintenance batches only when touching their area.",
+    "Use this report as refactor evidence, not model capability evidence."
+  ],
+  "csv_fieldnames": [
+    "module",
+    "exists",
+    "requires_locate_helper",
+    "imports_locate_upstream_report",
+    "imports_read_json_object",
+    "private_loader_copy_present",
+    "status"
+  ]
+}

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "tool": "mypy",
-  "scope_floor": 19,
+  "scope_floor": 20,
   "targets": [
     "scripts/_bootstrap.py",
     "scripts/_engineering_health.py",
@@ -21,11 +21,15 @@
     "src/minigpt/ci_workflow_hygiene_summary.py",
     "src/minigpt/ci_workflow_hygiene_types.py",
     "src/minigpt/model_capability_honest_measurement.py",
-    "src/minigpt/report_utils.py"
+    "src/minigpt/report_utils.py",
+    "src/minigpt/training_scale_handoff_guards.py"
   ],
   "groups": {
     "shared_report_contract": [
       "src/minigpt/report_utils.py"
+    ],
+    "training_handoff_contract": [
+      "src/minigpt/training_scale_handoff_guards.py"
     ],
     "ci_governance_gate": [
       "src/minigpt/ci_workflow_hygiene.py",

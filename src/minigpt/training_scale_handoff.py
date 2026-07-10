@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import json
 from pathlib import Path
 import subprocess
 import time
@@ -15,6 +14,10 @@ from minigpt.training_scale_handoff_artifacts import (
     write_training_scale_handoff_markdown,  # noqa: F401
     write_training_scale_handoff_outputs,  # noqa: F401
 )
+from minigpt.training_scale_handoff_guards import (
+    build_clean_batch_review_guard as _clean_batch_review_guard,
+    build_suite_guard as _suite_guard,
+)
 from minigpt.report_utils import (
     as_dict as _dict,
     count_available_artifacts,
@@ -22,6 +25,8 @@ from minigpt.report_utils import (
     first_present,
     make_artifact_row,
     positive_int_mapping as _int_mapping,
+    read_json_object,
+    read_json_object_or_empty,
     string_list as _string_list,
     utc_now,
 )
@@ -29,10 +34,7 @@ from minigpt.report_utils import (
 
 def load_training_scale_workflow(path: str | Path) -> dict[str, Any]:
     workflow_path = _resolve_workflow_path(Path(path))
-    payload = json.loads(workflow_path.read_text(encoding="utf-8-sig"))
-    if not isinstance(payload, dict):
-        raise ValueError("training scale workflow must be a JSON object")
-    payload = dict(payload)
+    payload = read_json_object(workflow_path, description="training scale workflow")
     payload["_source_path"] = str(workflow_path)
     return payload
 
@@ -50,7 +52,9 @@ def build_training_scale_handoff(
     workflow_file = Path(str(workflow.get("_source_path")))
     workflow_dir = workflow_file.parent
     decision = _load_decision(workflow, workflow_dir)
-    decision_status = str(decision.get("decision_status") or _dict(workflow.get("summary")).get("decision_status") or "")
+    decision_status = str(
+        decision.get("decision_status") or _dict(workflow.get("summary")).get("decision_status") or ""
+    )
     command = _command_from_decision(decision)
     suite_guard = _suite_guard(workflow, decision)
     clean_batch_review_guard = _clean_batch_review_guard(workflow, decision)
@@ -120,8 +124,7 @@ def _load_decision(workflow: dict[str, Any], workflow_dir: Path) -> dict[str, An
     candidates = [path, workflow_dir / path]
     for candidate in candidates:
         if candidate.is_file():
-            payload = json.loads(candidate.read_text(encoding="utf-8-sig"))
-            return dict(payload) if isinstance(payload, dict) else {}
+            return read_json_object_or_empty(candidate)
     return {}
 
 
@@ -227,10 +230,29 @@ def _artifact_rows(command: list[str]) -> list[dict[str, Any]]:
         make_artifact_row("batch_json", root / "batch" / "training_portfolio_batch.json"),
         make_artifact_row("batch_html", root / "batch" / "training_portfolio_batch.html"),
     ]
-    variant_reports = sorted((root / "batch" / "variants").glob("*/training_portfolio.json")) if (root / "batch" / "variants").exists() else []
-    rows.append(make_artifact_row("variant_portfolio_reports", root / "batch" / "variants", exists=bool(variant_reports), count=len(variant_reports)))
-    checkpoints = sorted((root / "batch" / "variants").glob("*/runs/*/checkpoint.pt")) if (root / "batch" / "variants").exists() else []
-    rows.append(make_artifact_row("variant_checkpoints", root / "batch" / "variants", exists=bool(checkpoints), count=len(checkpoints)))
+    variant_reports = (
+        sorted((root / "batch" / "variants").glob("*/training_portfolio.json"))
+        if (root / "batch" / "variants").exists()
+        else []
+    )
+    rows.append(
+        make_artifact_row(
+            "variant_portfolio_reports",
+            root / "batch" / "variants",
+            exists=bool(variant_reports),
+            count=len(variant_reports),
+        )
+    )
+    checkpoints = (
+        sorted((root / "batch" / "variants").glob("*/runs/*/checkpoint.pt"))
+        if (root / "batch" / "variants").exists()
+        else []
+    )
+    rows.append(
+        make_artifact_row(
+            "variant_checkpoints", root / "batch" / "variants", exists=bool(checkpoints), count=len(checkpoints)
+        )
+    )
     return rows
 
 
@@ -259,9 +281,15 @@ def _summary(
         "require_clean_batch_review": clean_batch_review_guard.get("require_clean_batch_review"),
         "clean_batch_review_status": clean_batch_review_guard.get("clean_batch_review_status"),
         "selected_batch_review_status": decision_summary.get("selected_batch_review_status"),
-        "selected_batch_comparison_review_action_count": decision_summary.get("selected_batch_comparison_review_action_count"),
-        "selected_batch_comparison_blocker_action_count": decision_summary.get("selected_batch_comparison_blocker_action_count"),
-        "selected_batch_maturity_coverage_regression_count": decision_summary.get("selected_batch_maturity_coverage_regression_count"),
+        "selected_batch_comparison_review_action_count": decision_summary.get(
+            "selected_batch_comparison_review_action_count"
+        ),
+        "selected_batch_comparison_blocker_action_count": decision_summary.get(
+            "selected_batch_comparison_blocker_action_count"
+        ),
+        "selected_batch_maturity_coverage_regression_count": decision_summary.get(
+            "selected_batch_maturity_coverage_regression_count"
+        ),
         "selected_batch_maturity_suite_design_regression_count": first_present(
             decision_summary.get("selected_batch_maturity_suite_design_regression_count"),
             clean_batch_review_guard.get("selected_batch_maturity_suite_design_regression_count"),
@@ -318,7 +346,9 @@ def _summary(
     }
 
 
-def _recommendations(summary: dict[str, Any], execution: dict[str, Any], artifact_rows: list[dict[str, Any]]) -> list[str]:
+def _recommendations(
+    summary: dict[str, Any], execution: dict[str, Any], artifact_rows: list[dict[str, Any]]
+) -> list[str]:
     if summary.get("decision_require_suite_consistency") and summary.get("suite_consistency") != "consistent":
         return ["Fix benchmark suite consistency before executing this handoff as clean model-quality evidence."]
     if summary.get("decision_require_clean_batch_review") and (
@@ -336,7 +366,10 @@ def _recommendations(summary: dict[str, Any], execution: dict[str, Any], artifac
     if int(summary.get("batch_maturity_suite_design_regression_count") or 0):
         names = ", ".join(_string_list(summary.get("batch_maturity_suite_design_regression_names")))
         suffix = f" Affected portfolios: {names}." if names else ""
-        return ["Resolve suite-design regressed batch evidence before executing this handoff as clean benchmark evidence." + suffix]
+        return [
+            "Resolve suite-design regressed batch evidence before executing this handoff as clean benchmark evidence."
+            + suffix
+        ]
     status = str(summary.get("handoff_status") or "")
     if status == "planned":
         if summary.get("selected_batch_review_status") == "review":
@@ -345,111 +378,14 @@ def _recommendations(summary: dict[str, Any], execution: dict[str, Any], artifac
     if status == "blocked":
         return ["Do not execute until the workflow decision provides an allowed handoff command."]
     if status == "timeout":
-        return ["Inspect the partial output directory and rerun with a larger --timeout-seconds if the training command is still valid."]
+        return [
+            "Inspect the partial output directory and rerun with a larger --timeout-seconds if the training command is still valid."
+        ]
     if status == "failed":
         return ["Inspect stdout/stderr tails and the selected run output directory before retrying."]
     if artifact_rows and summary.get("available_artifact_count") != summary.get("artifact_count"):
         return ["Execution completed, but some expected artifacts are missing; inspect the batch output tree."]
     return ["Execution completed and expected handoff artifacts were found."]
-
-
-def _suite_guard(workflow: dict[str, Any], decision: dict[str, Any]) -> dict[str, Any]:
-    decision_summary = _dict(decision.get("summary"))
-    workflow_summary = _dict(workflow.get("summary"))
-    required = (
-        decision_summary.get("require_suite_consistency")
-        if "require_suite_consistency" in decision_summary
-        else workflow_summary.get("decision_require_suite_consistency")
-    )
-    return {
-        "decision_require_suite_consistency": bool(required),
-        "require_suite_consistency": bool(required),
-        "suite_consistency": first_present(decision_summary.get("suite_consistency"), workflow_summary.get("suite_consistency")),
-        "suite_mismatch_count": first_present(decision_summary.get("suite_mismatch_count"), workflow_summary.get("suite_mismatch_count")),
-        "selected_suite_path": first_present(decision_summary.get("selected_suite_path"), workflow_summary.get("selected_suite_path")),
-        "workflow_suite_path": workflow_summary.get("suite_path"),
-        "workflow_suite_name": workflow_summary.get("suite_name"),
-    }
-
-
-def _clean_batch_review_guard(workflow: dict[str, Any], decision: dict[str, Any]) -> dict[str, Any]:
-    decision_summary = _dict(decision.get("summary"))
-    workflow_summary = _dict(workflow.get("summary"))
-    required = first_present(
-        decision_summary.get("require_clean_batch_review"),
-        workflow_summary.get("decision_require_clean_batch_review"),
-        workflow.get("require_clean_batch_review"),
-        workflow.get("decision_require_clean_batch_review"),
-    )
-    return {
-        "decision_require_clean_batch_review": bool(required),
-        "require_clean_batch_review": bool(required),
-        "clean_batch_review_status": first_present(
-            decision_summary.get("clean_batch_review_status"),
-            workflow_summary.get("clean_batch_review_status"),
-            decision_summary.get("selected_batch_review_status"),
-        ),
-        "batch_comparison_review_action_count": first_present(
-            decision_summary.get("batch_comparison_review_action_count"),
-            workflow_summary.get("batch_comparison_review_action_count"),
-        ),
-        "batch_comparison_blocker_action_count": first_present(
-            decision_summary.get("batch_comparison_blocker_action_count"),
-            workflow_summary.get("batch_comparison_blocker_action_count"),
-        ),
-        "batch_maturity_coverage_regression_count": first_present(
-            decision_summary.get("batch_maturity_coverage_regression_count"),
-            workflow_summary.get("batch_maturity_coverage_regression_count"),
-        ),
-        "selected_batch_maturity_suite_design_regression_count": first_present(
-            decision_summary.get("selected_batch_maturity_suite_design_regression_count"),
-            workflow_summary.get("selected_batch_maturity_suite_design_regression_count"),
-        ),
-        "selected_batch_maturity_suite_design_regression_names": _string_list(
-            first_present(
-                decision_summary.get("selected_batch_maturity_suite_design_regression_names"),
-                workflow_summary.get("selected_batch_maturity_suite_design_regression_names"),
-            )
-        ),
-        "batch_maturity_suite_design_regression_count": first_present(
-            decision_summary.get("batch_maturity_suite_design_regression_count"),
-            workflow_summary.get("batch_maturity_suite_design_regression_count"),
-        ),
-        "batch_maturity_suite_design_regression_names": _string_list(
-            first_present(
-                decision_summary.get("batch_maturity_suite_design_regression_names"),
-                workflow_summary.get("batch_maturity_suite_design_regression_names"),
-            )
-        ),
-        "batch_maturity_ci_regression_count": first_present(
-            decision_summary.get("batch_maturity_ci_regression_count"),
-            workflow_summary.get("batch_maturity_ci_regression_count"),
-        ),
-        "batch_maturity_ci_regression_reason_counts": _int_mapping(
-            first_present(
-                decision_summary.get("batch_maturity_ci_regression_reason_counts"),
-                workflow_summary.get("batch_maturity_ci_regression_reason_counts"),
-            )
-        ),
-        "selected_batch_maturity_ci_regression_reason_counts": _int_mapping(
-            first_present(
-                decision_summary.get("selected_batch_maturity_ci_regression_reason_counts"),
-                workflow_summary.get("selected_batch_maturity_ci_regression_reason_counts"),
-            )
-        ),
-        "batch_maturity_ci_regression_names": _string_list(
-            first_present(
-                decision_summary.get("batch_maturity_ci_regression_names"),
-                workflow_summary.get("batch_maturity_ci_regression_names"),
-            )
-        ),
-        "batch_comparison_blocker_reasons": _string_list(
-            first_present(
-                decision_summary.get("batch_comparison_blocker_reasons"),
-                workflow_summary.get("batch_comparison_blocker_reasons"),
-            )
-        ),
-    }
 
 
 def _reason_detail(value: Any) -> str:

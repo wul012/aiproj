@@ -2,6 +2,10 @@
 
 本目录从 v1098 开始保存模型治理阶段的运行截图和解释，和历史目录 `a/`、`b/`、`c/`、`d/`、`e/` 同级。
 
+## v1271
+
+v1271 将九个活跃 benchmark/training-scale 治理 loader 收敛到共享 JSON 对象读取器，并用独立的空值回落 helper 保留可选 evidence 语义。累计 14 个 dedup 目标全部通过，目标私有副本为 0；全仓 496 个历史副本继续可见且不做高风险批量改写。handoff guard 同时拆为 113 行严格类型组件，主文件降至 413 行，file-size warning count 保持 21。证据见 `f/1271/解释/report-loader-dedup/`，浏览器核验见 `f/1271/图片/governance-report-loader-dedup-v1271.png`。
+
 ## v1270
 
 v1270 将 523 行 `ci_workflow_hygiene.py` 按类型、检查、摘要和公共编排拆分，入口降到 80 行，新模块均低于 240 行。固定输入 canonical report hash 拆分前后完全一致，mypy scope 从 16 收紧到 19，file-size warning count 从 22 降到 21。证据见 `f/1270/解释/`，浏览器核验见 `f/1270/图片/ci-hygiene-type-scope-v1270.png`。

@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import json
 from pathlib import Path
 from typing import Any
 
@@ -23,15 +22,12 @@ from minigpt.benchmark_scorecard_comparison_deltas import (
     select_best_benchmark_scorecard_run,
     summarize_benchmark_scorecard_run,
 )
-from minigpt.report_utils import utc_now
+from minigpt.report_utils import read_json_object, utc_now
 
 
 def load_benchmark_scorecard(path: str | Path) -> dict[str, Any]:
     scorecard_path = _resolve_scorecard_path(Path(path))
-    payload = json.loads(scorecard_path.read_text(encoding="utf-8-sig"))
-    if not isinstance(payload, dict):
-        raise ValueError("benchmark scorecard must be a JSON object")
-    payload = dict(payload)
+    payload = read_json_object(scorecard_path, description="benchmark scorecard")
     payload["_source_path"] = str(scorecard_path)
     return payload
 
@@ -51,12 +47,19 @@ def build_benchmark_scorecard_comparison(
 
     scorecards = [load_benchmark_scorecard(path) for path in scorecard_paths]
     resolved_names = _resolve_names(scorecards, names)
-    runs = [summarize_benchmark_scorecard_run(scorecard, resolved_names[index], index) for index, scorecard in enumerate(scorecards)]
+    runs = [
+        summarize_benchmark_scorecard_run(scorecard, resolved_names[index], index)
+        for index, scorecard in enumerate(scorecards)
+    ]
     baseline_run = _select_baseline(runs, baseline)
     deltas = [build_benchmark_scorecard_run_delta(run, baseline_run) for run in runs]
     case_deltas = build_benchmark_scorecard_case_deltas(scorecards, resolved_names, baseline_run)
-    task_deltas = build_benchmark_scorecard_group_deltas(scorecards, resolved_names, baseline_run, group_name="task_type")
-    difficulty_deltas = build_benchmark_scorecard_group_deltas(scorecards, resolved_names, baseline_run, group_name="difficulty")
+    task_deltas = build_benchmark_scorecard_group_deltas(
+        scorecards, resolved_names, baseline_run, group_name="task_type"
+    )
+    difficulty_deltas = build_benchmark_scorecard_group_deltas(
+        scorecards, resolved_names, baseline_run, group_name="difficulty"
+    )
     summary = build_benchmark_scorecard_summary(runs, baseline_run, deltas, case_deltas, task_deltas, difficulty_deltas)
     return {
         "schema_version": 1,
@@ -72,7 +75,9 @@ def build_benchmark_scorecard_comparison(
         "summary": summary,
         "best_by_overall_score": select_best_benchmark_scorecard_run(runs, "overall_score"),
         "best_by_rubric_avg_score": select_best_benchmark_scorecard_run(runs, "rubric_avg_score"),
-        "recommendations": build_benchmark_scorecard_recommendations(summary, deltas, case_deltas, task_deltas, difficulty_deltas),
+        "recommendations": build_benchmark_scorecard_recommendations(
+            summary, deltas, case_deltas, task_deltas, difficulty_deltas
+        ),
     }
 
 
@@ -121,7 +126,12 @@ def _select_baseline(runs: list[dict[str, Any]], baseline: str | int | None) -> 
         if 0 <= index < len(runs):
             return runs[index]
     for run in runs:
-        if wanted in {str(run.get("name")), str(run.get("source_path")), str(run.get("run_dir")), Path(str(run.get("run_dir") or "")).name}:
+        if wanted in {
+            str(run.get("name")),
+            str(run.get("source_path")),
+            str(run.get("run_dir")),
+            Path(str(run.get("run_dir") or "")).name,
+        }:
             return run
     raise ValueError(f"baseline did not match a scorecard name, path, run_dir, or 1-based index: {baseline}")
 

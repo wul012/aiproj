@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import json
 from pathlib import Path
 from typing import Any
 
@@ -17,6 +16,7 @@ from minigpt.report_utils import (
     list_of_dicts as _list_of_dicts,
     number_or_default,
     positive_int_mapping as _int_mapping,
+    read_json_object,
     string_list as _string_list,
     utc_now,
 )
@@ -34,10 +34,7 @@ from minigpt.training_scale_run_comparison import build_training_scale_run_compa
 
 def load_training_scale_promotion_index(path: str | Path) -> dict[str, Any]:
     index_path = _resolve_index_path(Path(path))
-    payload = json.loads(index_path.read_text(encoding="utf-8-sig"))
-    if not isinstance(payload, dict):
-        raise ValueError("training scale promotion index must be a JSON object")
-    payload = dict(payload)
+    payload = read_json_object(index_path, description="training scale promotion index")
     payload["_source_path"] = str(index_path)
     return payload
 
@@ -77,7 +74,9 @@ def build_promoted_training_scale_comparison(
         except Exception as exc:  # pragma: no cover - converted into report data
             blocked_reason = str(exc)
     promotions = _merge_comparison_rows(promotions, comparison_report)
-    summary = _summary(index_summary, promotions, comparison_inputs, comparison_report, comparison_status, blocked_reason)
+    summary = _summary(
+        index_summary, promotions, comparison_inputs, comparison_report, comparison_status, blocked_reason
+    )
     return {
         "schema_version": 1,
         "title": title,
@@ -92,7 +91,6 @@ def build_promoted_training_scale_comparison(
         "blockers": _blockers(blocked_reason, comparison_inputs, comparison_status),
         "recommendations": _recommendations(summary),
     }
-
 
 
 def _resolve_index_path(path: Path) -> Path:
@@ -117,15 +115,14 @@ def _promotion_rows(index: dict[str, Any], index_dir: Path) -> list[dict[str, An
         resolved_run_path = _resolve_path(run_path, index_dir)
         clean_guard = _clean_batch_review_guard(row)
         index_marked_compare_ready = bool(row.get("promoted_for_comparison"))
-        exclusion_reasons = _comparison_exclusion_reasons(row, resolved_run_path, clean_guard, index_marked_compare_ready)
+        exclusion_reasons = _comparison_exclusion_reasons(
+            row, resolved_run_path, clean_guard, index_marked_compare_ready
+        )
         promoted_for_comparison = index_marked_compare_ready and not exclusion_reasons
-        if (
-            clean_guard.get("handoff_require_clean_batch_review")
-            and (
-                clean_guard.get("handoff_clean_batch_review_status") != "clean"
-                or _int(clean_guard.get("handoff_batch_maturity_ci_regression_count")) > 0
-                or _int(clean_guard.get("handoff_batch_maturity_suite_design_regression_count")) > 0
-            )
+        if clean_guard.get("handoff_require_clean_batch_review") and (
+            clean_guard.get("handoff_clean_batch_review_status") != "clean"
+            or _int(clean_guard.get("handoff_batch_maturity_ci_regression_count")) > 0
+            or _int(clean_guard.get("handoff_batch_maturity_suite_design_regression_count")) > 0
         ):
             promoted_for_comparison = False
         rows.append(
@@ -189,8 +186,12 @@ def _promotion_rows(index: dict[str, Any], index_dir: Path) -> list[dict[str, An
                     "handoff_selected_batch_maturity_coverage_regression_count"
                 ),
                 "handoff_batch_comparison_review_action_count": row.get("handoff_batch_comparison_review_action_count"),
-                "handoff_batch_comparison_blocker_action_count": row.get("handoff_batch_comparison_blocker_action_count"),
-                "handoff_batch_comparison_blocker_reasons": _string_list(row.get("handoff_batch_comparison_blocker_reasons")),
+                "handoff_batch_comparison_blocker_action_count": row.get(
+                    "handoff_batch_comparison_blocker_action_count"
+                ),
+                "handoff_batch_comparison_blocker_reasons": _string_list(
+                    row.get("handoff_batch_comparison_blocker_reasons")
+                ),
             }
         )
     return rows
@@ -249,7 +250,9 @@ def _blockers(blocked_reason: str | None, comparison_inputs: dict[str, Any], com
     if comparison_inputs.get("run_count", 0) < 2:
         blockers.append("need at least two promoted runs for comparison")
     if comparison_inputs.get("missing_paths"):
-        blockers.append("missing promoted run paths: " + ", ".join(_string_list(comparison_inputs.get("missing_paths"))))
+        blockers.append(
+            "missing promoted run paths: " + ", ".join(_string_list(comparison_inputs.get("missing_paths")))
+        )
     return blockers
 
 
@@ -269,8 +272,7 @@ def _comparison_exclusion_reasons(
             reasons.append(f"clean batch review status is {clean_guard.get('handoff_clean_batch_review_status')}")
         if _int(clean_guard.get("handoff_batch_maturity_ci_regression_count")) > 0:
             reasons.append(
-                "handoff batch CI regression count is "
-                f"{clean_guard.get('handoff_batch_maturity_ci_regression_count')}"
+                f"handoff batch CI regression count is {clean_guard.get('handoff_batch_maturity_ci_regression_count')}"
             )
         if _int(clean_guard.get("handoff_batch_maturity_suite_design_regression_count")) > 0:
             reasons.append(

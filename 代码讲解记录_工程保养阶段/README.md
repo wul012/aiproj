@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1229-v1271-governance-report-loader-consolidation.md
+ -> v1271 code explanation: consolidates nine active governance JSON object loaders into strict and optional-empty shared contracts, preserves exact public errors and path behavior, evolves the existing dedup checker to fourteen protected modules, and extracts handoff guard construction into a 113-line strict typed component so the active facade returns below the file-size warning threshold. It leaves 496 historical copies visible rather than bulk-rewriting frozen experiments. Evidence lives under `f/1271`.
+
 1228-v1270-ci-workflow-hygiene-responsibility-split.md
  -> v1270 code explanation: splits the 523-line CI workflow hygiene module into typed checks, summary, contract, and public orchestration layers; preserves a byte-identical canonical report; expands strict mypy scope to 19; and promotes zero-console-error HTML evidence into a repository rule. Evidence lives under `f/1270`.
 

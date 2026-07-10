@@ -1,0 +1,15 @@
+module,exists,requires_locate_helper,imports_locate_upstream_report,imports_read_json_object,private_loader_copy_present,status
+model_capability_regression_plan.py,True,True,True,True,False,migrated
+model_capability_regression_inventory.py,True,True,True,True,False,migrated
+model_capability_regression_suite_manifest.py,True,True,True,True,False,migrated
+model_capability_regression_suite_readiness.py,True,True,True,True,False,migrated
+model_capability_regression_followup_closeout.py,True,True,True,True,False,migrated
+benchmark_scorecard_comparison.py,True,False,False,True,False,migrated
+benchmark_scorecard_decision.py,True,False,False,True,False,migrated
+training_scale_handoff.py,True,False,False,True,False,migrated
+training_scale_promotion.py,True,False,False,True,False,migrated
+training_scale_run_comparison.py,True,False,False,True,False,migrated
+training_scale_run_decision.py,True,False,False,True,False,migrated
+training_portfolio_comparison.py,True,False,False,True,False,migrated
+promoted_training_scale_comparison.py,True,False,False,True,False,migrated
+promoted_training_scale_decision.py,True,False,False,True,False,migrated

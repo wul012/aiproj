@@ -1,12 +1,12 @@
 from __future__ import annotations
 
-import json
 from pathlib import Path
 from typing import Any
 
 from minigpt.report_utils import (
     as_dict as _dict,
     list_of_dicts as _list_of_dicts,
+    read_json_object,
     utc_now,
 )
 from minigpt.benchmark_scorecard_decision_logic import (
@@ -34,10 +34,7 @@ from minigpt.benchmark_scorecard_decision_artifacts import (
 
 def load_benchmark_scorecard_comparison(path: str | Path) -> dict[str, Any]:
     comparison_path = _resolve_comparison_path(Path(path))
-    payload = json.loads(comparison_path.read_text(encoding="utf-8-sig"))
-    if not isinstance(payload, dict):
-        raise ValueError("benchmark scorecard comparison must be a JSON object")
-    payload = dict(payload)
+    payload = read_json_object(comparison_path, description="benchmark scorecard comparison")
     payload["_source_path"] = str(comparison_path)
     return payload
 
@@ -60,7 +57,9 @@ def build_benchmark_scorecard_decision(
     clean_candidates = [row for row in candidates if not row.get("review_items")]
     selected = _select_candidate(clean_candidates or candidates)
     decision_status = _decision_status(selected)
-    summary = _summary(comparison, evaluations, candidates, clean_candidates, selected, decision_status, min_rubric_score)
+    summary = _summary(
+        comparison, evaluations, candidates, clean_candidates, selected, decision_status, min_rubric_score
+    )
     remediation_plan = _remediation_plan(summary)
     remediation_summary = _remediation_summary(remediation_plan)
     summary = {**summary, **remediation_summary}
@@ -70,7 +69,8 @@ def build_benchmark_scorecard_decision(
         "generated_at": generated_at or utc_now(),
         "comparison_path": str(comparison.get("_source_path")),
         "comparison_title": comparison.get("title"),
-        "baseline_name": _dict(comparison.get("baseline")).get("name") or _dict(comparison.get("summary")).get("baseline_name"),
+        "baseline_name": _dict(comparison.get("baseline")).get("name")
+        or _dict(comparison.get("summary")).get("baseline_name"),
         "min_rubric_score": float(min_rubric_score),
         "decision_status": decision_status,
         "recommended_action": _recommended_action(decision_status),
@@ -80,7 +80,6 @@ def build_benchmark_scorecard_decision(
         "remediation_plan": remediation_plan,
         "recommendations": _recommendations(decision_status, selected, evaluations, comparison, remediation_plan),
     }
-
 
 
 def _resolve_comparison_path(path: Path) -> Path:

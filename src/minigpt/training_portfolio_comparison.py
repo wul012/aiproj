@@ -1,11 +1,11 @@
 from __future__ import annotations
 
-import json
 from pathlib import Path
 from typing import Any
 
 from minigpt.report_utils import format_mapping as _format_mapping
 from minigpt.report_utils import positive_int_mapping as _int_mapping
+from minigpt.report_utils import read_json_object
 from minigpt.report_utils import utc_now
 from minigpt.training_portfolio_comparison_artifacts import (
     render_training_portfolio_comparison_html,  # noqa: F401
@@ -29,10 +29,7 @@ from minigpt.training_portfolio_comparison_review import (
 
 def load_training_portfolio(path: str | Path) -> dict[str, Any]:
     portfolio_path = _resolve_portfolio_path(Path(path))
-    payload = json.loads(portfolio_path.read_text(encoding="utf-8-sig"))
-    if not isinstance(payload, dict):
-        raise ValueError("training portfolio must be a JSON object")
-    payload = dict(payload)
+    payload = read_json_object(portfolio_path, description="training portfolio")
     payload["_source_path"] = str(portfolio_path)
     return payload
 
@@ -52,10 +49,7 @@ def build_training_portfolio_comparison(
 
     reports = [load_training_portfolio(path) for path in portfolio_paths]
     resolved_names = _resolve_names(reports, names)
-    portfolios = [
-        _portfolio_summary(report, resolved_names[index], index)
-        for index, report in enumerate(reports)
-    ]
+    portfolios = [_portfolio_summary(report, resolved_names[index], index) for index, report in enumerate(reports)]
     baseline_portfolio = _select_baseline(portfolios, baseline)
     deltas = [_portfolio_delta(item, baseline_portfolio) for item in portfolios]
     summary = _comparison_summary(portfolios, baseline_portfolio, deltas)
@@ -113,7 +107,9 @@ def _portfolio_delta(portfolio: dict[str, Any], baseline: dict[str, Any]) -> dic
     rubric_delta = _numeric_delta(portfolio.get("rubric_avg_score"), baseline.get("rubric_avg_score"))
     val_loss_delta = _numeric_delta(portfolio.get("final_val_loss"), baseline.get("final_val_loss"))
     artifact_delta = _numeric_delta(portfolio.get("artifact_coverage"), baseline.get("artifact_coverage"))
-    available_artifact_delta = _int_delta(portfolio.get("available_artifact_count"), baseline.get("available_artifact_count"))
+    available_artifact_delta = _int_delta(
+        portfolio.get("available_artifact_count"), baseline.get("available_artifact_count")
+    )
     dataset_warning_delta = _int_delta(portfolio.get("dataset_warning_count"), baseline.get("dataset_warning_count"))
     ci_regression_delta = _int_delta(
         portfolio.get("maturity_release_readiness_ci_workflow_regression_count"),
@@ -150,8 +146,10 @@ def _portfolio_delta(portfolio: dict[str, Any], baseline: dict[str, Any]) -> dic
         "rubric_avg_score_delta": rubric_delta,
         "final_val_loss_delta": val_loss_delta,
         "dataset_warning_delta": dataset_warning_delta,
-        "maturity_status_changed": portfolio.get("maturity_portfolio_status") != baseline.get("maturity_portfolio_status"),
-        "maturity_release_readiness_trend_changed": portfolio.get("maturity_release_readiness_trend") != baseline.get("maturity_release_readiness_trend"),
+        "maturity_status_changed": portfolio.get("maturity_portfolio_status")
+        != baseline.get("maturity_portfolio_status"),
+        "maturity_release_readiness_trend_changed": portfolio.get("maturity_release_readiness_trend")
+        != baseline.get("maturity_release_readiness_trend"),
         "maturity_release_readiness_ci_workflow_regression_delta": ci_regression_delta,
         "maturity_release_readiness_ci_workflow_order_regression_delta": ci_order_regression_delta,
         "maturity_release_readiness_test_coverage_regression_delta": coverage_regression_delta,
@@ -162,7 +160,9 @@ def _portfolio_delta(portfolio: dict[str, Any], baseline: dict[str, Any]) -> dic
         "rubric_relation": "baseline" if is_baseline else _score_relation(rubric_delta),
         "artifact_relation": "baseline" if is_baseline else _score_relation(artifact_delta),
         "final_val_loss_relation": "baseline" if is_baseline else _loss_relation(val_loss_delta),
-        "explanation": _delta_explanation(portfolio, baseline, overall_delta, artifact_delta, val_loss_delta, is_baseline),
+        "explanation": _delta_explanation(
+            portfolio, baseline, overall_delta, artifact_delta, val_loss_delta, is_baseline
+        ),
     }
 
 
@@ -185,9 +185,21 @@ def _comparison_summary(
         "completed_count": sum(1 for item in portfolios if item.get("status") == "completed"),
         "failed_count": sum(1 for item in portfolios if item.get("status") == "failed"),
         "planned_count": sum(1 for item in portfolios if item.get("status") == "planned"),
-        "artifact_regression_count": sum(1 for item in non_baseline if _number(item.get("artifact_coverage_delta")) is not None and float(item["artifact_coverage_delta"]) < 0),
-        "score_improvement_count": sum(1 for item in non_baseline if _number(item.get("overall_score_delta")) is not None and float(item["overall_score_delta"]) > 0),
-        "score_regression_count": sum(1 for item in non_baseline if _number(item.get("overall_score_delta")) is not None and float(item["overall_score_delta"]) < 0),
+        "artifact_regression_count": sum(
+            1
+            for item in non_baseline
+            if _number(item.get("artifact_coverage_delta")) is not None and float(item["artifact_coverage_delta"]) < 0
+        ),
+        "score_improvement_count": sum(
+            1
+            for item in non_baseline
+            if _number(item.get("overall_score_delta")) is not None and float(item["overall_score_delta"]) > 0
+        ),
+        "score_regression_count": sum(
+            1
+            for item in non_baseline
+            if _number(item.get("overall_score_delta")) is not None and float(item["overall_score_delta"]) < 0
+        ),
         "loss_improvement_count": sum(1 for item in non_baseline if item.get("final_val_loss_relation") == "improved"),
         "loss_regression_count": sum(1 for item in non_baseline if item.get("final_val_loss_relation") == "regressed"),
         "dataset_warning_count": sum(int(item.get("dataset_warning_count") or 0) for item in portfolios),
@@ -197,9 +209,13 @@ def _comparison_summary(
         "maturity_ci_regression_names": [name for item in maturity_ci_rows if (name := _as_str(item.get("name")))],
         "maturity_ci_regression_reason_counts": _merge_reason_counts(maturity_ci_rows),
         "maturity_coverage_regression_count": len(maturity_coverage_rows),
-        "maturity_coverage_regression_names": [name for item in maturity_coverage_rows if (name := _as_str(item.get("name")))],
+        "maturity_coverage_regression_names": [
+            name for item in maturity_coverage_rows if (name := _as_str(item.get("name")))
+        ],
         "maturity_suite_design_regression_count": len(maturity_suite_design_rows),
-        "maturity_suite_design_regression_names": [name for item in maturity_suite_design_rows if (name := _as_str(item.get("name")))],
+        "maturity_suite_design_regression_names": [
+            name for item in maturity_suite_design_rows if (name := _as_str(item.get("name")))
+        ],
         "best_score_name": _pick(best_score, "name"),
         "best_score_maturity_status": _pick(best_score, "maturity_portfolio_status"),
         "best_score_maturity_release_readiness_trend": _pick(best_score, "maturity_release_readiness_trend"),
@@ -266,7 +282,11 @@ def _best_numeric(portfolios: list[dict[str, Any]], key: str, *, higher_is_bette
     candidates = [item for item in portfolios if _number(item.get(key)) is not None]
     if not candidates:
         return None
-    return max(candidates, key=lambda item: float(item.get(key))) if higher_is_better else min(candidates, key=lambda item: float(item.get(key)))
+    return (
+        max(candidates, key=lambda item: float(item.get(key)))
+        if higher_is_better
+        else min(candidates, key=lambda item: float(item.get(key)))
+    )
 
 
 def _delta_explanation(
@@ -294,10 +314,7 @@ def _delta_explanation(
         reason_detail = _reason_count_detail(
             portfolio.get("maturity_release_readiness_ci_workflow_regression_reason_counts")
         )
-        parts.append(
-            "release-readiness CI regressed"
-            + (f" ({reason_detail})" if reason_detail else "")
-        )
+        parts.append("release-readiness CI regressed" + (f" ({reason_detail})" if reason_detail else ""))
     if has_maturity_coverage_regression(portfolio):
         parts.append("release-readiness coverage regressed")
     if has_maturity_suite_design_regression(portfolio):

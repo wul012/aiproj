@@ -29,6 +29,7 @@ from minigpt.report_utils import (
     number_or_none,
     positive_int_mapping,
     read_json_object,
+    read_json_object_or_empty,
     resolve_archived_reference_path,
     string_list,
     write_csv_row,
@@ -82,7 +83,7 @@ class ReportUtilsHelperTests(unittest.TestCase):
             object_path = root / "nested" / "object.json"
 
             write_json_payload({"name": "MiniGPT", "items": [1, 2]}, json_path)
-            object_path.write_text('{"status": "pass"}', encoding="utf-8")
+            object_path.write_text('{"status": "pass"}', encoding="utf-8-sig")
 
             payload = json.loads(json_path.read_text(encoding="utf-8"))
             self.assertEqual(payload["items"], [1, 2])
@@ -97,6 +98,19 @@ class ReportUtilsHelperTests(unittest.TestCase):
 
             with self.assertRaisesRegex(ValueError, "fixture must be a JSON object"):
                 read_json_object(path, description="fixture")
+
+    def test_optional_json_object_reader_preserves_empty_fallback_contract(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            object_path = root / "object.json"
+            list_path = root / "items.json"
+            object_path.write_text('{"status": "pass"}', encoding="utf-8")
+            list_path.write_text("[1, 2]", encoding="utf-8")
+
+            self.assertEqual(read_json_object_or_empty(object_path), {"status": "pass"})
+            self.assertEqual(read_json_object_or_empty(list_path), {})
+            self.assertEqual(read_json_object_or_empty(root / "missing.json"), {})
+            self.assertEqual(read_json_object_or_empty(None), {})
 
     def test_csv_and_text_helpers_preserve_report_safe_cells(self) -> None:
         command = display_command(["python", "script name.py", 'say"hi'])

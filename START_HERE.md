@@ -89,11 +89,14 @@ workflows.
 
 ## Latest version summary
 
-Current README focus: **v1270 CI workflow hygiene responsibility split**.
+Current README focus: **v1271 governance JSON reader consolidation**.
 
-v1270 separates CI workflow facts, checks, readiness summaries, and types into
-focused strict modules. The public report is byte-identical for a fixed input,
-and all three new components are included in the expanded mypy scope.
+v1271 moves nine active benchmark and training-scale governance loaders onto
+shared strict UTF-8-SIG object reading, while keeping optional evidence on a
+separate empty-fallback contract. Public loader error messages, path behavior,
+and science-lane results remain unchanged. Handoff guard construction is also
+split into a strict typed component so the active facade stays below the
+file-size warning threshold.
 
 ## Where to look next
 

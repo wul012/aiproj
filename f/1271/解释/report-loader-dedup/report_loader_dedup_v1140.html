@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT report loader dedup v1140</title>
+<style>
+:root { color-scheme: light; font-family: Arial, "Microsoft YaHei", sans-serif; color: #172026; background: #f6f8fa; }
+body { margin: 0; padding: 24px; }
+header, section, footer { max-width: 1120px; margin: 0 auto 18px; }
+header { padding: 18px 0 8px; border-bottom: 3px solid #2f6f8f; }
+h1 { margin: 0 0 8px; font-size: 28px; letter-spacing: 0; }
+h2 { margin: 0 0 10px; font-size: 18px; letter-spacing: 0; }
+p { margin: 0 0 10px; line-height: 1.5; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; background: transparent; border: 0; padding: 0; }
+.stat { background: #fff; border: 1px solid #d7dee5; border-radius: 8px; padding: 12px; min-height: 64px; }
+.stat span { display: block; color: #5c6b73; font-size: 12px; margin-bottom: 8px; }
+.stat strong { display: block; font-size: 18px; overflow-wrap: anywhere; }
+section { background: #fff; border: 1px solid #d7dee5; border-radius: 8px; padding: 16px; }
+table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+th, td { padding: 9px; border-bottom: 1px solid #e5e9ef; text-align: left; vertical-align: top; overflow-wrap: anywhere; }
+th { background: #eef3f6; }
+ul { margin: 0; padding-left: 20px; }
+li { margin: 6px 0; }
+.muted { color: #687782; }
+footer { color: #687782; font-size: 12px; }
+</style>
+</head>
+<body>
+<header><h1>MiniGPT report loader dedup v1140</h1><p>Late-stage maintenance report for keeping AI governance artifacts readable.</p></header>
+<section class="stats"><article class="stat"><span>dedup_ready</span><strong>True</strong></article><article class="stat"><span>read_json_report_definition_count</span><strong>454</strong></article><article class="stat"><span>private_loader_copy_count</span><strong>496</strong></article><article class="stat"><span>migrated_module_count</span><strong>14</strong></article><article class="stat"><span>locate_and_read_migrated_module_count</span><strong>5</strong></article><article class="stat"><span>governance_reader_migrated_module_count</span><strong>9</strong></article><article class="stat"><span>migrated_private_loader_copy_count</span><strong>0</strong></article><article class="stat"><span>left_for_future_count</span><strong>496</strong></article><article class="stat"><span>boundary</span><strong>contract_preserving_thin_wrappers_only</strong></article><article class="stat"><span>next_step</span><strong>continue_opportunistic_loader_migration_without_bulk_rewrite</strong></article></section>
+<section><h2>Migrated Report Loaders</h2><table><thead><tr><th>module</th><th>exists</th><th>requires_locate_helper</th><th>imports_locate_upstream_report</th><th>imports_read_json_object</th><th>private_loader_copy_present</th><th>status</th></tr></thead><tbody><tr><td>model_capability_regression_plan.py</td><td>True</td><td>True</td><td>True</td><td>True</td><td>False</td><td>migrated</td></tr><tr><td>model_capability_regression_inventory.py</td><td>True</td><td>True</td><td>True</td><td>True</td><td>False</td><td>migrated</td></tr><tr><td>model_capability_regression_suite_manifest.py</td><td>True</td><td>True</td><td>True</td><td>True</td><td>False</td><td>migrated</td></tr><tr><td>model_capability_regression_suite_readiness.py</td><td>True</td><td>True</td><td>True</td><td>True</td><td>False</td><td>migrated</td></tr><tr><td>model_capability_regression_followup_closeout.py</td><td>True</td><td>True</td><td>True</td><td>True</td><td>False</td><td>migrated</td></tr><tr><td>benchmark_scorecard_comparison.py</td><td>True</td><td>False</td><td>False</td><td>True</td><td>False</td><td>migrated</td></tr><tr><td>benchmark_scorecard_decision.py</td><td>True</td><td>False</td><td>False</td><td>True</td><td>False</td><td>migrated</td></tr><tr><td>training_scale_handoff.py</td><td>True</td><td>False</td><td>False</td><td>True</td><td>False</td><td>migrated</td></tr><tr><td>training_scale_promotion.py</td><td>True</td><td>False</td><td>False</td><td>True</td><td>False</td><td>migrated</td></tr><tr><td>training_scale_run_comparison.py</td><td>True</td><td>False</td><td>False</td><td>True</td><td>False</td><td>migrated</td></tr><tr><td>training_scale_run_decision.py</td><td>True</td><td>False</td><td>False</td><td>True</td><td>False</td><td>migrated</td></tr><tr><td>training_portfolio_comparison.py</td><td>True</td><td>False</td><td>False</td><td>True</td><td>False</td><td>migrated</td></tr><tr><td>promoted_training_scale_comparison.py</td><td>True</td><td>False</td><td>False</td><td>True</td><td>False</td><td>migrated</td></tr><tr><td>promoted_training_scale_decision.py</td><td>True</td><td>False</td><td>False</td><td>True</td><td>False</td><td>migrated</td></tr></tbody></table></section>
+<section><h2>Recommendations</h2><ul><li>Keep the old public locate/read_json_report names as compatibility wrappers.</li><li>Migrate older report loaders in future maintenance batches only when touching their area.</li><li>Use this report as refactor evidence, not model capability evidence.</li></ul></section>
+<footer>Generated by MiniGPT readability maintenance tooling.</footer>
+</body>
+</html>

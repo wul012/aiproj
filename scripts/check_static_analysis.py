@@ -42,6 +42,7 @@ DEFAULT_STRICT_PATHS = (
     "src/minigpt/artifact_schema_guard.py",
     "src/minigpt/file_size_ratchet.py",
     "src/minigpt/aiproj_track_closeout.py",
+    "src/minigpt/training_scale_handoff_guards.py",
 )
 
 Runner = Callable[..., subprocess.CompletedProcess[str]]
