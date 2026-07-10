@@ -89,12 +89,11 @@ workflows.
 
 ## Latest version summary
 
-Current README focus: **v1269 deep static-analysis baseline reduction**.
+Current README focus: **v1270 CI workflow hygiene responsibility split**.
 
-v1269 cuts the committed ruff debt from 545 to 271 findings while preserving
-direct-script and compatibility-facade contracts. Baseline updates are now
-fail-closed and shrink-only; remaining findings stay visible rather than being
-hidden by a global ignore.
+v1270 separates CI workflow facts, checks, readiness summaries, and types into
+focused strict modules. The public report is byte-identical for a fixed input,
+and all three new components are included in the expanded mypy scope.
 
 ## Where to look next
 

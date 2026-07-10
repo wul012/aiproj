@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1228-v1270-ci-workflow-hygiene-responsibility-split.md
+ -> v1270 code explanation: splits the 523-line CI workflow hygiene module into typed checks, summary, contract, and public orchestration layers; preserves a byte-identical canonical report; expands strict mypy scope to 19; and promotes zero-console-error HTML evidence into a repository rule. Evidence lives under `f/1270`.
+
 1227-v1269-static-analysis-baseline-debt-reduction.md
  -> v1269 code explanation: reduces the committed ruff baseline from 545 to 271, makes reviewed bootstrap and facade re-exports explicit at line scope, removes real unused/redefined bindings, and makes baseline updates fail-closed and shrink-only. Evidence lives under `f/1269`.
 

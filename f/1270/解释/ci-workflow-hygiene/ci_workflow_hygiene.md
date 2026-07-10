@@ -1,0 +1,146 @@
+# MiniGPT CI workflow hygiene
+
+- Generated: `2026-07-10T00:33:43Z`
+- Workflow: `.github\workflows\ci.yml`
+- Status: `pass`
+- Decision: `continue_with_node24_native_ci`
+
+## Summary
+
+| Metric | Value |
+| --- | --- |
+| check_count | 63 |
+| passed_check_count | 63 |
+| failed_check_count | 0 |
+| action_count | 2 |
+| found_required_action_count | 2 |
+| node24_native_action_count | 2 |
+| forbidden_env_count | 0 |
+| missing_step_count | 0 |
+| order_violation_count | 0 |
+| execution_policy_check_count | 6 |
+| execution_policy_violation_count | 0 |
+| main_branch_push_scope_ready | True |
+| tag_push_suppressed | True |
+| pip_dependency_cache_ready | True |
+| concurrency_cancel_ready | True |
+| ci_execution_economy_ready | True |
+| tiny_scorecard_plan_digest_gate_present | True |
+| tiny_scorecard_plan_digest_gate_order_ready | True |
+| tiny_scorecard_plan_digest_gate_ready | True |
+| baseline_candidate_threshold_boundary_gate_check_present | True |
+| baseline_candidate_threshold_boundary_gate_check_order_ready | True |
+| baseline_candidate_threshold_boundary_gate_check_ready | True |
+| baseline_candidate_threshold_boundary_gate_plan_check_present | True |
+| baseline_candidate_threshold_boundary_gate_plan_check_order_ready | True |
+| baseline_candidate_threshold_boundary_gate_plan_check_ready | True |
+| archived_path_portability_check_present | True |
+| archived_path_portability_check_order_ready | True |
+| archived_path_portability_check_ready | True |
+| promoted_seed_receipt_contract_failure_smoke_present | True |
+| promoted_seed_receipt_contract_failure_smoke_order_ready | True |
+| promoted_seed_receipt_contract_failure_smoke_ready | True |
+| promoted_seed_receipt_contract_failure_smoke_plan_check_present | True |
+| promoted_seed_receipt_contract_failure_smoke_plan_check_order_ready | True |
+| promoted_seed_receipt_contract_failure_smoke_plan_check_ready | True |
+| release_readiness_drift_contract_smoke_present | True |
+| release_readiness_drift_contract_smoke_order_ready | True |
+| release_readiness_drift_contract_smoke_ready | True |
+| project_docs_readability_present | True |
+| project_docs_readability_order_ready | True |
+| project_docs_readability_ready | True |
+| static_analysis_present | True |
+| static_analysis_order_ready | True |
+| static_analysis_ready | True |
+| type_analysis_present | True |
+| type_analysis_order_ready | True |
+| type_analysis_ready | True |
+| file_size_ratchet_present | True |
+| file_size_ratchet_order_ready | True |
+| file_size_ratchet_ready | True |
+| aiproj_track_closeout_present | True |
+| aiproj_track_closeout_order_ready | True |
+| aiproj_track_closeout_ready | True |
+| normalization_guard_present | True |
+| normalization_guard_order_ready | True |
+| normalization_guard_ready | True |
+| python_version | 3.11 |
+
+## Checks
+
+| ID | Category | Target | Expected | Actual | Status | Detail |
+| --- | --- | --- | --- | --- | --- | --- |
+| action:actions/checkout | action_version | actions/checkout | v6 | v6 | pass | Action uses the expected Node 24 native major. |
+| action:actions/setup-python | action_version | actions/setup-python | v6 | v6 | pass | Action uses the expected Node 24 native major. |
+| env:FORCE_JAVASCRIPT_ACTIONS_TO_NODE24 | forbidden_env | FORCE_JAVASCRIPT_ACTIONS_TO_NODE24 | absent | absent | pass | Native action versions should not rely on force-runtime environment variables. |
+| execution:main_branch_push_scope | execution_policy | main_branch_push_scope | branches:       - main | present | pass | Required CI execution-economy policy is present. |
+| execution:pip_dependency_cache | execution_policy | pip_dependency_cache | cache: "pip" | present | pass | Required CI execution-economy policy is present. |
+| execution:pip_cache_manifest | execution_policy | pip_cache_manifest | cache-dependency-path: requirements.txt | present | pass | Required CI execution-economy policy is present. |
+| execution:same_ref_concurrency_group | execution_policy | same_ref_concurrency_group | group: ci-${{ github.workflow }}-${{ github.ref }} | present | pass | Required CI execution-economy policy is present. |
+| execution:cancel_superseded_runs | execution_policy | cancel_superseded_runs | cancel-in-progress: true | present | pass | Required CI execution-economy policy is present. |
+| execution:no_tag_push_trigger | execution_policy | push.tags | absent | absent | pass | Tag pushes stay excluded so a tested main commit is not verified twice. |
+| command:source_encoding_gate | required_command | source_encoding_gate | scripts/check_source_encoding.py | present | pass | Required CI quality command is present. |
+| command:project_docs_readability_gate | required_command | project_docs_readability_gate | scripts/check_project_docs_readability.py | present | pass | Required CI quality command is present. |
+| command:ci_workflow_hygiene_gate | required_command | ci_workflow_hygiene_gate | scripts/check_ci_workflow_hygiene.py | present | pass | Required CI quality command is present. |
+| command:static_analysis_gate | required_command | static_analysis_gate | scripts/check_static_analysis.py | present | pass | Required CI quality command is present. |
+| command:type_analysis_gate | required_command | type_analysis_gate | scripts/check_type_analysis.py | present | pass | Required CI quality command is present. |
+| command:model_capability_honest_measurement_gate | required_command | model_capability_honest_measurement_gate | scripts/check_model_capability_honest_measurement.py | present | pass | Required CI quality command is present. |
+| command:artifact_schema_guard | required_command | artifact_schema_guard | scripts/check_artifact_schema_guard.py | present | pass | Required CI quality command is present. |
+| command:file_size_ratchet | required_command | file_size_ratchet | scripts/check_file_size_ratchet.py | present | pass | Required CI quality command is present. |
+| command:aiproj_track_closeout | required_command | aiproj_track_closeout | scripts/check_aiproj_track_closeout.py | present | pass | Required CI quality command is present. |
+| command:archived_path_portability_check | required_command | archived_path_portability_check | scripts/check_archived_path_portability.py | present | pass | Required CI quality command is present. |
+| command:promoted_seed_handoff_assurance_smoke | required_command | promoted_seed_handoff_assurance_smoke | scripts/check_promoted_seed_handoff_assurance_smoke.py | present | pass | Required CI quality command is present. |
+| command:promoted_seed_receipt_contract_failure_smoke | required_command | promoted_seed_receipt_contract_failure_smoke | scripts/run_ci_promoted_seed_receipt_contract_failure_smoke.py | present | pass | Required CI quality command is present. |
+| command:promoted_seed_receipt_contract_failure_smoke_plan_check | required_command | promoted_seed_receipt_contract_failure_smoke_plan_check | scripts/check_ci_promoted_seed_receipt_contract_failure_smoke_plan.py | present | pass | Required CI quality command is present. |
+| command:tiny_scorecard_comparison_inline_check_smoke | required_command | tiny_scorecard_comparison_inline_check_smoke | scripts/run_ci_tiny_scorecard_comparison_smoke.py | present | pass | Required CI quality command is present. |
+| command:tiny_scorecard_summary_check_sidecar | required_command | tiny_scorecard_summary_check_sidecar | --summary-check-out-dir | present | pass | Required CI quality command is present. |
+| command:ci_tiny_scorecard_plan_digest_check | required_command | ci_tiny_scorecard_plan_digest_check | scripts/check_ci_tiny_scorecard_plan.py | present | pass | Required CI quality command is present. |
+| command:baseline_candidate_threshold_boundary_gate_check | required_command | baseline_candidate_threshold_boundary_gate_check | scripts/run_ci_baseline_candidate_threshold_boundary_gate_check.py | present | pass | Required CI quality command is present. |
+| command:baseline_candidate_threshold_boundary_gate_plan_check | required_command | baseline_candidate_threshold_boundary_gate_plan_check | scripts/check_ci_baseline_candidate_threshold_boundary_gate_plan.py | present | pass | Required CI quality command is present. |
+| command:release_readiness_drift_contract_smoke | required_command | release_readiness_drift_contract_smoke | scripts/check_release_readiness_drift_contract_smoke.py | present | pass | Required CI quality command is present. |
+| command:normalization_guard | required_command | normalization_guard | scripts/check_normalization_guard.py | present | pass | Required CI quality command is present. |
+| command:test_coverage_report | required_command | test_coverage_report | scripts/run_test_coverage.py | present | pass | Required CI quality command is present. |
+| command:coverage_fail_under_gate | required_command | coverage_fail_under_gate | --fail-under 88.98 | present | pass | Required CI quality command is present. |
+| order:project_docs_readability_after_source_encoding | required_order | project_docs_readability_after_source_encoding | before | before_line=32;after_line=35 | pass | Required CI command order is preserved: before line 32, after line 35. |
+| order:project_docs_readability_before_ci_hygiene | required_order | project_docs_readability_before_ci_hygiene | before | before_line=35;after_line=38 | pass | Required CI command order is preserved: before line 35, after line 38. |
+| order:project_docs_readability_before_coverage | required_order | project_docs_readability_before_coverage | before | before_line=35;after_line=89 | pass | Required CI command order is preserved: before line 35, after line 89. |
+| order:static_analysis_after_ci_hygiene | required_order | static_analysis_after_ci_hygiene | before | before_line=38;after_line=41 | pass | Required CI command order is preserved: before line 38, after line 41. |
+| order:static_analysis_before_coverage | required_order | static_analysis_before_coverage | before | before_line=41;after_line=89 | pass | Required CI command order is preserved: before line 41, after line 89. |
+| order:type_analysis_after_static_analysis | required_order | type_analysis_after_static_analysis | before | before_line=41;after_line=44 | pass | Required CI command order is preserved: before line 41, after line 44. |
+| order:type_analysis_before_coverage | required_order | type_analysis_before_coverage | before | before_line=44;after_line=89 | pass | Required CI command order is preserved: before line 44, after line 89. |
+| order:model_capability_honest_measurement_after_type_analysis | required_order | model_capability_honest_measurement_after_type_analysis | before | before_line=44;after_line=47 | pass | Required CI command order is preserved: before line 44, after line 47. |
+| order:model_capability_honest_measurement_before_coverage | required_order | model_capability_honest_measurement_before_coverage | before | before_line=47;after_line=89 | pass | Required CI command order is preserved: before line 47, after line 89. |
+| order:artifact_schema_guard_after_honest_measurement | required_order | artifact_schema_guard_after_honest_measurement | before | before_line=47;after_line=50 | pass | Required CI command order is preserved: before line 47, after line 50. |
+| order:artifact_schema_guard_before_coverage | required_order | artifact_schema_guard_before_coverage | before | before_line=50;after_line=89 | pass | Required CI command order is preserved: before line 50, after line 89. |
+| order:file_size_ratchet_after_artifact_schema_guard | required_order | file_size_ratchet_after_artifact_schema_guard | before | before_line=50;after_line=53 | pass | Required CI command order is preserved: before line 50, after line 53. |
+| order:file_size_ratchet_before_coverage | required_order | file_size_ratchet_before_coverage | before | before_line=53;after_line=89 | pass | Required CI command order is preserved: before line 53, after line 89. |
+| order:aiproj_track_closeout_after_file_size_ratchet | required_order | aiproj_track_closeout_after_file_size_ratchet | before | before_line=53;after_line=56 | pass | Required CI command order is preserved: before line 53, after line 56. |
+| order:aiproj_track_closeout_before_coverage | required_order | aiproj_track_closeout_before_coverage | before | before_line=56;after_line=89 | pass | Required CI command order is preserved: before line 56, after line 89. |
+| order:promoted_seed_handoff_assurance_smoke_before_coverage | required_order | promoted_seed_handoff_assurance_smoke_before_coverage | before | before_line=62;after_line=89 | pass | Required CI command order is preserved: before line 62, after line 89. |
+| order:tiny_scorecard_inline_check_smoke_before_coverage | required_order | tiny_scorecard_inline_check_smoke_before_coverage | before | before_line=71;after_line=89 | pass | Required CI command order is preserved: before line 71, after line 89. |
+| order:archived_path_portability_check_before_receipt_smoke | required_order | archived_path_portability_check_before_receipt_smoke | before | before_line=59;after_line=65 | pass | Required CI command order is preserved: before line 59, after line 65. |
+| order:archived_path_portability_check_before_coverage | required_order | archived_path_portability_check_before_coverage | before | before_line=59;after_line=89 | pass | Required CI command order is preserved: before line 59, after line 89. |
+| order:promoted_seed_receipt_contract_failure_smoke_after_assurance | required_order | promoted_seed_receipt_contract_failure_smoke_after_assurance | before | before_line=62;after_line=65 | pass | Required CI command order is preserved: before line 62, after line 65. |
+| order:promoted_seed_receipt_contract_failure_smoke_before_coverage | required_order | promoted_seed_receipt_contract_failure_smoke_before_coverage | before | before_line=65;after_line=89 | pass | Required CI command order is preserved: before line 65, after line 89. |
+| order:promoted_seed_receipt_contract_failure_smoke_plan_check_after_smoke | required_order | promoted_seed_receipt_contract_failure_smoke_plan_check_after_smoke | before | before_line=65;after_line=68 | pass | Required CI command order is preserved: before line 65, after line 68. |
+| order:promoted_seed_receipt_contract_failure_smoke_plan_check_before_coverage | required_order | promoted_seed_receipt_contract_failure_smoke_plan_check_before_coverage | before | before_line=68;after_line=89 | pass | Required CI command order is preserved: before line 68, after line 89. |
+| order:ci_tiny_scorecard_plan_check_after_smoke | required_order | ci_tiny_scorecard_plan_check_after_smoke | before | before_line=71;after_line=74 | pass | Required CI command order is preserved: before line 71, after line 74. |
+| order:ci_tiny_scorecard_plan_check_before_coverage | required_order | ci_tiny_scorecard_plan_check_before_coverage | before | before_line=74;after_line=89 | pass | Required CI command order is preserved: before line 74, after line 89. |
+| order:baseline_candidate_threshold_boundary_gate_check_after_plan_digest | required_order | baseline_candidate_threshold_boundary_gate_check_after_plan_digest | before | before_line=74;after_line=77 | pass | Required CI command order is preserved: before line 74, after line 77. |
+| order:baseline_candidate_threshold_boundary_gate_check_before_coverage | required_order | baseline_candidate_threshold_boundary_gate_check_before_coverage | before | before_line=77;after_line=89 | pass | Required CI command order is preserved: before line 77, after line 89. |
+| order:baseline_candidate_threshold_boundary_gate_plan_check_after_gate_check | required_order | baseline_candidate_threshold_boundary_gate_plan_check_after_gate_check | before | before_line=77;after_line=80 | pass | Required CI command order is preserved: before line 77, after line 80. |
+| order:baseline_candidate_threshold_boundary_gate_plan_check_before_coverage | required_order | baseline_candidate_threshold_boundary_gate_plan_check_before_coverage | before | before_line=80;after_line=89 | pass | Required CI command order is preserved: before line 80, after line 89. |
+| order:release_readiness_drift_contract_smoke_before_coverage | required_order | release_readiness_drift_contract_smoke_before_coverage | before | before_line=83;after_line=89 | pass | Required CI command order is preserved: before line 83, after line 89. |
+| order:normalization_guard_before_coverage | required_order | normalization_guard_before_coverage | before | before_line=86;after_line=89 | pass | Required CI command order is preserved: before line 86, after line 89. |
+| python:setup-version | python_version | actions/setup-python | 3.11 | 3.11 | pass | CI parser target should remain aligned with source encoding compatibility checks. |
+
+## Actions
+
+| Repository | Version | Line | Node 24 Native |
+| --- | --- | --- | --- |
+| actions/checkout | v6 | 18 | True |
+| actions/setup-python | v6 | 20 | True |
+
+## Recommendations
+
+- Keep CI workflow action versions and quality gates aligned with the Node 24 native policy.

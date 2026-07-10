@@ -2,6 +2,10 @@
 
 本目录从 v1098 开始保存模型治理阶段的运行截图和解释，和历史目录 `a/`、`b/`、`c/`、`d/`、`e/` 同级。
 
+## v1270
+
+v1270 将 523 行 `ci_workflow_hygiene.py` 按类型、检查、摘要和公共编排拆分，入口降到 80 行，新模块均低于 240 行。固定输入 canonical report hash 拆分前后完全一致，mypy scope 从 16 收紧到 19，file-size warning count 从 22 降到 21。证据见 `f/1270/解释/`，浏览器核验见 `f/1270/图片/ci-hygiene-type-scope-v1270.png`。
+
 ## v1269
 
 v1269 深度压缩 staged ruff 历史债务，baseline 从 545 收紧到 271，净减少 274 条。直接脚本 bootstrap 与兼容 facade 再导出改为精确行级说明，真实无用 import/F811 被修复，`--update-baseline` 增加 fail-closed shrink-only 保护。运行证据见 `f/1269/解释/static-analysis-ratchet/`，浏览器核验见 `f/1269/图片/static-analysis-ratchet-v1269.png`。

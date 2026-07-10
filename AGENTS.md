@@ -140,6 +140,7 @@ If a process must remain running, state its name, port/PID if known, and why it 
 - Progress/ledger rows: at most ~3 lines per version; details go into per-version evidence or docs files, the row keeps a pointer.
 - Lesson promotion: when the same deviation or workaround is recorded twice, promote it into this file as a rule instead of recording it a third time.
 - Method kernel: apply the 12-rule kernel and task-brief skeleton from `D:\C\四项目理解统筹\模型使用手册\00-通用方法内核.md` (read once per session; also mirrored in the global `~/.codex/AGENTS.md`).
+- Standalone HTML evidence reports must use an inline empty favicon (for example `data:,`) and browser verification must finish without console errors; this prevents repeated favicon 404 noise in archived screenshots.
 
 ## Final Response Requirement
 

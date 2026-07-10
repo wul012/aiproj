@@ -61,7 +61,7 @@ This is an engineering gate, not a model-capability claim. It improves maintaina
 
 The second A1 step adds strict mypy without attempting a full-repository type
 sweep. The committed scope lives in
-`docs/static-analysis/mypy-scope.json`. It currently contains sixteen
+`docs/static-analysis/mypy-scope.json`. It currently contains nineteen
 load-bearing files across shared report contracts, CI governance, engineering
 orchestration, analysis gates, artifact schema, file-size ratchet, A-track
 closeout, and honest measurement.
@@ -74,7 +74,7 @@ python -B scripts/check_type_analysis.py --out-dir runs/type-analysis
 
 The checker validates the scope before invoking mypy. Every target must exist,
 must be a Python file inside the repository, must be unique, and must belong to
-a named group. `scope_floor=16` prevents the checked surface from being reduced
+a named group. `scope_floor=19` prevents the checked surface from being reduced
 without a visible policy change. The report writes JSON, CSV, Markdown, and
 HTML with the exact target list, scope issues, and mypy diagnostics.
 

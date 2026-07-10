@@ -36,9 +36,18 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1269.0.0` completes **the first deep static-analysis debt reduction**. It shrinks the committed ruff baseline from 545 to 271 findings, turns reviewed script-bootstrap and compatibility-facade exceptions into exact line-level annotations, removes real unused imports and duplicate bindings, and makes `--update-baseline` mechanically shrink-only. No global ignore, science-lane semantic change, or floor relaxation is introduced.
+Version `v1270.0.0` completes **the CI workflow hygiene responsibility split**. The 523-line high-churn module is now an 80-line public orchestrator plus typed checks, summary, and contract modules below 240 lines. A fixed-input canonical report hash is byte-identical before and after, mypy scope rises from 16 to 19, and the file-size warning count drops from 22 to 21. No CI policy or science-lane semantics change.
 
-## Latest v1269 checkpoint
+## Latest v1270 checkpoint
+
+- Split CI workflow parsing/check construction, readiness summary/recommendations, and TypedDict contracts into focused modules while preserving the public facade.
+- Proved exact report parity with the same 63 checks, 61 summary keys, and canonical SHA-256 before and after.
+- Added all new components to strict ruff paths and raised the strict mypy scope floor to 19 with zero diagnostics.
+- Promoted the repeated favicon 404 lesson into a repository rule and verified the final type-analysis page without console errors.
+
+## Historical v1269 context
+
+## v1269 checkpoint
 
 - Reduced the staged ruff baseline by 274 findings (50.3%), with E402 and F811 removed from the remaining baseline.
 - Preserved compatibility facade behavior through exact annotations and 294 focused facade tests rather than deleting re-exports.

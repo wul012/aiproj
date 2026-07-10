@@ -117,6 +117,20 @@ run artifacts, scorecards, holdout reports, receipt packets
   -> registry or publication receipt artifacts
 ```
 
+CI governance follows a focused component path:
+
+```text
+ci_workflow_hygiene_policy.py + ci_workflow_hygiene_types.py
+  -> ci_workflow_hygiene_checks.py
+  -> ci_workflow_hygiene_summary.py
+  -> ci_workflow_hygiene.py (public orchestration facade)
+  -> ci_workflow_hygiene_artifacts.py + CLI
+```
+
+Checks extract facts from workflow text; summaries derive readiness from stable
+check IDs; the public facade preserves the historical import and report
+contract. All component modules are in the strict ruff and mypy scopes.
+
 ## Normalization Rules
 
 1. New model primitives should go under the `core` owner class, not into

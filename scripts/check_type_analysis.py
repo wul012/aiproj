@@ -300,7 +300,7 @@ def render_html(report: dict[str, Any]) -> str:
     )
     return f"""<!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>MiniGPT scoped type analysis</title><style>
+<link rel="icon" href="data:,"><title>MiniGPT scoped type analysis</title><style>
 body{{font-family:Arial,"Microsoft YaHei",sans-serif;background:#f4f7f8;color:#172026;margin:0}}
 main{{max-width:1080px;margin:auto;padding:28px}}header,.panel{{background:#fff;border:1px solid #d8dee4;border-radius:8px;padding:18px;margin-bottom:14px}}
 .stats{{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}}.stat{{background:#eef4f5;padding:12px;border-radius:6px}}

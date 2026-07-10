@@ -20,6 +20,8 @@ from minigpt.ci_workflow_hygiene_artifacts import (
     render_ci_workflow_hygiene_html as artifact_render_ci_workflow_hygiene_html,
     write_ci_workflow_hygiene_outputs as artifact_write_ci_workflow_hygiene_outputs,
 )
+from minigpt.ci_workflow_hygiene_checks import build_checks, collect_actions
+from minigpt.ci_workflow_hygiene_summary import build_recommendations, build_summary
 from scripts.check_ci_workflow_hygiene import main as cli_main
 
 CI_WORKFLOW = ROOT / ".github" / "workflows" / "ci.yml"
@@ -161,6 +163,23 @@ class CIWorkflowTests(unittest.TestCase):
             self.assertIn("before_line=", order_check["actual"])
             self.assertIn("after_line=", order_check["actual"])
             self.assertIn("line", order_check["detail"])
+
+    def test_ci_workflow_components_recompose_public_report_without_drift(self) -> None:
+        workflow_text = CI_WORKFLOW.read_text(encoding="utf-8")
+        report = build_ci_workflow_hygiene_report(
+            CI_WORKFLOW,
+            project_root=ROOT,
+            generated_at="2026-01-01T00:00:00Z",
+        )
+
+        actions = collect_actions(workflow_text)
+        checks = build_checks(workflow_text, actions)
+        summary = build_summary(workflow_text, actions, checks)
+
+        self.assertEqual(actions, report["actions"])
+        self.assertEqual(checks, report["checks"])
+        self.assertEqual(summary, report["summary"])
+        self.assertEqual(build_recommendations(summary), report["recommendations"])
 
     def test_ci_workflow_hygiene_report_fails_old_runtime_policy(self) -> None:
         with TemporaryDirectory() as tmp:

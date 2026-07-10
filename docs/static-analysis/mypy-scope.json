@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "tool": "mypy",
-  "scope_floor": 16,
+  "scope_floor": 19,
   "targets": [
     "scripts/_bootstrap.py",
     "scripts/_engineering_health.py",
@@ -15,8 +15,11 @@
     "src/minigpt/artifact_schema_guard.py",
     "src/minigpt/file_size_ratchet.py",
     "src/minigpt/ci_workflow_hygiene.py",
+    "src/minigpt/ci_workflow_hygiene_checks.py",
     "src/minigpt/ci_workflow_hygiene_artifacts.py",
     "src/minigpt/ci_workflow_hygiene_policy.py",
+    "src/minigpt/ci_workflow_hygiene_summary.py",
+    "src/minigpt/ci_workflow_hygiene_types.py",
     "src/minigpt/model_capability_honest_measurement.py",
     "src/minigpt/report_utils.py"
   ],
@@ -26,8 +29,11 @@
     ],
     "ci_governance_gate": [
       "src/minigpt/ci_workflow_hygiene.py",
+      "src/minigpt/ci_workflow_hygiene_checks.py",
       "src/minigpt/ci_workflow_hygiene_artifacts.py",
-      "src/minigpt/ci_workflow_hygiene_policy.py"
+      "src/minigpt/ci_workflow_hygiene_policy.py",
+      "src/minigpt/ci_workflow_hygiene_summary.py",
+      "src/minigpt/ci_workflow_hygiene_types.py"
     ],
     "engineering_orchestration": [
       "scripts/_bootstrap.py",

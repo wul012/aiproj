@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "version": "v1270",
+  "input": ".github/workflows/ci.yml",
+  "generated_at_fixture": "2026-01-01T00:00:00Z",
+  "canonical_json_sha256_before": "298db00f23faa43be167566fb46e9f6851962364777b1693a29ad631cb72f126",
+  "canonical_json_sha256_after": "298db00f23faa43be167566fb46e9f6851962364777b1693a29ad631cb72f126",
+  "byte_contract_match": true,
+  "check_count": 63,
+  "summary_key_count": 61,
+  "before_entrypoint_lines": 523,
+  "after_module_lines": {
+    "ci_workflow_hygiene.py": 80,
+    "ci_workflow_hygiene_checks.py": 175,
+    "ci_workflow_hygiene_summary.py": 239,
+    "ci_workflow_hygiene_types.py": 96
+  },
+  "mypy_target_count": 19,
+  "file_size_over_warning_count": 21,
+  "science_lane_touched": false
+}
