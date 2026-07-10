@@ -32,11 +32,21 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 - [Model capability honest measurement policy](docs/model-capability-honest-measurement-policy.md)
 - [Production excellence brief](docs/production-excellence-aiproj-brief.md)
 - [Stage 2 operational brief (inactive)](docs/stage2-aiproj-operational-brief.md)
+- [Deep maintenance v1268-v1272 closeout](docs/deep-maintenance-v1268-v1272-closeout.md)
 - [Plain-language project guide](项目通俗说明/README.md)
 
 ## Current version
 
-Version `v1271.0.0` completes **a contract-preserving governance JSON reader consolidation**. Nine active benchmark/training-scale governance loaders now share strict UTF-8-SIG object reading, while optional sidecar evidence uses a separate empty-fallback helper. The evolved dedup checker reports 14 cumulative migrated modules and zero private copies inside the target set; 496 historical copies remain explicitly outside this batch. A guard extraction also reduces `training_scale_handoff.py` from the observed 514 lines to 413 and expands strict mypy scope from 19 to 20. No science-lane semantics or promotion decision changes.
+Version `v1272.0.0` completes **the v1268-v1272 deep engineering-maintenance closeout**. Full pytest passes 3,747 tests at the v1271 maintenance snapshot; final CI-style unittest discovery covers 3,538 tests and measures 91.06% line coverage against the unchanged 88.98% floor. Three new in-process tests raise the active promoted-seed assurance contract from 0/63 to 59/63 covered statements. This closes maintenance only: no science-lane result or model promotion changes.
+
+## Latest v1272 checkpoint
+
+- Closed five maintenance versions with a reviewer matrix covering CI execution economy, static debt, ownership splits, type scope, file-size ratchets, loader deduplication, and coverage.
+- Ran full pytest (`3747 passed in 1058.47s`) and final CI-style coverage (`91.06%`, 90,861/99,778 lines, 1,381 files, floor 88.98%).
+- Added three direct tests for the active promoted-seed assurance smoke contract, covering success, drift, malformed scopes, count boundaries, and missing sidecars; focused module coverage is 93.65%.
+- Preserved remaining debt explicitly: 271 ruff findings, 21 file-size warnings, and 496 historical loader shapes remain bounded rather than declared solved.
+
+## Historical v1271 context
 
 ## Latest v1271 checkpoint
 

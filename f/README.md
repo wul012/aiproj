@@ -2,6 +2,10 @@
 
 本目录从 v1098 开始保存模型治理阶段的运行截图和解释，和历史目录 `a/`、`b/`、`c/`、`d/`、`e/` 同级。
 
+## v1272
+
+v1272 收口 v1268-v1271 深度工程保养。全量 pytest 为 3747 passed；最终 CI-style unittest discovery 为 3538，line coverage 91.06%（90,861/99,778），高于不变的 88.98 floor。新增三个进程内 contract tests 将活跃 assurance smoke contract 从 0/63 提升为 59/63（93.65%）。精简证据见 `f/1272/解释/`，浏览器核验见 `f/1272/图片/deep-maintenance-coverage-v1272.png`。
+
 ## v1271
 
 v1271 将九个活跃 benchmark/training-scale 治理 loader 收敛到共享 JSON 对象读取器，并用独立的空值回落 helper 保留可选 evidence 语义。累计 14 个 dedup 目标全部通过，目标私有副本为 0；全仓 496 个历史副本继续可见且不做高风险批量改写。handoff guard 同时拆为 113 行严格类型组件，主文件降至 413 行，file-size warning count 保持 21。证据见 `f/1271/解释/report-loader-dedup/`，浏览器核验见 `f/1271/图片/governance-report-loader-dedup-v1271.png`。

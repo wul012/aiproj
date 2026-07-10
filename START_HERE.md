@@ -89,14 +89,13 @@ workflows.
 
 ## Latest version summary
 
-Current README focus: **v1271 governance JSON reader consolidation**.
+Current README focus: **v1272 deep engineering-maintenance closeout**.
 
-v1271 moves nine active benchmark and training-scale governance loaders onto
-shared strict UTF-8-SIG object reading, while keeping optional evidence on a
-separate empty-fallback contract. Public loader error messages, path behavior,
-and science-lane results remain unchanged. Handoff guard construction is also
-split into a strict typed component so the active facade stays below the
-file-size warning threshold.
+v1272 closes the v1268-v1271 maintenance batch with full pytest, CI-style
+unittest coverage, a reviewer outcome matrix, and a direct test repair for an
+active governance contract that coverage had reported at zero. Final line
+coverage is 91.06% against the unchanged 88.98% floor. Science-lane results and
+promotion decisions remain unchanged.
 
 ## Where to look next
 
@@ -120,6 +119,7 @@ file-size warning threshold.
 - `docs/aiproj-track-final-evidence.md` - A5 final evidence and reviewer handoff.
 - `docs/production-excellence-aiproj-brief.md` - Claude-authored A-track execution brief.
 - `docs/stage2-aiproj-operational-brief.md` - inactive, capstone-gated Stage-2 plan.
+- `docs/deep-maintenance-v1268-v1272-closeout.md` - verified maintenance outcomes, residual debt, and stop decision.
 - `文档分流说明.md` - current documentation routing map.
 - `src/minigpt/` - model, evaluation, reporting, and workflow code.
 - `tests/` - behavior, contract, configuration, and boundary tests.

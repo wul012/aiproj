@@ -1,0 +1,16 @@
+focused_test_command=python -m pytest tests/test_promoted_training_scale_seed_handoff_assurance_smoke_contract.py -q
+focused_test_status=pass
+focused_test_count=3
+focused_module=src/minigpt/promoted_training_scale_seed_handoff_assurance_smoke_contract.py
+focused_covered_statements=59
+focused_total_statements=63
+focused_line_coverage_percent=93.65
+whole_project_coverage_command=python -B scripts/run_test_coverage.py --out-dir runs/test-coverage-v1272 --fail-under 88.98
+whole_project_status=pass
+unittest_discovery_count=3538
+whole_project_line_coverage_percent=91.06
+whole_project_covered_lines=90861
+whole_project_total_statements=99778
+whole_project_measured_files=1381
+whole_project_fail_under=88.98
+

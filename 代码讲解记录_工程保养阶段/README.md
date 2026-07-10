@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1230-v1272-deep-maintenance-closeout.md
+ -> v1272 code explanation: closes the v1268-v1271 maintenance batch with 3,747 full pytest passes, 3,538 CI-style unittest cases, 91.06% coverage against the unchanged 88.98% floor, and three in-process tests that raise the active assurance contract from 0/63 to 59/63 covered statements. It records the remaining 271/21/496 debt rather than continuing version-count-driven cleanup. Evidence lives under `f/1272`.
+
 1229-v1271-governance-report-loader-consolidation.md
  -> v1271 code explanation: consolidates nine active governance JSON object loaders into strict and optional-empty shared contracts, preserves exact public errors and path behavior, evolves the existing dedup checker to fourteen protected modules, and extracts handoff guard construction into a 113-line strict typed component so the active facade returns below the file-size warning threshold. It leaves 496 historical copies visible rather than bulk-rewriting frozen experiments. Evidence lives under `f/1271`.
 

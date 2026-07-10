@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT test coverage report</title>
+<style>
+body { margin:0; background:#f7f8f3; color:#172033; font-family:Arial, "Microsoft YaHei", sans-serif; line-height:1.45; }
+header { padding:28px 32px 18px; background:#fff; border-bottom:1px solid #d9dfd2; }
+h1 { margin:0; font-size:28px; letter-spacing:0; }
+h2 { margin:0 0 12px; font-size:18px; }
+.stats { display:grid; grid-template-columns:repeat(auto-fit, minmax(170px, 1fr)); gap:12px; padding:18px 32px 4px; }
+.card, .panel { background:#fff; border:1px solid #d9dfd2; border-radius:8px; }
+.card { padding:14px; min-height:84px; }
+.label { color:#596579; font-size:12px; text-transform:uppercase; }
+.value { margin-top:6px; font-size:19px; font-weight:700; overflow-wrap:anywhere; }
+.panel { margin:18px 32px; padding:16px; overflow-x:auto; }
+table { width:100%; border-collapse:collapse; min-width:760px; }
+th, td { padding:9px 8px; border-bottom:1px solid #d9dfd2; text-align:left; vertical-align:top; }
+th { color:#596579; font-size:12px; text-transform:uppercase; }
+li { margin:8px 0; }
+</style>
+</head>
+<body>
+<header><h1>MiniGPT test coverage report</h1></header>
+<section class="stats"><div class="card"><div class="label">Status</div><div class="value">pass</div></div><div class="card"><div class="label">Decision</div><div class="value">continue_with_coverage_gate</div></div><div class="card"><div class="label">Line coverage</div><div class="value">91.06</div></div><div class="card"><div class="label">Covered lines</div><div class="value">90861/99778</div></div><div class="card"><div class="label">Files</div><div class="value">1381</div></div><div class="card"><div class="label">Threshold</div><div class="value">&gt;= 88.98</div></div><div class="card"><div class="label">Gap</div><div class="value">0.0</div></div></section>
+<section class="panel"><h2>Lowest Coverage Files</h2><table><thead><tr><th>File</th><th>Coverage</th><th>Covered</th><th>Statements</th><th>Missing</th></tr></thead><tbody><tr><td>src/minigpt/model_capability_required_term_prompt_leading_training.py</td><td>16.77</td><td>26</td><td>155</td><td>129</td></tr><tr><td>src/minigpt/model_capability_required_term_prompt_leading_corpus.py</td><td>17.26</td><td>29</td><td>168</td><td>139</td></tr><tr><td>src/minigpt/model_capability_required_term_balanced_corpus.py</td><td>17.9</td><td>29</td><td>162</td><td>133</td></tr><tr><td>src/minigpt/model_capability_required_term_split_seed_stability.py</td><td>18.06</td><td>26</td><td>144</td><td>118</td></tr><tr><td>src/minigpt/model_capability_required_term_one_term_seed_stability.py</td><td>18.18</td><td>30</td><td>165</td><td>135</td></tr><tr><td>src/minigpt/model_capability_required_term_direct_prompt_training.py</td><td>18.34</td><td>31</td><td>169</td><td>138</td></tr><tr><td>src/minigpt/model_capability_required_term_coverage.py</td><td>18.44</td><td>33</td><td>179</td><td>146</td></tr><tr><td>src/minigpt/grok_trajectory_phases_v1181.py</td><td>18.75</td><td>30</td><td>160</td><td>130</td></tr><tr><td>src/minigpt/model_capability_required_term_holdout.py</td><td>18.79</td><td>28</td><td>149</td><td>121</td></tr><tr><td>src/minigpt/model_capability_required_term_balanced_training.py</td><td>19.08</td><td>25</td><td>131</td><td>106</td></tr><tr><td>src/minigpt/model_capability_stall_diagnostic.py</td><td>19.14</td><td>31</td><td>162</td><td>131</td></tr><tr><td>src/minigpt/model_capability_rubric_signal_audit.py</td><td>19.42</td><td>27</td><td>139</td><td>112</td></tr></tbody></table></section>
+<section class="panel"><h2>Recommendations</h2><ul><li>Coverage 91.06% meets the configured fail-under gate of 88.98%.</li><li>Review the lowest-coverage files first; add focused tests before raising any threshold.</li></ul></section>
+</body>
+</html>

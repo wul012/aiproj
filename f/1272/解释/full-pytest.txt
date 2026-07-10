@@ -1,0 +1,7 @@
+command=python -m pytest -q -o cache_dir=runs/pytest-cache-v1272
+status=pass
+passed=3747
+duration_seconds=1058.47
+duration_hms=00:17:38
+scope=v1271 maintenance snapshot before the three v1272 in-process contract tests
+
