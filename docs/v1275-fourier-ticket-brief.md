@@ -87,3 +87,22 @@ retains 0.972, remove-them drops to 0.578). Question, two halves:
   with the fix from cache and disclosed.
 - GPU budget exceeded silently = fail; descopes are recorded, not hidden.
 - Random-mask or reinit control skipped = the corresponding claim is unsupported.
+
+## Claude review — 2026-07-12 (v1275): PASS — an honest negative with a real finding
+
+- Verified: the reviewer re-ran Phase B from the committed cache and the verdict
+  re-derives byte-stably (`pruning_breaks_circuit`); CI green; checkpoint sha pinned
+  and unchanged; zero GPU runs spent (probe stop honored, descope pre-declared).
+- The preregister-commit-then-run pattern (thresholds committed at `f12f8793` BEFORE
+  the first probe) is a genuine upgrade to the lane's discipline — keep it as the
+  standard for all future capability versions.
+- The finding is better than a null: at 50% sparsity accuracy collapses
+  (0.966 → 0.41 per-tensor / 0.49 global) while the SURVIVORS' fixed-5-freq Fourier
+  share stays ~0.305 (0.314 even at 95%) with the same top-5 — the circuit is
+  frequency-sparse but magnitude-DENSE. Magnitude pruning cannot find this ticket
+  because the circuit lives in a rotated basis and needs its coordinated small
+  weights. This cleanly explains WHY Arm L would have been mis-posed, and is the
+  correct scientific closure for the sparsity axis on this substrate.
+- Next capability version: superposition (Anthropic toy-models phase diagram) as
+  queued — a natural follow-on since basis-vs-neuron alignment is exactly what v1275
+  just made concrete.
