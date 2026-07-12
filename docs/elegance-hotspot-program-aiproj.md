@@ -12,7 +12,8 @@ Binding rules: AGENTS.md Elegance Gates section; existing gates unchanged (cover
 floor, size ratchet, schema guard, honest-measurement gate, no ML-lane touches).
 
 Execution status: E-A1 is implemented as v1273 with a 7,515-digest shrink-only
-baseline and zero new violations. E-A2 pin analysis remains pending.
+baseline and zero new violations. E-A2 found zero safe top-five candidates and
+was honestly skipped. E-A3 closes in v1274; external Claude review is pending.
 
 ## E-A1 — commit the mechanical gate (1 version, first)
 

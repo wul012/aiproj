@@ -89,14 +89,13 @@ workflows.
 
 ## Latest version summary
 
-Current README focus: **v1273 E-A1 name-budget mechanical gate**.
+Current README focus: **v1274 elegance hotspot closeout**.
 
-v1273 makes the 40-character filename/public-identifier budget executable. It
-scans 2,049 Python files, commits 7,515 historical violations as stable digests,
-and rejects any new violation or baseline growth. The gate runs between staged
-ruff and scoped mypy and is also part of local engineering health. Final full
-pytest passes 3,759 tests. Science-lane
-results, cached experiments, and promotion decisions remain unchanged.
+v1274 confirms the v1273 40-character name gate at 2,049 files and 7,515
+historical violations with zero new violations and an unchanged baseline hash.
+The top five and visible scripts duplicate family are pin-protected, so E-A2
+made no unsafe rename. The two-version program now stops for Claude review;
+science-lane results, cached experiments, and promotion decisions remain unchanged.
 
 ## Where to look next
 
@@ -120,6 +119,7 @@ results, cached experiments, and promotion decisions remain unchanged.
 - `docs/aiproj-track-final-evidence.md` - A5 final evidence and reviewer handoff.
 - `docs/production-excellence-aiproj-brief.md` - Claude-authored A-track execution brief.
 - `docs/elegance-hotspot-program-aiproj.md` - bounded E-track census, top-N, and closeout plan.
+- `docs/elegance-closeout-v1274.md` - final census, pin audit outcome, and stop decision.
 - `docs/stage2-aiproj-operational-brief.md` - inactive, capstone-gated Stage-2 plan.
 - `docs/deep-maintenance-v1268-v1272-closeout.md` - verified maintenance outcomes, residual debt, and stop decision.
 - `文档分流说明.md` - current documentation routing map.

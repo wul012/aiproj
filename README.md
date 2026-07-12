@@ -32,13 +32,23 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 - [Model capability honest measurement policy](docs/model-capability-honest-measurement-policy.md)
 - [Production excellence brief](docs/production-excellence-aiproj-brief.md)
 - [Elegance hotspot program](docs/elegance-hotspot-program-aiproj.md)
+- [Elegance hotspot closeout](docs/elegance-closeout-v1274.md)
 - [Stage 2 operational brief (inactive)](docs/stage2-aiproj-operational-brief.md)
 - [Deep maintenance v1268-v1272 closeout](docs/deep-maintenance-v1268-v1272-closeout.md)
 - [Plain-language project guide](项目通俗说明/README.md)
 
 ## Current version
 
-Version `v1273.0.0` completes **E-A1 of the bounded elegance hotspot program**. A new AST-based name-budget gate scans `src/` and `scripts/`, freezes 7,515 legacy filename/public-identifier violations as stable digests, and fails CI on any new name over 40 characters. The baseline is shrink-only, the gate is ordered between ruff and mypy, and no science-lane result or model promotion changes.
+Version `v1274.0.0` closes **the bounded elegance hotspot program**. The final census remains 7,515 historical violations across 2,049 files with zero new violations and an unchanged baseline SHA-256. E-A2 changed no code because the top five names and the visible scripts duplication family are pinned by publication artifacts, public exports, downstream receipts, or archived command evidence. The program stops after two versions rather than inventing unsafe remediation work.
+
+## Latest v1274 checkpoint
+
+- Re-ran the ordinary name gate: 2,049 files, 7,515 historical violations, zero new violations, zero scan errors, and zero blockers.
+- Proved the committed baseline stayed byte-stable with SHA-256 `4d0f5f9236ef805fc018912c7455724958e8f86763ad6511292b54c739b0e02d` before and after the run.
+- Audited the top five and scripts wrapper family; all meaningful candidates were pin-protected, so E-A2 safely made no source changes.
+- Published the one-page closeout and stopped for Claude review; v1273 remains the implementation version and its final source tree passed 3,759 tests.
+
+## Historical v1273 context
 
 ## Latest v1273 checkpoint
 

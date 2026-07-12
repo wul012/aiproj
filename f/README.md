@@ -2,6 +2,10 @@
 
 本目录从 v1098 开始保存模型治理阶段的运行截图和解释，和历史目录 `a/`、`b/`、`c/`、`d/`、`e/` 同级。
 
+## v1274
+
+v1274 收口两版 elegance hotspot program。最终名称 census 保持 2,049 files / 7,515 historical violations / 0 new，baseline SHA-256 前后不变。E-A2 top 5 与 scripts wrapper family 均受 publication、public export、downstream receipt 或 archived command pin，故不改源码。证据见 `f/1274/解释/`，最终页面核验见 `f/1274/图片/name-budget-close-v1274.png`。
+
 ## v1273
 
 v1273 完成 elegance hotspot program 的 E-A1，将 40 字符文件名/公开标识符预算变成 AST census、shrink-only digest baseline 和 CI gate。扫描 2,049 个 Python 文件，登记 7,515 条历史违规；普通模式复跑 `status=pass`、新增违规 0、扫描错误 0。运行证据见 `f/1273/解释/name-budget/`，浏览器核验见 `f/1273/图片/name-budget-v1273.png`。
