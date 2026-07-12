@@ -304,6 +304,7 @@ def decide(cache: dict, cfg: TicketConfig) -> dict:
             "checkpoint_unchanged": hash_ok, "p_complete": p_complete,
             "random_controls_complete": random_complete, "arm_p_probe_ok": p_info["probe_ok"],
             "arm_p_aligned": p_info["p_pass"], "arm_l_complete": l_complete,
+            "arm_l_skipped": not p_info["probe_ok"],
             "budget_ok": budget_ok, "ticket_groks": ticket_groks,
             "control_tie": control_tie, "tickets_aligned": tickets_aligned,
         },
@@ -344,6 +345,7 @@ def build_report(cache: dict, info: dict, generated_at: str | None = None) -> di
     }
     return {
         "schema_version": 1, "title": "MiniGPT v1275 Fourier lottery-ticket test",
+        "description": "Preregistered toy-scale test of whether magnitude pruning preserves the known Fourier circuit.",
         "generated_at": generated_at or utc_now(), "status": info["status"],
         "decision": info["verdict"], "summary": summary, "rows": rows,
         "recommendations": [
@@ -376,11 +378,13 @@ def plot_result(cache: dict, path: str | Path) -> None:
     ticket_rows = [row for row in l_rows if row["arm"] == "ticket"]
     if ticket_rows:
         align_ax.scatter([0.5], [sum(row["share_gap"] for row in ticket_rows) / len(ticket_rows)], color="#6a1b9a", marker="*", s=120, label="L ticket share gap")
+    else:
+        ax.text(0.72, 0.72, "Arm L not run: 50% probe failed", transform=ax.transAxes, ha="center")
     align_ax.axhline(0.05, color="#b34d00", linestyle=":", linewidth=1, label="P alignment gate")
     align_ax.set_ylabel("Fixed-frequency power margin / gap")
-    lines = ax.get_lines() + align_ax.get_lines()
-    labels = [line.get_label() for line in lines]
-    ax.legend(lines, labels, loc="lower left", fontsize=8)
+    handles, labels = ax.get_legend_handles_labels()
+    other_handles, other_labels = align_ax.get_legend_handles_labels()
+    ax.legend(handles + other_handles, labels + other_labels, loc="lower left", fontsize=8)
     fig.tight_layout()
     out = Path(path)
     out.parent.mkdir(parents=True, exist_ok=True)

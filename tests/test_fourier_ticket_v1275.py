@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+from pathlib import Path
 
 import torch
 
@@ -18,6 +19,7 @@ from minigpt.fourier_ticket_v1275 import (
 )
 from minigpt.grok_checkpoint_v1185 import CheckpointMeta, train_to_grok
 from minigpt.grok_v1179 import GrokConfig, make_grok_model
+from minigpt.readability_report_artifacts import render_readability_html
 from minigpt.script_runtime import seed_everything
 
 
@@ -229,7 +231,22 @@ def test_report_shape_carries_budget_boundary():
     cache = _cache()
     report = build_report(cache, decide(cache, _cfg()), generated_at="fixed")
     assert report["status"] == "pass"
+    assert "magnitude pruning" in report["description"]
     assert report["summary"]["scope"] == "toy_scale_own_substrate"
     assert report["summary"]["actual_training_runs"] == 12
     assert report["summary"]["descoped_levels"] == [0.75, 0.875]
     assert all(set(report["csv_fieldnames"]) == set(row) for row in report["rows"])
+    assert report["description"] in render_readability_html(report)
+
+
+def test_real_cache_rederives_verdict():
+    root = Path(__file__).resolve().parents[1]
+    paths = list((root / "f" / "1275").rglob("phase_a_cache.pt"))
+    assert len(paths) == 1
+    cache = torch.load(paths[0], map_location="cpu", weights_only=False)
+    first = decide(cache, TicketConfig())
+    second = decide(cache, TicketConfig())
+    assert first == second
+    assert first["status"] == "pass"
+    assert first["verdict"] == "pruning_breaks_circuit"
+    assert first["gates"]["arm_l_skipped"] is True

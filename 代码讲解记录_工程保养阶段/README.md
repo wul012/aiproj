@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1232-v1275-fourier-ticket.md
+ -> v1275 code explanation: preregisters a toy-scale Fourier lottery-ticket test, runs exact per-tensor/global magnitude pruning plus matched random controls on the frozen v1185 checkpoint, and honestly stops Arm L when 50% sparsity drops heldout accuracy to 0.407/0.487 despite the known-frequency power share remaining visible. Evidence lives under `f/1275`.
+
 1231-v1273-elegance-name-gate.md
  -> v1273 code explanation: turns the 40-character filename/public-identifier rule into an AST census, line-stable digest baseline, fail-closed shrink-only update contract, CI ordering guard, engineering-health step, and strict ruff/mypy scope. It records 7,515 legacy violations without claiming they are fixed and uses the top-offender report to gate E-A2 pin analysis. Evidence lives under `f/1273`.
 

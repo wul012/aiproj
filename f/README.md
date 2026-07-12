@@ -2,6 +2,10 @@
 
 本目录从 v1098 开始保存模型治理阶段的运行截图和解释，和历史目录 `a/`、`b/`、`c/`、`d/`、`e/` 同级。
 
+## v1275
+
+v1275 预注册并执行 Fourier lottery-ticket 实验。冻结 v1185 checkpoint 的 heldout accuracy 为 0.965989；50% per-tensor/global magnitude pruning 后分别降至 0.406536/0.486781，触发预注册停止门，因此 Arm L 未启动、GPU 训练次数为 0。固定五频 power share 仍约为 0.31，说明频率痕迹保留并不足以保持回路功能。五格式报告和 3616-byte cache 见 `f/1275/解释/fourier_ticket_v1275/`，综合图见 `f/1275/图片/fourier-ticket-v1275.png`。
+
 ## v1274
 
 v1274 收口两版 elegance hotspot program。最终名称 census 保持 2,049 files / 7,515 historical violations / 0 new，baseline SHA-256 前后不变。E-A2 top 5 与 scripts wrapper family 均受 publication、public export、downstream receipt 或 archived command pin，故不改源码。证据见 `f/1274/解释/`，最终页面核验见 `f/1274/图片/name-budget-close-v1274.png`。

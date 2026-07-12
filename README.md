@@ -33,13 +33,24 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 - [Production excellence brief](docs/production-excellence-aiproj-brief.md)
 - [Elegance hotspot program](docs/elegance-hotspot-program-aiproj.md)
 - [Elegance hotspot closeout](docs/elegance-closeout-v1274.md)
+- [v1275 Fourier ticket brief](docs/v1275-fourier-ticket-brief.md)
 - [Stage 2 operational brief (inactive)](docs/stage2-aiproj-operational-brief.md)
 - [Deep maintenance v1268-v1272 closeout](docs/deep-maintenance-v1268-v1272-closeout.md)
 - [Plain-language project guide](项目通俗说明/README.md)
 
 ## Current version
 
-Version `v1274.0.0` closes **the bounded elegance hotspot program**. The final census remains 7,515 historical violations across 2,049 files with zero new violations and an unchanged baseline SHA-256. E-A2 changed no code because the top five names and the visible scripts duplication family are pinned by publication artifacts, public exports, downstream receipts, or archived command evidence. The program stops after two versions rather than inventing unsafe remediation work.
+Version `v1275.0.0` runs a preregistered **Fourier lottery-ticket test** on the frozen v1185 mod-97 checkpoint. Both per-tensor and global magnitude pruning break the 0.90 capability floor at the first 50% sparsity level, so the experiment honestly stops before Arm L. The known Fourier frequencies remain visible in the surviving embedding power, showing that frequency concentration alone is not sufficient evidence that the executable circuit survived.
+
+## Latest v1275 checkpoint
+
+- Froze the v1185 checkpoint SHA-256 and the known frequencies `[43, 3, 48, 26, 44]` before measurement.
+- Swept 0.50/0.70/0.80/0.90/0.95 sparsity with exact per-tensor and global magnitude masks plus five matched random masks per cell.
+- Observed 50% heldout accuracy of 0.406536 and 0.486781 versus the unpruned 0.965989 baseline; the preregistered stop gate therefore skipped all GPU ticket training.
+- Re-derived `status=pass / pruning_breaks_circuit` from a 3616-byte cache and published JSON/CSV/text/Markdown/HTML plus one combined figure under `f/1275`.
+- Kept the claim at `toy_scale_own_substrate`: the result rejects this unstructured magnitude-pruning route, not lottery tickets or structured pruning in general.
+
+## Historical v1274 context
 
 ## Latest v1274 checkpoint
 
