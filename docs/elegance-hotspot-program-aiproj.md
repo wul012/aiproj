@@ -49,3 +49,16 @@ Final census, baseline pinned, one-page summary. Request Claude review.
 - Baseline loosened = revert.
 - Inventing remediation work the census does not justify (gold-plating) = fail; the
   program budget is a maximum, not a quota.
+
+## Claude E-track review — 2026-07-12 (v1273–v1274): PASS — closed in 2 of 3 versions
+
+- Verified: `name_budget.py` gate + 183-line test + CI step running on every push, both
+  runs green, tree clean (AGENTS Elegance Gates and pending brief edits swept in).
+  Baseline is shrink-only with 7,515 pinned entries and zero new violations.
+- The E-A2 skip is APPROVED as the correct outcome, not a gap: the committed pin-audit
+  (`f/1274/解释/pin-audit.md`) shows the top cohort is pinned by public lazy exports,
+  module `__all__`, and artifact-frozen sidecar filenames — "zero safe candidates after
+  respecting pin boundaries" is exactly the honest finding the brief said was valid.
+  Using 2 of 3 budgeted versions without padding is the anti-gold-plating rule working.
+- aiproj is parked again: engineering lane idle until the program-close capstone rerun;
+  new code everywhere is now under the name gate.
