@@ -2,10 +2,11 @@
 
 from __future__ import annotations
 
+import math
+import unittest
 from itertools import product
 from pathlib import Path
 
-import pytest
 import torch
 
 from minigpt.superposition_v1276 import (
@@ -48,8 +49,8 @@ def test_dedicated_formula_matches_grid():
     importance = [1.0, 0.5, 0.2]
     analytic = dedicated_loss(importance, 0.4, 1)
     numeric = brute_dedicated(importance, 0.4, 1)
-    assert analytic == pytest.approx(0.077)
-    assert numeric == pytest.approx(analytic, abs=5e-5)
+    assert math.isclose(analytic, 0.077, rel_tol=0.0, abs_tol=1e-12)
+    assert math.isclose(numeric, analytic, rel_tol=0.0, abs_tol=5e-5)
 
 
 def test_toy_ae_shape_and_nonnegative():
@@ -70,11 +71,11 @@ def test_weight_metrics_count_and_interference():
 
 def test_exact_spearman_is_one_sided():
     rho, p_value = spearman_exact([1, 2, 3, 4, 5])
-    assert rho == pytest.approx(1.0)
-    assert p_value == pytest.approx(1.0 / 120.0)
+    assert math.isclose(rho, 1.0)
+    assert math.isclose(p_value, 1.0 / 120.0)
     reversed_rho, reversed_p = spearman_exact([5, 4, 3, 2, 1])
-    assert reversed_rho == pytest.approx(-1.0)
-    assert reversed_p == pytest.approx(1.0)
+    assert math.isclose(reversed_rho, -1.0)
+    assert math.isclose(reversed_p, 1.0)
 
 
 def _cfg() -> SuperConfig:
@@ -240,7 +241,7 @@ def test_actual_cache_rederives_verdict():
     root = Path(__file__).resolve().parents[1]
     paths = list((root / "f" / "1276").rglob("phase_a_cache.pt"))
     if not paths:
-        pytest.skip("v1276 Phase-A cache is created only after the preregistration commit")
+        raise unittest.SkipTest("v1276 Phase-A cache is created only after the preregistration commit")
     assert len(paths) == 1
     cache = torch.load(paths[0], map_location="cpu", weights_only=False)
     cfg = SuperConfig()
@@ -253,3 +254,13 @@ def test_actual_cache_rederives_verdict():
         "superposition_not_optimal",
         "review",
     }
+
+
+def load_tests(loader, tests, pattern):
+    """Expose module-level contracts to the repository's unittest discovery."""
+    del loader, tests, pattern
+    suite = unittest.TestSuite()
+    for name, case in sorted(globals().items()):
+        if name.startswith("test_") and callable(case):
+            suite.addTest(unittest.FunctionTestCase(case, description=name))
+    return suite

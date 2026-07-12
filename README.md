@@ -41,7 +41,7 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 
 ## Current version
 
-Version `v1276.0.0` runs a preregistered **toy-model superposition experiment** on CPU. Across 50 cells, sparse features are packed into more than five directions and beat the best analytic dedicated solution by a large margin, while representation count grows monotonically in both arms. The formal verdict remains `review`, because the uniform dense control is threshold-sensitive at τ=0.3/0.5/0.7; the version preserves that mixed-τ result instead of dropping inconvenient thresholds.
+Version `v1276.0.1` runs a preregistered **toy-model superposition experiment** on CPU. Across 50 cells, sparse features are packed into more than five directions and beat the best analytic dedicated solution by a large margin, while representation count grows monotonically in both arms. The formal verdict remains `review`, because the uniform dense control is threshold-sensitive at τ=0.3/0.5/0.7; the version preserves that mixed-τ result instead of dropping inconvenient thresholds.
 
 ## Latest v1276 checkpoint
 
@@ -50,6 +50,7 @@ Version `v1276.0.0` runs a preregistered **toy-model superposition experiment** 
 - Measured τ=0.5 median R curves of `[5,8,9,10,11]` for importance and `[6,10,18,20,20]` for uniform, with exact one-sided p-values 0.008333 and 0.016667.
 - Verified sparse median loss ratios of 0.192564/0.161437 versus the analytic dedicated baseline, while dense models do not clear the 2% improvement gate.
 - Kept `status=review / mixed_tau=True` because uniform dense R is threshold-sensitive; no MiniGPT or LLM superposition claim is made.
+- Registered all 16 v1276 contracts with the repository's standard `unittest` discovery, avoiding a hidden local-only pytest dependency.
 
 ## Historical v1275 context
 
