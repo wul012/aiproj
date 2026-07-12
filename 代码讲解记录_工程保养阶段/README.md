@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1233-v1276-superposition.md
+ -> v1276 code explanation: preregisters and runs a CPU-only 20-feature/5-dimension ReLU autoencoder with importance and uniform controls, corrects the best-dedicated analytic baseline from the untouched probe cache, and finds converged monotone loss-optimal sparse packing while preserving the formal `review` verdict because the uniform dense control is mixed across τ. Evidence lives under `f/1276`.
+
 1232-v1275-fourier-ticket.md
  -> v1275 code explanation: preregisters a toy-scale Fourier lottery-ticket test, runs exact per-tensor/global magnitude pruning plus matched random controls on the frozen v1185 checkpoint, and honestly stops Arm L when 50% sparsity drops heldout accuracy to 0.407/0.487 despite the known-frequency power share remaining visible. Evidence lives under `f/1275`.
 

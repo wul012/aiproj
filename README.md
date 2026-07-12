@@ -34,13 +34,24 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 - [Elegance hotspot program](docs/elegance-hotspot-program-aiproj.md)
 - [Elegance hotspot closeout](docs/elegance-closeout-v1274.md)
 - [v1275 Fourier ticket brief](docs/v1275-fourier-ticket-brief.md)
+- [v1276 superposition brief](docs/v1276-superposition-brief.md)
 - [Stage 2 operational brief (inactive)](docs/stage2-aiproj-operational-brief.md)
 - [Deep maintenance v1268-v1272 closeout](docs/deep-maintenance-v1268-v1272-closeout.md)
 - [Plain-language project guide](项目通俗说明/README.md)
 
 ## Current version
 
-Version `v1275.0.0` runs a preregistered **Fourier lottery-ticket test** on the frozen v1185 mod-97 checkpoint. Both per-tensor and global magnitude pruning break the 0.90 capability floor at the first 50% sparsity level, so the experiment honestly stops before Arm L. The known Fourier frequencies remain visible in the surviving embedding power, showing that frequency concentration alone is not sufficient evidence that the executable circuit survived.
+Version `v1276.0.0` runs a preregistered **toy-model superposition experiment** on CPU. Across 50 cells, sparse features are packed into more than five directions and beat the best analytic dedicated solution by a large margin, while representation count grows monotonically in both arms. The formal verdict remains `review`, because the uniform dense control is threshold-sensitive at τ=0.3/0.5/0.7; the version preserves that mixed-τ result instead of dropping inconvenient thresholds.
+
+## Latest v1276 checkpoint
+
+- Trained a tied ReLU autoencoder with 20 features, 5 dimensions, two importance arms, five sparsity levels, and five seeds; all 50 cells passed the preregistered plateau gate on CPU.
+- Corrected the analytic best-dedicated baseline after the probe exposed that dropped features optimally use `E[x]` through their bias; the repair was disclosed and re-derived from the unchanged cache before the full grid.
+- Measured τ=0.5 median R curves of `[5,8,9,10,11]` for importance and `[6,10,18,20,20]` for uniform, with exact one-sided p-values 0.008333 and 0.016667.
+- Verified sparse median loss ratios of 0.192564/0.161437 versus the analytic dedicated baseline, while dense models do not clear the 2% improvement gate.
+- Kept `status=review / mixed_tau=True` because uniform dense R is threshold-sensitive; no MiniGPT or LLM superposition claim is made.
+
+## Historical v1275 context
 
 ## Latest v1275 checkpoint
 

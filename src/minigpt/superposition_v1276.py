@@ -334,8 +334,12 @@ def build_report(result: dict, info: dict, source: str, generated_at: str | None
     summary = {
         "verdict": info["verdict"], "scope": "toy_autoencoder_own_substrate", "source_cache": source,
         **info["gates"], "g5_match_count": info["g5_match_count"],
+        "g2_failed_checks": [key for key, passed in info["g2_checks"].items() if not passed],
+        "min_kept_count": min(info["kept_counts"].values()),
         "importance_rho": round(info["trends"]["importance"]["rho"], 6),
+        "importance_exact_p": round(info["trends"]["importance"]["p_value"], 6),
         "uniform_rho": round(info["trends"]["uniform"]["rho"], 6),
+        "uniform_exact_p": round(info["trends"]["uniform"]["p_value"], 6),
         "importance_sparse_loss_ratio": round(info["optimality"]["importance"]["sparse_loss"] / info["optimality"]["importance"]["sparse_baseline"], 6),
         "uniform_sparse_loss_ratio": round(info["optimality"]["uniform"]["sparse_loss"] / info["optimality"]["uniform"]["sparse_baseline"], 6),
     }

@@ -2,6 +2,10 @@
 
 本目录从 v1098 开始保存模型治理阶段的运行截图和解释，和历史目录 `a/`、`b/`、`c/`、`d/`、`e/` 同级。
 
+## v1276
+
+v1276 执行 CPU-only superposition 实验：20 个 features 压入 5 dimensions，importance/uniform 两 arm、五 sparsity、五 seeds 共 50 格全部收敛。高 sparsity 的 packing 在 loss 上只需 dedicated baseline 的约 19.3%/16.1%，且 R(τ) 单调增长；但 uniform dense 在 τ=0.3/0.5/0.7 下分别约为 15/6/4，触发预注册 mixed-τ，因此正式 verdict 保持 `review`。cache 与五格式报告见 `f/1276/解释/superposition_v1276/`，单图见 `f/1276/图片/superposition-v1276.png`。
+
 ## v1275
 
 v1275 预注册并执行 Fourier lottery-ticket 实验。冻结 v1185 checkpoint 的 heldout accuracy 为 0.965989；50% per-tensor/global magnitude pruning 后分别降至 0.406536/0.486781，触发预注册停止门，因此 Arm L 未启动、GPU 训练次数为 0。固定五频 power share 仍约为 0.31，说明频率痕迹保留并不足以保持回路功能。五格式报告和 3616-byte cache 见 `f/1275/解释/fourier_ticket_v1275/`，综合图见 `f/1275/图片/fourier-ticket-v1275.png`。

@@ -230,6 +230,8 @@ def test_report_shape_and_scope():
     report = build_report(result, info, "cache.pt", generated_at="fixed")
     assert report["status"] == "pass"
     assert report["summary"]["scope"] == "toy_autoencoder_own_substrate"
+    assert report["summary"]["g2_failed_checks"] == []
+    assert report["summary"]["min_kept_count"] == 5
     assert len(report["rows"]) == 50
     assert all(set(report["csv_fieldnames"]) == set(row) for row in report["rows"])
 
