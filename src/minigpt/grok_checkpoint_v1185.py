@@ -67,10 +67,22 @@ class CheckpointMeta:
         return dict(self.__dict__)
 
 
-def train_to_grok(config: GrokConfig, device: torch.device) -> tuple[MiniGPT, CheckpointMeta, list[dict]]:
+def train_to_grok(
+    config: GrokConfig,
+    device: torch.device,
+    *,
+    init_state: dict[str, torch.Tensor] | None = None,
+    masks: dict[str, torch.Tensor] | None = None,
+) -> tuple[MiniGPT, CheckpointMeta, list[dict]]:
     """Train the canonical recipe to grok and return the trained model, metadata,
     and the train/val accuracy curve. Uses the v1179 primitives; full-batch AdamW;
-    stops once a stable grok is confirmed, otherwise runs the full budget."""
+    stops once a stable grok is confirmed, otherwise runs the full budget.
+
+    ``init_state`` and ``masks`` are optional v1275 lottery-ticket controls. The
+    defaults preserve the canonical v1185 path byte-for-byte in behavior. Masks
+    zero gradients and weights throughout training rather than pruning only at
+    evaluation time.
+    """
     seed = config.seeds[0]
     weight_decay = config.wds[0]
     vocab_size = config.p + 2
@@ -79,6 +91,24 @@ def train_to_grok(config: GrokConfig, device: torch.device) -> tuple[MiniGPT, Ch
     seed_everything(seed)
     train_idx, val_idx = split_indices(full_data.shape[0], config.train_frac, seed)
     model = make_grok_model(vocab_size, config).to(device)
+    if init_state is not None:
+        model.load_state_dict(init_state)
+
+    named_params = dict(model.named_parameters())
+    active_masks: dict[str, torch.Tensor] = {}
+    mask_hooks = []
+    for name, mask in (masks or {}).items():
+        if name not in named_params:
+            raise KeyError(f"unknown masked parameter: {name}")
+        param = named_params[name]
+        if tuple(mask.shape) != tuple(param.shape):
+            raise ValueError(f"mask shape mismatch for {name}: {tuple(mask.shape)} != {tuple(param.shape)}")
+        active = mask.to(device=param.device, dtype=param.dtype)
+        active_masks[name] = active
+        with torch.no_grad():
+            param.mul_(active)
+        mask_hooks.append(param.register_hook(lambda grad, keep=active: grad * keep))
+
     optimizer = torch.optim.AdamW(
         model.parameters(), lr=config.lr, betas=(config.beta1, config.beta2), weight_decay=weight_decay
     )
@@ -109,6 +139,9 @@ def train_to_grok(config: GrokConfig, device: torch.device) -> tuple[MiniGPT, Ch
         optimizer.zero_grad(set_to_none=True)
         answer_loss(model, train).backward()
         optimizer.step()
+        with torch.no_grad():
+            for name, mask in active_masks.items():
+                named_params[name].mul_(mask)
         step += 1
 
     meta = CheckpointMeta(
@@ -118,6 +151,8 @@ def train_to_grok(config: GrokConfig, device: torch.device) -> tuple[MiniGPT, Ch
         final_train_acc=round(last_train_acc, 6), final_val_acc=round(last_val_acc, 6),
         steps_run=curve[-1]["step"],
     )
+    for hook in mask_hooks:
+        hook.remove()
     return model, meta, curve
 
 
