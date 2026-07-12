@@ -31,6 +31,7 @@ def brute_dedicated(importances, sparsity: float, n_dims: int, points: int = 30)
     support = [0.0] + [(idx + 0.5) / points for idx in range(points)]
     probs = [sparsity] + [(1.0 - sparsity) / points] * points
     keep = set(sorted(range(n), key=lambda idx: importances[idx], reverse=True)[:n_dims])
+    dropped_output = (1.0 - sparsity) / 2.0
     total = 0.0
     for choices in product(range(len(support)), repeat=n):
         probability = 1.0
@@ -38,7 +39,7 @@ def brute_dedicated(importances, sparsity: float, n_dims: int, points: int = 30)
         for idx, choice in enumerate(choices):
             probability *= probs[choice]
             if idx not in keep:
-                loss += importances[idx] * support[choice] ** 2
+                loss += importances[idx] * (support[choice] - dropped_output) ** 2
         total += probability * loss
     return total
 
@@ -47,7 +48,7 @@ def test_dedicated_formula_matches_grid():
     importance = [1.0, 0.5, 0.2]
     analytic = dedicated_loss(importance, 0.4, 1)
     numeric = brute_dedicated(importance, 0.4, 1)
-    assert analytic == pytest.approx(0.14)
+    assert analytic == pytest.approx(0.077)
     assert numeric == pytest.approx(analytic, abs=5e-5)
 
 

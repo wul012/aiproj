@@ -63,9 +63,11 @@ def importance_for(arm: str, n_features: int) -> torch.Tensor:
 
 
 def dedicated_loss(importances, sparsity: float, n_dims: int) -> float:
-    """Expected loss of the best dedicated solution, exactly: E[x_i^2]=(1-S)/3."""
+    """Best dedicated loss: dropped features use the optimal constant E[x]."""
     values = sorted((float(value) for value in importances), reverse=True)
-    return (1.0 - sparsity) * sum(values[n_dims:]) / 3.0
+    active_prob = 1.0 - sparsity
+    variance = active_prob / 3.0 - active_prob**2 / 4.0
+    return variance * sum(values[n_dims:])
 
 
 def sample_features(n: int, cfg: SuperConfig, sparsity: float, gen: torch.Generator) -> torch.Tensor:
