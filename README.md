@@ -31,13 +31,23 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 - [aiproj A-track final evidence](docs/aiproj-track-final-evidence.md)
 - [Model capability honest measurement policy](docs/model-capability-honest-measurement-policy.md)
 - [Production excellence brief](docs/production-excellence-aiproj-brief.md)
+- [Elegance hotspot program](docs/elegance-hotspot-program-aiproj.md)
 - [Stage 2 operational brief (inactive)](docs/stage2-aiproj-operational-brief.md)
 - [Deep maintenance v1268-v1272 closeout](docs/deep-maintenance-v1268-v1272-closeout.md)
 - [Plain-language project guide](项目通俗说明/README.md)
 
 ## Current version
 
-Version `v1272.0.0` completes **the v1268-v1272 deep engineering-maintenance closeout**. Full pytest passes 3,747 tests at the v1271 maintenance snapshot; final CI-style unittest discovery covers 3,538 tests and measures 91.06% line coverage against the unchanged 88.98% floor. Three new in-process tests raise the active promoted-seed assurance contract from 0/63 to 59/63 covered statements. This closes maintenance only: no science-lane result or model promotion changes.
+Version `v1273.0.0` completes **E-A1 of the bounded elegance hotspot program**. A new AST-based name-budget gate scans `src/` and `scripts/`, freezes 7,515 legacy filename/public-identifier violations as stable digests, and fails CI on any new name over 40 characters. The baseline is shrink-only, the gate is ordered between ruff and mypy, and no science-lane result or model promotion changes.
+
+## Latest v1273 checkpoint
+
+- Added `src/minigpt/name_budget.py` and `scripts/check_name_budget.py` with a fixed 40-character policy, stable line-independent digests, and fail-closed baseline updates.
+- Scanned 2,049 Python files: 3,201 functions, 2,671 variables, 1,610 filenames, and 33 fields exceed the historical budget; ordinary post-adoption execution has zero new violations and zero scan errors.
+- Wired the gate into CI workflow hygiene, local engineering health, strict ruff paths, and a mypy scope floor raised from 20 to 22.
+- Added nine direct contract tests plus updated workflow/orchestration tests; focused verification passes 38 tests, including malformed-baseline fail-closed behavior, and final-tree full pytest passes 3,759 tests in 1,254.87 seconds. E-A2 will first check whether the top five are pin-protected before attempting any rename.
+
+## Historical v1272 context
 
 ## Latest v1272 checkpoint
 

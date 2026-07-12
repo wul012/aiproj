@@ -89,13 +89,14 @@ workflows.
 
 ## Latest version summary
 
-Current README focus: **v1272 deep engineering-maintenance closeout**.
+Current README focus: **v1273 E-A1 name-budget mechanical gate**.
 
-v1272 closes the v1268-v1271 maintenance batch with full pytest, CI-style
-unittest coverage, a reviewer outcome matrix, and a direct test repair for an
-active governance contract that coverage had reported at zero. Final line
-coverage is 91.06% against the unchanged 88.98% floor. Science-lane results and
-promotion decisions remain unchanged.
+v1273 makes the 40-character filename/public-identifier budget executable. It
+scans 2,049 Python files, commits 7,515 historical violations as stable digests,
+and rejects any new violation or baseline growth. The gate runs between staged
+ruff and scoped mypy and is also part of local engineering health. Final full
+pytest passes 3,759 tests. Science-lane
+results, cached experiments, and promotion decisions remain unchanged.
 
 ## Where to look next
 
@@ -118,6 +119,7 @@ promotion decisions remain unchanged.
 - `docs/aiproj-track-a4-code-health.md` - A4 file-size ratchet evidence.
 - `docs/aiproj-track-final-evidence.md` - A5 final evidence and reviewer handoff.
 - `docs/production-excellence-aiproj-brief.md` - Claude-authored A-track execution brief.
+- `docs/elegance-hotspot-program-aiproj.md` - bounded E-track census, top-N, and closeout plan.
 - `docs/stage2-aiproj-operational-brief.md` - inactive, capstone-gated Stage-2 plan.
 - `docs/deep-maintenance-v1268-v1272-closeout.md` - verified maintenance outcomes, residual debt, and stop decision.
 - `文档分流说明.md` - current documentation routing map.

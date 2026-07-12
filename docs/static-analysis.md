@@ -1,6 +1,6 @@
-# MiniGPT Static, Type, Coverage, And Code-Health Gates
+# MiniGPT Static, Name, Type, Coverage, And Code-Health Gates
 
-This page documents the staged ruff, scoped mypy, coverage-ratchet, and
+This page documents the staged ruff, name-budget, scoped mypy, coverage-ratchet, and
 code-health adoption introduced by the production-excellence A-track.
 
 ## Purpose
@@ -26,6 +26,23 @@ current issue multiset must be a subset of the committed issue multiset; any
 new issue key makes the command fail and leaves the baseline file unchanged.
 Only first-time baseline creation may start from a non-empty current set. Do
 not use `--update-baseline` to hide a new violation in touched code.
+
+## Name Budget Gate
+
+The separate name-budget gate scans Python filenames and module/class-level
+public definitions under `src/` and `scripts/`. The budget is fixed at 40
+characters; the CLI intentionally has no option that can loosen it.
+
+```powershell
+python -B scripts/check_name_budget.py --out-dir runs/name-budget
+```
+
+`docs/elegance/name-baseline.json` stores stable digests for historical
+violations. Digests exclude line numbers, so moving a definition does not look
+like baseline growth. Existing baselines update only when the current digest
+set is a subset of the committed set; new violations make the update fail
+without changing the baseline. CI runs this gate after staged ruff and before
+scoped mypy.
 
 ## Outputs
 
@@ -61,7 +78,7 @@ This is an engineering gate, not a model-capability claim. It improves maintaina
 
 The second A1 step adds strict mypy without attempting a full-repository type
 sweep. The committed scope lives in
-`docs/static-analysis/mypy-scope.json`. It currently contains nineteen
+`docs/static-analysis/mypy-scope.json`. It currently contains twenty-two
 load-bearing files across shared report contracts, CI governance, engineering
 orchestration, analysis gates, artifact schema, file-size ratchet, A-track
 closeout, and honest measurement.
@@ -74,7 +91,7 @@ python -B scripts/check_type_analysis.py --out-dir runs/type-analysis
 
 The checker validates the scope before invoking mypy. Every target must exist,
 must be a Python file inside the repository, must be unique, and must belong to
-a named group. `scope_floor=19` prevents the checked surface from being reduced
+a named group. `scope_floor=22` prevents the checked surface from being reduced
 without a visible policy change. The report writes JSON, CSV, Markdown, and
 HTML with the exact target list, scope issues, and mypy diagnostics.
 

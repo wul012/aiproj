@@ -142,6 +142,27 @@ If a process must remain running, state its name, port/PID if known, and why it 
 - Method kernel: apply the 12-rule kernel and task-brief skeleton from `D:\C\四项目理解统筹\模型使用手册\00-通用方法内核.md` (read once per session; also mirrored in the global `~/.codex/AGENTS.md`).
 - Standalone HTML evidence reports must use an inline empty favicon (for example `data:,`) and browser verification must finish without console errors; this prevents repeated favicon 404 noise in archived screenshots.
 
+## Elegance Gates (promoted 2026-07-11, program-end review)
+
+The post-capstone review judged the four codebases fortified but not elegant. These
+gates buy elegance upstream. Scope here: the engineering/governance lane; the ML
+capability lane keeps its own design-panel discipline, but the name budget applies to
+ALL new code. Rules apply to NEW and TOUCHED code only; existing violations enter a
+committed baseline that may only shrink (same adoption recipe as the ruff baseline).
+Each rule should become a committed check that fails CI in a future maintenance
+version; until then it binds as an authoring rule. Ratchets only tighten.
+
+- Name budget: no new identifier or filename over 40 characters. A name that wants more
+  nouns means a missing abstraction — extract and name the concept instead.
+- Rule of three: a third structurally-similar module/script in any family is a STOP
+  condition — build the shared engine first, then land the third case as data/config.
+- Generation cap: an engineering-lane version adds at most 400 new source lines
+  (dedup/refactor/split versions exempt).
+- Family design note: before creating a new file family, write ≤10 lines in the version
+  doc naming the abstraction and the data-vs-behavior split, BEFORE implementation.
+- Boy-scout rule: any touched file must leave within this section's name and size
+  budgets (the 500–800 line split threshold above stays authoritative for size).
+
 ## Final Response Requirement
 
 Include a short cleanup summary when meaningful:

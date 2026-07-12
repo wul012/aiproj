@@ -1,11 +1,12 @@
 {
   "schema_version": 1,
   "tool": "mypy",
-  "scope_floor": 20,
+  "scope_floor": 22,
   "targets": [
     "scripts/_bootstrap.py",
     "scripts/_engineering_health.py",
     "scripts/check_static_analysis.py",
+    "scripts/check_name_budget.py",
     "scripts/check_type_analysis.py",
     "scripts/check_model_capability_honest_measurement.py",
     "scripts/check_artifact_schema_guard.py",
@@ -21,6 +22,7 @@
     "src/minigpt/ci_workflow_hygiene_summary.py",
     "src/minigpt/ci_workflow_hygiene_types.py",
     "src/minigpt/model_capability_honest_measurement.py",
+    "src/minigpt/name_budget.py",
     "src/minigpt/report_utils.py",
     "src/minigpt/training_scale_handoff_guards.py"
   ],
@@ -45,11 +47,16 @@
     ],
     "analysis_gates": [
       "scripts/check_static_analysis.py",
+      "scripts/check_name_budget.py",
       "scripts/check_type_analysis.py",
       "scripts/check_model_capability_honest_measurement.py",
       "scripts/check_artifact_schema_guard.py",
       "scripts/check_file_size_ratchet.py",
       "scripts/check_aiproj_track_closeout.py"
+    ],
+    "name_budget_gate": [
+      "scripts/check_name_budget.py",
+      "src/minigpt/name_budget.py"
     ],
     "aiproj_track_closeout_gate": [
       "src/minigpt/aiproj_track_closeout.py"

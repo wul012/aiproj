@@ -40,6 +40,9 @@ jobs:
       - name: Static analysis gate
         run: python -B scripts/check_static_analysis.py --out-dir runs/static-analysis-ci
 
+      - name: Name budget gate
+        run: python -B scripts/check_name_budget.py --out-dir runs/name-budget-ci
+
       - name: Scoped type analysis gate
         run: python -B scripts/check_type_analysis.py --out-dir runs/type-analysis-ci
 

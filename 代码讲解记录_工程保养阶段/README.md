@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1231-v1273-elegance-name-gate.md
+ -> v1273 code explanation: turns the 40-character filename/public-identifier rule into an AST census, line-stable digest baseline, fail-closed shrink-only update contract, CI ordering guard, engineering-health step, and strict ruff/mypy scope. It records 7,515 legacy violations without claiming they are fixed and uses the top-offender report to gate E-A2 pin analysis. Evidence lives under `f/1273`.
+
 1230-v1272-deep-maintenance-closeout.md
  -> v1272 code explanation: closes the v1268-v1271 maintenance batch with 3,747 full pytest passes, 3,538 CI-style unittest cases, 91.06% coverage against the unchanged 88.98% floor, and three in-process tests that raise the active assurance contract from 0/63 to 59/63 covered statements. It records the remaining 271/21/496 debt rather than continuing version-count-driven cleanup. Evidence lives under `f/1272`.
 

@@ -24,6 +24,7 @@ DEFAULT_BASELINE = ROOT / "docs" / "static-analysis" / "ruff-baseline.json"
 DEFAULT_OUT_DIR = ROOT / "runs" / "static-analysis"
 DEFAULT_STRICT_PATHS = (
     "scripts/check_static_analysis.py",
+    "scripts/check_name_budget.py",
     "scripts/check_type_analysis.py",
     "scripts/check_model_capability_honest_measurement.py",
     "scripts/check_artifact_schema_guard.py",
@@ -38,6 +39,7 @@ DEFAULT_STRICT_PATHS = (
     "src/minigpt/ci_workflow_hygiene_policy.py",
     "src/minigpt/ci_workflow_hygiene_summary.py",
     "src/minigpt/ci_workflow_hygiene_types.py",
+    "src/minigpt/name_budget.py",
     "src/minigpt/model_capability_honest_measurement.py",
     "src/minigpt/artifact_schema_guard.py",
     "src/minigpt/file_size_ratchet.py",

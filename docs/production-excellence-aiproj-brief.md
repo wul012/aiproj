@@ -99,3 +99,17 @@ only to guarantee the artifact contract A3.2 already enforces.
   triggers CI twice (branch push + tag push) — add a trigger filter to halve CI spend.
 - aiproj is the FIRST Stage-1 track complete. Stage-2 remains gated on the program-wide
   capstone; until then the engineering lane takes maintenance-only versions.
+
+## Claude checkpoint review — 2026-07-10 (v1268–v1272): PASS, track fully closed
+
+- Both close conditions verified done: stage2 brief committed (tracked); CI dedupe
+  landed at v1268 — one run per version since (v1267 was the last double-run).
+- v1269 cut the ruff baseline substantially (baseline file shrank ~4.7k lines) with CI
+  green — debt reduction in the correct ratchet direction, not baseline growth.
+- Maintenance-only boundary respected; no ML-lane touches. No conditions remain.
+  Next review only at the program-wide capstone (C4 consumes one aiproj artifact).
+- Update 2026-07-12: the capstone PASSED (C4 validated this repo's registry-listed
+  publication receipt). Sanctioned maintenance work while the Java track finishes:
+  the bounded elegance program `docs/elegance-hotspot-program-aiproj.md` (≤3 versions,
+  engineering lane only, E-A1 commits the pending AGENTS/brief edits + the name-census
+  gate).

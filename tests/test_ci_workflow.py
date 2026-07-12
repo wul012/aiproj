@@ -74,6 +74,7 @@ CURRENT_WORKFLOW_REQUIRED_CHECK_IDS = (
     "command:release_readiness_drift_contract_smoke",
     "command:project_docs_readability_gate",
     "command:static_analysis_gate",
+    "command:name_budget_gate",
     "command:type_analysis_gate",
     "command:model_capability_honest_measurement_gate",
     "command:artifact_schema_guard",
@@ -98,7 +99,10 @@ CURRENT_WORKFLOW_REQUIRED_CHECK_IDS = (
     "order:project_docs_readability_before_coverage",
     "order:static_analysis_after_ci_hygiene",
     "order:static_analysis_before_coverage",
+    "order:name_budget_after_static_analysis",
+    "order:name_budget_before_coverage",
     "order:type_analysis_after_static_analysis",
+    "order:type_analysis_after_name_budget",
     "order:type_analysis_before_coverage",
     "order:model_capability_honest_measurement_after_type_analysis",
     "order:model_capability_honest_measurement_before_coverage",
@@ -213,8 +217,8 @@ class CIWorkflowTests(unittest.TestCase):
             self.assertGreaterEqual(report["summary"]["failed_check_count"], 4)
             self.assertEqual(report["summary"]["node24_native_action_count"], 0)
             self.assertEqual(report["summary"]["forbidden_env_count"], 1)
-            self.assertEqual(report["summary"]["missing_step_count"], 20)
-            self.assertEqual(report["summary"]["required_step_count"], 22)
+            self.assertEqual(report["summary"]["missing_step_count"], 21)
+            self.assertEqual(report["summary"]["required_step_count"], 23)
             for gate in REQUIRED_SUMMARY_GATES:
                 with self.subTest(gate=gate):
                     self.assertFalse(report["summary"][f"{gate}_ready"])
@@ -262,6 +266,8 @@ class CIWorkflowTests(unittest.TestCase):
                         "        run: python -B scripts/check_ci_workflow_hygiene.py --out-dir runs/ci-workflow-hygiene-ci",
                         "      - name: Static analysis gate",
                         "        run: python -B scripts/check_static_analysis.py --out-dir runs/static-analysis-ci",
+                        "      - name: Name budget gate",
+                        "        run: python -B scripts/check_name_budget.py --out-dir runs/name-budget-ci",
                         "      - name: Scoped type analysis gate",
                         "        run: python -B scripts/check_type_analysis.py --out-dir runs/type-analysis-ci",
                         "      - name: Model capability honest measurement gate",
@@ -333,6 +339,8 @@ class CIWorkflowTests(unittest.TestCase):
                         "        run: python -B scripts/check_ci_workflow_hygiene.py --out-dir runs/ci-workflow-hygiene-ci",
                         "      - name: Static analysis gate",
                         "        run: python -B scripts/check_static_analysis.py --out-dir runs/static-analysis-ci",
+                        "      - name: Name budget gate",
+                        "        run: python -B scripts/check_name_budget.py --out-dir runs/name-budget-ci",
                         "      - name: Scoped type analysis gate",
                         "        run: python -B scripts/check_type_analysis.py --out-dir runs/type-analysis-ci",
                         "      - name: Model capability honest measurement gate",
@@ -404,6 +412,8 @@ class CIWorkflowTests(unittest.TestCase):
                         "        run: python -B scripts/check_ci_workflow_hygiene.py --out-dir runs/ci-workflow-hygiene-ci",
                         "      - name: Static analysis gate",
                         "        run: python -B scripts/check_static_analysis.py --out-dir runs/static-analysis-ci",
+                        "      - name: Name budget gate",
+                        "        run: python -B scripts/check_name_budget.py --out-dir runs/name-budget-ci",
                         "      - name: Scoped type analysis gate",
                         "        run: python -B scripts/check_type_analysis.py --out-dir runs/type-analysis-ci",
                         "      - name: Model capability honest measurement gate",

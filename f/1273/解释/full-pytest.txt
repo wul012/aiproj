@@ -1,0 +1,5 @@
+command=python -m pytest -q -o cache_dir=runs/pytest-cache-v1273-full
+status=pass
+passed=3759
+duration_seconds=1254.87
+summary=3759 passed in 1254.87s (0:20:54)

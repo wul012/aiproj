@@ -1,0 +1,150 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT engineering health summary",
+  "generated_at": "2026-07-12T02:09:33Z",
+  "status": "pass",
+  "decision": "engineering_health_ready",
+  "summary": {
+    "status": "pass",
+    "decision": "engineering_health_ready",
+    "step_count": 11,
+    "passed_step_count": 11,
+    "failed_step_count": 0,
+    "first_failure_code": 0,
+    "output_root": "D:\\aiproj\\runs\\engineering-health-v1273-final"
+  },
+  "steps": [
+    {
+      "step_id": "source_encoding",
+      "command": [
+        "D:\\python\\python.exe",
+        "-B",
+        "scripts/check_source_encoding.py",
+        "--out-dir",
+        "D:\\aiproj\\runs\\engineering-health-v1273-final\\source-encoding"
+      ],
+      "return_code": 0,
+      "status": "pass"
+    },
+    {
+      "step_id": "project_docs_readability",
+      "command": [
+        "D:\\python\\python.exe",
+        "-B",
+        "scripts/check_project_docs_readability.py",
+        "--out-dir",
+        "D:\\aiproj\\runs\\engineering-health-v1273-final\\project-docs-readability",
+        "--require-pass",
+        "--force"
+      ],
+      "return_code": 0,
+      "status": "pass"
+    },
+    {
+      "step_id": "ci_workflow_hygiene",
+      "command": [
+        "D:\\python\\python.exe",
+        "-B",
+        "scripts/check_ci_workflow_hygiene.py",
+        "--out-dir",
+        "D:\\aiproj\\runs\\engineering-health-v1273-final\\ci-workflow-hygiene"
+      ],
+      "return_code": 0,
+      "status": "pass"
+    },
+    {
+      "step_id": "static_analysis",
+      "command": [
+        "D:\\python\\python.exe",
+        "-B",
+        "scripts/check_static_analysis.py",
+        "--out-dir",
+        "D:\\aiproj\\runs\\engineering-health-v1273-final\\static-analysis"
+      ],
+      "return_code": 0,
+      "status": "pass"
+    },
+    {
+      "step_id": "name_budget",
+      "command": [
+        "D:\\python\\python.exe",
+        "-B",
+        "scripts/check_name_budget.py",
+        "--out-dir",
+        "D:\\aiproj\\runs\\engineering-health-v1273-final\\name-budget"
+      ],
+      "return_code": 0,
+      "status": "pass"
+    },
+    {
+      "step_id": "type_analysis",
+      "command": [
+        "D:\\python\\python.exe",
+        "-B",
+        "scripts/check_type_analysis.py",
+        "--out-dir",
+        "D:\\aiproj\\runs\\engineering-health-v1273-final\\type-analysis"
+      ],
+      "return_code": 0,
+      "status": "pass"
+    },
+    {
+      "step_id": "model_capability_honest_measurement",
+      "command": [
+        "D:\\python\\python.exe",
+        "-B",
+        "scripts/check_model_capability_honest_measurement.py",
+        "--out-dir",
+        "D:\\aiproj\\runs\\engineering-health-v1273-final\\model-capability-honest-measurement"
+      ],
+      "return_code": 0,
+      "status": "pass"
+    },
+    {
+      "step_id": "artifact_schema_guard",
+      "command": [
+        "D:\\python\\python.exe",
+        "-B",
+        "scripts/check_artifact_schema_guard.py",
+        "--out-dir",
+        "D:\\aiproj\\runs\\engineering-health-v1273-final\\artifact-schema-guard"
+      ],
+      "return_code": 0,
+      "status": "pass"
+    },
+    {
+      "step_id": "file_size_ratchet",
+      "command": [
+        "D:\\python\\python.exe",
+        "-B",
+        "scripts/check_file_size_ratchet.py",
+        "--out-dir",
+        "D:\\aiproj\\runs\\engineering-health-v1273-final\\file-size-ratchet"
+      ],
+      "return_code": 0,
+      "status": "pass"
+    },
+    {
+      "step_id": "aiproj_track_closeout",
+      "command": [
+        "D:\\python\\python.exe",
+        "-B",
+        "scripts/check_aiproj_track_closeout.py",
+        "--out-dir",
+        "D:\\aiproj\\runs\\engineering-health-v1273-final\\aiproj-track-closeout"
+      ],
+      "return_code": 0,
+      "status": "pass"
+    },
+    {
+      "step_id": "normalization_guard",
+      "command": [
+        "D:\\python\\python.exe",
+        "-B",
+        "scripts/check_normalization_guard.py"
+      ],
+      "return_code": 0,
+      "status": "pass"
+    }
+  ]
+}

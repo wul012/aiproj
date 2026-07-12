@@ -19,6 +19,7 @@ _HEALTH_STEP_IDS_BY_ENTRYPOINT = {
     "scripts/check_project_docs_readability.py": "project_docs_readability",
     "scripts/check_ci_workflow_hygiene.py": "ci_workflow_hygiene",
     "scripts/check_static_analysis.py": "static_analysis",
+    "scripts/check_name_budget.py": "name_budget",
     "scripts/check_type_analysis.py": "type_analysis",
     "scripts/check_model_capability_honest_measurement.py": "model_capability_honest_measurement",
     "scripts/check_artifact_schema_guard.py": "artifact_schema_guard",
@@ -100,6 +101,11 @@ def _build_step(entrypoint: str, out_dir: Path, *, python_executable: str) -> En
                 "--out-dir",
                 str(out_dir / "static-analysis"),
             ),
+        )
+    if entrypoint == "scripts/check_name_budget.py":
+        return EngineeringHealthStep(
+            _HEALTH_STEP_IDS_BY_ENTRYPOINT[entrypoint],
+            (python_executable, "-B", entrypoint, "--out-dir", str(out_dir / "name-budget")),
         )
     if entrypoint == "scripts/check_type_analysis.py":
         return EngineeringHealthStep(

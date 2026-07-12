@@ -18,6 +18,7 @@ REQUIRED_COMMAND_FRAGMENTS = {
     "project_docs_readability_gate": "scripts/check_project_docs_readability.py",
     "ci_workflow_hygiene_gate": "scripts/check_ci_workflow_hygiene.py",
     "static_analysis_gate": "scripts/check_static_analysis.py",
+    "name_budget_gate": "scripts/check_name_budget.py",
     "type_analysis_gate": "scripts/check_type_analysis.py",
     "model_capability_honest_measurement_gate": "scripts/check_model_capability_honest_measurement.py",
     "artifact_schema_guard": "scripts/check_artifact_schema_guard.py",
@@ -58,8 +59,20 @@ REQUIRED_COMMAND_ORDER = {
         "scripts/check_static_analysis.py",
         "scripts/run_test_coverage.py",
     ),
+    "name_budget_after_static_analysis": (
+        "scripts/check_static_analysis.py",
+        "scripts/check_name_budget.py",
+    ),
+    "name_budget_before_coverage": (
+        "scripts/check_name_budget.py",
+        "scripts/run_test_coverage.py",
+    ),
     "type_analysis_after_static_analysis": (
         "scripts/check_static_analysis.py",
+        "scripts/check_type_analysis.py",
+    ),
+    "type_analysis_after_name_budget": (
+        "scripts/check_name_budget.py",
         "scripts/check_type_analysis.py",
     ),
     "type_analysis_before_coverage": (

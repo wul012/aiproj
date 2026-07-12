@@ -1,0 +1,261 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT name budget gate",
+  "generated_at": "2026-07-12T02:08:41Z",
+  "status": "pass",
+  "decision": "continue_with_name_budget",
+  "baseline_path": "docs/elegance/name-baseline.json",
+  "targets": [
+    "src",
+    "scripts"
+  ],
+  "summary": {
+    "max_name_length": 40,
+    "scanned_file_count": 2049,
+    "current_violation_count": 7515,
+    "baseline_violation_count": 7515,
+    "new_violation_count": 0,
+    "resolved_violation_count": 0,
+    "baseline_exists": true,
+    "baseline_update_requested": false,
+    "baseline_update_allowed": false,
+    "scan_error_count": 0,
+    "blocker_count": 0
+  },
+  "kind_counts": {
+    "field": 33,
+    "filename": 1610,
+    "function": 3201,
+    "variable": 2671
+  },
+  "blockers": [],
+  "scan_errors": [],
+  "new_violations": [],
+  "top_offenders": [
+    {
+      "kind": "variable",
+      "path": "src/minigpt/randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1014.py",
+      "qualname": "RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_PUBLICATION_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_REVIEW_V1014_MARKDOWN_FILENAME",
+      "name": "RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_PUBLICATION_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_REVIEW_V1014_MARKDOWN_FILENAME",
+      "length": 210,
+      "line": 23,
+      "digest": "b2f85818161ae7a4219d0fbc6b996a3c8fb9e53d1f19a5a16a220206fb4ee1c5"
+    },
+    {
+      "kind": "function",
+      "path": "src/minigpt/randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1014_artifacts.py",
+      "qualname": "render_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1014_markdown",
+      "name": "render_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1014_markdown",
+      "length": 208,
+      "line": 50,
+      "digest": "8a35230ddc1d44c780347263b8acb3ae964a43cb50b3e7d775f96a3a91bb74bf"
+    },
+    {
+      "kind": "variable",
+      "path": "src/minigpt/randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1014.py",
+      "qualname": "RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_PUBLICATION_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_REVIEW_V1014_HTML_FILENAME",
+      "name": "RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_PUBLICATION_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_REVIEW_V1014_HTML_FILENAME",
+      "length": 206,
+      "line": 24,
+      "digest": "07f651e6aae961476b528d04f63314ae0a87879c87b4a2ce8a70c2e346e29acc"
+    },
+    {
+      "kind": "variable",
+      "path": "src/minigpt/randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1014.py",
+      "qualname": "RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_PUBLICATION_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_REVIEW_V1014_JSON_FILENAME",
+      "name": "RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_PUBLICATION_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_REVIEW_V1014_JSON_FILENAME",
+      "length": 206,
+      "line": 20,
+      "digest": "1ee3e216ab6d2c38bdd5e034af10fa2f888e25b1bd33a796c07ca76d696b402e"
+    },
+    {
+      "kind": "variable",
+      "path": "src/minigpt/randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1014.py",
+      "qualname": "RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_PUBLICATION_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_REVIEW_V1014_TEXT_FILENAME",
+      "name": "RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_PUBLICATION_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_REVIEW_V1014_TEXT_FILENAME",
+      "length": 206,
+      "line": 22,
+      "digest": "1cc08feceb865c1f54e4a42da97cac91add49559a6cfabc93123720ee4de44fd"
+    },
+    {
+      "kind": "function",
+      "path": "src/minigpt/randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1014_artifacts.py",
+      "qualname": "write_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1014_outputs",
+      "name": "write_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1014_outputs",
+      "length": 206,
+      "line": 113,
+      "digest": "230bfb80749605ef7d45b797aaada47fde9f31d87e05c721d76682e41554fec6"
+    },
+    {
+      "kind": "variable",
+      "path": "src/minigpt/randomized_holdout_publication_receipt_packet_index_publication_check_v980.py",
+      "qualname": "RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_DOWNSTREAM_CONSUMER_ACK_BUNDLE_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_CHECK_MARKDOWN_FILENAME",
+      "name": "RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_DOWNSTREAM_CONSUMER_ACK_BUNDLE_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_CHECK_MARKDOWN_FILENAME",
+      "length": 205,
+      "line": 21,
+      "digest": "f566162fc73c3b080d26fd3888ccd9957a2e2d07f4e1da73decc67f5c7e57f81"
+    },
+    {
+      "kind": "variable",
+      "path": "src/minigpt/randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1014.py",
+      "qualname": "RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_PUBLICATION_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_REVIEW_V1014_CSV_FILENAME",
+      "name": "RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_PUBLICATION_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_REVIEW_V1014_CSV_FILENAME",
+      "length": 205,
+      "line": 21,
+      "digest": "9aa7514ed588be379ed214fb34ad712715cd72783b28579907e014ff06964c87"
+    },
+    {
+      "kind": "filename",
+      "path": "src/minigpt/randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1014_artifacts.py",
+      "qualname": "randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1014_artifacts.py",
+      "name": "randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1014_artifacts.py",
+      "length": 205,
+      "line": 0,
+      "digest": "26284b9d61e3aa91eab50ad07d1ca8ab897a19a471c8bd5aefd0b0ac2a1b6405"
+    },
+    {
+      "kind": "function",
+      "path": "src/minigpt/randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1014_artifacts.py",
+      "qualname": "render_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1014_html",
+      "name": "render_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1014_html",
+      "length": 204,
+      "line": 83,
+      "digest": "5c8e5e8b6fdac09c11627a3979da28b410bed99f5b6a47dfe4b2d392c27dfbbc"
+    },
+    {
+      "kind": "function",
+      "path": "src/minigpt/randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1014_artifacts.py",
+      "qualname": "render_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1014_text",
+      "name": "render_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1014_text",
+      "length": 204,
+      "line": 17,
+      "digest": "b560b379b47620f732118eea510da3414139b666ecd25d53b6124e9bc347e318"
+    },
+    {
+      "kind": "variable",
+      "path": "src/minigpt/randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_check_v1012.py",
+      "qualname": "RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_PUBLICATION_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_CHECK_V1012_MARKDOWN_FILENAME",
+      "name": "RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_PUBLICATION_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_CHECK_V1012_MARKDOWN_FILENAME",
+      "length": 203,
+      "line": 23,
+      "digest": "b68e5eb772fe72fadbb764e0c68ca86cbf26185e9ec508c109148cd6eadb3813"
+    },
+    {
+      "kind": "variable",
+      "path": "src/minigpt/randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1013.py",
+      "qualname": "RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_PUBLICATION_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_V1013_MARKDOWN_FILENAME",
+      "name": "RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_PUBLICATION_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_V1013_MARKDOWN_FILENAME",
+      "length": 203,
+      "line": 27,
+      "digest": "1d44415e0fbcec2c4279b60beab01e3d513bfcbcde437544bf90ec1550733930"
+    },
+    {
+      "kind": "variable",
+      "path": "src/minigpt/randomized_holdout_publication_constants.py",
+      "qualname": "RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_PUBLICATION_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_REVIEW_V1014_NEXT_STEP",
+      "name": "RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_PUBLICATION_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_REVIEW_V1014_NEXT_STEP",
+      "length": 202,
+      "line": 94,
+      "digest": "7f5ee8c08434e6020659803eea68c5e377b2e9ac8909f8ca9dc6190d5e8d3a4e"
+    },
+    {
+      "kind": "function",
+      "path": "src/minigpt/randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1014_artifacts.py",
+      "qualname": "write_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1014_csv",
+      "name": "write_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1014_csv",
+      "length": 202,
+      "line": 39,
+      "digest": "e8757a9567ae8dd9f4d27c304f8e5d7142aac0dcc06eac510fa4c102449b4533"
+    },
+    {
+      "kind": "variable",
+      "path": "src/minigpt/randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1050.py",
+      "qualname": "RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_REVIEW_V1050_MARKDOWN_FILENAME",
+      "name": "RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_REVIEW_V1050_MARKDOWN_FILENAME",
+      "length": 201,
+      "line": 25,
+      "digest": "367a59f536594faec34f1378300f64d7236473cd1db34c79b962958c69826ef3"
+    },
+    {
+      "kind": "variable",
+      "path": "src/minigpt/randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1054.py",
+      "qualname": "RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_REVIEW_V1054_MARKDOWN_FILENAME",
+      "name": "RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_REVIEW_V1054_MARKDOWN_FILENAME",
+      "length": 201,
+      "line": 25,
+      "digest": "b5e557c34a58e1f0c35e552e93ccb347ba74ab03ad09615660f17bb33bd4126a"
+    },
+    {
+      "kind": "variable",
+      "path": "src/minigpt/randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1058.py",
+      "qualname": "RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_REVIEW_V1058_MARKDOWN_FILENAME",
+      "name": "RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_REVIEW_V1058_MARKDOWN_FILENAME",
+      "length": 201,
+      "line": 25,
+      "digest": "b4c04c9e96e30d41cade76604b6077fb764e75f2ddc4243bc772f8b2c7f405d7"
+    },
+    {
+      "kind": "variable",
+      "path": "src/minigpt/randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1062.py",
+      "qualname": "RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_REVIEW_V1062_MARKDOWN_FILENAME",
+      "name": "RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_REVIEW_V1062_MARKDOWN_FILENAME",
+      "length": 201,
+      "line": 25,
+      "digest": "88a0ea679d6ae8c6588e0df2f9a0ce11f35ac05316a609f9be897a9abd53c3b4"
+    },
+    {
+      "kind": "variable",
+      "path": "src/minigpt/randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1066.py",
+      "qualname": "RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_REVIEW_V1066_MARKDOWN_FILENAME",
+      "name": "RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_REVIEW_V1066_MARKDOWN_FILENAME",
+      "length": 201,
+      "line": 25,
+      "digest": "f58a0a3f3f64e905539e504b575ccf9ca7da485931ad73b9072bc9ecfda42376"
+    },
+    {
+      "kind": "variable",
+      "path": "src/minigpt/randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1070.py",
+      "qualname": "RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_REVIEW_V1070_MARKDOWN_FILENAME",
+      "name": "RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_REVIEW_V1070_MARKDOWN_FILENAME",
+      "length": 201,
+      "line": 25,
+      "digest": "f2b99f857269194782ff7a38f047fe355b07183bf844825e8ac33f1b49da5db7"
+    },
+    {
+      "kind": "variable",
+      "path": "src/minigpt/randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1074.py",
+      "qualname": "RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_REVIEW_V1074_MARKDOWN_FILENAME",
+      "name": "RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_REVIEW_V1074_MARKDOWN_FILENAME",
+      "length": 201,
+      "line": 25,
+      "digest": "1dd7cba7bf38c88cb66f51b0d780b653b0ab3e4ff49717a5d02138e5d36b4baf"
+    },
+    {
+      "kind": "variable",
+      "path": "src/minigpt/randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1078.py",
+      "qualname": "RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_REVIEW_V1078_MARKDOWN_FILENAME",
+      "name": "RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_REVIEW_V1078_MARKDOWN_FILENAME",
+      "length": 201,
+      "line": 25,
+      "digest": "61c74382999dde6bea83d3417f592364cccb948d3d55bc00e31c463d2604f80f"
+    },
+    {
+      "kind": "variable",
+      "path": "src/minigpt/randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1082.py",
+      "qualname": "RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_REVIEW_V1082_MARKDOWN_FILENAME",
+      "name": "RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_REVIEW_V1082_MARKDOWN_FILENAME",
+      "length": 201,
+      "line": 25,
+      "digest": "06f2a783f044e038b65998da4f4b2f893a8d6c791dcbc73351adee0375ae3685"
+    },
+    {
+      "kind": "variable",
+      "path": "src/minigpt/randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1086.py",
+      "qualname": "RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_REVIEW_V1086_MARKDOWN_FILENAME",
+      "name": "RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_REVIEW_V1086_MARKDOWN_FILENAME",
+      "length": 201,
+      "line": 25,
+      "digest": "4f126a1b660a3c97af9899615fe40130c9cd9ecac4048e2401c81af1d3722461"
+    }
+  ]
+}

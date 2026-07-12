@@ -18,7 +18,7 @@ python -B scripts/check_engineering_health.py
 `scripts/check_engineering_health.py` is the broad local maintainer check. It
 runs the `HEALTH_ENGINEERING_ENTRYPOINTS` subset: source-encoding hygiene,
 project documentation readability, CI workflow hygiene, staged static analysis,
-scoped type analysis, model-capability honest measurement, artifact schema
+name-budget enforcement, scoped type analysis, model-capability honest measurement, artifact schema
 guard, file-size ratchet, A-track closeout, and the normalization guard, then writes a compact
 top-level summary. It is
 intentionally local-only because CI already runs the underlying gates as
@@ -31,6 +31,7 @@ python -B scripts/check_source_encoding.py
 python -B scripts/check_project_docs_readability.py --require-pass --force
 python -B scripts/check_ci_workflow_hygiene.py
 python -B scripts/check_static_analysis.py --out-dir runs/static-analysis
+python -B scripts/check_name_budget.py --out-dir runs/name-budget
 python -B scripts/check_type_analysis.py --out-dir runs/type-analysis
 python -B scripts/check_model_capability_honest_measurement.py --out-dir runs/model-capability-honest-measurement
 python -B scripts/check_artifact_schema_guard.py --out-dir runs/artifact-schema-guard
@@ -79,6 +80,11 @@ required workflow steps visible.
 current `src/` and `scripts/` findings against
 `docs/static-analysis/ruff-baseline.json`, fails on new findings, and keeps the
 strict maintained path set lint-clean and format-clean.
+
+`scripts/check_name_budget.py` scans `src/` and `scripts/` filenames plus
+module/class-level public definitions. It enforces the fixed 40-character
+budget against `docs/elegance/name-baseline.json`; existing violations may only
+shrink, and any new digest fails before scoped type analysis.
 
 `scripts/check_type_analysis.py` runs strict mypy over the committed scope in
 `docs/static-analysis/mypy-scope.json`. The scope floor and group assignments
@@ -257,6 +263,7 @@ The default local evidence locations are:
 - `runs/engineering-health/project-docs-readability/`
 - `runs/engineering-health/ci-workflow-hygiene/`
 - `runs/engineering-health/static-analysis/`
+- `runs/engineering-health/name-budget/`
 - `runs/engineering-health/type-analysis/`
 - `runs/engineering-health/model-capability-honest-measurement/`
 - `runs/engineering-health/artifact-schema-guard/`

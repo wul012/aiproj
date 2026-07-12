@@ -2,6 +2,10 @@
 
 本目录从 v1098 开始保存模型治理阶段的运行截图和解释，和历史目录 `a/`、`b/`、`c/`、`d/`、`e/` 同级。
 
+## v1273
+
+v1273 完成 elegance hotspot program 的 E-A1，将 40 字符文件名/公开标识符预算变成 AST census、shrink-only digest baseline 和 CI gate。扫描 2,049 个 Python 文件，登记 7,515 条历史违规；普通模式复跑 `status=pass`、新增违规 0、扫描错误 0。运行证据见 `f/1273/解释/name-budget/`，浏览器核验见 `f/1273/图片/name-budget-v1273.png`。
+
 ## v1272
 
 v1272 收口 v1268-v1271 深度工程保养。全量 pytest 为 3747 passed；最终 CI-style unittest discovery 为 3538，line coverage 91.06%（90,861/99,778），高于不变的 88.98 floor。新增三个进程内 contract tests 将活跃 assurance smoke contract 从 0/63 提升为 59/63（93.65%）。精简证据见 `f/1272/解释/`，浏览器核验见 `f/1272/图片/deep-maintenance-coverage-v1272.png`。
