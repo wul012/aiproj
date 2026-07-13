@@ -1,5 +1,5 @@
 torch>=2.6
 numpy>=2.0
-coverage>=7.0
+coverage>=7.15.1
 ruff>=0.8,<1.0
 mypy>=1.13,<2.0
