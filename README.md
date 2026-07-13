@@ -2,6 +2,82 @@
 
 A PyTorch practice project for building and inspecting a tiny GPT language model.
 
+[![CI](https://github.com/wul012/aiproj/actions/workflows/ci.yml/badge.svg)](https://github.com/wul012/aiproj/actions/workflows/ci.yml)
+![tests](https://img.shields.io/badge/tests-3802_passed-brightgreen)
+![coverage floor](https://img.shields.io/badge/coverage_floor-%E2%89%A588.98%25-brightgreen)
+![method](https://img.shields.io/badge/method-preregistered-blue)
+![name budget](https://img.shields.io/badge/new_name_violations-0-brightgreen)
+
+## At a glance
+
+This repository is a **from-scratch MiniGPT research lab**. It runs two lanes: a
+science lane that answers one real machine-learning question per version on its own
+tiny transformer (trainable on a single RTX 4060), and an engineering lane that keeps
+the whole thing reproducible with mechanical gates (coverage floor, schema guards,
+name budgets, honest-measurement checks). The product is not the model — the model is
+deliberately educational — **the product is the method**: preregistered experiments,
+multi-seed evidence, byte-stable re-derivation from cached artifacts, and honest
+negative results published with the same care as positive ones.
+
+这是一个从零手写的 MiniGPT 研究实验室：科学车道每个版本回答一个真实的机器学习问题
+（grokking、傅里叶回路、叠加、持续学习……全部在单卡玩具尺度上诚实测量），工程车道用
+机械门（覆盖率下限、schema 守卫、命名预算、诚实测量检查）保证一切可复现。模型本身
+是教学质量——这个仓库真正的产品是**做可信实验的方法**：预注册、多种子、缓存零重训
+复推、负结果与正结果同等发表。
+
+## The science catalog
+
+Every closed axis, its exact verdict, and where the evidence lives. Nulls and
+review branches are listed with the same prominence as positive results — several of
+them are the most instructive rows in the table.
+
+| Axis | Versions | Headline (verdicts quoted exactly) | Evidence |
+|---|---|---|---|
+| Adapters & finetuning | v1156–v1165 | From-scratch LoRA, domain adaptation, RoPE, KV-cache, length extrapolation, SFT and SFT transfer — each with held-out evaluation | [walkthrough volume](代码讲解记录_工程保养阶段/README.md) |
+| Preference & inference | v1166–v1170 | DPO-lite, DPO+SFT-aux, reward modeling + best-of-N; speculative decoding verified output-identical but a FLOPs/wall-clock LOSS at toy scale (honest negative) | [walkthrough volume](代码讲解记录_工程保养阶段/README.md) |
+| Distillation | v1172–v1173 | Deterministic task: NO benefit — dark knowledge absent; stochastic task: soft ≪ hard, the effect is data-efficiency, not magic | [walkthrough volume](代码讲解记录_工程保养阶段/README.md) |
+| Post-training quantization | v1175 | A real accuracy cliff; the per-channel/attention/embedding "wins" from a single-seed probe were all multi-seed artifacts | [walkthrough volume](代码讲解记录_工程保养阶段/README.md) |
+| Grokking | v1179, v1183, v1185–v1186 | Delayed generalization reproduced (memorize ≈ step 100, generalize ≈ step 15k); weight decay has a NON-monotone interior optimum (wd≈1.0); shipped as a self-contained checkpoint, heldout 0.966 on 7,527 unseen pairs | [walkthrough volume](代码讲解记录_工程保养阶段/README.md) · [f archive](f/README.md) |
+| Mechanistic interpretability | v1188, v1190–v1191 | The grokked model works through 5 Fourier frequencies — causally: keep-only-top-5 retains 0.972, removing them drops to 0.578 | [walkthrough volume](代码讲解记录_工程保养阶段/README.md) |
+| Calibration | v1192 | Overconfident (conf 0.559 vs acc 0.442, ECE 0.124); ONE global temperature T=1.82 corrects it to 0.065, measured against an exact analytic oracle | [walkthrough volume](代码讲解记录_工程保养阶段/README.md) |
+| Continual learning | v1193–v1195 | Catastrophic forgetting is distribution-shift-driven (random-label task forgets just as much); replay dominates EWC on the stability-plasticity frontier; forgetting is monotonically governed by ANALYTIC output-table overlap — operation family is a red herring | [walkthrough volume](代码讲解记录_工程保养阶段/README.md) |
+| Induction mechanism | v1196–v1198 | In-context induction requires depth (1 layer fails at every width); the two-part mechanism verified causally on our own model: QK prefix-matching + OV copying circuit | [walkthrough volume](代码讲解记录_工程保养阶段/README.md) |
+| Capacity & regularization | v1199–v1200 | `no_double_descent_monotone` — an honest null at toy scale (overparameterization HURTS here); `wd_equals_early_stopping` — weight decay works by selective noise rejection and reaches early-stopping parity | [walkthrough volume](代码讲解记录_工程保养阶段/README.md) |
+| Sparsity / lottery tickets | v1275 | `pruning_breaks_circuit` — 50% magnitude pruning collapses accuracy while the survivors' Fourier share is unchanged: the circuit is frequency-sparse but magnitude-DENSE, so magnitude pruning cannot find this ticket | [brief](docs/v1275-fourier-ticket-brief.md) |
+| Superposition | v1276 | Preregistered `review` branch, externally adjudicated: superposition emerges with sparsity and is loss-OPTIMAL (packing beats the analytic best-dedicated solution 5–6×); the residual finding — norm-threshold representedness needs importance to break dense-end degeneracy | [brief](docs/v1276-superposition-brief.md) |
+| Capacity squeeze | v1277 | `squeeze_hits_capacity_floor` — squeezed below width 12 the circuit neither drops frequencies nor superposes; it stops forming, and the w=8 failures show attempted-but-failed packing. Bonus: narrow models grok ~5× faster than d=128 | [brief](docs/v1277-capacity-squeeze-brief.md) |
+
+## How to trust a result here
+
+- **Preregistration**: since v1275, the decide() thresholds, verdict ladder, and tests
+  are committed BEFORE the first experimental run; post-run diffs may only touch
+  report rendering. Every ladder includes null and review branches as publishable
+  outcomes.
+- **Cheap falsification first**: CPU probes run before any GPU budget is spent, and
+  design panels attack the experiment before it exists (several substrates were
+  killed at probe stage).
+- **Multi-seed or it did not happen**: lucky single-seed effects have been corrected
+  by multi-seed evidence repeatedly (v1175, v1196, v1199, v1200 all deflated a
+  single-seed probe).
+- **Byte-stable re-derivation**: Phase A trains once and caches; Phase B re-derives
+  the verdict CPU-only from the cache, and a contract test asserts the re-derivation
+  is byte-stable. Try one yourself, zero retraining:
+  `python -B scripts/analyze_fourier_ticket_v1275.py` or
+  `python -B scripts/analyze_capacity_squeeze_v1277.py --cache "f/1277/解释/capacity_squeeze_v1277/phase_a_cache.pt"`.
+- **Self-audit**: the decide()-threshold bug class has been caught 12 times across
+  the arc and is now an explicit per-version audit step; external review adjudicates
+  preregistered review branches.
+
+## Boundaries
+
+All science claims carry the scope label **toy scale, own substrate** — they are
+honestly measured phenomena on this repository's models, not claims about LLMs.
+Model quality is educational. Governance evidence is lookup-only: `status=pass`
+means internally consistent and traceable, and per the
+[no-promotion boundary](docs/no-promotion-boundary.md) it does not mean the model is
+production ready, should be promoted, or that results generalize beyond the tested
+scope.
+
 ## Documentation Map
 
 - [Project overview](docs/overview.md)
@@ -35,13 +111,48 @@ A PyTorch practice project for building and inspecting a tiny GPT language model
 - [Elegance hotspot closeout](docs/elegance-closeout-v1274.md)
 - [v1275 Fourier ticket brief](docs/v1275-fourier-ticket-brief.md)
 - [v1276 superposition brief](docs/v1276-superposition-brief.md)
+- [v1277 capacity squeeze brief](docs/v1277-capacity-squeeze-brief.md)
+- [README exhibition brief](docs/readme-exhibition-brief.md)
 - [Stage 2 operational brief (inactive)](docs/stage2-aiproj-operational-brief.md)
 - [Deep maintenance v1268-v1272 closeout](docs/deep-maintenance-v1268-v1272-closeout.md)
 - [Plain-language project guide](项目通俗说明/README.md)
 
 ## Current version
 
-Version `v1276.0.1` runs a preregistered **toy-model superposition experiment** on CPU. Across 50 cells, sparse features are packed into more than five directions and beat the best analytic dedicated solution by a large margin, while representation count grows monotonically in both arms. The formal verdict remains `review`, because the uniform dense control is threshold-sensitive at τ=0.3/0.5/0.7; the version preserves that mixed-τ result instead of dropping inconvenient thresholds.
+Version `v1278` is the README exhibition version: it adds the badge row, the bilingual
+At-a-glance, the science catalog, the How-to-trust section, and the Boundaries section
+above the Documentation Map, changing no experiment, gate, or artifact. It also
+repairs a v1277 ritual gap: the v1277 README version sections below were not added in
+the v1277 commit and are recorded here with that disclosure.
+
+## Latest v1278 checkpoint
+
+- README exhibition maintenance: badges, bilingual hero, the science catalog table
+  (one row per closed axis, verdicts quoted exactly, nulls included), the
+  how-to-trust methodology summary, and the boundaries section with the no-promotion
+  wording reference. Documentation-only readability maintenance; no experiment,
+  cache, verdict, or gate changed; full suite and CI green required as usual.
+- Honest disclosure: v1277's README "Current version"/"Latest checkpoint" sections
+  were missed in the v1277 commit (the walkthrough, f/1277 archive, and briefs were
+  complete); this version adds them below.
+
+## Latest v1277 checkpoint
+
+- Preregistered capacity-squeeze experiment (commit `644dd535` before any training):
+  n_embd {32, 16, 12, 8, 4} × 3 seeds on the frozen grok recipe; verdict
+  `squeeze_hits_capacity_floor` with G0–G2 gates passing and the verdict identical
+  across the keep-ratio robustness grid {0.85, 0.90, 0.95}.
+- The squeeze region {8, 4} never groks (0/6); smallest grokking width is 12 (1/3
+  seeds; the others stall near 0.78); the model hits its floor before the
+  drop-frequencies-versus-superpose choice is ever forced. Budget-scoped claim: the
+  floor is a property of the frozen recipe and 40k-step budget.
+- Descriptive findings recorded without verdict weight: narrow widths grok about
+  5× faster than d=128 (t_gen 2,600–3,400 versus ~15,000), and w=8 failures show
+  top-frequency direction interference 0.74–0.77 at chance accuracy —
+  attempted-but-failed packing.
+- Evidence: `f/1277/解释/capacity_squeeze_v1277/` (five formats plus the Phase-A
+  cache), `f/1277/图片/capacity-squeeze-v1277.png`, walkthrough 1234; full suite
+  3,802 passed; GPU budget 16/20; the v1185 checkpoint stayed read-only.
 
 ## Latest v1276 checkpoint
 

@@ -2,6 +2,10 @@
 
 本目录从 v1098 开始保存模型治理阶段的运行截图和解释，和历史目录 `a/`、`b/`、`c/`、`d/`、`e/` 同级。
 
+## v1278
+
+v1278 是 README 展示维护版：在 Documentation Map 之前前置插入徽章行、双语导语、十三行 science catalog（verdict 逐字引用、null 同等排版）、How-to-trust 方法论节与 Boundaries 节，并补上 v1277 漏掉的 README 版本节（含披露）。机读接口侦察 + 前置插入策略保证 cadence 正则、docs 链接检查、诚实测量门全部原样通过（聚焦门 32 passed，missing_readme_link_count=0）。GFM 渲染截图见 `f/1278/图片/readme-exhibit-v1278.png`，验证记录见 `f/1278/解释/说明.md`。
+
 ## v1277
 
 v1277 执行 capacity-squeeze 实验（预注册提交 `644dd535` 先于任何训练）：把 grokked 配方的 n_embd 压到 {32,16,12,8,4}，每宽 3 seeds 共 15 runs + 1 个 P2 probe（GPU 预算 16/20）。w=32/16 各 3/3 grok（且 t_gen 仅 2,600–3,400 步，远快于 d=128 的 ~15,000），w=12 仅 1/3，挤压区 {8,4} 全灭 → 预注册判决 `squeeze_hits_capacity_floor`，最小 grok 宽度 12，三个 keep_ratio 下判决一致。描述性发现：w=8 失败 seed 的频率方向干涉高达 0.74–0.77（"打包未遂"）；窄模型 grok 更快值得未来立版。cache 与五格式报告见 `f/1277/解释/capacity_squeeze_v1277/`，单图见 `f/1277/图片/capacity-squeeze-v1277.png`。

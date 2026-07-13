@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1235-v1278-readme-exhibition.md
+ -> v1278 code explanation: reconnoiters the README's machine-read surfaces first (cadence regex, doc-link contracts, honesty gate), then prepend-only installs the exhibition layer — badges, bilingual hero, a 13-row science catalog with verdicts quoted exactly, how-to-trust, boundaries — and repairs the missed v1277 README version sections with disclosure. Documentation-only; all focused gates green. Evidence lives under `f/1278`.
+
 1234-v1277-capacity-squeeze.md
  -> v1277 code explanation: preregisters (commit `644dd535`, before any training) and runs the capacity-squeeze grid — n_embd {32,16,12,8,4} × 3 seeds on the frozen grok recipe — and finds the preregistered `squeeze_hits_capacity_floor` verdict: the squeeze region {8,4} never groks, so the model hits its floor (smallest grokking width 12) before the drop-vs-superpose choice is ever forced. Descriptive extras: narrow models grok ~5× faster than d=128, and w=8 failures show 0.74+ direction interference ("attempted packing"). Evidence lives under `f/1277`.
 
