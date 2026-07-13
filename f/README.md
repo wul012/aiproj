@@ -2,6 +2,10 @@
 
 本目录从 v1098 开始保存模型治理阶段的运行截图和解释，和历史目录 `a/`、`b/`、`c/`、`d/`、`e/` 同级。
 
+## v1277
+
+v1277 执行 capacity-squeeze 实验（预注册提交 `644dd535` 先于任何训练）：把 grokked 配方的 n_embd 压到 {32,16,12,8,4}，每宽 3 seeds 共 15 runs + 1 个 P2 probe（GPU 预算 16/20）。w=32/16 各 3/3 grok（且 t_gen 仅 2,600–3,400 步，远快于 d=128 的 ~15,000），w=12 仅 1/3，挤压区 {8,4} 全灭 → 预注册判决 `squeeze_hits_capacity_floor`，最小 grok 宽度 12，三个 keep_ratio 下判决一致。描述性发现：w=8 失败 seed 的频率方向干涉高达 0.74–0.77（"打包未遂"）；窄模型 grok 更快值得未来立版。cache 与五格式报告见 `f/1277/解释/capacity_squeeze_v1277/`，单图见 `f/1277/图片/capacity-squeeze-v1277.png`。
+
 ## v1276
 
 v1276 执行 CPU-only superposition 实验：20 个 features 压入 5 dimensions，importance/uniform 两 arm、五 sparsity、五 seeds 共 50 格全部收敛。高 sparsity 的 packing 在 loss 上只需 dedicated baseline 的约 19.3%/16.1%，且 R(τ) 单调增长；但 uniform dense 在 τ=0.3/0.5/0.7 下分别约为 15/6/4，触发预注册 mixed-τ，因此正式 verdict 保持 `review`。cache 与五格式报告见 `f/1276/解释/superposition_v1276/`，单图见 `f/1276/图片/superposition-v1276.png`。

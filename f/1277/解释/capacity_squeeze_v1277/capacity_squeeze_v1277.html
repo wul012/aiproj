@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT v1277 capacity squeeze</title>
+<style>
+:root { color-scheme: light; font-family: Arial, "Microsoft YaHei", sans-serif; color: #172026; background: #f6f8fa; }
+body { margin: 0; padding: 24px; }
+header, section, footer { max-width: 1120px; margin: 0 auto 18px; }
+header { padding: 18px 0 8px; border-bottom: 3px solid #2f6f8f; }
+h1 { margin: 0 0 8px; font-size: 28px; letter-spacing: 0; }
+h2 { margin: 0 0 10px; font-size: 18px; letter-spacing: 0; }
+p { margin: 0 0 10px; line-height: 1.5; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; background: transparent; border: 0; padding: 0; }
+.stat { background: #fff; border: 1px solid #d7dee5; border-radius: 8px; padding: 12px; min-height: 64px; }
+.stat span { display: block; color: #5c6b73; font-size: 12px; margin-bottom: 8px; }
+.stat strong { display: block; font-size: 18px; overflow-wrap: anywhere; }
+section { background: #fff; border: 1px solid #d7dee5; border-radius: 8px; padding: 16px; }
+table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+th, td { padding: 9px; border-bottom: 1px solid #e5e9ef; text-align: left; vertical-align: top; overflow-wrap: anywhere; }
+th { background: #eef3f6; }
+ul { margin: 0; padding-left: 20px; }
+li { margin: 6px 0; }
+.muted { color: #687782; }
+footer { color: #687782; font-size: 12px; }
+</style>
+</head>
+<body>
+<header><h1>MiniGPT v1277 capacity squeeze</h1><p>Preregistered width squeeze of the grokked Fourier circuit: drop frequencies, superpose them, or fail.</p></header>
+<section class="stats"><article class="stat"><span>verdict</span><strong>squeeze_hits_capacity_floor</strong></article><article class="stat"><span>reason</span><strong>squeeze_hits_capacity_floor</strong></article><article class="stat"><span>scope</span><strong>own_grokked_substrate_toy_scale</strong></article><article class="stat"><span>g0_substrate</span><strong>True</strong></article><article class="stat"><span>g1_complete</span><strong>True</strong></article><article class="stat"><span>g2_ratio_stable</span><strong>True</strong></article><article class="stat"><span>keep_ratio</span><strong>0.9</strong></article><article class="stat"><span>grokked_squeeze_cells</span><strong>0</strong></article><article class="stat"><span>forced_packing</span><strong>0</strong></article><article class="stat"><span>economized</span><strong>0</strong></article><article class="stat"><span>off_mechanism</span><strong>0</strong></article><article class="stat"><span>smallest_grokking_width</span><strong>12</strong></article><article class="stat"><span>baseline_k_func_median</span><strong>3.0</strong></article><article class="stat"><span>baseline_gram_median</span><strong>0.060003</strong></article></section>
+<section><h2>Cells</h2><table><thead><tr><th>width</th><th>seed</th><th>heldout_acc</th><th>t_gen</th><th>k_func</th><th>footprint</th><th>gram_maxcos_at_k</th><th>n_eff</th><th>class</th></tr></thead><tbody><tr><td>32</td><td>1337</td><td>0.97024</td><td>2600</td><td>4</td><td>8</td><td>0.093311</td><td>8.9937</td><td>economized</td></tr><tr><td>32</td><td>1338</td><td>0.953368</td><td>3400</td><td>3</td><td>6</td><td>0.041113</td><td>9.1491</td><td>economized</td></tr><tr><td>32</td><td>1339</td><td>0.961206</td><td>2700</td><td>3</td><td>6</td><td>0.060003</td><td>9.1184</td><td>economized</td></tr><tr><td>16</td><td>1337</td><td>0.952305</td><td>2800</td><td>3</td><td>6</td><td>0.083078</td><td>4.0509</td><td>economized</td></tr><tr><td>16</td><td>1338</td><td>0.955228</td><td>2600</td><td>4</td><td>8</td><td>0.384127</td><td>3.7817</td><td>economized</td></tr><tr><td>16</td><td>1339</td><td>0.959081</td><td>6600</td><td>4</td><td>8</td><td>0.115741</td><td>4.9991</td><td>economized</td></tr><tr><td>12</td><td>1337</td><td>0.956158</td><td>3200</td><td>5</td><td>10</td><td>0.564025</td><td>3.3517</td><td>economized</td></tr><tr><td>12</td><td>1338</td><td>0.777202</td><td></td><td>2</td><td>4</td><td>0.023719</td><td>2.3037</td><td>not_grokked</td></tr><tr><td>12</td><td>1339</td><td>0.78783</td><td></td><td>2</td><td>4</td><td>0.006753</td><td>2.7568</td><td>not_grokked</td></tr><tr><td>8</td><td>1337</td><td>0.15451</td><td></td><td>4</td><td>8</td><td>0.737277</td><td>2.0557</td><td>not_grokked</td></tr><tr><td>8</td><td>1338</td><td>0.537797</td><td></td><td>2</td><td>4</td><td>0.0494</td><td>2.226</td><td>not_grokked</td></tr><tr><td>8</td><td>1339</td><td>0.160755</td><td></td><td>4</td><td>8</td><td>0.765921</td><td>2.1177</td><td>not_grokked</td></tr><tr><td>4</td><td>1337</td><td>0.008503</td><td></td><td>1</td><td>2</td><td>0.193614</td><td>33.7862</td><td>not_grokked</td></tr><tr><td>4</td><td>1338</td><td>0.009831</td><td></td><td>1</td><td>2</td><td>0.296957</td><td>32.5784</td><td>not_grokked</td></tr><tr><td>4</td><td>1339</td><td>0.010496</td><td></td><td>1</td><td>2</td><td>0.888835</td><td>23.7988</td><td>not_grokked</td></tr></tbody></table></section>
+<section><h2>Recommendations</h2><ul><li>Locate the floor: sweep between the smallest grokking width and the largest failing width with a longer step budget.</li></ul></section>
+<footer>Generated by MiniGPT readability maintenance tooling.</footer>
+</body>
+</html>

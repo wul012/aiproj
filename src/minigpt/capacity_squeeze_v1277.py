@@ -317,6 +317,46 @@ def _recommendations(info: dict) -> list[str]:
     return ["Adjudicate the review branch externally before any follow-up."]
 
 
+def plot_result(cache: dict, info: dict, path) -> None:
+    """One figure: k_func and top-k interference versus width, with the
+    orthogonal-footprint boundary k = w/2 marked."""
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    from pathlib import Path as _Path
+
+    cfg = SqueezeConfig()
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(11, 4.6))
+    widths = sorted({c["width"] for c in cache["cells"]})
+    for c in cache["cells"]:
+        grokked = c["heldout_acc"] >= cfg.grok_bar
+        k = k_func_of(c["keep_accs"], c["heldout_acc"], cfg.keep_ratio) if grokked else None
+        if k is not None:
+            forced = 2 * k > c["width"]
+            ax1.scatter(c["width"], k, marker="o" if forced else "s",
+                        color="tab:red" if forced else "tab:blue", zorder=3)
+            ax2.scatter(c["width"], c["gram_by_k"][k]["maxcos"], marker="o",
+                        color="tab:red" if forced else "tab:blue", zorder=3)
+        else:
+            ax1.scatter(c["width"], 0, marker="x", color="gray", zorder=3)
+    boundary = [w / 2 for w in widths]
+    ax1.plot(widths, boundary, "k--", label="orthogonal footprint k = w/2")
+    ax1.axhline(cfg.p1_k_func, color="green", linestyle=":", label="baseline k_func=4")
+    ax1.set(xlabel="n_embd (width)", ylabel="k_func (min sufficient frequencies)",
+            title="functional frequency count vs width")
+    ax1.legend(fontsize=8)
+    ax2.axhline(cfg.gram_ortho_bar, color="green", linestyle=":", label="ortho bar 0.30")
+    ax2.set(xlabel="n_embd (width)", ylabel="max |cos| among top-k directions",
+            title="feature interference vs width")
+    ax2.legend(fontsize=8)
+    fig.suptitle(f"v1277 capacity squeeze: {info['verdict']}")
+    fig.tight_layout()
+    out = _Path(path)
+    out.parent.mkdir(parents=True, exist_ok=True)
+    fig.savefig(out, dpi=160)
+    plt.close(fig)
+
+
 def summarize(report: dict) -> list[str]:
     lines = [f"status={report['status']}", f"decision={report['decision']}"]
     lines += [f"{key}={value}" for key, value in report["summary"].items()]

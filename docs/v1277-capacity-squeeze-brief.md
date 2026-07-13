@@ -91,3 +91,24 @@ Cell class at width w: `forced_packing` if 2·k_func > w; `economized` if
   fix = fail (12-times-caught bug class; explicit self-audit in the version doc).
 - GPU budget beyond 20 runs, or a silent descope = fail.
 - A verdict claimed from cells whose keep-ablation was not computed = fail.
+
+## Execution status (2026-07-13, executed directly by Claude)
+
+- Preregister commit `644dd535` (module + tests + this brief) landed BEFORE any
+  Phase-A run. P2 probe: w=16 grokked (0.952, t_gen 2,800). Phase A: 15 runs,
+  budget 16/20, v1185 checkpoint untouched.
+- **Verdict: `squeeze_hits_capacity_floor`** — squeeze region {8,4} grokked 0/6;
+  smallest grokking width 12 (1/3 seeds; the other two stall at ~0.78); G0/G1/G2
+  all pass; verdict identical across keep_ratio {0.85, 0.90, 0.95}. decide()
+  thresholds unchanged after Phase A (threshold-bug self-audit: clean — the floor
+  branch sits far from every threshold boundary).
+- Descriptive findings recorded (not verdict-bearing): narrow widths grok ~5x
+  FASTER than d=128 (t_gen 2,600–3,400 vs ~15,000); w=8 failures show top-freq
+  direction interference 0.74–0.77 at chance-level accuracy = attempted-but-failed
+  packing; the lone w=12 success uses 5 freqs at interference 0.564.
+- Evidence: `f/1277/解释/capacity_squeeze_v1277/` (5 formats + cache),
+  `f/1277/图片/capacity-squeeze-v1277.png`, walkthrough
+  `代码讲解记录_工程保养阶段/1234-v1277-capacity-squeeze.md`.
+- Follow-up candidates: locate the floor precisely (widths between 12 and 8,
+  longer budget arm); or the new question this version surfaced — why do NARROW
+  models grok so much faster?

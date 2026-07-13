@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1234-v1277-capacity-squeeze.md
+ -> v1277 code explanation: preregisters (commit `644dd535`, before any training) and runs the capacity-squeeze grid — n_embd {32,16,12,8,4} × 3 seeds on the frozen grok recipe — and finds the preregistered `squeeze_hits_capacity_floor` verdict: the squeeze region {8,4} never groks, so the model hits its floor (smallest grokking width 12) before the drop-vs-superpose choice is ever forced. Descriptive extras: narrow models grok ~5× faster than d=128, and w=8 failures show 0.74+ direction interference ("attempted packing"). Evidence lives under `f/1277`.
+
 1233-v1276-superposition.md
  -> v1276 code explanation: preregisters and runs a CPU-only 20-feature/5-dimension ReLU autoencoder with importance and uniform controls, corrects the best-dedicated analytic baseline from the untouched probe cache, and finds converged monotone loss-optimal sparse packing while preserving the formal `review` verdict because the uniform dense control is mixed across τ. Evidence lives under `f/1276`.
 

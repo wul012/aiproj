@@ -1,0 +1,228 @@
+{
+  "schema_version": 1,
+  "title": "MiniGPT v1277 capacity squeeze",
+  "description": "Preregistered width squeeze of the grokked Fourier circuit: drop frequencies, superpose them, or fail.",
+  "generated_at": "2026-07-13T05:13:21Z",
+  "status": "pass",
+  "decision": "squeeze_hits_capacity_floor",
+  "summary": {
+    "verdict": "squeeze_hits_capacity_floor",
+    "reason": "squeeze_hits_capacity_floor",
+    "scope": "own_grokked_substrate_toy_scale",
+    "g0_substrate": true,
+    "g1_complete": true,
+    "g2_ratio_stable": true,
+    "keep_ratio": 0.9,
+    "grokked_squeeze_cells": 0,
+    "forced_packing": 0,
+    "economized": 0,
+    "off_mechanism": 0,
+    "smallest_grokking_width": 12,
+    "baseline_k_func_median": 3.0,
+    "baseline_gram_median": 0.060003
+  },
+  "ladder": [
+    {
+      "ratio": 0.85,
+      "verdict": "squeeze_hits_capacity_floor",
+      "grokked_squeeze_cells": 0,
+      "class_counts": {
+        "forced_packing": 0,
+        "economized": 0,
+        "off_mechanism": 0
+      }
+    },
+    {
+      "ratio": 0.9,
+      "verdict": "squeeze_hits_capacity_floor",
+      "grokked_squeeze_cells": 0,
+      "class_counts": {
+        "forced_packing": 0,
+        "economized": 0,
+        "off_mechanism": 0
+      }
+    },
+    {
+      "ratio": 0.95,
+      "verdict": "squeeze_hits_capacity_floor",
+      "grokked_squeeze_cells": 0,
+      "class_counts": {
+        "forced_packing": 0,
+        "economized": 0,
+        "off_mechanism": 0
+      }
+    }
+  ],
+  "cells": [
+    {
+      "width": 32,
+      "seed": 1337,
+      "heldout_acc": 0.97024,
+      "t_gen": 2600,
+      "k_func": 4,
+      "footprint": 8,
+      "gram_maxcos_at_k": 0.093311,
+      "n_eff": 8.9937,
+      "class": "economized"
+    },
+    {
+      "width": 32,
+      "seed": 1338,
+      "heldout_acc": 0.953368,
+      "t_gen": 3400,
+      "k_func": 3,
+      "footprint": 6,
+      "gram_maxcos_at_k": 0.041113,
+      "n_eff": 9.1491,
+      "class": "economized"
+    },
+    {
+      "width": 32,
+      "seed": 1339,
+      "heldout_acc": 0.961206,
+      "t_gen": 2700,
+      "k_func": 3,
+      "footprint": 6,
+      "gram_maxcos_at_k": 0.060003,
+      "n_eff": 9.1184,
+      "class": "economized"
+    },
+    {
+      "width": 16,
+      "seed": 1337,
+      "heldout_acc": 0.952305,
+      "t_gen": 2800,
+      "k_func": 3,
+      "footprint": 6,
+      "gram_maxcos_at_k": 0.083078,
+      "n_eff": 4.0509,
+      "class": "economized"
+    },
+    {
+      "width": 16,
+      "seed": 1338,
+      "heldout_acc": 0.955228,
+      "t_gen": 2600,
+      "k_func": 4,
+      "footprint": 8,
+      "gram_maxcos_at_k": 0.384127,
+      "n_eff": 3.7817,
+      "class": "economized"
+    },
+    {
+      "width": 16,
+      "seed": 1339,
+      "heldout_acc": 0.959081,
+      "t_gen": 6600,
+      "k_func": 4,
+      "footprint": 8,
+      "gram_maxcos_at_k": 0.115741,
+      "n_eff": 4.9991,
+      "class": "economized"
+    },
+    {
+      "width": 12,
+      "seed": 1337,
+      "heldout_acc": 0.956158,
+      "t_gen": 3200,
+      "k_func": 5,
+      "footprint": 10,
+      "gram_maxcos_at_k": 0.564025,
+      "n_eff": 3.3517,
+      "class": "economized"
+    },
+    {
+      "width": 12,
+      "seed": 1338,
+      "heldout_acc": 0.777202,
+      "t_gen": null,
+      "k_func": 2,
+      "footprint": 4,
+      "gram_maxcos_at_k": 0.023719,
+      "n_eff": 2.3037,
+      "class": "not_grokked"
+    },
+    {
+      "width": 12,
+      "seed": 1339,
+      "heldout_acc": 0.78783,
+      "t_gen": null,
+      "k_func": 2,
+      "footprint": 4,
+      "gram_maxcos_at_k": 0.006753,
+      "n_eff": 2.7568,
+      "class": "not_grokked"
+    },
+    {
+      "width": 8,
+      "seed": 1337,
+      "heldout_acc": 0.15451,
+      "t_gen": null,
+      "k_func": 4,
+      "footprint": 8,
+      "gram_maxcos_at_k": 0.737277,
+      "n_eff": 2.0557,
+      "class": "not_grokked"
+    },
+    {
+      "width": 8,
+      "seed": 1338,
+      "heldout_acc": 0.537797,
+      "t_gen": null,
+      "k_func": 2,
+      "footprint": 4,
+      "gram_maxcos_at_k": 0.0494,
+      "n_eff": 2.226,
+      "class": "not_grokked"
+    },
+    {
+      "width": 8,
+      "seed": 1339,
+      "heldout_acc": 0.160755,
+      "t_gen": null,
+      "k_func": 4,
+      "footprint": 8,
+      "gram_maxcos_at_k": 0.765921,
+      "n_eff": 2.1177,
+      "class": "not_grokked"
+    },
+    {
+      "width": 4,
+      "seed": 1337,
+      "heldout_acc": 0.008503,
+      "t_gen": null,
+      "k_func": 1,
+      "footprint": 2,
+      "gram_maxcos_at_k": 0.193614,
+      "n_eff": 33.7862,
+      "class": "not_grokked"
+    },
+    {
+      "width": 4,
+      "seed": 1338,
+      "heldout_acc": 0.009831,
+      "t_gen": null,
+      "k_func": 1,
+      "footprint": 2,
+      "gram_maxcos_at_k": 0.296957,
+      "n_eff": 32.5784,
+      "class": "not_grokked"
+    },
+    {
+      "width": 4,
+      "seed": 1339,
+      "heldout_acc": 0.010496,
+      "t_gen": null,
+      "k_func": 1,
+      "footprint": 2,
+      "gram_maxcos_at_k": 0.888835,
+      "n_eff": 23.7988,
+      "class": "not_grokked"
+    }
+  ],
+  "artifacts": [],
+  "recommendations": [
+    "Locate the floor: sweep between the smallest grokking width and the largest failing width with a longer step budget."
+  ],
+  "warnings": []
+}

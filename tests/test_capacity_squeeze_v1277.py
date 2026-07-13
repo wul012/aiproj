@@ -214,3 +214,30 @@ def test_run_phase_a_with_injected_trainer_and_contract():
     lines = summarize(report)
     assert any(line.startswith("decision=") for line in lines)
     assert report["decision"] == "squeeze_forces_superposition"
+
+
+def test_committed_cache_rederives_byte_stably():
+    from pathlib import Path
+
+    cache_path = (Path(__file__).resolve().parents[1]
+                  / "f" / "1277" / "解释" / "capacity_squeeze_v1277" / "phase_a_cache.pt")
+    cache = torch.load(cache_path, weights_only=False)
+    first = json.dumps(decide(cache), sort_keys=True)
+    second = json.dumps(decide(cache), sort_keys=True)
+    assert first == second
+    info = decide(cache)
+    assert info["verdict"] == "squeeze_hits_capacity_floor"
+    assert info["g0_substrate"] and info["g1_complete"] and info["g2_ratio_stable"]
+    assert info["smallest_grokking_width"] == 12
+    assert info["main"]["grokked_squeeze_cells"] == 0
+
+
+def test_plot_result_writes_figure(tmp_path):
+    from minigpt.capacity_squeeze_v1277 import plot_result
+
+    cells = _grid("forced_packing")
+    cells[-1]["heldout_acc"] = 0.2  # exercise the not-grokked marker branch
+    cache = _cache(cells)
+    out = tmp_path / "fig" / "capacity-squeeze-v1277.png"
+    plot_result(cache, decide(cache), out)
+    assert out.exists() and out.stat().st_size > 10_000

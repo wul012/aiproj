@@ -1,0 +1,16 @@
+status=pass
+decision=squeeze_hits_capacity_floor
+verdict=squeeze_hits_capacity_floor
+reason=squeeze_hits_capacity_floor
+scope=own_grokked_substrate_toy_scale
+g0_substrate=True
+g1_complete=True
+g2_ratio_stable=True
+keep_ratio=0.9
+grokked_squeeze_cells=0
+forced_packing=0
+economized=0
+off_mechanism=0
+smallest_grokking_width=12
+baseline_k_func_median=3.0
+baseline_gram_median=0.060003
