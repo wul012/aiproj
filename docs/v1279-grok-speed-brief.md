@@ -1,0 +1,100 @@
+# v1279 capability brief — why do narrow models grok faster? The norm-clock test
+
+Lane: ML capability. Executor: **Claude directly** (continuing the v1277/v1278 mode).
+All lane rules bind: preregister-commit-then-run, CPU probes before GPU, Phase A
+caches / Phase B CPU-only, pre-registered decide() ladder, multi-seed, honest scope,
+elegance gates.
+
+## 背景与问题
+
+v1277's most striking descriptive finding: at the frozen grok recipe, narrow models
+grok ~5× FASTER (t_gen ≈ 2,600–3,400 at widths 16–32 versus ~15,000 at the canonical
+d=128 from v1183/v1185). Why? The sharpest candidate is the **weight-norm clock**
+(the Omnigrok-style account): grokking waits for weight decay to shrink the
+init-scale solution down to the small-norm generalizing regime, so time-to-grok is
+governed by how much norm must be burned — and wider models start with more norm.
+This is causally testable by INTERVENING on init scale at fixed width.
+
+## P1 calibration probe (CPU, free, run BEFORE this preregistration; disclosed)
+
+Standard init total parameter norm N0 scales cleanly with width and is essentially
+seed-invariant: d=16 → 7.06, d=32 → 10.11, d=64 → 14.64, d=128 → 21.63
+(≈ √params). The per-seed rescale that gives a d=128 model the total init norm of a
+d=32 model is **α\* ≈ 0.467** (0.4673/0.4675/0.4676 across seeds 1337–1339).
+
+## 实验设计（固定；GPU 预算上限 28 runs）
+
+Frozen recipe throughout (p=97, train_frac=0.2, wd=1.0, 1 layer, n_head=4,
+full-batch AdamW, max_steps=40000, early-stop on stable grok). Init rescaling uses
+the v1275-era `init_state` hook: build the seeded standard init, multiply every
+tensor by α, train from that state (same seed ⇒ same data split).
+
+- **Grid arm (phenomenon, α=1)**: widths {16, 32, 64, 128} × seeds {1337, 1338,
+  1339} = 12 runs. This re-measures the width→t_gen curve in ONE harness — the v1277
+  observation compared fresh runs against historical d=128 numbers, so
+  `phenomenon_not_robust` is a live branch, not a formality.
+- **α arm at d=128 (the causal test)**: α ∈ {0.5, 2.0} × 3 seeds = 6 runs (α=1 comes
+  from the grid; α=2 cells may censor at the 40k budget — censoring counts as
+  t_gen = +∞, which is evidence in the predicted direction, handled explicitly).
+- **Matched-norm arm**: d=128 with per-seed α\* = N0(32,seed)/N0(128,seed) × 3 seeds
+  = 3 runs — a wide model whose init norm equals a narrow model's.
+- **Symmetry arm (descriptive only)**: d=32 with α=2.0 × 3 seeds = 3 runs — does
+  inflating a narrow init slow it toward wide-model times?
+- P2 probe (GPU, before the full grid): one d=64, α=1, seed 1337 run; if it fails to
+  grok, stop and re-panel. Total ≤ 12+6+3+3+1 = 25 ≤ 28.
+- Per-cell cache: N0, N_final, meta (t_mem/t_gen/steps/final accs), heldout acc, and
+  the full (step, val_acc) curve so Phase B can recompute t_gen at any bar.
+
+## 预注册判据（decide()，本 commit 先于任何 GPU 运行）
+
+Definitions: grokked = meta t_gen present AND heldout ≥ 0.90. t_gen(bar) = first
+eval step with val ≥ bar, recomputed from the cached curve; censored cells count as
++∞ in comparisons and are excluded from medians only where stated.
+
+- **G0 substrate**: every grid width groks in ≥2/3 seeds at α=1. Fail → `review`.
+- **G1 completeness**: all 24 cells cached, no silent exclusion.
+- **Phenomenon** (bar 0.90, grid medians over grokked cells):
+  ratio = median t_gen(128) / median t_gen(16); adjacent medians non-increasing as
+  width shrinks. ratio ≥ 2 AND non-increasing → confirmed; ratio ≥ 2 with an
+  adjacent inversion → `review`; ratio < 2 → `phenomenon_not_robust`.
+- **α sign test** (d=128, per seed, adjacent pairs (0.5,1.0) and (1.0,2.0) = 6
+  comparisons, censored = +∞): predicted direction is t_gen increasing in α.
+  ≥5/6 → alpha_effect true; ≤3/6 → false; 4/6 → `review`.
+- **Mediation share**: gap = median t_gen(128, α=1) − median t_gen(32, α=1);
+  reduced = median t_gen(128, α\*) − median t_gen(32, α=1);
+  share = 1 − reduced/gap.
+- **Ladder**: phenomenon fails → `phenomenon_not_robust`; alpha_effect false →
+  `norm_clock_rejected`; share ≥ 0.5 → `narrow_speedup_is_norm_clock`;
+  0.2 ≤ share < 0.5 → `norm_clock_partial`; share < 0.2 → `norm_clock_rejected`;
+  anything mixed/gated → `review`. Every branch is publishable.
+- **G2 robustness**: the ladder verdict must be identical when t_gen is recomputed at
+  bars {0.85, 0.90, 0.95}; any flip → `review`.
+- Symmetry-arm and N0/N_final trajectories are descriptive only, never verdict-bearing.
+
+## 测试与证据要求
+
+`src/minigpt/grok_speed_v1279.py` + `tests/test_grok_speed_v1279.py` (t_gen-from-curve
+incl. censoring, sign-test counting, mediation-share math incl. censored α\*, every
+decide() branch on synthetic caches, config validation, injected-trainer Phase-A
+orchestration, committed-cache byte-stable contract, figure smoke); thin
+`scripts/run_grok_speed_v1279.py` / `scripts/analyze_grok_speed_v1279.py`.
+Lane ritual in full: 5-format artifacts; ONE figure (t_gen vs width with the α-arms
+overlaid at d=128); `f/1279/图片` + `解释/说明.md`; ~3000-char Chinese walkthrough
+BEFORE the final full-suite run; README version sections (NOT forgetting them —
+the v1277 lesson) + Documentation Map row + f/README + 讲解 README indexes;
+cleanup gate; preregister commit + close commit; push; CI green; tag.
+
+## 明确不做
+
+- No LLM claims; scope = "own grokked substrate, toy scale, frozen recipe/budget".
+- No second mechanism arm (lr/wd sweeps, memorization-capacity manipulations are
+  FUTURE versions); no v1185 artifact mutation; no training-loop modification —
+  init rescaling goes through the existing `init_state` parameter only.
+
+## 失败条件
+
+- Any GPU run before this brief + module + tests are committed = fail.
+- decide() thresholds edited post-hoc without the disclosed cache-re-derived
+  protocol = fail (13-times-caught bug class; explicit self-audit in the version doc).
+- Censored cells silently dropped from the sign test = fail (they are +∞, not
+  missing). Budget beyond 28 runs or silent descope = fail.
