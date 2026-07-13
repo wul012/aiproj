@@ -1,0 +1,15 @@
+status=pass
+decision=review
+verdict=review
+reason=substrate_unsound
+scope=own_grokked_substrate_toy_scale_frozen_recipe
+g0_substrate=False
+g1_complete=True
+g2_bar_stable=True
+phenomenon=review
+ratio_wide_over_narrowest=4.071
+alpha_monotone_pairs=3/6
+mediation_share=-inf
+matched_alpha_tgen=inf
+wide_base_tgen=11400.0
+narrow_base_tgen=2700.0

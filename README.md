@@ -46,6 +46,7 @@ them are the most instructive rows in the table.
 | Sparsity / lottery tickets | v1275 | `pruning_breaks_circuit` — 50% magnitude pruning collapses accuracy while the survivors' Fourier share is unchanged: the circuit is frequency-sparse but magnitude-DENSE, so magnitude pruning cannot find this ticket | [brief](docs/v1275-fourier-ticket-brief.md) |
 | Superposition | v1276 | Preregistered `review` branch, externally adjudicated: superposition emerges with sparsity and is loss-OPTIMAL (packing beats the analytic best-dedicated solution 5–6×); the residual finding — norm-threshold representedness needs importance to break dense-end degeneracy | [brief](docs/v1276-superposition-brief.md) |
 | Capacity squeeze | v1277 | `squeeze_hits_capacity_floor` — squeezed below width 12 the circuit neither drops frequencies nor superposes; it stops forming, and the w=8 failures show attempted-but-failed packing. Bonus: narrow models grok ~5× faster than d=128 | [brief](docs/v1277-capacity-squeeze-brief.md) |
+| Grok speed / norm clock | v1279 | Preregistered `review` (substrate_unsound): d=64 is a real mid-width slow zone (1/3 seeds, sole success at 35k steps), so the width→t_gen curve is non-monotone; and the norm clock is INVERTED — shrinking d=128's init norm to d=32's level prevents grokking (0/6) while doubling it still groks 3/3. The clock reads width, not norm | [brief](docs/v1279-grok-speed-brief.md) |
 
 ## How to trust a result here
 
@@ -113,17 +114,44 @@ scope.
 - [v1276 superposition brief](docs/v1276-superposition-brief.md)
 - [v1277 capacity squeeze brief](docs/v1277-capacity-squeeze-brief.md)
 - [README exhibition brief](docs/readme-exhibition-brief.md)
+- [v1279 grok speed / norm-clock brief](docs/v1279-grok-speed-brief.md)
 - [Stage 2 operational brief (inactive)](docs/stage2-aiproj-operational-brief.md)
 - [Deep maintenance v1268-v1272 closeout](docs/deep-maintenance-v1268-v1272-closeout.md)
 - [Plain-language project guide](项目通俗说明/README.md)
 
 ## Current version
 
-Version `v1278` is the README exhibition version: it adds the badge row, the bilingual
-At-a-glance, the science catalog, the How-to-trust section, and the Boundaries section
-above the Documentation Map, changing no experiment, gate, or artifact. It also
-repairs a v1277 ritual gap: the v1277 README version sections below were not added in
-the v1277 commit and are recorded here with that disclosure.
+Version `v1279` asks WHY narrow models grok ~5× faster (the v1277 descriptive
+surprise) by causally testing the weight-norm-clock account: intervene on init scale
+at fixed width (α arms at d=128, a matched-norm α\* arm, a d=32 inflation arm) under
+a preregistered decide() ladder. The preregistered verdict is `review`
+(reason=`substrate_unsound`: d=64 groks only 1/3 seeds — a real mid-width slow zone),
+and the α arms invert the norm-clock prediction: shrinking the wide model's init norm
+does not accelerate grokking, it prevents it.
+
+## Latest v1279 checkpoint
+
+- Preregistered norm-clock experiment (commit `0f5f77a3` before any grid run; one
+  disclosed pre-Phase-A amendment `37433657` raising max_steps 40k→100k after the
+  P2 probe hit its own stop condition). 24 cells: widths {16,32,64,128}×3 seeds plus
+  α∈{0.5,2}, matched-norm α\*≈0.493, and d=32 α=2 arms; budget 26/28 GPU runs.
+- Verdict `review` (reason=`substrate_unsound`, identical across t_gen bars
+  {0.85, 0.90, 0.95}): G0 requires every width to grok in ≥2/3 seeds, and d=64
+  managed 1/3 — the sole success needed 35,000 steps while two seeds censored at
+  100k. The width→t_gen curve is non-monotone: 2.6k–6.6k at w=16/32, a slow zone at
+  w=64, back to 10.5k–12.7k at d=128 (narrow-faster ratio 4.07 confirmed, but it is
+  a curve with a hole, not a monotone slope).
+- Norm-clock INVERTED, not just unsupported: d=128 at α=0.5 and at the d=32-matched
+  α\* never groks (0/6, heldout 0.14–0.29), while α=2 groks 3/3 (merely slower);
+  sign test 3/6. Same-norm contrasts dissociate norm from speed in both directions
+  (α\* d=128 at N0=10.88 censors while d=32 at the same norm groks in 2,600 steps;
+  d=32 inflated to N0=21.77 ≈ d=128's natural norm is the fastest cell family,
+  1,200–3,900 steps). The clock reads width, not norm.
+- Harness validity: the same init_state path reproduced v1277's w=32/seed-1337 cell
+  bit-for-bit (heldout 0.97024, t_gen 2600). Evidence:
+  `f/1279/解释/grok_speed_v1279/` (five formats plus the Phase-A cache),
+  `f/1279/图片/grok-speed-v1279.png`, walkthrough 1236; decide() untouched after
+  preregistration — the only post-run code change is figure rendering.
 
 ## Latest v1278 checkpoint
 

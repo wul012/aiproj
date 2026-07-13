@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1236-v1279-grok-speed.md
+ -> v1279 code explanation: preregisters (commit `0f5f77a3`) the norm-clock causal test of WHY narrow models grok faster, survives its own P2 stop condition (d=64 stalls at 40k; harness exonerated by a bit-exact v1277 cell reproduction; budget re-paneled to 100k BEFORE any grid data, commit `37433657`), and lands the preregistered `review` (substrate_unsound): d=64 is a real mid-width slow zone, and the norm clock is INVERTED — shrinking the wide init norm prevents grokking (0/6) while doubling it still groks. Evidence lives under `f/1279`.
+
 1235-v1278-readme-exhibition.md
  -> v1278 code explanation: reconnoiters the README's machine-read surfaces first (cadence regex, doc-link contracts, honesty gate), then prepend-only installs the exhibition layer — badges, bilingual hero, a 13-row science catalog with verdicts quoted exactly, how-to-trust, boundaries — and repairs the missed v1277 README version sections with disclosure. Documentation-only; all focused gates green. Evidence lives under `f/1278`.
 

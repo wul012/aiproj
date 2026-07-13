@@ -2,6 +2,10 @@
 
 本目录从 v1098 开始保存模型治理阶段的运行截图和解释，和历史目录 `a/`、`b/`、`c/`、`d/`、`e/` 同级。
 
+## v1279
+
+v1279 因果检验"窄模型为什么 grok 快"的范数时钟假说（预注册 `0f5f77a3` + 运行前公开修订 `37433657`：P2 探针触发止损后把 max_steps 提到 100k）。24 格：宽度网格 {16,32,64,128}×3 seeds + d=128 的 α∈{0.5,2}、匹配范数 α\*≈0.493、d=32 α=2 各臂，GPU 预算 26/28。预注册判决 **`review`（substrate_unsound）**：d=64 是系统性中宽度慢区（1/3 grok，唯一成功用了 35,000 步），宽度曲线非单调。更重要的反向证伪：缩小 d=128 初始范数到 d=32 水平不加速反而消灭 grokking（α=0.5 与 α\* 共 0/6），放大一倍反而 3/3 全 grok——时钟读宽度不读范数。cache 与五格式报告见 `f/1279/解释/grok_speed_v1279/`，单图见 `f/1279/图片/grok-speed-v1279.png`。
+
 ## v1278
 
 v1278 是 README 展示维护版：在 Documentation Map 之前前置插入徽章行、双语导语、十三行 science catalog（verdict 逐字引用、null 同等排版）、How-to-trust 方法论节与 Boundaries 节，并补上 v1277 漏掉的 README 版本节（含披露）。机读接口侦察 + 前置插入策略保证 cadence 正则、docs 链接检查、诚实测量门全部原样通过（聚焦门 32 passed，missing_readme_link_count=0）。GFM 渲染截图见 `f/1278/图片/readme-exhibit-v1278.png`，验证记录见 `f/1278/解释/说明.md`。

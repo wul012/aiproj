@@ -365,20 +365,32 @@ def plot_result(cache: dict, info: dict, path) -> None:
 
     cfg = SpeedConfig()
     fig, ax = plt.subplots(figsize=(7.5, 4.8))
+    # arms get a small horizontal offset and censored cells a vertical fan-out,
+    # otherwise the six killed alpha<=0.5 cells collapse into one marker at the
+    # budget line and the figure hides the verdict-bearing observation
+    offset = {"grid": 1.0, "alpha_wide": 1.06, "alpha_star": 0.94,
+              "alpha_narrow": 1.06}
+    censored_seen: dict[tuple, int] = {}
     for c in cache["cells"]:
         t = _cell_tgen(c, cfg.grok_bar)
-        y = cfg.max_steps * 1.15 if math.isinf(t) else t
+        if math.isinf(t):
+            rank = censored_seen.get((c["arm"], c["width"]), 0)
+            censored_seen[(c["arm"], c["width"])] = rank + 1
+            y = cfg.max_steps * (1.12 + 0.10 * rank)
+        else:
+            y = t
         marker = {"grid": "o", "alpha_wide": "^", "alpha_star": "*",
                   "alpha_narrow": "s"}[c["arm"]]
         color = {"grid": "tab:blue", "alpha_wide": "tab:orange",
                  "alpha_star": "tab:red", "alpha_narrow": "tab:green"}[c["arm"]]
-        ax.scatter(c["width"], y, marker=marker, color=color, zorder=3,
-                   s=90 if c["arm"] == "alpha_star" else 40)
+        ax.scatter(c["width"] * offset[c["arm"]], y, marker=marker, color=color,
+                   zorder=3, s=90 if c["arm"] == "alpha_star" else 40)
     ax.axhline(cfg.max_steps, color="gray", linestyle=":", label="step budget (censored above)")
     ax.set(xscale="log", yscale="log", xlabel="n_embd (width, log)",
            ylabel="t_gen (steps, log)",
            title=f"v1279 norm-clock: {info['verdict']}")
     ax.set_xticks(list(cfg.widths), [str(w) for w in cfg.widths])
+    ax.xaxis.set_minor_formatter(matplotlib.ticker.NullFormatter())
     handles = [plt.Line2D([], [], marker=m, color=col, linestyle="",
                           label=lab) for m, col, lab in
                [("o", "tab:blue", "grid α=1"), ("^", "tab:orange", "d=128 α∈{0.5,2}"),

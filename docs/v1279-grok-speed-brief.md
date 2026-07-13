@@ -111,6 +111,28 @@ cleanup gate; preregister commit + close commit; push; CI green; tag.
   FUTURE versions); no v1185 artifact mutation; no training-loop modification —
   init rescaling goes through the existing `init_state` parameter only.
 
+## Closeout (post-run; report rendering only, decide() untouched)
+
+- Phase A: 24/24 cells cached in one run; total GPU budget spent 26/28 (P2 probe +
+  validity check + 24 grid/arm cells). Phase B re-derived the verdict CPU-only.
+- Preregistered verdict: **`review` (reason=`substrate_unsound`)**, identical at
+  t_gen bars {0.85, 0.90, 0.95} (G2 pass). G0 failed exactly as written: d=64
+  grokked 1/3 seeds (sole success t_gen=35,000; two seeds censored at 100k,
+  heldout ≈0.23) — the P2 stall was a systematic mid-width slow zone, not seed luck.
+  G1 complete; phenomenon check `review` (ratio 4.07 ≥ 2 with the d=64 adjacent
+  inversion); sign test 3/6 ((1,2) pairs all predicted-direction, (0.5,1) pairs all
+  counter-direction); mediation share = −∞ (matched-norm cells all censored).
+- Headline observation (descriptive; the verdict stays `review`): the norm clock is
+  INVERTED on this substrate. d=128 at α=0.5 and at the d=32-matched α\*≈0.493
+  never groks (0/6, heldout 0.14–0.29), α=2 groks 3/3 (12.8k–23.2k); same-norm
+  contrasts dissociate norm from speed in both directions (α\* d=128 at N0=10.88
+  censors while d=32 at the same norm groks in 2,600; d=32 inflated to
+  N0=21.77 ≈ d=128's natural 22.09 is fastest overall, 1,200–3,900).
+- Post-run code delta: `plot_result` rendering only (censored-cell fan-out, minor
+  x-tick suppression). decide(), thresholds, and all gates untouched since
+  `37433657`. Artifacts: `f/1279/解释/grok_speed_v1279/` (five formats + Phase-A
+  cache), `f/1279/图片/grok-speed-v1279.png`, walkthrough 1236.
+
 ## 失败条件
 
 - Any GPU run before this brief + module + tests are committed = fail.

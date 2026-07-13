@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT v1279 narrow-grok-speed norm-clock test</title>
+<style>
+:root { color-scheme: light; font-family: Arial, "Microsoft YaHei", sans-serif; color: #172026; background: #f6f8fa; }
+body { margin: 0; padding: 24px; }
+header, section, footer { max-width: 1120px; margin: 0 auto 18px; }
+header { padding: 18px 0 8px; border-bottom: 3px solid #2f6f8f; }
+h1 { margin: 0 0 8px; font-size: 28px; letter-spacing: 0; }
+h2 { margin: 0 0 10px; font-size: 18px; letter-spacing: 0; }
+p { margin: 0 0 10px; line-height: 1.5; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; background: transparent; border: 0; padding: 0; }
+.stat { background: #fff; border: 1px solid #d7dee5; border-radius: 8px; padding: 12px; min-height: 64px; }
+.stat span { display: block; color: #5c6b73; font-size: 12px; margin-bottom: 8px; }
+.stat strong { display: block; font-size: 18px; overflow-wrap: anywhere; }
+section { background: #fff; border: 1px solid #d7dee5; border-radius: 8px; padding: 16px; }
+table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+th, td { padding: 9px; border-bottom: 1px solid #e5e9ef; text-align: left; vertical-align: top; overflow-wrap: anywhere; }
+th { background: #eef3f6; }
+ul { margin: 0; padding-left: 20px; }
+li { margin: 6px 0; }
+.muted { color: #687782; }
+footer { color: #687782; font-size: 12px; }
+</style>
+</head>
+<body>
+<header><h1>MiniGPT v1279 narrow-grok-speed norm-clock test</h1><p>Preregistered width/init-scale intervention on time-to-grok.</p></header>
+<section class="stats"><article class="stat"><span>verdict</span><strong>review</strong></article><article class="stat"><span>reason</span><strong>substrate_unsound</strong></article><article class="stat"><span>scope</span><strong>own_grokked_substrate_toy_scale_frozen_recipe</strong></article><article class="stat"><span>g0_substrate</span><strong>False</strong></article><article class="stat"><span>g1_complete</span><strong>True</strong></article><article class="stat"><span>g2_bar_stable</span><strong>True</strong></article><article class="stat"><span>phenomenon</span><strong>review</strong></article><article class="stat"><span>ratio_wide_over_narrowest</span><strong>4.071</strong></article><article class="stat"><span>alpha_monotone_pairs</span><strong>3/6</strong></article><article class="stat"><span>mediation_share</span><strong>-inf</strong></article><article class="stat"><span>matched_alpha_tgen</span><strong>inf</strong></article><article class="stat"><span>wide_base_tgen</span><strong>11400.0</strong></article><article class="stat"><span>narrow_base_tgen</span><strong>2700.0</strong></article></section>
+<section><h2>Cells</h2><table><thead><tr><th>arm</th><th>width</th><th>seed</th><th>alpha</th><th>n0</th><th>n_final</th><th>heldout_acc</th><th>t_gen</th><th>censored</th></tr></thead><tbody><tr><td>grid</td><td>16</td><td>1337</td><td>1.0</td><td>8.0921</td><td>26.6847</td><td>0.952305</td><td>2800</td><td>False</td></tr><tr><td>grid</td><td>16</td><td>1338</td><td>1.0</td><td>8.0946</td><td>27.088</td><td>0.955228</td><td>2600</td><td>False</td></tr><tr><td>grid</td><td>16</td><td>1339</td><td>1.0</td><td>8.0924</td><td>36.3788</td><td>0.959081</td><td>6600</td><td>False</td></tr><tr><td>grid</td><td>32</td><td>1337</td><td>1.0</td><td>10.8823</td><td>37.319</td><td>0.97024</td><td>2600</td><td>False</td></tr><tr><td>grid</td><td>32</td><td>1338</td><td>1.0</td><td>10.8884</td><td>37.6796</td><td>0.953368</td><td>3400</td><td>False</td></tr><tr><td>grid</td><td>32</td><td>1339</td><td>1.0</td><td>10.8875</td><td>38.4367</td><td>0.961206</td><td>2700</td><td>False</td></tr><tr><td>grid</td><td>64</td><td>1337</td><td>1.0</td><td>15.2266</td><td>46.4935</td><td>0.226651</td><td></td><td>True</td></tr><tr><td>grid</td><td>64</td><td>1338</td><td>1.0</td><td>15.2203</td><td>46.044</td><td>0.971436</td><td>35000</td><td>False</td></tr><tr><td>grid</td><td>64</td><td>1339</td><td>1.0</td><td>15.2228</td><td>45.5071</td><td>0.225189</td><td></td><td>True</td></tr><tr><td>grid</td><td>128</td><td>1337</td><td>1.0</td><td>22.0936</td><td>41.519</td><td>0.965989</td><td>11400</td><td>False</td></tr><tr><td>grid</td><td>128</td><td>1338</td><td>1.0</td><td>22.089</td><td>42.0488</td><td>0.951906</td><td>12700</td><td>False</td></tr><tr><td>grid</td><td>128</td><td>1339</td><td>1.0</td><td>22.0863</td><td>42.9488</td><td>0.970772</td><td>10500</td><td>False</td></tr><tr><td>alpha_wide</td><td>128</td><td>1337</td><td>0.5</td><td>11.0468</td><td>42.0191</td><td>0.174439</td><td></td><td>True</td></tr><tr><td>alpha_wide</td><td>128</td><td>1338</td><td>0.5</td><td>11.0445</td><td>44.3367</td><td>0.200744</td><td></td><td>True</td></tr><tr><td>alpha_wide</td><td>128</td><td>1339</td><td>0.5</td><td>11.0431</td><td>41.6629</td><td>0.294141</td><td></td><td>True</td></tr><tr><td>alpha_wide</td><td>128</td><td>1337</td><td>2.0</td><td>44.1871</td><td>41.6973</td><td>0.952039</td><td>12800</td><td>False</td></tr><tr><td>alpha_wide</td><td>128</td><td>1338</td><td>2.0</td><td>44.1781</td><td>39.488</td><td>0.986714</td><td>23200</td><td>False</td></tr><tr><td>alpha_wide</td><td>128</td><td>1339</td><td>2.0</td><td>44.1726</td><td>40.3324</td><td>0.957885</td><td>20200</td><td>False</td></tr><tr><td>alpha_star</td><td>128</td><td>1337</td><td>0.4926</td><td>10.8823</td><td>48.8166</td><td>0.144945</td><td></td><td>True</td></tr><tr><td>alpha_star</td><td>128</td><td>1338</td><td>0.4929</td><td>10.8884</td><td>43.7803</td><td>0.197954</td><td></td><td>True</td></tr><tr><td>alpha_star</td><td>128</td><td>1339</td><td>0.493</td><td>10.8875</td><td>48.4933</td><td>0.230902</td><td></td><td>True</td></tr><tr><td>alpha_narrow</td><td>32</td><td>1337</td><td>2.0</td><td>21.7646</td><td>40.2795</td><td>0.963066</td><td>3900</td><td>False</td></tr><tr><td>alpha_narrow</td><td>32</td><td>1338</td><td>2.0</td><td>21.7767</td><td>36.1069</td><td>0.98512</td><td>2400</td><td>False</td></tr><tr><td>alpha_narrow</td><td>32</td><td>1339</td><td>2.0</td><td>21.775</td><td>29.8664</td><td>0.973163</td><td>1200</td><td>False</td></tr></tbody></table></section>
+<section><h2>Recommendations</h2><ul><li>Adjudicate the review branch externally before any follow-up.</li></ul></section>
+<footer>Generated by MiniGPT readability maintenance tooling.</footer>
+</body>
+</html>
