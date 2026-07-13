@@ -35,7 +35,10 @@ class SpeedConfig:
     train_frac: float = 0.2
     weight_decay: float = 1.0
     n_head: int = 4
-    max_steps: int = 40000
+    # 100k, not the canonical 40k: the P2 probe (d=64, seed 1337, alpha=1) censored
+    # at 40k with heldout 0.219 while d=32 groks at 2,600 -- a real mid-width slow
+    # zone discovered before Phase A; the budget was re-paneled BEFORE any grid run.
+    max_steps: int = 100000
     widths: tuple[int, ...] = (16, 32, 64, 128)
     seeds: tuple[int, ...] = (1337, 1338, 1339)
     wide: int = 128

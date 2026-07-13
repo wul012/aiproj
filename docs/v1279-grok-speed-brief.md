@@ -25,7 +25,8 @@ d=32 model is **α\* ≈ 0.467** (0.4673/0.4675/0.4676 across seeds 1337–1339)
 ## 实验设计（固定；GPU 预算上限 28 runs）
 
 Frozen recipe throughout (p=97, train_frac=0.2, wd=1.0, 1 layer, n_head=4,
-full-batch AdamW, max_steps=40000, early-stop on stable grok). Init rescaling uses
+full-batch AdamW, max_steps=100000 — re-paneled from 40000 after the P2 probe, see
+the disclosed section below — early-stop on stable grok). Init rescaling uses
 the v1275-era `init_state` hook: build the seeded standard init, multiply every
 tensor by α, train from that state (same seed ⇒ same data split).
 
@@ -34,16 +35,35 @@ tensor by α, train from that state (same seed ⇒ same data split).
   observation compared fresh runs against historical d=128 numbers, so
   `phenomenon_not_robust` is a live branch, not a formality.
 - **α arm at d=128 (the causal test)**: α ∈ {0.5, 2.0} × 3 seeds = 6 runs (α=1 comes
-  from the grid; α=2 cells may censor at the 40k budget — censoring counts as
+  from the grid; α=2 cells may censor at the step budget — censoring counts as
   t_gen = +∞, which is evidence in the predicted direction, handled explicitly).
 - **Matched-norm arm**: d=128 with per-seed α\* = N0(32,seed)/N0(128,seed) × 3 seeds
   = 3 runs — a wide model whose init norm equals a narrow model's.
 - **Symmetry arm (descriptive only)**: d=32 with α=2.0 × 3 seeds = 3 runs — does
   inflating a narrow init slow it toward wide-model times?
 - P2 probe (GPU, before the full grid): one d=64, α=1, seed 1337 run; if it fails to
-  grok, stop and re-panel. Total ≤ 12+6+3+3+1 = 25 ≤ 28.
+  grok, stop and re-panel. Total ≤ 12+6+3+3+1(+1 validity check, see below) = 26 ≤ 28.
 - Per-cell cache: N0, N_final, meta (t_mem/t_gen/steps/final accs), heldout acc, and
   the full (step, val_acc) curve so Phase B can recompute t_gen at any bar.
+
+## P2 probe result & re-panel (disclosed; amended BEFORE any Phase-A grid run)
+
+The P2 probe **triggered its own stop condition**: d=64, α=1, seed 1337 did NOT grok
+within the original 40,000-step budget (heldout 0.219, t_gen censored, N0=15.23 —
+`total_norm_of` includes buffers, hence slightly above P1's parameter-only 14.64).
+A validity check through the identical `init_state` code path (d=32, seed 1337, α=1;
+one extra GPU run, disclosed against the budget) reproduced the v1277 reference cell
+EXACTLY (heldout 0.97024, t_gen 2600) — the harness is sound, so the d=64 stall is a
+real observation: the width→t_gen curve may be slower at mid-width than at d=128,
+i.e. possibly non-monotone. Re-panel decision, made before any grid data exists:
+
+- **max_steps 40000 → 100000 for ALL cells** (one clock for the whole design, the
+  v1183 precedent for a 100k budget). Early-stop keeps fast cells cheap.
+- Nothing else changes: arms, seeds, α values, decide() ladder, G0–G2, and all
+  thresholds are untouched. If d=64 still censors in ≥2/3 seeds at 100k, G0 routes
+  the verdict to `review` as originally written — that is the honest outcome, and
+  the mid-width slow zone itself becomes the reportable finding.
+- Runs spent so far: 2 (probe + validity check); 24 remain planned, total 26 ≤ 28.
 
 ## 预注册判据（decide()，本 commit 先于任何 GPU 运行）
 
