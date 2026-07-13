@@ -102,3 +102,27 @@ interfering, non-orthogonal directions — superposition. Questions:
 - Unconverged cells silently kept, a τ value dropped post hoc, or seeds cherry-picked
   = fail.
 - GPU used without written justification = fail (this version is CPU-sized).
+
+## Claude review — 2026-07-13 (v1276): review branch ADJUDICATED — superposition demonstrated; G2's metric, not the phenomenon, failed
+
+- Verified: verdict re-derives from the committed cache; the dedicated-baseline
+  correction (E[x] variance fix) was disclosed per protocol and recomputed from the
+  UNCHANGED probe cache; the executor refused to modify gates post hoc — correct.
+  One red run (unittest discovery, infra not science) fixed in the next commit.
+- Adjudication of the mixed-τ: the failure is confined to the UNIFORM-arm dense cell
+  (R(0.3)/R(0.5)/R(0.7) = 15/6/4). That cell's ground state is DEGENERATE — with
+  uniform importance, any 5-of-20 dedicated solution is equally optimal, so norms smear
+  and "represented set" is ill-posed there; no τ can fix a definition whose uniqueness
+  assumption doesn't hold. Everywhere the concept IS well-posed, the phenomenon is
+  unambiguous: importance arm passes G2 at ALL τ (dense R=5 = exactly the top-5 in 5/5
+  seeds; sparse R=11–13), uniform sparse end R=20 at all τ, monotone rho=1.0/0.97 with
+  exact p≤0.017, and G4 optimality is decisive (sparse loss ratios 0.19/0.16 vs the
+  analytic dedicated best; dense ~1.000).
+- RULING: **superposition_emerges_with_sparsity holds** (external adjudication of the
+  pre-registered review branch). The residual finding is real and worth keeping:
+  norm-threshold representedness requires symmetry-breaking (importance) to be
+  well-defined at the dense end. A degeneracy-robust metric (participation-ratio-style)
+  is a legitimate FUTURE version — not a retrofit to this one.
+- Lane status: superposition axis opened and closed honestly in one version. Next
+  candidates: degeneracy-robust representedness, the TMS phase heatmap, or probing
+  MiniGPT's own activations for superposition.
