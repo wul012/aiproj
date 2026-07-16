@@ -35,7 +35,9 @@ def main(argv=None) -> None:
               f" heldout={cell['heldout_acc']} t_mem={cell['t_mem']}"
               f" t_gen={cell['t_gen']}")
         return
-    cache = run_phase_a(cfg, device)
+    probe_path = args.out_dir / "p2_probe.pt"
+    preloaded = (torch.load(probe_path, weights_only=False),) if probe_path.exists() else ()
+    cache = run_phase_a(cfg, device, preloaded=preloaded)
     torch.save(cache, args.out_dir / "phase_a_cache.pt")
     for c in cache["cells"]:
         print(f"{c['arm']} a={c['alpha']} lr={c['lr']} seed={c['seed']}"

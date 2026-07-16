@@ -189,6 +189,23 @@ def test_run_phase_a_confirm_rule_with_injected_trainer():
     assert any(line.startswith("decision=") for line in summarize(report))
 
 
+def test_run_phase_a_uses_preloaded_probe_cell():
+    trained = []
+
+    def trainer(cfg, alpha, lr, seed, device):
+        trained.append((alpha, lr, seed))
+        return _cell("placeholder", alpha, lr, seed, 300, None, 0.2)
+
+    probe = _cell("ignored-arm", 0.5, 5e-4, 1337, 400, None, 0.157)
+    cache = run_phase_a(CFG, torch.device("cpu"), trainer=trainer,
+                        preloaded=(probe,))
+    assert (0.5, 5e-4, 1337) not in trained
+    assert len(cache["cells"]) == CFG.planned_min()
+    slot = [c for c in cache["cells"]
+            if c["lr"] == 5e-4 and c["seed"] == 1337 and c["arm"] == "rescue"]
+    assert len(slot) == 1 and slot[0]["t_mem"] == 400
+
+
 def test_plot_result_writes_figure(tmp_path):
     cache = _cache()
     out = tmp_path / "fig" / "grok-init-rescue-v1280.png"

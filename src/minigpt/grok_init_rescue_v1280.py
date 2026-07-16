@@ -136,22 +136,29 @@ def _confirm_lrs(cells: list[dict], cfg: RescueConfig) -> list[float]:
     return out
 
 
-def run_phase_a(cfg: RescueConfig, device, trainer=train_cell) -> dict:
+def run_phase_a(cfg: RescueConfig, device, trainer=train_cell,
+                preloaded: tuple = ()) -> dict:
     cfg.validate()
+    # preloaded cells (the P2 probe) fill their grid slot instead of retraining:
+    # the brief counts the probe toward the 8 rescue runs, and training is
+    # seed-deterministic, so the cached cell IS that slot's result
+    done = {(c["alpha"], c["lr"], c["seed"]): dict(c) for c in preloaded}
+
+    def cell_for(alpha: float, lr: float, seed: int, arm: str) -> dict:
+        base = done.get((alpha, lr, seed)) or trainer(cfg, alpha, lr, seed, device)
+        return base | {"arm": arm}
+
     cells: list[dict] = []
     for lr in cfg.rescue_lrs:
         for seed in cfg.seeds:
-            cells.append(trainer(cfg, cfg.alpha_dead, lr, seed, device)
-                         | {"arm": "rescue"})
+            cells.append(cell_for(cfg.alpha_dead, lr, seed, "rescue"))
     for lr in _confirm_lrs(cells, cfg):
         if len(cells) + len(cfg.dose_alphas) * len(cfg.seeds) >= cfg.max_runs:
             raise RuntimeError("confirm run would exceed the GPU budget")
-        cells.append(trainer(cfg, cfg.alpha_dead, lr, cfg.confirm_seed, device)
-                     | {"arm": "rescue_confirm"})
+        cells.append(cell_for(cfg.alpha_dead, lr, cfg.confirm_seed, "rescue_confirm"))
     for alpha in cfg.dose_alphas:
         for seed in cfg.seeds:
-            cells.append(trainer(cfg, alpha, cfg.base_lr, seed, device)
-                         | {"arm": "dose"})
+            cells.append(cell_for(alpha, cfg.base_lr, seed, "dose"))
     return {"schema": SCHEMA,
             "generated_at": datetime.now(timezone.utc).isoformat(),
             "config": asdict(cfg), "cells": cells}
