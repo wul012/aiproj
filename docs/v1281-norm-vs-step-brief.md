@@ -96,6 +96,29 @@ row + f/README + 讲解 README indexes, cleanup, commit, push, tag, CI green.
   the manipulated lr, 60k budget. No wd/optimizer sweeps; no d=64; no re-running
   of any reference cell (v1279/v1280 caches are read-only).
 
+## Closeout (post-run; zero code changes after preregistration ran)
+
+- GPU 10/12 (P2 probe filled its slot); all 10 cells grokked — no stuck, no
+  broken, even at lr=8e-3. Phase B CPU-only; G0/G1/G2 pass.
+- Preregistered verdict: **`review` (mixed_pairs)**, bar-stable. ρ(r=4×) = 0.359
+  (below the parity band: α=1 is ~2.8× FASTER than the matched-step α=0.5);
+  ρ(r=8×) = 0.778 (parity). Both pairs exclude the small-norm branch (neither
+  ρ > 2) — the certain content inside the review.
+- Descriptive resolution of the banked question: the ABSOLUTE lr dominates the
+  clock. α=1 lr dose: 11,400 (1e-3) → 1,900/2,800 (2e-3) → median 1,400 (4e-3)
+  → median 1,400 (8e-3, saturated ~1k). Three norms at one relative step (r=4×):
+  (α=0.5, 1, 2) → (3,900, 1,400, 900). At adequate lr, larger norm is mildly
+  FASTER; α=2 @ 8e-3 is the fastest, most accurate cell of the whole arc
+  (900/900 steps, heldout 0.9999/1.0).
+- Arc synthesis (descriptive): v1277's narrow-5×-faster, v1279's small-init
+  death, and v1280's rescue unify as "lr=1e-3 is far below optimal for d=128 —
+  the canonical baseline sits in an lr-starved regime"; norm/width effects were
+  largely indirect effective-lr effects. Banked: do narrow widths also converge
+  to ~1k steps at high lr (the width version of this control)?
+- The v1280 brief's banked-question note is resolved with a linked notice (the
+  preregistered obligation bound only the `relative_step_sets_the_clock` branch,
+  but the resolution is stamped regardless — the chain of notices continues).
+
 ## 失败条件
 
 - Any GPU run before this brief + module + tests are committed = fail.

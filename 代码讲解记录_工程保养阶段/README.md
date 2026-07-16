@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1238-v1281-norm-vs-step.md
+ -> v1281 code explanation: the control v1280 banked — alpha=1 at matched relative step (lr/alpha) against the committed v1280 cells. Preregistered `review` (mixed_pairs: rho 0.359/0.778), but both pairs exclude the small-norm branch; descriptively the ABSOLUTE lr dominates (alpha=1 dose 11,400 -> ~1,400, saturating ~1k at lr>=4e-3), larger norm is mildly faster at adequate lr (alpha=2 @ 8e-3: 900 steps, heldout 1.0), and the v1277-v1280 width/norm story collapses into "the canonical baseline is lr-starved". Evidence lives under `f/1281`.
+
 1237-v1280-init-rescue.md
  -> v1280 code explanation: stress-tests v1279's headline with the lr-artifact hypothesis. P1 corrects v1279's record from the committed cache (dead cells memorize instantly; the death is of the transition), then a preregistered 16x lr sweep at alpha=0.5 lands `norm_clock_revived_under_lr_scaling`: lr-down rescues nothing, lr-up at 2-4x groks in 1,300-4,000 steps vs baseline 11,400 (heldout up to 0.9992) — v1279's headline is formally downgraded to lr-conditional with linked notices. Dose arm: a cliff in (0.7, 0.85] at the frozen lr. Evidence lives under `f/1280`.
 

@@ -1,0 +1,11 @@
+arm,alpha,lr,seed,class,t_gen,t_mem,heldout_acc
+verdict,1.0,0.004,1337,grokked,1400,100,0.99442
+verdict,1.0,0.004,1338,grokked,1800,100,0.99907
+verdict,1.0,0.004,1339,grokked,1000,100,0.999203
+verdict,1.0,0.008,1337,grokked,1000,300,0.999336
+verdict,1.0,0.008,1338,grokked,1400,200,0.989106
+verdict,1.0,0.008,1339,grokked,1500,200,0.991497
+dose,1.0,0.002,1337,grokked,1900,100,0.993889
+dose,1.0,0.002,1338,grokked,2800,100,0.986582
+symmetry,2.0,0.008,1337,grokked,900,200,0.999867
+symmetry,2.0,0.008,1338,grokked,900,200,1.0

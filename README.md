@@ -47,7 +47,8 @@ them are the most instructive rows in the table.
 | Superposition | v1276 | Preregistered `review` branch, externally adjudicated: superposition emerges with sparsity and is loss-OPTIMAL (packing beats the analytic best-dedicated solution 5–6×); the residual finding — norm-threshold representedness needs importance to break dense-end degeneracy | [brief](docs/v1276-superposition-brief.md) |
 | Capacity squeeze | v1277 | `squeeze_hits_capacity_floor` — squeezed below width 12 the circuit neither drops frequencies nor superposes; it stops forming, and the w=8 failures show attempted-but-failed packing. Bonus: narrow models grok ~5× faster than d=128 | [brief](docs/v1277-capacity-squeeze-brief.md) |
 | Grok speed / norm clock | v1279 | Preregistered `review` (substrate_unsound): d=64 is a real mid-width slow zone (1/3 seeds, sole success at 35k steps), so the width→t_gen curve is non-monotone; and at the frozen lr, shrinking d=128's init norm to d=32's level prevents grokking (0/6) while doubling it still groks 3/3. **Downgraded by v1280** (next row): the prevention is lr-conditional | [brief](docs/v1279-grok-speed-brief.md) |
-| Init-scale × lr rescue | v1280 | `norm_clock_revived_under_lr_scaling` — v1279's death is an lr artifact: lr↓ rescues nothing, but at 2–4× lr the norm-shrunk α=0.5 model groks in 1,300–4,000 steps vs the baseline's 11,400 (heldout up to 0.9992). Dose arm: at frozen lr the death boundary is a cliff in (0.7, 0.85], with the transition slowing 3–4× before it closes | [brief](docs/v1280-init-rescue-brief.md) |
+| Init-scale × lr rescue | v1280 | `norm_clock_revived_under_lr_scaling` — v1279's death is an lr artifact: lr↓ rescues nothing, but at 2–4× lr the norm-shrunk α=0.5 model groks in 1,300–4,000 steps vs the baseline's 11,400 (heldout up to 0.9992). Dose arm: at frozen lr the death boundary is a cliff in (0.7, 0.85]. **The "norm" in the verdict name was emptied by v1281** (next row) | [brief](docs/v1280-init-rescue-brief.md) |
+| Norm vs relative step | v1281 | Preregistered `review` (mixed_pairs: ρ 0.359/0.778), but both matched-step pairs exclude the small-norm branch — the ABSOLUTE lr dominates the clock (α=1 dose 11,400 → ~1,400, saturating at lr ≥ 4e-3) and larger norm is mildly faster at adequate lr (α=2 @ 8e-3: 900 steps, heldout 1.0). The v1277–v1280 width/norm effects largely reduce to an lr-starved baseline | [brief](docs/v1281-norm-vs-step-brief.md) |
 
 ## How to trust a result here
 
@@ -117,20 +118,48 @@ scope.
 - [README exhibition brief](docs/readme-exhibition-brief.md)
 - [v1279 grok speed / norm-clock brief](docs/v1279-grok-speed-brief.md)
 - [v1280 init-rescue brief](docs/v1280-init-rescue-brief.md)
+- [v1281 norm-vs-step brief](docs/v1281-norm-vs-step-brief.md)
 - [Stage 2 operational brief (inactive)](docs/stage2-aiproj-operational-brief.md)
 - [Deep maintenance v1268-v1272 closeout](docs/deep-maintenance-v1268-v1272-closeout.md)
 - [Plain-language project guide](项目通俗说明/README.md)
 
 ## Current version
 
-Version `v1280` stress-tests v1279's headline with the sharpest deflationary
-hypothesis: is small-init grokking death just an lr artifact? Its P1 probe first
-corrected v1279's record (the "dead" cells memorize instantly — the death is of the
-memorize→generalize transition), then a preregistered 16× lr sweep at α=0.5 landed
-on `norm_clock_revived_under_lr_scaling`: lr↓ does nothing, but at 2–4× lr the
-norm-shrunk model groks in 1,300–4,000 steps — faster than the α=1 baseline's
-11,400. v1279's headline is formally downgraded to lr-conditional, with linked
-notices on every affected surface.
+Version `v1281` runs the control v1280 banked: at matched relative AdamW step
+(lr/α), does the full-norm model grok as fast as the rescued small-norm one? The
+preregistered verdict is `review` (mixed_pairs: ρ = 0.359 at r=4×, 0.778 at r=8×),
+but both pairs exclude the small-norm branch — and the descriptive resolution is
+sweeping: the ABSOLUTE lr dominates the clock (α=1 dose 11,400 → ~1,400 with
+saturation at lr ≥ 4e-3), larger norm is mildly FASTER at adequate lr (α=2 at
+lr=8e-3: 900 steps, heldout 1.0 — the fastest, most accurate cell of the arc), and
+the whole v1277–v1280 narrow-faster / small-init-death / lr-rescue sequence unifies
+as "the canonical lr=1e-3 baseline sits in an lr-starved regime."
+
+## Latest v1281 checkpoint
+
+- Preregistered norm-vs-step control (commit `ea074da1` before any run; zero code
+  changes after it). 10 cells at the 60k clock, 10/12 GPU budget: α=1 ×
+  lr ∈ {4e-3, 8e-3} × 3 seeds (verdict pairs at matched relative step against the
+  v1280 cache), α=1 × lr=2e-3 (dose), α=2 × lr=8e-3 (symmetry); v1279/v1280 caches
+  are read-only references with G0 median anchors checked exactly.
+- Verdict `review` (mixed_pairs, bar-stable): ρ(r=4×) = 1,400/3,900 = 0.359 —
+  the full-norm model is ~2.8× FASTER than the matched-step α=0.5 reference;
+  ρ(r=8×) = 1,400/1,800 = 0.778 (parity). Neither pair shows ρ > 2, so the
+  small-norm branch is excluded by both — the certain content inside the review:
+  v1280's rescued speed was never the norm's.
+- All 10 cells grokked cleanly (no stuck, no broken, even at lr=8e-3; t_mem
+  100–300; heldout 0.987–1.0). The α=1 lr dose collapses 11,400 (1e-3) →
+  1,900/2,800 (2e-3) → 1,400 (4e-3) → 1,400 (8e-3): absolute lr dominates and
+  saturates near ~1k steps. Three norms at one relative step (r=4×): (α=0.5, 1, 2)
+  → (3,900, 1,400, 900) — at adequate lr, larger norm is mildly faster, inverting
+  even v1279's α=2-slower observation (which was itself lr-conditional).
+- Arc synthesis (descriptive): the canonical grok recipe's lr=1e-3 is far below
+  optimal for d=128, so v1277's narrow-5×-faster, v1279's small-init death, and
+  v1280's rescue largely reduce to effective-lr effects. Banked: do narrow widths
+  also converge to ~1k steps at high lr? Resolution notice stamped into the v1280
+  brief (the linked-notice chain continues). Evidence:
+  `f/1281/解释/grok_norm_vs_step_v1281/` (five formats plus the Phase-A cache),
+  `f/1281/图片/grok-norm-vs-step-v1281.png`, walkthrough 1238.
 
 ## Latest v1280 checkpoint
 

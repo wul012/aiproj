@@ -1,0 +1,133 @@
+{
+  "schema": "grok_norm_vs_step_v1281.v1",
+  "generated_at": "2026-07-16T11:42:42.489842+00:00",
+  "summary": {
+    "verdict": "review",
+    "reason": "mixed_pairs",
+    "scope": "own_grokked_substrate_toy_scale_frozen_recipe_60k_budget",
+    "g0_references": true,
+    "g1_complete": true,
+    "g2_bar_stable": true,
+    "pairs": {
+      "0.004": {
+        "state": "ok",
+        "rho": 0.359
+      },
+      "0.008": {
+        "state": "ok",
+        "rho": 0.7778
+      }
+    },
+    "parity_band": [
+      0.5,
+      2.0
+    ],
+    "ref80_medians": [
+      3900.0,
+      1800.0
+    ],
+    "ref79_baseline_median": 11400.0
+  },
+  "cells": [
+    {
+      "arm": "verdict",
+      "alpha": 1.0,
+      "lr": 0.004,
+      "seed": 1337,
+      "class": "grokked",
+      "t_gen": 1400,
+      "t_mem": 100,
+      "heldout_acc": 0.99442
+    },
+    {
+      "arm": "verdict",
+      "alpha": 1.0,
+      "lr": 0.004,
+      "seed": 1338,
+      "class": "grokked",
+      "t_gen": 1800,
+      "t_mem": 100,
+      "heldout_acc": 0.99907
+    },
+    {
+      "arm": "verdict",
+      "alpha": 1.0,
+      "lr": 0.004,
+      "seed": 1339,
+      "class": "grokked",
+      "t_gen": 1000,
+      "t_mem": 100,
+      "heldout_acc": 0.999203
+    },
+    {
+      "arm": "verdict",
+      "alpha": 1.0,
+      "lr": 0.008,
+      "seed": 1337,
+      "class": "grokked",
+      "t_gen": 1000,
+      "t_mem": 300,
+      "heldout_acc": 0.999336
+    },
+    {
+      "arm": "verdict",
+      "alpha": 1.0,
+      "lr": 0.008,
+      "seed": 1338,
+      "class": "grokked",
+      "t_gen": 1400,
+      "t_mem": 200,
+      "heldout_acc": 0.989106
+    },
+    {
+      "arm": "verdict",
+      "alpha": 1.0,
+      "lr": 0.008,
+      "seed": 1339,
+      "class": "grokked",
+      "t_gen": 1500,
+      "t_mem": 200,
+      "heldout_acc": 0.991497
+    },
+    {
+      "arm": "dose",
+      "alpha": 1.0,
+      "lr": 0.002,
+      "seed": 1337,
+      "class": "grokked",
+      "t_gen": 1900,
+      "t_mem": 100,
+      "heldout_acc": 0.993889
+    },
+    {
+      "arm": "dose",
+      "alpha": 1.0,
+      "lr": 0.002,
+      "seed": 1338,
+      "class": "grokked",
+      "t_gen": 2800,
+      "t_mem": 100,
+      "heldout_acc": 0.986582
+    },
+    {
+      "arm": "symmetry",
+      "alpha": 2.0,
+      "lr": 0.008,
+      "seed": 1337,
+      "class": "grokked",
+      "t_gen": 900,
+      "t_mem": 200,
+      "heldout_acc": 0.999867
+    },
+    {
+      "arm": "symmetry",
+      "alpha": 2.0,
+      "lr": 0.008,
+      "seed": 1338,
+      "class": "grokked",
+      "t_gen": 900,
+      "t_mem": 200,
+      "heldout_acc": 1.0
+    }
+  ]
+}

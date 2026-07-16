@@ -125,6 +125,12 @@ Map row + f/README + 讲解 README indexes, cleanup, commit, push, tag, CI green
   the v1279 text corrections landed pre-registration in `784f91c2`.
 - Banked next question: is it the small NORM or the large RELATIVE STEP that
   makes rescued cells fast? (α=1 with lr 2–4× is the missing control.)
+  **Resolved by [v1281](v1281-norm-vs-step-brief.md)**: neither — the absolute lr
+  dominates (α=1 dose collapses 11,400 → ~1,400 with saturation at lr ≥ 4e-3),
+  both matched-step pairs exclude the small-norm branch, and at adequate lr LARGER
+  norm is mildly faster (α=2 @ 8e-3: 900 steps, heldout 1.0). The "norm" part of
+  this version's `norm_clock_revived_under_lr_scaling` verdict name is therefore
+  empty — the revival was the lr's doing.
 - Post-run code delta: `plot_result` suptitle only.
 
 ## 失败条件
