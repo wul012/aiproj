@@ -1,0 +1,178 @@
+{
+  "schema": "grok_init_rescue_v1280.v1",
+  "generated_at": "2026-07-16T11:06:38.059699+00:00",
+  "summary": {
+    "verdict": "norm_clock_revived_under_lr_scaling",
+    "reason": "",
+    "scope": "own_grokked_substrate_toy_scale_frozen_recipe_60k_budget",
+    "g0_reference": true,
+    "g1_complete": true,
+    "g2_bar_stable": true,
+    "rescued_lrs": [
+      0.002,
+      0.004
+    ],
+    "class_by_lr": {
+      "0.00025": [
+        "stuck_memorized",
+        "stuck_memorized"
+      ],
+      "0.0005": [
+        "stuck_memorized",
+        "stuck_memorized"
+      ],
+      "0.002": [
+        "grokked",
+        "grokked"
+      ],
+      "0.004": [
+        "grokked",
+        "grokked"
+      ]
+    },
+    "dose_shape": "cliff",
+    "baseline_median_tgen": 11400.0
+  },
+  "cells": [
+    {
+      "arm": "rescue",
+      "alpha": 0.5,
+      "lr": 0.00025,
+      "seed": 1337,
+      "class": "stuck_memorized",
+      "t_gen": null,
+      "t_mem": 600,
+      "heldout_acc": 0.152916
+    },
+    {
+      "arm": "rescue",
+      "alpha": 0.5,
+      "lr": 0.00025,
+      "seed": 1338,
+      "class": "stuck_memorized",
+      "t_gen": null,
+      "t_mem": 600,
+      "heldout_acc": 0.200478
+    },
+    {
+      "arm": "rescue",
+      "alpha": 0.5,
+      "lr": 0.0005,
+      "seed": 1337,
+      "class": "stuck_memorized",
+      "t_gen": null,
+      "t_mem": 400,
+      "heldout_acc": 0.156503
+    },
+    {
+      "arm": "rescue",
+      "alpha": 0.5,
+      "lr": 0.0005,
+      "seed": 1338,
+      "class": "stuck_memorized",
+      "t_gen": null,
+      "t_mem": 400,
+      "heldout_acc": 0.200478
+    },
+    {
+      "arm": "rescue",
+      "alpha": 0.5,
+      "lr": 0.002,
+      "seed": 1337,
+      "class": "grokked",
+      "t_gen": 3800,
+      "t_mem": 300,
+      "heldout_acc": 0.981267
+    },
+    {
+      "arm": "rescue",
+      "alpha": 0.5,
+      "lr": 0.002,
+      "seed": 1338,
+      "class": "grokked",
+      "t_gen": 4000,
+      "t_mem": 300,
+      "heldout_acc": 0.976618
+    },
+    {
+      "arm": "rescue",
+      "alpha": 0.5,
+      "lr": 0.004,
+      "seed": 1337,
+      "class": "grokked",
+      "t_gen": 1300,
+      "t_mem": 500,
+      "heldout_acc": 0.999203
+    },
+    {
+      "arm": "rescue",
+      "alpha": 0.5,
+      "lr": 0.004,
+      "seed": 1338,
+      "class": "grokked",
+      "t_gen": 2300,
+      "t_mem": 500,
+      "heldout_acc": 0.999203
+    },
+    {
+      "arm": "dose",
+      "alpha": 0.6,
+      "lr": 0.001,
+      "seed": 1337,
+      "class": "stuck_memorized",
+      "t_gen": null,
+      "t_mem": 200,
+      "heldout_acc": 0.106151
+    },
+    {
+      "arm": "dose",
+      "alpha": 0.6,
+      "lr": 0.001,
+      "seed": 1338,
+      "class": "stuck_memorized",
+      "t_gen": null,
+      "t_mem": 200,
+      "heldout_acc": 0.209247
+    },
+    {
+      "arm": "dose",
+      "alpha": 0.7,
+      "lr": 0.001,
+      "seed": 1337,
+      "class": "stuck_memorized",
+      "t_gen": null,
+      "t_mem": 200,
+      "heldout_acc": 0.105088
+    },
+    {
+      "arm": "dose",
+      "alpha": 0.7,
+      "lr": 0.001,
+      "seed": 1338,
+      "class": "stuck_memorized",
+      "t_gen": null,
+      "t_mem": 200,
+      "heldout_acc": 0.217085
+    },
+    {
+      "arm": "dose",
+      "alpha": 0.85,
+      "lr": 0.001,
+      "seed": 1337,
+      "class": "grokked",
+      "t_gen": 44200,
+      "t_mem": 100,
+      "heldout_acc": 0.954564
+    },
+    {
+      "arm": "dose",
+      "alpha": 0.85,
+      "lr": 0.001,
+      "seed": 1338,
+      "class": "grokked",
+      "t_gen": 35600,
+      "t_mem": 100,
+      "heldout_acc": 0.960542
+    }
+  ]
+}

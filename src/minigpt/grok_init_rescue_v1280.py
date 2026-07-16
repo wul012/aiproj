@@ -346,8 +346,9 @@ def plot_result(cache: dict, reference: dict, info: dict, path) -> None:
     ax1.axhline(cfg.max_steps, color="gray", linestyle=":",
                 label="60k budget (censored above)")
     ax1.set(xscale="log", yscale="log", xlabel="lr (log)", ylabel="t_gen (steps, log)",
-            title=f"rescue arm: alpha=0.5, lr sweep -> {info['verdict']}")
+            title="rescue arm: alpha=0.5, lr sweep")
     ax1.legend(fontsize=7)
+    fig.suptitle(f"v1280 init rescue: {info['verdict']}", fontsize=11)
 
     seen2: dict = {}
     for c in (x for x in cache["cells"] if x["arm"] == "dose"):

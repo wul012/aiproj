@@ -1,0 +1,10 @@
+status=None
+decision=None
+verdict=norm_clock_revived_under_lr_scaling
+reason=
+scope=own_grokked_substrate_toy_scale_frozen_recipe_60k_budget
+g0_reference=True
+g1_complete=True
+g2_bar_stable=True
+dose_shape=cliff
+baseline_median_tgen=11400.0

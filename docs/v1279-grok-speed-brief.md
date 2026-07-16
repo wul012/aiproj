@@ -1,5 +1,15 @@
 # v1279 capability brief — why do narrow models grok faster? The norm-clock test
 
+> **Downgrade notice (v1280, 2026-07-13).** Two v1279 conclusions were revised by
+> the preregistered follow-up ([v1280 brief](v1280-init-rescue-brief.md), verdict
+> `norm_clock_revived_under_lr_scaling`): (1) the censored small-init cells DO
+> memorize (t_mem≈300; the death is of the memorize→generalize transition — the
+> "not even memorization" wording below was corrected in `784f91c2`); (2) the
+> headline "shrinking init norm prevents grokking" is **lr-conditional**: at 2–4×
+> the frozen lr, α=0.5 groks in 1,300–4,000 steps — faster than the α=1 baseline's
+> 11,400. What v1279 measured is real at the frozen lr; it does not generalize
+> across lr.
+
 Lane: ML capability. Executor: **Claude directly** (continuing the v1277/v1278 mode).
 All lane rules bind: preregister-commit-then-run, CPU probes before GPU, Phase A
 caches / Phase B CPU-only, pre-registered decide() ladder, multi-seed, honest scope,

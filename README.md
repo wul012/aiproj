@@ -46,7 +46,8 @@ them are the most instructive rows in the table.
 | Sparsity / lottery tickets | v1275 | `pruning_breaks_circuit` — 50% magnitude pruning collapses accuracy while the survivors' Fourier share is unchanged: the circuit is frequency-sparse but magnitude-DENSE, so magnitude pruning cannot find this ticket | [brief](docs/v1275-fourier-ticket-brief.md) |
 | Superposition | v1276 | Preregistered `review` branch, externally adjudicated: superposition emerges with sparsity and is loss-OPTIMAL (packing beats the analytic best-dedicated solution 5–6×); the residual finding — norm-threshold representedness needs importance to break dense-end degeneracy | [brief](docs/v1276-superposition-brief.md) |
 | Capacity squeeze | v1277 | `squeeze_hits_capacity_floor` — squeezed below width 12 the circuit neither drops frequencies nor superposes; it stops forming, and the w=8 failures show attempted-but-failed packing. Bonus: narrow models grok ~5× faster than d=128 | [brief](docs/v1277-capacity-squeeze-brief.md) |
-| Grok speed / norm clock | v1279 | Preregistered `review` (substrate_unsound): d=64 is a real mid-width slow zone (1/3 seeds, sole success at 35k steps), so the width→t_gen curve is non-monotone; and the norm clock is INVERTED — shrinking d=128's init norm to d=32's level prevents grokking (0/6) while doubling it still groks 3/3. The clock reads width, not norm | [brief](docs/v1279-grok-speed-brief.md) |
+| Grok speed / norm clock | v1279 | Preregistered `review` (substrate_unsound): d=64 is a real mid-width slow zone (1/3 seeds, sole success at 35k steps), so the width→t_gen curve is non-monotone; and at the frozen lr, shrinking d=128's init norm to d=32's level prevents grokking (0/6) while doubling it still groks 3/3. **Downgraded by v1280** (next row): the prevention is lr-conditional | [brief](docs/v1279-grok-speed-brief.md) |
+| Init-scale × lr rescue | v1280 | `norm_clock_revived_under_lr_scaling` — v1279's death is an lr artifact: lr↓ rescues nothing, but at 2–4× lr the norm-shrunk α=0.5 model groks in 1,300–4,000 steps vs the baseline's 11,400 (heldout up to 0.9992). Dose arm: at frozen lr the death boundary is a cliff in (0.7, 0.85], with the transition slowing 3–4× before it closes | [brief](docs/v1280-init-rescue-brief.md) |
 
 ## How to trust a result here
 
@@ -115,19 +116,51 @@ scope.
 - [v1277 capacity squeeze brief](docs/v1277-capacity-squeeze-brief.md)
 - [README exhibition brief](docs/readme-exhibition-brief.md)
 - [v1279 grok speed / norm-clock brief](docs/v1279-grok-speed-brief.md)
+- [v1280 init-rescue brief](docs/v1280-init-rescue-brief.md)
 - [Stage 2 operational brief (inactive)](docs/stage2-aiproj-operational-brief.md)
 - [Deep maintenance v1268-v1272 closeout](docs/deep-maintenance-v1268-v1272-closeout.md)
 - [Plain-language project guide](项目通俗说明/README.md)
 
 ## Current version
 
-Version `v1279` asks WHY narrow models grok ~5× faster (the v1277 descriptive
-surprise) by causally testing the weight-norm-clock account: intervene on init scale
-at fixed width (α arms at d=128, a matched-norm α\* arm, a d=32 inflation arm) under
-a preregistered decide() ladder. The preregistered verdict is `review`
-(reason=`substrate_unsound`: d=64 groks only 1/3 seeds — a real mid-width slow zone),
-and the α arms invert the norm-clock prediction: shrinking the wide model's init norm
-does not accelerate grokking, it prevents it.
+Version `v1280` stress-tests v1279's headline with the sharpest deflationary
+hypothesis: is small-init grokking death just an lr artifact? Its P1 probe first
+corrected v1279's record (the "dead" cells memorize instantly — the death is of the
+memorize→generalize transition), then a preregistered 16× lr sweep at α=0.5 landed
+on `norm_clock_revived_under_lr_scaling`: lr↓ does nothing, but at 2–4× lr the
+norm-shrunk model groks in 1,300–4,000 steps — faster than the α=1 baseline's
+11,400. v1279's headline is formally downgraded to lr-conditional, with linked
+notices on every affected surface.
+
+## Latest v1280 checkpoint
+
+- Preregistered init-rescue experiment (commit `2cd7590c` before any grid run; one
+  disclosed orchestration amendment `3eaf5de9` letting the P2 probe cell fill its
+  Phase-A slot). 14 cells: lr ∈ {0.25, 0.5, 2, 4}×1e-3 at α=0.5 (2 seeds each, a
+  deterministic confirm rule that never fired) plus a dose arm α ∈ {0.6, 0.7, 0.85};
+  the committed v1279 cache is the read-only reference. Budget 14/18 GPU runs at a
+  single 60k clock.
+- Verdict `norm_clock_revived_under_lr_scaling` (G0/G1/G2 pass, identical across
+  t_gen bars {0.85, 0.90, 0.95}): lowering lr rescues nothing (4/4 cells memorize
+  at t_mem 400–600 then stay stuck), while raising it rescues everything — at
+  lr=4e-3, α=0.5 groks in 1,300/2,300 steps with heldout 0.9992, the fastest and
+  most accurate d=128 cells in the arc. Best-rescue statistic 1,800 vs baseline
+  median 11,400.
+- The direction refutes the relative-step-parity theory the P1 probe motivated:
+  under AdamW the α=0.5 cells already take 2× relative steps, yet the transition
+  needs 4–8×; the surviving picture is an exploration threshold for leaving the
+  memorization basin. What stays open (banked): whether small NORM or large
+  RELATIVE STEP drives the rescued speed — the α=1, lr 2–4× control is the natural
+  v1281.
+- Dose arm at the frozen lr (descriptive): a cliff — α ∈ {0.6, 0.7} stuck 4/4,
+  α=0.85 groks 2/2 but 3–4× slower (44,200/35,600 steps); the transition window
+  narrows before it closes.
+- Disclosure chain: v1279's interpretation errors were corrected pre-registration
+  (`784f91c2` — the censored cells DO memorize; 14th caught instance of the
+  infer-without-checking-cache class), and the rescued verdict triggered the
+  preregistered obligation to stamp a downgrade notice into the v1279 brief.
+  Evidence: `f/1280/解释/grok_init_rescue_v1280/` (five formats plus the Phase-A
+  cache), `f/1280/图片/grok-init-rescue-v1280.png`, walkthrough 1237.
 
 ## Latest v1279 checkpoint
 

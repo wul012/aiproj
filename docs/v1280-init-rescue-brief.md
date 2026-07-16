@@ -108,6 +108,25 @@ Map row + f/README + 讲解 README indexes, cleanup, commit, push, tag, CI green
   cache mutation (read-only reference); no training-loop modification (lr and
   max_steps flow through the existing GrokConfig fields).
 
+## Closeout (post-run; rendering only, decide() untouched)
+
+- GPU budget 14/18: P2 probe (stuck, t_mem=400) + 13 fresh cells; the confirm rule
+  fired zero times (every lr unanimous 0/2 or 2/2). Phase B CPU-only.
+- Preregistered verdict: **`norm_clock_revived_under_lr_scaling`** (G0/G1/G2 all
+  pass, identical across bars {0.85, 0.90, 0.95}). rescued_lrs = [2e-3, 4e-3];
+  best-rescue statistic 1,800 < baseline median 11,400.
+- Direction inverts the P1 theory: restoring relative-step parity (lr↓) does
+  nothing (4 cells stuck with t_mem 400–600); amplifying relative steps 4–8×
+  (lr↑) rescues — lr=4e-3 groks in 1,300/2,300 steps with heldout 0.9992, the
+  fastest and most accurate d=128 cells in the whole arc.
+- Dose arm (descriptive): cliff — α ∈ {0.6, 0.7} stuck 4/4, α=0.85 groks 2/2 but
+  3–4× slower (44,200/35,600; the 60k clock avoided censoring the 44.2k cell).
+- Obligations discharged: the v1279 brief carries the linked downgrade notice;
+  the v1279 text corrections landed pre-registration in `784f91c2`.
+- Banked next question: is it the small NORM or the large RELATIVE STEP that
+  makes rescued cells fast? (α=1 with lr 2–4× is the missing control.)
+- Post-run code delta: `plot_result` suptitle only.
+
 ## 失败条件
 
 - Any GPU run before this brief + module + tests are committed = fail.

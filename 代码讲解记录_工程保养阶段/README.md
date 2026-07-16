@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1237-v1280-init-rescue.md
+ -> v1280 code explanation: stress-tests v1279's headline with the lr-artifact hypothesis. P1 corrects v1279's record from the committed cache (dead cells memorize instantly; the death is of the transition), then a preregistered 16x lr sweep at alpha=0.5 lands `norm_clock_revived_under_lr_scaling`: lr-down rescues nothing, lr-up at 2-4x groks in 1,300-4,000 steps vs baseline 11,400 (heldout up to 0.9992) — v1279's headline is formally downgraded to lr-conditional with linked notices. Dose arm: a cliff in (0.7, 0.85] at the frozen lr. Evidence lives under `f/1280`.
+
 1236-v1279-grok-speed.md
  -> v1279 code explanation: preregisters (commit `0f5f77a3`) the norm-clock causal test of WHY narrow models grok faster, survives its own P2 stop condition (d=64 stalls at 40k; harness exonerated by a bit-exact v1277 cell reproduction; budget re-paneled to 100k BEFORE any grid data, commit `37433657`), and lands the preregistered `review` (substrate_unsound): d=64 is a real mid-width slow zone, and the norm clock is INVERTED — shrinking the wide init norm prevents grokking (0/6) while doubling it still groks. Evidence lives under `f/1279`.
 
