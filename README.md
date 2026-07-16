@@ -49,6 +49,7 @@ them are the most instructive rows in the table.
 | Grok speed / norm clock | v1279 | Preregistered `review` (substrate_unsound): d=64 is a real mid-width slow zone (1/3 seeds, sole success at 35k steps), so the width→t_gen curve is non-monotone; and at the frozen lr, shrinking d=128's init norm to d=32's level prevents grokking (0/6) while doubling it still groks 3/3. **Downgraded by v1280** (next row): the prevention is lr-conditional | [brief](docs/v1279-grok-speed-brief.md) |
 | Init-scale × lr rescue | v1280 | `norm_clock_revived_under_lr_scaling` — v1279's death is an lr artifact: lr↓ rescues nothing, but at 2–4× lr the norm-shrunk α=0.5 model groks in 1,300–4,000 steps vs the baseline's 11,400 (heldout up to 0.9992). Dose arm: at frozen lr the death boundary is a cliff in (0.7, 0.85]. **The "norm" in the verdict name was emptied by v1281** (next row) | [brief](docs/v1280-init-rescue-brief.md) |
 | Norm vs relative step | v1281 | Preregistered `review` (mixed_pairs: ρ 0.359/0.778), but both matched-step pairs exclude the small-norm branch — the ABSOLUTE lr dominates the clock (α=1 dose 11,400 → ~1,400, saturating at lr ≥ 4e-3) and larger norm is mildly faster at adequate lr (α=2 @ 8e-3: 900 steps, heldout 1.0). The v1277–v1280 width/norm effects largely reduce to an lr-starved baseline | [brief](docs/v1281-norm-vs-step-brief.md) |
+| Width × lr | v1282 | Preregistered `review` (broken_cells: w=16 exceeds its stability window at 4e-3 — the instability guard fired as designed). Descriptively: v1279's d=64 hole CLOSES at 4× lr (2,400 steps vs censored-at-100k), the narrow speedup inverts (w=32 ~3× slower than d=128), and the usable lr window shifts upward with width. Two w=16 seeds grok without ever memorizing | [brief](docs/v1282-width-lr-brief.md) |
 
 ## How to trust a result here
 
@@ -119,21 +120,50 @@ scope.
 - [v1279 grok speed / norm-clock brief](docs/v1279-grok-speed-brief.md)
 - [v1280 init-rescue brief](docs/v1280-init-rescue-brief.md)
 - [v1281 norm-vs-step brief](docs/v1281-norm-vs-step-brief.md)
+- [v1282 width-lr brief](docs/v1282-width-lr-brief.md)
 - [Stage 2 operational brief (inactive)](docs/stage2-aiproj-operational-brief.md)
 - [Deep maintenance v1268-v1272 closeout](docs/deep-maintenance-v1268-v1272-closeout.md)
 - [Plain-language project guide](项目通俗说明/README.md)
 
 ## Current version
 
-Version `v1281` runs the control v1280 banked: at matched relative AdamW step
-(lr/α), does the full-norm model grok as fast as the rescued small-norm one? The
-preregistered verdict is `review` (mixed_pairs: ρ = 0.359 at r=4×, 0.778 at r=8×),
-but both pairs exclude the small-norm branch — and the descriptive resolution is
-sweeping: the ABSOLUTE lr dominates the clock (α=1 dose 11,400 → ~1,400 with
-saturation at lr ≥ 4e-3), larger norm is mildly FASTER at adequate lr (α=2 at
-lr=8e-3: 900 steps, heldout 1.0 — the fastest, most accurate cell of the arc), and
-the whole v1277–v1280 narrow-faster / small-init-death / lr-rescue sequence unifies
-as "the canonical lr=1e-3 baseline sits in an lr-starved regime."
+Version `v1282` runs the width version of the v1281 control, testing the arc's
+synthesis on the question that started it (v1277's "narrow groks 5× faster"): at
+lr=4e-3, widths {16, 32, 64} train against the v1281 d=128 reference floor. The
+preregistered verdict is `review` (broken_cells: w=16 exceeds its stability window
+at 4e-3 — one seed neither groks nor memorizes, and the instability≠slowness guard
+fired exactly as designed). The descriptive resolution: v1279's d=64 hole CLOSES
+(2,400 steps vs censored-at-100k; ρ=1.71 converged), the narrow speedup vanishes
+and inverts (w=32 is ~3× slower than d=128 at high lr), and the usable lr window
+shifts upward with width. Two w=16 seeds grok without ever memorizing — a new
+phenomenon, banked.
+
+## Latest v1282 checkpoint
+
+- Preregistered width×lr experiment (commit `bf1cbf4b` before any run; post-run
+  code delta = one empty-legend rendering fix). 9 cells at the 60k clock, 9/12
+  GPU budget: widths {16, 32, 64} × 3 seeds at lr=4e-3; d=128 @ 4e-3 comes from
+  the v1281 cache and the lr=1e-3 grid from the v1279 cache (read-only, exact
+  G0 anchors); a conditional d=64 @ 8e-3 probe was preregistered but never fired
+  — the hole grokked on its own.
+- Verdict `review` (broken_cells, bar-stable): w=16 seed 1337 at 4e-3 neither
+  groks (heldout 0.847) nor memorizes (train never reaches 0.99) → the
+  preregistered broken guard routes the verdict honestly. Width states:
+  16 broken, 32 still_slower (ρ=3.36), 64 converged (ρ=1.71).
+- The v1279 mid-width hole closes at 4× lr: the same d=64 seeds that censored at
+  a 100k budget now grok in 1,800–3,000 steps with heldout up to 1.0 — the hole
+  was lr starvation at its most extreme, not width pathology.
+- The narrow speedup was never the width's: at 4e-3, w=32 is ~3× SLOWER than
+  d=128 (its t_mem also rises to 800–1,200). Unified picture: the usable lr
+  window shifts upward with width (w=16 breaks < 4e-3 ≤ w=32 usable < d=64/128
+  adequate) — three visible consequences (broken / slower / converged) of the
+  μP-style optimal-lr-grows-with-width rule on the grokking clock.
+- New phenomenon banked: two w=16 seeds reach heldout ~0.96 WITHOUT ever
+  memorizing (t_mem=None) — generalization without a memorization phase. Also
+  banked: the width-clock death certificate (per-width lr-adapted floors). A
+  descriptive follow-up notice (marked review) is stamped into the v1277 brief.
+  Evidence: `f/1282/解释/grok_width_lr_v1282/` (five formats plus the Phase-A
+  cache), `f/1282/图片/grok-width-lr-v1282.png`, walkthrough 1239.
 
 ## Latest v1281 checkpoint
 

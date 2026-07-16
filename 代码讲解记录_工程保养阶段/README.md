@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1239-v1282-width-lr.md
+ -> v1282 code explanation: the width version of the v1281 control — widths {16,32,64} at lr=4e-3 against the v1281 d=128 floor. Preregistered `review` (broken_cells: w=16 exceeds its stability window, the instability guard's first real firing). Descriptively: v1279's d=64 hole CLOSES at 4x lr (2,400 steps vs censored-at-100k), the narrow speedup inverts (w=32 ~3x slower), the usable lr window shifts upward with width, and two w=16 seeds grok WITHOUT ever memorizing (banked). Evidence lives under `f/1282`.
+
 1238-v1281-norm-vs-step.md
  -> v1281 code explanation: the control v1280 banked — alpha=1 at matched relative step (lr/alpha) against the committed v1280 cells. Preregistered `review` (mixed_pairs: rho 0.359/0.778), but both pairs exclude the small-norm branch; descriptively the ABSOLUTE lr dominates (alpha=1 dose 11,400 -> ~1,400, saturating ~1k at lr>=4e-3), larger norm is mildly faster at adequate lr (alpha=2 @ 8e-3: 900 steps, heldout 1.0), and the v1277-v1280 width/norm story collapses into "the canonical baseline is lr-starved". Evidence lives under `f/1281`.
 

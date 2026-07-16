@@ -81,6 +81,27 @@ picture. Full lane ritual as always; walkthrough 1239 BEFORE the final suite.
   lr, 60k budget. No new α arms; no lr beyond the preregistered {4e-3, 8e-3};
   no re-running of reference cells; v1279/v1280/v1281 caches read-only.
 
+## Closeout (post-run; legend rendering only, decide() untouched)
+
+- GPU 9/12 (P2 probe filled its slot; the conditional hole probe never fired —
+  the hole grokked). Phase B CPU-only; G0/G1/G2 pass.
+- Preregistered verdict: **`review` (broken_cells)**, bar-stable. w=16 seed 1337
+  at lr=4e-3 neither groks (heldout 0.847) nor memorizes (t_mem=None) → broken →
+  the guard routes to review exactly as designed (instability ≠ slowness).
+- Width states: 16 = broken (other 2 seeds grok WITHOUT ever memorizing —
+  t_mem=None, heldout ~0.96, a new phenomenon, banked); 32 = still_slower
+  (ρ = 3.36: the narrow speedup not only vanishes at high lr, it inverts);
+  64 = converged (ρ = 1.71: the v1279 hole closes — the same seeds that censored
+  at 100k now grok in 1,800–3,000 steps, heldout up to 1.0).
+- Descriptive resolution of the v1277 question (the verdict stays review): the
+  narrow speedup was never the width's doing — lr=1e-3 is near-adequate for
+  narrow widths and starved for wide ones, and the usable lr window shifts
+  upward with width (w=16's stability ceiling < 4e-3). A clean all-widths
+  convergence claim needs per-width lr adaptation (banked: the width-clock
+  death certificate — compare floors at each width's own adequate lr).
+- The v1277 brief carries a follow-up notice (marked as descriptive, since the
+  `width_clock_collapses_to_lr` obligation did not trigger).
+
 ## 失败条件
 
 - Any GPU run before this brief + module + tests are committed = fail.

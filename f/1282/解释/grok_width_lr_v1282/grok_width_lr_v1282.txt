@@ -1,0 +1,10 @@
+status=None
+decision=None
+verdict=review
+reason=broken_cells
+scope=own_grokked_substrate_toy_scale_frozen_recipe_60k_budget
+g0_references=True
+g1_complete=True
+g2_bar_stable=True
+hole_rule_fired=False
+ref81_median=1400.0

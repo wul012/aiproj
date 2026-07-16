@@ -295,9 +295,11 @@ def plot_result(cache: dict, ref81: dict, ref79: dict, info: dict, path) -> None
     handles = [plt.Line2D([], [], marker="o", color="gray", linestyle="",
                           markerfacecolor="none", label="lr=1e-3 (v1279)"),
                plt.Line2D([], [], marker="o", color="tab:blue", linestyle="",
-                          label="lr=4e-3 (new; hollow = v1281 ref)"),
-               plt.Line2D([], [], marker="s", color="tab:purple", linestyle="",
-                          label="d=64 @ lr=8e-3 (conditional probe)")]
+                          label="lr=4e-3 (new; hollow = v1281 ref)")]
+    if any(c["arm"] == "hole_probe" for c in cache["cells"]):
+        handles.append(plt.Line2D([], [], marker="s", color="tab:purple",
+                                  linestyle="",
+                                  label="d=64 @ lr=8e-3 (conditional probe)"))
     ax.legend(handles=handles, fontsize=7)
     fig.tight_layout()
     out = _Path(path)

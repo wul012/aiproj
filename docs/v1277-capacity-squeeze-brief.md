@@ -1,5 +1,14 @@
 # v1277 capability brief — capacity squeeze: drop, superpose, or fail?
 
+> **Follow-up notice (v1282, 2026-07-16).** This brief's descriptive bonus —
+> "narrow models grok ~5× faster" — was resolved by the v1279→v1282 arc
+> ([v1282 brief](v1282-width-lr-brief.md) — formally `review`/broken_cells,
+> so this is a descriptive resolution, not a verdict): at lr=4e-3 the narrow
+> advantage vanishes and even inverts (w=32 is ~3× SLOWER than d=128), while
+> v1279's d=64 hole closes (~2,400 steps). The speedup was never the width's —
+> the canonical lr=1e-3 is near-adequate for narrow widths and starved for wide
+> ones; the usable lr window shifts upward with width (w=16 breaks at 4e-3).
+
 Lane: ML capability. Executor: **Claude directly** (user: "entirely in your hands,
 independently without codex") — the lane's rules bind the reviewer-as-executor
 unchanged: preregister-commit-then-run, CPU probes before GPU, Phase A caches /
