@@ -87,6 +87,28 @@ lane ritual; walkthrough 1242 BEFORE the final suite.
   d=128 × 3 seeds. No new widths/lrs; no attention-level analysis; the v1279
   cache is read-only; no F-threshold changes (0.2/0.5 are v1284's, frozen).
 
+## Closeout (post-run; zero code changes after preregistration)
+
+- Budget 46/50 runs, 191,600/240,000 steps. Phase B CPU-only; G0 (prefix
+  43/43, all three cells reproduced their v1279 references EXACTLY, phases
+  3/3 delayed), G1, G2 all pass.
+- Preregistered verdict: **`deep_plateau_sculpts`** — the first non-review
+  verdict since v1280. F = {0.720, 0.556, 0.600}, median 0.600 ≥ 0.5,
+  unanimous across bars {0.25, 0.30, 0.35}; the dispersion guard never fired.
+- The two-version picture completes: the canonical deep plateau BUILDS
+  (~56–72% of the final circuit-power increment is in place before val leaves
+  the resting band; C(t) climbs monotonically across all ~10k steps), while
+  the v1283 phase boundary builds LATE (v1284's F ≈ 0.25). The slow-sculpting
+  account survives exactly where it was originally told; v1284's revision is
+  formally a boundary effect (resolution note stamped into the v1284 brief).
+- Triple replication of v1188's historic measurement: final top-5 shares
+  0.305/0.312/0.305 vs the 2026-07 value 0.307. The width-purity gradient
+  closes: 0.92@16 → 0.76@28 → 0.71@32 → 0.31@128.
+- Banked: the lr × F sweep — v1281 showed these same cells grok in ~1,400
+  steps at lr=4e-3; is F preserved under that 8× time compression? (Tests the
+  unified hypothesis "construction rate is set by effective lr; generalization
+  fires when construction completes.")
+
 ## 失败条件
 
 - Any GPU run before this brief + module + tests are committed = fail.

@@ -1,0 +1,11 @@
+status=None
+decision=None
+verdict=deep_plateau_sculpts
+reason=
+scope=own_grokked_substrate_toy_scale_canonical_recipe_d128
+g0_ok=True
+g1_complete=True
+g2_bar_stable=True
+f_median=0.6001
+runs=46
+total_steps=191600

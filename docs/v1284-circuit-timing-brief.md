@@ -134,6 +134,12 @@ the final suite.
 - Banked: the same trajectory measurement on d=128's classic DEEP plateau
   (val pinned at chance for thousands of steps; ladder cost ~40k+ steps/cell)
   — is F there also ≈0.25, or genuinely higher?
+  **Resolved by [v1285](v1285-deep-plateau-brief.md)** (verdict
+  `deep_plateau_sculpts`): F = 0.56–0.72 on the canonical d=128 plateau — the
+  deep plateau genuinely sculpts, so THIS version's "the plateau does not own
+  construction" is formally a boundary effect, correct near the v1283 phase
+  gate and not at canonical depth. (Also corrected there: the canonical
+  plateau rests at val ~0.11–0.21, not chance.)
 
 ## 失败条件
 

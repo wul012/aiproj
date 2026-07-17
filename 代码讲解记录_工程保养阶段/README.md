@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1242-v1285-deep-plateau.md
+ -> v1285 code explanation: takes v1284's timing question to the canonical d=128 deep plateau. Verdict `deep_plateau_sculpts` (first non-review since v1280): F = 0.56-0.72 — the deep plateau genuinely builds the circuit before val moves, so v1284's "the plateau does not own construction" is formally a boundary effect and slow sculpting survives where it was originally told. All three cells reproduce their v1279 references bit-for-bit; v1188's 0.307 endpoint triple-replicated; the thinnest module of the arc (v1284 machinery imported unchanged). Evidence lives under `f/1285`.
+
 1241-v1284-circuit-timing.md
  -> v1284 code explanation: measures WHEN the Fourier circuit forms relative to generalization in each of v1283's phases, using deterministic truncated re-runs as weight snapshots (zero training-code modification, prefix-determinism gate 43/43). Preregistered `review` (mixed_fractions) — the uniformity is the finding: both phases build the circuit on the same relative schedule (F~0.25 everywhere; the width-matched w=24 pair differs only by ~3x time dilation), so the plateau does not own construction and the slow-sculpting account needs revision. Coupled endpoints are the most concentrated circuits measured. Evidence lives under `f/1284`.
 

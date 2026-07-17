@@ -51,7 +51,8 @@ them are the most instructive rows in the table.
 | Norm vs relative step | v1281 | Preregistered `review` (mixed_pairs: ρ 0.359/0.778), but both matched-step pairs exclude the small-norm branch — the ABSOLUTE lr dominates the clock (α=1 dose 11,400 → ~1,400, saturating at lr ≥ 4e-3) and larger norm is mildly faster at adequate lr (α=2 @ 8e-3: 900 steps, heldout 1.0). The v1277–v1280 width/norm effects largely reduce to an lr-starved baseline | [brief](docs/v1281-norm-vs-step-brief.md) |
 | Width × lr | v1282 | Preregistered `review` (broken_cells: w=16 exceeds its stability window at 4e-3 — the instability guard fired as designed). Descriptively: v1279's d=64 hole CLOSES at 4× lr (2,400 steps vs censored-at-100k), the narrow speedup inverts (w=32 ~3× slower than d=128), and the usable lr window shifts upward with width. Two w=16 seeds grok without ever memorizing | [brief](docs/v1282-width-lr-brief.md) |
 | Delay gate | v1283 | Preregistered `review` (mixed_widths) — and the mixedness is the finding: grokking's delayed phase is width-gated (P1: the delay never vanishes with lr at d=128; w=16 never groks at any lr), and the onset is a sharp bimodal jump at critical width ≈24 where seeds split between phases. No intermediate cells exist; coupled cells have delay exactly 0. The `graded` branch was cleanly excluded | [brief](docs/v1283-delay-gate-brief.md) |
-| Circuit timing | v1284 | Preregistered `review` (mixed_fractions) — the uniformity is the finding: both phases build the Fourier circuit on the SAME relative schedule (F ≈ 0.25 in coupled and delayed cells; the width-matched w=24 pair differs only by ~3× time dilation). The plateau does not own construction — the slow-sculpting account needs revision. Method: deterministic truncated re-runs as weight snapshots, prefix-verified 43/43 | [brief](docs/v1284-circuit-timing-brief.md) |
+| Circuit timing | v1284 | Preregistered `review` (mixed_fractions) — the uniformity is the finding: both phases build the Fourier circuit on the SAME relative schedule (F ≈ 0.25 in coupled and delayed cells; the width-matched w=24 pair differs only by ~3× time dilation). Method: deterministic truncated re-runs as weight snapshots, prefix-verified 43/43. **Scoped by v1285** (next row): this is the BOUNDARY schedule | [brief](docs/v1284-circuit-timing-brief.md) |
+| Deep plateau | v1285 | `deep_plateau_sculpts` — the first non-review verdict since v1280: on the canonical d=128 plateau F = 0.56–0.72 (median 0.600), so the deep plateau genuinely builds the circuit before val moves and v1284's revision is formally a boundary effect. All three cells reproduced their v1279 references exactly; v1188's 0.307 endpoint replicated ×3; the width-purity gradient closes 0.92@16 → 0.31@128 | [brief](docs/v1285-deep-plateau-brief.md) |
 
 ## How to trust a result here
 
@@ -125,22 +126,48 @@ scope.
 - [v1282 width-lr brief](docs/v1282-width-lr-brief.md)
 - [v1283 delay-gate brief](docs/v1283-delay-gate-brief.md)
 - [v1284 circuit-timing brief](docs/v1284-circuit-timing-brief.md)
+- [v1285 deep-plateau brief](docs/v1285-deep-plateau-brief.md)
 - [Stage 2 operational brief (inactive)](docs/stage2-aiproj-operational-brief.md)
 - [Deep maintenance v1268-v1272 closeout](docs/deep-maintenance-v1268-v1272-closeout.md)
 - [Plain-language project guide](项目通俗说明/README.md)
 
 ## Current version
 
-Version `v1284` asks what the grokking plateau is FOR: does it slowly sculpt the
-Fourier circuit (the canonical account), or wait while the circuit forms late?
-Method: deterministic truncated re-runs as weight snapshots — zero modification of
-the canonical training code, self-verified by a prefix-determinism gate (43/43
-snapshots passed). The preregistered verdict is `review` (mixed_fractions), and
-the uniformity is the finding: both phases build the circuit on the SAME relative
-schedule (pre-generalization structure fraction ≈ 0.25 in coupled and delayed
-cells alike), with one C(t) curve shape merely time-stretched — the plateau does
-not own construction. Coupled-phase endpoints are the MOST concentrated circuits
-measured (top-5 share up to 0.91), extending v1277's endpoint gradient.
+Version `v1285` takes v1284's question to the one place the slow-sculpting story
+could still hold: the canonical d=128 deep plateau (t_mem=100, t_gen
+10,500–12,700). The verdict is **`deep_plateau_sculpts`** — the first non-review
+verdict since v1280: F = {0.720, 0.556, 0.600}, median 0.600, unanimous across
+bars, with all three cells reproducing their v1279 references exactly. The deep
+plateau genuinely builds the circuit (~56–72% of the final power increment is in
+place before val leaves its resting band), so v1284's "the plateau does not own
+construction" is formally a boundary effect — slow sculpting survives exactly
+where it was originally told. Bonus: v1188's historic 0.307 top-5 share is
+triple-replicated (0.305/0.312/0.305), closing the width-purity gradient
+0.92@16 → 0.31@128.
+
+## Latest v1285 checkpoint
+
+- Preregistered deep-plateau experiment (commit `46fc9734`; zero code changes
+  after it — fourth consecutive clean chain). The module is the thinnest of the
+  arc: v1284's `run_cell`/`train_snapshot`/`structure_fraction` imported
+  unchanged; new code is only the config, the reference-equality G0, and the
+  single-population ladder. P1-disclosed bar adaptation: the canonical plateau
+  rests at val ~0.11–0.21 (never chance), so t_pre bars move to {0.25, 0.30,
+  0.35}; the F formula and 0.2/0.5 thresholds are v1284's frozen.
+- 3 cells (the exact v1279 d=128 grid cells) × 15-point ladders; 46/50 runs,
+  191,600/240,000 steps; prefix gate 43/43; every full run reproduced its v1279
+  reference bit-for-bit (t_mem, t_gen, heldout).
+- Verdict `deep_plateau_sculpts` (bar-stable, no dispersion): C(t) climbs
+  monotonically across the entire ~10k-step plateau (0.15 → 0.30) with no
+  late-rush — the canonical account, quantified. Combined with v1284: circuit
+  construction is late and generalization-locked near the v1283 phase gate,
+  early and plateau-dominated at canonical depth. Resolution note stamped into
+  the v1284 brief (the linked-notice chain continues).
+- Banked: the lr × F sweep — v1281 showed these same cells grok in ~1,400 steps
+  at lr=4e-3 (8× compression); is F preserved? Tests "construction rate is set
+  by effective lr; generalization fires when construction completes." Evidence:
+  `f/1285/解释/grok_deep_plateau_v1285/` (five formats plus the Phase-A cache),
+  `f/1285/图片/grok-deep-plateau-v1285.png`, walkthrough 1242.
 
 ## Latest v1284 checkpoint
 

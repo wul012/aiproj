@@ -1,0 +1,61 @@
+{
+  "schema": "grok_deep_plateau_v1285.v1",
+  "generated_at": "2026-07-17T12:34:24.504478+00:00",
+  "summary": {
+    "verdict": "deep_plateau_sculpts",
+    "reason": "",
+    "scope": "own_grokked_substrate_toy_scale_canonical_recipe_d128",
+    "g0_ok": true,
+    "g1_complete": true,
+    "g2_bar_stable": true,
+    "fractions": {
+      "1337": 0.7202,
+      "1338": 0.5562,
+      "1339": 0.6001
+    },
+    "f_median": 0.6001,
+    "runs": 46,
+    "total_steps": 191600
+  },
+  "cells": [
+    {
+      "seed": 1337,
+      "fraction": 0.7202,
+      "c0_share": 0.106395,
+      "final_share": 0.305171,
+      "share_quarter": 0.197074,
+      "share_half": 0.249558,
+      "share_three_quarter": 0.27064,
+      "t_mem": 100,
+      "t_gen": 11400,
+      "heldout_acc": 0.965989,
+      "snapshot_count": 14
+    },
+    {
+      "seed": 1338,
+      "fraction": 0.5562,
+      "c0_share": 0.11039,
+      "final_share": 0.311829,
+      "share_quarter": 0.173839,
+      "share_half": 0.203487,
+      "share_three_quarter": 0.211164,
+      "t_mem": 100,
+      "t_gen": 12700,
+      "heldout_acc": 0.951906,
+      "snapshot_count": 15
+    },
+    {
+      "seed": 1339,
+      "fraction": 0.6001,
+      "c0_share": 0.110454,
+      "final_share": 0.304702,
+      "share_quarter": 0.21477,
+      "share_half": 0.227019,
+      "share_three_quarter": 0.258589,
+      "t_mem": 100,
+      "t_gen": 10500,
+      "heldout_acc": 0.970772,
+      "snapshot_count": 14
+    }
+  ]
+}
