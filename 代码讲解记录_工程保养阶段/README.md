@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1243-v1286-lr-compression.md
+ -> v1286 code explanation: tests the construction-completion invariant by re-running the eight v1281 d=128 cells (lr 2-8e-3) with snapshot ladders. Preregistered `review` (bar_instability: the 2e-3 median rides the 0.2 bin line; the G2 guard fired on genuinely boundary-riding data). Certain content: the invariant is FALSIFIED — F drops to ~0.25 under 8x compression — yet compressed cells hold MORE absolute structure at grok; high lr keeps purifying after grok (final shares 0.31→0.81 with lr), so lr decouples construction from generalization. Evidence lives under `f/1286`.
+
 1242-v1285-deep-plateau.md
  -> v1285 code explanation: takes v1284's timing question to the canonical d=128 deep plateau. Verdict `deep_plateau_sculpts` (first non-review since v1280): F = 0.56-0.72 — the deep plateau genuinely builds the circuit before val moves, so v1284's "the plateau does not own construction" is formally a boundary effect and slow sculpting survives where it was originally told. All three cells reproduce their v1279 references bit-for-bit; v1188's 0.307 endpoint triple-replicated; the thinnest module of the arc (v1284 machinery imported unchanged). Evidence lives under `f/1285`.
 

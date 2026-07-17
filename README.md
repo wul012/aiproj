@@ -53,6 +53,7 @@ them are the most instructive rows in the table.
 | Delay gate | v1283 | Preregistered `review` (mixed_widths) — and the mixedness is the finding: grokking's delayed phase is width-gated (P1: the delay never vanishes with lr at d=128; w=16 never groks at any lr), and the onset is a sharp bimodal jump at critical width ≈24 where seeds split between phases. No intermediate cells exist; coupled cells have delay exactly 0. The `graded` branch was cleanly excluded | [brief](docs/v1283-delay-gate-brief.md) |
 | Circuit timing | v1284 | Preregistered `review` (mixed_fractions) — the uniformity is the finding: both phases build the Fourier circuit on the SAME relative schedule (F ≈ 0.25 in coupled and delayed cells; the width-matched w=24 pair differs only by ~3× time dilation). Method: deterministic truncated re-runs as weight snapshots, prefix-verified 43/43. **Scoped by v1285** (next row): this is the BOUNDARY schedule | [brief](docs/v1284-circuit-timing-brief.md) |
 | Deep plateau | v1285 | `deep_plateau_sculpts` — the first non-review verdict since v1280: on the canonical d=128 plateau F = 0.56–0.72 (median 0.600), so the deep plateau genuinely builds the circuit before val moves and v1284's revision is formally a boundary effect. All three cells reproduced their v1279 references exactly; v1188's 0.307 endpoint replicated ×3; the width-purity gradient closes 0.92@16 → 0.31@128 | [brief](docs/v1285-deep-plateau-brief.md) |
+| lr compression | v1286 | Preregistered `review` (bar_instability — the 2e-3 median rides the bin boundary; the guard fired as designed). Certain content: the construction-completion invariant is FALSIFIED — F drops to ~0.25 under 8× compression, yet compressed cells hold MORE absolute structure at grok; high lr keeps purifying after grok (final shares 0.31 → 0.81 with lr). Only slow deep grokking equates generalization with construction-complete | [brief](docs/v1286-lr-compression-brief.md) |
 
 ## How to trust a result here
 
@@ -127,23 +128,48 @@ scope.
 - [v1283 delay-gate brief](docs/v1283-delay-gate-brief.md)
 - [v1284 circuit-timing brief](docs/v1284-circuit-timing-brief.md)
 - [v1285 deep-plateau brief](docs/v1285-deep-plateau-brief.md)
+- [v1286 lr-compression brief](docs/v1286-lr-compression-brief.md)
 - [Stage 2 operational brief (inactive)](docs/stage2-aiproj-operational-brief.md)
 - [Deep maintenance v1268-v1272 closeout](docs/deep-maintenance-v1268-v1272-closeout.md)
 - [Plain-language project guide](项目通俗说明/README.md)
 
 ## Current version
 
-Version `v1285` takes v1284's question to the one place the slow-sculpting story
-could still hold: the canonical d=128 deep plateau (t_mem=100, t_gen
-10,500–12,700). The verdict is **`deep_plateau_sculpts`** — the first non-review
-verdict since v1280: F = {0.720, 0.556, 0.600}, median 0.600, unanimous across
-bars, with all three cells reproducing their v1279 references exactly. The deep
-plateau genuinely builds the circuit (~56–72% of the final power increment is in
-place before val leaves its resting band), so v1284's "the plateau does not own
-construction" is formally a boundary effect — slow sculpting survives exactly
-where it was originally told. Bonus: v1188's historic 0.307 top-5 share is
-triple-replicated (0.305/0.312/0.305), closing the width-purity gradient
-0.92@16 → 0.31@128.
+Version `v1286` tests the unified hypothesis the v1284/v1285 pair suggested:
+construction rate is set by the effective lr, and generalization fires when
+construction completes — in which case F should survive v1281's 8× time
+compression. It does not: F drops from 0.56–0.72 (1e-3) to ~0.25 at lr ∈
+{2, 4, 8}×1e-3, falsifying the invariant. The formal verdict is `review`
+(bar_instability — the 2e-3 group's median rides the 0.2 bin boundary exactly,
+and the preregistered guard fired). The refined picture: compressed cells hold
+MORE absolute structure at grok (~0.45–0.55 vs 0.29) — the low F comes from the
+denominator, because high lr keeps purifying the circuit long after grok (final
+shares rise monotonically in lr: 0.31 → 0.81). lr decouples construction from
+generalization and makes the endpoint purer at fixed width.
+
+## Latest v1286 checkpoint
+
+- Preregistered lr-compression experiment (commit `2b31c62d`; zero code changes
+  after it — fifth consecutive clean chain). The eight v1281 α=1 d=128 cells
+  (lr ∈ {2e-3, 4e-3, 8e-3}) re-run with dense 13-point ladders; 84/112 runs,
+  63,400/130,000 steps; prefix gate 76/76; every full run reproduced its v1281
+  reference bit-for-bit. Third application of the disclosed bar-adaptation
+  rule (compressed plateaus rest near val ≈ 0 → bars {0.10, 0.15, 0.20}).
+- Verdict `review` (bar_instability): the lr=2e-3 median F = 0.196 sits on the
+  late/partial boundary and the verdict flips across bars — the G2 guard doing
+  its job on genuinely boundary-riding data. Certain content inside the review:
+  F medians 0.20/0.27/0.28 across the three lrs vs 0.56–0.72 at 1e-3 — the
+  construction-completion invariant is falsified.
+- The three-regime synthesis: slow deep grokking (F ≈ 0.6, no post-grok
+  purification) / compressed grokking (F ≈ 0.25, strong post-grok purification
+  to final shares 0.55–0.81) / the v1283 phase boundary (F ≈ 0.25). Only in
+  slow deep grokking does "generalization" coincide with "construction
+  complete". The v1285 width-purity gradient turns out lr-conditional — at
+  fixed d=128, endpoint purity climbs 0.31 → 0.81 with lr.
+- Banked: quantify the post-grok purification segment itself (ladders extended
+  past t_gen; same machinery). Evidence:
+  `f/1286/解释/grok_lr_compression_v1286/` (five formats plus the Phase-A
+  cache), `f/1286/图片/grok-lr-compression-v1286.png`, walkthrough 1243.
 
 ## Latest v1285 checkpoint
 

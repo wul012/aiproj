@@ -1,0 +1,124 @@
+{
+  "schema": "grok_lr_compression_v1286.v1",
+  "generated_at": "2026-07-17T13:39:37.737414+00:00",
+  "summary": {
+    "verdict": "review",
+    "reason": "bar_instability",
+    "scope": "own_grokked_substrate_toy_scale_d128_compressed_lrs",
+    "g0_ok": true,
+    "g1_complete": true,
+    "g2_bar_stable": false,
+    "fractions": {
+      "0.002/1337": 0.3153,
+      "0.002/1338": 0.0762,
+      "0.004/1337": 0.2699,
+      "0.004/1338": 0.2814,
+      "0.004/1339": 0.2257,
+      "0.008/1337": 0.3802,
+      "0.008/1338": 0.2801,
+      "0.008/1339": 0.2325
+    },
+    "f_median_by_lr": {
+      "0.002": 0.1957,
+      "0.004": 0.2699,
+      "0.008": 0.2801
+    },
+    "v1285_reference_medians": [
+      0.72,
+      0.556,
+      0.6
+    ],
+    "runs": 84,
+    "total_steps": 63400
+  },
+  "cells": [
+    {
+      "lr": 0.002,
+      "seed": 1337,
+      "fraction": 0.3153,
+      "c0_share": 0.103448,
+      "final_share": 0.586188,
+      "t_mem": 100,
+      "t_gen": 1900,
+      "heldout_acc": 0.993889,
+      "snapshot_count": 11
+    },
+    {
+      "lr": 0.002,
+      "seed": 1338,
+      "fraction": 0.0762,
+      "c0_share": 0.112946,
+      "final_share": 0.550819,
+      "t_mem": 100,
+      "t_gen": 2800,
+      "heldout_acc": 0.986582,
+      "snapshot_count": 13
+    },
+    {
+      "lr": 0.004,
+      "seed": 1337,
+      "fraction": 0.2699,
+      "c0_share": 0.10206,
+      "final_share": 0.716182,
+      "t_mem": 100,
+      "t_gen": 1400,
+      "heldout_acc": 0.99442,
+      "snapshot_count": 9
+    },
+    {
+      "lr": 0.004,
+      "seed": 1338,
+      "fraction": 0.2814,
+      "c0_share": 0.111007,
+      "final_share": 0.685856,
+      "t_mem": 100,
+      "t_gen": 1800,
+      "heldout_acc": 0.99907,
+      "snapshot_count": 10
+    },
+    {
+      "lr": 0.004,
+      "seed": 1339,
+      "fraction": 0.2257,
+      "c0_share": 0.108881,
+      "final_share": 0.616716,
+      "t_mem": 100,
+      "t_gen": 1000,
+      "heldout_acc": 0.999203,
+      "snapshot_count": 8
+    },
+    {
+      "lr": 0.008,
+      "seed": 1337,
+      "fraction": 0.3802,
+      "c0_share": 0.108862,
+      "final_share": 0.711672,
+      "t_mem": 300,
+      "t_gen": 1000,
+      "heldout_acc": 0.999336,
+      "snapshot_count": 7
+    },
+    {
+      "lr": 0.008,
+      "seed": 1338,
+      "fraction": 0.2801,
+      "c0_share": 0.10401,
+      "final_share": 0.814102,
+      "t_mem": 200,
+      "t_gen": 1400,
+      "heldout_acc": 0.989106,
+      "snapshot_count": 9
+    },
+    {
+      "lr": 0.008,
+      "seed": 1339,
+      "fraction": 0.2325,
+      "c0_share": 0.105634,
+      "final_share": 0.757589,
+      "t_mem": 200,
+      "t_gen": 1500,
+      "heldout_acc": 0.991497,
+      "snapshot_count": 9
+    }
+  ]
+}

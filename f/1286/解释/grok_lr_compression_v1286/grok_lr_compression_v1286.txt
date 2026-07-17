@@ -1,0 +1,10 @@
+status=None
+decision=None
+verdict=review
+reason=bar_instability
+scope=own_grokked_substrate_toy_scale_d128_compressed_lrs
+g0_ok=True
+g1_complete=True
+g2_bar_stable=False
+runs=84
+total_steps=63400

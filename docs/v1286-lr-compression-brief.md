@@ -90,6 +90,33 @@ final suite.
   preregistered cells. No new lrs/widths; no threshold changes; v1281/v1285
   caches read-only.
 
+## Closeout (post-run; zero code changes after preregistration)
+
+- Budget 84/112 runs, 63,400/130,000 steps. G0 (prefix 76/76, all eight cells
+  reproduced their v1281 references exactly, phases 8/8 delayed) and G1 pass;
+  G2 FAILS: the lr=2e-3 group's median F = 0.196 rides the late/partial bin
+  boundary, so the verdict flips across bars → **`review`
+  (bar_instability)** — the preregistered guard doing its job on a genuinely
+  boundary-riding data shape.
+- The certain content: **the construction-completion invariant is falsified.**
+  F under 8× compression = 0.08–0.38 (medians 0.20/0.27/0.28 across the three
+  lrs) versus 0.56–0.72 at 1e-3 — generalization no longer waits for
+  construction to near-complete.
+- The refined picture (relative-time overlay): compressed cells actually hold
+  MORE absolute structure at grok (~0.45–0.55 vs 0.29) — the low F comes from
+  the denominator: **high lr keeps purifying the circuit long after grok**,
+  with final shares rising monotonically in lr (0.31 → 0.55–0.59 → 0.62–0.72
+  → 0.71–0.81). lr does not merely compress the clock; it decouples
+  construction from generalization and changes the endpoint purity at fixed
+  width.
+- Three-regime synthesis: slow deep grokking (F≈0.6, no post-grok
+  purification) / compressed grokking (F≈0.25, strong post-grok purification)
+  / the v1283 phase boundary (F≈0.25). Only slow deep grokking equates
+  "generalization" with "construction complete".
+- Banked: the post-grok purification segment itself (extend ladders past
+  t_gen at high lr; same machinery) — quantify wd's continued sculpting after
+  generalization.
+
 ## 失败条件
 
 - Any GPU run before this brief + module + tests are committed = fail.
