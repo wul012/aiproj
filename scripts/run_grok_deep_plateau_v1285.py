@@ -1,0 +1,56 @@
+"""v1285 Phase A: the three d=128 deep-plateau trajectory cells (full + ladders).
+
+Example:
+    python scripts/run_grok_deep_plateau_v1285.py            # full plan
+    python scripts/run_grok_deep_plateau_v1285.py --probe    # P2: seed 1337
+"""
+from __future__ import annotations
+
+import argparse
+import sys
+from pathlib import Path
+
+import torch
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
+
+from minigpt.grok_circuit_timing_v1284 import run_cell  # noqa: E402
+from minigpt.grok_deep_plateau_v1285 import DeepPlateauConfig, run_phase_a  # noqa: E402
+
+
+def main(argv=None) -> None:
+    parser = argparse.ArgumentParser(description="v1285 Phase A trainer")
+    parser.add_argument("--out-dir", type=Path,
+                        default=ROOT / "output" / "grok-deep-plateau-v1285")
+    parser.add_argument("--probe", action="store_true",
+                        help="P2 probe: the full ladder for seed 1337")
+    args = parser.parse_args(argv)
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    cfg = DeepPlateauConfig()
+    args.out_dir.mkdir(parents=True, exist_ok=True)
+    if args.probe:
+        cell = run_cell(cfg, cfg.width, cfg.seeds[0], "delayed", device)
+        torch.save(cell, args.out_dir / "p2_probe.pt")
+        print(f"probe seed={cfg.seeds[0]} prefix_ok={cell['prefix_ok']}"
+              f" t_mem={cell['t_mem']} t_gen={cell['t_gen']}"
+              f" heldout={cell['heldout_acc']}"
+              f" final_share={cell['final_share']} c0={cell['c0_share']}")
+        for s in cell["snapshots"]:
+            print(f"  k={s['k']} train={s['train_acc']} val={s['val_acc']}"
+                  f" share={s['share']} prefix_ok={s['prefix_ok']}")
+        return
+    probe_path = args.out_dir / "p2_probe.pt"
+    preloaded = (torch.load(probe_path, weights_only=False),) if probe_path.exists() else ()
+    cache = run_phase_a(cfg, device, preloaded=preloaded)
+    torch.save(cache, args.out_dir / "phase_a_cache.pt")
+    for c in cache["cells"]:
+        print(f"seed={c['seed']}: prefix_ok={c['prefix_ok']} t_mem={c['t_mem']}"
+              f" t_gen={c['t_gen']} final_share={c['final_share']}"
+              f" snapshots={len(c['snapshots'])}")
+    print(f"runs={cache['runs']} total_steps={cache['total_steps']}")
+    print(f"cache={args.out_dir / 'phase_a_cache.pt'}")
+
+
+if __name__ == "__main__":
+    main()
