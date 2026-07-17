@@ -51,6 +51,7 @@ them are the most instructive rows in the table.
 | Norm vs relative step | v1281 | Preregistered `review` (mixed_pairs: ρ 0.359/0.778), but both matched-step pairs exclude the small-norm branch — the ABSOLUTE lr dominates the clock (α=1 dose 11,400 → ~1,400, saturating at lr ≥ 4e-3) and larger norm is mildly faster at adequate lr (α=2 @ 8e-3: 900 steps, heldout 1.0). The v1277–v1280 width/norm effects largely reduce to an lr-starved baseline | [brief](docs/v1281-norm-vs-step-brief.md) |
 | Width × lr | v1282 | Preregistered `review` (broken_cells: w=16 exceeds its stability window at 4e-3 — the instability guard fired as designed). Descriptively: v1279's d=64 hole CLOSES at 4× lr (2,400 steps vs censored-at-100k), the narrow speedup inverts (w=32 ~3× slower than d=128), and the usable lr window shifts upward with width. Two w=16 seeds grok without ever memorizing | [brief](docs/v1282-width-lr-brief.md) |
 | Delay gate | v1283 | Preregistered `review` (mixed_widths) — and the mixedness is the finding: grokking's delayed phase is width-gated (P1: the delay never vanishes with lr at d=128; w=16 never groks at any lr), and the onset is a sharp bimodal jump at critical width ≈24 where seeds split between phases. No intermediate cells exist; coupled cells have delay exactly 0. The `graded` branch was cleanly excluded | [brief](docs/v1283-delay-gate-brief.md) |
+| Circuit timing | v1284 | Preregistered `review` (mixed_fractions) — the uniformity is the finding: both phases build the Fourier circuit on the SAME relative schedule (F ≈ 0.25 in coupled and delayed cells; the width-matched w=24 pair differs only by ~3× time dilation). The plateau does not own construction — the slow-sculpting account needs revision. Method: deterministic truncated re-runs as weight snapshots, prefix-verified 43/43 | [brief](docs/v1284-circuit-timing-brief.md) |
 
 ## How to trust a result here
 
@@ -123,22 +124,50 @@ scope.
 - [v1281 norm-vs-step brief](docs/v1281-norm-vs-step-brief.md)
 - [v1282 width-lr brief](docs/v1282-width-lr-brief.md)
 - [v1283 delay-gate brief](docs/v1283-delay-gate-brief.md)
+- [v1284 circuit-timing brief](docs/v1284-circuit-timing-brief.md)
 - [Stage 2 operational brief (inactive)](docs/stage2-aiproj-operational-brief.md)
 - [Deep maintenance v1268-v1272 closeout](docs/deep-maintenance-v1268-v1272-closeout.md)
 - [Plain-language project guide](项目通俗说明/README.md)
 
 ## Current version
 
-Version `v1283` maps the gate behind v1282's banked phenomenon. Its P1 forensics
-over the four committed caches first established that grokking's delayed phase is
-width-gated, not lr-induced (the delay compresses ~11,100 → ~700 steps with lr at
-d=128 but never vanishes, while w=16 is coupled — train and val rise together — at
-every lr). The boundary experiment (widths 20/24/28 plus re-run w=16/32 anchors)
-lands the preregistered `review` (mixed_widths), and the mixedness is the finding:
-the onset is a sharp bimodal jump with a stochastic critical width at ≈24 — the
-max-gap band [0.5, 0.7] stays empty across all 13 cells, coupled cells have delay
-exactly 0, and w=24's seeds jump between the two phases rather than sliding
-through an intermediate one.
+Version `v1284` asks what the grokking plateau is FOR: does it slowly sculpt the
+Fourier circuit (the canonical account), or wait while the circuit forms late?
+Method: deterministic truncated re-runs as weight snapshots — zero modification of
+the canonical training code, self-verified by a prefix-determinism gate (43/43
+snapshots passed). The preregistered verdict is `review` (mixed_fractions), and
+the uniformity is the finding: both phases build the circuit on the SAME relative
+schedule (pre-generalization structure fraction ≈ 0.25 in coupled and delayed
+cells alike), with one C(t) curve shape merely time-stretched — the plateau does
+not own construction. Coupled-phase endpoints are the MOST concentrated circuits
+measured (top-5 share up to 0.91), extending v1277's endpoint gradient.
+
+## Latest v1284 checkpoint
+
+- Preregistered circuit-timing experiment (commit `74970587`; zero code changes
+  after it — third consecutive clean chain). P1 settled the endpoint question
+  from the v1277 cache (coupled endpoints MORE concentrated: 0.85–0.92 at w=16
+  vs 0.68–0.72 at w=32), leaving pure timing. 6 trajectory cells including the
+  width-matched w=24 cross-phase pair; full runs + 11-step truncation ladders;
+  budget 49/76 runs and 60,600/260,000 total steps.
+- Method validated: training is seed-deterministic, so a truncated re-run IS the
+  step-k weight snapshot; every truncated run's last curve row matched the full
+  run's row exactly (prefix gate 43/43). The gate also caught a relative-step bug
+  in the test fake before any GPU ran.
+- Verdict `review` (mixed_fractions, bar-stable): F medians 0.275 (coupled) vs
+  0.240 (delayed) — no preregistered separation pattern fires. The certain
+  content: ~¼ of the final circuit's power is in place when val crosses 0.1 in
+  BOTH phases; the w=24 pair (same width, same recipe, seed decides the phase)
+  shows F 0.251 vs 0.240 with the delayed construction curve dilated ~3×. The
+  slow-sculpting story needs revision: structure grows at the same relative
+  slope before, during, and without the plateau.
+- Descriptive: final top-5 concentration falls smoothly with width (0.91 → 0.85
+  → 0.76 across 20/24/28, joining v1277's 16/32 endpoints); near-boundary
+  plateaus are leaky (val creeps 0.08→0.53 during w=28's plateau; t_mem
+  1600–2300 vs d=128's 100–300). Banked: the same measurement on d=128's
+  classic deep plateau — is F there also ≈0.25? Evidence:
+  `f/1284/解释/grok_circuit_timing_v1284/` (five formats plus the Phase-A
+  cache), `f/1284/图片/grok-circuit-timing-v1284.png`, walkthrough 1241.
 
 ## Latest v1283 checkpoint
 

@@ -111,6 +111,30 @@ the final suite.
   no logit/attention-level circuit analysis (embedding spectra only — the
   v1188 measurement); no new phases; v1277–v1283 caches read-only.
 
+## Closeout (post-run; zero code changes after preregistration)
+
+- Budget 49/76 runs, 60,600/260,000 steps. Phase B CPU-only; G0 (prefix
+  determinism 43/43 snapshots, phases 6/6 matching v1283, heldout ≥0.963),
+  G1, G2 all pass. The truncated-rerun snapshot method is validated.
+- Preregistered verdict: **`review` (mixed_fractions)**, bar-stable. F medians:
+  coupled 0.275, delayed 0.240 — both inside the (0.2, 0.5) middle band, so no
+  preregistered separation pattern fires. The endpoint override did not fire
+  (coupled final median 0.883 ≫ 0.5).
+- The uniformity is the finding: **both phases build the circuit on the same
+  relative schedule** — ~¼ of the final circuit power is in place when val
+  crosses 0.1 in BOTH phases, and the C(t) curves share one shape, merely
+  time-stretched (the width-matched w=24 pair: F 0.251 vs 0.240, the delayed
+  seed's curve dilated ~3×). The plateau does not own construction; the
+  canonical slow-sculpting story needs revision here — structure grows at the
+  same slope before, during, and outside the plateau.
+- Endpoint gradient (descriptive): final top-5 share falls smoothly with width
+  — 0.88–0.91 (w=20) → 0.81–0.85 (24) → 0.76 (28), joining v1277's 0.85–0.92
+  (16) and 0.68–0.72 (32). Near-boundary plateaus are LEAKY (w=28/1337 val
+  creeps 0.08→0.53 during the plateau; t_mem 1600–2300 vs d=128's 100–300).
+- Banked: the same trajectory measurement on d=128's classic DEEP plateau
+  (val pinned at chance for thousands of steps; ladder cost ~40k+ steps/cell)
+  — is F there also ≈0.25, or genuinely higher?
+
 ## 失败条件
 
 - Any GPU run before this brief + module + tests are committed = fail.

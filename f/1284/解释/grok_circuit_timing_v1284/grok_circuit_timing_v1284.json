@@ -1,0 +1,97 @@
+{
+  "schema": "grok_circuit_timing_v1284.v1",
+  "generated_at": "2026-07-17T04:49:50.074465+00:00",
+  "summary": {
+    "verdict": "review",
+    "reason": "mixed_fractions",
+    "scope": "own_grokked_substrate_toy_scale_canonical_recipe_6_cells",
+    "g0_ok": true,
+    "g1_complete": true,
+    "g2_bar_stable": true,
+    "fractions": {
+      "20/1337": 0.2748,
+      "20/1338": 0.4718,
+      "24/1337": 0.2506,
+      "24/1338": 0.2399,
+      "28/1337": 0.3084,
+      "28/1338": 0.2186
+    },
+    "coupled_final_median": 0.8833,
+    "runs": 49,
+    "total_steps": 60600
+  },
+  "cells": [
+    {
+      "width": 20,
+      "seed": 1337,
+      "phase": "coupled",
+      "fraction": 0.2748,
+      "c0_share": 0.11716,
+      "final_share": 0.91488,
+      "t_mem": 1300,
+      "t_gen": 1300,
+      "heldout_acc": 0.985652,
+      "snapshot_count": 5
+    },
+    {
+      "width": 20,
+      "seed": 1338,
+      "phase": "coupled",
+      "fraction": 0.4718,
+      "c0_share": 0.107952,
+      "final_share": 0.883328,
+      "t_mem": 1500,
+      "t_gen": 1500,
+      "heldout_acc": 0.988043,
+      "snapshot_count": 6
+    },
+    {
+      "width": 24,
+      "seed": 1337,
+      "phase": "coupled",
+      "fraction": 0.2506,
+      "c0_share": 0.125861,
+      "final_share": 0.851287,
+      "t_mem": 1100,
+      "t_gen": 1100,
+      "heldout_acc": 0.988442,
+      "snapshot_count": 5
+    },
+    {
+      "width": 24,
+      "seed": 1338,
+      "phase": "delayed",
+      "fraction": 0.2399,
+      "c0_share": 0.109785,
+      "final_share": 0.811575,
+      "t_mem": 2300,
+      "t_gen": 3600,
+      "heldout_acc": 0.98791,
+      "snapshot_count": 9
+    },
+    {
+      "width": 28,
+      "seed": 1337,
+      "phase": "delayed",
+      "fraction": 0.3084,
+      "c0_share": 0.128936,
+      "final_share": 0.764643,
+      "t_mem": 1900,
+      "t_gen": 5100,
+      "heldout_acc": 0.963332,
+      "snapshot_count": 10
+    },
+    {
+      "width": 28,
+      "seed": 1338,
+      "phase": "delayed",
+      "fraction": 0.2186,
+      "c0_share": 0.108132,
+      "final_share": 0.763848,
+      "t_mem": 1600,
+      "t_gen": 2700,
+      "heldout_acc": 0.960941,
+      "snapshot_count": 8
+    }
+  ]
+}

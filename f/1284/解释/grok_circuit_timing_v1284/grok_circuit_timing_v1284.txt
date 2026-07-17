@@ -1,0 +1,11 @@
+status=None
+decision=None
+verdict=review
+reason=mixed_fractions
+scope=own_grokked_substrate_toy_scale_canonical_recipe_6_cells
+g0_ok=True
+g1_complete=True
+g2_bar_stable=True
+coupled_final_median=0.8833
+runs=49
+total_steps=60600

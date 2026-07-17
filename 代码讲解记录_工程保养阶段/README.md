@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1241-v1284-circuit-timing.md
+ -> v1284 code explanation: measures WHEN the Fourier circuit forms relative to generalization in each of v1283's phases, using deterministic truncated re-runs as weight snapshots (zero training-code modification, prefix-determinism gate 43/43). Preregistered `review` (mixed_fractions) — the uniformity is the finding: both phases build the circuit on the same relative schedule (F~0.25 everywhere; the width-matched w=24 pair differs only by ~3x time dilation), so the plateau does not own construction and the slow-sculpting account needs revision. Coupled endpoints are the most concentrated circuits measured. Evidence lives under `f/1284`.
+
 1240-v1283-delay-gate.md
  -> v1283 code explanation: locates the gate behind v1282's banked no-memorization phenomenon. P1 forensics over four committed caches (free) establish the delayed phase is width-gated, not lr-induced, with a bimodal max-gap distribution whose empty hole [0.41,0.79] freezes the thresholds. The boundary experiment (widths 20/24/28 + re-run anchors) lands preregistered `review` (mixed_widths) — the finding itself: a sharp bimodal jump at critical width ~24 where seeds split between phases; no intermediate cells exist, coupled cells have delay exactly 0, and the `graded` branch is cleanly excluded. Evidence lives under `f/1283`.
 
