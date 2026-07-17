@@ -50,6 +50,7 @@ them are the most instructive rows in the table.
 | Init-scale × lr rescue | v1280 | `norm_clock_revived_under_lr_scaling` — v1279's death is an lr artifact: lr↓ rescues nothing, but at 2–4× lr the norm-shrunk α=0.5 model groks in 1,300–4,000 steps vs the baseline's 11,400 (heldout up to 0.9992). Dose arm: at frozen lr the death boundary is a cliff in (0.7, 0.85]. **The "norm" in the verdict name was emptied by v1281** (next row) | [brief](docs/v1280-init-rescue-brief.md) |
 | Norm vs relative step | v1281 | Preregistered `review` (mixed_pairs: ρ 0.359/0.778), but both matched-step pairs exclude the small-norm branch — the ABSOLUTE lr dominates the clock (α=1 dose 11,400 → ~1,400, saturating at lr ≥ 4e-3) and larger norm is mildly faster at adequate lr (α=2 @ 8e-3: 900 steps, heldout 1.0). The v1277–v1280 width/norm effects largely reduce to an lr-starved baseline | [brief](docs/v1281-norm-vs-step-brief.md) |
 | Width × lr | v1282 | Preregistered `review` (broken_cells: w=16 exceeds its stability window at 4e-3 — the instability guard fired as designed). Descriptively: v1279's d=64 hole CLOSES at 4× lr (2,400 steps vs censored-at-100k), the narrow speedup inverts (w=32 ~3× slower than d=128), and the usable lr window shifts upward with width. Two w=16 seeds grok without ever memorizing | [brief](docs/v1282-width-lr-brief.md) |
+| Delay gate | v1283 | Preregistered `review` (mixed_widths) — and the mixedness is the finding: grokking's delayed phase is width-gated (P1: the delay never vanishes with lr at d=128; w=16 never groks at any lr), and the onset is a sharp bimodal jump at critical width ≈24 where seeds split between phases. No intermediate cells exist; coupled cells have delay exactly 0. The `graded` branch was cleanly excluded | [brief](docs/v1283-delay-gate-brief.md) |
 
 ## How to trust a result here
 
@@ -121,22 +122,51 @@ scope.
 - [v1280 init-rescue brief](docs/v1280-init-rescue-brief.md)
 - [v1281 norm-vs-step brief](docs/v1281-norm-vs-step-brief.md)
 - [v1282 width-lr brief](docs/v1282-width-lr-brief.md)
+- [v1283 delay-gate brief](docs/v1283-delay-gate-brief.md)
 - [Stage 2 operational brief (inactive)](docs/stage2-aiproj-operational-brief.md)
 - [Deep maintenance v1268-v1272 closeout](docs/deep-maintenance-v1268-v1272-closeout.md)
 - [Plain-language project guide](项目通俗说明/README.md)
 
 ## Current version
 
-Version `v1282` runs the width version of the v1281 control, testing the arc's
-synthesis on the question that started it (v1277's "narrow groks 5× faster"): at
-lr=4e-3, widths {16, 32, 64} train against the v1281 d=128 reference floor. The
-preregistered verdict is `review` (broken_cells: w=16 exceeds its stability window
-at 4e-3 — one seed neither groks nor memorizes, and the instability≠slowness guard
-fired exactly as designed). The descriptive resolution: v1279's d=64 hole CLOSES
-(2,400 steps vs censored-at-100k; ρ=1.71 converged), the narrow speedup vanishes
-and inverts (w=32 is ~3× slower than d=128 at high lr), and the usable lr window
-shifts upward with width. Two w=16 seeds grok without ever memorizing — a new
-phenomenon, banked.
+Version `v1283` maps the gate behind v1282's banked phenomenon. Its P1 forensics
+over the four committed caches first established that grokking's delayed phase is
+width-gated, not lr-induced (the delay compresses ~11,100 → ~700 steps with lr at
+d=128 but never vanishes, while w=16 is coupled — train and val rise together — at
+every lr). The boundary experiment (widths 20/24/28 plus re-run w=16/32 anchors)
+lands the preregistered `review` (mixed_widths), and the mixedness is the finding:
+the onset is a sharp bimodal jump with a stochastic critical width at ≈24 — the
+max-gap band [0.5, 0.7] stays empty across all 13 cells, coupled cells have delay
+exactly 0, and w=24's seeds jump between the two phases rather than sliding
+through an intermediate one.
+
+## Latest v1283 checkpoint
+
+- Preregistered delay-gate experiment (commit `5146a306`; zero code changes after
+  it). P1 cache forensics (disclosed calibration): the strong form of "grokking is
+  an lr artifact" is FALSE at d=128 — a full memorized-not-generalizing plateau
+  (max train−val gap 0.85–1.0) exists at every stable lr; and w=16 never groks at
+  any lr (t_mem ≈ t_gen at 1e-3, max_gap 0.29–0.41 at 4e-3). The max_gap
+  distribution over 33 cached cells is bimodal with an empty hole [0.41, 0.79] —
+  classification thresholds were frozen inside it before any new run.
+- 13 cells at the canonical recipe (widths {20, 24, 28} × 3 seeds + w=16/32
+  anchors × 2 re-run with full train curves), 13/16 GPU budget, all 13
+  generalized (heldout 0.952–0.988). Verdict `review` (mixed_widths, stable
+  across both threshold pairs): w=20 coupled 3/3, w=24 MIXED (1 coupled /
+  2 delayed), w=28 delayed 3/3; anchors confirmed coupled/delayed at curve level.
+- The preregistered `graded` branch was cleanly excluded: no cell lands between
+  the phases (the hole survives 13 new samples), and the delay statistic is
+  bimodal too — coupled cells cross t_mem and t_gen at the same eval step
+  (delay = 0), delayed cells at ≥300. The transition is first-order-like with
+  seed fluctuation at the critical width.
+- Arc closure, three layers deep: v1277's "narrow groks 5× faster" decomposes
+  into (a) w≥32 speed differences were lr starvation (v1281/v1282), (b) w≤20 is
+  not grokking at all — no delayed phase exists there, and (c) the phase boundary
+  sits at w≈24, sharp and stochastic. Banked: the mechanism version — does the
+  coupled phase grow the Fourier circuit directly, without passing through a
+  memorization solution? Evidence: `f/1283/解释/grok_delay_gate_v1283/` (five
+  formats plus the Phase-A cache), `f/1283/图片/grok-delay-gate-v1283.png`,
+  walkthrough 1240.
 
 ## Latest v1282 checkpoint
 

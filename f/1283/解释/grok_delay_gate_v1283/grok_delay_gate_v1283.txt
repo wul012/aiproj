@@ -1,0 +1,8 @@
+status=None
+decision=None
+verdict=review
+reason=mixed_widths
+scope=own_grokked_substrate_toy_scale_canonical_recipe_60k_budget
+g0_anchors=True
+g1_complete=True
+g2_threshold_stable=True

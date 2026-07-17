@@ -96,6 +96,31 @@ BEFORE the final suite.
   mechanistic probe of WHY the gate exists (banked: Fourier-circuit formation
   vs width at the boundary); v1279–v1282 caches read-only.
 
+## Closeout (post-run; zero code changes after preregistration)
+
+- GPU 13/16 (P2 probe filled its slot). Phase B CPU-only; G0/G1/G2 all pass;
+  all 13 cells generalized (heldout 0.952–0.988, no failed cells).
+- Preregistered verdict: **`review` (mixed_widths)** — w=24's seeds split
+  1 coupled / 2 delayed, and the width-class rule routes mixed to review.
+  Both threshold pairs agree (the P2-flagged threshold_instability never
+  fired: the review reason is identical under both).
+- The mixedness is the finding: the onset is a SHARP BIMODAL JUMP with a
+  stochastic critical width at ≈24. Even with 13 new cells the [0.5, 0.7]
+  max_gap band stays EMPTY — no cell sits between the phases; w=24 seeds jump
+  between modes (gaps 0.48 vs 0.71/0.72) rather than sliding through. The
+  delay statistic is bimodal too: coupled cells have delay EXACTLY 0
+  (t_mem = t_gen), delayed cells ≥300 steps. First-order-transition-like, with
+  finite-size seed fluctuation at the critical point; the preregistered
+  `graded` branch was cleanly excluded.
+- Anchors confirmed the P1 field-based inference at curve level (w=16 coupled
+  2/2, w=32 delayed 2/2). Arc closure: "narrow groks faster" now has all three
+  layers — w≥32 differences were lr starvation (v1281/82), w≤20 is not
+  grokking at all (no delayed phase), and the boundary at w≈24 is sharp and
+  stochastic.
+- Banked: the mechanism version — does the coupled phase grow the Fourier
+  circuit directly without passing through a memorization solution? (ties to
+  v1191's circuit footprint and v1277's capacity floor).
+
 ## 失败条件
 
 - Any GPU run before this brief + module + tests are committed = fail.

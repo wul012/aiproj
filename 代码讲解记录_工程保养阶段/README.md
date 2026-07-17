@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1240-v1283-delay-gate.md
+ -> v1283 code explanation: locates the gate behind v1282's banked no-memorization phenomenon. P1 forensics over four committed caches (free) establish the delayed phase is width-gated, not lr-induced, with a bimodal max-gap distribution whose empty hole [0.41,0.79] freezes the thresholds. The boundary experiment (widths 20/24/28 + re-run anchors) lands preregistered `review` (mixed_widths) — the finding itself: a sharp bimodal jump at critical width ~24 where seeds split between phases; no intermediate cells exist, coupled cells have delay exactly 0, and the `graded` branch is cleanly excluded. Evidence lives under `f/1283`.
+
 1239-v1282-width-lr.md
  -> v1282 code explanation: the width version of the v1281 control — widths {16,32,64} at lr=4e-3 against the v1281 d=128 floor. Preregistered `review` (broken_cells: w=16 exceeds its stability window, the instability guard's first real firing). Descriptively: v1279's d=64 hole CLOSES at 4x lr (2,400 steps vs censored-at-100k), the narrow speedup inverts (w=32 ~3x slower), the usable lr window shifts upward with width, and two w=16 seeds grok WITHOUT ever memorizing (banked). Evidence lives under `f/1282`.
 

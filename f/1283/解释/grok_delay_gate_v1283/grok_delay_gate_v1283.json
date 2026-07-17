@@ -1,0 +1,172 @@
+{
+  "schema": "grok_delay_gate_v1283.v1",
+  "generated_at": "2026-07-17T03:38:57.003059+00:00",
+  "summary": {
+    "verdict": "review",
+    "reason": "mixed_widths",
+    "scope": "own_grokked_substrate_toy_scale_canonical_recipe_60k_budget",
+    "g0_anchors": true,
+    "g1_complete": true,
+    "g2_threshold_stable": true,
+    "width_classes": {
+      "20": "coupled",
+      "24": "mixed",
+      "28": "delayed"
+    },
+    "threshold_pairs": [
+      [
+        0.5,
+        0.7
+      ],
+      [
+        0.4,
+        0.8
+      ]
+    ]
+  },
+  "cells": [
+    {
+      "arm": "boundary",
+      "width": 20,
+      "seed": 1337,
+      "phase": "coupled",
+      "max_gap": 0.3455,
+      "t_mem": 1300,
+      "t_gen": 1300,
+      "delay": 0,
+      "heldout_acc": 0.985652
+    },
+    {
+      "arm": "boundary",
+      "width": 20,
+      "seed": 1338,
+      "phase": "coupled",
+      "max_gap": 0.4679,
+      "t_mem": 1500,
+      "t_gen": 1500,
+      "delay": 0,
+      "heldout_acc": 0.988043
+    },
+    {
+      "arm": "boundary",
+      "width": 20,
+      "seed": 1339,
+      "phase": "coupled",
+      "max_gap": 0.4386,
+      "t_mem": 1700,
+      "t_gen": 1700,
+      "delay": 0,
+      "heldout_acc": 0.957221
+    },
+    {
+      "arm": "boundary",
+      "width": 24,
+      "seed": 1337,
+      "phase": "coupled",
+      "max_gap": 0.4766,
+      "t_mem": 1100,
+      "t_gen": 1100,
+      "delay": 0,
+      "heldout_acc": 0.988442
+    },
+    {
+      "arm": "boundary",
+      "width": 24,
+      "seed": 1338,
+      "phase": "delayed",
+      "max_gap": 0.7073,
+      "t_mem": 2300,
+      "t_gen": 3600,
+      "delay": 1300,
+      "heldout_acc": 0.98791
+    },
+    {
+      "arm": "boundary",
+      "width": 24,
+      "seed": 1339,
+      "phase": "delayed",
+      "max_gap": 0.7238,
+      "t_mem": 2600,
+      "t_gen": 2900,
+      "delay": 300,
+      "heldout_acc": 0.974625
+    },
+    {
+      "arm": "boundary",
+      "width": 28,
+      "seed": 1337,
+      "phase": "delayed",
+      "max_gap": 0.8387,
+      "t_mem": 1900,
+      "t_gen": 5100,
+      "delay": 3200,
+      "heldout_acc": 0.963332
+    },
+    {
+      "arm": "boundary",
+      "width": 28,
+      "seed": 1338,
+      "phase": "delayed",
+      "max_gap": 0.7687,
+      "t_mem": 1600,
+      "t_gen": 2700,
+      "delay": 1100,
+      "heldout_acc": 0.960941
+    },
+    {
+      "arm": "boundary",
+      "width": 28,
+      "seed": 1339,
+      "phase": "delayed",
+      "max_gap": 0.7486,
+      "t_mem": 1600,
+      "t_gen": 3400,
+      "delay": 1800,
+      "heldout_acc": 0.979407
+    },
+    {
+      "arm": "anchor",
+      "width": 16,
+      "seed": 1337,
+      "phase": "coupled",
+      "max_gap": 0.337,
+      "t_mem": null,
+      "t_gen": 2800,
+      "delay": null,
+      "heldout_acc": 0.952305
+    },
+    {
+      "arm": "anchor",
+      "width": 16,
+      "seed": 1338,
+      "phase": "coupled",
+      "max_gap": 0.4079,
+      "t_mem": 2600,
+      "t_gen": 2600,
+      "delay": 0,
+      "heldout_acc": 0.955228
+    },
+    {
+      "arm": "anchor",
+      "width": 32,
+      "seed": 1337,
+      "phase": "delayed",
+      "max_gap": 0.8067,
+      "t_mem": 1200,
+      "t_gen": 2600,
+      "delay": 1400,
+      "heldout_acc": 0.97024
+    },
+    {
+      "arm": "anchor",
+      "width": 32,
+      "seed": 1338,
+      "phase": "delayed",
+      "max_gap": 0.729,
+      "t_mem": 800,
+      "t_gen": 3400,
+      "delay": 2600,
+      "heldout_acc": 0.953368
+    }
+  ]
+}
