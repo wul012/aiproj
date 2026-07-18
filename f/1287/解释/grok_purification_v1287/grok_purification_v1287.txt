@@ -1,0 +1,11 @@
+status=None
+decision=None
+verdict=review
+reason=substrate_unsound
+scope=own_grokked_substrate_toy_scale_d128_post_grok_3x_horizon
+g0_ok=False
+g1_complete=True
+g2_bar_stable=False
+f_ext_unified=None
+runs=44
+total_steps=407800

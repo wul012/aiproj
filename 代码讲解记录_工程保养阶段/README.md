@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1244-v1287-post-grok-purification.md
+ -> v1287 code explanation: observes directly the post-grok purification v1286 inferred from endpoints — all 11 v1285/v1286 cells extended to 3x t_gen with the early stop disabled via the existing `grok_stop_val` config field (zero training-code modification), purity measured on each cell's committed cache top-5 set. Preregistered `review` (substrate_unsound: the pre-announced post-grok stability guard fired on two 4e-3 cells). What it caught: grokked solutions are METASTABLE — 9/11 cells spike train+val together and self-heal in 100-300 steps; the "dead" cells are censored mid-spike at their horizons. Purification is real and universal (own purity 0.31→0.50-0.63 at 1e-3, →0.88-0.93 at high lr; extended 4e-3 overtakes 8e-3), and canonical purification rotates the frequency set. Evidence lives under `f/1287`.
+
 1243-v1286-lr-compression.md
  -> v1286 code explanation: tests the construction-completion invariant by re-running the eight v1281 d=128 cells (lr 2-8e-3) with snapshot ladders. Preregistered `review` (bar_instability: the 2e-3 median rides the 0.2 bin line; the G2 guard fired on genuinely boundary-riding data). Certain content: the invariant is FALSIFIED — F drops to ~0.25 under 8x compression — yet compressed cells hold MORE absolute structure at grok; high lr keeps purifying after grok (final shares 0.31→0.81 with lr), so lr decouples construction from generalization. Evidence lives under `f/1286`.
 

@@ -54,6 +54,7 @@ them are the most instructive rows in the table.
 | Circuit timing | v1284 | Preregistered `review` (mixed_fractions) — the uniformity is the finding: both phases build the Fourier circuit on the SAME relative schedule (F ≈ 0.25 in coupled and delayed cells; the width-matched w=24 pair differs only by ~3× time dilation). Method: deterministic truncated re-runs as weight snapshots, prefix-verified 43/43. **Scoped by v1285** (next row): this is the BOUNDARY schedule | [brief](docs/v1284-circuit-timing-brief.md) |
 | Deep plateau | v1285 | `deep_plateau_sculpts` — the first non-review verdict since v1280: on the canonical d=128 plateau F = 0.56–0.72 (median 0.600), so the deep plateau genuinely builds the circuit before val moves and v1284's revision is formally a boundary effect. All three cells reproduced their v1279 references exactly; v1188's 0.307 endpoint replicated ×3; the width-purity gradient closes 0.92@16 → 0.31@128 | [brief](docs/v1285-deep-plateau-brief.md) |
 | lr compression | v1286 | Preregistered `review` (bar_instability — the 2e-3 median rides the bin boundary; the guard fired as designed). Certain content: the construction-completion invariant is FALSIFIED — F drops to ~0.25 under 8× compression, yet compressed cells hold MORE absolute structure at grok; high lr keeps purifying after grok (final shares 0.31 → 0.81 with lr). Only slow deep grokking equates generalization with construction-complete | [brief](docs/v1286-lr-compression-brief.md) |
+| Post-grok purification | v1287 | Preregistered `review` (substrate_unsound — the guard the brief pre-announced as the post-grok stability gate fired). What it caught: grokked solutions are METASTABLE under continued training — 9/11 cells (including canonical 1e-3) show train+val collapse-recovery spikes, all self-healing in 100–300 steps; the two "dead" 4e-3 cells are censored mid-spike exactly at their horizons. Purification itself is real and universal (own-set purity: 0.31→0.50–0.63 at 1e-3, →0.88–0.93 at high lr; extended 4e-3 overtakes 8e-3, so v1286's lr-monotone endpoint was a truncation snapshot), canonical purification rotates the frequency set, and low-lr post-grok training lifts heldout to 1.0 | [brief](docs/v1287-purification-brief.md) |
 
 ## How to trust a result here
 
@@ -129,23 +130,56 @@ scope.
 - [v1284 circuit-timing brief](docs/v1284-circuit-timing-brief.md)
 - [v1285 deep-plateau brief](docs/v1285-deep-plateau-brief.md)
 - [v1286 lr-compression brief](docs/v1286-lr-compression-brief.md)
+- [v1287 post-grok-purification brief](docs/v1287-purification-brief.md)
 - [Stage 2 operational brief (inactive)](docs/stage2-aiproj-operational-brief.md)
 - [Deep maintenance v1268-v1272 closeout](docs/deep-maintenance-v1268-v1272-closeout.md)
 - [Plain-language project guide](项目通俗说明/README.md)
 
 ## Current version
 
-Version `v1286` tests the unified hypothesis the v1284/v1285 pair suggested:
-construction rate is set by the effective lr, and generalization fires when
-construction completes — in which case F should survive v1281's 8× time
-compression. It does not: F drops from 0.56–0.72 (1e-3) to ~0.25 at lr ∈
-{2, 4, 8}×1e-3, falsifying the invariant. The formal verdict is `review`
-(bar_instability — the 2e-3 group's median rides the 0.2 bin boundary exactly,
-and the preregistered guard fired). The refined picture: compressed cells hold
-MORE absolute structure at grok (~0.45–0.55 vs 0.29) — the low F comes from the
-denominator, because high lr keeps purifying the circuit long after grok (final
-shares rise monotonically in lr: 0.31 → 0.81). lr decouples construction from
-generalization and makes the endpoint purer at fixed width.
+Version `v1287` observes directly what v1286 could only infer from endpoints:
+the post-grok purification segment. All 11 v1285/v1286 cells are extended to a
+3× t_gen horizon with the early stop disabled (a config field — zero
+training-code modification), because the P1 cache audit showed every committed
+run had near-zero post-grok time: all known purity numbers were "purity at
+grok". The preregistered substrate guard — announced in the brief as the
+post-grok stability gate — fired: verdict `review` (substrate_unsound). What
+it caught is bigger than the original question: grokked solutions are
+metastable under continued training (9/11 cells spike train+val together and
+self-heal within 100–300 steps; the two "dead" 4e-3 cells are censored
+mid-spike exactly at their horizons). Purification itself is real and
+universal in own-set purity (canonical 0.31 → 0.50–0.63, high lr → 0.88–0.93,
+with extended 4e-3 overtaking 8e-3 — v1286's lr-monotone endpoint was a
+truncation snapshot), and at canonical lr it rotates the frequency set while
+lifting heldout to 1.0.
+
+## Latest v1287 checkpoint
+
+- Preregistered post-grok-purification experiment (commit `19a429c8`; zero
+  code/criteria changes after it — sixth consecutive clean chain). The 11
+  v1285/v1286 cells extended to 3× t_gen with `grok_stop_val = 2.0` disabling
+  the early stop through the existing config field; truncated-rerun snapshots
+  at relative multipliers {1.4, 1.8, 2.4}; purity measured on each cell's
+  COMMITTED cache top-5 set with the cached final_share as anchor. Exactly the
+  preregistered budget: 44 runs, 407,800 steps; prefix gate 33/33;
+  `steps_run == horizon` 11/11; t_mem/t_gen 11/11 bit-equal to references.
+- Verdict `review` (substrate_unsound): 4e-3 seeds 1338/1339 ended at heldout
+  0.431/0.373. The microscope shows both are whole-solution instability
+  spikes (train collapses in sync, 1.0 → 0.46 within one 100-step window,
+  exactly at the horizon) of the same kind 9/11 cells experienced and
+  recovered from — the post-grok regime is a ridge with recurrent
+  collapse-recovery events, not a quiet attractor. The early stop of the
+  canonical recipe was accidentally protective.
+- Exploratory content inside the review: own-set purity rises in all 9
+  surviving cells; canonical purification rotates the top-5 frequency set
+  (set_match ✗ 3/3 — the preregistered climb metric is principledly blind to
+  this, and the rotation diagnostic caught it as designed, so review is
+  doubly earned); low-lr post-grok training improves heldout to 1.0 (5/5).
+- Banked: spike anatomy (norm/curvature trajectories around
+  collapse-recovery; wd=0 post-grok control; short horizon extension to
+  un-censor the two dead cells) and canonical rotation dynamics. Evidence:
+  `f/1287/解释/grok_purification_v1287/` (five formats plus the Phase-A
+  cache), `f/1287/图片/grok_purification_v1287.png`, walkthrough 1244.
 
 ## Latest v1286 checkpoint
 

@@ -115,7 +115,13 @@ final suite.
   "generalization" with "construction complete".
 - Banked: the post-grok purification segment itself (extend ladders past
   t_gen at high lr; same machinery) — quantify wd's continued sculpting after
-  generalization.
+  generalization. **Observed directly by
+  [v1287](v1287-purification-brief.md)** (verdict `review`/substrate_unsound:
+  purification is real and universal in own-set purity, but the post-grok
+  trajectories are metastable — recurrent collapse-recovery spikes, two cells
+  censored mid-spike — and at canonical lr purification rotates the
+  frequency set, so "endpoint purity monotone in lr" above is a truncation
+  snapshot, not equilibria).
 
 ## 失败条件
 

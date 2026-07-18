@@ -160,3 +160,37 @@ bold), colored by lr, vertical line at t_gen.
 ## Amendments
 
 (none)
+
+## Closeout (post-run)
+
+- **Verdict: `review` (reason=substrate_unsound)** — the preregistered
+  substrate guard (documented above as "also the post-grok stability guard")
+  fired: 4e-3/1338 ended at heldout 0.431 and 4e-3/1339 at 0.373. All other
+  G0 checks passed: prefix 33/33, `steps_run == horizon` 11/11 (the early
+  stop was genuinely disabled), t_mem/t_gen 11/11 bit-equal to the committed
+  references. Budget exactly as preregistered: 44 runs, 407,800 steps.
+- What the guard caught (exploratory — review versions issue no primary
+  scientific verdict): post-grok trajectories are **metastable**. 9 of 11
+  cells (including canonical 1e-3) show train+val collapse-recovery spikes
+  after grok, all self-healing within 100–300 steps; the two "dead" cells are
+  censored mid-spike exactly at their horizons (4e-3/1338: val 1.0 at step
+  5300 → 0.431 at 5400 = the horizon, with train collapsing in sync — a
+  whole-solution instability event, not selective generalization loss).
+- Purification itself is real and universal in own-set purity across the 9
+  surviving cells (canonical 0.305 → 0.50–0.63, 2e-3 → 0.72–0.82, 8e-3 →
+  0.88–0.91), but at canonical lr it **rotates the frequency set**
+  (set_match ✗ 3/3; 1337's cached-set share fell to 0.137 while its own
+  purity reached 0.629). The preregistered climb metric cannot see rotated
+  purification, so even absent the substrate failure the primary ladder
+  would have needed review — the design's rotation diagnostic worked as
+  intended. Low-lr post-grok training also *improved* heldout to 1.0 (5/5
+  cells at 1e-3/2e-3), and extended 4e-3 purity (0.93) overtakes 8e-3's
+  (0.89): v1286's "endpoint purity monotone in lr" was a truncation
+  snapshot, not equilibria.
+- Banked for a next version: spike anatomy (norm/curvature around
+  collapse-recovery events; wd=0 post-grok control; a few hundred steps past
+  the horizon to un-censor the two dead cells), and the rotation dynamics at
+  canonical lr.
+- Evidence bundle: [f/1287](../f/1287/解释/说明.md); zero code/criteria
+  changes after preregistration commit `19a429c8` (sixth consecutive clean
+  chain).
