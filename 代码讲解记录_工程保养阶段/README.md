@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1245-v1288-spike-anatomy.md
+ -> v1288 code explanation: the causal follow-up to v1287's metastability discovery — paired branch arms (wd=1.0 vs wd=0.0, sharing the optimizer-reset confound) from nine bit-verified healthy v1287 states, plus two un-censoring runs. Verdict `spikes_are_wd_driven` (the arc's first positive causal verdict): wd=1 arms reproduce the post-grok spikes in 8/9 cells while wd=0 arms are spike-free 9/9; both v1287 "deaths" re-grokked within 100 steps. Norm flow reverses without wd; purification freezes where it has headroom — purification and metastability are two faces of one wd process. Evidence lives under `f/1288`.
+
 1244-v1287-post-grok-purification.md
  -> v1287 code explanation: observes directly the post-grok purification v1286 inferred from endpoints — all 11 v1285/v1286 cells extended to 3x t_gen with the early stop disabled via the existing `grok_stop_val` config field (zero training-code modification), purity measured on each cell's committed cache top-5 set. Preregistered `review` (substrate_unsound: the pre-announced post-grok stability guard fired on two 4e-3 cells). What it caught: grokked solutions are METASTABLE — 9/11 cells spike train+val together and self-heal in 100-300 steps; the "dead" cells are censored mid-spike at their horizons. Purification is real and universal (own purity 0.31→0.50-0.63 at 1e-3, →0.88-0.93 at high lr; extended 4e-3 overtakes 8e-3), and canonical purification rotates the frequency set. Evidence lives under `f/1287`.
 

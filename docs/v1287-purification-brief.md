@@ -190,7 +190,11 @@ bold), colored by lr, vertical line at t_gen.
 - Banked for a next version: spike anatomy (norm/curvature around
   collapse-recovery events; wd=0 post-grok control; a few hundred steps past
   the horizon to un-censor the two dead cells), and the rotation dynamics at
-  canonical lr.
+  canonical lr. **Executed by [v1288](v1288-spike-anatomy-brief.md)**
+  (verdict `spikes_are_wd_driven`: the wd=0 branch arms are spike-free 9/9
+  while wd=1 arms reproduce the spikes 8/9; both "dead" cells re-grokked
+  within 100 steps of their horizons — the censoring interpretation above is
+  confirmed). Rotation dynamics remain banked.
 - Evidence bundle: [f/1287](../f/1287/解释/说明.md); zero code/criteria
   changes after preregistration commit `19a429c8` (sixth consecutive clean
   chain).

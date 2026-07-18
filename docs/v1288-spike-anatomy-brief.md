@@ -122,3 +122,37 @@ across the old horizon.
 ## Amendments
 
 (none)
+
+## Closeout (post-run)
+
+- **Verdict: `spikes_are_wd_driven`** — all gates green (G0: 9/9 branch
+  curves bit-equal to the committed v1287 cache, branch health 9/9 ≥ 0.991,
+  un-censor prefixes bit-exact; G1 complete; G2 stable across the spike-bar
+  grid). S1 = 8/9 (14 episodes, deepest 0.311, all self-healing ≤ 300
+  steps), **S0 = 0** (every wd=0 arm spike-free, min val ≥ 0.909). Exactly
+  the preregistered budget: 29 runs, 117,000 steps. Second non-review
+  verdict since v1280, and the arc's first positive *causal* one.
+- Un-censoring confirmed the v1287 censoring interpretation: both "dead"
+  cells re-grokked within **100 steps** of their old horizons
+  (0.431 → 0.996; 0.373 → 0.999). The preregistered recovered-flag reads
+  False for 4e-3/1338 only because its +1,000 endpoint lands inside another
+  routine shallow dip (0.881) — the endpoint lottery repeating one level up,
+  itself a recursive confirmation of metastability.
+- Secondary readouts: norm direction exactly as predicted (wd=1 median
+  ratio 0.953 shrinking, wd=0 1.753 growing). The purity-freeze prediction
+  is ceiling-limited — branch purities were already 0.73–0.93 in compressed
+  cells, so both arms' median deltas are ≈ 0 (reported as a wash); the one
+  cell with headroom (canonical, branch 0.372) shows the predicted
+  dissociation: wd=1 arm climbs to 0.574, wd=0 arm frozen at 0.373
+  (exploratory label).
+- Synthesis: purification and metastability are two faces of one wd
+  process — wd keeps shrinking and sculpting the grokked solution and
+  periodically pushes it off a stability edge (train+val collapse), after
+  which it re-groks in a few hundred steps. Removing wd removes the spikes,
+  reverses norm flow, and freezes purification.
+- Banked: the microscopic spike trigger (norm/sharpness ramp before an
+  event — needs dense norm sampling); canonical rotation dynamics (v1287's
+  other banked item, untouched).
+- Evidence bundle: [f/1288](../f/1288/解释/说明.md); zero code/criteria
+  changes after preregistration commit `b07f1b1f` (seventh consecutive
+  clean chain).

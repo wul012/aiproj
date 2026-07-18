@@ -55,6 +55,7 @@ them are the most instructive rows in the table.
 | Deep plateau | v1285 | `deep_plateau_sculpts` — the first non-review verdict since v1280: on the canonical d=128 plateau F = 0.56–0.72 (median 0.600), so the deep plateau genuinely builds the circuit before val moves and v1284's revision is formally a boundary effect. All three cells reproduced their v1279 references exactly; v1188's 0.307 endpoint replicated ×3; the width-purity gradient closes 0.92@16 → 0.31@128 | [brief](docs/v1285-deep-plateau-brief.md) |
 | lr compression | v1286 | Preregistered `review` (bar_instability — the 2e-3 median rides the bin boundary; the guard fired as designed). Certain content: the construction-completion invariant is FALSIFIED — F drops to ~0.25 under 8× compression, yet compressed cells hold MORE absolute structure at grok; high lr keeps purifying after grok (final shares 0.31 → 0.81 with lr). Only slow deep grokking equates generalization with construction-complete | [brief](docs/v1286-lr-compression-brief.md) |
 | Post-grok purification | v1287 | Preregistered `review` (substrate_unsound — the guard the brief pre-announced as the post-grok stability gate fired). What it caught: grokked solutions are METASTABLE under continued training — 9/11 cells (including canonical 1e-3) show train+val collapse-recovery spikes, all self-healing in 100–300 steps; the two "dead" 4e-3 cells are censored mid-spike exactly at their horizons. Purification itself is real and universal (own-set purity: 0.31→0.50–0.63 at 1e-3, →0.88–0.93 at high lr; extended 4e-3 overtakes 8e-3, so v1286's lr-monotone endpoint was a truncation snapshot), canonical purification rotates the frequency set, and low-lr post-grok training lifts heldout to 1.0 | [brief](docs/v1287-purification-brief.md) |
+| Spike anatomy | v1288 | `spikes_are_wd_driven` — the arc's first positive CAUSAL verdict: paired branch arms from bit-verified v1287 states (only difference = wd) show wd=1.0 reproduces the post-grok spikes in 8/9 cells (14 episodes, all self-healing) while wd=0.0 is spike-free in 9/9; both v1287 "deaths" re-grokked within 100 steps when un-censored. Norm flow reverses without wd (ratio 0.95 vs 1.75) and the one purity-headroom cell shows the predicted freeze/climb dissociation — purification and metastability are two faces of one wd process | [brief](docs/v1288-spike-anatomy-brief.md) |
 
 ## How to trust a result here
 
@@ -131,27 +132,58 @@ scope.
 - [v1285 deep-plateau brief](docs/v1285-deep-plateau-brief.md)
 - [v1286 lr-compression brief](docs/v1286-lr-compression-brief.md)
 - [v1287 post-grok-purification brief](docs/v1287-purification-brief.md)
+- [v1288 spike-anatomy brief](docs/v1288-spike-anatomy-brief.md)
 - [Stage 2 operational brief (inactive)](docs/stage2-aiproj-operational-brief.md)
 - [Deep maintenance v1268-v1272 closeout](docs/deep-maintenance-v1268-v1272-closeout.md)
 - [Plain-language project guide](项目通俗说明/README.md)
 
 ## Current version
 
-Version `v1287` observes directly what v1286 could only infer from endpoints:
-the post-grok purification segment. All 11 v1285/v1286 cells are extended to a
-3× t_gen horizon with the early stop disabled (a config field — zero
-training-code modification), because the P1 cache audit showed every committed
-run had near-zero post-grok time: all known purity numbers were "purity at
-grok". The preregistered substrate guard — announced in the brief as the
-post-grok stability gate — fired: verdict `review` (substrate_unsound). What
-it caught is bigger than the original question: grokked solutions are
-metastable under continued training (9/11 cells spike train+val together and
-self-heal within 100–300 steps; the two "dead" 4e-3 cells are censored
-mid-spike exactly at their horizons). Purification itself is real and
-universal in own-set purity (canonical 0.31 → 0.50–0.63, high lr → 0.88–0.93,
-with extended 4e-3 overtaking 8e-3 — v1286's lr-monotone endpoint was a
-truncation snapshot), and at canonical lr it rotates the frequency set while
-lifting heldout to 1.0.
+Version `v1288` asks the causal question v1287's discovery demanded: what
+destabilizes the grokked solution? Nine spike-prone cells are branched at
+verified-healthy committed snapshot steps into paired continuation arms —
+wd = 1.0 vs wd = 0.0, sharing the optimizer-reset confound, so the arms
+differ only in weight decay — with branch integrity gated on bit-exact
+reproduction of the committed v1287 curves. Verdict
+**`spikes_are_wd_driven`** (all gates green, stable across the spike-bar
+grid): the wd arm reproduces the post-grok spikes in 8/9 cells (14 episodes,
+deepest 0.31, all self-healing) while every wd = 0 arm is spike-free. The two
+v1287 "deaths" are formally un-censored: both re-grokked within 100 steps of
+their old horizons. Without wd the norm flow reverses (median ratio 1.75 vs
+0.95) and purification freezes where it has headroom (canonical: wd arm
+climbs 0.372 → 0.574, wd = 0 arm frozen) — purification and metastability
+are two faces of one wd process: the same hand that sculpts the circuit
+periodically pushes the solution off a stability edge, and the canonical
+recipe's early stop was protective because it stops before the first shove.
+
+## Latest v1288 checkpoint
+
+- Preregistered spike-anatomy experiment (commit `b07f1b1f`; zero
+  code/criteria changes after it — seventh consecutive clean chain). Paired
+  branch arms from nine verified-healthy v1287 ladder states (P1 moved
+  8e-3/1338's branch off a mid-spike point, val 0.567, to its verified 1.8×
+  point); both arms restart AdamW moments so wd is the only difference;
+  training code untouched (`train_to_grok(init_state=...)`,
+  `grok_stop_val = 2.0`). Exactly the preregistered budget: 29 runs,
+  117,000 steps; branch curves bit-equal to the committed v1287 cache 9/9.
+- Verdict `spikes_are_wd_driven` (S1 = 8/9, S0 = 0, G2-stable across bars
+  {0.8, 0.85, 0.9}): weight decay is necessary for post-grok metastability.
+  Endpoint heldout was deliberately not a gate (an arm may end mid-spike —
+  the disclosed institutionalization of v1287's censoring lesson), and the
+  un-censor runs vindicated it: 4e-3/1339 ends at 1.0, while 4e-3/1338
+  recovered to 0.996 in 100 steps and then landed its new +1,000 endpoint
+  inside another routine shallow dip (0.881) — the endpoint lottery
+  repeating one level up.
+- Secondary (non-verdict): norm direction as predicted (wd shrinks 0.953,
+  no-wd grows 1.753); purity-freeze prediction ceiling-limited (branch
+  purities already 0.73–0.93 → median deltas ≈ 0, reported as a wash) but
+  confirmed in the one headroom cell (canonical dissociation 0.574 vs
+  0.373, exploratory label).
+- Banked: the microscopic spike trigger (norm/sharpness ramp before an
+  event — needs dense norm sampling) and canonical rotation dynamics.
+  Evidence: `f/1288/解释/grok_spike_anatomy_v1288/` (five formats plus the
+  Phase-A cache), `f/1288/图片/grok_spike_anatomy_v1288.png`, walkthrough
+  1245.
 
 ## Latest v1287 checkpoint
 

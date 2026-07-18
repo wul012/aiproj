@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MiniGPT readability report</title>
+<style>
+:root { color-scheme: light; font-family: Arial, "Microsoft YaHei", sans-serif; color: #172026; background: #f6f8fa; }
+body { margin: 0; padding: 24px; }
+header, section, footer { max-width: 1120px; margin: 0 auto 18px; }
+header { padding: 18px 0 8px; border-bottom: 3px solid #2f6f8f; }
+h1 { margin: 0 0 8px; font-size: 28px; letter-spacing: 0; }
+h2 { margin: 0 0 10px; font-size: 18px; letter-spacing: 0; }
+p { margin: 0 0 10px; line-height: 1.5; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; background: transparent; border: 0; padding: 0; }
+.stat { background: #fff; border: 1px solid #d7dee5; border-radius: 8px; padding: 12px; min-height: 64px; }
+.stat span { display: block; color: #5c6b73; font-size: 12px; margin-bottom: 8px; }
+.stat strong { display: block; font-size: 18px; overflow-wrap: anywhere; }
+section { background: #fff; border: 1px solid #d7dee5; border-radius: 8px; padding: 16px; }
+table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+th, td { padding: 9px; border-bottom: 1px solid #e5e9ef; text-align: left; vertical-align: top; overflow-wrap: anywhere; }
+th { background: #eef3f6; }
+ul { margin: 0; padding-left: 20px; }
+li { margin: 6px 0; }
+.muted { color: #687782; }
+footer { color: #687782; font-size: 12px; }
+</style>
+</head>
+<body>
+<header><h1>MiniGPT readability report</h1><p>Late-stage maintenance report for keeping AI governance artifacts readable.</p></header>
+<section class="stats"><article class="stat"><span>verdict</span><strong>spikes_are_wd_driven</strong></article><article class="stat"><span>reason</span><strong></strong></article><article class="stat"><span>scope</span><strong>own_grokked_substrate_toy_scale_d128_branch_arms</strong></article><article class="stat"><span>g0_ok</span><strong>True</strong></article><article class="stat"><span>g1_complete</span><strong>True</strong></article><article class="stat"><span>g2_bar_stable</span><strong>True</strong></article><article class="stat"><span>s1</span><strong>8</strong></article><article class="stat"><span>s0</span><strong>0</strong></article><article class="stat"><span>s1_bar</span><strong>5</strong></article><article class="stat"><span>s0_persist</span><strong>3</strong></article><article class="stat"><span>purity_delta_wd1</span><strong>-0.0033</strong></article><article class="stat"><span>purity_delta_wd0</span><strong>0.0006</strong></article><article class="stat"><span>norm_ratio_wd1</span><strong>0.9533</strong></article><article class="stat"><span>norm_ratio_wd0</span><strong>1.7527</strong></article><article class="stat"><span>uncensor</span><strong>{&#x27;lr&#x27;: 0.004, &#x27;seed&#x27;: 1338, &#x27;recovered&#x27;: False, &#x27;final_val&#x27;: 0.88136, &#x27;heldout_acc&#x27;: 0.88136}, {&#x27;lr&#x27;: 0.004, &#x27;seed&#x27;: 1339, &#x27;recovered&#x27;: True, &#x27;final_val&#x27;: 1.0, &#x27;heldout_acc&#x27;: 1.0}</strong></article><article class="stat"><span>runs</span><strong>29</strong></article><article class="stat"><span>total_steps</span><strong>117000</strong></article></section>
+<section><h2>Cells</h2><table><thead><tr><th>lr</th><th>seed</th><th>k_branch</th><th>horizon</th><th>branch_val</th><th>spikes_wd1</th><th>spikes_wd0</th><th>spikes_continuous</th><th>branch_purity</th><th>purity_wd1</th><th>min_val_wd1</th><th>ends_in_spike_wd1</th><th>purity_wd0</th><th>min_val_wd0</th><th>ends_in_spike_wd0</th></tr></thead><tbody><tr><td>0.001</td><td>1339</td><td>14700</td><td>31500</td><td>1.0</td><td>0</td><td>0</td><td>2</td><td>0.372206</td><td>0.574048</td><td>0.931713</td><td>False</td><td>0.372797</td><td>0.958682</td><td>False</td></tr><tr><td>0.002</td><td>1337</td><td>2700</td><td>5700</td><td>1.0</td><td>1</td><td>0</td><td>1</td><td>0.779647</td><td>0.821574</td><td>0.42487</td><td>False</td><td>0.811434</td><td>0.978212</td><td>False</td></tr><tr><td>0.002</td><td>1338</td><td>3900</td><td>8400</td><td>1.0</td><td>3</td><td>0</td><td>3</td><td>0.726543</td><td>0.716006</td><td>0.311279</td><td>False</td><td>0.748795</td><td>0.969045</td><td>False</td></tr><tr><td>0.004</td><td>1337</td><td>2000</td><td>4200</td><td>1.0</td><td>2</td><td>0</td><td>2</td><td>0.931885</td><td>0.928613</td><td>0.739604</td><td>False</td><td>0.937558</td><td>0.979009</td><td>False</td></tr><tr><td>0.004</td><td>1338</td><td>2500</td><td>5400</td><td>1.0</td><td>4</td><td>0</td><td>3</td><td>0.911456</td><td>0.935397</td><td>0.656835</td><td>False</td><td>0.917273</td><td>0.984456</td><td>False</td></tr><tr><td>0.004</td><td>1339</td><td>1400</td><td>3000</td><td>0.996546</td><td>1</td><td>0</td><td>2</td><td>0.820709</td><td>0.924913</td><td>0.8981</td><td>False</td><td>0.802272</td><td>0.990833</td><td>False</td></tr><tr><td>0.008</td><td>1337</td><td>1400</td><td>3000</td><td>0.999867</td><td>1</td><td>0</td><td>0</td><td>0.93399</td><td>0.914896</td><td>0.363093</td><td>False</td><td>0.90549</td><td>0.98419</td><td>False</td></tr><tr><td>0.008</td><td>1338</td><td>2500</td><td>4200</td><td>0.998406</td><td>1</td><td>0</td><td>1</td><td>0.900113</td><td>0.89399</td><td>0.681812</td><td>False</td><td>0.888696</td><td>0.909659</td><td>False</td></tr><tr><td>0.008</td><td>1339</td><td>2100</td><td>4500</td><td>0.991497</td><td>1</td><td>0</td><td>1</td><td>0.898583</td><td>0.888527</td><td>0.356583</td><td>False</td><td>0.872115</td><td>0.963199</td><td>False</td></tr></tbody></table></section>
+
+<footer>Generated by MiniGPT readability maintenance tooling.</footer>
+</body>
+</html>
