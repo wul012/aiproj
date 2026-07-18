@@ -141,6 +141,7 @@ If a process must remain running, state its name, port/PID if known, and why it 
 - Lesson promotion: when the same deviation or workaround is recorded twice, promote it into this file as a rule instead of recording it a third time.
 - Method kernel: apply the 12-rule kernel and task-brief skeleton from `D:\C\四项目理解统筹\模型使用手册\00-通用方法内核.md` (read once per session; also mirrored in the global `~/.codex/AGENTS.md`).
 - Standalone HTML evidence reports must use an inline empty favicon (for example `data:,`) and browser verification must finish without console errors; this prevents repeated favicon 404 noise in archived screenshots.
+- CI-parity close gate (promoted 2026-07-18 after two same-class misses in the v1287 close): before any close commit, run the gates in CI's shape, not just the local habit — (1) `python -B scripts/check_static_analysis.py` (the ratchet counts ALL issues; strict lint alone is not the gate); (2) new test modules must not `import pytest` (CI's unit-test step is plain unittest with no pytest installed; the arc's test files are pytest-style but pytest-import-free — assert raises via try/except, tolerances via `abs(a-b) < tol`), verified with `PYTHONPATH=src python -m unittest discover -s tests -p "<new_test_file>.py"` expecting a clean import.
 
 ## Elegance Gates (promoted 2026-07-11, program-end review)
 
