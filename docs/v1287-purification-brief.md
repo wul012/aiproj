@@ -194,3 +194,9 @@ bold), colored by lr, vertical line at t_gen.
 - Evidence bundle: [f/1287](../f/1287/解释/说明.md); zero code/criteria
   changes after preregistration commit `19a429c8` (sixth consecutive clean
   chain).
+- Post-close CI fix (disclosed): the static-analysis ratchet caught one E741
+  (ambiguous name `l`) in `decide()`'s group comprehension — renamed to
+  `cell_lr`/`seed`, a pure lint rename with zero behavior change; the v1287
+  tests pass and the analyzer re-derives the identical verdict from the
+  committed cache. The science chain (preregistration → verdict) remains
+  unchanged.

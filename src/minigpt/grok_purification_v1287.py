@@ -289,7 +289,8 @@ def decide(cache: dict, ref_canonical: dict, ref_compressed: dict,
     metrics = {(c["lr"], c["seed"]): cell_metrics(c, refs[(c["lr"], c["seed"])],
                                                   cfg)
                for c in cache["cells"]}
-    groups = {lr: [metrics[(l, s)] for l, s, _t in cfg.cells if l == lr]
+    groups = {lr: [metrics[(cell_lr, seed)]
+                   for cell_lr, seed, _t in cfg.cells if cell_lr == lr]
               for lr in group_lrs(cfg)}
     info["climb_by_lr"] = {str(lr): round(_median([m["climb"] for m in ms]), 4)
                            for lr, ms in groups.items()}
