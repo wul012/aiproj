@@ -194,9 +194,12 @@ bold), colored by lr, vertical line at t_gen.
 - Evidence bundle: [f/1287](../f/1287/解释/说明.md); zero code/criteria
   changes after preregistration commit `19a429c8` (sixth consecutive clean
   chain).
-- Post-close CI fix (disclosed): the static-analysis ratchet caught one E741
-  (ambiguous name `l`) in `decide()`'s group comprehension — renamed to
-  `cell_lr`/`seed`, a pure lint rename with zero behavior change; the v1287
-  tests pass and the analyzer re-derives the identical verdict from the
-  committed cache. The science chain (preregistration → verdict) remains
-  unchanged.
+- Post-close CI fixes (disclosed, two): (1) the static-analysis ratchet
+  caught one E741 (ambiguous name `l`) in `decide()`'s group comprehension —
+  renamed to `cell_lr`/`seed`, a pure lint rename with zero behavior change;
+  (2) the CI unittest runner has no pytest installed and the test module's
+  `import pytest` broke collection — replaced `pytest.raises`/`pytest.approx`
+  with the stdlib idiom the sibling arc test files use (they are
+  pytest-style but pytest-import-free). Test logic unchanged; the analyzer
+  re-derives the identical verdict from the committed cache. The science
+  chain (preregistration → verdict) remains unchanged.

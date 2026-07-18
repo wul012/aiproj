@@ -9,8 +9,6 @@ from __future__ import annotations
 
 from dataclasses import asdict, replace
 
-import pytest
-
 from minigpt.grok_purification_v1287 import (
     SCHEMA,
     PurificationConfig,
@@ -112,14 +110,17 @@ def test_config_and_ladder_derivation():
         [16000, 20500, 27400, 34200]
     assert [step_of(m, 1000) for m in CFG.multipliers] == \
         [1400, 1800, 2400, 3000]
-    with pytest.raises(ValueError):
-        replace(CFG, multipliers=(1.8, 1.4, 3.0)).validate()
-    with pytest.raises(ValueError):
-        replace(CFG, grok_stop_val=0.95).validate()
-    with pytest.raises(ValueError):
-        replace(CFG, max_total_steps=100000).validate()
-    with pytest.raises(ValueError):
-        replace(CFG, max_runs=40).validate()
+    for bad in (
+        replace(CFG, multipliers=(1.8, 1.4, 3.0)),
+        replace(CFG, grok_stop_val=0.95),
+        replace(CFG, max_total_steps=100000),
+        replace(CFG, max_runs=40),
+    ):
+        try:
+            bad.validate()
+        except ValueError:
+            continue
+        raise AssertionError("expected ValueError")
 
 
 def test_verdict_branches():
@@ -239,7 +240,7 @@ def test_metrics_report_and_figure(tmp_path):
     rotated["final_power"] = _power(0.9, [0, 1, 3, 6, 7])
     metrics = cell_metrics(rotated, ref, CFG)
     assert not metrics["set_match"]
-    assert metrics["own_final"] == pytest.approx(0.9, abs=1e-6)
+    assert abs(metrics["own_final"] - 0.9) < 1e-6
     assert metrics["c_final"] < 0.1
 
     cache = _cache((0.5, 0.7, 0.85, 0.9))
@@ -247,8 +248,8 @@ def test_metrics_report_and_figure(tmp_path):
     report = build_report(cache, canonical, compressed, info)
     assert report["schema"] == SCHEMA and len(report["cells"]) == 11
     row = report["cells"][0]
-    assert row["climb"] == pytest.approx(0.9 - 0.305171, abs=1e-6)
-    assert row["f_ext"] == pytest.approx(0.1503, abs=0.02)
+    assert abs(row["climb"] - (0.9 - 0.305171)) < 1e-6
+    assert abs(row["f_ext"] - 0.1503) < 0.02
     assert row["set_match"] and not row["saturated"]  # 0.85 -> 0.9 still moving
     slowed = _new_cell(1e-3, 1337, (0.5, 0.7, 0.895, 0.9))
     assert cell_metrics(slowed, ref, CFG)["saturated"]
