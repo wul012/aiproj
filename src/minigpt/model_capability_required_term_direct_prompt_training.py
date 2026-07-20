@@ -13,7 +13,7 @@ from minigpt.model_capability_required_term_micro_training import (
 from minigpt.model_capability_required_term_prompt_leading_training import (
     REQUIRED_TERM_PROMPT_LEADING_TRAINING_JSON_FILENAME,
 )
-from minigpt.model_capability_required_term_scaffold_probe import read_json_report
+from minigpt.model_capability_required_term_scaffold_probe import read_json_report as read_json_report
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 
 

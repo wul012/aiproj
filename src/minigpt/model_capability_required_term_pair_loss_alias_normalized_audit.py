@@ -3,8 +3,8 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any
 
-from minigpt.model_capability_required_term_pair_loss_alias_focus import REQUIRED_TERM_PAIR_LOSS_ALIAS_FOCUS_JSON_FILENAME, read_json_report
-from minigpt.model_capability_required_term_pair_loss_alias_metrics import normalize_for_required_term, required_term_hit_metrics
+from minigpt.model_capability_required_term_pair_loss_alias_focus import REQUIRED_TERM_PAIR_LOSS_ALIAS_FOCUS_JSON_FILENAME, read_json_report as read_json_report
+from minigpt.model_capability_required_term_pair_loss_alias_metrics import normalize_for_required_term as normalize_for_required_term, required_term_hit_metrics
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 
 

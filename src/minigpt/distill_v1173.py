@@ -38,7 +38,7 @@ import numpy as np
 import torch
 import torch.nn.functional as F
 
-from minigpt.distill_common import make_distill_model as _make_model, shuffle_residual_mass, train_student
+from minigpt.distill_common import make_distill_model as _make_model, train_student
 from minigpt.experiment_utils import mean_std, significant
 from minigpt.report_utils import utc_now
 

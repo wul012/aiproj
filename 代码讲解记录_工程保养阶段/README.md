@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1249-v1292-f401-audited-sweep.md
+ -> v1292 code explanation: stage 3 — the audited F401 sweep. Three audit iterations (naive from-import scan said 146 dead; adding attribute-access consumers said 137; the final multiline-parenthesized + local-alias-aware audit proved 90 KEEP / 62 dead — a naive sweep would have severed 84 live import chains, and one mid-execution break by the public-API `is`-contract tests proved it concretely). Atomic pipeline: 89 keepers formalized as `Y as Y`, 1 noqa'd, 62 removed by ruff --fix only after formalization succeeded. Baseline 153 → 1 (the lone data_prep F821 bug, reserved for v1293). Two honest rollbacks recorded.
+
 1248-v1291-lint-burndown.md
  -> v1291 code explanation: stage 2 of the elegance program — all 118 mechanically-fixable lint issues (92 E702 semicolon lines, 15 E741 ambiguous `l` names, 6 verified-dead F841 assignments, 5 F541) cleared across 20 files, ratchet baseline tightened 271→153. Three-tier verification: AST-identity proof vs HEAD for the 10 split-only files (the parse tree is byte-identical — mathematically zero behavior change), 204/204 focused tests for the rename/deletion files, and the static gate re-read with the corrected pass signal. F401 (re-export risk) and F821 (bug-class) deliberately deferred to their own audited versions.
 

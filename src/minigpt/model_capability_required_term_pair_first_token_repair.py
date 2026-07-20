@@ -11,7 +11,7 @@ from minigpt.model_capability_required_term_pair_first_token_repair_components i
     summarize_first_token_repair_profiles,
     summarize_required_term_pair_first_token_repair,
 )
-from minigpt.model_capability_required_term_scaffold_probe import read_json_report
+from minigpt.model_capability_required_term_scaffold_probe import read_json_report as read_json_report
 from minigpt.report_utils import utc_now
 
 

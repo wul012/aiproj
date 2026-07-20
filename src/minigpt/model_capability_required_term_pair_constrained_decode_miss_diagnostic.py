@@ -6,7 +6,6 @@ from typing import Any
 
 from minigpt.model_capability_required_term_pair_constrained_decode_feasibility import (
     BLOCK_COMPETING_INITIAL_PROFILE_ID,
-    DEFAULT_PROFILE_ID,
     PAIR_CONSTRAINED_DECODE_FEASIBILITY_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now

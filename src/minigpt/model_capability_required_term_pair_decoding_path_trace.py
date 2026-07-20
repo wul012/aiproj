@@ -11,7 +11,7 @@ from minigpt.model_capability_required_term_pair_decoding_path_trace_components 
     summarize_decoding_path_probe_rows,
     summarize_required_term_pair_decoding_path_trace,
 )
-from minigpt.model_capability_required_term_scaffold_probe import read_json_report
+from minigpt.model_capability_required_term_scaffold_probe import read_json_report as read_json_report
 from minigpt.report_utils import utc_now
 
 

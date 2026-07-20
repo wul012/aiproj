@@ -5,7 +5,7 @@ from pathlib import Path
 from typing import Any, Callable
 
 from minigpt.generation_profiles import DEFAULT_GENERATION_PROFILE_ID, NEWLINE_SUPPRESSION_PROFILE_ID
-from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_utils import list_of_dicts, utc_now
 from minigpt.server_contracts import parse_generation_request
 from minigpt.server_generator import MiniGPTGenerator
 

@@ -21,7 +21,7 @@ from minigpt.model_capability_required_term_pair_contrast_free_training_componen
     summarize_contrast_free_variant_probe_rows,
     summarize_required_term_pair_contrast_free_training,
 )
-from minigpt.model_capability_required_term_scaffold_probe import read_json_report
+from minigpt.model_capability_required_term_scaffold_probe import read_json_report as read_json_report
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 
 

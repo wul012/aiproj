@@ -57,7 +57,6 @@ Scope: toy modular arithmetic on a 1-layer transformer; not a claim about LLM fo
 
 from __future__ import annotations
 
-import copy
 import math
 from dataclasses import dataclass, field
 
@@ -65,10 +64,10 @@ import torch
 
 from minigpt.continual_v1193 import (
     ContinualConfig, _opt, _step, consolidate, eq_token, majority_prior, make_model,
-    op_token, pair_masks, vocab_size,
+    op_token, pair_masks,
 )
 from minigpt.experiment_utils import mean_std
-from minigpt.grok_v1179 import ANSWER_TARGET_POS, answer_accuracy
+from minigpt.grok_v1179 import answer_accuracy
 from minigpt.similarity_v1195_decision import (
     PRIMARY_VERDICTS,
     REVIEW_VERDICTS,

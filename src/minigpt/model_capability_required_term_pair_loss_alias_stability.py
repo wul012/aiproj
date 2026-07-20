@@ -8,7 +8,7 @@ from minigpt.model_capability_required_term_pair_loss_alias_objective import (
     REQUIRED_TERM_PAIR_LOSS_ALIAS_OBJECTIVE_JSON_FILENAME,
     build_model_capability_required_term_pair_loss_alias_objective,
     locate_model_capability_required_term_pair_loss_alias_objective_source,
-    read_json_report,
+    read_json_report as read_json_report,
 )
 from minigpt.model_capability_required_term_pair_loss_alias_metrics import required_term_hit_metrics
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now

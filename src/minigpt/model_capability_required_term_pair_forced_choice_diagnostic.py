@@ -13,7 +13,7 @@ from minigpt.model_capability_required_term_pair_forced_choice_diagnostic_compon
     summarize_forced_choice_variants,
     summarize_required_term_pair_forced_choice_diagnostic,
 )
-from minigpt.model_capability_required_term_scaffold_probe import read_json_report
+from minigpt.model_capability_required_term_scaffold_probe import read_json_report as read_json_report
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 
 

@@ -4,12 +4,6 @@ import json
 from pathlib import Path
 from typing import Any
 
-from minigpt.model_capability_required_term_pair_loss_internal_preference_objective_comparison import (
-    PAIR_LOSS_INTERNAL_PREFERENCE_OBJECTIVE_COMPARISON_JSON_FILENAME,
-)
-from minigpt.model_capability_required_term_pair_refresh_forced_choice_diagnostic import (
-    PAIR_REFRESH_FORCED_CHOICE_DIAGNOSTIC_JSON_FILENAME,
-)
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 
 

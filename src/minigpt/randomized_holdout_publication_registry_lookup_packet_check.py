@@ -8,7 +8,6 @@ from minigpt.randomized_holdout_publication_constants import RANDOMIZED_HOLDOUT_
 from minigpt.randomized_holdout_publication_registry_lookup_packet import (
     RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_LOOKUP_PACKET_JSON_FILENAME,
     build_randomized_holdout_publication_registry_lookup_packet,
-    read_json_report as read_lookup_packet_source_json,
 )
 from minigpt.randomized_holdout_publication_registry_manifest_review import read_json_report as read_manifest_review_json
 from minigpt.report_utils import as_dict, utc_now

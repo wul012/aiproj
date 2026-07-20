@@ -52,7 +52,6 @@ matched-specificity + mean-ablation demonstration on this model. Not a claim abo
 
 from __future__ import annotations
 
-import math
 from dataclasses import dataclass
 
 import torch

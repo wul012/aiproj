@@ -4,23 +4,7 @@ import json
 from pathlib import Path
 from typing import Any
 
-from minigpt.model_capability_required_term_pair_coexistence_refresh import PAIR_COEXISTENCE_REFRESH_JSON_FILENAME
-from minigpt.model_capability_required_term_pair_colon_immediate_missed_seed_diagnostic import (
-    PAIR_COLON_IMMEDIATE_MISSED_SEED_DIAGNOSTIC_JSON_FILENAME,
-)
-from minigpt.model_capability_required_term_pair_colon_immediate_stability import (
-    PAIR_COLON_IMMEDIATE_STABILITY_JSON_FILENAME,
-)
-from minigpt.model_capability_required_term_pair_fixed_retention_objective_readiness import (
-    PAIR_FIXED_RETENTION_OBJECTIVE_READINESS_JSON_FILENAME,
-)
-from minigpt.model_capability_required_term_pair_loss_branch_objective_comparison import (
-    PAIR_LOSS_BRANCH_OBJECTIVE_COMPARISON_JSON_FILENAME,
-)
-from minigpt.model_capability_required_term_pair_loss_branch_route_decision import (
-    PAIR_LOSS_BRANCH_ROUTE_DECISION_JSON_FILENAME,
-)
-from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_utils import as_dict, utc_now
 
 
 PAIR_LOSS_BRANCH_BATCH_CLOSEOUT_JSON_FILENAME = "model_capability_required_term_pair_loss_branch_batch_closeout.json"

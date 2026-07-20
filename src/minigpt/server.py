@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-from functools import partial
 from pathlib import Path
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -12,30 +11,28 @@ from minigpt.pair_artifacts import (
 )
 from minigpt.request_history import (
     append_inference_log,
-    build_request_history_detail_payload,
-    build_request_history_payload,
-    request_history_to_csv,
+    build_request_history_detail_payload as build_request_history_detail_payload,
+    build_request_history_payload as build_request_history_payload,
+    request_history_to_csv as request_history_to_csv,
 )
 from minigpt.server_contracts import (
     CheckpointOption,
     GenerationPairRequest,
     GenerationRequest,
     GenerationResponse,
-    GenerationStreamChunk,
+    GenerationStreamChunk as GenerationStreamChunk,
     InferenceSafetyProfile,
-    build_checkpoint_compare_payload,
-    build_checkpoints_payload,
-    build_generation_profiles_payload,
-    build_health_payload,
-    build_model_info_payload,
+    build_checkpoint_compare_payload as build_checkpoint_compare_payload,
+    build_checkpoints_payload as build_checkpoints_payload,
+    build_generation_profiles_payload as build_generation_profiles_payload,
+    build_health_payload as build_health_payload,
+    build_model_info_payload as build_model_info_payload,
     discover_checkpoint_options,
-    generation_profile_options,
-    pair_generation_payload,
-    parse_generation_pair_request,
-    parse_generation_request,
-    resolve_checkpoint_option,
-    sse_message,
-    stream_timeout_payload,
+    generation_profile_options as generation_profile_options,
+    parse_generation_pair_request as parse_generation_pair_request,
+    parse_generation_request as parse_generation_request,
+    sse_message as sse_message,
+    stream_timeout_payload as stream_timeout_payload,
 )
 from minigpt.server_generator import MiniGPTGenerator
 from minigpt.server_http import (
@@ -54,7 +51,6 @@ from minigpt.server_logging import (
 from minigpt.server_post_routes import handle_post_request
 from minigpt.server_routes import handle_get_request
 
-from .playground import write_playground
 
 
 def write_pair_generation_artifacts(

@@ -6,7 +6,7 @@ from typing import Any, Callable
 from minigpt.model_capability_required_term_pair_continuation_span_stability import (
     REQUIRED_TERM_PAIR_CONTINUATION_SPAN_STABILITY_JSON_FILENAME,
 )
-from minigpt.model_capability_required_term_scaffold_probe import read_json_report
+from minigpt.model_capability_required_term_scaffold_probe import read_json_report as read_json_report
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 
 

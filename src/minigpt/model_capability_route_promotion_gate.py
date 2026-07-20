@@ -6,7 +6,7 @@ from typing import Any
 
 from minigpt.model_capability_route_promotion_portfolio import MODEL_CAPABILITY_ROUTE_PROMOTION_PORTFOLIO_JSON_FILENAME
 from minigpt.model_capability_route_promotion_regression_monitor import MODEL_CAPABILITY_ROUTE_PROMOTION_REGRESSION_JSON_FILENAME
-from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_utils import as_dict, utc_now
 
 
 MODEL_CAPABILITY_ROUTE_PROMOTION_GATE_JSON_FILENAME = "model_capability_route_promotion_gate.json"

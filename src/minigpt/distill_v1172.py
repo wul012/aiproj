@@ -29,12 +29,11 @@ forced gold-path logit KL, char-toy deterministic task.
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 
 import torch
 
 from minigpt.distill_common import (
-    _build_xy,
     kl_term,
     make_distill_model as _make_model,
     shuffle_residual_mass,

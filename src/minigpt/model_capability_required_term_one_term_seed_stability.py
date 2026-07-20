@@ -14,7 +14,7 @@ from minigpt.model_capability_required_term_one_term_isolation import (
     REQUIRED_TERM_ONE_TERM_ISOLATION_JSON_FILENAME,
     build_required_term_one_term_corpus,
 )
-from minigpt.model_capability_required_term_scaffold_probe import read_json_report
+from minigpt.model_capability_required_term_scaffold_probe import read_json_report as read_json_report
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 
 

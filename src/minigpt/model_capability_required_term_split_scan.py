@@ -6,8 +6,8 @@ from typing import Any
 from minigpt.model_capability_required_term_holdout import (
     REQUIRED_TERM_HOLDOUT_JSON_FILENAME,
     build_model_capability_required_term_holdout,
-    locate_model_capability_required_term_micro_training,
-    read_json_report,
+    locate_model_capability_required_term_micro_training as locate_model_capability_required_term_micro_training,
+    read_json_report as read_json_report,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 

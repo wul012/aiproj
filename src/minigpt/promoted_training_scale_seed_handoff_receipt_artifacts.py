@@ -12,9 +12,9 @@ from minigpt.report_utils import (
     write_json_payload,
 )
 from minigpt.promoted_training_scale_seed_handoff_receipt_sections import (
-    _embedded_receipt_check_section,
-    _handoff_assurance_section,
-    _receipt_check_section,
+    _embedded_receipt_check_section as _embedded_receipt_check_section,
+    _handoff_assurance_section as _handoff_assurance_section,
+    _receipt_check_section as _receipt_check_section,
 )
 
 

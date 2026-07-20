@@ -7,7 +7,7 @@ from typing import Any
 from minigpt.model_capability_required_term_pair_surface_failure_diagnostic import (
     PAIR_SURFACE_FAILURE_DIAGNOSTIC_JSON_FILENAME,
 )
-from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_utils import as_dict, utc_now
 
 
 PAIR_SURFACE_POLICY_PLAN_JSON_FILENAME = "model_capability_required_term_pair_surface_policy_plan.json"

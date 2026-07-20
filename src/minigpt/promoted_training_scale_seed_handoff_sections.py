@@ -3,8 +3,7 @@ from __future__ import annotations
 from typing import Any
 
 from minigpt.promoted_training_scale_seed_handoff_markdown import (
-    render_promoted_training_scale_seed_handoff_markdown,
-    write_promoted_training_scale_seed_handoff_markdown,
+    render_promoted_training_scale_seed_handoff_markdown as render_promoted_training_scale_seed_handoff_markdown,
 )
 from minigpt.promoted_training_scale_seed_handoff_html_stats import (
     build_promoted_training_scale_seed_handoff_html_stats,

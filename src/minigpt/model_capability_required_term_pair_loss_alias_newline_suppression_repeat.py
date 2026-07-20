@@ -9,7 +9,7 @@ from minigpt.model_capability_required_term_pair_loss_alias_newline_suppression_
     locate_loss_alias_newline_suppression_source,
     read_json_report,
 )
-from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_utils import as_dict, utc_now
 
 
 REQUIRED_TERM_PAIR_LOSS_ALIAS_NEWLINE_SUPPRESSION_REPEAT_JSON_FILENAME = (

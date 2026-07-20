@@ -5,9 +5,9 @@ from pathlib import Path
 from typing import Any
 
 from minigpt.registry_release_readiness import (
-    collect_release_readiness_delta_rows,
-    release_readiness_delta_leaderboard,
-    release_readiness_delta_summary,
+    collect_release_readiness_delta_rows as collect_release_readiness_delta_rows,
+    release_readiness_delta_leaderboard as release_readiness_delta_leaderboard,
+    release_readiness_delta_summary as release_readiness_delta_summary,
 )
 
 

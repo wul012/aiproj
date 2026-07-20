@@ -10,7 +10,7 @@ from minigpt.model_capability_required_term_pair_colon_immediate_missed_seed_dia
 from minigpt.model_capability_required_term_pair_loss_branch_route_decision import (
     PAIR_LOSS_BRANCH_ROUTE_DECISION_JSON_FILENAME,
 )
-from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_utils import as_dict, utc_now
 
 
 PAIR_FIXED_RETENTION_OBJECTIVE_READINESS_JSON_FILENAME = "model_capability_required_term_pair_fixed_retention_objective_readiness.json"

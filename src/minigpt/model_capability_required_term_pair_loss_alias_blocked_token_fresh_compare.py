@@ -8,7 +8,7 @@ from minigpt.model_capability_required_term_pair_loss_alias_focus import (
     REQUIRED_TERM_PAIR_LOSS_ALIAS_FOCUS_JSON_FILENAME,
     build_model_capability_required_term_pair_loss_alias_focus,
     locate_model_capability_required_term_pair_loss_alias_focus_source,
-    read_json_report,
+    read_json_report as read_json_report,
 )
 from minigpt.model_capability_required_term_pair_loss_alias_newline_suppression_probe import (
     build_model_capability_required_term_pair_loss_alias_newline_suppression_probe,

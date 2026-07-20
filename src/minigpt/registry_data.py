@@ -17,12 +17,12 @@ from minigpt.registry_rankings import (
     release_readiness_delta_summary,
 )
 from minigpt.registry_run_summary import (
-    REGISTRY_ARTIFACT_PATHS,
-    RegisteredRun,
+    REGISTRY_ARTIFACT_PATHS as REGISTRY_ARTIFACT_PATHS,
+    RegisteredRun as RegisteredRun,
     _as_int,
-    _as_optional_float,
-    _as_str_list,
-    _pick,
+    _as_optional_float as _as_optional_float,
+    _as_str_list as _as_str_list,
+    _pick as _pick,
     summarize_registered_run,
 )
 

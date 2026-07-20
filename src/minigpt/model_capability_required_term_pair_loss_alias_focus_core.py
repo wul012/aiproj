@@ -10,7 +10,7 @@ from minigpt.model_capability_required_term_pair_continuation_span_objective imp
 from minigpt.model_capability_required_term_pair_loss_alias_focus_components import (
     case_from_row as _case_from_row,
     case_lines as _case_lines,
-    clean_seeds as _clean_seeds,
+    clean_seeds as _clean_seeds,  # noqa: F401 (re-export)
     focus_decision as _focus_decision,
     focus_metric_decision as _focus_metric_decision,
     focus_surface_decision as _focus_surface_decision,

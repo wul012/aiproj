@@ -3,7 +3,7 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any, Iterable
 
-from minigpt.report_utils import as_dict, list_of_dicts, number_or_none, utc_now
+from minigpt.report_utils import as_dict, number_or_none, utc_now
 
 
 TOKEN_BUDGET_JSON_FILENAME = "model_capability_token_budget_probe.json"

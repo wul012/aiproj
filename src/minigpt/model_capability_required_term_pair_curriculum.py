@@ -8,10 +8,10 @@ from minigpt.model_capability_required_term_micro_training import (
     TrainFunc,
 )
 from minigpt.model_capability_required_term_pair_curriculum_core import (
-    REQUIRED_TERM_PAIR_CURRICULUM_HTML_FILENAME,
-    REQUIRED_TERM_PAIR_CURRICULUM_JSON_FILENAME,
-    REQUIRED_TERM_PAIR_CURRICULUM_MARKDOWN_FILENAME,
-    REQUIRED_TERM_PAIR_CURRICULUM_TEXT_FILENAME,
+    REQUIRED_TERM_PAIR_CURRICULUM_HTML_FILENAME as REQUIRED_TERM_PAIR_CURRICULUM_HTML_FILENAME,
+    REQUIRED_TERM_PAIR_CURRICULUM_JSON_FILENAME as REQUIRED_TERM_PAIR_CURRICULUM_JSON_FILENAME,
+    REQUIRED_TERM_PAIR_CURRICULUM_MARKDOWN_FILENAME as REQUIRED_TERM_PAIR_CURRICULUM_MARKDOWN_FILENAME,
+    REQUIRED_TERM_PAIR_CURRICULUM_TEXT_FILENAME as REQUIRED_TERM_PAIR_CURRICULUM_TEXT_FILENAME,
     _decision,
     _input_issues,
     _interpretation_reason,
@@ -20,8 +20,8 @@ from minigpt.model_capability_required_term_pair_curriculum_core import (
     _previous_baseline,
     _run_pair,
     build_pair_curriculum_pairs,
-    build_required_term_pair_curriculum_corpus,
-    resolve_exit_code,
+    build_required_term_pair_curriculum_corpus as build_required_term_pair_curriculum_corpus,
+    resolve_exit_code as resolve_exit_code,
     select_pair_curriculum_terms,
     summarize_pair_probe_rows,
     summarize_required_term_pair_curriculum,
@@ -29,7 +29,7 @@ from minigpt.model_capability_required_term_pair_curriculum_core import (
 from minigpt.model_capability_required_term_one_term_seed_stability import (
     REQUIRED_TERM_ONE_TERM_SEED_STABILITY_JSON_FILENAME,
 )
-from minigpt.model_capability_required_term_scaffold_probe import read_json_report
+from minigpt.model_capability_required_term_scaffold_probe import read_json_report as read_json_report
 from minigpt.report_utils import as_dict, utc_now
 
 

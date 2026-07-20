@@ -5,7 +5,6 @@ from typing import Any
 from minigpt.benchmark_scorecard_comparison_helpers import (
     _as_int,
     _case_delta,
-    _case_explanation,
     _case_map,
     _changed,
     _dict,
@@ -16,7 +15,6 @@ from minigpt.benchmark_scorecard_comparison_helpers import (
     _group_explanation,
     _group_map,
     _int_delta,
-    _list_delta,
     _list_of_dicts,
     _number,
     _score_relation,

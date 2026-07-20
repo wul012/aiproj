@@ -5,7 +5,7 @@ from pathlib import Path
 from typing import Any
 
 from minigpt.release_bundle_contexts import _benchmark_history_context, _benchmark_history_summary_status
-from minigpt.report_utils import as_dict as _dict, first_present, list_of_dicts as _list_of_dicts
+from minigpt.report_utils import as_dict as _dict, first_present
 
 
 def _read_required_json(path: Path) -> dict[str, Any]:

@@ -11,7 +11,6 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from minigpt.decoder_anchor_holdout_comparison_v1147 import (  # noqa: E402
-    DECODER_ANCHOR_HOLDOUT_COMPARISON_V1147_STEM,
     EXPLAIN_DIR_NAME,
     build_decoder_anchor_holdout_comparison_v1147,
     locate_v1146_report,

@@ -9,7 +9,7 @@ import subprocess
 import sys
 from typing import Any
 
-from minigpt.report_utils import html_escape as _e, utc_now, write_json_payload
+from minigpt.report_utils import html_escape as _e, utc_now as utc_now, write_json_payload
 
 
 RUN_ARTIFACT_SPECS = [

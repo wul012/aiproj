@@ -11,8 +11,8 @@ from minigpt.model_capability_required_term_pair_continuation_span_objective imp
 from minigpt.model_capability_required_term_pair_diagnostic_rollup import (
     REQUIRED_TERM_PAIR_DIAGNOSTIC_ROLLUP_JSON_FILENAME,
 )
-from minigpt.model_capability_required_term_scaffold_probe import read_json_report
-from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.model_capability_required_term_scaffold_probe import read_json_report as read_json_report
+from minigpt.report_utils import as_dict, utc_now
 
 
 REQUIRED_TERM_PAIR_CONTINUATION_SPAN_STABILITY_JSON_FILENAME = "model_capability_required_term_pair_continuation_span_stability.json"

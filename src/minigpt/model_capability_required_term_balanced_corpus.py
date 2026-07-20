@@ -12,7 +12,7 @@ from minigpt.model_capability_required_term_scaffold_probe import read_json_repo
 from minigpt.model_capability_required_term_split_seed_stability import (
     REQUIRED_TERM_SPLIT_SEED_STABILITY_JSON_FILENAME,
 )
-from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_utils import list_of_dicts, utc_now
 
 
 REQUIRED_TERM_BALANCED_CORPUS_JSON_FILENAME = "model_capability_required_term_balanced_corpus.json"

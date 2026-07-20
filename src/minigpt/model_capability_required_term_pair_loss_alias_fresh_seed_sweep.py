@@ -7,7 +7,7 @@ from minigpt.model_capability_required_term_micro_training import GenerateFunc, 
 from minigpt.model_capability_required_term_pair_loss_alias_blocked_token_fresh_compare import (
     build_model_capability_required_term_pair_loss_alias_blocked_token_fresh_compare,
     locate_loss_alias_blocked_token_fresh_compare_source,
-    read_json_report,
+    read_json_report as read_json_report,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 

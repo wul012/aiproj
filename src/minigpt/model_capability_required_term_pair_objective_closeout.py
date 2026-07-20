@@ -10,7 +10,7 @@ from minigpt.model_capability_required_term_pair_branch_binding_route_decision i
 from minigpt.model_capability_required_term_pair_target_anchor_route_decision import (
     PAIR_TARGET_ANCHOR_ROUTE_DECISION_JSON_FILENAME,
 )
-from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_utils import as_dict, utc_now
 
 
 PAIR_OBJECTIVE_CLOSEOUT_JSON_FILENAME = "model_capability_required_term_pair_objective_closeout.json"

@@ -37,7 +37,7 @@ about instruction-tuned LLM forgetting.
 from __future__ import annotations
 
 import copy
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 
 import torch
 
@@ -48,7 +48,7 @@ from minigpt.continual_v1193_decision import (
 )
 from minigpt.continual_v1193_report import build_report
 from minigpt.experiment_utils import mean_std
-from minigpt.grok_v1179 import ANSWER_READ_POS, ANSWER_TARGET_POS, SEQ_LEN, answer_accuracy, answer_loss
+from minigpt.grok_v1179 import ANSWER_TARGET_POS, SEQ_LEN, answer_accuracy, answer_loss
 from minigpt.model import GPTConfig, MiniGPT
 
 OPS = {

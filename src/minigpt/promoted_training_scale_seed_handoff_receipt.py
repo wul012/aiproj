@@ -18,11 +18,7 @@ from minigpt.promoted_training_scale_seed_handoff_receipt_outputs import (
     render_promoted_training_scale_seed_handoff_embedded_receipt_check,
 )
 from minigpt.promoted_training_scale_seed_handoff_receipt_validation import (
-    EMBEDDED_RECEIPT_CHECK_COMPARE_KEYS,
-    RECEIPT_SCHEMA_V2_REQUIRED_FIELDS,
-    RECEIPT_SCHEMA_V3_REQUIRED_FIELDS,
-    RECEIPT_SCHEMA_V4_REQUIRED_FIELDS,
-    RECEIPT_SCHEMA_V5_REQUIRED_FIELDS,
+    RECEIPT_SCHEMA_V5_REQUIRED_FIELDS as RECEIPT_SCHEMA_V5_REQUIRED_FIELDS,
     normalized_receipt_check_value as _normalized_check_value,
     receipt_check_compare_keys as _receipt_check_compare_keys,
     receipt_int as _int,

@@ -21,7 +21,7 @@ from minigpt.model_capability_required_term_pair_branch_retention_sweep_componen
     summarize_branch_retention_variant_probe_rows,
     summarize_required_term_pair_branch_retention_sweep,
 )
-from minigpt.model_capability_required_term_scaffold_probe import read_json_report
+from minigpt.model_capability_required_term_scaffold_probe import read_json_report as read_json_report
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 
 

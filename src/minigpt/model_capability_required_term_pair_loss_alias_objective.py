@@ -8,7 +8,7 @@ from minigpt.model_capability_required_term_pair_continuation_span_heldout impor
     REQUIRED_TERM_PAIR_CONTINUATION_SPAN_HELDOUT_JSON_FILENAME,
 )
 from minigpt.model_capability_required_term_pair_continuation_span_objective import refresh_training_artifact_status
-from minigpt.model_capability_required_term_scaffold_probe import read_json_report
+from minigpt.model_capability_required_term_scaffold_probe import read_json_report as read_json_report
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 
 

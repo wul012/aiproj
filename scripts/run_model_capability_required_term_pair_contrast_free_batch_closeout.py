@@ -12,7 +12,6 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from minigpt.model_capability_required_term_pair_contrast_free_batch_closeout import (  # noqa: E402
     CONTRAST_FREE_CORPUS_CONTRACT_JSON_FILENAME,
-    PAIR_CONTRAST_FREE_BATCH_CLOSEOUT_JSON_FILENAME,
     build_model_capability_required_term_pair_contrast_free_batch_closeout,
     locate_batch_report,
     read_json_report,

@@ -6,7 +6,7 @@ from typing import Any, Callable, Sequence
 
 from minigpt.model_capability_required_term_pair_coexistence_refresh import PAIR_COEXISTENCE_REFRESH_JSON_FILENAME
 from minigpt.model_capability_required_term_pair_fixed_retention_objective_comparison import TARGET_TERMS
-from minigpt.report_utils import as_dict, list_of_dicts, number_or_none, utc_now
+from minigpt.report_utils import as_dict, number_or_none, utc_now
 
 
 PAIR_REFRESH_FORCED_CHOICE_DIAGNOSTIC_JSON_FILENAME = (
