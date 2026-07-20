@@ -15,6 +15,7 @@ from dataclasses import dataclass
 
 import torch
 
+from minigpt.grok_arc_common import agg_pyplot, median_or_nan as _median, save_figure
 from minigpt.grok_checkpoint_v1185 import train_to_grok
 from minigpt.grok_freq_ablation_v1191 import ablated_model
 from minigpt.grok_interp_v1188 import embedding_spectrum, number_embedding
@@ -183,15 +184,6 @@ def classify_cell(cell: dict, cfg: SqueezeConfig, ratio: float) -> str:
     return "forced_packing" if 2 * k > cell["width"] else "economized"
 
 
-def _median(values: list[float]) -> float:
-    ordered = sorted(values)
-    n = len(ordered)
-    if n == 0:
-        return float("nan")
-    mid = n // 2
-    return float(ordered[mid]) if n % 2 else float((ordered[mid - 1] + ordered[mid]) / 2)
-
-
 def _verdict_at_ratio(cells: list[dict], cfg: SqueezeConfig, ratio: float) -> dict:
     squeeze = [c for c in cells if c["width"] in cfg.squeeze_widths]
     grokked = [c for c in squeeze if c["heldout_acc"] >= cfg.grok_bar]
@@ -320,10 +312,7 @@ def _recommendations(info: dict) -> list[str]:
 def plot_result(cache: dict, info: dict, path) -> None:
     """One figure: k_func and top-k interference versus width, with the
     orthogonal-footprint boundary k = w/2 marked."""
-    import matplotlib
-    matplotlib.use("Agg")
-    import matplotlib.pyplot as plt
-    from pathlib import Path as _Path
+    plt = agg_pyplot()
 
     cfg = SqueezeConfig()
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(11, 4.6))
@@ -351,10 +340,7 @@ def plot_result(cache: dict, info: dict, path) -> None:
     ax2.legend(fontsize=8)
     fig.suptitle(f"v1277 capacity squeeze: {info['verdict']}")
     fig.tight_layout()
-    out = _Path(path)
-    out.parent.mkdir(parents=True, exist_ok=True)
-    fig.savefig(out, dpi=160)
-    plt.close(fig)
+    save_figure(fig, path)
 
 
 def summarize(report: dict) -> list[str]:

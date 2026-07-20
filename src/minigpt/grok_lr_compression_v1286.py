@@ -16,6 +16,7 @@ from __future__ import annotations
 from dataclasses import asdict, dataclass, replace
 from datetime import datetime, timezone
 
+from minigpt.grok_arc_common import agg_pyplot, median as _median, save_figure
 from minigpt.grok_circuit_timing_v1284 import (
     run_cell,
     structure_fraction,
@@ -101,13 +102,6 @@ def run_phase_a(cfg: LrCompressionConfig, device, snapshot_fn=train_snapshot,
 
 
 # ----------------------------------------------------------------- decide ----
-def _median(values: list[float]) -> float:
-    ordered = sorted(values)
-    n = len(ordered)
-    mid = n // 2
-    return ordered[mid] if n % 2 else (ordered[mid - 1] + ordered[mid]) / 2
-
-
 def _reference_cells(reference: dict, cfg: LrCompressionConfig) -> dict:
     return {(c["lr"], c["seed"]): c for c in reference["cells"]
             if c.get("alpha") == 1.0}
@@ -249,10 +243,7 @@ def summarize(report: dict) -> list[str]:
 def plot_result(cache: dict, info: dict, path, v1285_cache: dict | None = None) -> None:
     """One figure: C versus relative time t/t_gen, colored by lr; v1285's
     1e-3 trajectories in gray for the compression-invariance comparison."""
-    import matplotlib
-    matplotlib.use("Agg")
-    import matplotlib.pyplot as plt
-    from pathlib import Path as _Path
+    plt = agg_pyplot()
 
     fig, ax = plt.subplots(figsize=(8.5, 5))
     colors = {2e-3: "tab:green", 4e-3: "tab:blue", 8e-3: "tab:purple"}
@@ -275,7 +266,4 @@ def plot_result(cache: dict, info: dict, path, v1285_cache: dict | None = None) 
            title=f"v1286 lr compression: {info['verdict']}")
     ax.legend(fontsize=7)
     fig.tight_layout()
-    out = _Path(path)
-    out.parent.mkdir(parents=True, exist_ok=True)
-    fig.savefig(out, dpi=160)
-    plt.close(fig)
+    save_figure(fig, path)

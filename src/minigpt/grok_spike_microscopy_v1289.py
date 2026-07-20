@@ -28,6 +28,7 @@ from datetime import datetime, timezone
 
 import torch
 
+from minigpt.grok_arc_common import agg_pyplot, median as _median, save_figure
 from minigpt.grok_circuit_timing_v1284 import set_share
 from minigpt.grok_interp_v1188 import embedding_spectrum, number_embedding
 from minigpt.grok_purification_v1287 import top_freqs
@@ -225,13 +226,6 @@ def run_phase_a(cfg: SpikeMicroscopyConfig, device, dense_fn=dense_run,
 
 
 # ----------------------------------------------------------------- analysis ----
-def _median(values: list[float]) -> float:
-    ordered = sorted(values)
-    n = len(ordered)
-    mid = n // 2
-    return ordered[mid] if n % 2 else (ordered[mid - 1] + ordered[mid]) / 2
-
-
 def _smooth(xs: list[float], w: int) -> list[float]:
     half = w // 2
     return [_median(xs[max(0, i - half): i + half + 1])
@@ -533,10 +527,7 @@ def plot_result(cache: dict, info: dict, path) -> None:
     resolution -- val/train acc, share ratio, norm ratio, with the 100-step
     grid overlaid as dots (what v1287/v1288 could see); (b) r vs dense
     min val for every qualified episode -- the verdict panel."""
-    import matplotlib
-    matplotlib.use("Agg")
-    import matplotlib.pyplot as plt
-    from pathlib import Path as _Path
+    plt = agg_pyplot()
 
     cfg = SpikeMicroscopyConfig()  # display constants are preregistered
     rows = info.get("episodes", [])
@@ -592,7 +583,4 @@ def plot_result(cache: dict, info: dict, path) -> None:
            title=f"circuit persistence: {info['verdict']}")
     bx.legend(fontsize=7)
     fig.tight_layout()
-    out = _Path(path)
-    out.parent.mkdir(parents=True, exist_ok=True)
-    fig.savefig(out, dpi=160)
-    plt.close(fig)
+    save_figure(fig, path)

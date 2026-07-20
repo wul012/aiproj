@@ -14,6 +14,7 @@ from __future__ import annotations
 from dataclasses import asdict, dataclass
 from datetime import datetime, timezone
 
+from minigpt.grok_arc_common import agg_pyplot, median as _median, save_figure
 from minigpt.grok_checkpoint_v1185 import train_to_grok
 from minigpt.grok_delay_gate_v1283 import classify_phase
 from minigpt.grok_interp_v1188 import embedding_spectrum, number_embedding
@@ -165,13 +166,6 @@ def run_phase_a(cfg: TimingConfig, device, snapshot_fn=train_snapshot,
 
 
 # ----------------------------------------------------------------- decide ----
-def _median(values: list[float]) -> float:
-    ordered = sorted(values)
-    n = len(ordered)
-    mid = n // 2
-    return ordered[mid] if n % 2 else (ordered[mid - 1] + ordered[mid]) / 2
-
-
 def structure_fraction(cell: dict, bar: float) -> float:
     pre = [s for s in cell["snapshots"] if s["val_acc"] <= bar]
     if not pre:
@@ -296,10 +290,7 @@ def summarize(report: dict) -> list[str]:
 def plot_result(cache: dict, info: dict, path) -> None:
     """One figure: C(t) trajectories, coupled green vs delayed blue,
     val curves faint, the w=24 cross-phase pair emphasized."""
-    import matplotlib
-    matplotlib.use("Agg")
-    import matplotlib.pyplot as plt
-    from pathlib import Path as _Path
+    plt = agg_pyplot()
 
     fig, ax = plt.subplots(figsize=(8.5, 5))
     for c in cache["cells"]:
@@ -317,7 +308,4 @@ def plot_result(cache: dict, info: dict, path) -> None:
            title=f"v1284 circuit timing: {info['verdict']}")
     ax.legend(fontsize=6.5, ncol=2)
     fig.tight_layout()
-    out = _Path(path)
-    out.parent.mkdir(parents=True, exist_ok=True)
-    fig.savefig(out, dpi=160)
-    plt.close(fig)
+    save_figure(fig, path)

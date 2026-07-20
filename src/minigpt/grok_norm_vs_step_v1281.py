@@ -15,6 +15,7 @@ import math
 from dataclasses import asdict, dataclass
 from datetime import datetime, timezone
 
+from minigpt.grok_arc_common import agg_pyplot, median as _median, save_figure
 from minigpt.grok_init_rescue_v1280 import cell_tgen, classify, train_cell
 
 SCHEMA = "grok_norm_vs_step_v1281.v1"
@@ -98,13 +99,6 @@ def run_phase_a(cfg: StepClockConfig, device, trainer=train_cell,
 
 
 # ----------------------------------------------------------------- decide ----
-def _median(values: list[float]) -> float:
-    ordered = sorted(values)
-    n = len(ordered)
-    mid = n // 2
-    return ordered[mid] if n % 2 else (ordered[mid - 1] + ordered[mid]) / 2
-
-
 def _ref80_cells(ref80: dict, ref_lr: float) -> list[dict]:
     return [c for c in ref80["cells"] if c["alpha"] == 0.5 and c["lr"] == ref_lr]
 
@@ -244,10 +238,7 @@ def summarize(report: dict) -> list[str]:
 
 def plot_result(cache: dict, ref80: dict, ref79: dict, info: dict, path) -> None:
     """One figure: matched pairs at r=4x/8x (left); alpha=1 lr dose (right)."""
-    import matplotlib
-    matplotlib.use("Agg")
-    import matplotlib.pyplot as plt
-    from pathlib import Path as _Path
+    plt = agg_pyplot()
 
     cfg = StepClockConfig()
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(11, 4.6))
@@ -290,7 +281,4 @@ def plot_result(cache: dict, ref80: dict, ref79: dict, info: dict, path) -> None
     fig.suptitle(f"v1281 norm vs step: {info['verdict']}", fontsize=11)
 
     fig.tight_layout()
-    out = _Path(path)
-    out.parent.mkdir(parents=True, exist_ok=True)
-    fig.savefig(out, dpi=160)
-    plt.close(fig)
+    save_figure(fig, path)

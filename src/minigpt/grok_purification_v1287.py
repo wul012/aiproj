@@ -19,6 +19,7 @@ from __future__ import annotations
 from dataclasses import asdict, dataclass, replace
 from datetime import datetime, timezone
 
+from minigpt.grok_arc_common import agg_pyplot, median as _median, save_figure
 from minigpt.grok_checkpoint_v1185 import train_to_grok
 from minigpt.grok_circuit_timing_v1284 import set_share
 from minigpt.grok_delay_gate_v1283 import classify_phase
@@ -184,13 +185,6 @@ def run_phase_a(cfg: PurificationConfig, device,
 
 
 # ----------------------------------------------------------------- decide ----
-def _median(values: list[float]) -> float:
-    ordered = sorted(values)
-    n = len(ordered)
-    mid = n // 2
-    return ordered[mid] if n % 2 else (ordered[mid - 1] + ordered[mid]) / 2
-
-
 def top_freqs(power: list[float], k: int) -> list[int]:
     return sorted(range(len(power)), key=lambda i: power[i], reverse=True)[:k]
 
@@ -397,10 +391,7 @@ def plot_result(cache: dict, ref_canonical: dict, ref_compressed: dict,
                 info: dict, path) -> None:
     """One figure: cached-top5 share vs relative time t/t_gen(ref) -- the
     committed pre-grok trajectory faint, the new post-grok segment bold."""
-    import matplotlib
-    matplotlib.use("Agg")
-    import matplotlib.pyplot as plt
-    from pathlib import Path as _Path
+    plt = agg_pyplot()
 
     refs = reference_map(ref_canonical, ref_compressed)
     colors = {1e-3: "black", 2e-3: "tab:green", 4e-3: "tab:blue",
@@ -428,7 +419,4 @@ def plot_result(cache: dict, ref_canonical: dict, ref_compressed: dict,
            title=f"v1287 post-grok purification: {info['verdict']}")
     ax.legend(fontsize=8)
     fig.tight_layout()
-    out = _Path(path)
-    out.parent.mkdir(parents=True, exist_ok=True)
-    fig.savefig(out, dpi=160)
-    plt.close(fig)
+    save_figure(fig, path)

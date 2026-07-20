@@ -15,6 +15,7 @@ from dataclasses import dataclass
 
 import torch
 
+from minigpt.grok_arc_common import agg_pyplot, median_or_nan as _median, save_figure
 from minigpt.grok_checkpoint_v1185 import train_to_grok
 from minigpt.grok_predict_v1186 import evaluate_table
 from minigpt.grok_v1179 import GrokConfig, make_grok_model, seed_everything
@@ -91,15 +92,6 @@ def t_gen_at(curve: list[tuple[int, float]], bar: float) -> int | None:
         if val_acc >= bar:
             return step
     return None
-
-
-def _median(values: list[float]) -> float:
-    ordered = sorted(values)
-    n = len(ordered)
-    if n == 0:
-        return math.nan
-    mid = n // 2
-    return float(ordered[mid]) if n % 2 else float((ordered[mid - 1] + ordered[mid]) / 2)
 
 
 def _cell_tgen(cell: dict, bar: float) -> float:
@@ -359,9 +351,8 @@ def summarize(report: dict) -> list[str]:
 def plot_result(cache: dict, info: dict, path) -> None:
     """One figure: t_gen vs width (grid) with the d=128 alpha arms overlaid."""
     import matplotlib
-    matplotlib.use("Agg")
-    import matplotlib.pyplot as plt
-    from pathlib import Path as _Path
+
+    plt = agg_pyplot()
 
     cfg = SpeedConfig()
     fig, ax = plt.subplots(figsize=(7.5, 4.8))
@@ -397,7 +388,4 @@ def plot_result(cache: dict, info: dict, path) -> None:
                 ("*", "tab:red", "d=128 matched-norm α*"), ("s", "tab:green", "d=32 α=2")]]
     ax.legend(handles=handles, fontsize=8)
     fig.tight_layout()
-    out = _Path(path)
-    out.parent.mkdir(parents=True, exist_ok=True)
-    fig.savefig(out, dpi=160)
-    plt.close(fig)
+    save_figure(fig, path)

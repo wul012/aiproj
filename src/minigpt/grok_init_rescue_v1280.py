@@ -17,6 +17,7 @@ import math
 from dataclasses import asdict, dataclass
 from datetime import datetime, timezone
 
+from minigpt.grok_arc_common import agg_pyplot, median as _median, save_figure
 from minigpt.grok_checkpoint_v1185 import train_to_grok
 from minigpt.grok_predict_v1186 import evaluate_table
 from minigpt.grok_speed_v1279 import scaled_init, t_gen_at, total_norm_of
@@ -165,13 +166,6 @@ def run_phase_a(cfg: RescueConfig, device, trainer=train_cell,
 
 
 # ----------------------------------------------------------------- decide ----
-def _median(values: list[float]) -> float:
-    ordered = sorted(values)
-    n = len(ordered)
-    mid = n // 2
-    return ordered[mid] if n % 2 else (ordered[mid - 1] + ordered[mid]) / 2
-
-
 def _reference_arms(reference: dict, cfg: RescueConfig) -> tuple[list, list]:
     base = [c for c in reference["cells"]
             if c["arm"] == "grid" and c["width"] == cfg.width and c["alpha"] == 1.0]
@@ -317,10 +311,7 @@ def summarize(report: dict) -> list[str]:
 
 def plot_result(cache: dict, reference: dict, info: dict, path) -> None:
     """One figure, two panels: rescue arm lr->t_gen; dose arm alpha->t_gen."""
-    import matplotlib
-    matplotlib.use("Agg")
-    import matplotlib.pyplot as plt
-    from pathlib import Path as _Path
+    plt = agg_pyplot()
 
     cfg = RescueConfig()
     base, dead = _reference_arms(reference, cfg)
@@ -367,7 +358,4 @@ def plot_result(cache: dict, reference: dict, info: dict, path) -> None:
                   f"{info.get('dose_shape', '')}")
 
     fig.tight_layout()
-    out = _Path(path)
-    out.parent.mkdir(parents=True, exist_ok=True)
-    fig.savefig(out, dpi=160)
-    plt.close(fig)
+    save_figure(fig, path)

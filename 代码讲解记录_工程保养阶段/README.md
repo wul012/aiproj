@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1247-v1290-grok-arc-common.md
+ -> v1290 code explanation: elegance/maintenance version on the AGENTS.md refactoring rhythm — the 12 byte-identical copies of `_median` (9 plain + 2 NaN-guarded) and the 12 identical Agg figure-scaffolding blocks across the grok-arc experiment modules converge into `grok_arc_common.py` (median/median_or_nan/agg_pyplot/save_figure), with the old private names re-imported so decide() bodies stay textually untouched. Verified three ways: identity-guard tests (`module._median is median` — any re-fork fails the suite), byte-for-byte re-derivation of all committed arc artifacts (61/63 identical; the 2 exceptions are v1277/v1279's pre-existing analyze-time `generated_at` timestamps; all 3 regenerated PNGs identical), and the full suite. Net -141 lines of copy-paste.
+
 1246-v1289-spike-microscopy.md
  -> v1289 code explanation: per-step microscopy of the committed v1287 post-grok spikes — the nine spiking trajectories continued with their original Adam moments via a line-for-line faithful reimplementation of the training loop, certified by bit-equality of all ~740 shared coarse rows (G0 9/9). Verdict `spike_preserves_circuit`: 134/134 deep collapses leave the embedding Fourier circuit intact (r median 1.007, worst 0.979) — the wd shove is a 1-3-step gradient impulse (median 240x) that breaks the network middle while share keeps climbing. The post-grok regime is a ~50-step relaxation oscillator (173 episodes where the census saw 24; 150 fully invisible at 100-step resolution); rotation happens AT spikes (13/161, all lr<=4e-3). Completes the arc: phenomenon (v1287) -> cause (v1288) -> mechanism (v1289). Evidence lives under `f/1289`.
 

@@ -19,6 +19,7 @@ from __future__ import annotations
 from dataclasses import asdict, dataclass, replace
 from datetime import datetime, timezone
 
+from minigpt.grok_arc_common import agg_pyplot, median as _median, save_figure
 from minigpt.grok_checkpoint_v1185 import train_to_grok
 from minigpt.grok_circuit_timing_v1284 import set_share
 from minigpt.grok_interp_v1188 import embedding_spectrum, number_embedding
@@ -198,13 +199,6 @@ def run_phase_a(cfg: SpikeAnatomyConfig, device, branch_fn=branch_run,
 
 
 # ----------------------------------------------------------------- decide ----
-def _median(values: list[float]) -> float:
-    ordered = sorted(values)
-    n = len(ordered)
-    mid = n // 2
-    return ordered[mid] if n % 2 else (ordered[mid - 1] + ordered[mid]) / 2
-
-
 def episodes(curve: list, bar: float, eval_every: int = 100) -> list[dict]:
     """Maximal runs of val < bar: the spike episodes of one trajectory."""
     eps: list[dict] = []
@@ -430,10 +424,7 @@ def plot_result(cache: dict, info: dict, path) -> None:
     """One file, two panels: (a) paired arm val trajectories on normalized
     time (wd=1 solid, wd=0 dashed), (b) the un-censor runs crossing the old
     v1287 horizon."""
-    import matplotlib
-    matplotlib.use("Agg")
-    import matplotlib.pyplot as plt
-    from pathlib import Path as _Path
+    plt = agg_pyplot()
 
     colors = {1e-3: "black", 2e-3: "tab:green", 4e-3: "tab:blue",
               8e-3: "tab:purple"}
@@ -465,7 +456,4 @@ def plot_result(cache: dict, info: dict, path) -> None:
            title="un-censoring the v1287 deaths")
     bx.legend(fontsize=7)
     fig.tight_layout()
-    out = _Path(path)
-    out.parent.mkdir(parents=True, exist_ok=True)
-    fig.savefig(out, dpi=160)
-    plt.close(fig)
+    save_figure(fig, path)

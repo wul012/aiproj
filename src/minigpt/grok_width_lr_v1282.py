@@ -16,6 +16,7 @@ import math
 from dataclasses import asdict, dataclass, replace
 from datetime import datetime, timezone
 
+from minigpt.grok_arc_common import agg_pyplot, median as _median, save_figure
 from minigpt.grok_init_rescue_v1280 import cell_tgen, classify, train_cell
 
 SCHEMA = "grok_width_lr_v1282.v1"
@@ -101,13 +102,6 @@ def run_phase_a(cfg: WidthLrConfig, device, trainer=train_cell,
 
 
 # ----------------------------------------------------------------- decide ----
-def _median(values: list[float]) -> float:
-    ordered = sorted(values)
-    n = len(ordered)
-    mid = n // 2
-    return ordered[mid] if n % 2 else (ordered[mid - 1] + ordered[mid]) / 2
-
-
 def _ref81_cells(ref81: dict) -> list[dict]:
     return [c for c in ref81["cells"] if c["arm"] == "verdict" and c["lr"] == 4e-3]
 
@@ -257,9 +251,8 @@ def summarize(report: dict) -> list[str]:
 def plot_result(cache: dict, ref81: dict, ref79: dict, info: dict, path) -> None:
     """One figure: t_gen vs width -- lr=1e-3 (v1279, gray) vs lr=4e-3 (new)."""
     import matplotlib
-    matplotlib.use("Agg")
-    import matplotlib.pyplot as plt
-    from pathlib import Path as _Path
+
+    plt = agg_pyplot()
 
     cfg = WidthLrConfig()
     fig, ax = plt.subplots(figsize=(7.5, 4.8))
@@ -302,7 +295,4 @@ def plot_result(cache: dict, ref81: dict, ref79: dict, info: dict, path) -> None
                                   label="d=64 @ lr=8e-3 (conditional probe)"))
     ax.legend(handles=handles, fontsize=7)
     fig.tight_layout()
-    out = _Path(path)
-    out.parent.mkdir(parents=True, exist_ok=True)
-    fig.savefig(out, dpi=160)
-    plt.close(fig)
+    save_figure(fig, path)

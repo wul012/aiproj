@@ -14,6 +14,7 @@ from __future__ import annotations
 from dataclasses import asdict, dataclass, replace
 from datetime import datetime, timezone
 
+from minigpt.grok_arc_common import agg_pyplot, save_figure
 from minigpt.grok_init_rescue_v1280 import train_cell
 
 SCHEMA = "grok_delay_gate_v1283.v1"
@@ -233,10 +234,7 @@ def summarize(report: dict) -> list[str]:
 
 def plot_result(cache: dict, info: dict, path) -> None:
     """One figure: max train-val gap vs width, threshold band, classes."""
-    import matplotlib
-    matplotlib.use("Agg")
-    import matplotlib.pyplot as plt
-    from pathlib import Path as _Path
+    plt = agg_pyplot()
 
     cfg = DelayGateConfig()
     coupled_max, delayed_min = cfg.threshold_pairs[0]
@@ -264,7 +262,4 @@ def plot_result(cache: dict, info: dict, path) -> None:
                               label="anchors (w=16/32, hollow)"))
     ax.legend(handles=handles, fontsize=7, loc="center right")
     fig.tight_layout()
-    out = _Path(path)
-    out.parent.mkdir(parents=True, exist_ok=True)
-    fig.savefig(out, dpi=160)
-    plt.close(fig)
+    save_figure(fig, path)
