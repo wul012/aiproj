@@ -14,6 +14,8 @@ from minigpt.randomized_holdout_publication_receipt_index_receipt_index_receipt_
     read_json_report as read_review_json,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 
 
 RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_CHECK_V1020_JSON_FILENAME = "randomized_holdout_publication_receipt_index_receipt_index_receipt_check_v1020.json"
@@ -119,10 +121,6 @@ def build_randomized_holdout_publication_receipt_index_receipt_index_receipt_che
     }
 
 
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    return 1 if require_pass and report.get("status") != "pass" else 0
-
-
 def _checks(
     original: dict[str, Any],
     rebuilt: dict[str, Any],
@@ -202,10 +200,6 @@ def _summary(
         "passed_check_count": sum(1 for row in checks if row["status"] == "pass"),
         "failed_check_count": sum(1 for row in checks if row["status"] != "pass"),
     }
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _decision(status: str) -> str:

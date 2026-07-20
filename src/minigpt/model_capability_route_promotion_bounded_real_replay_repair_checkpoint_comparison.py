@@ -11,6 +11,7 @@ from minigpt.model_capability_route_promotion_bounded_real_replay_repair_trainin
     MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_REPAIR_TRAINING_RUN_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import check_entry as _check
 
 
 MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_REPAIR_CHECKPOINT_COMPARISON_JSON_FILENAME = "model_capability_route_promotion_bounded_real_replay_repair_checkpoint_comparison.json"
@@ -140,10 +141,6 @@ def _checks(
         _check("case_counts_match", baseline_summary.get("case_count") == repair_summary.get("case_count"), {"baseline": baseline_summary.get("case_count"), "repair": repair_summary.get("case_count")}, "baseline and repair replay should cover the same suite"),
         _check("case_rows_present", bool(case_rows), len(case_rows), "comparison must include case rows"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _comparison(status: str, baseline_summary: dict[str, Any], repair_summary: dict[str, Any], case_rows: list[dict[str, Any]]) -> dict[str, Any]:

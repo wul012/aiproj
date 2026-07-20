@@ -11,6 +11,8 @@ from minigpt.model_capability_route_promotion_bounded_real_replay_decoder_anchor
     MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_DECODER_ANCHOR_SEED_REVISION_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code_seed_ready as resolve_exit_code
 
 
 MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_DECODER_ANCHOR_REBALANCED_SEED_REVISION_JSON_FILENAME = "model_capability_route_promotion_bounded_real_replay_decoder_anchor_rebalanced_seed_revision.json"
@@ -82,10 +84,6 @@ def build_model_capability_route_promotion_bounded_real_replay_decoder_anchor_re
         "summary": _summary(status, checks, revision),
         "interpretation": _interpretation(status, revision),
     }
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_seed_ready: bool) -> int:
-    return 1 if require_seed_ready and report.get("status") != "pass" else 0
 
 
 def _rebalance(examples: list[dict[str, Any]], carry_forward_per_case: int, direct_copies_per_case: int) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
@@ -188,10 +186,6 @@ def _checks(seed: dict[str, Any], audit: dict[str, Any], source_examples: list[d
         _check("decoder_bridge_share_preserved", bridge_share >= 0.25, bridge_share, "decoder bridge share must remain above the audit threshold"),
         _check("seed_examples_have_text", all(str(row.get("text") or "").strip() for row in output_examples), len(output_examples), "all seed examples must have text"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _revision(status: str, source_examples: list[dict[str, Any]], output_examples: list[dict[str, Any]], rebalance_rows: list[dict[str, Any]], bucket_rows: list[dict[str, Any]], audit_summary: dict[str, Any]) -> dict[str, Any]:

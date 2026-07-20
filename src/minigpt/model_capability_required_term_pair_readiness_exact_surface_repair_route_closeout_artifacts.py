@@ -12,6 +12,7 @@ from minigpt.model_capability_required_term_pair_readiness_exact_surface_repair_
     PAIR_READINESS_EXACT_SURFACE_REPAIR_ROUTE_CLOSEOUT_TEXT_FILENAME,
 )
 from minigpt.report_utils import as_dict, csv_cell, html_escape, list_of_dicts, markdown_cell, write_json_payload
+from minigpt.report_utils import html_card as _card
 
 
 def render_exact_surface_repair_route_closeout_text(report: dict[str, Any]) -> str:
@@ -146,10 +147,6 @@ def _check_html(row: dict[str, Any]) -> str:
         f"<td>{html_escape(row.get('detail'))}</td>"
         "</tr>"
     )
-
-
-def _card(label: str, value: Any) -> str:
-    return f"<div class=\"card\"><span>{html_escape(label)}</span><strong>{html_escape(value)}</strong></div>"
 
 
 def _style() -> str:

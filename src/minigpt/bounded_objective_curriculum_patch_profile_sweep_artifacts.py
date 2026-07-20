@@ -12,6 +12,7 @@ from minigpt.bounded_objective_curriculum_patch_profile_sweep import (
     CURRICULUM_PATCH_PROFILE_SWEEP_TEXT_FILENAME,
 )
 from minigpt.report_utils import as_dict, csv_cell, html_escape, list_of_dicts, markdown_cell, write_json_payload
+from minigpt.report_utils import html_card_label_value as _card
 
 
 def render_curriculum_patch_profile_sweep_text(report: dict[str, Any]) -> str:
@@ -171,10 +172,6 @@ def _sweep_html(report: dict[str, Any]) -> str:
         for row in list_of_dicts(report.get("sweep_rows"))
     )
     return f"<table><thead><tr><th>Profile</th><th>Case</th><th>Hit</th><th>Missed</th><th>Continuation</th></tr></thead><tbody>{body}</tbody></table>"
-
-
-def _card(label: str, value: Any) -> str:
-    return f'<div class="card"><div class="label">{html_escape(label)}</div><strong>{html_escape(value)}</strong></div>'
 
 
 __all__ = [

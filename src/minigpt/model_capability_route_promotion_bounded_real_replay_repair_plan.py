@@ -8,6 +8,8 @@ from minigpt.model_capability_route_promotion_bounded_real_replay_review import 
     MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_REVIEW_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code_plan_ready as resolve_exit_code
 
 
 MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_REPAIR_PLAN_JSON_FILENAME = "model_capability_route_promotion_bounded_real_replay_repair_plan.json"
@@ -63,10 +65,6 @@ def build_model_capability_route_promotion_bounded_real_replay_repair_plan(
     }
 
 
-def resolve_exit_code(report: dict[str, Any], *, require_plan_ready: bool) -> int:
-    return 1 if require_plan_ready and report.get("status") != "pass" else 0
-
-
 def _repair_task(row: dict[str, Any]) -> dict[str, Any]:
     case_id = str(row.get("case_id") or "unknown-case")
     missed_terms = [str(term) for term in row.get("missed_terms", [])]
@@ -110,10 +108,6 @@ def _checks(
         _check("repair_tasks_present", bool(repair_tasks), len(repair_tasks), "repair plan must include failed-case tasks"),
         _check("repair_task_count_matches_failed_cases", len(repair_tasks) == int(review_summary.get("failed_case_count") or 0), {"tasks": len(repair_tasks), "failed_cases": review_summary.get("failed_case_count")}, "repair tasks must match failed replay cases"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _plan(status: str, repair_tasks: list[dict[str, Any]], review_summary: dict[str, Any]) -> dict[str, Any]:

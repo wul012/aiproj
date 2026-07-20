@@ -8,6 +8,8 @@ from minigpt.bounded_objective_loss_signal_bridge_target_only_memory_stabilized_
     TARGET_ONLY_MEMORY_STABILIZED_LOSS_SUFFIX_UPTAKE_STAGNATION_DIAGNOSTIC_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code_plan_ready as resolve_exit_code
 
 
 TARGET_ONLY_MEMORY_STAGNATION_AWARE_SUFFIX_REPAIR_PLAN_JSON_FILENAME = (
@@ -73,10 +75,6 @@ def build_stagnation_aware_suffix_repair_plan(
         "summary": summary,
         "interpretation": _interpretation(status, summary),
     }
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_plan_ready: bool) -> int:
-    return 1 if require_plan_ready and report.get("status") != "pass" else 0
 
 
 def _plan_actions(summary: dict[str, Any], case_rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -165,10 +163,6 @@ def _checks(
 
 def _required_categories() -> set[str]:
     return {"suffix_position", "surface_format", "replay_prompt_boundary", "training_corpus_ratio", "verification_gate"}
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _summary(status: str, diagnostic_summary: dict[str, Any], actions: list[dict[str, Any]]) -> dict[str, Any]:

@@ -13,6 +13,7 @@ from minigpt.model_capability_required_term_pair_decoding_path_trace_components 
 )
 from minigpt.model_capability_required_term_scaffold_probe import read_json_report as read_json_report
 from minigpt.report_utils import utc_now
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code  # noqa: F401 (re-export)
 
 
 REQUIRED_TERM_PAIR_DECODING_PATH_TRACE_JSON_FILENAME = "model_capability_required_term_pair_decoding_path_trace.json"
@@ -71,12 +72,6 @@ def build_model_capability_required_term_pair_decoding_path_trace(
             "next_action": _next_action(status, summary),
         },
     }
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    if require_pass and report.get("status") != "pass":
-        return 1
-    return 0
 
 
 def _trace_targets(targets: list[dict[str, Any]], *, device: str, trace_func: TraceFunc | None) -> list[dict[str, Any]]:

@@ -7,6 +7,7 @@ from typing import Any
 from minigpt.randomized_holdout_acceptance_summary import RANDOMIZED_HOLDOUT_ACCEPTANCE_SUMMARY_JSON_FILENAME
 from minigpt.randomized_holdout_acceptance_summary_check import RANDOMIZED_HOLDOUT_ACCEPTANCE_SUMMARY_CHECK_JSON_FILENAME
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import check_entry as _check
 
 
 RANDOMIZED_HOLDOUT_ACCEPTANCE_PUBLICATION_PACKET_JSON_FILENAME = "randomized_holdout_acceptance_publication_packet.json"
@@ -119,10 +120,6 @@ def _checks(
         _check("approved_for_promotion_false", acceptance.get("approved_for_promotion") is False, acceptance.get("approved_for_promotion"), "direct promotion approval must remain false"),
         _check("evidence_files_exist", all(row.get("exists") is True for row in evidence_rows), evidence_rows, "publication evidence files must exist"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _packet(

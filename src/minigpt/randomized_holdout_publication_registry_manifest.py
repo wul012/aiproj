@@ -12,6 +12,8 @@ from minigpt.randomized_holdout_publication_constants import (
 )
 from minigpt.randomized_holdout_publication_registry_packet import RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_PACKET_JSON_FILENAME
 from minigpt.report_utils import as_dict, utc_now
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_utils import path_exists as _path_exists
 
 
 RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_MANIFEST_JSON_FILENAME = "randomized_holdout_publication_registry_manifest.json"
@@ -105,14 +107,6 @@ def _checks(packet_report: dict[str, Any], packet_summary: dict[str, Any], packe
         _check("source_checks_clean", int(packet_summary.get("failed_check_count") or 0) == 0, packet_summary.get("failed_check_count"), "source packet checks must be clean"),
         _check("source_next_step_matches", packet_summary.get("next_step") == RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_MANIFEST_NEXT_STEP, packet_summary.get("next_step"), "source packet must route to registry manifest build"),
     ]
-
-
-def _path_exists(path: str | Path | None) -> bool:
-    return bool(path) and Path(path).exists()
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _manifest(status: str, packet_summary: dict[str, Any], packet: dict[str, Any], packet_path: str | Path | None) -> dict[str, Any]:

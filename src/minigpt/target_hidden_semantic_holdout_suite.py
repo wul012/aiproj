@@ -14,6 +14,8 @@ from minigpt.bounded_objective_loss_signal_bridge_target_only_memory_target_hidd
 from minigpt.eval_suite import PromptCase
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.tokenizer import load_tokenizer
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code_suite_ready as resolve_exit_code
 
 
 TARGET_HIDDEN_SEMANTIC_HOLDOUT_SUITE_JSON_FILENAME = "target_hidden_semantic_holdout_suite.json"
@@ -83,10 +85,6 @@ def build_target_hidden_semantic_holdout_suite(
         "summary": summary,
         "interpretation": _interpretation(status, summary),
     }
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_suite_ready: bool) -> int:
-    return 1 if require_suite_ready and report.get("status") != "pass" else 0
 
 
 def semantic_candidate_prompt_seed_text() -> str:
@@ -177,10 +175,6 @@ def _checks(
         _check("all_prompts_target_hidden", all(row.get("target_hidden") is True for row in coverage_rows), sum(1 for row in coverage_rows if row.get("target_hidden") is True), "all prompts must hide expected terms"),
         _check("no_prompt_task_hints", all(row.get("task_hint") is not True for row in coverage_rows), sum(1 for row in coverage_rows if row.get("task_hint") is True), "semantic suite should avoid known task-hint terms"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _suite(status: str, source_suite: dict[str, Any], cases: list[dict[str, Any]], expected_terms: list[str]) -> dict[str, Any]:

@@ -23,11 +23,13 @@
     "src/minigpt/ci_workflow_hygiene_types.py",
     "src/minigpt/model_capability_honest_measurement.py",
     "src/minigpt/name_budget.py",
+    "src/minigpt/report_check_common.py",
     "src/minigpt/report_utils.py",
     "src/minigpt/training_scale_handoff_guards.py"
   ],
   "groups": {
     "shared_report_contract": [
+      "src/minigpt/report_check_common.py",
       "src/minigpt/report_utils.py"
     ],
     "training_handoff_contract": [

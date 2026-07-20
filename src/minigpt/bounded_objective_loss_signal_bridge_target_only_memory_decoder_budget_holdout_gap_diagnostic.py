@@ -9,6 +9,8 @@ from minigpt.bounded_objective_loss_signal_bridge_target_only_memory_decoder_bud
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.tokenizer import load_tokenizer
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code_diagnostic_ready as resolve_exit_code
 
 
 TARGET_ONLY_MEMORY_DECODER_BUDGET_HOLDOUT_GAP_DIAGNOSTIC_JSON_FILENAME = (
@@ -82,10 +84,6 @@ def build_decoder_budget_holdout_gap_diagnostic(
     }
 
 
-def resolve_exit_code(report: dict[str, Any], *, require_diagnostic_ready: bool) -> int:
-    return 1 if require_diagnostic_ready and report.get("status") != "pass" else 0
-
-
 def _diagnostic_rows(replay_rows: list[dict[str, Any]], tokenizer: Any, corpus: str) -> list[dict[str, Any]]:
     vocab = set(getattr(tokenizer, "stoi", {}).keys())
     rows: list[dict[str, Any]] = []
@@ -150,10 +148,6 @@ def _checks(
         _check("replay_rows_present", bool(replay_rows), len(replay_rows), "holdout replay must include replay rows"),
         _check("diagnostic_rows_complete", len(diagnostic_rows) == len(replay_rows), len(diagnostic_rows), "diagnostic should cover every replay row"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _summary(

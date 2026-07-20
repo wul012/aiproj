@@ -8,6 +8,8 @@ from minigpt.model_capability_required_term_pair_readiness_route_comparison impo
     PAIR_READINESS_ROUTE_COMPARISON_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, utc_now
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 
 
 PAIR_READINESS_CAPACITY_PROBE_PLAN_JSON_FILENAME = "model_capability_required_term_pair_readiness_capacity_probe_plan.json"
@@ -80,12 +82,6 @@ def build_capacity_probe_plan(
     }
 
 
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    if require_pass and report.get("status") != "pass":
-        return 1
-    return 0
-
-
 def _checks(route_comparison: dict[str, Any], summary: dict[str, Any]) -> list[dict[str, Any]]:
     return [
         _check("route_comparison_passed", route_comparison.get("status") == "pass", route_comparison.get("status"), "source route comparison must pass"),
@@ -99,10 +95,6 @@ def _checks(route_comparison: dict[str, Any], summary: dict[str, Any]) -> list[d
         _check("fixed_recovery_returned_to_baseline", summary.get("fixed_recovery_returns_to_baseline") is True, summary.get("fixed_recovery_returns_to_baseline"), "fixed-recovery must be confirmed as a baseline return"),
         _check("route_count_four", int(summary.get("route_count") or 0) >= 4, summary.get("route_count"), "comparison should include baseline, loss-retention, structured, and fixed-recovery routes"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _plan(status: str) -> dict[str, Any]:

@@ -14,6 +14,7 @@ from minigpt.model_capability_required_term_pair_loss_alias_newline_suppression_
     build_model_capability_required_term_pair_loss_alias_newline_suppression_probe,
 )
 from minigpt.report_utils import as_dict, utc_now
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code  # noqa: F401 (re-export)
 
 
 REQUIRED_TERM_PAIR_LOSS_ALIAS_BLOCKED_TOKEN_FRESH_COMPARE_JSON_FILENAME = (
@@ -145,12 +146,6 @@ def build_model_capability_required_term_pair_loss_alias_blocked_token_fresh_com
             "next_action": _next_action(status, summary),
         },
     }
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    if require_pass and report.get("status") != "pass":
-        return 1
-    return 0
 
 
 def _focus_issues(focus_report: dict[str, Any]) -> list[str]:

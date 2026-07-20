@@ -11,6 +11,8 @@ from minigpt.model_capability_route_promotion_bounded_objective_unassisted_repai
     BOUNDED_OBJECTIVE_UNASSISTED_REPAIR_CURRICULUM_REVISION_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code_seed_ready as resolve_exit_code
 
 
 BOUNDED_OBJECTIVE_UNASSISTED_REPAIR_SEED_REVISION_JSON_FILENAME = "model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision.json"
@@ -81,10 +83,6 @@ def build_model_capability_route_promotion_bounded_objective_unassisted_repair_s
         "summary": _summary(status, checks, examples, corpus_text, seed_revision),
         "interpretation": _interpretation(status, seed_revision),
     }
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_seed_ready: bool) -> int:
-    return 1 if require_seed_ready and report.get("status") != "pass" else 0
 
 
 def _seed_examples(contract_cases: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -167,10 +165,6 @@ def _checks(
         _check("revision_modes_present", {"output_position_anchor_examples", "neutral_prompt_exact_completion_repetition", "fragment_contrast_examples", "short_completion_repetition"}.issubset(modes), sorted(modes), "all curriculum modes must be represented"),
         _check("no_decoder_anchors", not any(row.get("decoder_anchor_used") for row in examples), len(examples), "seed revision must not use decoder anchors"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _seed_revision(status: str, examples: list[dict[str, Any]], corpus_text: str) -> dict[str, Any]:

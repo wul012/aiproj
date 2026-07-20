@@ -12,6 +12,7 @@ from minigpt.model_capability_route_promotion_bounded_objective_decoder_anchor_p
     BOUNDED_OBJECTIVE_DECODER_ANCHOR_PROBE_TEXT_FILENAME,
 )
 from minigpt.report_utils import as_dict, csv_cell, html_escape, list_of_dicts, markdown_cell, write_json_payload
+from minigpt.report_utils import html_card as _card
 
 
 def render_bounded_objective_decoder_anchor_probe_text(report: dict[str, Any]) -> str:
@@ -156,10 +157,6 @@ def _probe_row(row: dict[str, Any]) -> str:
         f"<td>{html_escape(row.get('continuation'))}</td>"
         "</tr>"
     )
-
-
-def _card(label: str, value: Any) -> str:
-    return f"<div class=\"card\"><span>{html_escape(label)}</span><strong>{html_escape(value)}</strong></div>"
 
 
 def _style() -> str:

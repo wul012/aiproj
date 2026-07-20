@@ -9,6 +9,8 @@ from minigpt.readability_report_artifacts import write_readability_outputs
 from minigpt.report_utils import as_dict, list_of_dicts, read_json_object, utc_now, write_json_payload
 from minigpt.server_contracts import GenerationRequest
 from minigpt.server_generator import MiniGPTGenerator
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code
 
 HOLDOUT_SCORECARD_SMOKE_STEM = "model_capability_holdout_scorecard_smoke_v1144"
 DEFAULT_REQUIRED_TERMS = ("fixed", "loss")
@@ -103,10 +105,6 @@ def write_holdout_scorecard_smoke_outputs(report: dict[str, Any], out_dir: str |
         stem=HOLDOUT_SCORECARD_SMOKE_STEM,
         row_title="Real Holdout Scorecard Smoke Rows",
     )
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool = False) -> int:
-    return 1 if require_pass and report.get("status") != "pass" else 0
 
 
 def _holdout_cases() -> list[dict[str, Any]]:
@@ -323,10 +321,6 @@ def _checks(
         _check("scorecard_outputs_written", all(Path(path).is_file() for path in outputs.values()), sorted(outputs), "nested benchmark scorecard outputs must exist"),
         _check("promotion_boundary_kept", True, False, "holdout scorecard smoke must not set promotion_ready true"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _summary(status: str, rows: list[dict[str, Any]], issues: list[dict[str, Any]], scorecard: dict[str, Any]) -> dict[str, Any]:

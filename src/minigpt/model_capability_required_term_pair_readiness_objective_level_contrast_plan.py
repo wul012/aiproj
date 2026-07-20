@@ -8,6 +8,8 @@ from minigpt.model_capability_required_term_pair_readiness_objective_or_decoding
     PAIR_READINESS_OBJECTIVE_OR_DECODING_ALTERNATIVE_SELECTOR_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 
 
 PAIR_READINESS_OBJECTIVE_LEVEL_CONTRAST_PLAN_JSON_FILENAME = (
@@ -76,10 +78,6 @@ def build_objective_level_contrast_plan(
     }
 
 
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    return 1 if require_pass and report.get("status") != "pass" else 0
-
-
 def _checks(
     selector_report: dict[str, Any],
     summary: dict[str, Any],
@@ -106,10 +104,6 @@ def _checks(
         ),
         _check("single_selected_route", len(selected_rows) == 1, len(selected_rows), "selector should mark exactly one route as selected"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _plan(status: str, selector: dict[str, Any]) -> dict[str, Any]:

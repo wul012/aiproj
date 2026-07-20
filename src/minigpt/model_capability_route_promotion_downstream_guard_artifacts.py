@@ -12,6 +12,8 @@ from minigpt.model_capability_route_promotion_downstream_guard import (
     MODEL_CAPABILITY_ROUTE_PROMOTION_DOWNSTREAM_GUARD_TEXT_FILENAME,
 )
 from minigpt.report_utils import as_dict, csv_cell, html_escape, list_of_dicts, markdown_cell, write_json_payload
+from minigpt.report_utils import html_card as _card
+from minigpt.report_utils import html_check_row as _check_row
 
 
 def render_model_capability_route_promotion_downstream_guard_text(report: dict[str, Any]) -> str:
@@ -116,21 +118,6 @@ def write_model_capability_route_promotion_downstream_guard_outputs(report: dict
     paths["markdown"].write_text(render_model_capability_route_promotion_downstream_guard_markdown(report), encoding="utf-8")
     paths["html"].write_text(render_model_capability_route_promotion_downstream_guard_html(report), encoding="utf-8")
     return {key: str(value) for key, value in paths.items()}
-
-
-def _check_row(row: dict[str, Any]) -> str:
-    return (
-        "<tr>"
-        f"<td>{html_escape(row.get('id'))}</td>"
-        f"<td>{html_escape(row.get('status'))}</td>"
-        f"<td>{html_escape(row.get('actual'))}</td>"
-        f"<td>{html_escape(row.get('detail'))}</td>"
-        "</tr>"
-    )
-
-
-def _card(label: str, value: Any) -> str:
-    return f"<div class=\"card\"><span>{html_escape(label)}</span><strong>{html_escape(value)}</strong></div>"
 
 
 def _style() -> str:

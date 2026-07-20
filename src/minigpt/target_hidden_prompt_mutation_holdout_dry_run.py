@@ -6,6 +6,8 @@ from typing import Any
 
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.target_hidden_prompt_mutation_holdout_suite import TARGET_HIDDEN_PROMPT_MUTATION_HOLDOUT_SUITE_JSON_FILENAME
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code_dry_run_ready as resolve_exit_code
 
 
 TARGET_HIDDEN_PROMPT_MUTATION_HOLDOUT_DRY_RUN_JSON_FILENAME = "target_hidden_prompt_mutation_holdout_dry_run.json"
@@ -66,10 +68,6 @@ def build_target_hidden_prompt_mutation_holdout_dry_run(
     }
 
 
-def resolve_exit_code(report: dict[str, Any], *, require_dry_run_ready: bool) -> int:
-    return 1 if require_dry_run_ready and report.get("status") != "pass" else 0
-
-
 def _dry_run_rows(
     cases: list[dict[str, Any]],
     expected_terms: list[str],
@@ -126,10 +124,6 @@ def _checks(
         _check("positive_rows_pass", all(row.get("positive_case_pass") is True for row in dry_run_rows), sum(1 for row in dry_run_rows if row.get("positive_case_pass") is True), "positive continuation must pass every case"),
         _check("negative_rows_fail", all(row.get("negative_case_pass") is not True for row in dry_run_rows), sum(1 for row in dry_run_rows if row.get("negative_case_pass") is True), "negative continuation must not pass any case"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _summary(

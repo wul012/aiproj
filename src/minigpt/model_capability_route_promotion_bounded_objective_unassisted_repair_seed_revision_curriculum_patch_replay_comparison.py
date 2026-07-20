@@ -15,6 +15,7 @@ from minigpt.model_capability_route_promotion_bounded_objective_unassisted_repai
     BOUNDED_OBJECTIVE_UNASSISTED_REPAIR_SEED_REVISION_CURRICULUM_PATCH_TRAINING_RUN_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict
+from minigpt.report_check_common import resolve_exit_code_comparison_objective as resolve_exit_code
 
 
 BOUNDED_OBJECTIVE_UNASSISTED_REPAIR_SEED_REVISION_CURRICULUM_PATCH_REPLAY_COMPARISON_JSON_FILENAME = "model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_curriculum_patch_replay_comparison.json"
@@ -71,15 +72,6 @@ def build_model_capability_route_promotion_bounded_objective_unassisted_repair_s
         generated_at=generated_at,
     )
     return _adapt_replay_report(report, curriculum_patch_training_run_report, curriculum_patch_training_run_path)
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_comparison_ready: bool, require_objective_pass: bool = False) -> int:
-    if require_comparison_ready and report.get("status") != "pass":
-        return 1
-    summary = as_dict(report.get("summary"))
-    if require_objective_pass and summary.get("objective_contract_recovered") is not True:
-        return 1
-    return 0
 
 
 def _adapt_training(training_report: dict[str, Any]) -> dict[str, Any]:

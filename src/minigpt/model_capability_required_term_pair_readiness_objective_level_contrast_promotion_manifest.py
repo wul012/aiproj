@@ -8,6 +8,8 @@ from minigpt.model_capability_required_term_pair_readiness_objective_level_contr
     PAIR_READINESS_OBJECTIVE_LEVEL_CONTRAST_ACCEPTANCE_REVIEW_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, number_or_default, utc_now
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 
 
 PAIR_READINESS_OBJECTIVE_LEVEL_CONTRAST_PROMOTION_MANIFEST_JSON_FILENAME = (
@@ -81,10 +83,6 @@ def build_objective_level_contrast_promotion_manifest(
     }
 
 
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    return 1 if require_pass and report.get("status") != "pass" else 0
-
-
 def _seed_rows(acceptance_review: dict[str, Any]) -> list[dict[str, Any]]:
     rows = []
     for row in list_of_dicts(acceptance_review.get("seed_rows")):
@@ -154,10 +152,6 @@ def _checks(
             "manifest must trace back to a review-ready seed-stability rollup",
         ),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _manifest(

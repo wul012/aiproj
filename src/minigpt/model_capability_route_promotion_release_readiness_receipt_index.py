@@ -11,6 +11,8 @@ from minigpt.model_capability_route_promotion_release_readiness_downstream_recei
     MODEL_CAPABILITY_ROUTE_PROMOTION_RELEASE_READINESS_DOWNSTREAM_RECEIPT_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_utils import path_exists as _path_exists
 
 
 MODEL_CAPABILITY_ROUTE_PROMOTION_RELEASE_READINESS_RECEIPT_INDEX_JSON_FILENAME = "model_capability_route_promotion_release_readiness_receipt_index.json"
@@ -211,10 +213,6 @@ def _interpretation(status: str, index: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def _path_exists(path: str | Path | None) -> bool:
-    return bool(path) and Path(path).exists()
-
-
 def _sha256_or_empty(path: str | Path | None) -> str:
     if not path:
         return ""
@@ -230,10 +228,6 @@ def _sha256_or_empty(path: str | Path | None) -> str:
 
 def _failed_ids(rows: list[dict[str, Any]]) -> list[str]:
     return [str(row.get("id")) for row in rows if row.get("status") != "pass"]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _decision(status: str) -> str:

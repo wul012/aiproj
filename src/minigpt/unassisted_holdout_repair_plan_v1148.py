@@ -6,6 +6,7 @@ from typing import Any
 from minigpt.decoder_anchor_holdout_comparison_v1147 import DECODER_ANCHOR_HOLDOUT_COMPARISON_V1147_STEM, EXPLAIN_DIR_NAME
 from minigpt.readability_report_artifacts import write_readability_outputs
 from minigpt.report_utils import as_dict, list_of_dicts, read_json_object, utc_now, write_json_payload
+from minigpt.report_check_common import check_entry as _check
 
 UNASSISTED_HOLDOUT_REPAIR_PLAN_V1148_STEM = "unassisted_holdout_repair_plan_v1148"
 
@@ -182,10 +183,6 @@ def _checks(report: dict[str, Any], summary: dict[str, Any], seed_rows: list[dic
         _check("seed_eval_prompts_target_free", all("fixed" not in str(row.get("prompt")).lower() and "loss" not in str(row.get("prompt")).lower() for row in seed_rows[:5]), False, "evaluation-derived seed prompts must stay target-free"),
         _check("promotion_boundary_kept", summary.get("promotion_ready") is False, summary.get("promotion_ready"), "v1147 must not already be a promotion report"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _plan(

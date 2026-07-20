@@ -11,6 +11,8 @@ from minigpt.bounded_objective_loss_signal_bridge_target_only_memory_replay_comp
     TARGET_ONLY_MEMORY_REPLAY_COMPARISON_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code_diagnostic_ready as resolve_exit_code
 
 
 TARGET_ONLY_MEMORY_LOSS_SUFFIX_REPLAY_REGRESSION_DIAGNOSTIC_JSON_FILENAME = (
@@ -97,10 +99,6 @@ def build_loss_suffix_replay_regression_diagnostic(
         "summary": _summary(status, current_cases, baseline_cases, regression),
         "interpretation": interpretation,
     }
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_diagnostic_ready: bool) -> int:
-    return 1 if require_diagnostic_ready and report.get("status") != "pass" else 0
 
 
 def _case_diagnostic(row: dict[str, Any]) -> dict[str, Any]:
@@ -230,10 +228,6 @@ def _checks(
         _check("replay_signal_regressed", regression.get("any_hit_delta", 0) < 0 or regression.get("zero_hit_delta", 0) > 0, {"any_hit_delta": regression.get("any_hit_delta"), "zero_hit_delta": regression.get("zero_hit_delta")}, "current replay must regress against the baseline signal"),
         _check("completion_surface_regressed", regression.get("completion_surface_regressed_to_zero") is True, regression.get("completion_surface_regressed_to_zero"), "completion surface should explain the zero-hit regression"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _summary(status: str, current_cases: list[dict[str, Any]], baseline_cases: list[dict[str, Any]], regression: dict[str, Any]) -> dict[str, Any]:

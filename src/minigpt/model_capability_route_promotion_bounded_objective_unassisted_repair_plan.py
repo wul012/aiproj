@@ -8,6 +8,8 @@ from minigpt.model_capability_route_promotion_bounded_objective_decoder_anchor_p
     BOUNDED_OBJECTIVE_DECODER_ANCHOR_POLICY_REVIEW_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code_plan_ready as resolve_exit_code
 
 
 BOUNDED_OBJECTIVE_UNASSISTED_REPAIR_PLAN_JSON_FILENAME = "model_capability_route_promotion_bounded_objective_unassisted_repair_plan.json"
@@ -70,10 +72,6 @@ def build_model_capability_route_promotion_bounded_objective_unassisted_repair_p
     }
 
 
-def resolve_exit_code(report: dict[str, Any], *, require_plan_ready: bool) -> int:
-    return 1 if require_plan_ready and report.get("status") != "pass" else 0
-
-
 def _repair_work_items() -> list[dict[str, Any]]:
     return [
         _work("unassisted_seed_revision", "high", "Build a seed corpus whose training examples require the model to emit fixed loss without injected decoder anchors.", "model_capability_route_promotion_bounded_objective_unassisted_repair_seed"),
@@ -113,10 +111,6 @@ def _checks(review: dict[str, Any], summary: dict[str, Any], signals: dict[str, 
         _check("selected_track_unassisted_repair", summary.get("selected_track") == "unassisted_objective_repair", summary.get("selected_track"), "review must select unassisted objective repair"),
         _check("new_text_still_failed", int(signals.get("new_text_pass_count") or 0) == 0, signals.get("new_text_pass_count"), "plan should run only when new-text replay is still failing"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _plan(status: str, work_items: list[dict[str, Any]], gates: list[dict[str, Any]], blocked_actions: list[dict[str, Any]]) -> dict[str, Any]:

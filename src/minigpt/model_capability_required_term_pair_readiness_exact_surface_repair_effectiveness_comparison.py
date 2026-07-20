@@ -8,6 +8,8 @@ from minigpt.model_capability_required_term_pair_readiness_fixed_preserving_tran
     PAIR_READINESS_FIXED_PRESERVING_TRANSFER_PAIR_PROBE_REPLAY_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 
 
 PAIR_READINESS_EXACT_SURFACE_REPAIR_EFFECTIVENESS_COMPARISON_JSON_FILENAME = (
@@ -71,10 +73,6 @@ def build_exact_surface_repair_effectiveness_comparison(
     }
 
 
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    return 1 if require_pass and report.get("status") != "pass" else 0
-
-
 def _comparison_rows(baseline: dict[str, Any], repaired: dict[str, Any]) -> list[dict[str, Any]]:
     baseline_rows = {str(row.get("spec_id")): row for row in list_of_dicts(baseline.get("replay_rows"))}
     repaired_rows = {str(row.get("spec_id")): row for row in list_of_dicts(repaired.get("replay_rows"))}
@@ -107,10 +105,6 @@ def _checks(baseline: dict[str, Any], repaired: dict[str, Any], rows: list[dict[
         _check("comparison_rows_present", bool(rows), len(rows), "comparison requires replay rows"),
         _check("exact_surface_compared", any(row.get("spec_id") == "exact-heldout-pair" for row in rows), [row.get("spec_id") for row in rows], "exact heldout pair surface must be compared"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _summary(baseline: dict[str, Any], repaired: dict[str, Any], rows: list[dict[str, Any]]) -> dict[str, Any]:

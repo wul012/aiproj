@@ -13,6 +13,7 @@ from minigpt.unassisted_holdout_repair_plan_v1148 import EXPLAIN_DIR_NAME
 from minigpt.unassisted_holdout_repair_seed_corpus_v1149 import (
     UNASSISTED_HOLDOUT_REPAIR_SEED_CORPUS_V1149_STEM,
 )
+from minigpt.report_check_common import check_entry as _check
 
 
 UNASSISTED_LOSS_SUFFIX_REPAIR_SEED_V1153_STEM = "unassisted_loss_suffix_repair_seed_v1153"
@@ -353,10 +354,6 @@ def _target_prompt_hits(prompts: list[dict[str, Any]]) -> list[str]:
         if any(term and term in prompt for term in terms):
             hits.append(str(row.get("case_id") or row.get("prompt") or "unknown"))
     return hits
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _int_value(value: Any, *, default: int = 0) -> int:

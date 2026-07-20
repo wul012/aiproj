@@ -8,6 +8,7 @@ from typing import Any
 from minigpt.model_capability_required_term_pair_surface_baseline_contrast import PAIR_SURFACE_BASELINE_CONTRAST_JSON_FILENAME
 from minigpt.model_capability_required_term_pair_surface_variant_selector import PAIR_SURFACE_VARIANT_SELECTOR_JSON_FILENAME
 from minigpt.report_utils import as_dict, csv_cell, html_escape, markdown_cell, utc_now, write_json_payload
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 
 
 PAIR_SURFACE_ROUTE_DECISION_JSON_FILENAME = "model_capability_required_term_pair_surface_route_decision.json"
@@ -141,12 +142,6 @@ def render_html(report: dict[str, Any]) -> str:
 <section><h2>Route</h2><table><tbody>{rows}</tbody></table></section>
 <section><h2>Next Action</h2><p>{html_escape(interpretation.get('next_action'))}</p></section>
 </main></body></html>"""
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    if require_pass and report.get("status") != "pass":
-        return 1
-    return 0
 
 
 def _issues(

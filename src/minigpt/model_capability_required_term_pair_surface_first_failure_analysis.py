@@ -15,6 +15,7 @@ from minigpt.model_capability_required_term_pair_refresh_forced_choice_diagnosti
     PAIR_REFRESH_FORCED_CHOICE_DIAGNOSTIC_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 
 
 SURFACE_FIRST_FAILURE_ANALYSIS_JSON_FILENAME = (
@@ -96,12 +97,6 @@ def build_model_capability_required_term_pair_surface_first_failure_analysis(
         "recommendations": _recommendations(status, summary),
         "interpretation": _interpretation(status, summary),
     }
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    if require_pass and report.get("status") != "pass":
-        return 1
-    return 0
 
 
 def _evidence_rows(

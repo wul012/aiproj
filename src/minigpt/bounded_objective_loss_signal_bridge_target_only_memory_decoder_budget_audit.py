@@ -12,6 +12,7 @@ from minigpt.bounded_objective_loss_signal_bridge_target_only_memory_stagnation_
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.tokenizer import load_tokenizer
+from minigpt.report_check_common import check_entry as _check
 
 
 TARGET_ONLY_MEMORY_DECODER_BUDGET_AUDIT_JSON_FILENAME = (
@@ -190,10 +191,6 @@ def _checks(
         _check("replay_rows_present", bool(replay_rows), len(replay_rows), "replay report must include rows"),
         _check("budget_exhaustion_confirmed", diagnostic.get("all_cases_budget_exhausted_before_top1_suffix") is True, diagnostic.get("budget_exhausted_case_count"), "all cases should exhaust decode budget before top-1 suffix"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _summary(

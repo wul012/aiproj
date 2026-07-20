@@ -6,6 +6,7 @@ from typing import Any
 
 from minigpt.bounded_objective_curriculum_patch_profile_sweep import CURRICULUM_PATCH_PROFILE_SWEEP_JSON_FILENAME
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import check_entry as _check
 
 
 LOSS_SIGNAL_BRIDGE_JSON_FILENAME = "bounded_objective_loss_signal_bridge.json"
@@ -215,10 +216,6 @@ def _purpose(kind: str) -> str:
         "fixed_signal_pair_bridge": "retain fixed while adding loss in the same completion",
         "pair_reinforcement": "repeat the exact bounded objective pair without decoder anchors",
     }.get(kind, "bridge fixed and loss without decoder anchors")
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 __all__ = [

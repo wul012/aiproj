@@ -12,6 +12,7 @@ from minigpt.model_capability_required_term_pair_fixed_retention_objective_readi
     PAIR_FIXED_RETENTION_OBJECTIVE_READINESS_TEXT_FILENAME,
 )
 from minigpt.report_utils import as_dict, csv_cell, html_escape, list_of_dicts, markdown_cell, write_json_payload
+from minigpt.report_utils import html_card as _card
 
 
 def render_fixed_retention_objective_readiness_text(report: dict[str, Any]) -> str:
@@ -151,10 +152,6 @@ def _requirement_html(row: dict[str, Any]) -> str:
         f"<td>{html_escape(row.get('acceptance'))}</td>"
         "</tr>"
     )
-
-
-def _card(label: str, value: Any) -> str:
-    return f"<div class=\"card\"><span>{html_escape(label)}</span><strong>{html_escape(value)}</strong></div>"
 
 
 def _style() -> str:

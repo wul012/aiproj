@@ -15,6 +15,8 @@ from minigpt.model_capability_route_promotion_bounded_real_replay_decoder_anchor
     MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_DECODER_ANCHOR_REBALANCED_TRAINING_RUN_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code_diagnostic_ready as resolve_exit_code
 
 
 MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_DECODER_ANCHOR_REBALANCED_FAILURE_DIAGNOSTIC_JSON_FILENAME = "model_capability_route_promotion_bounded_real_replay_decoder_anchor_rebalanced_failure_diagnostic.json"
@@ -113,10 +115,6 @@ def build_model_capability_route_promotion_bounded_real_replay_decoder_anchor_re
     }
 
 
-def resolve_exit_code(report: dict[str, Any], *, require_diagnostic_ready: bool) -> int:
-    return 1 if require_diagnostic_ready and report.get("status") != "pass" else 0
-
-
 def _case_diagnostic(row: dict[str, Any], seed_text: str, corpus: str) -> dict[str, Any]:
     prompt = str(row.get("prompt") or "")
     continuation = str(row.get("continuation") or "")
@@ -207,10 +205,6 @@ def _checks(replay: dict[str, Any], comparison: dict[str, Any], seed: dict[str, 
         _check("corpus_present", bool(corpus.strip()), len(corpus), "rebalanced corpus must be readable"),
         _check("case_diagnostics_present", bool(case_rows), len(case_rows), "diagnostic must inspect replay cases"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _diagnostic(status: str, case_rows: list[dict[str, Any]], root_causes: list[dict[str, Any]], comparison_summary: dict[str, Any], seed_summary: dict[str, Any], training_summary: dict[str, Any]) -> dict[str, Any]:

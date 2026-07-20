@@ -11,6 +11,8 @@ from minigpt.model_capability_route_promotion_bounded_objective_unassisted_repai
     BOUNDED_OBJECTIVE_UNASSISTED_REPAIR_SEED_REVISION_REPLAY_COMPARISON_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code_diagnostic_ready as resolve_exit_code
 
 
 BOUNDED_OBJECTIVE_UNASSISTED_REPAIR_SEED_REVISION_CURRICULUM_PATCH_SHAPE_MIGRATION_DIAGNOSTIC_JSON_FILENAME = (
@@ -79,10 +81,6 @@ def build_model_capability_route_promotion_bounded_objective_unassisted_repair_s
         "summary": summary,
         "interpretation": _interpretation(status, summary, root_causes),
     }
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_diagnostic_ready: bool) -> int:
-    return 1 if require_diagnostic_ready and report.get("status") != "pass" else 0
 
 
 def _migration_rows(seed_rows: list[dict[str, Any]], patch_rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -247,10 +245,6 @@ def _terms(value: Any) -> list[str]:
     if not isinstance(value, list):
         return []
     return sorted(str(term).lower() for term in value)
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _cause(cause_id: str, severity: str, detail: str, evidence: list[str]) -> dict[str, Any]:

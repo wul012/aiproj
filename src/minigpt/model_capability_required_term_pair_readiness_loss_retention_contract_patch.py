@@ -11,6 +11,8 @@ from minigpt.model_capability_required_term_pair_readiness_split_contract import
     PAIR_READINESS_SPLIT_CONTRACT_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 
 
 PAIR_READINESS_LOSS_RETENTION_CONTRACT_PATCH_JSON_FILENAME = "model_capability_required_term_pair_readiness_loss_retention_contract_patch.json"
@@ -97,12 +99,6 @@ def build_loss_retention_contract_patch(
     }
 
 
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    if require_pass and report.get("status") != "pass":
-        return 1
-    return 0
-
-
 def _patched_contract(base_contract: dict[str, Any]) -> dict[str, Any]:
     training_rows = [str(row) for row in base_contract.get("training_rows", [])]
     return {
@@ -137,10 +133,6 @@ def _checks(repair_plan: dict[str, Any], base_contract_report: dict[str, Any], p
         _check("heldout_pair_absent", heldout not in training_rows, heldout in training_rows, "heldout pair probe must not be a training row"),
         _check("evaluation_probes_preserved", len(probes) == 3, len(probes), "fixed, loss, and pair probes must be preserved"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _summary(base_contract: dict[str, Any], patched_contract: dict[str, Any], checks: list[dict[str, Any]]) -> dict[str, Any]:

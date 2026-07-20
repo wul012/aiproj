@@ -13,6 +13,7 @@ from minigpt.model_capability_required_term_micro_training import (
     _train_micro_checkpoint,
 )
 from minigpt.report_utils import as_dict, list_of_dicts
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 
 REQUIRED_TERM_PAIR_REBALANCE_JSON_FILENAME = "model_capability_required_term_pair_rebalance.json"
 REQUIRED_TERM_PAIR_REBALANCE_TEXT_FILENAME = "model_capability_required_term_pair_rebalance.txt"
@@ -182,12 +183,6 @@ def compare_rebalance_pairs(pairs: list[dict[str, Any]], pair_summaries: list[di
             }
         )
     return rows
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    if require_pass and report.get("status") != "pass":
-        return 1
-    return 0
 
 
 def _run_rebalance_pair(

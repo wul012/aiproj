@@ -11,6 +11,7 @@ from minigpt.model_capability_route_promotion_bounded_real_replay_repair_strateg
     MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_REPAIR_STRATEGY_REVISION_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import check_entry as _check
 
 
 MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_REPAIR_SEED_REVISION_JSON_FILENAME = "model_capability_route_promotion_bounded_real_replay_repair_seed_revision.json"
@@ -177,10 +178,6 @@ def _checks(
         _check("preservation_examples_for_regressions", preservation_count >= regression_count, {"preservation": preservation_count, "regressions": regression_count}, "each regression case should receive a baseline preservation example"),
         _check("seed_examples_have_text", all(str(row.get("text") or "").strip() for row in seed_examples), len(seed_examples), "every revised seed example must have training text"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _revision(

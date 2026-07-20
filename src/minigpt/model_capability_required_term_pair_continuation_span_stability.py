@@ -13,6 +13,7 @@ from minigpt.model_capability_required_term_pair_diagnostic_rollup import (
 )
 from minigpt.model_capability_required_term_scaffold_probe import read_json_report as read_json_report
 from minigpt.report_utils import as_dict, utc_now
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code  # noqa: F401 (re-export)
 
 
 REQUIRED_TERM_PAIR_CONTINUATION_SPAN_STABILITY_JSON_FILENAME = "model_capability_required_term_pair_continuation_span_stability.json"
@@ -172,12 +173,6 @@ def summarize_continuation_span_stability(seed_rows: list[dict[str, Any]]) -> di
         "stable_prefix_gain": bool(seed_count) and prefix_gain_count == seed_count,
         "stable_full_pair_generation": bool(seed_count) and full_pair_count == seed_count,
     }
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    if require_pass and report.get("status") != "pass":
-        return 1
-    return 0
 
 
 def _clean_seeds(seeds: tuple[int, ...] | list[int]) -> list[int]:

@@ -12,6 +12,7 @@ from minigpt.bounded_objective_loss_signal_bridge_target_only_memory_target_hidd
     TARGET_ONLY_MEMORY_TARGET_HIDDEN_TOKENIZER_COVERED_HOLDOUT_REPLAY_REVIEW_TEXT_FILENAME,
 )
 from minigpt.report_utils import as_dict, csv_cell, html_escape, list_of_dicts, markdown_cell, write_json_payload
+from minigpt.report_utils import html_card as _card
 
 
 def render_target_hidden_tokenizer_covered_holdout_replay_review_text(report: dict[str, Any]) -> str:
@@ -162,10 +163,6 @@ def _join_terms(value: Any) -> str:
     if not isinstance(value, list):
         return ""
     return ",".join(str(item) for item in value)
-
-
-def _card(label: str, value: Any) -> str:
-    return f"<div class=\"card\"><span>{html_escape(label)}</span><strong>{html_escape(value)}</strong></div>"
 
 
 def _style() -> str:

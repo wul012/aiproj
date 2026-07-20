@@ -8,6 +8,7 @@ from minigpt.model_capability_route_promotion_bounded_objective_intervention_pla
     BOUNDED_OBJECTIVE_INTERVENTION_PLAN_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import check_entry as _check
 
 
 BOUNDED_OBJECTIVE_CONTRACT_JSON_FILENAME = "model_capability_route_promotion_bounded_objective_contract.json"
@@ -188,10 +189,6 @@ def _checks(
         _check("direct_seed_work_item_present", "direct_seed_corpus" in work_items, sorted(work_items), "plan must include direct seed work item"),
         _check("dual_replay_work_item_present", "dual_replay" in work_items, sorted(work_items), "plan must include dual replay work item"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _summary(

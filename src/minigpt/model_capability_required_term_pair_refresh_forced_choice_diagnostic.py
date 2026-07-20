@@ -7,6 +7,7 @@ from typing import Any, Callable, Sequence
 from minigpt.model_capability_required_term_pair_coexistence_refresh import PAIR_COEXISTENCE_REFRESH_JSON_FILENAME
 from minigpt.model_capability_required_term_pair_fixed_retention_objective_comparison import TARGET_TERMS
 from minigpt.report_utils import as_dict, number_or_none, utc_now
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 
 
 PAIR_REFRESH_FORCED_CHOICE_DIAGNOSTIC_JSON_FILENAME = (
@@ -81,12 +82,6 @@ def build_model_capability_required_term_pair_refresh_forced_choice_diagnostic(
         "summary": summary,
         "interpretation": _interpretation(status, summary),
     }
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    if require_pass and report.get("status") != "pass":
-        return 1
-    return 0
 
 
 def _source_path(paths: Sequence[str | Path] | None, index: int) -> str:

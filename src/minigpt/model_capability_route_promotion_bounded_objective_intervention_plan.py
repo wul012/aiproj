@@ -8,6 +8,7 @@ from minigpt.model_capability_route_promotion_bounded_rebalanced_intervention_de
     BOUNDED_REBALANCED_INTERVENTION_DECISION_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, utc_now
+from minigpt.report_check_common import check_entry as _check
 
 
 BOUNDED_OBJECTIVE_INTERVENTION_PLAN_JSON_FILENAME = "model_capability_route_promotion_bounded_objective_intervention_plan.json"
@@ -141,10 +142,6 @@ def _checks(decision: dict[str, Any], summary: dict[str, Any], route: dict[str, 
         _check("training_blocked_until_plan", summary.get("new_training_allowed") is False, summary.get("new_training_allowed"), "new training must remain blocked until this plan exists"),
         _check("closed_route_present", bool(route.get("closed_route")), route.get("closed_route"), "source decision must identify the closed route"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _summary(status: str, issues: list[dict[str, Any]], plan: dict[str, Any]) -> dict[str, Any]:

@@ -13,6 +13,8 @@ from minigpt.model_capability_route_promotion_bounded_objective_training_run imp
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.server_contracts import GenerationRequest
 from minigpt.server_generator import MiniGPTGenerator
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code_comparison_objective as resolve_exit_code
 
 
 BOUNDED_OBJECTIVE_REPLAY_COMPARISON_JSON_FILENAME = "model_capability_route_promotion_bounded_objective_replay_comparison.json"
@@ -92,15 +94,6 @@ def build_model_capability_route_promotion_bounded_objective_replay_comparison(
         "summary": _summary(status, checks, comparison),
         "interpretation": _interpretation(status, comparison),
     }
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_comparison_ready: bool, require_objective_pass: bool = False) -> int:
-    if require_comparison_ready and report.get("status") != "pass":
-        return 1
-    summary = as_dict(report.get("summary"))
-    if require_objective_pass and summary.get("objective_contract_recovered") is not True:
-        return 1
-    return 0
 
 
 def _resolve_checkpoint(training_run: dict[str, Any], override: str | Path | None) -> Path:
@@ -213,10 +206,6 @@ def _checks(
         _check("all_cases_executed", len(replay_rows) == len(cases), len(replay_rows), "objective replay should execute every contract case"),
         _check("no_replay_errors", not replay_errors, len(replay_errors), "objective replay should not raise generation errors"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _comparison(status: str, replay_summary: dict[str, Any], contract_summary: dict[str, Any], training_summary: dict[str, Any]) -> dict[str, Any]:

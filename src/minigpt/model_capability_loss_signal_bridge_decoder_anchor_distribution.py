@@ -15,6 +15,8 @@ from minigpt.model_capability_route_promotion_bounded_real_replay_decoder_anchor
 )
 from minigpt.readability_report_artifacts import write_readability_outputs
 from minigpt.report_utils import as_dict, list_of_dicts, read_json_object, utc_now, write_json_payload
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code
 
 LOSS_SIGNAL_BRIDGE_DECODER_ANCHOR_DISTRIBUTION_STEM = (
     "model_capability_loss_signal_bridge_decoder_anchor_distribution_v1145"
@@ -212,10 +214,6 @@ def write_loss_signal_bridge_decoder_anchor_distribution_outputs(
     )
 
 
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool = False) -> int:
-    return 1 if require_pass and report.get("status") != "pass" else 0
-
-
 def _seed_revision_report(examples: list[dict[str, Any]], corpus_path: Path) -> dict[str, Any]:
     return {
         "schema_version": 1,
@@ -304,10 +302,6 @@ def _checks(
         _check("distribution_outputs_written", all(Path(path).is_file() for path in distribution_outputs.values()), sorted(distribution_outputs), "nested distribution outputs must be written"),
         _check("promotion_boundary_kept", True, False, "v1145 is a bounded capability evidence run, not a model promotion"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _summary(status: str, issues: list[dict[str, Any]], training: dict[str, Any], distribution: dict[str, Any]) -> dict[str, Any]:

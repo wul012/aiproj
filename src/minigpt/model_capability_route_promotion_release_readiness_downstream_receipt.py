@@ -9,6 +9,7 @@ from minigpt.model_capability_route_promotion_release_readiness_summary_check im
     MODEL_CAPABILITY_ROUTE_PROMOTION_RELEASE_READINESS_SUMMARY_CHECK_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, string_list, utc_now
+from minigpt.report_check_common import check_entry as _check
 
 
 MODEL_CAPABILITY_ROUTE_PROMOTION_RELEASE_READINESS_DOWNSTREAM_RECEIPT_JSON_FILENAME = "model_capability_route_promotion_release_readiness_downstream_receipt.json"
@@ -201,10 +202,6 @@ def _interpretation(status: str, receipt: dict[str, Any]) -> dict[str, Any]:
         "reason": "A downstream consumer receipt is granted for bounded route-promotion release governance only.",
         "next_action": "index the receipt before using it as downstream governance evidence",
     }
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _status_counts(rows: list[dict[str, Any]]) -> dict[str, int]:

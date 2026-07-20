@@ -8,6 +8,7 @@ from minigpt.model_capability_route_promotion_bounded_objective_decoder_anchor_p
     BOUNDED_OBJECTIVE_DECODER_ANCHOR_PROBE_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import check_entry as _check
 
 
 BOUNDED_OBJECTIVE_DECODER_ANCHOR_POLICY_JSON_FILENAME = "model_capability_route_promotion_bounded_objective_decoder_anchor_policy.json"
@@ -125,10 +126,6 @@ def _checks(probe: dict[str, Any], probe_summary: dict[str, Any], rows: list[dic
         _check("probe_rows_present", bool(rows), len(rows), "policy must read probe rows"),
         _check("completion_signal_present", bool(policy_rows), len(policy_rows), "policy requires at least one completion-pass probe row"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _policy(status: str, policy_rows: list[dict[str, Any]], uncovered_cases: list[dict[str, Any]], guardrails: list[dict[str, Any]]) -> dict[str, Any]:

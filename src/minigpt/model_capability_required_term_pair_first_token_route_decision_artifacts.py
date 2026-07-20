@@ -12,6 +12,7 @@ from minigpt.model_capability_required_term_pair_first_token_route_decision impo
     PAIR_FIRST_TOKEN_ROUTE_DECISION_TEXT_FILENAME,
 )
 from minigpt.report_utils import as_dict, csv_cell, html_escape, list_of_dicts, markdown_cell, write_json_payload
+from minigpt.report_utils import html_card as _card
 
 
 def render_model_capability_required_term_pair_first_token_route_decision_text(report: dict[str, Any]) -> str:
@@ -222,10 +223,6 @@ def _rejected_html(row: dict[str, Any]) -> str:
 
 def _pair_full_display(row: dict[str, Any]) -> str:
     return f"{row.get('pair_full_seed_count')}/{row.get('seed_count')}"
-
-
-def _card(label: str, value: Any) -> str:
-    return f"<div class=\"card\"><span>{html_escape(label)}</span><strong>{html_escape(value)}</strong></div>"
 
 
 def _style() -> str:

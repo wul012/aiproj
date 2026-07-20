@@ -14,6 +14,7 @@ from minigpt.model_capability_required_term_micro_training import (
 )
 from minigpt.model_capability_required_term_scaffold_probe import read_json_report as read_json_report
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code  # noqa: F401 (re-export)
 
 
 REQUIRED_TERM_BALANCED_TRAINING_JSON_FILENAME = "model_capability_required_term_balanced_training.json"
@@ -181,12 +182,6 @@ def summarize_required_term_balanced_training(
         "prompt_aligned_term_count": alignment.get("prompt_aligned_term_count", 0),
         "prompt_alignment_ready": bool(alignment.get("prompt_alignment_ready")),
     }
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    if require_pass and report.get("status") != "pass":
-        return 1
-    return 0
 
 
 def _term_rows(report: dict[str, Any]) -> list[dict[str, Any]]:

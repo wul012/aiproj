@@ -8,6 +8,8 @@ from minigpt.bounded_objective_loss_signal_bridge_target_only_memory_loss_suffix
     TARGET_ONLY_MEMORY_LOSS_SUFFIX_REPLAY_REGRESSION_DIAGNOSTIC_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code_patch_ready as resolve_exit_code
 
 
 TARGET_ONLY_MEMORY_COMPLETION_SURFACE_STABILIZATION_PATCH_JSON_FILENAME = (
@@ -85,10 +87,6 @@ def build_completion_surface_stabilization_patch(
         "summary": summary,
         "interpretation": _interpretation(status, summary),
     }
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_patch_ready: bool) -> int:
-    return 1 if require_patch_ready and report.get("status") != "pass" else 0
 
 
 def _patch_examples(current_cases: list[dict[str, Any]], baseline_cases: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -208,10 +206,6 @@ def _checks(
         _check("completion_surface_dominates", completion_count >= answer_count, {"completion": completion_count, "answer": answer_count}, "completion stabilization should dominate carry-forward examples"),
         _check("decoder_anchor_free", not any(row.get("decoder_anchor") for row in patch_examples), False, "patch must stay no-anchor"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _summary(

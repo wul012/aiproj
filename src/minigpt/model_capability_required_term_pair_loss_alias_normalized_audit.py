@@ -6,6 +6,7 @@ from typing import Any
 from minigpt.model_capability_required_term_pair_loss_alias_focus import REQUIRED_TERM_PAIR_LOSS_ALIAS_FOCUS_JSON_FILENAME, read_json_report as read_json_report
 from minigpt.model_capability_required_term_pair_loss_alias_metrics import normalize_for_required_term as normalize_for_required_term, required_term_hit_metrics
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code  # noqa: F401 (re-export)
 
 
 REQUIRED_TERM_PAIR_LOSS_ALIAS_NORMALIZED_AUDIT_JSON_FILENAME = "model_capability_required_term_pair_loss_alias_normalized_audit.json"
@@ -101,12 +102,6 @@ def summarize_normalized_rows(rows: list[dict[str, Any]]) -> dict[str, Any]:
         "normalized_full_coverage": bool(rows) and normalized_hits == len(rows),
         "focus_normalized_full_coverage": bool(focus_rows) and focus_normalized_hits == len(focus_rows),
     }
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    if require_pass and report.get("status") != "pass":
-        return 1
-    return 0
 
 
 def _input_issues(focus_report: dict[str, Any], rows: list[dict[str, Any]]) -> list[str]:

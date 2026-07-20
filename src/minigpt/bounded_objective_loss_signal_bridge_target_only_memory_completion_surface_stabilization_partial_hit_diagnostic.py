@@ -11,6 +11,8 @@ from minigpt.bounded_objective_loss_signal_bridge_target_only_memory_loss_suffix
     TARGET_ONLY_MEMORY_LOSS_SUFFIX_REPLAY_REGRESSION_DIAGNOSTIC_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code_diagnostic_ready as resolve_exit_code
 
 
 TARGET_ONLY_MEMORY_COMPLETION_SURFACE_STABILIZATION_PARTIAL_HIT_DIAGNOSTIC_JSON_FILENAME = (
@@ -87,10 +89,6 @@ def build_completion_surface_stabilization_partial_hit_diagnostic(
         "summary": _summary(status, case_rows, diagnostic),
         "interpretation": _interpretation(status, diagnostic),
     }
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_diagnostic_ready: bool) -> int:
-    return 1 if require_diagnostic_ready and report.get("status") != "pass" else 0
 
 
 def _case_diagnostic(row: dict[str, Any]) -> dict[str, Any]:
@@ -175,10 +173,6 @@ def _checks(
         _check("all_fixed_l_partial", diagnostic.get("all_cases_fixed_l_partial") is True, diagnostic.get("fixed_l_partial_case_count"), "all cases should stabilize at fixed l"),
         _check("loss_still_missing", int(diagnostic.get("loss_hit_case_count") or 0) == 0, diagnostic.get("loss_hit_case_count"), "diagnostic requires loss still missing"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _summary(status: str, case_rows: list[dict[str, Any]], diagnostic: dict[str, Any]) -> dict[str, Any]:

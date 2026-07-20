@@ -8,6 +8,8 @@ from minigpt.bounded_objective_loss_signal_bridge_single_line_surface_replay_com
     LOSS_SIGNAL_BRIDGE_SINGLE_LINE_SURFACE_REPLAY_COMPARISON_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code_diagnostic_ready as resolve_exit_code
 
 
 SINGLE_LINE_SURFACE_ZERO_HIT_DIAGNOSTIC_JSON_FILENAME = (
@@ -75,10 +77,6 @@ def build_single_line_surface_zero_hit_diagnostic(
         "summary": _summary(status, case_rows, root_causes, diagnostic),
         "interpretation": _interpretation(status, diagnostic),
     }
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_diagnostic_ready: bool) -> int:
-    return 1 if require_diagnostic_ready and report.get("status") != "pass" else 0
 
 
 def _case_diagnostic(row: dict[str, Any]) -> dict[str, Any]:
@@ -153,10 +151,6 @@ def _checks(replay: dict[str, Any], summary: dict[str, Any], case_rows: list[dic
         _check("not_recovered", summary.get("objective_contract_recovered") is False, summary.get("objective_contract_recovered"), "diagnostic only applies before recovery"),
         _check("case_rows_present", bool(case_rows), len(case_rows), "diagnostic needs replay rows"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _diagnostic(

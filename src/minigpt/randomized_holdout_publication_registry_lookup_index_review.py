@@ -14,6 +14,8 @@ from minigpt.randomized_holdout_publication_registry_lookup_index import (
     RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_LOOKUP_INDEX_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_utils import path_exists as _path_exists
 
 
 RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_LOOKUP_INDEX_REVIEW_JSON_FILENAME = "randomized_holdout_publication_registry_lookup_index_review.json"
@@ -115,14 +117,6 @@ def _checks(
         _check("source_checks_clean", int(index_summary.get("failed_check_count") or 0) == 0, index_summary.get("failed_check_count"), "source lookup index checks must be clean"),
         _check("source_next_step_matches", index_summary.get("next_step") == RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_LOOKUP_INDEX_NEXT_STEP, index_summary.get("next_step"), "source lookup index must route to review"),
     ]
-
-
-def _path_exists(path: str | Path | None) -> bool:
-    return bool(path) and Path(path).exists()
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _review(

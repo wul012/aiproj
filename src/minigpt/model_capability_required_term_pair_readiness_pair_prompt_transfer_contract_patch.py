@@ -12,6 +12,8 @@ from minigpt.model_capability_required_term_pair_readiness_pair_prompt_transfer_
 )
 from minigpt.model_capability_required_term_pair_readiness_split_contract import HELDOUT_PAIR_PROBE
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 
 
 PAIR_READINESS_PAIR_PROMPT_TRANSFER_CONTRACT_PATCH_JSON_FILENAME = (
@@ -109,12 +111,6 @@ def build_pair_prompt_transfer_contract_patch(
     }
 
 
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    if require_pass and report.get("status") != "pass":
-        return 1
-    return 0
-
-
 def _patched_contract(base_contract: dict[str, Any]) -> dict[str, Any]:
     training_rows = [str(row) for row in base_contract.get("training_rows", [])]
     return {
@@ -160,10 +156,6 @@ def _checks(repair_plan: dict[str, Any], base_contract_report: dict[str, Any], p
         _check("heldout_pair_absent_from_patch", HELDOUT_PAIR_PROBE not in PAIR_PROMPT_TRANSFER_ROWS, HELDOUT_PAIR_PROBE in PAIR_PROMPT_TRANSFER_ROWS, "patch rows must not train on exact heldout pair prompt"),
         _check("no_exact_eval_row_overlap", not (set(training_rows) & set(probe_prompts)), sorted(set(training_rows) & set(probe_prompts)), "exact eval prompts must not be training rows"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _summary(base_contract: dict[str, Any], patched_contract: dict[str, Any], checks: list[dict[str, Any]]) -> dict[str, Any]:

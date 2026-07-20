@@ -6,6 +6,8 @@ from typing import Any
 
 from minigpt.randomized_holdout_decision_index import RANDOMIZED_HOLDOUT_DECISION_INDEX_JSON_FILENAME
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_utils import path_exists as _path_exists
 
 
 RANDOMIZED_HOLDOUT_ACCEPTANCE_SUMMARY_JSON_FILENAME = "randomized_holdout_acceptance_summary.json"
@@ -131,14 +133,6 @@ def _checks(
         _check("source_rows_ready", all(row.get("status") == "pass" and row.get("ready_value") is True for row in source_rows), [row.get("ready_value") for row in source_rows], "all source rows must remain passed and ready"),
         _check("source_rows_block_promotion", all(row.get("promotion_ready") is False for row in source_rows), [row.get("promotion_ready") for row in source_rows], "all source rows must keep promotion false"),
     ]
-
-
-def _path_exists(path: str | Path | None) -> bool:
-    return bool(path) and Path(path).exists()
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _acceptance_card(

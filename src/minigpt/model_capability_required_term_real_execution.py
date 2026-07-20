@@ -7,6 +7,8 @@ from minigpt.readability_report_artifacts import write_readability_outputs
 from minigpt.report_utils import as_dict, list_of_dicts, read_json_object, utc_now
 from minigpt.server_contracts import GenerationRequest
 from minigpt.server_generator import MiniGPTGenerator
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code
 
 REQUIRED_TERM_REAL_EXECUTION_STEM = "model_capability_required_term_real_execution_v1143"
 DEFAULT_REQUIRED_TERMS = ("fixed", "loss")
@@ -143,10 +145,6 @@ def write_required_term_real_execution_outputs(report: dict[str, Any], out_dir: 
     )
 
 
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool = False) -> int:
-    return 1 if require_pass and report.get("status") != "pass" else 0
-
-
 def _selected_suite_row(report: dict[str, Any]) -> dict[str, Any]:
     for row in list_of_dicts(report.get("rows")):
         if row.get("suite_id") == "capability-regression-01" or row.get("check_id") == "required_term_coverage":
@@ -223,10 +221,6 @@ def _checks(
         _check("required_terms_hit", row.get("case_pass") is True, {"hit": row.get("hit_terms"), "missed": row.get("missed_terms")}, "continuation must contain fixed and loss"),
         _check("promotion_boundary_kept", True, False, "single-check evidence must not set promotion_ready true"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _summary(status: str, row: dict[str, Any], issues: list[dict[str, Any]], report: dict[str, Any]) -> dict[str, Any]:

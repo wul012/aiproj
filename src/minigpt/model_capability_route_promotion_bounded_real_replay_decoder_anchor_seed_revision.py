@@ -14,6 +14,8 @@ from minigpt.model_capability_route_promotion_bounded_real_replay_prompt_aligned
     MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_PROMPT_ALIGNED_SEED_REVISION_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code_seed_ready as resolve_exit_code
 
 
 MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_DECODER_ANCHOR_SEED_REVISION_JSON_FILENAME = "model_capability_route_promotion_bounded_real_replay_decoder_anchor_seed_revision.json"
@@ -94,10 +96,6 @@ def build_model_capability_route_promotion_bounded_real_replay_decoder_anchor_se
     }
 
 
-def resolve_exit_code(report: dict[str, Any], *, require_seed_ready: bool) -> int:
-    return 1 if require_seed_ready and report.get("status") != "pass" else 0
-
-
 def _carry(row: dict[str, Any]) -> dict[str, Any]:
     return {
         "example_id": f"decoder-anchor-carry-{row.get('example_id')}",
@@ -149,10 +147,6 @@ def _checks(seed: dict[str, Any], replay: dict[str, Any], policy_replay: dict[st
         _check("replay_rows_present", bool(replay_rows), len(replay_rows), "replay rows must provide prompts"),
         _check("seed_examples_have_text", all(str(row.get("text") or "").strip() for row in seed_examples), len(seed_examples), "all seed examples must have text"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _revision(status: str, original: list[dict[str, Any]], examples: list[dict[str, Any]], replay_rows: list[dict[str, Any]]) -> dict[str, Any]:

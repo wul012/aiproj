@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import Any
 
 from minigpt.report_utils import as_dict, utc_now
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 
 
 PAIR_LOSS_BRANCH_BATCH_CLOSEOUT_JSON_FILENAME = "model_capability_required_term_pair_loss_branch_batch_closeout.json"
@@ -83,12 +84,6 @@ def build_model_capability_required_term_pair_loss_branch_batch_closeout(
         "evidence_rows": evidence_rows,
         "interpretation": _interpretation(status, summary),
     }
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    if require_pass and report.get("status") != "pass":
-        return 1
-    return 0
 
 
 def _evidence_rows(reports: dict[str, dict[str, Any]], paths: dict[str, str]) -> list[dict[str, Any]]:

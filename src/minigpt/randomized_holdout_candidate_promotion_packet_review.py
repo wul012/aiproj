@@ -6,6 +6,7 @@ from typing import Any
 
 from minigpt.randomized_holdout_candidate_promotion_packet import RANDOMIZED_HOLDOUT_CANDIDATE_PROMOTION_PACKET_JSON_FILENAME
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import check_entry as _check
 
 
 RANDOMIZED_HOLDOUT_CANDIDATE_PROMOTION_PACKET_REVIEW_JSON_FILENAME = "randomized_holdout_candidate_promotion_packet_review.json"
@@ -127,10 +128,6 @@ def _checks(
         _check("approved_for_promotion_false", summary.get("approved_for_promotion") is False and packet.get("approved_for_promotion") is False, {"summary": summary.get("approved_for_promotion"), "packet": packet.get("approved_for_promotion")}, "direct promotion must remain false"),
         _check("claim_is_candidate_packet_only", (summary.get("model_quality_claim") or packet.get("model_quality_claim")) == "candidate_packet_only", summary.get("model_quality_claim") or packet.get("model_quality_claim"), "source claim must remain candidate-packet only"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _review(status: str, packet: dict[str, Any], summary: dict[str, Any], evidence_rows: list[dict[str, Any]]) -> dict[str, Any]:

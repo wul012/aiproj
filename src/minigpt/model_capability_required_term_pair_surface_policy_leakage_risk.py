@@ -9,6 +9,7 @@ from minigpt.model_capability_required_term_pair_surface_policy_minimality_check
 )
 from minigpt.model_capability_required_term_pair_surface_policy_selector import PAIR_SURFACE_POLICY_SELECTOR_JSON_FILENAME
 from minigpt.report_utils import as_dict, html_escape, markdown_cell, utc_now, write_csv_row, write_json_payload
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 
 
 PAIR_SURFACE_POLICY_LEAKAGE_RISK_JSON_FILENAME = "model_capability_required_term_pair_surface_policy_leakage_risk.json"
@@ -160,12 +161,6 @@ def render_html(report: dict[str, Any]) -> str:
 <section><h2>Next Action</h2><p>{html_escape(interpretation.get('next_action'))}</p></section>
 <section><h2>Risks</h2><table><thead><tr><th>Risk</th><th>Level</th><th>Detail</th></tr></thead><tbody>{risk_rows}</tbody></table></section>
 </main></body></html>"""
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    if require_pass and report.get("status") != "pass":
-        return 1
-    return 0
 
 
 def _issues(selector_report: dict[str, Any], minimality_report: dict[str, Any], selected: dict[str, Any]) -> list[str]:

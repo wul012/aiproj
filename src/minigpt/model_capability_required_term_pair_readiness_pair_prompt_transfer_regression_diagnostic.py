@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import Any
 
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 
 
 PAIR_READINESS_PAIR_PROMPT_TRANSFER_REGRESSION_DIAGNOSTIC_JSON_FILENAME = (
@@ -61,10 +62,6 @@ def build_pair_prompt_transfer_regression_diagnostic(
         "summary": summary,
         "interpretation": _interpretation(status, summary),
     }
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    return 1 if require_pass and report.get("status") != "pass" else 0
 
 
 def _training_row(label: str, report: dict[str, Any], path: str | Path | None) -> dict[str, Any]:

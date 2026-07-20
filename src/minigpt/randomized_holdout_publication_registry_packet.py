@@ -13,6 +13,7 @@ from minigpt.randomized_holdout_publication_constants import (
     RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_MANIFEST_NEXT_STEP,
 )
 from minigpt.report_utils import as_dict, utc_now
+from minigpt.report_check_common import check_entry as _check
 
 
 RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_PACKET_JSON_FILENAME = "randomized_holdout_publication_registry_packet.json"
@@ -132,10 +133,6 @@ def _checks(
         _check("approved_for_promotion_false", entry_summary.get("approved_for_promotion") is False, entry_summary.get("approved_for_promotion"), "packet must not approve direct promotion"),
         _check("source_checks_clean", int(entry_summary.get("failed_check_count") or 0) == 0 and int(check_summary.get("failed_check_count") or 0) == 0, {"entry": entry_summary.get("failed_check_count"), "check": check_summary.get("failed_check_count")}, "entry and contract check must have no failed checks"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _packet(status: str, entry_summary: dict[str, Any], check_summary: dict[str, Any], evidence_rows: list[dict[str, Any]]) -> dict[str, Any]:

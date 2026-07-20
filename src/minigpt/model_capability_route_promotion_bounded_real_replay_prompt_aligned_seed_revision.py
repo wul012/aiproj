@@ -14,6 +14,7 @@ from minigpt.model_capability_route_promotion_bounded_real_replay_repair_seed_re
     MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_REPAIR_SEED_REVISION_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import check_entry as _check
 
 
 MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_PROMPT_ALIGNED_SEED_REVISION_JSON_FILENAME = "model_capability_route_promotion_bounded_real_replay_prompt_aligned_seed_revision.json"
@@ -151,10 +152,6 @@ def _checks(
         _check("exact_prompt_examples_cover_cases", exact_prompt_count == len(cases), {"exact_prompt_examples": exact_prompt_count, "cases": len(cases)}, "each benchmark case needs one exact prompt answer example"),
         _check("seed_examples_have_text", all(str(row.get("text") or "").strip() for row in seed_examples), len(seed_examples), "every seed example must have text"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _revision(status: str, original_examples: list[dict[str, Any]], seed_examples: list[dict[str, Any]], cases: list[dict[str, Any]], diagnostic_summary: dict[str, Any]) -> dict[str, Any]:

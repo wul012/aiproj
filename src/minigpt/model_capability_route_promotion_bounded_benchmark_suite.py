@@ -7,6 +7,7 @@ from typing import Any
 from minigpt.eval_suite import PromptCase
 from minigpt.model_capability_route_promotion_consumer_plan import MODEL_CAPABILITY_ROUTE_PROMOTION_CONSUMER_PLAN_JSON_FILENAME
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import check_entry as _check
 
 
 MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_BENCHMARK_SUITE_JSON_FILENAME = "model_capability_route_promotion_bounded_benchmark_suite.json"
@@ -79,10 +80,6 @@ def _checks(consumer_plan: dict[str, Any], summary: dict[str, Any], plan: dict[s
         _check("plan_steps_present", int(summary.get("plan_step_count") or 0) >= 5, summary.get("plan_step_count"), "consumer plan should include enough execution steps"),
         _check("non_goals_present", len(plan.get("non_goals", [])) >= 3, len(plan.get("non_goals", [])), "consumer plan must carry non-goals"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _suite(status: str, plan: dict[str, Any]) -> dict[str, Any]:

@@ -7,6 +7,7 @@ from typing import Any
 from minigpt.model_capability_route_promotion_portfolio import MODEL_CAPABILITY_ROUTE_PROMOTION_PORTFOLIO_JSON_FILENAME
 from minigpt.model_capability_route_promotion_regression_monitor import MODEL_CAPABILITY_ROUTE_PROMOTION_REGRESSION_JSON_FILENAME
 from minigpt.report_utils import as_dict, utc_now
+from minigpt.report_check_common import check_entry as _check
 
 
 MODEL_CAPABILITY_ROUTE_PROMOTION_GATE_JSON_FILENAME = "model_capability_route_promotion_gate.json"
@@ -143,10 +144,6 @@ def _checks(
             "regression monitor should have no failed checks",
         ),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _gate(status: str, portfolio_summary: dict[str, Any], monitor_summary: dict[str, Any], required_boundary: str) -> dict[str, Any]:

@@ -14,6 +14,7 @@ from minigpt.model_capability_required_term_prompt_leading_corpus import (
 )
 from minigpt.model_capability_required_term_scaffold_probe import read_json_report
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code  # noqa: F401 (re-export)
 
 
 REQUIRED_TERM_PROMPT_LEADING_TRAINING_JSON_FILENAME = "model_capability_required_term_prompt_leading_training.json"
@@ -206,12 +207,6 @@ def summarize_required_term_prompt_leading_training(
         "prompt_alignment_ready": bool(source.get("prompt_alignment_ready")),
         "previous_prompt_alignment_ready": previous.get("prompt_alignment_ready"),
     }
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    if require_pass and report.get("status") != "pass":
-        return 1
-    return 0
 
 
 def _term_rows(report: dict[str, Any]) -> list[dict[str, Any]]:

@@ -12,6 +12,7 @@ from minigpt.model_capability_route_promotion_bounded_real_replay_repair_plan im
     MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_REPAIR_PLAN_TEXT_FILENAME,
 )
 from minigpt.report_utils import as_dict, csv_cell, html_escape, list_of_dicts, markdown_cell, write_json_payload
+from minigpt.report_utils import html_card as _card
 
 
 def render_model_capability_route_promotion_bounded_real_replay_repair_plan_text(report: dict[str, Any]) -> str:
@@ -149,10 +150,6 @@ def _row(row: dict[str, Any]) -> str:
         f"<td>{html_escape(row.get('training_focus'))}</td>"
         "</tr>"
     )
-
-
-def _card(label: str, value: Any) -> str:
-    return f"<div class=\"card\"><span>{html_escape(label)}</span><strong>{html_escape(value)}</strong></div>"
 
 
 def _style() -> str:

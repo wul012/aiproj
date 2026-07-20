@@ -13,6 +13,7 @@ from minigpt.model_capability_required_term_pair_surface_policy_replay import PA
 from minigpt.model_capability_required_term_pair_surface_route_decision import PAIR_SURFACE_ROUTE_DECISION_JSON_FILENAME
 from minigpt.model_capability_required_term_pair_surface_variant_replay import PAIR_SURFACE_VARIANT_REPLAY_JSON_FILENAME
 from minigpt.report_utils import as_dict, csv_cell, html_escape, markdown_cell, utc_now, write_json_payload
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 
 
 PAIR_SURFACE_BRANCH_CLOSEOUT_JSON_FILENAME = "model_capability_required_term_pair_surface_branch_closeout.json"
@@ -153,12 +154,6 @@ def render_html(report: dict[str, Any]) -> str:
 <section><h2>Milestones</h2><table><thead><tr><th>Id</th><th>Version</th><th>Status</th><th>Finding</th></tr></thead><tbody>{rows}</tbody></table></section>
 <section><h2>Next Action</h2><p>{html_escape(interpretation.get('next_action'))}</p></section>
 </main></body></html>"""
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    if require_pass and report.get("status") != "pass":
-        return 1
-    return 0
 
 
 def _milestone_rows(reports: dict[str, dict[str, Any]]) -> list[dict[str, Any]]:

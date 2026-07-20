@@ -8,6 +8,8 @@ from minigpt.model_capability_required_term_pair_readiness_fixed_preserving_tran
     PAIR_READINESS_FIXED_PRESERVING_TRANSFER_PAIR_PROBE_REPLAY_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 
 
 PAIR_READINESS_OBJECTIVE_LEVEL_CONTRAST_ROUTE_COMPARISON_JSON_FILENAME = (
@@ -80,10 +82,6 @@ def build_objective_level_contrast_route_comparison(
     }
 
 
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    return 1 if require_pass and report.get("status") != "pass" else 0
-
-
 def _route_row(route: str, replay: dict[str, Any]) -> dict[str, Any]:
     summary = as_dict(replay.get("summary"))
     rows = list_of_dicts(replay.get("replay_rows"))
@@ -119,10 +117,6 @@ def _checks(
         _check("objective_pair_full_count_wins", int(objective_row.get("pair_full_count") or 0) > int(prior_max or 0), f"objective={objective_row.get('pair_full_count')}, prior_max={prior_max}", "objective route should improve pair-full count over prior routes"),
         _check("objective_exact_hits_complete", int(objective_row.get("exact_default_hit_count") or 0) >= 2, objective_row.get("exact_default_hit_count"), "objective route should hit both terms on exact default replay"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _row(route_rows: list[dict[str, Any]], route: str) -> dict[str, Any]:

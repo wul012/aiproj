@@ -12,6 +12,8 @@ from minigpt.randomized_holdout_publication_registry_entry import (
     RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_ENTRY_TEXT_FILENAME,
 )
 from minigpt.report_utils import as_dict, csv_cell, html_escape, list_of_dicts, markdown_cell, write_json_payload
+from minigpt.report_utils import html_card as _card
+from minigpt.report_utils import html_check_row as _check_row
 
 
 def render_randomized_holdout_publication_registry_entry_text(report: dict[str, Any]) -> str:
@@ -195,14 +197,6 @@ def write_randomized_holdout_publication_registry_entry_outputs(report: dict[str
 
 def _entry_row(key: str, value: Any) -> str:
     return f"<tr><td>{html_escape(key)}</td><td>{html_escape(value)}</td></tr>"
-
-
-def _check_row(row: dict[str, Any]) -> str:
-    return "<tr>" + "".join(f"<td>{html_escape(row.get(key))}</td>" for key in ["id", "status", "actual", "detail"]) + "</tr>"
-
-
-def _card(label: str, value: Any) -> str:
-    return f"<div class=\"card\"><span>{html_escape(label)}</span><strong>{html_escape(value)}</strong></div>"
 
 
 def _style() -> str:

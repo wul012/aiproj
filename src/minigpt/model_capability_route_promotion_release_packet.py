@@ -8,6 +8,8 @@ from minigpt.model_capability_route_promotion_gate import MODEL_CAPABILITY_ROUTE
 from minigpt.model_capability_route_promotion_portfolio import MODEL_CAPABILITY_ROUTE_PROMOTION_PORTFOLIO_JSON_FILENAME
 from minigpt.model_capability_route_promotion_regression_monitor import MODEL_CAPABILITY_ROUTE_PROMOTION_REGRESSION_JSON_FILENAME
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 
 
 MODEL_CAPABILITY_ROUTE_PROMOTION_RELEASE_PACKET_JSON_FILENAME = "model_capability_route_promotion_release_packet.json"
@@ -85,10 +87,6 @@ def build_model_capability_route_promotion_release_packet(
     }
 
 
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    return 1 if require_pass and report.get("status") != "pass" else 0
-
-
 def _evidence_rows(
     portfolio_path: str | Path | None,
     regression_monitor_path: str | Path | None,
@@ -132,10 +130,6 @@ def _checks(
         _check("claim_not_widened", monitor_summary.get("model_quality_claim_changed") is False, monitor_summary.get("model_quality_claim_changed"), "release packet claim must not widen"),
         _check("evidence_files_exist", all(row.get("exists") is True for row in evidence_rows), evidence_rows, "packet evidence source files must exist"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _packet(

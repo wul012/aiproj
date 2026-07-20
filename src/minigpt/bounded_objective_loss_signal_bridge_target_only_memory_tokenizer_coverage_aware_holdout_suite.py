@@ -13,6 +13,8 @@ from minigpt.model_capability_route_promotion_bounded_benchmark_suite import (
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.tokenizer import load_tokenizer
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code_suite_ready as resolve_exit_code
 
 
 TARGET_ONLY_MEMORY_TOKENIZER_COVERAGE_AWARE_HOLDOUT_SUITE_JSON_FILENAME = (
@@ -93,10 +95,6 @@ def build_tokenizer_coverage_aware_holdout_suite(
         "summary": summary,
         "interpretation": _interpretation(status, summary),
     }
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_suite_ready: bool) -> int:
-    return 1 if require_suite_ready and report.get("status") != "pass" else 0
 
 
 def _expected_terms(source_suite: dict[str, Any]) -> list[str]:
@@ -185,10 +183,6 @@ def _checks(
         _check("coverage_rows_complete", len(coverage_rows) == len(candidate_cases), len(coverage_rows), "coverage report must cover every candidate case"),
         _check("all_candidate_prompts_tokenizer_covered", all(row.get("tokenizer_covered") is True for row in coverage_rows), sum(1 for row in coverage_rows if row.get("tokenizer_covered") is True), "every candidate prompt must be tokenizer covered"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _suite(status: str, source_suite: dict[str, Any], cases: list[dict[str, Any]], expected_terms: list[str]) -> dict[str, Any]:

@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import Any, Sequence
 
 from minigpt.report_utils import as_dict, utc_now
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 
 
 PAIR_CONTRAST_FREE_BATCH_CLOSEOUT_JSON_FILENAME = "model_capability_required_term_pair_contrast_free_batch_closeout.json"
@@ -65,12 +66,6 @@ def build_model_capability_required_term_pair_contrast_free_batch_closeout(
         "evidence_rows": evidence_rows,
         "interpretation": _interpretation(status, summary),
     }
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    if require_pass and report.get("status") != "pass":
-        return 1
-    return 0
 
 
 def _evidence_rows(

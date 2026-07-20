@@ -9,6 +9,8 @@ from minigpt.model_capability_required_term_pair_readiness_direct_completion_pai
 )
 from minigpt.model_capability_required_term_pair_readiness_split_contract import HELDOUT_PAIR_PROBE
 from minigpt.report_utils import as_dict, utc_now
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 
 
 PAIR_READINESS_PAIR_PROMPT_TRANSFER_REPAIR_PLAN_JSON_FILENAME = (
@@ -74,12 +76,6 @@ def build_pair_prompt_transfer_repair_plan(
     }
 
 
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    if require_pass and report.get("status") != "pass":
-        return 1
-    return 0
-
-
 def _checks(pair_probe_replay: dict[str, Any], summary: dict[str, Any]) -> list[dict[str, Any]]:
     return [
         _check("pair_probe_replay_passed", pair_probe_replay.get("status") == "pass", pair_probe_replay.get("status"), "pair-probe replay must execute successfully"),
@@ -93,10 +89,6 @@ def _checks(pair_probe_replay: dict[str, Any], summary: dict[str, Any]) -> list[
         _check("no_pair_prompt_full", int(summary.get("pair_full_count") or 0) == 0, summary.get("pair_full_count"), "plan assumes no pair prompt surface replayed pair-full"),
         _check("heldout_pair_remains_heldout", HELDOUT_PAIR_PROBE == "fixed=|loss=", HELDOUT_PAIR_PROBE, "heldout pair prompt identity must stay explicit"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _plan(status: str) -> dict[str, Any]:

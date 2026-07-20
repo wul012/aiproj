@@ -15,6 +15,7 @@ from minigpt.bounded_objective_loss_signal_bridge import (
     LOSS_SIGNAL_BRIDGE_TEXT_FILENAME,
 )
 from minigpt.report_utils import as_dict, html_escape, list_of_dicts, markdown_cell, write_json_payload
+from minigpt.report_utils import html_card_label_value as _card
 
 
 def render_loss_signal_bridge_text(report: dict[str, Any]) -> str:
@@ -157,10 +158,6 @@ def _example_html(report: dict[str, Any]) -> str:
         for row in list_of_dicts(report.get("bridge_examples"))
     )
     return f"<table><thead><tr><th>Example</th><th>Kind</th><th>Prompt</th><th>Completion</th><th>Source</th></tr></thead><tbody>{body}</tbody></table>"
-
-
-def _card(label: str, value: Any) -> str:
-    return f'<div class="card"><div class="label">{html_escape(label)}</div><strong>{html_escape(value)}</strong></div>'
 
 
 __all__ = [

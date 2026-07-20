@@ -6,6 +6,7 @@ from typing import Any
 
 from minigpt.model_capability_route_promotion_governance_snapshot import MODEL_CAPABILITY_ROUTE_PROMOTION_GOVERNANCE_SNAPSHOT_JSON_FILENAME
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import check_entry as _check
 
 
 MODEL_CAPABILITY_ROUTE_PROMOTION_DOWNSTREAM_GUARD_JSON_FILENAME = "model_capability_route_promotion_downstream_guard.json"
@@ -104,10 +105,6 @@ def _checks(
         _check("boundary_scoped", route_card.get("boundary") == required_boundary, route_card.get("boundary"), "route card boundary must match the required boundary"),
         _check("claim_bounded", claim.startswith("seed_stable_pair_probe_route"), claim, "route claim must remain pair-probe scoped"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _access_decision(status: str, route_card: dict[str, Any], requested_scope: str, consumer_name: str) -> dict[str, Any]:

@@ -8,6 +8,8 @@ from minigpt.model_capability_required_term_pair_readiness_bridge_comparison imp
     PAIR_READINESS_BRIDGE_COMPARISON_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, utc_now
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 
 
 PAIR_READINESS_BRIDGE_CLOSEOUT_PLAN_JSON_FILENAME = "model_capability_required_term_pair_readiness_bridge_closeout_plan.json"
@@ -63,12 +65,6 @@ def build_bridge_closeout_plan(
     }
 
 
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    if require_pass and report.get("status") != "pass":
-        return 1
-    return 0
-
-
 def _checks(bridge_comparison: dict[str, Any], summary: dict[str, Any]) -> list[dict[str, Any]]:
     return [
         _check("comparison_passed", bridge_comparison.get("status") == "pass", bridge_comparison.get("status"), "bridge comparison must pass"),
@@ -82,10 +78,6 @@ def _checks(bridge_comparison: dict[str, Any], summary: dict[str, Any]) -> list[
         _check("pollution_introduced", summary.get("bridge_pollution_introduced") is True, summary.get("bridge_pollution_introduced"), "bridge route must introduce loss-prompt fixed pollution"),
         _check("bridge_not_improved", summary.get("bridge_improved") is False, summary.get("bridge_improved"), "bridge route must not be an improved candidate"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _plan(status: str) -> dict[str, Any]:

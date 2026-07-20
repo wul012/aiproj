@@ -15,6 +15,7 @@ from minigpt.bounded_objective_loss_signal_bridge_target_only_memory_completion_
     TARGET_ONLY_MEMORY_COMPLETION_SURFACE_STABILIZATION_PATCH_TEXT_FILENAME,
 )
 from minigpt.report_utils import as_dict, html_escape, list_of_dicts, markdown_cell, write_json_payload
+from minigpt.report_utils import html_card as _card
 
 
 def render_completion_surface_stabilization_patch_text(report: dict[str, Any]) -> str:
@@ -132,10 +133,6 @@ def _row(row: dict[str, Any]) -> str:
         f"<td>{html_escape(row.get('source_case_id'))}</td>"
         "</tr>"
     )
-
-
-def _card(label: str, value: Any) -> str:
-    return f"<div class=\"card\"><span>{html_escape(label)}</span><strong>{html_escape(value)}</strong></div>"
 
 
 def _style() -> str:

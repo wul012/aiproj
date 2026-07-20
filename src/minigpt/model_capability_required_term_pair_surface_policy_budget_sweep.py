@@ -15,6 +15,8 @@ from minigpt.model_capability_required_term_pair_surface_policy_replay import (
 )
 from minigpt.model_capability_required_term_pair_surface_policy_selector import PAIR_SURFACE_POLICY_SELECTOR_JSON_FILENAME
 from minigpt.report_utils import as_dict, csv_cell, html_escape, list_of_dicts, markdown_cell, utc_now, write_json_payload
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
+from minigpt.report_utils import html_card as _card
 
 
 PAIR_SURFACE_POLICY_BUDGET_SWEEP_JSON_FILENAME = "model_capability_required_term_pair_surface_policy_budget_sweep.json"
@@ -206,12 +208,6 @@ def render_html(report: dict[str, Any]) -> str:
 </main></body></html>"""
 
 
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    if require_pass and report.get("status") != "pass":
-        return 1
-    return 0
-
-
 def _issues(
     stability_report: dict[str, Any],
     selector_report: dict[str, Any],
@@ -326,10 +322,6 @@ def _case_html(row: dict[str, Any]) -> str:
         f"<td>{html_escape(row.get('continuation_preview'))}</td>"
         "</tr>"
     )
-
-
-def _card(label: str, value: Any) -> str:
-    return f"<div class=\"card\"><span>{html_escape(label)}</span><strong>{html_escape(value)}</strong></div>"
 
 
 def _style() -> str:

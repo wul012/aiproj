@@ -13,6 +13,7 @@ from minigpt.model_capability_route_promotion_bounded_objective_replay_compariso
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.server_contracts import GenerationRequest
 from minigpt.server_generator import MiniGPTGenerator
+from minigpt.report_check_common import check_entry as _check
 
 
 BOUNDED_OBJECTIVE_DECODER_ANCHOR_POLICY_REPLAY_JSON_FILENAME = "model_capability_route_promotion_bounded_objective_decoder_anchor_policy_replay.json"
@@ -193,10 +194,6 @@ def _checks(
         _check("all_cases_replayed", len(replayed_rows) == len(source_rows), len(replayed_rows), "policy replay should replay every source case"),
         _check("no_replay_errors", not replay_errors, len(replay_errors), "policy replay should not raise generation errors"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _replay(status: str, rows: list[dict[str, Any]], policy_rows: list[dict[str, Any]]) -> dict[str, Any]:

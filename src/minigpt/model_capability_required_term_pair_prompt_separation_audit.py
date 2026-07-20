@@ -8,6 +8,7 @@ from minigpt.model_capability_required_term_pair_decoding_sweep import (
 )
 from minigpt.model_capability_required_term_scaffold_probe import read_json_report
 from minigpt.report_utils import as_dict, list_of_dicts, resolve_archived_reference_path, utc_now
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code  # noqa: F401 (re-export)
 
 
 REQUIRED_TERM_PAIR_PROMPT_SEPARATION_AUDIT_JSON_FILENAME = (
@@ -125,12 +126,6 @@ def summarize_required_term_pair_prompt_separation_audit(
         "target_with_shared_pair_context_count": sum(1 for row in target_rows if row.get("shared_pair_context_observed")),
         "corpus_revision_recommended": direct_leaks > 0 or negative_leaks > 0,
     }
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    if require_pass and report.get("status") != "pass":
-        return 1
-    return 0
 
 
 def _targets_with_corpus(

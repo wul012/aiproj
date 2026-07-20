@@ -9,6 +9,7 @@ from minigpt.randomized_holdout_bounded_promotion_gate import RANDOMIZED_HOLDOUT
 from minigpt.randomized_holdout_candidate_promotion_packet import RANDOMIZED_HOLDOUT_CANDIDATE_PROMOTION_PACKET_JSON_FILENAME
 from minigpt.randomized_holdout_candidate_promotion_packet_review import RANDOMIZED_HOLDOUT_CANDIDATE_PROMOTION_PACKET_REVIEW_JSON_FILENAME
 from minigpt.report_utils import as_dict, utc_now
+from minigpt.report_check_common import check_entry as _check
 
 
 RANDOMIZED_HOLDOUT_DECISION_INDEX_JSON_FILENAME = "randomized_holdout_decision_index.json"
@@ -279,10 +280,6 @@ def _checks(
             "each layer must keep its bounded claim scope",
         ),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _index(

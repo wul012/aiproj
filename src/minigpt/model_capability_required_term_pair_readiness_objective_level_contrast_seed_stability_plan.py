@@ -8,6 +8,8 @@ from minigpt.model_capability_required_term_pair_readiness_objective_level_contr
     PAIR_READINESS_OBJECTIVE_LEVEL_CONTRAST_PROMOTION_GUARD_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, utc_now
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 
 
 PAIR_READINESS_OBJECTIVE_LEVEL_CONTRAST_SEED_STABILITY_PLAN_JSON_FILENAME = (
@@ -74,10 +76,6 @@ def build_objective_level_contrast_seed_stability_plan(
     }
 
 
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    return 1 if require_pass and report.get("status") != "pass" else 0
-
-
 def _checks(promotion_guard: dict[str, Any], summary: dict[str, Any], guard: dict[str, Any]) -> list[dict[str, Any]]:
     return [
         _check("guard_passed", promotion_guard.get("status") == "pass", promotion_guard.get("status"), "promotion guard must pass"),
@@ -96,10 +94,6 @@ def _checks(promotion_guard: dict[str, Any], summary: dict[str, Any], guard: dic
             "guard must request this seed stability plan",
         ),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _plan(status: str) -> dict[str, Any]:

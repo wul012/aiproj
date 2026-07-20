@@ -9,6 +9,7 @@ from minigpt.model_capability_required_term_balanced_training import (
 )
 from minigpt.model_capability_required_term_scaffold_probe import read_json_report
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code  # noqa: F401 (re-export)
 
 
 REQUIRED_TERM_PROMPT_LEADING_CORPUS_JSON_FILENAME = "model_capability_required_term_prompt_leading_corpus.json"
@@ -176,12 +177,6 @@ def summarize_required_term_prompt_leading_corpus(
         "pattern_counts": dict(sorted(pattern_counts.items())),
         "term_prompt_leading_counts": dict(sorted(prompt_counts.items())),
     }
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    if require_pass and report.get("status") != "pass":
-        return 1
-    return 0
 
 
 def _resolve_balanced_corpus_report(source_report: dict[str, Any], source_path: str | Path | None) -> dict[str, Any]:

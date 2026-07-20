@@ -8,6 +8,8 @@ from minigpt.model_capability_required_term_pair_minimal_prompt_batch_closeout i
     PAIR_MINIMAL_PROMPT_BATCH_CLOSEOUT_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, utc_now
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 
 
 PAIR_READINESS_SPLIT_PLAN_JSON_FILENAME = "model_capability_required_term_pair_readiness_split_plan.json"
@@ -63,12 +65,6 @@ def build_pair_readiness_split_plan(
     }
 
 
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    if require_pass and report.get("status") != "pass":
-        return 1
-    return 0
-
-
 def _checks(closeout_report: dict[str, Any], summary: dict[str, Any]) -> list[dict[str, Any]]:
     return [
         _check("closeout_passed", closeout_report.get("status") == "pass", closeout_report.get("status"), "minimal prompt closeout must pass"),
@@ -92,10 +88,6 @@ def _checks(closeout_report: dict[str, Any], summary: dict[str, Any]) -> list[di
             "split plan needs evidence that both branches can win separately",
         ),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _plan(status: str) -> dict[str, Any]:

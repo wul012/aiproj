@@ -14,6 +14,8 @@ from minigpt.randomized_holdout_publication_constants import (
     RANDOMIZED_HOLDOUT_PUBLICATION_MODEL_QUALITY_CLAIM,
 )
 from minigpt.report_utils import as_dict, utc_now
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 
 
 RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_ENTRY_CHECK_JSON_FILENAME = "randomized_holdout_publication_registry_entry_check.json"
@@ -113,10 +115,6 @@ def build_randomized_holdout_publication_registry_entry_check(
     }
 
 
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    return 1 if require_pass and report.get("status") != "pass" else 0
-
-
 def _resolve_source_index(registry_entry_report: dict[str, Any], registry_entry_path: str | Path | None) -> Path | None:
     entry = as_dict(registry_entry_report.get("registry_entry"))
     candidates = [registry_entry_report.get("publication_decision_index_path"), entry.get("source_index_path")]
@@ -175,10 +173,6 @@ def _check_rows(original: dict[str, Any], rebuilt: dict[str, Any], source_index:
 
 def _compare(check_id: str, original: Any, rebuilt: Any) -> dict[str, Any]:
     return _check(check_id, original == rebuilt, {"source": original, "rebuilt": rebuilt}, f"{check_id} must match the rebuilt registry entry")
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _summary(

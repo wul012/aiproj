@@ -9,6 +9,7 @@ from minigpt.model_capability_required_term_pair_loss_alias_focus import REQUIRE
 from minigpt.model_capability_required_term_pair_loss_alias_metrics import normalize_for_required_term
 from minigpt.report_utils import as_dict, list_of_dicts, resolve_archived_reference_path, utc_now
 from minigpt.tokenizer import load_tokenizer
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code  # noqa: F401 (re-export)
 
 
 REQUIRED_TERM_PAIR_LOSS_ALIAS_SEGMENT_AUDIT_JSON_FILENAME = (
@@ -65,12 +66,6 @@ def build_model_capability_required_term_pair_loss_alias_segment_audit(
             "next_action": _next_action(status, summary),
         },
     }
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    if require_pass and report.get("status") != "pass":
-        return 1
-    return 0
 
 
 def _input_issues(focus_report: dict[str, Any]) -> list[str]:

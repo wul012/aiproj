@@ -12,6 +12,7 @@ from minigpt.bounded_objective_loss_signal_bridge_target_only_memory_tokenizer_c
     TARGET_ONLY_MEMORY_TOKENIZER_COVERAGE_AWARE_HOLDOUT_REPLAY_REVIEW_TEXT_FILENAME,
 )
 from minigpt.report_utils import as_dict, csv_cell, html_escape, list_of_dicts, markdown_cell, write_json_payload
+from minigpt.report_utils import html_card as _card
 
 
 def render_tokenizer_coverage_aware_holdout_replay_review_text(report: dict[str, Any]) -> str:
@@ -128,10 +129,6 @@ def _row(row: dict[str, Any]) -> str:
             row.get("detail"),
         ]
     ) + "</tr>"
-
-
-def _card(label: str, value: Any) -> str:
-    return f"<div class=\"card\"><span>{html_escape(label)}</span><strong>{html_escape(value)}</strong></div>"
 
 
 def _style() -> str:

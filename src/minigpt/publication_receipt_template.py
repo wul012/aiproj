@@ -5,6 +5,7 @@ from typing import Any
 
 from minigpt.readability_report_artifacts import write_readability_outputs
 from minigpt.report_utils import utc_now
+from minigpt.report_check_common import resolve_exit_code
 
 TEMPLATE_PATH = Path("docs/publication-receipt-template.md")
 REQUIRED_SECTIONS = [
@@ -64,12 +65,6 @@ def write_publication_receipt_template_outputs(report: dict[str, Any], out_dir: 
         stem="publication_receipt_template_v1132",
         row_title="Template And Script Layer Checks",
     )
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool = False) -> int:
-    if require_pass and report.get("status") != "pass":
-        return 1
-    return 0
 
 
 def _section_row(text: str, section: str) -> dict[str, Any]:

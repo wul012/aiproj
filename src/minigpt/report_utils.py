@@ -239,3 +239,24 @@ def _int_count_or_none(value: Any) -> int | None:
         return int(float(value))
     except (TypeError, ValueError):
         return None
+
+
+def html_card(label: str, value: Any) -> str:
+    """The span/strong summary card used by the governance HTML reports."""
+    return f"<div class=\"card\"><span>{html_escape(label)}</span><strong>{html_escape(value)}</strong></div>"
+
+def html_card_label_value(label: str, value: Any) -> str:
+    """The label-div/strong card variant."""
+    return f'<div class="card"><div class="label">{html_escape(label)}</div><strong>{html_escape(value)}</strong></div>'
+
+def html_check_row(row: dict[str, Any]) -> str:
+    """One ``<tr>`` for the id/status/actual/detail check table."""
+    return "<tr>" + "".join(f"<td>{html_escape(row.get(key))}</td>" for key in ["id", "status", "actual", "detail"]) + "</tr>"
+
+def html_term(label: str, value: Any) -> str:
+    """One ``<dt>/<dd>`` pair for definition-list report sections."""
+    return f"<dt>{html_escape(label)}</dt><dd>{html_escape(value)}</dd>"
+
+def path_exists(path: str | Path | None) -> bool:
+    """True iff ``path`` is truthy and exists on disk."""
+    return bool(path) and Path(str(path)).exists()

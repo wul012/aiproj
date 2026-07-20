@@ -12,6 +12,7 @@ from minigpt.model_capability_required_term_pair_generation_internal_alignment_r
     PAIR_GENERATION_INTERNAL_ALIGNMENT_ROUTE_DECISION_TEXT_FILENAME,
 )
 from minigpt.report_utils import as_dict, csv_cell, html_escape, list_of_dicts, markdown_cell, write_json_payload
+from minigpt.report_utils import html_card as _card
 
 
 def render_generation_internal_alignment_route_decision_text(report: dict[str, Any]) -> str:
@@ -150,10 +151,6 @@ def _constraint_html(row: dict[str, Any]) -> str:
         f"<td>{html_escape(row.get('detail'))}</td>"
         "</tr>"
     )
-
-
-def _card(label: str, value: Any) -> str:
-    return f"<div class=\"card\"><span>{html_escape(label)}</span><strong>{html_escape(value)}</strong></div>"
 
 
 def _style() -> str:

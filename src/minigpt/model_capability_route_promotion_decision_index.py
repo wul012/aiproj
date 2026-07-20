@@ -6,6 +6,7 @@ from typing import Any
 
 from minigpt.model_capability_route_promotion_review_decision import MODEL_CAPABILITY_ROUTE_PROMOTION_REVIEW_DECISION_JSON_FILENAME
 from minigpt.report_utils import as_dict, list_of_dicts, number_or_default, utc_now
+from minigpt.report_check_common import check_entry as _check
 
 
 MODEL_CAPABILITY_ROUTE_PROMOTION_DECISION_INDEX_JSON_FILENAME = "model_capability_route_promotion_decision_index.json"
@@ -135,10 +136,6 @@ def _checks(sources: list[dict[str, Any]], entries: list[dict[str, Any]], min_re
         _check("boundary_scoped", not boundary_mismatches, len(boundary_mismatches), "all indexed routes must keep the required boundary"),
         _check("review_scope_bounded", not widened_scopes, len(widened_scopes), "all indexed routes must keep bounded review scope"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _summary(

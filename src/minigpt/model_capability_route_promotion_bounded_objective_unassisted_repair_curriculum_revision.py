@@ -8,6 +8,7 @@ from minigpt.model_capability_route_promotion_bounded_objective_unassisted_repai
     BOUNDED_OBJECTIVE_UNASSISTED_REPAIR_ZERO_HIT_DIAGNOSTIC_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import check_entry as _check
 
 
 BOUNDED_OBJECTIVE_UNASSISTED_REPAIR_CURRICULUM_REVISION_JSON_FILENAME = "model_capability_route_promotion_bounded_objective_unassisted_repair_curriculum_revision.json"
@@ -157,10 +158,6 @@ def _checks(
         _check("revision_items_present", len(revision_items) >= 5, len(revision_items), "curriculum revision should include seed, replay, and holdout items"),
         _check("no_decoder_anchor_items", not any(row.get("decoder_anchor_allowed") for row in revision_items), len(revision_items), "curriculum revision must stay unassisted"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _revision(status: str, revision_items: list[dict[str, Any]], acceptance_gates: list[dict[str, Any]]) -> dict[str, Any]:

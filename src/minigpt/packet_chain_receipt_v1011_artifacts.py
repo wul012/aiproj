@@ -12,6 +12,8 @@ from minigpt.packet_chain_receipt_v1011 import (
     RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_PUBLICATION_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_V1011_TEXT_FILENAME,
 )
 from minigpt.report_utils import as_dict, csv_cell, html_escape, list_of_dicts, markdown_cell, write_json_payload
+from minigpt.report_utils import html_card as _card
+from minigpt.report_utils import html_check_row as _check_row
 
 
 def render_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1011_text(report: dict[str, Any]) -> str:
@@ -138,14 +140,6 @@ def write_randomized_holdout_publication_receipt_packet_index_publication_receip
 def _consumer_row(row: dict[str, Any]) -> str:
     keys = ["consumer_name", "lookup_key", "receipt_index_id", "source_receipt_id", "receipt_id", "granted_use", "promotion_ready", "receipt_status"]
     return "<tr>" + "".join(f"<td>{html_escape(row.get(key))}</td>" for key in keys) + "</tr>"
-
-
-def _check_row(row: dict[str, Any]) -> str:
-    return "<tr>" + "".join(f"<td>{html_escape(row.get(key))}</td>" for key in ["id", "status", "actual", "detail"]) + "</tr>"
-
-
-def _card(label: str, value: Any) -> str:
-    return f"<div class=\"card\"><span>{html_escape(label)}</span><strong>{html_escape(value)}</strong></div>"
 
 
 def _style() -> str:

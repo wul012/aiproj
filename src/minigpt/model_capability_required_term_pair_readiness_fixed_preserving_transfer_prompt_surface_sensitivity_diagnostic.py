@@ -9,6 +9,8 @@ from minigpt.model_capability_required_term_pair_readiness_fixed_preserving_tran
 )
 from minigpt.model_capability_required_term_pair_readiness_training_run import PAIR_READINESS_TRAINING_RUN_JSON_FILENAME
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 
 
 PAIR_READINESS_FIXED_PRESERVING_TRANSFER_PROMPT_SURFACE_SENSITIVITY_DIAGNOSTIC_JSON_FILENAME = (
@@ -79,10 +81,6 @@ def build_prompt_surface_sensitivity_diagnostic(
     }
 
 
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    return 1 if require_pass and report.get("status") != "pass" else 0
-
-
 def _surface_rows(replay_report: dict[str, Any]) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
     for row in list_of_dicts(replay_report.get("replay_rows")):
@@ -126,10 +124,6 @@ def _checks(training_report: dict[str, Any], replay_report: dict[str, Any], rows
             "at least one required surface must be checked",
         ),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _summary(training_report: dict[str, Any], replay_report: dict[str, Any], rows: list[dict[str, Any]]) -> dict[str, Any]:

@@ -6,6 +6,7 @@ from typing import Any
 
 from minigpt.randomized_holdout_acceptance_publication_packet import RANDOMIZED_HOLDOUT_ACCEPTANCE_PUBLICATION_PACKET_JSON_FILENAME
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import check_entry as _check
 
 
 RANDOMIZED_HOLDOUT_ACCEPTANCE_PUBLICATION_PACKET_REVIEW_JSON_FILENAME = "randomized_holdout_acceptance_publication_packet_review.json"
@@ -106,10 +107,6 @@ def _checks(
         _check("evidence_files_exist", all(row.get("exists") is True for row in evidence_rows), evidence_rows, "all publication packet evidence rows must exist"),
         _check("packet_checks_clean", int(summary.get("failed_check_count") or 0) == 0, summary.get("failed_check_count"), "publication packet checks must be clean"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _review(

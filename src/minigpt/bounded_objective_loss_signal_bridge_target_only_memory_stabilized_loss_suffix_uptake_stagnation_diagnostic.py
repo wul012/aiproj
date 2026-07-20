@@ -11,6 +11,8 @@ from minigpt.bounded_objective_loss_signal_bridge_target_only_memory_stabilized_
     TARGET_ONLY_MEMORY_STABILIZED_LOSS_SUFFIX_UPTAKE_REPLAY_COMPARISON_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code_diagnostic_ready as resolve_exit_code
 
 
 TARGET_ONLY_MEMORY_STABILIZED_LOSS_SUFFIX_UPTAKE_STAGNATION_DIAGNOSTIC_JSON_FILENAME = (
@@ -89,10 +91,6 @@ def build_stabilized_loss_suffix_uptake_stagnation_diagnostic(
         "summary": summary,
         "interpretation": _interpretation(status, diagnostic),
     }
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_diagnostic_ready: bool) -> int:
-    return 1 if require_diagnostic_ready and report.get("status") != "pass" else 0
 
 
 def _case_diagnostics(baseline_rows: list[dict[str, Any]], current_rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -217,10 +215,6 @@ def _checks(
         _check("no_loss_newly_hit", diagnostic.get("loss_newly_hit_case_count") == 0, diagnostic.get("loss_newly_hit_case_count"), "loss suffix must not be newly hit"),
         _check("all_current_fixed_l_partial", diagnostic.get("current_fixed_l_partial_case_count") == len(case_rows), diagnostic.get("current_fixed_l_partial_case_count"), "all current cases should remain fixed-l partial"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _summary(

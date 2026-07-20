@@ -6,6 +6,7 @@ from typing import Any
 
 from minigpt.model_capability_route_promotion_history import MODEL_CAPABILITY_ROUTE_PROMOTION_HISTORY_JSON_FILENAME
 from minigpt.report_utils import as_dict, list_of_dicts, number_or_default, utc_now
+from minigpt.report_check_common import check_entry as _check
 
 
 MODEL_CAPABILITY_ROUTE_PROMOTION_PORTFOLIO_JSON_FILENAME = "model_capability_route_promotion_portfolio.json"
@@ -121,10 +122,6 @@ def _checks(
         _check("boundary_matches_history", summary.get("required_boundary") == required_boundary, summary.get("required_boundary"), "history boundary must match portfolio boundary"),
         _check("claims_are_bounded", bounded_claims, [row.get("model_quality_claim") for row in route_cards], "claims must remain pair-probe scoped"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _portfolio(status: str, route_cards: list[dict[str, Any]], required_boundary: str) -> dict[str, Any]:

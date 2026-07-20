@@ -7,6 +7,7 @@ from typing import Any
 from minigpt.model_capability_route_promotion_decision_index import MODEL_CAPABILITY_ROUTE_PROMOTION_DECISION_INDEX_JSON_FILENAME
 from minigpt.model_capability_route_promotion_decision_index_check import MODEL_CAPABILITY_ROUTE_PROMOTION_DECISION_INDEX_CHECK_JSON_FILENAME
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import check_entry as _check
 
 
 MODEL_CAPABILITY_ROUTE_PROMOTION_GOVERNANCE_SNAPSHOT_JSON_FILENAME = "model_capability_route_promotion_governance_snapshot.json"
@@ -124,10 +125,6 @@ def _checks(
         _check("accepted_route_count_matches", index_summary.get("accepted_route_count") == check_summary.get("rebuilt_accepted_route_count"), {"index": index_summary.get("accepted_route_count"), "rebuilt": check_summary.get("rebuilt_accepted_route_count")}, "index and rebuilt accepted route count must match"),
         _check("boundary_scoped", not boundary_mismatches, len(boundary_mismatches), "all route cards must keep the required boundary"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _summary(status: str, route_cards: list[dict[str, Any]], check_rows: list[dict[str, Any]], required_boundary: str) -> dict[str, Any]:

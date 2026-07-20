@@ -6,6 +6,7 @@ from typing import Any
 
 from minigpt.model_capability_route_promotion_downstream_guard import MODEL_CAPABILITY_ROUTE_PROMOTION_DOWNSTREAM_GUARD_JSON_FILENAME
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import check_entry as _check
 
 
 MODEL_CAPABILITY_ROUTE_PROMOTION_CONSUMER_PLAN_JSON_FILENAME = "model_capability_route_promotion_consumer_plan.json"
@@ -90,10 +91,6 @@ def _checks(
         _check("claim_bounded", claim.startswith("seed_stable_pair_probe_route"), claim, "consumer plan claim must remain pair-probe scoped"),
         _check("consumer_named", bool(request.get("consumer_name") or summary.get("consumer_name")), request.get("consumer_name") or summary.get("consumer_name"), "consumer name must be explicit"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _plan(status: str, summary: dict[str, Any], access: dict[str, Any], request: dict[str, Any]) -> dict[str, Any]:

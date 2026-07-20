@@ -12,6 +12,7 @@ from minigpt.ptq_candidate_v1177 import (
 )
 from minigpt.readability_report_artifacts import write_readability_outputs
 from minigpt.report_utils import as_dict, utc_now
+from minigpt.report_check_common import resolve_exit_code
 
 PTQ_POLICY_SENSITIVITY_STEM = "ptq_policy_sensitivity_v1178"
 
@@ -129,12 +130,6 @@ def build_ptq_policy_sensitivity_report(
 
 def write_ptq_policy_sensitivity_outputs(report: dict[str, Any], out_dir: str | Path) -> dict[str, str]:
     return write_readability_outputs(report, out_dir, stem=PTQ_POLICY_SENSITIVITY_STEM, row_title="PTQ Policy Profiles")
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool = False) -> int:
-    if require_pass and report.get("status") != "pass":
-        return 1
-    return 0
 
 
 def _profile_row(profile: PtqPolicyProfile, report: dict[str, Any]) -> dict[str, Any]:

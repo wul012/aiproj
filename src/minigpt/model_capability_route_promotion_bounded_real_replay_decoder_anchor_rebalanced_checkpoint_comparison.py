@@ -9,6 +9,7 @@ from minigpt.model_capability_route_promotion_bounded_real_replay_decoder_anchor
     MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_DECODER_ANCHOR_REBALANCED_TRAINING_RUN_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, utc_now
+from minigpt.report_check_common import check_entry as _check
 
 
 MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_DECODER_ANCHOR_REBALANCED_CHECKPOINT_COMPARISON_JSON_FILENAME = "model_capability_route_promotion_bounded_real_replay_decoder_anchor_rebalanced_checkpoint_comparison.json"
@@ -117,10 +118,6 @@ def _checks(route_rows: list[dict[str, Any]], training: dict[str, Any] | None) -
         *[_check(f"{row['label']}_replay_executed", row.get("executed") is True, row.get("executed"), f"{row['label']} replay must execute") for row in route_rows],
         _check("rebalanced_training_ready", training is None or training_summary.get("decoder_anchor_rebalanced_training_ready") is True, training_summary.get("decoder_anchor_rebalanced_training_ready"), "optional rebalanced training evidence must be ready"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _comparison(status: str, route_rows: list[dict[str, Any]], training_summary: dict[str, Any]) -> dict[str, Any]:

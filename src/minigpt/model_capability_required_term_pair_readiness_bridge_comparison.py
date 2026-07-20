@@ -8,6 +8,7 @@ from minigpt.model_capability_required_term_pair_readiness_training_run import (
     PAIR_READINESS_TRAINING_RUN_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 
 
 PAIR_READINESS_BRIDGE_COMPARISON_JSON_FILENAME = "model_capability_required_term_pair_readiness_bridge_comparison.json"
@@ -58,12 +59,6 @@ def build_bridge_comparison(
         "summary": summary,
         "interpretation": _interpretation(status, summary),
     }
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    if require_pass and report.get("status") != "pass":
-        return 1
-    return 0
 
 
 def _row(label: str, report: dict[str, Any], path: str | Path | None) -> dict[str, Any]:

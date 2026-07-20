@@ -12,6 +12,8 @@ from minigpt.model_capability_route_promotion_release_packet import (
     MODEL_CAPABILITY_ROUTE_PROMOTION_RELEASE_PACKET_TEXT_FILENAME,
 )
 from minigpt.report_utils import as_dict, csv_cell, html_escape, list_of_dicts, markdown_cell, write_json_payload
+from minigpt.report_utils import html_card as _card
+from minigpt.report_utils import html_check_row as _check_row
 
 
 def render_model_capability_route_promotion_release_packet_text(report: dict[str, Any]) -> str:
@@ -146,21 +148,6 @@ def _evidence_row(row: dict[str, Any]) -> str:
         f"<td>{html_escape(row.get('path'))}</td>"
         "</tr>"
     )
-
-
-def _check_row(row: dict[str, Any]) -> str:
-    return (
-        "<tr>"
-        f"<td>{html_escape(row.get('id'))}</td>"
-        f"<td>{html_escape(row.get('status'))}</td>"
-        f"<td>{html_escape(row.get('actual'))}</td>"
-        f"<td>{html_escape(row.get('detail'))}</td>"
-        "</tr>"
-    )
-
-
-def _card(label: str, value: Any) -> str:
-    return f"<div class=\"card\"><span>{html_escape(label)}</span><strong>{html_escape(value)}</strong></div>"
 
 
 def _style() -> str:

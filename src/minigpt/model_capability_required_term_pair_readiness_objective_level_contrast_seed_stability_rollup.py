@@ -11,6 +11,8 @@ from minigpt.model_capability_required_term_pair_readiness_objective_level_contr
     PAIR_READINESS_OBJECTIVE_LEVEL_CONTRAST_SEED_STABILITY_PLAN_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, number_or_default, utc_now
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 
 
 PAIR_READINESS_OBJECTIVE_LEVEL_CONTRAST_SEED_STABILITY_ROLLUP_JSON_FILENAME = (
@@ -87,10 +89,6 @@ def build_objective_level_contrast_seed_stability_rollup(
     }
 
 
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    return 1 if require_pass and report.get("status") != "pass" else 0
-
-
 def _expected_seeds(plan: dict[str, Any]) -> list[int]:
     seeds = [number_or_default(plan.get("source_seed"), 0, int)]
     seeds.extend(number_or_default(seed, 0, int) for seed in plan.get("additional_seeds", []))
@@ -139,10 +137,6 @@ def _checks(seed_stability_plan: dict[str, Any], plan: dict[str, Any], expected_
         _check("no_zero_pair_full_seed", not zero_pair_full, zero_pair_full, "no seed may regress to zero pair-full hits"),
         _check("every_observed_replay_ready", all(row.get("ready") is True for row in rows), ready_count, "each observed replay must be replay-ready"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _summary(

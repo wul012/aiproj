@@ -11,6 +11,7 @@ from minigpt.model_capability_route_promotion_bounded_real_replay_decoder_anchor
     MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_DECODER_ANCHOR_SEED_REVISION_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import check_entry as _check
 
 
 MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_DECODER_ANCHOR_DISTRIBUTION_AUDIT_JSON_FILENAME = "model_capability_route_promotion_bounded_real_replay_decoder_anchor_distribution_audit.json"
@@ -169,10 +170,6 @@ def _checks(seed: dict[str, Any], diagnostic: dict[str, Any], corpus: str, examp
         _check("bucket_rows_present", bool(bucket_rows), len(bucket_rows), "bucket rows must be computed"),
         _check("corpus_present", bool(corpus.strip()), len(corpus), "corpus must be readable"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _audit(

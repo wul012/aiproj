@@ -5,6 +5,7 @@ from typing import Any
 
 from minigpt.readability_report_artifacts import write_readability_outputs
 from minigpt.report_utils import as_dict, list_of_dicts, locate_upstream_report, read_json_object, utc_now
+from minigpt.report_check_common import check_entry_no_detail as _check
 
 READINESS_JSON = "model_capability_regression_suite_readiness_v1138.json"
 CLOSEOUT_STEM = "model_capability_regression_followup_closeout_v1139"
@@ -107,10 +108,6 @@ def _checks(
         _check("closeout_rows_match_readiness", len(closeout_rows) == len(readiness_rows), {"closeout": len(closeout_rows), "readiness": len(readiness_rows)}),
         _check("all_rows_closed", all(row["status"] == "closed" for row in closeout_rows), [row["status"] for row in closeout_rows]),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual}
 
 
 __all__ = [

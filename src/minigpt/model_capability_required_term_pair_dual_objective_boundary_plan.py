@@ -11,6 +11,7 @@ from minigpt.model_capability_required_term_pair_generation_internal_batch_close
     PAIR_GENERATION_INTERNAL_BATCH_CLOSEOUT_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, list_of_strs, utc_now
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 
 
 PAIR_DUAL_OBJECTIVE_BOUNDARY_PLAN_JSON_FILENAME = "model_capability_required_term_pair_dual_objective_boundary_plan.json"
@@ -78,12 +79,6 @@ def build_model_capability_required_term_pair_dual_objective_boundary_plan(
         "summary": summary,
         "interpretation": _interpretation(status, summary),
     }
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    if require_pass and report.get("status") != "pass":
-        return 1
-    return 0
 
 
 def _issues(

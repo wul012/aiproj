@@ -9,6 +9,8 @@ from minigpt.server_contracts import GenerationRequest
 from minigpt.server_generator import MiniGPTGenerator
 from minigpt.target_hidden_semantic_holdout_dry_run import TARGET_HIDDEN_SEMANTIC_HOLDOUT_DRY_RUN_JSON_FILENAME
 from minigpt.target_hidden_semantic_holdout_suite import TARGET_HIDDEN_SEMANTIC_HOLDOUT_SUITE_JSON_FILENAME
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code_execution_model as resolve_exit_code
 
 
 TARGET_HIDDEN_SEMANTIC_HOLDOUT_REAL_REPLAY_JSON_FILENAME = "target_hidden_semantic_holdout_real_replay.json"
@@ -83,14 +85,6 @@ def build_target_hidden_semantic_holdout_real_replay(
         "summary": summary,
         "interpretation": _interpretation(status, summary),
     }
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_execution_pass: bool, require_model_pass: bool = False) -> int:
-    if require_execution_pass and report.get("status") != "pass":
-        return 1
-    if require_model_pass and as_dict(report.get("summary")).get("holdout_model_quality_ready") is not True:
-        return 1
-    return 0
 
 
 def _run_cases(
@@ -175,10 +169,6 @@ def _checks(
         _check("all_cases_executed", len(replay_rows) == len(cases), len(replay_rows), "real replay should execute every case"),
         _check("no_replay_errors", not replay_errors, len(replay_errors), "real replay should not raise generation errors"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _summary(status: str, cases: list[dict[str, Any]], rows: list[dict[str, Any]], issues: list[dict[str, Any]]) -> dict[str, Any]:

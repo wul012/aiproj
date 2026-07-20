@@ -8,6 +8,7 @@ from minigpt.model_capability_route_promotion_bounded_objective_decoder_anchor_p
     BOUNDED_OBJECTIVE_DECODER_ANCHOR_POLICY_REPLAY_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import check_entry as _check
 
 
 BOUNDED_OBJECTIVE_DECODER_ANCHOR_POLICY_REVIEW_JSON_FILENAME = "model_capability_route_promotion_bounded_objective_decoder_anchor_policy_review.json"
@@ -115,10 +116,6 @@ def _checks(policy_replay: dict[str, Any], replay_summary: dict[str, Any], repla
         _check("promotion_still_blocked", signals.get("promotion_ready") is False, signals.get("promotion_ready"), "policy replay must not already allow promotion"),
         _check("policy_signal_present", int(signals.get("policy_applied_pass_count") or 0) > 0, signals.get("policy_applied_pass_count"), "review expects a reproduced assisted signal"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _review(status: str, signals: dict[str, Any], recommendations: list[dict[str, Any]]) -> dict[str, Any]:

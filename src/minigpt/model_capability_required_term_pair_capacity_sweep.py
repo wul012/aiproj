@@ -28,6 +28,7 @@ from minigpt.model_capability_required_term_pair_capacity_sweep_summary import (
     summarize_required_term_pair_capacity_sweep,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code  # noqa: F401 (re-export)
 
 
 REQUIRED_TERM_PAIR_CAPACITY_SWEEP_JSON_FILENAME = "model_capability_required_term_pair_capacity_sweep.json"
@@ -258,12 +259,6 @@ def normalize_capacity_sweep_variants(variants: list[dict[str, Any]]) -> list[di
             }
         )
     return normalized
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    if require_pass and report.get("status") != "pass":
-        return 1
-    return 0
 
 
 def _run_pair_capacity_variant(

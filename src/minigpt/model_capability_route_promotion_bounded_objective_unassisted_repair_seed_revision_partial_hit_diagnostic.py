@@ -14,6 +14,8 @@ from minigpt.model_capability_route_promotion_bounded_objective_unassisted_repai
     BOUNDED_OBJECTIVE_UNASSISTED_REPAIR_SEED_REVISION_TRAINING_RUN_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code_diagnostic_ready as resolve_exit_code
 
 
 BOUNDED_OBJECTIVE_UNASSISTED_REPAIR_SEED_REVISION_PARTIAL_HIT_DIAGNOSTIC_JSON_FILENAME = "model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_partial_hit_diagnostic.json"
@@ -96,10 +98,6 @@ def build_model_capability_route_promotion_bounded_objective_unassisted_repair_s
         "summary": _summary(status, case_rows, root_causes, diagnostic),
         "interpretation": _interpretation(status, diagnostic, root_causes),
     }
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_diagnostic_ready: bool) -> int:
-    return 1 if require_diagnostic_ready and report.get("status") != "pass" else 0
 
 
 def _case_diagnostic(row: dict[str, Any], corpus_text: str) -> dict[str, Any]:
@@ -220,10 +218,6 @@ def _interpretation(status: str, diagnostic: dict[str, Any], root_causes: list[d
         "reason": f"The revised no-anchor checkpoint partially learned the objective surface, but the dominant diagnostic is `{top}`.",
         "next_action": diagnostic.get("next_step"),
     }
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _cause(cause_id: str, severity: str, detail: str, evidence: list[Any]) -> dict[str, Any]:

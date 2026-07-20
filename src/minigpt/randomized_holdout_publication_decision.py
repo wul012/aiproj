@@ -10,6 +10,8 @@ from minigpt.randomized_holdout_publication_constants import (
     RANDOMIZED_HOLDOUT_PUBLICATION_DECISION_SCOPE,
 )
 from minigpt.report_utils import as_dict, utc_now
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_utils import path_exists as _path_exists
 
 
 RANDOMIZED_HOLDOUT_PUBLICATION_DECISION_JSON_FILENAME = "randomized_holdout_publication_decision.json"
@@ -101,14 +103,6 @@ def _checks(
         _check("review_scope_bounded", summary.get("review_scope") == "bounded_randomized_holdout_publication_review_only", summary.get("review_scope"), "review scope must stay bounded"),
         _check("source_checks_clean", int(summary.get("failed_check_count") or 0) == 0, summary.get("failed_check_count"), "source review checks must be clean"),
     ]
-
-
-def _path_exists(path: str | Path | None) -> bool:
-    return bool(path) and Path(path).exists()
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _final_decision(status: str, review: dict[str, Any], summary: dict[str, Any]) -> dict[str, Any]:

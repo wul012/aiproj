@@ -5,6 +5,7 @@ from typing import Any
 
 from minigpt.readability_report_artifacts import write_readability_outputs
 from minigpt.report_utils import as_dict, locate_upstream_report, read_json_object, utc_now
+from minigpt.report_check_common import check_entry_no_detail as _check
 
 CADENCE_JSON = "model_capability_cadence_v1133.json"
 PLAN_STEM = "model_capability_regression_plan_v1135"
@@ -124,10 +125,6 @@ def _plan_rows(plan_ready: bool) -> list[dict[str, Any]]:
     if not plan_ready:
         return []
     return [{**item, "status": "planned"} for item in REGRESSION_ITEMS]
-
-
-def _check(check_id: str, passed: bool, actual: Any) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual}
 
 
 __all__ = [

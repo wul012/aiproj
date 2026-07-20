@@ -14,6 +14,8 @@ from minigpt.target_hidden_semantic_holdout_real_replay import (
     TARGET_HIDDEN_SEMANTIC_HOLDOUT_REAL_REPLAY_MARKDOWN_FILENAME,
     TARGET_HIDDEN_SEMANTIC_HOLDOUT_REAL_REPLAY_TEXT_FILENAME,
 )
+from minigpt.report_utils import html_card as _card
+from minigpt.report_utils import html_check_row as _check_row
 
 
 def render_target_hidden_semantic_holdout_real_replay_text(report: dict[str, Any]) -> str:
@@ -137,18 +139,10 @@ def _row(row: dict[str, Any]) -> str:
     )
 
 
-def _check_row(row: dict[str, Any]) -> str:
-    return "<tr>" + "".join(f"<td>{html_escape(row.get(key))}</td>" for key in ["id", "status", "actual", "detail"]) + "</tr>"
-
-
 def _join_terms(value: Any) -> str:
     if not isinstance(value, list):
         return ""
     return ",".join(str(item) for item in value)
-
-
-def _card(label: str, value: Any) -> str:
-    return f"<div class=\"card\"><span>{html_escape(label)}</span><strong>{html_escape(value)}</strong></div>"
 
 
 def _style() -> str:

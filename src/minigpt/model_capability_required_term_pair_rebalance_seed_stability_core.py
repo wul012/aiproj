@@ -14,6 +14,7 @@ from minigpt.model_capability_required_term_micro_training import (
 )
 from minigpt.model_capability_required_term_pair_rebalance import build_required_term_pair_rebalance_corpus
 from minigpt.report_utils import as_dict, list_of_dicts
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 
 REQUIRED_TERM_PAIR_REBALANCE_SEED_STABILITY_JSON_FILENAME = (
     "model_capability_required_term_pair_rebalance_seed_stability.json"
@@ -180,12 +181,6 @@ def summarize_pair_seed_stability(
             }
         )
     return rows
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    if require_pass and report.get("status") != "pass":
-        return 1
-    return 0
 
 
 def _run_pair_seed(

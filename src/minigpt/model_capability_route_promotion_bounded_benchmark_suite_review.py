@@ -8,6 +8,7 @@ from minigpt.model_capability_route_promotion_bounded_benchmark_suite import (
     MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_BENCHMARK_SUITE_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import check_entry as _check
 
 
 MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_BENCHMARK_SUITE_REVIEW_JSON_FILENAME = "model_capability_route_promotion_bounded_benchmark_suite_review.json"
@@ -107,10 +108,6 @@ def _checks(
         _check("prompt_uniqueness", len(prompts) == len(set(prompts)), len(prompts) - len(set(prompts)), "suite prompts must be unique"),
         _check("next_artifact_review", suite.get("proposed_next_artifact") == "model_capability_route_promotion_bounded_benchmark_suite_review", suite.get("proposed_next_artifact"), "suite must point at this review artifact"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _review(status: str, suite: dict[str, Any], case_reviews: list[dict[str, Any]]) -> dict[str, Any]:

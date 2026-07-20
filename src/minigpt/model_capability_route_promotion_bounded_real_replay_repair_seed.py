@@ -11,6 +11,8 @@ from minigpt.model_capability_route_promotion_bounded_real_replay_repair_plan im
     MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_REPAIR_PLAN_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code_seed_ready as resolve_exit_code
 
 
 MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_REPAIR_SEED_JSON_FILENAME = "model_capability_route_promotion_bounded_real_replay_repair_seed.json"
@@ -78,10 +80,6 @@ def build_model_capability_route_promotion_bounded_real_replay_repair_seed(
     }
 
 
-def resolve_exit_code(report: dict[str, Any], *, require_seed_ready: bool) -> int:
-    return 1 if require_seed_ready and report.get("status") != "pass" else 0
-
-
 def _seed_examples(repair_tasks: list[dict[str, Any]], replay_rows: dict[str, dict[str, Any]]) -> list[dict[str, Any]]:
     examples: list[dict[str, Any]] = []
     for task in repair_tasks:
@@ -128,10 +126,6 @@ def _checks(
         _check("two_examples_per_task", len(seed_examples) == len(repair_tasks) * 2, {"examples": len(seed_examples), "tasks": len(repair_tasks)}, "seed should create two examples per repair task"),
         _check("all_tasks_seeded", task_ids == seeded_task_ids, {"tasks": sorted(str(item) for item in task_ids), "seeded": sorted(str(item) for item in seeded_task_ids)}, "every repair task must have seed examples"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _seed(status: str, examples: list[dict[str, Any]], plan_summary: dict[str, Any]) -> dict[str, Any]:

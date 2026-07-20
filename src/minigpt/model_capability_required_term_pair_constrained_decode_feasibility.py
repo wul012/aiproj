@@ -10,6 +10,7 @@ from minigpt.model_capability_required_term_pair_refresh_forced_choice import (
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.server_contracts import parse_generation_request
 from minigpt.server_generator import MiniGPTGenerator
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 
 
 PAIR_CONSTRAINED_DECODE_FEASIBILITY_JSON_FILENAME = "model_capability_required_term_pair_constrained_decode_feasibility.json"
@@ -98,12 +99,6 @@ def build_model_capability_required_term_pair_constrained_decode_feasibility(
         "summary": summary,
         "interpretation": _interpretation(status, summary),
     }
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    if require_pass and report.get("status") != "pass":
-        return 1
-    return 0
 
 
 def _terms(replay: dict[str, Any]) -> list[dict[str, Any]]:

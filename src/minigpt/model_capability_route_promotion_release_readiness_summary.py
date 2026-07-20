@@ -14,6 +14,8 @@ from minigpt.model_capability_route_promotion_release_packet_review import (
     MODEL_CAPABILITY_ROUTE_PROMOTION_RELEASE_PACKET_REVIEW_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, string_list, utc_now
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 
 
 MODEL_CAPABILITY_ROUTE_PROMOTION_RELEASE_READINESS_SUMMARY_JSON_FILENAME = "model_capability_route_promotion_release_readiness_summary.json"
@@ -110,10 +112,6 @@ def build_model_capability_route_promotion_release_readiness_summary(
         "summary": summary,
         "interpretation": _interpretation(status, summary),
     }
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    return 1 if require_pass and report.get("status") != "pass" else 0
 
 
 def _source_rows(
@@ -291,10 +289,6 @@ def _interpretation(status: str, summary: dict[str, Any]) -> dict[str, Any]:
         "reason": "The route promotion packet, review, and governance snapshot agree as bounded release-readiness evidence.",
         "next_action": "publish the bounded release readiness summary as governance evidence, without widening model-quality claims",
     }
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _decision(status: str) -> str:

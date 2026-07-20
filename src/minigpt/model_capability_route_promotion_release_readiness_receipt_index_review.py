@@ -12,6 +12,8 @@ from minigpt.model_capability_route_promotion_release_readiness_receipt_index im
     MODEL_CAPABILITY_ROUTE_PROMOTION_RELEASE_READINESS_RECEIPT_INDEX_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_utils import path_exists as _path_exists
 
 
 MODEL_CAPABILITY_ROUTE_PROMOTION_RELEASE_READINESS_RECEIPT_INDEX_REVIEW_JSON_FILENAME = "model_capability_route_promotion_release_readiness_receipt_index_review.json"
@@ -201,10 +203,6 @@ def _interpretation(status: str, review: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def _path_exists(path: str | Path | None) -> bool:
-    return bool(path) and Path(path).exists()
-
-
 def _sha256_or_empty(path: str | Path | None) -> str:
     if not path:
         return ""
@@ -216,10 +214,6 @@ def _sha256_or_empty(path: str | Path | None) -> str:
         for chunk in iter(lambda: handle.read(1024 * 1024), b""):
             digest.update(chunk)
     return digest.hexdigest()
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _decision(status: str) -> str:

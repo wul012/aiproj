@@ -8,6 +8,8 @@ from minigpt.model_capability_required_term_pair_readiness_route_comparison impo
     PAIR_READINESS_ROUTE_COMPARISON_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, list_of_strs, utc_now
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 
 
 PAIR_READINESS_FIXED_RECOVERY_REPAIR_PLAN_JSON_FILENAME = "model_capability_required_term_pair_readiness_fixed_recovery_repair_plan.json"
@@ -63,12 +65,6 @@ def build_fixed_recovery_repair_plan(
     }
 
 
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    if require_pass and report.get("status") != "pass":
-        return 1
-    return 0
-
-
 def _checks(route_comparison: dict[str, Any], summary: dict[str, Any]) -> list[dict[str, Any]]:
     structured_hits = list_of_strs(summary.get("structured_default_hit_terms"))
     structured_misses = list_of_strs(summary.get("structured_default_missed_terms"))
@@ -88,10 +84,6 @@ def _checks(route_comparison: dict[str, Any], summary: dict[str, Any]) -> list[d
         _check("structured_not_above_baseline", int(summary.get("structured_vs_baseline_default_hit_delta") or 0) == 0, summary.get("structured_vs_baseline_default_hit_delta"), "structured route should be a shape change, not an improvement"),
         _check("structured_and_baseline_best", {"baseline-split", "structured-template"}.issubset(set(best_routes)), best_routes, "baseline and structured routes should be tied best evidence"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _plan(status: str) -> dict[str, Any]:

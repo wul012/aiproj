@@ -9,6 +9,7 @@ from minigpt.model_capability_required_term_split_scan import (
     read_json_report,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code  # noqa: F401 (re-export)
 
 
 REQUIRED_TERM_SPLIT_SEED_STABILITY_JSON_FILENAME = "model_capability_required_term_split_seed_stability.json"
@@ -144,12 +145,6 @@ def summarize_required_term_split_seed_stability(rows: list[dict[str, Any]]) -> 
         "stable_train_repro": bool(rows) and len(train_repro_rows) == len(rows),
         "stable_holdout_zero": bool(rows) and not holdout_rows,
     }
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    if require_pass and report.get("status") != "pass":
-        return 1
-    return 0
 
 
 def _settings(report: dict[str, Any]) -> dict[str, Any]:

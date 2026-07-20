@@ -11,6 +11,7 @@ from minigpt.model_capability_required_term_pair_generation_internal_alignment_c
     make_generation_internal_alignment_source,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 
 
 PAIR_TWO_STAGE_SCHEDULE_PLAN_JSON_FILENAME = (
@@ -102,12 +103,6 @@ def build_model_capability_required_term_pair_two_stage_schedule_plan(
         "summary": summary,
         "interpretation": _interpretation(status),
     }
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    if require_pass and report.get("status") != "pass":
-        return 1
-    return 0
 
 
 def _row_by_label(rows: list[dict[str, Any]], label: str) -> dict[str, Any]:

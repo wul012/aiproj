@@ -13,6 +13,7 @@ from minigpt.model_capability_route_promotion_bounded_objective_replay_compariso
     build_model_capability_route_promotion_bounded_objective_replay_comparison,
 )
 from minigpt.report_utils import as_dict
+from minigpt.report_check_common import resolve_exit_code_comparison_objective as resolve_exit_code
 
 
 LOSS_SIGNAL_BRIDGE_REPLAY_COMPARISON_JSON_FILENAME = "bounded_objective_loss_signal_bridge_replay_comparison.json"
@@ -69,15 +70,6 @@ def build_bounded_objective_loss_signal_bridge_replay_comparison(
         generated_at=generated_at,
     )
     return _adapt_replay_report(report, loss_signal_bridge_training_run_report, loss_signal_bridge_training_run_path)
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_comparison_ready: bool, require_objective_pass: bool = False) -> int:
-    if require_comparison_ready and report.get("status") != "pass":
-        return 1
-    summary = as_dict(report.get("summary"))
-    if require_objective_pass and summary.get("objective_contract_recovered") is not True:
-        return 1
-    return 0
 
 
 def _adapt_training_run(training_report: dict[str, Any]) -> dict[str, Any]:

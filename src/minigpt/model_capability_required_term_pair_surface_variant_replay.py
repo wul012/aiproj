@@ -14,6 +14,7 @@ from minigpt.model_capability_required_term_pair_surface_policy_replay import (
 )
 from minigpt.model_capability_required_term_pair_surface_variant_plan import PAIR_SURFACE_VARIANT_PLAN_JSON_FILENAME
 from minigpt.report_utils import as_dict, csv_cell, html_escape, list_of_dicts, markdown_cell, utc_now, write_json_payload
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 
 
 PAIR_SURFACE_VARIANT_REPLAY_JSON_FILENAME = "model_capability_required_term_pair_surface_variant_replay.json"
@@ -184,12 +185,6 @@ def render_html(report: dict[str, Any]) -> str:
 <section><h2>Variant Summary</h2><table><thead><tr><th>Variant</th><th>Pair-full seeds</th><th>Hits</th><th>Cases</th><th>Stable</th></tr></thead><tbody>{variant_rows}</tbody></table></section>
 <section><h2>Cases</h2><table><thead><tr><th>Seed</th><th>Variant</th><th>Term</th><th>Hit</th><th>Continuation</th></tr></thead><tbody>{case_rows}</tbody></table></section>
 </main></body></html>"""
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    if require_pass and report.get("status") != "pass":
-        return 1
-    return 0
 
 
 def _policy_plan_from_variants(variant_plan: dict[str, Any]) -> dict[str, Any]:

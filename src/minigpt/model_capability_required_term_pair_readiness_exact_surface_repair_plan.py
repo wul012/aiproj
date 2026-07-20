@@ -9,6 +9,8 @@ from minigpt.model_capability_required_term_pair_readiness_fixed_preserving_tran
 )
 from minigpt.model_capability_required_term_pair_readiness_split_contract import HELDOUT_PAIR_PROBE
 from minigpt.report_utils import as_dict, utc_now
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 
 
 PAIR_READINESS_EXACT_SURFACE_REPAIR_PLAN_JSON_FILENAME = "model_capability_required_term_pair_readiness_exact_surface_repair_plan.json"
@@ -64,10 +66,6 @@ def build_exact_surface_repair_plan(
     }
 
 
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    return 1 if require_pass and report.get("status") != "pass" else 0
-
-
 def _checks(diagnostic: dict[str, Any], summary: dict[str, Any]) -> list[dict[str, Any]]:
     return [
         _check("diagnostic_passed", diagnostic.get("status") == "pass", diagnostic.get("status"), "sensitivity diagnostic must pass"),
@@ -91,10 +89,6 @@ def _checks(diagnostic: dict[str, Any], summary: dict[str, Any]) -> list[dict[st
             "at least one optional surface should show pair-full signal before minimal repair",
         ),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _plan(summary: dict[str, Any]) -> dict[str, Any]:

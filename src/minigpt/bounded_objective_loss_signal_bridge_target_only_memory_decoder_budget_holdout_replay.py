@@ -14,6 +14,7 @@ from minigpt.model_capability_route_promotion_bounded_real_replay import (
     locate_route_promotion_bounded_benchmark_suite_review,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import check_entry as _check
 
 
 TARGET_ONLY_MEMORY_DECODER_BUDGET_HOLDOUT_REPLAY_JSON_FILENAME = (
@@ -151,10 +152,6 @@ def _source_checks(source: dict[str, Any], summary: dict[str, Any]) -> list[dict
             "source replay must explicitly require unchanged holdout replay",
         ),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _hit_summary(replay_rows: list[dict[str, Any]]) -> dict[str, int]:

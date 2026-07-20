@@ -8,6 +8,7 @@ from minigpt.model_capability_route_promotion_bounded_real_replay import (
     MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import check_entry as _check
 
 
 MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_REVIEW_JSON_FILENAME = "model_capability_route_promotion_bounded_real_replay_review.json"
@@ -136,10 +137,6 @@ def _checks(real_replay_report: dict[str, Any], replay_summary: dict[str, Any], 
         _check("case_count_matches_summary", len(case_reviews) == int(replay_summary.get("case_count") or 0), {"reviews": len(case_reviews), "summary": replay_summary.get("case_count")}, "reviewed cases must match replay summary"),
         _check("no_source_execution_failures", int(real_replay_report.get("failed_count") or 0) == 0, real_replay_report.get("failed_count"), "source replay must have no execution check failures"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _summary(status: str, checks: list[dict[str, Any]], review_summary: dict[str, Any]) -> dict[str, Any]:

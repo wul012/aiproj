@@ -10,6 +10,7 @@ from minigpt.model_capability_required_term_holdout import (
     read_json_report as read_json_report,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code  # noqa: F401 (re-export)
 
 
 REQUIRED_TERM_SPLIT_SCAN_JSON_FILENAME = "model_capability_required_term_split_scan.json"
@@ -152,12 +153,6 @@ def summarize_required_term_split_scan(rows: list[dict[str, Any]]) -> dict[str, 
         "total_holdout_continuation_hit_count": sum(int(row.get("holdout_continuation_hit_count") or 0) for row in rows),
         "best_split_id": _best_split_id(rows),
     }
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    if require_pass and report.get("status") != "pass":
-        return 1
-    return 0
 
 
 def _scan_row(spec: dict[str, Any], report: dict[str, Any], split_dir: Path) -> dict[str, Any]:

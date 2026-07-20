@@ -12,6 +12,8 @@ from minigpt.target_hidden_semantic_holdout_suite import (
     TARGET_HIDDEN_SEMANTIC_HOLDOUT_SUITE_MARKDOWN_FILENAME,
     TARGET_HIDDEN_SEMANTIC_HOLDOUT_SUITE_TEXT_FILENAME,
 )
+from minigpt.report_utils import html_card as _card
+from minigpt.report_utils import html_check_row as _check_row
 
 
 def render_target_hidden_semantic_holdout_suite_text(report: dict[str, Any]) -> str:
@@ -158,10 +160,6 @@ def _coverage_row(row: dict[str, Any], report: dict[str, Any]) -> str:
     )
 
 
-def _check_row(row: dict[str, Any]) -> str:
-    return "<tr>" + "".join(f"<td>{html_escape(row.get(key))}</td>" for key in ["id", "status", "actual", "detail"]) + "</tr>"
-
-
 def _prompt_for_case(report: dict[str, Any], case_id: Any) -> Any:
     return as_dict(as_dict(_cases_by_id(report).get(str(case_id))).get("prompt_case")).get("prompt")
 
@@ -169,10 +167,6 @@ def _prompt_for_case(report: dict[str, Any], case_id: Any) -> Any:
 def _cases_by_id(report: dict[str, Any]) -> dict[str, dict[str, Any]]:
     suite = as_dict(report.get("benchmark_suite"))
     return {str(item.get("case_id")): item for item in list_of_dicts(suite.get("cases"))}
-
-
-def _card(label: str, value: Any) -> str:
-    return f"<div class=\"card\"><span>{html_escape(label)}</span><strong>{html_escape(value)}</strong></div>"
 
 
 def _style() -> str:

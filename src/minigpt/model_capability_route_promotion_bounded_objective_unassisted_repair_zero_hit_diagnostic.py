@@ -17,6 +17,7 @@ from minigpt.model_capability_route_promotion_bounded_objective_unassisted_repai
     BOUNDED_OBJECTIVE_UNASSISTED_REPAIR_TRAINING_RUN_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict
+from minigpt.report_check_common import resolve_exit_code_diagnostic_ready as resolve_exit_code
 
 
 BOUNDED_OBJECTIVE_UNASSISTED_REPAIR_ZERO_HIT_DIAGNOSTIC_JSON_FILENAME = "model_capability_route_promotion_bounded_objective_unassisted_repair_zero_hit_diagnostic.json"
@@ -78,10 +79,6 @@ def build_model_capability_route_promotion_bounded_objective_unassisted_repair_z
         generated_at=generated_at,
     )
     return _adapt_diagnostic_report(report, unassisted_repair_seed, unassisted_repair_training_run)
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_diagnostic_ready: bool) -> int:
-    return 1 if require_diagnostic_ready and report.get("status") != "pass" else 0
 
 
 def _adapt_replay(replay: dict[str, Any]) -> dict[str, Any]:

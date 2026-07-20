@@ -12,6 +12,8 @@ from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.target_hidden_semantic_holdout_replay_review import TARGET_HIDDEN_SEMANTIC_HOLDOUT_REPLAY_REVIEW_JSON_FILENAME
 from minigpt.target_hidden_semantic_holdout_suite import TARGET_HIDDEN_SEMANTIC_HOLDOUT_SUITE_JSON_FILENAME
 from minigpt.tokenizer import load_tokenizer
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code_suite_ready as resolve_exit_code
 
 
 TARGET_HIDDEN_PROMPT_MUTATION_HOLDOUT_SUITE_JSON_FILENAME = "target_hidden_prompt_mutation_holdout_suite.json"
@@ -82,10 +84,6 @@ def build_target_hidden_prompt_mutation_holdout_suite(
         "summary": summary,
         "interpretation": _interpretation(status, summary),
     }
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_suite_ready: bool) -> int:
-    return 1 if require_suite_ready and report.get("status") != "pass" else 0
 
 
 def prompt_mutation_candidate_prompt_seed_text() -> str:
@@ -187,10 +185,6 @@ def _checks(
         _check("no_prompt_task_hints", all(row.get("task_hint") is not True for row in coverage_rows), sum(1 for row in coverage_rows if row.get("task_hint") is True), "prompt mutations should avoid known task-hint terms"),
         _check("all_prompts_mutated", all(row.get("prompt_mutated") is True for row in coverage_rows), sum(1 for row in coverage_rows if row.get("prompt_mutated") is True), "candidate prompts should differ from source prompts"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _suite(status: str, source_suite: dict[str, Any], cases: list[dict[str, Any]], expected_terms: list[str]) -> dict[str, Any]:

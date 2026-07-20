@@ -6,6 +6,8 @@ from typing import Any
 
 from minigpt.model_capability_route_promotion_release_packet_review import MODEL_CAPABILITY_ROUTE_PROMOTION_RELEASE_PACKET_REVIEW_JSON_FILENAME
 from minigpt.report_utils import as_dict, utc_now
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 
 
 MODEL_CAPABILITY_ROUTE_PROMOTION_REVIEW_DECISION_JSON_FILENAME = "model_capability_route_promotion_review_decision.json"
@@ -61,10 +63,6 @@ def build_model_capability_route_promotion_review_decision(
     }
 
 
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    return 1 if require_pass and report.get("status") != "pass" else 0
-
-
 def _checks(
     release_packet_review: dict[str, Any],
     review: dict[str, Any],
@@ -92,10 +90,6 @@ def _checks(
         _check("claim_bounded", claim.startswith("seed_stable_pair_probe_route"), claim, "final decision claim must remain pair-probe scoped"),
         _check("source_review_checks_clean", int(review_summary.get("failed_check_count") or 0) == 0, review_summary.get("failed_check_count"), "source review checks must be clean"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _final_decision(status: str, review: dict[str, Any]) -> dict[str, Any]:

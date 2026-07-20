@@ -13,6 +13,7 @@ from minigpt.model_capability_route_promotion_bounded_objective_contract import 
     BOUNDED_OBJECTIVE_CONTRACT_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import check_entry as _check
 
 
 TARGET_ONLY_MEMORY_LOSS_TOKEN_PROBABILITY_PROBE_JSON_FILENAME = (
@@ -229,10 +230,6 @@ def _checks(
         _check("tokenizer_exists", tokenizer.is_file(), str(tokenizer), "tokenizer.json must exist"),
         _check("probe_rows_scored", diagnostic.get("probe_step_count", 0) > 0, diagnostic.get("probe_step_count"), "probe must score at least one target token"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _summary(

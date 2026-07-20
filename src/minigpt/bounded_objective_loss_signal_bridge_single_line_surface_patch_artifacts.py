@@ -15,6 +15,7 @@ from minigpt.bounded_objective_loss_signal_bridge_single_line_surface_patch impo
     SINGLE_LINE_SURFACE_PATCH_TEXT_FILENAME,
 )
 from minigpt.report_utils import as_dict, html_escape, list_of_dicts, markdown_cell, write_json_payload
+from minigpt.report_utils import html_card as _card
 
 
 def render_single_line_surface_patch_text(report: dict[str, Any]) -> str:
@@ -126,10 +127,6 @@ def _write_jsonl(report: dict[str, Any], path: Path) -> None:
 
 def _row(row: dict[str, Any]) -> str:
     return f"<tr><td>{html_escape(row.get('example_id'))}</td><td>{html_escape(row.get('kind'))}</td><td>{html_escape(row.get('text'))}</td><td>{html_escape(row.get('source_case_id'))}</td></tr>"
-
-
-def _card(label: str, value: Any) -> str:
-    return f"<div class=\"card\"><span>{html_escape(label)}</span><strong>{html_escape(value)}</strong></div>"
 
 
 def _style() -> str:

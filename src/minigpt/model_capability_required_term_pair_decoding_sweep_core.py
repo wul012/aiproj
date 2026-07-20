@@ -8,6 +8,7 @@ from typing import Any
 
 from minigpt.model_capability_required_term_micro_training import GenerateFunc, _generation_row
 from minigpt.report_utils import as_dict, list_of_dicts, resolve_archived_reference_path
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 
 REQUIRED_TERM_PAIR_DECODING_SWEEP_JSON_FILENAME = "model_capability_required_term_pair_decoding_sweep.json"
 REQUIRED_TERM_PAIR_DECODING_SWEEP_TEXT_FILENAME = "model_capability_required_term_pair_decoding_sweep.txt"
@@ -201,12 +202,6 @@ def summarize_pair_decoding_targets(
             }
         )
     return rows
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    if require_pass and report.get("status") != "pass":
-        return 1
-    return 0
 
 
 def _run_decoding_profile(

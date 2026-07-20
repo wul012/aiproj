@@ -12,6 +12,7 @@ from minigpt.model_capability_required_term_pair_seed_config_heldout_gap import 
     PAIR_SEED_CONFIG_HELDOUT_GAP_TEXT_FILENAME,
 )
 from minigpt.report_utils import as_dict, csv_cell, format_mapping, html_escape, list_of_dicts, markdown_cell, write_json_payload
+from minigpt.report_utils import html_card as _card
 
 
 def render_model_capability_required_term_pair_seed_config_heldout_gap_text(report: dict[str, Any]) -> str:
@@ -233,10 +234,6 @@ def _preview_text(profile: dict[str, Any]) -> str:
     for case in list_of_dicts(profile.get("case_previews")):
         pieces.append(f"{case.get('term')}={case.get('continuation_preview')}")
     return "; ".join(pieces)
-
-
-def _card(label: str, value: Any) -> str:
-    return f"<div class=\"card\"><span>{html_escape(label)}</span><strong>{html_escape(value)}</strong></div>"
 
 
 def _style() -> str:

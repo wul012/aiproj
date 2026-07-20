@@ -7,6 +7,7 @@ from typing import Any
 from minigpt.readability_report_artifacts import write_readability_outputs
 from minigpt.report_utils import as_dict, list_of_dicts, read_json_object, utc_now, write_json_payload
 from minigpt.unassisted_holdout_repair_plan_v1148 import EXPLAIN_DIR_NAME, UNASSISTED_HOLDOUT_REPAIR_PLAN_V1148_STEM
+from minigpt.report_check_common import check_entry as _check
 
 UNASSISTED_HOLDOUT_REPAIR_SEED_CORPUS_V1149_STEM = "unassisted_holdout_repair_seed_corpus_v1149"
 SEED_BLUEPRINT_JSON_NAME = "unassisted_holdout_repair_seed_blueprint.json"
@@ -201,10 +202,6 @@ def _checks(
         _check("corpus_non_empty", corpus_chars > 120, corpus_chars, "materialized corpus must be non-empty and trainable"),
         _check("promotion_boundary_kept", plan_summary.get("promotion_ready") is False, plan_summary.get("promotion_ready"), "seed corpus is not promotion evidence"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _materialization(status: str, examples: list[dict[str, Any]], corpus_text: str, holdout_prompts: list[dict[str, Any]]) -> dict[str, Any]:

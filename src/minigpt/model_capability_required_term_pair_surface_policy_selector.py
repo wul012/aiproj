@@ -7,6 +7,7 @@ from typing import Any
 from minigpt.model_capability_required_term_pair_surface_policy_plan import PAIR_SURFACE_POLICY_PLAN_JSON_FILENAME
 from minigpt.model_capability_required_term_pair_surface_policy_replay import PAIR_SURFACE_POLICY_REPLAY_JSON_FILENAME
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 
 
 PAIR_SURFACE_POLICY_SELECTOR_JSON_FILENAME = "model_capability_required_term_pair_surface_policy_selector.json"
@@ -67,12 +68,6 @@ def build_model_capability_required_term_pair_surface_policy_selector(
         "summary": summary,
         "interpretation": _interpretation(status, summary),
     }
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    if require_pass and report.get("status") != "pass":
-        return 1
-    return 0
 
 
 def _candidate_rows(policy_plan: dict[str, Any], policy_replay: dict[str, Any]) -> list[dict[str, Any]]:

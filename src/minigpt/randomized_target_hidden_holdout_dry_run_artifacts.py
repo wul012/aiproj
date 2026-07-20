@@ -12,6 +12,8 @@ from minigpt.randomized_target_hidden_holdout_dry_run import (
     RANDOMIZED_TARGET_HIDDEN_HOLDOUT_DRY_RUN_TEXT_FILENAME,
 )
 from minigpt.report_utils import as_dict, csv_cell, html_escape, list_of_dicts, markdown_cell, write_json_payload
+from minigpt.report_utils import html_card as _card
+from minigpt.report_utils import html_check_row as _check_row
 
 
 def render_randomized_target_hidden_holdout_dry_run_text(report: dict[str, Any]) -> str:
@@ -154,18 +156,10 @@ def _row(row: dict[str, Any]) -> str:
     ) + "</tr>"
 
 
-def _check_row(row: dict[str, Any]) -> str:
-    return "<tr>" + "".join(f"<td>{html_escape(row.get(key))}</td>" for key in ["id", "status", "actual", "detail"]) + "</tr>"
-
-
 def _join(value: Any) -> str:
     if not isinstance(value, list):
         return ""
     return ",".join(str(item) for item in value)
-
-
-def _card(label: str, value: Any) -> str:
-    return f"<div class=\"card\"><span>{html_escape(label)}</span><strong>{html_escape(value)}</strong></div>"
 
 
 def _style() -> str:

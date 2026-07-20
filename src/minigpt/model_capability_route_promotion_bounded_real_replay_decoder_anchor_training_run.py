@@ -8,6 +8,8 @@ from minigpt.model_capability_route_promotion_bounded_real_replay_decoder_anchor
     MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_DECODER_ANCHOR_SEED_REVISION_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, utc_now
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code_training_ready as resolve_exit_code
 
 
 MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_DECODER_ANCHOR_TRAINING_RUN_JSON_FILENAME = "model_capability_route_promotion_bounded_real_replay_decoder_anchor_training_run.json"
@@ -69,10 +71,6 @@ def build_model_capability_route_promotion_bounded_real_replay_decoder_anchor_tr
         "summary": _summary(status, checks, training),
         "interpretation": _interpretation(status, training),
     }
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_training_ready: bool) -> int:
-    return 1 if require_training_ready and report.get("status") != "pass" else 0
 
 
 def _artifacts(root: Path) -> list[dict[str, Any]]:
@@ -137,10 +135,6 @@ def _checks(
         _check("metrics_records_present", int(metrics.get("record_count") or 0) >= 2, metrics.get("record_count"), "training should record at least first and last metrics"),
         _check("max_iters_positive", int(train_config.get("max_iters") or 0) > 0, train_config.get("max_iters"), "train_config must record positive max_iters"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _training(

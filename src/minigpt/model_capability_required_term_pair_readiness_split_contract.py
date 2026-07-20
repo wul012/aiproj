@@ -8,6 +8,8 @@ from minigpt.model_capability_required_term_pair_readiness_split_plan import (
     PAIR_READINESS_SPLIT_PLAN_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, utc_now
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 
 
 PAIR_READINESS_SPLIT_CONTRACT_JSON_FILENAME = "model_capability_required_term_pair_readiness_split_contract.json"
@@ -63,12 +65,6 @@ def build_pair_readiness_split_contract(
         "summary": _summary(contract, checks),
         "interpretation": _interpretation(status),
     }
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    if require_pass and report.get("status") != "pass":
-        return 1
-    return 0
 
 
 def _contract() -> dict[str, Any]:
@@ -134,10 +130,6 @@ def _checks(split_plan: dict[str, Any], plan: dict[str, Any], contract: dict[str
             "heldout pair probe must stay out of training rows",
         ),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _summary(contract: dict[str, Any], checks: list[dict[str, Any]]) -> dict[str, Any]:

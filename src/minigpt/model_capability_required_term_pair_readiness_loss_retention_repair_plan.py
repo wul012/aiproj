@@ -8,6 +8,8 @@ from minigpt.model_capability_required_term_pair_readiness_heldout_failure_diagn
     PAIR_READINESS_HELDOUT_FAILURE_DIAGNOSTIC_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, utc_now
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 
 
 PAIR_READINESS_LOSS_RETENTION_REPAIR_PLAN_JSON_FILENAME = "model_capability_required_term_pair_readiness_loss_retention_repair_plan.json"
@@ -63,12 +65,6 @@ def build_loss_retention_repair_plan(
     }
 
 
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    if require_pass and report.get("status") != "pass":
-        return 1
-    return 0
-
-
 def _checks(diagnostic_report: dict[str, Any], summary: dict[str, Any]) -> list[dict[str, Any]]:
     return [
         _check("diagnostic_passed", diagnostic_report.get("status") == "pass", diagnostic_report.get("status"), "source diagnostic must pass"),
@@ -91,10 +87,6 @@ def _checks(diagnostic_report: dict[str, Any], summary: dict[str, Any]) -> list[
             "loss prompt must show fixed pollution",
         ),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _plan(status: str) -> dict[str, Any]:

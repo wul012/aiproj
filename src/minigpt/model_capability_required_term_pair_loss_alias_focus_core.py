@@ -19,6 +19,7 @@ from minigpt.model_capability_required_term_pair_loss_alias_focus_components imp
 )
 from minigpt.model_capability_required_term_pair_loss_alias_metrics import required_term_hit_metrics
 from minigpt.report_utils import as_dict, list_of_dicts
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 
 REQUIRED_TERM_PAIR_LOSS_ALIAS_FOCUS_JSON_FILENAME = "model_capability_required_term_pair_loss_alias_focus.json"
 REQUIRED_TERM_PAIR_LOSS_ALIAS_FOCUS_TEXT_FILENAME = "model_capability_required_term_pair_loss_alias_focus.txt"
@@ -161,12 +162,6 @@ def summarize_loss_alias_focus(
         "normalization_gain_count": normalization_gain_count,
         "checkpoint_seed_count": sum(1 for row in seed_rows if row.get("checkpoint_exists")),
     }
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    if require_pass and report.get("status") != "pass":
-        return 1
-    return 0
 
 
 def _run_focus_seed(

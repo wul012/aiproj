@@ -8,6 +8,7 @@ from typing import Any
 from minigpt.model_capability_required_term_pair_surface_variant_plan import PAIR_SURFACE_VARIANT_PLAN_JSON_FILENAME
 from minigpt.model_capability_required_term_pair_surface_variant_replay import PAIR_SURFACE_VARIANT_REPLAY_JSON_FILENAME
 from minigpt.report_utils import as_dict, csv_cell, html_escape, list_of_dicts, markdown_cell, utc_now, write_json_payload
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 
 
 PAIR_SURFACE_VARIANT_SELECTOR_JSON_FILENAME = "model_capability_required_term_pair_surface_variant_selector.json"
@@ -152,12 +153,6 @@ def render_html(report: dict[str, Any]) -> str:
 <section><h2>Candidates</h2><table><thead><tr><th>Variant</th><th>Separator</th><th>Stable</th><th>Score</th><th>Reason</th></tr></thead><tbody>{rows}</tbody></table></section>
 <section><h2>Next Action</h2><p>{html_escape(interpretation.get('next_action'))}</p></section>
 </main></body></html>"""
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    if require_pass and report.get("status") != "pass":
-        return 1
-    return 0
 
 
 def _candidate_rows(variant_plan: dict[str, Any], variant_replay: dict[str, Any]) -> list[dict[str, Any]]:

@@ -8,6 +8,8 @@ from minigpt.model_capability_required_term_pair_readiness_route_comparison impo
     PAIR_READINESS_ROUTE_COMPARISON_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 
 
 PAIR_READINESS_OBJECTIVE_STRUCTURE_PLAN_JSON_FILENAME = "model_capability_required_term_pair_readiness_objective_structure_plan.json"
@@ -64,12 +66,6 @@ def build_objective_structure_plan(
     }
 
 
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    if require_pass and report.get("status") != "pass":
-        return 1
-    return 0
-
-
 def _checks(route_comparison: dict[str, Any], summary: dict[str, Any], route_rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
     capacity_row = _route_row(route_rows, "capacity-probe")
     missed_terms = [str(term) for term in summary.get("capacity_probe_default_missed_terms") or []]
@@ -95,10 +91,6 @@ def _route_row(route_rows: list[dict[str, Any]], label: str) -> dict[str, Any]:
         if row.get("label") == label:
             return row
     return {}
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _plan(status: str) -> dict[str, Any]:

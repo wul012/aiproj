@@ -9,6 +9,7 @@ from minigpt.model_capability_route_promotion_bounded_objective_unassisted_repai
     build_model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_training_run,
 )
 from minigpt.report_utils import as_dict
+from minigpt.report_check_common import resolve_exit_code_training_ready as resolve_exit_code
 
 
 LOSS_SIGNAL_BRIDGE_TRAINING_RUN_JSON_FILENAME = "bounded_objective_loss_signal_bridge_training_run.json"
@@ -48,10 +49,6 @@ def build_bounded_objective_loss_signal_bridge_training_run(
         generated_at=generated_at,
     )
     return _adapt_training_report(report, bridge_report, bridge_path)
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_training_ready: bool) -> int:
-    return 1 if require_training_ready and report.get("status") != "pass" else 0
 
 
 def _adapt_bridge(bridge_report: dict[str, Any]) -> dict[str, Any]:

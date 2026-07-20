@@ -11,6 +11,7 @@ from minigpt.bounded_objective_loss_signal_bridge_training_run import (
     build_bounded_objective_loss_signal_bridge_training_run,
 )
 from minigpt.report_utils import as_dict
+from minigpt.report_check_common import resolve_exit_code_training_ready as resolve_exit_code
 
 
 TARGET_ONLY_MEMORY_STAGNATION_AWARE_SUFFIX_TRAINING_RUN_JSON_FILENAME = (
@@ -60,10 +61,6 @@ def build_stagnation_aware_suffix_training_run(
         generated_at=generated_at,
     )
     return _adapt_training_report(report, stagnation_aware_suffix_patch, stagnation_aware_suffix_patch_path)
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_training_ready: bool) -> int:
-    return 1 if require_training_ready and report.get("status") != "pass" else 0
 
 
 def _adapt_patch(patch: dict[str, Any]) -> dict[str, Any]:

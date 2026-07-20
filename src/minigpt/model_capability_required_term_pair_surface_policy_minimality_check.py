@@ -7,6 +7,7 @@ from typing import Any
 from minigpt.model_capability_required_term_pair_surface_policy_replay import PAIR_SURFACE_POLICY_REPLAY_JSON_FILENAME
 from minigpt.model_capability_required_term_pair_surface_policy_selector import PAIR_SURFACE_POLICY_SELECTOR_JSON_FILENAME
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 
 
 PAIR_SURFACE_POLICY_MINIMALITY_CHECK_JSON_FILENAME = "model_capability_required_term_pair_surface_policy_minimality_check.json"
@@ -63,12 +64,6 @@ def build_model_capability_required_term_pair_surface_policy_minimality_check(
         "summary": summary,
         "interpretation": _interpretation(status, summary),
     }
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    if require_pass and report.get("status") != "pass":
-        return 1
-    return 0
 
 
 def _check_rows(selector_report: dict[str, Any], replay_report: dict[str, Any]) -> list[dict[str, Any]]:

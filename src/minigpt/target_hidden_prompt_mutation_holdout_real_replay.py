@@ -9,6 +9,7 @@ from minigpt.server_contracts import GenerationRequest
 from minigpt.server_generator import MiniGPTGenerator
 from minigpt.target_hidden_prompt_mutation_holdout_dry_run import TARGET_HIDDEN_PROMPT_MUTATION_HOLDOUT_DRY_RUN_JSON_FILENAME
 from minigpt.target_hidden_prompt_mutation_holdout_suite import TARGET_HIDDEN_PROMPT_MUTATION_HOLDOUT_SUITE_JSON_FILENAME
+from minigpt.report_check_common import check_entry as _check
 
 
 TARGET_HIDDEN_PROMPT_MUTATION_HOLDOUT_REAL_REPLAY_JSON_FILENAME = "target_hidden_prompt_mutation_holdout_real_replay.json"
@@ -175,10 +176,6 @@ def _checks(
         _check("all_cases_executed", len(replay_rows) == len(cases), len(replay_rows), "real replay should execute every case"),
         _check("no_replay_errors", not replay_errors, len(replay_errors), "real replay should not raise generation errors"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _summary(

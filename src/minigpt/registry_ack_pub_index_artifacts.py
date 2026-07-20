@@ -12,6 +12,8 @@ from minigpt.registry_ack_pub_index import (
     RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_DOWNSTREAM_CONSUMER_ACK_BUNDLE_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_INDEX_TEXT_FILENAME,
 )
 from minigpt.report_utils import as_dict, csv_cell, html_escape, list_of_dicts, markdown_cell, write_json_payload
+from minigpt.report_utils import html_card as _card
+from minigpt.report_utils import html_check_row as _check_row
 
 
 def render_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_index_text(report: dict[str, Any]) -> str:
@@ -152,14 +154,6 @@ def write_randomized_holdout_publication_registry_downstream_consumer_ack_bundle
 def _index_row(row: dict[str, Any]) -> str:
     keys = ["publication_index_id", "lookup_key", "publication_id", "publication_status", "published_use", "contract_check_ready", "promotion_ready"]
     return "<tr>" + "".join(f"<td>{html_escape(row.get(key))}</td>" for key in keys) + "</tr>"
-
-
-def _check_row(row: dict[str, Any]) -> str:
-    return "<tr>" + "".join(f"<td>{html_escape(row.get(key))}</td>" for key in ["id", "status", "actual", "detail"]) + "</tr>"
-
-
-def _card(label: str, value: Any) -> str:
-    return f"<div class=\"card\"><span>{html_escape(label)}</span><strong>{html_escape(value)}</strong></div>"
 
 
 def _style() -> str:

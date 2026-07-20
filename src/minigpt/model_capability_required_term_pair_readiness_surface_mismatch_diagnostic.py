@@ -11,6 +11,8 @@ from minigpt.model_capability_required_term_pair_readiness_training_run import (
     PAIR_READINESS_TRAINING_RUN_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 
 
 PAIR_READINESS_SURFACE_MISMATCH_DIAGNOSTIC_JSON_FILENAME = "model_capability_required_term_pair_readiness_surface_mismatch_diagnostic.json"
@@ -81,12 +83,6 @@ def build_surface_mismatch_diagnostic(
         "summary": summary,
         "interpretation": _interpretation(status, summary),
     }
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    if require_pass and report.get("status") != "pass":
-        return 1
-    return 0
 
 
 def _analysis_rows(contract: dict[str, Any], replay_rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -173,10 +169,6 @@ def _checks(contract_report: dict[str, Any], training_report: dict[str, Any], su
         _check("default_replay_terms_present", int(summary.get("default_replay_term_count") or 0) >= 2, summary.get("default_replay_term_count"), "need default fixed/loss replay rows"),
         _check("both_direct_terms_missed", summary.get("both_direct_terms_missed") is True, summary.get("both_direct_terms_missed"), "both direct terms must miss before planning a bridge"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _decision(status: str, summary: dict[str, Any]) -> str:

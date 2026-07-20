@@ -12,6 +12,7 @@ from minigpt.model_capability_required_term_pair_readiness_direct_completion_rou
     PAIR_READINESS_DIRECT_COMPLETION_ROUTE_COMPARISON_TEXT_FILENAME,
 )
 from minigpt.report_utils import as_dict, csv_cell, html_escape, list_of_dicts, markdown_cell, write_json_payload
+from minigpt.report_utils import html_card as _card
 
 
 def render_direct_completion_route_comparison_text(report: dict[str, Any]) -> str:
@@ -156,10 +157,6 @@ def _row_html(row: dict[str, Any]) -> str:
         f"<td>{html_escape(row.get('continuation_previews'))}</td>"
         "</tr>"
     )
-
-
-def _card(label: str, value: Any) -> str:
-    return f"<div class=\"card\"><span>{html_escape(label)}</span><strong>{html_escape(value)}</strong></div>"
 
 
 def _style() -> str:

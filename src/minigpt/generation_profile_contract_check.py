@@ -6,6 +6,7 @@ from typing import Any
 
 from minigpt.generation_profiles import DEFAULT_GENERATION_PROFILE_ID, NEWLINE_SUPPRESSION_PROFILE_ID
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 
 
 GENERATION_PROFILE_CONTRACT_CHECK_JSON_FILENAME = "generation_profile_contract_check.json"
@@ -230,12 +231,6 @@ def build_generation_profile_contract_check(
             "profile_output_has_newline": "\n" in profile_output.strip() or "\r" in profile_output.strip(),
         },
     }
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    if require_pass and report.get("status") != "pass":
-        return 1
-    return 0
 
 
 def _read_json_source(source_id: str, path: Path) -> tuple[dict[str, Any], dict[str, Any]]:

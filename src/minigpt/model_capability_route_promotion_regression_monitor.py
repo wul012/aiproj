@@ -6,6 +6,8 @@ from typing import Any
 
 from minigpt.model_capability_route_promotion_portfolio import MODEL_CAPABILITY_ROUTE_PROMOTION_PORTFOLIO_JSON_FILENAME
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 
 
 MODEL_CAPABILITY_ROUTE_PROMOTION_REGRESSION_JSON_FILENAME = "model_capability_route_promotion_regression_monitor.json"
@@ -61,10 +63,6 @@ def build_model_capability_route_promotion_regression_monitor(
         "summary": summary,
         "interpretation": _interpretation(status, summary),
     }
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    return 1 if require_pass and report.get("status") != "pass" else 0
 
 
 def _route_deltas(baseline: dict[str, Any], current: dict[str, Any]) -> list[dict[str, Any]]:
@@ -153,10 +151,6 @@ def _claim_widened(baseline_claim: Any, current_claim: Any) -> bool:
     if cur.startswith("seed_stable_pair_probe_route"):
         return False
     return cur != base
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _summary(

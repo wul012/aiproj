@@ -17,6 +17,8 @@ from minigpt.model_capability_route_promotion_bounded_real_replay_repair_trainin
     MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_REPAIR_TRAINING_RUN_REVISION_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code_diagnostic_ready as resolve_exit_code
 
 
 MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_FAILURE_ALIGNMENT_DIAGNOSTIC_JSON_FILENAME = "model_capability_route_promotion_bounded_real_replay_failure_alignment_diagnostic.json"
@@ -109,10 +111,6 @@ def build_model_capability_route_promotion_bounded_real_replay_failure_alignment
     }
 
 
-def resolve_exit_code(report: dict[str, Any], *, require_diagnostic_ready: bool) -> int:
-    return 1 if require_diagnostic_ready and report.get("status") != "pass" else 0
-
-
 def _case_diagnostic(case: dict[str, Any], row: dict[str, Any], corpus: str) -> dict[str, Any]:
     prompt_case = as_dict(case.get("prompt_case"))
     prompt = str(prompt_case.get("prompt") or "")
@@ -182,10 +180,6 @@ def _checks(
         _check("corpus_present", bool(corpus.strip()), len(corpus), "corpus must be readable"),
         _check("case_diagnostics_present", bool(diagnostics), len(diagnostics), "diagnostic must inspect benchmark cases"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _summary(status: str, checks: list[dict[str, Any]], diagnostics: list[dict[str, Any]], root_causes: list[dict[str, Any]]) -> dict[str, Any]:

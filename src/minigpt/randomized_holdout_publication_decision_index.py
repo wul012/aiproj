@@ -13,6 +13,7 @@ from minigpt.randomized_holdout_publication_constants import (
 )
 from minigpt.randomized_holdout_publication_decision import RANDOMIZED_HOLDOUT_PUBLICATION_DECISION_JSON_FILENAME
 from minigpt.report_utils import as_dict, utc_now
+from minigpt.report_check_common import check_entry as _check
 
 
 RANDOMIZED_HOLDOUT_PUBLICATION_DECISION_INDEX_JSON_FILENAME = "randomized_holdout_publication_decision_index.json"
@@ -232,10 +233,6 @@ def _checks(
             "source next-step routing must match packet -> review -> decision -> index",
         ),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _index(status: str, decision_summary: dict[str, Any], review_summary: dict[str, Any], packet_summary: dict[str, Any], source_rows: list[dict[str, Any]]) -> dict[str, Any]:

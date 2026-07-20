@@ -13,6 +13,8 @@ from minigpt.bounded_objective_loss_signal_bridge_target_only_memory_tokenizer_c
 from minigpt.eval_suite import PromptCase
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.tokenizer import load_tokenizer
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code_suite_ready as resolve_exit_code
 
 
 TARGET_ONLY_MEMORY_TARGET_HIDDEN_TOKENIZER_COVERED_HOLDOUT_SUITE_JSON_FILENAME = (
@@ -94,10 +96,6 @@ def build_target_hidden_tokenizer_covered_holdout_suite(
     }
 
 
-def resolve_exit_code(report: dict[str, Any], *, require_suite_ready: bool) -> int:
-    return 1 if require_suite_ready and report.get("status") != "pass" else 0
-
-
 def target_hidden_candidate_prompt_seed_text() -> str:
     return "\n".join(prompt for _, prompt, _ in _candidate_prompt_specs())
 
@@ -173,10 +171,6 @@ def _checks(review: dict[str, Any], suite_report: dict[str, Any], tokenizer: Pat
         _check("all_prompts_tokenizer_covered", all(row.get("tokenizer_covered") is True for row in coverage_rows), sum(1 for row in coverage_rows if row.get("tokenizer_covered") is True), "all prompts must be tokenizer covered"),
         _check("all_prompts_target_hidden", all(row.get("target_hidden") is True for row in coverage_rows), sum(1 for row in coverage_rows if row.get("target_hidden") is True), "all prompts must hide expected terms"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _suite(status: str, source_suite: dict[str, Any], cases: list[dict[str, Any]], expected_terms: list[str]) -> dict[str, Any]:

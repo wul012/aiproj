@@ -14,6 +14,8 @@ from minigpt.model_capability_required_term_pair_readiness_training_run import (
     PAIR_READINESS_TRAINING_RUN_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, utc_now
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 
 
 PAIR_READINESS_OBJECTIVE_LEVEL_CONTRAST_PROMOTION_GUARD_JSON_FILENAME = (
@@ -100,10 +102,6 @@ def build_objective_level_contrast_promotion_guard(
     }
 
 
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    return 1 if require_pass and report.get("status") != "pass" else 0
-
-
 def _checks(route_comparison: dict[str, Any], objective_replay: dict[str, Any], training_run: dict[str, Any]) -> list[dict[str, Any]]:
     comparison_summary = as_dict(route_comparison.get("summary"))
     replay_summary = as_dict(objective_replay.get("summary"))
@@ -131,10 +129,6 @@ def _checks(route_comparison: dict[str, Any], objective_replay: dict[str, Any], 
         _check("direct_pair_full", training_summary.get("pair_full_observed") is True, training_summary.get("pair_full_observed"), "training run should observe direct pair-full before replay"),
         _check("materialized_corpus_large_enough", int(materialization_summary.get("training_line_count") or 0) >= 8000, materialization_summary.get("training_line_count"), "source corpus should be the objective-level contrast materialization"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _guard(status: str) -> dict[str, Any]:

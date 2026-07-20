@@ -9,6 +9,7 @@ from minigpt.randomized_target_hidden_holdout_suite import RANDOMIZED_TARGET_HID
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.server_contracts import GenerationRequest
 from minigpt.server_generator import MiniGPTGenerator
+from minigpt.report_check_common import check_entry as _check
 
 
 RANDOMIZED_TARGET_HIDDEN_HOLDOUT_REAL_REPLAY_JSON_FILENAME = "randomized_target_hidden_holdout_real_replay.json"
@@ -178,10 +179,6 @@ def _checks(
         _check("all_cases_executed", len(replay_rows) == len(cases), len(replay_rows), "real replay should execute every case"),
         _check("no_replay_errors", not replay_errors, len(replay_errors), "real replay should not raise generation errors"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _summary(

@@ -12,6 +12,8 @@ from minigpt.bounded_objective_loss_signal_bridge_target_only_memory_tokenizer_c
     TARGET_ONLY_MEMORY_TOKENIZER_COVERAGE_AWARE_HOLDOUT_DRY_RUN_TEXT_FILENAME,
 )
 from minigpt.report_utils import as_dict, csv_cell, html_escape, list_of_dicts, markdown_cell, write_json_payload
+from minigpt.report_utils import html_card as _card
+from minigpt.report_utils import html_check_row as _check_row
 
 
 def render_tokenizer_coverage_aware_holdout_dry_run_text(report: dict[str, Any]) -> str:
@@ -161,21 +163,6 @@ def _row(row: dict[str, Any]) -> str:
         f"<td>{html_escape(','.join(str(item) for item in row.get('negative_hit_terms', [])))}</td>"
         "</tr>"
     )
-
-
-def _check_row(row: dict[str, Any]) -> str:
-    return (
-        "<tr>"
-        f"<td>{html_escape(row.get('id'))}</td>"
-        f"<td>{html_escape(row.get('status'))}</td>"
-        f"<td>{html_escape(row.get('actual'))}</td>"
-        f"<td>{html_escape(row.get('detail'))}</td>"
-        "</tr>"
-    )
-
-
-def _card(label: str, value: Any) -> str:
-    return f"<div class=\"card\"><span>{html_escape(label)}</span><strong>{html_escape(value)}</strong></div>"
 
 
 def _style() -> str:

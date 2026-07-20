@@ -5,6 +5,7 @@ from typing import Any
 
 from minigpt.readability_report_artifacts import write_readability_outputs
 from minigpt.report_utils import utc_now
+from minigpt.report_check_common import check_entry_no_detail as _check
 
 REPORT_LOADER_DEDUP_STEM = "report_loader_dedup_v1140"
 LOCATE_AND_READ_MIGRATED_MODULES = [
@@ -135,10 +136,6 @@ def _checks(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
             [row["module"] for row in rows if row["private_loader_copy_present"]],
         ),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual}
 
 
 def _count_text(paths: list[Path], needle: str) -> int:

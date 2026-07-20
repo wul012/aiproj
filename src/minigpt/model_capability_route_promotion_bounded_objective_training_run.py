@@ -8,6 +8,7 @@ from minigpt.model_capability_route_promotion_bounded_objective_seed import (
     BOUNDED_OBJECTIVE_SEED_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, utc_now
+from minigpt.report_check_common import check_entry as _check
 
 
 BOUNDED_OBJECTIVE_TRAINING_RUN_JSON_FILENAME = "model_capability_route_promotion_bounded_objective_training_run.json"
@@ -139,10 +140,6 @@ def _checks(
         _check("metrics_records_present", int(metrics.get("record_count") or 0) >= 2, metrics.get("record_count"), "training should record at least first and last metrics"),
         _check("max_iters_positive", int(train_config.get("max_iters") or 0) > 0, train_config.get("max_iters"), "train_config must record positive max_iters"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _training(

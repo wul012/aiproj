@@ -10,6 +10,7 @@ from minigpt.model_capability_required_term_pair_continuation_span_heldout impor
 from minigpt.model_capability_required_term_pair_continuation_span_objective import refresh_training_artifact_status
 from minigpt.model_capability_required_term_scaffold_probe import read_json_report as read_json_report
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code  # noqa: F401 (re-export)
 
 
 REQUIRED_TERM_PAIR_LOSS_ALIAS_OBJECTIVE_JSON_FILENAME = "model_capability_required_term_pair_loss_alias_objective.json"
@@ -240,12 +241,6 @@ def summarize_loss_alias_objective(
         "metrics_exists": bool(training.get("metrics_exists")),
         "train_config_exists": bool(training.get("train_config_exists")),
     }
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    if require_pass and report.get("status") != "pass":
-        return 1
-    return 0
 
 
 def _input_issues(heldout_report: dict[str, Any], cases: list[dict[str, Any]]) -> list[str]:

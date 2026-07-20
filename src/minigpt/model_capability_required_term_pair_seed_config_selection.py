@@ -8,6 +8,7 @@ from minigpt.model_capability_required_term_pair_seed_coverage_tradeoff import (
     PAIR_SEED_COVERAGE_TRADEOFF_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 
 
 PAIR_SEED_CONFIG_SELECTION_JSON_FILENAME = "model_capability_required_term_pair_seed_config_selection.json"
@@ -65,10 +66,6 @@ def build_model_capability_required_term_pair_seed_config_selection(
         "summary": summary,
         "interpretation": _interpretation(status, summary),
     }
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    return 1 if require_pass and report.get("status") != "pass" else 0
 
 
 def _input_issues(

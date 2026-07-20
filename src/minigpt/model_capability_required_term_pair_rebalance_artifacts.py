@@ -11,6 +11,7 @@ from minigpt.model_capability_required_term_pair_rebalance import (
     REQUIRED_TERM_PAIR_REBALANCE_TEXT_FILENAME,
 )
 from minigpt.report_utils import as_dict, csv_cell, html_escape, list_of_dicts, markdown_cell, write_json_payload
+from minigpt.report_utils import html_card as _card
 
 
 def render_model_capability_required_term_pair_rebalance_text(report: dict[str, Any]) -> str:
@@ -215,10 +216,6 @@ def _probe_html(row: dict[str, Any]) -> str:
         f"<td>{html_escape(row.get('checkpoint_path'))}</td>"
         "</tr>"
     )
-
-
-def _card(label: str, value: Any) -> str:
-    return f'<div class="card"><span>{html_escape(label)}</span><strong>{html_escape(value)}</strong></div>'
 
 
 def _style() -> str:

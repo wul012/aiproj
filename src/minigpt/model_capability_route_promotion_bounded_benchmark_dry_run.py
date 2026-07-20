@@ -11,6 +11,8 @@ from minigpt.model_capability_route_promotion_bounded_benchmark_suite_review imp
     MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_BENCHMARK_SUITE_REVIEW_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 
 
 MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_BENCHMARK_DRY_RUN_JSON_FILENAME = "model_capability_route_promotion_bounded_benchmark_dry_run.json"
@@ -80,10 +82,6 @@ def build_model_capability_route_promotion_bounded_benchmark_dry_run(
     }
 
 
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    return 1 if require_pass and report.get("status") != "pass" else 0
-
-
 def _score_case(row: dict[str, Any], continuation: str) -> dict[str, Any]:
     expected_terms = [str(term) for term in row.get("expected_terms", [])]
     scores = _score_terms(expected_terms, continuation)
@@ -122,10 +120,6 @@ def _checks(
         _check("positive_rows_pass", len(passed_rows) == len(dry_rows), len(passed_rows), "positive continuation should pass every case"),
         _check("negative_control_fails", negative_control.get("case_pass") is False, negative_control.get("case_pass"), "negative control must fail missing required term"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _summary(

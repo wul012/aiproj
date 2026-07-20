@@ -13,6 +13,7 @@ from minigpt.model_capability_required_term_split_seed_stability import (
     REQUIRED_TERM_SPLIT_SEED_STABILITY_JSON_FILENAME,
 )
 from minigpt.report_utils import list_of_dicts, utc_now
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code  # noqa: F401 (re-export)
 
 
 REQUIRED_TERM_BALANCED_CORPUS_JSON_FILENAME = "model_capability_required_term_balanced_corpus.json"
@@ -186,12 +187,6 @@ def summarize_required_term_balanced_corpus(
         "term_line_balance_ready": bool(term_counts) and term_line_min == term_line_max,
         "pattern_counts": dict(sorted(pattern_counts.items())),
     }
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    if require_pass and report.get("status") != "pass":
-        return 1
-    return 0
 
 
 def _source_examples(micro_report: dict[str, Any]) -> list[dict[str, Any]]:

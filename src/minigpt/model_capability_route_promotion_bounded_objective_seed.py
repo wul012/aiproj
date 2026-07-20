@@ -8,6 +8,7 @@ from minigpt.model_capability_route_promotion_bounded_objective_contract import 
     BOUNDED_OBJECTIVE_CONTRACT_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import check_entry as _check
 
 
 BOUNDED_OBJECTIVE_SEED_JSON_FILENAME = "model_capability_route_promotion_bounded_objective_seed.json"
@@ -140,10 +141,6 @@ def _checks(
 def _contains_terms(row: dict[str, Any]) -> bool:
     text = str(row.get("text") or "").lower()
     return "fixed" in text and "loss" in text
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _seed(status: str, contract: dict[str, Any], examples: list[dict[str, Any]], corpus_text: str) -> dict[str, Any]:

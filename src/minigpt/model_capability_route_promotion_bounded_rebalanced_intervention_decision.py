@@ -20,6 +20,7 @@ from minigpt.model_capability_route_promotion_bounded_real_replay_decoder_anchor
     MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_DECODER_ANCHOR_REBALANCED_TRAINING_RUN_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, utc_now
+from minigpt.report_check_common import check_entry as _check
 
 
 BOUNDED_REBALANCED_INTERVENTION_DECISION_JSON_FILENAME = "model_capability_route_promotion_bounded_rebalanced_intervention_decision.json"
@@ -195,10 +196,6 @@ def _issues(
         _check("profile_sweep_requests_intervention", as_dict(profile_sweep.get("summary")).get("next_step") == "route_to_objective_or_architecture_intervention", as_dict(profile_sweep.get("summary")).get("next_step"), "profile sweep should request intervention routing"),
     ]
     return [row for row in checks if row["status"] != "pass"]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _route(status: str, signals: dict[str, Any]) -> dict[str, Any]:

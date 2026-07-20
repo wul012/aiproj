@@ -8,6 +8,8 @@ from minigpt.model_capability_required_term_pair_readiness_split_contract import
     PAIR_READINESS_SPLIT_CONTRACT_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now, write_json_payload
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 
 
 PAIR_READINESS_CORPUS_MATERIALIZATION_JSON_FILENAME = "model_capability_required_term_pair_readiness_corpus_materialization.json"
@@ -123,12 +125,6 @@ def write_materialized_pair_readiness_inputs(report: dict[str, Any]) -> None:
     write_json_payload(report.get("heldout_eval_fixture"), fixture_path)
 
 
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    if require_pass and report.get("status") != "pass":
-        return 1
-    return 0
-
-
 def _corpus_lines(training_rows: list[str], repeat: int) -> list[str]:
     lines: list[str] = []
     for _ in range(max(0, repeat)):
@@ -171,10 +167,6 @@ def _checks(contract_report: dict[str, Any], contract: dict[str, Any], corpus_li
         _check("heldout_not_in_training_rows", heldout not in training_rows, heldout in training_rows, "heldout pair probe must not be a training row"),
         _check("heldout_not_in_corpus", heldout not in corpus_lines, heldout in corpus_lines, "heldout pair probe must not appear as a corpus line"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _summary(corpus_lines: list[str], eval_probes: list[dict[str, Any]], checks: list[dict[str, Any]], status: str) -> dict[str, Any]:

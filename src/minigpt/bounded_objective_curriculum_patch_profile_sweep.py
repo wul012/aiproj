@@ -16,6 +16,7 @@ from minigpt.curriculum_patch_shape_diag import (
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.server_contracts import GenerationRequest
 from minigpt.server_generator import MiniGPTGenerator
+from minigpt.report_check_common import check_entry as _check
 
 
 CURRICULUM_PATCH_PROFILE_SWEEP_JSON_FILENAME = "bounded_objective_curriculum_patch_profile_sweep.json"
@@ -343,10 +344,6 @@ def _terms(value: Any) -> list[str]:
     if not isinstance(value, list):
         return []
     return [str(term).lower() for term in value]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 __all__ = [

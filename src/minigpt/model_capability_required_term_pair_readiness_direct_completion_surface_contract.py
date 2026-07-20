@@ -9,6 +9,8 @@ from minigpt.model_capability_required_term_pair_readiness_bridge_closeout_plan 
 )
 from minigpt.model_capability_required_term_pair_readiness_split_contract import HELDOUT_PAIR_PROBE
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 
 
 PAIR_READINESS_DIRECT_COMPLETION_SURFACE_CONTRACT_JSON_FILENAME = (
@@ -125,12 +127,6 @@ def build_direct_completion_surface_contract(
     }
 
 
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    if require_pass and report.get("status") != "pass":
-        return 1
-    return 0
-
-
 def _contract() -> dict[str, Any]:
     training_rows = [row for family in DIRECT_COMPLETION_SURFACE_ROW_FAMILIES for row in family["rows"]]
     evaluation_probes = [
@@ -187,10 +183,6 @@ def _checks(closeout_plan: dict[str, Any], plan: dict[str, Any], contract: dict[
         _check("no_exact_eval_row_overlap", not (set(training_rows) & set(probe_prompts)), sorted(set(training_rows) & set(probe_prompts)), "exact eval prompts must not be training rows"),
         _check("heldout_pair_absent", heldout not in training_rows, heldout in training_rows, "heldout pair probe must stay out of training rows"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _family_rows(row_families: list[dict[str, Any]], family_name: str) -> list[str]:

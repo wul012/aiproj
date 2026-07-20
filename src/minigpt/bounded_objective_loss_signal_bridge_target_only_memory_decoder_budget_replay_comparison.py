@@ -19,6 +19,8 @@ from minigpt.model_capability_route_promotion_bounded_objective_contract import 
 from minigpt.report_utils import as_dict
 from minigpt.server_contracts import GenerationRequest
 from minigpt.server_generator import MiniGPTGenerator
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code_comparison_objective as resolve_exit_code
 
 
 TARGET_ONLY_MEMORY_DECODER_BUDGET_REPLAY_COMPARISON_JSON_FILENAME = (
@@ -99,15 +101,6 @@ def build_decoder_budget_replay_comparison(
     return _adapt_replay_report(report, decoder_budget_audit_report, decoder_budget_audit_path, max_new_tokens)
 
 
-def resolve_exit_code(report: dict[str, Any], *, require_comparison_ready: bool, require_objective_pass: bool = False) -> int:
-    if require_comparison_ready and report.get("status") != "pass":
-        return 1
-    summary = as_dict(report.get("summary"))
-    if require_objective_pass and summary.get("objective_contract_recovered") is not True:
-        return 1
-    return 0
-
-
 def _budget_runner(max_new_tokens: int) -> Any:
     def run(case: dict[str, Any], checkpoint: str | Path, tokenizer: str | Path, device: str) -> dict[str, Any]:
         request = GenerationRequest(
@@ -159,10 +152,6 @@ def _budget_checks(budget_report: dict[str, Any], budget_summary: dict[str, Any]
         ),
         _check("recommended_budget_present", int(budget_summary.get("recommended_max_new_tokens") or 0) > 0, budget_summary.get("recommended_max_new_tokens"), "decoder budget audit must recommend max_new_tokens"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _comparison(base: dict[str, Any], max_new_tokens: int) -> dict[str, Any]:

@@ -13,6 +13,7 @@ from minigpt.model_capability_required_term_pair_readiness_corpus_materializatio
     read_json_report,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 
 
 PAIR_READINESS_TRAINING_RUN_JSON_FILENAME = "model_capability_required_term_pair_readiness_training_run.json"
@@ -137,12 +138,6 @@ def build_pair_readiness_training_run(
         "summary": summary,
         "interpretation": _interpretation(status, summary),
     }
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    if require_pass and report.get("status") != "pass":
-        return 1
-    return 0
 
 
 def _source_report(materialization_report: dict[str, Any], training: dict[str, Any], *, seed: int) -> dict[str, Any]:

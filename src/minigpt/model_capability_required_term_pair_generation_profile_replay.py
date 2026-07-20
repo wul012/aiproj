@@ -8,6 +8,7 @@ from minigpt.generation_profiles import DEFAULT_GENERATION_PROFILE_ID, NEWLINE_S
 from minigpt.report_utils import list_of_dicts, utc_now
 from minigpt.server_contracts import parse_generation_request
 from minigpt.server_generator import MiniGPTGenerator
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 
 
 PAIR_GENERATION_PROFILE_REPLAY_JSON_FILENAME = "model_capability_required_term_pair_generation_profile_replay.json"
@@ -96,12 +97,6 @@ def build_model_capability_required_term_pair_generation_profile_replay(
         "summary": summary,
         "interpretation": _interpretation(decision, summary),
     }
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    if require_pass and report.get("status") != "pass":
-        return 1
-    return 0
 
 
 def _run_case(

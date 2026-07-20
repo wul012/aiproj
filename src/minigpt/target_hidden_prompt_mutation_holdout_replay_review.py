@@ -12,6 +12,7 @@ from minigpt.target_hidden_prompt_mutation_holdout_real_replay import (
     TARGET_HIDDEN_PROMPT_MUTATION_HOLDOUT_REAL_REPLAY_JSON_FILENAME,
 )
 from minigpt.target_hidden_prompt_mutation_holdout_suite import TARGET_HIDDEN_PROMPT_MUTATION_HOLDOUT_SUITE_JSON_FILENAME
+from minigpt.report_check_common import check_entry as _check
 
 
 TARGET_HIDDEN_PROMPT_MUTATION_HOLDOUT_REPLAY_REVIEW_JSON_FILENAME = "target_hidden_prompt_mutation_holdout_replay_review.json"
@@ -168,10 +169,6 @@ def _checks(
         _check("cases_present", bool(cases), len(cases), "suite cases must be present"),
         _check("review_rows_complete", len(review_rows) == len(cases), len(review_rows), "review must cover every case"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _summary(

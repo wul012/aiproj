@@ -14,6 +14,8 @@ from minigpt.model_capability_route_promotion_bounded_objective_unassisted_repai
     BOUNDED_OBJECTIVE_UNASSISTED_REPAIR_SEED_REVISION_PARTIAL_HIT_DIAGNOSTIC_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code_patch_ready as resolve_exit_code
 
 
 BOUNDED_OBJECTIVE_UNASSISTED_REPAIR_SEED_REVISION_CURRICULUM_PATCH_JSON_FILENAME = "model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_curriculum_patch.json"
@@ -99,10 +101,6 @@ def build_model_capability_route_promotion_bounded_objective_unassisted_repair_s
         "summary": _summary(status, checks, examples, original_corpus, patch_corpus, patch),
         "interpretation": _interpretation(status, patch),
     }
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_patch_ready: bool) -> int:
-    return 1 if require_patch_ready and report.get("status") != "pass" else 0
 
 
 def _patch_examples(contract: dict[str, Any], contract_cases: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -242,10 +240,6 @@ def _purpose(kind: str) -> str:
         "completion_surface_short": "repair completion-label prompt surface",
     }
     return purposes.get(kind, kind)
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 __all__ = [

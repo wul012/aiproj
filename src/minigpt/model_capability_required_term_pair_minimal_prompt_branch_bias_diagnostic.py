@@ -7,6 +7,7 @@ from typing import Any
 from minigpt.model_capability_required_term_pair_coexistence_refresh import PAIR_COEXISTENCE_REFRESH_JSON_FILENAME
 from minigpt.model_capability_required_term_pair_fixed_retention_objective_comparison import TARGET_TERMS
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 
 
 PAIR_MINIMAL_PROMPT_BRANCH_BIAS_DIAGNOSTIC_JSON_FILENAME = "model_capability_required_term_pair_minimal_prompt_branch_bias_diagnostic.json"
@@ -59,12 +60,6 @@ def build_minimal_prompt_branch_bias_diagnostic(
         "summary": summary,
         "interpretation": _interpretation(status, summary),
     }
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    if require_pass and report.get("status") != "pass":
-        return 1
-    return 0
 
 
 def _diagnostic_rows(refresh_report: dict[str, Any]) -> list[dict[str, Any]]:

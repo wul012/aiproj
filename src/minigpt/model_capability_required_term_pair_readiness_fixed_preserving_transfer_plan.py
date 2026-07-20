@@ -8,6 +8,8 @@ from minigpt.model_capability_required_term_pair_readiness_pair_prompt_transfer_
     PAIR_READINESS_PAIR_PROMPT_TRANSFER_REGRESSION_DIAGNOSTIC_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, utc_now
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 
 
 PAIR_READINESS_FIXED_PRESERVING_TRANSFER_PLAN_JSON_FILENAME = (
@@ -73,10 +75,6 @@ def build_fixed_preserving_transfer_plan(
     }
 
 
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    return 1 if require_pass and report.get("status") != "pass" else 0
-
-
 def _checks(regression_diagnostic: dict[str, Any], summary: dict[str, Any]) -> list[dict[str, Any]]:
     return [
         _check("diagnostic_passed", regression_diagnostic.get("status") == "pass", regression_diagnostic.get("status"), "regression diagnostic must pass"),
@@ -101,10 +99,6 @@ def _checks(regression_diagnostic: dict[str, Any], summary: dict[str, Any]) -> l
             "direct-completion pair probe must still be not ready",
         ),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _plan(summary: dict[str, Any]) -> dict[str, Any]:

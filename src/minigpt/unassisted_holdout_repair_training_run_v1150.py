@@ -8,6 +8,7 @@ from minigpt.readability_report_artifacts import write_readability_outputs
 from minigpt.report_utils import as_dict, read_json_object, utc_now, write_json_payload
 from minigpt.unassisted_holdout_repair_plan_v1148 import EXPLAIN_DIR_NAME
 from minigpt.unassisted_holdout_repair_seed_corpus_v1149 import UNASSISTED_HOLDOUT_REPAIR_SEED_CORPUS_V1149_STEM
+from minigpt.report_check_common import check_entry as _check
 
 
 UNASSISTED_HOLDOUT_REPAIR_TRAINING_RUN_V1150_STEM = "unassisted_holdout_repair_training_run_v1150"
@@ -177,10 +178,6 @@ def _checks(
         _check("val_loss_decreased", _negative(metrics.get("val_loss_delta")), metrics.get("val_loss_delta"), "bounded training should reduce validation loss on the small holdout split"),
         _check("promotion_boundary_kept", seed_summary.get("promotion_ready") is False, seed_summary.get("promotion_ready"), "training artifact is not promotion evidence before replay comparison"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _training(

@@ -8,6 +8,8 @@ from minigpt.model_capability_required_term_pair_first_token_preference_diagnost
     PAIR_FIRST_TOKEN_PREFERENCE_DIAGNOSTIC_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, utc_now
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 
 
 PAIR_MINIMAL_PROMPT_BALANCED_REPAIR_PLAN_JSON_FILENAME = "model_capability_required_term_pair_minimal_prompt_balanced_repair_plan.json"
@@ -65,12 +67,6 @@ def build_balanced_repair_plan(
     }
 
 
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    if require_pass and report.get("status") != "pass":
-        return 1
-    return 0
-
-
 def _check_rows(report: dict[str, Any], summary: dict[str, Any]) -> list[dict[str, Any]]:
     return [
         _check("tradeoff_passed", report.get("status") == "pass", report.get("status"), "tradeoff diagnostic must pass"),
@@ -93,10 +89,6 @@ def _check_rows(report: dict[str, Any], summary: dict[str, Any]) -> list[dict[st
             "plan should only run when no pair-full candidate exists",
         ),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _plan(status: str) -> dict[str, Any]:

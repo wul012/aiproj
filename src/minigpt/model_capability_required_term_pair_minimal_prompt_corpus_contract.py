@@ -13,6 +13,8 @@ from minigpt.model_capability_required_term_pair_minimal_prompt_objective_readin
     PAIR_MINIMAL_PROMPT_OBJECTIVE_READINESS_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, utc_now
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 
 
 PAIR_MINIMAL_PROMPT_CORPUS_CONTRACT_JSON_FILENAME = "model_capability_required_term_pair_minimal_prompt_corpus_contract.json"
@@ -84,12 +86,6 @@ def build_minimal_prompt_corpus_contract(
     }
 
 
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    if require_pass and report.get("status") != "pass":
-        return 1
-    return 0
-
-
 def _check_rows(
     readiness: dict[str, Any],
     objective: dict[str, Any],
@@ -111,10 +107,6 @@ def _check_rows(
         _check("no_pair_id", "pair=01" not in corpus_text, "pair=01" in corpus_text, "minimal prompt corpus must not reintroduce numeric pair ids"),
     ]
     return rows
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _anchor_hits(corpus_text: str) -> list[str]:

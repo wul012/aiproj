@@ -12,6 +12,8 @@ from minigpt.randomized_holdout_publication_receipt_packet_index_publication_rec
     RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_PUBLICATION_V991_TEXT_FILENAME,
 )
 from minigpt.report_utils import as_dict, csv_cell, html_escape, list_of_dicts, markdown_cell, write_json_payload
+from minigpt.report_utils import html_card as _card
+from minigpt.report_utils import html_check_row as _check_row
 
 
 def render_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_v991_text(report: dict[str, Any]) -> str:
@@ -142,14 +144,6 @@ def write_randomized_holdout_publication_receipt_packet_index_publication_receip
     paths["markdown"].write_text(render_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_v991_markdown(report), encoding="utf-8")
     paths["html"].write_text(render_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_v991_html(report), encoding="utf-8")
     return {key: str(value) for key, value in paths.items()}
-
-
-def _check_row(row: dict[str, Any]) -> str:
-    return "<tr>" + "".join(f"<td>{html_escape(row.get(key))}</td>" for key in ["id", "status", "actual", "detail"]) + "</tr>"
-
-
-def _card(label: str, value: Any) -> str:
-    return f"<div class=\"card\"><span>{html_escape(label)}</span><strong>{html_escape(value)}</strong></div>"
 
 
 def _style() -> str:

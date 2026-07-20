@@ -8,6 +8,7 @@ from typing import Any, Callable
 from minigpt.model_capability_required_term_micro_training import GenerateFunc, _generation_row
 from minigpt.model_capability_required_term_pair_prefix_completion_sweep import _sweep_with_checkpoint
 from minigpt.report_utils import as_dict, list_of_dicts, resolve_archived_reference_path
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 
 REQUIRED_TERM_PAIR_CONTINUATION_SPAN_OBJECTIVE_JSON_FILENAME = "model_capability_required_term_pair_continuation_span_objective.json"
 REQUIRED_TERM_PAIR_CONTINUATION_SPAN_OBJECTIVE_TEXT_FILENAME = "model_capability_required_term_pair_continuation_span_objective.txt"
@@ -159,12 +160,6 @@ def summarize_continuation_span_objective(
         "prefix_minimum_improved_count": prefix_improvements,
         "source_one_token_retained_count": retained_one_token,
     }
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    if require_pass and report.get("status") != "pass":
-        return 1
-    return 0
 
 
 def refresh_training_artifact_status(training: dict[str, Any]) -> dict[str, Any]:

@@ -10,6 +10,7 @@ from minigpt.server_contracts import GenerationRequest
 from minigpt.server_generator import MiniGPTGenerator
 from minigpt.unassisted_holdout_repair_plan_v1148 import EXPLAIN_DIR_NAME
 from minigpt.unassisted_holdout_repair_training_run_v1150 import TRAINING_HANDOFF_NAME
+from minigpt.report_check_common import check_entry as _check
 
 
 UNASSISTED_HOLDOUT_REPAIR_REPLAY_COMPARISON_V1151_STEM = "unassisted_holdout_repair_replay_comparison_v1151"
@@ -295,10 +296,6 @@ def _target_prompt_hits(prompts: list[dict[str, Any]]) -> list[str]:
         if any(term and term in prompt for term in terms):
             hits.append(str(row.get("case_id") or row.get("prompt") or "unknown"))
     return hits
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 __all__ = [

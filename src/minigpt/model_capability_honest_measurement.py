@@ -15,6 +15,7 @@ from minigpt.report_utils import (
     write_json_payload,
     write_output_bundle,
 )
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 
 DEFAULT_REGISTRY_PATH = Path("docs") / "model-capability-honest-measurement-registry.json"
 
@@ -168,10 +169,6 @@ table{{width:100%;border-collapse:collapse}}th,td{{border-bottom:1px solid #d8de
 <section class="panel stats"><div class="stat">Families<br><strong>{html_escape(summary.get("family_count"))}</strong></div><div class="stat">Checks<br><strong>{html_escape(summary.get("check_count"))}</strong></div><div class="stat">Failures<br><strong>{html_escape(summary.get("failed_check_count"))}</strong></div><div class="stat">Single-seed<br><strong>{html_escape(summary.get("single_seed_family_count"))}</strong></div></section>
 <section class="panel"><h2>Checks</h2><table><thead><tr><th>Family</th><th>Check</th><th>Expected</th><th>Actual</th><th>Status</th><th>Detail</th></tr></thead><tbody>{check_rows}</tbody></table></section>
 </main></body></html>"""
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    return 0 if not require_pass or report.get("status") == "pass" else 1
 
 
 def _build_checks(registry: dict[str, Any], *, registry_path: Path, project_root: Path) -> list[dict[str, Any]]:

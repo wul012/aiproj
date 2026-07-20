@@ -9,6 +9,8 @@ from minigpt.model_capability_required_term_pair_readiness_repair_comparison imp
 )
 from minigpt.model_capability_required_term_pair_readiness_split_contract import HELDOUT_PAIR_PROBE
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 
 
 PAIR_READINESS_STRUCTURED_TEMPLATE_CONTRACT_JSON_FILENAME = (
@@ -90,12 +92,6 @@ def build_structured_template_contract(
     }
 
 
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    if require_pass and report.get("status") != "pass":
-        return 1
-    return 0
-
-
 def _contract() -> dict[str, Any]:
     evaluation_probes = [
         {"id": "fixed-direct", "prompt": "fixed=", "expected_term": "fixed", "split": "heldout-direct"},
@@ -137,10 +133,6 @@ def _checks(repair_comparison: dict[str, Any], contract: dict[str, Any]) -> list
         _check("no_exact_eval_row_overlap", not (set(training_rows) & set(probe_prompts)), sorted(set(training_rows) & set(probe_prompts)), "exact eval prompts must not be training rows"),
         _check("heldout_pair_absent", heldout not in training_rows, heldout in training_rows, "heldout pair probe must stay out of training rows"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _contains_count(rows: list[str], needle: str) -> int:

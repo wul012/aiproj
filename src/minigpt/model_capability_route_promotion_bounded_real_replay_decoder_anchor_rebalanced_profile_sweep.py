@@ -23,6 +23,7 @@ from minigpt.model_capability_route_promotion_bounded_real_replay_decoder_anchor
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.server_contracts import GenerationRequest
 from minigpt.server_generator import MiniGPTGenerator
+from minigpt.report_check_common import check_entry as _check
 
 
 MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_DECODER_ANCHOR_REBALANCED_PROFILE_SWEEP_JSON_FILENAME = "model_capability_route_promotion_bounded_real_replay_decoder_anchor_rebalanced_profile_sweep.json"
@@ -311,10 +312,6 @@ def _checks(
         _check("all_profile_replays_passed", all(report.get("status") == "pass" for report in replay_reports), [report.get("status") for report in replay_reports], "all profile replays must execute successfully"),
         _check("all_profiles_execute_all_cases", all(int(as_dict(report.get("summary")).get("executed_case_count") or 0) == len(cases) for report in replay_reports), [as_dict(report.get("summary")).get("executed_case_count") for report in replay_reports], "every profile must execute every case"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _sweep_summary(status: str, profile_rows: list[dict[str, Any]], case_profile_rows: list[dict[str, Any]]) -> dict[str, Any]:

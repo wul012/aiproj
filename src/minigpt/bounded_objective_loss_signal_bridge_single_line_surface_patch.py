@@ -11,6 +11,8 @@ from minigpt.bounded_objective_loss_signal_bridge_pair_binding_zero_hit_diagnost
     PAIR_BINDING_ZERO_HIT_DIAGNOSTIC_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code_patch_ready as resolve_exit_code
 
 
 SINGLE_LINE_SURFACE_PATCH_JSON_FILENAME = "bounded_objective_loss_signal_bridge_single_line_surface_patch.json"
@@ -77,10 +79,6 @@ def build_single_line_surface_patch(
         "summary": _summary(status, checks, examples, source_corpus, patched_corpus, patch),
         "interpretation": _interpretation(status, patch),
     }
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_patch_ready: bool) -> int:
-    return 1 if require_patch_ready and report.get("status") != "pass" else 0
 
 
 def _patch_examples(replay_rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -159,10 +157,6 @@ def _checks(
         _check("patch_examples_present", bool(examples), len(examples), "patch examples must be generated"),
         _check("decoder_anchor_free", all(example.get("decoder_anchor") is False for example in examples), 0, "patch examples must stay no-anchor"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _patch(status: str, examples: list[dict[str, Any]], corpus: str) -> dict[str, Any]:

@@ -5,6 +5,7 @@ from typing import Any
 
 from minigpt.readability_report_artifacts import write_readability_outputs
 from minigpt.report_utils import utc_now
+from minigpt.report_check_common import resolve_exit_code
 
 STABLE_OUTPUT_STEM = "project_docs_readability"
 LEGACY_V1131_OUTPUT_STEM = "project_docs_readability_v1131"
@@ -250,12 +251,6 @@ def write_project_docs_readability_outputs(
         stem=stem,
         row_title="Documentation Targets",
     )
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool = False) -> int:
-    if require_pass and report.get("status") != "pass":
-        return 1
-    return 0
 
 
 def _doc_row(root: Path, readme_text: str, target: dict[str, Any]) -> dict[str, Any]:

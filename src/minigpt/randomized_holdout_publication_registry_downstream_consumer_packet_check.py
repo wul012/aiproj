@@ -14,6 +14,8 @@ from minigpt.randomized_holdout_publication_registry_downstream_consumer_packet 
 )
 from minigpt.randomized_holdout_publication_registry_downstream_receipt_review import read_json_report as read_receipt_review_json
 from minigpt.report_utils import as_dict, utc_now
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 
 
 RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_DOWNSTREAM_CONSUMER_PACKET_CHECK_JSON_FILENAME = "randomized_holdout_publication_registry_downstream_consumer_packet_check.json"
@@ -108,10 +110,6 @@ def build_randomized_holdout_publication_registry_downstream_consumer_packet_che
     }
 
 
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    return 1 if require_pass and report.get("status") != "pass" else 0
-
-
 def _resolve_source_review(packet_report: dict[str, Any], packet_path: str | Path | None) -> Path | None:
     packet = as_dict(packet_report.get("packet"))
     candidates = [packet_report.get("receipt_review_path"), packet.get("receipt_review_path")]
@@ -171,10 +169,6 @@ def _check_rows(original: dict[str, Any], rebuilt: dict[str, Any], source_review
 
 def _compare(check_id: str, original: Any, rebuilt: Any) -> dict[str, Any]:
     return _check(check_id, original == rebuilt, {"source": original, "rebuilt": rebuilt}, f"{check_id} must match the rebuilt consumer packet")
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _summary(status: str, checks: list[dict[str, Any]], original: dict[str, Any], rebuilt: dict[str, Any], source_review: Path | None) -> dict[str, Any]:

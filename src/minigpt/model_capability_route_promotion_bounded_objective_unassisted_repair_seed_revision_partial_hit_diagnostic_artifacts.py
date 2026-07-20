@@ -12,6 +12,7 @@ from minigpt.model_capability_route_promotion_bounded_objective_unassisted_repai
     BOUNDED_OBJECTIVE_UNASSISTED_REPAIR_SEED_REVISION_PARTIAL_HIT_DIAGNOSTIC_TEXT_FILENAME,
 )
 from minigpt.report_utils import as_dict, html_escape, list_of_dicts, markdown_cell, write_json_payload
+from minigpt.report_utils import html_card_label_value as _card
 
 
 def render_bounded_objective_unassisted_repair_seed_revision_partial_hit_diagnostic_text(report: dict[str, Any]) -> str:
@@ -185,10 +186,6 @@ def _cause_html(report: dict[str, Any]) -> str:
         for row in list_of_dicts(report.get("root_causes"))
     )
     return f"<table><thead><tr><th>Cause</th><th>Severity</th><th>Detail</th><th>Evidence</th></tr></thead><tbody>{body}</tbody></table>"
-
-
-def _card(label: str, value: Any) -> str:
-    return f'<div class="card"><div class="label">{html_escape(label)}</div><strong>{html_escape(value)}</strong></div>'
 
 
 __all__ = [

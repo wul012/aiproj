@@ -11,6 +11,8 @@ from minigpt.model_capability_route_promotion_bounded_objective_unassisted_repai
     BOUNDED_OBJECTIVE_UNASSISTED_REPAIR_PLAN_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code_seed_ready as resolve_exit_code
 
 
 BOUNDED_OBJECTIVE_UNASSISTED_REPAIR_SEED_JSON_FILENAME = "model_capability_route_promotion_bounded_objective_unassisted_repair_seed.json"
@@ -81,10 +83,6 @@ def build_model_capability_route_promotion_bounded_objective_unassisted_repair_s
         "summary": _summary(status, issues, contract, seed_examples, corpus_text),
         "interpretation": _interpretation(status, seed),
     }
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_seed_ready: bool) -> int:
-    return 1 if require_seed_ready and report.get("status") != "pass" else 0
 
 
 def _seed_examples(contract_cases: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -181,10 +179,6 @@ def _checks(
 def _contains_terms(row: dict[str, Any]) -> bool:
     text = str(row.get("text") or "").lower()
     return "fixed" in text and "loss" in text
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _seed(status: str, contract: dict[str, Any], examples: list[dict[str, Any]], corpus_text: str) -> dict[str, Any]:

@@ -14,6 +14,7 @@ from minigpt.registry_ack_packet import (
 )
 from minigpt.registry_ack_receipt_review import read_json_report as read_receipt_review_json
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import check_entry as _check
 
 
 RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_DOWNSTREAM_CONSUMER_ACK_BUNDLE_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_PACKET_CHECK_JSON_FILENAME = "randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet_check.json"
@@ -191,10 +192,6 @@ def _check_rows(original: dict[str, Any], rebuilt: dict[str, Any], source_review
 
 def _compare(check_id: str, original: Any, rebuilt: Any) -> dict[str, Any]:
     return _check(check_id, original == rebuilt, {"source": original, "rebuilt": rebuilt}, f"{check_id} must match the rebuilt publication receipt packet")
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _summary(status: str, checks: list[dict[str, Any]], original: dict[str, Any], rebuilt: dict[str, Any], source_review: Path | None) -> dict[str, Any]:

@@ -8,6 +8,8 @@ from minigpt.model_capability_required_term_pair_surface_branch_closeout import 
     PAIR_SURFACE_BRANCH_CLOSEOUT_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, utc_now
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 
 
 PAIR_MINIMAL_PROMPT_OBJECTIVE_READINESS_JSON_FILENAME = "model_capability_required_term_pair_minimal_prompt_objective_readiness.json"
@@ -64,12 +66,6 @@ def build_minimal_prompt_objective_readiness(
     }
 
 
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    if require_pass and report.get("status") != "pass":
-        return 1
-    return 0
-
-
 def _check_rows(closeout: dict[str, Any], summary: dict[str, Any], interpretation: dict[str, Any]) -> list[dict[str, Any]]:
     rows = [
         _check(
@@ -104,15 +100,6 @@ def _check_rows(closeout: dict[str, Any], summary: dict[str, Any], interpretatio
         ),
     ]
     return rows
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {
-        "id": check_id,
-        "status": "pass" if passed else "fail",
-        "actual": actual,
-        "detail": detail,
-    }
 
 
 def _objective(status: str, summary: dict[str, Any]) -> dict[str, Any]:

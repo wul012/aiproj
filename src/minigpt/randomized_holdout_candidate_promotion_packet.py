@@ -9,6 +9,7 @@ from minigpt.randomized_target_hidden_holdout_real_replay import RANDOMIZED_TARG
 from minigpt.randomized_target_hidden_holdout_replay_review import RANDOMIZED_TARGET_HIDDEN_HOLDOUT_REPLAY_REVIEW_JSON_FILENAME
 from minigpt.randomized_target_hidden_holdout_suite import RANDOMIZED_TARGET_HIDDEN_HOLDOUT_SUITE_JSON_FILENAME
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import check_entry as _check
 
 
 RANDOMIZED_HOLDOUT_CANDIDATE_PROMOTION_PACKET_JSON_FILENAME = "randomized_holdout_candidate_promotion_packet.json"
@@ -232,10 +233,6 @@ def _checks(
         _check("all_evidence_files_exist", all(row.get("exists") is True for row in evidence_rows), evidence_rows, "all packet source files must exist"),
         _check("all_inputs_keep_promotion_false", all(row.get("promotion_ready") is False for row in evidence_rows), [row.get("promotion_ready") for row in evidence_rows], "candidate packet must not silently become promotion"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _seed_values(

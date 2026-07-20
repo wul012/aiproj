@@ -15,6 +15,7 @@ from minigpt.model_capability_route_promotion_bounded_objective_training_run imp
     BOUNDED_OBJECTIVE_TRAINING_RUN_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import check_entry as _check
 
 
 BOUNDED_OBJECTIVE_REPLAY_ZERO_HIT_DIAGNOSTIC_JSON_FILENAME = "model_capability_route_promotion_bounded_objective_replay_zero_hit_diagnostic.json"
@@ -205,10 +206,6 @@ def _checks(
         _check("corpus_present", bool(corpus.strip()), len(corpus), "objective seed corpus must be readable"),
         _check("case_diagnostics_present", bool(case_rows), len(case_rows), "diagnostic must inspect replay rows"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _diagnostic(status: str, case_rows: list[dict[str, Any]], root_causes: list[dict[str, Any]], training_summary: dict[str, Any]) -> dict[str, Any]:

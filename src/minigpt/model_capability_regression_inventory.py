@@ -5,6 +5,7 @@ from typing import Any
 
 from minigpt.readability_report_artifacts import write_readability_outputs
 from minigpt.report_utils import as_dict, list_of_dicts, locate_upstream_report, read_json_object, utc_now
+from minigpt.report_check_common import check_entry_no_detail as _check
 
 PLAN_JSON = "model_capability_regression_plan_v1135.json"
 INVENTORY_STEM = "model_capability_regression_inventory_v1136"
@@ -132,10 +133,6 @@ def _matching_files(root: Path, pattern: str, keywords: tuple[str, ...]) -> list
         if any(keyword.lower() in name for keyword in keywords):
             matches.append(path.as_posix())
     return sorted(matches)
-
-
-def _check(check_id: str, passed: bool, actual: Any) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual}
 
 
 __all__ = [

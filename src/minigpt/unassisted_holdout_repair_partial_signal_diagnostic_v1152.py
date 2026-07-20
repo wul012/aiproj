@@ -12,6 +12,7 @@ from minigpt.unassisted_holdout_repair_replay_comparison_v1151 import (
 from minigpt.unassisted_holdout_repair_seed_corpus_v1149 import (
     UNASSISTED_HOLDOUT_REPAIR_SEED_CORPUS_V1149_STEM,
 )
+from minigpt.report_check_common import check_entry as _check
 
 
 UNASSISTED_HOLDOUT_REPAIR_PARTIAL_SIGNAL_DIAGNOSTIC_V1152_STEM = (
@@ -310,10 +311,6 @@ def _interpretation(status: str, diagnosis: dict[str, Any]) -> dict[str, Any]:
         "reason": "The real v1151 replay shows fixed-only partial signal, but loss and full-pair recovery are absent.",
         "next_action": diagnosis.get("next_step"),
     }
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _finding(

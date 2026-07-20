@@ -21,6 +21,8 @@ from minigpt.randomized_holdout_publication_receipt_index_receipt_v1015 import (
     RECEIPT_STATUS,
 )
 from minigpt.report_utils import as_dict, utc_now
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_utils import path_exists as _path_exists
 
 
 RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_V1017_JSON_FILENAME = "randomized_holdout_publication_receipt_index_receipt_index_v1017.json"
@@ -219,14 +221,6 @@ def _summary(status: str, checks: list[dict[str, Any]], index: dict[str, Any]) -
         "passed_check_count": sum(1 for row in checks if row["status"] == "pass"),
         "failed_check_count": sum(1 for row in checks if row["status"] != "pass"),
     }
-
-
-def _path_exists(path: str | Path | None) -> bool:
-    return bool(path) and Path(str(path)).exists()
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _decision(status: str) -> str:

@@ -8,6 +8,8 @@ from minigpt.randomized_holdout_bounded_promotion_gate import RANDOMIZED_HOLDOUT
 from minigpt.randomized_holdout_candidate_promotion_packet import RANDOMIZED_HOLDOUT_CANDIDATE_PROMOTION_PACKET_JSON_FILENAME
 from minigpt.randomized_holdout_candidate_promotion_packet_review import RANDOMIZED_HOLDOUT_CANDIDATE_PROMOTION_PACKET_REVIEW_JSON_FILENAME
 from minigpt.report_utils import as_dict, utc_now
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_utils import path_exists as _path_exists
 
 
 RANDOMIZED_HOLDOUT_BOUNDED_PROMOTION_DECISION_JSON_FILENAME = "randomized_holdout_bounded_promotion_decision.json"
@@ -153,14 +155,6 @@ def _checks(
         _check("approved_for_promotion_false", gate_summary.get("approved_for_promotion") is False and review_summary.get("approved_for_promotion") is False and packet_summary.get("approved_for_promotion") is False, {"gate": gate_summary.get("approved_for_promotion"), "review": review_summary.get("approved_for_promotion"), "packet": packet_summary.get("approved_for_promotion")}, "direct promotion approval must stay false"),
         _check("claim_scopes_expected", gate_summary.get("model_quality_claim") == "bounded_gate_only" and review_summary.get("model_quality_claim") == "candidate_packet_review_only" and packet_summary.get("model_quality_claim") == "candidate_packet_only", {"gate": gate_summary.get("model_quality_claim"), "review": review_summary.get("model_quality_claim"), "packet": packet_summary.get("model_quality_claim")}, "claim scopes must stay bounded"),
     ]
-
-
-def _path_exists(path: str | Path | None) -> bool:
-    return bool(path) and Path(path).exists()
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _final_decision(

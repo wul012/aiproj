@@ -11,6 +11,8 @@ from minigpt.readability_report_artifacts import write_readability_outputs
 from minigpt.report_utils import as_dict, list_of_dicts, read_json_object, utc_now
 from minigpt.server_contracts import GenerationRequest
 from minigpt.server_generator import MiniGPTGenerator
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code
 
 DECODER_ANCHOR_HOLDOUT_COMPARISON_V1147_STEM = "decoder_anchor_holdout_comparison_v1147"
 EXPLAIN_DIR_NAME = "\u89e3\u91ca"
@@ -156,10 +158,6 @@ def write_decoder_anchor_holdout_comparison_v1147_outputs(report: dict[str, Any]
     )
 
 
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool = False) -> int:
-    return 1 if require_pass and report.get("status") != "pass" else 0
-
-
 def _unassisted_cases() -> list[dict[str, Any]]:
     return [
         {"case_id": "answer-colon-pair", "prompt": "answer:", "expected_terms": ["fixed", "loss"], "seed": 4100},
@@ -265,10 +263,6 @@ def _checks(
         _check("unassisted_pair_not_recovered", unassisted_full_pairs == 0, unassisted_full_pairs, "unassisted prompts should not yet recover the full fixed/loss pair"),
         _check("promotion_boundary_kept", True, False, "comparison is a bounded diagnostic, not a promotion gate"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _summary(status: str, anchor_rows: list[dict[str, Any]], unassisted_rows: list[dict[str, Any]], issues: list[dict[str, Any]]) -> dict[str, Any]:

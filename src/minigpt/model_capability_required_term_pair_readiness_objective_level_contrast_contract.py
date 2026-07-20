@@ -9,6 +9,8 @@ from minigpt.model_capability_required_term_pair_readiness_objective_level_contr
 )
 from minigpt.model_capability_required_term_pair_readiness_split_contract import HELDOUT_PAIR_PROBE
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 
 
 PAIR_READINESS_OBJECTIVE_LEVEL_CONTRAST_CONTRACT_JSON_FILENAME = (
@@ -132,10 +134,6 @@ def build_objective_level_contrast_contract(
     }
 
 
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    return 1 if require_pass and report.get("status") != "pass" else 0
-
-
 def _contract(plan: dict[str, Any]) -> dict[str, Any]:
     training_rows = [row for family in OBJECTIVE_LEVEL_CONTRAST_ROW_FAMILIES for row in family["rows"]]
     return {
@@ -184,10 +182,6 @@ def _checks(plan_report: dict[str, Any], plan: dict[str, Any], contract: dict[st
         _check("heldout_pair_absent", HELDOUT_PAIR_PROBE not in training_rows, HELDOUT_PAIR_PROBE in training_rows, "heldout pair probe must stay out of training rows"),
         _check("no_near_exact_pipe_prompt", not any("|" in row or "=" in row for row in training_rows), "pipe_or_equals_absent", "objective-level rows must avoid near-exact pipe/equals prompt surfaces"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _branch_family_count(row_families: list[dict[str, Any]], needle: str) -> int:

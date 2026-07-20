@@ -8,6 +8,8 @@ from minigpt.model_capability_required_term_pair_readiness_exact_surface_repair_
     PAIR_READINESS_EXACT_SURFACE_REPAIR_ROUTE_CLOSEOUT_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 
 
 PAIR_READINESS_OBJECTIVE_OR_DECODING_ALTERNATIVE_SELECTOR_JSON_FILENAME = (
@@ -83,10 +85,6 @@ def build_objective_or_decoding_alternative_selector(
     }
 
 
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    return 1 if require_pass and report.get("status") != "pass" else 0
-
-
 def _checks(
     closeout_report: dict[str, Any],
     summary: dict[str, Any],
@@ -122,10 +120,6 @@ def _checks(
         _check("fresh_seed_candidate_present", "fresh_seed_stability" in route_names, sorted(route_names), "fresh-seed route must be available"),
         _check("no_repair_improvement", not evidence.get("improved_surface_ids"), evidence.get("improved_surface_ids"), "closed route should have no improved replay surfaces"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _route_rows(candidates: list[dict[str, Any]]) -> list[dict[str, Any]]:

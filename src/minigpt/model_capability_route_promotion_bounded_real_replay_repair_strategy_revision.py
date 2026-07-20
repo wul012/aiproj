@@ -17,6 +17,7 @@ from minigpt.model_capability_route_promotion_bounded_real_replay_repair_trainin
     MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_REPAIR_TRAINING_RUN_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import check_entry as _check
 
 
 MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_REPAIR_STRATEGY_REVISION_JSON_FILENAME = "model_capability_route_promotion_bounded_real_replay_repair_strategy_revision.json"
@@ -187,10 +188,6 @@ def _checks(
         _check("case_rows_present", bool(case_rows), len(case_rows), "strategy revision must inspect case rows"),
         _check("case_actions_present", bool(case_actions), len(case_actions), "strategy revision must create case actions for failed repair replay cases"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _strategy(

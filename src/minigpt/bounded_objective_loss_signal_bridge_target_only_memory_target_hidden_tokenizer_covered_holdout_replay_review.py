@@ -11,6 +11,7 @@ from minigpt.bounded_objective_loss_signal_bridge_target_only_memory_target_hidd
     TARGET_ONLY_MEMORY_TARGET_HIDDEN_TOKENIZER_COVERED_HOLDOUT_SUITE_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import check_entry as _check
 
 
 TARGET_ONLY_MEMORY_TARGET_HIDDEN_TOKENIZER_COVERED_HOLDOUT_REPLAY_REVIEW_JSON_FILENAME = (
@@ -161,10 +162,6 @@ def _checks(
         _check("cases_present", bool(cases), len(cases), "suite cases must be present"),
         _check("review_rows_complete", len(review_rows) == len(cases), len(review_rows), "review must cover every case"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _summary(status: str, real_replay_report: dict[str, Any], rows: list[dict[str, Any]], issues: list[dict[str, Any]]) -> dict[str, Any]:

@@ -16,6 +16,7 @@ from minigpt.report_utils import (
     write_json_payload,
     write_output_bundle,
 )
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 
 DEFAULT_CONFIG_PATH = Path("docs") / "code-health" / "file-size-ratchet.json"
 DEFAULT_WARNING_LINE_LIMIT = 500
@@ -171,10 +172,6 @@ table{{width:100%;border-collapse:collapse}}th,td{{border-bottom:1px solid #d8de
 <section class="panel stats"><div class="stat">Files<br><strong>{html_escape(summary.get("scanned_file_count"))}</strong></div><div class="stat">Warnings<br><strong>{html_escape(summary.get("over_warning_count"))}</strong></div><div class="stat">Over limit<br><strong>{html_escape(summary.get("over_limit_count"))}</strong></div><div class="stat">Failures<br><strong>{html_escape(summary.get("failed_check_count"))}</strong></div></section>
 <section class="panel"><h2>Oversize Files</h2><table><thead><tr><th>Path</th><th>Lines</th><th>Bucket</th><th>Waived</th><th>Waiver Status</th></tr></thead><tbody>{rows}</tbody></table></section>
 </main></body></html>"""
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    return 0 if not require_pass or report.get("status") == "pass" else 1
 
 
 def _scan_files(

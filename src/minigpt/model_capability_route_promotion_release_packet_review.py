@@ -6,6 +6,8 @@ from typing import Any
 
 from minigpt.model_capability_route_promotion_release_packet import MODEL_CAPABILITY_ROUTE_PROMOTION_RELEASE_PACKET_JSON_FILENAME
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 
 
 MODEL_CAPABILITY_ROUTE_PROMOTION_RELEASE_PACKET_REVIEW_JSON_FILENAME = "model_capability_route_promotion_release_packet_review.json"
@@ -63,10 +65,6 @@ def build_model_capability_route_promotion_release_packet_review(
     }
 
 
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    return 1 if require_pass and report.get("status") != "pass" else 0
-
-
 def _checks(
     release_packet: dict[str, Any],
     packet: dict[str, Any],
@@ -98,10 +96,6 @@ def _checks(
         _check("evidence_files_exist", all(row.get("exists") is True for row in evidence_rows), evidence_rows, "all packet evidence rows must exist"),
         _check("packet_checks_clean", int(summary.get("failed_check_count") or 0) == 0, summary.get("failed_check_count"), "packet source checks must be clean"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _review(status: str, packet: dict[str, Any], summary: dict[str, Any], evidence_rows: list[dict[str, Any]]) -> dict[str, Any]:

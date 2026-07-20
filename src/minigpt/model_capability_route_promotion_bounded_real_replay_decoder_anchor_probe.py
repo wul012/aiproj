@@ -13,6 +13,7 @@ from minigpt.model_capability_route_promotion_bounded_real_replay_prompt_aligned
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.server_contracts import GenerationRequest
 from minigpt.server_generator import MiniGPTGenerator
+from minigpt.report_check_common import check_entry as _check
 
 
 MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_DECODER_ANCHOR_PROBE_JSON_FILENAME = "model_capability_route_promotion_bounded_real_replay_decoder_anchor_probe.json"
@@ -186,10 +187,6 @@ def _checks(
         _check("all_probe_rows_executed", len(probe_rows) == len(replay_rows) * len(ANCHOR_PROFILES), len(probe_rows), "probe must execute every case/profile pair"),
         _check("no_probe_errors", not probe_errors, len(probe_errors), "probe should not raise generation errors"),
     ]
-
-
-def _check(check_id: str, passed: bool, actual: Any, detail: str) -> dict[str, Any]:
-    return {"id": check_id, "status": "pass" if passed else "fail", "actual": actual, "detail": detail}
 
 
 def _probe(status: str, rows: list[dict[str, Any]], diagnostic_summary: dict[str, Any]) -> dict[str, Any]:
