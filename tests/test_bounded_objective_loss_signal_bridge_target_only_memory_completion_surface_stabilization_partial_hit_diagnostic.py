@@ -11,7 +11,7 @@ from minigpt.bounded_objective_loss_signal_bridge_target_only_memory_completion_
     locate_loss_suffix_replay_regression_diagnostic,
     resolve_exit_code,
 )
-from minigpt.bounded_objective_loss_signal_bridge_target_only_memory_completion_surface_stabilization_partial_hit_diagnostic_artifacts import (
+from minigpt.surface_partial_hit_diag_artifacts import (
     render_completion_surface_stabilization_partial_hit_diagnostic_html,
     render_completion_surface_stabilization_partial_hit_diagnostic_markdown,
     render_completion_surface_stabilization_partial_hit_diagnostic_text,

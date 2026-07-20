@@ -16,7 +16,7 @@ from minigpt.randomized_holdout_publication_receipt_index_receipt_index_receipt_
     read_json_report,
     resolve_exit_code,
 )
-from minigpt.randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_check_v1032_artifacts import (  # noqa: E402
+from minigpt.receipt_chain_check_v1032_artifacts import (  # noqa: E402
     render_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_check_v1032_text,
     write_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_check_v1032_outputs,
 )

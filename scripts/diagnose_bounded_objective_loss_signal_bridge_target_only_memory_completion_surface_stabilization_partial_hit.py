@@ -17,7 +17,7 @@ from minigpt.bounded_objective_loss_signal_bridge_target_only_memory_completion_
     read_json_report,
     resolve_exit_code,
 )
-from minigpt.bounded_objective_loss_signal_bridge_target_only_memory_completion_surface_stabilization_partial_hit_diagnostic_artifacts import (  # noqa: E402
+from minigpt.surface_partial_hit_diag_artifacts import (  # noqa: E402
     render_completion_surface_stabilization_partial_hit_diagnostic_text,
     write_completion_surface_stabilization_partial_hit_diagnostic_outputs,
 )

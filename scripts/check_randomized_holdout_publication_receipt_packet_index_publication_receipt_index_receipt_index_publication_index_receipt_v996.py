@@ -10,13 +10,13 @@ from typing import Sequence
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from minigpt.randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_check_v996 import (  # noqa: E402
+from minigpt.packet_chain_check_v996 import (  # noqa: E402
     build_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_check_v996,
     locate_receipt_v996,
     read_json_report,
     resolve_exit_code,
 )
-from minigpt.randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_check_v996_artifacts import (  # noqa: E402
+from minigpt.packet_chain_check_v996_artifacts import (  # noqa: E402
     render_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_check_v996_text,
     write_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_check_v996_outputs,
 )

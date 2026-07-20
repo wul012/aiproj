@@ -17,7 +17,7 @@ from minigpt.model_capability_route_promotion_bounded_objective_unassisted_repai
     read_json_report,
     resolve_exit_code,
 )
-from minigpt.model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_curriculum_patch_replay_comparison_artifacts import (  # noqa: E402
+from minigpt.curriculum_patch_replay_cmp_artifacts import (  # noqa: E402
     render_bounded_objective_unassisted_repair_seed_revision_curriculum_patch_replay_comparison_text,
     write_bounded_objective_unassisted_repair_seed_revision_curriculum_patch_replay_comparison_outputs,
 )

@@ -16,7 +16,7 @@ from minigpt.randomized_holdout_publication_downstream_common import (
     downstream_lookup_use,
     sha256_file,
 )
-from minigpt.randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_review_v1002 import (
+from minigpt.packet_chain_review_v1002 import (
     RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_PUBLICATION_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_REVIEW_V1002_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now

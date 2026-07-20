@@ -13,7 +13,7 @@ from minigpt.model_capability_route_promotion_bounded_objective_unassisted_repai
     locate_curriculum_patch,
     resolve_exit_code,
 )
-from minigpt.model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_curriculum_patch_training_run_artifacts import (
+from minigpt.curriculum_patch_train_run_artifacts import (
     render_bounded_objective_unassisted_repair_seed_revision_curriculum_patch_training_run_html,
     render_bounded_objective_unassisted_repair_seed_revision_curriculum_patch_training_run_markdown,
     render_bounded_objective_unassisted_repair_seed_revision_curriculum_patch_training_run_text,

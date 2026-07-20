@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-07-20T10:31:17Z",
+  "updated_at": "2026-07-20T12:13:13Z",
   "metrics": {
     "flat_dir_file_count": 1355,
-    "long_name_stock": 57,
-    "max_stem_length": 150,
+    "long_name_stock": 0,
+    "max_stem_length": 120,
     "dup_def_stock": 227
   }
 }

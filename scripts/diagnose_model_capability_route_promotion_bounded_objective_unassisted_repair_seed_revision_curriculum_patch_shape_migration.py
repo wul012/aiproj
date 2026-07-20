@@ -10,14 +10,14 @@ from typing import Sequence
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from minigpt.model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_curriculum_patch_shape_migration_diagnostic import (  # noqa: E402
+from minigpt.curriculum_patch_shape_diag import (  # noqa: E402
     build_model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_curriculum_patch_shape_migration_diagnostic,
     locate_curriculum_patch_replay_comparison,
     locate_seed_revision_replay_comparison,
     read_json_report,
     resolve_exit_code,
 )
-from minigpt.model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_curriculum_patch_shape_migration_diagnostic_artifacts import (  # noqa: E402
+from minigpt.curriculum_patch_shape_diag_artifacts import (  # noqa: E402
     render_bounded_objective_unassisted_repair_seed_revision_curriculum_patch_shape_migration_diagnostic_text,
     write_bounded_objective_unassisted_repair_seed_revision_curriculum_patch_shape_migration_diagnostic_outputs,
 )
