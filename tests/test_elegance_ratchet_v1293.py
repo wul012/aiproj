@@ -42,6 +42,11 @@ def _baseline(tmp_path, metrics):
     return path
 
 
+SHIM = ('"""Forwarding shim."""\nimport sys\n\n'
+        "from minigpt.core import target as _target\n\n"
+        "sys.modules[__name__] = _target\n")
+
+
 def test_measure_counts_files_names_and_dup_bodies(tmp_path):
     root = _project(tmp_path, long_name=True, dups=3)
     m = measure_elegance(root)
@@ -52,6 +57,23 @@ def test_measure_counts_files_names_and_dup_bodies(tmp_path):
     m2 = measure_elegance(_project(tmp_path / "two", dups=2))
     assert m2["dup_def_stock"] == 0  # two copies stay under the threshold
     assert m2["long_name_stock"] == 0
+
+
+def test_measure_skips_shims_and_follows_moved_dups(tmp_path):
+    root = _project(tmp_path, dups=3)
+    src = root / "src" / "minigpt"
+    # a forwarding shim with a pathological name is not a flat resident
+    (src / ("shim_" + "long_" * 25 + "name.py")).write_text(
+        SHIM, encoding="utf-8")
+    # a real module moved into a subpackage still carries its dup body
+    sub = src / "receipts"
+    sub.mkdir()
+    (sub / "__init__.py").write_text("", encoding="utf-8")
+    (sub / "dup_moved.py").write_text(DUP, encoding="utf-8")
+    m = measure_elegance(root)
+    assert m["flat_dir_file_count"] == 5  # shim excluded
+    assert m["long_name_stock"] == 0      # the long name is a shim
+    assert m["dup_def_stock"] == 1        # moved copy still counted
 
 
 def test_report_passes_at_baseline_and_fails_on_growth(tmp_path):

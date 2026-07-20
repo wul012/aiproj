@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1251-v1294-receipts-pilot-batch.md
+ -> v1294 code explanation: stage 5 pilot batch — the v1012-v1014 receipt-packet-index cluster (6 modules, 185-202-char names) renamed IN PLACE to short canonical names with sys.modules-forwarding shims at every old path (importlib proves `old is new`), 3 scripts renamed with dual-path shims, 3 tests renamed with their 2 consumers rewritten. The pilot's biggest finding: the first-cut sub-packaging into minigpt/receipts/ was correctly BLOCKED by the owner-package architecture contract (facade-only __init__, 220-line module cap, 93 structural rules) — verbatim historical modules don't meet the normalization bar, so sub-packaging belongs to the normalization lane and the elegance program honestly narrows to naming surgery + shims + ratchets. Three further couplings surfaced and fixed (scripts.-package imports, test-to-test helper imports, long names in artifact-filename strings = output contracts). Elegance metric became shim-aware (+recursive dup scan); ratchet's first tightening: long names 282→276, max stem 202→193.
+
 1250-v1293-baseline-zero-elegance-ratchet.md
  -> v1293 code explanation: stage 4 — static baseline reaches ZERO (271→153→1→0) by fixing the last entry, data_prep's latent NameError (the quality=None fallback called an un-imported function; function-local import mirrors the existing cycle-safe pattern; regression test added), and the same version welds the gate shut: a whole-codebase elegance ratchet (flat_dir_file_count 1355, long_name_stock 282, max_stem_length 202, dup_def_stock 227 — byte-identical function bodies across >=3 modules) frozen at current values, tighten-only updates, wired into CI after the file-size ratchet. The zero state and its lock land in one version so the dirty-window is zero.
 

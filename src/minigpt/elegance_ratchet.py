@@ -42,21 +42,44 @@ METRIC_KEYS = ("flat_dir_file_count", "long_name_stock", "max_stem_length",
                "dup_def_stock")
 
 
+def _is_shim(tree: ast.Module) -> bool:
+    """A forwarding module (v1294 rename batches): nothing but a docstring,
+    imports, and the sys.modules self-replacement. Shims are graves with
+    forwarding addresses — they keep old import paths alive but are not
+    real residents of the flat namespace, so the flat/name metrics skip
+    them (the dup metric never sees them: shims define no functions)."""
+    body = tree.body
+    if body and isinstance(body[0], ast.Expr):
+        body = body[1:]
+    saw_forward = False
+    for node in body:
+        if isinstance(node, (ast.Import, ast.ImportFrom)):
+            continue
+        if isinstance(node, ast.Assign) and len(node.targets) == 1 \
+                and isinstance(node.targets[0], ast.Subscript):
+            saw_forward = True
+            continue
+        return False
+    return saw_forward
+
+
 def measure_elegance(project_root: str | Path) -> dict[str, int]:
     src = Path(project_root) / "src" / "minigpt"
-    files = sorted(src.glob("*.py"))
-    stems = [f.stem for f in files]
+    flat_stems = []
+    for f in sorted(src.glob("*.py")):
+        if not _is_shim(ast.parse(f.read_text(encoding="utf-8"))):
+            flat_stems.append(f.stem)
     body_modules: dict[str, set[str]] = {}
-    for f in files:
+    for f in sorted(src.rglob("*.py")):  # dup debt follows moved modules
         tree = ast.parse(f.read_text(encoding="utf-8"))
         for node in ast.walk(tree):
             if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
                 body_modules.setdefault(ast.dump(node), set()).add(f.name)
     return {
-        "flat_dir_file_count": len(files),
-        "long_name_stock": sum(1 for s in stems
+        "flat_dir_file_count": len(flat_stems),
+        "long_name_stock": sum(1 for s in flat_stems
                                if len(s) > LONG_NAME_THRESHOLD),
-        "max_stem_length": max((len(s) for s in stems), default=0),
+        "max_stem_length": max((len(s) for s in flat_stems), default=0),
         "dup_def_stock": sum(1 for mods in body_modules.values()
                              if len(mods) >= DUP_MIN_MODULES),
     }
