@@ -84,6 +84,22 @@ class DataPrepTests(unittest.TestCase):
             self.assertEqual(len(report["fingerprint"]), 64)
             self.assertEqual(report["most_common_chars"][0]["char"], "a")
 
+    def test_build_dataset_version_manifest_defaults_quality_report(self) -> None:
+        # Regression: quality=None used to raise NameError because the
+        # fallback called build_dataset_quality_report without importing it.
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "one.txt").write_text("MiniGPT default quality path", encoding="utf-8")
+            dataset = build_prepared_dataset([root])
+
+            manifest = build_dataset_version_manifest(
+                dataset, dataset_name="demo-quality", dataset_version="v1"
+            )
+
+            self.assertEqual(manifest["dataset"]["id"], "demo-quality@v1")
+            self.assertIsNotNone(manifest["quality"]["status"])
+            self.assertIsInstance(manifest["quality"]["issue_count"], int)
+
     def test_build_dataset_version_manifest_records_identity_and_outputs(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

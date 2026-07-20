@@ -169,7 +169,12 @@ def build_dataset_version_manifest(
     if not version:
         raise ValueError("dataset_version cannot be empty")
     dataset_report = report or build_dataset_report(dataset)
-    dataset_quality = quality if quality is not None else build_dataset_quality_report(dataset)
+    if quality is None:
+        # data_quality imports PreparedDataset from this module, so the
+        # import must stay function-local to avoid the cycle.
+        from minigpt.data_quality import build_dataset_quality_report
+        quality = build_dataset_quality_report(dataset)
+    dataset_quality = quality
     fingerprint = str(dataset_report.get("fingerprint") or dataset.fingerprint)
     return {
         "schema_version": 1,

@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1250-v1293-baseline-zero-elegance-ratchet.md
+ -> v1293 code explanation: stage 4 — static baseline reaches ZERO (271→153→1→0) by fixing the last entry, data_prep's latent NameError (the quality=None fallback called an un-imported function; function-local import mirrors the existing cycle-safe pattern; regression test added), and the same version welds the gate shut: a whole-codebase elegance ratchet (flat_dir_file_count 1355, long_name_stock 282, max_stem_length 202, dup_def_stock 227 — byte-identical function bodies across >=3 modules) frozen at current values, tighten-only updates, wired into CI after the file-size ratchet. The zero state and its lock land in one version so the dirty-window is zero.
+
 1249-v1292-f401-audited-sweep.md
  -> v1292 code explanation: stage 3 — the audited F401 sweep. Three audit iterations (naive from-import scan said 146 dead; adding attribute-access consumers said 137; the final multiline-parenthesized + local-alias-aware audit proved 90 KEEP / 62 dead — a naive sweep would have severed 84 live import chains, and one mid-execution break by the public-API `is`-contract tests proved it concretely). Atomic pipeline: 89 keepers formalized as `Y as Y`, 1 noqa'd, 62 removed by ruff --fix only after formalization succeeded. Baseline 153 → 1 (the lone data_prep F821 bug, reserved for v1293). Two honest rollbacks recorded.
 

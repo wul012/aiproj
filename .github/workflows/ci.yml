@@ -55,6 +55,9 @@ jobs:
       - name: File size ratchet
         run: python -B scripts/check_file_size_ratchet.py --out-dir runs/file-size-ratchet-ci
 
+      - name: Elegance ratchet
+        run: python -B scripts/check_elegance_ratchet.py --out-dir runs/elegance-ratchet-ci
+
       - name: aiproj production excellence closeout
         run: python -B scripts/check_aiproj_track_closeout.py --out-dir runs/aiproj-track-closeout-ci
 

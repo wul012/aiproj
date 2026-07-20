@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "tool": "ruff",
-  "generated_at": "2026-07-20T04:10:47Z",
+  "generated_at": "2026-07-20T04:30:07Z",
   "targets": [
     "src",
     "scripts"
@@ -30,15 +30,6 @@
     "src/minigpt/aiproj_track_closeout.py",
     "src/minigpt/training_scale_handoff_guards.py"
   ],
-  "issue_count": 1,
-  "issues": [
-    {
-      "path": "src/minigpt/data_prep.py",
-      "line": 172,
-      "column": 59,
-      "code": "F821",
-      "message": "Undefined name `build_dataset_quality_report`",
-      "source_line": "dataset_quality = quality if quality is not None else build_dataset_quality_report(dataset)"
-    }
-  ]
+  "issue_count": 0,
+  "issues": []
 }
