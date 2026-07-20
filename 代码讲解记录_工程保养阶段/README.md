@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1255-v1298-packet-registry-batch4.md
+ -> v1298 code explanation: batch 4 clears the last >150-char names (43 modules: the versioned packet chain + the generational registry-ack facades, where mechanical tail-collapse provably fails — generation depth IS the distinguishing information — so the map went hand-curated, 43 entries with per-entry semantic invariants). Also closes the v1297 CI coverage failure the right way: 189 forwarding shims sat at 0% coverage; instead of omitting them, test_forwarding_shims_v1298 imports every shim (detected by the canonical _is_shim shape) and asserts old-is-new — compat surface tested, coverage restored, shim-count floor asserted. long_name_stock 100 -> 57, max_stem_length 191 -> 150. Fifth local-vs-CI gap (the Unit-tests step embeds the coverage ratchet) added to the close checklist.
+
 1254-v1297-receipt-chain-batch3.md
  -> v1297 code explanation: batch 3 clears the receipt_index-chain family — all remaining 146 modules >150 chars short-named in one pass, and this tier's consumer filenames embed the module stems so 43 scripts + 86 tests renamed in the same batch (329 files' imports rewritten). The v1296 budget lesson moved upstream into the map generator (zero dup/clash/over-budget asserted at generation; zero rework). 473/473 family tests, 15/15 gates, zero-net name-budget rebase, long_name_stock 246 -> 100.
 
