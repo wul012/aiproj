@@ -111,7 +111,8 @@ def entropy(P, floor=1e-12):
 
 def ols_slope_se(x, y):
     """Simple linear regression slope and its standard error."""
-    x = np.asarray(x, float); y = np.asarray(y, float)
+    x = np.asarray(x, float)
+    y = np.asarray(y, float)
     n = len(x)
     if n < 3:
         return float("nan"), float("nan")

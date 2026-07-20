@@ -168,7 +168,8 @@ def consolidate(cfg: ContinualConfig, a_train: torch.Tensor, a_test: torch.Tenso
     torch.manual_seed(seed)
     model = make_model(cfg).to(device)
     opt = _opt(model, cfg)
-    a_train = a_train.to(device); a_test = a_test.to(device)
+    a_train = a_train.to(device)
+    a_test = a_test.to(device)
     hold = 0
     step = 0
     while step < cfg.consolidate_max_steps:
@@ -189,7 +190,9 @@ def train_phase(cfg: ContinualConfig, init_state: dict, b_train: torch.Tensor, *
     model = make_model(cfg).to(device)
     model.load_state_dict(init_state)
     opt = _opt(model, cfg)
-    b_train = b_train.to(device); a_test = a_test.to(device); b_test = b_test.to(device)
+    b_train = b_train.to(device)
+    a_test = a_test.to(device)
+    b_test = b_test.to(device)
     if replay_train is not None:
         replay_train = replay_train.to(device)
     gen = torch.Generator(device="cpu").manual_seed(seed + 7)
@@ -214,7 +217,8 @@ def savings_probe(cfg: ContinualConfig, forgotten_state: dict, a_train: torch.Te
     model = make_model(cfg).to(device)
     model.load_state_dict(forgotten_state)
     opt = _opt(model, cfg)
-    a_train = a_train.to(device); a_test = a_test.to(device)
+    a_train = a_train.to(device)
+    a_test = a_test.to(device)
     curve = []
     done = 0
     for k in cfg.savings_ks:
@@ -238,8 +242,10 @@ def run_phase_a(cfg: ContinualConfig, device) -> dict:
 
     for seed in seeds:
         train_mask, test_mask = pair_masks(cfg, seed)
-        A_tr = build_op(cfg, "A", train_mask); A_te = build_op(cfg, "A", test_mask)
-        B_tr = build_op(cfg, "B", train_mask); B_te = build_op(cfg, "B", test_mask)
+        A_tr = build_op(cfg, "A", train_mask)
+        A_te = build_op(cfg, "A", test_mask)
+        B_tr = build_op(cfg, "B", train_mask)
+        B_te = build_op(cfg, "B", test_mask)
         if b_majority is None:
             b_majority = majority_prior(B_tr, cfg.p)
         leak_ok = leak_ok and verify_no_leak(A_tr, A_te) and verify_no_leak(B_tr, A_te)
@@ -278,12 +284,14 @@ def run_phase_a(cfg: ContinualConfig, device) -> dict:
         jm = make_model(cfg).to(device)
         jopt = _opt(jm, cfg)
         both = torch.cat([A_tr, B_tr], dim=0).to(device)
-        A_te_d = A_te.to(device); B_te_d = B_te.to(device)
+        A_te_d = A_te.to(device)
+        B_te_d = B_te.to(device)
         js = 0
         hold = 0
         while js < cfg.joint_max_steps:
             for _ in range(cfg.eval_every):
-                _step(jm, jopt, both); js += 1
+                _step(jm, jopt, both)
+                js += 1
             hold = hold + 1 if (answer_accuracy(jm, A_te_d) >= cfg.plateau_acc and
                                 answer_accuracy(jm, B_te_d) >= cfg.plateau_acc) else 0
             if hold >= cfg.plateau_hold:

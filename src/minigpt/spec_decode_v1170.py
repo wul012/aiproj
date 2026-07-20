@@ -248,8 +248,12 @@ def run_spec_decode(
         pl_times = _time(run_plain, device, config.timing_repeats, config.timing_warmup)
         sm, si = _median_iqr(st_times)
         pm, pi = _median_iqr(pl_times)
-        timing["spec_med"].append(sm); timing["spec_mean"].append(statistics.mean(st_times)); timing["spec_std"].append(statistics.pstdev(st_times))
-        timing["plain_med"].append(pm); timing["plain_mean"].append(statistics.mean(pl_times)); timing["plain_std"].append(statistics.pstdev(pl_times))
+        timing["spec_med"].append(sm)
+        timing["spec_mean"].append(statistics.mean(st_times))
+        timing["spec_std"].append(statistics.pstdev(st_times))
+        timing["plain_med"].append(pm)
+        timing["plain_mean"].append(statistics.mean(pl_times))
+        timing["plain_std"].append(statistics.pstdev(pl_times))
 
     # ============================ aggregate ============================
     target_em_mean, _ = mean_std(target_em_all)
@@ -319,8 +323,6 @@ def run_spec_decode(
 
     # acceptance-by-position curve (at timing_k)
     curve = accept_curve[config.timing_k] if config.timing_k in accept_curve else []
-    pos_curve: dict[str, float] = {}
-    by_pos: dict[int, list[int]] = {}
     # accept_by_pos was flattened across prompts/blocks; reconstruct per within-completion position approximately
     # (kept simple: report overall accepted fraction across all proposed positions at timing_k)
     overall_accept_k = (sum(curve) / len(curve)) if curve else float("nan")

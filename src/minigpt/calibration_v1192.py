@@ -229,10 +229,20 @@ def aggregate_arm(p_true: np.ndarray, arm_logits: dict, cfg: CalibrationConfig):
         interior_all = interior_all and interior and (cfg.t_lo <= T <= cfg.t_hi)
         e1, c1, a1, _ = analytic_ece(p_true, z, 1.0, cfg.bins_primary)
         eT, _, _, _ = analytic_ece(p_true, z, T, cfg.bins_primary)
-        ece1.append(e1); eceT.append(eT); conf1.append(c1); acc1.append(a1)
-        nll1.append(n1); nllT.append(nT); kl1.append(kl_to_true(p_true, z, 1.0)); klT.append(kl_to_true(p_true, z, T))
-        br1.append(brier(p_true, z, 1.0)); brT.append(brier(p_true, z, T)); Ts.append(T)
-        cstd.append(confidence_spread(z)); dECE.append(e1 - eT); dNLL.append(n1 - nT)
+        ece1.append(e1)
+        eceT.append(eT)
+        conf1.append(c1)
+        acc1.append(a1)
+        nll1.append(n1)
+        nllT.append(nT)
+        kl1.append(kl_to_true(p_true, z, 1.0))
+        klT.append(kl_to_true(p_true, z, T))
+        br1.append(brier(p_true, z, 1.0))
+        brT.append(brier(p_true, z, T))
+        Ts.append(T)
+        cstd.append(confidence_spread(z))
+        dECE.append(e1 - eT)
+        dNLL.append(n1 - nT)
     return {
         "ece": mean_std(ece1), "ece_T": mean_std(eceT), "nll": mean_std(nll1), "nll_T": mean_std(nllT),
         "kl": mean_std(kl1), "kl_T": mean_std(klT), "brier": mean_std(br1), "brier_T": mean_std(brT),
@@ -288,8 +298,10 @@ def specificity_controls(p_true, headline_logits, wrong_T, calibrated_logits, cf
         Th, _, _, _ = fit_temperature(p_true, np.asarray(headline_logits[seed], float))
         cal_pre.append(zc_pre)
         cal_post.append(analytic_ece(p_true, zc, Th, cfg.bins_primary)[0])
-    fit_m = float(np.mean(e_fit)); wrong_m = float(np.mean(e_wrong))
-    cal_pre_m = float(np.mean(cal_pre)); cal_post_m = float(np.mean(cal_post))
+    fit_m = float(np.mean(e_fit))
+    wrong_m = float(np.mean(e_wrong))
+    cal_pre_m = float(np.mean(cal_pre))
+    cal_post_m = float(np.mean(cal_post))
     return {
         "oracle_floor_zero": bool(oe < 0.02),
         "oracle_ece": round(oe, 6),
@@ -313,7 +325,8 @@ def run_analysis(cache: dict, cfg: CalibrationConfig | None = None) -> dict:
     cfg = cfg or CalibrationConfig()
     p_true = np.asarray(cache["p_true"], float)
     H = np.asarray(cache["H"], float)
-    mean_H = float(H.mean()); spread = float(H.max() - H.min())
+    mean_H = float(H.mean())
+    spread = float(H.max() - H.min())
 
     arms = {name: aggregate_arm(p_true, logits, cfg) for name, logits in cache["arms"].items()}
 
@@ -330,7 +343,8 @@ def run_analysis(cache: dict, cfg: CalibrationConfig | None = None) -> dict:
     controls = specificity_controls(p_true, cache["arms"]["hard_ce"], wrong_T, calibrated_logits, cfg)
 
     # boundary low-entropy task instance (expected null: not overconfident, T~=1)
-    bp = np.asarray(cache["boundary_p_true"], float); bH = np.asarray(cache["boundary_H"], float)
+    bp = np.asarray(cache["boundary_p_true"], float)
+    bH = np.asarray(cache["boundary_H"], float)
     boundary = aggregate_arm(bp, cache["boundary"], cfg)
     boundary_overconfident = bool(
         significant(boundary["ece"][0], boundary["ece"][1], 0.0, 0.0)
@@ -410,7 +424,8 @@ def decide(result: dict, cfg: CalibrationConfig | None = None) -> dict:
     cfg = cfg or CalibrationConfig()
     h = result["arms"]["hard_ce"]
     ctl = result["controls"]
-    ece_m, ece_s = h["ece"]; T_m, T_s = h["T"]
+    ece_m, ece_s = h["ece"]
+    T_m, T_s = h["T"]
 
     g0 = h["kl"][0] < result["uniform_kl_floor"]
     g1 = (result["mean_H"] > cfg.entropy_floor_min) and (result["entropy_spread"] >= cfg.entropy_spread_min)

@@ -28,7 +28,9 @@ def build_calibration_report(
 ) -> dict:
     """Assemble the 5-format readability report from the analysis ``result`` + ``decide`` info."""
 
-    h = result["arms"]["hard_ce"]; ctl = result["controls"]; cm = result["comovement"]
+    h = result["arms"]["hard_ce"]
+    ctl = result["controls"]
+    cm = result["comovement"]
     status, verdict, flags = info["status"], info["verdict"], info["flags"]
 
     rows = [_arm_row(n, result["arms"][n]) for n in ("hard_ce", "soft_distill", "label_smooth", "random_init")

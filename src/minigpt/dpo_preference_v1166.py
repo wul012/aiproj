@@ -345,7 +345,6 @@ def run_dpo_preference(
     margin_up = margin_improvable
     em_dpo_up = significant(wr_em_max, wr_em_max_std, init_em_mean, init_em_std)
     em_dpo_down = significant(init_em_mean, init_em_std, wr_em_max, wr_em_max_std)
-    logp_c_down = wr_dlc_max < -1e-4
     sft_beats_dpo = significant(sft_em_max, sft_em_max_std, wr_em_max, wr_em_max_std)
     dpo_beats_sft = significant(wr_em_max, wr_em_max_std, sft_em_max, sft_em_max_std)
 
@@ -422,7 +421,7 @@ def run_dpo_preference(
 
     recommendations = [
         f"VERDICT ({verdict}): from a weak SFT init (held-out exact-match {init_em_mean:.3f}, in the [{config.gate_lower},{config.gate_upper}] headroom band), DPO-with-ref at {max_b} forward passes grows the held-out margin {init_margin_mean:.1f} -> {wr_margin_max:.1f} (preference-accuracy {init_pa_mean:.3f} -> {wr_pa_max:.3f}, already near-ceiling) but held-out exact-match FALLS {init_em_mean:.3f} -> {wr_em_max:.3f}, with delta_logp_chosen {wr_dlc_max:+.3f}. {len(config.seeds)} seeds, gap-minus-combined-std significance.",
-        f"THE LESSON: the MARGIN (and pref-accuracy) is the OPTIMIZATION TARGET (it moves by construction); held-out exact-match is the CAPABILITY metric. DPO maximizes a RELATIVE margin, so logp_chosen can fall while logp_rejected falls faster — the margin can rise while generation does not improve. NOTE: pref-accuracy saturates near 1.0 at the init (ranking is easier than generating), so the margin is the faithful 'did the objective move' signal; do not read a preference rise as a capability win.",
+        "THE LESSON: the MARGIN (and pref-accuracy) is the OPTIMIZATION TARGET (it moves by construction); held-out exact-match is the CAPABILITY metric. DPO maximizes a RELATIVE margin, so logp_chosen can fall while logp_rejected falls faster — the margin can rise while generation does not improve. NOTE: pref-accuracy saturates near 1.0 at the init (ranking is easier than generating), so the margin is the faithful 'did the objective move' signal; do not read a preference rise as a capability win.",
         f"KILLER CONTROL ({sft_control_verdict}): matched on FORWARD PASSES (DPO does 2 policy forwards/step, so SFT-on-chosen gets ~2x the optimizer steps), continued SFT-on-chosen reaches exact-match {sft_em_max:.3f} vs DPO-with-ref {wr_em_max:.3f} at the max budget. This tests whether any DPO movement is uniquely DPO or just more supervision on positives.",
         f"REFERENCE TERM ({reference_verdict}): DPO-no-ref reaches exact-match {nr_em_max:.3f} vs with-ref {wr_em_max:.3f} at max budget. The KL/reference anchor's stabilizing benefit is a large-scale phenomenon; whatever is reported here is bounded to this tiny scale.",
         f"GATE: status='{status}' means the comparison was VALID and measurable (init in band={in_band}, DPO loss optimized={loss_optimized}, margin improvable={margin_improvable}) — NOT that DPO is good. SCOPE: DPO-the-loss on a synthetic deterministic correctness signal with confusable hard-negatives, from-scratch char-level MiniGPT; NOT human preferences / RLHF. Findings are scale-dependent.",

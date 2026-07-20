@@ -6,7 +6,6 @@ from minigpt.report_utils import utc_now
 
 
 def build_report(result: dict, info: dict, source: str, *, generated_at: str | None = None) -> dict:
-    p = result["primary"]
     status, verdict, flags = info["status"], info["verdict"], info["flags"]
     cfg = result["cfg"]
 

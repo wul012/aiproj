@@ -50,7 +50,8 @@ BATCH = 64
 def build_task(k, seed, alpha_lo, alpha_hi):
     P_true, H, ctx_chars, out_chars = build_stochastic_task(k, seed=seed, alpha_lo=alpha_lo, alpha_hi=alpha_hi)
     tok = CharTokenizer.train(ctx_chars + out_chars + SEP + EOS + PAD)
-    sep_id = tok.encode(SEP)[0]; pad_id = tok.encode(PAD)[0]
+    sep_id = tok.encode(SEP)[0]
+    pad_id = tok.encode(PAD)[0]
     contexts = [[tok.encode(c)[0], sep_id] for c in ctx_chars]
     out_ids = [tok.encode(c)[0] for c in out_chars]
     return P_true, H, contexts, out_ids, pad_id, tok.vocab_size
@@ -91,7 +92,8 @@ def main(argv: Sequence[str] | None = None) -> None:
 
     # ---- main stochastic task (known P_true, entropy swept) ----
     P_true, H, contexts, out_ids, pad_id, vocab = build_task(args.k_contexts, args.corpus_seed, 0.12, 6.0)
-    M = len(out_ids); mean_H = float(H.mean())
+    M = len(out_ids)
+    mean_H = float(H.mean())
     uniform_kl_floor = float(np.log(M) - mean_H)
     print(f"device={device} K={args.k_contexts} M={M} vocab={vocab} mean_H={mean_H:.3f} "
           f"spread={float(H.max()-H.min()):.3f} uniform_kl_floor={uniform_kl_floor:.3f}")

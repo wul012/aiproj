@@ -134,35 +134,45 @@ def _train_to_interp(model, x, y, cfg: DDConfig):
     """Train full-batch until train_acc >= tau_interp (on the NOISY labels) or ms_max_steps. Returns
     (final_train_acc, steps_taken)."""
     opt = _opt(model, cfg)
-    tgt = torch.full_like(x, IGNORE); tgt[:, -1] = y
+    tgt = torch.full_like(x, IGNORE)
+    tgt[:, -1] = y
     steps = cfg.ms_max_steps
     ta = 0.0
     for s in range(cfg.ms_max_steps):
-        model.train(); opt.zero_grad(set_to_none=True)
-        _, loss = model(x, tgt); loss.backward(); opt.step()
+        model.train()
+        opt.zero_grad(set_to_none=True)
+        _, loss = model(x, tgt)
+        loss.backward()
+        opt.step()
         if s % 100 == 0 or s == cfg.ms_max_steps - 1:
             ta = _acc(model, x, y)
             if ta >= cfg.tau_interp:
-                steps = s; break
+                steps = s
+                break
     return ta, steps
 
 
 def _train_trajectory(model, x, y, xte, yte, cfg: DDConfig):
     """Train epoch_steps full-batch; record (step, train_acc_noisy, clean_test_err) every rec_every."""
     opt = _opt(model, cfg)
-    tgt = torch.full_like(x, IGNORE); tgt[:, -1] = y
+    tgt = torch.full_like(x, IGNORE)
+    tgt[:, -1] = y
     traj = []
     interp_step = None
     for s in range(cfg.epoch_steps + 1):
         if s % cfg.rec_every == 0:
-            ta = _acc(model, x, y); te = 1.0 - _acc(model, xte, yte)
+            ta = _acc(model, x, y)
+            te = 1.0 - _acc(model, xte, yte)
             traj.append((s, ta, te))
             if interp_step is None and ta >= cfg.tau_interp:
                 interp_step = s
         if s == cfg.epoch_steps:
             break
-        model.train(); opt.zero_grad(set_to_none=True)
-        _, loss = model(x, tgt); loss.backward(); opt.step()
+        model.train()
+        opt.zero_grad(set_to_none=True)
+        _, loss = model(x, tgt)
+        loss.backward()
+        opt.step()
     return traj, interp_step
 
 
@@ -223,13 +233,15 @@ def _epoch_stats(cache, cfg: DDConfig, eta, width):
     rises, recoveries, best_pres, finals, interp_ok = [], [], [], [], 0
     for s in seeds:
         rec = ep[_ms_key(eta, width, s)]
-        traj = rec["traj"]; istep = rec["interp_step"]
+        traj = rec["traj"]
+        istep = rec["interp_step"]
         errs = [te for (_, _, te) in traj]
         final = errs[-1]
         finals.append(final)
         if istep is None:
             # never interpolated -> use the global min as best_pre, plateau as final
-            best_pre = min(errs); peak = max(errs)
+            best_pre = min(errs)
+            peak = max(errs)
         else:
             interp_ok += 1
             pre = [te for (st, _, te) in traj if st <= istep]

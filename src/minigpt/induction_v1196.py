@@ -174,8 +174,10 @@ def unigram_acc(cfg: InductionConfig, x: torch.Tensor, target: torch.Tensor) -> 
         for i in range(T - 1):
             if i > 0 and int(target[b, i]) != IGNORE:
                 pred = int(counts.argmax())
-                marg_sum += counts.max().item() / i; marg_cnt += 1
-                c += int(pred == int(target[b, i])); n += 1
+                marg_sum += counts.max().item() / i
+                marg_cnt += 1
+                c += int(pred == int(target[b, i]))
+                n += 1
             counts[int(x[b, i])] += 1
     return c / max(n, 1), marg_sum / max(marg_cnt, 1)
 
@@ -202,10 +204,12 @@ def _inductable_acc(model: MiniGPT, eval_x, eval_t, device) -> float:
     correct = total = 0
     with torch.no_grad():
         for x, t in zip(eval_x, eval_t):
-            x = x.to(device); t = t.to(device)
+            x = x.to(device)
+            t = t.to(device)
             pred = model(x[:, :-1])[0].argmax(-1)
             m = t != IGNORE
-            correct += (pred[m] == t[m]).sum().item(); total += int(m.sum())
+            correct += (pred[m] == t[m]).sum().item()
+            total += int(m.sum())
     return correct / max(total, 1)
 
 
@@ -235,7 +239,9 @@ def _swap_follow(cfg: InductionConfig, model: MiniGPT, x: torch.Tensor, t: torch
         if sp == orig:
             sp = (sp + 1) % cfg.K
         xs[b, j + 1] = sp
-        rows.append(b); qpos.append(i); sps.append(sp)
+        rows.append(b)
+        qpos.append(i)
+        sps.append(sp)
     if not rows:
         return 0.0
     with torch.no_grad():
@@ -274,11 +280,13 @@ def _induction_scores(cfg: InductionConfig, model: MiniGPT, x: torch.Tensor, t: 
         succ_by_layer.append(ssum / max(scnt, 1))
     prev_tok = 0.0
     if maps:
-        att0 = maps[0]; H = att0.shape[1]
+        att0 = maps[0]
+        H = att0.shape[1]
         ps = pc = 0.0
         for b in range(B):
             for i in range(1, T - 1):
-                ps += sum(att0[b, h, i, i - 1].item() for h in range(H)); pc += 1
+                ps += sum(att0[b, h, i, i - 1].item() for h in range(H))
+                pc += 1
         prev_tok = ps / max(pc, 1)
     return {"succ_mass_by_layer": [round(v, 5) for v in succ_by_layer],
             "best_layer_succ_mass": round(max(succ_by_layer), 5) if succ_by_layer else 0.0,
@@ -301,9 +309,11 @@ def train_arm(cfg: InductionConfig, depth: int, width: int, attn_only: bool, mod
         if step == cfg.steps:
             break
         x, tg = make_batch(cfg, cfg.batch, gen, device, mode=mode)
-        model.train(); opt.zero_grad(set_to_none=True)
+        model.train()
+        opt.zero_grad(set_to_none=True)
         _, loss = model(x[:, :-1], tg)
-        loss.backward(); opt.step()
+        loss.backward()
+        opt.step()
     out = {"acc": _inductable_acc(model, eval_x, eval_t, device), "traj": traj}
     if mech_x is not None:
         out["swap_follow"] = _swap_follow(cfg, model, mech_x, mech_t, device, seed)
@@ -322,12 +332,14 @@ def run_phase_a(cfg: InductionConfig, device) -> dict:
     eval_x, eval_t = [], []
     for _ in range(cfg.eval_n_batches):
         x, tg = make_batch(cfg, cfg.eval_batch, ge, device, mode="clean")
-        eval_x.append(x.cpu()); eval_t.append(tg.cpu())
+        eval_x.append(x.cpu())
+        eval_t.append(tg.cpu())
     gef = torch.Generator(device=device).manual_seed(20241)
     fx_eval_x, fx_eval_t = [], []
     for _ in range(cfg.eval_n_batches):
         x, tg = make_batch(cfg, cfg.eval_batch, gef, device, mode="fixed_offset")
-        fx_eval_x.append(x.cpu()); fx_eval_t.append(tg.cpu())
+        fx_eval_x.append(x.cpu())
+        fx_eval_t.append(tg.cpu())
     gm = torch.Generator(device=device).manual_seed(20242)
     mx, mt = make_batch(cfg, cfg.mech_batch, gm, device, mode="clean")
     mech_x, mech_t = mx.cpu(), mt.cpu()

@@ -246,9 +246,11 @@ def train_model(cfg: CircuitConfig, seed: int, eval_x, eval_t, device):
     gen = torch.Generator(device=device).manual_seed(seed + 11)
     for _ in range(cfg.steps):
         x, t = make_batch(icfg, cfg.batch, gen, device, mode="clean")
-        model.train(); opt.zero_grad(set_to_none=True)
+        model.train()
+        opt.zero_grad(set_to_none=True)
         _, loss = model(x[:, :-1], t)
-        loss.backward(); opt.step()
+        loss.backward()
+        opt.step()
     return model, icfg
 
 
@@ -258,7 +260,8 @@ def run_phase_a(cfg: CircuitConfig, device) -> dict:
     eval_x, eval_t = [], []
     for _ in range(cfg.eval_n_batches):
         x, t = make_batch(icfg, cfg.eval_batch, ge, device, mode="clean")
-        eval_x.append(x.cpu()); eval_t.append(t.cpu())
+        eval_x.append(x.cpu())
+        eval_t.append(t.cpu())
     # classification batch and a SEPARATE composition-remeasurement batch (M4 de-circularization)
     gm = torch.Generator(device=device).manual_seed(20242)
     cls_x, cls_t = make_batch(icfg, cfg.mech_batch, gm, device, mode="clean")
@@ -283,8 +286,8 @@ def run_phase_a(cfg: CircuitConfig, device) -> dict:
         l0_by_prev = sorted(range(H), key=lambda h: prev[(0, h)], reverse=True)
         l1_by_ind = sorted(range(H), key=lambda h: ind[(1, h)], reverse=True)
 
-        rec = {"base_acc": base, "prev": {f"{l},{h}": prev[(l, h)] for (l, h) in prev},
-               "ind": {f"{l},{h}": ind[(l, h)] for (l, h) in ind},
+        rec = {"base_acc": base, "prev": {f"{layer},{h}": prev[(layer, h)] for (layer, h) in prev},
+               "ind": {f"{layer},{h}": ind[(layer, h)] for (layer, h) in ind},
                "l0_by_prev": l0_by_prev, "l1_by_ind": l1_by_ind}
 
         for mode in ("mean", "zero"):
@@ -405,13 +408,16 @@ def _classify_verdict(cache: dict, cfg: CircuitConfig, tau_prev: float, tau_ind:
         prev_single_drops, ind_single_drops, prev_class_drops, ind_class_drops = [], [], [], []
         for s in usable:
             r = cache["seeds"][s]
-            l0p = r["l0_by_prev"][:kp[s]]; l1i = r["l1_by_ind"][:ki[s]]
+            l0p = r["l0_by_prev"][:kp[s]]
+            l1i = r["l1_by_ind"][:ki[s]]
             prev_single_drops.append(max(r["base_acc"] - r["mean_single_l0"][h] for h in l0p))
             ind_single_drops.append(max(r["base_acc"] - r["mean_single_l1"][h] for h in l1i))
             prev_class_drops.append(r["base_acc"] - r["mean_topprev"][kp[s]])
             ind_class_drops.append(r["base_acc"] - r["mean_topind"][ki[s]])
-        msp = mean_std(prev_single_drops); msi = mean_std(ind_single_drops)
-        mcp = mean_std(prev_class_drops); mci = mean_std(ind_class_drops)
+        msp = mean_std(prev_single_drops)
+        msi = mean_std(ind_single_drops)
+        mcp = mean_std(prev_class_drops)
+        mci = mean_std(ind_class_drops)
         red_info.update({"prev_max_single_drop": msp, "ind_max_single_drop": msi,
                          "prev_class_drop": mcp, "ind_class_drop": mci})
         prev_redundant = msp[0] <= cfg.single_max and (mcp[0] - msp[0]) >= cfg.redundancy_gap

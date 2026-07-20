@@ -208,7 +208,9 @@ def train_b(cfg: SimilarityConfig, init_state: dict, b_train: torch.Tensor, *,
     model.load_state_dict(init_state)
     opt = _opt(model, base)
     p = cfg.p
-    b_train = b_train.to(device); a_test = a_test.to(device); b_train_acc = b_train_acc.to(device)
+    b_train = b_train.to(device)
+    a_test = a_test.to(device)
+    b_train_acc = b_train_acc.to(device)
 
     num_rows0 = model.token_embedding.weight.detach()[:p].clone()
     theta0 = [q.detach().clone() for q in model.parameters()]
@@ -252,7 +254,8 @@ def _consolidate_joint(cfg: SimilarityConfig, A_tr, B_tr, A_te, B_te, seed, devi
     js, hold = 0, 0
     while js < base.joint_max_steps:
         for _ in range(base.eval_every):
-            _step(jm, jopt, both); js += 1
+            _step(jm, jopt, both)
+            js += 1
         hold = hold + 1 if (answer_accuracy(jm, A_te_d) >= base.plateau_acc and
                             answer_accuracy(jm, B_te_d) >= base.plateau_acc) else 0
         if hold >= base.plateau_hold:

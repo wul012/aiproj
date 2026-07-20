@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1248-v1291-lint-burndown.md
+ -> v1291 code explanation: stage 2 of the elegance program — all 118 mechanically-fixable lint issues (92 E702 semicolon lines, 15 E741 ambiguous `l` names, 6 verified-dead F841 assignments, 5 F541) cleared across 20 files, ratchet baseline tightened 271→153. Three-tier verification: AST-identity proof vs HEAD for the 10 split-only files (the parse tree is byte-identical — mathematically zero behavior change), 204/204 focused tests for the rename/deletion files, and the static gate re-read with the corrected pass signal. F401 (re-export risk) and F821 (bug-class) deliberately deferred to their own audited versions.
+
 1247-v1290-grok-arc-common.md
  -> v1290 code explanation: elegance/maintenance version on the AGENTS.md refactoring rhythm — the 12 byte-identical copies of `_median` (9 plain + 2 NaN-guarded) and the 12 identical Agg figure-scaffolding blocks across the grok-arc experiment modules converge into `grok_arc_common.py` (median/median_or_nan/agg_pyplot/save_figure), with the old private names re-imported so decide() bodies stay textually untouched. Verified three ways: identity-guard tests (`module._median is median` — any re-fork fails the suite), byte-for-byte re-derivation of all committed arc artifacts (61/63 identical; the 2 exceptions are v1277/v1279's pre-existing analyze-time `generated_at` timestamps; all 3 regenerated PNGs identical), and the full suite. Net -141 lines of copy-paste.
 

@@ -194,10 +194,18 @@ def run_ptq(*, vocab_size, train_examples, heldout_instructions, ops, pad_id, eo
 
     def push(acc, key, ce, dce, kl, em, relerr, eff_bits):
         d = acc.setdefault(key, {"ce": [], "dce": [], "kl": [], "em": [], "relerr": [], "eff_bits": eff_bits})
-        d["ce"].append(ce); d["dce"].append(dce); d["kl"].append(kl); d["em"].append(em); d["relerr"].append(relerr)
+        d["ce"].append(ce)
+        d["dce"].append(dce)
+        d["kl"].append(kl)
+        d["em"].append(em)
+        d["relerr"].append(relerr)
 
     class Cfg:
-        block_size = bs; n_layer = config.n_layer; n_head = config.n_head; n_embd = config.n_embd; use_rope = config.use_rope
+        block_size = bs
+        n_layer = config.n_layer
+        n_head = config.n_head
+        n_embd = config.n_embd
+        use_rope = config.use_rope
 
     for seed in config.seeds:
         torch.manual_seed(seed)
@@ -207,7 +215,8 @@ def run_ptq(*, vocab_size, train_examples, heldout_instructions, ops, pad_id, eo
         f_ce, _, ref_logits = ce_and_kl(base, X, Y, None)
         f_em = evaluate_instructions(base, heldout_instructions, eos_id=eos_id,
                                      max_new_tokens=config.max_new_tokens, device=device)["overall_accuracy"]
-        fp32_ce.append(f_ce); fp32_em.append(f_em)
+        fp32_ce.append(f_ce)
+        fp32_em.append(f_em)
 
         def measure(component, bits, gran, scheme):
             qm = quantized_model(base, bits, component, granularity=gran, scheme=scheme)

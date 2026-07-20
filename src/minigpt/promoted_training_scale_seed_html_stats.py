@@ -11,7 +11,6 @@ from minigpt.report_utils import (
 
 def build_promoted_training_scale_seed_html_stats(report: dict[str, Any]) -> list[tuple[str, Any]]:
     seed = _dict(report.get("baseline_seed"))
-    plan = _dict(report.get("next_plan"))
     summary = _dict(report.get("summary"))
     return [
         ("Status", report.get("seed_status")),

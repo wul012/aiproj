@@ -99,7 +99,9 @@ def train_ewc(cfg: EWCReplayConfig, init_state: dict, theta_star: dict, fisher: 
     model.load_state_dict(init_state)
     opt = torch.optim.AdamW(model.parameters(), lr=base.lr, betas=(base.beta1, base.beta2),
                             weight_decay=cfg.b_phase_weight_decay)
-    b_train = b_train.to(device); a_test = a_test.to(device); b_test = b_test.to(device)
+    b_train = b_train.to(device)
+    a_test = a_test.to(device)
+    b_test = b_test.to(device)
     if a_train is not None:
         a_train = a_train.to(device)
     gen = torch.Generator(device="cpu").manual_seed(seed + 7)
@@ -138,8 +140,10 @@ def run_phase_a(cfg: EWCReplayConfig, device) -> dict:
 
     for seed in cfg.seeds:
         tr, te = pair_masks(base, seed)
-        A_tr = build_op(base, "A", tr); A_te = build_op(base, "A", te)
-        B_tr = build_op(base, "B", tr); B_te = build_op(base, "B", te)
+        A_tr = build_op(base, "A", tr)
+        A_te = build_op(base, "A", te)
+        B_tr = build_op(base, "B", tr)
+        B_te = build_op(base, "B", te)
         if b_majority is None:
             b_majority = majority_prior(B_tr, base.p)
         leak_ok = leak_ok and verify_no_leak(A_tr, A_te) and verify_no_leak(B_tr, A_te)
@@ -179,10 +183,15 @@ def run_phase_a(cfg: EWCReplayConfig, device) -> dict:
                                  weight_decay=base.weight_decay)
         both = torch.cat([A_tr, B_tr], dim=0).to(device)
         A_te_d, B_te_d = A_te.to(device), B_te.to(device)
-        js = 0; hold = 0
+        js = 0
+        hold = 0
         while js < base.joint_max_steps:
             for _ in range(base.eval_every):
-                jm.train(); jopt.zero_grad(set_to_none=True); answer_loss(jm, both).backward(); jopt.step(); js += 1
+                jm.train()
+                jopt.zero_grad(set_to_none=True)
+                answer_loss(jm, both).backward()
+                jopt.step()
+                js += 1
             hold = hold + 1 if (answer_accuracy(jm, A_te_d) >= base.plateau_acc and
                                 answer_accuracy(jm, B_te_d) >= base.plateau_acc) else 0
             if hold >= base.plateau_hold:
@@ -223,8 +232,8 @@ def summarize(cache: dict, cfg: EWCReplayConfig | None = None) -> dict:
     M_replay = mean_std([_best_min(replay, s)[0] for s in seeds])
 
     # EWC fairness signals: across lambda, can it EVER protect A, and can it EVER stay plastic?
-    ewc_max_accA = mean_std([max(ewc[l][s]["accA_after_B"] for l in ewc) for s in seeds])
-    ewc_max_accB = mean_std([max(ewc[l][s]["accB_after_B"] for l in ewc) for s in seeds])
+    ewc_max_accA = mean_std([max(ewc[lam][s]["accA_after_B"] for lam in ewc) for s in seeds])
+    ewc_max_accB = mean_std([max(ewc[lam][s]["accB_after_B"] for lam in ewc) for s in seeds])
     lam0 = 0.0
     naive_accA = mean_std([ewc[lam0][s]["accA_after_B"] for s in seeds])   # lambda=0 == naive sequential
     naive_accB = mean_std([ewc[lam0][s]["accB_after_B"] for s in seeds])
@@ -233,8 +242,8 @@ def summarize(cache: dict, cfg: EWCReplayConfig | None = None) -> dict:
 
     replay_accA = {int(k): mean_std([replay[k][s]["accA_after_B"] for s in seeds]) for k in replay}
     replay_accB = {int(k): mean_std([replay[k][s]["accB_after_B"] for s in seeds]) for k in replay}
-    ewc_accA = {float(l): mean_std([ewc[l][s]["accA_after_B"] for s in seeds]) for l in ewc}
-    ewc_accB = {float(l): mean_std([ewc[l][s]["accB_after_B"] for s in seeds]) for l in ewc}
+    ewc_accA = {float(lam): mean_std([ewc[lam][s]["accA_after_B"] for s in seeds]) for lam in ewc}
+    ewc_accB = {float(lam): mean_std([ewc[lam][s]["accB_after_B"] for s in seeds]) for lam in ewc}
 
     hybrid_min = mean_std([min(cache["hybrid"][s]["accA_after_B"], cache["hybrid"][s]["accB_after_B"]) for s in seeds])
     # replay at the hybrid's k, for the "does EWC add anything on top of replay" comparison
@@ -423,7 +432,7 @@ def build_report(result: dict, info: dict, source: str, *, generated_at: str | N
         "status": status, "decision": info["decision"],
         "summary": summary, "rows": rows, "recommendations": recs,
         "csv_fieldnames": ["method", "knob", "acc_A", "acc_B", "min_both"],
-        "ewc_frontier": {f"{l:.0e}": [round(s["ewc_accB"][l][0], 5), round(s["ewc_accA"][l][0], 5)] for l in sorted(s["ewc_accA"])},
+        "ewc_frontier": {f"{lam:.0e}": [round(s["ewc_accB"][lam][0], 5), round(s["ewc_accA"][lam][0], 5)] for lam in sorted(s["ewc_accA"])},
         "replay_frontier": {str(k): [round(s["replay_accB"][k][0], 5), round(s["replay_accA"][k][0], 5)] for k in sorted(s["replay_accA"])},
         "source": source,
     }

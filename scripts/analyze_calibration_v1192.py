@@ -48,7 +48,7 @@ def main(argv: Sequence[str] | None = None) -> None:
     h = result["arms"]["hard_ce"]
     print(f"\nhard_ce(n={result['headline_n']}): conf={h['conf'][0]:.3f} acc={h['acc'][0]:.3f} "
           f"ECE={h['ece'][0]:.3f} --T={h['T'][0]:.2f}--> ECE={h['ece_T'][0]:.3f} | KL {h['kl'][0]:.3f}->{h['kl_T'][0]:.3f}")
-    print(f"sweep T: " + ", ".join(f"n={n}:{result['sweep'][n]['T'][0]:.2f}" for n in sorted(result['sweep'])))
+    print("sweep T: " + ", ".join(f"n={n}:{result['sweep'][n]['T'][0]:.2f}" for n in sorted(result['sweep'])))
     print("outputs=" + json.dumps(outputs, ensure_ascii=True))
     if report["status"] != "pass":
         raise SystemExit(1)

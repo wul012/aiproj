@@ -176,7 +176,8 @@ def run_phase_a(cfg: OVConfig, device) -> dict:
     eval_x, eval_t = [], []
     for _ in range(cfg.eval_n_batches):
         x, t = make_batch(icfg, cfg.eval_batch, ge, device, mode="clean")
-        eval_x.append(x.cpu()); eval_t.append(t.cpu())
+        eval_x.append(x.cpu())
+        eval_t.append(t.cpu())
     gm = torch.Generator(device=device).manual_seed(20242)
     cls_x, cls_t = make_batch(icfg, cfg.mech_batch, gm, device, mode="clean")
     cls_x, cls_t = cls_x.cpu(), cls_t.cpu()
@@ -195,7 +196,8 @@ def run_phase_a(cfg: OVConfig, device) -> dict:
         prev, ind = head_scores(model, cls_x, cls_t, device)
         dla = dla_gaps(model, cls_x, cls_t, device)
 
-        copy_z = {}; diag_max = {}
+        copy_z = {}
+        diag_max = {}
         for layer in range(cfg.depth):
             for h in range(H):
                 dim, cz = copying_scores(ov_matrix(model, layer, h))
@@ -208,13 +210,13 @@ def run_phase_a(cfg: OVConfig, device) -> dict:
 
         rec = {
             "base_acc": base,
-            "prev": {f"{l},{h}": prev[(l, h)] for (l, h) in prev},
-            "ind": {f"{l},{h}": ind[(l, h)] for (l, h) in ind},
-            "copy_z": {f"{l},{h}": copy_z[(l, h)] for (l, h) in copy_z},
-            "diag_is_max": {f"{l},{h}": diag_max[(l, h)] for (l, h) in diag_max},
-            "dla_gap": {f"{l},{h}": dla[(l, h)][0] for (l, h) in dla},
-            "dla_correct": {f"{l},{h}": dla[(l, h)][1] for (l, h) in dla},
-            "dla_wrong": {f"{l},{h}": dla[(l, h)][2] for (l, h) in dla},
+            "prev": {f"{layer},{h}": prev[(layer, h)] for (layer, h) in prev},
+            "ind": {f"{layer},{h}": ind[(layer, h)] for (layer, h) in ind},
+            "copy_z": {f"{layer},{h}": copy_z[(layer, h)] for (layer, h) in copy_z},
+            "diag_is_max": {f"{layer},{h}": diag_max[(layer, h)] for (layer, h) in diag_max},
+            "dla_gap": {f"{layer},{h}": dla[(layer, h)][0] for (layer, h) in dla},
+            "dla_correct": {f"{layer},{h}": dla[(layer, h)][1] for (layer, h) in dla},
+            "dla_wrong": {f"{layer},{h}": dla[(layer, h)][2] for (layer, h) in dla},
             "gram_diag_is_max": g_dim, "gram_copy_z": g_cz,
         }
         seeds_out[seed] = rec
@@ -273,9 +275,13 @@ def _classify_verdict(cache: dict, cfg: OVConfig, tau_prev: float, tau_ind: floa
             prev_dg.append(sum(rec["dla_gap"][f"0,{h}"] for h in prev_h) / len(prev_h))
 
     classifiable_frac = len(classifiable) / n_trained
-    ind_copy_z = mean_std(ind_cz); ctrl_copy_z = mean_std(ctrl_cz); prev_copy_z = mean_std(prev_cz)
+    ind_copy_z = mean_std(ind_cz)
+    ctrl_copy_z = mean_std(ctrl_cz)
+    prev_copy_z = mean_std(prev_cz)
     ind_diag_max = mean_std(ind_dm)
-    ind_dla_gap = mean_std(ind_dg); ctrl_dla_gap = mean_std(ctrl_dg); prev_dla_gap = mean_std(prev_dg)
+    ind_dla_gap = mean_std(ind_dg)
+    ctrl_dla_gap = mean_std(ctrl_dg)
+    prev_dla_gap = mean_std(prev_dg)
     gram_copy_z = mean_std([cache["seeds"][s]["gram_copy_z"] for s in seeds])
     base_ms = mean_std([cache["seeds"][s]["base_acc"] for s in seeds])
 
@@ -357,7 +363,6 @@ def _v(status, verdict, flags):
 
 # ------------------------------------------------------------------------- report
 def build_report(result: dict, info: dict, source: str, *, generated_at: str | None = None) -> dict:
-    p = result["primary"]
     status, verdict, flags = info["status"], info["verdict"], info["flags"]
     cfg = result["cfg"]
 

@@ -157,8 +157,11 @@ def run_phase_a(cfg: WDConfig, device) -> dict:
                         traj.append((s, 1.0 - (_preds(model, xte) == yte).float().mean().item()))
                     if s == cfg.steps:
                         break
-                    model.train(); opt.zero_grad(set_to_none=True)
-                    _, loss = model(xtr, tgt); loss.backward(); opt.step()
+                    model.train()
+                    opt.zero_grad(set_to_none=True)
+                    _, loss = model(xtr, tgt)
+                    loss.backward()
+                    opt.step()
                 ptr = _preds(model, xtr)
                 tr_acc = (ptr == ytr).float().mean().item()
                 clean_rows = ~mask if eta > 0 else torch.ones_like(mask)

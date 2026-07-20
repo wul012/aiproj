@@ -59,7 +59,7 @@ def build_report(result: dict, info: dict, source: str, *, generated_at: str | N
         (f"FLOOR & TRAJECTORY: continue-on-A (no distribution shift) forgets only {s['continue_on_A_forget'][0]:.3f} "
          f"(g_floor_clean={flags['g_floor_clean']}) — so forgetting needs a NEW distribution, not just more steps. "
          f"acc_A through the B phase: {s['traj_mean']} — collapse is {'sharp/instant' if len(s['traj_mean'])>1 and s['traj_mean'][1] < 0.3 else 'gradual'}."),
-        (f"REPLAY (mitigation): replaying A-train examples during B reduces forgetting as a dose-response "
+        ("REPLAY (mitigation): replaying A-train examples during B reduces forgetting as a dose-response "
          + ", ".join(f"buf={bs}:{s['replay_forget'][bs][0]:.3f}" for bs in sorted(s['replay_forget']))
          + f" (monotone={flags['replay_dose_response_monotone']}); replay reduces forgetting={flags['replay_reduces_forgetting']}. "
          f"SPECIFIC (not 'any extra gradients'): WRONG-replay (replaying B, not A) still forgets {s['wrong_replay_forget'][0]:.3f} "
@@ -68,7 +68,7 @@ def build_report(result: dict, info: dict, source: str, *, generated_at: str | N
         (f"HONEST MECHANISM: random-label-B (same B inputs, SHUFFLED targets) forgets {s['random_label_B_forget'][0]:.3f} "
          f"vs real-B {s['naive_forget'][0]:.3f} — task-structure-specific={flags['forgetting_is_task_structure_specific']}. "
          f"{'Real B forgets significantly more, so B-structure interferes.' if flags['forgetting_is_task_structure_specific'] else 'They forget about equally, so the forgetting is DISTRIBUTION-SHIFT-driven (training on a new input distribution overwrites the shared weights), NOT specific to B-task structure — reported honestly.'}"),
-        (f"SAVINGS (erasure vs masking): relearning A reaches its plateau "
+        ("SAVINGS (erasure vs masking): relearning A reaches its plateau "
          + (f"in {s['recovered_k']} steps (fast => representational MASKING, A reused not erased)"
             if flags['savings_fast_masking'] else
             (f"in {s['recovered_k']} steps (slow => closer to ERASURE)" if s['recovered_k'] is not None

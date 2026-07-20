@@ -342,7 +342,7 @@ def run_dpo_sft_aux(
 
     # ---- verdict: the λ-sweep readout (only after the gate passes) ----
     pos_lams = [lam for lam in grid if lam > 0.0]
-    best_lam = max(pos_lams, key=lambda l: ms(_lam_key(l), "exact_match")[0]) if pos_lams else 0.0
+    best_lam = max(pos_lams, key=lambda lam: ms(_lam_key(lam), "exact_match")[0]) if pos_lams else 0.0
     best_arm = _lam_key(best_lam)
     best_em_mean, best_em_std = ms(best_arm, "exact_match")
     best_conf_mean, best_conf_std = ms(best_arm, "confusable_error_rate")
@@ -413,7 +413,7 @@ def run_dpo_sft_aux(
 
     recommendations = [
         f"VERDICT ({verdict}): vanilla DPO (λ=0) takes held-out exact-match {init_em_mean:.3f} -> {van_em_mean:.3f} ({vanilla_dpo_verdict}). Adding the chosen-NLL aux, the best λ={best_lam:g} reaches {best_em_mean:.3f} exact-match (recovers_generation={recovers}); the matched-compute SFT-on-chosen control reaches {sft_em_mean:.3f}. {len(config.seeds)} seeds, gap-minus-combined-std significance.",
-        f"AUX RECOVERS GENERATION: the NLL term anchors logp(chosen) so the λ-sweep interpolates from vanilla DPO (λ=0, generation crashes) toward SFT-on-chosen (λ→large). λ=0 reproduces vanilla DPO and λ→large converges to SFT — the sweep is a fair interpolation between the two endpoints.",
+        "AUX RECOVERS GENERATION: the NLL term anchors logp(chosen) so the λ-sweep interpolates from vanilla DPO (λ=0, generation crashes) toward SFT-on-chosen (λ→large). λ=0 reproduces vanilla DPO and λ→large converges to SFT — the sweep is a fair interpolation between the two endpoints.",
         f"vs PLAIN SFT ({'beats' if beats_sft else 'matches' if matches_sft else 'below'} on exact-match): on overall generation the SFT term tends to do the heavy lifting. The one DPO-attributable axis is the confusable error: best-λ DPO+SFT confusable-error {best_conf_mean:.3f} vs SFT-on-chosen {sft_conf_mean:.3f} (suppresses_confusable_vs_sft={suppresses_confusable}) — the negative signal targets the specific confusion plain SFT-on-positives leaves in place.",
         "LOSS: aux is the token-level mean CE train_sft minimizes on chosen, fused with the DPO summed-logp from ONE chosen forward (same mask). Reference frozen; arms share init clone + seeded batch stream; DPO+SFT does 2 policy forwards/step so SFT-on-chosen gets ~2x steps at the same forward budget.",
         f"GATE: status='{status}' means the comparison was VALID/measurable (init in band={in_band}, DPO loss optimized={loss_optimized}, margin improvable={margin_improvable}) — NOT that DPO+SFT is good. SCOPE: NLL-regularized DPO (DPO+SFT / RPO) on a synthetic deterministic correctness signal with confusable hard-negatives, from-scratch char-level MiniGPT; NOT human preferences / RLHF. Scale-dependent.",
