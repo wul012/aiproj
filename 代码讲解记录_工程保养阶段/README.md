@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1253-v1296-receipt-chain-batch2.md
+ -> v1296 code explanation: the first production rename batch — the 30 longest receipt_index-chain modules (193-186 chars; the family's names accreted one receipt_index_ layer per generation) renamed in place to receipt_chain_<role>_<version>, 30 forwarding shims, 90 consumer files' imports rewritten. The v1295 rebase tool's REFUSAL branch fired in earnest: 10 mechanically-derived short names were themselves over the 40-char filename budget (a doubled token) and the tool blocked the baseline swap until a second-pass de-dup fixed them — then 7,515 -> 7,515 zero-net rebase. 320/320 family tests, all 15 CI gates swept locally, ratchet tightened: long_name_stock 276 -> 246, max_stem_length 193 -> 191.
+
 1252-v1295-name-budget-rename-rebase.md
  -> v1295 code explanation: v1294's push turned CI red — the name-budget gate keys its 7,515-entry baseline by (path, qualname) digest, so the 6 file renames re-keyed 33 historic inner-name violations as "new" (new 33 + resolved 33, stock unchanged). The fix is a provably-neutral rebase: rebase_renamed_paths allows a baseline path-rebase ONLY when the multiset of (kind, qualname, length) of new violations exactly equals the resolved ones (any net growth, length change, or unprovable metadata refuses); the companion script scans the pre-rename tree via git worktree (core.longpaths for the near-MAX_PATH archive). Run: 7,515 -> 7,515, gate pass. Fourth instance of "local gates ⊊ CI gates" upgraded the AGENTS.md rule to a mandatory full-gate sweep before any close (which immediately caught a strict-format failure in this very version's new code).
 
