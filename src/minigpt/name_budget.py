@@ -325,3 +325,37 @@ def _qualify(scope: str, name: str) -> str:
 
 def _item_key(item: NameItem) -> tuple[str, str, str]:
     return item["path"], item["kind"], item["qualname"]
+
+
+def rebase_renamed_paths(
+    old_items: list[NameItem],
+    current_items: list[NameItem],
+    baseline_digests: set[str],
+) -> list[NameItem] | None:
+    """v1295: prove a baseline path-rebase is rename-neutral, or refuse.
+
+    File renames re-key baselined violations (the digest includes the path),
+    so a pure rename shows up as N new + N resolved. The rebase is allowed
+    ONLY when the multiset of (kind, qualname, length) of the new violations
+    exactly equals that of the resolved ones — the violation stock is then
+    provably unchanged modulo path and the ratchet cannot loosen through
+    this door. Returns the item list to write as the rebased baseline, or
+    None when neutrality cannot be proven (including when a resolved
+    digest's metadata is absent from the old-tree scan).
+    """
+    current_digests = {item["digest"] for item in current_items}
+    new_items = [item for item in current_items if item["digest"] not in baseline_digests]
+    resolved_digests = baseline_digests - current_digests
+    old_by_digest = {item["digest"]: item for item in old_items}
+    if not new_items or len(new_items) != len(resolved_digests):
+        return None
+    if any(digest not in old_by_digest for digest in resolved_digests):
+        return None
+    resolved_items = [old_by_digest[digest] for digest in resolved_digests]
+
+    def signature(item: NameItem) -> tuple[str, str, int]:
+        return (item["kind"], item["qualname"], item["length"])
+
+    if Counter(map(signature, new_items)) != Counter(map(signature, resolved_items)):
+        return None
+    return current_items
