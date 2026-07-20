@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1254-v1297-receipt-chain-batch3.md
+ -> v1297 code explanation: batch 3 clears the receipt_index-chain family — all remaining 146 modules >150 chars short-named in one pass, and this tier's consumer filenames embed the module stems so 43 scripts + 86 tests renamed in the same batch (329 files' imports rewritten). The v1296 budget lesson moved upstream into the map generator (zero dup/clash/over-budget asserted at generation; zero rework). 473/473 family tests, 15/15 gates, zero-net name-budget rebase, long_name_stock 246 -> 100.
+
 1253-v1296-receipt-chain-batch2.md
  -> v1296 code explanation: the first production rename batch — the 30 longest receipt_index-chain modules (193-186 chars; the family's names accreted one receipt_index_ layer per generation) renamed in place to receipt_chain_<role>_<version>, 30 forwarding shims, 90 consumer files' imports rewritten. The v1295 rebase tool's REFUSAL branch fired in earnest: 10 mechanically-derived short names were themselves over the 40-char filename budget (a doubled token) and the tool blocked the baseline swap until a second-pass de-dup fixed them — then 7,515 -> 7,515 zero-net rebase. 320/320 family tests, all 15 CI gates swept locally, ratchet tightened: long_name_stock 276 -> 246, max_stem_length 193 -> 191.
 
