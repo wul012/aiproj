@@ -192,3 +192,52 @@ re-observation only — no new training conditions. "Circuit" here means
 the number-embedding Fourier structure (v1188's locus) specifically; the
 attention/OV pathway is not measured. Every claim is about wd=1.0
 post-grok dynamics of this substrate.
+
+---
+
+## Closeout (post-run, 2026-07-20)
+
+**Verdict: `spike_preserves_circuit`** (status pass; G0/G1/G2 all green;
+runs 9, steps 73,700 + 15,620 dense — exactly as preregistered; zero
+code/criteria changes after preregistration commit `e3a1c63b` — eighth
+consecutive clean chain).
+
+- **G0 certificate held everywhere**: all nine reimplemented dense reruns
+  reproduced the committed v1287 curves bit-equal at every one of the
+  ~740 shared coarse rows. The microscopy watched the original
+  trajectories, Adam moments and all.
+- **Primary**: 173 qualified episodes (committed census saw 24), 134 deep
+  (min val < 0.5), **134/134 preserved, 0 destroyed, 0 mid**; r median
+  1.007, worst single episode 0.979. Stable across the deep-bar grid.
+  The embedding Fourier circuit does not even flinch — its share keeps
+  climbing THROUGH collapses (purification continues mid-spike).
+- **Morphology** (secondary): high-lr spikes are 1–3-step needles healing
+  in 3–8 steps, arriving quasi-periodically every ~50 steps — a
+  relaxation oscillator: loss charges slowly, one giant gradient impulse
+  discharges it (median 240×, canonical extremes 9.5M× baseline), fast
+  heal. Canonical-lr events are slower (fall 89–187 steps, longest 254)
+  and equally preserved.
+- **Census blindness quantified**: 150/173 episodes contain no committed
+  row at all; hidden depth median 0.46. v1287's "9 cells spike
+  occasionally" was the 100-step shadow of near-continuous oscillation.
+- **Rotation at spikes**: 13/161 episodes rotate their top-5 set across
+  the spike, all at lr ≤ 4e-3 (8e-3: 0/55, set-locked) — the banked
+  rotation-dynamics question is partially answered: rotation events
+  coincide with spikes.
+- **Honest notes**: the preserved "circuit" is the embedding (= tied
+  unembedding) Fourier structure; what breaks for those few steps lives
+  in the network middle (attention/MLP), not localized here — banked.
+  The loss-precursor lead (median 79, n=120) ≈ the inter-spike interval:
+  it reads the oscillator's charging phase, not an independent early
+  warning — preregistered as non-verdict and reported as such.
+
+**Synthesis**: v1287 (phenomenon: metastability) → v1288 (cause: wd) →
+v1289 (mechanism: the shove breaks the readout for a handful of steps
+while the circuit sails through). Metastability is shallow; recovery is
+cheap because nothing structural is ever lost; v1287's monotone ladder
+purities across spikes are explained — purification is continuous
+refinement, not repeated rebuild.
+
+Banked for later: localize WHAT breaks during the needle (per-component
+dense probing — attention vs MLP vs layernorm); the ~50-step period's
+dependence on lr·wd (oscillator frequency law).

@@ -13,6 +13,9 @@
 
 ## 当前索引
 
+1246-v1289-spike-microscopy.md
+ -> v1289 code explanation: per-step microscopy of the committed v1287 post-grok spikes — the nine spiking trajectories continued with their original Adam moments via a line-for-line faithful reimplementation of the training loop, certified by bit-equality of all ~740 shared coarse rows (G0 9/9). Verdict `spike_preserves_circuit`: 134/134 deep collapses leave the embedding Fourier circuit intact (r median 1.007, worst 0.979) — the wd shove is a 1-3-step gradient impulse (median 240x) that breaks the network middle while share keeps climbing. The post-grok regime is a ~50-step relaxation oscillator (173 episodes where the census saw 24; 150 fully invisible at 100-step resolution); rotation happens AT spikes (13/161, all lr<=4e-3). Completes the arc: phenomenon (v1287) -> cause (v1288) -> mechanism (v1289). Evidence lives under `f/1289`.
+
 1245-v1288-spike-anatomy.md
  -> v1288 code explanation: the causal follow-up to v1287's metastability discovery — paired branch arms (wd=1.0 vs wd=0.0, sharing the optimizer-reset confound) from nine bit-verified healthy v1287 states, plus two un-censoring runs. Verdict `spikes_are_wd_driven` (the arc's first positive causal verdict): wd=1 arms reproduce the post-grok spikes in 8/9 cells while wd=0 arms are spike-free 9/9; both v1287 "deaths" re-grokked within 100 steps. Norm flow reverses without wd; purification freezes where it has headroom — purification and metastability are two faces of one wd process. Evidence lives under `f/1288`.
 

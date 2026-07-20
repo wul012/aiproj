@@ -151,8 +151,11 @@ across the old horizon.
   which it re-groks in a few hundred steps. Removing wd removes the spikes,
   reverses norm flow, and freezes purification.
 - Banked: the microscopic spike trigger (norm/sharpness ramp before an
-  event — needs dense norm sampling); canonical rotation dynamics (v1287's
-  other banked item, untouched).
+  event — needs dense norm sampling) — **executed by v1289** (verdict
+  `spike_preserves_circuit`: the shove is a 1–2-step gradient impulse that
+  spares the embedding circuit); canonical rotation dynamics (v1287's
+  other banked item) — **partially observed by v1289** (13/161 episodes
+  rotate their top-5 set across a spike, concentrated at low/mid lr).
 - Evidence bundle: [f/1288](../f/1288/解释/说明.md); zero code/criteria
   changes after preregistration commit `b07f1b1f` (seventh consecutive
   clean chain).

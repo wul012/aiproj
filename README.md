@@ -56,6 +56,7 @@ them are the most instructive rows in the table.
 | lr compression | v1286 | Preregistered `review` (bar_instability — the 2e-3 median rides the bin boundary; the guard fired as designed). Certain content: the construction-completion invariant is FALSIFIED — F drops to ~0.25 under 8× compression, yet compressed cells hold MORE absolute structure at grok; high lr keeps purifying after grok (final shares 0.31 → 0.81 with lr). Only slow deep grokking equates generalization with construction-complete | [brief](docs/v1286-lr-compression-brief.md) |
 | Post-grok purification | v1287 | Preregistered `review` (substrate_unsound — the guard the brief pre-announced as the post-grok stability gate fired). What it caught: grokked solutions are METASTABLE under continued training — 9/11 cells (including canonical 1e-3) show train+val collapse-recovery spikes, all self-healing in 100–300 steps; the two "dead" 4e-3 cells are censored mid-spike exactly at their horizons. Purification itself is real and universal (own-set purity: 0.31→0.50–0.63 at 1e-3, →0.88–0.93 at high lr; extended 4e-3 overtakes 8e-3, so v1286's lr-monotone endpoint was a truncation snapshot), canonical purification rotates the frequency set, and low-lr post-grok training lifts heldout to 1.0 | [brief](docs/v1287-purification-brief.md) |
 | Spike anatomy | v1288 | `spikes_are_wd_driven` — the arc's first positive CAUSAL verdict: paired branch arms from bit-verified v1287 states (only difference = wd) show wd=1.0 reproduces the post-grok spikes in 8/9 cells (14 episodes, all self-healing) while wd=0.0 is spike-free in 9/9; both v1287 "deaths" re-grokked within 100 steps when un-censored. Norm flow reverses without wd (ratio 0.95 vs 1.75) and the one purity-headroom cell shows the predicted freeze/climb dissociation — purification and metastability are two faces of one wd process | [brief](docs/v1288-spike-anatomy-brief.md) |
+| Spike microscopy | v1289 | `spike_preserves_circuit` — per-step microscopy of the committed spikes via a bit-certified faithful rerun (all ~740 shared coarse rows bit-equal, original Adam moments): 134/134 deep collapses leave the embedding Fourier circuit intact (r median 1.007, worst 0.979, zero destroyed) — the wd shove is a 1–3-step gradient impulse (median 240×, extremes 9.5M×) that breaks the network middle while share keeps climbing mid-collapse. The post-grok regime is a ~50-step relaxation oscillator: 173 episodes where the 100-step census saw 24 (150 fully invisible, hidden depth median 0.46); rotation happens AT spikes (13/161, all lr ≤ 4e-3). Metastability is shallow — purification is continuous refinement, not repeated rebuild | [brief](docs/v1289-spike-microscopy-brief.md) |
 
 ## How to trust a result here
 
@@ -133,28 +134,65 @@ scope.
 - [v1286 lr-compression brief](docs/v1286-lr-compression-brief.md)
 - [v1287 post-grok-purification brief](docs/v1287-purification-brief.md)
 - [v1288 spike-anatomy brief](docs/v1288-spike-anatomy-brief.md)
+- [v1289 spike-microscopy brief](docs/v1289-spike-microscopy-brief.md)
 - [Stage 2 operational brief (inactive)](docs/stage2-aiproj-operational-brief.md)
 - [Deep maintenance v1268-v1272 closeout](docs/deep-maintenance-v1268-v1272-closeout.md)
 - [Plain-language project guide](项目通俗说明/README.md)
 
 ## Current version
 
-Version `v1288` asks the causal question v1287's discovery demanded: what
-destabilizes the grokked solution? Nine spike-prone cells are branched at
-verified-healthy committed snapshot steps into paired continuation arms —
-wd = 1.0 vs wd = 0.0, sharing the optimizer-reset confound, so the arms
-differ only in weight decay — with branch integrity gated on bit-exact
-reproduction of the committed v1287 curves. Verdict
-**`spikes_are_wd_driven`** (all gates green, stable across the spike-bar
-grid): the wd arm reproduces the post-grok spikes in 8/9 cells (14 episodes,
-deepest 0.31, all self-healing) while every wd = 0 arm is spike-free. The two
-v1287 "deaths" are formally un-censored: both re-grokked within 100 steps of
-their old horizons. Without wd the norm flow reverses (median ratio 1.75 vs
-0.95) and purification freezes where it has headroom (canonical: wd arm
-climbs 0.372 → 0.574, wd = 0 arm frozen) — purification and metastability
-are two faces of one wd process: the same hand that sculpts the circuit
-periodically pushes the solution off a stability edge, and the canonical
-recipe's early stop was protective because it stops before the first shove.
+Version `v1289` puts the committed post-grok spikes under a per-step
+microscope and asks the mechanism question v1288's causal verdict left open:
+when val collapses, what actually breaks? The nine spiking v1287
+trajectories are continued with their original Adam moments by a
+line-for-line faithful reimplementation of the training loop, certified by
+bit-equality of all ~740 shared coarse rows against the committed cache, with
+per-step measurements (accuracies, full embedding spectrum, weight norm, and
+the training backward's own loss and gradient norm) inside 20 preregistered
+windows. Verdict **`spike_preserves_circuit`** (all gates green, stable
+across the deep-bar grid): 134/134 deep collapses leave the embedding
+Fourier circuit intact (share ratio median 1.007, worst 0.979, zero
+destroyed) — the wd shove is a 1–3-step gradient impulse (median 240×
+baseline) that breaks the network's middle for a few steps while the circuit
+sails through, share still climbing mid-collapse. Bonus microscopy: the
+post-grok regime is a quasi-periodic relaxation oscillator (~50-step period
+at high lr; 173 episodes where the 100-step census saw 24, 150 of them fully
+invisible to the grid), and 13/161 episodes rotate their top-5 frequency set
+exactly at a spike. Metastability is shallow: nothing structural is ever
+lost, which is why recovery is cheap and why v1287's ladder purities climb
+monotonically across spikes.
+
+## Latest v1289 checkpoint
+
+- Preregistered spike-microscopy experiment (commit `e3a1c63b`; zero
+  code/criteria changes after it — eighth consecutive clean chain). Dense
+  re-observation of the committed v1287 trajectories themselves: v1288-style
+  branch arms restart optimizer state, so v1289 reimplements the
+  `train_to_grok` loop line-for-line and gates on bit-equal coarse rows
+  (G0 passed 9/9 cells, every shared row) — the microscope provably watched
+  the original runs, Adam moments and all. Exactly the preregistered budget:
+  9 runs, 73,700 training steps, 15,620 dense steps in 20 windows.
+- Verdict `spike_preserves_circuit` (173 qualified episodes, 134 deep,
+  134/134 preserved, r median 1.007, worst 0.979; G2-stable across deep bars
+  {0.5, 0.55, 0.6}): the embedding (= tied unembedding) Fourier circuit
+  survives every deep collapse untouched; what breaks for those few steps
+  lives in the network middle (not localized here — banked). Completes the
+  three-layer arc: v1287 phenomenon (metastability) → v1288 cause (wd) →
+  v1289 mechanism (readout breaks, circuit persists); purification is
+  continuous refinement, not repeated rebuild.
+- Secondary microscopy (all preregistered non-verdict): relaxation-oscillator
+  anatomy — slow loss charge, single-impulse discharge (median 240×, extremes
+  9.5M× baseline), 3–8-step heal, ~50-step period at high lr; census
+  blindness quantified (hidden depth median 0.46; 150/173 episodes contain no
+  committed row); two timescales (canonical events fall in 89–187 steps,
+  longest 254; high-lr needles 1–3 steps); rotation-at-spike 13/161, all at
+  lr ≤ 4e-3 (8e-3 set-locked 0/55). The loss-precursor lead (median 79)
+  ≈ the inter-spike interval — it reads the oscillator's charging phase, not
+  an independent early warning, disclosed as such.
+- Banked: localize which component breaks during the needle (per-component
+  dense probing); the oscillator period's dependence on lr·wd. Evidence:
+  `f/1289/解释/grok_spike_microscopy_v1289/` (five formats plus the Phase-A
+  cache), `f/1289/图片/grok_spike_microscopy_v1289.png`, walkthrough 1246.
 
 ## Latest v1288 checkpoint
 
