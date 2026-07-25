@@ -133,6 +133,26 @@ Common examples to stop:
 
 If a process must remain running, state its name, port/PID if known, and why it was kept.
 
+## Staging Discipline (promoted 2026-07-25, after a real leak)
+
+Never stage with a name-based denylist. `git add -A ':!SomeName*'` fails open:
+it protects only the files someone remembered to name, so any newly-shaped
+personal file is committed silently. This is not hypothetical — on 2026-07-25
+that exact command pushed six third-party payslip files to a PUBLIC remote,
+requiring a history rewrite, a force-push, and a GitHub Support request
+(orphaned commits stay fetchable by SHA until Support purges them).
+
+Rules:
+
+- Stage explicitly (`git add <paths>` / `git add src scripts tests docs`), or
+  review `git status --porcelain` in full before any `-A`.
+- Before every commit, confirm no unexpected file is staged at the repo root:
+  `git diff --cached --name-only | grep -v /`.
+- The repo root is an ALLOWLIST enforced by `tests/test_repo_root_hygiene.py`.
+  Adding a root file means editing that allowlist in the same commit.
+- Personal documents belong outside the repo directory. `.gitignore` carries
+  root-scoped patterns as a second layer, not as the primary defense.
+
 ## Program Discipline (promoted 2026-07-06)
 
 - Remote verification policy: after push, confirm the CI run is queued/started with a quick `gh run list` (seconds); do not block on `gh run watch` for intermediate versions of a multi-version batch. Check the previous version's run conclusion at the start of the next version; block-watch only the final version of a batch or when the user asks.
