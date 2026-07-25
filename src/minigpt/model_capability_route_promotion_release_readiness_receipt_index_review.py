@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import hashlib
 import json
 from pathlib import Path
 from typing import Any
@@ -14,6 +13,7 @@ from minigpt.model_capability_route_promotion_release_readiness_receipt_index im
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.report_check_common import check_entry as _check
 from minigpt.report_utils import path_exists as _path_exists
+from minigpt.report_utils import sha256_or_empty as _sha256_or_empty
 
 
 MODEL_CAPABILITY_ROUTE_PROMOTION_RELEASE_READINESS_RECEIPT_INDEX_REVIEW_JSON_FILENAME = "model_capability_route_promotion_release_readiness_receipt_index_review.json"
@@ -201,19 +201,6 @@ def _interpretation(status: str, review: dict[str, Any]) -> dict[str, Any]:
         "reason": "The receipt index is approved for bounded route-promotion release readiness lookup only.",
         "next_action": review.get("next_step"),
     }
-
-
-def _sha256_or_empty(path: str | Path | None) -> str:
-    if not path:
-        return ""
-    source = Path(path)
-    if not source.is_file():
-        return ""
-    digest = hashlib.sha256()
-    with source.open("rb") as handle:
-        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
 
 
 def _decision(status: str) -> str:

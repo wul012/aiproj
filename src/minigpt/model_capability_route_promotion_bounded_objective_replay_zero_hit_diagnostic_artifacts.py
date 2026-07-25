@@ -13,6 +13,7 @@ from minigpt.model_capability_route_promotion_bounded_objective_replay_zero_hit_
 )
 from minigpt.report_utils import as_dict, csv_cell, html_escape, list_of_dicts, markdown_cell, write_json_payload
 from minigpt.report_utils import html_card as _card
+from minigpt.report_utils import cause_row as _cause_row
 
 
 def render_bounded_objective_replay_zero_hit_diagnostic_text(report: dict[str, Any]) -> str:
@@ -154,17 +155,6 @@ def _case_row(row: dict[str, Any]) -> str:
         f"<td>{html_escape(row.get('diagnosis'))}</td>"
         f"<td>{html_escape(row.get('recommended_action'))}</td>"
         f"<td>{html_escape(row.get('continuation_preview'))}</td>"
-        "</tr>"
-    )
-
-
-def _cause_row(row: dict[str, Any]) -> str:
-    return (
-        "<tr>"
-        f"<td>{html_escape(row.get('cause_id'))}</td>"
-        f"<td>{html_escape(row.get('severity'))}</td>"
-        f"<td>{html_escape(row.get('evidence'))}</td>"
-        f"<td>{html_escape(row.get('detail'))}</td>"
         "</tr>"
     )
 

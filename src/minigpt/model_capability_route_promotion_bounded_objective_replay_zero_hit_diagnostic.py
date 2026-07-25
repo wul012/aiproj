@@ -5,9 +5,6 @@ import re
 from pathlib import Path
 from typing import Any
 
-from minigpt.model_capability_route_promotion_bounded_objective_replay_comparison import (
-    BOUNDED_OBJECTIVE_REPLAY_COMPARISON_JSON_FILENAME,
-)
 from minigpt.model_capability_route_promotion_bounded_objective_seed import (
     BOUNDED_OBJECTIVE_SEED_JSON_FILENAME,
 )
@@ -16,6 +13,7 @@ from minigpt.model_capability_route_promotion_bounded_objective_training_run imp
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.report_check_common import check_entry as _check
+from minigpt.model_capability_route_promotion_bounded_objective_replay_comparison import locate_objective_replay_comparison
 
 
 BOUNDED_OBJECTIVE_REPLAY_ZERO_HIT_DIAGNOSTIC_JSON_FILENAME = "model_capability_route_promotion_bounded_objective_replay_zero_hit_diagnostic.json"
@@ -23,13 +21,6 @@ BOUNDED_OBJECTIVE_REPLAY_ZERO_HIT_DIAGNOSTIC_CSV_FILENAME = "model_capability_ro
 BOUNDED_OBJECTIVE_REPLAY_ZERO_HIT_DIAGNOSTIC_TEXT_FILENAME = "model_capability_route_promotion_bounded_objective_replay_zero_hit_diagnostic.txt"
 BOUNDED_OBJECTIVE_REPLAY_ZERO_HIT_DIAGNOSTIC_MARKDOWN_FILENAME = "model_capability_route_promotion_bounded_objective_replay_zero_hit_diagnostic.md"
 BOUNDED_OBJECTIVE_REPLAY_ZERO_HIT_DIAGNOSTIC_HTML_FILENAME = "model_capability_route_promotion_bounded_objective_replay_zero_hit_diagnostic.html"
-
-
-def locate_objective_replay_comparison(path: str | Path) -> Path:
-    source = Path(path)
-    if source.is_dir():
-        source = source / BOUNDED_OBJECTIVE_REPLAY_COMPARISON_JSON_FILENAME
-    return source
 
 
 def locate_objective_seed(path: str | Path) -> Path:

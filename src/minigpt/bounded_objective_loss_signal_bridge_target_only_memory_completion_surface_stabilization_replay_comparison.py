@@ -11,11 +11,9 @@ from minigpt.bounded_objective_loss_signal_bridge_replay_comparison import (
 from minigpt.bounded_objective_loss_signal_bridge_target_only_memory_completion_surface_stabilization_training_run import (
     TARGET_ONLY_MEMORY_COMPLETION_SURFACE_STABILIZATION_TRAINING_RUN_JSON_FILENAME,
 )
-from minigpt.model_capability_route_promotion_bounded_objective_contract import (
-    BOUNDED_OBJECTIVE_CONTRACT_JSON_FILENAME,
-)
 from minigpt.report_utils import as_dict
 from minigpt.report_check_common import resolve_exit_code_comparison_objective as resolve_exit_code
+from minigpt.model_capability_route_promotion_bounded_objective_contract import locate_objective_contract
 
 
 TARGET_ONLY_MEMORY_COMPLETION_SURFACE_STABILIZATION_REPLAY_COMPARISON_JSON_FILENAME = (
@@ -33,13 +31,6 @@ TARGET_ONLY_MEMORY_COMPLETION_SURFACE_STABILIZATION_REPLAY_COMPARISON_MARKDOWN_F
 TARGET_ONLY_MEMORY_COMPLETION_SURFACE_STABILIZATION_REPLAY_COMPARISON_HTML_FILENAME = (
     "bounded_objective_loss_signal_bridge_target_only_memory_completion_surface_stabilization_replay_comparison.html"
 )
-
-
-def locate_objective_contract(path: str | Path) -> Path:
-    source = Path(path)
-    if source.is_dir():
-        source = source / BOUNDED_OBJECTIVE_CONTRACT_JSON_FILENAME
-    return source
 
 
 def locate_completion_surface_stabilization_training_run(path: str | Path) -> Path:

@@ -4,9 +4,6 @@ import json
 from pathlib import Path
 from typing import Any
 
-from minigpt.model_capability_route_promotion_bounded_benchmark_suite import (
-    MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_BENCHMARK_SUITE_JSON_FILENAME,
-)
 from minigpt.model_capability_route_promotion_bounded_real_replay_repair_checkpoint_comparison import (
     MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_REPAIR_CHECKPOINT_COMPARISON_JSON_FILENAME,
 )
@@ -19,6 +16,7 @@ from minigpt.model_capability_route_promotion_bounded_real_replay_repair_trainin
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.report_check_common import check_entry as _check
 from minigpt.report_check_common import resolve_exit_code_diagnostic_ready as resolve_exit_code
+from minigpt.model_capability_route_promotion_bounded_benchmark_suite import locate_benchmark_suite
 
 
 MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_FAILURE_ALIGNMENT_DIAGNOSTIC_JSON_FILENAME = "model_capability_route_promotion_bounded_real_replay_failure_alignment_diagnostic.json"
@@ -26,13 +24,6 @@ MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_FAILURE_ALIGNMENT_DIAGNOSTI
 MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_FAILURE_ALIGNMENT_DIAGNOSTIC_TEXT_FILENAME = "model_capability_route_promotion_bounded_real_replay_failure_alignment_diagnostic.txt"
 MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_FAILURE_ALIGNMENT_DIAGNOSTIC_MARKDOWN_FILENAME = "model_capability_route_promotion_bounded_real_replay_failure_alignment_diagnostic.md"
 MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_FAILURE_ALIGNMENT_DIAGNOSTIC_HTML_FILENAME = "model_capability_route_promotion_bounded_real_replay_failure_alignment_diagnostic.html"
-
-
-def locate_benchmark_suite(path: str | Path) -> Path:
-    source = Path(path)
-    if source.is_dir():
-        source = source / MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_BENCHMARK_SUITE_JSON_FILENAME
-    return source
 
 
 def locate_checkpoint_comparison(path: str | Path) -> Path:

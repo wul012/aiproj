@@ -9,6 +9,7 @@ from minigpt.report_utils import (
     html_escape as _e,
     write_json_payload,
 )
+from minigpt.report_utils import as_list_of_dicts as _list_of_dicts
 
 
 def write_dataset_card_json(card: dict[str, Any], path: str | Path) -> None:
@@ -339,10 +340,6 @@ def _markdown_table(rows: list[tuple[Any, Any]]) -> list[str]:
     lines = ["| Key | Value |", "| --- | --- |"]
     lines.extend(f"| {_md(key)} | {_md(value)} |" for key, value in rows)
     return lines
-
-
-def _list_of_dicts(value: Any) -> list[dict[str, Any]]:
-    return [item for item in value if isinstance(item, dict)] if isinstance(value, list) else []
 
 
 def _string_list(value: Any) -> list[str]:

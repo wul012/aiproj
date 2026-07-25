@@ -15,6 +15,7 @@ from minigpt.registry_ack_packet import (
 from minigpt.registry_ack_receipt_review import read_json_report as read_receipt_review_json
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.report_check_common import check_entry as _check
+from minigpt.report_check_common import resolve_source_review as _resolve_source_review
 
 
 RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_DOWNSTREAM_CONSUMER_ACK_BUNDLE_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_PACKET_CHECK_JSON_FILENAME = "randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet_check.json"
@@ -127,24 +128,6 @@ def resolve_exit_code(report: dict[str, Any], *, require_pass: bool, require_pro
     if require_promotion_ready and summary.get("original_promotion_ready") is not True:
         return 1
     return 0
-
-
-def _resolve_source_review(packet_report: dict[str, Any], packet_path: str | Path | None) -> Path | None:
-    packet = as_dict(packet_report.get("packet"))
-    candidates = [packet_report.get("receipt_review_path"), packet.get("receipt_review_path")]
-    for value in candidates:
-        text = str(value or "")
-        if not text:
-            continue
-        direct = Path(text)
-        if direct.is_file():
-            return direct
-        if packet_path:
-            sibling = Path(packet_path).parent / text
-            if sibling.is_file():
-                return sibling
-        return direct
-    return None
 
 
 def _rebuild_receipt_packet(source_review: Path | None) -> dict[str, Any]:

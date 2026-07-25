@@ -10,8 +10,15 @@ from minigpt.model_capability_token_budget_stability import (
     TOKEN_BUDGET_STABILITY_MARKDOWN_FILENAME,
     TOKEN_BUDGET_STABILITY_TEXT_FILENAME,
 )
-from minigpt.report_utils import as_dict, csv_cell, html_escape, list_of_dicts, markdown_cell, write_json_payload
+from minigpt.report_utils import (
+    as_dict,
+    csv_cell,
+    html_escape,
+    markdown_cell,
+    write_json_payload,
+)
 from minigpt.report_utils import html_card as _card
+from minigpt.report_utils import rows as _rows
 
 
 def render_model_capability_token_budget_stability_text(report: dict[str, Any]) -> str:
@@ -183,10 +190,6 @@ def write_model_capability_token_budget_stability_outputs(report: dict[str, Any]
     paths["markdown"].write_text(render_model_capability_token_budget_stability_markdown(report), encoding="utf-8")
     paths["html"].write_text(render_model_capability_token_budget_stability_html(report), encoding="utf-8")
     return {key: str(value) for key, value in paths.items()}
-
-
-def _rows(report: dict[str, Any]) -> list[dict[str, Any]]:
-    return list_of_dicts(report.get("rows"))
 
 
 def _row_html(row: dict[str, Any]) -> str:

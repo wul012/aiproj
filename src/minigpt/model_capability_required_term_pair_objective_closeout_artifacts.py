@@ -11,8 +11,16 @@ from minigpt.model_capability_required_term_pair_objective_closeout import (
     PAIR_OBJECTIVE_CLOSEOUT_MARKDOWN_FILENAME,
     PAIR_OBJECTIVE_CLOSEOUT_TEXT_FILENAME,
 )
-from minigpt.report_utils import as_dict, csv_cell, html_escape, list_of_dicts, markdown_cell, write_json_payload
+from minigpt.report_utils import (
+    as_dict,
+    csv_cell,
+    html_escape,
+    list_of_dicts,
+    write_json_payload,
+)
 from minigpt.report_utils import html_card as _card
+from minigpt.report_utils import evidence_html as _evidence_html
+from minigpt.report_utils import evidence_markdown_rows as _evidence_markdown_rows
 
 
 def render_model_capability_required_term_pair_objective_closeout_text(report: dict[str, Any]) -> str:
@@ -123,35 +131,6 @@ def _write_csv(report: dict[str, Any], path: str | Path) -> None:
         writer.writeheader()
         for row in list_of_dicts(report.get("evidence_rows")):
             writer.writerow({field: csv_cell(row.get(field)) for field in fieldnames})
-
-
-def _evidence_markdown_rows(report: dict[str, Any]) -> list[str]:
-    rows = ["| Label | Status | Decision | Key result |", "| --- | --- | --- | --- |"]
-    for row in list_of_dicts(report.get("evidence_rows")):
-        rows.append(
-            "| "
-            + " | ".join(
-                [
-                    markdown_cell(row.get("label")),
-                    markdown_cell(row.get("status")),
-                    markdown_cell(row.get("decision")),
-                    markdown_cell(row.get("key_result")),
-                ]
-            )
-            + " |"
-        )
-    return rows
-
-
-def _evidence_html(row: dict[str, Any]) -> str:
-    return (
-        "<tr>"
-        f"<td>{html_escape(row.get('label'))}</td>"
-        f"<td>{html_escape(row.get('status'))}</td>"
-        f"<td>{html_escape(row.get('decision'))}</td>"
-        f"<td>{html_escape(row.get('key_result'))}</td>"
-        "</tr>"
-    )
 
 
 def _style() -> str:

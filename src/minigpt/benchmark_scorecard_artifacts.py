@@ -428,10 +428,6 @@ def _list_section(title: str, values: Any, *, hide_empty: bool = False) -> str:
     return f'<section class="panel"><h2>{_e(title)}</h2><ul>{body}</ul></section>'
 
 
-def _string_list(value: Any) -> list[str]:
-    return [str(item) for item in value] if isinstance(value, list) else []
-
-
 def _md(value: Any) -> str:
     text = "" if value is None else str(value)
     return text.replace("|", "\\|").replace("\n", " ")

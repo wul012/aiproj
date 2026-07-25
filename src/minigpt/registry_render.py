@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import html
 import json
 from pathlib import Path
 from typing import Any
@@ -19,6 +18,7 @@ from minigpt.registry_render_helpers import (
     registry_style,
     stat_card,
 )
+from minigpt.report_utils import html_e as _e
 
 
 def render_registry_html(
@@ -103,7 +103,3 @@ def write_registry_outputs(registry: dict[str, Any], out_dir: str | Path) -> dic
     from minigpt.registry_artifacts import write_registry_outputs as _write_registry_outputs
 
     return _write_registry_outputs(registry, out_dir)
-
-
-def _e(value: Any) -> str:
-    return html.escape("" if value is None else str(value), quote=True)

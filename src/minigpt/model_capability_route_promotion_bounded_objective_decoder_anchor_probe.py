@@ -4,9 +4,6 @@ import json
 from pathlib import Path
 from typing import Any, Callable
 
-from minigpt.model_capability_route_promotion_bounded_objective_replay_comparison import (
-    BOUNDED_OBJECTIVE_REPLAY_COMPARISON_JSON_FILENAME,
-)
 from minigpt.model_capability_route_promotion_bounded_objective_replay_zero_hit_diagnostic import (
     BOUNDED_OBJECTIVE_REPLAY_ZERO_HIT_DIAGNOSTIC_JSON_FILENAME,
 )
@@ -14,6 +11,7 @@ from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.server_contracts import GenerationRequest
 from minigpt.server_generator import MiniGPTGenerator
 from minigpt.report_check_common import check_entry as _check
+from minigpt.model_capability_route_promotion_bounded_objective_replay_comparison import locate_objective_replay_comparison
 
 
 BOUNDED_OBJECTIVE_DECODER_ANCHOR_PROBE_JSON_FILENAME = "model_capability_route_promotion_bounded_objective_decoder_anchor_probe.json"
@@ -29,13 +27,6 @@ ANCHOR_PROFILES = [
     {"profile_id": "prefix_fixed_space", "anchor": "fixed ", "max_new_tokens": 12, "seed_offset": 1200, "description": "Give the first target term and ask for loss."},
     {"profile_id": "prefix_fixed_l", "anchor": "fixed l", "max_new_tokens": 12, "seed_offset": 1300, "description": "Give fixed and the first character of loss."},
 ]
-
-
-def locate_objective_replay_comparison(path: str | Path) -> Path:
-    source = Path(path)
-    if source.is_dir():
-        source = source / BOUNDED_OBJECTIVE_REPLAY_COMPARISON_JSON_FILENAME
-    return source
 
 
 def locate_objective_zero_hit_diagnostic(path: str | Path) -> Path:

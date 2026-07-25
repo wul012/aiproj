@@ -10,6 +10,9 @@ from minigpt.report_utils import (
     string_list,
     write_json_payload,
 )
+from minigpt.report_utils import counts as _counts
+from minigpt.report_utils import reason_drift_status as _reason_drift_status
+from minigpt.report_utils import unique_strings as _unique_strings
 
 
 COMPARISON_JSON_FILENAME = "release_readiness_comparison.json"
@@ -273,16 +276,6 @@ def _reason_removals(baseline: Any, compared: Any) -> list[str]:
     return [reason for reason in _clean_strings(baseline) if reason not in compared_reasons]
 
 
-def _reason_drift_status(added: list[str], removed: list[str]) -> str:
-    if added and removed:
-        return "mixed"
-    if added:
-        return "regressed"
-    if removed:
-        return "recovered"
-    return "stable"
-
-
 def _issue(code: str, target: str, expected: Any, actual: Any) -> dict[str, Any]:
     return {
         "code": code,
@@ -309,23 +302,6 @@ def _optional_int(value: Any) -> int | None:
 
 def _string_or_empty(value: Any) -> str:
     return "" if value is None else str(value)
-
-
-def _unique_strings(values: Any) -> list[str]:
-    items: list[str] = []
-    for value in values:
-        text = str(value).strip()
-        if text and text not in items:
-            items.append(text)
-    return items
-
-
-def _counts(values: Any) -> dict[str, int]:
-    counts: dict[str, int] = {}
-    for value in values:
-        key = str(value)
-        counts[key] = counts.get(key, 0) + 1
-    return counts
 
 
 def _count_map(value: Any) -> dict[str, int]:

@@ -4,9 +4,6 @@ import json
 from pathlib import Path
 from typing import Any, Callable
 
-from minigpt.model_capability_route_promotion_bounded_objective_contract import (
-    BOUNDED_OBJECTIVE_CONTRACT_JSON_FILENAME,
-)
 from minigpt.model_capability_route_promotion_bounded_objective_training_run import (
     BOUNDED_OBJECTIVE_TRAINING_RUN_JSON_FILENAME,
 )
@@ -15,6 +12,7 @@ from minigpt.server_contracts import GenerationRequest
 from minigpt.server_generator import MiniGPTGenerator
 from minigpt.report_check_common import check_entry as _check
 from minigpt.report_check_common import resolve_exit_code_comparison_objective as resolve_exit_code
+from minigpt.model_capability_route_promotion_bounded_objective_contract import locate_objective_contract
 
 
 BOUNDED_OBJECTIVE_REPLAY_COMPARISON_JSON_FILENAME = "model_capability_route_promotion_bounded_objective_replay_comparison.json"
@@ -24,13 +22,6 @@ BOUNDED_OBJECTIVE_REPLAY_COMPARISON_MARKDOWN_FILENAME = "model_capability_route_
 BOUNDED_OBJECTIVE_REPLAY_COMPARISON_HTML_FILENAME = "model_capability_route_promotion_bounded_objective_replay_comparison.html"
 
 GeneratorRunner = Callable[[dict[str, Any], str | Path, str | Path, str], dict[str, Any]]
-
-
-def locate_objective_contract(path: str | Path) -> Path:
-    source = Path(path)
-    if source.is_dir():
-        source = source / BOUNDED_OBJECTIVE_CONTRACT_JSON_FILENAME
-    return source
 
 
 def locate_objective_training_run(path: str | Path) -> Path:
@@ -288,6 +279,14 @@ def _next_step(recovered: bool, any_hit_count: int) -> str:
     return "diagnose_bounded_objective_replay_zero_hit_before_more_training"
 
 
+
+
+def locate_objective_replay_comparison(path: str | Path) -> Path:
+    source = Path(path)
+    if source.is_dir():
+        source = source / BOUNDED_OBJECTIVE_REPLAY_COMPARISON_JSON_FILENAME
+    return source
+
 __all__ = [
     "BOUNDED_OBJECTIVE_REPLAY_COMPARISON_CSV_FILENAME",
     "BOUNDED_OBJECTIVE_REPLAY_COMPARISON_HTML_FILENAME",
@@ -296,6 +295,7 @@ __all__ = [
     "BOUNDED_OBJECTIVE_REPLAY_COMPARISON_TEXT_FILENAME",
     "build_model_capability_route_promotion_bounded_objective_replay_comparison",
     "locate_objective_contract",
+    "locate_objective_replay_comparison",
     "locate_objective_training_run",
     "read_json_report",
     "resolve_exit_code",

@@ -14,6 +14,7 @@ from minigpt.eval_suite import (
     RECOMMENDED_TASK_TYPES,
 )
 from minigpt.report_utils import list_of_dicts
+from minigpt.report_utils import count_by as _count_by
 
 
 def summarize_prompt_suite_design(suite: PromptSuite | dict[str, Any]) -> dict[str, Any]:
@@ -117,14 +118,6 @@ def _comparison_blockers(
     if len(tag_counts) < MIN_COMPARISON_TAGS:
         blockers.append(f"only {len(tag_counts)} tag(s), expected at least {MIN_COMPARISON_TAGS}")
     return blockers
-
-
-def _count_by(values: Any) -> dict[str, int]:
-    counts: dict[str, int] = {}
-    for value in values:
-        key = str(value or "unknown")
-        counts[key] = counts.get(key, 0) + 1
-    return dict(sorted(counts.items()))
 
 
 def _positive_int(value: Any) -> int | None:

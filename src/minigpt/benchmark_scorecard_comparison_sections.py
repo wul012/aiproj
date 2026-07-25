@@ -1,7 +1,11 @@
 from __future__ import annotations
 
-import html
 from typing import Any
+from minigpt.report_utils import as_dict_or_empty as _dict
+from minigpt.report_utils import as_list_of_dicts as _list_of_dicts
+from minigpt.report_utils import fmt_signed as _fmt_signed
+from minigpt.report_utils import format_value as _fmt
+from minigpt.report_utils import html_e as _e
 
 
 def render_benchmark_scorecard_comparison_markdown(report: dict[str, Any]) -> str:
@@ -253,16 +257,8 @@ def _terms_delta(row: dict[str, Any], suffix: str) -> str:
     return "; ".join(parts) if parts else "none"
 
 
-def _dict(value: Any) -> dict[str, Any]:
-    return value if isinstance(value, dict) else {}
-
-
 def _pick(value: dict[str, Any], key: str) -> Any:
     return value.get(key) if isinstance(value, dict) else None
-
-
-def _list_of_dicts(value: Any) -> list[dict[str, Any]]:
-    return [item for item in value if isinstance(item, dict)] if isinstance(value, list) else []
 
 
 def _string_list(value: Any) -> list[str]:
@@ -273,27 +269,8 @@ def _string_list(value: Any) -> list[str]:
     return [str(value)]
 
 
-def _fmt(value: Any) -> str:
-    if value is None:
-        return "missing"
-    if isinstance(value, float):
-        return f"{value:.5g}"
-    return str(value)
-
-
-def _fmt_signed(value: Any) -> str:
-    if value is None:
-        return "missing"
-    number = float(value)
-    return f"{number:+.5g}"
-
-
 def _md(value: Any) -> str:
     return ("missing" if value is None else str(value)).replace("|", "\\|").replace("\n", " ")
-
-
-def _e(value: Any) -> str:
-    return html.escape("" if value is None else str(value), quote=True)
 
 
 def _stat(label: str, value: Any) -> str:

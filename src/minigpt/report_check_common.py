@@ -21,6 +21,8 @@ from __future__ import annotations
 from typing import Any
 
 from minigpt.report_utils import as_dict
+from minigpt.report_utils import html_escape
+from pathlib import Path
 
 
 def check_row(check_id: str, passed: bool, expected: Any, actual: Any, detail: str) -> dict[str, Any]:
@@ -116,11 +118,55 @@ def resolve_exit_code_execution_model(
     return 0
 
 
+
+
+def field_checks(prefix: str, fields: list[str], original: dict[str, Any], rebuilt: dict[str, Any]) -> list[dict[str, Any]]:
+    return [check_entry(f'{prefix}.{field}', original.get(field) == rebuilt.get(field), {'original': original.get(field), 'rebuilt': rebuilt.get(field)}, f'{prefix}.{field} must rebuild exactly') for field in fields]
+
+
+def html_check_section(row: dict[str, Any]) -> str:
+    return f"<tr><td>{html_escape(row.get('id'))}</td><td>{html_escape(row.get('status'))}</td><td>{html_escape(row.get('actual'))}</td><td>{html_escape(row.get('detail'))}</td></tr>"
+
+
+def resolve_source_review(packet_report: dict[str, Any], packet_path: str | Path | None) -> Path | None:
+    packet = as_dict(packet_report.get('packet'))
+    candidates = [packet_report.get('receipt_review_path'), packet.get('receipt_review_path')]
+    for value in candidates:
+        text = str(value or '')
+        if not text:
+            continue
+        direct = Path(text)
+        if direct.is_file():
+            return direct
+        if packet_path:
+            sibling = Path(packet_path).parent / text
+            if sibling.is_file():
+                return sibling
+        return direct
+    return None
+
+
+def check_row_html(row: dict[str, Any]) -> str:
+    return f"<tr><td>{html_escape(row.get('id'))}</td><td>{html_escape(row.get('status'))}</td><td>{html_escape(row.get('actual'))}</td><td>{html_escape(row.get('detail'))}</td></tr>"
+
+
+def resolve_inside_root(path: str | Path, root: Path) -> Path:
+    candidate = Path(path)
+    resolved = candidate.resolve() if candidate.is_absolute() else (root / candidate).resolve()
+    try:
+        resolved.relative_to(root)
+    except ValueError as exc:
+        raise ValueError(f'path escapes project root: {path}') from exc
+    return resolved
+
 __all__ = [
     "check_entry",
     "check_entry_no_detail",
     "check_row",
+    "check_row_html",
     "collect_failures",
+    "field_checks",
+    "html_check_section",
     "resolve_exit_code",
     "resolve_exit_code_comparison_objective",
     "resolve_exit_code_diagnostic_ready",
@@ -132,4 +178,6 @@ __all__ = [
     "resolve_exit_code_strict",
     "resolve_exit_code_suite_ready",
     "resolve_exit_code_training_ready",
+    "resolve_inside_root",
+    "resolve_source_review",
 ]

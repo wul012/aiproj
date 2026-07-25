@@ -1,12 +1,15 @@
 from __future__ import annotations
 
 import csv
-import html
 import json
 from pathlib import Path
 from typing import Any
 
 from minigpt.registry_data import _as_optional_float, _as_str_list
+from minigpt.report_utils import fmt_int as _fmt_int
+from minigpt.report_utils import format_value as _fmt
+from minigpt.report_utils import html_e as _e
+from minigpt.report_utils import rank_label as _rank_label
 
 
 def write_registry_json(registry: dict[str, Any], path: str | Path) -> None:
@@ -175,31 +178,11 @@ def write_registry_outputs(registry: dict[str, Any], out_dir: str | Path) -> dic
     return {key: str(value) for key, value in paths.items()}
 
 
-def _fmt(value: Any) -> str:
-    if value is None:
-        return "missing"
-    if isinstance(value, float):
-        return f"{value:.5g}"
-    return str(value)
-
-
 def _fmt_delta(value: Any) -> str:
     number = _as_optional_float(value)
     if number is None:
         return "delta missing"
     return f"{number:+.5g}"
-
-
-def _fmt_int(value: Any) -> str:
-    if value is None:
-        return "missing"
-    return f"{int(value):,}"
-
-
-def _rank_label(value: Any) -> str:
-    if value is None or value == "":
-        return "unranked"
-    return f"#{int(value)}"
 
 
 def _csv_value(value: Any) -> Any:
@@ -245,10 +228,6 @@ def _clip(value: Any, limit: int) -> str:
 def _fmt_tags(value: Any) -> str:
     tags = value if isinstance(value, list) else _as_str_list(value)
     return ", ".join(str(tag) for tag in tags)
-
-
-def _e(value: Any) -> str:
-    return html.escape("" if value is None else str(value), quote=True)
 
 
 def _pick_dict(payload: Any, key: str) -> dict[str, Any]:

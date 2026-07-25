@@ -10,6 +10,7 @@ from minigpt.bounded_objective_loss_signal_bridge_target_only_memory_target_hidd
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.report_check_common import check_entry as _check
 from minigpt.report_check_common import resolve_exit_code_dry_run_ready as resolve_exit_code
+from minigpt.report_utils import score_fraction as _score
 
 
 TARGET_ONLY_MEMORY_TARGET_HIDDEN_TOKENIZER_COVERED_HOLDOUT_DRY_RUN_JSON_FILENAME = (
@@ -106,13 +107,6 @@ def _dry_run_rows(
             }
         )
     return rows
-
-
-def _score(expected_terms: list[str], continuation: str) -> dict[str, Any]:
-    lowered = continuation.lower()
-    hit_terms = [term for term in expected_terms if term.lower() in lowered]
-    missed_terms = [term for term in expected_terms if term not in hit_terms]
-    return {"hit_terms": hit_terms, "missed_terms": missed_terms, "case_pass": bool(expected_terms) and not missed_terms}
 
 
 def _checks(

@@ -185,6 +185,14 @@ def _interpretation(status: str, summary: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+
+
+def locate_route_promotion_portfolio(path: str | Path) -> Path:
+    source = Path(path)
+    if source.is_dir():
+        source = source / MODEL_CAPABILITY_ROUTE_PROMOTION_PORTFOLIO_JSON_FILENAME
+    return source
+
 __all__ = [
     "MODEL_CAPABILITY_ROUTE_PROMOTION_PORTFOLIO_CSV_FILENAME",
     "MODEL_CAPABILITY_ROUTE_PROMOTION_PORTFOLIO_HTML_FILENAME",
@@ -193,6 +201,7 @@ __all__ = [
     "MODEL_CAPABILITY_ROUTE_PROMOTION_PORTFOLIO_TEXT_FILENAME",
     "build_model_capability_route_promotion_portfolio",
     "locate_route_promotion_history",
+    "locate_route_promotion_portfolio",
     "read_json_report",
     "resolve_exit_code",
 ]

@@ -5,6 +5,7 @@ from typing import Any
 
 from minigpt.report_utils import as_dict as _dict
 from minigpt.report_utils import list_of_dicts as _list_of_dicts
+from minigpt.report_utils import fmt_any as _fmt_any
 
 
 def build_request_history_summary_check(
@@ -430,12 +431,6 @@ def _check(
         "detail": detail,
         "evidence": evidence or {},
     }
-
-
-def _fmt_any(value: Any) -> str:
-    if isinstance(value, float):
-        return f"{value:.5g}"
-    return "missing" if value is None else str(value)
 
 
 def _int(value: Any) -> int:

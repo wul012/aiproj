@@ -5,11 +5,11 @@ from pathlib import Path
 from typing import Any
 
 from minigpt.randomized_holdout_bounded_promotion_gate import RANDOMIZED_HOLDOUT_BOUNDED_PROMOTION_GATE_JSON_FILENAME
-from minigpt.randomized_holdout_candidate_promotion_packet import RANDOMIZED_HOLDOUT_CANDIDATE_PROMOTION_PACKET_JSON_FILENAME
-from minigpt.randomized_holdout_candidate_promotion_packet_review import RANDOMIZED_HOLDOUT_CANDIDATE_PROMOTION_PACKET_REVIEW_JSON_FILENAME
 from minigpt.report_utils import as_dict, utc_now
 from minigpt.report_check_common import check_entry as _check
 from minigpt.report_utils import path_exists as _path_exists
+from minigpt.randomized_holdout_candidate_promotion_packet import locate_candidate_packet as locate_randomized_holdout_candidate_packet
+from minigpt.randomized_holdout_candidate_promotion_packet_review import locate_candidate_packet_review as locate_randomized_holdout_candidate_packet_review
 
 
 RANDOMIZED_HOLDOUT_BOUNDED_PROMOTION_DECISION_JSON_FILENAME = "randomized_holdout_bounded_promotion_decision.json"
@@ -23,20 +23,6 @@ def locate_randomized_holdout_bounded_promotion_gate(path: str | Path) -> Path:
     source = Path(path)
     if source.is_dir():
         source = source / RANDOMIZED_HOLDOUT_BOUNDED_PROMOTION_GATE_JSON_FILENAME
-    return source
-
-
-def locate_randomized_holdout_candidate_packet_review(path: str | Path) -> Path:
-    source = Path(path)
-    if source.is_dir():
-        source = source / RANDOMIZED_HOLDOUT_CANDIDATE_PROMOTION_PACKET_REVIEW_JSON_FILENAME
-    return source
-
-
-def locate_randomized_holdout_candidate_packet(path: str | Path) -> Path:
-    source = Path(path)
-    if source.is_dir():
-        source = source / RANDOMIZED_HOLDOUT_CANDIDATE_PROMOTION_PACKET_JSON_FILENAME
     return source
 
 

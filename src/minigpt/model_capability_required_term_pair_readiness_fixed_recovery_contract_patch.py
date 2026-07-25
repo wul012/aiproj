@@ -13,6 +13,7 @@ from minigpt.model_capability_required_term_pair_readiness_structured_template_c
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.report_check_common import check_entry as _check
 from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
+from minigpt.report_utils import contains_count as _contains_count
 
 
 PAIR_READINESS_FIXED_RECOVERY_CONTRACT_PATCH_JSON_FILENAME = "model_capability_required_term_pair_readiness_fixed_recovery_contract_patch.json"
@@ -136,10 +137,6 @@ def _checks(repair_plan: dict[str, Any], base_contract_report: dict[str, Any], p
         _check("no_exact_eval_row_overlap", not (set(training_rows) & set(probe_prompts)), sorted(set(training_rows) & set(probe_prompts)), "exact eval prompts must not be training rows"),
         _check("heldout_pair_absent", heldout not in training_rows, heldout in training_rows, "heldout pair probe must not be a training row"),
     ]
-
-
-def _contains_count(rows: list[str], needle: str) -> int:
-    return sum(1 for row in rows if needle in row)
 
 
 def _summary(base_contract: dict[str, Any], patched_contract: dict[str, Any], checks: list[dict[str, Any]]) -> dict[str, Any]:

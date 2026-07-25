@@ -11,6 +11,7 @@ from minigpt.report_utils import (
     number_or_none,
     write_json_payload,
 )
+from minigpt.report_utils import fmt_any as _fmt_any
 
 
 def write_generation_quality_json(report: dict[str, Any], path: str | Path) -> None:
@@ -391,12 +392,6 @@ def _ratio_label(value: Any) -> str:
 
 def _status_color(status: str) -> str:
     return {"pass": "#047857", "warn": "#b45309", "fail": "#b91c1c"}.get(status, "#1d4ed8")
-
-
-def _fmt_any(value: Any) -> str:
-    if isinstance(value, float):
-        return f"{value:.5g}"
-    return "missing" if value is None else str(value)
 
 
 def _md(value: Any) -> str:

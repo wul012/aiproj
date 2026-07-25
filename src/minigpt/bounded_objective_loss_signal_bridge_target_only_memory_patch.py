@@ -13,6 +13,7 @@ from minigpt.bounded_objective_loss_signal_bridge_single_line_surface_zero_hit_d
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.report_check_common import check_entry as _check
 from minigpt.report_check_common import resolve_exit_code_patch_ready as resolve_exit_code
+from minigpt.report_utils import locate as _locate
 
 
 TARGET_ONLY_MEMORY_PATCH_JSON_FILENAME = "bounded_objective_loss_signal_bridge_target_only_memory_patch.json"
@@ -269,16 +270,6 @@ def _purpose(kind: str) -> str:
         "plain_target_statement": "state the target pair as plain memory",
         "target_pair_repeat": "increase short target-pair recurrence without label noise",
     }.get(kind, "repair target-only completion memory")
-
-
-def _locate(path: str | Path, filename: str) -> Path:
-    source = Path(path)
-    if source.is_file():
-        return source
-    nested = source / filename
-    if nested.is_file():
-        return nested
-    raise FileNotFoundError(f"cannot locate {filename} under {source}")
 
 
 __all__ = [

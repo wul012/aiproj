@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-from hashlib import sha256
 import json
 from pathlib import Path
 from typing import Any
@@ -18,6 +17,7 @@ from minigpt.ack_bundle_receipt import (
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.report_check_common import check_entry as _check
 from minigpt.report_utils import path_exists as _path_exists
+from minigpt.report_utils import sha256_file as _sha256_file
 
 
 RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_DOWNSTREAM_CONSUMER_ACK_BUNDLE_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_REVIEW_JSON_FILENAME = "randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_review.json"
@@ -216,12 +216,6 @@ def _interpretation(status: str, review: dict[str, Any]) -> dict[str, str]:
         "reason": "The downstream publication receipt is reviewed for packet construction while promotion remains blocked.",
         "next_action": str(review.get("next_step")),
     }
-
-
-def _sha256_file(path: str | Path | None) -> str:
-    if not path or not Path(str(path)).is_file():
-        return ""
-    return sha256(Path(str(path)).read_bytes()).hexdigest()
 
 
 __all__ = [

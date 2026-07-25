@@ -11,6 +11,7 @@ from minigpt.model_capability_required_term_scaffold_probe import (
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code  # noqa: F401 (re-export)
+from minigpt.report_utils import preview as _preview
 
 
 REQUIRED_TERM_MICRO_TRAINING_JSON_FILENAME = "model_capability_required_term_micro_training.json"
@@ -452,8 +453,3 @@ def _sample_prompt(examples: list[dict[str, Any]]) -> str:
 def _hit_count(text: Any, terms: list[str]) -> int:
     lowered = str(text or "").casefold()
     return sum(1 for term in terms if str(term).casefold() in lowered)
-
-
-def _preview(value: Any, limit: int = 90) -> str:
-    text = str(value or "").replace("\n", "\\n").replace("\t", "\\t")
-    return text if len(text) <= limit else text[: limit - 1] + "..."

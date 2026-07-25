@@ -10,6 +10,11 @@ from minigpt.report_utils import (
     list_of_dicts as _list_of_dicts,
     write_json_payload,
 )
+from minigpt.report_utils import as_str_list as _as_str_list
+from minigpt.report_utils import fmt_delta as _fmt_delta
+from minigpt.report_utils import fmt_int as _fmt_int
+from minigpt.report_utils import format_value as _fmt
+from minigpt.report_utils import rank_label as _rank_label
 
 
 def write_model_card_json(card: dict[str, Any], path: str | Path) -> None:
@@ -311,36 +316,6 @@ def _string_list(value: Any) -> list[str]:
     return [str(item) for item in value if str(item).strip()] if isinstance(value, list) else []
 
 
-def _as_str_list(value: Any) -> list[str]:
-    if value is None:
-        return []
-    if isinstance(value, str):
-        return [item.strip() for item in value.split(",") if item.strip()]
-    if isinstance(value, list):
-        return [str(item).strip() for item in value if str(item).strip()]
-    return [str(value).strip()] if str(value).strip() else []
-
-
-def _fmt(value: Any) -> str:
-    if value is None:
-        return "missing"
-    if isinstance(value, float):
-        return f"{value:.5g}"
-    return str(value)
-
-
-def _fmt_delta(value: Any) -> str:
-    if value is None or value == "":
-        return "missing"
-    return f"{float(value):+.5g}"
-
-
-def _fmt_int(value: Any) -> str:
-    if value is None:
-        return "missing"
-    return f"{int(value):,}"
-
-
 def _fmt_any(value: Any) -> str:
     if isinstance(value, dict):
         return ", ".join(f"{key}:{val}" for key, val in value.items()) or "missing"
@@ -349,12 +324,6 @@ def _fmt_any(value: Any) -> str:
     if isinstance(value, float):
         return f"{value:.5g}"
     return "missing" if value is None else str(value)
-
-
-def _rank_label(value: Any) -> str:
-    if value is None or value == "":
-        return "unranked"
-    return f"#{int(value)}"
 
 
 def _clip(value: Any, limit: int) -> str:

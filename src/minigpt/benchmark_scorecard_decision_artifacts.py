@@ -13,6 +13,8 @@ from minigpt.report_utils import (
     string_list as _string_list,
     write_json_payload,
 )
+from minigpt.report_utils import fmt_signed as _fmt_signed
+from minigpt.report_utils import format_value as _fmt
 
 __all__ = [
     "render_benchmark_scorecard_decision_html",
@@ -364,22 +366,7 @@ def _csv_value(value: Any) -> Any:
     return value
 
 
-def _fmt(value: Any) -> str:
-    if value is None:
-        return "missing"
-    if isinstance(value, float):
-        return f"{value:.5g}"
-    return str(value)
-
-
 def _format_pair(name: Any, value: Any) -> str:
     if name is None and value is None:
         return "missing"
     return f"{_fmt(name)} / {_fmt_signed(value)}"
-
-
-def _fmt_signed(value: Any) -> str:
-    if value is None:
-        return "missing"
-    number = float(value)
-    return f"{number:+.5g}"

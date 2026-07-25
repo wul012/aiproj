@@ -12,6 +12,7 @@ from minigpt.report_utils import (
     write_csv_row,
     write_json_payload,
 )
+from minigpt.report_utils import format_value as _fmt
 
 
 def write_training_run_evidence_json(report: dict[str, Any], path: str | Path) -> None:
@@ -432,14 +433,6 @@ tr.fail td:first-child { color:#b91c1c; font-weight:700; }
 li { margin:7px 0; }
 footer { color:#69756a; font-size:12px; }
 </style>"""
-
-
-def _fmt(value: Any) -> str:
-    if value is None:
-        return "missing"
-    if isinstance(value, float):
-        return f"{value:.5g}"
-    return str(value)
 
 
 def _fmt_int(value: Any) -> str:

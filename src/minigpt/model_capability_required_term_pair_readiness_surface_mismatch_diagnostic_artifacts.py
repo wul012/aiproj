@@ -13,6 +13,7 @@ from minigpt.model_capability_required_term_pair_readiness_surface_mismatch_diag
 )
 from minigpt.report_utils import as_dict, csv_cell, html_escape, list_of_dicts, markdown_cell, write_json_payload
 from minigpt.report_utils import html_card as _card
+from minigpt.report_check_common import html_check_section as _check_html
 
 
 def render_surface_mismatch_diagnostic_text(report: dict[str, Any]) -> str:
@@ -142,17 +143,6 @@ def _row_html(row: dict[str, Any]) -> str:
         f"<td>{html_escape(row.get('continuation_hit'))}</td>"
         f"<td>{html_escape(row.get('surface_class'))}</td>"
         f"<td>{html_escape(row.get('continuation'))}</td>"
-        "</tr>"
-    )
-
-
-def _check_html(row: dict[str, Any]) -> str:
-    return (
-        "<tr>"
-        f"<td>{html_escape(row.get('id'))}</td>"
-        f"<td>{html_escape(row.get('status'))}</td>"
-        f"<td>{html_escape(row.get('actual'))}</td>"
-        f"<td>{html_escape(row.get('detail'))}</td>"
         "</tr>"
     )
 

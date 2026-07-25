@@ -24,6 +24,7 @@ from minigpt.randomized_holdout_publication_registry_downstream_consumer_ack_bun
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.report_check_common import check_entry as _check
 from minigpt.report_utils import path_exists as _path_exists
+from minigpt.report_utils import packet_rows as _packet_rows
 
 
 RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_DOWNSTREAM_CONSUMER_ACK_BUNDLE_PUBLICATION_RECEIPT_PACKET_JSON_FILENAME = "randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet.json"
@@ -180,23 +181,6 @@ def _packet(
         "model_quality_claim": RANDOMIZED_HOLDOUT_PUBLICATION_MODEL_QUALITY_CLAIM if ready else "not_claimed",
         "next_step": RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_DOWNSTREAM_CONSUMER_ACK_BUNDLE_PUBLICATION_RECEIPT_PACKET_NEXT_STEP if ready else "repair_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet",
     }
-
-
-def _packet_rows(packet: dict[str, Any], consumer_receipts: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    return [
-        {
-            "packet_id": packet.get("packet_id"),
-            "consumer_name": packet.get("consumer_name"),
-            "lookup_key": row.get("lookup_key"),
-            "publication_id": row.get("publication_id"),
-            "granted_use": packet.get("granted_use"),
-            "blocked_uses": packet.get("blocked_uses"),
-            "promotion_ready": False,
-            "receipt_status": row.get("receipt_status"),
-            "packet_status": packet.get("packet_status"),
-        }
-        for row in consumer_receipts
-    ]
 
 
 def _summary(status: str, checks: list[dict[str, Any]], packet: dict[str, Any]) -> dict[str, Any]:

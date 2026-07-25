@@ -13,6 +13,7 @@ from minigpt.eval_suite_artifacts import (
     write_eval_suite_outputs,  # noqa: F401
     write_eval_suite_svg,  # noqa: F401
 )
+from minigpt.report_utils import count_by as _count_by
 
 RECOMMENDED_TASK_TYPES = ("continuation", "qa", "summary", "structured", "factual-consistency")
 RECOMMENDED_DIFFICULTIES = ("easy", "medium")
@@ -314,14 +315,6 @@ def _case_from_dict(payload: Any) -> PromptCase:
         expected_behavior=str(payload.get("expected_behavior") or ""),
         tags=tags,
     )
-
-
-def _count_by(values: Any) -> dict[str, int]:
-    counts: dict[str, int] = {}
-    for value in values:
-        key = str(value or "unknown")
-        counts[key] = counts.get(key, 0) + 1
-    return dict(sorted(counts.items()))
 
 
 def _coverage_summary(

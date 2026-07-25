@@ -3,6 +3,9 @@ from __future__ import annotations
 import json
 from pathlib import Path
 from typing import Any
+from minigpt.report_utils import as_optional_float as _as_optional_float
+from minigpt.report_utils import as_str_list as _as_str_list
+from minigpt.report_utils import int_if_whole as _int_if_whole
 
 
 def read_release_readiness_comparison(root: Path) -> dict[str, Any]:
@@ -164,31 +167,6 @@ def _as_int(value: Any) -> int | None:
     if value is None:
         return None
     return int(value)
-
-
-def _as_optional_float(value: Any) -> float | None:
-    if value is None or value == "":
-        return None
-    try:
-        return float(value)
-    except (TypeError, ValueError):
-        return None
-
-
-def _int_if_whole(value: float | None) -> int | float | None:
-    if value is None:
-        return None
-    return int(value) if float(value).is_integer() else value
-
-
-def _as_str_list(value: Any) -> list[str]:
-    if value is None:
-        return []
-    if isinstance(value, str):
-        return [item.strip() for item in value.split(",") if item.strip()]
-    if isinstance(value, list):
-        return [str(item).strip() for item in value if str(item).strip()]
-    return [str(value).strip()] if str(value).strip() else []
 
 
 __all__ = [

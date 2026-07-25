@@ -8,6 +8,7 @@ from minigpt.report_utils import (
     first_present,
     list_of_dicts as _list_of_dicts,
 )
+from minigpt.report_utils import format_value as _fmt
 
 
 def registry_panel(path: Path | None, registry: dict[str, Any] | None) -> dict[str, Any]:
@@ -315,14 +316,6 @@ def _int(value: Any) -> int:
         return int(value)
     except (TypeError, ValueError):
         return 0
-
-
-def _fmt(value: Any) -> str:
-    if value is None:
-        return "missing"
-    if isinstance(value, float):
-        return f"{value:.5g}"
-    return str(value)
 
 
 def _fmt_reasons(value: Any) -> str:

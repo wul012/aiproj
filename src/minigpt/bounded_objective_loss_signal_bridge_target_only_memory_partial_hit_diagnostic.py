@@ -10,6 +10,7 @@ from minigpt.bounded_objective_loss_signal_bridge_target_only_memory_replay_comp
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.report_check_common import check_entry as _check
 from minigpt.report_check_common import resolve_exit_code_diagnostic_ready as resolve_exit_code
+from minigpt.report_utils import cause as _cause
 
 
 TARGET_ONLY_MEMORY_PARTIAL_HIT_DIAGNOSTIC_JSON_FILENAME = (
@@ -128,10 +129,6 @@ def _root_causes(case_rows: list[dict[str, Any]], replay_summary: dict[str, Any]
     if int(replay_summary.get("passed_case_count") or 0) == 0 and int(replay_summary.get("any_hit_case_count") or 0) > 0:
         causes.append(_cause("partial_signal_without_contract_pass", "required-term signal improved, but no case satisfies the full objective."))
     return causes
-
-
-def _cause(cause_id: str, detail: str) -> dict[str, str]:
-    return {"id": cause_id, "detail": detail}
 
 
 def _checks(replay_comparison: dict[str, Any], replay_summary: dict[str, Any], case_rows: list[dict[str, Any]]) -> list[dict[str, Any]]:

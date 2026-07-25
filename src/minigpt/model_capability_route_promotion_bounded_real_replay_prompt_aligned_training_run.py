@@ -4,12 +4,11 @@ import json
 from pathlib import Path
 from typing import Any
 
-from minigpt.model_capability_route_promotion_bounded_real_replay_prompt_aligned_seed_revision import (
-    MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_PROMPT_ALIGNED_SEED_REVISION_JSON_FILENAME,
-)
 from minigpt.report_utils import as_dict, utc_now
 from minigpt.report_check_common import check_entry as _check
 from minigpt.report_check_common import resolve_exit_code_training_ready as resolve_exit_code
+from minigpt.model_capability_route_promotion_bounded_real_replay_prompt_aligned_seed_revision import locate_prompt_aligned_seed_revision
+from minigpt.report_utils import artifact_entries as _artifacts
 
 
 MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_PROMPT_ALIGNED_TRAINING_RUN_JSON_FILENAME = "model_capability_route_promotion_bounded_real_replay_prompt_aligned_training_run.json"
@@ -17,13 +16,6 @@ MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_PROMPT_ALIGNED_TRAINING_RUN
 MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_PROMPT_ALIGNED_TRAINING_RUN_TEXT_FILENAME = "model_capability_route_promotion_bounded_real_replay_prompt_aligned_training_run.txt"
 MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_PROMPT_ALIGNED_TRAINING_RUN_MARKDOWN_FILENAME = "model_capability_route_promotion_bounded_real_replay_prompt_aligned_training_run.md"
 MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_PROMPT_ALIGNED_TRAINING_RUN_HTML_FILENAME = "model_capability_route_promotion_bounded_real_replay_prompt_aligned_training_run.html"
-
-
-def locate_prompt_aligned_seed_revision(path: str | Path) -> Path:
-    source = Path(path)
-    if source.is_dir():
-        source = source / MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_PROMPT_ALIGNED_SEED_REVISION_JSON_FILENAME
-    return source
 
 
 def read_json_report(path: str | Path) -> dict[str, Any]:
@@ -71,22 +63,6 @@ def build_model_capability_route_promotion_bounded_real_replay_prompt_aligned_tr
         "summary": _summary(status, checks, training),
         "interpretation": _interpretation(status, training),
     }
-
-
-def _artifacts(root: Path) -> list[dict[str, Any]]:
-    rows = []
-    for key, name in [
-        ("checkpoint", "checkpoint.pt"),
-        ("tokenizer", "tokenizer.json"),
-        ("metrics", "metrics.jsonl"),
-        ("train_config", "train_config.json"),
-        ("run_manifest", "run_manifest.json"),
-        ("sample", "sample.txt"),
-        ("prepared_corpus", "prepared_corpus.txt"),
-    ]:
-        path = root / name
-        rows.append({"key": key, "path": str(path), "exists": path.is_file(), "size": path.stat().st_size if path.is_file() else 0})
-    return rows
 
 
 def _metrics(path: Path) -> dict[str, Any]:

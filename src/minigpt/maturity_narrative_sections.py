@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 from typing import Any
+from minigpt.report_utils import fmt_mapping as _fmt_mapping
 
 
 def build_maturity_narrative_sections(summary: dict[str, Any]) -> list[dict[str, Any]]:
@@ -245,12 +246,6 @@ def _dataset_claim(summary: dict[str, Any]) -> str:
 
 def _portfolio_claim(summary: dict[str, Any]) -> str:
     return f"Portfolio status is {summary.get('portfolio_status')} after combining release, serving, benchmark, data, and maturity evidence."
-
-
-def _fmt_mapping(value: Any) -> str:
-    if not isinstance(value, dict) or not value:
-        return "missing"
-    return ", ".join(f"{key}:{value[key]}" for key in sorted(value))
 
 
 __all__ = [

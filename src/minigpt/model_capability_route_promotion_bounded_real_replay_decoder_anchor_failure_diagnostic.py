@@ -10,15 +10,14 @@ from minigpt.model_capability_route_promotion_bounded_real_replay import (
 from minigpt.model_capability_route_promotion_bounded_real_replay_decoder_anchor_checkpoint_comparison import (
     MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_DECODER_ANCHOR_CHECKPOINT_COMPARISON_JSON_FILENAME,
 )
-from minigpt.model_capability_route_promotion_bounded_real_replay_decoder_anchor_seed_revision import (
-    MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_DECODER_ANCHOR_SEED_REVISION_JSON_FILENAME,
-)
 from minigpt.model_capability_route_promotion_bounded_real_replay_decoder_anchor_training_run import (
     MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_DECODER_ANCHOR_TRAINING_RUN_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.report_check_common import check_entry as _check
 from minigpt.report_check_common import resolve_exit_code_diagnostic_ready as resolve_exit_code
+from minigpt.model_capability_route_promotion_bounded_real_replay_decoder_anchor_seed_revision import locate_decoder_anchor_seed_revision
+from minigpt.report_utils import term_count as _term_count
 
 
 MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_DECODER_ANCHOR_FAILURE_DIAGNOSTIC_JSON_FILENAME = "model_capability_route_promotion_bounded_real_replay_decoder_anchor_failure_diagnostic.json"
@@ -39,13 +38,6 @@ def locate_decoder_anchor_comparison(path: str | Path) -> Path:
     source = Path(path)
     if source.is_dir():
         source = source / MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_DECODER_ANCHOR_CHECKPOINT_COMPARISON_JSON_FILENAME
-    return source
-
-
-def locate_decoder_anchor_seed_revision(path: str | Path) -> Path:
-    source = Path(path)
-    if source.is_dir():
-        source = source / MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_DECODER_ANCHOR_SEED_REVISION_JSON_FILENAME
     return source
 
 
@@ -145,11 +137,6 @@ def _case_diagnostic(row: dict[str, Any], seed_text: str, corpus: str) -> dict[s
         "diagnosis": _diagnosis(prompt_in_corpus, zero_hit, fragment_like, term_corpus_count),
         "recommended_action": _recommended_action(prompt_in_corpus, zero_hit, fragment_like),
     }
-
-
-def _term_count(text: str, terms: list[str]) -> dict[str, int]:
-    lowered = text.lower()
-    return {term: lowered.count(term.lower()) for term in terms}
 
 
 def _fragment_like(continuation: str, expected_terms: list[str]) -> bool:

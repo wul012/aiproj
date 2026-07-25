@@ -4,10 +4,10 @@ import json
 from pathlib import Path
 from typing import Any
 
-from minigpt.model_capability_route_promotion_portfolio import MODEL_CAPABILITY_ROUTE_PROMOTION_PORTFOLIO_JSON_FILENAME
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.report_check_common import check_entry as _check
 from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
+from minigpt.model_capability_route_promotion_portfolio import locate_route_promotion_portfolio
 
 
 MODEL_CAPABILITY_ROUTE_PROMOTION_REGRESSION_JSON_FILENAME = "model_capability_route_promotion_regression_monitor.json"
@@ -15,13 +15,6 @@ MODEL_CAPABILITY_ROUTE_PROMOTION_REGRESSION_CSV_FILENAME = "model_capability_rou
 MODEL_CAPABILITY_ROUTE_PROMOTION_REGRESSION_TEXT_FILENAME = "model_capability_route_promotion_regression_monitor.txt"
 MODEL_CAPABILITY_ROUTE_PROMOTION_REGRESSION_MARKDOWN_FILENAME = "model_capability_route_promotion_regression_monitor.md"
 MODEL_CAPABILITY_ROUTE_PROMOTION_REGRESSION_HTML_FILENAME = "model_capability_route_promotion_regression_monitor.html"
-
-
-def locate_route_promotion_portfolio(path: str | Path) -> Path:
-    source = Path(path)
-    if source.is_dir():
-        source = source / MODEL_CAPABILITY_ROUTE_PROMOTION_PORTFOLIO_JSON_FILENAME
-    return source
 
 
 def read_json_report(path: str | Path) -> dict[str, Any]:

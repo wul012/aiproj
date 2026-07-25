@@ -11,8 +11,16 @@ from minigpt.model_capability_required_term_pair_target_anchor_route_decision im
     PAIR_TARGET_ANCHOR_ROUTE_DECISION_MARKDOWN_FILENAME,
     PAIR_TARGET_ANCHOR_ROUTE_DECISION_TEXT_FILENAME,
 )
-from minigpt.report_utils import as_dict, csv_cell, html_escape, list_of_dicts, markdown_cell, write_json_payload
+from minigpt.report_utils import (
+    as_dict,
+    csv_cell,
+    html_escape,
+    list_of_dicts,
+    write_json_payload,
+)
 from minigpt.report_utils import html_card as _card
+from minigpt.report_utils import route_html as _route_html
+from minigpt.report_utils import route_markdown_rows as _route_markdown_rows
 
 
 def render_model_capability_required_term_pair_target_anchor_route_decision_text(report: dict[str, Any]) -> str:
@@ -123,38 +131,6 @@ def _write_csv(report: dict[str, Any], path: str | Path) -> None:
         writer.writeheader()
         for row in list_of_dicts(report.get("route_rows")):
             writer.writerow({field: csv_cell(row.get(field)) for field in fieldnames})
-
-
-def _route_markdown_rows(report: dict[str, Any]) -> list[str]:
-    rows = ["| Route | Type | Pair-full | Hit terms | Reasons |", "| --- | --- | ---: | --- | --- |"]
-    for row in list_of_dicts(report.get("route_rows")):
-        rows.append(
-            "| "
-            + " | ".join(
-                [
-                    markdown_cell(row.get("source_label")),
-                    markdown_cell(row.get("route_type")),
-                    markdown_cell(f"{row.get('pair_full_seed_count')}/{row.get('seed_count')}"),
-                    markdown_cell(",".join(str(term) for term in row.get("hit_terms", []))),
-                    markdown_cell(",".join(str(reason) for reason in row.get("rejection_reasons", []))),
-                ]
-            )
-            + " |"
-        )
-    return rows
-
-
-def _route_html(row: dict[str, Any]) -> str:
-    pair_full = f"{row.get('pair_full_seed_count')}/{row.get('seed_count')}"
-    return (
-        "<tr>"
-        f"<td>{html_escape(row.get('source_label'))}</td>"
-        f"<td>{html_escape(row.get('route_type'))}</td>"
-        f"<td>{html_escape(pair_full)}</td>"
-        f"<td>{html_escape(','.join(str(term) for term in row.get('hit_terms', [])))}</td>"
-        f"<td>{html_escape(','.join(str(reason) for reason in row.get('rejection_reasons', [])))}</td>"
-        "</tr>"
-    )
 
 
 def _style() -> str:

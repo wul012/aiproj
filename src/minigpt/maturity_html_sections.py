@@ -1,7 +1,8 @@
 from __future__ import annotations
 
-import html
 from typing import Any
+from minigpt.report_utils import fmt_mapping as _fmt_mapping
+from minigpt.report_utils import html_e as _e
 
 
 def card(label: str, value: Any) -> str:
@@ -199,18 +200,8 @@ def _version_list(value: Any) -> str:
     return ", ".join(f"v{item}" for item in value)
 
 
-def _fmt_mapping(value: Any) -> str:
-    if not isinstance(value, dict) or not value:
-        return "missing"
-    return ", ".join(f"{key}:{value[key]}" for key in sorted(value))
-
-
 def _string_list(value: Any) -> list[str]:
     return [str(item) for item in value] if isinstance(value, list) else []
-
-
-def _e(value: Any) -> str:
-    return html.escape("" if value is None else str(value), quote=True)
 
 
 __all__ = [

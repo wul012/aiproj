@@ -7,6 +7,7 @@ from typing import Any, Sequence
 from minigpt.model_capability_required_term_pair_coexistence_refresh import PAIR_COEXISTENCE_REFRESH_JSON_FILENAME
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
+from minigpt.report_utils import best_routes as _best_routes
 
 
 PAIR_FIXED_RETENTION_OBJECTIVE_COMPARISON_JSON_FILENAME = "model_capability_required_term_pair_fixed_retention_objective_comparison.json"
@@ -193,11 +194,6 @@ def _summary(report_rows: list[dict[str, Any]], branch_rows: list[dict[str, Any]
         "best_routes": _best_routes(branch_rows),
         "fixed_recovery_route": _first_route(branch_rows, "fixed_only_tradeoff"),
     }
-
-
-def _best_routes(branch_rows: list[dict[str, Any]]) -> list[str]:
-    best = max([int(row.get("hit_term_count") or 0) for row in branch_rows] or [0])
-    return [str(row.get("source_label") or "") for row in branch_rows if int(row.get("hit_term_count") or 0) == best]
 
 
 def _first_route(branch_rows: list[dict[str, Any]], key: str) -> str:

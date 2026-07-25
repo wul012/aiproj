@@ -4,9 +4,6 @@ import json
 from pathlib import Path
 from typing import Any, Callable
 
-from minigpt.model_capability_route_promotion_bounded_real_replay import (
-    MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_JSON_FILENAME,
-)
 from minigpt.model_capability_route_promotion_bounded_real_replay_decoder_anchor_policy import (
     MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_DECODER_ANCHOR_POLICY_JSON_FILENAME,
 )
@@ -14,6 +11,7 @@ from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.server_contracts import GenerationRequest
 from minigpt.server_generator import MiniGPTGenerator
 from minigpt.report_check_common import check_entry as _check
+from minigpt.model_capability_route_promotion_bounded_real_replay import locate_real_replay as locate_prompt_aligned_replay
 
 
 MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_DECODER_ANCHOR_POLICY_REPLAY_JSON_FILENAME = "model_capability_route_promotion_bounded_real_replay_decoder_anchor_policy_replay.json"
@@ -23,13 +21,6 @@ MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_DECODER_ANCHOR_POLICY_REPLA
 MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_DECODER_ANCHOR_POLICY_REPLAY_HTML_FILENAME = "model_capability_route_promotion_bounded_real_replay_decoder_anchor_policy_replay.html"
 
 GeneratorRunner = Callable[[dict[str, Any], dict[str, Any] | None, str | Path, str | Path, str], dict[str, Any]]
-
-
-def locate_prompt_aligned_replay(path: str | Path) -> Path:
-    source = Path(path)
-    if source.is_dir():
-        source = source / MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_JSON_FILENAME
-    return source
 
 
 def locate_decoder_anchor_policy(path: str | Path) -> Path:

@@ -10,6 +10,7 @@ from minigpt.bounded_objective_loss_signal_bridge_pair_binding_replay_comparison
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.report_check_common import check_entry as _check
 from minigpt.report_check_common import resolve_exit_code_diagnostic_ready as resolve_exit_code
+from minigpt.report_utils import cause as _cause
 
 
 PAIR_BINDING_ZERO_HIT_DIAGNOSTIC_JSON_FILENAME = "bounded_objective_loss_signal_bridge_pair_binding_zero_hit_diagnostic.json"
@@ -98,10 +99,6 @@ def _root_causes(case_rows: list[dict[str, Any]], replay_summary: dict[str, Any]
     if any(row["continuation_len"] <= 8 for row in case_rows):
         causes.append(_cause("short_decode_label_fragment", "short continuations are consumed by label fragments before target terms appear."))
     return causes
-
-
-def _cause(cause_id: str, detail: str) -> dict[str, str]:
-    return {"id": cause_id, "detail": detail}
 
 
 def _checks(replay: dict[str, Any], summary: dict[str, Any], case_rows: list[dict[str, Any]]) -> list[dict[str, Any]]:

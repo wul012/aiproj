@@ -1,9 +1,12 @@
 from __future__ import annotations
 
-import html
 import json
 from pathlib import Path
 from typing import Any
+from minigpt.report_utils import as_dict_or_empty as _dict
+from minigpt.report_utils import as_list_of_dicts as _list_of_dicts
+from minigpt.report_utils import fmt_mapping as _fmt_mapping
+from minigpt.report_utils import html_e as _e
 
 
 def write_maturity_narrative_json(narrative: dict[str, Any], path: str | Path) -> None:
@@ -249,14 +252,6 @@ def write_maturity_narrative_outputs(narrative: dict[str, Any], out_dir: str | P
     return {key: str(value) for key, value in paths.items()}
 
 
-def _dict(value: Any) -> dict[str, Any]:
-    return value if isinstance(value, dict) else {}
-
-
-def _list_of_dicts(value: Any) -> list[dict[str, Any]]:
-    return [item for item in value if isinstance(item, dict)] if isinstance(value, list) else []
-
-
 def _string_list(value: Any) -> list[str]:
     return [str(item) for item in value if str(item).strip()] if isinstance(value, list) else []
 
@@ -265,12 +260,6 @@ def _markdown_table(rows: list[tuple[Any, Any]]) -> list[str]:
     lines = ["| Key | Value |", "| --- | --- |"]
     lines.extend(f"| {_md(key)} | {_md(value)} |" for key, value in rows)
     return lines
-
-
-def _fmt_mapping(value: Any) -> str:
-    if not isinstance(value, dict) or not value:
-        return "missing"
-    return ", ".join(f"{key}:{value[key]}" for key in sorted(value))
 
 
 def _section_cards(sections: list[dict[str, Any]]) -> str:
@@ -358,7 +347,3 @@ footer { padding:20px 32px 34px; color:var(--muted); font-size:13px; }
 def _md(value: Any) -> str:
     text = "" if value is None else str(value)
     return text.replace("|", "\\|").replace("\n", " ")
-
-
-def _e(value: Any) -> str:
-    return html.escape("" if value is None else str(value), quote=True)

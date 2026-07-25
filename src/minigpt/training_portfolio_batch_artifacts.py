@@ -6,6 +6,8 @@ from pathlib import Path
 from typing import Any
 
 from minigpt.report_utils import html_escape as _e
+from minigpt.report_utils import as_dict_or_empty as _dict
+from minigpt.report_utils import as_list_of_dicts as _list_of_dicts
 
 
 def write_training_portfolio_batch_json(report: dict[str, Any], path: str | Path) -> None:
@@ -383,14 +385,6 @@ def _markdown_table(rows: list[tuple[str, Any]]) -> list[str]:
     lines = ["| Field | Value |", "| --- | --- |"]
     lines.extend(f"| {_md(label)} | {_md(value)} |" for label, value in rows)
     return lines
-
-
-def _dict(value: Any) -> dict[str, Any]:
-    return value if isinstance(value, dict) else {}
-
-
-def _list_of_dicts(value: Any) -> list[dict[str, Any]]:
-    return [item for item in value if isinstance(item, dict)] if isinstance(value, list) else []
 
 
 def _string_list(value: Any) -> list[str]:

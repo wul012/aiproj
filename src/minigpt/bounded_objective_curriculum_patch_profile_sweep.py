@@ -17,6 +17,7 @@ from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.server_contracts import GenerationRequest
 from minigpt.server_generator import MiniGPTGenerator
 from minigpt.report_check_common import check_entry as _check
+from minigpt.report_utils import locate as _locate
 
 
 CURRICULUM_PATCH_PROFILE_SWEEP_JSON_FILENAME = "bounded_objective_curriculum_patch_profile_sweep.json"
@@ -328,16 +329,6 @@ def _resolve_tokenizer(report: dict[str, Any], explicit: str | Path | None, chec
     if run_dir:
         return run_dir / "tokenizer.json"
     return checkpoint.with_name("tokenizer.json")
-
-
-def _locate(path: str | Path, filename: str) -> Path:
-    source = Path(path)
-    if source.is_file():
-        return source
-    nested = source / filename
-    if nested.is_file():
-        return nested
-    raise FileNotFoundError(f"cannot locate {filename} under {source}")
 
 
 def _terms(value: Any) -> list[str]:

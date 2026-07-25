@@ -2,12 +2,13 @@ from __future__ import annotations
 
 import csv
 from dataclasses import asdict, is_dataclass
-import html
 import json
 from pathlib import Path
 from typing import Any
 
 from .eval_suite import PromptCase, PromptSuite
+from minigpt.report_utils import count_by as _count_by
+from minigpt.report_utils import html_e as _e
 
 
 def build_pair_batch_case_result(
@@ -359,14 +360,6 @@ def _summary_by(results: list[dict[str, Any]], key: str) -> list[dict[str, Any]]
     return summaries
 
 
-def _count_by(values: Any) -> dict[str, int]:
-    counts: dict[str, int] = {}
-    for value in values:
-        key = str(value or "unknown")
-        counts[key] = counts.get(key, 0) + 1
-    return dict(sorted(counts.items()))
-
-
 def _avg_abs(values: Any) -> float:
     items = [abs(int(value)) for value in values if value is not None]
     if not items:
@@ -388,10 +381,6 @@ def _clip(text: str, limit: int) -> str:
 
 def _md(value: Any) -> str:
     return str("" if value is None else value).replace("|", "\\|").replace("\n", "\\n")
-
-
-def _e(value: Any) -> str:
-    return html.escape("" if value is None else str(value), quote=True)
 
 
 def _stat(label: str, value: Any) -> str:

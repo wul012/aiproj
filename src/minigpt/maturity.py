@@ -24,6 +24,7 @@ from minigpt.maturity_artifacts import (
     write_maturity_summary_outputs,  # noqa: F401
 )
 from minigpt.maturity_release_context import build_release_readiness_context as _release_readiness_context
+from minigpt.report_utils import as_dict_or_empty as _dict
 
 
 def build_maturity_summary(
@@ -312,10 +313,6 @@ def _read_json(path: Path) -> dict[str, Any] | None:
         return None
     payload = json.loads(path.read_text(encoding="utf-8-sig"))
     return payload if isinstance(payload, dict) else None
-
-
-def _dict(value: Any) -> dict[str, Any]:
-    return value if isinstance(value, dict) else {}
 
 
 def _string_list(value: Any) -> list[str]:

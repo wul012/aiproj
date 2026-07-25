@@ -4,15 +4,13 @@ import json
 from pathlib import Path
 from typing import Any
 
-from minigpt.model_capability_route_promotion_bounded_benchmark_suite import (
-    MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_BENCHMARK_SUITE_JSON_FILENAME,
-)
 from minigpt.model_capability_route_promotion_bounded_benchmark_suite_review import (
     MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_BENCHMARK_SUITE_REVIEW_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.report_check_common import check_entry as _check
 from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
+from minigpt.model_capability_route_promotion_bounded_benchmark_suite import locate_benchmark_suite as locate_route_promotion_bounded_benchmark_suite
 
 
 MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_BENCHMARK_DRY_RUN_JSON_FILENAME = "model_capability_route_promotion_bounded_benchmark_dry_run.json"
@@ -20,13 +18,6 @@ MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_BENCHMARK_DRY_RUN_CSV_FILENAME = "model
 MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_BENCHMARK_DRY_RUN_TEXT_FILENAME = "model_capability_route_promotion_bounded_benchmark_dry_run.txt"
 MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_BENCHMARK_DRY_RUN_MARKDOWN_FILENAME = "model_capability_route_promotion_bounded_benchmark_dry_run.md"
 MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_BENCHMARK_DRY_RUN_HTML_FILENAME = "model_capability_route_promotion_bounded_benchmark_dry_run.html"
-
-
-def locate_route_promotion_bounded_benchmark_suite(path: str | Path) -> Path:
-    source = Path(path)
-    if source.is_dir():
-        source = source / MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_BENCHMARK_SUITE_JSON_FILENAME
-    return source
 
 
 def locate_route_promotion_bounded_benchmark_suite_review(path: str | Path) -> Path:

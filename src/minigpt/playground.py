@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from dataclasses import asdict, dataclass
-import html
 import json
 import os
 from pathlib import Path
@@ -10,6 +9,7 @@ from typing import Any
 from .dashboard import build_dashboard_payload
 from .generation_profiles import DEFAULT_GENERATION_PROFILE_ID, generation_profile_options
 from .playground_assets import playground_script, playground_style
+from minigpt.report_utils import html_e as _e
 
 
 @dataclass(frozen=True)
@@ -464,7 +464,3 @@ def _fmt_missing(value: Any) -> str:
     if value is None:
         return "missing"
     return str(_fmt(value))
-
-
-def _e(value: Any) -> str:
-    return html.escape("" if value is None else str(value), quote=True)

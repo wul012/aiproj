@@ -5,9 +5,10 @@ from pathlib import Path
 from typing import Any
 
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
-from minigpt.target_hidden_semantic_holdout_suite import TARGET_HIDDEN_SEMANTIC_HOLDOUT_SUITE_JSON_FILENAME
 from minigpt.report_check_common import check_entry as _check
 from minigpt.report_check_common import resolve_exit_code_dry_run_ready as resolve_exit_code
+from minigpt.report_utils import score_fraction as _score
+from minigpt.target_hidden_semantic_holdout_suite import locate_semantic_holdout_suite as locate_target_hidden_semantic_holdout_suite
 
 
 TARGET_HIDDEN_SEMANTIC_HOLDOUT_DRY_RUN_JSON_FILENAME = "target_hidden_semantic_holdout_dry_run.json"
@@ -15,13 +16,6 @@ TARGET_HIDDEN_SEMANTIC_HOLDOUT_DRY_RUN_CSV_FILENAME = "target_hidden_semantic_ho
 TARGET_HIDDEN_SEMANTIC_HOLDOUT_DRY_RUN_TEXT_FILENAME = "target_hidden_semantic_holdout_dry_run.txt"
 TARGET_HIDDEN_SEMANTIC_HOLDOUT_DRY_RUN_MARKDOWN_FILENAME = "target_hidden_semantic_holdout_dry_run.md"
 TARGET_HIDDEN_SEMANTIC_HOLDOUT_DRY_RUN_HTML_FILENAME = "target_hidden_semantic_holdout_dry_run.html"
-
-
-def locate_target_hidden_semantic_holdout_suite(path: str | Path) -> Path:
-    source = Path(path)
-    if source.is_dir():
-        source = source / TARGET_HIDDEN_SEMANTIC_HOLDOUT_SUITE_JSON_FILENAME
-    return source
 
 
 def read_json_report(path: str | Path) -> dict[str, Any]:
@@ -94,13 +88,6 @@ def _dry_run_rows(
             }
         )
     return rows
-
-
-def _score(expected_terms: list[str], continuation: str) -> dict[str, Any]:
-    lowered = continuation.lower()
-    hit_terms = [term for term in expected_terms if term.lower() in lowered]
-    missed_terms = [term for term in expected_terms if term not in hit_terms]
-    return {"hit_terms": hit_terms, "missed_terms": missed_terms, "case_pass": bool(expected_terms) and not missed_terms}
 
 
 def _checks(

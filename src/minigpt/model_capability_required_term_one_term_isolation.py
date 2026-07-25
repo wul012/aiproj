@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import re
 from pathlib import Path
 from typing import Any
 
@@ -16,6 +15,7 @@ from minigpt.model_capability_required_term_micro_training import (
 from minigpt.model_capability_required_term_scaffold_probe import read_json_report as read_json_report
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code  # noqa: F401 (re-export)
+from minigpt.report_utils import slug as _slug
 
 
 REQUIRED_TERM_ONE_TERM_ISOLATION_JSON_FILENAME = "model_capability_required_term_one_term_isolation.json"
@@ -381,8 +381,3 @@ def _next_action(status: str, summary: dict[str, Any]) -> str:
     if summary.get("single_term_capacity_observed"):
         return "repeat successful one-term cases across seeds before returning to multi-term training"
     return "increase single-term max_iters or inspect tokenizer/generation settings before reintroducing multiple terms"
-
-
-def _slug(value: str) -> str:
-    slug = re.sub(r"[^a-zA-Z0-9]+", "-", value.strip().lower()).strip("-")
-    return slug or "term"

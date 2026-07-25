@@ -8,9 +8,6 @@ from typing import Any, Callable
 from minigpt.model_capability_route_promotion_bounded_benchmark_dry_run import (
     MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_BENCHMARK_DRY_RUN_JSON_FILENAME,
 )
-from minigpt.model_capability_route_promotion_bounded_benchmark_suite import (
-    MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_BENCHMARK_SUITE_JSON_FILENAME,
-)
 from minigpt.model_capability_route_promotion_bounded_benchmark_suite_review import (
     MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_BENCHMARK_SUITE_REVIEW_JSON_FILENAME,
 )
@@ -24,6 +21,7 @@ from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.server_contracts import GenerationRequest
 from minigpt.server_generator import MiniGPTGenerator
 from minigpt.report_check_common import check_entry as _check
+from minigpt.model_capability_route_promotion_bounded_benchmark_suite import locate_benchmark_suite
 
 
 MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_DECODER_ANCHOR_REBALANCED_PROFILE_SWEEP_JSON_FILENAME = "model_capability_route_promotion_bounded_real_replay_decoder_anchor_rebalanced_profile_sweep.json"
@@ -41,13 +39,6 @@ DEFAULT_REBALANCED_DECODER_PROFILES: tuple[dict[str, Any], ...] = (
     {"profile_id": "longer_low_temp", "label": "longer low-temperature replay", "max_new_tokens": 64, "temperature": 0.2, "top_k": 10},
     {"profile_id": "wider_rescue", "label": "wider rescue replay", "max_new_tokens": 80, "temperature": 0.6, "top_k": 30},
 )
-
-
-def locate_benchmark_suite(path: str | Path) -> Path:
-    source = Path(path)
-    if source.is_dir():
-        source = source / MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_BENCHMARK_SUITE_JSON_FILENAME
-    return source
 
 
 def locate_suite_review(path: str | Path) -> Path:

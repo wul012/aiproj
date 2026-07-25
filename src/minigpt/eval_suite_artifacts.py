@@ -5,6 +5,7 @@ import html
 import json
 from pathlib import Path
 from typing import Any
+from minigpt.report_utils import html_e as _e
 
 
 def write_eval_suite_json(report: dict[str, Any], path: str | Path) -> None:
@@ -227,10 +228,6 @@ def _range_text(min_value: Any, max_value: Any) -> str:
     if min_value is None and max_value is None:
         return ""
     return f"{min_value} / {max_value}"
-
-
-def _e(value: Any) -> str:
-    return html.escape("" if value is None else str(value), quote=True)
 
 
 def _stat(label: str, value: Any) -> str:

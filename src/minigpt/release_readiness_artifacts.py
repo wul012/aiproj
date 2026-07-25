@@ -9,6 +9,7 @@ from minigpt.report_utils import (
     list_of_dicts as _list_of_dicts,
     write_json_payload,
 )
+from minigpt.report_utils import format_value as _fmt
 
 
 def write_release_readiness_json(report: dict[str, Any], path: str | Path) -> None:
@@ -265,14 +266,6 @@ def _evidence_lines(items: list[dict[str, Any]]) -> list[str]:
         f"- `{item.get('path')}`: {'yes' if item.get('exists') else 'no'}, {item.get('kind')}, {_fmt_bytes(item.get('size_bytes'))}"
         for item in items
     ]
-
-
-def _fmt(value: Any) -> str:
-    if value is None:
-        return "missing"
-    if isinstance(value, float):
-        return f"{value:.5g}"
-    return str(value)
 
 
 def _fmt_bytes(value: Any) -> str:

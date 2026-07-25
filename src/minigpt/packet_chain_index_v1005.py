@@ -11,7 +11,10 @@ from minigpt.randomized_holdout_publication_constants import (
     RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_PUBLICATION_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_V1005_NEXT_STEP,
     RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_PUBLICATION_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_V1003_NEXT_STEP,
 )
-from minigpt.randomized_holdout_publication_downstream_common import downstream_lookup_use, is_downstream_lookup_only, sha256_file
+from minigpt.randomized_holdout_publication_downstream_common import (
+    downstream_lookup_use,
+    is_downstream_lookup_only,
+)
 from minigpt.packet_chain_check_v1004 import (
     RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_PUBLICATION_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_CHECK_V1004_JSON_FILENAME,
 )
@@ -21,6 +24,8 @@ from minigpt.packet_chain_receipt_v1003 import (
 from minigpt.report_utils import as_dict, utc_now
 from minigpt.report_check_common import check_entry as _check
 from minigpt.report_utils import path_exists as _path_exists
+from minigpt.randomized_holdout_publication_constants import interpretation as _interpretation
+from minigpt.randomized_holdout_publication_downstream_common import evidence_row as _evidence_row
 
 
 RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_PUBLICATION_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_V1005_JSON_FILENAME = "randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_v1005.json"
@@ -204,10 +209,6 @@ def _source_evidence_rows(
     return [_evidence_row("receipt", receipt_path, receipt_status), _evidence_row("receipt_check", receipt_check_path, check_status)]
 
 
-def _evidence_row(kind: str, path: str | Path | None, status: Any) -> dict[str, Any]:
-    return {"kind": kind, "path": str(path or ""), "sha256": sha256_file(path), "status": "pass" if status else "fail"}
-
-
 def _summary(status: str, checks: list[dict[str, Any]], index: dict[str, Any]) -> dict[str, Any]:
     return {
         "randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_v1005_ready": status == "pass" and index.get("index_ready") is True,
@@ -234,12 +235,6 @@ def _decision(status: str) -> str:
     if status == "pass":
         return "randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_v1005_ready"
     return "fix_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_v1005"
-
-
-def _interpretation(status: str, index: dict[str, Any]) -> dict[str, str]:
-    if status != "pass":
-        return {"model_quality_claim": "not_claimed", "reason": "The lookup-only receipt and its contract check are not ready for indexing.", "next_action": "repair receipt or contract check before index"}
-    return {"model_quality_claim": RANDOMIZED_HOLDOUT_PUBLICATION_MODEL_QUALITY_CLAIM, "reason": "The lookup-only receipt and contract check are packaged into a receipt index while production promotion remains blocked.", "next_action": str(index.get("next_step"))}
 
 
 __all__ = [

@@ -10,8 +10,15 @@ from minigpt.model_capability_required_term_pair_diagnostic_rollup import (
     REQUIRED_TERM_PAIR_DIAGNOSTIC_ROLLUP_MARKDOWN_FILENAME,
     REQUIRED_TERM_PAIR_DIAGNOSTIC_ROLLUP_TEXT_FILENAME,
 )
-from minigpt.report_utils import as_dict, csv_cell, html_escape, list_of_dicts, markdown_cell, write_json_payload
+from minigpt.report_utils import (
+    as_dict,
+    html_escape,
+    list_of_dicts,
+    markdown_cell,
+    write_json_payload,
+)
 from minigpt.report_utils import html_card as _card
+from minigpt.report_utils import csv_clean as _csv_clean
 
 
 def render_model_capability_required_term_pair_diagnostic_rollup_text(report: dict[str, Any]) -> str:
@@ -219,11 +226,6 @@ th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-a
 th{background:var(--panel);color:#334155}
 .path{font-family:Consolas,"Courier New",monospace;font-size:12px;overflow-wrap:anywhere;color:#475569}
 </style>"""
-
-
-def _csv_clean(value: Any) -> Any:
-    cell = csv_cell(value)
-    return cell.rstrip() if isinstance(cell, str) else cell
 
 
 def _stage_metric(row: dict[str, Any]) -> str:

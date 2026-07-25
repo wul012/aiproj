@@ -14,6 +14,7 @@ from minigpt.registry_ack_packet import (
 from minigpt.report_utils import as_dict, csv_cell, html_escape, list_of_dicts, markdown_cell, write_json_payload
 from minigpt.report_utils import html_card as _card
 from minigpt.report_utils import html_check_row as _check_row
+from minigpt.report_utils import packet_row as _packet_row
 
 
 def render_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet_text(report: dict[str, Any]) -> str:
@@ -152,10 +153,6 @@ def write_randomized_holdout_publication_registry_downstream_consumer_ack_bundle
     paths["markdown"].write_text(render_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet_markdown(report), encoding="utf-8")
     paths["html"].write_text(render_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet_html(report), encoding="utf-8")
     return {key: str(value) for key, value in paths.items()}
-
-
-def _packet_row(row: dict[str, Any]) -> str:
-    return "<tr>" + "".join(f"<td>{html_escape(row.get(key))}</td>" for key in ["packet_id", "consumer_name", "lookup_key", "publication_id", "granted_use", "promotion_ready", "receipt_status", "packet_status"]) + "</tr>"
 
 
 def _style() -> str:

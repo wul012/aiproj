@@ -10,6 +10,7 @@ from minigpt.bounded_objective_loss_signal_bridge_single_line_surface_replay_com
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.report_check_common import check_entry as _check
 from minigpt.report_check_common import resolve_exit_code_diagnostic_ready as resolve_exit_code
+from minigpt.report_utils import cause as _cause
 
 
 SINGLE_LINE_SURFACE_ZERO_HIT_DIAGNOSTIC_JSON_FILENAME = (
@@ -132,10 +133,6 @@ def _root_causes(
     if case_rows and all(int(row["continuation_len"] or 0) <= 8 for row in case_rows):
         causes.append(_cause("short_decode_budget_consumed_by_label", "short continuations are consumed by labels or fragments before target terms appear."))
     return causes
-
-
-def _cause(cause_id: str, detail: str) -> dict[str, str]:
-    return {"id": cause_id, "detail": detail}
 
 
 def _checks(replay: dict[str, Any], summary: dict[str, Any], case_rows: list[dict[str, Any]]) -> list[dict[str, Any]]:

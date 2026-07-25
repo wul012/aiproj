@@ -9,6 +9,7 @@ from minigpt.report_utils import list_of_dicts, utc_now
 from minigpt.server_contracts import parse_generation_request
 from minigpt.server_generator import MiniGPTGenerator
 from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
+from minigpt.report_utils import as_dict
 
 
 PAIR_GENERATION_PROFILE_REPLAY_JSON_FILENAME = "model_capability_required_term_pair_generation_profile_replay.json"
@@ -353,6 +354,20 @@ def _int(value: Any, default: int = 0) -> int:
     except (TypeError, ValueError):
         return default
 
+def resolve_exit_code_with_replay_children(
+    report: dict[str, Any], *, require_pass: bool
+) -> int:
+    """The status gate applied to the report and each replay child report
+    (children checked with the plain strict gate, exactly as the inline
+    member copies did via their aliased ``_replay_exit_code``)."""
+    if require_pass and report.get("status") != "pass":
+        return 1
+    for entry in list_of_dicts(report.get("replay_reports")):
+        child = as_dict(entry.get("report"))
+        if child and resolve_exit_code(child, require_pass=require_pass):
+            return 1
+    return 0
+
 
 __all__ = [
     "DEFAULT_PROFILE_IDS",
@@ -364,4 +379,5 @@ __all__ = [
     "build_model_capability_required_term_pair_generation_profile_replay",
     "read_json_report",
     "resolve_exit_code",
+    "resolve_exit_code_with_replay_children",
 ]

@@ -7,6 +7,7 @@ from minigpt.model_capability_required_term_pair_loss_alias_focus import REQUIRE
 from minigpt.model_capability_required_term_pair_loss_alias_metrics import normalize_for_required_term as normalize_for_required_term, required_term_hit_metrics
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code  # noqa: F401 (re-export)
+from minigpt.report_utils import preview as _preview
 
 
 REQUIRED_TERM_PAIR_LOSS_ALIAS_NORMALIZED_AUDIT_JSON_FILENAME = "model_capability_required_term_pair_loss_alias_normalized_audit.json"
@@ -169,8 +170,3 @@ def _next_action(status: str, summary: dict[str, Any]) -> str:
     if int(summary.get("normalization_gain_count") or 0) > 0:
         return "inspect which cases gain under normalization before changing the corpus"
     return "return to corpus shape or decoding path analysis"
-
-
-def _preview(value: Any, limit: int = 90) -> str:
-    text = str(value or "").replace("\n", "\\n").replace("\t", "\\t")
-    return text if len(text) <= limit else text[: limit - 1] + "..."

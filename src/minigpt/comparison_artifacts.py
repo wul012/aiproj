@@ -5,6 +5,11 @@ import html
 import json
 from pathlib import Path
 from typing import Any
+from minigpt.report_utils import as_list_of_dicts as _list_of_dicts
+from minigpt.report_utils import fmt_int as _fmt_int
+from minigpt.report_utils import fmt_signed as _fmt_signed
+from minigpt.report_utils import format_value as _fmt
+from minigpt.report_utils import html_e as _e
 
 
 def write_comparison_json(report: dict[str, Any], path: str | Path) -> None:
@@ -276,41 +281,16 @@ def _pick_dict(payload: Any, key: str) -> dict[str, Any]:
     return value if isinstance(value, dict) else {}
 
 
-def _list_of_dicts(value: Any) -> list[dict[str, Any]]:
-    return [item for item in value if isinstance(item, dict)] if isinstance(value, list) else []
-
-
 def _as_str_list(value: Any) -> list[str]:
     if isinstance(value, list):
         return [str(item) for item in value]
     return []
 
 
-def _fmt(value: Any) -> str:
-    if value is None:
-        return "missing"
-    if isinstance(value, float):
-        return f"{value:.5g}"
-    return str(value)
-
-
-def _fmt_signed(value: Any) -> str:
-    if value is None:
-        return "missing"
-    number = float(value)
-    return f"{number:+.5g}"
-
-
 def _fmt_ratio(value: Any) -> str:
     if value is None:
         return "missing"
     return f"{float(value):.2f}x"
-
-
-def _fmt_int(value: Any) -> str:
-    if value is None:
-        return "missing"
-    return f"{int(value):,}"
 
 
 def _fmt_signed_int(value: Any) -> str:
@@ -345,10 +325,6 @@ def _dataset_snapshot_label(run: dict[str, Any], delta: dict[str, Any]) -> str:
     if changed:
         parts.append("changed=" + ",".join(changed))
     return "; ".join(parts) if parts else "missing"
-
-
-def _e(value: Any) -> str:
-    return html.escape("" if value is None else str(value), quote=True)
 
 
 def _md(value: Any) -> str:

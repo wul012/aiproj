@@ -7,6 +7,7 @@ from typing import Any, Iterable
 from minigpt.model_capability_stall_diagnostic import STALL_JSON_FILENAME
 from minigpt.model_capability_token_budget_stability import TOKEN_BUDGET_STABILITY_JSON_FILENAME
 from minigpt.report_utils import as_dict, list_of_dicts, list_of_strs, number_or_none, utc_now
+from minigpt.report_utils import base_dir as _base_dir
 
 
 RUBRIC_SIGNAL_AUDIT_JSON_FILENAME = "model_capability_rubric_signal_audit.json"
@@ -214,14 +215,6 @@ def _resolve_file(value: Any, base_dir: Path, *, filename: str | None = None) ->
         if candidate.is_file():
             return candidate
     return None
-
-
-def _base_dir(source_path: str | Path | None, search_base: str | Path | None) -> Path:
-    if search_base is not None:
-        return Path(search_base)
-    if source_path is not None:
-        return Path(source_path).parent
-    return Path.cwd()
 
 
 def _cross_seed_keys(seeds: list[dict[str, Any]], key: str) -> list[str]:

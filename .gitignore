@@ -20,3 +20,12 @@ venv/
 build/
 dist/
 *.egg-info/
+
+# Personal documents kept in the working tree but never part of the repo.
+# The repo root is a scratch area for them; this pattern set is the guard
+# (v1302 incident: an -A stage swept in payslip files that no pattern named).
+/*.pdf
+/*_Payslip*.html
+/*_Cert*.html
+/*证明*.html
+/*证明*.pdf

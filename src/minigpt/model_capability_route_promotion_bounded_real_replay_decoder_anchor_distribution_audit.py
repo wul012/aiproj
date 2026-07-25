@@ -7,11 +7,9 @@ from typing import Any
 from minigpt.model_capability_route_promotion_bounded_real_replay_decoder_anchor_failure_diagnostic import (
     MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_DECODER_ANCHOR_FAILURE_DIAGNOSTIC_JSON_FILENAME,
 )
-from minigpt.model_capability_route_promotion_bounded_real_replay_decoder_anchor_seed_revision import (
-    MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_DECODER_ANCHOR_SEED_REVISION_JSON_FILENAME,
-)
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.report_check_common import check_entry as _check
+from minigpt.model_capability_route_promotion_bounded_real_replay_decoder_anchor_seed_revision import locate_decoder_anchor_seed_revision
 
 
 MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_DECODER_ANCHOR_DISTRIBUTION_AUDIT_JSON_FILENAME = "model_capability_route_promotion_bounded_real_replay_decoder_anchor_distribution_audit.json"
@@ -19,13 +17,6 @@ MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_DECODER_ANCHOR_DISTRIBUTION
 MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_DECODER_ANCHOR_DISTRIBUTION_AUDIT_TEXT_FILENAME = "model_capability_route_promotion_bounded_real_replay_decoder_anchor_distribution_audit.txt"
 MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_DECODER_ANCHOR_DISTRIBUTION_AUDIT_MARKDOWN_FILENAME = "model_capability_route_promotion_bounded_real_replay_decoder_anchor_distribution_audit.md"
 MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_DECODER_ANCHOR_DISTRIBUTION_AUDIT_HTML_FILENAME = "model_capability_route_promotion_bounded_real_replay_decoder_anchor_distribution_audit.html"
-
-
-def locate_decoder_anchor_seed_revision(path: str | Path) -> Path:
-    source = Path(path)
-    if source.is_dir():
-        source = source / MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_DECODER_ANCHOR_SEED_REVISION_JSON_FILENAME
-    return source
 
 
 def locate_decoder_anchor_failure_diagnostic(path: str | Path) -> Path:

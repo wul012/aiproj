@@ -14,6 +14,7 @@ from minigpt.target_hidden_semantic_holdout_suite import (
 )
 from minigpt.report_utils import html_card as _card
 from minigpt.report_utils import html_check_row as _check_row
+from minigpt.report_utils import cases_by_id as _cases_by_id
 
 
 def render_target_hidden_semantic_holdout_suite_text(report: dict[str, Any]) -> str:
@@ -162,11 +163,6 @@ def _coverage_row(row: dict[str, Any], report: dict[str, Any]) -> str:
 
 def _prompt_for_case(report: dict[str, Any], case_id: Any) -> Any:
     return as_dict(as_dict(_cases_by_id(report).get(str(case_id))).get("prompt_case")).get("prompt")
-
-
-def _cases_by_id(report: dict[str, Any]) -> dict[str, dict[str, Any]]:
-    suite = as_dict(report.get("benchmark_suite"))
-    return {str(item.get("case_id")): item for item in list_of_dicts(suite.get("cases"))}
 
 
 def _style() -> str:

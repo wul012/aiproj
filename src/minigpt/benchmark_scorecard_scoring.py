@@ -3,6 +3,8 @@ from __future__ import annotations
 from typing import Any
 
 from minigpt.report_utils import number_or_none
+from minigpt.report_utils import as_dict_or_empty as _dict
+from minigpt.report_utils import as_list_of_dicts as _list_of_dicts
 
 
 def case_scores(eval_suite: Any, generation_quality: Any, pair_batch: Any) -> list[dict[str, Any]]:
@@ -291,16 +293,8 @@ def _task_shape_check(case: dict[str, Any], text: str, char_count: float, min_ch
     return _rubric_check("task_shape", "Task shape is plausible", 0.2, passed, detail)
 
 
-def _dict(value: Any) -> dict[str, Any]:
-    return value if isinstance(value, dict) else {}
-
-
 def _pick(value: Any, key: str) -> Any:
     return value.get(key) if isinstance(value, dict) else None
-
-
-def _list_of_dicts(value: Any) -> list[dict[str, Any]]:
-    return [item for item in value if isinstance(item, dict)] if isinstance(value, list) else []
 
 
 def _number(value: Any) -> float | None:

@@ -8,9 +8,9 @@ from minigpt.bounded_objective_loss_signal_bridge_target_only_memory_target_hidd
     TASK_HINT_TERMS,
 )
 from minigpt.randomized_target_hidden_holdout_real_replay import RANDOMIZED_TARGET_HIDDEN_HOLDOUT_REAL_REPLAY_JSON_FILENAME
-from minigpt.randomized_target_hidden_holdout_suite import RANDOMIZED_TARGET_HIDDEN_HOLDOUT_SUITE_JSON_FILENAME
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.report_check_common import check_entry as _check
+from minigpt.randomized_target_hidden_holdout_suite import locate_holdout_suite as locate_randomized_target_hidden_holdout_suite
 
 
 RANDOMIZED_TARGET_HIDDEN_HOLDOUT_REPLAY_REVIEW_JSON_FILENAME = "randomized_target_hidden_holdout_replay_review.json"
@@ -24,13 +24,6 @@ def locate_randomized_target_hidden_holdout_real_replay(path: str | Path) -> Pat
     source = Path(path)
     if source.is_dir():
         source = source / RANDOMIZED_TARGET_HIDDEN_HOLDOUT_REAL_REPLAY_JSON_FILENAME
-    return source
-
-
-def locate_randomized_target_hidden_holdout_suite(path: str | Path) -> Path:
-    source = Path(path)
-    if source.is_dir():
-        source = source / RANDOMIZED_TARGET_HIDDEN_HOLDOUT_SUITE_JSON_FILENAME
     return source
 
 

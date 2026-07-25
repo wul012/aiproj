@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from typing import Any
+from minigpt.report_utils import as_dict_or_empty as _dict
 
 
 def build_maturity_narrative_release_summary(
@@ -187,10 +188,6 @@ def build_maturity_narrative_release_summary(
         "max_abs_benchmark_history_suite_design_non_comparison_ready_entries_delta": max_suite_design_delta,
         "max_abs_benchmark_history_design_comparison_changed_entries_delta": max_design_change_delta,
     }
-
-
-def _dict(value: Any) -> dict[str, Any]:
-    return value if isinstance(value, dict) else {}
 
 
 def _coalesce(*values: Any) -> Any:

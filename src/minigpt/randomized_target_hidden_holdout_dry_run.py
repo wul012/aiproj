@@ -4,10 +4,11 @@ import json
 from pathlib import Path
 from typing import Any
 
-from minigpt.randomized_target_hidden_holdout_suite import RANDOMIZED_TARGET_HIDDEN_HOLDOUT_SUITE_JSON_FILENAME
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.report_check_common import check_entry as _check
 from minigpt.report_check_common import resolve_exit_code_dry_run_ready as resolve_exit_code
+from minigpt.randomized_target_hidden_holdout_suite import locate_holdout_suite as locate_randomized_target_hidden_holdout_suite
+from minigpt.report_utils import score_fraction as _score
 
 
 RANDOMIZED_TARGET_HIDDEN_HOLDOUT_DRY_RUN_JSON_FILENAME = "randomized_target_hidden_holdout_dry_run.json"
@@ -15,13 +16,6 @@ RANDOMIZED_TARGET_HIDDEN_HOLDOUT_DRY_RUN_CSV_FILENAME = "randomized_target_hidde
 RANDOMIZED_TARGET_HIDDEN_HOLDOUT_DRY_RUN_TEXT_FILENAME = "randomized_target_hidden_holdout_dry_run.txt"
 RANDOMIZED_TARGET_HIDDEN_HOLDOUT_DRY_RUN_MARKDOWN_FILENAME = "randomized_target_hidden_holdout_dry_run.md"
 RANDOMIZED_TARGET_HIDDEN_HOLDOUT_DRY_RUN_HTML_FILENAME = "randomized_target_hidden_holdout_dry_run.html"
-
-
-def locate_randomized_target_hidden_holdout_suite(path: str | Path) -> Path:
-    source = Path(path)
-    if source.is_dir():
-        source = source / RANDOMIZED_TARGET_HIDDEN_HOLDOUT_SUITE_JSON_FILENAME
-    return source
 
 
 def read_json_report(path: str | Path) -> dict[str, Any]:
@@ -95,13 +89,6 @@ def _dry_run_rows(
             }
         )
     return rows
-
-
-def _score(expected_terms: list[str], continuation: str) -> dict[str, Any]:
-    lowered = continuation.lower()
-    hit_terms = [term for term in expected_terms if term.lower() in lowered]
-    missed_terms = [term for term in expected_terms if term not in hit_terms]
-    return {"hit_terms": hit_terms, "missed_terms": missed_terms, "case_pass": bool(expected_terms) and not missed_terms}
 
 
 def _checks(

@@ -16,6 +16,8 @@ from minigpt.report_utils import (
     write_output_bundle,
 )
 from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
+from minigpt.report_check_common import resolve_inside_root as _resolve_inside_root
+from minigpt.report_utils import relative_path as _relative_path
 
 DEFAULT_REGISTRY_PATH = Path("docs") / "model-capability-honest-measurement-registry.json"
 
@@ -389,26 +391,9 @@ def _recommendations(failed_checks: list[dict[str, Any]]) -> list[str]:
     ]
 
 
-def _resolve_inside_root(path: str | Path, root: Path) -> Path:
-    candidate = Path(path)
-    resolved = candidate.resolve() if candidate.is_absolute() else (root / candidate).resolve()
-    try:
-        resolved.relative_to(root)
-    except ValueError as exc:
-        raise ValueError(f"path escapes project root: {path}") from exc
-    return resolved
-
-
 def _resolve_registry_path(path: str | Path, root: Path) -> Path:
     candidate = Path(path)
     return candidate.resolve() if candidate.is_absolute() else (root / candidate).resolve()
-
-
-def _relative_path(path: Path, root: Path) -> str:
-    try:
-        return path.resolve().relative_to(root).as_posix()
-    except ValueError:
-        return str(path)
 
 
 def _read_if_file(path: Path) -> str:

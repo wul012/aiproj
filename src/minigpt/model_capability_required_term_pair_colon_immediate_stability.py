@@ -186,6 +186,14 @@ def _interpretation(status: str, summary: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+
+
+def locate_pair_colon_immediate_stability(path: str | Path) -> Path:
+    source = Path(path)
+    if source.is_dir():
+        source = source / PAIR_COLON_IMMEDIATE_STABILITY_JSON_FILENAME
+    return source
+
 __all__ = [
     "PAIR_COLON_IMMEDIATE_STABILITY_CSV_FILENAME",
     "PAIR_COLON_IMMEDIATE_STABILITY_HTML_FILENAME",
@@ -193,5 +201,6 @@ __all__ = [
     "PAIR_COLON_IMMEDIATE_STABILITY_MARKDOWN_FILENAME",
     "PAIR_COLON_IMMEDIATE_STABILITY_TEXT_FILENAME",
     "build_model_capability_required_term_pair_colon_immediate_stability",
+    "locate_pair_colon_immediate_stability",
     "resolve_exit_code",
 ]

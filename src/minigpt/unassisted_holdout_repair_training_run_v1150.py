@@ -9,19 +9,13 @@ from minigpt.report_utils import as_dict, read_json_object, utc_now, write_json_
 from minigpt.unassisted_holdout_repair_plan_v1148 import EXPLAIN_DIR_NAME
 from minigpt.unassisted_holdout_repair_seed_corpus_v1149 import UNASSISTED_HOLDOUT_REPAIR_SEED_CORPUS_V1149_STEM
 from minigpt.report_check_common import check_entry as _check
+from minigpt.unassisted_holdout_repair_seed_corpus_v1149 import locate_v1149_seed_corpus
 
 
 UNASSISTED_HOLDOUT_REPAIR_TRAINING_RUN_V1150_STEM = "unassisted_holdout_repair_training_run_v1150"
 SEED_CORPUS_TEXT_NAME = "unassisted_holdout_repair_seed_corpus.txt"
 HOLDOUT_PROMPTS_NAME = "unassisted_holdout_repair_holdout_prompts.json"
 TRAINING_HANDOFF_NAME = "unassisted_holdout_repair_training_handoff_v1150.json"
-
-
-def locate_v1149_seed_corpus(path: str | Path) -> Path:
-    source = Path(path)
-    if source.is_dir():
-        return source / f"{UNASSISTED_HOLDOUT_REPAIR_SEED_CORPUS_V1149_STEM}.json"
-    return source
 
 
 def default_v1149_seed_corpus_path(repo_root: str | Path) -> Path:

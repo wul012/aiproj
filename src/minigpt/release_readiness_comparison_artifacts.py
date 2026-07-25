@@ -18,6 +18,8 @@ from minigpt.release_readiness_comparison_html import (
     stats_section,
     style,
 )
+from minigpt.report_utils import fmt_mapping as _fmt_mapping
+from minigpt.report_utils import format_value as _fmt
 
 
 def write_release_readiness_comparison_json(report: dict[str, Any], path: str | Path) -> None:
@@ -446,20 +448,6 @@ def _csv_value(value: Any) -> str:
     if isinstance(value, list):
         return ";".join(_string_list(value))
     return str(csv_cell(value))
-
-
-def _fmt(value: Any) -> str:
-    if value is None:
-        return "missing"
-    if isinstance(value, float):
-        return f"{value:.5g}"
-    return str(value)
-
-
-def _fmt_mapping(value: Any) -> str:
-    if not isinstance(value, dict) or not value:
-        return "missing"
-    return ", ".join(f"{key}:{value[key]}" for key in sorted(value))
 
 
 def _md(value: Any) -> str:

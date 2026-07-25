@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import Any
 
 from minigpt.report_utils import positive_int_mapping as _int_mapping
+from minigpt.report_utils import as_dict_or_empty as _dict
 
 
 CORE_ARTIFACT_KEYS = [
@@ -234,10 +235,6 @@ def _dataset_label(report: dict[str, Any], dataset: dict[str, Any]) -> str:
 
 def _missing_artifact(key: str) -> dict[str, Any]:
     return {"key": key, "path": None, "exists": False}
-
-
-def _dict(value: Any) -> dict[str, Any]:
-    return value if isinstance(value, dict) else {}
 
 
 def _count_strings(values: list[str]) -> dict[str, int]:

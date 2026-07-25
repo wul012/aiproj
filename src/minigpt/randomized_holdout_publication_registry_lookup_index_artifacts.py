@@ -14,6 +14,7 @@ from minigpt.randomized_holdout_publication_registry_lookup_index import (
 from minigpt.report_utils import as_dict, csv_cell, html_escape, list_of_dicts, markdown_cell, write_json_payload
 from minigpt.report_utils import html_card as _card
 from minigpt.report_utils import html_check_row as _check_row
+from minigpt.report_utils import entry_row as _entry_row
 
 
 def render_randomized_holdout_publication_registry_lookup_index_text(report: dict[str, Any]) -> str:
@@ -156,20 +157,6 @@ def write_randomized_holdout_publication_registry_lookup_index_outputs(report: d
     paths["markdown"].write_text(render_randomized_holdout_publication_registry_lookup_index_markdown(report), encoding="utf-8")
     paths["html"].write_text(render_randomized_holdout_publication_registry_lookup_index_html(report), encoding="utf-8")
     return {key: str(value) for key, value in paths.items()}
-
-
-def _entry_row(row: dict[str, Any]) -> str:
-    return (
-        "<tr>"
-        f"<td>{html_escape(row.get('lookup_key'))}</td>"
-        f"<td>{html_escape(row.get('entry_id'))}</td>"
-        f"<td>{html_escape(row.get('registry_status'))}</td>"
-        f"<td>{html_escape(row.get('bounded_publication_accepted'))}</td>"
-        f"<td>{html_escape(row.get('promotion_ready'))}</td>"
-        f"<td>{html_escape(row.get('consumer_boundary'))}</td>"
-        f"<td>{html_escape(row.get('model_quality_claim'))}</td>"
-        "</tr>"
-    )
 
 
 def _style() -> str:

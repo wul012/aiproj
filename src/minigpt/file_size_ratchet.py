@@ -17,6 +17,7 @@ from minigpt.report_utils import (
     write_output_bundle,
 )
 from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
+from minigpt.report_utils import relative_path as _relative_path
 
 DEFAULT_CONFIG_PATH = Path("docs") / "code-health" / "file-size-ratchet.json"
 DEFAULT_WARNING_LINE_LIMIT = 500
@@ -358,13 +359,6 @@ def _is_inside(path: Path, root: Path) -> bool:
         return True
     except ValueError:
         return False
-
-
-def _relative_path(path: Path, root: Path) -> str:
-    try:
-        return path.resolve().relative_to(root).as_posix()
-    except ValueError:
-        return str(path)
 
 
 __all__ = [

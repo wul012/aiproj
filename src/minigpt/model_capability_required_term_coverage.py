@@ -7,6 +7,7 @@ from typing import Any
 from minigpt.model_capability_rubric_signal_audit import RUBRIC_SIGNAL_AUDIT_JSON_FILENAME
 from minigpt.model_capability_stall_diagnostic import STALL_JSON_FILENAME
 from minigpt.report_utils import as_dict, list_of_dicts, list_of_strs, utc_now
+from minigpt.report_utils import base_dir as _base_dir
 
 
 REQUIRED_TERM_COVERAGE_JSON_FILENAME = "model_capability_required_term_coverage.json"
@@ -247,14 +248,6 @@ def _next_action(summary: dict[str, Any]) -> str:
     if decision == "required_terms_absent_from_tiny_corpus":
         return "extend the tiny corpus/data card before spending more training compute"
     return "continue with the existing model-capability ladder only if a new required-term gap appears"
-
-
-def _base_dir(source_path: str | Path | None, search_base: str | Path | None) -> Path:
-    if search_base is not None:
-        return Path(search_base)
-    if source_path is not None:
-        return Path(source_path).parent
-    return Path.cwd()
 
 
 def _resolve_file(value: Any, base_dir: Path, *, filename: str | None = None) -> Path | None:

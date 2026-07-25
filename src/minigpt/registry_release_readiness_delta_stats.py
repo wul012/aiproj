@@ -3,6 +3,12 @@ from __future__ import annotations
 from typing import Any
 
 from minigpt.report_utils import CI_ARCHIVED_PATH_PORTABILITY_CHECK_READY_REGRESSION_REASON
+from minigpt.report_utils import as_optional_float as _as_optional_float
+from minigpt.report_utils import as_str as _as_str  # noqa: F401 (re-export)
+from minigpt.report_utils import as_str_list as _as_str_list
+from minigpt.report_utils import int_if_whole as _int_if_whole
+from minigpt.report_utils import reason_drift_status as _reason_drift_status  # noqa: F401 (re-export)
+from minigpt.report_utils import unique_strings as _unique_strings
 
 
 CI_READY_REGRESSION_REASON_FIELDS = {
@@ -305,40 +311,9 @@ def _benchmark_requirement_status_score(value: Any) -> int:
     return {"missing": 0, "fail": 0, "pass": 2}.get(str(value or "missing"), 0)
 
 
-def _as_optional_float(value: Any) -> float | None:
-    if value is None or value == "":
-        return None
-    try:
-        return float(value)
-    except (TypeError, ValueError):
-        return None
-
-
 def _as_int(value: Any) -> int | None:
     number = _as_optional_float(value)
     return int(number) if number is not None else None
-
-
-def _int_if_whole(value: float | None) -> int | float | None:
-    if value is None:
-        return None
-    return int(value) if float(value).is_integer() else value
-
-
-def _as_str(value: Any) -> str | None:
-    if value is None:
-        return None
-    return str(value)
-
-
-def _as_str_list(value: Any) -> list[str]:
-    if value is None:
-        return []
-    if isinstance(value, str):
-        return [item.strip() for item in value.split(",") if item.strip()]
-    if isinstance(value, list):
-        return [str(item).strip() for item in value if str(item).strip()]
-    return [str(value).strip()] if str(value).strip() else []
 
 
 def _reason_additions(baseline: Any, compared: Any) -> list[str]:
@@ -349,25 +324,6 @@ def _reason_additions(baseline: Any, compared: Any) -> list[str]:
 def _reason_removals(baseline: Any, compared: Any) -> list[str]:
     compared_reasons = set(_as_str_list(compared))
     return [reason for reason in _as_str_list(baseline) if reason not in compared_reasons]
-
-
-def _reason_drift_status(added: list[str], removed: list[str]) -> str:
-    if added and removed:
-        return "mixed"
-    if added:
-        return "regressed"
-    if removed:
-        return "recovered"
-    return "stable"
-
-
-def _unique_strings(values: Any) -> list[str]:
-    items: list[str] = []
-    for value in values:
-        text = str(value).strip()
-        if text and text not in items:
-            items.append(text)
-    return items
 
 
 def _counts(values: Any) -> dict[str, int]:

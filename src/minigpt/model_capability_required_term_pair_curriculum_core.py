@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 from itertools import combinations
-import re
 from pathlib import Path
 from typing import Any
 
@@ -15,6 +14,7 @@ from minigpt.model_capability_required_term_micro_training import (
 )
 from minigpt.report_utils import as_dict, list_of_dicts
 from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
+from minigpt.report_utils import slug as _slug
 
 REQUIRED_TERM_PAIR_CURRICULUM_JSON_FILENAME = "model_capability_required_term_pair_curriculum.json"
 REQUIRED_TERM_PAIR_CURRICULUM_TEXT_FILENAME = "model_capability_required_term_pair_curriculum.txt"
@@ -369,11 +369,6 @@ def _sample_prompt(pair: dict[str, Any]) -> str:
         if prompt:
             return prompt
     return "fixed:"
-
-
-def _slug(value: str) -> str:
-    slug = re.sub(r"[^a-zA-Z0-9]+", "-", value.strip().lower()).strip("-")
-    return slug or "term"
 
 
 __all__ = [

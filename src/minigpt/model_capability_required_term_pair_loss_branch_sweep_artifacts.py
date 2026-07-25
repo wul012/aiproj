@@ -10,8 +10,15 @@ from minigpt.model_capability_required_term_pair_loss_branch_sweep import (
     REQUIRED_TERM_PAIR_LOSS_BRANCH_SWEEP_MARKDOWN_FILENAME,
     REQUIRED_TERM_PAIR_LOSS_BRANCH_SWEEP_TEXT_FILENAME,
 )
-from minigpt.report_utils import as_dict, csv_cell, html_escape, list_of_dicts, markdown_cell, write_json_payload
+from minigpt.report_utils import (
+    as_dict,
+    html_escape,
+    list_of_dicts,
+    markdown_cell,
+    write_json_payload,
+)
 from minigpt.report_utils import html_card as _card
+from minigpt.report_utils import csv_clean as _csv_clean
 
 
 def render_model_capability_required_term_pair_loss_branch_sweep_text(report: dict[str, Any]) -> str:
@@ -265,8 +272,3 @@ table{width:100%;border-collapse:collapse;font-size:13px}
 th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}
 th{background:var(--panel);color:#334155}
 </style>"""
-
-
-def _csv_clean(value: Any) -> Any:
-    cell = csv_cell(value)
-    return cell.rstrip() if isinstance(cell, str) else cell

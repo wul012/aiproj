@@ -8,9 +8,10 @@ from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.server_contracts import GenerationRequest
 from minigpt.server_generator import MiniGPTGenerator
 from minigpt.target_hidden_semantic_holdout_dry_run import TARGET_HIDDEN_SEMANTIC_HOLDOUT_DRY_RUN_JSON_FILENAME
-from minigpt.target_hidden_semantic_holdout_suite import TARGET_HIDDEN_SEMANTIC_HOLDOUT_SUITE_JSON_FILENAME
 from minigpt.report_check_common import check_entry as _check
 from minigpt.report_check_common import resolve_exit_code_execution_model as resolve_exit_code
+from minigpt.report_utils import score_fraction as _score
+from minigpt.target_hidden_semantic_holdout_suite import locate_semantic_holdout_suite as locate_target_hidden_semantic_holdout_suite
 
 
 TARGET_HIDDEN_SEMANTIC_HOLDOUT_REAL_REPLAY_JSON_FILENAME = "target_hidden_semantic_holdout_real_replay.json"
@@ -20,13 +21,6 @@ TARGET_HIDDEN_SEMANTIC_HOLDOUT_REAL_REPLAY_MARKDOWN_FILENAME = "target_hidden_se
 TARGET_HIDDEN_SEMANTIC_HOLDOUT_REAL_REPLAY_HTML_FILENAME = "target_hidden_semantic_holdout_real_replay.html"
 
 GeneratorRunner = Callable[[dict[str, Any], str | Path, str | Path, str], dict[str, Any]]
-
-
-def locate_target_hidden_semantic_holdout_suite(path: str | Path) -> Path:
-    source = Path(path)
-    if source.is_dir():
-        source = source / TARGET_HIDDEN_SEMANTIC_HOLDOUT_SUITE_JSON_FILENAME
-    return source
 
 
 def locate_target_hidden_semantic_holdout_dry_run(path: str | Path) -> Path:
@@ -134,13 +128,6 @@ def _generate_case(case: dict[str, Any], checkpoint: str | Path, tokenizer: str 
         seed=None if prompt_case.get("seed") in {None, ""} else int(prompt_case.get("seed")),
     )
     return MiniGPTGenerator(checkpoint, tokenizer, device=device).generate(request).to_dict()
-
-
-def _score(expected_terms: list[str], continuation: str) -> dict[str, Any]:
-    lowered = continuation.lower()
-    hit_terms = [term for term in expected_terms if term.lower() in lowered]
-    missed_terms = [term for term in expected_terms if term not in hit_terms]
-    return {"hit_terms": hit_terms, "missed_terms": missed_terms, "case_pass": bool(expected_terms) and not missed_terms}
 
 
 def _checks(

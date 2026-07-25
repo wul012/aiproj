@@ -11,6 +11,7 @@ from minigpt.report_utils import (
     list_of_dicts as _list_of_dicts,
     write_json_payload,
 )
+from minigpt.report_utils import fmt_any as _fmt_any
 
 
 def write_release_gate_profile_comparison_json(report: dict[str, Any], path: str | Path) -> None:
@@ -318,12 +319,6 @@ def _csv_value(value: Any) -> str:
     if isinstance(value, list):
         return ";".join(_string_list(value))
     return str(csv_cell(value))
-
-
-def _fmt_any(value: Any) -> str:
-    if isinstance(value, float):
-        return f"{value:.5g}"
-    return "missing" if value is None else str(value)
 
 
 def _md(value: Any) -> str:

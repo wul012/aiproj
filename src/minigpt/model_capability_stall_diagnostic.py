@@ -12,6 +12,7 @@ from minigpt.report_utils import (
     resolve_archived_reference_path,
     utc_now,
 )
+from minigpt.report_utils import base_dir as _base_dir
 
 
 STALL_JSON_FILENAME = "model_capability_stall_diagnostic.json"
@@ -257,14 +258,6 @@ def _next_action(summary: dict[str, Any]) -> str:
     if summary.get("score_improved_count", 0) > summary.get("score_degraded_count", 0):
         return "repeat the improved cases with more seeds and a larger training budget"
     return "inspect required-term failures and decide whether data, token budget, or rubric design is the limiting factor"
-
-
-def _base_dir(source_path: str | Path | None, search_base: str | Path | None) -> Path:
-    if search_base is not None:
-        return Path(search_base)
-    if source_path is not None:
-        return Path(source_path).parent
-    return Path.cwd()
 
 
 def _resolve_file(value: Any, base_dir: Path) -> Path | None:

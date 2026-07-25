@@ -12,6 +12,7 @@ from minigpt.model_capability_required_term_balanced_training import (
 )
 from minigpt.report_utils import as_dict, csv_cell, html_escape, list_of_dicts, markdown_cell, write_json_payload
 from minigpt.report_utils import html_card as _card
+from minigpt.report_utils import generation_html as _generation_html
 
 
 def render_model_capability_required_term_balanced_training_text(report: dict[str, Any]) -> str:
@@ -176,19 +177,6 @@ def write_model_capability_required_term_balanced_training_outputs(
     paths["markdown"].write_text(render_model_capability_required_term_balanced_training_markdown(report), encoding="utf-8")
     paths["html"].write_text(render_model_capability_required_term_balanced_training_html(report), encoding="utf-8")
     return {key: str(value) for key, value in paths.items()}
-
-
-def _generation_html(row: dict[str, Any]) -> str:
-    return (
-        "<tr>"
-        f"<td>{html_escape(row.get('case'))}</td>"
-        f"<td>{html_escape(row.get('term'))}</td>"
-        f"<td>{html_escape(row.get('scaffold_prompt'))}</td>"
-        f"<td>{html_escape(row.get('generated_hit_count'))}</td>"
-        f"<td>{html_escape(row.get('continuation_hit_count'))}</td>"
-        f"<td>{html_escape(row.get('continuation_preview'))}</td>"
-        "</tr>"
-    )
 
 
 def _style() -> str:

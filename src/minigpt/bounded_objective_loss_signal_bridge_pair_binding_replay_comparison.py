@@ -11,11 +11,9 @@ from minigpt.bounded_objective_loss_signal_bridge_replay_comparison import (
     GeneratorRunner,
     build_bounded_objective_loss_signal_bridge_replay_comparison,
 )
-from minigpt.model_capability_route_promotion_bounded_objective_contract import (
-    BOUNDED_OBJECTIVE_CONTRACT_JSON_FILENAME,
-)
 from minigpt.report_utils import as_dict
 from minigpt.report_check_common import resolve_exit_code_comparison_objective as resolve_exit_code
+from minigpt.model_capability_route_promotion_bounded_objective_contract import locate_objective_contract
 
 
 LOSS_SIGNAL_BRIDGE_PAIR_BINDING_REPLAY_COMPARISON_JSON_FILENAME = "bounded_objective_loss_signal_bridge_pair_binding_replay_comparison.json"
@@ -23,13 +21,6 @@ LOSS_SIGNAL_BRIDGE_PAIR_BINDING_REPLAY_COMPARISON_CSV_FILENAME = "bounded_object
 LOSS_SIGNAL_BRIDGE_PAIR_BINDING_REPLAY_COMPARISON_TEXT_FILENAME = "bounded_objective_loss_signal_bridge_pair_binding_replay_comparison.txt"
 LOSS_SIGNAL_BRIDGE_PAIR_BINDING_REPLAY_COMPARISON_MARKDOWN_FILENAME = "bounded_objective_loss_signal_bridge_pair_binding_replay_comparison.md"
 LOSS_SIGNAL_BRIDGE_PAIR_BINDING_REPLAY_COMPARISON_HTML_FILENAME = "bounded_objective_loss_signal_bridge_pair_binding_replay_comparison.html"
-
-
-def locate_objective_contract(path: str | Path) -> Path:
-    source = Path(path)
-    if source.is_dir():
-        source = source / BOUNDED_OBJECTIVE_CONTRACT_JSON_FILENAME
-    return source
 
 
 def locate_pair_binding_training_run(path: str | Path) -> Path:

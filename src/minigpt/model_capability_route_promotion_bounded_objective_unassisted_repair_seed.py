@@ -4,15 +4,13 @@ import json
 from pathlib import Path
 from typing import Any
 
-from minigpt.model_capability_route_promotion_bounded_objective_contract import (
-    BOUNDED_OBJECTIVE_CONTRACT_JSON_FILENAME,
-)
 from minigpt.model_capability_route_promotion_bounded_objective_unassisted_repair_plan import (
     BOUNDED_OBJECTIVE_UNASSISTED_REPAIR_PLAN_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.report_check_common import check_entry as _check
 from minigpt.report_check_common import resolve_exit_code_seed_ready as resolve_exit_code
+from minigpt.model_capability_route_promotion_bounded_objective_contract import locate_objective_contract
 
 
 BOUNDED_OBJECTIVE_UNASSISTED_REPAIR_SEED_JSON_FILENAME = "model_capability_route_promotion_bounded_objective_unassisted_repair_seed.json"
@@ -28,13 +26,6 @@ def locate_unassisted_repair_plan(path: str | Path) -> Path:
     source = Path(path)
     if source.is_dir():
         source = source / BOUNDED_OBJECTIVE_UNASSISTED_REPAIR_PLAN_JSON_FILENAME
-    return source
-
-
-def locate_objective_contract(path: str | Path) -> Path:
-    source = Path(path)
-    if source.is_dir():
-        source = source / BOUNDED_OBJECTIVE_CONTRACT_JSON_FILENAME
     return source
 
 

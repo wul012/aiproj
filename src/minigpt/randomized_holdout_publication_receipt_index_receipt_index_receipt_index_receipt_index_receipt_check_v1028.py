@@ -16,6 +16,7 @@ from minigpt.randomized_holdout_publication_receipt_index_receipt_index_receipt_
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.report_check_common import check_entry as _check
 from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
+from minigpt.report_check_common import field_checks as _field_checks
 
 
 RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_CHECK_V1028_JSON_FILENAME = "randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_check_v1028.json"
@@ -141,13 +142,6 @@ def _checks(
     checks.extend(_field_checks("summary", SUMMARY_FIELDS, original_summary, rebuilt_summary))
     checks.extend(_field_checks("receipt", RECEIPT_FIELDS, original_receipt, rebuilt_receipt))
     return checks
-
-
-def _field_checks(prefix: str, fields: list[str], original: dict[str, Any], rebuilt: dict[str, Any]) -> list[dict[str, Any]]:
-    return [
-        _check(f"{prefix}.{field}", original.get(field) == rebuilt.get(field), {"original": original.get(field), "rebuilt": rebuilt.get(field)}, f"{prefix}.{field} must rebuild exactly")
-        for field in fields
-    ]
 
 
 def _resolve_source_review_path(report: dict[str, Any], receipt: dict[str, Any], receipt_path: str | Path | None) -> Path | None:

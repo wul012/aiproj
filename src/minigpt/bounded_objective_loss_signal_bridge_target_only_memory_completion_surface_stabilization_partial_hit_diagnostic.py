@@ -13,6 +13,7 @@ from minigpt.bounded_objective_loss_signal_bridge_target_only_memory_loss_suffix
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.report_check_common import check_entry as _check
 from minigpt.report_check_common import resolve_exit_code_diagnostic_ready as resolve_exit_code
+from minigpt.report_utils import case_by_id as _case_by_id
 
 
 TARGET_ONLY_MEMORY_COMPLETION_SURFACE_STABILIZATION_PARTIAL_HIT_DIAGNOSTIC_JSON_FILENAME = (
@@ -140,13 +141,6 @@ def _diagnostic(
         "source_sample_contract_gap": regression_summary.get("sample_contract_gap"),
         "next_step": "build_bounded_objective_loss_signal_bridge_target_only_memory_stabilized_loss_suffix_uptake_patch",
     }
-
-
-def _case_by_id(rows: list[dict[str, Any]], case_id: str) -> dict[str, Any]:
-    for row in rows:
-        if row.get("case_id") == case_id:
-            return row
-    return {}
 
 
 def _checks(

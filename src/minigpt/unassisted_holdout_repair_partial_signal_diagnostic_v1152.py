@@ -13,6 +13,7 @@ from minigpt.unassisted_holdout_repair_seed_corpus_v1149 import (
     UNASSISTED_HOLDOUT_REPAIR_SEED_CORPUS_V1149_STEM,
 )
 from minigpt.report_check_common import check_entry as _check
+from minigpt.unassisted_holdout_repair_seed_corpus_v1149 import locate_v1149_seed_corpus
 
 
 UNASSISTED_HOLDOUT_REPAIR_PARTIAL_SIGNAL_DIAGNOSTIC_V1152_STEM = (
@@ -46,13 +47,6 @@ def locate_v1151_replay_comparison(path: str | Path) -> Path:
     source = Path(path)
     if source.is_dir():
         return source / f"{UNASSISTED_HOLDOUT_REPAIR_REPLAY_COMPARISON_V1151_STEM}.json"
-    return source
-
-
-def locate_v1149_seed_corpus(path: str | Path) -> Path:
-    source = Path(path)
-    if source.is_dir():
-        return source / f"{UNASSISTED_HOLDOUT_REPAIR_SEED_CORPUS_V1149_STEM}.json"
     return source
 
 

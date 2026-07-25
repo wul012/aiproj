@@ -4,9 +4,6 @@ import json
 from pathlib import Path
 from typing import Any
 
-from minigpt.model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision import (
-    BOUNDED_OBJECTIVE_UNASSISTED_REPAIR_SEED_REVISION_JSON_FILENAME,
-)
 from minigpt.model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_replay_comparison import (
     BOUNDED_OBJECTIVE_UNASSISTED_REPAIR_SEED_REVISION_REPLAY_COMPARISON_JSON_FILENAME,
 )
@@ -16,6 +13,7 @@ from minigpt.model_capability_route_promotion_bounded_objective_unassisted_repai
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.report_check_common import check_entry as _check
 from minigpt.report_check_common import resolve_exit_code_diagnostic_ready as resolve_exit_code
+from minigpt.model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision import locate_seed_revision
 
 
 BOUNDED_OBJECTIVE_UNASSISTED_REPAIR_SEED_REVISION_PARTIAL_HIT_DIAGNOSTIC_JSON_FILENAME = "model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_partial_hit_diagnostic.json"
@@ -29,13 +27,6 @@ def locate_seed_revision_replay_comparison(path: str | Path) -> Path:
     source = Path(path)
     if source.is_dir():
         source = source / BOUNDED_OBJECTIVE_UNASSISTED_REPAIR_SEED_REVISION_REPLAY_COMPARISON_JSON_FILENAME
-    return source
-
-
-def locate_seed_revision(path: str | Path) -> Path:
-    source = Path(path)
-    if source.is_dir():
-        source = source / BOUNDED_OBJECTIVE_UNASSISTED_REPAIR_SEED_REVISION_JSON_FILENAME
     return source
 
 

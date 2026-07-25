@@ -6,6 +6,7 @@ from typing import Any, Callable
 
 from minigpt.model_capability_required_term_uptake import REQUIRED_TERM_UPTAKE_JSON_FILENAME
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.report_utils import base_dir as _base_dir
 
 
 REQUIRED_TERM_SCAFFOLD_PROBE_JSON_FILENAME = "model_capability_required_term_scaffold_probe.json"
@@ -384,14 +385,6 @@ def _resolve_file(value: Any, base_dir: Path) -> Path | None:
         if candidate.is_file():
             return candidate
     return None
-
-
-def _base_dir(source_path: str | Path | None, search_base: str | Path | None) -> Path:
-    if search_base is not None:
-        return Path(search_base)
-    if source_path is not None:
-        return Path(source_path).parent
-    return Path.cwd()
 
 
 def _hit_count(text: Any, terms: list[str]) -> int:

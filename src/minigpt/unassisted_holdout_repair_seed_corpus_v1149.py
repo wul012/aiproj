@@ -281,6 +281,14 @@ def _jsonl(rows: list[dict[str, Any]]) -> str:
     return "".join(json.dumps(row, ensure_ascii=False, sort_keys=True) + "\n" for row in rows)
 
 
+
+
+def locate_v1149_seed_corpus(path: str | Path) -> Path:
+    source = Path(path)
+    if source.is_dir():
+        return source / f'{UNASSISTED_HOLDOUT_REPAIR_SEED_CORPUS_V1149_STEM}.json'
+    return source
+
 __all__ = [
     "SEED_BLUEPRINT_JSON_NAME",
     "UNASSISTED_HOLDOUT_REPAIR_SEED_CORPUS_V1149_STEM",
@@ -288,6 +296,7 @@ __all__ = [
     "default_v1148_plan_path",
     "load_seed_blueprint",
     "locate_v1148_plan",
+    "locate_v1149_seed_corpus",
     "read_json_report",
     "resolve_exit_code",
     "write_unassisted_holdout_repair_seed_corpus_v1149_outputs",

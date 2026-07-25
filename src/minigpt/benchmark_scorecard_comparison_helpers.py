@@ -3,6 +3,9 @@ from __future__ import annotations
 from typing import Any
 
 from minigpt.report_utils import number_or_none
+from minigpt.report_utils import as_dict_or_empty as _dict
+from minigpt.report_utils import as_list_of_dicts as _list_of_dicts
+from minigpt.report_utils import fmt_signed as _fmt_signed
 
 
 def _case_delta(
@@ -197,24 +200,9 @@ def _as_int(value: Any) -> int | None:
         return None
 
 
-def _dict(value: Any) -> dict[str, Any]:
-    return value if isinstance(value, dict) else {}
-
-
-def _list_of_dicts(value: Any) -> list[dict[str, Any]]:
-    return [item for item in value if isinstance(item, dict)] if isinstance(value, list) else []
-
-
 def _string_list(value: Any) -> list[str]:
     if isinstance(value, list):
         return [str(item) for item in value if str(item).strip()]
     if value in (None, ""):
         return []
     return [str(value)]
-
-
-def _fmt_signed(value: Any) -> str:
-    if value is None:
-        return "missing"
-    number = float(value)
-    return f"{number:+.5g}"

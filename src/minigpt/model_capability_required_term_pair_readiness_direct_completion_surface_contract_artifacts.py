@@ -13,6 +13,9 @@ from minigpt.model_capability_required_term_pair_readiness_direct_completion_sur
 )
 from minigpt.report_utils import as_dict, csv_cell, html_escape, list_of_dicts, markdown_cell, write_json_payload
 from minigpt.report_utils import html_card as _card
+from minigpt.report_check_common import html_check_section as _check_html
+from minigpt.report_utils import family_html as _family_html
+from minigpt.report_utils import probe_html as _probe_html
 
 
 def render_direct_completion_surface_contract_text(report: dict[str, Any]) -> str:
@@ -150,32 +153,6 @@ def write_direct_completion_surface_contract_outputs(report: dict[str, Any], out
     paths["markdown"].write_text(render_direct_completion_surface_contract_markdown(report), encoding="utf-8")
     paths["html"].write_text(render_direct_completion_surface_contract_html(report), encoding="utf-8")
     return {key: str(value) for key, value in paths.items()}
-
-
-def _check_html(row: dict[str, Any]) -> str:
-    return (
-        "<tr>"
-        f"<td>{html_escape(row.get('id'))}</td>"
-        f"<td>{html_escape(row.get('status'))}</td>"
-        f"<td>{html_escape(row.get('actual'))}</td>"
-        f"<td>{html_escape(row.get('detail'))}</td>"
-        "</tr>"
-    )
-
-
-def _family_html(row: dict[str, Any]) -> str:
-    return (
-        "<tr>"
-        f"<td>{html_escape(row.get('family'))}</td>"
-        f"<td>{html_escape(row.get('role'))}</td>"
-        f"<td>{html_escape(row.get('target_term'))}</td>"
-        f"<td>{html_escape(len(row.get('rows', [])))}</td>"
-        "</tr>"
-    )
-
-
-def _probe_html(row: dict[str, Any]) -> str:
-    return f"<li>{html_escape(row.get('id'))}: {html_escape(row.get('prompt'))} -> {html_escape(row.get('expected_term'))}</li>"
 
 
 def _style() -> str:

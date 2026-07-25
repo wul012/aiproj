@@ -15,6 +15,7 @@ from minigpt.server_contracts import GenerationRequest
 from minigpt.server_generator import MiniGPTGenerator
 from minigpt.report_check_common import check_entry as _check
 from minigpt.report_check_common import resolve_exit_code_execution_model as resolve_exit_code
+from minigpt.report_utils import score_fraction as _score
 
 
 TARGET_ONLY_MEMORY_TARGET_HIDDEN_TOKENIZER_COVERED_HOLDOUT_REAL_REPLAY_JSON_FILENAME = (
@@ -148,13 +149,6 @@ def _generate_case(case: dict[str, Any], checkpoint: str | Path, tokenizer: str 
         seed=None if prompt_case.get("seed") in {None, ""} else int(prompt_case.get("seed")),
     )
     return MiniGPTGenerator(checkpoint, tokenizer, device=device).generate(request).to_dict()
-
-
-def _score(expected_terms: list[str], continuation: str) -> dict[str, Any]:
-    lowered = continuation.lower()
-    hit_terms = [term for term in expected_terms if term.lower() in lowered]
-    missed_terms = [term for term in expected_terms if term not in hit_terms]
-    return {"hit_terms": hit_terms, "missed_terms": missed_terms, "case_pass": bool(expected_terms) and not missed_terms}
 
 
 def _checks(

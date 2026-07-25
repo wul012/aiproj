@@ -4,15 +4,13 @@ import json
 from pathlib import Path
 from typing import Any
 
-from minigpt.model_capability_required_term_pair_colon_immediate_stability import (
-    PAIR_COLON_IMMEDIATE_STABILITY_JSON_FILENAME,
-)
 from minigpt.model_capability_required_term_pair_first_token_preference import (
     ScoreFunc,
     build_model_capability_required_term_pair_first_token_preference,
     resolve_exit_code as _first_token_exit_code,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.model_capability_required_term_pair_colon_immediate_stability import locate_pair_colon_immediate_stability
 
 
 PAIR_COLON_IMMEDIATE_MISSED_SEED_DIAGNOSTIC_JSON_FILENAME = (
@@ -30,13 +28,6 @@ PAIR_COLON_IMMEDIATE_MISSED_SEED_DIAGNOSTIC_MARKDOWN_FILENAME = (
 PAIR_COLON_IMMEDIATE_MISSED_SEED_DIAGNOSTIC_HTML_FILENAME = (
     "model_capability_required_term_pair_colon_immediate_missed_seed_diagnostic.html"
 )
-
-
-def locate_pair_colon_immediate_stability(path: str | Path) -> Path:
-    source = Path(path)
-    if source.is_dir():
-        source = source / PAIR_COLON_IMMEDIATE_STABILITY_JSON_FILENAME
-    return source
 
 
 def read_json_report(path: str | Path) -> dict[str, Any]:

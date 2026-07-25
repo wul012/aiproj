@@ -35,6 +35,9 @@ from minigpt.report_utils import (
     list_of_dicts as _list_of_dicts,
     utc_now,
 )
+from minigpt.report_utils import counts as _counts
+from minigpt.report_utils import reason_drift_status as _reason_drift_status
+from minigpt.report_utils import unique_strings as _unique_strings
 
 
 STATUS_ORDER = {
@@ -414,33 +417,6 @@ def _reason_additions(baseline: Any, compared: Any) -> list[str]:
 def _reason_removals(baseline: Any, compared: Any) -> list[str]:
     compared_reasons = set(_string_list(compared))
     return [reason for reason in _string_list(baseline) if reason not in compared_reasons]
-
-
-def _reason_drift_status(added: list[str], removed: list[str]) -> str:
-    if added and removed:
-        return "mixed"
-    if added:
-        return "regressed"
-    if removed:
-        return "recovered"
-    return "stable"
-
-
-def _unique_strings(values: Any) -> list[str]:
-    items: list[str] = []
-    for value in values:
-        text = str(value).strip()
-        if text and text not in items:
-            items.append(text)
-    return items
-
-
-def _counts(values: Any) -> dict[str, int]:
-    counts: dict[str, int] = {}
-    for value in values:
-        key = str(value)
-        counts[key] = counts.get(key, 0) + 1
-    return counts
 
 
 __all__ = [

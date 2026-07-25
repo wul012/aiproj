@@ -9,6 +9,7 @@ from minigpt.model_capability_required_term_pair_continuation_span_stability imp
 from minigpt.model_capability_required_term_scaffold_probe import read_json_report as read_json_report
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code  # noqa: F401 (re-export)
+from minigpt.report_utils import preview as _preview
 
 
 REQUIRED_TERM_PAIR_CONTINUATION_SPAN_HELDOUT_JSON_FILENAME = "model_capability_required_term_pair_continuation_span_heldout.json"
@@ -339,8 +340,3 @@ def _next_action(status: str, summary: dict[str, Any]) -> str:
     if summary.get("heldout_generalization_observed"):
         return "repeat held-out prompts across more aliases before promoting the signal"
     return "add explicit alias-to-term mapping examples or redesign the objective before scaling model size"
-
-
-def _preview(value: Any, limit: int = 90) -> str:
-    text = str(value or "").replace("\n", "\\n").replace("\t", "\\t")
-    return text if len(text) <= limit else text[: limit - 1] + "..."

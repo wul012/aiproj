@@ -9,6 +9,7 @@ from minigpt.model_capability_required_term_pair_colon_immediate_stability impor
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
+from minigpt.model_capability_required_term_pair_colon_immediate_stability import locate_pair_colon_immediate_stability
 
 
 PAIR_SEED_COVERAGE_TRADEOFF_JSON_FILENAME = "model_capability_required_term_pair_seed_coverage_tradeoff.json"
@@ -16,13 +17,6 @@ PAIR_SEED_COVERAGE_TRADEOFF_CSV_FILENAME = "model_capability_required_term_pair_
 PAIR_SEED_COVERAGE_TRADEOFF_TEXT_FILENAME = "model_capability_required_term_pair_seed_coverage_tradeoff.txt"
 PAIR_SEED_COVERAGE_TRADEOFF_MARKDOWN_FILENAME = "model_capability_required_term_pair_seed_coverage_tradeoff.md"
 PAIR_SEED_COVERAGE_TRADEOFF_HTML_FILENAME = "model_capability_required_term_pair_seed_coverage_tradeoff.html"
-
-
-def locate_pair_colon_immediate_stability(path: str | Path) -> Path:
-    source = Path(path)
-    if source.is_dir():
-        source = source / PAIR_COLON_IMMEDIATE_STABILITY_JSON_FILENAME
-    return source
 
 
 def read_json_report(path: str | Path) -> dict[str, Any]:

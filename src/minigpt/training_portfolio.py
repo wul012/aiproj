@@ -14,6 +14,8 @@ from minigpt.training_portfolio_artifacts import (
     write_training_portfolio_outputs,  # noqa: F401
 )
 from minigpt.training_portfolio_plan import build_training_portfolio_plan  # noqa: F401
+from minigpt.report_utils import as_dict_or_empty as _dict
+from minigpt.report_utils import as_list_of_dicts as _list_of_dicts
 
 
 def run_training_portfolio_plan(
@@ -97,14 +99,6 @@ def _recommendations(status: str, artifacts: list[dict[str, Any]], failed_key: s
 def _tail(text: str, line_count: int = 8) -> str:
     lines = [line for line in text.splitlines() if line.strip()]
     return " / ".join(lines[-line_count:])
-
-
-def _dict(value: Any) -> dict[str, Any]:
-    return value if isinstance(value, dict) else {}
-
-
-def _list_of_dicts(value: Any) -> list[dict[str, Any]]:
-    return [item for item in value if isinstance(item, dict)] if isinstance(value, list) else []
 
 
 def _string_list(value: Any) -> list[str]:

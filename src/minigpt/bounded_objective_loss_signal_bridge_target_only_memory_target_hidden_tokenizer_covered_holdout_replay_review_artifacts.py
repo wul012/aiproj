@@ -13,6 +13,7 @@ from minigpt.bounded_objective_loss_signal_bridge_target_only_memory_target_hidd
 )
 from minigpt.report_utils import as_dict, csv_cell, html_escape, list_of_dicts, markdown_cell, write_json_payload
 from minigpt.report_utils import html_card as _card
+from minigpt.report_utils import join_terms as _join_terms
 
 
 def render_target_hidden_tokenizer_covered_holdout_replay_review_text(report: dict[str, Any]) -> str:
@@ -157,12 +158,6 @@ def _row(row: dict[str, Any]) -> str:
             row.get("detail"),
         ]
     ) + "</tr>"
-
-
-def _join_terms(value: Any) -> str:
-    if not isinstance(value, list):
-        return ""
-    return ",".join(str(item) for item in value)
 
 
 def _style() -> str:

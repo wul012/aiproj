@@ -277,6 +277,14 @@ def _unique_prompt_count(cases: list[dict[str, Any]]) -> int:
     return len({str(as_dict(case.get("prompt_case")).get("prompt") or "") for case in cases})
 
 
+
+
+def locate_holdout_suite(path: str | Path) -> Path:
+    source = Path(path)
+    if source.is_dir():
+        source = source / RANDOMIZED_TARGET_HIDDEN_HOLDOUT_SUITE_JSON_FILENAME
+    return source
+
 __all__ = [
     "RANDOMIZED_TARGET_HIDDEN_HOLDOUT_SUITE_CSV_FILENAME",
     "RANDOMIZED_TARGET_HIDDEN_HOLDOUT_SUITE_HTML_FILENAME",
@@ -284,6 +292,7 @@ __all__ = [
     "RANDOMIZED_TARGET_HIDDEN_HOLDOUT_SUITE_MARKDOWN_FILENAME",
     "RANDOMIZED_TARGET_HIDDEN_HOLDOUT_SUITE_TEXT_FILENAME",
     "build_randomized_target_hidden_holdout_suite",
+    "locate_holdout_suite",
     "locate_replay_review",
     "locate_source_holdout_suite",
     "randomized_target_hidden_candidate_prompt_seed_text",

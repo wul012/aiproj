@@ -14,6 +14,7 @@ from minigpt.target_hidden_prompt_mutation_holdout_dry_run import (
 )
 from minigpt.report_utils import html_card as _card
 from minigpt.report_utils import html_check_row as _check_row
+from minigpt.report_utils import join as _join
 
 
 def render_target_hidden_prompt_mutation_holdout_dry_run_text(report: dict[str, Any]) -> str:
@@ -150,12 +151,6 @@ def _row(row: dict[str, Any]) -> str:
             _join(row.get("negative_missed_terms")),
         ]
     ) + "</tr>"
-
-
-def _join(value: Any) -> str:
-    if not isinstance(value, list):
-        return ""
-    return ",".join(str(item) for item in value)
 
 
 def _style() -> str:

@@ -14,6 +14,8 @@ from minigpt.unassisted_holdout_repair_seed_corpus_v1149 import (
     UNASSISTED_HOLDOUT_REPAIR_SEED_CORPUS_V1149_STEM,
 )
 from minigpt.report_check_common import check_entry as _check
+from minigpt.report_utils import target_prompt_hits as _target_prompt_hits
+from minigpt.unassisted_holdout_repair_seed_corpus_v1149 import locate_v1149_seed_corpus
 
 
 UNASSISTED_LOSS_SUFFIX_REPAIR_SEED_V1153_STEM = "unassisted_loss_suffix_repair_seed_v1153"
@@ -49,13 +51,6 @@ def locate_v1152_diagnostic(path: str | Path) -> Path:
     source = Path(path)
     if source.is_dir():
         return source / f"{UNASSISTED_HOLDOUT_REPAIR_PARTIAL_SIGNAL_DIAGNOSTIC_V1152_STEM}.json"
-    return source
-
-
-def locate_v1149_seed_corpus(path: str | Path) -> Path:
-    source = Path(path)
-    if source.is_dir():
-        return source / f"{UNASSISTED_HOLDOUT_REPAIR_SEED_CORPUS_V1149_STEM}.json"
     return source
 
 
@@ -344,16 +339,6 @@ def _jsonl(rows: list[dict[str, Any]]) -> str:
 
 def _target_free(prompts: list[dict[str, Any]]) -> bool:
     return not _target_prompt_hits(prompts)
-
-
-def _target_prompt_hits(prompts: list[dict[str, Any]]) -> list[str]:
-    hits = []
-    for row in prompts:
-        prompt = str(row.get("prompt") or "").lower()
-        terms = [str(term).lower() for term in row.get("expected_terms", ["fixed", "loss"])]
-        if any(term and term in prompt for term in terms):
-            hits.append(str(row.get("case_id") or row.get("prompt") or "unknown"))
-    return hits
 
 
 def _int_value(value: Any, *, default: int = 0) -> int:

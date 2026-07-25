@@ -11,6 +11,7 @@ from minigpt.model_capability_required_term_pair_continuation_span_objective imp
 from minigpt.model_capability_required_term_scaffold_probe import read_json_report as read_json_report
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code  # noqa: F401 (re-export)
+from minigpt.report_utils import preview as _preview
 
 
 REQUIRED_TERM_PAIR_LOSS_ALIAS_OBJECTIVE_JSON_FILENAME = "model_capability_required_term_pair_loss_alias_objective.json"
@@ -419,8 +420,3 @@ def _sample_prompt(cases: list[dict[str, Any]]) -> str:
         if prompt:
             return prompt
     return "loss:"
-
-
-def _preview(value: Any, limit: int = 90) -> str:
-    text = str(value or "").replace("\n", "\\n").replace("\t", "\\t")
-    return text if len(text) <= limit else text[: limit - 1] + "..."

@@ -1,6 +1,10 @@
 from __future__ import annotations
 
 from typing import Any
+from minigpt.report_utils import as_dict_or_empty as _dict
+from minigpt.report_utils import as_list_of_dicts as _list_of_dicts
+from minigpt.report_utils import counts as _counts
+from minigpt.report_utils import unique_strings as _unique_strings  # noqa: F401 (re-export)
 
 
 def _request_summary(maturity: dict[str, Any] | None, request_history: dict[str, Any] | None) -> dict[str, Any]:
@@ -157,15 +161,6 @@ def _max_int(values: Any) -> int | None:
     return max(parsed) if parsed else None
 
 
-def _unique_strings(values: Any) -> list[str]:
-    items: list[str] = []
-    for value in values:
-        text = str(value).strip()
-        if text and text not in items:
-            items.append(text)
-    return items
-
-
 def _decision_row_non_ready_candidates(evaluations: list[dict[str, Any]], summary: dict[str, Any]) -> list[str]:
     from_summary = _string_list(summary.get("non_comparison_ready_candidates"))
     if from_summary:
@@ -187,10 +182,6 @@ def _merge_counts(rows: Any) -> dict[str, int]:
     return counts
 
 
-def _dict(value: Any) -> dict[str, Any]:
-    return value if isinstance(value, dict) else {}
-
-
 def _pick(value: Any, key: str) -> Any:
     return value.get(key) if isinstance(value, dict) else None
 
@@ -202,10 +193,6 @@ def _coalesce(*values: Any) -> Any:
     return None
 
 
-def _list_of_dicts(value: Any) -> list[dict[str, Any]]:
-    return [item for item in value if isinstance(item, dict)] if isinstance(value, list) else []
-
-
 def _string_list(value: Any) -> list[str]:
     return [str(item) for item in value if str(item).strip()] if isinstance(value, list) else []
 
@@ -215,11 +202,3 @@ def _reason_count_detail(value: Any) -> str:
     if not counts:
         return ""
     return " (" + ", ".join(f"{key}:{counts[key]}" for key in sorted(counts)) + ")"
-
-
-def _counts(values: Any) -> dict[str, int]:
-    counts: dict[str, int] = {}
-    for value in values:
-        key = str(value)
-        counts[key] = counts.get(key, 0) + 1
-    return counts

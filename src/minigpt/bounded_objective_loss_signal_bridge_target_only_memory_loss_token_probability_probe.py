@@ -9,11 +9,9 @@ from typing import Any
 from minigpt.bounded_objective_loss_signal_bridge_target_only_memory_stagnation_aware_suffix_replay_delta_diagnostic import (
     TARGET_ONLY_MEMORY_STAGNATION_AWARE_SUFFIX_REPLAY_DELTA_DIAGNOSTIC_JSON_FILENAME,
 )
-from minigpt.model_capability_route_promotion_bounded_objective_contract import (
-    BOUNDED_OBJECTIVE_CONTRACT_JSON_FILENAME,
-)
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.report_check_common import check_entry as _check
+from minigpt.model_capability_route_promotion_bounded_objective_contract import locate_objective_contract
 
 
 TARGET_ONLY_MEMORY_LOSS_TOKEN_PROBABILITY_PROBE_JSON_FILENAME = (
@@ -33,13 +31,6 @@ TARGET_ONLY_MEMORY_LOSS_TOKEN_PROBABILITY_PROBE_HTML_FILENAME = (
 )
 
 LossTokenScorer = Callable[[str, str], dict[str, Any]]
-
-
-def locate_objective_contract(path: str | Path) -> Path:
-    source = Path(path)
-    if source.is_dir():
-        source = source / BOUNDED_OBJECTIVE_CONTRACT_JSON_FILENAME
-    return source
 
 
 def locate_replay_delta_diagnostic(path: str | Path) -> Path:

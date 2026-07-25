@@ -1,10 +1,10 @@
 from __future__ import annotations
 
 import csv
-import html
 import json
 from pathlib import Path
 from typing import Any
+from minigpt.report_utils import html_e as _e
 
 
 def load_pair_batch_report(path: str | Path) -> dict[str, Any]:
@@ -349,10 +349,6 @@ def _pick_dict(payload: dict[str, Any], key: str) -> dict[str, Any]:
 
 def _md(value: Any) -> str:
     return str("" if value is None else value).replace("|", "\\|").replace("\n", "\\n")
-
-
-def _e(value: Any) -> str:
-    return html.escape("" if value is None else str(value), quote=True)
 
 
 def _stat(label: str, value: Any) -> str:

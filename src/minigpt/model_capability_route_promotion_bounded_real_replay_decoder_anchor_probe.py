@@ -4,9 +4,6 @@ import json
 from pathlib import Path
 from typing import Any, Callable
 
-from minigpt.model_capability_route_promotion_bounded_real_replay import (
-    MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_JSON_FILENAME,
-)
 from minigpt.model_capability_route_promotion_bounded_real_replay_prompt_aligned_failure_diagnostic import (
     MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_PROMPT_ALIGNED_FAILURE_DIAGNOSTIC_JSON_FILENAME,
 )
@@ -14,6 +11,7 @@ from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.server_contracts import GenerationRequest
 from minigpt.server_generator import MiniGPTGenerator
 from minigpt.report_check_common import check_entry as _check
+from minigpt.model_capability_route_promotion_bounded_real_replay import locate_real_replay as locate_prompt_aligned_replay
 
 
 MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_DECODER_ANCHOR_PROBE_JSON_FILENAME = "model_capability_route_promotion_bounded_real_replay_decoder_anchor_probe.json"
@@ -29,13 +27,6 @@ ANCHOR_PROFILES = [
     {"profile_id": "prefix_fixed_space", "anchor": "fixed ", "max_new_tokens": 18, "seed_offset": 1200, "description": "Give the first full term and ask the model to complete loss."},
     {"profile_id": "prefix_fixed_l", "anchor": "fixed l", "max_new_tokens": 16, "seed_offset": 1300, "description": "Give fixed and the first character of loss."},
 ]
-
-
-def locate_prompt_aligned_replay(path: str | Path) -> Path:
-    source = Path(path)
-    if source.is_dir():
-        source = source / MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_JSON_FILENAME
-    return source
 
 
 def locate_failure_diagnostic(path: str | Path) -> Path:

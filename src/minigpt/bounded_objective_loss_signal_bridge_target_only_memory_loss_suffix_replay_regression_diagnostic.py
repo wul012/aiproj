@@ -13,6 +13,7 @@ from minigpt.bounded_objective_loss_signal_bridge_target_only_memory_replay_comp
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.report_check_common import check_entry as _check
 from minigpt.report_check_common import resolve_exit_code_diagnostic_ready as resolve_exit_code
+from minigpt.report_utils import case_by_id as _case_by_id
 
 
 TARGET_ONLY_MEMORY_LOSS_SUFFIX_REPLAY_REGRESSION_DIAGNOSTIC_JSON_FILENAME = (
@@ -186,13 +187,6 @@ def _regression(
         "completion_surface_baseline_label": completion_baseline.get("label", ""),
         "next_step": "build_bounded_objective_loss_signal_bridge_target_only_memory_completion_surface_stabilization_patch",
     }
-
-
-def _case_by_id(rows: list[dict[str, Any]], case_id: str) -> dict[str, Any]:
-    for row in rows:
-        if row.get("case_id") == case_id:
-            return row
-    return {}
 
 
 def _checks(

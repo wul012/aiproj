@@ -253,6 +253,14 @@ def _interpretation(status: str, summary: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+
+
+def locate_mutation_holdout_suite(path: str | Path) -> Path:
+    source = Path(path)
+    if source.is_dir():
+        source = source / TARGET_HIDDEN_PROMPT_MUTATION_HOLDOUT_SUITE_JSON_FILENAME
+    return source
+
 __all__ = [
     "TARGET_HIDDEN_PROMPT_MUTATION_HOLDOUT_SUITE_CSV_FILENAME",
     "TARGET_HIDDEN_PROMPT_MUTATION_HOLDOUT_SUITE_HTML_FILENAME",
@@ -260,6 +268,7 @@ __all__ = [
     "TARGET_HIDDEN_PROMPT_MUTATION_HOLDOUT_SUITE_MARKDOWN_FILENAME",
     "TARGET_HIDDEN_PROMPT_MUTATION_HOLDOUT_SUITE_TEXT_FILENAME",
     "build_target_hidden_prompt_mutation_holdout_suite",
+    "locate_mutation_holdout_suite",
     "locate_replay_review",
     "locate_source_holdout_suite",
     "prompt_mutation_candidate_prompt_seed_text",

@@ -9,10 +9,10 @@ from minigpt.model_capability_required_term_pair_generation_profile_replay impor
     DEFAULT_PROFILE_IDS,
     GenerateFunc,
     build_model_capability_required_term_pair_generation_profile_replay,
-    resolve_exit_code as _replay_exit_code,
 )
 from minigpt.model_capability_required_term_pair_seed_config_heldout_replay import DEFAULT_HELDOUT_PROMPT_SPECS
 from minigpt.report_utils import as_dict, list_of_dicts, resolve_archived_reference_path, utc_now
+from minigpt.model_capability_required_term_pair_generation_profile_replay import resolve_exit_code_with_replay_children as resolve_exit_code
 
 
 PAIR_ROUTE_HELDOUT_REPLAY_JSON_FILENAME = "model_capability_required_term_pair_route_heldout_replay.json"
@@ -106,16 +106,6 @@ def build_model_capability_required_term_pair_route_heldout_replay(
         "summary": summary,
         "interpretation": _interpretation(status, summary),
     }
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    if require_pass and report.get("status") != "pass":
-        return 1
-    for entry in list_of_dicts(report.get("replay_reports")):
-        child = as_dict(entry.get("report"))
-        if child and _replay_exit_code(child, require_pass=require_pass):
-            return 1
-    return 0
 
 
 def _input_issues(route_decision: dict[str, Any], selected: dict[str, Any], prompt_specs: tuple[dict[str, str], ...]) -> list[str]:

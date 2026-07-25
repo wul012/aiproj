@@ -16,6 +16,7 @@ from minigpt.report_utils import (
     utc_now,
     write_json_payload,
 )
+from minigpt.report_utils import as_str as _as_str
 
 
 @dataclass(frozen=True)
@@ -406,12 +407,6 @@ def _changed(value: Any, baseline: Any) -> bool:
 
 def _as_int(value: Any) -> int:
     return int(number_or_default(value, 0, int))
-
-
-def _as_str(value: Any) -> str | None:
-    if value is None:
-        return None
-    return str(value)
 
 
 def _fmt_signed(value: Any) -> str:

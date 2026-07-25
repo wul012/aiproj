@@ -4,11 +4,9 @@ import json
 from pathlib import Path
 from typing import Any
 
-from minigpt.model_capability_route_promotion_bounded_objective_contract import (
-    BOUNDED_OBJECTIVE_CONTRACT_JSON_FILENAME,
-)
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.report_check_common import check_entry as _check
+from minigpt.model_capability_route_promotion_bounded_objective_contract import locate_objective_contract
 
 
 BOUNDED_OBJECTIVE_SEED_JSON_FILENAME = "model_capability_route_promotion_bounded_objective_seed.json"
@@ -18,13 +16,6 @@ BOUNDED_OBJECTIVE_SEED_CORPUS_FILENAME = "model_capability_route_promotion_bound
 BOUNDED_OBJECTIVE_SEED_TEXT_FILENAME = "model_capability_route_promotion_bounded_objective_seed.txt"
 BOUNDED_OBJECTIVE_SEED_MARKDOWN_FILENAME = "model_capability_route_promotion_bounded_objective_seed.md"
 BOUNDED_OBJECTIVE_SEED_HTML_FILENAME = "model_capability_route_promotion_bounded_objective_seed.html"
-
-
-def locate_objective_contract(path: str | Path) -> Path:
-    source = Path(path)
-    if source.is_dir():
-        source = source / BOUNDED_OBJECTIVE_CONTRACT_JSON_FILENAME
-    return source
 
 
 def read_json_report(path: str | Path) -> dict[str, Any]:

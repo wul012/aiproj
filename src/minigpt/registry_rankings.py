@@ -9,6 +9,9 @@ from minigpt.registry_release_readiness import (
     release_readiness_delta_leaderboard as release_readiness_delta_leaderboard,
     release_readiness_delta_summary as release_readiness_delta_summary,
 )
+from minigpt.report_utils import as_optional_float as _as_optional_float
+from minigpt.report_utils import as_str as _as_str
+from minigpt.report_utils import int_if_whole as _int_if_whole
 
 
 def best_registered_run(runs: list[Any], field: str) -> dict[str, Any] | None:
@@ -219,24 +222,3 @@ def _pick(payload: Any, key: str) -> Any:
 def _pick_dict(payload: Any, key: str) -> dict[str, Any]:
     nested = _pick(payload, key)
     return nested if isinstance(nested, dict) else {}
-
-
-def _as_optional_float(value: Any) -> float | None:
-    if value is None or value == "":
-        return None
-    try:
-        return float(value)
-    except (TypeError, ValueError):
-        return None
-
-
-def _int_if_whole(value: float | None) -> int | float | None:
-    if value is None:
-        return None
-    return int(value) if float(value).is_integer() else value
-
-
-def _as_str(value: Any) -> str | None:
-    if value is None:
-        return None
-    return str(value)

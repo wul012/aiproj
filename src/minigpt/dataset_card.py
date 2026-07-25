@@ -16,6 +16,7 @@ from minigpt.report_utils import (
     as_dict as _dict,
     utc_now,
 )
+from minigpt.report_utils import as_list_of_dicts as _list_of_dicts
 
 
 DEFAULT_INTENDED_USE = [
@@ -258,10 +259,6 @@ def _first_number(*values: Any) -> int | float | None:
 
 def _pick(value: Any, key: str) -> Any:
     return value.get(key) if isinstance(value, dict) else None
-
-
-def _list_of_dicts(value: Any) -> list[dict[str, Any]]:
-    return [item for item in value if isinstance(item, dict)] if isinstance(value, list) else []
 
 
 def _string_list(value: Any) -> list[str]:

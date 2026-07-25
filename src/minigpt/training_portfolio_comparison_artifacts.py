@@ -1,10 +1,12 @@
 from __future__ import annotations
 
 import csv
-import html
 import json
 from pathlib import Path
 from typing import Any
+from minigpt.report_utils import as_dict_or_empty as _dict
+from minigpt.report_utils import as_list_of_dicts as _list_of_dicts
+from minigpt.report_utils import html_e as _e
 
 
 def write_training_portfolio_comparison_json(report: dict[str, Any], path: str | Path) -> None:
@@ -405,14 +407,6 @@ footer { padding:20px 32px 34px; color:var(--muted); font-size:13px; }
 </style>"""
 
 
-def _dict(value: Any) -> dict[str, Any]:
-    return value if isinstance(value, dict) else {}
-
-
-def _list_of_dicts(value: Any) -> list[dict[str, Any]]:
-    return [item for item in value if isinstance(item, dict)] if isinstance(value, list) else []
-
-
 def _string_list(value: Any) -> list[str]:
     return [str(item) for item in value if str(item).strip()] if isinstance(value, list) else []
 
@@ -461,10 +455,6 @@ def _fmt_mapping(value: Any) -> str:
 def _md(value: Any) -> str:
     text = "" if value is None else str(value)
     return text.replace("|", "\\|").replace("\n", " ")
-
-
-def _e(value: Any) -> str:
-    return html.escape("" if value is None else str(value), quote=True)
 
 
 __all__ = [

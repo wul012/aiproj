@@ -7,13 +7,11 @@ from typing import Any, Callable
 from minigpt.model_capability_route_promotion_bounded_objective_decoder_anchor_policy import (
     BOUNDED_OBJECTIVE_DECODER_ANCHOR_POLICY_JSON_FILENAME,
 )
-from minigpt.model_capability_route_promotion_bounded_objective_replay_comparison import (
-    BOUNDED_OBJECTIVE_REPLAY_COMPARISON_JSON_FILENAME,
-)
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.server_contracts import GenerationRequest
 from minigpt.server_generator import MiniGPTGenerator
 from minigpt.report_check_common import check_entry as _check
+from minigpt.model_capability_route_promotion_bounded_objective_replay_comparison import locate_objective_replay_comparison
 
 
 BOUNDED_OBJECTIVE_DECODER_ANCHOR_POLICY_REPLAY_JSON_FILENAME = "model_capability_route_promotion_bounded_objective_decoder_anchor_policy_replay.json"
@@ -25,13 +23,6 @@ BOUNDED_OBJECTIVE_DECODER_ANCHOR_POLICY_REPLAY_HTML_FILENAME = "model_capability
 PROFILE_SEED_OFFSETS = {"prefix_f": 1100, "prefix_fixed_space": 1200, "prefix_fixed_l": 1300}
 
 GeneratorRunner = Callable[[dict[str, Any], dict[str, Any] | None, str | Path, str | Path, str], dict[str, Any]]
-
-
-def locate_objective_replay_comparison(path: str | Path) -> Path:
-    source = Path(path)
-    if source.is_dir():
-        source = source / BOUNDED_OBJECTIVE_REPLAY_COMPARISON_JSON_FILENAME
-    return source
 
 
 def locate_decoder_anchor_policy(path: str | Path) -> Path:

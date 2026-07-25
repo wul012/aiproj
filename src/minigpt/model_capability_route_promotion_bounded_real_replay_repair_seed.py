@@ -4,15 +4,13 @@ import json
 from pathlib import Path
 from typing import Any
 
-from minigpt.model_capability_route_promotion_bounded_real_replay import (
-    MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_JSON_FILENAME,
-)
 from minigpt.model_capability_route_promotion_bounded_real_replay_repair_plan import (
     MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_REPAIR_PLAN_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.report_check_common import check_entry as _check
 from minigpt.report_check_common import resolve_exit_code_seed_ready as resolve_exit_code
+from minigpt.model_capability_route_promotion_bounded_real_replay import locate_real_replay as locate_route_promotion_bounded_real_replay
 
 
 MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_REPAIR_SEED_JSON_FILENAME = "model_capability_route_promotion_bounded_real_replay_repair_seed.json"
@@ -28,13 +26,6 @@ def locate_route_promotion_bounded_real_replay_repair_plan(path: str | Path) -> 
     source = Path(path)
     if source.is_dir():
         source = source / MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_REPAIR_PLAN_JSON_FILENAME
-    return source
-
-
-def locate_route_promotion_bounded_real_replay(path: str | Path) -> Path:
-    source = Path(path)
-    if source.is_dir():
-        source = source / MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_JSON_FILENAME
     return source
 
 

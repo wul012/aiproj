@@ -229,6 +229,14 @@ def _interpretation(status: str, contract: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+
+
+def locate_objective_contract(path: str | Path) -> Path:
+    source = Path(path)
+    if source.is_dir():
+        source = source / BOUNDED_OBJECTIVE_CONTRACT_JSON_FILENAME
+    return source
+
 __all__ = [
     "BOUNDED_OBJECTIVE_CONTRACT_CSV_FILENAME",
     "BOUNDED_OBJECTIVE_CONTRACT_HTML_FILENAME",
@@ -236,6 +244,7 @@ __all__ = [
     "BOUNDED_OBJECTIVE_CONTRACT_MARKDOWN_FILENAME",
     "BOUNDED_OBJECTIVE_CONTRACT_TEXT_FILENAME",
     "build_model_capability_route_promotion_bounded_objective_contract",
+    "locate_objective_contract",
     "locate_objective_intervention_plan",
     "read_json_report",
     "resolve_exit_code",

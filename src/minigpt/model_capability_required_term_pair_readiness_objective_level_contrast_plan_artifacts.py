@@ -13,6 +13,7 @@ from minigpt.model_capability_required_term_pair_readiness_objective_level_contr
 )
 from minigpt.report_utils import as_dict, csv_cell, html_escape, list_of_dicts, markdown_cell, write_json_payload
 from minigpt.report_utils import html_card as _card
+from minigpt.report_check_common import html_check_section as _check_html
 
 
 def render_objective_level_contrast_plan_text(report: dict[str, Any]) -> str:
@@ -150,17 +151,6 @@ def _design_row_html(row: dict[str, Any]) -> str:
         f"<td>{html_escape(row.get('planned_count'))}</td>"
         f"<td>{html_escape(row.get('purpose'))}</td>"
         f"<td>{html_escape(row.get('guardrail'))}</td>"
-        "</tr>"
-    )
-
-
-def _check_html(row: dict[str, Any]) -> str:
-    return (
-        "<tr>"
-        f"<td>{html_escape(row.get('id'))}</td>"
-        f"<td>{html_escape(row.get('status'))}</td>"
-        f"<td>{html_escape(row.get('actual'))}</td>"
-        f"<td>{html_escape(row.get('detail'))}</td>"
         "</tr>"
     )
 

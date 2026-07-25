@@ -9,6 +9,7 @@ from minigpt.benchmark_scorecard_comparison_sections import (
     render_benchmark_scorecard_comparison_html,
     render_benchmark_scorecard_comparison_markdown,
 )
+from minigpt.report_utils import as_list_of_dicts as _list_of_dicts
 
 
 def write_benchmark_scorecard_comparison_json(report: dict[str, Any], path: str | Path) -> None:
@@ -132,10 +133,6 @@ def write_benchmark_scorecard_comparison_outputs(report: dict[str, Any], out_dir
     write_benchmark_scorecard_comparison_markdown(report, paths["markdown"])
     write_benchmark_scorecard_comparison_html(report, paths["html"])
     return {key: str(value) for key, value in paths.items()}
-
-
-def _list_of_dicts(value: Any) -> list[dict[str, Any]]:
-    return [item for item in value if isinstance(item, dict)] if isinstance(value, list) else []
 
 
 def _csv_value(value: Any) -> Any:

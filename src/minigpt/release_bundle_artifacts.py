@@ -10,6 +10,10 @@ from minigpt.report_utils import (
     list_of_dicts as _list_of_dicts,
     write_json_payload,
 )
+from minigpt.report_utils import fmt_any as _fmt_any
+from minigpt.report_utils import fmt_delta as _fmt_delta
+from minigpt.report_utils import format_value as _fmt
+from minigpt.report_utils import rank_label as _rank_label
 
 
 def write_release_bundle_json(bundle: dict[str, Any], path: str | Path) -> None:
@@ -340,36 +344,10 @@ def _string_list(value: Any) -> list[str]:
     return [str(item) for item in value if str(item).strip()] if isinstance(value, list) else []
 
 
-def _fmt(value: Any) -> str:
-    if value is None:
-        return "missing"
-    if isinstance(value, float):
-        return f"{value:.5g}"
-    return str(value)
-
-
-def _fmt_delta(value: Any) -> str:
-    if value is None or value == "":
-        return "missing"
-    return f"{float(value):+.5g}"
-
-
-def _fmt_any(value: Any) -> str:
-    if isinstance(value, float):
-        return f"{value:.5g}"
-    return "missing" if value is None else str(value)
-
-
 def _fmt_bytes(value: Any) -> str:
     if value is None:
         return "missing"
     return f"{int(value):,} bytes"
-
-
-def _rank_label(value: Any) -> str:
-    if value is None or value == "":
-        return "unranked"
-    return f"#{int(value)}"
 
 
 def _md(value: Any) -> str:

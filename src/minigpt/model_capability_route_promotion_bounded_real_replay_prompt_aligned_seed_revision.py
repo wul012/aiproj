@@ -4,9 +4,6 @@ import json
 from pathlib import Path
 from typing import Any
 
-from minigpt.model_capability_route_promotion_bounded_benchmark_suite import (
-    MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_BENCHMARK_SUITE_JSON_FILENAME,
-)
 from minigpt.model_capability_route_promotion_bounded_real_replay_failure_alignment_diagnostic import (
     MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_FAILURE_ALIGNMENT_DIAGNOSTIC_JSON_FILENAME,
 )
@@ -15,6 +12,7 @@ from minigpt.model_capability_route_promotion_bounded_real_replay_repair_seed_re
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.report_check_common import check_entry as _check
+from minigpt.model_capability_route_promotion_bounded_benchmark_suite import locate_benchmark_suite
 
 
 MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_PROMPT_ALIGNED_SEED_REVISION_JSON_FILENAME = "model_capability_route_promotion_bounded_real_replay_prompt_aligned_seed_revision.json"
@@ -24,13 +22,6 @@ MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_PROMPT_ALIGNED_SEED_REVISIO
 MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_PROMPT_ALIGNED_SEED_REVISION_TEXT_FILENAME = "model_capability_route_promotion_bounded_real_replay_prompt_aligned_seed_revision.txt"
 MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_PROMPT_ALIGNED_SEED_REVISION_MARKDOWN_FILENAME = "model_capability_route_promotion_bounded_real_replay_prompt_aligned_seed_revision.md"
 MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_PROMPT_ALIGNED_SEED_REVISION_HTML_FILENAME = "model_capability_route_promotion_bounded_real_replay_prompt_aligned_seed_revision.html"
-
-
-def locate_benchmark_suite(path: str | Path) -> Path:
-    source = Path(path)
-    if source.is_dir():
-        source = source / MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_BENCHMARK_SUITE_JSON_FILENAME
-    return source
 
 
 def locate_failure_alignment_diagnostic(path: str | Path) -> Path:
@@ -198,17 +189,26 @@ def _interpretation(status: str, revision: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+
+
+def locate_prompt_aligned_seed_revision(path: str | Path) -> Path:
+    source = Path(path)
+    if source.is_dir():
+        source = source / MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_PROMPT_ALIGNED_SEED_REVISION_JSON_FILENAME
+    return source
+
 __all__ = [
     "MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_PROMPT_ALIGNED_SEED_REVISION_CORPUS_FILENAME",
     "MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_PROMPT_ALIGNED_SEED_REVISION_CSV_FILENAME",
     "MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_PROMPT_ALIGNED_SEED_REVISION_HTML_FILENAME",
-    "MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_PROMPT_ALIGNED_SEED_REVISION_JSON_FILENAME",
     "MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_PROMPT_ALIGNED_SEED_REVISION_JSONL_FILENAME",
+    "MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_PROMPT_ALIGNED_SEED_REVISION_JSON_FILENAME",
     "MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_PROMPT_ALIGNED_SEED_REVISION_MARKDOWN_FILENAME",
     "MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_PROMPT_ALIGNED_SEED_REVISION_TEXT_FILENAME",
     "build_model_capability_route_promotion_bounded_real_replay_prompt_aligned_seed_revision",
     "locate_benchmark_suite",
     "locate_failure_alignment_diagnostic",
+    "locate_prompt_aligned_seed_revision",
     "locate_repair_seed_revision",
     "read_json_report",
     "resolve_exit_code",

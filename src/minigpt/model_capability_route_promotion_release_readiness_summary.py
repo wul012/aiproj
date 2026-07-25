@@ -13,9 +13,10 @@ from minigpt.model_capability_route_promotion_release_packet import (
 from minigpt.model_capability_route_promotion_release_packet_review import (
     MODEL_CAPABILITY_ROUTE_PROMOTION_RELEASE_PACKET_REVIEW_JSON_FILENAME,
 )
-from minigpt.report_utils import as_dict, string_list, utc_now
+from minigpt.report_utils import as_dict, utc_now
 from minigpt.report_check_common import check_entry as _check
 from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
+from minigpt.report_utils import unique_sorted as _unique_sorted
 
 
 MODEL_CAPABILITY_ROUTE_PROMOTION_RELEASE_READINESS_SUMMARY_JSON_FILENAME = "model_capability_route_promotion_release_readiness_summary.json"
@@ -295,10 +296,6 @@ def _decision(status: str) -> str:
     if status == "pass":
         return "model_capability_route_promotion_release_readiness_summary_ready"
     return "fix_model_capability_route_promotion_release_readiness_summary"
-
-
-def _unique_sorted(value: Any) -> list[str]:
-    return sorted({str(item) for item in string_list(value) if str(item)})
 
 
 def _failed_count(summary: dict[str, Any]) -> int:

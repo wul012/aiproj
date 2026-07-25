@@ -38,10 +38,16 @@ def sha256_file(path: Any) -> str:
     return sha256(Path(str(path)).read_bytes()).hexdigest()
 
 
+
+
+def evidence_row(kind: str, path: str | Path | None, status: Any) -> dict[str, Any]:
+    return {'kind': kind, 'path': str(path or ''), 'sha256': sha256_file(path), 'status': 'pass' if status else 'fail'}
+
 __all__ = [
     "blocked_uses",
     "blocked_uses_complete",
     "downstream_lookup_use",
+    "evidence_row",
     "is_downstream_lookup_only",
     "is_sha256",
     "sha256_file",

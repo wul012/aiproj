@@ -15,6 +15,7 @@ from minigpt.randomized_holdout_publication_registry_downstream_consumer_index_r
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.report_check_common import check_entry as _check
 from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
+from minigpt.report_check_common import field_checks as _field_checks
 
 
 RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_DOWNSTREAM_CONSUMER_ACK_CHECK_JSON_FILENAME = "randomized_holdout_publication_registry_downstream_consumer_ack_check.json"
@@ -134,18 +135,6 @@ def _checks(
     checks.extend(_field_checks("summary", SUMMARY_FIELDS, original_summary, rebuilt_summary))
     checks.extend(_field_checks("ack", ACK_FIELDS, original_ack, rebuilt_ack))
     return checks
-
-
-def _field_checks(prefix: str, fields: list[str], original: dict[str, Any], rebuilt: dict[str, Any]) -> list[dict[str, Any]]:
-    return [
-        _check(
-            f"{prefix}.{field}",
-            original.get(field) == rebuilt.get(field),
-            {"original": original.get(field), "rebuilt": rebuilt.get(field)},
-            f"{prefix}.{field} must rebuild exactly",
-        )
-        for field in fields
-    ]
 
 
 def _resolve_source_review_path(report: dict[str, Any], ack: dict[str, Any], ack_path: str | Path | None) -> Path | None:

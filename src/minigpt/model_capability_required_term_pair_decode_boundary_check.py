@@ -4,16 +4,14 @@ import json
 from pathlib import Path
 from typing import Any, Sequence
 
-from minigpt.model_capability_required_term_pair_colon_immediate_stability import (
-    PAIR_COLON_IMMEDIATE_STABILITY_JSON_FILENAME,
-)
 from minigpt.model_capability_required_term_pair_generation_profile_replay import (
     DEFAULT_PROFILE_IDS,
     GenerateFunc,
     build_model_capability_required_term_pair_generation_profile_replay,
-    resolve_exit_code as _replay_exit_code,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
+from minigpt.model_capability_required_term_pair_colon_immediate_stability import locate_pair_colon_immediate_stability
+from minigpt.model_capability_required_term_pair_generation_profile_replay import resolve_exit_code_with_replay_children as resolve_exit_code
 
 
 PAIR_DECODE_BOUNDARY_CHECK_JSON_FILENAME = "model_capability_required_term_pair_decode_boundary_check.json"
@@ -28,13 +26,6 @@ DEFAULT_DECODE_SPECS = (
     {"spec_id": "wider-k4-t020-n12", "top_k": 4, "temperature": 0.2, "max_new_tokens": 12},
     {"spec_id": "greedy-k1-t020-n20", "top_k": 1, "temperature": 0.2, "max_new_tokens": 20},
 )
-
-
-def locate_pair_colon_immediate_stability(path: str | Path) -> Path:
-    source = Path(path)
-    if source.is_dir():
-        source = source / PAIR_COLON_IMMEDIATE_STABILITY_JSON_FILENAME
-    return source
 
 
 def read_json_report(path: str | Path) -> dict[str, Any]:
@@ -131,16 +122,6 @@ def build_model_capability_required_term_pair_decode_boundary_check(
         "summary": summary,
         "interpretation": _interpretation(status, summary),
     }
-
-
-def resolve_exit_code(report: dict[str, Any], *, require_pass: bool) -> int:
-    if require_pass and report.get("status") != "pass":
-        return 1
-    for entry in list_of_dicts(report.get("replay_reports")):
-        child = as_dict(entry.get("report"))
-        if child and _replay_exit_code(child, require_pass=require_pass):
-            return 1
-    return 0
 
 
 def _seed_reports_by_seed(stability_report: dict[str, Any]) -> dict[int, dict[str, Any]]:

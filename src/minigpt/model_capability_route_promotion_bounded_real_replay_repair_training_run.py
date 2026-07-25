@@ -10,6 +10,7 @@ from minigpt.model_capability_route_promotion_bounded_real_replay_repair_seed im
 from minigpt.report_utils import as_dict, utc_now
 from minigpt.report_check_common import check_entry as _check
 from minigpt.report_check_common import resolve_exit_code_training_ready as resolve_exit_code
+from minigpt.report_utils import artifact_entries as _artifacts
 
 
 MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_REPAIR_TRAINING_RUN_JSON_FILENAME = "model_capability_route_promotion_bounded_real_replay_repair_training_run.json"
@@ -71,22 +72,6 @@ def build_model_capability_route_promotion_bounded_real_replay_repair_training_r
         "summary": _summary(status, checks, training),
         "interpretation": _interpretation(status, training),
     }
-
-
-def _artifacts(root: Path) -> list[dict[str, Any]]:
-    rows = []
-    for key, name in [
-        ("checkpoint", "checkpoint.pt"),
-        ("tokenizer", "tokenizer.json"),
-        ("metrics", "metrics.jsonl"),
-        ("train_config", "train_config.json"),
-        ("run_manifest", "run_manifest.json"),
-        ("sample", "sample.txt"),
-        ("prepared_corpus", "prepared_corpus.txt"),
-    ]:
-        path = root / name
-        rows.append({"key": key, "path": str(path), "exists": path.is_file(), "size": path.stat().st_size if path.is_file() else 0})
-    return rows
 
 
 def _metrics(path: Path) -> dict[str, Any]:

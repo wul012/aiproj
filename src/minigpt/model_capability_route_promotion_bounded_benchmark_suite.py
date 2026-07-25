@@ -169,6 +169,15 @@ def _interpretation(status: str, suite: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+
+
+def locate_benchmark_suite(path: str | Path) -> Path:
+    source = Path(path)
+    if source.is_dir():
+        source = source / MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_BENCHMARK_SUITE_JSON_FILENAME
+    return source
+
+
 __all__ = [
     "MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_BENCHMARK_SUITE_CSV_FILENAME",
     "MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_BENCHMARK_SUITE_HTML_FILENAME",
@@ -176,6 +185,7 @@ __all__ = [
     "MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_BENCHMARK_SUITE_MARKDOWN_FILENAME",
     "MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_BENCHMARK_SUITE_TEXT_FILENAME",
     "build_model_capability_route_promotion_bounded_benchmark_suite",
+    "locate_benchmark_suite",
     "locate_route_promotion_consumer_plan",
     "read_json_report",
     "resolve_exit_code",

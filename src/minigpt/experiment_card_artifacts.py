@@ -9,6 +9,11 @@ from minigpt.report_utils import (
     html_escape as _e,
     write_json_payload,
 )
+from minigpt.report_utils import as_optional_float as _as_optional_float
+from minigpt.report_utils import as_str_list as _as_str_list
+from minigpt.report_utils import fmt_int as _fmt_int
+from minigpt.report_utils import format_value as _fmt
+from minigpt.report_utils import rank_label as _rank_label
 
 
 def write_experiment_card_json(card: dict[str, Any], path: str | Path) -> None:
@@ -301,50 +306,11 @@ def _tag_chips(value: Any) -> str:
     return "".join(f'<span class="tag">{_e(tag)}</span>' for tag in tags)
 
 
-def _as_optional_float(value: Any) -> float | None:
-    if value is None or value == "":
-        return None
-    try:
-        return float(value)
-    except (TypeError, ValueError):
-        return None
-
-
-def _as_str_list(value: Any) -> list[str]:
-    if value is None:
-        return []
-    if isinstance(value, str):
-        return [item.strip() for item in value.split(",") if item.strip()]
-    if isinstance(value, list):
-        return [str(item).strip() for item in value if str(item).strip()]
-    return [str(value).strip()] if str(value).strip() else []
-
-
-def _fmt(value: Any) -> str:
-    if value is None:
-        return "missing"
-    if isinstance(value, float):
-        return f"{value:.5g}"
-    return str(value)
-
-
 def _fmt_delta(value: Any) -> str:
     number = _as_optional_float(value)
     if number is None:
         return "missing"
     return f"{number:+.5g}"
-
-
-def _fmt_int(value: Any) -> str:
-    if value is None:
-        return "missing"
-    return f"{int(value):,}"
-
-
-def _rank_label(value: Any) -> str:
-    if value is None or value == "":
-        return "unranked"
-    return f"#{int(value)}"
 
 
 def _fmt_tags(value: Any) -> str:

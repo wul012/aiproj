@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import re
 from pathlib import Path
 from typing import Any
 
@@ -17,6 +16,7 @@ from minigpt.model_capability_required_term_one_term_isolation import (
 from minigpt.model_capability_required_term_scaffold_probe import read_json_report as read_json_report
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code  # noqa: F401 (re-export)
+from minigpt.report_utils import slug as _slug
 
 
 REQUIRED_TERM_ONE_TERM_SEED_STABILITY_JSON_FILENAME = (
@@ -480,8 +480,3 @@ def _clean_seeds(seeds: tuple[int, ...] | list[int]) -> list[int]:
         if seed not in cleaned:
             cleaned.append(seed)
     return cleaned
-
-
-def _slug(value: str) -> str:
-    slug = re.sub(r"[^a-zA-Z0-9]+", "-", value.strip().lower()).strip("-")
-    return slug or "term"

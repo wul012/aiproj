@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from typing import Any
+from minigpt.report_utils import as_dict_or_empty as _dict
 
 
 def build_release_readiness_context(registry: dict[str, Any] | None) -> dict[str, Any]:
@@ -172,10 +173,6 @@ def release_readiness_trend_status(context: dict[str, Any]) -> str | None:
     if counts:
         return ", ".join(f"{key}:{counts[key]}" for key in sorted(counts))
     return None
-
-
-def _dict(value: Any) -> dict[str, Any]:
-    return value if isinstance(value, dict) else {}
 
 
 def _string_list(value: Any) -> list[str]:

@@ -4,15 +4,13 @@ import json
 from pathlib import Path
 from typing import Any
 
-from minigpt.model_capability_route_promotion_bounded_objective_contract import (
-    BOUNDED_OBJECTIVE_CONTRACT_JSON_FILENAME,
-)
 from minigpt.model_capability_route_promotion_bounded_objective_unassisted_repair_curriculum_revision import (
     BOUNDED_OBJECTIVE_UNASSISTED_REPAIR_CURRICULUM_REVISION_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.report_check_common import check_entry as _check
 from minigpt.report_check_common import resolve_exit_code_seed_ready as resolve_exit_code
+from minigpt.model_capability_route_promotion_bounded_objective_contract import locate_objective_contract
 
 
 BOUNDED_OBJECTIVE_UNASSISTED_REPAIR_SEED_REVISION_JSON_FILENAME = "model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision.json"
@@ -28,13 +26,6 @@ def locate_curriculum_revision(path: str | Path) -> Path:
     source = Path(path)
     if source.is_dir():
         source = source / BOUNDED_OBJECTIVE_UNASSISTED_REPAIR_CURRICULUM_REVISION_JSON_FILENAME
-    return source
-
-
-def locate_objective_contract(path: str | Path) -> Path:
-    source = Path(path)
-    if source.is_dir():
-        source = source / BOUNDED_OBJECTIVE_CONTRACT_JSON_FILENAME
     return source
 
 
@@ -209,17 +200,26 @@ def _interpretation(status: str, seed_revision: dict[str, Any]) -> dict[str, Any
     }
 
 
+
+
+def locate_seed_revision(path: str | Path) -> Path:
+    source = Path(path)
+    if source.is_dir():
+        source = source / BOUNDED_OBJECTIVE_UNASSISTED_REPAIR_SEED_REVISION_JSON_FILENAME
+    return source
+
 __all__ = [
     "BOUNDED_OBJECTIVE_UNASSISTED_REPAIR_SEED_REVISION_CORPUS_FILENAME",
     "BOUNDED_OBJECTIVE_UNASSISTED_REPAIR_SEED_REVISION_CSV_FILENAME",
     "BOUNDED_OBJECTIVE_UNASSISTED_REPAIR_SEED_REVISION_HTML_FILENAME",
-    "BOUNDED_OBJECTIVE_UNASSISTED_REPAIR_SEED_REVISION_JSON_FILENAME",
     "BOUNDED_OBJECTIVE_UNASSISTED_REPAIR_SEED_REVISION_JSONL_FILENAME",
+    "BOUNDED_OBJECTIVE_UNASSISTED_REPAIR_SEED_REVISION_JSON_FILENAME",
     "BOUNDED_OBJECTIVE_UNASSISTED_REPAIR_SEED_REVISION_MARKDOWN_FILENAME",
     "BOUNDED_OBJECTIVE_UNASSISTED_REPAIR_SEED_REVISION_TEXT_FILENAME",
     "build_model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision",
     "locate_curriculum_revision",
     "locate_objective_contract",
+    "locate_seed_revision",
     "read_json_report",
     "resolve_exit_code",
 ]

@@ -13,6 +13,7 @@ from minigpt.model_capability_required_term_pair_readiness_fixed_preserving_tran
 )
 from minigpt.report_utils import as_dict, csv_cell, html_escape, list_of_dicts, markdown_cell, write_json_payload
 from minigpt.report_utils import html_card as _card
+from minigpt.report_check_common import check_row_html as _check_row_html
 
 
 def render_prompt_surface_sensitivity_diagnostic_text(report: dict[str, Any]) -> str:
@@ -144,17 +145,6 @@ def _surface_row_html(row: dict[str, Any]) -> str:
         f"<td>{html_escape(row.get('default_continuation_hit_count'))}</td>"
         f"<td>{html_escape(row.get('suppression_continuation_hit_count'))}</td>"
         f"<td>{html_escape(row.get('diagnosis'))}</td>"
-        "</tr>"
-    )
-
-
-def _check_row_html(row: dict[str, Any]) -> str:
-    return (
-        "<tr>"
-        f"<td>{html_escape(row.get('id'))}</td>"
-        f"<td>{html_escape(row.get('status'))}</td>"
-        f"<td>{html_escape(row.get('actual'))}</td>"
-        f"<td>{html_escape(row.get('detail'))}</td>"
         "</tr>"
     )
 

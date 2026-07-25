@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import hashlib
 import json
 from pathlib import Path
 from typing import Any
@@ -8,9 +7,11 @@ from typing import Any
 from minigpt.model_capability_route_promotion_release_readiness_summary import (
     MODEL_CAPABILITY_ROUTE_PROMOTION_RELEASE_READINESS_SUMMARY_JSON_FILENAME,
 )
-from minigpt.report_utils import as_dict, list_of_dicts, string_list, utc_now
+from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.report_check_common import check_entry as _check
 from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
+from minigpt.report_utils import sha256_or_empty as _sha256_or_empty
+from minigpt.report_utils import unique_sorted as _unique_sorted
 
 
 MODEL_CAPABILITY_ROUTE_PROMOTION_RELEASE_READINESS_SUMMARY_CHECK_JSON_FILENAME = "model_capability_route_promotion_release_readiness_summary_check.json"
@@ -154,19 +155,6 @@ def _source_digest_rows(source_rows: list[dict[str, Any]]) -> list[dict[str, Any
     return rows
 
 
-def _sha256_or_empty(path: str | Path | None) -> str:
-    if not path:
-        return ""
-    source = Path(path)
-    if not source.is_file():
-        return ""
-    digest = hashlib.sha256()
-    with source.open("rb") as handle:
-        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
-
-
 def _summary(
     status: str,
     check_rows: list[dict[str, Any]],
@@ -209,10 +197,6 @@ def _status_counts(rows: list[dict[str, Any]]) -> dict[str, int]:
         "pass": sum(1 for row in rows if row.get("status") == "pass"),
         "fail": sum(1 for row in rows if row.get("status") != "pass"),
     }
-
-
-def _unique_sorted(value: Any) -> list[str]:
-    return sorted({str(item) for item in string_list(value) if str(item)})
 
 
 def _decision(status: str) -> str:

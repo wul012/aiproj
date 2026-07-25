@@ -7,6 +7,7 @@ from typing import Any
 from minigpt.bounded_objective_curriculum_patch_profile_sweep import CURRICULUM_PATCH_PROFILE_SWEEP_JSON_FILENAME
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.report_check_common import check_entry as _check
+from minigpt.report_utils import locate as _locate
 
 
 LOSS_SIGNAL_BRIDGE_JSON_FILENAME = "bounded_objective_loss_signal_bridge.json"
@@ -193,16 +194,6 @@ def _interpretation(status: str, bridge: dict[str, Any]) -> dict[str, Any]:
         "reason": reason,
         "next_action": bridge.get("next_step"),
     }
-
-
-def _locate(path: str | Path, filename: str) -> Path:
-    source = Path(path)
-    if source.is_file():
-        return source
-    nested = source / filename
-    if nested.is_file():
-        return nested
-    raise FileNotFoundError(f"cannot locate {filename} under {source}")
 
 
 def _row_id(row: dict[str, Any]) -> str:

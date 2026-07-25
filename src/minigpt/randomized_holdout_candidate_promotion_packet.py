@@ -345,6 +345,14 @@ def _interpretation(status: str, summary: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+
+
+def locate_candidate_packet(path: str | Path) -> Path:
+    source = Path(path)
+    if source.is_dir():
+        source = source / RANDOMIZED_HOLDOUT_CANDIDATE_PROMOTION_PACKET_JSON_FILENAME
+    return source
+
 __all__ = [
     "RANDOMIZED_HOLDOUT_CANDIDATE_PROMOTION_PACKET_CSV_FILENAME",
     "RANDOMIZED_HOLDOUT_CANDIDATE_PROMOTION_PACKET_HTML_FILENAME",
@@ -352,6 +360,7 @@ __all__ = [
     "RANDOMIZED_HOLDOUT_CANDIDATE_PROMOTION_PACKET_MARKDOWN_FILENAME",
     "RANDOMIZED_HOLDOUT_CANDIDATE_PROMOTION_PACKET_TEXT_FILENAME",
     "build_randomized_holdout_candidate_promotion_packet",
+    "locate_candidate_packet",
     "locate_randomized_holdout_dry_run",
     "locate_randomized_holdout_real_replay",
     "locate_randomized_holdout_replay_review",

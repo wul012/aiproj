@@ -241,6 +241,14 @@ def _interpretation(status: str, summary: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+
+
+def locate_semantic_holdout_suite(path: str | Path) -> Path:
+    source = Path(path)
+    if source.is_dir():
+        source = source / TARGET_HIDDEN_SEMANTIC_HOLDOUT_SUITE_JSON_FILENAME
+    return source
+
 __all__ = [
     "TARGET_HIDDEN_SEMANTIC_HOLDOUT_SUITE_CSV_FILENAME",
     "TARGET_HIDDEN_SEMANTIC_HOLDOUT_SUITE_HTML_FILENAME",
@@ -249,6 +257,7 @@ __all__ = [
     "TARGET_HIDDEN_SEMANTIC_HOLDOUT_SUITE_TEXT_FILENAME",
     "build_target_hidden_semantic_holdout_suite",
     "locate_replay_review",
+    "locate_semantic_holdout_suite",
     "locate_source_holdout_suite",
     "read_json_report",
     "resolve_exit_code",

@@ -1,11 +1,13 @@
 from __future__ import annotations
 
-import html
 import os
 from pathlib import Path
 from typing import Any
 
 from minigpt.registry_data import _as_optional_float, _as_str_list
+from minigpt.report_utils import format_value as _fmt
+from minigpt.report_utils import html_e as _e
+from minigpt.report_utils import rank_label as _rank_label
 
 
 def loss_leaderboard_html(leaderboard: Any) -> str:
@@ -157,25 +159,11 @@ def _release_readiness_benchmark_cell(item: dict[str, Any]) -> str:
     )
 
 
-def _fmt(value: Any) -> str:
-    if value is None:
-        return "missing"
-    if isinstance(value, float):
-        return f"{value:.5g}"
-    return str(value)
-
-
 def _fmt_delta(value: Any) -> str:
     number = _as_optional_float(value)
     if number is None:
         return "delta missing"
     return f"{number:+.5g}"
-
-
-def _rank_label(value: Any) -> str:
-    if value is None or value == "":
-        return "unranked"
-    return f"#{int(value)}"
 
 
 def _href(path: Path, base_dir: str | Path | None) -> str:
@@ -185,10 +173,6 @@ def _href(path: Path, base_dir: str | Path | None) -> str:
         return Path(os.path.relpath(path, Path(base_dir))).as_posix()
     except ValueError:
         return path.as_posix()
-
-
-def _e(value: Any) -> str:
-    return html.escape("" if value is None else str(value), quote=True)
 
 
 __all__ = [

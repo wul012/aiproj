@@ -3,6 +3,7 @@ from __future__ import annotations
 from typing import Any
 
 from minigpt.report_utils import html_escape as _e
+from minigpt.report_utils import format_value as _fmt
 
 
 def stats_section(stats: list[tuple[str, Any]]) -> str:
@@ -162,14 +163,6 @@ def _status_delta_label(value: Any) -> str:
 
 def _string_list(value: Any) -> list[str]:
     return [str(item) for item in value if str(item).strip()] if isinstance(value, list) else []
-
-
-def _fmt(value: Any) -> str:
-    if value is None:
-        return "missing"
-    if isinstance(value, float):
-        return f"{value:.5g}"
-    return str(value)
 
 
 __all__ = [

@@ -9,6 +9,7 @@ from minigpt.model_capability_route_promotion_bounded_real_replay_repair_seed_re
 )
 from minigpt.report_utils import as_dict, utc_now
 from minigpt.report_check_common import check_entry as _check
+from minigpt.report_utils import artifact_entries as _artifacts
 
 
 MODEL_CAPABILITY_ROUTE_PROMOTION_BOUNDED_REAL_REPLAY_REPAIR_TRAINING_RUN_REVISION_JSON_FILENAME = "model_capability_route_promotion_bounded_real_replay_repair_training_run_revision.json"
@@ -74,22 +75,6 @@ def build_model_capability_route_promotion_bounded_real_replay_repair_training_r
 
 def resolve_exit_code(report: dict[str, Any], *, require_training_revision_ready: bool) -> int:
     return 1 if require_training_revision_ready and report.get("status") != "pass" else 0
-
-
-def _artifacts(root: Path) -> list[dict[str, Any]]:
-    rows = []
-    for key, name in [
-        ("checkpoint", "checkpoint.pt"),
-        ("tokenizer", "tokenizer.json"),
-        ("metrics", "metrics.jsonl"),
-        ("train_config", "train_config.json"),
-        ("run_manifest", "run_manifest.json"),
-        ("sample", "sample.txt"),
-        ("prepared_corpus", "prepared_corpus.txt"),
-    ]:
-        path = root / name
-        rows.append({"key": key, "path": str(path), "exists": path.is_file(), "size": path.stat().st_size if path.is_file() else 0})
-    return rows
 
 
 def _metrics(path: Path) -> dict[str, Any]:

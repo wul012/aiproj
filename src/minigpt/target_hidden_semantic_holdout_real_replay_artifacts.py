@@ -16,6 +16,7 @@ from minigpt.target_hidden_semantic_holdout_real_replay import (
 )
 from minigpt.report_utils import html_card as _card
 from minigpt.report_utils import html_check_row as _check_row
+from minigpt.report_utils import join_terms as _join_terms
 
 
 def render_target_hidden_semantic_holdout_real_replay_text(report: dict[str, Any]) -> str:
@@ -137,12 +138,6 @@ def _row(row: dict[str, Any]) -> str:
         f"<td>{html_escape(row.get('continuation'))}</td>"
         "</tr>"
     )
-
-
-def _join_terms(value: Any) -> str:
-    if not isinstance(value, list):
-        return ""
-    return ",".join(str(item) for item in value)
 
 
 def _style() -> str:

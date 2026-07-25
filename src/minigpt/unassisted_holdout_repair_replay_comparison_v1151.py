@@ -11,6 +11,7 @@ from minigpt.server_generator import MiniGPTGenerator
 from minigpt.unassisted_holdout_repair_plan_v1148 import EXPLAIN_DIR_NAME
 from minigpt.unassisted_holdout_repair_training_run_v1150 import TRAINING_HANDOFF_NAME
 from minigpt.report_check_common import check_entry as _check
+from minigpt.report_utils import target_prompt_hits as _target_prompt_hits
 
 
 UNASSISTED_HOLDOUT_REPAIR_REPLAY_COMPARISON_V1151_STEM = "unassisted_holdout_repair_replay_comparison_v1151"
@@ -286,16 +287,6 @@ def _next_step(all_full_pair: bool, any_hit_count: int) -> str:
 
 def _target_free(prompts: list[dict[str, Any]]) -> bool:
     return not _target_prompt_hits(prompts)
-
-
-def _target_prompt_hits(prompts: list[dict[str, Any]]) -> list[str]:
-    hits = []
-    for row in prompts:
-        prompt = str(row.get("prompt") or "").lower()
-        terms = [str(term).lower() for term in row.get("expected_terms", ["fixed", "loss"])]
-        if any(term and term in prompt for term in terms):
-            hits.append(str(row.get("case_id") or row.get("prompt") or "unknown"))
-    return hits
 
 
 __all__ = [

@@ -4,14 +4,12 @@ import json
 from pathlib import Path
 from typing import Any
 
-from minigpt.model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision import (
-    BOUNDED_OBJECTIVE_UNASSISTED_REPAIR_SEED_REVISION_JSON_FILENAME,
-)
 from minigpt.model_capability_route_promotion_bounded_objective_unassisted_repair_training_run import (
     build_model_capability_route_promotion_bounded_objective_unassisted_repair_training_run,
 )
 from minigpt.report_utils import as_dict
 from minigpt.report_check_common import resolve_exit_code_training_ready as resolve_exit_code
+from minigpt.model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision import locate_seed_revision
 
 
 BOUNDED_OBJECTIVE_UNASSISTED_REPAIR_SEED_REVISION_TRAINING_RUN_JSON_FILENAME = "model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_training_run.json"
@@ -19,13 +17,6 @@ BOUNDED_OBJECTIVE_UNASSISTED_REPAIR_SEED_REVISION_TRAINING_RUN_CSV_FILENAME = "m
 BOUNDED_OBJECTIVE_UNASSISTED_REPAIR_SEED_REVISION_TRAINING_RUN_TEXT_FILENAME = "model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_training_run.txt"
 BOUNDED_OBJECTIVE_UNASSISTED_REPAIR_SEED_REVISION_TRAINING_RUN_MARKDOWN_FILENAME = "model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_training_run.md"
 BOUNDED_OBJECTIVE_UNASSISTED_REPAIR_SEED_REVISION_TRAINING_RUN_HTML_FILENAME = "model_capability_route_promotion_bounded_objective_unassisted_repair_seed_revision_training_run.html"
-
-
-def locate_seed_revision(path: str | Path) -> Path:
-    source = Path(path)
-    if source.is_dir():
-        source = source / BOUNDED_OBJECTIVE_UNASSISTED_REPAIR_SEED_REVISION_JSON_FILENAME
-    return source
 
 
 def read_json_report(path: str | Path) -> dict[str, Any]:

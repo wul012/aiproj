@@ -13,6 +13,7 @@ from minigpt.bounded_objective_loss_signal_bridge_replay_comparison import (
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.report_check_common import check_entry as _check
 from minigpt.report_check_common import resolve_exit_code_patch_ready as resolve_exit_code
+from minigpt.report_utils import locate as _locate
 
 
 LOSS_SIGNAL_BRIDGE_PAIR_BINDING_PATCH_JSON_FILENAME = "bounded_objective_loss_signal_bridge_pair_binding_patch.json"
@@ -254,16 +255,6 @@ def _purpose(kind: str) -> str:
         "global_pair_binding": "reinforce fixed-to-loss adjacency",
         "global_pair_repeat": "repeat fixed loss as a short target completion",
     }.get(kind, "reinforce fixed loss pair binding")
-
-
-def _locate(path: str | Path, filename: str) -> Path:
-    source = Path(path)
-    if source.is_file():
-        return source
-    nested = source / filename
-    if nested.is_file():
-        return nested
-    raise FileNotFoundError(f"cannot locate {filename} under {source}")
 
 
 __all__ = [

@@ -11,7 +11,10 @@ from minigpt.randomized_holdout_publication_constants import (
     RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_V989_NEXT_STEP,
     RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_INDEX_RECEIPT_V987_NEXT_STEP,
 )
-from minigpt.randomized_holdout_publication_downstream_common import downstream_lookup_use, is_downstream_lookup_only, sha256_file
+from minigpt.randomized_holdout_publication_downstream_common import (
+    downstream_lookup_use,
+    is_downstream_lookup_only,
+)
 from minigpt.randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_check_v988 import (
     RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_INDEX_RECEIPT_CHECK_V988_JSON_FILENAME,
 )
@@ -21,6 +24,7 @@ from minigpt.randomized_holdout_publication_receipt_packet_index_publication_rec
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.report_check_common import check_entry as _check
 from minigpt.report_utils import path_exists as _path_exists
+from minigpt.randomized_holdout_publication_downstream_common import evidence_row as _evidence_row
 
 
 RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_V989_JSON_FILENAME = "randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_v989.json"
@@ -211,15 +215,6 @@ def _source_evidence_rows(
         _evidence_row("receipt", receipt_path, receipt_status),
         _evidence_row("receipt_check", receipt_check_path, check_status),
     ]
-
-
-def _evidence_row(kind: str, path: str | Path | None, status: Any) -> dict[str, Any]:
-    return {
-        "kind": kind,
-        "path": str(path or ""),
-        "sha256": sha256_file(path),
-        "status": "pass" if status else "fail",
-    }
 
 
 def _summary(status: str, checks: list[dict[str, Any]], index: dict[str, Any]) -> dict[str, Any]:
