@@ -6,20 +6,17 @@ from typing import Any, Callable
 from minigpt.benchmark_scorecard import build_benchmark_scorecard, write_benchmark_scorecard_outputs
 from minigpt.model_capability_required_term_real_execution import create_required_term_tiny_checkpoint
 from minigpt.readability_report_artifacts import write_readability_outputs
-from minigpt.report_utils import as_dict, list_of_dicts, read_json_object, utc_now, write_json_payload
+from minigpt.report_utils import as_dict, list_of_dicts, utc_now, write_json_payload
 from minigpt.server_contracts import GenerationRequest
 from minigpt.server_generator import MiniGPTGenerator
 from minigpt.report_check_common import check_entry as _check
 from minigpt.report_check_common import resolve_exit_code
+from minigpt.report_utils import read_json_report
 
 HOLDOUT_SCORECARD_SMOKE_STEM = "model_capability_holdout_scorecard_smoke_v1144"
 DEFAULT_REQUIRED_TERMS = ("fixed", "loss")
 
 GeneratorRunner = Callable[[dict[str, Any], str | Path, str | Path, str], dict[str, Any]]
-
-
-def read_json_report(path: str | Path, *, description: str = "JSON report") -> dict[str, Any]:
-    return read_json_object(path, description=description)
 
 
 def create_holdout_scorecard_tiny_checkpoint(out_dir: str | Path) -> dict[str, str]:

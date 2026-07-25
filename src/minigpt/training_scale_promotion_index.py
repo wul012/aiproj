@@ -22,6 +22,7 @@ from minigpt.training_scale_promotion_index_helpers import (
     _resolve_names,
     _summary,
 )
+from minigpt.report_utils import html_card_span_strong as _card
 
 
 def load_training_scale_promotion(path: str | Path) -> dict[str, Any]:
@@ -420,7 +421,3 @@ pre { white-space: pre-wrap; overflow-wrap: anywhere; background: #f2f5f1; borde
 li { margin: 7px 0; }
 footer { color: #69786e; font-size: 12px; }
 </style>"""
-
-
-def _card(label: str, value: Any) -> str:
-    return f'<div class="card"><span>{_e(label)}</span><strong>{_e(value)}</strong></div>'

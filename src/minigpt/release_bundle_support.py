@@ -6,6 +6,7 @@ from typing import Any
 
 from minigpt.release_bundle_contexts import _benchmark_history_context, _benchmark_history_summary_status
 from minigpt.report_utils import as_dict as _dict, first_present
+from minigpt.report_utils import read_json_file as _read_json  # noqa: F401 (re-export)
 
 
 def _read_required_json(path: Path) -> dict[str, Any]:
@@ -14,21 +15,6 @@ def _read_required_json(path: Path) -> dict[str, Any]:
     payload = json.loads(path.read_text(encoding="utf-8-sig"))
     if not isinstance(payload, dict):
         raise ValueError(f"release bundle input must be a JSON object: {path}")
-    return payload
-
-
-def _read_json(path: Path, warnings: list[str], label: str) -> dict[str, Any] | None:
-    if not path.exists():
-        warnings.append(f"{label} not found: {path}")
-        return None
-    try:
-        payload = json.loads(path.read_text(encoding="utf-8-sig"))
-    except json.JSONDecodeError as exc:
-        warnings.append(f"{path} is not valid JSON: {exc}")
-        return None
-    if not isinstance(payload, dict):
-        warnings.append(f"{path} must contain a JSON object")
-        return None
     return payload
 
 

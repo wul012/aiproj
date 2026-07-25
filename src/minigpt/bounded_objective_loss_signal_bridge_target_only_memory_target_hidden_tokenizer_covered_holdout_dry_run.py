@@ -10,7 +10,7 @@ from minigpt.bounded_objective_loss_signal_bridge_target_only_memory_target_hidd
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.report_check_common import check_entry as _check
 from minigpt.report_check_common import resolve_exit_code_dry_run_ready as resolve_exit_code
-from minigpt.report_utils import score_fraction as _score
+from minigpt.report_utils import dry_run_rows as _dry_run_rows
 
 
 TARGET_ONLY_MEMORY_TARGET_HIDDEN_TOKENIZER_COVERED_HOLDOUT_DRY_RUN_JSON_FILENAME = (
@@ -79,34 +79,6 @@ def build_target_hidden_tokenizer_covered_holdout_dry_run(
         "summary": summary,
         "interpretation": _interpretation(status, summary),
     }
-
-
-def _dry_run_rows(
-    cases: list[dict[str, Any]],
-    expected_terms: list[str],
-    positive_continuation: str,
-    negative_continuation: str,
-) -> list[dict[str, Any]]:
-    rows: list[dict[str, Any]] = []
-    for case in cases:
-        positive = _score(expected_terms, positive_continuation)
-        negative = _score(expected_terms, negative_continuation)
-        rows.append(
-            {
-                "case_id": case.get("case_id"),
-                "source_case_id": case.get("source_case_id"),
-                "expected_terms": expected_terms,
-                "positive_continuation": positive_continuation,
-                "positive_case_pass": positive["case_pass"],
-                "positive_hit_terms": positive["hit_terms"],
-                "positive_missed_terms": positive["missed_terms"],
-                "negative_continuation": negative_continuation,
-                "negative_case_pass": negative["case_pass"],
-                "negative_hit_terms": negative["hit_terms"],
-                "negative_missed_terms": negative["missed_terms"],
-            }
-        )
-    return rows
 
 
 def _checks(

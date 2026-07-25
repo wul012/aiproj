@@ -16,6 +16,7 @@ from minigpt.report_utils import as_dict, utc_now
 from minigpt.report_check_common import check_entry as _check
 from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 from minigpt.report_check_common import field_checks as _field_checks
+from minigpt.report_check_common import resolve_source_review_packet_path as _resolve_source_review_path
 
 
 RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_DOWNSTREAM_CONSUMER_ACK_BUNDLE_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_CHECK_JSON_FILENAME = "randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_check.json"
@@ -135,20 +136,6 @@ def _checks(
     checks.extend(_field_checks("summary", SUMMARY_FIELDS, original_summary, rebuilt_summary))
     checks.extend(_field_checks("publication", PUBLICATION_FIELDS, original_publication, rebuilt_publication))
     return checks
-
-
-def _resolve_source_review_path(report: dict[str, Any], publication: dict[str, Any], publication_path: str | Path | None) -> Path | None:
-    raw = report.get("receipt_packet_index_review_path") or publication.get("receipt_packet_index_review_path")
-    if not raw:
-        return None
-    source = Path(str(raw))
-    if source.is_absolute() or source.exists():
-        return source
-    if publication_path:
-        candidate = Path(publication_path).parent / source
-        if candidate.exists():
-            return candidate
-    return source
 
 
 def _rebuild_publication(source_review: Path | None) -> dict[str, Any]:

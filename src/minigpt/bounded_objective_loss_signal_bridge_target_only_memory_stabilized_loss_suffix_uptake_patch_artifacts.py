@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import csv
 from pathlib import Path
 from typing import Any
 
@@ -16,6 +15,8 @@ from minigpt.bounded_objective_loss_signal_bridge_target_only_memory_stabilized_
 from minigpt.report_utils import as_dict, html_escape, list_of_dicts, markdown_cell, write_json_payload
 from minigpt.report_utils import html_card as _card
 from minigpt.report_utils import write_jsonl as _write_jsonl
+from minigpt.report_utils import html_row_example as _row
+from minigpt.report_utils import write_csv_rows_anchor as _write_csv
 
 
 def render_stabilized_loss_suffix_uptake_patch_text(report: dict[str, Any]) -> str:
@@ -108,26 +109,6 @@ def write_stabilized_loss_suffix_uptake_patch_outputs(report: dict[str, Any], ou
     paths["markdown"].write_text(render_stabilized_loss_suffix_uptake_patch_markdown(report), encoding="utf-8")
     paths["html"].write_text(render_stabilized_loss_suffix_uptake_patch_html(report), encoding="utf-8")
     return {key: str(value) for key, value in paths.items()}
-
-
-def _write_csv(report: dict[str, Any], path: Path) -> None:
-    fieldnames = ["example_id", "kind", "text", "source_case_id", "decoder_anchor"]
-    with path.open("w", newline="", encoding="utf-8") as handle:
-        writer = csv.DictWriter(handle, fieldnames=fieldnames)
-        writer.writeheader()
-        for row in list_of_dicts(report.get("patch_examples")):
-            writer.writerow({field: row.get(field) for field in fieldnames})
-
-
-def _row(row: dict[str, Any]) -> str:
-    return (
-        "<tr>"
-        f"<td>{html_escape(row.get('example_id'))}</td>"
-        f"<td>{html_escape(row.get('kind'))}</td>"
-        f"<td>{html_escape(row.get('text'))}</td>"
-        f"<td>{html_escape(row.get('source_case_id'))}</td>"
-        "</tr>"
-    )
 
 
 def _style() -> str:

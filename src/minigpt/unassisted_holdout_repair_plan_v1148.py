@@ -5,14 +5,11 @@ from typing import Any
 
 from minigpt.decoder_anchor_holdout_comparison_v1147 import DECODER_ANCHOR_HOLDOUT_COMPARISON_V1147_STEM, EXPLAIN_DIR_NAME
 from minigpt.readability_report_artifacts import write_readability_outputs
-from minigpt.report_utils import as_dict, list_of_dicts, read_json_object, utc_now, write_json_payload
+from minigpt.report_utils import as_dict, list_of_dicts, utc_now, write_json_payload
 from minigpt.report_check_common import check_entry as _check
+from minigpt.report_utils import read_json_report
 
 UNASSISTED_HOLDOUT_REPAIR_PLAN_V1148_STEM = "unassisted_holdout_repair_plan_v1148"
-
-
-def read_json_report(path: str | Path, *, description: str = "JSON report") -> dict[str, Any]:
-    return read_json_object(path, description=description)
 
 
 def locate_v1147_comparison(path: str | Path) -> Path:

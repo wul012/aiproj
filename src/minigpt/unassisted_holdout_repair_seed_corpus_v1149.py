@@ -5,16 +5,13 @@ from pathlib import Path
 from typing import Any
 
 from minigpt.readability_report_artifacts import write_readability_outputs
-from minigpt.report_utils import as_dict, list_of_dicts, read_json_object, utc_now, write_json_payload
+from minigpt.report_utils import as_dict, list_of_dicts, utc_now, write_json_payload
 from minigpt.unassisted_holdout_repair_plan_v1148 import EXPLAIN_DIR_NAME, UNASSISTED_HOLDOUT_REPAIR_PLAN_V1148_STEM
 from minigpt.report_check_common import check_entry as _check
+from minigpt.report_utils import read_json_report
 
 UNASSISTED_HOLDOUT_REPAIR_SEED_CORPUS_V1149_STEM = "unassisted_holdout_repair_seed_corpus_v1149"
 SEED_BLUEPRINT_JSON_NAME = "unassisted_holdout_repair_seed_blueprint.json"
-
-
-def read_json_report(path: str | Path, *, description: str = "JSON report") -> dict[str, Any]:
-    return read_json_object(path, description=description)
 
 
 def locate_v1148_plan(path: str | Path) -> Path:

@@ -16,6 +16,7 @@ from minigpt.model_capability_required_term_prompt_leading_training import (
 from minigpt.model_capability_required_term_scaffold_probe import read_json_report as read_json_report
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code  # noqa: F401 (re-export)
+from minigpt.report_utils import sample_prompt_data as _sample_prompt
 
 
 REQUIRED_TERM_DIRECT_PROMPT_TRAINING_JSON_FILENAME = "model_capability_required_term_direct_prompt_training.json"
@@ -389,11 +390,3 @@ def _pattern_counts(lines: list[str], term_rows: list[dict[str, Any]]) -> dict[s
                 counts["spaced"] += 1
             break
     return dict(counts)
-
-
-def _sample_prompt(term_rows: list[dict[str, Any]]) -> str:
-    for row in term_rows:
-        prompt = str(row.get("scaffold_prompt") or "")
-        if prompt:
-            return prompt
-    return "data:"

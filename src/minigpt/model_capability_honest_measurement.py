@@ -18,6 +18,7 @@ from minigpt.report_utils import (
 from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 from minigpt.report_check_common import resolve_inside_root as _resolve_inside_root
 from minigpt.report_utils import relative_path as _relative_path
+from minigpt.report_check_common import check_entries as _checks
 
 DEFAULT_REGISTRY_PATH = Path("docs") / "model-capability-honest-measurement-registry.json"
 
@@ -367,10 +368,6 @@ def _check(family_id: str, check_id: str, expected: Any, actual: Any, passed: bo
         if passed
         else "Honest measurement contract is missing or widened.",
     }
-
-
-def _checks(report: dict[str, Any]) -> list[dict[str, Any]]:
-    return list_of_dicts(report.get("checks"))
 
 
 def _write_csv(report: dict[str, Any], path: Path) -> None:

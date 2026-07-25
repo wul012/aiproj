@@ -9,6 +9,7 @@ from typing import Any
 from .eval_suite import PromptCase, PromptSuite
 from minigpt.report_utils import count_by as _count_by
 from minigpt.report_utils import html_e as _e
+from minigpt.report_utils import clip_text as _clip
 
 
 def build_pair_batch_case_result(
@@ -370,13 +371,6 @@ def _avg_abs(values: Any) -> float:
 def _pick_dict(payload: dict[str, Any], key: str) -> dict[str, Any]:
     value = payload.get(key)
     return value if isinstance(value, dict) else {}
-
-
-def _clip(text: str, limit: int) -> str:
-    flat = text.replace("\n", "\\n").replace("\t", "\\t")
-    if len(flat) <= limit:
-        return flat
-    return flat[: limit - 1] + "..."
 
 
 def _md(value: Any) -> str:

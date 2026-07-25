@@ -10,6 +10,7 @@ from minigpt.model_capability_required_term_pair_loss_alias_metrics import norma
 from minigpt.report_utils import as_dict, list_of_dicts, resolve_archived_reference_path, utc_now
 from minigpt.tokenizer import load_tokenizer
 from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code  # noqa: F401 (re-export)
+from minigpt.report_utils import read_json_report_utf8 as read_json_report  # noqa: F401 (re-export)
 
 
 REQUIRED_TERM_PAIR_LOSS_ALIAS_SEGMENT_AUDIT_JSON_FILENAME = (
@@ -31,10 +32,6 @@ def locate_loss_alias_segment_audit_source(path: str | Path) -> Path:
     if source.is_dir():
         source = source / REQUIRED_TERM_PAIR_LOSS_ALIAS_FOCUS_JSON_FILENAME
     return source
-
-
-def read_json_report(path: str | Path) -> dict[str, Any]:
-    return json.loads(Path(path).read_text(encoding="utf-8"))
 
 
 def build_model_capability_required_term_pair_loss_alias_segment_audit(

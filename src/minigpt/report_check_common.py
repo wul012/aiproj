@@ -23,6 +23,7 @@ from typing import Any
 from minigpt.report_utils import as_dict
 from minigpt.report_utils import html_escape
 from pathlib import Path
+from minigpt.report_utils import list_of_dicts
 
 
 def check_row(check_id: str, passed: bool, expected: Any, actual: Any, detail: str) -> dict[str, Any]:
@@ -159,7 +160,41 @@ def resolve_inside_root(path: str | Path, root: Path) -> Path:
         raise ValueError(f'path escapes project root: {path}') from exc
     return resolved
 
+
+
+def resolve_source_review_path(report: dict[str, Any], receipt: dict[str, Any], receipt_path: str | Path | None) -> Path | None:
+    raw = report.get('receipt_index_review_path') or receipt.get('receipt_index_review_path')
+    if not raw:
+        return None
+    source = Path(str(raw))
+    if source.is_absolute() or source.exists():
+        return source
+    if receipt_path:
+        candidate = Path(receipt_path).parent / source
+        if candidate.exists():
+            return candidate
+    return source
+
+
+def check_entries(report: dict[str, Any]) -> list[dict[str, Any]]:
+    return list_of_dicts(report.get('checks'))
+
+
+def resolve_source_review_packet_path(report: dict[str, Any], publication: dict[str, Any], publication_path: str | Path | None) -> Path | None:
+    raw = report.get('receipt_packet_index_review_path') or publication.get('receipt_packet_index_review_path')
+    if not raw:
+        return None
+    source = Path(str(raw))
+    if source.is_absolute() or source.exists():
+        return source
+    if publication_path:
+        candidate = Path(publication_path).parent / source
+        if candidate.exists():
+            return candidate
+    return source
+
 __all__ = [
+    "check_entries",
     "check_entry",
     "check_entry_no_detail",
     "check_row",
@@ -180,4 +215,6 @@ __all__ = [
     "resolve_exit_code_training_ready",
     "resolve_inside_root",
     "resolve_source_review",
+    "resolve_source_review_packet_path",
+    "resolve_source_review_path",
 ]

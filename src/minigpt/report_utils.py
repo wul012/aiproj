@@ -580,3 +580,137 @@ def term_count(text: str, terms: list[str]) -> dict[str, int]:
 
 def unique_sorted(value: Any) -> list[str]:
     return sorted({str(item) for item in string_list(value) if str(item)})
+
+
+def html_receipt_index_row(row: dict[str, Any]) -> str:
+    keys = ['receipt_index_id', 'lookup_key', 'receipt_id', 'receipt_status', 'granted_use', 'contract_check_ready', 'promotion_ready']
+    return '<tr>' + ''.join((f'<td>{html_escape(row.get(key))}</td>' for key in keys)) + '</tr>'
+
+
+def html_card_span_strong(label: str, value: Any) -> str:
+    return f'<div class="card"><span>{html_escape(label)}</span><strong>{html_escape(value)}</strong></div>'
+
+
+def read_json_report(path: str | Path, *, description: str='JSON report') -> dict[str, Any]:
+    return read_json_object(path, description=description)
+
+
+def html_row_exists(row: dict[str, Any]) -> str:
+    return f"<tr><td>{html_escape(row.get('key'))}</td><td>{html_escape(row.get('exists'))}</td><td>{html_escape(row.get('size'))}</td><td>{html_escape(row.get('path'))}</td></tr>"
+
+
+def read_json_report_utf8(path: str | Path) -> dict[str, Any]:
+    """Plain utf-8 read with NO object validation, unlike read_json_object.
+
+    That is deliberate: the inline copies this replaces did exactly this, so
+    validating here would raise where callers previously got a list back.
+    The annotated local is the unchecked narrowing that behaviour requires.
+    """
+    payload: dict[str, Any] = json.loads(Path(path).read_text(encoding='utf-8'))
+    return payload
+
+
+def consumer_receipts(receipt: dict[str, Any], index_rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    return [{'consumer_name': receipt.get('consumer_name'), 'lookup_key': row.get('lookup_key'), 'receipt_index_id': row.get('receipt_index_id'), 'source_receipt_id': row.get('receipt_id'), 'receipt_id': receipt.get('receipt_id'), 'granted_use': receipt.get('granted_use'), 'blocked_uses': receipt.get('blocked_uses'), 'promotion_ready': False, 'receipt_status': receipt.get('receipt_status')} for row in index_rows]
+
+
+def evidence_row(row: dict[str, Any]) -> str:
+    return '<tr>' + ''.join((f'<td>{html_escape(row.get(key))}</td>' for key in ['kind', 'path', 'sha256', 'status', 'decision', 'failed_count'])) + '</tr>'
+
+
+def clip_text(text: str, limit: int) -> str:
+    flat = text.replace('\n', '\\n').replace('\t', '\\t')
+    if len(flat) <= limit:
+        return flat
+    return flat[:limit - 1] + '...'
+
+
+def dry_run_rows(cases: list[dict[str, Any]], expected_terms: list[str], positive_continuation: str, negative_continuation: str) -> list[dict[str, Any]]:
+    rows: list[dict[str, Any]] = []
+    for case in cases:
+        positive = score_fraction(expected_terms, positive_continuation)
+        negative = score_fraction(expected_terms, negative_continuation)
+        rows.append({'case_id': case.get('case_id'), 'source_case_id': case.get('source_case_id'), 'expected_terms': expected_terms, 'positive_continuation': positive_continuation, 'positive_case_pass': positive['case_pass'], 'positive_hit_terms': positive['hit_terms'], 'positive_missed_terms': positive['missed_terms'], 'negative_continuation': negative_continuation, 'negative_case_pass': negative['case_pass'], 'negative_hit_terms': negative['hit_terms'], 'negative_missed_terms': negative['missed_terms']})
+    return rows
+
+
+def prompt_for_case(report: dict[str, Any], case_id: Any) -> Any:
+    return as_dict(as_dict(cases_by_id(report).get(str(case_id))).get('prompt_case')).get('prompt')
+
+
+def html_row_example(row: dict[str, Any]) -> str:
+    return f"<tr><td>{html_escape(row.get('example_id'))}</td><td>{html_escape(row.get('kind'))}</td><td>{html_escape(row.get('text'))}</td><td>{html_escape(row.get('source_case_id'))}</td></tr>"
+
+
+def case_row_continuation(row: dict[str, Any]) -> str:
+    return f"<tr><td>{html_escape(row.get('case_id'))}</td><td>{html_escape(row.get('label'))}</td><td>{html_escape(','.join((str(item) for item in row.get('hit_terms', []))))}</td><td>{html_escape(','.join((str(item) for item in row.get('missed_terms', []))))}</td><td>{html_escape(row.get('continuation'))}</td></tr>"
+
+
+def case_row_pass(row: dict[str, Any]) -> str:
+    return f"<tr><td>{html_escape(row.get('case_id'))}</td><td>{html_escape(row.get('case_pass'))}</td><td>{html_escape(row.get('prompt_in_corpus'))}</td><td>{html_escape(row.get('zero_hit'))}</td><td>{html_escape(row.get('fragment_like_generation'))}</td><td>{html_escape(','.join((str(item) for item in row.get('missed_terms', []))))}</td><td>{html_escape(row.get('diagnosis'))}</td><td>{html_escape(row.get('recommended_action'))}</td></tr>"
+
+
+def read_json_file(path: Path, warnings: list[str], label: str) -> dict[str, Any] | None:
+    if not path.exists():
+        warnings.append(f'{label} not found: {path}')
+        return None
+    try:
+        payload = json.loads(path.read_text(encoding='utf-8-sig'))
+    except json.JSONDecodeError as exc:
+        warnings.append(f'{path} is not valid JSON: {exc}')
+        return None
+    if not isinstance(payload, dict):
+        warnings.append(f'{path} must contain a JSON object')
+        return None
+    return payload
+
+
+def sample_prompt_data(term_rows: list[dict[str, Any]]) -> str:
+    for row in term_rows:
+        prompt = str(row.get('scaffold_prompt') or '')
+        if prompt:
+            return prompt
+    return 'data:'
+
+
+def sample_prompt_fixed(pair: dict[str, Any]) -> str:
+    for term in list_of_dicts(pair.get('terms')):
+        prompt = str(term.get('scaffold_prompt') or '')
+        if prompt:
+            return prompt
+    return 'fixed:'
+
+
+def target_free(prompts: list[dict[str, Any]]) -> bool:
+    return not target_prompt_hits(prompts)
+
+
+def write_csv_rows_anchor(report: dict[str, Any], path: Path) -> None:
+    fieldnames = ['example_id', 'kind', 'text', 'source_case_id', 'decoder_anchor']
+    with path.open('w', newline='', encoding='utf-8') as handle:
+        writer = csv.DictWriter(handle, fieldnames=fieldnames)
+        writer.writeheader()
+        for row in list_of_dicts(report.get('patch_examples')):
+            writer.writerow({field: row.get(field) for field in fieldnames})
+
+
+def write_csv_rows_hit_terms(report: dict[str, Any], path: str | Path) -> None:
+    fieldnames = ['source_label', 'route_type', 'pair_full_seed_count', 'seed_count', 'hit_terms', 'rejection_reasons']
+    out_path = Path(path)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    with out_path.open('w', encoding='utf-8', newline='') as handle:
+        writer = csv.DictWriter(handle, fieldnames=fieldnames)
+        writer.writeheader()
+        for row in list_of_dicts(report.get('route_rows')):
+            writer.writerow({field: csv_cell(row.get(field)) for field in fieldnames})
+
+
+def write_csv_rows_decision(report: dict[str, Any], path: str | Path) -> None:
+    fieldnames = ['label', 'status', 'decision', 'key_result', 'path']
+    out_path = Path(path)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    with out_path.open('w', encoding='utf-8', newline='') as handle:
+        writer = csv.DictWriter(handle, fieldnames=fieldnames)
+        writer.writeheader()
+        for row in list_of_dicts(report.get('evidence_rows')):
+            writer.writerow({field: csv_cell(row.get(field)) for field in fieldnames})

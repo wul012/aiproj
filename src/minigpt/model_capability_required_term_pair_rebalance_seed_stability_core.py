@@ -15,6 +15,7 @@ from minigpt.model_capability_required_term_micro_training import (
 from minigpt.model_capability_required_term_pair_rebalance import build_required_term_pair_rebalance_corpus
 from minigpt.report_utils import as_dict, list_of_dicts
 from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
+from minigpt.report_utils import sample_prompt_fixed as _sample_prompt
 
 REQUIRED_TERM_PAIR_REBALANCE_SEED_STABILITY_JSON_FILENAME = (
     "model_capability_required_term_pair_rebalance_seed_stability.json"
@@ -395,14 +396,6 @@ def _seed_success_rates(seed_pair_summaries: list[dict[str, Any]], seeds: list[i
         )
         rates[str(seed)] = round(full_hits / pair_count, 4) if pair_count else 0.0
     return rates
-
-
-def _sample_prompt(pair: dict[str, Any]) -> str:
-    for term in list_of_dicts(pair.get("terms")):
-        prompt = str(term.get("scaffold_prompt") or "")
-        if prompt:
-            return prompt
-    return "fixed:"
 
 
 def _clean_seeds(seeds: tuple[int, ...] | list[int]) -> list[int]:

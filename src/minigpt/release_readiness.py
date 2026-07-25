@@ -29,6 +29,7 @@ from minigpt.release_readiness_panels import (
     request_history_panel as _request_history_panel,
     test_coverage_panel as _test_coverage_panel,
 )
+from minigpt.report_utils import read_json_file as _read_json
 
 
 def build_release_readiness_dashboard(
@@ -369,21 +370,6 @@ def _read_required_json(path: Path) -> dict[str, Any]:
     payload = json.loads(path.read_text(encoding="utf-8-sig"))
     if not isinstance(payload, dict):
         raise ValueError(f"release readiness input must be a JSON object: {path}")
-    return payload
-
-
-def _read_json(path: Path, warnings: list[str], label: str) -> dict[str, Any] | None:
-    if not path.exists():
-        warnings.append(f"{label} not found: {path}")
-        return None
-    try:
-        payload = json.loads(path.read_text(encoding="utf-8-sig"))
-    except json.JSONDecodeError as exc:
-        warnings.append(f"{path} is not valid JSON: {exc}")
-        return None
-    if not isinstance(payload, dict):
-        warnings.append(f"{path} must contain a JSON object")
-        return None
     return payload
 
 

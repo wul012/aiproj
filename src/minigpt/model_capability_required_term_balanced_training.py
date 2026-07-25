@@ -15,6 +15,7 @@ from minigpt.model_capability_required_term_micro_training import (
 from minigpt.model_capability_required_term_scaffold_probe import read_json_report as read_json_report
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code  # noqa: F401 (re-export)
+from minigpt.report_utils import sample_prompt_data as _sample_prompt
 
 
 REQUIRED_TERM_BALANCED_TRAINING_JSON_FILENAME = "model_capability_required_term_balanced_training.json"
@@ -308,11 +309,3 @@ def _next_action(status: str, summary: dict[str, Any]) -> str:
     if not summary.get("prompt_alignment_ready"):
         return "rebuild the balanced corpus with prompt-leading scaffold-to-term rows before increasing training budget"
     return "increase balanced corpus training budget or simplify prompt templates before rerunning holdout"
-
-
-def _sample_prompt(term_rows: list[dict[str, Any]]) -> str:
-    for row in term_rows:
-        prompt = str(row.get("scaffold_prompt") or "")
-        if prompt:
-            return prompt
-    return "data:"

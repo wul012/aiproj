@@ -12,6 +12,7 @@ from minigpt.report_utils import (
     list_of_dicts as _list_of_dicts,
     string_list as _string_list,
 )
+from minigpt.report_utils import html_card_span_strong as _card
 
 
 def render_promoted_training_scale_seed_html(report: dict[str, Any]) -> str:
@@ -275,10 +276,6 @@ pre { white-space: pre-wrap; overflow-wrap: anywhere; background: #172026; color
 li { margin: 7px 0; }
 footer { color: #69756a; font-size: 12px; }
 </style>"""
-
-
-def _card(label: str, value: Any) -> str:
-    return f'<div class="card"><span>{_e(label)}</span><strong>{_e(value)}</strong></div>'
 
 
 __all__ = ["render_promoted_training_scale_seed_html"]

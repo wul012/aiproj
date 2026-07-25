@@ -24,6 +24,7 @@ from minigpt.model_capability_required_term_pair_contrast_free_training_componen
 from minigpt.model_capability_required_term_scaffold_probe import read_json_report as read_json_report
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code  # noqa: F401 (re-export)
+from minigpt.report_utils import sample_prompt_fixed as _sample_prompt
 
 
 REQUIRED_TERM_PAIR_CONTRAST_FREE_TRAINING_JSON_FILENAME = (
@@ -379,11 +380,3 @@ def _next_action(status: str, summary: dict[str, Any]) -> str:
     if int(summary.get("variant_pair_partial_hit_count") or 0) > 0:
         return "inspect contrast-free generations and consider seed stability before adding more corpus templates"
     return "increase corpus clarity or model capacity after confirming the contrast-free rows are correct"
-
-
-def _sample_prompt(pair: dict[str, Any]) -> str:
-    for term in list_of_dicts(pair.get("terms")):
-        prompt = str(term.get("scaffold_prompt") or "")
-        if prompt:
-            return prompt
-    return "fixed:"

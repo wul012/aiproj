@@ -20,6 +20,7 @@ from minigpt.report_utils import (
     number_or_none,
     utc_now,
 )
+from minigpt.report_utils import clip_text as _clip
 
 
 def build_generation_quality_report(
@@ -367,9 +368,3 @@ def _ratio_label(value: Any) -> str:
     if number is None:
         return "missing"
     return f"{number:.1%}"
-
-def _clip(text: str, limit: int) -> str:
-    flat = text.replace("\n", "\\n").replace("\t", "\\t")
-    if len(flat) <= limit:
-        return flat
-    return flat[: limit - 1] + "..."

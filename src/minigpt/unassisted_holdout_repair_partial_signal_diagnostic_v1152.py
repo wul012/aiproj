@@ -4,7 +4,7 @@ from pathlib import Path
 from typing import Any
 
 from minigpt.readability_report_artifacts import write_readability_outputs
-from minigpt.report_utils import as_dict, list_of_dicts, read_json_object, utc_now
+from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.unassisted_holdout_repair_plan_v1148 import EXPLAIN_DIR_NAME
 from minigpt.unassisted_holdout_repair_replay_comparison_v1151 import (
     UNASSISTED_HOLDOUT_REPAIR_REPLAY_COMPARISON_V1151_STEM,
@@ -14,6 +14,7 @@ from minigpt.unassisted_holdout_repair_seed_corpus_v1149 import (
 )
 from minigpt.report_check_common import check_entry as _check
 from minigpt.unassisted_holdout_repair_seed_corpus_v1149 import locate_v1149_seed_corpus
+from minigpt.report_utils import read_json_report
 
 
 UNASSISTED_HOLDOUT_REPAIR_PARTIAL_SIGNAL_DIAGNOSTIC_V1152_STEM = (
@@ -48,10 +49,6 @@ def locate_v1151_replay_comparison(path: str | Path) -> Path:
     if source.is_dir():
         return source / f"{UNASSISTED_HOLDOUT_REPAIR_REPLAY_COMPARISON_V1151_STEM}.json"
     return source
-
-
-def read_json_report(path: str | Path, *, description: str = "JSON report") -> dict[str, Any]:
-    return read_json_object(path, description=description)
 
 
 def build_unassisted_holdout_repair_partial_signal_diagnostic_v1152(

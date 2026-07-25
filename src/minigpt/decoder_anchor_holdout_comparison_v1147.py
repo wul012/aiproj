@@ -8,20 +8,17 @@ from minigpt.model_capability_decoder_anchor_probe_v1146 import (
     resolve_v1145_checkpoint_paths,
 )
 from minigpt.readability_report_artifacts import write_readability_outputs
-from minigpt.report_utils import as_dict, list_of_dicts, read_json_object, utc_now
+from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.server_contracts import GenerationRequest
 from minigpt.server_generator import MiniGPTGenerator
 from minigpt.report_check_common import check_entry as _check
 from minigpt.report_check_common import resolve_exit_code
+from minigpt.report_utils import read_json_report
 
 DECODER_ANCHOR_HOLDOUT_COMPARISON_V1147_STEM = "decoder_anchor_holdout_comparison_v1147"
 EXPLAIN_DIR_NAME = "\u89e3\u91ca"
 
 GeneratorRunner = Callable[[dict[str, Any], str | Path, str | Path, str], dict[str, Any]]
-
-
-def read_json_report(path: str | Path, *, description: str = "JSON report") -> dict[str, Any]:
-    return read_json_object(path, description=description)
 
 
 def locate_v1146_report(path: str | Path) -> Path:

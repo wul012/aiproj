@@ -16,6 +16,7 @@ from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.report_check_common import check_entry as _check
 from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 from minigpt.report_check_common import field_checks as _field_checks
+from minigpt.report_check_common import resolve_source_review_path as _resolve_source_review_path
 
 
 RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_CHECK_V1048_JSON_FILENAME = "randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_check_v1048.json"
@@ -141,20 +142,6 @@ def _checks(
     checks.extend(_field_checks("summary", SUMMARY_FIELDS, original_summary, rebuilt_summary))
     checks.extend(_field_checks("receipt", RECEIPT_FIELDS, original_receipt, rebuilt_receipt))
     return checks
-
-
-def _resolve_source_review_path(report: dict[str, Any], receipt: dict[str, Any], receipt_path: str | Path | None) -> Path | None:
-    raw = report.get("receipt_index_review_path") or receipt.get("receipt_index_review_path")
-    if not raw:
-        return None
-    source = Path(str(raw))
-    if source.is_absolute() or source.exists():
-        return source
-    if receipt_path:
-        candidate = Path(receipt_path).parent / source
-        if candidate.exists():
-            return candidate
-    return source
 
 
 def _rebuild_receipt(source_review: Path | None) -> dict[str, Any]:

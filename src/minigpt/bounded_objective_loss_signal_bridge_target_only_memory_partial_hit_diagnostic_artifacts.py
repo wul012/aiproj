@@ -13,6 +13,7 @@ from minigpt.bounded_objective_loss_signal_bridge_target_only_memory_partial_hit
 )
 from minigpt.report_utils import as_dict, csv_cell, html_escape, list_of_dicts, markdown_cell, write_json_payload
 from minigpt.report_utils import html_card as _card
+from minigpt.report_utils import case_row_continuation as _case_row
 
 
 def render_target_only_memory_partial_hit_diagnostic_text(report: dict[str, Any]) -> str:
@@ -135,18 +136,6 @@ def _write_csv(report: dict[str, Any], path: Path) -> None:
                 "continuation": csv_cell(row.get("continuation")),
                 "has_loss_prefix": csv_cell(row.get("has_loss_prefix")),
             })
-
-
-def _case_row(row: dict[str, Any]) -> str:
-    return (
-        "<tr>"
-        f"<td>{html_escape(row.get('case_id'))}</td>"
-        f"<td>{html_escape(row.get('label'))}</td>"
-        f"<td>{html_escape(','.join(str(item) for item in row.get('hit_terms', [])))}</td>"
-        f"<td>{html_escape(','.join(str(item) for item in row.get('missed_terms', [])))}</td>"
-        f"<td>{html_escape(row.get('continuation'))}</td>"
-        "</tr>"
-    )
 
 
 def _style() -> str:

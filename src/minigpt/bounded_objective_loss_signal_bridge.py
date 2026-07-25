@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import json
 from pathlib import Path
 from typing import Any
 
@@ -8,6 +7,7 @@ from minigpt.bounded_objective_curriculum_patch_profile_sweep import CURRICULUM_
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.report_check_common import check_entry as _check
 from minigpt.report_utils import locate as _locate
+from minigpt.report_utils import read_json_report_utf8 as read_json_report
 
 
 LOSS_SIGNAL_BRIDGE_JSON_FILENAME = "bounded_objective_loss_signal_bridge.json"
@@ -17,10 +17,6 @@ LOSS_SIGNAL_BRIDGE_CORPUS_FILENAME = "bounded_objective_loss_signal_bridge_corpu
 LOSS_SIGNAL_BRIDGE_TEXT_FILENAME = "bounded_objective_loss_signal_bridge.txt"
 LOSS_SIGNAL_BRIDGE_MARKDOWN_FILENAME = "bounded_objective_loss_signal_bridge.md"
 LOSS_SIGNAL_BRIDGE_HTML_FILENAME = "bounded_objective_loss_signal_bridge.html"
-
-
-def read_json_report(path: str | Path) -> dict[str, Any]:
-    return json.loads(Path(path).read_text(encoding="utf-8"))
 
 
 def locate_profile_sweep(path: str | Path) -> Path:

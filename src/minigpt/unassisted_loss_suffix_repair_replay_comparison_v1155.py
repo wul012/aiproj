@@ -5,13 +5,15 @@ from pathlib import Path
 from typing import Any, Callable
 
 from minigpt.readability_report_artifacts import write_readability_outputs
-from minigpt.report_utils import as_dict, list_of_dicts, read_json_object, utc_now, write_json_payload
+from minigpt.report_utils import as_dict, list_of_dicts, utc_now, write_json_payload
 from minigpt.server_contracts import GenerationRequest
 from minigpt.server_generator import MiniGPTGenerator
 from minigpt.unassisted_holdout_repair_plan_v1148 import EXPLAIN_DIR_NAME
 from minigpt.unassisted_loss_suffix_repair_training_run_v1154 import TRAINING_HANDOFF_NAME
 from minigpt.report_check_common import check_entry as _check
 from minigpt.report_utils import target_prompt_hits as _target_prompt_hits
+from minigpt.report_utils import read_json_report
+from minigpt.report_utils import target_free as _target_free
 
 
 UNASSISTED_LOSS_SUFFIX_REPAIR_REPLAY_COMPARISON_V1155_STEM = "unassisted_loss_suffix_repair_replay_comparison_v1155"
@@ -35,10 +37,6 @@ def locate_v1154_training_handoff(path: str | Path) -> Path:
     if source.is_dir():
         return source / TRAINING_HANDOFF_NAME
     return source
-
-
-def read_json_report(path: str | Path, *, description: str = "JSON report") -> dict[str, Any]:
-    return read_json_object(path, description=description)
 
 
 def read_json_rows(path: str | Path, *, description: str = "JSON rows") -> list[dict[str, Any]]:
@@ -283,10 +281,6 @@ def _next_step(all_full_pair: bool, any_hit_count: int) -> str:
     if any_hit_count > 0:
         return "diagnose_unassisted_loss_suffix_repair_partial_signal"
     return "diagnose_unassisted_loss_suffix_repair_zero_hit"
-
-
-def _target_free(prompts: list[dict[str, Any]]) -> bool:
-    return not _target_prompt_hits(prompts)
 
 
 __all__ = [

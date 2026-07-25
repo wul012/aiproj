@@ -5,10 +5,11 @@ from pathlib import Path
 from typing import Any
 
 from minigpt.readability_report_artifacts import write_readability_outputs
-from minigpt.report_utils import as_dict, read_json_object, utc_now, write_json_payload
+from minigpt.report_utils import as_dict, utc_now, write_json_payload
 from minigpt.unassisted_holdout_repair_plan_v1148 import EXPLAIN_DIR_NAME
 from minigpt.unassisted_loss_suffix_repair_seed_v1153 import UNASSISTED_LOSS_SUFFIX_REPAIR_SEED_V1153_STEM
 from minigpt.report_check_common import check_entry as _check
+from minigpt.report_utils import read_json_report
 
 
 UNASSISTED_LOSS_SUFFIX_REPAIR_TRAINING_RUN_V1154_STEM = "unassisted_loss_suffix_repair_training_run_v1154"
@@ -33,10 +34,6 @@ def default_v1153_seed_corpus_path(repo_root: str | Path) -> Path:
         / "unassisted-loss-suffix-repair-seed-v1153"
         / f"{UNASSISTED_LOSS_SUFFIX_REPAIR_SEED_V1153_STEM}.json"
     )
-
-
-def read_json_report(path: str | Path, *, description: str = "JSON report") -> dict[str, Any]:
-    return read_json_object(path, description=description)
 
 
 def seed_corpus_text_path(seed_corpus_report_path: str | Path) -> Path:

@@ -15,6 +15,7 @@ from minigpt.model_capability_required_term_micro_training import (
 from minigpt.report_utils import as_dict, list_of_dicts
 from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code
 from minigpt.report_utils import slug as _slug
+from minigpt.report_utils import sample_prompt_fixed as _sample_prompt
 
 REQUIRED_TERM_PAIR_CURRICULUM_JSON_FILENAME = "model_capability_required_term_pair_curriculum.json"
 REQUIRED_TERM_PAIR_CURRICULUM_TEXT_FILENAME = "model_capability_required_term_pair_curriculum.txt"
@@ -361,14 +362,6 @@ def _next_action(status: str, summary: dict[str, Any]) -> str:
     if int(summary.get("probe_hit_count") or 0) > 0:
         return "inspect partially successful pairs and rebalance pair corpus before adding more targets"
     return "reduce pair size pressure with more iterations or stronger prompt separation before trying larger groups"
-
-
-def _sample_prompt(pair: dict[str, Any]) -> str:
-    for term in list_of_dicts(pair.get("terms")):
-        prompt = str(term.get("scaffold_prompt") or "")
-        if prompt:
-            return prompt
-    return "fixed:"
 
 
 __all__ = [

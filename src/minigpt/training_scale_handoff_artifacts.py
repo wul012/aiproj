@@ -13,6 +13,7 @@ from minigpt.report_utils import (
     write_csv_row,
     write_json_payload,
 )
+from minigpt.report_utils import html_card_span_strong as _card
 
 
 def write_training_scale_handoff_json(report: dict[str, Any], path: str | Path) -> None:
@@ -307,7 +308,3 @@ pre { white-space: pre-wrap; overflow-wrap: anywhere; background: #172026; color
 li { margin: 7px 0; }
 footer { color: #69756a; font-size: 12px; }
 </style>"""
-
-
-def _card(label: str, value: Any) -> str:
-    return f'<div class="card"><span>{_e(label)}</span><strong>{_e(value)}</strong></div>'

@@ -6,6 +6,7 @@ import json
 from pathlib import Path
 from typing import Any
 from minigpt.report_utils import html_e as _e
+from minigpt.report_utils import clip_text as _clip
 
 
 def write_eval_suite_json(report: dict[str, Any], path: str | Path) -> None:
@@ -209,13 +210,6 @@ def write_eval_suite_outputs(report: dict[str, Any], out_dir: str | Path) -> dic
     write_eval_suite_svg(report, paths["svg"])
     write_eval_suite_html(report, paths["html"])
     return {key: str(value) for key, value in paths.items()}
-
-
-def _clip(text: str, limit: int) -> str:
-    flat = text.replace("\n", "\\n").replace("\t", "\\t")
-    if len(flat) <= limit:
-        return flat
-    return flat[: limit - 1] + "..."
 
 
 def _join_counts(value: Any) -> str:

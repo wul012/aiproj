@@ -6,6 +6,7 @@ import html
 import json
 from pathlib import Path
 from typing import Any
+from minigpt.report_utils import clip_text as _clip
 
 
 @dataclass(frozen=True)
@@ -186,10 +187,3 @@ def write_sampling_outputs(report: dict[str, Any], out_dir: str | Path) -> dict[
     write_sampling_csv(report, paths["csv"])
     write_sampling_svg(report, paths["svg"])
     return {key: str(value) for key, value in paths.items()}
-
-
-def _clip(text: str, limit: int) -> str:
-    flat = text.replace("\n", "\\n").replace("\t", "\\t")
-    if len(flat) <= limit:
-        return flat
-    return flat[: limit - 1] + "..."

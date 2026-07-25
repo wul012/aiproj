@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import csv
 from pathlib import Path
 from typing import Any
 
@@ -11,16 +10,11 @@ from minigpt.model_capability_required_term_pair_target_anchor_route_decision im
     PAIR_TARGET_ANCHOR_ROUTE_DECISION_MARKDOWN_FILENAME,
     PAIR_TARGET_ANCHOR_ROUTE_DECISION_TEXT_FILENAME,
 )
-from minigpt.report_utils import (
-    as_dict,
-    csv_cell,
-    html_escape,
-    list_of_dicts,
-    write_json_payload,
-)
+from minigpt.report_utils import as_dict, html_escape, list_of_dicts, write_json_payload
 from minigpt.report_utils import html_card as _card
 from minigpt.report_utils import route_html as _route_html
 from minigpt.report_utils import route_markdown_rows as _route_markdown_rows
+from minigpt.report_utils import write_csv_rows_hit_terms as _write_csv
 
 
 def render_model_capability_required_term_pair_target_anchor_route_decision_text(report: dict[str, Any]) -> str:
@@ -120,17 +114,6 @@ def write_model_capability_required_term_pair_target_anchor_route_decision_outpu
     paths["markdown"].write_text(render_model_capability_required_term_pair_target_anchor_route_decision_markdown(report), encoding="utf-8")
     paths["html"].write_text(render_model_capability_required_term_pair_target_anchor_route_decision_html(report), encoding="utf-8")
     return {key: str(value) for key, value in paths.items()}
-
-
-def _write_csv(report: dict[str, Any], path: str | Path) -> None:
-    fieldnames = ["source_label", "route_type", "pair_full_seed_count", "seed_count", "hit_terms", "rejection_reasons"]
-    out_path = Path(path)
-    out_path.parent.mkdir(parents=True, exist_ok=True)
-    with out_path.open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=fieldnames)
-        writer.writeheader()
-        for row in list_of_dicts(report.get("route_rows")):
-            writer.writerow({field: csv_cell(row.get(field)) for field in fieldnames})
 
 
 def _style() -> str:

@@ -13,6 +13,7 @@ from minigpt.bounded_objective_loss_signal_bridge_partial_hit_diagnostic import 
 )
 from minigpt.report_utils import as_dict, csv_cell, html_escape, list_of_dicts, markdown_cell, write_json_payload
 from minigpt.report_utils import html_card as _card
+from minigpt.report_utils import case_row_continuation as _case_row
 
 
 def render_loss_signal_bridge_partial_hit_diagnostic_text(report: dict[str, Any]) -> str:
@@ -137,18 +138,6 @@ def write_loss_signal_bridge_partial_hit_diagnostic_outputs(report: dict[str, An
     paths["markdown"].write_text(render_loss_signal_bridge_partial_hit_diagnostic_markdown(report), encoding="utf-8")
     paths["html"].write_text(render_loss_signal_bridge_partial_hit_diagnostic_html(report), encoding="utf-8")
     return {key: str(value) for key, value in paths.items()}
-
-
-def _case_row(row: dict[str, Any]) -> str:
-    return (
-        "<tr>"
-        f"<td>{html_escape(row.get('case_id'))}</td>"
-        f"<td>{html_escape(row.get('label'))}</td>"
-        f"<td>{html_escape(','.join(str(item) for item in row.get('hit_terms', [])))}</td>"
-        f"<td>{html_escape(','.join(str(item) for item in row.get('missed_terms', [])))}</td>"
-        f"<td>{html_escape(row.get('continuation'))}</td>"
-        "</tr>"
-    )
 
 
 def _style() -> str:

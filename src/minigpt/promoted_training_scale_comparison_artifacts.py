@@ -17,6 +17,7 @@ from minigpt.report_utils import (
     string_list as _string_list,
     write_json_payload,
 )
+from minigpt.report_utils import html_card_span_strong as _card
 
 __all__ = [
     "render_promoted_training_scale_comparison_html",
@@ -372,9 +373,6 @@ li { margin: 7px 0; }
 footer { color: #69786e; font-size: 12px; }
 </style>"""
 
-
-def _card(label: str, value: Any) -> str:
-    return f'<div class="card"><span>{_e(label)}</span><strong>{_e(value)}</strong></div>'
 
 def _block_reason(report: dict[str, Any]) -> str | None:
     return _dict(report.get("summary")).get("blocked_reason") or (_string_list(report.get("blockers"))[0] if _string_list(report.get("blockers")) else None)

@@ -15,6 +15,7 @@ from minigpt.target_hidden_prompt_mutation_holdout_suite import (
 from minigpt.report_utils import html_card as _card
 from minigpt.report_utils import html_check_row as _check_row
 from minigpt.report_utils import cases_by_id as _cases_by_id
+from minigpt.report_utils import prompt_for_case as _prompt_for_case
 
 
 def render_target_hidden_prompt_mutation_holdout_suite_text(report: dict[str, Any]) -> str:
@@ -166,10 +167,6 @@ def _coverage_row(row: dict[str, Any], report: dict[str, Any]) -> str:
         f"<td>{html_escape(_prompt_for_case(report, row.get('case_id')))}</td>"
         "</tr>"
     )
-
-
-def _prompt_for_case(report: dict[str, Any], case_id: Any) -> Any:
-    return as_dict(as_dict(_cases_by_id(report).get(str(case_id))).get("prompt_case")).get("prompt")
 
 
 def _style() -> str:

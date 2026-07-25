@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import json
 from pathlib import Path
 from typing import Any, Callable
 
@@ -18,6 +17,7 @@ from minigpt.server_contracts import GenerationRequest
 from minigpt.server_generator import MiniGPTGenerator
 from minigpt.report_check_common import check_entry as _check
 from minigpt.report_utils import locate as _locate
+from minigpt.report_utils import read_json_report_utf8 as read_json_report
 
 
 CURRICULUM_PATCH_PROFILE_SWEEP_JSON_FILENAME = "bounded_objective_curriculum_patch_profile_sweep.json"
@@ -35,10 +35,6 @@ DEFAULT_PROFILES: tuple[dict[str, Any], ...] = (
     {"profile_id": "longer-top20", "max_new_tokens": 12, "temperature": 0.15, "top_k": 20, "seed": 1841},
     {"profile_id": "longer-open", "max_new_tokens": 12, "temperature": 0.2, "top_k": None, "seed": 1842},
 )
-
-
-def read_json_report(path: str | Path) -> dict[str, Any]:
-    return json.loads(Path(path).read_text(encoding="utf-8"))
 
 
 def locate_objective_contract(path: str | Path) -> Path:

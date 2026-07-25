@@ -30,6 +30,7 @@ from minigpt.training_portfolio_batch_artifacts import (
 )
 from minigpt.training_scale_gate import build_training_scale_gate, load_training_scale_plan, write_training_scale_gate_outputs
 from minigpt.training_scale_plan import write_training_scale_variants_json
+from minigpt.report_utils import html_card_span_strong as _card
 
 
 def run_training_scale_plan(
@@ -460,10 +461,6 @@ th { width: 180px; color: #435047; font-size: 12px; text-transform: uppercase; }
 li { margin: 7px 0; }
 footer { color: #69756a; font-size: 12px; }
 </style>"""
-
-
-def _card(label: str, value: Any) -> str:
-    return f'<div class="card"><span>{_e(label)}</span><strong>{_e(value)}</strong></div>'
 
 
 def _markdown_table(rows: list[tuple[str, Any]]) -> list[str]:

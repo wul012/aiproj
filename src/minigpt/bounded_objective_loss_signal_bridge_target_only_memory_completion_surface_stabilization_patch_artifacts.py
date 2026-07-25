@@ -16,6 +16,7 @@ from minigpt.bounded_objective_loss_signal_bridge_target_only_memory_completion_
 from minigpt.report_utils import as_dict, html_escape, list_of_dicts, markdown_cell, write_json_payload
 from minigpt.report_utils import html_card as _card
 from minigpt.report_utils import write_jsonl as _write_jsonl
+from minigpt.report_utils import html_row_example as _row
 
 
 def render_completion_surface_stabilization_patch_text(report: dict[str, Any]) -> str:
@@ -117,17 +118,6 @@ def _write_csv(report: dict[str, Any], path: Path) -> None:
         writer.writeheader()
         for row in list_of_dicts(report.get("patch_examples")):
             writer.writerow({field: row.get(field) for field in fieldnames})
-
-
-def _row(row: dict[str, Any]) -> str:
-    return (
-        "<tr>"
-        f"<td>{html_escape(row.get('example_id'))}</td>"
-        f"<td>{html_escape(row.get('kind'))}</td>"
-        f"<td>{html_escape(row.get('text'))}</td>"
-        f"<td>{html_escape(row.get('source_case_id'))}</td>"
-        "</tr>"
-    )
 
 
 def _style() -> str:

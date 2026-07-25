@@ -14,17 +14,14 @@ from minigpt.model_capability_route_promotion_bounded_real_replay_decoder_anchor
     write_model_capability_route_promotion_bounded_real_replay_decoder_anchor_distribution_audit_outputs,
 )
 from minigpt.readability_report_artifacts import write_readability_outputs
-from minigpt.report_utils import as_dict, list_of_dicts, read_json_object, utc_now, write_json_payload
+from minigpt.report_utils import as_dict, list_of_dicts, utc_now, write_json_payload
 from minigpt.report_check_common import check_entry as _check
 from minigpt.report_check_common import resolve_exit_code
+from minigpt.report_utils import read_json_report
 
 LOSS_SIGNAL_BRIDGE_DECODER_ANCHOR_DISTRIBUTION_STEM = (
     "model_capability_loss_signal_bridge_decoder_anchor_distribution_v1145"
 )
-
-
-def read_json_report(path: str | Path, *, description: str = "JSON report") -> dict[str, Any]:
-    return read_json_object(path, description=description)
 
 
 def default_decoder_anchor_examples() -> list[dict[str, Any]]:

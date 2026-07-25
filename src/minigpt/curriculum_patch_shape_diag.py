@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import json
 from pathlib import Path
 from typing import Any
 
@@ -13,6 +12,7 @@ from minigpt.model_capability_route_promotion_bounded_objective_unassisted_repai
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.report_check_common import check_entry as _check
 from minigpt.report_check_common import resolve_exit_code_diagnostic_ready as resolve_exit_code
+from minigpt.report_utils import read_json_report_utf8 as read_json_report
 
 
 BOUNDED_OBJECTIVE_UNASSISTED_REPAIR_SEED_REVISION_CURRICULUM_PATCH_SHAPE_MIGRATION_DIAGNOSTIC_JSON_FILENAME = (
@@ -30,10 +30,6 @@ BOUNDED_OBJECTIVE_UNASSISTED_REPAIR_SEED_REVISION_CURRICULUM_PATCH_SHAPE_MIGRATI
 BOUNDED_OBJECTIVE_UNASSISTED_REPAIR_SEED_REVISION_CURRICULUM_PATCH_SHAPE_MIGRATION_DIAGNOSTIC_HTML_FILENAME = (
     "bounded_objective_curriculum_patch_shape_migration_diagnostic.html"
 )
-
-
-def read_json_report(path: str | Path) -> dict[str, Any]:
-    return json.loads(Path(path).read_text(encoding="utf-8"))
 
 
 def locate_seed_revision_replay_comparison(path: str | Path) -> Path:

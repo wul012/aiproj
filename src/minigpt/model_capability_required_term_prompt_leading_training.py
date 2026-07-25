@@ -15,6 +15,7 @@ from minigpt.model_capability_required_term_prompt_leading_corpus import (
 from minigpt.model_capability_required_term_scaffold_probe import read_json_report
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.report_check_common import resolve_exit_code_strict as resolve_exit_code  # noqa: F401 (re-export)
+from minigpt.report_utils import sample_prompt_data as _sample_prompt
 
 
 REQUIRED_TERM_PROMPT_LEADING_TRAINING_JSON_FILENAME = "model_capability_required_term_prompt_leading_training.json"
@@ -353,11 +354,3 @@ def _next_action(status: str, summary: dict[str, Any]) -> str:
     if summary.get("prompt_alignment_ready"):
         return "increase training budget or reduce prompt variants before rerunning the prompt-leading training"
     return "repair prompt-leading corpus alignment before training again"
-
-
-def _sample_prompt(term_rows: list[dict[str, Any]]) -> str:
-    for row in term_rows:
-        prompt = str(row.get("scaffold_prompt") or "")
-        if prompt:
-            return prompt
-    return "data:"

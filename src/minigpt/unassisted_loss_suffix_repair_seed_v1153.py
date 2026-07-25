@@ -5,7 +5,7 @@ from pathlib import Path
 from typing import Any
 
 from minigpt.readability_report_artifacts import write_readability_outputs
-from minigpt.report_utils import as_dict, list_of_dicts, read_json_object, utc_now, write_json_payload
+from minigpt.report_utils import as_dict, list_of_dicts, utc_now, write_json_payload
 from minigpt.unassisted_holdout_repair_partial_signal_diagnostic_v1152 import (
     UNASSISTED_HOLDOUT_REPAIR_PARTIAL_SIGNAL_DIAGNOSTIC_V1152_STEM,
 )
@@ -16,6 +16,8 @@ from minigpt.unassisted_holdout_repair_seed_corpus_v1149 import (
 from minigpt.report_check_common import check_entry as _check
 from minigpt.report_utils import target_prompt_hits as _target_prompt_hits
 from minigpt.unassisted_holdout_repair_seed_corpus_v1149 import locate_v1149_seed_corpus
+from minigpt.report_utils import read_json_report
+from minigpt.report_utils import target_free as _target_free
 
 
 UNASSISTED_LOSS_SUFFIX_REPAIR_SEED_V1153_STEM = "unassisted_loss_suffix_repair_seed_v1153"
@@ -52,10 +54,6 @@ def locate_v1152_diagnostic(path: str | Path) -> Path:
     if source.is_dir():
         return source / f"{UNASSISTED_HOLDOUT_REPAIR_PARTIAL_SIGNAL_DIAGNOSTIC_V1152_STEM}.json"
     return source
-
-
-def read_json_report(path: str | Path, *, description: str = "JSON report") -> dict[str, Any]:
-    return read_json_object(path, description=description)
 
 
 def build_unassisted_loss_suffix_repair_seed_v1153(
@@ -335,10 +333,6 @@ def _join_prompt_completion(prompt: str, completion: str) -> str:
 
 def _jsonl(rows: list[dict[str, Any]]) -> str:
     return "".join(json.dumps(row, ensure_ascii=False, sort_keys=True) + "\n" for row in rows)
-
-
-def _target_free(prompts: list[dict[str, Any]]) -> bool:
-    return not _target_prompt_hits(prompts)
 
 
 def _int_value(value: Any, *, default: int = 0) -> int:

@@ -13,6 +13,7 @@ from minigpt.model_capability_route_promotion_bounded_objective_unassisted_repai
 )
 from minigpt.report_utils import as_dict, csv_cell, html_escape, list_of_dicts, markdown_cell, write_json_payload
 from minigpt.report_utils import html_card as _card
+from minigpt.report_utils import html_row_exists as _row
 
 
 def render_bounded_objective_unassisted_repair_training_run_text(report: dict[str, Any]) -> str:
@@ -127,17 +128,6 @@ def write_bounded_objective_unassisted_repair_training_run_outputs(report: dict[
     paths["markdown"].write_text(render_bounded_objective_unassisted_repair_training_run_markdown(report), encoding="utf-8")
     paths["html"].write_text(render_bounded_objective_unassisted_repair_training_run_html(report), encoding="utf-8")
     return {key: str(value) for key, value in paths.items()}
-
-
-def _row(row: dict[str, Any]) -> str:
-    return (
-        "<tr>"
-        f"<td>{html_escape(row.get('key'))}</td>"
-        f"<td>{html_escape(row.get('exists'))}</td>"
-        f"<td>{html_escape(row.get('size'))}</td>"
-        f"<td>{html_escape(row.get('path'))}</td>"
-        "</tr>"
-    )
 
 
 def _style() -> str:

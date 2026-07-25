@@ -22,6 +22,7 @@ from minigpt.packet_chain_review_v1006 import (
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.report_check_common import check_entry as _check
 from minigpt.report_utils import path_exists as _path_exists
+from minigpt.report_utils import consumer_receipts as _consumer_receipts
 
 
 RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_PUBLICATION_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_V1007_JSON_FILENAME = "randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_v1007.json"
@@ -184,23 +185,6 @@ def _receipt(
         "source_receipt_check_path": review.get("source_receipt_check_path") if ready else "",
         "next_step": RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_PUBLICATION_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_V1007_NEXT_STEP if ready else "repair_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_v1007",
     }
-
-
-def _consumer_receipts(receipt: dict[str, Any], index_rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    return [
-        {
-            "consumer_name": receipt.get("consumer_name"),
-            "lookup_key": row.get("lookup_key"),
-            "receipt_index_id": row.get("receipt_index_id"),
-            "source_receipt_id": row.get("receipt_id"),
-            "receipt_id": receipt.get("receipt_id"),
-            "granted_use": receipt.get("granted_use"),
-            "blocked_uses": receipt.get("blocked_uses"),
-            "promotion_ready": False,
-            "receipt_status": receipt.get("receipt_status"),
-        }
-        for row in index_rows
-    ]
 
 
 def _summary(status: str, checks: list[dict[str, Any]], receipt: dict[str, Any]) -> dict[str, Any]:
