@@ -17,7 +17,7 @@ from minigpt.randomized_holdout_publication_downstream_common import (
     sha256_file,
 )
 from minigpt.randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1014 import (
-    RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_PUBLICATION_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_REVIEW_V1014_JSON_FILENAME,
+    PACKET_REVIEW_V1014_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.report_check_common import check_entry as _check
@@ -44,7 +44,7 @@ LOOKUP_KEY_PREFIX = "publication-index-receipt-index-receipt-index-receipt-index
 def locate_receipt_index_review_v1015(path: str | Path) -> Path:
     source = Path(path)
     if source.is_dir():
-        source = source / RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_PUBLICATION_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_REVIEW_V1014_JSON_FILENAME
+        source = source / PACKET_REVIEW_V1014_JSON_FILENAME
     return source
 
 

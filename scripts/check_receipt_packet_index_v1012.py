@@ -11,14 +11,14 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from minigpt.packet_index_check_v1012 import (  # noqa: E402
-    build_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_check_v1012,
+    build_packet_check_v1012,
     locate_receipt_v1012,
     read_json_report,
     resolve_exit_code,
 )
 from minigpt.packet_index_check_v1012_artifacts import (  # noqa: E402
-    render_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_check_v1012_text,
-    write_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_check_v1012_outputs,
+    render_packet_check_v1012_text,
+    write_packet_check_v1012_outputs,
 )
 
 
@@ -35,12 +35,12 @@ def main(argv: Sequence[str] | None = None) -> None:
     args = parse_args(argv)
     receipt_path = locate_receipt_v1012(args.receipt)
     prepare_output_dir(args.out_dir, force=args.force)
-    report = build_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_check_v1012(
+    report = build_packet_check_v1012(
         read_json_report(receipt_path),
         receipt_path=receipt_path,
     )
-    outputs = write_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_check_v1012_outputs(report, args.out_dir)
-    print(render_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_check_v1012_text(report), end="")
+    outputs = write_packet_check_v1012_outputs(report, args.out_dir)
+    print(render_packet_check_v1012_text(report), end="")
     print("outputs=" + json.dumps(outputs, ensure_ascii=True))
     code = resolve_exit_code(report, require_pass=args.require_pass)
     if code:

@@ -5,16 +5,16 @@ import tempfile
 import unittest
 
 from minigpt.packet_index_check_v1012 import (
-    RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_PUBLICATION_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_CHECK_V1012_JSON_FILENAME,
-    build_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_check_v1012,
+    PACKET_CHECK_V1012_JSON_FILENAME,
+    build_packet_check_v1012,
     locate_receipt_v1012,
     resolve_exit_code,
 )
 from minigpt.packet_index_check_v1012_artifacts import (
-    render_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_check_v1012_html,
-    render_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_check_v1012_markdown,
-    render_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_check_v1012_text,
-    write_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_check_v1012_outputs,
+    render_packet_check_v1012_html,
+    render_packet_check_v1012_markdown,
+    render_packet_check_v1012_text,
+    write_packet_check_v1012_outputs,
 )
 from minigpt.packet_chain_receipt_v1011 import build_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1011
 from minigpt.packet_chain_receipt_v1011_artifacts import write_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1011_outputs
@@ -27,7 +27,7 @@ class RandomizedHoldoutPublicationReceiptPacketIndexPublicationReceiptIndexRecei
     def test_receipt_check_accepts_rebuildable_receipt(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             receipt, receipt_path = ready_check_inputs(Path(tmp))
-            report = build_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_check_v1012(
+            report = build_packet_check_v1012(
                 receipt,
                 receipt_path=receipt_path,
             )
@@ -49,7 +49,7 @@ class RandomizedHoldoutPublicationReceiptPacketIndexPublicationReceiptIndexRecei
             receipt, receipt_path = ready_check_inputs(Path(tmp))
             receipt["summary"]["granted_use"] = "production_promotion"
             receipt["receipt"]["granted_use"] = "production_promotion"
-            report = build_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_check_v1012(
+            report = build_packet_check_v1012(
                 receipt,
                 receipt_path=receipt_path,
             )
@@ -63,7 +63,7 @@ class RandomizedHoldoutPublicationReceiptPacketIndexPublicationReceiptIndexRecei
             receipt, receipt_path = ready_check_inputs(Path(tmp))
             receipt["receipt_index_review_path"] = "missing-review.json"
             receipt["receipt"]["receipt_index_review_path"] = "missing-review.json"
-            report = build_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_check_v1012(
+            report = build_packet_check_v1012(
                 receipt,
                 receipt_path=receipt_path,
             )
@@ -75,7 +75,7 @@ class RandomizedHoldoutPublicationReceiptPacketIndexPublicationReceiptIndexRecei
         with tempfile.TemporaryDirectory() as tmp:
             receipt, receipt_path = ready_check_inputs(Path(tmp))
             receipt["receipt_index_review_sha256"] = "bad"
-            report = build_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_check_v1012(
+            report = build_packet_check_v1012(
                 receipt,
                 receipt_path=receipt_path,
             )
@@ -94,25 +94,25 @@ class RandomizedHoldoutPublicationReceiptPacketIndexPublicationReceiptIndexRecei
                 cli_main([str(receipt_path.parent), "--out-dir", str(root / "cli-check"), "--require-pass", "--force"])
 
             self.assertEqual(raised.exception.code, 1)
-            self.assertTrue((root / "cli-check" / RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_PUBLICATION_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_CHECK_V1012_JSON_FILENAME).is_file())
+            self.assertTrue((root / "cli-check" / PACKET_CHECK_V1012_JSON_FILENAME).is_file())
 
     def test_outputs_and_cli_are_wired(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             receipt, receipt_path = ready_check_inputs(root)
             self.assertEqual(locate_receipt_v1012(receipt_path.parent), receipt_path)
-            report = build_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_check_v1012(
+            report = build_packet_check_v1012(
                 receipt,
                 receipt_path=receipt_path,
             )
-            outputs = write_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_check_v1012_outputs(report, root / "check")
+            outputs = write_packet_check_v1012_outputs(report, root / "check")
             cli_main([str(receipt_path.parent), "--out-dir", str(root / "cli-check"), "--require-pass", "--force"])
 
         self.assertEqual(set(outputs), {"json", "csv", "text", "markdown", "html"})
-        self.assertTrue(outputs["json"].endswith(RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_PUBLICATION_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_CHECK_V1012_JSON_FILENAME))
-        self.assertIn("contract_check_ready=True", render_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_check_v1012_text(report))
-        self.assertIn("Checks", render_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_check_v1012_markdown(report))
-        self.assertIn("receipt check", render_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_check_v1012_html(report))
+        self.assertTrue(outputs["json"].endswith(PACKET_CHECK_V1012_JSON_FILENAME))
+        self.assertIn("contract_check_ready=True", render_packet_check_v1012_text(report))
+        self.assertIn("Checks", render_packet_check_v1012_markdown(report))
+        self.assertIn("receipt check", render_packet_check_v1012_html(report))
 
 
 def ready_check_inputs(root: Path) -> tuple[dict[str, object], Path]:

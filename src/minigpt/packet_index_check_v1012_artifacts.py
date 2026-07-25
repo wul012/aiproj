@@ -5,18 +5,18 @@ from pathlib import Path
 from typing import Any
 
 from minigpt.packet_index_check_v1012 import (
-    RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_PUBLICATION_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_CHECK_V1012_CSV_FILENAME,
-    RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_PUBLICATION_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_CHECK_V1012_HTML_FILENAME,
-    RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_PUBLICATION_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_CHECK_V1012_JSON_FILENAME,
-    RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_PUBLICATION_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_CHECK_V1012_MARKDOWN_FILENAME,
-    RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_PUBLICATION_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_CHECK_V1012_TEXT_FILENAME,
+    PACKET_CHECK_V1012_CSV_FILENAME,
+    PACKET_CHECK_V1012_HTML_FILENAME,
+    PACKET_CHECK_V1012_JSON_FILENAME,
+    PACKET_CHECK_V1012_MARKDOWN_FILENAME,
+    PACKET_CHECK_V1012_TEXT_FILENAME,
 )
 from minigpt.report_utils import as_dict, csv_cell, html_escape, list_of_dicts, markdown_cell, write_json_payload
 from minigpt.report_utils import html_card as _card
 from minigpt.report_utils import html_check_row as _check_row
 
 
-def render_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_check_v1012_text(report: dict[str, Any]) -> str:
+def render_packet_check_v1012_text(report: dict[str, Any]) -> str:
     summary = as_dict(report.get("summary"))
     rows = [
         ("status", report.get("status")),
@@ -39,7 +39,7 @@ def render_randomized_holdout_publication_receipt_packet_index_publication_recei
     return "\n".join(f"{key}={value}" for key, value in rows) + "\n"
 
 
-def write_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_check_v1012_csv(report: dict[str, Any], path: str | Path) -> None:
+def write_packet_check_v1012_csv(report: dict[str, Any], path: str | Path) -> None:
     fieldnames = ["id", "status", "actual", "detail"]
     out_path = Path(path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
@@ -50,7 +50,7 @@ def write_randomized_holdout_publication_receipt_packet_index_publication_receip
             writer.writerow({field: csv_cell(row.get(field)) for field in fieldnames})
 
 
-def render_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_check_v1012_markdown(report: dict[str, Any]) -> str:
+def render_packet_check_v1012_markdown(report: dict[str, Any]) -> str:
     summary = as_dict(report.get("summary"))
     lines = [
         f"# {markdown_cell(report.get('title', 'MiniGPT randomized holdout publication receipt index receipt index receipt index receipt check v1012'))}",
@@ -75,7 +75,7 @@ def render_randomized_holdout_publication_receipt_packet_index_publication_recei
     return "\n".join(lines).rstrip() + "\n"
 
 
-def render_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_check_v1012_html(report: dict[str, Any]) -> str:
+def render_packet_check_v1012_html(report: dict[str, Any]) -> str:
     summary = as_dict(report.get("summary"))
     interpretation = as_dict(report.get("interpretation"))
     stats = [
@@ -105,21 +105,21 @@ def render_randomized_holdout_publication_receipt_packet_index_publication_recei
 """
 
 
-def write_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_check_v1012_outputs(report: dict[str, Any], out_dir: str | Path) -> dict[str, str]:
+def write_packet_check_v1012_outputs(report: dict[str, Any], out_dir: str | Path) -> dict[str, str]:
     root = Path(out_dir)
     root.mkdir(parents=True, exist_ok=True)
     paths = {
-        "json": root / RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_PUBLICATION_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_CHECK_V1012_JSON_FILENAME,
-        "csv": root / RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_PUBLICATION_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_CHECK_V1012_CSV_FILENAME,
-        "text": root / RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_PUBLICATION_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_CHECK_V1012_TEXT_FILENAME,
-        "markdown": root / RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_PUBLICATION_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_CHECK_V1012_MARKDOWN_FILENAME,
-        "html": root / RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_PUBLICATION_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_CHECK_V1012_HTML_FILENAME,
+        "json": root / PACKET_CHECK_V1012_JSON_FILENAME,
+        "csv": root / PACKET_CHECK_V1012_CSV_FILENAME,
+        "text": root / PACKET_CHECK_V1012_TEXT_FILENAME,
+        "markdown": root / PACKET_CHECK_V1012_MARKDOWN_FILENAME,
+        "html": root / PACKET_CHECK_V1012_HTML_FILENAME,
     }
     write_json_payload(report, paths["json"])
-    write_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_check_v1012_csv(report, paths["csv"])
-    paths["text"].write_text(render_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_check_v1012_text(report), encoding="utf-8")
-    paths["markdown"].write_text(render_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_check_v1012_markdown(report), encoding="utf-8")
-    paths["html"].write_text(render_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_check_v1012_html(report), encoding="utf-8")
+    write_packet_check_v1012_csv(report, paths["csv"])
+    paths["text"].write_text(render_packet_check_v1012_text(report), encoding="utf-8")
+    paths["markdown"].write_text(render_packet_check_v1012_markdown(report), encoding="utf-8")
+    paths["html"].write_text(render_packet_check_v1012_html(report), encoding="utf-8")
     return {key: str(value) for key, value in paths.items()}
 
 
@@ -131,10 +131,10 @@ def _style() -> str:
 
 
 __all__ = [
-    "render_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_check_v1012_html",
-    "render_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_check_v1012_markdown",
-    "render_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_check_v1012_text",
-    "write_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_check_v1012_outputs",
+    "render_packet_check_v1012_html",
+    "render_packet_check_v1012_markdown",
+    "render_packet_check_v1012_text",
+    "write_packet_check_v1012_outputs",
 ]
 
 
