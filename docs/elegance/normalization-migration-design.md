@@ -86,6 +86,50 @@ at least as strong:
    decision worth taking before mass migration, since archiving would move
    the metric far faster than restructuring.
 
+## 5b. Measured cost of the remaining packages (added after v1308)
+
+v1308 migrated `core` and `flat_dir_file_count` moved 1,355 → 1,350. Applying
+the eligibility rules to the other five packages shows **every one is
+currently blocked**, and why: the migration unit is not just "the package"
+but **the package's transitive flat dependency closure**, because an
+implementation submodule may not import an un-migrated flat module.
+
+`core` was migratable only because it is the leaf of the dependency graph.
+
+| owner | closure | lines | modules over 220 | extra modules from splits |
+|---|---:|---:|---:|---:|
+| training | 6 | 964 | 1 | ~2 |
+| evaluation | 9 | 2,679 | 6 | ~7 |
+| serving | 14 | 2,906 | 6 | ~7 |
+| reports | 13 | 3,626 | 9 | ~10 |
+| governance | 43 | 10,739 | 23 | ~25 |
+
+**Totals: 85 flat modules, ~20,900 lines, ~45 splits.**
+
+### What that buys, stated plainly
+
+Migrating **all five remaining packages** would take
+`flat_dir_file_count` from 1,350 to roughly **1,265** — about 6% of the flat
+corpus, for ~45 careful module splits of live production code.
+
+The reason is structural: the ~1,200 modules that dominate the flat namespace
+are **not faced by any owner package at all**. They are the generated
+per-version governance artifacts (`receipt_chain_*`, `packet_chain_*`,
+`model_capability_*`, …). No amount of owner-package migration touches them.
+
+### Revised recommendation
+
+Owner-package migration is **not** the path to a materially better
+"navigating the repo" score. It is worth doing incrementally for the
+packages that are cheap (`training` next, at 6 modules and one split), but it
+should not be sold as the route to 9/10.
+
+The decision that actually moves this axis is what to do with the ~1,200
+generated artifact modules: **archive them out of `src/`** (they are records
+of completed versions, not code under maintenance) versus keep and migrate
+them. That is a product decision about what belongs in the source tree, and
+it is worth taking before any further migration work is funded.
+
 ## 6. Honest expectation
 
 Even a complete `core` migration moves `flat_dir_file_count` by 5 of 1,355.
