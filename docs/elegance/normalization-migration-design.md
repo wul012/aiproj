@@ -130,6 +130,61 @@ of completed versions, not code under maintenance) versus keep and migrate
 them. That is a product decision about what belongs in the source tree, and
 it is worth taking before any further migration work is funded.
 
+## 5c. The archive question, made decidable (added after v1309)
+
+The ~1,000 generated per-version modules dominate the flat namespace and no
+owner package faces them. Before anything can be archived, one question has
+to be answered with evidence rather than intuition: **are they inert records,
+or load-bearing infrastructure?**
+
+Measured by consumer analysis — a module counts as inert when nothing outside
+its own family imports it (its own test, its own `build_/check_/review_`
+script and its family siblings do not count as outside):
+
+| family | modules | inert | load-bearing |
+|---|---:|---:|---:|
+| model_capability | 483 | 425 | 58 |
+| receipt_chain | 192 | 94 | 98 |
+| randomized_holdout | 145 | 130 | 15 |
+| bounded_objective | 93 | 66 | 27 |
+| packet_chain | 38 | 16 | 22 |
+| registry_ack | 24 | 22 | 2 |
+| ack_bundle | 17 | 12 | 5 |
+| packet_index | 6 | 0 | 6 |
+| **total** | **998** | **765** | **233** |
+
+**765 of 998 are inert.** They are closed records of completed versions: the
+module, its script and its test refer only to each other.
+
+### But the unit is a family cluster, not a module
+
+233 modules are genuinely load-bearing, and the dependencies cross family
+lines (`ack_bundle_packet_index` is imported by `registry_ack_review`, which
+couples those two families). So the archivable unit is a set of families
+closed under cross-family dependency, moved with their scripts and tests
+together — the same atomicity lesson as v1307/v1308, one level up.
+
+### Why this is not an engineering decision
+
+Archiving on this scale would take `flat_dir_file_count` from 1,350 to
+roughly **585** — an order of magnitude more than every owner-package
+migration combined (which buys ~85). It would also remove those modules'
+tests from the suite, which moves the coverage denominator, and shrink the
+name-budget and duplication baselines substantially.
+
+That is not a refactor; it changes what the project **is**. These modules are
+the accumulated governance record of ~1,000 versions of deliberate work. The
+engineering evidence says they are archivable; whether they *should* be
+archived is the author's call, and it should be made explicitly rather than
+arrived at as a side effect of chasing a score.
+
+**Recommendation:** take this decision before funding further migration work.
+If the answer is "archive", the flat namespace problem is largely solved in
+one deliberate move. If the answer is "keep", then `flat_dir_file_count` is
+measuring something the project has consciously chosen, the "navigating the
+repo" sub-score should be re-framed to exclude generated records, and the
+9/10 target should be restated against a corpus that excludes them.
+
 ## 6. Honest expectation
 
 Even a complete `core` migration moves `flat_dir_file_count` by 5 of 1,355.
