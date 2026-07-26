@@ -11,17 +11,17 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from minigpt.ack_bundle_packet import (  # noqa: E402
-    build_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet,
-    locate_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_review,
+    build_ack_bundle_packet,
+    locate_ack_bundle_packet,
     read_json_report,
     resolve_exit_code,
 )
 from minigpt.ack_bundle_packet_artifacts import (  # noqa: E402
-    render_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_text,
-    write_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_outputs,
+    render_p_et_artifacts_text,
+    write_p_et_artifacts_outputs,
 )
 from minigpt.ack_bundle_packet_check import (  # noqa: E402
-    build_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_check,
+    build_p_et_check,
 )
 from minigpt.ack_bundle_packet_check_artifacts import (  # noqa: E402
     write_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_check_outputs,
@@ -42,21 +42,21 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
 
 def main(argv: Sequence[str] | None = None) -> None:
     args = parse_args(argv)
-    review_path = locate_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_review(args.receipt_review)
+    review_path = locate_ack_bundle_packet(args.receipt_review)
     prepare_output_dir(args.out_dir, force=args.force)
-    report = build_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet(
+    report = build_ack_bundle_packet(
         read_json_report(review_path),
         receipt_review_path=review_path,
     )
-    outputs = write_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_outputs(report, args.out_dir)
+    outputs = write_p_et_artifacts_outputs(report, args.out_dir)
     if args.check_out_dir:
         prepare_output_dir(args.check_out_dir, force=args.force)
-        check_report = build_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_check(
+        check_report = build_p_et_check(
             report,
             receipt_packet_path=outputs["json"],
         )
         outputs["check"] = write_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_check_outputs(check_report, args.check_out_dir)["json"]
-    print(render_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_text(report), end="")
+    print(render_p_et_artifacts_text(report), end="")
     print("outputs=" + json.dumps(outputs, ensure_ascii=True))
     code = resolve_exit_code(
         report,

@@ -222,7 +222,7 @@ def _next_step(clean_signal: bool, leakage_count: int, hint_count: int, mutated_
     if mutated_count != case_count:
         return "repair_prompt_mutation_holdout_unmutated_prompts"
     if clean_signal:
-        return "build_randomized_target_hidden_holdout_suite"
+        return "build_target_holdout_suite"
     return "diagnose_prompt_mutation_target_hidden_holdout_replay_gap"
 
 

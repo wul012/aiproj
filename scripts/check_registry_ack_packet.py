@@ -11,14 +11,14 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from minigpt.registry_ack_packet_check import (  # noqa: E402
-    build_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet_check,
+    build_ack_packet_check,
     locate_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet,
     read_json_report,
     resolve_exit_code,
 )
 from minigpt.registry_ack_packet_check_artifacts import (  # noqa: E402
-    render_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet_check_text,
-    write_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet_check_outputs,
+    render_p_et_check_artifacts_text,
+    write_p_et_check_artifacts_outputs,
 )
 
 
@@ -36,12 +36,12 @@ def main(argv: Sequence[str] | None = None) -> None:
     args = parse_args(argv)
     packet_path = locate_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet(args.receipt_packet)
     prepare_output_dir(args.out_dir, force=args.force)
-    report = build_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet_check(
+    report = build_ack_packet_check(
         read_json_report(packet_path),
         receipt_packet_path=packet_path,
     )
-    outputs = write_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet_check_outputs(report, args.out_dir)
-    print(render_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet_check_text(report), end="")
+    outputs = write_p_et_check_artifacts_outputs(report, args.out_dir)
+    print(render_p_et_check_artifacts_text(report), end="")
     print("outputs=" + json.dumps(outputs, ensure_ascii=True))
     if resolve_exit_code(report, require_pass=args.require_pass, require_promotion_ready=args.require_promotion_ready):
         raise SystemExit(1)

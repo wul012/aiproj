@@ -11,8 +11,8 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from minigpt.ack_bundle_receipt_review import (  # noqa: E402
-    build_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_review,
-    locate_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt,
+    build_receipt_review,
+    locate_receipt_review,
     read_json_report,
     resolve_exit_code,
 )
@@ -35,9 +35,9 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
 
 def main(argv: Sequence[str] | None = None) -> None:
     args = parse_args(argv)
-    receipt_path = locate_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt(args.receipt)
+    receipt_path = locate_receipt_review(args.receipt)
     prepare_output_dir(args.out_dir, force=args.force)
-    report = build_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_review(
+    report = build_receipt_review(
         read_json_report(receipt_path),
         publication_receipt_path=receipt_path,
     )

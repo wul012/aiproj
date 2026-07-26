@@ -11,15 +11,15 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from minigpt.registry_ack_packet_index import (  # noqa: E402
-    build_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet_index,
+    build_ack_packet_index,
     locate_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet,
-    locate_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet_check,
+    locate_ack_packet_index,
     read_json_report,
     resolve_exit_code,
 )
 from minigpt.registry_ack_packet_index_artifacts import (  # noqa: E402
-    render_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet_index_text,
-    write_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet_index_outputs,
+    render_p_et_index_artifacts_text,
+    write_p_et_index_artifacts_outputs,
 )
 
 
@@ -38,16 +38,16 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
 def main(argv: Sequence[str] | None = None) -> None:
     args = parse_args(argv)
     packet_path = locate_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet(args.receipt_packet)
-    check_path = locate_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet_check(args.receipt_packet_check)
+    check_path = locate_ack_packet_index(args.receipt_packet_check)
     prepare_output_dir(args.out_dir, force=args.force)
-    report = build_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet_index(
+    report = build_ack_packet_index(
         read_json_report(packet_path),
         read_json_report(check_path),
         receipt_packet_path=packet_path,
         receipt_packet_check_path=check_path,
     )
-    outputs = write_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet_index_outputs(report, args.out_dir)
-    print(render_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet_index_text(report), end="")
+    outputs = write_p_et_index_artifacts_outputs(report, args.out_dir)
+    print(render_p_et_index_artifacts_text(report), end="")
     print("outputs=" + json.dumps(outputs, ensure_ascii=True))
     code = resolve_exit_code(
         report,

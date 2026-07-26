@@ -17,7 +17,7 @@ from minigpt.target_hidden_semantic_holdout_dry_run_artifacts import (
     render_target_hidden_semantic_holdout_dry_run_text,
     write_target_hidden_semantic_holdout_dry_run_outputs,
 )
-from minigpt.target_hidden_semantic_holdout_suite import TARGET_HIDDEN_SEMANTIC_HOLDOUT_SUITE_JSON_FILENAME
+from minigpt.target_hidden_semantic_holdout_suite import SEMANTIC_HOLDOUT_SUITE_JSON_FILENAME
 from scripts.dry_run_target_hidden_semantic_holdout import main as cli_main
 
 
@@ -51,7 +51,7 @@ class TargetHiddenSemanticHoldoutDryRunTests(unittest.TestCase):
     def test_outputs_and_cli_are_wired(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            suite_path = root / "suite" / TARGET_HIDDEN_SEMANTIC_HOLDOUT_SUITE_JSON_FILENAME
+            suite_path = root / "suite" / SEMANTIC_HOLDOUT_SUITE_JSON_FILENAME
             write_json_payload(ready_suite(), suite_path)
             self.assertEqual(locate_target_hidden_semantic_holdout_suite(suite_path.parent), suite_path)
             report = build_target_hidden_semantic_holdout_dry_run(ready_suite())

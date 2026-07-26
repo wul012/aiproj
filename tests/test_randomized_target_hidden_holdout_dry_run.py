@@ -5,8 +5,8 @@ import tempfile
 import unittest
 
 from minigpt.randomized_target_hidden_holdout_dry_run import (
-    RANDOMIZED_TARGET_HIDDEN_HOLDOUT_DRY_RUN_JSON_FILENAME,
-    build_randomized_target_hidden_holdout_dry_run,
+    TARGET_HOLDOUT_DRY_RUN_JSON_FILENAME,
+    build_target_holdout_dry_run,
     locate_randomized_target_hidden_holdout_suite,
     resolve_exit_code,
 )
@@ -16,14 +16,14 @@ from minigpt.randomized_target_hidden_holdout_dry_run_artifacts import (
     render_randomized_target_hidden_holdout_dry_run_text,
     write_randomized_target_hidden_holdout_dry_run_outputs,
 )
-from minigpt.randomized_target_hidden_holdout_suite import RANDOMIZED_TARGET_HIDDEN_HOLDOUT_SUITE_JSON_FILENAME
+from minigpt.randomized_target_hidden_holdout_suite import TARGET_HOLDOUT_SUITE_JSON_FILENAME
 from minigpt.report_utils import write_json_payload
 from scripts.dry_run_randomized_target_hidden_holdout import main as cli_main
 
 
 class RandomizedTargetHiddenHoldoutDryRunTests(unittest.TestCase):
     def test_dry_run_passes_positive_and_blocks_negative_control(self) -> None:
-        report = build_randomized_target_hidden_holdout_dry_run(ready_suite())
+        report = build_target_holdout_dry_run(ready_suite())
 
         self.assertEqual(report["status"], "pass")
         self.assertEqual(report["decision"], "randomized_target_hidden_holdout_dry_run_passed")
@@ -38,7 +38,7 @@ class RandomizedTargetHiddenHoldoutDryRunTests(unittest.TestCase):
         self.assertEqual(resolve_exit_code(report, require_dry_run_ready=True), 0)
 
     def test_dry_run_fails_when_negative_control_passes(self) -> None:
-        report = build_randomized_target_hidden_holdout_dry_run(ready_suite(), negative_continuation=" fixed loss")
+        report = build_target_holdout_dry_run(ready_suite(), negative_continuation=" fixed loss")
 
         self.assertEqual(report["status"], "fail")
         self.assertIn("negative_rows_fail", [issue["id"] for issue in report["issues"]])
@@ -47,7 +47,7 @@ class RandomizedTargetHiddenHoldoutDryRunTests(unittest.TestCase):
     def test_dry_run_fails_when_source_is_not_ready(self) -> None:
         source = ready_suite()
         source["summary"]["randomized_target_hidden_holdout_suite_ready"] = False
-        report = build_randomized_target_hidden_holdout_dry_run(source)
+        report = build_target_holdout_dry_run(source)
 
         self.assertEqual(report["status"], "fail")
         self.assertIn("holdout_suite_ready", [issue["id"] for issue in report["issues"]])
@@ -55,10 +55,10 @@ class RandomizedTargetHiddenHoldoutDryRunTests(unittest.TestCase):
     def test_outputs_and_cli_are_wired(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            suite_path = root / "suite" / RANDOMIZED_TARGET_HIDDEN_HOLDOUT_SUITE_JSON_FILENAME
+            suite_path = root / "suite" / TARGET_HOLDOUT_SUITE_JSON_FILENAME
             write_json_payload(ready_suite(), suite_path)
             self.assertEqual(locate_randomized_target_hidden_holdout_suite(suite_path.parent), suite_path)
-            report = build_randomized_target_hidden_holdout_dry_run(ready_suite())
+            report = build_target_holdout_dry_run(ready_suite())
             outputs = write_randomized_target_hidden_holdout_dry_run_outputs(report, root / "out")
             cli_main(
                 [
@@ -72,7 +72,7 @@ class RandomizedTargetHiddenHoldoutDryRunTests(unittest.TestCase):
             )
 
         self.assertEqual(set(outputs), {"json", "csv", "text", "markdown", "html"})
-        self.assertTrue(outputs["json"].endswith(RANDOMIZED_TARGET_HIDDEN_HOLDOUT_DRY_RUN_JSON_FILENAME))
+        self.assertTrue(outputs["json"].endswith(TARGET_HOLDOUT_DRY_RUN_JSON_FILENAME))
         self.assertIn("positive_passed_case_count=4", render_randomized_target_hidden_holdout_dry_run_text(report))
         self.assertIn("Dry-Run Rows", render_randomized_target_hidden_holdout_dry_run_markdown(report))
         self.assertIn("randomized target-hidden holdout dry-run", render_randomized_target_hidden_holdout_dry_run_html(report))

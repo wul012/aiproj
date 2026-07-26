@@ -5,18 +5,18 @@ from pathlib import Path
 from typing import Any
 
 from minigpt.registry_ack_pub import (
-    RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_DOWNSTREAM_CONSUMER_ACK_BUNDLE_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_CSV_FILENAME,
-    RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_DOWNSTREAM_CONSUMER_ACK_BUNDLE_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_HTML_FILENAME,
-    RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_DOWNSTREAM_CONSUMER_ACK_BUNDLE_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_JSON_FILENAME,
-    RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_DOWNSTREAM_CONSUMER_ACK_BUNDLE_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_MARKDOWN_FILENAME,
-    RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_DOWNSTREAM_CONSUMER_ACK_BUNDLE_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_TEXT_FILENAME,
+    REGISTRY_ACK_PUB_CSV_FILENAME,
+    REGISTRY_ACK_PUB_HTML_FILENAME,
+    REGISTRY_ACK_PUB_JSON_FILENAME,
+    REGISTRY_ACK_PUB_MARKDOWN_FILENAME,
+    REGISTRY_ACK_PUB_TEXT_FILENAME,
 )
 from minigpt.report_utils import as_dict, csv_cell, html_escape, list_of_dicts, markdown_cell, write_json_payload
 from minigpt.report_utils import html_card as _card
 from minigpt.report_utils import html_check_row as _check_row
 
 
-def render_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_text(report: dict[str, Any]) -> str:
+def render_ack_pub_artifacts_text(report: dict[str, Any]) -> str:
     summary = as_dict(report.get("summary"))
     rows = [
         ("status", report.get("status")),
@@ -41,7 +41,7 @@ def render_randomized_holdout_publication_registry_downstream_consumer_ack_bundl
     return "\n".join(f"{key}={value}" for key, value in rows) + "\n"
 
 
-def write_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_csv(report: dict[str, Any], path: str | Path) -> None:
+def write_ack_pub_artifacts_csv(report: dict[str, Any], path: str | Path) -> None:
     fieldnames = ["id", "status", "actual", "detail"]
     out_path = Path(path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
@@ -52,7 +52,7 @@ def write_randomized_holdout_publication_registry_downstream_consumer_ack_bundle
             writer.writerow({field: csv_cell(row.get(field)) for field in fieldnames})
 
 
-def render_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_markdown(report: dict[str, Any]) -> str:
+def render_ack_pub_artifacts_markdown(report: dict[str, Any]) -> str:
     summary = as_dict(report.get("summary"))
     publication = as_dict(report.get("publication"))
     lines = [
@@ -86,7 +86,7 @@ def render_randomized_holdout_publication_registry_downstream_consumer_ack_bundl
     return "\n".join(lines).rstrip() + "\n"
 
 
-def render_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_html(report: dict[str, Any]) -> str:
+def render_ack_pub_artifacts_html(report: dict[str, Any]) -> str:
     summary = as_dict(report.get("summary"))
     publication = as_dict(report.get("publication"))
     interpretation = as_dict(report.get("interpretation"))
@@ -130,21 +130,21 @@ def render_randomized_holdout_publication_registry_downstream_consumer_ack_bundl
 """
 
 
-def write_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_outputs(report: dict[str, Any], out_dir: str | Path) -> dict[str, str]:
+def write_ack_pub_artifacts_outputs(report: dict[str, Any], out_dir: str | Path) -> dict[str, str]:
     root = Path(out_dir)
     root.mkdir(parents=True, exist_ok=True)
     paths = {
-        "json": root / RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_DOWNSTREAM_CONSUMER_ACK_BUNDLE_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_JSON_FILENAME,
-        "csv": root / RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_DOWNSTREAM_CONSUMER_ACK_BUNDLE_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_CSV_FILENAME,
-        "text": root / RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_DOWNSTREAM_CONSUMER_ACK_BUNDLE_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_TEXT_FILENAME,
-        "markdown": root / RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_DOWNSTREAM_CONSUMER_ACK_BUNDLE_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_MARKDOWN_FILENAME,
-        "html": root / RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_DOWNSTREAM_CONSUMER_ACK_BUNDLE_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_HTML_FILENAME,
+        "json": root / REGISTRY_ACK_PUB_JSON_FILENAME,
+        "csv": root / REGISTRY_ACK_PUB_CSV_FILENAME,
+        "text": root / REGISTRY_ACK_PUB_TEXT_FILENAME,
+        "markdown": root / REGISTRY_ACK_PUB_MARKDOWN_FILENAME,
+        "html": root / REGISTRY_ACK_PUB_HTML_FILENAME,
     }
     write_json_payload(report, paths["json"])
-    write_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_csv(report, paths["csv"])
-    paths["text"].write_text(render_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_text(report), encoding="utf-8")
-    paths["markdown"].write_text(render_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_markdown(report), encoding="utf-8")
-    paths["html"].write_text(render_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_html(report), encoding="utf-8")
+    write_ack_pub_artifacts_csv(report, paths["csv"])
+    paths["text"].write_text(render_ack_pub_artifacts_text(report), encoding="utf-8")
+    paths["markdown"].write_text(render_ack_pub_artifacts_markdown(report), encoding="utf-8")
+    paths["html"].write_text(render_ack_pub_artifacts_html(report), encoding="utf-8")
     return {key: str(value) for key, value in paths.items()}
 
 
@@ -175,8 +175,8 @@ td{overflow-wrap:anywhere}
 
 
 __all__ = [
-    "render_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_html",
-    "render_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_markdown",
-    "render_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_text",
-    "write_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_outputs",
+    "render_ack_pub_artifacts_html",
+    "render_ack_pub_artifacts_markdown",
+    "render_ack_pub_artifacts_text",
+    "write_ack_pub_artifacts_outputs",
 ]

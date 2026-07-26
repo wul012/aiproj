@@ -6,11 +6,11 @@ from typing import Any
 
 from minigpt.report_utils import as_dict, csv_cell, html_escape, list_of_dicts, markdown_cell, write_json_payload
 from minigpt.target_hidden_semantic_holdout_suite import (
-    TARGET_HIDDEN_SEMANTIC_HOLDOUT_SUITE_CSV_FILENAME,
-    TARGET_HIDDEN_SEMANTIC_HOLDOUT_SUITE_HTML_FILENAME,
-    TARGET_HIDDEN_SEMANTIC_HOLDOUT_SUITE_JSON_FILENAME,
-    TARGET_HIDDEN_SEMANTIC_HOLDOUT_SUITE_MARKDOWN_FILENAME,
-    TARGET_HIDDEN_SEMANTIC_HOLDOUT_SUITE_TEXT_FILENAME,
+    SEMANTIC_HOLDOUT_SUITE_CSV_FILENAME,
+    SEMANTIC_HOLDOUT_SUITE_HTML_FILENAME,
+    SEMANTIC_HOLDOUT_SUITE_JSON_FILENAME,
+    SEMANTIC_HOLDOUT_SUITE_MARKDOWN_FILENAME,
+    SEMANTIC_HOLDOUT_SUITE_TEXT_FILENAME,
 )
 from minigpt.report_utils import html_card as _card
 from minigpt.report_utils import html_check_row as _check_row
@@ -134,11 +134,11 @@ def write_target_hidden_semantic_holdout_suite_outputs(report: dict[str, Any], o
     root = Path(out_dir)
     root.mkdir(parents=True, exist_ok=True)
     paths = {
-        "json": root / TARGET_HIDDEN_SEMANTIC_HOLDOUT_SUITE_JSON_FILENAME,
-        "csv": root / TARGET_HIDDEN_SEMANTIC_HOLDOUT_SUITE_CSV_FILENAME,
-        "text": root / TARGET_HIDDEN_SEMANTIC_HOLDOUT_SUITE_TEXT_FILENAME,
-        "markdown": root / TARGET_HIDDEN_SEMANTIC_HOLDOUT_SUITE_MARKDOWN_FILENAME,
-        "html": root / TARGET_HIDDEN_SEMANTIC_HOLDOUT_SUITE_HTML_FILENAME,
+        "json": root / SEMANTIC_HOLDOUT_SUITE_JSON_FILENAME,
+        "csv": root / SEMANTIC_HOLDOUT_SUITE_CSV_FILENAME,
+        "text": root / SEMANTIC_HOLDOUT_SUITE_TEXT_FILENAME,
+        "markdown": root / SEMANTIC_HOLDOUT_SUITE_MARKDOWN_FILENAME,
+        "html": root / SEMANTIC_HOLDOUT_SUITE_HTML_FILENAME,
     }
     write_json_payload(report, paths["json"])
     write_target_hidden_semantic_holdout_suite_csv(report, paths["csv"])

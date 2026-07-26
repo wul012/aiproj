@@ -11,11 +11,11 @@ from minigpt.randomized_target_hidden_holdout_suite import locate_holdout_suite 
 from minigpt.report_utils import score_fraction as _score
 
 
-RANDOMIZED_TARGET_HIDDEN_HOLDOUT_DRY_RUN_JSON_FILENAME = "randomized_target_hidden_holdout_dry_run.json"
-RANDOMIZED_TARGET_HIDDEN_HOLDOUT_DRY_RUN_CSV_FILENAME = "randomized_target_hidden_holdout_dry_run.csv"
-RANDOMIZED_TARGET_HIDDEN_HOLDOUT_DRY_RUN_TEXT_FILENAME = "randomized_target_hidden_holdout_dry_run.txt"
-RANDOMIZED_TARGET_HIDDEN_HOLDOUT_DRY_RUN_MARKDOWN_FILENAME = "randomized_target_hidden_holdout_dry_run.md"
-RANDOMIZED_TARGET_HIDDEN_HOLDOUT_DRY_RUN_HTML_FILENAME = "randomized_target_hidden_holdout_dry_run.html"
+TARGET_HOLDOUT_DRY_RUN_JSON_FILENAME = "randomized_target_hidden_holdout_dry_run.json"
+TARGET_HOLDOUT_DRY_RUN_CSV_FILENAME = "randomized_target_hidden_holdout_dry_run.csv"
+TARGET_HOLDOUT_DRY_RUN_TEXT_FILENAME = "randomized_target_hidden_holdout_dry_run.txt"
+TARGET_HOLDOUT_DRY_RUN_MARKDOWN_FILENAME = "randomized_target_hidden_holdout_dry_run.md"
+TARGET_HOLDOUT_DRY_RUN_HTML_FILENAME = "randomized_target_hidden_holdout_dry_run.html"
 
 
 def read_json_report(path: str | Path) -> dict[str, Any]:
@@ -25,7 +25,7 @@ def read_json_report(path: str | Path) -> dict[str, Any]:
     return dict(payload)
 
 
-def build_randomized_target_hidden_holdout_dry_run(
+def build_target_holdout_dry_run(
     holdout_suite_report: dict[str, Any],
     *,
     positive_continuation: str = " fixed loss",
@@ -157,12 +157,12 @@ def _interpretation(status: str, summary: dict[str, Any]) -> dict[str, Any]:
 
 
 __all__ = [
-    "RANDOMIZED_TARGET_HIDDEN_HOLDOUT_DRY_RUN_CSV_FILENAME",
-    "RANDOMIZED_TARGET_HIDDEN_HOLDOUT_DRY_RUN_HTML_FILENAME",
-    "RANDOMIZED_TARGET_HIDDEN_HOLDOUT_DRY_RUN_JSON_FILENAME",
-    "RANDOMIZED_TARGET_HIDDEN_HOLDOUT_DRY_RUN_MARKDOWN_FILENAME",
-    "RANDOMIZED_TARGET_HIDDEN_HOLDOUT_DRY_RUN_TEXT_FILENAME",
-    "build_randomized_target_hidden_holdout_dry_run",
+    "TARGET_HOLDOUT_DRY_RUN_CSV_FILENAME",
+    "TARGET_HOLDOUT_DRY_RUN_HTML_FILENAME",
+    "TARGET_HOLDOUT_DRY_RUN_JSON_FILENAME",
+    "TARGET_HOLDOUT_DRY_RUN_MARKDOWN_FILENAME",
+    "TARGET_HOLDOUT_DRY_RUN_TEXT_FILENAME",
+    "build_target_holdout_dry_run",
     "locate_randomized_target_hidden_holdout_suite",
     "read_json_report",
     "resolve_exit_code",

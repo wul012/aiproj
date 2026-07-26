@@ -16,10 +16,10 @@ from minigpt.randomized_holdout_publication_downstream_common import (
     is_downstream_lookup_only,
 )
 from minigpt.packet_chain_check_v996 import (
-    RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_PUBLICATION_INDEX_RECEIPT_CHECK_V996_JSON_FILENAME,
+    PACKET_CHECK_V996_JSON_FILENAME,
 )
 from minigpt.packet_chain_receipt_v995 import (
-    RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_PUBLICATION_INDEX_RECEIPT_V995_JSON_FILENAME,
+    PACKET_RECEIPT_V995_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, utc_now
 from minigpt.report_check_common import check_entry as _check
@@ -28,11 +28,11 @@ from minigpt.randomized_holdout_publication_constants import interpretation as _
 from minigpt.randomized_holdout_publication_downstream_common import evidence_row as _evidence_row
 
 
-RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_PUBLICATION_INDEX_RECEIPT_INDEX_V997_JSON_FILENAME = "randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_v997.json"
-RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_PUBLICATION_INDEX_RECEIPT_INDEX_V997_CSV_FILENAME = "randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_v997.csv"
-RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_PUBLICATION_INDEX_RECEIPT_INDEX_V997_TEXT_FILENAME = "randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_v997.txt"
-RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_PUBLICATION_INDEX_RECEIPT_INDEX_V997_MARKDOWN_FILENAME = "randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_v997.md"
-RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_PUBLICATION_INDEX_RECEIPT_INDEX_V997_HTML_FILENAME = "randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_v997.html"
+PACKET_INDEX_V997_JSON_FILENAME = "randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_v997.json"
+PACKET_INDEX_V997_CSV_FILENAME = "randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_v997.csv"
+PACKET_INDEX_V997_TEXT_FILENAME = "randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_v997.txt"
+PACKET_INDEX_V997_MARKDOWN_FILENAME = "randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_v997.md"
+PACKET_INDEX_V997_HTML_FILENAME = "randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_v997.html"
 
 RECEIPT_INDEX_ID = "randomized-holdout-publication-receipt-packet-index-publication-receipt-index-receipt-index-publication-index-receipt-index-v997"
 
@@ -40,14 +40,14 @@ RECEIPT_INDEX_ID = "randomized-holdout-publication-receipt-packet-index-publicat
 def locate_receipt_v997(path: str | Path) -> Path:
     source = Path(path)
     if source.is_dir():
-        source = source / RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_PUBLICATION_INDEX_RECEIPT_V995_JSON_FILENAME
+        source = source / PACKET_RECEIPT_V995_JSON_FILENAME
     return source
 
 
 def locate_receipt_check_v997(path: str | Path) -> Path:
     source = Path(path)
     if source.is_dir():
-        source = source / RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_PUBLICATION_INDEX_RECEIPT_CHECK_V996_JSON_FILENAME
+        source = source / PACKET_CHECK_V996_JSON_FILENAME
     return source
 
 
@@ -58,7 +58,7 @@ def read_json_report(path: str | Path) -> dict[str, Any]:
     return dict(payload)
 
 
-def build_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_v997(
+def build_packet_index_v997(
     receipt_report: dict[str, Any],
     receipt_check_report: dict[str, Any],
     *,
@@ -235,12 +235,12 @@ def _decision(status: str) -> str:
 
 
 __all__ = [
-    "RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_PUBLICATION_INDEX_RECEIPT_INDEX_V997_CSV_FILENAME",
-    "RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_PUBLICATION_INDEX_RECEIPT_INDEX_V997_HTML_FILENAME",
-    "RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_PUBLICATION_INDEX_RECEIPT_INDEX_V997_JSON_FILENAME",
-    "RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_PUBLICATION_INDEX_RECEIPT_INDEX_V997_MARKDOWN_FILENAME",
-    "RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_PUBLICATION_INDEX_RECEIPT_INDEX_V997_TEXT_FILENAME",
-    "build_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_v997",
+    "PACKET_INDEX_V997_CSV_FILENAME",
+    "PACKET_INDEX_V997_HTML_FILENAME",
+    "PACKET_INDEX_V997_JSON_FILENAME",
+    "PACKET_INDEX_V997_MARKDOWN_FILENAME",
+    "PACKET_INDEX_V997_TEXT_FILENAME",
+    "build_packet_index_v997",
     "locate_receipt_check_v997",
     "locate_receipt_v997",
     "read_json_report",

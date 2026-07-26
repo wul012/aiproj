@@ -18,7 +18,7 @@ from minigpt.randomized_target_hidden_holdout_replay_review_artifacts import (
     render_randomized_target_hidden_holdout_replay_review_text,
     write_randomized_target_hidden_holdout_replay_review_outputs,
 )
-from minigpt.randomized_target_hidden_holdout_suite import RANDOMIZED_TARGET_HIDDEN_HOLDOUT_SUITE_JSON_FILENAME
+from minigpt.randomized_target_hidden_holdout_suite import TARGET_HOLDOUT_SUITE_JSON_FILENAME
 from minigpt.report_utils import write_json_payload
 from scripts.review_randomized_target_hidden_holdout_replay import main as cli_main
 
@@ -64,7 +64,7 @@ class RandomizedTargetHiddenHoldoutReplayReviewTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             replay_path = root / "replay" / RANDOMIZED_TARGET_HIDDEN_HOLDOUT_REAL_REPLAY_JSON_FILENAME
-            suite_path = root / "suite" / RANDOMIZED_TARGET_HIDDEN_HOLDOUT_SUITE_JSON_FILENAME
+            suite_path = root / "suite" / TARGET_HOLDOUT_SUITE_JSON_FILENAME
             prompts = [f"memory route {index}\nanswer:" for index in range(20)]
             write_json_payload(real_replay(case_count=20), replay_path)
             write_json_payload(randomized_suite(prompts), suite_path)

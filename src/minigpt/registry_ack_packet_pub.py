@@ -12,26 +12,26 @@ from minigpt.randomized_holdout_publication_constants import (
 )
 from minigpt.randomized_holdout_publication_downstream_common import downstream_lookup_use, is_downstream_lookup_only
 from minigpt.registry_ack_packet_review import (
-    RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_DOWNSTREAM_CONSUMER_ACK_BUNDLE_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_PACKET_INDEX_REVIEW_JSON_FILENAME,
+    ACK_PACKET_REVIEW_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, utc_now
 from minigpt.report_check_common import check_entry as _check
 from minigpt.report_utils import path_exists as _path_exists
 
 
-RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_DOWNSTREAM_CONSUMER_ACK_BUNDLE_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_JSON_FILENAME = "randomized_holdout_publication_receipt_packet_index_publication_v979.json"
-RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_DOWNSTREAM_CONSUMER_ACK_BUNDLE_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_CSV_FILENAME = "randomized_holdout_publication_receipt_packet_index_publication_v979.csv"
-RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_DOWNSTREAM_CONSUMER_ACK_BUNDLE_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_TEXT_FILENAME = "randomized_holdout_publication_receipt_packet_index_publication_v979.txt"
-RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_DOWNSTREAM_CONSUMER_ACK_BUNDLE_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_MARKDOWN_FILENAME = "randomized_holdout_publication_receipt_packet_index_publication_v979.md"
-RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_DOWNSTREAM_CONSUMER_ACK_BUNDLE_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_HTML_FILENAME = "randomized_holdout_publication_receipt_packet_index_publication_v979.html"
+ACK_PACKET_PUB_JSON_FILENAME = "randomized_holdout_publication_receipt_packet_index_publication_v979.json"
+ACK_PACKET_PUB_CSV_FILENAME = "randomized_holdout_publication_receipt_packet_index_publication_v979.csv"
+ACK_PACKET_PUB_TEXT_FILENAME = "randomized_holdout_publication_receipt_packet_index_publication_v979.txt"
+ACK_PACKET_PUB_MARKDOWN_FILENAME = "randomized_holdout_publication_receipt_packet_index_publication_v979.md"
+ACK_PACKET_PUB_HTML_FILENAME = "randomized_holdout_publication_receipt_packet_index_publication_v979.html"
 
 PUBLICATION_ID = "randomized-holdout-publication-registry-downstream-consumer-ack-bundle-publication-receipt-packet-index-publication-receipt-packet-index-publication-receipt-packet-index-publication-v979"
 
 
-def locate_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet_index_review(path: str | Path) -> Path:
+def locate_ack_packet_pub(path: str | Path) -> Path:
     source = Path(path)
     if source.is_dir():
-        source = source / RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_DOWNSTREAM_CONSUMER_ACK_BUNDLE_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_PACKET_INDEX_REVIEW_JSON_FILENAME
+        source = source / ACK_PACKET_REVIEW_JSON_FILENAME
     return source
 
 
@@ -42,7 +42,7 @@ def read_json_report(path: str | Path) -> dict[str, Any]:
     return dict(payload)
 
 
-def build_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet_index_publication(
+def build_ack_packet_pub(
     index_review_report: dict[str, Any],
     *,
     receipt_packet_index_review_path: str | Path | None = None,
@@ -199,13 +199,13 @@ def _interpretation(status: str, publication: dict[str, Any]) -> dict[str, str]:
 
 
 __all__ = [
-    "RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_DOWNSTREAM_CONSUMER_ACK_BUNDLE_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_CSV_FILENAME",
-    "RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_DOWNSTREAM_CONSUMER_ACK_BUNDLE_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_HTML_FILENAME",
-    "RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_DOWNSTREAM_CONSUMER_ACK_BUNDLE_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_JSON_FILENAME",
-    "RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_DOWNSTREAM_CONSUMER_ACK_BUNDLE_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_MARKDOWN_FILENAME",
-    "RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_DOWNSTREAM_CONSUMER_ACK_BUNDLE_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_TEXT_FILENAME",
-    "build_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet_index_publication",
-    "locate_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet_index_review",
+    "ACK_PACKET_PUB_CSV_FILENAME",
+    "ACK_PACKET_PUB_HTML_FILENAME",
+    "ACK_PACKET_PUB_JSON_FILENAME",
+    "ACK_PACKET_PUB_MARKDOWN_FILENAME",
+    "ACK_PACKET_PUB_TEXT_FILENAME",
+    "build_ack_packet_pub",
+    "locate_ack_packet_pub",
     "read_json_report",
     "resolve_exit_code",
 ]

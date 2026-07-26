@@ -5,11 +5,11 @@ import tempfile
 import unittest
 
 from minigpt.randomized_target_hidden_holdout_suite import (
-    RANDOMIZED_TARGET_HIDDEN_HOLDOUT_SUITE_JSON_FILENAME,
-    build_randomized_target_hidden_holdout_suite,
+    TARGET_HOLDOUT_SUITE_JSON_FILENAME,
+    build_target_holdout_suite,
     locate_replay_review,
     locate_source_holdout_suite,
-    randomized_target_hidden_candidate_prompt_seed_text,
+    randomized_target_holdout_suite_text,
     resolve_exit_code,
 )
 from minigpt.randomized_target_hidden_holdout_suite_artifacts import (
@@ -28,8 +28,8 @@ from scripts.build_randomized_target_hidden_holdout_suite import main as cli_mai
 class RandomizedTargetHiddenHoldoutSuiteTests(unittest.TestCase):
     def test_builds_seeded_randomized_target_hidden_holdout_suite(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
-            tokenizer_path = write_tokenizer(Path(tmp), randomized_target_hidden_candidate_prompt_seed_text())
-            report = build_randomized_target_hidden_holdout_suite(
+            tokenizer_path = write_tokenizer(Path(tmp), randomized_target_holdout_suite_text())
+            report = build_target_holdout_suite(
                 replay_review(),
                 source_holdout_suite(),
                 tokenizer_path=tokenizer_path,
@@ -54,10 +54,10 @@ class RandomizedTargetHiddenHoldoutSuiteTests(unittest.TestCase):
 
     def test_seed_reproducibility_and_seed_variation_are_visible(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
-            tokenizer_path = write_tokenizer(Path(tmp), randomized_target_hidden_candidate_prompt_seed_text())
-            first = build_randomized_target_hidden_holdout_suite(replay_review(), source_holdout_suite(), tokenizer_path=tokenizer_path, seed=914, candidate_count=8)
-            second = build_randomized_target_hidden_holdout_suite(replay_review(), source_holdout_suite(), tokenizer_path=tokenizer_path, seed=914, candidate_count=8)
-            third = build_randomized_target_hidden_holdout_suite(replay_review(), source_holdout_suite(), tokenizer_path=tokenizer_path, seed=915, candidate_count=8)
+            tokenizer_path = write_tokenizer(Path(tmp), randomized_target_holdout_suite_text())
+            first = build_target_holdout_suite(replay_review(), source_holdout_suite(), tokenizer_path=tokenizer_path, seed=914, candidate_count=8)
+            second = build_target_holdout_suite(replay_review(), source_holdout_suite(), tokenizer_path=tokenizer_path, seed=914, candidate_count=8)
+            third = build_target_holdout_suite(replay_review(), source_holdout_suite(), tokenizer_path=tokenizer_path, seed=915, candidate_count=8)
 
         self.assertEqual(prompts(first), prompts(second))
         self.assertNotEqual(prompts(first), prompts(third))
@@ -66,8 +66,8 @@ class RandomizedTargetHiddenHoldoutSuiteTests(unittest.TestCase):
         review = replay_review()
         review["summary"]["approved_for_randomized_prompt_holdout"] = False
         with tempfile.TemporaryDirectory() as tmp:
-            tokenizer_path = write_tokenizer(Path(tmp), randomized_target_hidden_candidate_prompt_seed_text())
-            report = build_randomized_target_hidden_holdout_suite(review, source_holdout_suite(), tokenizer_path=tokenizer_path, candidate_count=8)
+            tokenizer_path = write_tokenizer(Path(tmp), randomized_target_holdout_suite_text())
+            report = build_target_holdout_suite(review, source_holdout_suite(), tokenizer_path=tokenizer_path, candidate_count=8)
 
         self.assertEqual(report["status"], "fail")
         self.assertIn("review_approves_randomized_holdout", [issue["id"] for issue in report["issues"]])
@@ -76,7 +76,7 @@ class RandomizedTargetHiddenHoldoutSuiteTests(unittest.TestCase):
     def test_fails_when_randomized_prompts_are_not_tokenizer_covered(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             tokenizer_path = write_tokenizer(Path(tmp), "fixed loss")
-            report = build_randomized_target_hidden_holdout_suite(replay_review(), source_holdout_suite(), tokenizer_path=tokenizer_path, candidate_count=8)
+            report = build_target_holdout_suite(replay_review(), source_holdout_suite(), tokenizer_path=tokenizer_path, candidate_count=8)
 
         self.assertEqual(report["status"], "fail")
         self.assertIn("all_prompts_tokenizer_covered", [issue["id"] for issue in report["issues"]])
@@ -84,14 +84,14 @@ class RandomizedTargetHiddenHoldoutSuiteTests(unittest.TestCase):
     def test_outputs_and_cli_are_wired(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            tokenizer_path = write_tokenizer(root, randomized_target_hidden_candidate_prompt_seed_text())
+            tokenizer_path = write_tokenizer(root, randomized_target_holdout_suite_text())
             review_path = root / "review" / TARGET_HIDDEN_PROMPT_MUTATION_HOLDOUT_REPLAY_REVIEW_JSON_FILENAME
             suite_path = root / "suite" / TARGET_HIDDEN_PROMPT_MUTATION_HOLDOUT_SUITE_JSON_FILENAME
             write_json_payload(replay_review(), review_path)
             write_json_payload(source_holdout_suite(), suite_path)
             self.assertEqual(locate_replay_review(review_path.parent), review_path)
             self.assertEqual(locate_source_holdout_suite(suite_path.parent), suite_path)
-            report = build_randomized_target_hidden_holdout_suite(replay_review(), source_holdout_suite(), tokenizer_path=tokenizer_path, seed=914, candidate_count=8)
+            report = build_target_holdout_suite(replay_review(), source_holdout_suite(), tokenizer_path=tokenizer_path, seed=914, candidate_count=8)
             outputs = write_randomized_target_hidden_holdout_suite_outputs(report, root / "out")
             cli_main(
                 [
@@ -113,7 +113,7 @@ class RandomizedTargetHiddenHoldoutSuiteTests(unittest.TestCase):
             )
 
         self.assertEqual(set(outputs), {"json", "csv", "text", "markdown", "html"})
-        self.assertTrue(outputs["json"].endswith(RANDOMIZED_TARGET_HIDDEN_HOLDOUT_SUITE_JSON_FILENAME))
+        self.assertTrue(outputs["json"].endswith(TARGET_HOLDOUT_SUITE_JSON_FILENAME))
         self.assertIn("randomized_target_hidden_holdout_suite_ready=True", render_randomized_target_hidden_holdout_suite_text(report))
         self.assertIn("Coverage Rows", render_randomized_target_hidden_holdout_suite_markdown(report))
         self.assertIn("randomized target-hidden", render_randomized_target_hidden_holdout_suite_html(report))
@@ -138,7 +138,7 @@ def replay_review() -> dict[str, object]:
             "approved_for_randomized_prompt_holdout": True,
             "clean_prompt_mutation_case_count": 10,
             "pass_rate": 1.0,
-            "next_step": "build_randomized_target_hidden_holdout_suite",
+            "next_step": "build_target_holdout_suite",
         },
     }
 

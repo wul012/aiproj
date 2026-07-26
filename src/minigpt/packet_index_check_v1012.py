@@ -8,8 +8,8 @@ from minigpt.randomized_holdout_publication_constants import (
     RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_PUBLICATION_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_CHECK_V1012_NEXT_STEP,
 )
 from minigpt.packet_chain_receipt_v1011 import (
-    RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_PUBLICATION_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_V1011_JSON_FILENAME,
-    build_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1011,
+    PACKET_RECEIPT_V1011_JSON_FILENAME,
+    build_packet_receipt_v1011,
 )
 from minigpt.packet_chain_review_v1010 import (
     read_json_report as read_review_json,
@@ -75,7 +75,7 @@ RECEIPT_FIELDS = [
 def locate_receipt_v1012(path: str | Path) -> Path:
     source = Path(path)
     if source.is_dir():
-        source = source / RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_PUBLICATION_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_V1011_JSON_FILENAME
+        source = source / PACKET_RECEIPT_V1011_JSON_FILENAME
     return source
 
 
@@ -147,7 +147,7 @@ def _checks(
 def _rebuild_receipt(source_review: Path | None) -> dict[str, Any]:
     if source_review is None or not source_review.exists():
         return {}
-    return build_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1011(
+    return build_packet_receipt_v1011(
         read_review_json(source_review),
         receipt_index_review_path=source_review,
     )

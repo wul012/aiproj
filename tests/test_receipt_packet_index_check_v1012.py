@@ -16,7 +16,7 @@ from minigpt.packet_index_check_v1012_artifacts import (
     render_packet_check_v1012_text,
     write_packet_check_v1012_outputs,
 )
-from minigpt.packet_chain_receipt_v1011 import build_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1011
+from minigpt.packet_chain_receipt_v1011 import build_packet_receipt_v1011
 from minigpt.packet_chain_receipt_v1011_artifacts import write_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1011_outputs
 from minigpt.report_utils import write_json_payload
 from scripts.check_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1012 import main as cli_main
@@ -117,7 +117,7 @@ class RandomizedHoldoutPublicationReceiptPacketIndexPublicationReceiptIndexRecei
 
 def ready_check_inputs(root: Path) -> tuple[dict[str, object], Path]:
     review, review_path = ready_receipt_inputs(root)
-    receipt = build_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1011(
+    receipt = build_packet_receipt_v1011(
         review,
         receipt_index_review_path=review_path,
     )

@@ -4,10 +4,10 @@ import json
 from pathlib import Path
 from typing import Any
 
-from minigpt.randomized_target_hidden_holdout_dry_run import RANDOMIZED_TARGET_HIDDEN_HOLDOUT_DRY_RUN_JSON_FILENAME
+from minigpt.randomized_target_hidden_holdout_dry_run import TARGET_HOLDOUT_DRY_RUN_JSON_FILENAME
 from minigpt.randomized_target_hidden_holdout_real_replay import RANDOMIZED_TARGET_HIDDEN_HOLDOUT_REAL_REPLAY_JSON_FILENAME
 from minigpt.randomized_target_hidden_holdout_replay_review import RANDOMIZED_TARGET_HIDDEN_HOLDOUT_REPLAY_REVIEW_JSON_FILENAME
-from minigpt.randomized_target_hidden_holdout_suite import RANDOMIZED_TARGET_HIDDEN_HOLDOUT_SUITE_JSON_FILENAME
+from minigpt.randomized_target_hidden_holdout_suite import TARGET_HOLDOUT_SUITE_JSON_FILENAME
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.report_check_common import check_entry as _check
 
@@ -36,14 +36,14 @@ def locate_randomized_holdout_real_replay(path: str | Path) -> Path:
 def locate_randomized_holdout_dry_run(path: str | Path) -> Path:
     source = Path(path)
     if source.is_dir():
-        source = source / RANDOMIZED_TARGET_HIDDEN_HOLDOUT_DRY_RUN_JSON_FILENAME
+        source = source / TARGET_HOLDOUT_DRY_RUN_JSON_FILENAME
     return source
 
 
 def locate_randomized_holdout_suite(path: str | Path) -> Path:
     source = Path(path)
     if source.is_dir():
-        source = source / RANDOMIZED_TARGET_HIDDEN_HOLDOUT_SUITE_JSON_FILENAME
+        source = source / TARGET_HOLDOUT_SUITE_JSON_FILENAME
     return source
 
 

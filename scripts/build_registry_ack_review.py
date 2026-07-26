@@ -11,14 +11,14 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from minigpt.registry_ack_review import (  # noqa: E402
-    build_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_review,
-    locate_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index,
+    build_registry_ack_review,
+    locate_registry_ack_review,
     read_json_report,
     resolve_exit_code,
 )
 from minigpt.registry_ack_review_artifacts import (  # noqa: E402
-    render_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_review_text,
-    write_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_review_outputs,
+    render_ack_review_artifacts_text,
+    write_ack_review_artifacts_outputs,
 )
 
 
@@ -35,14 +35,14 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
 
 def main(argv: Sequence[str] | None = None) -> None:
     args = parse_args(argv)
-    index_path = locate_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index(args.receipt_packet_index)
+    index_path = locate_registry_ack_review(args.receipt_packet_index)
     prepare_output_dir(args.out_dir, force=args.force)
-    report = build_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_review(
+    report = build_registry_ack_review(
         read_json_report(index_path),
         receipt_packet_index_path=index_path,
     )
-    outputs = write_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_review_outputs(report, args.out_dir)
-    print(render_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_review_text(report), end="")
+    outputs = write_ack_review_artifacts_outputs(report, args.out_dir)
+    print(render_ack_review_artifacts_text(report), end="")
     print("outputs=" + json.dumps(outputs, ensure_ascii=True))
     code = resolve_exit_code(
         report,

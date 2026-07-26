@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from minigpt.packet_chain_review_v994 import (  # noqa: E402
-    build_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_review_v994,
+    build_packet_review_v994,
     locate_publication_index_v994,
     read_json_report,
     resolve_exit_code,
@@ -37,7 +37,7 @@ def main(argv: Sequence[str] | None = None) -> None:
     args = parse_args(argv)
     index_path = locate_publication_index_v994(args.publication_index)
     prepare_output_dir(args.out_dir, force=args.force)
-    report = build_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_review_v994(read_json_report(index_path), publication_index_path=index_path)
+    report = build_packet_review_v994(read_json_report(index_path), publication_index_path=index_path)
     outputs = write_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_review_v994_outputs(report, args.out_dir)
     print(render_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_review_v994_text(report), end="")
     print("outputs=" + json.dumps(outputs, ensure_ascii=True))

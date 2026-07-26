@@ -20,7 +20,7 @@ from minigpt.target_hidden_prompt_mutation_holdout_suite_artifacts import (
     write_target_hidden_prompt_mutation_holdout_suite_outputs,
 )
 from minigpt.target_hidden_semantic_holdout_replay_review import TARGET_HIDDEN_SEMANTIC_HOLDOUT_REPLAY_REVIEW_JSON_FILENAME
-from minigpt.target_hidden_semantic_holdout_suite import TARGET_HIDDEN_SEMANTIC_HOLDOUT_SUITE_JSON_FILENAME
+from minigpt.target_hidden_semantic_holdout_suite import SEMANTIC_HOLDOUT_SUITE_JSON_FILENAME
 from minigpt.tokenizer import CharTokenizer
 from scripts.build_target_hidden_prompt_mutation_holdout_suite import main as cli_main
 
@@ -76,7 +76,7 @@ class TargetHiddenPromptMutationHoldoutSuiteTests(unittest.TestCase):
             root = Path(tmp)
             tokenizer_path = write_tokenizer(root, prompt_mutation_candidate_prompt_seed_text())
             review_path = root / "review" / TARGET_HIDDEN_SEMANTIC_HOLDOUT_REPLAY_REVIEW_JSON_FILENAME
-            suite_path = root / "suite" / TARGET_HIDDEN_SEMANTIC_HOLDOUT_SUITE_JSON_FILENAME
+            suite_path = root / "suite" / SEMANTIC_HOLDOUT_SUITE_JSON_FILENAME
             write_json_payload(replay_review(), review_path)
             write_json_payload(source_holdout_suite(), suite_path)
             self.assertEqual(locate_replay_review(review_path.parent), review_path)

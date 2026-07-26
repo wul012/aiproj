@@ -19,7 +19,7 @@ from minigpt.target_hidden_semantic_holdout_replay_review_artifacts import (
     render_target_hidden_semantic_holdout_replay_review_text,
     write_target_hidden_semantic_holdout_replay_review_outputs,
 )
-from minigpt.target_hidden_semantic_holdout_suite import TARGET_HIDDEN_SEMANTIC_HOLDOUT_SUITE_JSON_FILENAME
+from minigpt.target_hidden_semantic_holdout_suite import SEMANTIC_HOLDOUT_SUITE_JSON_FILENAME
 from scripts.review_target_hidden_semantic_holdout_replay import main as cli_main
 
 
@@ -60,7 +60,7 @@ class TargetHiddenSemanticHoldoutReplayReviewTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             replay_path = root / "replay" / TARGET_HIDDEN_SEMANTIC_HOLDOUT_REAL_REPLAY_JSON_FILENAME
-            suite_path = root / "suite" / TARGET_HIDDEN_SEMANTIC_HOLDOUT_SUITE_JSON_FILENAME
+            suite_path = root / "suite" / SEMANTIC_HOLDOUT_SUITE_JSON_FILENAME
             write_json_payload(real_replay(), replay_path)
             write_json_payload(semantic_suite(["answer from memory\nanswer:"]), suite_path)
             self.assertEqual(locate_target_hidden_semantic_holdout_real_replay(replay_path.parent), replay_path)

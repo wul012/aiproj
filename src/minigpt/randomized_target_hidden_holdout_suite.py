@@ -17,11 +17,11 @@ from minigpt.report_check_common import check_entry as _check
 from minigpt.report_check_common import resolve_exit_code_suite_ready as resolve_exit_code
 
 
-RANDOMIZED_TARGET_HIDDEN_HOLDOUT_SUITE_JSON_FILENAME = "randomized_target_hidden_holdout_suite.json"
-RANDOMIZED_TARGET_HIDDEN_HOLDOUT_SUITE_CSV_FILENAME = "randomized_target_hidden_holdout_suite.csv"
-RANDOMIZED_TARGET_HIDDEN_HOLDOUT_SUITE_TEXT_FILENAME = "randomized_target_hidden_holdout_suite.txt"
-RANDOMIZED_TARGET_HIDDEN_HOLDOUT_SUITE_MARKDOWN_FILENAME = "randomized_target_hidden_holdout_suite.md"
-RANDOMIZED_TARGET_HIDDEN_HOLDOUT_SUITE_HTML_FILENAME = "randomized_target_hidden_holdout_suite.html"
+TARGET_HOLDOUT_SUITE_JSON_FILENAME = "randomized_target_hidden_holdout_suite.json"
+TARGET_HOLDOUT_SUITE_CSV_FILENAME = "randomized_target_hidden_holdout_suite.csv"
+TARGET_HOLDOUT_SUITE_TEXT_FILENAME = "randomized_target_hidden_holdout_suite.txt"
+TARGET_HOLDOUT_SUITE_MARKDOWN_FILENAME = "randomized_target_hidden_holdout_suite.md"
+TARGET_HOLDOUT_SUITE_HTML_FILENAME = "randomized_target_hidden_holdout_suite.html"
 
 
 def locate_replay_review(path: str | Path) -> Path:
@@ -45,7 +45,7 @@ def read_json_report(path: str | Path) -> dict[str, Any]:
     return dict(payload)
 
 
-def build_randomized_target_hidden_holdout_suite(
+def build_target_holdout_suite(
     replay_review_report: dict[str, Any],
     source_holdout_suite_report: dict[str, Any],
     *,
@@ -90,7 +90,7 @@ def build_randomized_target_hidden_holdout_suite(
     }
 
 
-def randomized_target_hidden_candidate_prompt_seed_text() -> str:
+def randomized_target_holdout_suite_text() -> str:
     return " ".join(_prompt_pool_words()) + "\n" + "\n".join(f"{tail}:" for tail in _tail_pool())
 
 
@@ -180,7 +180,7 @@ def _checks(
     return [
         _check("replay_review_passed", review.get("status") == "pass", review.get("status"), "v913 replay review must pass"),
         _check("review_approves_randomized_holdout", review_summary.get("approved_for_randomized_prompt_holdout") is True, review_summary.get("approved_for_randomized_prompt_holdout"), "review must approve randomized holdout"),
-        _check("review_routes_to_randomized_suite", review_summary.get("next_step") == "build_randomized_target_hidden_holdout_suite", review_summary.get("next_step"), "review must route to randomized holdout suite"),
+        _check("review_routes_to_randomized_suite", review_summary.get("next_step") == "build_target_holdout_suite", review_summary.get("next_step"), "review must route to randomized holdout suite"),
         _check("source_suite_passed", source_suite_report.get("status") == "pass", source_suite_report.get("status"), "source prompt-mutation suite must pass"),
         _check("source_suite_ready", source_summary.get("target_hidden_prompt_mutation_holdout_suite_ready") is True, source_summary.get("target_hidden_prompt_mutation_holdout_suite_ready"), "source prompt-mutation suite summary must be ready"),
         _check("tokenizer_exists", tokenizer.is_file(), str(tokenizer), "tokenizer.json must exist"),
@@ -282,20 +282,20 @@ def _unique_prompt_count(cases: list[dict[str, Any]]) -> int:
 def locate_holdout_suite(path: str | Path) -> Path:
     source = Path(path)
     if source.is_dir():
-        source = source / RANDOMIZED_TARGET_HIDDEN_HOLDOUT_SUITE_JSON_FILENAME
+        source = source / TARGET_HOLDOUT_SUITE_JSON_FILENAME
     return source
 
 __all__ = [
-    "RANDOMIZED_TARGET_HIDDEN_HOLDOUT_SUITE_CSV_FILENAME",
-    "RANDOMIZED_TARGET_HIDDEN_HOLDOUT_SUITE_HTML_FILENAME",
-    "RANDOMIZED_TARGET_HIDDEN_HOLDOUT_SUITE_JSON_FILENAME",
-    "RANDOMIZED_TARGET_HIDDEN_HOLDOUT_SUITE_MARKDOWN_FILENAME",
-    "RANDOMIZED_TARGET_HIDDEN_HOLDOUT_SUITE_TEXT_FILENAME",
-    "build_randomized_target_hidden_holdout_suite",
+    "TARGET_HOLDOUT_SUITE_CSV_FILENAME",
+    "TARGET_HOLDOUT_SUITE_HTML_FILENAME",
+    "TARGET_HOLDOUT_SUITE_JSON_FILENAME",
+    "TARGET_HOLDOUT_SUITE_MARKDOWN_FILENAME",
+    "TARGET_HOLDOUT_SUITE_TEXT_FILENAME",
+    "build_target_holdout_suite",
     "locate_holdout_suite",
     "locate_replay_review",
     "locate_source_holdout_suite",
-    "randomized_target_hidden_candidate_prompt_seed_text",
+    "randomized_target_holdout_suite_text",
     "read_json_report",
     "resolve_exit_code",
 ]

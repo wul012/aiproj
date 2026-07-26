@@ -8,8 +8,8 @@ from minigpt.randomized_holdout_publication_constants import (
     RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_DOWNSTREAM_CONSUMER_ACK_BUNDLE_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_CHECK_NEXT_STEP,
 )
 from minigpt.registry_ack_packet_pub import (
-    RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_DOWNSTREAM_CONSUMER_ACK_BUNDLE_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_JSON_FILENAME,
-    build_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet_index_publication,
+    ACK_PACKET_PUB_JSON_FILENAME,
+    build_ack_packet_pub,
     read_json_report as read_review_json,
 )
 from minigpt.report_utils import as_dict, utc_now
@@ -70,7 +70,7 @@ PUBLICATION_FIELDS = [
 def locate_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet_index_publication(path: str | Path) -> Path:
     source = Path(path)
     if source.is_dir():
-        source = source / RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_DOWNSTREAM_CONSUMER_ACK_BUNDLE_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_JSON_FILENAME
+        source = source / ACK_PACKET_PUB_JSON_FILENAME
     return source
 
 
@@ -141,7 +141,7 @@ def _checks(
 def _rebuild_publication(source_review: Path | None) -> dict[str, Any]:
     if source_review is None or not source_review.exists():
         return {}
-    return build_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet_index_publication(
+    return build_ack_packet_pub(
         read_review_json(source_review),
         receipt_packet_index_review_path=source_review,
     )

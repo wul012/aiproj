@@ -8,13 +8,13 @@ from tests._bootstrap import ensure_src_path
 
 ensure_src_path()
 
-from minigpt.ack_bundle_packet_check import build_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_check
+from minigpt.ack_bundle_packet_check import build_p_et_check
 from minigpt.ack_bundle_packet_check_artifacts import write_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_check_outputs
 from minigpt.ack_bundle_packet_index import (
-    RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_DOWNSTREAM_CONSUMER_ACK_BUNDLE_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_PACKET_INDEX_JSON_FILENAME,
-    build_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index,
+    P_ET_INDEX_JSON_FILENAME,
+    build_p_et_index,
     locate_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet,
-    locate_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_check,
+    locate_p_et_index,
     resolve_exit_code,
 )
 from minigpt.ack_bundle_packet_index_artifacts import (
@@ -32,7 +32,7 @@ class RandomizedHoldoutPublicationRegistryDownstreamConsumerAckBundlePublication
     def test_receipt_packet_index_accepts_packet_and_contract_check(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             packet, packet_path, check, check_path = ready_index_inputs(Path(tmp))
-            report = build_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index(
+            report = build_p_et_index(
                 packet,
                 check,
                 receipt_packet_path=packet_path,
@@ -57,7 +57,7 @@ class RandomizedHoldoutPublicationRegistryDownstreamConsumerAckBundlePublication
             packet, packet_path, check, check_path = ready_index_inputs(Path(tmp))
             check["status"] = "fail"
             check["summary"]["contract_check_ready"] = False
-            report = build_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index(
+            report = build_p_et_index(
                 packet,
                 check,
                 receipt_packet_path=packet_path,
@@ -73,7 +73,7 @@ class RandomizedHoldoutPublicationRegistryDownstreamConsumerAckBundlePublication
         with tempfile.TemporaryDirectory() as tmp:
             packet, packet_path, check, check_path = ready_index_inputs(Path(tmp))
             packet["packet"]["source_review_path"] = str(Path(tmp) / "missing-source-review.json")
-            report = build_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index(
+            report = build_p_et_index(
                 packet,
                 check,
                 receipt_packet_path=packet_path,
@@ -105,15 +105,15 @@ class RandomizedHoldoutPublicationRegistryDownstreamConsumerAckBundlePublication
                 )
 
             self.assertEqual(raised.exception.code, 1)
-            self.assertTrue((root / "cli-index" / RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_DOWNSTREAM_CONSUMER_ACK_BUNDLE_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_PACKET_INDEX_JSON_FILENAME).is_file())
+            self.assertTrue((root / "cli-index" / P_ET_INDEX_JSON_FILENAME).is_file())
 
     def test_outputs_and_cli_are_wired(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             packet, packet_path, check, check_path = ready_index_inputs(root)
             self.assertEqual(locate_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet(packet_path.parent), packet_path)
-            self.assertEqual(locate_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_check(check_path.parent), check_path)
-            report = build_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index(
+            self.assertEqual(locate_p_et_index(check_path.parent), check_path)
+            report = build_p_et_index(
                 packet,
                 check,
                 receipt_packet_path=packet_path,
@@ -135,7 +135,7 @@ class RandomizedHoldoutPublicationRegistryDownstreamConsumerAckBundlePublication
             )
 
         self.assertEqual(set(outputs), {"json", "csv", "text", "markdown", "html"})
-        self.assertTrue(outputs["json"].endswith(RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_DOWNSTREAM_CONSUMER_ACK_BUNDLE_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_PACKET_INDEX_JSON_FILENAME))
+        self.assertTrue(outputs["json"].endswith(P_ET_INDEX_JSON_FILENAME))
         self.assertIn("randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_ready=True", render_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_text(report))
         self.assertIn("Source Evidence", render_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_markdown(report))
         self.assertIn("receipt packet index", render_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_html(report))
@@ -143,7 +143,7 @@ class RandomizedHoldoutPublicationRegistryDownstreamConsumerAckBundlePublication
 
 def ready_index_inputs(root: Path) -> tuple[dict[str, object], Path, dict[str, object], Path]:
     packet, packet_path = ready_check_inputs(root)
-    check = build_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_check(
+    check = build_p_et_check(
         packet,
         receipt_packet_path=packet_path,
     )

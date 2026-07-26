@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 from typing import Any, Callable
 
-from minigpt.randomized_target_hidden_holdout_dry_run import RANDOMIZED_TARGET_HIDDEN_HOLDOUT_DRY_RUN_JSON_FILENAME
+from minigpt.randomized_target_hidden_holdout_dry_run import TARGET_HOLDOUT_DRY_RUN_JSON_FILENAME
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.server_contracts import GenerationRequest
 from minigpt.server_generator import MiniGPTGenerator
@@ -25,7 +25,7 @@ GeneratorRunner = Callable[[dict[str, Any], str | Path, str | Path, str], dict[s
 def locate_randomized_target_hidden_holdout_dry_run(path: str | Path) -> Path:
     source = Path(path)
     if source.is_dir():
-        source = source / RANDOMIZED_TARGET_HIDDEN_HOLDOUT_DRY_RUN_JSON_FILENAME
+        source = source / TARGET_HOLDOUT_DRY_RUN_JSON_FILENAME
     return source
 
 

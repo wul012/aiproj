@@ -49,7 +49,7 @@ class TargetHiddenPromptMutationHoldoutReplayReviewTests(unittest.TestCase):
         self.assertEqual(report["summary"]["case_count"], 10)
         self.assertTrue(report["summary"]["approved_for_randomized_prompt_holdout"])
         self.assertFalse(report["summary"]["approved_for_promotion"])
-        self.assertEqual(report["summary"]["next_step"], "build_randomized_target_hidden_holdout_suite")
+        self.assertEqual(report["summary"]["next_step"], "build_target_holdout_suite")
         self.assertEqual(resolve_exit_code(report, require_review_ready=True, require_randomized_holdout_approval=True), 0)
 
     def test_unmutated_prompt_blocks_randomized_holdout_approval(self) -> None:

@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from minigpt.target_hidden_semantic_holdout_suite import (  # noqa: E402
-    build_target_hidden_semantic_holdout_suite,
+    build_semantic_holdout_suite,
     locate_replay_review,
     locate_source_holdout_suite,
     read_json_report,
@@ -43,7 +43,7 @@ def main(argv: Sequence[str] | None = None) -> None:
     review_path = locate_replay_review(args.replay_review)
     suite_path = locate_source_holdout_suite(args.source_holdout_suite)
     prepare_output_dir(args.out_dir, force=args.force)
-    report = build_target_hidden_semantic_holdout_suite(
+    report = build_semantic_holdout_suite(
         read_json_report(review_path),
         read_json_report(suite_path),
         tokenizer_path=args.tokenizer,

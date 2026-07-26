@@ -22,7 +22,7 @@ from minigpt.target_hidden_semantic_holdout_real_replay_artifacts import (
     render_target_hidden_semantic_holdout_real_replay_text,
     write_target_hidden_semantic_holdout_real_replay_outputs,
 )
-from minigpt.target_hidden_semantic_holdout_suite import TARGET_HIDDEN_SEMANTIC_HOLDOUT_SUITE_JSON_FILENAME
+from minigpt.target_hidden_semantic_holdout_suite import SEMANTIC_HOLDOUT_SUITE_JSON_FILENAME
 from minigpt.tokenizer import CharTokenizer
 from scripts.run_target_hidden_semantic_holdout_real_replay import main as cli_main
 
@@ -92,7 +92,7 @@ class TargetHiddenSemanticHoldoutRealReplayTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             checkpoint, tokenizer = fake_checkpoint(root)
-            suite_path = root / "suite" / TARGET_HIDDEN_SEMANTIC_HOLDOUT_SUITE_JSON_FILENAME
+            suite_path = root / "suite" / SEMANTIC_HOLDOUT_SUITE_JSON_FILENAME
             dry_path = root / "dry" / TARGET_HIDDEN_SEMANTIC_HOLDOUT_DRY_RUN_JSON_FILENAME
             write_json_payload(ready_suite(), suite_path)
             write_json_payload(ready_dry_run(), dry_path)

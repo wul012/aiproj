@@ -7,7 +7,7 @@ import unittest
 import torch
 
 from minigpt.model import GPTConfig, MiniGPT
-from minigpt.randomized_target_hidden_holdout_dry_run import RANDOMIZED_TARGET_HIDDEN_HOLDOUT_DRY_RUN_JSON_FILENAME
+from minigpt.randomized_target_hidden_holdout_dry_run import TARGET_HOLDOUT_DRY_RUN_JSON_FILENAME
 from minigpt.randomized_target_hidden_holdout_real_replay import (
     RANDOMIZED_TARGET_HIDDEN_HOLDOUT_REAL_REPLAY_JSON_FILENAME,
     build_randomized_target_hidden_holdout_real_replay,
@@ -21,7 +21,7 @@ from minigpt.randomized_target_hidden_holdout_real_replay_artifacts import (
     render_randomized_target_hidden_holdout_real_replay_text,
     write_randomized_target_hidden_holdout_real_replay_outputs,
 )
-from minigpt.randomized_target_hidden_holdout_suite import RANDOMIZED_TARGET_HIDDEN_HOLDOUT_SUITE_JSON_FILENAME
+from minigpt.randomized_target_hidden_holdout_suite import TARGET_HOLDOUT_SUITE_JSON_FILENAME
 from minigpt.report_utils import write_json_payload
 from minigpt.tokenizer import CharTokenizer
 from scripts.run_randomized_target_hidden_holdout_real_replay import main as cli_main
@@ -79,8 +79,8 @@ class RandomizedTargetHiddenHoldoutRealReplayTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             checkpoint, tokenizer = fake_checkpoint(root)
-            suite_path = root / "suite" / RANDOMIZED_TARGET_HIDDEN_HOLDOUT_SUITE_JSON_FILENAME
-            dry_path = root / "dry" / RANDOMIZED_TARGET_HIDDEN_HOLDOUT_DRY_RUN_JSON_FILENAME
+            suite_path = root / "suite" / TARGET_HOLDOUT_SUITE_JSON_FILENAME
+            dry_path = root / "dry" / TARGET_HOLDOUT_DRY_RUN_JSON_FILENAME
             write_json_payload(ready_suite(), suite_path)
             write_json_payload(ready_dry_run(), dry_path)
             self.assertEqual(locate_randomized_target_hidden_holdout_suite(suite_path.parent), suite_path)

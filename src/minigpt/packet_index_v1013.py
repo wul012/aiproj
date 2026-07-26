@@ -19,7 +19,7 @@ from minigpt.packet_index_check_v1012 import (
     PACKET_CHECK_V1012_JSON_FILENAME,
 )
 from minigpt.packet_chain_receipt_v1011 import (
-    RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_PUBLICATION_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_V1011_JSON_FILENAME,
+    PACKET_RECEIPT_V1011_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, utc_now
 from minigpt.report_check_common import check_entry as _check
@@ -42,7 +42,7 @@ SOURCE_RECEIPT_READY_KEY = "randomized_holdout_publication_receipt_packet_index_
 def locate_receipt_v1013(path: str | Path) -> Path:
     source = Path(path)
     if source.is_dir():
-        source = source / RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_PUBLICATION_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_V1011_JSON_FILENAME
+        source = source / PACKET_RECEIPT_V1011_JSON_FILENAME
     return source
 
 

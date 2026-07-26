@@ -18,11 +18,11 @@ from minigpt.report_check_common import check_entry as _check
 from minigpt.report_check_common import resolve_exit_code_suite_ready as resolve_exit_code
 
 
-TARGET_HIDDEN_SEMANTIC_HOLDOUT_SUITE_JSON_FILENAME = "target_hidden_semantic_holdout_suite.json"
-TARGET_HIDDEN_SEMANTIC_HOLDOUT_SUITE_CSV_FILENAME = "target_hidden_semantic_holdout_suite.csv"
-TARGET_HIDDEN_SEMANTIC_HOLDOUT_SUITE_TEXT_FILENAME = "target_hidden_semantic_holdout_suite.txt"
-TARGET_HIDDEN_SEMANTIC_HOLDOUT_SUITE_MARKDOWN_FILENAME = "target_hidden_semantic_holdout_suite.md"
-TARGET_HIDDEN_SEMANTIC_HOLDOUT_SUITE_HTML_FILENAME = "target_hidden_semantic_holdout_suite.html"
+SEMANTIC_HOLDOUT_SUITE_JSON_FILENAME = "target_hidden_semantic_holdout_suite.json"
+SEMANTIC_HOLDOUT_SUITE_CSV_FILENAME = "target_hidden_semantic_holdout_suite.csv"
+SEMANTIC_HOLDOUT_SUITE_TEXT_FILENAME = "target_hidden_semantic_holdout_suite.txt"
+SEMANTIC_HOLDOUT_SUITE_MARKDOWN_FILENAME = "target_hidden_semantic_holdout_suite.md"
+SEMANTIC_HOLDOUT_SUITE_HTML_FILENAME = "target_hidden_semantic_holdout_suite.html"
 
 
 def locate_replay_review(path: str | Path) -> Path:
@@ -46,7 +46,7 @@ def read_json_report(path: str | Path) -> dict[str, Any]:
     return dict(payload)
 
 
-def build_target_hidden_semantic_holdout_suite(
+def build_semantic_holdout_suite(
     replay_review_report: dict[str, Any],
     source_holdout_suite_report: dict[str, Any],
     *,
@@ -246,16 +246,16 @@ def _interpretation(status: str, summary: dict[str, Any]) -> dict[str, Any]:
 def locate_semantic_holdout_suite(path: str | Path) -> Path:
     source = Path(path)
     if source.is_dir():
-        source = source / TARGET_HIDDEN_SEMANTIC_HOLDOUT_SUITE_JSON_FILENAME
+        source = source / SEMANTIC_HOLDOUT_SUITE_JSON_FILENAME
     return source
 
 __all__ = [
-    "TARGET_HIDDEN_SEMANTIC_HOLDOUT_SUITE_CSV_FILENAME",
-    "TARGET_HIDDEN_SEMANTIC_HOLDOUT_SUITE_HTML_FILENAME",
-    "TARGET_HIDDEN_SEMANTIC_HOLDOUT_SUITE_JSON_FILENAME",
-    "TARGET_HIDDEN_SEMANTIC_HOLDOUT_SUITE_MARKDOWN_FILENAME",
-    "TARGET_HIDDEN_SEMANTIC_HOLDOUT_SUITE_TEXT_FILENAME",
-    "build_target_hidden_semantic_holdout_suite",
+    "SEMANTIC_HOLDOUT_SUITE_CSV_FILENAME",
+    "SEMANTIC_HOLDOUT_SUITE_HTML_FILENAME",
+    "SEMANTIC_HOLDOUT_SUITE_JSON_FILENAME",
+    "SEMANTIC_HOLDOUT_SUITE_MARKDOWN_FILENAME",
+    "SEMANTIC_HOLDOUT_SUITE_TEXT_FILENAME",
+    "build_semantic_holdout_suite",
     "locate_replay_review",
     "locate_semantic_holdout_suite",
     "locate_source_holdout_suite",

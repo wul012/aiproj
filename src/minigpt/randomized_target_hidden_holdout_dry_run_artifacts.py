@@ -5,11 +5,11 @@ from pathlib import Path
 from typing import Any
 
 from minigpt.randomized_target_hidden_holdout_dry_run import (
-    RANDOMIZED_TARGET_HIDDEN_HOLDOUT_DRY_RUN_CSV_FILENAME,
-    RANDOMIZED_TARGET_HIDDEN_HOLDOUT_DRY_RUN_HTML_FILENAME,
-    RANDOMIZED_TARGET_HIDDEN_HOLDOUT_DRY_RUN_JSON_FILENAME,
-    RANDOMIZED_TARGET_HIDDEN_HOLDOUT_DRY_RUN_MARKDOWN_FILENAME,
-    RANDOMIZED_TARGET_HIDDEN_HOLDOUT_DRY_RUN_TEXT_FILENAME,
+    TARGET_HOLDOUT_DRY_RUN_CSV_FILENAME,
+    TARGET_HOLDOUT_DRY_RUN_HTML_FILENAME,
+    TARGET_HOLDOUT_DRY_RUN_JSON_FILENAME,
+    TARGET_HOLDOUT_DRY_RUN_MARKDOWN_FILENAME,
+    TARGET_HOLDOUT_DRY_RUN_TEXT_FILENAME,
 )
 from minigpt.report_utils import as_dict, csv_cell, html_escape, list_of_dicts, markdown_cell, write_json_payload
 from minigpt.report_utils import html_card as _card
@@ -128,11 +128,11 @@ def write_randomized_target_hidden_holdout_dry_run_outputs(report: dict[str, Any
     root = Path(out_dir)
     root.mkdir(parents=True, exist_ok=True)
     paths = {
-        "json": root / RANDOMIZED_TARGET_HIDDEN_HOLDOUT_DRY_RUN_JSON_FILENAME,
-        "csv": root / RANDOMIZED_TARGET_HIDDEN_HOLDOUT_DRY_RUN_CSV_FILENAME,
-        "text": root / RANDOMIZED_TARGET_HIDDEN_HOLDOUT_DRY_RUN_TEXT_FILENAME,
-        "markdown": root / RANDOMIZED_TARGET_HIDDEN_HOLDOUT_DRY_RUN_MARKDOWN_FILENAME,
-        "html": root / RANDOMIZED_TARGET_HIDDEN_HOLDOUT_DRY_RUN_HTML_FILENAME,
+        "json": root / TARGET_HOLDOUT_DRY_RUN_JSON_FILENAME,
+        "csv": root / TARGET_HOLDOUT_DRY_RUN_CSV_FILENAME,
+        "text": root / TARGET_HOLDOUT_DRY_RUN_TEXT_FILENAME,
+        "markdown": root / TARGET_HOLDOUT_DRY_RUN_MARKDOWN_FILENAME,
+        "html": root / TARGET_HOLDOUT_DRY_RUN_HTML_FILENAME,
     }
     write_json_payload(report, paths["json"])
     write_randomized_target_hidden_holdout_dry_run_csv(report, paths["csv"])

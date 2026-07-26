@@ -17,8 +17,8 @@ from minigpt.randomized_holdout_publication_registry_downstream_consumer_ack_bun
     resolve_exit_code,
 )
 from minigpt.ack_bundle_artifacts import (  # noqa: E402
-    render_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_text,
-    write_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_outputs,
+    render_ack_bundle_artifacts_text,
+    write_ack_bundle_artifacts_outputs,
 )
 
 
@@ -41,8 +41,8 @@ def main(argv: Sequence[str] | None = None) -> None:
         read_json_report(review_path),
         receipt_packet_index_review_path=review_path,
     )
-    outputs = write_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_outputs(report, args.out_dir)
-    print(render_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_text(report), end="")
+    outputs = write_ack_bundle_artifacts_outputs(report, args.out_dir)
+    print(render_ack_bundle_artifacts_text(report), end="")
     print("outputs=" + json.dumps(outputs, ensure_ascii=True))
     code = resolve_exit_code(
         report,

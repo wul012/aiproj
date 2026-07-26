@@ -19,7 +19,7 @@ from minigpt.randomized_holdout_publication_receipt_packet_index_publication_che
     RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_DOWNSTREAM_CONSUMER_ACK_BUNDLE_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_CHECK_JSON_FILENAME,
 )
 from minigpt.registry_ack_packet_pub import (
-    RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_DOWNSTREAM_CONSUMER_ACK_BUNDLE_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_JSON_FILENAME,
+    ACK_PACKET_PUB_JSON_FILENAME,
 )
 from minigpt.report_utils import as_dict, utc_now
 from minigpt.report_check_common import check_entry as _check
@@ -39,7 +39,7 @@ PUBLICATION_INDEX_ID = "randomized-holdout-publication-receipt-packet-index-publ
 def locate_publication_v981(path: str | Path) -> Path:
     source = Path(path)
     if source.is_dir():
-        source = source / RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_DOWNSTREAM_CONSUMER_ACK_BUNDLE_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_JSON_FILENAME
+        source = source / ACK_PACKET_PUB_JSON_FILENAME
     return source
 
 

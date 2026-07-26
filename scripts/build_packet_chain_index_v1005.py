@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from minigpt.packet_chain_index_v1005 import (  # noqa: E402
-    build_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_v1005,
+    build_packet_index_v1005,
     locate_receipt_check_v1005,
     locate_receipt_v1005,
     read_json_report,
@@ -40,7 +40,7 @@ def main(argv: Sequence[str] | None = None) -> None:
     receipt_path = locate_receipt_v1005(args.receipt)
     receipt_check_path = locate_receipt_check_v1005(args.receipt_check)
     prepare_output_dir(args.out_dir, force=args.force)
-    report = build_randomized_holdout_publication_receipt_packet_index_publication_receipt_index_receipt_index_publication_index_receipt_index_receipt_index_receipt_index_v1005(
+    report = build_packet_index_v1005(
         read_json_report(receipt_path),
         read_json_report(receipt_check_path),
         receipt_path=receipt_path,

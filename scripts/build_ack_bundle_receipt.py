@@ -11,14 +11,14 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from minigpt.ack_bundle_receipt import (  # noqa: E402
-    build_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt,
-    locate_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_index_review,
+    build_ack_bundle_receipt,
+    locate_ack_bundle_receipt,
     read_json_report,
     resolve_exit_code,
 )
 from minigpt.ack_bundle_receipt_artifacts import (  # noqa: E402
-    render_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_text,
-    write_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_outputs,
+    render_ack_receipt_artifacts_text,
+    write_ack_receipt_artifacts_outputs,
 )
 
 
@@ -36,16 +36,16 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
 
 def main(argv: Sequence[str] | None = None) -> None:
     args = parse_args(argv)
-    review_path = locate_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_index_review(args.index_review)
+    review_path = locate_ack_bundle_receipt(args.index_review)
     prepare_output_dir(args.out_dir, force=args.force)
-    report = build_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt(
+    report = build_ack_bundle_receipt(
         read_json_report(review_path),
         index_review_path=review_path,
         consumer_name=args.consumer_name,
         requested_use=args.requested_use,
     )
-    outputs = write_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_outputs(report, args.out_dir)
-    print(render_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_text(report), end="")
+    outputs = write_ack_receipt_artifacts_outputs(report, args.out_dir)
+    print(render_ack_receipt_artifacts_text(report), end="")
     print("outputs=" + json.dumps(outputs, ensure_ascii=True))
     if resolve_exit_code(report, require_receipt_ready=args.require_receipt_ready, require_promotion_ready=args.require_promotion_ready):
         raise SystemExit(1)

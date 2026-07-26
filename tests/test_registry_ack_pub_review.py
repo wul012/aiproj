@@ -5,19 +5,19 @@ from pathlib import Path
 import tempfile
 import unittest
 
-from minigpt.registry_ack_pub_index import build_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_index
-from minigpt.registry_ack_pub_index_artifacts import write_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_index_outputs
+from minigpt.registry_ack_pub_index import build_registry_ack_pub_index
+from minigpt.registry_ack_pub_index_artifacts import write_ack_pub_index_artifacts_outputs
 from minigpt.registry_ack_pub_review import (
-    RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_DOWNSTREAM_CONSUMER_ACK_BUNDLE_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_INDEX_REVIEW_JSON_FILENAME,
-    build_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_index_review,
-    locate_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_index,
+    ACK_PUB_REVIEW_JSON_FILENAME,
+    build_ack_pub_review,
+    locate_ack_pub_review,
     resolve_exit_code,
 )
 from minigpt.registry_ack_pub_review_artifacts import (
-    render_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_index_review_html,
-    render_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_index_review_markdown,
-    render_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_index_review_text,
-    write_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_index_review_outputs,
+    render_ack_pub_review_artifacts_html,
+    render_ack_pub_review_artifacts_markdown,
+    render_ack_pub_review_artifacts_text,
+    write_ack_pub_review_artifacts_outputs,
 )
 from scripts.build_registry_ack_pub_review import main as cli_main
 from tests.test_registry_ack_pub_index import ready_index_inputs
@@ -27,7 +27,7 @@ class RandomizedHoldoutPublicationRegistryDownstreamConsumerAckBundlePublication
     def test_publication_index_review_accepts_ready_index(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             index, index_path = ready_review_inputs(Path(tmp))
-            report = build_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_index_review(
+            report = build_ack_pub_review(
                 index,
                 publication_index_path=index_path,
             )
@@ -50,7 +50,7 @@ class RandomizedHoldoutPublicationRegistryDownstreamConsumerAckBundlePublication
         with tempfile.TemporaryDirectory() as tmp:
             index, index_path = ready_review_inputs(Path(tmp))
             index["publication_index"]["publication_path"] = str(Path(tmp) / "missing-publication.json")
-            report = build_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_index_review(
+            report = build_ack_pub_review(
                 index,
                 publication_index_path=index_path,
             )
@@ -63,7 +63,7 @@ class RandomizedHoldoutPublicationRegistryDownstreamConsumerAckBundlePublication
             index, index_path = ready_review_inputs(Path(tmp))
             index["summary"]["published_use"] = "production_promotion"
             index["publication_index"]["published_use"] = "production_promotion"
-            report = build_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_index_review(
+            report = build_ack_pub_review(
                 index,
                 publication_index_path=index_path,
             )
@@ -89,12 +89,12 @@ class RandomizedHoldoutPublicationRegistryDownstreamConsumerAckBundlePublication
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             index, index_path = ready_review_inputs(root)
-            self.assertEqual(locate_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_index(index_path.parent), index_path)
-            report = build_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_index_review(
+            self.assertEqual(locate_ack_pub_review(index_path.parent), index_path)
+            report = build_ack_pub_review(
                 index,
                 publication_index_path=index_path,
             )
-            outputs = write_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_index_review_outputs(report, root / "review")
+            outputs = write_ack_pub_review_artifacts_outputs(report, root / "review")
             cli_main(
                 [
                     str(index_path.parent),
@@ -107,21 +107,21 @@ class RandomizedHoldoutPublicationRegistryDownstreamConsumerAckBundlePublication
             )
 
         self.assertEqual(set(outputs), {"json", "csv", "text", "markdown", "html"})
-        self.assertTrue(outputs["json"].endswith(RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_DOWNSTREAM_CONSUMER_ACK_BUNDLE_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_INDEX_REVIEW_JSON_FILENAME))
-        self.assertIn("randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_index_review_ready=True", render_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_index_review_text(report))
-        self.assertIn("Publication index rows", render_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_index_review_markdown(report))
-        self.assertIn("publication index review", render_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_index_review_html(report))
+        self.assertTrue(outputs["json"].endswith(ACK_PUB_REVIEW_JSON_FILENAME))
+        self.assertIn("randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_index_review_ready=True", render_ack_pub_review_artifacts_text(report))
+        self.assertIn("Publication index rows", render_ack_pub_review_artifacts_markdown(report))
+        self.assertIn("publication index review", render_ack_pub_review_artifacts_html(report))
 
 
 def ready_review_inputs(root: Path) -> tuple[dict[str, object], Path]:
     publication, publication_path, check, check_path = ready_index_inputs(root)
-    index = build_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_index(
+    index = build_registry_ack_pub_index(
         publication,
         check,
         publication_path=publication_path,
         publication_check_path=check_path,
     )
-    index_outputs = write_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_index_outputs(index, root / "publication-index")
+    index_outputs = write_ack_pub_index_artifacts_outputs(index, root / "publication-index")
     return index, Path(index_outputs["json"])
 
 

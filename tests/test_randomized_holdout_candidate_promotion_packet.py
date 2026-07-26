@@ -19,10 +19,10 @@ from minigpt.randomized_holdout_candidate_promotion_packet_artifacts import (
     render_randomized_holdout_candidate_promotion_packet_text,
     write_randomized_holdout_candidate_promotion_packet_outputs,
 )
-from minigpt.randomized_target_hidden_holdout_dry_run import RANDOMIZED_TARGET_HIDDEN_HOLDOUT_DRY_RUN_JSON_FILENAME
+from minigpt.randomized_target_hidden_holdout_dry_run import TARGET_HOLDOUT_DRY_RUN_JSON_FILENAME
 from minigpt.randomized_target_hidden_holdout_real_replay import RANDOMIZED_TARGET_HIDDEN_HOLDOUT_REAL_REPLAY_JSON_FILENAME
 from minigpt.randomized_target_hidden_holdout_replay_review import RANDOMIZED_TARGET_HIDDEN_HOLDOUT_REPLAY_REVIEW_JSON_FILENAME
-from minigpt.randomized_target_hidden_holdout_suite import RANDOMIZED_TARGET_HIDDEN_HOLDOUT_SUITE_JSON_FILENAME
+from minigpt.randomized_target_hidden_holdout_suite import TARGET_HOLDOUT_SUITE_JSON_FILENAME
 from minigpt.report_utils import write_json_payload
 from scripts.build_randomized_holdout_candidate_promotion_packet import main as cli_main
 
@@ -126,8 +126,8 @@ def write_inputs(root: Path) -> dict[str, Path]:
     paths = {
         "review": root / "review" / RANDOMIZED_TARGET_HIDDEN_HOLDOUT_REPLAY_REVIEW_JSON_FILENAME,
         "real": root / "real" / RANDOMIZED_TARGET_HIDDEN_HOLDOUT_REAL_REPLAY_JSON_FILENAME,
-        "dry": root / "dry" / RANDOMIZED_TARGET_HIDDEN_HOLDOUT_DRY_RUN_JSON_FILENAME,
-        "suite": root / "suite" / RANDOMIZED_TARGET_HIDDEN_HOLDOUT_SUITE_JSON_FILENAME,
+        "dry": root / "dry" / TARGET_HOLDOUT_DRY_RUN_JSON_FILENAME,
+        "suite": root / "suite" / TARGET_HOLDOUT_SUITE_JSON_FILENAME,
     }
     write_json_payload(replay_review(), paths["review"])
     write_json_payload(real_replay(), paths["real"])

@@ -12,8 +12,8 @@ from minigpt.bounded_objective_loss_signal_bridge_target_only_memory_target_hidd
 )
 from minigpt.report_utils import write_json_payload
 from minigpt.target_hidden_semantic_holdout_suite import (
-    TARGET_HIDDEN_SEMANTIC_HOLDOUT_SUITE_JSON_FILENAME,
-    build_target_hidden_semantic_holdout_suite,
+    SEMANTIC_HOLDOUT_SUITE_JSON_FILENAME,
+    build_semantic_holdout_suite,
     locate_replay_review,
     locate_source_holdout_suite,
     resolve_exit_code,
@@ -33,7 +33,7 @@ class TargetHiddenSemanticHoldoutSuiteTests(unittest.TestCase):
     def test_builds_semantic_target_hidden_holdout_suite(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             tokenizer_path = write_tokenizer(Path(tmp), semantic_candidate_prompt_seed_text())
-            report = build_target_hidden_semantic_holdout_suite(
+            report = build_semantic_holdout_suite(
                 replay_review(),
                 source_holdout_suite(),
                 tokenizer_path=tokenizer_path,
@@ -59,7 +59,7 @@ class TargetHiddenSemanticHoldoutSuiteTests(unittest.TestCase):
         review["summary"]["approved_for_wider_holdout"] = False
         with tempfile.TemporaryDirectory() as tmp:
             tokenizer_path = write_tokenizer(Path(tmp), semantic_candidate_prompt_seed_text())
-            report = build_target_hidden_semantic_holdout_suite(review, source_holdout_suite(), tokenizer_path=tokenizer_path)
+            report = build_semantic_holdout_suite(review, source_holdout_suite(), tokenizer_path=tokenizer_path)
 
         self.assertEqual(report["status"], "fail")
         self.assertIn("review_approves_wider_holdout", [issue["id"] for issue in report["issues"]])
@@ -67,7 +67,7 @@ class TargetHiddenSemanticHoldoutSuiteTests(unittest.TestCase):
     def test_fails_when_prompts_are_not_tokenizer_covered(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             tokenizer_path = write_tokenizer(Path(tmp), "fixed loss")
-            report = build_target_hidden_semantic_holdout_suite(
+            report = build_semantic_holdout_suite(
                 replay_review(),
                 source_holdout_suite(),
                 tokenizer_path=tokenizer_path,
@@ -87,7 +87,7 @@ class TargetHiddenSemanticHoldoutSuiteTests(unittest.TestCase):
             write_json_payload(source_holdout_suite(), suite_path)
             self.assertEqual(locate_replay_review(review_path.parent), review_path)
             self.assertEqual(locate_source_holdout_suite(suite_path.parent), suite_path)
-            report = build_target_hidden_semantic_holdout_suite(
+            report = build_semantic_holdout_suite(
                 replay_review(),
                 source_holdout_suite(),
                 tokenizer_path=tokenizer_path,
@@ -109,7 +109,7 @@ class TargetHiddenSemanticHoldoutSuiteTests(unittest.TestCase):
             )
 
         self.assertEqual(set(outputs), {"json", "csv", "text", "markdown", "html"})
-        self.assertTrue(outputs["json"].endswith(TARGET_HIDDEN_SEMANTIC_HOLDOUT_SUITE_JSON_FILENAME))
+        self.assertTrue(outputs["json"].endswith(SEMANTIC_HOLDOUT_SUITE_JSON_FILENAME))
         self.assertIn("task_hint_case_count=0", render_target_hidden_semantic_holdout_suite_text(report))
         self.assertIn("Coverage Rows", render_target_hidden_semantic_holdout_suite_markdown(report))
         self.assertIn("target-hidden semantic paraphrase tokenizer-covered holdout suite", render_target_hidden_semantic_holdout_suite_html(report))

@@ -10,7 +10,7 @@ from minigpt.bounded_objective_loss_signal_bridge_target_only_memory_target_hidd
 from minigpt.eval_suite import PromptCase
 from minigpt.report_utils import as_dict, list_of_dicts, utc_now
 from minigpt.target_hidden_semantic_holdout_replay_review import TARGET_HIDDEN_SEMANTIC_HOLDOUT_REPLAY_REVIEW_JSON_FILENAME
-from minigpt.target_hidden_semantic_holdout_suite import TARGET_HIDDEN_SEMANTIC_HOLDOUT_SUITE_JSON_FILENAME
+from minigpt.target_hidden_semantic_holdout_suite import SEMANTIC_HOLDOUT_SUITE_JSON_FILENAME
 from minigpt.tokenizer import load_tokenizer
 from minigpt.report_check_common import check_entry as _check
 from minigpt.report_check_common import resolve_exit_code_suite_ready as resolve_exit_code
@@ -33,7 +33,7 @@ def locate_replay_review(path: str | Path) -> Path:
 def locate_source_holdout_suite(path: str | Path) -> Path:
     source = Path(path)
     if source.is_dir():
-        source = source / TARGET_HIDDEN_SEMANTIC_HOLDOUT_SUITE_JSON_FILENAME
+        source = source / SEMANTIC_HOLDOUT_SUITE_JSON_FILENAME
     return source
 
 

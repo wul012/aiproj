@@ -4,8 +4,8 @@ from pathlib import Path
 import tempfile
 import unittest
 
-from minigpt.registry_ack_packet_pub import build_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet_index_publication
-from minigpt.registry_ack_packet_pub_artifacts import write_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet_index_publication_outputs
+from minigpt.registry_ack_packet_pub import build_ack_packet_pub
+from minigpt.registry_ack_packet_pub_artifacts import write_ack_packet_pub_artifacts_outputs
 from minigpt.randomized_holdout_publication_receipt_packet_index_publication_check_v980 import (
     RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_DOWNSTREAM_CONSUMER_ACK_BUNDLE_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_CHECK_JSON_FILENAME,
     build_randomized_holdout_publication_receipt_packet_index_publication_check_v980,
@@ -108,11 +108,11 @@ class RandomizedHoldoutPublicationRegistryDownstreamConsumerAckBundlePublication
 
 def ready_check_inputs(root: Path) -> tuple[dict[str, object], Path]:
     review, review_path = ready_publication_inputs(root)
-    publication = build_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet_index_publication(
+    publication = build_ack_packet_pub(
         review,
         receipt_packet_index_review_path=review_path,
     )
-    outputs = write_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_receipt_packet_index_publication_receipt_packet_index_publication_outputs(publication, root / "publication")
+    outputs = write_ack_packet_pub_artifacts_outputs(publication, root / "publication")
     return publication, Path(outputs["json"])
 
 

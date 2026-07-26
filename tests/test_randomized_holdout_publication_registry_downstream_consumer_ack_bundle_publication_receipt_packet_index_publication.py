@@ -11,10 +11,10 @@ from minigpt.randomized_holdout_publication_registry_downstream_consumer_ack_bun
     resolve_exit_code,
 )
 from minigpt.ack_bundle_artifacts import (
-    render_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_html,
-    render_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_markdown,
-    render_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_text,
-    write_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_outputs,
+    render_ack_bundle_artifacts_html,
+    render_ack_bundle_artifacts_markdown,
+    render_ack_bundle_artifacts_text,
+    write_ack_bundle_artifacts_outputs,
 )
 from minigpt.randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_review import build_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_review
 from minigpt.randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_review_artifacts import write_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_review_outputs
@@ -91,14 +91,14 @@ class RandomizedHoldoutPublicationRegistryDownstreamConsumerAckBundlePublication
                 review,
                 receipt_packet_index_review_path=review_path,
             )
-            outputs = write_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_outputs(report, root / "publication")
+            outputs = write_ack_bundle_artifacts_outputs(report, root / "publication")
             cli_main([str(review_path.parent), "--out-dir", str(root / "cli-publication"), "--require-publication-ready", "--require-lookup-ready", "--force"])
 
         self.assertEqual(set(outputs), {"json", "csv", "text", "markdown", "html"})
         self.assertTrue(outputs["json"].endswith(RANDOMIZED_HOLDOUT_PUBLICATION_REGISTRY_DOWNSTREAM_CONSUMER_ACK_BUNDLE_PUBLICATION_RECEIPT_PACKET_INDEX_PUBLICATION_JSON_FILENAME))
-        self.assertIn("randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_ready=True", render_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_text(report))
-        self.assertIn("Receipt packet index", render_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_markdown(report))
-        self.assertIn("receipt packet index publication", render_randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_html(report))
+        self.assertIn("randomized_holdout_publication_registry_downstream_consumer_ack_bundle_publication_receipt_packet_index_publication_ready=True", render_ack_bundle_artifacts_text(report))
+        self.assertIn("Receipt packet index", render_ack_bundle_artifacts_markdown(report))
+        self.assertIn("receipt packet index publication", render_ack_bundle_artifacts_html(report))
 
 
 def ready_publication_inputs(root: Path) -> tuple[dict[str, object], Path]:

@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from minigpt.randomized_target_hidden_holdout_dry_run import (  # noqa: E402
-    build_randomized_target_hidden_holdout_dry_run,
+    build_target_holdout_dry_run,
     locate_randomized_target_hidden_holdout_suite,
     read_json_report,
     resolve_exit_code,
@@ -37,7 +37,7 @@ def main(argv: Sequence[str] | None = None) -> None:
     args = parse_args(argv)
     suite_path = locate_randomized_target_hidden_holdout_suite(args.holdout_suite)
     prepare_output_dir(args.out_dir, force=args.force)
-    report = build_randomized_target_hidden_holdout_dry_run(
+    report = build_target_holdout_dry_run(
         read_json_report(suite_path),
         positive_continuation=args.positive_continuation,
         negative_continuation=args.negative_continuation,
