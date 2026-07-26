@@ -17,8 +17,8 @@ from minigpt.randomized_holdout_publication_receipt_index_receipt_index_receipt_
     resolve_exit_code,
 )
 from minigpt.receipt_chain_review_v1030_artifacts import (  # noqa: E402
-    render_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1030_text,
-    write_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1030_outputs,
+    render_review_v1030_artifacts_text,
+    write_review_v1030_artifacts_outputs,
 )
 
 
@@ -41,8 +41,8 @@ def main(argv: Sequence[str] | None = None) -> None:
         read_json_report(receipt_index_path),
         receipt_index_path=receipt_index_path,
     )
-    outputs = write_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1030_outputs(report, args.out_dir)
-    print(render_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1030_text(report), end="")
+    outputs = write_review_v1030_artifacts_outputs(report, args.out_dir)
+    print(render_review_v1030_artifacts_text(report), end="")
     print("outputs=" + json.dumps(outputs, ensure_ascii=True))
     code = resolve_exit_code(
         report,

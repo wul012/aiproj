@@ -11,15 +11,15 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from minigpt.receipt_chain_v1041 import (  # noqa: E402
-    build_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1041,
+    build_receipt_chain_v1041,
     locate_receipt_check_v1041,
     locate_receipt_v1041,
     read_json_report,
     resolve_exit_code,
 )
 from minigpt.receipt_chain_v1041_artifacts import (  # noqa: E402
-    render_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1041_text,
-    write_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1041_outputs,
+    render_receipt_v1041_artifacts_text,
+    write_receipt_v1041_artifacts_outputs,
 )
 
 
@@ -40,14 +40,14 @@ def main(argv: Sequence[str] | None = None) -> None:
     receipt_path = locate_receipt_v1041(args.receipt)
     receipt_check_path = locate_receipt_check_v1041(args.receipt_check)
     prepare_output_dir(args.out_dir, force=args.force)
-    report = build_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1041(
+    report = build_receipt_chain_v1041(
         read_json_report(receipt_path),
         read_json_report(receipt_check_path),
         receipt_path=receipt_path,
         receipt_check_path=receipt_check_path,
     )
-    outputs = write_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1041_outputs(report, args.out_dir)
-    print(render_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1041_text(report), end="")
+    outputs = write_receipt_v1041_artifacts_outputs(report, args.out_dir)
+    print(render_receipt_v1041_artifacts_text(report), end="")
     print("outputs=" + json.dumps(outputs, ensure_ascii=True))
     code = resolve_exit_code(
         report,

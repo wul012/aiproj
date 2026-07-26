@@ -11,16 +11,16 @@ from minigpt.randomized_holdout_publication_receipt_index_receipt_index_receipt_
     resolve_exit_code,
 )
 from minigpt.receipt_chain_check_v1032_artifacts import (
-    render_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_check_v1032_html,
-    render_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_check_v1032_markdown,
-    render_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_check_v1032_text,
-    write_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_check_v1032_outputs,
+    render_check_v1032_artifacts_html,
+    render_check_v1032_artifacts_markdown,
+    render_check_v1032_artifacts_text,
+    write_check_v1032_artifacts_outputs,
 )
 from minigpt.randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1031 import (
     RECEIPT_STATUS,
     build_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1031,
 )
-from minigpt.receipt_chain_v1031_artifacts import write_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1031_outputs
+from minigpt.receipt_chain_v1031_artifacts import write_receipt_v1031_artifacts_outputs
 from minigpt.report_utils import write_json_payload
 from scripts.check_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1032 import main as cli_main
 from tests.test_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1031 import ready_receipt_inputs
@@ -110,14 +110,14 @@ class RandomizedHoldoutPublicationReceiptIndexReceiptIndexReceiptIndexReceiptInd
                 receipt,
                 receipt_path=receipt_path,
             )
-            outputs = write_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_check_v1032_outputs(report, root / "check")
+            outputs = write_check_v1032_artifacts_outputs(report, root / "check")
             cli_main([str(receipt_path.parent), "--out-dir", str(root / "cli-check"), "--require-pass", "--force"])
 
         self.assertEqual(set(outputs), {"json", "csv", "text", "markdown", "html"})
         self.assertTrue(outputs["json"].endswith(RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_CHECK_V1032_JSON_FILENAME))
-        self.assertIn("contract_check_ready=True", render_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_check_v1032_text(report))
-        self.assertIn("Checks", render_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_check_v1032_markdown(report))
-        self.assertIn("receipt", render_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_check_v1032_html(report))
+        self.assertIn("contract_check_ready=True", render_check_v1032_artifacts_text(report))
+        self.assertIn("Checks", render_check_v1032_artifacts_markdown(report))
+        self.assertIn("receipt", render_check_v1032_artifacts_html(report))
 
 
 def ready_check_inputs(root: Path) -> tuple[dict[str, object], Path]:
@@ -126,7 +126,7 @@ def ready_check_inputs(root: Path) -> tuple[dict[str, object], Path]:
         review,
         receipt_index_review_path=review_path,
     )
-    outputs = write_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1031_outputs(receipt, root / "receipt")
+    outputs = write_receipt_v1031_artifacts_outputs(receipt, root / "receipt")
     return receipt, Path(outputs["json"])
 
 

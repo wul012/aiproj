@@ -11,14 +11,14 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from minigpt.receipt_chain_review_v1124 import (  # noqa: E402
-    build_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1124,
+    build_receipt_review_v1124,
     locate_receipt_index_v1124,
     read_json_report,
     resolve_exit_code,
 )
 from minigpt.receipt_chain_review_v1124_artifacts import (  # noqa: E402
-    render_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1124_text,
-    write_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1124_outputs,
+    render_review_v1124_artifacts_text,
+    write_review_v1124_artifacts_outputs,
 )
 
 
@@ -37,12 +37,12 @@ def main(argv: Sequence[str] | None = None) -> None:
     args = parse_args(argv)
     receipt_index_path = locate_receipt_index_v1124(args.receipt_index)
     prepare_output_dir(args.out_dir, force=args.force)
-    report = build_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1124(
+    report = build_receipt_review_v1124(
         read_json_report(receipt_index_path),
         receipt_index_path=receipt_index_path,
     )
-    outputs = write_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1124_outputs(report, args.out_dir)
-    print(render_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1124_text(report), end="")
+    outputs = write_review_v1124_artifacts_outputs(report, args.out_dir)
+    print(render_review_v1124_artifacts_text(report), end="")
     print("outputs=" + json.dumps(outputs, ensure_ascii=True))
     code = resolve_exit_code(
         report,

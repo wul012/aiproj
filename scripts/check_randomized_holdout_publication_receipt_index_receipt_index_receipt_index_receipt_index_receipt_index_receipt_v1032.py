@@ -17,8 +17,8 @@ from minigpt.randomized_holdout_publication_receipt_index_receipt_index_receipt_
     resolve_exit_code,
 )
 from minigpt.receipt_chain_check_v1032_artifacts import (  # noqa: E402
-    render_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_check_v1032_text,
-    write_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_check_v1032_outputs,
+    render_check_v1032_artifacts_text,
+    write_check_v1032_artifacts_outputs,
 )
 
 
@@ -39,8 +39,8 @@ def main(argv: Sequence[str] | None = None) -> None:
         read_json_report(receipt_path),
         receipt_path=receipt_path,
     )
-    outputs = write_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_check_v1032_outputs(report, args.out_dir)
-    print(render_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_check_v1032_text(report), end="")
+    outputs = write_check_v1032_artifacts_outputs(report, args.out_dir)
+    print(render_check_v1032_artifacts_text(report), end="")
     print("outputs=" + json.dumps(outputs, ensure_ascii=True))
     code = resolve_exit_code(report, require_pass=args.require_pass)
     if code:

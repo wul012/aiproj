@@ -16,10 +16,10 @@ from minigpt.randomized_holdout_publication_downstream_common import (
     is_downstream_lookup_only,
 )
 from minigpt.receipt_chain_check_v1036 import (
-    RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_CHECK_V1036_JSON_FILENAME,
+    RECEIPT_CHECK_V1036_JSON_FILENAME,
 )
 from minigpt.receipt_chain_v1035 import (
-    RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_V1035_JSON_FILENAME,
+    RECEIPT_CHAIN_V1035_JSON_FILENAME,
     READY_KEY as SOURCE_RECEIPT_READY_KEY,
     RECEIPT_STATUS,
 )
@@ -30,11 +30,11 @@ from minigpt.randomized_holdout_publication_constants import interpretation as _
 from minigpt.randomized_holdout_publication_downstream_common import evidence_row as _evidence_row
 
 
-RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_V1037_JSON_FILENAME = "randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1037.json"
-RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_V1037_CSV_FILENAME = "randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1037.csv"
-RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_V1037_TEXT_FILENAME = "randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1037.txt"
-RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_V1037_MARKDOWN_FILENAME = "randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1037.md"
-RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_V1037_HTML_FILENAME = "randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1037.html"
+RECEIPT_CHAIN_V1037_JSON_FILENAME = "randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1037.json"
+RECEIPT_CHAIN_V1037_CSV_FILENAME = "randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1037.csv"
+RECEIPT_CHAIN_V1037_TEXT_FILENAME = "randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1037.txt"
+RECEIPT_CHAIN_V1037_MARKDOWN_FILENAME = "randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1037.md"
+RECEIPT_CHAIN_V1037_HTML_FILENAME = "randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1037.html"
 
 RECEIPT_INDEX_ID = "randomized-holdout-publication-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-receipt-index-v1037"
 READY_KEY = "randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1037_ready"
@@ -44,14 +44,14 @@ LOOKUP_KEY_PREFIX = "publication-receipt-index-receipt-index-receipt-index-recei
 def locate_receipt_v1037(path: str | Path) -> Path:
     source = Path(path)
     if source.is_dir():
-        source = source / RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_V1035_JSON_FILENAME
+        source = source / RECEIPT_CHAIN_V1035_JSON_FILENAME
     return source
 
 
 def locate_receipt_check_v1037(path: str | Path) -> Path:
     source = Path(path)
     if source.is_dir():
-        source = source / RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_CHECK_V1036_JSON_FILENAME
+        source = source / RECEIPT_CHECK_V1036_JSON_FILENAME
     return source
 
 
@@ -62,7 +62,7 @@ def read_json_report(path: str | Path) -> dict[str, Any]:
     return dict(payload)
 
 
-def build_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1037(
+def build_receipt_chain_v1037(
     receipt_report: dict[str, Any],
     receipt_check_report: dict[str, Any],
     *,
@@ -235,13 +235,13 @@ def _decision(status: str) -> str:
 
 __all__ = [
     "LOOKUP_KEY_PREFIX",
-    "RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_V1037_CSV_FILENAME",
-    "RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_V1037_HTML_FILENAME",
-    "RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_V1037_JSON_FILENAME",
-    "RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_V1037_MARKDOWN_FILENAME",
-    "RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_V1037_TEXT_FILENAME",
+    "RECEIPT_CHAIN_V1037_CSV_FILENAME",
+    "RECEIPT_CHAIN_V1037_HTML_FILENAME",
+    "RECEIPT_CHAIN_V1037_JSON_FILENAME",
+    "RECEIPT_CHAIN_V1037_MARKDOWN_FILENAME",
+    "RECEIPT_CHAIN_V1037_TEXT_FILENAME",
     "READY_KEY",
-    "build_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1037",
+    "build_receipt_chain_v1037",
     "locate_receipt_check_v1037",
     "locate_receipt_v1037",
     "read_json_report",

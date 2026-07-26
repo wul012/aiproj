@@ -15,13 +15,13 @@ from minigpt.randomized_holdout_publication_receipt_index_receipt_index_receipt_
     resolve_exit_code,
 )
 from minigpt.receipt_chain_v1031_artifacts import (
-    render_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1031_html,
-    render_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1031_markdown,
-    render_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1031_text,
-    write_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1031_outputs,
+    render_receipt_v1031_artifacts_html,
+    render_receipt_v1031_artifacts_markdown,
+    render_receipt_v1031_artifacts_text,
+    write_receipt_v1031_artifacts_outputs,
 )
 from minigpt.randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1030 import build_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1030
-from minigpt.receipt_chain_review_v1030_artifacts import write_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1030_outputs
+from minigpt.receipt_chain_review_v1030_artifacts import write_review_v1030_artifacts_outputs
 from minigpt.report_utils import write_json_payload
 from scripts.record_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1031 import main as cli_main
 from tests.test_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1030 import ready_review_inputs as ready_v1030_index_inputs
@@ -109,16 +109,16 @@ class RandomizedHoldoutPublicationReceiptIndexReceiptIndexReceiptIndexReceiptInd
                 review,
                 receipt_index_review_path=review_path,
             )
-            outputs = write_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1031_outputs(report, root / "receipt")
+            outputs = write_receipt_v1031_artifacts_outputs(report, root / "receipt")
             cli_main([str(review_path.parent), "--out-dir", str(root / "cli-receipt"), "--require-receipt-ready", "--force"])
             cli_report = read_json_report(root / "cli-receipt" / RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_V1031_JSON_FILENAME)
 
         self.assertEqual(set(outputs), {"json", "csv", "text", "markdown", "html"})
         self.assertTrue(outputs["json"].endswith(RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_V1031_JSON_FILENAME))
         self.assertEqual(cli_report["summary"]["consumer_name"], DEFAULT_CONSUMER_NAME)
-        self.assertIn("receipt_ready=True", render_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1031_text(report))
-        self.assertIn("Consumer Receipts", render_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1031_markdown(report))
-        self.assertIn("receipt", render_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_v1031_html(report))
+        self.assertIn("receipt_ready=True", render_receipt_v1031_artifacts_text(report))
+        self.assertIn("Consumer Receipts", render_receipt_v1031_artifacts_markdown(report))
+        self.assertIn("receipt", render_receipt_v1031_artifacts_html(report))
 
 
 def ready_receipt_inputs(root: Path) -> tuple[dict[str, object], Path]:
@@ -127,7 +127,7 @@ def ready_receipt_inputs(root: Path) -> tuple[dict[str, object], Path]:
         index,
         receipt_index_path=index_path,
     )
-    outputs = write_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1030_outputs(review, root / "review")
+    outputs = write_review_v1030_artifacts_outputs(review, root / "review")
     return review, Path(outputs["json"])
 
 

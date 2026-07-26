@@ -11,14 +11,14 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from minigpt.receipt_chain_check_v1096 import (  # noqa: E402
-    build_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_check_v1096,
+    build_receipt_check_v1096,
     locate_receipt_v1096,
     read_json_report,
     resolve_exit_code,
 )
 from minigpt.receipt_chain_check_v1096_artifacts import (  # noqa: E402
-    render_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_check_v1096_text,
-    write_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_check_v1096_outputs,
+    render_check_v1096_artifacts_text,
+    write_check_v1096_artifacts_outputs,
 )
 
 
@@ -35,12 +35,12 @@ def main(argv: Sequence[str] | None = None) -> None:
     args = parse_args(argv)
     receipt_path = locate_receipt_v1096(args.receipt)
     prepare_output_dir(args.out_dir, force=args.force)
-    report = build_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_check_v1096(
+    report = build_receipt_check_v1096(
         read_json_report(receipt_path),
         receipt_path=receipt_path,
     )
-    outputs = write_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_check_v1096_outputs(report, args.out_dir)
-    print(render_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_receipt_check_v1096_text(report), end="")
+    outputs = write_check_v1096_artifacts_outputs(report, args.out_dir)
+    print(render_check_v1096_artifacts_text(report), end="")
     print("outputs=" + json.dumps(outputs, ensure_ascii=True))
     code = resolve_exit_code(report, require_pass=args.require_pass)
     if code:

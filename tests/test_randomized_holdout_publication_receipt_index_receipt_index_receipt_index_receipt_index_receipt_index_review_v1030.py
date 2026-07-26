@@ -13,10 +13,10 @@ from minigpt.randomized_holdout_publication_receipt_index_receipt_index_receipt_
     resolve_exit_code,
 )
 from minigpt.receipt_chain_review_v1030_artifacts import (
-    render_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1030_html,
-    render_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1030_markdown,
-    render_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1030_text,
-    write_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1030_outputs,
+    render_review_v1030_artifacts_html,
+    render_review_v1030_artifacts_markdown,
+    render_review_v1030_artifacts_text,
+    write_review_v1030_artifacts_outputs,
 )
 from minigpt.randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1029 import build_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1029
 from minigpt.randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1029_artifacts import write_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_v1029_outputs
@@ -94,14 +94,14 @@ class RandomizedHoldoutPublicationReceiptIndexReceiptIndexReceiptIndexReceiptInd
                 index,
                 receipt_index_path=index_path,
             )
-            outputs = write_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1030_outputs(report, root / "review")
+            outputs = write_review_v1030_artifacts_outputs(report, root / "review")
             cli_main([str(index_path.parent), "--out-dir", str(root / "cli-review"), "--require-review-ready", "--require-lookup-ready", "--force"])
 
         self.assertEqual(set(outputs), {"json", "csv", "text", "markdown", "html"})
         self.assertTrue(outputs["json"].endswith(RANDOMIZED_HOLDOUT_PUBLICATION_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_RECEIPT_INDEX_REVIEW_V1030_JSON_FILENAME))
-        self.assertIn("review_ready=True", render_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1030_text(report))
-        self.assertIn("Review Summary", render_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1030_markdown(report))
-        self.assertIn("Review Summary", render_randomized_holdout_publication_receipt_index_receipt_index_receipt_index_receipt_index_receipt_index_review_v1030_html(report))
+        self.assertIn("review_ready=True", render_review_v1030_artifacts_text(report))
+        self.assertIn("Review Summary", render_review_v1030_artifacts_markdown(report))
+        self.assertIn("Review Summary", render_review_v1030_artifacts_html(report))
 
 
 def ready_review_inputs(root: Path) -> tuple[dict[str, object], Path]:
