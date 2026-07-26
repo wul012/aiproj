@@ -168,17 +168,41 @@ class ArchitectureBoundaryTests(unittest.TestCase):
 
         self.assertEqual([], violations)
 
-    def test_transitional_package_submodules_remain_facade_only(self) -> None:
+    def test_transitional_submodules_are_facades_or_owned_implementation(
+        self,
+    ) -> None:
+        """A submodule is either a pure facade or real implementation.
+
+        Owner packages began as facades over the flat modules -- "a migration
+        target before the physical module move". While that held, the flat
+        namespace could never shrink, because the flat module stayed the only
+        home for the code. v1308 starts the move, so implementation is now
+        allowed here and is governed by the rules that already existed and are
+        unchanged: the owner layering prohibitions and the 220-line cap.
+
+        What this rejects is the in-between state: an implementation module
+        that still imports from the flat namespace it was migrated out of,
+        which would make the move cosmetic and reintroduce the v1307 import
+        cycle. Shared report helpers are exempt: they are infrastructure that
+        has not been assigned an owner package yet.
+        """
+        exempt = {"report_utils", "report_check_common"}
         violations = []
         for directory in TRANSITIONAL_PACKAGE_DIRS:
             for path in package_files(directory):
                 if path.name == "__init__.py":
                     continue
                 tree = ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
-                for node in tree.body:
-                    message = transitional_submodule_violation(node)
-                    if message is not None:
-                        violations.append(f"{path.relative_to(ROOT)}: {message}")
+                if is_facade_module(tree):
+                    continue
+                for module in imports_for(path):
+                    flat = module.removeprefix("minigpt.")
+                    if module.startswith("minigpt.") and "." not in flat \
+                            and flat not in exempt \
+                            and (SRC / f"{flat}.py").is_file():
+                        violations.append(
+                            f"{path.relative_to(ROOT)}: implementation still "
+                            f"imports flat minigpt.{flat}")
 
         self.assertEqual([], violations)
 
@@ -244,11 +268,24 @@ def owner_initializer_facades() -> list[tuple[Path, str]]:
     ]
 
 
+def is_facade_module(tree: ast.Module) -> bool:
+    """A re-export shell: docstring, imports and ``__all__`` only.
+
+    Facade-shape rules are keyed on this, not on location, so a package may
+    hold facades and migrated implementation side by side during the move.
+    """
+    return all(transitional_submodule_violation(node) is None
+               for node in tree.body)
+
+
 def transitional_submodule_facades() -> list[tuple[Path, str]]:
     facades: list[tuple[Path, str]] = []
     for directory in TRANSITIONAL_PACKAGE_DIRS:
         for path in package_files(directory):
-            if path.name != "__init__.py":
+            if path.name == "__init__.py":
+                continue
+            tree = ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
+            if is_facade_module(tree):
                 facades.append((path, module_name_for_source(path)))
     return facades
 
