@@ -216,11 +216,16 @@ evicting and was not closed.
 
 ### Measured results with steps 1–3 applied
 
+> **Superseded by §5e.** The numbers below came from a set that was **not
+> sound**: it archived a live gate's own test, and it archived modules a live
+> lazy-export registry loads by name. They are kept here only so the
+> correction is legible. The sound figure is **1,350 → 918**, not 724.
+
 | | |
 |---|---|
 | closed set | 626 src + 456 scripts + 408 tests = 1,490 files |
-| `flat_dir_file_count` | 1,350 → **724** |
-| `dup_def_stock` | 102 → **65** |
+| `flat_dir_file_count` | 1,350 → ~~724~~ (unsound) |
+| `dup_def_stock` | 102 → ~~65~~ (unsound) |
 | unresolvable imports | 0 |
 | structural tests | pass (architecture, root hygiene, import resolution) |
 | `static_analysis`, `type_analysis` | **pass** |
@@ -252,6 +257,85 @@ That is pre-existing and expected here; only `strict_paths` are format
 enforced. It is not caused by the archive and must not be "fixed" as part of
 it.
 
+## 5e. The archive is blocked by a coverage subsidy (v1312)
+
+Executing §5d found three more bugs in the closure, corrected the win
+downward, and then hit a blocker that is not mechanical at all.
+
+### Three further consumer classes the fixpoint could not see
+
+| # | anchor class | what it missed |
+|---|---|---|
+| 5 | `_normalization_guard.FOCUSED_TEST_MODULES` | 25 test modules named as strings |
+| 6 | **test ↔ subject symmetry** | archived `test_model_capability_honest_measurement.py` while keeping the gate it tests — dropping a guard on LIVE code |
+| 7 | **whole-string module identity** | `_root_lazy_exports_*.py` maps names to modules loaded on demand |
+
+Class 6 is not a *reference* at all, it is a **relation**: a module and its
+test must move together, or the archive silently retires a live guard. Assert
+it both ways — no archived test may have a live subject, and no archived
+module may have a live test.
+
+Class 7 needs care in **both** directions. Splitting strings into tokens
+evicted 343 modules on a false signal: `"model_capability_ladder.json"` is an
+artifact a module *writes*, not a consumer of it. Ignoring strings entirely
+archives modules a live registry loads by name. Only **whole-string module
+identity** is sound.
+
+Each correction moved the win *against* the archive — 724 → 735 → 833 → 918 —
+because each was a bug fixed, not a concession. Corroborating signal that the
+corrected set is the sound one: under it, **zero** of the 134 entries in
+`test_script_bootstrap.py`'s contract need editing, where the earlier set
+required deleting 9. A closure that does not force you to touch a live
+contract is evidence the closure is right.
+
+### Sound measured result
+
+| | |
+|---|---|
+| closed set | 432 src + 325 scripts + 215 tests = **972 files** |
+| `flat_dir_file_count` | 1,350 → **918** (−32%) |
+| `dup_def_stock` | 102 → **77** |
+| elegance ratchet | **pass** on all four metrics |
+| surviving suite | **2,584 tests, 0 failures, 0 errors, 0 import failures** |
+| surviving files naming an archived file | 500 — **all documentation prose**, no code |
+
+### The blocker: the coverage floor is subsidised by the records
+
+Post-archive line coverage is **87.51%** against a `--fail-under` of
+**88.98**. It is not a scoping bug: only 8 live modules lose any coverage at
+all, 75 lines total (0.1 points). Splitting the *same* cached full-suite run
+into the two populations shows the real cause:
+
+| population | coverage | share of corpus |
+|---|---|---|
+| generated records | **93.26%** | 29.0% |
+| maintained code | **87.61%** | 71.0% |
+| headline (both) | 89.25% | floor 88.98 |
+
+**The generated records are 5.65 points better covered than the code under
+maintenance, and they are 29% of the corpus.** The project meets its coverage
+floor partly because of them. Archiving does not *lower* coverage — it stops
+the records from concealing it, and what they conceal is that maintained code
+sits 1.37 points below the floor it appears to satisfy.
+
+### What this costs, and the one thing that must not be done
+
+Holding the floor honestly after the archive requires **+974 covered lines**
+on maintained code. That debt is real and pre-existing: 62 live modules sit
+under 60% coverage, concentrated in the science and training modules that are
+expensive to test. It is a program, not a session.
+
+Lowering `fail_under` to fit the new corpus would make the archive pass by
+restating what the project claims about its own test coverage. Ratchets only
+tighten. **Do not do it** — it is the same move as rebasing the
+honest-measurement inventory in §5d, and it is refused for the same reason.
+
+**Status:** the archive is mechanically ready and proven sound; it is blocked
+on a priced coverage gap, not on a filing decision. The finding is worth more
+than the move: a metric that reads 89.25% describes a corpus that is 29%
+closed records, and the number for the code anyone actually maintains
+is 87.61%.
+
 ## 6. Honest expectation
 
 Even a complete `core` migration moves `flat_dir_file_count` by 5 of 1,355.
@@ -260,3 +344,7 @@ materially once the large generated families are dealt with — and the
 cheapest honest lever there is the archive decision in step 4, not migration.
 Reaching 9/10 remains a multi-version program; nothing in this pilot changes
 that estimate.
+
+§5e prices that lever exactly: the archive is worth 1,350 → 918 and is proven
+sound, but it is gated behind **+974 covered lines** of pre-existing test debt
+on maintained code. The generated records were paying that bill.
