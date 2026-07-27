@@ -185,6 +185,73 @@ measuring something the project has consciously chosen, the "navigating the
 repo" sub-score should be re-framed to exclude generated records, and the
 9/10 target should be restated against a corpus that excludes them.
 
+## 5d. Executing the archive — verified recipe and the one open question
+
+The archive was executed and reverted three times on 2026-07-25. It works;
+what follows is the exact recipe, including the two mistakes that cost a run
+each, so the next attempt is a single pass.
+
+### The closure must be seeded with non-import anchors
+
+A fixpoint over Python imports is **not sufficient**. Some consumers never
+import: CI names scripts by path in `ci.yml`, and gate baselines name paths
+in JSON. A set can be perfectly closed under imports and still contain live
+infrastructure. The first run swept in
+`model_capability_honest_measurement` — a **CI gate** — because its name
+begins with `model_capability`, and nothing *imported* it.
+
+Seed the "outside" set before iterating:
+
+1. every `scripts/*.py` named in `.github/workflows/ci.yml`;
+2. every path in `docs/static-analysis/ruff-baseline.json` → `strict_paths`;
+3. for each anchored `check_/run_/build_/…` script, the module it wraps;
+4. **every path in the honest-measurement registry's
+   `contract_test_modules`** (and each family's source artifacts). The gate
+   reads these from a registry, not a hardcoded list — see
+   `model_capability_honest_measurement.py:255,313,321`.
+
+Then run the fixpoint **to proven convergence** — assert it, do not cap the
+iteration count. An early run stopped at a 50-iteration cap while still
+evicting and was not closed.
+
+### Measured results with steps 1–3 applied
+
+| | |
+|---|---|
+| closed set | 626 src + 456 scripts + 408 tests = 1,490 files |
+| `flat_dir_file_count` | 1,350 → **724** |
+| `dup_def_stock` | 102 → **65** |
+| unresolvable imports | 0 |
+| structural tests | pass (architecture, root hygiene, import resolution) |
+| `static_analysis`, `type_analysis` | **pass** |
+
+### The open question — deliberately not resolved by an engineer
+
+With steps 1–3, two gates still fail:
+`check_model_capability_honest_measurement` (7 checks) and
+`normalization_guard`. Both report the same thing:
+
+> **Honest measurement contract is missing or widened.**
+
+They fail because the archive removes the **contract test modules** that
+enforce the project's honest-measurement guarantees. That is the gate working
+as designed, not staleness. Rebasing its inventory would make the sweep green
+by restating what the project asserts about its own measurement honesty —
+which is editing an expectation to make the work pass.
+
+Step 4 above is the resolution that costs nothing: anchor those contract
+tests and their subjects so they stay live, and archive the remainder. The
+win lands somewhat below 724 and **no contract is weakened**. Take that
+route unless the author decides, explicitly and on the record, what those
+contracts should assert once the artifacts are archived.
+
+### Note
+
+`ruff format --check src scripts` reports ~1,229 files would be reformatted.
+That is pre-existing and expected here; only `strict_paths` are format
+enforced. It is not caused by the archive and must not be "fixed" as part of
+it.
+
 ## 6. Honest expectation
 
 Even a complete `core` migration moves `flat_dir_file_count` by 5 of 1,355.
