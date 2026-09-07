@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="320" viewBox="0 0 1280 320" role="img" aria-labelledby="title desc">
+<title id="title">MiniGPT Lab — INDEPENDENT ML LAB</title><desc id="desc">Build the model. Test the claim.</desc>
+<defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#111D2C"/><stop offset="1" stop-color="#08121F"/></linearGradient></defs>
+<rect width="1280" height="320" rx="20" fill="url(#bg)"/>
+<path d="M770 0V320M960 0V320M1150 0V320M720 70H1280M720 250H1280" stroke="#263549" stroke-opacity=".65"/>
+<rect x="48" y="46" width="6" height="22" rx="3" fill="#BC9BFF"/>
+<g font-family="Segoe UI,Arial,sans-serif"><text x="70" y="63" fill="#BC9BFF" font-size="15" font-weight="600" letter-spacing="3">INDEPENDENT ML LAB</text>
+<text x="48" y="147" fill="#F7FAFE" font-size="62" font-weight="700" letter-spacing="-2">MiniGPT Lab</text>
+<text x="50" y="189" fill="#A9BBD0" font-size="22">Build the model. Test the claim.</text>
+<text x="50" y="270" fill="#72859D" font-size="13" letter-spacing="2">WUL012 / ENGINEERING PROJECTS</text>
+<text x="1190" y="66" fill="#BC9BFF" font-size="18" text-anchor="end">04 / 04</text>
+<path d="M919 171H931M1045 171H1057" stroke="#BC9BFF" stroke-width="2"/><rect x="805" y="132" width="114" height="78" rx="12" fill="#152334" stroke="#BC9BFF" stroke-opacity=".55"/><text x="862" y="178" text-anchor="middle" fill="#F1F5FA" font-size="12" font-weight="600">MODEL</text><rect x="931" y="132" width="114" height="78" rx="12" fill="#152334" stroke="#BC9BFF" stroke-opacity=".55"/><text x="988" y="178" text-anchor="middle" fill="#F1F5FA" font-size="12" font-weight="600">EXPERIMENT</text><rect x="1057" y="132" width="114" height="78" rx="12" fill="#152334" stroke="#BC9BFF" stroke-opacity=".55"/><text x="1114" y="178" text-anchor="middle" fill="#F1F5FA" font-size="12" font-weight="600">REVIEW</text>
+<text x="805" y="264" fill="#72859D" font-size="12">aiproj / BUILD · VERIFY · LEARN</text></g>
+</svg>

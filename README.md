@@ -1,5 +1,64 @@
 # MiniGPT From Scratch
 
+**独立的 Transformer 实验室**：实现训练与推理组件，并用可复核实验研究模型行为。
+
+![MiniGPT Lab — ML RESEARCH](docs/assets/project-banner.svg)
+
+[![CI](https://github.com/wul012/aiproj/actions/workflows/ci.yml/badge.svg)](https://github.com/wul012/aiproj/actions/workflows/ci.yml)
+**Python · PyTorch · Transformer · LoRA · RoPE · KV Cache**
+
+A tiny Transformer lab for reproducible experiments and mechanistic interpretation.
+
+[快速开始](#快速开始) · [代码入口](#代码入口) · [验证与范围](#验证与范围) · [完整历史](#research-history)
+
+## 核心能力
+
+- **模型实现** — 因果多头注意力、分词、训练/评估、自回归采样与 checkpoint 续训。
+- **推理与微调** — LoRA、RoPE 和 KV Cache，配套缓存前向、权重合并的数值一致性测试。
+- **实验方法** — grokking、Fourier circuits 与 superposition 等玩具尺度实验；预注册、多种子、缓存复推，保留负结果。
+
+## 快速开始
+
+需要 Python 3.11+。上述命令运行小范围实现测试，不启动长训练。macOS/Linux 使用 `source .venv/bin/activate` 激活环境。
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
+python -B -m unittest tests.test_model tests.test_kv_cache tests.test_lora tests.test_rope
+```
+
+## 代码入口
+
+[模型核心](src/minigpt/core/model.py) · [训练脚本](scripts/train.py) · [研究与工程导航](docs/README.md)
+
+## 验证与范围
+
+先看[训练与评估](docs/model-training.md)、[实验目录](#research-history)和[工程验证记录](docs/aiproj-track-final-evidence.md)。详细 verdict 保留其原版本与适用范围。
+
+研究结论仅适用于 toy scale, own substrate，不外推通用 LLM 能力。模型是教学质量；治理报告保持 lookup-only / no-promotion，见[边界说明](docs/no-promotion-boundary.md)。
+
+<details>
+<summary>展开更多验证 / 实验命令</summary>
+
+```powershell
+python -B scripts/train.py --device cpu --max-iters 300 --n-layer 2 --n-head 2 --n-embd 64 --batch-size 16 --block-size 64
+```
+
+</details>
+
+## 独立项目
+
+MiniGPT 独立运行、独立验证，不是订单系统的模块，也不依赖 Java、Node 或 mini-kv。
+
+<a id="research-history"></a>
+<details>
+<summary>历史证据与完整维护手册（点击展开）</summary>
+
+以下保留原始文档。版本号、测试数量和研究结论沿用其原始时点，不是本次门面整理的实测结果。
+
+# MiniGPT From Scratch
+
 A PyTorch practice project for building and inspecting a tiny GPT language model.
 
 [![CI](https://github.com/wul012/aiproj/actions/workflows/ci.yml/badge.svg)](https://github.com/wul012/aiproj/actions/workflows/ci.yml)
@@ -12952,3 +13011,5 @@ Next useful extensions:
 - Train on a larger Chinese corpus.
 - Use the v75-v90 workflow/handoff/promotion/index/promoted-comparison/decision/seed/seed-handoff/report-utility chain on a real larger Chinese corpus.
 - Compare from-scratch training with LoRA fine-tuning of an open model.
+
+</details>
