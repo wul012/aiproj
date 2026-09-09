@@ -369,3 +369,5 @@
 
 1142-v1130-publication-naming-readability.md
  -> v1130 code explanation: stop new publication naming sprawl with a readable scanner and short-alias policy.
+
+- [v1313 训练断点随机状态与可复现续跑](1266-v1313-checkpoint-rng.md)

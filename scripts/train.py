@@ -34,6 +34,7 @@ from minigpt.training.data_prep import (  # noqa: E402
 )
 from minigpt.training.data_quality import build_dataset_quality_report, write_dataset_quality_json, write_dataset_quality_svg  # noqa: E402
 from minigpt.training.history import TrainingRecord, append_record, load_records, summarize_records, write_loss_curve_svg  # noqa: E402
+from minigpt.training.rng_state import capture_rng_state, restore_rng_state  # noqa: E402
 from minigpt.reports.manifest import (  # noqa: E402
     build_environment_metadata,
     build_run_manifest,
@@ -302,7 +303,11 @@ def main(argv: Sequence[str] | None = None) -> int:
     if args.resume is None and history_path.exists():
         history_path.unlink()
 
+    if checkpoint is not None:
+        restore_rng_state(checkpoint.get("rng_state"))
+
     last_loss = None
+    continuation_rng = None
     for step in range(start_step, args.max_iters + 1):
         x, y = get_batch(train_data, config.block_size, args.batch_size, device)
         _, loss = model(x, y)
@@ -314,7 +319,11 @@ def main(argv: Sequence[str] | None = None) -> int:
         optimizer.step()
         last_loss = float(loss.item())
 
-        if step == 1 or step % args.eval_interval == 0 or step == args.max_iters:
+        scheduled_eval = step == 1 or step % args.eval_interval == 0
+        if step == args.max_iters and not scheduled_eval:
+            # Final-only diagnostics do not exist at this step in an uninterrupted run.
+            continuation_rng = capture_rng_state()
+        if scheduled_eval or step == args.max_iters:
             losses = estimate_loss(
                 model=model,
                 train_data=train_data,
@@ -335,6 +344,8 @@ def main(argv: Sequence[str] | None = None) -> int:
                 ),
             )
 
+    if continuation_rng is None:
+        continuation_rng = capture_rng_state()
     history_summary = None
     records = load_records(history_path)
     if records:
@@ -360,6 +371,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     checkpoint = {
         "model": model.state_dict(),
         "optimizer": optimizer.state_dict(),
+        "rng_state": continuation_rng,
         "config": asdict(config),
         "last_loss": last_loss,
         "step": args.max_iters,

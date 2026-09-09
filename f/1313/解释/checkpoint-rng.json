@@ -1,0 +1,193 @@
+{
+  "version": "v1313.0.0",
+  "baseline": "6e50c9213e6bbe4e5d779a00bc9d6f034a74487d",
+  "scope": "checkpoint RNG continuation and two archived interview lessons",
+  "state": "local_verified",
+  "packageVersion": "0.1.0",
+  "scientificVerdictsChanged": false,
+  "focused": {
+    "command": "python -B -m unittest tests.test_rng_state tests.test_resume_rng tests.test_model_cli_behavior tests.test_architecture_boundaries -v",
+    "tests": 23,
+    "exitCode": 0
+  },
+  "redControl": {
+    "stopSteps": [
+      1,
+      2,
+      3,
+      5
+    ],
+    "oldImplementationFailures": 4,
+    "expectationsUnchanged": true
+  },
+  "cliSmoke": {
+    "status": "pass",
+    "checks": {
+      "new_process_model_exact": true,
+      "new_process_optimizer_exact": true,
+      "new_process_loss_exact": true,
+      "new_process_sample_exact": true,
+      "uninterrupted_model_unchanged": true,
+      "uninterrupted_optimizer_unchanged": true,
+      "uninterrupted_metrics_unchanged": true,
+      "uninterrupted_sample_unchanged": true
+    },
+    "torch": "2.12.0+cpu",
+    "device": "cpu",
+    "dropout": 0.2,
+    "stop": 3,
+    "end": 6
+  },
+  "fullCoverage": {
+    "command": "python -B scripts/run_test_coverage.py --out-dir .tmp/v1313/final-coverage --fail-under 88.98",
+    "tests": 3585,
+    "testSeconds": 818.649,
+    "exitCode": 0,
+    "summary": {
+      "status": "pass",
+      "decision": "continue_with_coverage_gate",
+      "line_coverage_percent": 89.26,
+      "covered_lines": 89517,
+      "num_statements": 100288,
+      "missing_lines": 10771,
+      "file_count": 1682,
+      "measured_file_count": 1682,
+      "threshold_enabled": true,
+      "fail_under": 88.98,
+      "coverage_gap": 0.0
+    },
+    "rngModule": {
+      "covered_lines": 18,
+      "num_statements": 18,
+      "percent_covered": 100.0,
+      "percent_covered_display": "100",
+      "missing_lines": 0,
+      "excluded_lines": 0,
+      "percent_statements_covered": 100.0,
+      "percent_statements_covered_display": "100"
+    }
+  },
+  "fastCiCommands": [
+    {
+      "name": "check_source_encoding",
+      "exit": 0,
+      "seconds": 11.8
+    },
+    {
+      "name": "check_project_docs_readability",
+      "exit": 0,
+      "seconds": 0.19
+    },
+    {
+      "name": "check_ci_workflow_hygiene",
+      "exit": 0,
+      "seconds": 1.75
+    },
+    {
+      "name": "check_static_analysis",
+      "exit": 0,
+      "seconds": 0.67
+    },
+    {
+      "name": "check_name_budget",
+      "exit": 0,
+      "seconds": 2.36
+    },
+    {
+      "name": "check_type_analysis",
+      "exit": 0,
+      "seconds": 2.0
+    },
+    {
+      "name": "check_model_capability_honest_measurement",
+      "exit": 0,
+      "seconds": 0.15
+    },
+    {
+      "name": "check_artifact_schema_guard",
+      "exit": 0,
+      "seconds": 0.16
+    },
+    {
+      "name": "check_file_size_ratchet",
+      "exit": 0,
+      "seconds": 1.15
+    },
+    {
+      "name": "check_elegance_ratchet",
+      "exit": 0,
+      "seconds": 5.89
+    },
+    {
+      "name": "check_aiproj_track_closeout",
+      "exit": 0,
+      "seconds": 0.18
+    },
+    {
+      "name": "check_archived_path_portability",
+      "exit": 0,
+      "seconds": 0.14
+    },
+    {
+      "name": "check_promoted_seed_handoff_assurance_smoke",
+      "exit": 0,
+      "seconds": 0.53
+    },
+    {
+      "name": "run_ci_promoted_seed_receipt_contract_failure_smoke",
+      "exit": 0,
+      "seconds": 0.6
+    },
+    {
+      "name": "check_ci_promoted_seed_receipt_contract_failure_smoke_plan",
+      "exit": 0,
+      "seconds": 0.15
+    },
+    {
+      "name": "run_ci_tiny_scorecard_comparison_smoke",
+      "exit": 0,
+      "seconds": 21.82
+    },
+    {
+      "name": "check_ci_tiny_scorecard_plan",
+      "exit": 0,
+      "seconds": 0.14
+    },
+    {
+      "name": "run_ci_baseline_candidate_threshold_boundary_gate_check",
+      "exit": 0,
+      "seconds": 0.49
+    },
+    {
+      "name": "check_ci_baseline_candidate_threshold_boundary_gate_plan",
+      "exit": 0,
+      "seconds": 0.14
+    },
+    {
+      "name": "check_release_readiness_drift_contract_smoke",
+      "exit": 0,
+      "seconds": 0.31
+    },
+    {
+      "name": "check_normalization_guard",
+      "exit": 0,
+      "seconds": 9.24
+    }
+  ],
+  "boundaries": [
+    "Same data/config/evaluation schedule and deterministic runtime required.",
+    "CUDA branches mocked on CPU-only host; no CUDA trajectory claim.",
+    "Legacy checkpoints remain loadable without exact RNG replay.",
+    "Final-only evaluation rows and run timestamps are not byte-identical across interruption."
+  ],
+  "lessons": [
+    "面试讲解_吴林东/01-aiproj-model-pipeline.md",
+    "面试讲解_吴林东/02-attention-qkv.md"
+  ],
+  "publication": {
+    "tag": "v1313.0.0",
+    "receiptLocation": "refs/tags/v1313.0.0 (annotated tag)",
+    "gate": "Tag only after origin/main equals the implementation SHA and same-SHA GitHub CI succeeds.",
+    "recordBoundary": "This committed report records local verification; the observed remote result is recorded in the annotated tag, not asserted here."
+  }
+}
