@@ -13,7 +13,7 @@ A tiny Transformer lab for reproducible experiments and mechanistic interpretati
 
 ## 核心能力
 
-[逐步面试讲解](面试讲解_吴林东/README.md) · [v1313 训练续跑复现说明](docs/v1313-checkpoint-rng.md)
+[逐步面试讲解](面试讲解_吴林东/README.md) · [v1314 存档写入保护](docs/v1314-checkpoint-write.md) · [续跑复现](docs/v1313-checkpoint-rng.md)
 
 - **模型实现** — 因果多头注意力、分词、训练/评估、自回归采样与 checkpoint 续训。
 - **推理与微调** — LoRA、RoPE 和 KV Cache，配套缓存前向、权重合并的数值一致性测试。

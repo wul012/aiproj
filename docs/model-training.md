@@ -33,3 +33,20 @@ cross-PyTorch-version bitwise equality is not guaranteed; extra final evaluation
 files from interrupted and uninterrupted runs need not be identical.
 
 Tests: `python -B -m unittest tests.test_rng_state tests.test_resume_rng -v`.
+
+## Checkpoint publication failures
+
+Since v1314, train.py serializes the existing checkpoint dictionary into a unique temporary file
+beside checkpoint.pt. It flushes and fsyncs the open file, closes it, then uses os.replace to publish.
+A pre-publication exception leaves the previous checkpoint intact (or no checkpoint on the first save),
+and normal Python unwinding removes only that invocation's temporary file. The original error propagates.
+The parent directory must exist; train.py creates it during setup as before.
+
+This is single-file isolation, not a transaction over tokenizer.json, metrics, samples or manifests.
+Other outputs may already have advanced when saving fails. Abrupt process death before replacement can
+leave `.checkpoint.pt.*.tmp`; the controlled kill test verifies the previous checkpoint still loads,
+not automatic orphan cleanup. There is no writer lock or directory-entry power-loss durability guarantee.
+Checkpoint payloads remain loadable with the existing torch.load path; archive bytes need not be identical
+to direct path-based torch.save. See [v1314 evidence and boundaries](v1314-checkpoint-write.md).
+
+Tests: `python -B -m unittest tests.test_checkpoint_io tests.test_resume_rng -v`.

@@ -23,6 +23,7 @@ ensure_src_path()
 from minigpt.core.dataset import get_batch, load_text, split_token_ids  # noqa: E402
 from minigpt.core.model import GPTConfig, MiniGPT  # noqa: E402
 from minigpt.core.tokenizer import BPETokenizer, CharTokenizer, Tokenizer, load_tokenizer  # noqa: E402
+from minigpt.training.checkpoint_io import save_checkpoint  # noqa: E402
 from minigpt.training.data_prep import (  # noqa: E402
     build_dataset_report,
     build_dataset_version_manifest,
@@ -380,7 +381,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         "tokenizer_type": getattr(tokenizer, "name", "unknown"),
         "data_source": data_source,
     }
-    torch.save(checkpoint, args.out_dir / "checkpoint.pt")
+    save_checkpoint(checkpoint, args.out_dir / "checkpoint.pt")
     tokenizer.save(args.out_dir / "tokenizer.json")
     train_config = vars(args) | {"device_used": str(device), "data_source": data_source}
     (args.out_dir / "train_config.json").write_text(
