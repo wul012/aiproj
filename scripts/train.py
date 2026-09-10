@@ -36,6 +36,7 @@ from minigpt.training.data_prep import (  # noqa: E402
 from minigpt.training.data_quality import build_dataset_quality_report, write_dataset_quality_json, write_dataset_quality_svg  # noqa: E402
 from minigpt.training.history import TrainingRecord, append_record, load_records, summarize_records, write_loss_curve_svg  # noqa: E402
 from minigpt.training.rng_state import capture_rng_state, restore_rng_state  # noqa: E402
+from minigpt.training.tokenizer_binding import tokenizer_digest, validate_tokenizer_binding  # noqa: E402
 from minigpt.reports.manifest import (  # noqa: E402
     build_environment_metadata,
     build_run_manifest,
@@ -115,6 +116,7 @@ def load_resume_state(resume_path: Path, device: torch.device) -> tuple[dict, To
     if not tokenizer_path.exists():
         raise FileNotFoundError(f"Resume tokenizer not found: {tokenizer_path}")
     tokenizer = load_tokenizer(tokenizer_path)
+    validate_tokenizer_binding(checkpoint, tokenizer)
     config = GPTConfig(**checkpoint["config"])
     if config.vocab_size != tokenizer.vocab_size:
         raise ValueError(
@@ -379,6 +381,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         "history_file": "metrics.jsonl",
         "sample_file": None if args.no_sample else "sample.txt",
         "tokenizer_type": getattr(tokenizer, "name", "unknown"),
+        "tokenizer_sha256": tokenizer_digest(tokenizer),
         "data_source": data_source,
     }
     save_checkpoint(checkpoint, args.out_dir / "checkpoint.pt")

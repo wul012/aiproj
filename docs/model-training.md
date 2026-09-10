@@ -50,3 +50,16 @@ Checkpoint payloads remain loadable with the existing torch.load path; archive b
 to direct path-based torch.save. See [v1314 evidence and boundaries](v1314-checkpoint-write.md).
 
 Tests: `python -B -m unittest tests.test_checkpoint_io tests.test_resume_rng -v`.
+
+## Tokenizer identity on resume
+
+Since v1315, newly written checkpoints include `tokenizer_sha256`, a SHA-256 digest of a
+versioned canonical semantic payload: tokenizer type, ordered `itos`, unknown token and (for BPE)
+ordered merge rules. Resume validates this after loading `tokenizer.json` and before constructing
+the model or creating the output directory. Formatting/key-order changes do not matter, while a
+same-size vocabulary permutation or BPE merge-order change fails closed. Checkpoints without the
+field remain loadable for backward compatibility and have no retrospective identity guarantee.
+
+This is an accidental-pairing guard, not authenticity, source-data, hyperparameter or cross-device
+verification. It does not migrate inference tools or rewrite historical checkpoints. See
+[v1315 tokenizer binding](v1315-tokenizer-binding.md).
