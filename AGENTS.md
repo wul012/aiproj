@@ -135,6 +135,8 @@ If a process must remain running, state its name, port/PID if known, and why it 
 
 ## Staging Discipline (promoted 2026-07-25, after a real leak)
 
+Personal interview-study notes are local-only unless the user explicitly requests publication. Creating or saving a local folder is not permission to commit/push it. Keep `面试讲解_吴林东/` untracked and ignored; do not link it from the public README.
+
 Never stage with a name-based denylist. `git add -A ':!SomeName*'` fails open:
 it protects only the files someone remembered to name, so any newly-shaped
 personal file is committed silently. This is not hypothetical — on 2026-07-25
