@@ -32,8 +32,8 @@ Personal interview notes remain local-only and ignored; this version does not re
 | Recover even an incomplete suffix | raw byte prefix, not parsing uncommitted rows | partial UTF-8/JSON suffix archived and excluded | passed locally |
 | Atomic/idempotent recovery | shared atomic writer | archive/write failures preserve original; retry succeeds | passed locally |
 | Respect boundaries | same run only, optional metadata | legacy and alternate-output paths keep behavior | passed locally |
-| Preserve previous work | unchanged RNG/tokenizer/checkpoint assertions | complete focused regression and full existing suite | focused pass; full result in release tag |
-| Honest quality evidence | own report/terminal status, unchanged floors | all fast CI commands and coverage >=88.98 | local fast record; full result in release tag |
+| Preserve previous work | unchanged RNG/tokenizer/checkpoint assertions | complete focused regression and full existing suite | focused pass; full implementation CI pass |
+| Honest quality evidence | own report/terminal status, unchanged floors | all fast CI commands and coverage >=88.98 | local fast and implementation full CI pass |
 | One release and cleanup | explicit staging, tag after same-SHA CI | remote refs, scratch absent, no owned helper process | before handoff |
 
 ## DONE, failure conditions and review
@@ -85,3 +85,13 @@ Machine evidence: `f/1316/解释/history-recovery.json`. Public engineering expl
 The existing full command is `python -B scripts/run_test_coverage.py --out-dir runs/test-coverage-ci --fail-under 88.98`.
 No claim of a completed local full run is made. Inspect the annotated release tag for the observed full-run
 test count, coverage and same-SHA CI link; no tag is created before success.
+
+
+## Observed implementation CI
+
+Implementation `ddd872f529a3ec4195481a67715f6ad2c3094f38` passed
+[CI 34472496169](https://github.com/wul012/aiproj/actions/runs/34472496169).
+The Unit tests step reported `Ran 3602 tests in 325.058s`, `OK`, `status=pass`, and
+`line_coverage_percent=89.27` against the unchanged `fail_under=88.98`.
+This is remote full-suite evidence, not a completed local coverage run. The documentation receipt
+commit does not change production/test code; its own same-SHA CI must pass before the release tag.

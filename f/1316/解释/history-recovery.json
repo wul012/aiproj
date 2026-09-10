@@ -2,7 +2,7 @@
   "version": "v1316.0.0",
   "implementationBaseline": "949d721de0449b735babc1e8c9e27e940c6f2bb8",
   "publicationBase": "15dedf794b78fd27b34817afb0361bde87a51f06",
-  "state": "local_focused_and_fast_verified",
+  "state": "remote_ci_verified",
   "packageVersion": "0.1.0",
   "scientificVerdictsChanged": false,
   "personalNotesPublished": false,
@@ -205,12 +205,17 @@
     "tinyCheckpointFactoryAstUnchanged": true
   },
   "fullCoverage": {
-    "localStatus": "incomplete_not_passed",
-    "localCompletedRuns": 0,
-    "verificationRoute": "fresh same-SHA GitHub CI",
+    "localStatus": "not_counted",
+    "verificationRoute": "GitHub Actions fresh checkout",
     "command": "python -B scripts/run_test_coverage.py --out-dir runs/test-coverage-ci --fail-under 88.98",
+    "exitCode": 0,
+    "tests": 3602,
+    "testSeconds": 325.058,
+    "lineCoveragePercent": 89.27,
     "floor": 88.98,
-    "resultReceipt": "annotated v1316.0.0 tag; created only after success"
+    "ciRun": 34472496169,
+    "ciUrl": "https://github.com/wul012/aiproj/actions/runs/34472496169",
+    "headSha": "ddd872f529a3ec4195481a67715f6ad2c3094f38"
   },
   "localRuntimeIssues": {
     "incompleteFullRuns": 2,
@@ -226,6 +231,8 @@
   ],
   "publication": {
     "tag": "v1316.0.0",
-    "gate": "Full same-SHA CI success and matching origin/main required before tag."
+    "gate": "Create only after the tag target is pushed and its same-SHA CI succeeds.",
+    "implementationCommit": "ddd872f529a3ec4195481a67715f6ad2c3094f38",
+    "receiptLocation": "annotated release tag"
   }
 }
