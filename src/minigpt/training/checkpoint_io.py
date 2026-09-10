@@ -4,13 +4,19 @@ from __future__ import annotations
 
 import os
 import tempfile
+from collections.abc import Callable
 from pathlib import Path
-from typing import Any
+from typing import IO, Any
 
 import torch
 
 
 def save_checkpoint(checkpoint: dict[str, Any], path: Path) -> None:
+    """Publish checkpoint data with the same single-file write contract."""
+    write_atomically(path, lambda stream: torch.save(checkpoint, stream))
+
+
+def write_atomically(path: Path, write: Callable[[IO[bytes]], object]) -> None:
     """Serialize beside the target, then replace it after closing the file.
 
     The parent must exist. This is a single-file operation, not a transaction
@@ -22,7 +28,7 @@ def save_checkpoint(checkpoint: dict[str, Any], path: Path) -> None:
             mode="wb", prefix=f".{path.name}.", suffix=".tmp", dir=path.parent, delete=False
         ) as stream:
             pending = Path(stream.name)
-            torch.save(checkpoint, stream)
+            write(stream.file)
             stream.flush()
             os.fsync(stream.fileno())
         os.replace(pending, path)

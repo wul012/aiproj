@@ -35,6 +35,7 @@ from minigpt.training.data_prep import (  # noqa: E402
 )
 from minigpt.training.data_quality import build_dataset_quality_report, write_dataset_quality_json, write_dataset_quality_svg  # noqa: E402
 from minigpt.training.history import TrainingRecord, append_record, load_records, summarize_records, write_loss_curve_svg  # noqa: E402
+from minigpt.training.history_recovery import recover_history, snapshot_history  # noqa: E402
 from minigpt.training.rng_state import capture_rng_state, restore_rng_state  # noqa: E402
 from minigpt.training.tokenizer_binding import tokenizer_digest, validate_tokenizer_binding  # noqa: E402
 from minigpt.reports.manifest import (  # noqa: E402
@@ -261,6 +262,12 @@ def main(argv: Sequence[str] | None = None) -> int:
             "Use a larger --max-iters target."
         )
 
+    history_path = args.out_dir / "metrics.jsonl"
+    if checkpoint is not None and args.out_dir.resolve() == args.resume.parent.resolve():
+        backup = recover_history(history_path, checkpoint)
+        if backup is not None:
+            print(f"history_recovered={backup}")
+
     print(f"device={device}")
     print(f"tokenizer={getattr(tokenizer, 'name', 'unknown')}")
     print(f"tokens={len(token_ids)} vocab_size={tokenizer.vocab_size}")
@@ -302,7 +309,6 @@ def main(argv: Sequence[str] | None = None) -> int:
         write_dataset_version_html(version_manifest, args.out_dir / "dataset_version.html")
     elif args.prepared_data is not None:
         copy_prepared_artifacts(args.prepared_data, args.out_dir)
-    history_path = args.out_dir / "metrics.jsonl"
     if args.resume is None and history_path.exists():
         history_path.unlink()
 
@@ -379,6 +385,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         "last_loss": last_loss,
         "step": args.max_iters,
         "history_file": "metrics.jsonl",
+        "history_state": snapshot_history(history_path),
         "sample_file": None if args.no_sample else "sample.txt",
         "tokenizer_type": getattr(tokenizer, "name", "unknown"),
         "tokenizer_sha256": tokenizer_digest(tokenizer),

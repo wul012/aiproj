@@ -18,7 +18,7 @@ from tests._bootstrap import ensure_src_path
 from minigpt.training.checkpoint_io import save_checkpoint
 from minigpt.training.rng_state import capture_rng_state, restore_rng_state
 from scripts import train
-from tests.model_cli_fixtures import make_tiny_checkpoint
+from tests.model_cli_fixtures import make_tiny_checkpoint, tiny_resume_args
 
 ensure_src_path()
 
@@ -178,25 +178,7 @@ class TrainSaveTests(unittest.TestCase):
         torch.set_num_threads(self.threads)
 
     def run_train(self, checkpoint: Path, data: Path, step: int) -> str:
-        args = [
-            "--resume",
-            str(checkpoint),
-            "--data",
-            str(data),
-            "--max-iters",
-            str(step),
-            "--batch-size",
-            "2",
-            "--eval-interval",
-            "1",
-            "--eval-iters",
-            "1",
-            "--no-sample",
-            "--device",
-            "cpu",
-            "--train-ratio",
-            "0.5",
-        ]
+        args = tiny_resume_args(checkpoint, data, step)
         with contextlib.redirect_stdout(io.StringIO()) as output:
             self.assertEqual(train.main(args), 0)
         return output.getvalue()

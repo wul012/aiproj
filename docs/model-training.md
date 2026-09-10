@@ -63,3 +63,21 @@ field remain loadable for backward compatibility and have no retrospective ident
 This is an accidental-pairing guard, not authenticity, source-data, hyperparameter or cross-device
 verification. It does not migrate inference tools or rewrite historical checkpoints. See
 [v1315 tokenizer binding](v1315-tokenizer-binding.md).
+
+## Same-run history recovery
+
+Since v1316, new checkpoints include `history_state`: version 1, the committed metrics.jsonl byte
+size, and its SHA-256 digest. When resuming into the checkpoint's own directory, train.py verifies
+that exact byte prefix before output writes. Any extra suffix, including a partial JSON/UTF-8 write,
+is excluded from the retried history only after preserving the entire original file as
+`metrics-<12-hex-digest>.jsonl`. Recovery prints `history_recovered=<backup>` when it acts.
+Backup conflicts, missing/altered committed bytes and publication failures stop the run.
+
+Backups are retained recovery evidence; they are not automatically deleted or used as metrics inputs.
+Missing legacy metadata keeps previous behavior. Explicit resume into a different output directory
+also keeps previous behavior: it neither repairs nor imports the original directory's history.
+This is a single-writer, file-sized-memory operation, not a transaction over all run artifacts or
+a directory-entry power-loss durability guarantee. RNG and tokenizer guards remain independent.
+
+Reproduce: `python -B -m unittest tests.test_history_recovery tests.test_checkpoint_io tests.test_resume_rng -v`.
+See [v1316 scope and evidence](v1316-history-recovery.md).

@@ -15,7 +15,7 @@ from minigpt.training.rng_state import capture_rng_state, restore_rng_state
 from minigpt.training.tokenizer_binding import tokenizer_digest, validate_tokenizer_binding
 from minigpt.core.tokenizer import BPETokenizer, CharTokenizer, load_tokenizer
 from scripts import train
-from tests.model_cli_fixtures import make_tiny_checkpoint
+from tests.model_cli_fixtures import make_tiny_checkpoint, tiny_resume_args
 
 ensure_src_path()
 
@@ -51,25 +51,7 @@ class TokenizerResumeTests(unittest.TestCase):
             run = root / "run"
             run.mkdir()
             checkpoint, tokenizer, data, _ = make_tiny_checkpoint(run)
-            args = [
-                "--resume",
-                str(checkpoint),
-                "--data",
-                str(data),
-                "--max-iters",
-                "2",
-                "--batch-size",
-                "2",
-                "--eval-interval",
-                "1",
-                "--eval-iters",
-                "1",
-                "--no-sample",
-                "--device",
-                "cpu",
-                "--train-ratio",
-                "0.5",
-            ]
+            args = tiny_resume_args(checkpoint, data, 2)
             with contextlib.redirect_stdout(io.StringIO()):
                 self.assertEqual(train.main(args), 0)
             payload = json.loads(tokenizer.read_text(encoding="utf-8"))

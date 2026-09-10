@@ -1,0 +1,231 @@
+{
+  "version": "v1316.0.0",
+  "implementationBaseline": "949d721de0449b735babc1e8c9e27e940c6f2bb8",
+  "publicationBase": "15dedf794b78fd27b34817afb0361bde87a51f06",
+  "state": "local_focused_and_fast_verified",
+  "packageVersion": "0.1.0",
+  "scientificVerdictsChanged": false,
+  "personalNotesPublished": false,
+  "redControl": {
+    "command": "python -B -m unittest tests.test_history_recovery -v",
+    "exitCode": 1,
+    "actualSteps": [
+      2,
+      3,
+      3
+    ],
+    "expectedSteps": [
+      2,
+      3
+    ],
+    "assertionUnchanged": true
+  },
+  "focused": {
+    "command": "python -B -m unittest tests.test_history_recovery tests.test_checkpoint_io tests.test_tokenizer_binding tests.test_rng_state tests.test_resume_rng tests.test_model_cli_behavior tests.test_architecture_boundaries -v",
+    "exitCode": 0,
+    "tests": 40,
+    "seconds": 13.108
+  },
+  "independentCli": {
+    "status": "pass",
+    "independentProcesses": 4,
+    "checks": {
+      "checkpoint_survived_failed_save": true,
+      "model_exact": true,
+      "optimizer_exact": true,
+      "metrics_bytes_exact": true,
+      "summary_bytes_exact": true,
+      "history_marker_exact": true,
+      "backup_exact": true,
+      "recovery_announced": true,
+      "two_records_only": true
+    },
+    "torch": "2.12.0+cpu",
+    "device": "cpu"
+  },
+  "fastCiCommands": [
+    {
+      "name": "check_source_encoding",
+      "command": "python -B scripts/check_source_encoding.py --out-dir runs/source-encoding-hygiene-ci",
+      "exit": 0,
+      "seconds": 14.88,
+      "signal": "status=pass"
+    },
+    {
+      "name": "check_project_docs_readability",
+      "command": "python -B scripts/check_project_docs_readability.py --out-dir runs/project-docs-readability-ci --require-pass --force",
+      "exit": 0,
+      "seconds": 0.16,
+      "signal": "status=pass"
+    },
+    {
+      "name": "check_ci_workflow_hygiene",
+      "command": "python -B scripts/check_ci_workflow_hygiene.py --out-dir runs/ci-workflow-hygiene-ci",
+      "exit": 0,
+      "seconds": 2.171,
+      "signal": "status=pass"
+    },
+    {
+      "name": "check_static_analysis",
+      "command": "python -B scripts/check_static_analysis.py --out-dir runs/static-analysis-ci",
+      "exit": 0,
+      "seconds": 0.492,
+      "signal": "status=pass"
+    },
+    {
+      "name": "check_name_budget",
+      "command": "python -B scripts/check_name_budget.py --out-dir runs/name-budget-ci",
+      "exit": 0,
+      "seconds": 2.766,
+      "signal": "status=pass"
+    },
+    {
+      "name": "check_type_analysis",
+      "command": "python -B scripts/check_type_analysis.py --out-dir runs/type-analysis-ci",
+      "exit": 0,
+      "seconds": 0.513,
+      "signal": "status=pass"
+    },
+    {
+      "name": "check_model_capability_honest_measurement",
+      "command": "python -B scripts/check_model_capability_honest_measurement.py --out-dir runs/model-capability-honest-measurement-ci",
+      "exit": 0,
+      "seconds": 0.187,
+      "signal": "status=pass"
+    },
+    {
+      "name": "check_artifact_schema_guard",
+      "command": "python -B scripts/check_artifact_schema_guard.py --out-dir runs/artifact-schema-guard-ci",
+      "exit": 0,
+      "seconds": 0.184,
+      "signal": "status=pass"
+    },
+    {
+      "name": "check_file_size_ratchet",
+      "command": "python -B scripts/check_file_size_ratchet.py --out-dir runs/file-size-ratchet-ci",
+      "exit": 0,
+      "seconds": 1.574,
+      "signal": "status=pass"
+    },
+    {
+      "name": "check_elegance_ratchet",
+      "command": "python -B scripts/check_elegance_ratchet.py --out-dir runs/elegance-ratchet-ci",
+      "exit": 0,
+      "seconds": 7.408,
+      "signal": "status=pass"
+    },
+    {
+      "name": "check_aiproj_track_closeout",
+      "command": "python -B scripts/check_aiproj_track_closeout.py --out-dir runs/aiproj-track-closeout-ci",
+      "exit": 0,
+      "seconds": 0.18,
+      "signal": "status=pass"
+    },
+    {
+      "name": "check_archived_path_portability",
+      "command": "python -B scripts/check_archived_path_portability.py --out-dir runs/archived-path-portability-ci",
+      "exit": 0,
+      "seconds": 0.154,
+      "signal": "status=pass"
+    },
+    {
+      "name": "check_promoted_seed_handoff_assurance_smoke",
+      "command": "python -B scripts/check_promoted_seed_handoff_assurance_smoke.py --out-dir runs/promoted-seed-handoff-assurance-smoke-ci",
+      "exit": 0,
+      "seconds": 0.632,
+      "signal": "status=pass"
+    },
+    {
+      "name": "run_ci_promoted_seed_receipt_contract_failure_smoke",
+      "command": "python -B scripts/run_ci_promoted_seed_receipt_contract_failure_smoke.py --out-dir runs/promoted-seed-receipt-contract-failure-smoke-ci --force",
+      "exit": 0,
+      "seconds": 0.658,
+      "signal": "receipt_contract_summary_check_failure_smoke_status=pass"
+    },
+    {
+      "name": "check_ci_promoted_seed_receipt_contract_failure_smoke_plan",
+      "command": "python -B scripts/check_ci_promoted_seed_receipt_contract_failure_smoke_plan.py runs/promoted-seed-receipt-contract-failure-smoke-ci --out-dir runs/ci-promoted-seed-receipt-contract-failure-smoke-plan-check-ci",
+      "exit": 0,
+      "seconds": 0.154,
+      "signal": "status=pass"
+    },
+    {
+      "name": "run_ci_tiny_scorecard_comparison_smoke",
+      "command": "python -B scripts/run_ci_tiny_scorecard_comparison_smoke.py --out-dir runs/tiny-scorecard-comparison-smoke-ci --summary-check-out-dir runs/tiny-scorecard-comparison-smoke-check-ci --force",
+      "exit": 0,
+      "seconds": 26.557,
+      "signal": "status=pass"
+    },
+    {
+      "name": "check_ci_tiny_scorecard_plan",
+      "command": "python -B scripts/check_ci_tiny_scorecard_plan.py runs/tiny-scorecard-comparison-smoke-ci --out-dir runs/ci-tiny-scorecard-plan-check-ci",
+      "exit": 0,
+      "seconds": 0.153,
+      "signal": "status=pass"
+    },
+    {
+      "name": "run_ci_baseline_candidate_threshold_boundary_gate_check",
+      "command": "python -B scripts/run_ci_baseline_candidate_threshold_boundary_gate_check.py --out-dir runs/baseline-candidate-threshold-boundary-gate-check-ci --force",
+      "exit": 0,
+      "seconds": 0.559,
+      "signal": "status=pass"
+    },
+    {
+      "name": "check_ci_baseline_candidate_threshold_boundary_gate_plan",
+      "command": "python -B scripts/check_ci_baseline_candidate_threshold_boundary_gate_plan.py runs/baseline-candidate-threshold-boundary-gate-check-ci --out-dir runs/ci-baseline-candidate-threshold-boundary-gate-plan-check-ci",
+      "exit": 0,
+      "seconds": 0.158,
+      "signal": "status=pass"
+    },
+    {
+      "name": "check_release_readiness_drift_contract_smoke",
+      "command": "python -B scripts/check_release_readiness_drift_contract_smoke.py --out-dir runs/release-readiness-drift-contract-smoke-ci",
+      "exit": 0,
+      "seconds": 0.351,
+      "signal": "status=pass"
+    },
+    {
+      "name": "check_normalization_guard",
+      "command": "python -B scripts/check_normalization_guard.py",
+      "exit": 0,
+      "seconds": 10.915,
+      "tests": 136,
+      "testSeconds": 8.304,
+      "terminal": "OK"
+    }
+  ],
+  "strictTypes": {
+    "command": "python -B -m mypy --strict src/minigpt/training/checkpoint_io.py src/minigpt/training/history_recovery.py",
+    "exitCode": 0,
+    "output": "Success: no issues found in 2 source files"
+  },
+  "preservedTests": {
+    "assertionAstUnchanged": true,
+    "argumentVectorsUnchanged": true,
+    "tinyCheckpointFactoryAstUnchanged": true
+  },
+  "fullCoverage": {
+    "localStatus": "incomplete_not_passed",
+    "localCompletedRuns": 0,
+    "verificationRoute": "fresh same-SHA GitHub CI",
+    "command": "python -B scripts/run_test_coverage.py --out-dir runs/test-coverage-ci --fail-under 88.98",
+    "floor": 88.98,
+    "resultReceipt": "annotated v1316.0.0 tag; created only after success"
+  },
+  "localRuntimeIssues": {
+    "incompleteFullRuns": 2,
+    "supplementaryScopedExit": -1073741819,
+    "cause": "undetermined",
+    "productChangesForFailure": false
+  },
+  "boundaries": [
+    "Same-run recovery only; explicit different output leaves source unchanged.",
+    "Legacy history without a marker cannot be retrospectively verified.",
+    "Backups are retained runtime evidence, not scratch.",
+    "Single writer and file-sized memory; no directory transaction or power-loss guarantee."
+  ],
+  "publication": {
+    "tag": "v1316.0.0",
+    "gate": "Full same-SHA CI success and matching origin/main required before tag."
+  }
+}

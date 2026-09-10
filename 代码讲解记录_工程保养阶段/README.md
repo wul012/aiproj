@@ -373,3 +373,4 @@
 - [v1313 训练断点随机状态与可复现续跑](1266-v1313-checkpoint-rng.md)
 - [v1314 checkpoint 写入失败保护](1267-v1314-checkpoint-write.md)
 - [v1315 tokenizer 语义绑定](1268-v1315-tokenizer-binding.md)
+- [v1316 checkpoint 与指标日志恢复边界](1269-v1316-history-recovery.md)

@@ -7,10 +7,10 @@ import torch
 
 from tests._bootstrap import ensure_src_path
 
-ensure_src_path()
-
 from minigpt.core.model import GPTConfig, MiniGPT
 from minigpt.core.tokenizer import CharTokenizer
+
+ensure_src_path()
 
 
 def make_tiny_checkpoint(root: Path) -> tuple[Path, Path, Path, Path]:
@@ -68,4 +68,26 @@ def make_tiny_checkpoint(root: Path) -> tuple[Path, Path, Path, Path]:
     return checkpoint_path, tokenizer_path, data_path, suite_path
 
 
-__all__ = ["make_tiny_checkpoint"]
+def tiny_resume_args(checkpoint: Path, data: Path, step: int) -> list[str]:
+    return [
+        "--resume",
+        str(checkpoint),
+        "--data",
+        str(data),
+        "--max-iters",
+        str(step),
+        "--batch-size",
+        "2",
+        "--eval-interval",
+        "1",
+        "--eval-iters",
+        "1",
+        "--no-sample",
+        "--device",
+        "cpu",
+        "--train-ratio",
+        "0.5",
+    ]
+
+
+__all__ = ["make_tiny_checkpoint", "tiny_resume_args"]
