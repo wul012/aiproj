@@ -24,6 +24,7 @@ from minigpt.core.dataset import get_batch, load_text, split_token_ids  # noqa: 
 from minigpt.core.model import GPTConfig, MiniGPT  # noqa: E402
 from minigpt.core.tokenizer import BPETokenizer, CharTokenizer, Tokenizer, load_tokenizer  # noqa: E402
 from minigpt.training.checkpoint_io import save_checkpoint  # noqa: E402
+from minigpt.training.data_binding import build_data_binding, validate_data_binding  # noqa: E402
 from minigpt.training.data_prep import (  # noqa: E402
     build_dataset_report,
     build_dataset_version_manifest,
@@ -249,6 +250,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         )
 
     token_ids = tokenizer.encode(text)
+    if checkpoint is not None:
+        validate_data_binding(checkpoint, text, args.train_ratio)
     train_data, val_data = split_token_ids(token_ids, train_ratio=args.train_ratio)
     validate_splits(len(train_data), len(val_data), config.block_size)
 
@@ -389,6 +392,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         "last_loss": last_loss,
         "step": args.max_iters,
         "history_file": "metrics.jsonl",
+        "data_binding": build_data_binding(text, args.train_ratio),
         "history_state": snapshot_history(history_path),
         "sample_file": None if args.no_sample else "sample.txt",
         "tokenizer_type": getattr(tokenizer, "name", "unknown"),

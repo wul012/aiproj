@@ -116,3 +116,24 @@ not be mistaken for a promise that the whole rejected CLI invocation leaves glob
 
 Reproduce: `python -B -m unittest tests.test_rng_validation tests.test_rng_state tests.test_resume_rng -v`.
 See [v1318 scope and evidence](v1318-rng-validation.md).
+
+## Training data identity on resume
+
+Since v1319, newly written checkpoints include an optional version-1 `data_binding` containing
+the SHA-256 of the exact UTF-8 text loaded by the run, its character length and `train_ratio`.
+Resume compares this semantic input identity before splitting tokens, recovering history or writing
+outputs. A same-vocabulary text edit and a changed split ratio therefore fail closed. The source path
+is not hashed: identical content at a different path remains a valid branch when the output directory
+is explicitly different.
+
+Checkpoints without `data_binding` remain legacy-loadable. The binding is an accidental-drift guard,
+not file authenticity, tokenizer identity, optimizer/config validation or cross-device determinism.
+Data-directory preparation and ordering keep their existing contract. See [v1319 evidence](v1319-data-binding.md).
+
+Only a missing field is legacy: explicit null, invalid version/length/ratio or a mismatched digest
+is rejected. The digest is over the loader's resulting text, not raw source-file bytes; existing
+universal-newline decoding and dataset preparation still apply. For example, CRLF and LF source
+files loading to the same text have the same identity. `text_length` counts characters, not tokens.
+A different output directory does not bypass data validation: it only allows the existing same-input
+branch workflow. Changing corpus or ratio is intentionally no longer accepted as an exact resume of
+a newly bound checkpoint; this release adds no fine-tuning override or automatic historical rewrite.
