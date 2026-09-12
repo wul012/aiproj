@@ -13,7 +13,7 @@ A tiny Transformer lab for reproducible experiments and mechanistic interpretati
 
 ## 核心能力
 
-[v1319 训练数据绑定](docs/v1319-data-binding.md) · [随机状态校验](docs/v1318-rng-validation.md)
+[公平的模型对比评测](docs/v1320-paired-evaluation.md) · [查看真实运行示例](f/1320/解释/demo/comparison.md)
 
 - **模型实现** — 因果多头注意力、分词、训练/评估、自回归采样与 checkpoint 续训。
 - **推理与微调** — LoRA、RoPE 和 KV Cache，配套缓存前向、权重合并的数值一致性测试。
@@ -29,6 +29,19 @@ python -m venv .venv
 python -m pip install -r requirements.txt
 python -B -m unittest tests.test_model tests.test_kv_cache tests.test_lora tests.test_rope
 ```
+
+### 实际比较两个模型，不只看测试绿灯
+
+下面直接使用仓库附带的两个小模型，无需重新训练。双方在相同的 64 个文本窗口上评估，
+输出平均 loss、困惑度和改善/退化最大的片段：
+
+```powershell
+python -B scripts/evaluate.py --checkpoint f/1320/解释/demo/baseline.pt --compare-with f/1320/解释/demo/candidate.pt --data f/1320/解释/demo/eval.txt --split all --windows 64 --batch-size 8 --device cpu --out runs/paired-demo.json
+```
+
+这个受控示例中，候选模型训练了 40 步，却只改善了 28 个窗口、退化了 36 个窗口，平均 loss 从
+1.8217 升至 4.5738：`abc` 模式学得更好，但对 `cba` 模式更差。它展示如何定位退化，
+**不是泛化能力实验，也不是“训练越多一定越好”的证明**。[协议与使用边界](docs/v1320-paired-evaluation.md)
 
 ## 代码入口
 

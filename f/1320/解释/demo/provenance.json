@@ -1,0 +1,65 @@
+{
+  "purpose": "Controlled evaluator demonstration, NOT heldout generalization evidence",
+  "seed": 31415,
+  "optimizer": "AdamW",
+  "learning_rate": 0.01,
+  "training_steps": 40,
+  "training_text": "abc abc abc abc abc abc abc abc abc abc abc abc abc abc abc abc abc abc abc abc abc abc abc abc abc abc abc abc abc abc abc abc abc abc abc abc abc abc abc abc abc abc abc abc abc abc abc abc abc abc \n",
+  "training_sha256": "c8095a7f44cb07f54ba2eea9dbbd003b30cab7c18d18a71e3f14212a86107470",
+  "config": {
+    "vocab_size": 6,
+    "block_size": 8,
+    "n_layer": 1,
+    "n_head": 2,
+    "n_embd": 16,
+    "dropout": 0.1,
+    "bias": true,
+    "use_rope": false,
+    "rope_base": 10000.0
+  },
+  "torch": "2.12.0+cpu",
+  "device": "cpu",
+  "evaluation_command": [
+    "python",
+    "-B",
+    "scripts/evaluate.py",
+    "--checkpoint",
+    "f/1320/解释/demo/baseline.pt",
+    "--compare-with",
+    "f/1320/解释/demo/candidate.pt",
+    "--data",
+    "f/1320/解释/demo/eval.txt",
+    "--split",
+    "all",
+    "--windows",
+    "64",
+    "--batch-size",
+    "8",
+    "--device",
+    "cpu",
+    "--out",
+    "f/1320/解释/demo/comparison.json"
+  ],
+  "observed": {
+    "baseline": {
+      "loss": 1.8216619361191988,
+      "perplexity": 6.182124212521994
+    },
+    "candidate": {
+      "loss": 4.573826997875585,
+      "perplexity": 96.91429176689368
+    },
+    "delta_loss": 2.7521650617563864,
+    "improved_windows": 28,
+    "regressed_windows": 36,
+    "tied_windows": 0
+  },
+  "batch_size": 8,
+  "weight_decay": 0.01,
+  "betas": [
+    0.9,
+    0.999
+  ],
+  "eps": 1e-08,
+  "checkpoint_format": "model and config only; no optimizer/RNG resume state in this evaluation-only demo"
+}

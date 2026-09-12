@@ -1,0 +1,230 @@
+{
+  "version": "v1320.0.0",
+  "baseline": "c01272847fd127f58924868b58ad32996de4f2dc",
+  "state": "local_demo_focused_and_fast_verified",
+  "outcome": "Fair same-window checkpoint comparisons with per-window NLL regression localization",
+  "packageVersion": "0.1.0",
+  "historicalScientificVerdictsChanged": false,
+  "personalNotesPublished": false,
+  "redControl": {
+    "command": "python -B -m unittest tests.test_eval_pairs -v",
+    "exitCode": 1,
+    "failure": "different widths consume global RNG differently and evaluate different windows",
+    "assertionUnchanged": true
+  },
+  "focused": {
+    "command": "python -B -m unittest tests.test_eval_pairs tests.test_model_cli_behavior tests.test_eval_suite tests.test_architecture_boundaries tests.test_script_import_boundaries -v",
+    "exitCode": 0,
+    "tests": 40,
+    "seconds": 4.036,
+    "newTestMethods": 11
+  },
+  "demonstration": {
+    "purpose": "controlled evaluator demonstration; not heldout generalization evidence",
+    "files": {
+      "baseline.pt": "42c25f6d4565796a41499f9ca3729677fe328be1e37deca63058a03fe742b795",
+      "candidate.pt": "072881ff820f7b6bc1783ac8e174893a386bd4cbf17980f42cde694f8502e8a0"
+    },
+    "observed": {
+      "baseline": {
+        "loss": 1.8216619361191988,
+        "perplexity": 6.182124212521994
+      },
+      "candidate": {
+        "loss": 4.573826997875585,
+        "perplexity": 96.91429176689368
+      },
+      "delta_loss": 2.7521650617563864,
+      "improved_windows": 28,
+      "regressed_windows": 36,
+      "tied_windows": 0
+    },
+    "trainingSteps": 40,
+    "seed": 31415,
+    "device": "cpu",
+    "replay": "python -B scripts/evaluate.py --checkpoint f/1320/解释/demo/baseline.pt --compare-with f/1320/解释/demo/candidate.pt --data f/1320/解释/demo/eval.txt --split all --windows 64 --batch-size 8 --device cpu --out runs/paired-demo.json",
+    "digestScope": "Binary checkpoint bytes; loaded text and tokenizer semantic hashes are recorded in comparison.json. Text artifact CRLF/LF serialization is not byte-pinned."
+  },
+  "checks": [
+    "Actual forward inputs match across widths/context limits",
+    "Per-token manual CE and uniform logits oracle",
+    "Same model zero delta; swapping labels reverses sign",
+    "Window plan independent of global RNG and batch regrouping",
+    "Tokenizer mismatch/too-short validation/nonfinite loss rejected",
+    "Training/core/old experiments/fixtures unchanged"
+  ],
+  "fullCoverage": {
+    "verificationRoute": "fresh same-SHA GitHub CI",
+    "command": "python -B scripts/run_test_coverage.py --out-dir runs/test-coverage-ci --fail-under 88.98",
+    "floor": 88.98,
+    "resultReceipt": "annotated v1320.0.0 only after same-SHA full CI success"
+  },
+  "boundaries": [
+    "fixed_windows_v1 changes historical random-batch metrics; re-evaluate both checkpoints",
+    "Overlapping windows are correlated; no significance or model-ranking claim",
+    "Same tokenizer semantics required; text snippets appear in reports",
+    "Training/holdout provenance not certified; example repeats training pattern"
+  ],
+  "publication": {
+    "tag": "v1320.0.0",
+    "gate": "Pushed target must pass same-SHA full CI before tag creation"
+  },
+  "staticChecks": {
+    "ruff": "All checks passed!",
+    "strictMypy": "Success: no issues found in 2 source files",
+    "scope": [
+      "src/minigpt/evaluation/windows.py",
+      "src/minigpt/evaluation/paired.py"
+    ]
+  },
+  "fastCiCommands": [
+    {
+      "name": "check_source_encoding",
+      "command": "python -B scripts/check_source_encoding.py --out-dir runs/source-encoding-hygiene-ci",
+      "exit": 0,
+      "seconds": 14.345,
+      "signal": "status=pass"
+    },
+    {
+      "name": "check_project_docs_readability",
+      "command": "python -B scripts/check_project_docs_readability.py --out-dir runs/project-docs-readability-ci --require-pass --force",
+      "exit": 0,
+      "seconds": 0.155,
+      "signal": "status=pass"
+    },
+    {
+      "name": "check_ci_workflow_hygiene",
+      "command": "python -B scripts/check_ci_workflow_hygiene.py --out-dir runs/ci-workflow-hygiene-ci",
+      "exit": 0,
+      "seconds": 2.304,
+      "signal": "status=pass"
+    },
+    {
+      "name": "check_static_analysis",
+      "command": "python -B scripts/check_static_analysis.py --out-dir runs/static-analysis-ci",
+      "exit": 0,
+      "seconds": 0.529,
+      "signal": "status=pass"
+    },
+    {
+      "name": "check_name_budget",
+      "command": "python -B scripts/check_name_budget.py --out-dir runs/name-budget-ci",
+      "exit": 0,
+      "seconds": 2.95,
+      "signal": "status=pass"
+    },
+    {
+      "name": "check_type_analysis",
+      "command": "python -B scripts/check_type_analysis.py --out-dir runs/type-analysis-ci",
+      "exit": 0,
+      "seconds": 0.562,
+      "signal": "status=pass"
+    },
+    {
+      "name": "check_model_capability_honest_measurement",
+      "command": "python -B scripts/check_model_capability_honest_measurement.py --out-dir runs/model-capability-honest-measurement-ci",
+      "exit": 0,
+      "seconds": 0.151,
+      "signal": "status=pass"
+    },
+    {
+      "name": "check_artifact_schema_guard",
+      "command": "python -B scripts/check_artifact_schema_guard.py --out-dir runs/artifact-schema-guard-ci",
+      "exit": 0,
+      "seconds": 0.155,
+      "signal": "status=pass"
+    },
+    {
+      "name": "check_file_size_ratchet",
+      "command": "python -B scripts/check_file_size_ratchet.py --out-dir runs/file-size-ratchet-ci",
+      "exit": 0,
+      "seconds": 1.534,
+      "signal": "status=pass"
+    },
+    {
+      "name": "check_elegance_ratchet",
+      "command": "python -B scripts/check_elegance_ratchet.py --out-dir runs/elegance-ratchet-ci",
+      "exit": 0,
+      "seconds": 7.282,
+      "signal": "status=pass"
+    },
+    {
+      "name": "check_aiproj_track_closeout",
+      "command": "python -B scripts/check_aiproj_track_closeout.py --out-dir runs/aiproj-track-closeout-ci",
+      "exit": 0,
+      "seconds": 0.204,
+      "signal": "status=pass"
+    },
+    {
+      "name": "check_archived_path_portability",
+      "command": "python -B scripts/check_archived_path_portability.py --out-dir runs/archived-path-portability-ci",
+      "exit": 0,
+      "seconds": 0.17,
+      "signal": "status=pass"
+    },
+    {
+      "name": "check_promoted_seed_handoff_assurance_smoke",
+      "command": "python -B scripts/check_promoted_seed_handoff_assurance_smoke.py --out-dir runs/promoted-seed-handoff-assurance-smoke-ci",
+      "exit": 0,
+      "seconds": 0.753,
+      "signal": "status=pass"
+    },
+    {
+      "name": "run_ci_promoted_seed_receipt_contract_failure_smoke",
+      "command": "python -B scripts/run_ci_promoted_seed_receipt_contract_failure_smoke.py --out-dir runs/promoted-seed-receipt-contract-failure-smoke-ci --force",
+      "exit": 0,
+      "seconds": 0.716,
+      "signal": "receipt_contract_summary_check_failure_smoke_status=pass"
+    },
+    {
+      "name": "check_ci_promoted_seed_receipt_contract_failure_smoke_plan",
+      "command": "python -B scripts/check_ci_promoted_seed_receipt_contract_failure_smoke_plan.py runs/promoted-seed-receipt-contract-failure-smoke-ci --out-dir runs/ci-promoted-seed-receipt-contract-failure-smoke-plan-check-ci",
+      "exit": 0,
+      "seconds": 0.151,
+      "signal": "status=pass"
+    },
+    {
+      "name": "run_ci_tiny_scorecard_comparison_smoke",
+      "command": "python -B scripts/run_ci_tiny_scorecard_comparison_smoke.py --out-dir runs/tiny-scorecard-comparison-smoke-ci --summary-check-out-dir runs/tiny-scorecard-comparison-smoke-check-ci --force",
+      "exit": 0,
+      "seconds": 27.322,
+      "signal": "status=pass"
+    },
+    {
+      "name": "check_ci_tiny_scorecard_plan",
+      "command": "python -B scripts/check_ci_tiny_scorecard_plan.py runs/tiny-scorecard-comparison-smoke-ci --out-dir runs/ci-tiny-scorecard-plan-check-ci",
+      "exit": 0,
+      "seconds": 0.183,
+      "signal": "status=pass"
+    },
+    {
+      "name": "run_ci_baseline_candidate_threshold_boundary_gate_check",
+      "command": "python -B scripts/run_ci_baseline_candidate_threshold_boundary_gate_check.py --out-dir runs/baseline-candidate-threshold-boundary-gate-check-ci --force",
+      "exit": 0,
+      "seconds": 0.633,
+      "signal": "status=pass"
+    },
+    {
+      "name": "check_ci_baseline_candidate_threshold_boundary_gate_plan",
+      "command": "python -B scripts/check_ci_baseline_candidate_threshold_boundary_gate_plan.py runs/baseline-candidate-threshold-boundary-gate-check-ci --out-dir runs/ci-baseline-candidate-threshold-boundary-gate-plan-check-ci",
+      "exit": 0,
+      "seconds": 0.193,
+      "signal": "status=pass"
+    },
+    {
+      "name": "check_release_readiness_drift_contract_smoke",
+      "command": "python -B scripts/check_release_readiness_drift_contract_smoke.py --out-dir runs/release-readiness-drift-contract-smoke-ci",
+      "exit": 0,
+      "seconds": 0.431,
+      "signal": "status=pass"
+    },
+    {
+      "name": "check_normalization_guard",
+      "command": "python -B scripts/check_normalization_guard.py",
+      "exit": 0,
+      "seconds": 10.887,
+      "tests": 136,
+      "terminal": "OK"
+    }
+  ]
+}

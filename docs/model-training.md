@@ -12,6 +12,35 @@ Late-stage governance should not hide the model layer. After several publication
 
 See [Model capability cadence](model-capability-cadence.md) for the maintenance rule that keeps governance and readability work from replacing real model checks.
 
+## Compare checkpoints on the same data windows
+
+Use the existing evaluation entrypoint with `--compare-with`:
+
+```powershell
+python -B scripts/evaluate.py --checkpoint runs/baseline/checkpoint.pt --compare-with runs/candidate/checkpoint.pt --data data/heldout.txt --split all --windows 128 --batch-size 16 --device cpu --out runs/comparison.json
+```
+
+The candidate must use the same tokenizer semantics (a separate file can be supplied with
+`--candidate-tokenizer`). By default, both models use the smaller supported context; set
+`--context-size` to fix it across multiple comparisons. A private RNG chooses one unique-offset plan,
+independent of model initialization. With explicit `--windows`, `--batch-size` only groups execution.
+The JSON contains all paired window losses, offsets, source/checkpoint hashes and sampling settings;
+the adjacent Markdown shows aggregate NLL/perplexity and the top five improvements/regressions.
+Negative candidate-minus-baseline NLL is better on these windows; it is not a global model ranking.
+
+The new `fixed_windows_v1` protocol samples without replacement, caps at available starts, and never
+substitutes training data for a short validation slice. With no `--windows`, requested count remains
+`eval-iters * batch-size`. Existing single-checkpoint report keys remain, but its numerical evaluation
+protocol has changed: do not compare new losses directly with old random-batch reports. train.py's
+training-time metrics and archived experimental protocols are unchanged. `--split all` treats the
+supplied file as evaluation data; it does not establish whether that file was held out from training.
+For train/val, the requested ratio must agree with the experiment's intended split; it is not inferred.
+
+See the [replayable demo and interpretation](../f/1320/解释/说明.md) and
+[complete comparison protocol](v1320-paired-evaluation.md). Overlapping windows are correlated,
+unknown tokens are counted, and this version does not compute statistical significance or certify
+generation quality. Diagnostic reports include short corpus snippets; keep private evaluation data private.
+
 ## Step-boundary resume reproducibility
 
 Since v1313, `scripts/train.py` saves an optional version-1 `rng_state` alongside the

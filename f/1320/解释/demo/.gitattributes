@@ -1,0 +1,2 @@
+# Spaces delimit tokens in this evaluation corpus; they are data, not code formatting.
+eval.txt text eol=lf whitespace=-blank-at-eol

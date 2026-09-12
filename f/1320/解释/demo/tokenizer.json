@@ -1,0 +1,12 @@
+{
+  "type": "char",
+  "itos": [
+    "<unk>",
+    "\n",
+    " ",
+    "a",
+    "b",
+    "c"
+  ],
+  "unk_token": "<unk>"
+}
