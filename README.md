@@ -13,7 +13,7 @@ A tiny Transformer lab for reproducible experiments and mechanistic interpretati
 
 ## 核心能力
 
-[v1317 训练前置校验](docs/v1317-train-preflight.md) · [日志恢复](docs/v1316-history-recovery.md)
+[v1318 随机状态校验](docs/v1318-rng-validation.md) · [训练前置校验](docs/v1317-train-preflight.md)
 
 - **模型实现** — 因果多头注意力、分词、训练/评估、自回归采样与 checkpoint 续训。
 - **推理与微调** — LoRA、RoPE 和 KV Cache，配套缓存前向、权重合并的数值一致性测试。

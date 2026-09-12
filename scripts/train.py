@@ -37,7 +37,7 @@ from minigpt.training.data_quality import build_dataset_quality_report, write_da
 from minigpt.training.history import TrainingRecord, append_record, load_records, summarize_records, write_loss_curve_svg  # noqa: E402
 from minigpt.training.history_recovery import recover_history, snapshot_history  # noqa: E402
 from minigpt.training.preflight import validate_options, validate_splits  # noqa: E402
-from minigpt.training.rng_state import capture_rng_state, restore_rng_state  # noqa: E402
+from minigpt.training.rng_state import capture_rng_state, restore_rng_state, validate_rng_state  # noqa: E402
 from minigpt.training.tokenizer_binding import tokenizer_digest, validate_tokenizer_binding  # noqa: E402
 from minigpt.reports.manifest import (  # noqa: E402
     build_environment_metadata,
@@ -114,6 +114,7 @@ def estimate_loss(
 
 def load_resume_state(resume_path: Path, device: torch.device) -> tuple[dict, Tokenizer, GPTConfig]:
     checkpoint = torch.load(resume_path, map_location=device, weights_only=False)
+    validate_rng_state(checkpoint.get("rng_state"))
     tokenizer_path = resume_path.parent / "tokenizer.json"
     if not tokenizer_path.exists():
         raise FileNotFoundError(f"Resume tokenizer not found: {tokenizer_path}")

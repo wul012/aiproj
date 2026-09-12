@@ -375,3 +375,4 @@
 - [v1315 tokenizer 语义绑定](1268-v1315-tokenizer-binding.md)
 - [v1316 checkpoint 与指标日志恢复边界](1269-v1316-history-recovery.md)
 - [v1317 训练前置校验与失败前文件保护](1270-v1317-train-preflight.md)
+- [v1318 随机状态预校验与失败隔离](1271-v1318-rng-validation.md)

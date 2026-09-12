@@ -98,3 +98,21 @@ follows input reads and seeding. Runtime OOM, disk failures and later training d
 
 Reproduce: `python -B -m unittest tests.test_train_preflight -v`.
 See [v1317 scope, constraints and verification](v1317-train-preflight.md).
+
+## Validate saved random state before restoration
+
+Since v1318, the resume loader validates a non-None RNG snapshot before constructing the model,
+recovering metrics or writing outputs. Validation uses isolated Python/NumPy/Torch CPU generators;
+it neither installs the saved state into globals nor draws from them. restore_rng_state also validates
+the complete supported payload before changing any global CPU state, so malformed later fields cannot
+leave earlier generators partially restored. Valid restoration still occurs at the original post-setup
+continuation boundary; capture and checkpoint version remain unchanged.
+
+None/missing snapshots keep the legacy no-op behavior. CUDA fields get sequence/tensor structure checks
+and CPU normalization only; no CUDA initialization, device-count/driver validation or GPU replay claim.
+This is not rollback for native runtime failures or a transaction under concurrent global RNG changes.
+train.main still seeds globals before checkpoint loading; the validator's no-mutation guarantee should
+not be mistaken for a promise that the whole rejected CLI invocation leaves global RNG untouched.
+
+Reproduce: `python -B -m unittest tests.test_rng_validation tests.test_rng_state tests.test_resume_rng -v`.
+See [v1318 scope and evidence](v1318-rng-validation.md).
