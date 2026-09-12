@@ -23,6 +23,7 @@ ensure_src_path()
 from minigpt.core.dataset import load_text  # noqa: E402
 from minigpt.core.model import GPTConfig, MiniGPT  # noqa: E402
 from minigpt.core.tokenizer import Tokenizer, load_tokenizer  # noqa: E402
+from minigpt.evaluation.corpora import aggregate_corpora, load_corpora, render_corpora  # noqa: E402
 from minigpt.evaluation.windows import make_plan, score_windows, select_split  # noqa: E402
 from minigpt.evaluation.paired import pair_results, render_pair  # noqa: E402
 from minigpt.evaluation.prediction import perplexity_from_loss  # noqa: E402
@@ -33,7 +34,8 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Evaluate a MiniGPT checkpoint on local text data.")
     parser.add_argument("--checkpoint", type=Path, default=ROOT / "runs" / "minigpt" / "checkpoint.pt")
     parser.add_argument("--tokenizer", type=Path, default=None)
-    parser.add_argument("--data", type=Path, default=ROOT / "data" / "sample_zh.txt")
+    sources = parser.add_mutually_exclusive_group()
+    sources.add_argument("--data", type=Path, default=ROOT / "data" / "sample_zh.txt")
     parser.add_argument("--split", choices=["train", "val", "all"], default="val")
     parser.add_argument("--train-ratio", type=float, default=0.9)
     parser.add_argument("--eval-iters", type=int, default=20)
@@ -45,6 +47,9 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--candidate-tokenizer", type=Path, default=None)
     parser.add_argument("--context-size", type=int, default=None, help="Default: smallest supported model context")
     parser.add_argument("--windows", type=int, default=None, help="Unique windows; default eval-iters * batch-size")
+    sources.add_argument(
+        "--corpora", type=Path, help="Named corpus manifest instead of --data; requires --compare-with"
+    )
     return parser.parse_args(argv)
 
 
@@ -84,29 +89,16 @@ def _load_model(path: Path, tokenizer_path: Path, device: torch.device) -> tuple
     return model, tokenizer, digest
 
 
-def main(argv: Sequence[str] | None = None) -> int:
-    args = parse_args(argv)
-    device = choose_device(args.device)
-    tokenizer_path = args.tokenizer or args.checkpoint.parent / "tokenizer.json"
-    if args.batch_size < 1 or (args.windows is None and args.eval_iters < 1):
-        raise ValueError("Positive batch size and evaluation window count required")
-    model, tokenizer, digest = _load_model(args.checkpoint, tokenizer_path, device)
-    candidate = None
-    candidate_path = args.candidate_tokenizer
-    if args.compare_with is not None:
-        candidate_path = candidate_path or args.compare_with.parent / "tokenizer.json"
-        candidate, other, other_digest = _load_model(args.compare_with, candidate_path, device)
-        if tokenizer_digest(tokenizer) != tokenizer_digest(other):
-            raise ValueError("Paired token losses require identical tokenizer semantics")
-    context = (
-        args.context_size
-        if args.context_size is not None
-        else min(
-            model.config.block_size, candidate.config.block_size if candidate is not None else model.config.block_size
-        )
-    )
-    if context > model.config.block_size or (candidate is not None and context > candidate.config.block_size):
-        raise ValueError("Context size exceeds a compared model's supported context")
+def _score_corpus(
+    args: argparse.Namespace,
+    model: MiniGPT,
+    tokenizer: Tokenizer,
+    digest: str,
+    candidate: MiniGPT | None,
+    other_digest: str | None,
+    context: int,
+    device: torch.device,
+) -> dict[str, Any]:
     text = load_text(args.data)
     token_ids = tokenizer.encode(text)
     data, offset = select_split(token_ids, args.split, args.train_ratio)
@@ -145,17 +137,60 @@ def main(argv: Sequence[str] | None = None) -> int:
         report["candidate_sha256"] = other_digest
         report["candidate_context_limit"] = candidate.config.block_size
         report["comparison"] = pair_results(losses, other_losses, plan, data, tokenizer, offset)
-    out_path = args.out or args.checkpoint.parent / (
-        "eval_comparison.json" if candidate is not None else "eval_report.json"
+    return report
+
+
+def main(argv: Sequence[str] | None = None) -> int:
+    args = parse_args(argv)
+    device = choose_device(args.device)
+    tokenizer_path = args.tokenizer or args.checkpoint.parent / "tokenizer.json"
+    if args.batch_size < 1 or (args.windows is None and args.eval_iters < 1):
+        raise ValueError("Positive batch size and evaluation window count required")
+    if args.corpora is not None and args.compare_with is None:
+        raise ValueError("--corpora requires --compare-with")
+    corpora = load_corpora(args.corpora) if args.corpora is not None else []
+    model, tokenizer, digest = _load_model(args.checkpoint, tokenizer_path, device)
+    candidate, other_digest = None, None
+    candidate_path = args.candidate_tokenizer
+    if args.compare_with is not None:
+        candidate_path = candidate_path or args.compare_with.parent / "tokenizer.json"
+        candidate, other, other_digest = _load_model(args.compare_with, candidate_path, device)
+        if tokenizer_digest(tokenizer) != tokenizer_digest(other):
+            raise ValueError("Paired token losses require identical tokenizer semantics")
+    context = (
+        args.context_size
+        if args.context_size is not None
+        else min(
+            model.config.block_size, candidate.config.block_size if candidate is not None else model.config.block_size
+        )
     )
+    if context > model.config.block_size or (candidate is not None and context > candidate.config.block_size):
+        raise ValueError("Context size exceeds a compared model's supported context")
+    if corpora:
+        groups = []
+        for corpus in corpora:
+            selected = argparse.Namespace(**(vars(args) | {"data": corpus.path}))
+            result = _score_corpus(selected, model, tokenizer, digest, candidate, other_digest, context, device)
+            groups.append({"name": corpus.name, "weight": corpus.weight, "report": result})
+        report = aggregate_corpora(groups)
+        report["manifest"] = str(args.corpora)
+        filename = "eval_corpora.json"
+        markdown = render_corpora(report)
+    else:
+        report = _score_corpus(args, model, tokenizer, digest, candidate, other_digest, context, device)
+        filename = "eval_comparison.json" if candidate is not None else "eval_report.json"
+        markdown = render_pair(report) if candidate is not None else None
+    out_path = args.out or args.checkpoint.parent / filename
     outputs = [out_path, out_path.with_suffix(".md")] if candidate is not None else [out_path]
     inputs = [p.resolve() for p in (args.data, args.checkpoint, tokenizer_path, args.compare_with, candidate_path) if p]
+    inputs += [corpus.path for corpus in corpora]
+    if args.corpora is not None:
+        inputs.append(args.corpora.resolve())
     if len({p.resolve() for p in outputs}) != len(outputs) or any(p.resolve() in inputs for p in outputs):
         raise ValueError("Evaluation outputs must be distinct from each other and all inputs")
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(json.dumps(report, ensure_ascii=False, indent=2, allow_nan=False), encoding="utf-8")
-    if candidate is not None:
-        markdown = render_pair(report)
+    if markdown is not None:
         out_path.with_suffix(".md").write_text(markdown, encoding="utf-8")
         print(markdown)
     else:

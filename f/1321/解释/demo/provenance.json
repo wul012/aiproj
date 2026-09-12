@@ -1,0 +1,85 @@
+{
+  "purpose": "Controlled aggregation demonstration, not heldout generalization or measured traffic",
+  "checkpoint_source": "f/1320/解释/demo/provenance.json",
+  "training_in_this_version": false,
+  "weights": "9:1 is an explicit illustrative policy, not an empirical distribution",
+  "evaluation_command": [
+    "python",
+    "-B",
+    "scripts/evaluate.py",
+    "--checkpoint",
+    "f/1320/解释/demo/baseline.pt",
+    "--compare-with",
+    "f/1320/解释/demo/candidate.pt",
+    "--corpora",
+    "f/1321/解释/demo/corpora.json",
+    "--split",
+    "all",
+    "--windows",
+    "16",
+    "--batch-size",
+    "4",
+    "--device",
+    "cpu",
+    "--out",
+    "f/1321/解释/demo/comparison.json"
+  ],
+  "observed": {
+    "macro": {
+      "baseline": {
+        "loss": 1.8186158053576946,
+        "perplexity": 6.163321306381399
+      },
+      "candidate": {
+        "loss": 4.107683725800598,
+        "perplexity": 60.80571162743327
+      },
+      "delta_loss": 2.2890679204429034
+    },
+    "weighted": {
+      "baseline": {
+        "loss": 1.8247587464749813,
+        "perplexity": 6.201298753438478
+      },
+      "candidate": {
+        "loss": 0.8314324158069211,
+        "perplexity": 2.2966060801347576
+      },
+      "delta_loss": -0.9933263306680602
+    },
+    "regressed_corpora": [
+      "reverse"
+    ],
+    "weighted_gain_with_regressions": true,
+    "groups": [
+      {
+        "name": "forward",
+        "weight": 9.0,
+        "windows": 16,
+        "baseline": {
+          "loss": 1.826294481754303,
+          "perplexity": 6.210829623285081
+        },
+        "candidate": {
+          "loss": 0.012369588308501989,
+          "perplexity": 1.012446408082187
+        },
+        "delta_loss": -1.813924893445801
+      },
+      {
+        "name": "reverse",
+        "weight": 1.0,
+        "windows": 16,
+        "baseline": {
+          "loss": 1.8109371289610863,
+          "perplexity": 6.116176393453018
+        },
+        "candidate": {
+          "loss": 8.202997863292694,
+          "perplexity": 3651.8817559165423
+        },
+        "delta_loss": 6.392060734331608
+      }
+    ]
+  }
+}

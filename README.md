@@ -13,7 +13,7 @@ A tiny Transformer lab for reproducible experiments and mechanistic interpretati
 
 ## 核心能力
 
-[公平的模型对比评测](docs/v1320-paired-evaluation.md) · [查看真实运行示例](f/1320/解释/demo/comparison.md)
+[分语料模型对比](docs/v1321-corpus-comparison.md) · [总分改善却局部退化的示例](f/1321/解释/demo/comparison.md)
 
 - **模型实现** — 因果多头注意力、分词、训练/评估、自回归采样与 checkpoint 续训。
 - **推理与微调** — LoRA、RoPE 和 KV Cache，配套缓存前向、权重合并的数值一致性测试。
@@ -42,6 +42,16 @@ python -B scripts/evaluate.py --checkpoint f/1320/解释/demo/baseline.pt --comp
 这个受控示例中，候选模型训练了 40 步，却只改善了 28 个窗口、退化了 36 个窗口，平均 loss 从
 1.8217 升至 4.5738：`abc` 模式学得更好，但对 `cba` 模式更差。它展示如何定位退化，
 **不是泛化能力实验，也不是“训练越多一定越好”的证明**。[协议与使用边界](docs/v1320-paired-evaluation.md)
+
+### 总分变好，是否掩盖某类数据退化？
+
+```powershell
+python -B scripts/evaluate.py --checkpoint f/1320/解释/demo/baseline.pt --compare-with f/1320/解释/demo/candidate.pt --corpora f/1321/解释/demo/corpora.json --split all --windows 16 --batch-size 4 --device cpu --out runs/corpora-demo.json
+```
+
+复用同一对模型，不重新训练。示例声明 `forward:reverse = 9:1` 权重，加权 loss 从 **1.8248 降到
+0.8314**，但 `reverse` 组从 **1.8109 升到 8.2030**，两组等权平均也变差。报告同时保留组别结果、
+权重和退化清单，避免仅凭一个好看的总分判断模型。[示例说明与边界](f/1321/解释/说明.md)
 
 ## 代码入口
 

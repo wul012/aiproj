@@ -41,6 +41,26 @@ See the [replayable demo and interpretation](../f/1320/解释/说明.md) and
 unknown tokens are counted, and this version does not compute statistical significance or certify
 generation quality. Diagnostic reports include short corpus snippets; keep private evaluation data private.
 
+## Compare several named corpora without hiding a regressed group
+
+v1321 adds opt-in `--corpora manifest.json` (mutually exclusive with `--data`, requires `--compare-with`).
+The version-1 manifest lists `{name, path, weight}` entries under `corpora`; weight defaults to 1,
+and paths are relative to the manifest. Both checkpoints load once and share one context/tokenizer
+contract. Each corpus is split and sampled separately by the unchanged v1320 engine, so windows never
+cross corpus-file boundaries. The requested `--windows` count is per corpus, not a global budget.
+
+Output shows per-corpus NLL and perplexity plus two aggregates: `macro` gives each corpus equal weight;
+`weighted` uses declared weights on corpus mean NLL, then exponentiates that mean for perplexity.
+Neither weighting uses the observed corpus length, number of windows or average of perplexities.
+All regressed corpora remain listed, including when the weighted total improves. A short corpus may
+have fewer unique windows but retains its declared weight; interpret sampling strength accordingly.
+
+All corpora must score before either report is written. Invalid/missing sources do not silently disappear
+from the total. This is not a two-file disk transaction, statistical significance test, or automatically
+verified holdout evaluation. JSON/Markdown include text snippets and paths from your inputs.
+The default single-text and v1320 pair paths remain unchanged.
+See [manifest, demo and interpretation](v1321-corpus-comparison.md).
+
 ## Step-boundary resume reproducibility
 
 Since v1313, `scripts/train.py` saves an optional version-1 `rng_state` alongside the

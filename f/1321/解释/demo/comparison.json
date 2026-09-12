@@ -1,0 +1,564 @@
+{
+  "protocol": "named_corpora_v1",
+  "corpora": [
+    {
+      "name": "forward",
+      "weight": 9.0,
+      "report": {
+        "checkpoint": "f\\1320\\解释\\demo\\baseline.pt",
+        "checkpoint_sha256": "42c25f6d4565796a41499f9ca3729677fe328be1e37deca63058a03fe742b795",
+        "data": "D:\\aiproj\\f\\1321\\解释\\demo\\forward.txt",
+        "split": "all",
+        "train_ratio": null,
+        "tokenizer": "char",
+        "tokens": 120,
+        "vocab_size": 6,
+        "block_size": 8,
+        "model_context_limit": 8,
+        "eval_iters": 20,
+        "batch_size": 4,
+        "loss": 1.82629448,
+        "perplexity": 6.21082962,
+        "sampling": {
+          "context": 8,
+          "starts": [
+            79,
+            68,
+            90,
+            46,
+            73,
+            74,
+            93,
+            21,
+            99,
+            105,
+            42,
+            49,
+            81,
+            101,
+            39,
+            50
+          ],
+          "available": 112,
+          "requested": 16,
+          "seed": 1337,
+          "protocol": "fixed_windows_v1",
+          "replacement": false
+        },
+        "text_sha256": "02cae0201bfe7bcdd356414d1ac64ee9c58aaa035b4b3dbbab313cd334d955f5",
+        "tokenizer_sha256": "bcad3180a790026736d4ee13ad64d90a06299fc0c2ac60ed1f4a4f4895e06b8d",
+        "split_offset": 0,
+        "split_tokens": 120,
+        "evaluated_tokens": 128,
+        "unknown_tokens": 0,
+        "interpretation": "Sampled teacher-forced NLL only. Overlapping windows are correlated; holdout provenance and statistical significance are not verified. Different protocols/tokenizers are not comparable.",
+        "candidate_checkpoint": "f\\1320\\解释\\demo\\candidate.pt",
+        "candidate_sha256": "072881ff820f7b6bc1783ac8e174893a386bd4cbf17980f42cde694f8502e8a0",
+        "candidate_context_limit": 8,
+        "comparison": {
+          "baseline": {
+            "loss": 1.826294481754303,
+            "perplexity": 6.210829623285081
+          },
+          "candidate": {
+            "loss": 0.012369588308501989,
+            "perplexity": 1.012446408082187
+          },
+          "delta_loss": -1.813924893445801,
+          "improved_windows": 16,
+          "regressed_windows": 0,
+          "tied_windows": 0,
+          "tie_tolerance": 1e-06,
+          "largest_improvements": [
+            {
+              "start_token": 90,
+              "target_end_token": 98,
+              "baseline_loss": 1.8380849361419678,
+              "candidate_loss": 0.012321321293711662,
+              "delta": -1.8257636148482561,
+              "input_preview": "c abc ab",
+              "target_preview": " abc abc"
+            },
+            {
+              "start_token": 46,
+              "target_end_token": 54,
+              "baseline_loss": 1.8380849361419678,
+              "candidate_loss": 0.012321321293711662,
+              "delta": -1.8257636148482561,
+              "input_preview": "c abc ab",
+              "target_preview": " abc abc"
+            },
+            {
+              "start_token": 74,
+              "target_end_token": 82,
+              "baseline_loss": 1.8380849361419678,
+              "candidate_loss": 0.012321321293711662,
+              "delta": -1.8257636148482561,
+              "input_preview": "c abc ab",
+              "target_preview": " abc abc"
+            },
+            {
+              "start_token": 42,
+              "target_end_token": 50,
+              "baseline_loss": 1.8380849361419678,
+              "candidate_loss": 0.012321321293711662,
+              "delta": -1.8257636148482561,
+              "input_preview": "c abc ab",
+              "target_preview": " abc abc"
+            },
+            {
+              "start_token": 50,
+              "target_end_token": 58,
+              "baseline_loss": 1.8380849361419678,
+              "candidate_loss": 0.012321321293711662,
+              "delta": -1.8257636148482561,
+              "input_preview": "c abc ab",
+              "target_preview": " abc abc"
+            }
+          ],
+          "largest_regressions": [],
+          "windows": [
+            {
+              "start_token": 79,
+              "target_end_token": 87,
+              "baseline_loss": 1.8257296085357666,
+              "candidate_loss": 0.012331126257777214,
+              "delta": -1.8133984822779894,
+              "input_preview": " abc abc",
+              "target_preview": "abc abc "
+            },
+            {
+              "start_token": 68,
+              "target_end_token": 76,
+              "baseline_loss": 1.8047206401824951,
+              "candidate_loss": 0.012424958869814873,
+              "delta": -1.7922956813126802,
+              "input_preview": "abc abc ",
+              "target_preview": "bc abc a"
+            },
+            {
+              "start_token": 90,
+              "target_end_token": 98,
+              "baseline_loss": 1.8380849361419678,
+              "candidate_loss": 0.012321321293711662,
+              "delta": -1.8257636148482561,
+              "input_preview": "c abc ab",
+              "target_preview": " abc abc"
+            },
+            {
+              "start_token": 46,
+              "target_end_token": 54,
+              "baseline_loss": 1.8380849361419678,
+              "candidate_loss": 0.012321321293711662,
+              "delta": -1.8257636148482561,
+              "input_preview": "c abc ab",
+              "target_preview": " abc abc"
+            },
+            {
+              "start_token": 73,
+              "target_end_token": 81,
+              "baseline_loss": 1.8211967945098877,
+              "candidate_loss": 0.012412638403475285,
+              "delta": -1.8087841561064124,
+              "input_preview": "bc abc a",
+              "target_preview": "c abc ab"
+            },
+            {
+              "start_token": 74,
+              "target_end_token": 82,
+              "baseline_loss": 1.8380849361419678,
+              "candidate_loss": 0.012321321293711662,
+              "delta": -1.8257636148482561,
+              "input_preview": "c abc ab",
+              "target_preview": " abc abc"
+            },
+            {
+              "start_token": 93,
+              "target_end_token": 101,
+              "baseline_loss": 1.8211967945098877,
+              "candidate_loss": 0.012412638403475285,
+              "delta": -1.8087841561064124,
+              "input_preview": "bc abc a",
+              "target_preview": "c abc ab"
+            },
+            {
+              "start_token": 21,
+              "target_end_token": 29,
+              "baseline_loss": 1.8211967945098877,
+              "candidate_loss": 0.012412638403475285,
+              "delta": -1.8087841561064124,
+              "input_preview": "bc abc a",
+              "target_preview": "c abc ab"
+            },
+            {
+              "start_token": 99,
+              "target_end_token": 107,
+              "baseline_loss": 1.8257296085357666,
+              "candidate_loss": 0.012331126257777214,
+              "delta": -1.8133984822779894,
+              "input_preview": " abc abc",
+              "target_preview": "abc abc "
+            },
+            {
+              "start_token": 105,
+              "target_end_token": 113,
+              "baseline_loss": 1.8211967945098877,
+              "candidate_loss": 0.012412638403475285,
+              "delta": -1.8087841561064124,
+              "input_preview": "bc abc a",
+              "target_preview": "c abc ab"
+            },
+            {
+              "start_token": 42,
+              "target_end_token": 50,
+              "baseline_loss": 1.8380849361419678,
+              "candidate_loss": 0.012321321293711662,
+              "delta": -1.8257636148482561,
+              "input_preview": "c abc ab",
+              "target_preview": " abc abc"
+            },
+            {
+              "start_token": 49,
+              "target_end_token": 57,
+              "baseline_loss": 1.8211967945098877,
+              "candidate_loss": 0.012412638403475285,
+              "delta": -1.8087841561064124,
+              "input_preview": "bc abc a",
+              "target_preview": "c abc ab"
+            },
+            {
+              "start_token": 81,
+              "target_end_token": 89,
+              "baseline_loss": 1.8211967945098877,
+              "candidate_loss": 0.012412638403475285,
+              "delta": -1.8087841561064124,
+              "input_preview": "bc abc a",
+              "target_preview": "c abc ab"
+            },
+            {
+              "start_token": 101,
+              "target_end_token": 109,
+              "baseline_loss": 1.8211967945098877,
+              "candidate_loss": 0.012412638403475285,
+              "delta": -1.8087841561064124,
+              "input_preview": "bc abc a",
+              "target_preview": "c abc ab"
+            },
+            {
+              "start_token": 39,
+              "target_end_token": 47,
+              "baseline_loss": 1.8257296085357666,
+              "candidate_loss": 0.012331126257777214,
+              "delta": -1.8133984822779894,
+              "input_preview": " abc abc",
+              "target_preview": "abc abc "
+            },
+            {
+              "start_token": 50,
+              "target_end_token": 58,
+              "baseline_loss": 1.8380849361419678,
+              "candidate_loss": 0.012321321293711662,
+              "delta": -1.8257636148482561,
+              "input_preview": "c abc ab",
+              "target_preview": " abc abc"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "reverse",
+      "weight": 1.0,
+      "report": {
+        "checkpoint": "f\\1320\\解释\\demo\\baseline.pt",
+        "checkpoint_sha256": "42c25f6d4565796a41499f9ca3729677fe328be1e37deca63058a03fe742b795",
+        "data": "D:\\aiproj\\f\\1321\\解释\\demo\\reverse.txt",
+        "split": "all",
+        "train_ratio": null,
+        "tokenizer": "char",
+        "tokens": 120,
+        "vocab_size": 6,
+        "block_size": 8,
+        "model_context_limit": 8,
+        "eval_iters": 20,
+        "batch_size": 4,
+        "loss": 1.81093713,
+        "perplexity": 6.11617639,
+        "sampling": {
+          "context": 8,
+          "starts": [
+            79,
+            68,
+            90,
+            46,
+            73,
+            74,
+            93,
+            21,
+            99,
+            105,
+            42,
+            49,
+            81,
+            101,
+            39,
+            50
+          ],
+          "available": 112,
+          "requested": 16,
+          "seed": 1337,
+          "protocol": "fixed_windows_v1",
+          "replacement": false
+        },
+        "text_sha256": "e97d87bebc06940670454a7656fbb5ffb16516b0d646cdb441fece55a81cf83f",
+        "tokenizer_sha256": "bcad3180a790026736d4ee13ad64d90a06299fc0c2ac60ed1f4a4f4895e06b8d",
+        "split_offset": 0,
+        "split_tokens": 120,
+        "evaluated_tokens": 128,
+        "unknown_tokens": 0,
+        "interpretation": "Sampled teacher-forced NLL only. Overlapping windows are correlated; holdout provenance and statistical significance are not verified. Different protocols/tokenizers are not comparable.",
+        "candidate_checkpoint": "f\\1320\\解释\\demo\\candidate.pt",
+        "candidate_sha256": "072881ff820f7b6bc1783ac8e174893a386bd4cbf17980f42cde694f8502e8a0",
+        "candidate_context_limit": 8,
+        "comparison": {
+          "baseline": {
+            "loss": 1.8109371289610863,
+            "perplexity": 6.116176393453018
+          },
+          "candidate": {
+            "loss": 8.202997863292694,
+            "perplexity": 3651.8817559165423
+          },
+          "delta_loss": 6.392060734331608,
+          "improved_windows": 0,
+          "regressed_windows": 16,
+          "tied_windows": 0,
+          "tie_tolerance": 1e-06,
+          "largest_improvements": [],
+          "largest_regressions": [
+            {
+              "start_token": 90,
+              "target_end_token": 98,
+              "baseline_loss": 1.8058656454086304,
+              "candidate_loss": 8.21816349029541,
+              "delta": 6.41229784488678,
+              "input_preview": "a cba cb",
+              "target_preview": " cba cba"
+            },
+            {
+              "start_token": 46,
+              "target_end_token": 54,
+              "baseline_loss": 1.8058656454086304,
+              "candidate_loss": 8.21816349029541,
+              "delta": 6.41229784488678,
+              "input_preview": "a cba cb",
+              "target_preview": " cba cba"
+            },
+            {
+              "start_token": 74,
+              "target_end_token": 82,
+              "baseline_loss": 1.8058656454086304,
+              "candidate_loss": 8.21816349029541,
+              "delta": 6.41229784488678,
+              "input_preview": "a cba cb",
+              "target_preview": " cba cba"
+            },
+            {
+              "start_token": 42,
+              "target_end_token": 50,
+              "baseline_loss": 1.8058656454086304,
+              "candidate_loss": 8.21816349029541,
+              "delta": 6.41229784488678,
+              "input_preview": "a cba cb",
+              "target_preview": " cba cba"
+            },
+            {
+              "start_token": 50,
+              "target_end_token": 58,
+              "baseline_loss": 1.8058656454086304,
+              "candidate_loss": 8.21816349029541,
+              "delta": 6.41229784488678,
+              "input_preview": "a cba cb",
+              "target_preview": " cba cba"
+            }
+          ],
+          "windows": [
+            {
+              "start_token": 79,
+              "target_end_token": 87,
+              "baseline_loss": 1.8452539443969727,
+              "candidate_loss": 8.188360214233398,
+              "delta": 6.343106269836426,
+              "input_preview": " cba cba",
+              "target_preview": "cba cba "
+            },
+            {
+              "start_token": 68,
+              "target_end_token": 76,
+              "baseline_loss": 1.838012456893921,
+              "candidate_loss": 8.21885871887207,
+              "delta": 6.380846261978149,
+              "input_preview": "cba cba ",
+              "target_preview": "ba cba c"
+            },
+            {
+              "start_token": 90,
+              "target_end_token": 98,
+              "baseline_loss": 1.8058656454086304,
+              "candidate_loss": 8.21816349029541,
+              "delta": 6.41229784488678,
+              "input_preview": "a cba cb",
+              "target_preview": " cba cba"
+            },
+            {
+              "start_token": 46,
+              "target_end_token": 54,
+              "baseline_loss": 1.8058656454086304,
+              "candidate_loss": 8.21816349029541,
+              "delta": 6.41229784488678,
+              "input_preview": "a cba cb",
+              "target_preview": " cba cba"
+            },
+            {
+              "start_token": 73,
+              "target_end_token": 81,
+              "baseline_loss": 1.7959845066070557,
+              "candidate_loss": 8.196172714233398,
+              "delta": 6.400188207626343,
+              "input_preview": "ba cba c",
+              "target_preview": "a cba cb"
+            },
+            {
+              "start_token": 74,
+              "target_end_token": 82,
+              "baseline_loss": 1.8058656454086304,
+              "candidate_loss": 8.21816349029541,
+              "delta": 6.41229784488678,
+              "input_preview": "a cba cb",
+              "target_preview": " cba cba"
+            },
+            {
+              "start_token": 93,
+              "target_end_token": 101,
+              "baseline_loss": 1.7959845066070557,
+              "candidate_loss": 8.196172714233398,
+              "delta": 6.400188207626343,
+              "input_preview": "ba cba c",
+              "target_preview": "a cba cb"
+            },
+            {
+              "start_token": 21,
+              "target_end_token": 29,
+              "baseline_loss": 1.7959845066070557,
+              "candidate_loss": 8.196172714233398,
+              "delta": 6.400188207626343,
+              "input_preview": "ba cba c",
+              "target_preview": "a cba cb"
+            },
+            {
+              "start_token": 99,
+              "target_end_token": 107,
+              "baseline_loss": 1.8452539443969727,
+              "candidate_loss": 8.188360214233398,
+              "delta": 6.343106269836426,
+              "input_preview": " cba cba",
+              "target_preview": "cba cba "
+            },
+            {
+              "start_token": 105,
+              "target_end_token": 113,
+              "baseline_loss": 1.7959845066070557,
+              "candidate_loss": 8.196172714233398,
+              "delta": 6.400188207626343,
+              "input_preview": "ba cba c",
+              "target_preview": "a cba cb"
+            },
+            {
+              "start_token": 42,
+              "target_end_token": 50,
+              "baseline_loss": 1.8058656454086304,
+              "candidate_loss": 8.21816349029541,
+              "delta": 6.41229784488678,
+              "input_preview": "a cba cb",
+              "target_preview": " cba cba"
+            },
+            {
+              "start_token": 49,
+              "target_end_token": 57,
+              "baseline_loss": 1.7959845066070557,
+              "candidate_loss": 8.196172714233398,
+              "delta": 6.400188207626343,
+              "input_preview": "ba cba c",
+              "target_preview": "a cba cb"
+            },
+            {
+              "start_token": 81,
+              "target_end_token": 89,
+              "baseline_loss": 1.7959845066070557,
+              "candidate_loss": 8.196172714233398,
+              "delta": 6.400188207626343,
+              "input_preview": "ba cba c",
+              "target_preview": "a cba cb"
+            },
+            {
+              "start_token": 101,
+              "target_end_token": 109,
+              "baseline_loss": 1.7959845066070557,
+              "candidate_loss": 8.196172714233398,
+              "delta": 6.400188207626343,
+              "input_preview": "ba cba c",
+              "target_preview": "a cba cb"
+            },
+            {
+              "start_token": 39,
+              "target_end_token": 47,
+              "baseline_loss": 1.8452539443969727,
+              "candidate_loss": 8.188360214233398,
+              "delta": 6.343106269836426,
+              "input_preview": " cba cba",
+              "target_preview": "cba cba "
+            },
+            {
+              "start_token": 50,
+              "target_end_token": 58,
+              "baseline_loss": 1.8058656454086304,
+              "candidate_loss": 8.21816349029541,
+              "delta": 6.41229784488678,
+              "input_preview": "a cba cb",
+              "target_preview": " cba cba"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "macro": {
+    "baseline": {
+      "loss": 1.8186158053576946,
+      "perplexity": 6.163321306381399
+    },
+    "candidate": {
+      "loss": 4.107683725800598,
+      "perplexity": 60.80571162743327
+    },
+    "delta_loss": 2.2890679204429034
+  },
+  "weighted": {
+    "baseline": {
+      "loss": 1.8247587464749813,
+      "perplexity": 6.201298753438478
+    },
+    "candidate": {
+      "loss": 0.8314324158069211,
+      "perplexity": 2.2966060801347576
+    },
+    "delta_loss": -0.9933263306680602
+  },
+  "regressed_corpora": [
+    "reverse"
+  ],
+  "weighted_gain_with_regressions": true,
+  "aggregation": "Macro: equal corpus weight. Weighted: declared positive weights applied to corpus mean NLL, not perplexity or observed token counts.",
+  "interpretation": "Same paired windows within each corpus; no cross-corpus concatenation. Declared weights are policy, not measured traffic. Overlapping windows are correlated; holdout provenance/significance are not verified.",
+  "manifest": "f\\1321\\解释\\demo\\corpora.json"
+}

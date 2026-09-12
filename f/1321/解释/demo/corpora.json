@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "corpora": [
+    {
+      "name": "forward",
+      "path": "forward.txt",
+      "weight": 9
+    },
+    {
+      "name": "reverse",
+      "path": "reverse.txt",
+      "weight": 1
+    }
+  ]
+}

@@ -1,0 +1,277 @@
+{
+  "version": "v1321.0.0",
+  "baseline": "bc9000fb9fedef81dfbff7c563004dbec652bfbf",
+  "state": "local_demo_focused_and_fast_verified",
+  "outcome": "Per-corpus regressions visible beside declared weighted and equal-corpus NLL",
+  "packageVersion": "0.1.0",
+  "oldScientificVerdictsChanged": false,
+  "oldDemoCheckpointsChanged": false,
+  "personalNotesPublished": false,
+  "redControl": {
+    "command": "python -B -m unittest tests.test_eval_corpora -v",
+    "exitCode": 1,
+    "failure": "v1320 CLI does not support named corpus comparison",
+    "assertionUnchanged": true
+  },
+  "focused": {
+    "command": "python -B -m unittest tests.test_eval_corpora tests.test_eval_pairs tests.test_model_cli_behavior tests.test_eval_suite tests.test_architecture_boundaries tests.test_script_import_boundaries -v",
+    "exitCode": 0,
+    "tests": 48,
+    "seconds": 4.693,
+    "newTestMethods": 8
+  },
+  "independentCompatibility": {
+    "status": "pass",
+    "baseline": "bc9000fb9fedef81dfbff7c563004dbec652bfbf",
+    "processes": 4,
+    "checks": {
+      "single_json_bytes_exact": true,
+      "pair_json_bytes_exact": true,
+      "pair_markdown_bytes_exact": true
+    }
+  },
+  "demonstration": {
+    "source": "f/1320/解释/demo",
+    "newTraining": false,
+    "weightsAreMeasuredTraffic": false,
+    "observed": {
+      "macro": {
+        "baseline": {
+          "loss": 1.8186158053576946,
+          "perplexity": 6.163321306381399
+        },
+        "candidate": {
+          "loss": 4.107683725800598,
+          "perplexity": 60.80571162743327
+        },
+        "delta_loss": 2.2890679204429034
+      },
+      "weighted": {
+        "baseline": {
+          "loss": 1.8247587464749813,
+          "perplexity": 6.201298753438478
+        },
+        "candidate": {
+          "loss": 0.8314324158069211,
+          "perplexity": 2.2966060801347576
+        },
+        "delta_loss": -0.9933263306680602
+      },
+      "regressed_corpora": [
+        "reverse"
+      ],
+      "weighted_gain_with_regressions": true,
+      "groups": [
+        {
+          "name": "forward",
+          "weight": 9.0,
+          "windows": 16,
+          "baseline": {
+            "loss": 1.826294481754303,
+            "perplexity": 6.210829623285081
+          },
+          "candidate": {
+            "loss": 0.012369588308501989,
+            "perplexity": 1.012446408082187
+          },
+          "delta_loss": -1.813924893445801
+        },
+        {
+          "name": "reverse",
+          "weight": 1.0,
+          "windows": 16,
+          "baseline": {
+            "loss": 1.8109371289610863,
+            "perplexity": 6.116176393453018
+          },
+          "candidate": {
+            "loss": 8.202997863292694,
+            "perplexity": 3651.8817559165423
+          },
+          "delta_loss": 6.392060734331608
+        }
+      ]
+    },
+    "replay": "python -B scripts/evaluate.py --checkpoint f/1320/解释/demo/baseline.pt --compare-with f/1320/解释/demo/candidate.pt --corpora f/1321/解释/demo/corpora.json --split all --windows 16 --batch-size 4 --device cpu --out runs/corpora-demo.json"
+  },
+  "correctness": [
+    "two model loads independent of group count",
+    "per-group results equal standalone corpus evaluation",
+    "manifest order does not affect per-corpus sampling",
+    "NLL mean before perplexity exponentiation",
+    "no silently omitted failed group",
+    "fixed_windows_v1 scoring and previous demo immutable"
+  ],
+  "fullCoverage": {
+    "verificationRoute": "same-SHA GitHub CI",
+    "command": "python -B scripts/run_test_coverage.py --out-dir runs/test-coverage-ci --fail-under 88.98",
+    "floor": 88.98,
+    "resultReceipt": "annotated v1321.0.0 only after successful same-SHA CI"
+  },
+  "boundaries": [
+    "weights are explicit policy, not measured traffic",
+    "no significance or heldout generalization claim",
+    "overlapping windows remain correlated",
+    "report output contains input text snippets",
+    "not a transactional two-file writer"
+  ],
+  "publication": {
+    "tag": "v1321.0.0",
+    "gate": "Push target and verify same-SHA full CI before tag creation"
+  },
+  "fastCiCommands": [
+    {
+      "name": "check_source_encoding",
+      "command": "python -B scripts/check_source_encoding.py --out-dir runs/source-encoding-hygiene-ci",
+      "exit": 0,
+      "seconds": 16.6,
+      "signal": "status=pass"
+    },
+    {
+      "name": "check_project_docs_readability",
+      "command": "python -B scripts/check_project_docs_readability.py --out-dir runs/project-docs-readability-ci --require-pass --force",
+      "exit": 0,
+      "seconds": 0.139,
+      "signal": "status=pass"
+    },
+    {
+      "name": "check_ci_workflow_hygiene",
+      "command": "python -B scripts/check_ci_workflow_hygiene.py --out-dir runs/ci-workflow-hygiene-ci",
+      "exit": 0,
+      "seconds": 2.008,
+      "signal": "status=pass"
+    },
+    {
+      "name": "check_static_analysis",
+      "command": "python -B scripts/check_static_analysis.py --out-dir runs/static-analysis-ci",
+      "exit": 0,
+      "seconds": 0.657,
+      "signal": "status=pass"
+    },
+    {
+      "name": "check_name_budget",
+      "command": "python -B scripts/check_name_budget.py --out-dir runs/name-budget-ci",
+      "exit": 0,
+      "seconds": 2.873,
+      "signal": "status=pass"
+    },
+    {
+      "name": "check_type_analysis",
+      "command": "python -B scripts/check_type_analysis.py --out-dir runs/type-analysis-ci",
+      "exit": 0,
+      "seconds": 0.962,
+      "signal": "status=pass"
+    },
+    {
+      "name": "check_model_capability_honest_measurement",
+      "command": "python -B scripts/check_model_capability_honest_measurement.py --out-dir runs/model-capability-honest-measurement-ci",
+      "exit": 0,
+      "seconds": 0.154,
+      "signal": "status=pass"
+    },
+    {
+      "name": "check_artifact_schema_guard",
+      "command": "python -B scripts/check_artifact_schema_guard.py --out-dir runs/artifact-schema-guard-ci",
+      "exit": 0,
+      "seconds": 0.166,
+      "signal": "status=pass"
+    },
+    {
+      "name": "check_file_size_ratchet",
+      "command": "python -B scripts/check_file_size_ratchet.py --out-dir runs/file-size-ratchet-ci",
+      "exit": 0,
+      "seconds": 1.709,
+      "signal": "status=pass"
+    },
+    {
+      "name": "check_elegance_ratchet",
+      "command": "python -B scripts/check_elegance_ratchet.py --out-dir runs/elegance-ratchet-ci",
+      "exit": 0,
+      "seconds": 6.939,
+      "signal": "status=pass"
+    },
+    {
+      "name": "check_aiproj_track_closeout",
+      "command": "python -B scripts/check_aiproj_track_closeout.py --out-dir runs/aiproj-track-closeout-ci",
+      "exit": 0,
+      "seconds": 0.156,
+      "signal": "status=pass"
+    },
+    {
+      "name": "check_archived_path_portability",
+      "command": "python -B scripts/check_archived_path_portability.py --out-dir runs/archived-path-portability-ci",
+      "exit": 0,
+      "seconds": 0.116,
+      "signal": "status=pass"
+    },
+    {
+      "name": "check_promoted_seed_handoff_assurance_smoke",
+      "command": "python -B scripts/check_promoted_seed_handoff_assurance_smoke.py --out-dir runs/promoted-seed-handoff-assurance-smoke-ci",
+      "exit": 0,
+      "seconds": 0.556,
+      "signal": "status=pass"
+    },
+    {
+      "name": "run_ci_promoted_seed_receipt_contract_failure_smoke",
+      "command": "python -B scripts/run_ci_promoted_seed_receipt_contract_failure_smoke.py --out-dir runs/promoted-seed-receipt-contract-failure-smoke-ci --force",
+      "exit": 0,
+      "seconds": 0.575,
+      "signal": "receipt_contract_summary_check_failure_smoke_status=pass"
+    },
+    {
+      "name": "check_ci_promoted_seed_receipt_contract_failure_smoke_plan",
+      "command": "python -B scripts/check_ci_promoted_seed_receipt_contract_failure_smoke_plan.py runs/promoted-seed-receipt-contract-failure-smoke-ci --out-dir runs/ci-promoted-seed-receipt-contract-failure-smoke-plan-check-ci",
+      "exit": 0,
+      "seconds": 0.158,
+      "signal": "status=pass"
+    },
+    {
+      "name": "run_ci_tiny_scorecard_comparison_smoke",
+      "command": "python -B scripts/run_ci_tiny_scorecard_comparison_smoke.py --out-dir runs/tiny-scorecard-comparison-smoke-ci --summary-check-out-dir runs/tiny-scorecard-comparison-smoke-check-ci --force",
+      "exit": 0,
+      "seconds": 23.718,
+      "signal": "status=pass"
+    },
+    {
+      "name": "check_ci_tiny_scorecard_plan",
+      "command": "python -B scripts/check_ci_tiny_scorecard_plan.py runs/tiny-scorecard-comparison-smoke-ci --out-dir runs/ci-tiny-scorecard-plan-check-ci",
+      "exit": 0,
+      "seconds": 0.154,
+      "signal": "status=pass"
+    },
+    {
+      "name": "run_ci_baseline_candidate_threshold_boundary_gate_check",
+      "command": "python -B scripts/run_ci_baseline_candidate_threshold_boundary_gate_check.py --out-dir runs/baseline-candidate-threshold-boundary-gate-check-ci --force",
+      "exit": 0,
+      "seconds": 0.564,
+      "signal": "status=pass"
+    },
+    {
+      "name": "check_ci_baseline_candidate_threshold_boundary_gate_plan",
+      "command": "python -B scripts/check_ci_baseline_candidate_threshold_boundary_gate_plan.py runs/baseline-candidate-threshold-boundary-gate-check-ci --out-dir runs/ci-baseline-candidate-threshold-boundary-gate-plan-check-ci",
+      "exit": 0,
+      "seconds": 0.169,
+      "signal": "status=pass"
+    },
+    {
+      "name": "check_release_readiness_drift_contract_smoke",
+      "command": "python -B scripts/check_release_readiness_drift_contract_smoke.py --out-dir runs/release-readiness-drift-contract-smoke-ci",
+      "exit": 0,
+      "seconds": 0.367,
+      "signal": "status=pass"
+    },
+    {
+      "name": "check_normalization_guard",
+      "command": "python -B scripts/check_normalization_guard.py",
+      "exit": 0,
+      "seconds": 9.659,
+      "tests": 136,
+      "terminal": "OK"
+    }
+  ],
+  "staticChecks": {
+    "ruff": "All checks passed!",
+    "strictMypy": "Success: no issues found in 1 source file",
+    "scope": "src/minigpt/evaluation/corpora.py"
+  }
+}

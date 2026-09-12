@@ -378,3 +378,4 @@
 - [v1318 随机状态预校验与失败隔离](1271-v1318-rng-validation.md)
 - [v1319 训练数据身份绑定](1272-v1319-data-binding.md)
 - [v1320 同样本模型对比评测](1273-v1320-paired-evaluation.md)
+- [v1321 分语料对比与聚合退化揭示](1274-v1321-corpus-comparison.md)
