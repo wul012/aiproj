@@ -81,3 +81,20 @@ a directory-entry power-loss durability guarantee. RNG and tokenizer guards rema
 
 Reproduce: `python -B -m unittest tests.test_history_recovery tests.test_checkpoint_io tests.test_resume_rng -v`.
 See [v1316 scope and evidence](v1316-history-recovery.md).
+
+## Input preflight before output mutation
+
+Since v1317, train.py validates active options immediately after parsing: positive batch/iteration
+counts, finite learning rate and ratio, the supported NumPy seed range, fresh-model/BPE settings,
+and enabled sampling options. A zero learning rate and zero new sample tokens remain accepted.
+`--no-sample` skips sample validation; resume uses checkpoint-owned model/tokenizer configuration
+instead of checking ignored fresh-model/BPE CLI values. Values are rejected, not silently clamped.
+
+After tokenization and the existing split/fallback logic, both split lengths are checked against
+the effective block size before model allocation and history recovery/output writes. This mirrors
+the current get_batch minimum (`block_size + 2` tokens) without changing its sampling behavior or
+the tiny-validation fallback. Bad options fail before seeding/input loading; size validation necessarily
+follows input reads and seeding. Runtime OOM, disk failures and later training divergence remain possible.
+
+Reproduce: `python -B -m unittest tests.test_train_preflight -v`.
+See [v1317 scope, constraints and verification](v1317-train-preflight.md).

@@ -36,6 +36,7 @@ from minigpt.training.data_prep import (  # noqa: E402
 from minigpt.training.data_quality import build_dataset_quality_report, write_dataset_quality_json, write_dataset_quality_svg  # noqa: E402
 from minigpt.training.history import TrainingRecord, append_record, load_records, summarize_records, write_loss_curve_svg  # noqa: E402
 from minigpt.training.history_recovery import recover_history, snapshot_history  # noqa: E402
+from minigpt.training.preflight import validate_options, validate_splits  # noqa: E402
 from minigpt.training.rng_state import capture_rng_state, restore_rng_state  # noqa: E402
 from minigpt.training.tokenizer_binding import tokenizer_digest, validate_tokenizer_binding  # noqa: E402
 from minigpt.reports.manifest import (  # noqa: E402
@@ -216,6 +217,7 @@ def write_sample(
 
 def main(argv: Sequence[str] | None = None) -> int:
     args = parse_args(argv)
+    validate_options(args)
     command_args = sys.argv if argv is None else ["scripts/train.py", *argv]
     started_at = utc_now()
     default_out_dir = ROOT / "runs" / "minigpt"
@@ -247,6 +249,7 @@ def main(argv: Sequence[str] | None = None) -> int:
 
     token_ids = tokenizer.encode(text)
     train_data, val_data = split_token_ids(token_ids, train_ratio=args.train_ratio)
+    validate_splits(len(train_data), len(val_data), config.block_size)
 
     model = MiniGPT(config).to(device)
     optimizer = torch.optim.AdamW(model.parameters(), lr=args.learning_rate)
